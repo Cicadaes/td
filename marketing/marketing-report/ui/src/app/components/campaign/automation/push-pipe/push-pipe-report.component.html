@@ -1,0 +1,92 @@
+<main>
+    <div class="push-promotion-cycle" *ngIf="showTimeList.length!==0">
+        <div [ngClass]="{'push-promotion-cycle-left': true, 'push-promotion-cycle-left-click': leftButton}" (click)="getCycleTimeList('left')">
+            <i class="left-arrow1"></i><i class="left-arrow2"></i>
+        </div>
+        <div class="push-promotion-cycle-timezone">
+            <div [ngClass]="{'point': true, 'select': cycleSelect=='all'}" (click)="getPromotionData('all')">
+                <label class="time">累计</label>
+            </div>
+            <div *ngFor="let time of showTimeList" (click)="getPushPromotionData(time)" [ngClass]="{'point': true, 'select': time==cycleSelect}">
+                <label class="otherTime">{{time | dataFormat:1}}</label>
+            </div>
+            <div class="point" (click)="getPromotionData('end')">
+                <label class="time">最近</label>
+            </div>
+        </div>
+        <div [ngClass]="{'push-promotion-cycle-right': true, 'push-promotion-cycle-right-click': rightButton}" (click)="getCycleTimeList('right')">
+            <i class="right-arrow1"></i><i class="right-arrow2"></i>
+        </div>
+    </div>
+    <div class="push-promotion-report" style="background:#fff;">
+        <div class="push-promotion-report-head clearfix">
+            <div class="l">
+                <h4 class="title" *ngIf="!isDialogReport">{{nodeData.name}}</h4>
+                <p><span class="name">投放概览</span>
+                    <i class="fa fa-question-circle question-tip-box">
+                        <div class="question-tip">
+                            <em></em>
+                            <span>
+                                发送数：本次推送活动，成功向用户发出推送消息的用户设备数。<br>
+                                到达数：本次推送活动，确认终端接收到推送的用户设备数。<br>
+                                展示数：本次推送活动，抵达终端的消息有展示出消息内容的数量。<br>
+                                点击数：本次推送活动，点击接收到的推送消息的用户设备数。<br>
+                                到达率：发出的推送消息成功抵达用户的比率，到达数/发送数。<br>
+                                展示率：到达用户终端并且成功展示出来的用户设备数占消息成功到达的设备数比率，展示数/到达数。<br>
+                                点击率：点击了推送消息进入到应用的用户设备数占接收到消息的用户比率，进入应用的用户数/到达数。<br>
+                            </span>
+                        </div>
+                    </i>
+                </p>
+            </div>
+            <div class="r">
+                <ul class="clearfix devote-list">
+                    <li class="r" *ngFor="let effect of effectList">
+                        <p style="color: #2d3038; font-weight: bold">{{effect.name}}</p>
+                        <p style="color: #657180"><span class="percent">{{effect.actualValue ? (effect.subActualValue/effect.actualValue*100).toFixed(2) + '%' : '0%'}}</span>贡献率</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="push-preview">
+            <p-dataTable [value]="conts" [style]="{'margin':'15px 0'}" emptyMessage="暂无数据">
+                <p-column [style]="{'text-align':'center'}" *ngFor="let col of cols;let i = index" [field]="col.field" [header]="col.header">
+                    <template let-data="rowData" pTemplate="body">
+                        <div *ngIf="i==0&&data[col.field]!='总计'">
+                            <div>
+                                <a style="line-height: 22px;" *ngIf="!isOne" [ngClass]="{'group-icon': true, 'A': data[col.field] === 'A' || !data[col.field], 'B': data[col.field] === 'B', 'C': data[col.field] === 'C'}">
+                                    {{data[col.field] || 'A'}}
+                                </a> 
+                                <span style="display:inline-block; width:80px;">流量{{isOne ? (data.ratio || 100) : (data.ratio || 0)}}%</span>
+                            </div>
+                        </div>
+                        <div *ngIf="i!=0||data[col.field]=='总计'">{{(data[col.field] || 0) | formatNumber}}</div>
+                    </template>
+                </p-column>
+            </p-dataTable>
+        </div>
+        <div class="charts">
+            <div class="trend-title">
+                <h4>趋势分析</h4>
+                <p-dropdown [options]="statRangeList" [(ngModel)]="statRange" [style]="{'min-width':'120px'}" (onChange)="getStatistic()"></p-dropdown>
+            </div>
+            <div class="click-choice clearfix">
+                <div class="l">
+                    <button *ngFor="let b of buttonList" (click)="onclick(b)" type="button" [ngClass]="{'button': true, 'select': selectButton==b.type}">{{b.name}}</button>
+                </div>
+                <div class="r">
+                    <common-charts-handle (onBar)="onBar($event)" (onChart)="onChart($event)" [downloadJson]="downloadJson"></common-charts-handle>
+                </div>
+            </div>
+        </div>
+
+        <common-charts *ngIf="chartShow" [xdata]="xdata" [series]="series" [formatter]="chartsFn" [legend]="legend"></common-charts>
+        <p-dataTable *ngIf="barShow" [value]="tableList" [style]="{'margin':'15px 0'}" emptyMessage="暂无数据">
+            <p-column [style]="{'text-align':'center'}" *ngFor="let col of tableHeaders" [field]="col.field" [header]="col.header">
+                <template let-data="rowData" pTemplate="body">
+                    <span>{{data[col.field] | formatNumber}}</span>
+                </template>
+            </p-column>
+        </p-dataTable>
+    </div>
+</main>

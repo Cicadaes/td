@@ -1,0 +1,196 @@
+@import './../common.scss';
+main {
+    .pipe-desc {
+        padding: 21px 20px 0px 32px;
+    }
+    .pipe-content {
+        border-top: $border-top;
+        padding: 21px 20px 0px 32px;
+        .filter-info {
+            .tag-infomation {
+                margin-left: 30px;
+                border-left: 1px solid #EBEEF2;
+                padding-bottom: 20px;
+                .infomation {
+                    box-sizing: border-box;
+                    margin-top: 16px;
+                    background: #F4F7FB;
+                    height: 40px;
+                    width: 327px;
+                    padding: 8px 26px;
+                    margin-left: -30px;
+                }
+                .infomation-relation {
+                    display: inline-block;
+                    background: #FFFFFF;
+                    border: 1px solid #DDDEE1;
+                    border-radius: 4px;
+                    height: 32px;
+                    width: 66px;
+                    line-height: 32px;
+                    text-align: center;
+                    margin-left: -30px;
+                    @include user-select-none;
+                    cursor: pointer;
+                }
+                .infomation-relation.disabled {
+                    background-color: #F8F8F9!important;
+                    color: rgba(23, 35, 61, 0.30)!important;
+                }
+            }
+            .add-tag {
+                padding: 8px 10px;
+                background: #2D8CF0;
+                border-radius: 4px;
+                display: inline-block;
+                font-family: PingFangSC-Regular;
+                font-size: 12px;
+                color: #FFFFFF;
+                line-height: 12px;
+                @include user-select-none;
+                cursor: pointer;
+                i {
+                    width: 12px;
+                    height: 12px;
+                    background: $icon-add;
+                    background-size: contain;
+                    vertical-align: bottom;
+                    display: inline-block;
+                }
+            }
+            .icon-del {
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                background: $icon-del;
+                background-size: contain;
+                cursor: pointer;
+                vertical-align: middle;
+                margin-left: 13px;
+            }
+        }
+    }
+}
+
+.property-infomation {
+    margin-top: 24px;
+}
+
+.property-infomation,
+.behavior-infomation {
+    background: #FFFFFF;
+    border: 1px solid #D7DDE4;
+    border-radius: 4px;
+    width: 340px;
+}
+
+.property-infomation .infomation-header,
+.behavior-infomation .infomation-header {
+    background: #F7F8F9;
+    border-bottom: 1px solid #D7DDE4;
+    height: 32px;
+    box-sizing: border-box;
+    border-radius: 4px 4px 0 0;
+    padding: 10px 16px;
+}
+
+.property-infomation .infomation-header span,
+.behavior-infomation .infomation-header span {
+    font-family: PingFangSC-Semibold;
+    font-size: 12px;
+    color: #464C5B;
+    letter-spacing: 0;
+    line-height: 12px;
+}
+
+.property-infomation .infomation-content,
+.behavior-infomation .infomation-content {
+    text-align: center;
+    border-radius: 0 0 4px 4px;
+}
+
+.property-infomation .infomation-content .infomation-text,
+.behavior-infomation .infomation-content .infomation-text {
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #9EA7B4;
+    line-height: 12px;
+    margin-top: 19px;
+    margin-bottom: 16px;
+}
+
+.property-infomation .infomation-content .infomation-add-button,
+.behavior-infomation .infomation-content .infomation-add-button {
+    display: inline-block;
+    border: 1px solid #43A3FB;
+    border-radius: 4px;
+    padding: 8px 22px;
+    box-sizing: border-box;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #43A3FB;
+    line-height: 12px;
+    margin-bottom: 17px;
+    @include user-select-none;
+    cursor: pointer;
+}
+
+.info-line {
+    height: 14px;
+    border-left: 1px solid #DEE0E3;
+    margin-left: 50%;
+}
+
+.info-button {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 28px;
+    display: inline-block;
+    background: #EBEEF2;
+    border-radius: 4px;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #464C5B;
+    line-height: 12px;
+    @include user-select-none;
+    cursor: pointer;
+}
+
+.add-behavior {
+    padding: 8px 10px;
+    background: #2D8CF0;
+    border-radius: 4px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    display: inline-block;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #FFFFFF;
+    line-height: 12px;
+    @include user-select-none;
+    cursor: pointer;
+}
+
+.add-behavior i {
+    width: 12px;
+    height: 12px;
+    // background-image: url('marketing/public/images/add.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: bottom;
+    display: inline-block;
+}
+
+:host /deep/ .ui-state-disabled {
+    opacity: 1!important;
+}
+
+:host /deep/ .ui-state-disabled .ui-dropdown-label {
+    background-color: #F8F8F9!important;
+    color: rgba(23, 35, 61, 0.30)!important;
+}
+
+:host /deep/ .ui-state-disabled .ui-dropdown-trigger {
+    background-color: #F8F8F9!important;
+    color: rgba(23, 35, 61, 0.30)!important;
+}

@@ -1,0 +1,135 @@
+.test {
+    margin-top: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+}
+
+table * {
+    box-sizing: border-box;
+}
+
+table thead tr {
+    border-width: 0;
+}
+
+table thead tr th {
+    border: 1px solid rgb(230, 238, 250);
+    display: table-cell;
+    padding: 6px 0 6px 22px;
+    text-align: left;
+    background: #f3f8ff;
+    font-size: 14px;
+    color: #373a3c;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+table thead tr th:nth-child(1) {
+    width: 140px;
+}
+
+table thead tr th:nth-child(2) {
+    width: 170px;
+}
+
+table tbody {
+    outline: 0;
+    background-color: #ffffff;
+    border: 1px solid #c7c7c7;
+}
+
+table tbody tr {
+    background-color: #ffffff;
+    border: 1px solid #c7c7c7;
+}
+/*table thead tr th{
+    overflow:hidden; 
+    text-overflow:ellipsis;
+    display:-webkit-box; 
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+}*/
+table tbody tr td {
+    border: 1px solid rgb(230, 238, 250);
+    display: table-cell;
+    padding: 10px 0 10px 22px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+    color: #657180;
+    text-align: left;
+    -ms-word-break: break-all;
+    word-break: break-all;
+}
+table tbody tr td.td-special{
+    overflow: visible;
+    white-space: normal;
+}
+/*table tbody tr>td:hover .devote-per {
+    opacity: 0;
+}
+
+table tbody tr>td:hover .devote-word {
+    opacity: 1;
+}*/
+
+.table-test {
+    border: 1px solid #000;
+}
+
+.test .devote-word {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    transition: all ease .5s;
+    /*opacity: 0;
+    position: absolute;*/
+}
+
+.test .devote-per {
+    transition: all ease .5s;
+}
+
+.percent-box {
+    position: relative;
+    width: 88%;
+    height: 4px;
+    background: #e7edf9;
+    border-radius: 3px;
+    margin: 8px 10px 0 0;
+    overflow: hidden;
+}
+
+.percent {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: #4cc7b9;
+    border-radius: 3px;
+}
+
+.fullPer {
+    background: #ff8888;
+}
+
+:host /deep/ .ui-dialog {
+    padding: 0 28px;
+}
+
+.report {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    /*background-image: url(../../../../../../public/images/report.svg);*/
+    background-image: url(/marketing/public/images/report.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+}

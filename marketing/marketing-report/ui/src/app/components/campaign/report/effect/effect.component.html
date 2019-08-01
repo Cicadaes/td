@@ -1,0 +1,70 @@
+<main id="test">
+    <div class="effect-box">
+        <div class="clearfix">
+            <label class="lab-time l">时间选择</label>
+            <div class="l">
+                <datePicker [value]="marketingValue" (onSelect)="onSelect($event)"></datePicker>
+            </div>
+        </div>
+        <div>
+            <ul class="number-list">
+                <li class="number-item">
+                    <div class="clearfix" *ngIf="selectOverview1">
+                        <span class="l num-name">{{selectOverview1 && selectOverview1.name}}</span>
+                        <p-dropdown class="r" (onChange)="selectOtherOverview($event, 1)" [options]="overviewList1" [(ngModel)]="selectOverview1" [style]="{'min-width':'110px', 'height': '30px','margin':'10px'}" placeholder="指标切换"></p-dropdown>
+                    </div>
+                    <p *ngIf="selectOverview1">
+                        <span class="number">{{selectOverviewData1 || '--' | formatNumber}}</span>
+                    </p>
+                </li>
+                <li class="number-item">
+                    <div class="clearfix" *ngIf="selectOverview2">
+                        <span class="l num-name">{{selectOverview2 && selectOverview2.name}}</span>
+                        <p-dropdown class="r" (onChange)="selectOtherOverview($event, 2)" [options]="overviewList2" [(ngModel)]="selectOverview2" [style]="{'min-width':'110px', 'height': '30px','margin':'10px'}" placeholder="指标切换"></p-dropdown>
+                    </div>
+                    <p *ngIf="selectOverview2">
+                        <span class="number">{{selectOverviewData2 || '--' | formatNumber}}</span>
+                    </p>
+                </li>
+                <li class="number-item">
+                    <div class="clearfix" *ngIf="selectOverview3">
+                        <span class="l num-name">{{selectOverview3 && selectOverview3.name}}</span>
+                        <p-dropdown class="r" (onChange)="selectOtherOverview($event, 3)" [options]="overviewList3" [(ngModel)]="selectOverview3" [style]="{'min-width':'110px', 'height': '30px','margin':'10px'}" placeholder="指标切换"></p-dropdown>
+                    </div>
+                    <p *ngIf="selectOverview3">
+                        <span class="number">{{selectOverviewData3 || '--' | formatNumber}}</span>
+                    </p>
+                </li>
+                <li class="number-item">
+                    <div class="clearfix" *ngIf="selectOverview4">
+                        <span class="l num-name">{{selectOverview4 && selectOverview4.name}}</span>
+                        <p-dropdown class="r" (onChange)="selectOtherOverview($event, 4)" [options]="overviewList4" [(ngModel)]="selectOverview4" [style]="{'min-width':'110px', 'height': '30px','margin':'10px'}" placeholder="指标切换"></p-dropdown>
+                    </div>
+                    <p *ngIf="selectOverview4">
+                        <span class="number">{{selectOverviewData4 || '--' | formatNumber}}</span>
+                    </p>
+                </li>
+            </ul>
+        </div>
+        <div class="charts-area">
+            <div class="line-chart">
+                <div class="chart-abs"><span>{{selectLine && selectLine.name || lineList[0] && lineList[0].value && lineList[0].value.name}}</span>-趋势图</div>
+                <p-dropdown class="chart-dropdown" (onChange)="changeTrend($event)" [options]="lineList" [(ngModel)]="selectLine" [style]="{'min-width':'110px', 'height': '30px','margin':'10px'}"></p-dropdown>
+                <div id="effectLine" style="height: 300px; width: 100%"></div>
+            </div>
+            <div class="clearfix">
+                <div class="l bar-chart">
+                    <p-dropdown (onChange)="changeBar($event)" class="chart-dropdown top-dropdown" [options]="barList" [(ngModel)]="selectbar" [style]="{'min-width':'110px', 'height': '30px','margin':'10px'}"></p-dropdown>
+                    <p-dropdown (onChange)="changeTop($event)" class="chart-dropdown" [options]="topList" [(ngModel)]="selectTop" [style]="{'min-width':'10px', 'height': '30px','margin':'10px'}"></p-dropdown>
+                    <div id="effectBar" style="height: 300px; width: 100%"></div>
+                    <div class="chart-abs"><span>{{selectbar && selectbar.name || barList[0] && barList[0].value && barList[0].value.name}}</span><span>Top {{selectTop}}</span>-对比图</div>
+                </div>
+                <div class="r pie-chart">
+                    <p-dropdown (onChange)="changePie($event)" class="chart-dropdown" [options]="pieList" [(ngModel)]="selectpie" [style]="{'min-width':'110px', 'height': '30px','margin':'10px'}"></p-dropdown>
+                    <div id="effectPie" style="height: 300px; width: 100%"></div>
+                    <div class="chart-abs"><span>{{selectpie && selectpie.name || pieList[0] && pieList[0].value && pieList[0].value.name}}</span>-占比图</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

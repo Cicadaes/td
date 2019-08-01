@@ -1,0 +1,182 @@
+main{
+    padding: 20px;
+    background: #fff;
+}
+
+.new-build-button{
+    display: inline-block;
+    padding: 10px 0 0 15px;
+}
+.new-build-button button{
+    background: #679fef;
+    cursor: pointer;
+    color: #fff;
+    padding: 0 15px;
+    border-radius: 15px;
+}
+.new-build-button button:hover{
+    background: #5c8fd7;
+}
+.new-build-button button span{
+    font-size: 24px;
+    vertical-align: sub;
+    padding-right: 10px;
+}
+:host /deep/ .search-btn{
+    background: #679fef;
+    margin-left: -3px;
+    border-radius: 0 3px 3px 0;
+    height: 32px;
+}
+:host /deep/ .search-btn:hover{
+    background: #5c8fd7 !important;
+}
+.del{
+    /*background:#d9534f;*/
+    color: #666;
+    background: #fff;
+    cursor: pointer;
+}
+.del:hover{
+    /*background:#d9534f !important;*/
+    color: #337ab7;
+    text-decoration: underline;
+}
+.update,.changeBtn{
+    width:84px;
+	height:28px;
+    border-radius: 3px;
+	background:#5ba0ff;
+    vertical-align: middle;
+    color:#fff;
+    margin-left:20px;
+    cursor: pointer;
+}
+:host /deep/ .ui-dialog{
+    width:400px;
+    padding: 0 20px;
+    padding-bottom:20px;
+    overflow:visible;
+}
+:host /deep/ .ui-dialog-content {
+    padding:10px 0 0 0 !important;
+    overflow:visible;
+}
+:host /deep/ .ui-dialog-buttonpane{
+    margin-top:20px;
+}
+.event-div{
+    margin:10px 0;
+}
+.textarea{
+    width:100%;
+    height:100px;
+    text-indent: .5em;
+    color:#000;
+    resize: none;
+    border: 1px solid #dfe7f2;
+    border-radius: 3px;
+}
+span.desc{
+    display: inline-block;
+    vertical-align: top;
+}
+span.l{
+    margin-top:5px;
+}
+.search-box{
+    margin-top:10px;
+    padding-left: 15px;
+}
+.change-name{
+    width:250px;
+    height:30px;
+    text-indent: .5em;
+    border-radius: 3px 0 0 3px;
+    border: 1px solid #dfe7f2;
+}
+.tab-activity{
+    /*border-left:1px solid #e7ebef;*/
+    border-top:1px solid #e7ebef;
+    margin-top:10px;
+}
+.tab-activity tr{
+    border-bottom:1px solid #e7ebef;
+    text-align: left;
+}
+.tab-activity tr th{
+    text-align: left;
+    /*font-weight: bold;*/
+    background: #f7f8f9;
+}
+
+.tab-activity tr td,.tab-activity tr th{
+    /*border-right:1px solid #e7ebef;*/
+    /*padding-left: 15px;*/
+}
+.tab-activity tr th span{
+    padding-left: 15px;
+}
+.tab-activity th {
+    line-height: 35px;
+}
+.tab-activity td{
+    line-height: 33px;
+}
+.tab-activity tr:nth-child(2n+1) td {
+    /*background: #f7f8f9;*/
+}
+.tab-activity .change{
+    /*background: #679fef;*/
+    margin-right: 10px;
+    color: #666;
+    background: #fff;
+    cursor: pointer;
+}
+.tab-activity .change:hover{
+    /*background: #5c8fd7 !important;*/
+    color: #337ab7;
+    text-decoration: underline;
+}
+.tip{
+    padding:20px;
+    color:red;
+}
+:host /deep/ .cancel-btn{
+    background: #fff;
+    color: #666;
+    padding: 6px 15px;
+    cursor: pointer;
+}
+:host /deep/ .cancel-btn:hover{
+    color: #337ab7;
+    text-decoration: underline;
+}
+/*修改删除确认弹框*/
+:host /deep/ .ui-confirmdialog .ui-dialog-buttonpane button:nth-child(1){
+    background: #fff;
+    color: #666;
+    float: none;
+}
+:host /deep/ .ui-confirmdialog .ui-dialog-buttonpane button .fa{
+    display: none;
+}
+:host /deep/ .ui-confirmdialog .ui-dialog-buttonpane button:nth-child(2){
+    background: #679fef;
+}
+:host /deep/ .ui-confirmdialog .ui-dialog-buttonpane button:nth-child(2) span.ui-button-text{
+    padding: .25em 1em .25em 1em;
+}
+:host /deep/ .new-build-button button:disabled:hover{
+    background-color: rgba(204, 204, 204, 0.3)!important;
+}
+.warn-tip{
+    margin-left: 81px;
+}
+.description{
+    max-width: 280px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+

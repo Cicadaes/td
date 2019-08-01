@@ -1,0 +1,81 @@
+<main>
+    <div class="text-editor">
+        <div class="text_editor_title">
+            <span class="r">
+                <p-checkbox [disabled]="segmentCommunicationService.isUpdate === 0" name="appCheck" binary="true" [(ngModel)]="pushData[pieceIndex].action" ></p-checkbox>
+                <i>透传消息</i>
+                <i class="fa fa-question-circle question-tip-box">
+                    <div class="question-tip">
+                        <em></em>
+                        透传消息会使消息标题、消息内容、震动提示、唤醒屏幕都将不可用
+                    </div>
+                </i>
+            </span>
+            <em><span class="required">*</span>消息标题</em>
+        </div>
+        <div class="text_editor_input" style="padding-bottom: 0;">
+            <input disabled="{{pushData[pieceIndex].action || segmentCommunicationService.isUpdate === 0 || false}}" (keyup)="checkInput()" type="text" placeholder="请输入不超过30个字的消息标题" class="text_input_push" [(ngModel)]="pushData[pieceIndex].title">
+            <!--<p class="err-tip"><i class="iconfonts icon-empty1"></i><span>请填写有效消息标题！</span></p>-->
+        </div>
+        <p *ngIf="segmentCommunicationService.isError && segmentCommunicationService.isError.title && segmentCommunicationService.isError.title.indexOf(pieceIndex) != -1" class="warn-tip"><i class="iconfonts icon-empty1"></i>请填写消息标题。</p>
+        <p *ngIf="titleShow" class="warn-tip"><i class="iconfonts icon-empty1"></i>消息标题字数不能超过30个字符。</p>
+        <div class="text_editor_title" style="padding-top: 15px;">
+            <!--<span class="r span-desc">
+                <i>选中输入在标题和内容中的文本，使用下方工具条来调节样式</i>
+                <input type="checkbox" id="checkbox_ec1" class="chk_3" [(ngModel)]="isEditor" disabled="{{pushData[pieceIndex].action || false}}" /><label for="checkbox_c1"></label>
+            </span>-->
+            <!--<em class="rich-text">启用富文本</em>-->
+            <em class="rich-text special-rich-text"><span class="required">*</span>消息内容</em>
+        </div>
+        <div *ngIf="isEditor && !pushData[pieceIndex].action && segmentCommunicationService.isUpdate !== 0">
+            <p-editor [(ngModel)]="pushData[pieceIndex].message" [style]="{'height':'200px'}">
+                <p-header>
+                    <span class="ql-formats">
+                        <button class="ql-bold" aria-label="Bold"></button>
+                        <button class="ql-italic" aria-label="Italic"></button>
+                        <button class="ql-underline" aria-label="Underline"></button>
+                    </span>
+                    <span class="ql-formats">
+                        <select class="ql-header">
+                        <option value="1">标题1</option>
+                        <option value="2">标题2</option>
+                        <option value="3">标题3</option>
+                        <option value="4">标题4</option>
+                        <option value="5">标题5</option>
+                        <option value="6">标题6</option>
+                        <option selected>正常</option>
+                        </select>
+                    </span>
+                    <span class="ql-formats">
+                        <select class="ql-color"></select>
+                    </span>
+                    <span class="ql-formats">
+                        <button class="ql-clean" aria-label="Remove Styles"></button>
+                    </span>
+                </p-header>
+            </p-editor>
+        </div>
+        <div *ngIf="!isEditor || pushData[pieceIndex].action || segmentCommunicationService.isUpdate === 0" style="width :100%; height :242px;">
+            <!--<textarea disabled="{{segmentCommunicationService.segmentInfo.message.messages[pieceIndex].action || segmentCommunicationService.isUpdate === 0 || false}}" pInputTextarea style="width: 100%; height :100%; border-radius:3px 3px 0 0; border-color: #cccccc; resize: none;"
+                [(ngModel)]="segmentCommunicationService.segmentInfo.message.messages[pieceIndex].content"></textarea>-->
+            <div class="disabled-show" [innerHtml]="pushData[pieceIndex].message"></div>
+        </div>
+        <div *ngIf="segmentCommunicationService.quoteList && segmentCommunicationService.quoteList.length > 0" class="editor-input">
+            <label>单击标签在光标处插入变量</label>
+            <ul class="json-list clearfix">
+                <li *ngFor="let quote of segmentCommunicationService.quoteList" (mousedown)="jsonInsert('{' + quote + '}')">
+                    <i class="triangle"></i>
+                    <span>{{'+{$' + quote + '}'}}</span>
+                </li>
+            </ul>
+        </div>
+        <div class="editor-down">
+            <p-checkbox [disabled]="pushData[pieceIndex].action || segmentCommunicationService.isUpdate === 0 || false" name="isDel " binary="true" label=" " [(ngModel)]="pushData[pieceIndex].clearable"></p-checkbox>
+            <span [ngClass]="{disabled: pushData[pieceIndex].action || segmentCommunicationService.isUpdate === 0 || false}">让本条推送消息不可被删除，谨慎使用</span>
+        </div>
+        <p *ngIf="segmentCommunicationService.isError && segmentCommunicationService.isError.content && segmentCommunicationService.isError.content.indexOf(pieceIndex) != -1" class="warn-tip">
+            <i class="iconfonts icon-empty1"></i>请填写消息内容。
+        </p>
+        <!--<p class="err-tip "><i class="iconfonts icon-empty1 "></i><span>请填写消息内容！</span></p>-->
+    </div>
+</main>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.EquityRecordDao" >
+
+  <insert id="insertBatchEquityRecord" parameterType="List">
+    INSERT INTO TD_MKT_EQUITY_RECORD (<include refid="Base_Column_List" />)
+    VALUES
+    <foreach collection="list" item="equityRecord" separator=",">
+      (
+      #{equityRecord.id}, #{equityRecord.campaignId}, #{equityRecord.pipelineDefinitionId},
+      #{equityRecord.equityConfigId}, #{equityRecord.equityCode}, #{equityRecord.equityValue},
+      #{equityRecord.status},#{equityRecord.tenantId},
+      #{equityRecord.creator}, #{equityRecord.createBy},#{equityRecord.createTime},
+      #{equityRecord.updater}, #{equityRecord.updateBy}, #{equityRecord.updateTime}
+      )
+    </foreach>
+  </insert>
+
+    <delete id="deleteNotUsedEquity">
+        delete from TD_MKT_EQUITY_RECORD WHERE pipeline_definition_id=#{pipelineDefinitionId} AND status=0
+    </delete>
+
+    <delete id="deleteExtraEquity">
+        delete from TD_MKT_EQUITY_RECORD WHERE pipeline_definition_id=#{pipelineDefinitionId}
+        AND equity_config_id=#{equityConfigId}
+        AND status=0
+        limit #{limit}
+    </delete>
+
+    <update id="updateEquityUsed" >
+        UPDATE TD_MKT_EQUITY_RECORD
+        SET status=1
+        WHERE campaign_id=#{campaignId}
+        AND pipeline_definition_id=#{pipelineDefinitionId}
+        AND equity_code=#{equityCode}
+        AND equity_value IN
+        <foreach collection="equityValueList" index="index" item="value" open="(" separator="," close=")">
+            #{value}
+        </foreach>
+    </update>
+
+    <delete id="deleteByIds" >
+        delete from TD_MKT_EQUITY_RECORD WHERE id IN
+        <foreach collection="ids" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="findByEquityConfigIdAndStatus" resultMap="BaseResultMap" parameterType="map">
+        select <include refid="Base_Column_List" />
+        from TD_MKT_EQUITY_RECORD
+        where `equity_config_id` = #{equityConfigId} and `status` = #{status}
+    </select>
+
+    <select id="countByEquityConfigIdAndStatus" resultType="int" parameterType="map">
+        SELECT count(id) FROM TD_MKT_EQUITY_RECORD
+        where `equity_config_id` = #{equityConfigId} and `status` = #{status}
+    </select>
+
+    <select id="countByPipelineDefinitionIdAndStatus" resultType="int" parameterType="map">
+        SELECT count(id) FROM TD_MKT_EQUITY_RECORD
+        where `pipeline_definition_id` = #{pipelineDefinitionId} and `status` = #{status}
+    </select>
+</mapper>

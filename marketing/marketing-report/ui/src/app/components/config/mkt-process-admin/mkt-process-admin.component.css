@@ -1,0 +1,30 @@
+main{
+    padding: 20px;
+    background: #fff;
+}
+
+.tab {
+    height: 60px;
+    background: #FBFBFC;
+    font-size: 14px;
+    border: 1px solid #E7EBEF;
+    border-top: none;
+}
+
+.tab .tab_overview {
+    display: inline-block;
+    padding: 23px 0;
+    color: #7F8FA4;
+    height: 100%;
+    box-sizing: border-box;
+    line-height: 14px;
+    width: 64px;
+    margin: 0 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.tab .tab_overview.active {
+    border-bottom: 3px solid #43A3FB;
+    color: #373D5D;
+}

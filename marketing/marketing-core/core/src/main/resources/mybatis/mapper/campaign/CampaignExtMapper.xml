@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.CampaignDao" >
+  <select id="selectByIds" parameterType="List" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM TD_MKT_CAMPAIGN
+    WHERE id IN
+    <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+  </select>
+
+    <delete id="deleteByCreateTime" parameterType="string">
+      delete from TD_MKT_CAMPAIGN WHERE create_time > #{createTime}
+    </delete>
+
+  <select id="findByStartTime" resultMap="BaseResultMap" parameterType="map">
+    SELECT <include refid="Base_Column_List"/>
+    FROM TD_MKT_CAMPAIGN where status >= 0 and tenant_id = #{tenantId} and start_time >= #{starDate}
+    <![CDATA[
+      and start_time <= #{endDate}
+    ]]>
+  </select>
+
+  <select id="findByStatusAndTimeRange" parameterType="map" resultMap="BaseResultMap">
+    SELECT * FROM TD_MKT_CAMPAIGN WHERE status >= 0
+    <if test="status==1">and start_time>#{nowTime} </if>
+    <if test="status==2">
+          <![CDATA[
+              and start_time<=#{nowTime} AND end_time>=#{nowTime}
+          ]]>
+    </if>
+    <if test="status==3">
+          <![CDATA[
+              AND end_time<#{nowTime}
+          ]]>
+    </if>
+    <if test="startTime!=null">
+        <![CDATA[
+             AND start_time >= #{startTime} AND start_time <= #{endTime}
+        ]]>
+    </if>
+    <if test="name!=null">
+      AND  name like '%/${name}%' escape '/'
+    </if>
+      AND tenant_id = #{tenantId}
+
+      <choose>
+          <when test="orderBy != null and order != null">
+              order by ${orderBy} ${order}
+          </when>
+          <otherwise>
+              order by update_time desc
+          </otherwise>
+      </choose>
+
+      <if test="offset!=null">
+      LIMIT #{offset},#{limit}
+    </if>
+  </select>
+
+  <select id="countByStatusAndTimeRange" parameterType="map" resultType="int">
+    SELECT count(1) FROM TD_MKT_CAMPAIGN WHERE status >= 0
+    <if test="status==1">and start_time>#{nowTime}</if>
+    <if test="status==2">
+      <![CDATA[
+            AND start_time<=#{nowTime} AND end_time>=#{nowTime}
+      ]]>
+    </if>
+    <if test="status==3">
+        <![CDATA[
+              AND end_time<#{nowTime}
+         ]]>
+    </if>
+    <![CDATA[
+             AND start_time >= #{startTime} AND start_time <= #{endTime}
+        ]]>
+    <if test="name!=null">AND name like '%/${name}%' escape '/'</if>
+  </select>
+
+  <select id="getCampaignByEquityConfigId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select b.id, b.name, b.description, b.start_time, b.end_time, b.status, b.tenant_id
+    , b.creator, b.create_by, b.create_time, b.updater, b.update_by, b.update_time
+    from TD_MKT_EQUITY_CONFIG a,TD_MKT_CAMPAIGN b
+    where a.campaign_id = b.id and a.id = #{equityConfigId}
+  </select>
+</mapper>

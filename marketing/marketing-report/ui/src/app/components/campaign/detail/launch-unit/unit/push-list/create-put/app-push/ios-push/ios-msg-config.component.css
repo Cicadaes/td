@@ -1,0 +1,189 @@
+h2 {
+    display: inline;
+}
+
+.inRight {
+    float: right;
+}
+
+.control-group {
+    width: 100%;
+    position: relative;
+}
+
+.control-group-last {
+    margin: 0;
+}
+
+.text_editor_list {
+    border-bottom: 1px solid #dee6ed;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.control-label {
+    float: left;
+    min-width: 120px;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    margin-right: 10px;
+    line-height: 30px;
+    height: 30px;
+    font-weight: normal;
+    color: #666f7b;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.controls {
+    width: 62%;
+    float: left;
+    line-height: 30px;
+    position: relative;
+    max-width: 88%;
+}
+
+.json-list {
+    width: 100%;
+    height: auto;
+    padding-top: 5px;
+}
+
+.json-list li {
+    height: 26px;
+    line-height: 26px;
+    margin: 5px 15px;
+    text-align: center;
+    float: left;
+    position: relative;
+    background: #5ba0ff;
+    padding: 0 10px 0 5px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+.json-list li span {
+    color: #ffffff;
+    font-size: 12px;
+}
+
+.json-list li .triangle {
+    position: absolute;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-top: 13px solid transparent;
+    border-right: 13px solid #5ba0ff;
+    border-bottom: 13px solid transparent;
+    left: -12px;
+    top: 0;
+}
+
+.text_editor_button {
+    padding: 5px 0 20px 0;
+    cursor: pointer;
+    color: #657180;
+    display: inline-block;
+}
+
+.text_editor_button .iconfont {
+    color: #5ba0ff;
+}
+
+.text_editor_input {
+    padding-bottom: 0;
+}
+
+.text_editor_title {
+    padding-top: 15px;
+}
+
+.text_editor_title input:disabled {
+    width: 38px;
+    border-radius: 50px;
+    cursor: default!important;
+    background: #ebebe5 !important;
+}
+
+.question-tip {
+    left: 20px;
+    top: -20px;
+}
+
+.number {
+    top: -10px;
+}
+
+.params {
+    top: -28px;
+}
+
+
+/*input:disabled:hover {
+    background: #cccccc!important;
+}*/
+
+.editor-input {
+    border: 1px solid #cccccc;
+    border-top: none;
+    border-radius: 0 0 3px 3px;
+    padding: 13px;
+    background-color: #f3f8ff;
+    color: #657180;
+}
+
+:host /deep/ .selected-btn .ui-selectbutton .ui-button {
+    padding: 3px 7px;
+    border-radius: 5px;
+}
+
+:host /deep/ .selected-btn .ui-selectbutton .ui-button:first-child {
+    margin-right: 12px;
+    border: 1px solid #dee6ed;
+}
+
+:host /deep/ .selected-btn .ui-selectbutton .ui-button:last-child {
+    border: 1px solid #dee6ed;
+}
+
+:host /deep/ .selected-btn .ui-selectbutton .ui-button.ui-state-active {
+    background: #fff;
+    color: #5ba0ff;
+    border-color: #5ba0ff;
+}
+
+:host /deep/ .selected-btn .ui-selectbutton .ui-button span.ui-button-text {
+    padding: 0.6em 1em;
+    width: 81px;
+}
+
+:host /deep/ input:disabled {
+    cursor: default!important;
+    background: #ebebe5 !important;
+    opacity: 0.3;
+}
+
+:host /deep/ input:disabled:hover {
+    background: #ebebe5 !important;
+    opacity: 0.3;
+}
+
+:host /deep/ textarea:disabled {
+    background: #fff !important;
+    opacity: 0.3;
+}
+
+:host /deep/ label.disabled {
+    opacity: 0.3;
+}
+
+:host /deep/ .chk_3 {
+    position: absolute;
+    right: 20px;
+}
+
+:host /deep/ .chk_3+label {
+    margin-left: -60px;
+}

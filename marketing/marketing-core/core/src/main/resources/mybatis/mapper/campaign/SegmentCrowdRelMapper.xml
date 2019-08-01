@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.SegmentCrowdRelDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.marketing.core.entity.campaign.SegmentCrowdRel" >
+    <id column="id" property="id" />
+    <result column="campaign_id" property="campaignId" />
+    <result column="campaign_launch_unit_id" property="campaignLaunchUnitId" />
+    <result column="segment_id" property="segmentId" />
+    <result column="crowd_id" property="crowdId" />
+    <result column="crowd_name" property="crowdName" />
+    <result column="crowd_version" property="crowdVersion" />
+    <result column="crowd_type" property="crowdType" />
+    <result column="tenant_id" property="tenantId" />
+    <result column="creator" property="creator" />
+    <result column="create_by" property="createBy" />
+    <result column="create_time" property="createTime" />
+    <result column="updater" property="updater" />
+    <result column="update_by" property="updateBy" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+
+  <!-- TD_MKT_SEGMENT_CROWD_REL table all fields -->
+  <sql id="Base_Column_List" >
+     `id`, `campaign_id`, `campaign_launch_unit_id`, `segment_id`, `crowd_id`, `crowd_name`, `crowd_version`, `crowd_type`, `tenant_id`, `creator`, `create_by`, `create_time`, `updater`, `update_by`, `update_time`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and `id` ${idOperator} #{id}
+      </if>
+      <if test="campaignId != null" >
+        and `campaign_id` ${campaignIdOperator} #{campaignId}
+      </if>
+      <if test="campaignLaunchUnitId != null" >
+        and `campaign_launch_unit_id` ${campaignLaunchUnitIdOperator} #{campaignLaunchUnitId}
+      </if>
+      <if test="segmentId != null" >
+        and `segment_id` ${segmentIdOperator} #{segmentId}
+      </if>
+      <if test="crowdId != null" >
+        and `crowd_id` ${crowdIdOperator} #{crowdId}
+      </if>
+      <if test="crowdName != null" >
+        and `crowd_name` ${crowdNameOperator} #{crowdName}
+      </if>
+      <if test="crowdVersion != null" >
+        and `crowd_version` ${crowdVersionOperator} #{crowdVersion}
+      </if>
+      <if test="crowdType != null" >
+        and `crowd_type` ${crowdTypeOperator} #{crowdType}
+      </if>
+      <if test="tenantId != null" >
+        and `tenant_id` ${tenantIdOperator} #{tenantId}
+      </if>
+      <if test="creator != null" >
+        and `creator` ${creatorOperator} #{creator}
+      </if>
+      <if test="createBy != null" >
+        and `create_by` ${createByOperator} #{createBy}
+      </if>
+      <if test="createTime != null" >
+        and `create_time` ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and `create_time` &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and `create_time` &lt;= #{createTime2}
+      </if>
+      <if test="updater != null" >
+        and `updater` ${updaterOperator} #{updater}
+      </if>
+      <if test="updateBy != null" >
+        and `update_by` ${updateByOperator} #{updateBy}
+      </if>
+      <if test="updateTime != null" >
+        and `update_time` ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and `update_time` &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and `update_time` &lt;= #{updateTime2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.marketing.core.entity.campaign.SegmentCrowdRel" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_MKT_SEGMENT_CROWD_REL(<include refid="Base_Column_List" />)
+    values (#{id}, #{campaignId}, #{campaignLaunchUnitId}, #{segmentId}, #{crowdId}, #{crowdName}, #{crowdVersion}, #{crowdType}, #{tenantId}, #{creator}, #{createBy}, #{createTime}, #{updater}, #{updateBy}, #{updateTime})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.marketing.core.entity.campaign.SegmentCrowdRel" >
+    update TD_MKT_SEGMENT_CROWD_REL
+       set `campaign_id` = #{campaignId},
+           `campaign_launch_unit_id` = #{campaignLaunchUnitId},
+           `segment_id` = #{segmentId},
+           `crowd_id` = #{crowdId},
+           `crowd_name` = #{crowdName},
+           `crowd_version` = #{crowdVersion},
+           `crowd_type` = #{crowdType},
+           `tenant_id` = #{tenantId},
+           `creator` = #{creator},
+           `create_by` = #{createBy},
+           `create_time` = #{createTime},
+           `updater` = #{updater},
+           `update_by` = #{updateBy},
+           `update_time` = #{updateTime}
+     where `id` = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.marketing.core.entity.campaign.SegmentCrowdRel" >
+    update TD_MKT_SEGMENT_CROWD_REL
+    <set >
+      <if test="campaignId != null" >
+        `campaign_id` = #{campaignId},
+      </if>
+      <if test="campaignLaunchUnitId != null" >
+        `campaign_launch_unit_id` = #{campaignLaunchUnitId},
+      </if>
+      <if test="segmentId != null" >
+        `segment_id` = #{segmentId},
+      </if>
+      <if test="crowdId != null" >
+        `crowd_id` = #{crowdId},
+      </if>
+      <if test="crowdName != null" >
+        `crowd_name` = #{crowdName},
+      </if>
+      <if test="crowdVersion != null" >
+        `crowd_version` = #{crowdVersion},
+      </if>
+      <if test="crowdType != null" >
+        `crowd_type` = #{crowdType},
+      </if>
+      <if test="tenantId != null" >
+        `tenant_id` = #{tenantId},
+      </if>
+      <if test="creator != null" >
+        `creator` = #{creator},
+      </if>
+      <if test="createBy != null" >
+        `create_by` = #{createBy},
+      </if>
+      <if test="createTime != null" >
+        `create_time` = #{createTime},
+      </if>
+      <if test="updater != null" >
+        `updater` = #{updater},
+      </if>
+      <if test="updateBy != null" >
+        `update_by` = #{updateBy},
+      </if>
+      <if test="updateTime != null" >
+        `update_time` = #{updateTime},
+      </if>
+    </set>
+     where `id` = #{id}
+  </update>
+
+  <!-- 根据id查询 TD_MKT_SEGMENT_CROWD_REL -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from TD_MKT_SEGMENT_CROWD_REL
+     where `id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TD_MKT_SEGMENT_CROWD_REL
+     where `id` = #{value}
+
+  </delete>
+
+  <!-- TD_MKT_SEGMENT_CROWD_REL 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select count(1) from TD_MKT_SEGMENT_CROWD_REL
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TD_MKT_SEGMENT_CROWD_REL列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from TD_MKT_SEGMENT_CROWD_REL
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+</mapper>

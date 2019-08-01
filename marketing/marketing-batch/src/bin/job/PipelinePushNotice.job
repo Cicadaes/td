@@ -1,0 +1,2 @@
+type=command
+command=sh /home/hadoop/marketing-batch/marketing-batch/etl/shell/pipelineNoticeTask.sh  pushNotice

@@ -1,0 +1,108 @@
+<main>
+    <div>
+        <div class="text_editor_title margin-t">
+            <span class="r">
+                <input type="checkbox" id="checkbox_mc2" disabled="{{pushData[pieceIndex].action || segmentCommunicationService.isUpdate === 0 || false}}" class="chk_3" [(ngModel)]="pushData[pieceIndex].vibrate"/>
+                <label [ngClass]="{disabled: pushData[pieceIndex].action || segmentCommunicationService.isUpdate == 0 || false}" class = "right_" for="checkbox_c2"></label>
+            </span>
+            <em>震动提示</em>
+        </div>
+        <div class="text_editor_title">
+            <span class="r">
+                <input type="checkbox" id="checkbox_mc1" disabled="{{pushData[pieceIndex].action || segmentCommunicationService.isUpdate === 0 || false}}" class="chk_3" [(ngModel)]="pushData[pieceIndex].wakeup" />
+                <label [ngClass]="{disabled: pushData[pieceIndex].action || segmentCommunicationService.isUpdate === 0 || false}" class = "right_" for="checkbox_c1"></label>
+            </span>
+            <em>唤醒屏幕</em>
+        </div>
+        <div class="text_editor_title">
+            <span class="r">
+                <input type="checkbox" id="checkbox_mc3" disabled="{{segmentCommunicationService.isUpdate === 0}}" class="chk_3" [(ngModel)]="pushData[pieceIndex].isCustom" (change)="changeCustom()" />
+                <label [ngClass]="{disabled: pushData[pieceIndex].action || segmentCommunicationService.isUpdate === 0 || false}" class = "right_" for="checkbox_c3"></label>
+            </span>
+            <em>自定义参数</em>
+            <i class="fa fa-question-circle question-tip-box">
+                <div class="question-tip">
+                    <em></em>
+                    在推送的内容里面附加自定义参数，参数将透传至应用，由应用自行处理
+                </div>
+            </i>
+        </div>
+
+        <div class="text_editor_list special_text_editor_list" *ngIf="pushData[pieceIndex].isCustom">
+            <dl style="float:none;" *ngFor="let list of pushData[pieceIndex].extendAttr; let i = index;">
+                <dt>键 (key）</dt>
+                <dd><input type="text" disabled="{{segmentCommunicationService.isUpdate === 0}}" placeholder="请输入key" class="text_input_push" [(ngModel)]="list['key']"></dd>
+                <dt>值 (value）</dt>
+                <dd><input type="text" disabled="{{segmentCommunicationService.isUpdate === 0}}" placeholder="请输入value" class="text_input_push" [(ngModel)]="list['value']"></dd>
+                <span *ngIf="i!=0" class="iconfont icon-delete removeOne" (click)="deleteEx(i)"></span>
+            </dl>
+            <p *ngIf="exError" class="warn-tip"><i class="iconfonts icon-empty1"></i>请先填写key和value。</p>
+            <div *ngIf="segmentCommunicationService.isUpdate !== 0" class="text_editor_button" (click)="addEx()">
+                <span class="iconfont icon-add"></span>
+                <span>新增自定义程序值</span>
+            </div>
+        </div>
+
+        <!--<div class="control-group">
+            <h2 class="control-label">点击通知后的行为</h2>
+            <div class="controls">
+                <p-radioButton [disabled]="false" value="0" label="打开应用" [(ngModel)]="afterNoticeBehavior"></p-radioButton>
+                <br>
+                <p-radioButton [disabled]="false" value="1" label="深度链接" [(ngModel)]="afterNoticeBehavior"></p-radioButton>
+                <input type="text" *ngIf="afterNoticeBehavior=='1'" pInputText placeholder="请输入深度链接">
+                <br>
+                <p-radioButton [disabled]="false" value="2" label="打开链接" [(ngModel)]="afterNoticeBehavior"></p-radioButton>
+                <input type="text" *ngIf="afterNoticeBehavior=='2'" pInputText placeholder=" 请输入有效可访问链接以http://或https://开头">
+            </div>
+        </div>-->
+
+        <div class="text_editor_title">
+            <em><span class="required">*</span>推送通道
+                <!--暂时注掉防止以后打开-->
+                <!--<a (click)="showPushChannel = !showPushChannel" class="text_title_btn">配置</a>-->
+                (第三方通道配置请联系管理员)
+            </em>
+        </div>
+
+        <!--<div class="text_choose_list clearfix">
+            <ul>
+                <li class="text_choose_color">TD推送</li>
+                <li>极光推送</li>
+            </ul>
+        </div>-->
+
+        <div class="clearfix selected-btn">
+            <p-selectButton [disabled]="segmentCommunicationService.isUpdate == 0" [options]="androidPushTypes" [(ngModel)]="pushData[pieceIndex].appPushChannelCode"></p-selectButton>
+        </div>
+        <!--目前只显示一个增强通道-->
+        <!--*ngIf="msgConfig.message.channel==4"-->
+        <div class="controls">
+            <label>增强通道</label>
+            <!-- <a *ngIf="segmentCommunicationService.isUpdate == 0" style="color:#5697f1 ;display: inline-block;cursor: default;">配置</a>
+            <a (click)="showEnhancedChannelSet = !showEnhancedChannelSet" *ngIf="segmentCommunicationService.isUpdate != 0" style="color:#5697f1 ;display: inline-block;">配置</a> -->
+            <div class="app-select" *ngIf="segmentCommunicationService.appConf[0] && segmentCommunicationService.appConf[0].hwApp">
+                <p-checkbox name="appCheck" [disabled]="segmentCommunicationService.isUpdate == 0" [(ngModel)]="pushData[pieceIndex].huawei" binary="true"></p-checkbox>
+                <span>华为增强通道 </span>
+            </div>
+            <div class="app-select" *ngIf="segmentCommunicationService.appConf[0] && segmentCommunicationService.appConf[0].xmApp">
+                <p-checkbox name="appCheck" [disabled]="segmentCommunicationService.isUpdate == 0" [(ngModel)]="pushData[pieceIndex].xiaomi" binary="true"></p-checkbox>
+                <span>小米增强通道 </span>
+            </div>
+        </div>
+
+        <create-put-event-time [promotion]="msgConfig" [dateRange]="dateRange"></create-put-event-time>
+
+        <div class="control-group control-group-last">
+            <p>
+                <p-checkbox [disabled]="segmentCommunicationService.isUpdate == 0" [(ngModel)]="pushData[pieceIndex].ttlType" binary="true"></p-checkbox>发送时处于离线的用户，如在
+                <p-dropdown [disabled]="segmentCommunicationService.isUpdate == 0" [(ngModel)]="pushData[pieceIndex].timeToLive" (onChange)="changeDropdown()" [style]="{'width':'84px'}" [options]="offLinePushTimes"></p-dropdown>
+                恢复在线，仍然进行推送
+            </p>
+        </div>
+    </div>
+
+    <!--安卓推送配置-->
+    <android-push-config (hideDialog)="hidePushDialog($event)" [showDialog]="showPushChannel" [appConf]="segmentCommunicationService.appConf"></android-push-config>
+    <!--安卓增强推送配置-->
+    <android-intensify-push-config *ngIf="showEnhancedChannelSet" (hideAndroidIntensifyDailog)="hideAndroidIntensifyDailog($event)" [showAndroidIntensifyDailog]="showEnhancedChannelSet" [app]="msgConfig.appid"></android-intensify-push-config>
+</main>

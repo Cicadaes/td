@@ -1,0 +1,105 @@
+<main class="background">
+    <div class="panel">
+        <div class="panel-header">
+            {{campaignInfo.name}}
+        </div>
+        <div class="tab-box">
+            <p-tabView (onChange)="handle($event)">
+                <p-tabPanel header="目标达成">
+                    <div class="content" *ngIf="showGoalAtta">
+                        <div class="content">
+                            <button pButton class="ui-button-secondary content-select" type="text" label="条件筛选" icon="fa-angle-down" iconPos="right" (click)="showOverlayPanel($event, goalSelect)"></button>
+                            <div class="content-box">
+                                <div *ngFor="let childCrowd of childCrowdList;let i=index;" class="content-button">
+                                    <span [ngStyle]="{'color':childCrowd.color,'font-size':'20px','vertical-align': 'middle'}">●</span>{{childCrowd.label}}
+                                    <span (click)="delChild(i)" style="margin-left:10px;cursor: pointer;" class="fa fa-times"></span>
+                                </div>
+                            </div>
+                            <div class="plan-target clearfix">
+                                <div class="taget-content l" *ngFor="let effectItem of effectItemList;let i=index" (click)="chooseTarget($event,i)" [ngClass]="{'active':i==selectedTargetIndex}">
+                                    <div class="taget-name">
+                                        <span style="font-weight:bold;">{{effectItem.name}}</span>
+                                    </div>
+                                    <div class="taget-data" *ngIf="segments.length==0">
+                                        <div class="taget-left">
+                                            <span>达成率</span>
+                                            <span [ngClass]="{'fullReach':effectItem.actualValue/effectItem.value >= 1}">{{((effectItem.actualValue/effectItem.value)*100).toFixed(2)}}%</span>
+                                        </div>
+                                        <div class="taget-right">
+                                            <span>达成 / 计划</span>
+                                            <span [ngClass]="{'fullReach':effectItem.actualValue/effectItem.value >= 1}">{{effectItem.actualValue || '--' | formatNumber}}<i class="diff-color">/{{effectItem.value | formatNumber}}</i></span>
+                                        </div>
+                                    </div>
+                                    <div class="taget-data" *ngIf="segments.length > 0">
+                                        <div class="taget-left">
+                                            <span>贡献率</span>
+                                            <span [ngClass]="{'fullReach':effectItem.subVal/effectItem.actualVal >= 1}">{{effectItem.actualValue ? ((effectItem.subActualValue/effectItem.actualValue)*100).toFixed(2) : 0}}%</span>
+                                        </div>
+                                        <div class="taget-right">
+                                            <span>贡献值 / 实际</span>
+                                            <span [ngClass]="{'fullReach':effectItem.subVal/effectItem.actualVal >= 1}">{{effectItem.subActualValue || '--' | formatNumber}}<i class="diff-color">/{{effectItem.actualValue | formatNumber}}</i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="content-header">
+                            趋势分析
+                        </div>
+                        <div class="content trend-charts">
+                            <common-charts *ngIf="showCharts" [legend]="legend" [xdata]="xdata" [series]="series" [formatter]="chartsFn"></common-charts>
+                        </div>
+
+                        <!-- 条件筛选弹出层 -->
+                        <p-overlayPanel #goalSelect [style]="{'width': '325px', 'height': '350px;'}" appendTo="body">
+                            <div class="overlay-content">
+                                <label>投放单元</label>
+                                <p-dropdown [options]="crowdNameList" [(ngModel)]="selectCrowd" [tabindex]="crowdIndex" (onChange)="changeCrowd()" [style]="{'width':'210px', 'height': '30px'}"></p-dropdown>
+                            </div>
+                            <div class="overlay-content">
+                                <label>投放名称</label>
+                                <p-dropdown [options]="pushNameList" [(ngModel)]="selectPush" [style]="{'width':'210px', 'height': '30px'}"></p-dropdown>
+                            </div>
+                            <div class="overlay-content-button">
+                                <span (click)="selectContrastData()" *ngIf="null!=selectPush && null!=selectCrowd">添加对比</span>
+                            </div>
+                            <div></div>
+                            <div class="overlay-select-content">
+                                <div *ngFor="let select of selectList;let i = index;" class="tag">
+                                    <!--<span>{{select.label}}</span>-->
+                                    <span class="compare-name" [title]="select.label">{{select.label}}</span>
+                                    <a (click)="deleteSelectContrast(i)"><i class="fa fa-times"></i></a>
+                                </div>
+                            </div>
+                            <!--<div class="overlay-select-footer">
+                                <button pButton type="button" class="ui-button-info" (click)="save(goalSelect)" label="确定"></button>
+                                <button pButton type="button" class="ui-button-secondary" (click)="dismiss(goalSelect)" label="取消"></button>
+                            </div>-->
+                            <div class="r btn-handel" style="margin:13px">
+                                <button class="cancel" type="text" pButton (click)="dismiss(goalSelect)" label="取消"></button>
+                                <button class="confirm dis-btn" type="text" pButton (click)="save(goalSelect)" label="确定"></button>
+                            </div>
+                        </p-overlayPanel>
+                        <div class="content-header-detail">
+                            投放目标贡献详情(贡献值/贡献率)
+                            <div class="table-down" (click)="downloadTargetDetail()"><i class="iconfonts icon-down"></i></div>
+                        </div>
+                        <goal-table [campaignId]="campaignId" [segments]="segments" [segmentGroup]="segmentGroup"></goal-table>
+                    </div>
+
+                    <div *ngIf="!showGoalAtta" class="plan-add">
+                        <p class="no-data">未设置计划目标暂无可查看数据<a href="javascript:;" class="set-now" (click)="toCampaignDetail()">点击立即设置</a></p>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel header="漏斗分析" headerStyleClass="tab-panel">
+                    <funnel *ngIf="funnelShow" [campaignId]="campaignId" [campaignName]="campaignInfo.name"></funnel>
+                </p-tabPanel>
+                <p-tabPanel header="效果分析" headerStyleClass="tab-panel">
+                    <effect *ngIf="effectShow" [campaignId]="campaignId"></effect>
+                </p-tabPanel>
+            </p-tabView>
+        </div>
+    </div>
+    <p-growl [value]="msgs" life="3000"></p-growl>
+</main>

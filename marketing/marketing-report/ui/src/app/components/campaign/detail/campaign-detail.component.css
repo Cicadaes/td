@@ -1,0 +1,157 @@
+main {
+    background: #eef0f3;
+    padding: 30px;
+}
+
+.targetReachSituation {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.marketing-box {
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 1px 1px 0 #CED3D9;
+    border-radius: 4px;
+}
+
+.basic-info {
+    background: #fff;
+}
+
+.basic-info .change-name .report {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    /*background-image: url(../../../../../../public/images/report.svg);*/
+    background-image: url(/marketing/public/images/report.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.description {
+    margin-top: 10px;
+}
+
+.desc-word {
+    display: inline-block;
+    /*width: 300px;
+    height: 50px;*/
+    overflow-y: scroll;
+}
+
+.desc-text {
+    display: inline-block;
+    width: 300px;
+    height: 50px;
+    border: 1px solid #dfe7f2;
+    resize: none;
+    border-radius: 5px;
+    color: #5f6a78;
+}
+
+.desc-tit {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.detail-info {
+    margin-top: 15px;
+}
+
+.basic-info .change-name .iconfonts {
+    /*color: #7d8793;*/
+}
+
+p.warn-tip {
+    color: #ff6e6b;
+    padding-top: 3px;
+}
+
+.basic-info .change-name .icon-editor1 {
+    margin-right: 10px;
+    color: #5ba0ff;
+}
+
+.basic-info .edit {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-image: url(marketing/public/images/icon-edit.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+
+:host /deep/ .change-name .ui-inputtext {
+    padding: 0.5em 0.5em !important;
+}
+
+#campaignName {
+    font-size: 17px;
+    color: #2d3038;
+    opacity: 1;
+    font-weight: bold;
+}
+
+.basic-info .icon-yes {
+    margin-right: 12px;
+    color: #5ba0ff;
+}
+
+.basic-info icon-cancel1 {
+    color: #5ba0ff;
+}
+
+.basic-info .build-name {
+    display: inline-block;
+    border-left: 1px solid #dfe7f2;
+    margin-left: 10px;
+    padding-left: 10px;
+}
+
+h2 {
+    display: inline;
+}
+
+.disable-input {
+    border: 0px!important;
+    background-color: transparent !important;
+    font-size: 16px;
+    color: #464C5B;
+    line-height: 16px;
+}
+
+a {
+    font-size: 18px;
+}
+
+.name-button {
+    display: inline-block;
+}
+
+.fa-check-circle-o {
+    margin: 0 10px;
+}
+
+.loading_background {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.loading_image {
+    position: relative;
+    top: 50%;
+}
+
+.loading_image img {
+    /*width:30px;
+    height:30px;*/
+}

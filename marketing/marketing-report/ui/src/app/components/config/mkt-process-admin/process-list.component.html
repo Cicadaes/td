@@ -1,0 +1,61 @@
+<main>
+    <!--搜索-->
+    <div class="search-box">
+        <p style="display: inline-block;color:black;">筛选条件：</p>
+        <span>所属营销活动：</span>
+        <p-dropdown [style]="{'width':'120px'}" [options]="campaigns" [(ngModel)]="selectedCampaign" placeholder="请选择"></p-dropdown>
+        <span>发布者：</span>
+        <input type="text" [(ngModel)]="selectedPublisher" class="change-name" />
+        <span>流程名称：</span>
+        <input type="text" [(ngModel)]="searchName" class="change-name" />
+        <div class="operator">
+            <button class="search-btn" pButton type="button" (click)="search()" label="搜索"></button>
+            <button class="cancel-btn" type="button" (click)="cancelSearch()">重置</button>
+        </div>
+    </div>
+    <!--展示查询提交过的列表数据-->
+    <table *ngIf="updateTableList.length" width="100%" border="0" cellspacing="0" cellpadding="0" class="tab-activity">
+        <tr>
+            <th style="width:30%" scope="col"><span style="padding-left:15px;">营销流程名称</span></th>
+            <th style="width:30%" scope="col">所属营销活动名称</th>
+            <th style="width:10%" scope="col">状态</th>
+            <th style="width:14%" scope="col">发布者</th>
+            <th style="width:14%" scope="col">操作</th>
+        </tr>
+        <tr *ngFor="let item of updateTableList; let i=index">
+            <td>
+                <span style="padding-left:15px;">{{item.name}}</span>
+            </td>
+            <td>{{item.campaignName}}</td>
+            <td>
+                <div *ngIf="item.status==1">草稿</div>
+                <div *ngIf="item.status==2">测试通过</div>
+
+                <div *ngIf="item.status==3">申请上线</div>
+                <div *ngIf="item.status==5">已上线</div>
+                <div *ngIf="item.status==6">运行中</div>
+
+                <div *ngIf="item.status==4">审批未通过</div>
+                <div *ngIf="item.status==7">已下线</div>
+                <div *ngIf="item.status==8">流程已结束</div>
+                <div *ngIf="item.status==9">流程测试中</div>
+            </td>
+            <td>{{item.creator}}</td>
+            <td>
+                <button class="del" *ngIf="item.status==3" type="button" (click)="operation(i,item,5)">审批通过</button>
+                <button class="del" *ngIf="item.status==3" type="button" (click)="operation(i,item,2)">不同意上线</button>
+                <button class="del" *ngIf="item.status==5 || item.status==6" type="button" (click)="operation(i,item,7)">下线</button>
+            </td>
+        </tr>
+
+    </table>
+    <p-growl [value]="msgs" life="3000"></p-growl>
+    <!--添加无数据显示语句-->
+    <p class="tip" *ngIf="!updateTableList.length">暂时没有数据...</p>
+    <!--确认弹框-->
+    <p-confirmDialog width="304" height="150" [acceptLabel]="acceptLabel" [rejectLabel]="rejectLabel"></p-confirmDialog>
+    <!--分页-->
+    <div>
+        <x-paginator [value]="value" (onPagesChange)="paginate($event)"></x-paginator>
+    </div>
+</main>

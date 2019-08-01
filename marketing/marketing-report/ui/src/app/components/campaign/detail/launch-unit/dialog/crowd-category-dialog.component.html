@@ -1,0 +1,31 @@
+<main>
+    <div class="choice-box">
+        <p-dialog header="选择投放单元人群类别" [(visible)]="show" [draggable]="false" modal="modal" responsive="true" (onAfterHide)="afterDialogHide()">
+            <div class="panel clearfix">
+                <div class="content l" (click)="clickShowCrowdDialog('lookalike','2')">
+                    <div class="content-image">
+                        <img src="../../../../../../../public/images/looklike.png">
+                    </div>
+                    <h3>Lookalike人群</h3>
+                    <p>基于已有人群构建相似人群</p>
+                </div>
+                <div class="content l" (click)="clickShowCrowdDialog('scene','2')">
+                    <div class="content-image">
+                        <img src="../../../../../../../public/images/time-people.png">
+                    </div>
+                    <h3>场景人群</h3>
+                    <p>定义场景规则,获取触发人群</p>
+                </div>
+                <div class="content l" (click)="showPreciseCrowdDialog = !showPreciseCrowdDialog;">
+                    <div class="content-image">
+                        <img src="../../../../../../../public/images/acc-people.png">
+                    </div>
+                    <h3>精细化人群</h3>
+                    <p>多样化的人群构建方式让营销更精准</p>
+                </div>
+            </div>
+        </p-dialog>
+    </div>
+    <precise-crowd-form *ngIf="showPreciseCrowdDialog" (hidePreciseCrowdDialog)="hidePreciseCrowdDialog($event)" (hideParentDialog)="hideParentDialog($event)" [showPreciseCrowdDialog]="showPreciseCrowdDialog"></precise-crowd-form>
+    <crowd-form *ngIf="iFshowLookalikeCrowdDialog" (hideLookalikeCrowdDialog)="hideLookalikeCrowdDialog($event)" (hideParentDialog)="hideParentDialog($event)" [dialogData]="dialogData" [showLookalikeCrowdDialog]="showLookalikeCrowdDialog"></crowd-form>
+</main>

@@ -1,0 +1,7 @@
+<main>
+    <my-menu *ngIf="!setPage"></my-menu>
+    <div class="content" [ngStyle]="{'width':setPage ? '100%' : 'calc(100% - 80px)' }">
+        <my-header></my-header>
+        <router-outlet></router-outlet>
+    </div>
+</main>

@@ -1,0 +1,334 @@
+@import './../common.scss';
+// 索引 目的 通过这样的形式 方便找到元素样式所在位置
+main {
+    background: #fff;
+    .pipe-desc {
+        padding: 21px 20px 0px 32px;
+        padding-bottom: 16px;
+        .add-desc {
+            position: relative;
+            .pipe-item {
+                .item-label {
+                    i {
+                        margin-top: 7px;
+                    }
+                }
+            }
+            .push-group {
+                margin-top: 16px;
+                .item-input {
+                    border: 1px solid #D7DDE4;
+                    border-radius: 4px;
+                    input:disabled {
+                        border: 0px !important;
+                    }
+                    .disabled {
+                        background-color: #F8F8F9;
+                    }
+                }
+            }
+            .dropdown {
+                margin-top: 5px;
+                width: 263px;
+                max-height: 200px;
+                display: block;
+                z-index: 1001;
+                visibility: visible;
+                top: 29px;
+                right: 0px;
+                opacity: 1;
+                border-color: #dfe7f2;
+                background-color: #ffffff;
+                border: 1px solid #c7c7c7;
+                border-radius: 5px;
+                position: absolute;
+                -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+                -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+                box-sizing: border-box;
+                overflow-y: auto;
+                li {
+                    margin: 1px 0;
+                    border: 0 none;
+                    border-radius: 0;
+                    font-weight: normal;
+                    text-align: left;
+                    cursor: pointer;
+                    &:hover {
+                        background-color: #e5e5e5;
+                    }
+                    span {
+                        padding: 5px 10px;
+                        width: 220px;
+                        display: inline-block;
+                    }
+                    .delete {
+                        display: inline-block;
+                        width: 12px;
+                        height: 12px;
+                        background-image: url(/marketing/public/images/icon-close.svg);
+                        background-repeat: no-repeat;
+                        background-size: contain;
+                        cursor: pointer;
+                        vertical-align: initial;
+                    }
+                }
+            }
+            .push-times {
+                margin-top: 23px;
+                @include normal-font;
+            }
+        }
+    }
+    .pipe-content {
+        border-top: $border-top;
+        padding: 17px 20px 0px 32px;
+        .target-platform {
+            .icon-platform {
+                width: 112px;
+                height: 33px;
+                display: block;
+                cursor: pointer;
+                &.android {
+                    margin-right: 16px;
+                    background: $android-icon;
+                    &.active {
+                        background: $android-active-icon;
+                    }
+                }
+                &.ios {
+                    margin-right: 21px;
+                    background: $ios-icon;
+                    &.active {
+                        background: $ios-active-icon;
+                    }
+                }
+            }
+        }
+        .select-app {
+            margin-top: 24px;
+        }
+        .editor {
+            margin-top: 24px;
+            .editor_title {
+                margin-top: 22px;
+            }
+            .p_editor_wrap {
+                margin-top: 16px;
+                position: relative;
+                .mask_layer {
+                    position: absolute;
+                    height: 100%;
+                    width: 100%;
+                    top: 0;
+                    left: 0;
+                    background: rgba(204, 204, 204, 0.3);
+                    z-index: 9999;
+                }
+            }
+            .editor-down {
+                @include input-style;
+                padding: 0;
+                border-top: none;
+                border-radius: 0px 0px 4px 4px;
+                height: 29px;
+                text-indent: 0;
+                padding-left: 12px;
+                &>i {
+                    @include normal-font;
+                    line-height: 29px;
+                }
+            }
+        }
+        .editor_input {
+            margin-top: 16px;
+            .input_push {
+                @include input-style;
+                width: 328px;
+                height: $item-height;
+            }
+        }
+        .reminder {
+            margin-top: 23px;
+        }
+        .insertData {
+            margin-top: 18px;
+            &>textarea {
+                @include textarea-style;
+                display: block;
+                width: 328px;
+                height: 138px;
+            }
+        }
+        .editor-input {
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            padding: 5px;
+        }
+        .custom-arguments-flag {
+            margin-top: 22px;
+            .key-value {
+                margin-top: 15px;
+                .title {
+                    @include normal-font;
+                    line-height: 32px;
+                    color: #657180;
+                    margin-right: 10px;
+                }
+                .key {
+                    @include input-style;
+                    width: 125px;
+                }
+                .value {
+                    @include input-style;
+                    width: 118px;
+                }
+                .divider {
+                    line-height: 32px;
+                }
+            }
+            .add-rules {
+                @include user-select-none;
+                margin-top: 20px;
+                color: #2D8CF0;
+                &>span {
+                    @include normal-font;
+                    color: #2D8CF0;
+                    cursor: pointer;
+                }
+                &>i {
+                    cursor: pointer;
+                }
+            }
+            .icon-del {
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                background: $icon-del;
+                background-size: contain;
+                vertical-align: sub;
+                margin-left: 7px;
+                cursor: pointer;
+            }
+        }
+        .push-channels {
+            margin-top: 20px;
+            .channels {
+                display: block;
+                margin-top: 15px;
+            }
+        }
+        .strengthen-channels {
+            margin-top: 24px;
+        }
+        .push-time {
+            margin-top: 26px;
+            .charts-handle-date {
+                margin-left: 15px;
+                &>div {
+                    width: 72px;
+                    height: 32px;
+                    background: #FFFFFF;
+                    border-top: 1px solid #DDDEE1;
+                    border-bottom: 1px solid #DDDEE1;
+                    border-left: 1px solid #DDDEE1;
+                    border-right: 1px solid #DDDEE1;
+                    line-height: 32px;
+                    box-sizing: border-box;
+                    text-align: center;
+                    cursor: pointer;
+                    &.active {
+                        border: none;
+                        background: #2D8CF0;
+                        color: #fff;
+                    }
+                    &:first-child {
+                        border-left: 1px solid #DDDEE1;
+                        border-right: none;
+                        border-radius: 4px 0 0 4px;
+                    }
+                    &:last-child {
+                        border-left: none;
+                        border-right: 1px solid #DDDEE1;
+                        border-radius: 0 4px 4px 0;
+                    }
+                }
+            }
+        }
+        .send-choice {
+            margin-top: 20px;
+        }
+        .stay-time {
+            margin-top: 23px;
+            &>span {
+                @include user-select-none;
+                cursor: pointer;
+            }
+        }
+    }
+    .other-config {
+        padding-top: 0px;
+        margin-top: 20px;
+    }
+}
+
+:host /deep/ .ql-editor {
+    min-height: 138px;
+}
+
+:host /deep/ .ui-selectbutton .ui-button {
+    padding: 3px 7px;
+    border-radius: 5px;
+}
+
+:host /deep/ .ui-selectbutton .ui-button {
+    margin-right: 12px;
+    border: 1px solid #dee6ed;
+}
+
+:host /deep/ .ui-selectbutton .ui-button:last-child {
+    margin-right: 0px;
+    border: 1px solid #dee6ed;
+}
+
+:host /deep/ .ui-selectbutton .ui-button.ui-state-active {
+    background: #fff;
+    color: #5ba0ff;
+    border-color: #5ba0ff;
+}
+
+:host /deep/ .ui-selectbutton .ui-button span.ui-button-text {
+    padding: 0.6em 1em;
+}
+
+:host /deep/ .ui-button {
+    border: 1px solid #5697f1 !important;
+    // color: #5697f1;
+}
+
+:host /deep/ .ui-state-disabled {
+    opacity: 1!important;
+}
+
+:host /deep/ .ui-state-disabled .ui-dropdown-label {
+    background-color: #F8F8F9!important;
+    color: rgba(23, 35, 61, 0.30)!important;
+}
+
+:host /deep/ .ui-state-disabled .ui-dropdown-trigger {
+    background-color: #F8F8F9!important;
+    color: rgba(23, 35, 61, 0.30)!important;
+}
+
+:host /deep/ .ui-widget:disabled {
+    opacity: 1;
+}
+
+:host /deep/ .ui-state-disabled.ui-button {
+    border: 1px solid #DCDEE2!important;
+}
+
+:host /deep/ .send-choice .ui-state-disabled.ui-button span {
+    color: rgba(23, 35, 61, 0.25);
+}

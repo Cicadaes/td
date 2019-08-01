@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ehcache name="datafilter-ehcache" updateCheck="false">
+
+	<!-- pipelineDefinitionCache配置 营销流程定义缓存-->
+	<cache
+			name="pipelineDefinitionCache"
+			maxEntriesLocalHeap="2000"
+			eternal="false"
+			timeToLiveSeconds="3600"
+			overflowToDisk="false"
+			statistics="false">
+	</cache>
+
+	<!-- pipelineInstanceCache配置 营销流程实例缓存-->
+	<cache
+			name="pipelineInstanceCache"
+			maxEntriesLocalHeap="2000"
+			eternal="false"
+			timeToLiveSeconds="3600"
+			overflowToDisk="false"
+			statistics="false">
+	</cache>
+
+	<!-- pipelineUserInstanceCache配置 营销流程用户实例缓存-->
+	<cache
+			name="pipelineUserInstanceCache"
+			maxEntriesLocalHeap="2000"
+			eternal="false"
+			timeToLiveSeconds="86400"
+			overflowToDisk="false"
+			statistics="false">
+	</cache>
+
+	<!-- pipelineEnterCache配置 全局进入规则缓存-->
+	<cache
+			name="pipelineEnterCache"
+			maxEntriesLocalHeap="2000"
+			eternal="false"
+			timeToLiveSeconds="86400"
+			overflowToDisk="false"
+			statistics="false">
+	</cache>
+
+	<!-- pipelineTerminationCache配置 全局禁止规则缓存-->
+	<cache
+			name="pipelineTerminationCache"
+			maxEntriesLocalHeap="2000"
+			eternal="false"
+			timeToLiveSeconds="86400"
+			overflowToDisk="false"
+			statistics="false">
+	</cache>
+	<!-- pipelineSplitBranchCache 分流器算子规则缓存-->
+	<cache
+			name="pipelineSplitBranchCache"
+			maxEntriesLocalHeap="2000"
+			eternal="false"
+			timeToLiveSeconds="86400"
+			overflowToDisk="false"
+			statistics="false">
+	</cache>
+
+	<!-- pipelineUserAccessTraceCache 用户通过流程痕迹缓存-->
+	<cache
+			name="pipelineUserAccessTraceCache"
+			maxEntriesLocalHeap="50000"
+			eternal="false"
+			timeToLiveSeconds="86400"
+			overflowToDisk="false"
+			statistics="false">
+	</cache>
+
+	<!-- pipelineStage配置 营销流程实例缓存-->
+	<cache
+			name="pipelineStage"
+			maxEntriesLocalHeap="2000"
+			eternal="false"
+			timeToLiveSeconds="3600"
+			overflowToDisk="false"
+			statistics="false">
+	</cache>
+
+    <cache
+            name="bitmapCache"
+            maxEntriesLocalHeap="2000"
+            eternal="false"
+            timeToLiveSeconds="3600"
+            overflowToDisk="false"
+            memoryStoreEvictionPolicy="LRU"
+            statistics="false">
+    </cache>
+
+</ehcache>

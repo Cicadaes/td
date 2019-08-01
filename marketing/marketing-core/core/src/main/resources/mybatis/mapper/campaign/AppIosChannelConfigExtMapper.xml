@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.AppIosChannelConfigDao" >
+  <insert id="insertOrUpdate" parameterType="com.talkingdata.marketing.core.entity.campaign.AppIosChannelConfig">
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_MKT_APP_IOS_CHANNEL_CONFIG(<include refid="Base_Column_List" />)
+    values (#{id}, #{appConfigId}, #{prodFileName}, #{prodExpiryDate}, #{prodPem}, #{devFileName}, #{devExpiryDate}
+    , #{devPem}, #{tenantId}, #{creator}, #{createBy}, #{createTime}, #{updater}, #{updateBy}, #{updateTime})
+    ON DUPLICATE KEY UPDATE
+    <if test="appConfigId != null" >
+      `app_config_id` = #{appConfigId},
+    </if>
+    <if test="prodFileName != null" >
+      `prod_file_name` = #{prodFileName},
+    </if>
+    <if test="prodExpiryDate != null" >
+      `prod_expiry_date` = #{prodExpiryDate},
+    </if>
+    <if test="prodPem != null" >
+      `prod_pem` = #{prodPem},
+    </if>
+    <if test="devFileName != null" >
+      `dev_file_name` = #{devFileName},
+    </if>
+    <if test="devExpiryDate != null" >
+      `dev_expiry_date` = #{devExpiryDate},
+    </if>
+    <if test="devPem != null" >
+      `dev_pem` = #{devPem},
+    </if>
+    <if test="tenantId != null" >
+      `tenant_id` = #{tenantId},
+    </if>
+    <if test="creator != null" >
+      `creator` = #{creator},
+    </if>
+    <if test="createBy != null" >
+      `create_by` = #{createBy},
+    </if>
+    <if test="createTime != null" >
+      `create_time` = #{createTime},
+    </if>
+    <if test="updater != null" >
+      `updater` = #{updater},
+    </if>
+    <if test="updateBy != null" >
+      `update_by` = #{updateBy},
+    </if>
+    `update_time` = #{updateTime}
+  </insert>
+
+  <select id="getByAppConfigId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" />
+    from TD_MKT_APP_IOS_CHANNEL_CONFIG
+    where `app_config_id` = #{appConfigId}
+  </select>
+</mapper>

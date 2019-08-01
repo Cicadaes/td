@@ -1,0 +1,181 @@
+.check-phone-content {
+    margin-right: 10px;
+    border: 1px solid #dee6ed;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 26px;
+    display: inline-block;
+    cursor: pointer;
+    width: 91px;
+}
+
+.check-phone-content .iconfont {
+    vertical-align: middle;
+}
+
+.check-phone-content-border-blue {
+    border-color: #5697f1;
+    color: #5697f1;
+}
+
+.check-phone-content-border-blue .iconfont {
+    color: #5697f1;
+}
+
+.app-push-add {
+    width: 160px;
+    height: 83px;
+    background: #f3f8ff;
+    border: 1px dashed #dce0e5;
+    margin: 0 0 8px 0px;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+}
+
+.app-push-add:hover {
+    background: #ffffff;
+}
+
+.app-push-add h2 {
+    text-align: center;
+    font-size: 27px;
+    color: #a7b0c4;
+    padding-bottom: 5px;
+}
+
+.app-push-add h3 {
+    text-align: center;
+    font-size: 14px;
+    color: #657180;
+    font-weight: normal;
+}
+
+.app_push_content {
+    min-width: 520px;
+    border: 1px solid #dee6ed;
+    border-radius: 3px;
+    margin-top: 10px;
+    padding: 15px;
+    float: left;
+}
+
+.phone1,
+.phone2 {
+    width: 309px;
+    height: 620px;
+    margin-top: 25px;
+    position: relative;
+}
+
+.phone1 .msg-box,
+.phone2 .msg-box {
+    position: absolute;
+    color: #fff;
+}
+
+.phone1 .msg-box {
+    left: 60px;
+    top: 225px;
+}
+
+.phone1 .msg-box span.now {
+    color: #5e5ab0;
+    padding-left: 7px;
+}
+
+.phone1 .msg-box p.slide {
+    color: #8a74b8;
+}
+
+.phone1 .msg-box p {
+    padding-top: 5px;
+    width: 200px;
+}
+
+.phone2 .msg-box {
+    top: 100px;
+    left: 45px;
+}
+
+.phone2 .msg-box p {
+    padding-top: 5px;
+    width: 228px;
+}
+
+.phone2 .msg-icon {
+    width: 15px;
+    height: 15px;
+    background-color: #5ba0ff;
+    position: absolute;
+    top: 100px;
+    left: 20px;
+    border-radius: 3px;
+}
+
+.phone1 {
+    /*background: url(../../../../../../public/images/phone1.png) no-repeat;*/
+    background: url(/marketing/public/images/phone1.png) no-repeat;
+}
+
+.phone2 {
+    /*background: url(../../../../../../public/images/phone2.png) no-repeat;*/
+    background: url(/marketing/public/images/phone2.png) no-repeat;
+}
+
+.edit {
+    width: 580px;
+}
+
+:host /deep/ .ui-slider {
+    height: 6px;
+}
+
+:host /deep/ .ui-slider.ui-slider-horizontal .ui-slider-handle {
+    top: -0.3em;
+    width: 12px;
+    height: 12px;
+}
+
+:host /deep/ .app_push_list_right app-push-piece:nth-child(1) .select-push-piece h4 span {
+    color: #5ba0ff;
+}
+
+:host /deep/ .app_push_list_right app-push-piece:nth-child(1) .select-push-piece .ui-slider-handle {
+    background: #fff;
+    border: 2px solid #5ba0ff;
+}
+
+:host /deep/ .app_push_list_right app-push-piece:nth-child(2) .select-push-piece .ui-slider-handle {
+    background: #fff;
+    border: 2px solid #4cc7b9;
+}
+
+:host /deep/ .app_push_list_right app-push-piece:nth-child(3) .select-push-piece .ui-slider-handle {
+    background: #fff;
+    border: 2px solid #ff8888;
+}
+
+:host /deep/ .app_push_list_right app-push-piece:nth-child(2) .select-push-piece h4 span {
+    color: #4cc7b9;
+}
+
+:host /deep/ .app_push_list_right app-push-piece:nth-child(3) .select-push-piece h4 span {
+    color: #ff8888;
+}
+
+:host /deep/ .app_push_list_right app-push-piece:nth-child(2) .select-push-piece em {
+    background: #4cc7b9;
+}
+
+:host /deep/ .app_push_list_right app-push-piece:nth-child(3) .select-push-piece em {
+    background: #ff8888;
+}
+
+em {
+    font-style: normal;
+}
+
+.disabled {
+    cursor: default !important;
+}

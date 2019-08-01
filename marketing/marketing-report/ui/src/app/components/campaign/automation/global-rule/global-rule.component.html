@@ -1,0 +1,55 @@
+<div class="global-rule">
+    <div class="termination-rule">
+        <div class="termination-label">提前终止规则（满足如下条件可提前终止营销流程）：</div>
+        <div class="content">
+            <div class="termination-content" *ngFor="let rule of terminationRuleList;let i = index">
+                <div *ngIf="i" class="rule-button" (click)="changeRuleRelation(terminationRuleRelation)">{{terminationRuleRelation.label}}</div>
+                <div class="rule-setting">
+                    <p-dropdown [disabled]="!pipelineNodeCommunicationService.editFlag" placeholder="请选择指标" [options]="targetList" [(ngModel)]="rule.target" [style]="{'width': '120px'}" (onChange)="changeTerminationRule(rule)"></p-dropdown>
+                    <p-dropdown [disabled]="!pipelineNodeCommunicationService.editFlag" [options]="symbolList" [(ngModel)]="rule.code" [style]="{'width': '50px','margin-left': '5px'}" (onChange)="changeTerminationRule(rule)"></p-dropdown>
+                    <input tdLimitNumberInput condition="PI" [max]="rule.target && rule.target.value" type="text" class="rule-input" [(ngModel)]="rule.number" (input)="changeTerminationRule()" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                    <i class="icon-del" (click)="deleteRule(i)"></i>
+                </div>
+            </div>
+        </div>
+        <div class="add-rules" (click)="addRule()">
+            <i class="fa fa-plus"></i>
+            <span>添加规则</span>
+        </div>
+    </div>
+    <div class="enter-rule">
+        <div class="enter-label">全局进入规则（默认为同一用户不受次数和频率限制）：</div>
+        <div class="rule-setting">
+            <span (click)="selectRule($event, '1')">
+                <input type="checkbox" [value]="1" name="rule" [(ngModel)]="selectLessThanDays" [disabled]="!pipelineNodeCommunicationService.editFlag"> 同一用户
+            </span>
+            <input tdLimitNumberInput condition="PI" class="rule-val" type="text" (input)="enterRuleChange($event)" [disabled]="!selectLessThanDays || !pipelineNodeCommunicationService.editFlag" [(ngModel)]="pipelineNodeCommunicationService.rule.pipelineEnterRuleDefinition.lessThanDays">天内不再进入营销流程
+        </div>
+        <div class="rule-setting">
+            <span (click)="selectRule($event, '2')"><input type="checkbox" [value]="2" name="rule" [(ngModel)]="selectLessThanTimes" [disabled]="!pipelineNodeCommunicationService.editFlag"> 同一用户进入营销活动次数不超过</span>
+            <input tdLimitNumberInput condition="PI" class="rule-val" type="text" (input)="enterRuleChange($event)" [disabled]="!selectLessThanTimes || !pipelineNodeCommunicationService.editFlag" [(ngModel)]="pipelineNodeCommunicationService.rule.pipelineEnterRuleDefinition.lessThanTimes">
+        </div>
+    </div>
+    <div class="no-entry">
+        <p>全局禁止规则<span class="desc-text">（满足如下条件的用户不可进入流程）：</span></p>
+        <div class="rule-header" *ngIf="noEntryRules.length">
+            <div class="rule-body" *ngFor="let rule of noEntryRules;let i = index">
+                <div *ngIf="i" class="rule-button" (click)="changeRuleRelation(terminationNoEntryRelation)">{{terminationNoEntryRelation.label}}</div>
+                <!-- <p-dropdown *ngIf="i" [style]="{'width':'66px','position':'absolute','left':'-73px','top': '0'}" placeholder="或者"></p-dropdown> -->
+                <p-dropdown [style]="{'width':'66px','position':'absolute','left':'-73px'}" placeholder="未发生" [options]="fristeNoEntry" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                <p-dropdown [style]="{'width':'160px'}" placeholder="请选择" [options]="secondNoEntry" (onChange)="selectNoEntry($event, rule)" [(ngModel)]="rule.second" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                <i *ngIf="!rule.second" class="icon-del" (click)="delNoEntryRule(i);"></i>
+                <div class="rule-content" *ngIf="rule.second">
+                    <p-dropdown [style]="{'width':'160px'}" [options]="rule.forbidRuleList" placeholder="请选择" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                    <b></b>
+                    <input tdLimitNumberInput condition="PI" type="text" [(ngModel)]="rule.number" [disabled]="!pipelineNodeCommunicationService.editFlag">次
+                    <i class="icon-del" (click)="delNoEntryRule(i);"></i>
+                </div>
+            </div>
+        </div>
+        <div class="add-rules" (click)="addNoEntryRule();">
+            <i class="fa fa-plus"></i>
+            <span>添加规则</span>
+        </div>
+    </div>
+</div>

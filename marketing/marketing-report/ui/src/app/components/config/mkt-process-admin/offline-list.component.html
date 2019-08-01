@@ -1,0 +1,63 @@
+<main>
+    <!--搜索-->
+    <div class="search-box">
+        <div>
+            <p style="line-height: 40px;color:black;width: 70px;">筛选条件：</p>
+        </div>
+        <div class="conditions">
+            <div class="condition">
+                <span>所属营销活动：</span>
+                <p-dropdown [style]="{'width':'180px'}" [options]="campaigns" [(ngModel)]="selectedCampaign" placeholder="请选择"></p-dropdown>
+            </div>
+            <div class="condition">
+                <span>发布者：</span>
+                <input type="text" [(ngModel)]="selectedPublisher" class="change-name" />
+            </div>
+            <div class="condition">
+                <span>流程名称：</span>
+                <input type="text" [(ngModel)]="searchName" class="change-name" />
+            </div>
+            <div class="condition">
+                <span>下线时间区间：</span>
+                <datePicker [value]="marketingValue" (onSelect)="onSelect($event)"></datePicker>
+            </div>
+            <div class="condition">
+                <span>操作者：</span>
+                <input type="text" [(ngModel)]="selectedOperator" class="change-name" />
+            </div>
+        </div>
+        <div class="operator">
+            <button class="search-btn" pButton type="button" (click)="search()" label="搜索"></button>
+            <button class="cancel-btn" type="button" (click)="cancelSearch()" >重置</button>
+        </div>
+    </div>
+    <!--展示查询提交过的列表数据-->
+    <table *ngIf="updateTableList.length" width="100%" border="0" cellspacing="0" cellpadding="0" class="tab-activity">
+        <tr>
+            <th style="width:25%" scope="col" ><span style="padding-left:15px;">营销流程名称</span></th>
+            <th style="width:25%" scope="col" >所属营销活动名称</th>
+            <th style="width:20%" scope="col" >发布者</th>
+            <th style="width:14%" scope="col" >下线时间</th>
+            <th style="width:14%" scope="col">操作者</th>
+        </tr>
+        <tr *ngFor = "let item of updateTableList; let i=index" >
+            <td>
+                <span style="padding-left:15px;">{{item.name}}</span>
+            </td>
+            <td>{{item.campaignName}}</td>
+            <td>{{item.creator}}</td>
+            <td>
+                {{item.updateTime | date:'yyyy-MM-dd HH:mm'}}
+            </td>
+            <td>{{item.updater}}</td>
+        </tr>
+        
+    </table>
+    <p-growl [value]="msgs" life="3000"></p-growl>
+    <!--添加无数据显示语句-->
+    <p class="tip" *ngIf="!updateTableList.length">暂时没有数据...</p>
+    <!--分页-->
+    <div>
+        <x-paginator [value]="value" (onPagesChange)="paginate($event)"></x-paginator>
+    </div>
+</main>

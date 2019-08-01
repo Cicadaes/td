@@ -1,0 +1,356 @@
+main {
+    background: #FFFFFF;
+    box-shadow: 0 1px 1px 0 #CED3D9;
+    border-radius: 4px;
+}
+
+.dataHead {
+    height: 235px;
+    padding-top: 25px;
+    border-radius: 4px 4px 0 0;
+    padding-left: 20px;
+    box-sizing: border-box;
+}
+
+.dataHead .control-group {
+    margin-bottom: 20px;
+}
+
+.control-group .act-num {
+    font-size: 18px;
+    color: #43A3FB;
+    ;
+    line-height: 20px;
+}
+
+.control-label {
+    margin-right: 28px;
+    line-height: 30px;
+    color: #666f7b;
+}
+
+.search-activity {
+    position: relative;
+}
+
+.search-activity i.fa-search {
+    font-size: 15px;
+    color: #a7b0c4;
+    position: absolute;
+    left: 18px;
+    top: 10px;
+}
+
+.search-activity input {
+    width: 254px;
+    height: 18px;
+    border: 1px solid #dfe7f2;
+    border-radius: 25px;
+    text-indent: 2em;
+    font-size: 14px;
+}
+
+.search-activity .icon-empty1 {
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 9px;
+    font-size: 16px;
+    color: #e2e7ed;
+}
+
+:host /deep/ .ui-inputtext {
+    width: 257px;
+}
+
+:host /deep/ .pinput-sel .ui-inputtext {
+    width: auto;
+}
+
+:host /deep/ .dbtn-blue {
+    padding: 6px 20px !important;
+    border-radius: 5px;
+    background: #0275d8 !important;
+}
+
+:host /deep/ .dbtn-gray {
+    background: #fff !important;
+}
+
+:host /deep/ .ui-datatable .ui-datatable-thead tr th {
+    padding: 10px 0 10px 30px !important;
+}
+
+:host /deep/ .ui-datatable .ui-datatable-thead tr th:nth-child(1) {
+    width: 16%;
+}
+
+:host /deep/ .ui-datatable .ui-datatable-thead tr th:nth-child(2) {
+    width: 20.03%;
+    /*cursor:pointer;*/
+}
+
+:host /deep/ .ui-datatable .ui-datatable-thead tr th:nth-child(3) {
+    width: 10%;
+}
+
+:host /deep/ .ui-datatable .ui-datatable-thead tr th:nth-child(4) {
+    width: 11.33%;
+}
+
+:host /deep/ .ui-datatable .ui-datatable-thead tr th:nth-child(5) {
+    width: 30.96%;
+}
+
+:host /deep/ .ui-datatable .ui-datatable-thead tr th:nth-child(6) {
+    width: 11.33%;
+}
+
+:host /deep/ .ui-datatable tbody {
+    border: none;
+}
+
+:host /deep/ .ui-datatable .ui-datatable-tablewrapper .ui-datatable-data tr {
+    border: none;
+}
+
+:host /deep/ .ui-datatable .ui-datatable-tablewrapper .ui-datatable-data tr td {
+    padding: 11px 0 11px 30px;
+}
+
+:host /deep/ .ui-datatable .ui-datatable-tablewrapper .ui-datatable-data tr td:last-child {
+    padding: 11px 0 11px 11px;
+}
+
+:host /deep/ .ui-datatable .ui-datatable-tablewrapper .ui-datatable-data tr td p.creator,
+:host /deep/ .ui-datatable .ui-datatable-tablewrapper .ui-datatable-data tr td p.targetReachSituation {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+:host /deep/ .ui-datatable .ui-datatable-tablewrapper .ui-datatable-data tr td p.name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/*修改 等待开始 进行中 已结束 tab切换*/
+
+:host /deep/ .dataHead .ui-button {
+    border: none;
+    border-radius: 15px;
+}
+
+:host /deep/ .ui-buttonset .ui-button:first-child {
+    border-radius: 15px;
+}
+
+:host /deep/ .ui-buttonset .ui-button:last-child {
+    border-radius: 15px;
+}
+
+:host /deep/ .dataHead .ui-button:nth-child(2) {
+    margin: 0 27px;
+}
+
+:host /deep/ .dataHead .ui-button:last-child {
+    margin-left: 27px;
+}
+
+.controls {
+    line-height: 30px;
+}
+
+.dataBody {
+    border-top: none;
+}
+
+.dataBody .ui-widget-header {
+    border-top: 1px solid #dfe7f2;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    height: 49px;
+}
+
+.dataBody .ui-widget-header p {
+    font-size: 14px;
+    color: #464C5B;
+    line-height: 48px;
+    padding-left: 20px;
+}
+
+.dataBody .ui-widget-header .download.r {
+    border: none;
+    line-height: 48px;
+}
+
+.dataBody .ui-widget-header .down_icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url(marketing/public/images/icon－download.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.dataBody .ui-widget-header .icon-prompt1 {
+    font-size: 16px;
+    margin: 0 17px 0 5px;
+    color: #ced1d5;
+    opacity: 0;
+}
+
+.dataBody .ui-widget-header div.r {
+    width: 58px;
+    height: 30px;
+    border: 1px solid #dfe7f2;
+    border-radius: 17px;
+    text-align: center;
+    line-height: 34px;
+    font-size: 16px;
+    color: #a7b0c4;
+    cursor: pointer;
+    margin-top: 6px;
+}
+
+.dataBody .ui-widget-header div.l {
+    position: relative;
+}
+
+.dataBody .ui-widget-header input {
+    width: 223px;
+    height: 18px;
+    border: 1px solid #dfe7f2;
+    border-radius: 25px;
+    text-indent: 2em;
+    font-size: 14px;
+}
+
+.dataBody .ui-widget-header i.fa-search {
+    font-size: 15px;
+    color: #a7b0c4;
+    position: absolute;
+    left: 130px;
+    top: 10px;
+}
+
+.dataBody .ui-widget-header i.icon-empty1 {
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 9px;
+    font-size: 16px;
+    color: #e2e7ed;
+}
+
+.dataBody .icon-details,
+.dataBody .icon-report {
+    color: #43A3FB;
+    ;
+}
+
+.dataBody .details,
+.dataBody .clone,
+.dataBody .report,
+.dataBody .delete {
+    font-size: 12px;
+    color: #464C5B;
+    line-height: 12px;
+}
+
+
+/*.dataBody .details {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background-image: url(/marketing/public/images/detail.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.dataBody .report {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url(/marketing/public/images/report.svg);
+}*/
+
+
+/*.dataBody .delete {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url(/marketing/public/images/delete.svg);
+}*/
+
+.waiting,
+.doing,
+.done {
+    margin-right: 9px;
+    font-size: 20px;
+}
+
+.waiting {
+    color: #F2AC61;
+}
+
+.doing {
+    color: #00CC66;
+}
+
+.done {
+    color: #C3CBD6;
+}
+
+
+/*确认删除弹框*/
+
+:host /deep/ .ui-dialog {
+    padding: 0 28px;
+}
+
+:host /deep/ .ui-confirmdialog-message {
+    color: #657180;
+    display: inline-block;
+    text-align: center;
+    font-size: 14px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-content {
+    padding-top: 25px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane {
+    border-top: none;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane button:nth-child(1) {
+    display: none;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane button:nth-child(2) {
+    width: 100%;
+    background: #ff6e6b;
+    color: #fff;
+    margin-top: 22px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane button:nth-child(2) .fa {
+    display: none;
+}
+
+:host /deep/ .ui-selectbutton.ui-buttonset .ui-button.ui-state-active {
+    background: #43A3FB;
+}
+
+:host /deep/ .ui-datatable .ui-datatable-thead tr th {
+    background: #F5F7F9 !important;
+    border-width: 1px 0;
+}

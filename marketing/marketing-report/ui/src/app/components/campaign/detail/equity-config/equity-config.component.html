@@ -1,0 +1,80 @@
+<main>
+    <div class="plan-box">
+        <div class="plan-add" [ngClass]="{'has-data':equityList.length}">
+            <h2 class="l">权益设置</h2>
+            <i class="new_icon r" *ngIf="campaignStatus===1 && campaignDetailDataCommunication.userRight === 'marketing_ADMIN'" (click)="addTab()"></i>
+        </div>
+        <div *ngIf="equityList.length" class="plan-target-box">
+            <div *ngFor="let equity of equityList;let i = index">
+                <div class="plan-target">
+                    <div class="plan-target-td">
+                        <label class="title">权益名称</label>
+                        <!-- (keyup)="checkEquityName(equityNameInput)" -->
+                        <input *ngIf="equity.isAdding" #equityNameInput [(ngModel)]="equity.name" class="new-name" type="text" placeholder="请输入权益名称" />
+                        <span *ngIf="!equity.isAdding" class="name" [title]="equity.name">{{equity.name}}</span>
+                    </div>
+                    <div class="plan-target-td" *ngIf="equity.isAdding && equity.isNeedClear">
+                        <div class="upload-area">
+                            <div class="upload-btn">
+                                上传权益表
+                            </div>
+                            <input id="uploadCsv" class="upload-input" type="file" accept=".csv" (change)="selectFile($event, i)">
+                        </div>
+                        <span>{{equity.attachmentName ? equity.attachmentName : ( csvFileName ? csvFileName :'请上传.csv格式权益表') }}</span>
+                    </div>
+                    <div class="plan-target-td" *ngIf="!equity.isNeedClear">
+                        <span class="upload-file-name">{{equity.attachmentName || '未知文件名.csv'}}</span>
+                        <span class="clear-file" *ngIf="!equity.isAdding"></span>
+                        <span class="clear-file" *ngIf="equity.isAdding" (click)="changeClearRel(i)">清除</span>
+                    </div>
+                    <div class="plan-target-td">
+                        <div class="l" *ngIf="campaignStatus===1">
+                            <label>总量</label>
+                            <span class="total-count" *ngIf="equity.isAdding">{{(equity.total || '--')}}</span>
+                            <span class="total-count" *ngIf="!equity.isAdding">{{equity.total | formatNumber}}</span>
+                        </div>
+                        <div class="l" *ngIf="campaignStatus===2">
+                            <label>余量</label>
+                            <span class="total-count">{{equity.remain | formatNumber}}&nbsp;/&nbsp;{{equity.total | formatNumber}}&nbsp;({{(equity.remain / equity.total * 100) | number:'1.0-1'}}%)</span>
+                        </div>
+                        <div class="l" *ngIf="campaignStatus===3">
+                            <label>下发量</label>
+                            <span class="total-count">{{(equity.total - equity.remain) | formatNumber}}&nbsp;/&nbsp;{{equity.total | formatNumber}}&nbsp;({{((equity.total - equity.remain) / equity.total * 100) | number:'1.0-1'}}%)</span>
+                        </div>
+                        <div class="operation r" *ngIf="equity.isAdding">
+                            <i class="icon-done" *ngIf="campaignStatus===1" (click)="createPlan(i)"></i>
+                            <i class="icon-close1" *ngIf="campaignStatus===1" style="margin-right: 16px;" (click)="cancel(i)"></i>
+                        </div>
+                        <div class="operation r" *ngIf="!equity.isAdding">
+                            <i class="icon-edit" *ngIf="campaignStatus===1" (click)="reEditPlan(i)"></i>
+                            <i class="icon-del" *ngIf="campaignStatus===1" style="margin-right: 16px;" (click)="delEquity(i)"></i>
+                        </div>
+                    </div>
+                </div>
+                <!--<div *ngIf="true" class="plan-target">
+                    <div class="plan-target-td">
+                        <label style="margin-left: 23px">权益名称</label>
+                        <span class="name">天龙八部3D不删档测试邀请码</span>
+                    </div>
+                    <div class="plan-target-td">
+                        <span class="upload-file-name">邀请码.csv</span>
+                        <span class="clear-file">清除</span>
+                    </div>
+                    <div class="plan-target-td">
+                        <div class="l">
+                            <label>总量</label>
+                            <span class="total-count">{{50000 | formatNumber}}</span>
+                        </div>
+                        <div class="operation r">
+                            <i class="icon-edit" (click)="createPlan(plan, i)"></i>
+                            <i class="icon-del" style="margin-right: 16px;" (click)="cancel(i)"></i>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+            <p *ngIf="tipShow" class="warn-tip"><i class="iconfonts icon-empty1"></i>{{tipContent}}</p>
+        </div>
+    </div>
+    <p-confirmDialog width="304" height="200" [acceptLabel]="acceptLabel"></p-confirmDialog>
+    <p-growl [value]="msgs" life="3000"></p-growl>
+</main>

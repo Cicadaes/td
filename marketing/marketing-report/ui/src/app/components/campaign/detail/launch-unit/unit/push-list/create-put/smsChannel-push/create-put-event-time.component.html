@@ -1,0 +1,40 @@
+<main>
+    <div class="put-event-time">
+        <label><span class="required">*</span><span style="color:#464c5b;">投放时间</span></label>
+        <div *ngIf="!segmentCommunicationService.isSceneCrowd || (segmentCommunicationService.segmentListLength !== 0 && !segmentCommunicationService.isFirstSegmentForScene) || segmentCommunicationService.isSegmentForSceneSub" class="send-button inline-b">
+            <!--<p-radioButton [disabled]="segmentCommunicationService.isUpdate === 0" name="group2" value="1" label="立即发送" (ngModelChange)="exLoop($event)" [ngModel]="segment.triggerType"></p-radioButton>
+            <p-radioButton [disabled]="segmentCommunicationService.isUpdate === 0" style="margin:0 40px" name="group2" value="2" label="定时发送" (ngModelChange)="exLoop($event)" [ngModel]="segment.sendType"></p-radioButton>
+            <p-radioButton [disabled]="segmentCommunicationService.isUpdate === 0" name="group2" value="true" label="循环发送" [(ngModel)]="selectedLoop"></p-radioButton>-->
+            <input [disabled]="(segmentCommunicationService.isUpdate === 0) || (campaignDetailDataCommunication.campaignData.startTime > nowTime)" type="radio" value="1" name="group2" id="rightNow" [ngModel]="segment.triggerType" (change)="exLoop($event)" checked="checked">
+            <label [ngClass]="{active: segment.triggerType==1 && !selectedLoop, disabled: segmentCommunicationService.isUpdate === 0 || campaignDetailDataCommunication.campaignData.startTime > nowTime}" for="rightNow">立即发送</label>
+            <p style="display:inline-block; margin:0 40px">
+                <input [disabled]="segmentCommunicationService.isUpdate === 0" type="radio" value="2" name="group2" id="fixTime" [ngModel]="segment.triggerType" (change)="exLoop($event)">
+                <label [ngClass]="{active: segment.triggerType==2 && !selectedLoop, disabled: segmentCommunicationService.isUpdate === 0}" for="fixTime">定时发送</label>
+            </p>
+            <input [disabled]="segmentCommunicationService.isUpdate === 0" type="radio" value="true" name="group2" id="loopTime" [(ngModel)]="selectedLoop" (click)="selectCycle()">
+            <label *ngIf="!hideLoop" [ngClass]="{active: selectedLoop, disabled: segmentCommunicationService.isUpdate === 0}" for="loopTime">循环发送</label>
+        </div>
+        <ul *ngIf="!segmentCommunicationService.isSceneCrowd || (segmentCommunicationService.segmentListLength !== 0 && !segmentCommunicationService.isFirstSegmentForScene) || segmentCommunicationService.isSegmentForSceneSub" class="send-choice">
+            <li *ngIf="segment.triggerType == 2 && !selectedLoop">
+                <p-calendar [disabled]="segmentCommunicationService.isUpdate === 0" placeholder="请选择时间" [minDate]="minDate" [maxDate]="maxDate" dataType="string" [(ngModel)]="sendTime" [inputStyle]="{'width': '130px' }" dateFormat="yy-mm-dd" [showIcon]="true" (onSelect)="changeTime()"
+                    readonlyInput="true"></p-calendar>
+                <p-dropdown [disabled]="segmentCommunicationService.isUpdate === 0" [options]="hours" [style]="{'margin':'-2px 8px 0px 30px', 'width': '70px'}" [(ngModel)]="selectedHous" (click)="changeTime()"></p-dropdown>
+                <p-dropdown [disabled]="segmentCommunicationService.isUpdate === 0" [options]="minutes" [style]="{'margin-top':'-2px', 'width': '60px'}" [(ngModel)]="selectedMins" (click)="changeTime()"></p-dropdown>
+                <p *ngIf="segmentCommunicationService.isError && segmentCommunicationService.isError.sendTime" class="warn-tip"><i class="iconfonts icon-empty1"></i>{{segmentCommunicationService.isError.sendTime}}</p>
+            </li>
+            <li *ngIf="selectedLoop" style="min-width: 425px;">
+                <!--选择日周月-->
+                <p-dropdown [disabled]="segmentCommunicationService.isUpdate === 0" placeholder="请选择循环类型" [style]="{'vertical-align':'middle', 'width':'130px', 'margin-right': '8px'}" (onChange)="sLoop($event)" [options]="period" [(ngModel)]="segment.subTriggerType"></p-dropdown>
+                <p-dropdown [disabled]="segmentCommunicationService.isUpdate === 0" placeholder="请选择循环日期" [style]="{'width':'130px', 'margin-right': '8px'}" *ngIf="segment.subTriggerType && segment.subTriggerType == 4" [style]="{'vertical-align':'middle'}" [options]="week"
+                    [(ngModel)]="segment.cycleVal"></p-dropdown>
+                <p-dropdown [disabled]="segmentCommunicationService.isUpdate === 0" placeholder="请选择循环日期" [style]="{'width':'130px', 'margin-right': '8px'}" *ngIf="segment.subTriggerType && segment.subTriggerType == 5" [style]="{'vertical-align':'middle'}" [options]="month"
+                    [(ngModel)]="segment.cycleVal"></p-dropdown>
+                <p-dropdown [disabled]="segmentCommunicationService.isUpdate === 0" [options]="hours" [style]="{'margin':'0px 8px 0px 0px', 'width': '70px'}" [(ngModel)]="segment.cycleHour"></p-dropdown>
+                <p-dropdown [disabled]="segmentCommunicationService.isUpdate === 0" [options]="minutes" [style]="{'margin-top':'0px', 'width': '60px'}" [(ngModel)]="segment.cycleMinute"></p-dropdown>
+            </li>
+        </ul>
+        <div *ngIf="segmentCommunicationService.isSceneCrowd && (segmentCommunicationService.segmentListLength === 0 || segmentCommunicationService.isFirstSegmentForScene) && !segmentCommunicationService.isSegmentForSceneSub" class="send-button inline-b gruop-select">
+            <p-dropdown [disabled]="segmentCommunicationService.isUpdate === 0" [options]="groupList" [(ngModel)]="segment.cycleHour" [style]="{ 'width': '110px'}" (onChange)="selectTime($event)"></p-dropdown>
+        </div>
+    </div>
+</main>

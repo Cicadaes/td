@@ -1,0 +1,23 @@
+<div class="launch-box">
+    <div class="unit-add">
+        <h2 class="l">投放单元<span class="blue-mark" *ngIf="launchUnits && launchUnits.length !== 0">(&nbsp;{{launchUnits.length}}&nbsp;)</span></h2>
+        <i class="new_icon r" *ngIf="!campaignDetailDataCommunication.isFinish" (click)="showDialog()"></i>
+    </div>
+    <p-confirmDialog width="304" height="200" [acceptLabel]="acceptLabel"></p-confirmDialog>
+    <!--<scene-crowd-dialog (hideCrowdCateDialog)="hideCrowdCateDialog($event)" (updateUnit)="updateUnit($event)" [showCrowdCategoryDialog]="showCrowdCategoryDialog"></scene-crowd-dialog>-->
+
+    <crowd-category-dialog (hideCrowdCateDialog)="hideCrowdCateDialog($event)" (updateUnit)="updateUnit($event)" [showCrowdCategoryDialog]="showCrowdCategoryDialog"></crowd-category-dialog>
+    <unit *ngFor="let launchUnit of launchUnits" (delDeliUnit)="delDeliUnit($event)" [launchUnitData]="launchUnit"></unit>
+    <create-put-event *ngIf="showCreatePutDialog" (hideCreatePutDialog)="hideCreatePutDialog($event)" [crowdId]="createSegmentData.crowdId" [showCreatePutDialog]="createSegmentData.showCreatePutDialog" [subCrowdVersion]="createSegmentData.subCrowdVersion"
+        [unitData]="createSegmentData.unitData"></create-put-event>
+</div>
+<div class="loader" *ngIf="isMore" (click)="getMoreUnit()">
+    点击加载更多
+    <div class="loading" *ngIf="loading">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>

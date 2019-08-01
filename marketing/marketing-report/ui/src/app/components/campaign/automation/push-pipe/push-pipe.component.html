@@ -1,0 +1,259 @@
+<main (click)="hideGroupList()">
+    <!-- pipe-desc start -->
+    <div class="pipe-desc">
+        <base-desc textRequired="true" textTitle="投放名称" [(text)]="pipelineNodeCommunicationService.nodeData.name" [(desc)]="pipelineNodeCommunicationService.nodeData.description" [editFlag]="!pipelineNodeCommunicationService.editFlag"></base-desc>
+        <div class="add-desc">
+            <div class="pipe-item clearfix push-group">
+                <label class="item-label l">
+                    <span class="l">投放组</span>
+                    <i class="icon-info l" #groupPoint tooltipPosition="right" pTooltip="按“回车”键添加新投放组" [appendTo]="groupPoint"></i>
+                </label>
+                <div class="item-input r" (click)="showGroups($event)">
+                    <input class="text" type="text" placeholder="请输入内容" [(ngModel)]="pipelineNodeCommunicationService.nodeData.groupName" [disabled]="!pipelineNodeCommunicationService.editFlag" (input)="getGroupList()" (keydown)="saveGroup($event)" />
+                    <div [ngClass]="{'dropdown-trigger': true, 'disabled': !pipelineNodeCommunicationService.editFlag}">
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="showGroupList" class="dropdown">
+                <ul>
+                    <li *ngFor="let item of groupList">
+                        <span (click)="selectGroup(item)">{{item.groupName}}</span>
+                        <i class="delete" (click)="deleteGroup(item)"></i>
+                    </li>
+                </ul>
+            </div>
+            <div class="pipe-item clearfix push-times">
+                同一用户最多可收到
+                <input class="lite-num-input" tdLimitNumberInput condition="PI" type="text" [(ngModel)]="pipelineNodeCommunicationService.nodeData.maxDeliveryCount" [disabled]="!pipelineNodeCommunicationService.editFlag">次，频率不低于
+                <input class="lite-num-input" tdLimitNumberInput condition="PI" type="text" [(ngModel)]="pipelineNodeCommunicationService.nodeData.frequency" [disabled]="!pipelineNodeCommunicationService.editFlag">天
+            </div>
+        </div>
+    </div>
+    <!-- pipe-desc end -->
+
+    <!-- pipe-content start -->
+    <div class="pipe-content">
+        <div class="pipe-item clearfix target-platform">
+            <label class="item-label l"><p class="required">*</p>目标平台</label>
+            <i class="icon-platform ios r" [ngClass]="{active:isIOS}" (click)="changePlatform('ios')"></i>
+            <i class="icon-platform android r" [ngClass]="{active:isAndroid}" (click)="changePlatform('android')"></i>
+        </div>
+        <div class="pipe-item clearfix select-app">
+            <label class="item-label l"><p class="required">*</p>APP选择</label>
+            <p-dropdown [style]="{'width':'263px', 'float':'right'}" [options]="channels" [(ngModel)]="pipelineNodeCommunicationService.nodeData.appid" placeholder="请选择APP" (onChange)="changeApp($event.value);" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+        </div>
+
+        <!-- android start -->
+        <div class="andriod" *ngIf="isAndroid">
+            <div class="editor">
+                <div class="text_editor_title pipe-item clearfix">
+                    <label class="item-label l no-line-height"><span class="required">*</span>消息标题</label>
+                    <div class="check-info r no-line-height">
+                        <p-checkbox class="l" name="appCheck" binary="true" [(ngModel)]="pipelineNodeCommunicationService.nodeData.action" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-checkbox>
+                        <i class="l" (click)="pipelineNodeCommunicationService.nodeData.action = !pipelineNodeCommunicationService.nodeData.action">透传消息</i>
+                        <i class="icon-info l" #actionPoint tooltipPosition="left" pTooltip="透传消息时，消息标题、消息内容、震动提示、唤醒屏幕均不可用" [appendTo]="actionPoint"></i>
+                    </div>
+                </div>
+                <div class="editor_input">
+                    <input class="input_push" tdLimitInputLength max="25" (keyup)="checkInput()" [disabled]="pipelineNodeCommunicationService.nodeData.action || !pipelineNodeCommunicationService.editFlag" [(ngModel)]="pipelineNodeCommunicationService.nodeData.title" type="text"
+                        placeholder="请输入不超过25个字的消息标题">
+                </div>
+                <div class="editor_title pipe-item">
+                    <label class="item-label no-line-height"><span class="required">*</span>消息内容</label>
+                </div>
+                <div class="p_editor_wrap">
+                    <div class="mask_layer" *ngIf="pipelineNodeCommunicationService.nodeData.action || !pipelineNodeCommunicationService.editFlag"></div>
+                    <p-editor #androidEditor [style]="{'min-height':'138px'}" [(ngModel)]="pipelineNodeCommunicationService.nodeData.message">
+                        <p-header>
+                            <span class="ql-formats">
+                                <button class="ql-bold" aria-label="Bold"></button>
+                                <button class="ql-italic" aria-label="Italic"></button>
+                                <button class="ql-underline" aria-label="Underline"></button>
+                                <select class="ql-color"></select>
+                                <button class="ql-clean" aria-label="Remove Styles"></button>
+                            </span>
+                            <span class="ql-formats r">
+                                <select class="ql-header">
+                                    <option value="1">标题1</option>
+                                    <option value="2">标题2</option>
+                                    <option value="3">标题3</option>
+                                    <option value="4">标题4</option>
+                                    <option value="5">标题5</option>
+                                    <option value="6">标题6</option>
+                                    <option selected>正常</option>
+                                </select>
+                            </span>
+                        </p-header>
+                    </p-editor>
+                </div>
+                <div class="editor-input" *ngIf="quoteList && quoteList.length > 0" style="border-radius: 0;">
+                    <p-dropdown [options]="quoteList" [disabled]="pipelineNodeCommunicationService.nodeData.action || !pipelineNodeCommunicationService.editFlag" placeholder="选择标签在光标处插入变量" [style]="{width: '100%'}" [ngModel]="" (onChange)="jsonInsert($event.value, 'andriod')"></p-dropdown>
+                </div>
+                <div class="editor-down">
+                    <p-checkbox [disabled]="pipelineNodeCommunicationService.nodeData.action || !pipelineNodeCommunicationService.editFlag" [(ngModel)]="pipelineNodeCommunicationService.nodeData.clearable" name="isDel" binary="true"></p-checkbox>
+                    <i>让本条推送消息不可被删除，谨慎使用</i>
+                </div>
+            </div>
+            <div class="pipe-item clearfix reminder">
+                <label class="item-label l no-line-height">
+                    <span class="l">震动提示</span>
+                    <i class="icon-info r" #vibratePoint tooltipPosition="right" pTooltip="推送到达时震动手机" [appendTo]="vibratePoint"></i>
+                </label>
+                <div class="item-trigger r">
+                    <input [disabled]="pipelineNodeCommunicationService.nodeData.action || !pipelineNodeCommunicationService.editFlag" [(ngModel)]="pipelineNodeCommunicationService.nodeData.vibrate" type="checkbox" id="checkbox_mc2" class="chk_3" />
+                    <label class="trigger" [ngClass]="{disabled: false}" for="checkbox_c2"></label>
+                </div>
+            </div>
+            <div class="pipe-item clearfix reminder">
+                <label class="item-label l no-line-height">
+                    <span class="l">唤醒屏幕</span>
+                    <i class="icon-info r" #wakeupPoint tooltipPosition="right" pTooltip="推送到达时唤醒屏幕" [appendTo]="wakeupPoint"></i>
+                </label>
+                <div class="item-trigger r">
+                    <input [disabled]="pipelineNodeCommunicationService.nodeData.action || !pipelineNodeCommunicationService.editFlag" [(ngModel)]="pipelineNodeCommunicationService.nodeData.wakeup" type="checkbox" id="checkbox_mc1" class="chk_3" />
+                    <label class="trigger" for="checkbox_c1"></label>
+                </div>
+            </div>
+        </div>
+        <!-- android end -->
+
+        <!-- ios start -->
+        <div class="ios" *ngIf="isIOS" style="width:328px;">
+            <div class="editor">
+                <div class="editor_title pipe-item clearfix">
+                    <label class="item-label l no-line-height"><span class="required">*</span>消息内容</label>
+                    <div class="check-info r no-line-height">
+                        <p-checkbox class="l" name="appCheck" binary="true" [(ngModel)]="pipelineNodeCommunicationService.nodeData.action" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-checkbox>
+                        <i class="l" (click)="changeAction()">静默消息</i>
+                        <i class="icon-info l" #actionPoint tooltipPosition="left" pTooltip="透传消息时，消息标题、消息内容、震动提示、唤醒屏幕均不可用" [appendTo]="actionPoint"></i>
+                    </div>
+                </div>
+                <div class="insertData">
+                    <textarea tdLimitInputLength max="240" class="osTextArea" [style.borderRadius]="quoteList && quoteList.length > 0 ? '4px 4px 0 0' : '4px'" [(ngModel)]="pipelineNodeCommunicationService.nodeData.message" [disabled]="pipelineNodeCommunicationService.nodeData.action || !pipelineNodeCommunicationService.editFlag"
+                        pInputTextarea #iosEditor (focus)="getCursortPosition()" (click)="getCursortPosition()" (input)="getCursortPosition()"></textarea>
+                    <div class="editor-input" *ngIf="quoteList && quoteList.length > 0">
+                        <p-dropdown [options]="quoteList" [disabled]="pipelineNodeCommunicationService.nodeData.action || !pipelineNodeCommunicationService.editFlag" placeholder="选择标签在光标处插入变量" [style]="{width: '100%'}" [ngModel]="" (onChange)="jsonInsert($event.value, 'ios')"></p-dropdown>
+                    </div>
+                </div>
+            </div>
+            <div class="pipe-item clearfix reminder">
+                <label class="item-label l no-line-height"><span class="l">自定义声音</span><i class="icon-info r" #soundPoint tooltipPosition="right" pTooltip="自定义推送到达时播放的提示声音" [appendTo]="soundPoint"></i></label>
+                <div class="item-trigger r">
+                    <input [disabled]="pipelineNodeCommunicationService.nodeData.action || !pipelineNodeCommunicationService.editFlag" type="checkbox" id="checkbox_ios1" class="chk_3 left_" (change)="updateBindingData($event,'soundName');" [(ngModel)]="isCustomSound" />
+                    <label class="trigger" for="checkbox_c1"></label>
+                </div>
+            </div>
+
+            <div class="editor_input">
+                <input class="input_push" [disabled]="pipelineNodeCommunicationService.nodeData.action || !pipelineNodeCommunicationService.editFlag" [(ngModel)]="pipelineNodeCommunicationService.nodeData.soundName" *ngIf="isCustomSound" type="text" placeholder="请输入应用包中声音文件名">
+            </div>
+
+            <div class="pipe-item clearfix reminder">
+                <label class="item-label l no-line-height"><span class="l">数字角标</span><i class="icon-info r" #badgePoint tooltipPosition="right" pTooltip="推送到达时在应用图标右上角显示数字标注" [appendTo]="badgePoint"></i></label>
+                <div class="item-trigger r">
+                    <input [disabled]="pipelineNodeCommunicationService.nodeData.action || !pipelineNodeCommunicationService.editFlag" (change)="updateBindingData($event,'badge')" [(ngModel)]="isCustomBadge" type="checkbox" id="checkbox_ios2" class="chk_3 left_" />
+                    <label class="trigger" for="checkbox_c1"></label>
+                </div>
+            </div>
+
+            <div class="editor_input">
+                <input class="input_push" *ngIf="isCustomBadge" tdLimitNumberInput condition="PI" max="99" [disabled]="pipelineNodeCommunicationService.nodeData.action || !pipelineNodeCommunicationService.editFlag" [(ngModel)]="pipelineNodeCommunicationService.nodeData.badge"
+                    type="text" placeholder="请输入小于99的整数">
+            </div>
+        </div>
+        <!-- ios end -->
+    </div>
+    <div class="pipe-content other-config">
+        <!-- 自定义参数 start -->
+        <div class="pipe-item clearfix reminder custom-arguments-trigger">
+            <label class="item-label l no-line-height">
+                <span class="l">自定义参数</span>
+                <i class="icon-info r" #customPoint tooltipPosition="right" pTooltip="在推送内容里面附加自定义参数，参数将透传至应用，由应用自行处理" [appendTo]="customPoint"></i>
+            </label>
+            <div class="item-trigger r">
+                <input [disabled]="!pipelineNodeCommunicationService.editFlag" (change)="updateBindingData(customArgumentsFlag,'extendAttr');" [(ngModel)]="customArgumentsFlag" type="checkbox" id="checkbox_mc1" class="chk_3" />
+                <label class="trigger" for="checkbox_c1"></label>
+            </div>
+        </div>
+
+        <div class="custom-arguments-flag" *ngIf="customArgumentsFlag">
+            <div class="key-value" *ngFor="let param of keyValues;let i = index;">
+                <label class="title">键值对</label>
+                <input [disabled]="!pipelineNodeCommunicationService.editFlag" class="key" [(ngModel)]="param['key']" (input)="bindKeyValues()" type="text" placeholder="请输入key">
+                <label class="divider">-</label>
+                <input [disabled]="!pipelineNodeCommunicationService.editFlag" class="value" [(ngModel)]="param['value']" (input)="bindKeyValues()" type="text" placeholder="请输入value">
+                <i *ngIf="i!=0" class="icon-del" (click)="delKeyValue(i);"></i>
+            </div>
+            <div class="add-rules" (click)="addKeyValue();">
+                <i class="fa fa-plus"></i>
+                <span>新增键值</span>
+            </div>
+        </div>
+        <!-- 自定义参数 end -->
+
+        <!-- 推送通道 start -->
+        <div class="pipe-item push-channels clearfix" *ngIf="isAndroid">
+            <label class="item-label"><span class="required">*</span>推送通道<span class="desc-text">（第三方通道配置请联系管理员）</span></label>
+            <div class="channels">
+                <p-selectButton [(ngModel)]="pipelineNodeCommunicationService.nodeData.channel" [options]="androidPushTypes" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-selectButton>
+            </div>
+        </div>
+        <div class="pipe-item push-channels clearfix" *ngIf="isIOS">
+            <label class="item-label"><span class="required">*</span>推送通道</label>
+            <div class="channels">
+                <p-selectButton [(ngModel)]="pipelineNodeCommunicationService.nodeData.channel" [options]="iosPushTypes" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-selectButton>
+            </div>
+        </div>
+        <!-- 推送通道 end -->
+
+        <!-- 增强通道 start -->
+        <div class="pipe-item strengthen-channels clearfix" *ngIf="isAndroid">
+            <label class="item-label l no-line-height"><span class="l">增强通道</span><i class="icon-info r" #enhancePoint tooltipPosition="right" pTooltip="可增强特定品牌Android设备的到达能力" [appendTo]="enhancePoint"></i></label>
+            <div class="l">
+                <p-checkbox *ngIf="appConfig && appConfig.hwApp" [(ngModel)]="pipelineNodeCommunicationService.nodeData.huawei" style="margin-left:35px" label="华为增强通道" binary="true" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-checkbox>
+                <p-checkbox *ngIf="appConfig && appConfig.xmApp" [(ngModel)]="pipelineNodeCommunicationService.nodeData.xiaomi" style="margin-left:12px" label="小米增强通道" binary="true" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-checkbox>
+            </div>
+        </div>
+        <!-- 增强通道 end -->
+
+        <!-- 投放时间 start -->
+        <div class="pipe-item clearfix push-time">
+            <label class="item-label l"><p class="required">*</p>投放时间</label>
+            <div class="charts-handle-date clearfix l">
+                <div class="l" [ngClass]="{active:isRightNow}" (click)="changeRightNow();">立即发送</div>
+                <div class="l" [ngClass]="{active:isFixTime}" (click)="changeFixTime();">定时发送</div>
+                <div class="l" [ngClass]="{active:isLoopTime}" (click)="changeLoop();">循环发送</div>
+            </div>
+        </div>
+        <ul class="send-choice">
+            <li *ngIf="sendType == 2 && !selectedLoop">
+                <p-calendar placeholder="请选择时间" dataType="string" [(ngModel)]="sendTime" [inputStyle]="{'width': '130px' }" dateFormat="yy-mm-dd" [showIcon]="true" (onSelect)="changeTime()" [minDate]="startTime" [maxDate]="endTime" [defaultDate]="startTime" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-calendar>
+                <p-dropdown [options]="hours" [style]="{'margin':'-2px 8px 0px 30px', 'width': '70px'}" [(ngModel)]="selectedHous" (click)="changeTime()" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                <p-dropdown [options]="minutes" [style]="{'margin-top':'-2px', 'width': '60px'}" [(ngModel)]="selectedMins" (click)="changeTime()" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                <!--<p *ngIf="segmentCommunicationService.isError && segmentCommunicationService.isError.sendTime" class="warn-tip"><i class="iconfonts icon-empty1"></i>{{segmentCommunicationService.isError.sendTime}}</p>-->
+            </li>
+            <li *ngIf="selectedLoop">
+                <!--选择日周月-->
+                <p-dropdown placeholder="选择类型" [style]="{'vertical-align':'middle', 'width':'80px', 'margin-right': '8px'}" (onChange)="sLoop($event)" [options]="period" [(ngModel)]="subTriggerType" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                <p-dropdown placeholder="选择日期" [style]="{'width':'80px', 'margin-right': '8px'}" *ngIf="subTriggerType && subTriggerType==4" [style]="{'vertical-align':'middle'}" [options]="week" [(ngModel)]="cycleVal" (onChange)="changeLoopTime();" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                <p-dropdown placeholder="选择日期" [style]="{'width':'80px', 'margin-right': '8px'}" *ngIf="subTriggerType && subTriggerType==5" [style]="{'vertical-align':'middle'}" [options]="month" [(ngModel)]="cycleVal" (onChange)="changeLoopTime();" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                <p-dropdown [options]="hours" [style]="{'margin':'0px 8px 0px 0px', 'width': '51px'}" [(ngModel)]="cycleHour" (onChange)="changeLoopTime();" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                <p-dropdown [options]="minutes" [style]="{'margin-top':'0px', 'width': '51px'}" [(ngModel)]="cycleMinute" (onChange)="changeLoopTime();" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+            </li>
+        </ul>
+        <!-- 投放时间 end -->
+
+        <!-- 离线消息保存时间 start -->
+        <div class="stay-time">
+            <p-checkbox (onChange)="updateBindingData($event,'timeToLive');" [(ngModel)]="offlineDataRetentionTimeFlag" binary="true" id="stayTime" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-checkbox>
+            <span>为离线用户保留
+                <p-dropdown [(ngModel)]="pipelineNodeCommunicationService.nodeData.timeToLive" [style]="{'width':'100px'}"
+                    [options]="offLinePushTimes" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+            推送消息</span>
+        </div>
+        <!-- 离线消息保存时间 end -->
+    </div>
+    <!-- pipe-content end -->
+    <p-growl [(value)]="msgs"></p-growl>
+</main>

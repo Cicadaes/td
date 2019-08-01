@@ -1,0 +1,47 @@
+<main>
+    <div class="test">
+        <table>
+            <thead>
+                <tr>
+                    <th>投放单元</th>
+                    <th>投放名称</th>
+                    <!--{{col.value | formatNumber}}-->
+                    <th [title]="col.name.split('-')[0]" *ngFor="let col of segmentGroup">{{col.name.split('-')[0]}}</th>
+                    <th style="width: 90px">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of formatedDatas; let i = index">
+                    <td class="td-special" [title]="data.crowdName" [attr.rowspan]="data.rowSpan" *ngIf="!formatedDatas[i - 1] || formatedDatas[i - 1].crowdName != data.crowdName"> {{data.crowdName}}</td>
+                    <td>
+                        <span [title]="data.proInfo.segmentName" *ngIf="null!==data.proInfo.segmentId">{{data.proInfo && data.proInfo.segmentName}}</span>
+                        <span *ngIf="null===data.proInfo.segmentId" style="font-weight:bold;color:black">{{data.proInfo && data.proInfo.segmentName}}</span>
+                    </td>
+                    <td *ngFor="let item of data['items']; let j = index">
+                        <span class="devote-word">
+                            <span>
+                                <!--贡献值/贡献率：-->
+                                {{item.actualValue | formatNumber}}/{{item.totalActualValue ? ((item.actualValue/item.totalActualValue)*100).toFixed(2) : 0}}%
+                            </span>
+                        </span>
+                        <div class="devote-per">
+                            <div class="clearfix">
+                                <!--<span class="l">{{item.totalActualValue ? ((item.actualValue/item.totalActualValue)*100).toFixed(2) : 0}}%</span>-->
+                                <div class="percent-box">
+                                    <div class="percent" [ngClass]="{fullPer: item.actualValue/item.totalActualValue >= 1}" [ngStyle]="{'width':((item.actualValue/item.totalActualValue)*100).toFixed(2)+'%'}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <a *ngIf="null != data.proInfo.segmentId" class="report" style="color: #43a3fb;font-size: 16px" (click)="reportDetail(data);"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p-dialog [header]="title" [draggable]="false" [resizable]="false" [(visible)]="display" modal="modal" [contentStyle]="{'width': '1000px', 'height': '500px'}">
+        <sms-promotion-report *ngIf="display && promotionTp==2" [isDialog]="isDialogReport" [inPromotionId]="promotionId" (errorMessage)="campaignDetailExceptionalCommunication.exceptionalMission($event)"></sms-promotion-report>
+        <push-promotion-report *ngIf="display && promotionTp==1" [isDialog]="isDialogReport" [inPromotionId]="promotionId" (errorMessage)="campaignDetailExceptionalCommunication.exceptionalMission($event)"></push-promotion-report>
+    </p-dialog>
+</main>

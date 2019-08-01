@@ -1,0 +1,128 @@
+<main>
+    <div class="sms-promotion-cycle" *ngIf="showTimeList.length!==0">
+        <!-- 往前 -->
+        <div [ngClass]="{'sms-promotion-cycle-left': true, 'sms-promotion-cycle-left-click': leftButton}" (click)="getCycleTimeList('left')">
+            <i class="left-arrow1"></i><i class="left-arrow2"></i>
+        </div>
+        <!-- 时间轴 -->
+        <div class="sms-promotion-cycle-timezone">
+            <div [ngClass]="{'point': true, 'select': cycleSelect=='all'}" (click)="getPromotionData('all')">
+                <label class="time">累计</label>
+            </div>
+            <div *ngFor="let time of showTimeList" (click)="getPromotionDataByTime(time)" [ngClass]="{'point': true, 'select': time==cycleSelect}">
+                <label class="otherTime">{{time | dataFormat:1}}</label>
+            </div>
+            <div class="point" (click)="getPromotionData('end')">
+                <label class="time">最近</label>
+            </div>
+        </div>
+        <!-- 往后 -->
+        <div [ngClass]="{'sms-promotion-cycle-right': true, 'sms-promotion-cycle-right-click': rightButton}" (click)="getCycleTimeList('right')">
+            <i class="right-arrow1"></i><i class="right-arrow2"></i>
+        </div>
+    </div>
+    <div class="sms-promotion-report">
+        <div class="sms-promotion-report-head clearfix">
+            <div class="l">
+                <h4 class="title">投放名称：{{promotionName}}</h4>
+                <p>
+                    <span class="name">投放概览</span>
+                    <!-- <i class="fa fa-question-circle question-tip-box">
+                        <div class="question-tip">
+                            <em></em>
+                            <span>
+                                点击：短信内容中所包含的活动链接被点击的次数。<br>
+                                独立点击：短信内容中所包含的活动链接被点击次数按设备去重。<br>
+                                点击IP：短信内容中所包含的活动链接被点击次数按IP去重 <br>
+                            </span>
+                        </div>
+                    </i> -->
+                     由于短信发送受运营商管控,概览数据建议在72小时后查阅；
+                </p>
+            </div>
+            <div class="r">
+                <ul class="clearfix devote-list">
+                    <li class="r" *ngFor="let effect of effectList">
+                        <p style="color: #2d3038; font-weight: bold">{{effect.name}}</p>
+                        <p style="color: #657180">贡献率： <span class="percent">{{effect.actualValue ? (effect.subActualValue/effect.actualValue*100).toFixed(2) + '%' : '0%'}}</span></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="state-box">
+            <div class="r" style="margin:10px;">
+                <a *ngIf="promotionOverview.totalSuccCount" (click)="exportSuccessLog()">导出成功日志</a>
+                <span class="border" *ngIf="promotionOverview.totalSuccCount && promotionOverview.totalFailCount">|</span>
+                <a *ngIf="promotionOverview.totalFailCount" (click)="exportErrorLog()">导出错误日志</a>
+            </div>
+            <ul class="clearfix state-list">
+                <li class="l">
+                    <div class="color-stick color-stick1"></div>
+                    <h4 class="clearfix state-range">
+                        <span class="l">成功： {{promotionOverview.totalSuccCount || 0}}</span> 
+                        <span class="r color-font1">{{promotionOverview.totalSuccPercent || "0%"}}</span>
+                    </h4>
+                    <div class="slider-box">
+                        <div class="slider" [ngStyle]="{width: processPercent(promotionOverview.totalSuccPercent)}"></div>
+                    </div>
+                </li>
+                <li class="l">
+                    <i class="fa fa-eye question-tip-box fail-info">
+                        <div class="question-tip">
+                            <em></em>
+                            <span>
+                                手机号错误：{{promotionOverview.totalInvalidPhoneNumberPercent || "0%"}}<br>
+                                黑名单：{{promotionOverview.totalBlacklistPercent || "0%"}}<br>
+                                超限失败：{{promotionOverview.totalOverrunFailPercent || "0%"}}<br>
+                                无法接通：{{promotionOverview.totalUnconnectPercent || "0%"}}<br>
+                                其他：{{promotionOverview.totalOtherPercent || "0%"}}<br>
+                            </span>
+                        </div>
+                    </i>
+                    <div class="color-stick color-stick2"></div>
+                    <h4 class="clearfix state-range">
+                        <span class="l">失败： {{promotionOverview.totalFailCount || 0}}</span>
+                        <span class="r color-font2">{{promotionOverview.totalFailPercent || '0%'}}</span>
+                    </h4>
+                    <div class="slider-box">
+                        <div class="slider slider2" [ngStyle]="{width: processPercent(promotionOverview.totalFailPercent)}"></div>
+                    </div>
+                </li>
+                <li class="r">
+                    <div class="color-stick color-stick3"></div>
+                    <h4 class="clearfix state-range">
+                        <span class="l">未知： {{promotionOverview.totalUnknownCount || 0}}</span>
+                        <span class="r color-font3">{{promotionOverview.totalUnknownPercent || "0%"}}</span>
+                    </h4>
+                    <div class="slider-box">
+                        <div class="slider slider3" [ngStyle]="{width: processPercent(promotionOverview.totalUnknownPercent)}"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="charts">
+            <h4 class="trend-title">
+                趋势分析
+            </h4>
+            <div class="click-choice clearfix">
+                <div class="l">
+                    <button *ngFor="let statistic of promotionStatisticName;let i = index" (click)="onclick(statistic)" type="button" [ngClass]="{'button': true, 'select': selectButton==statistic.type}">
+                        {{statistic.name}} 
+                        <span style="display:block">{{promotionOverview[statistic.type] || 0}}</span>
+                    </button>
+                </div>
+                <div class="r">
+                    <common-charts-handle (onBar)="onBar($event)" (onChart)="onChart($event)" [downloadJson]="downloadJson"></common-charts-handle>
+                </div>
+                <div class="r" style="margin-right:20px;">
+                    时间粒度：<p-dropdown [options]="timeGranularitys" [(ngModel)]="selectedGranularity" (onChange)="changeGranularity($event)" [style]="{'min-width':'60px'}"></p-dropdown>
+                </div>
+            </div>
+        </div>
+        <p-dataTable *ngIf="barShow" [value]="conts" [style]="{'margin':'15px 0'}" emptyMessage="暂无数据">
+            <p-column [style]="{'text-align':'center'}" *ngFor="let col of colList" [field]="col.field" [header]="col.header"></p-column>
+        </p-dataTable>
+        <common-charts *ngIf="chartShow" [xdata]="xdata" [series]="series" [formatter]="chartsFn"></common-charts>
+    </div>
+    <p-growl [(value)]="msgs"></p-growl>
+</main>

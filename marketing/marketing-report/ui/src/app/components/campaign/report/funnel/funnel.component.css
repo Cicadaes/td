@@ -1,0 +1,350 @@
+.content {
+    margin-top: 20px;
+}
+
+.content-section .funnel-choice {
+    color: #2d3038;
+    margin-right: 15px;
+}
+
+.content-section .p-checkbox {
+    margin-left: 20px;
+}
+
+.sub-box {
+    margin: 32px 0;
+}
+
+.sub-devide {
+    color: #2d3038;
+    margin-right: 15px;
+}
+
+.trans-view-title {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e6eefa;
+}
+
+.trans-view-title h3 {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.left-charts-box {
+    width: 40%;
+}
+
+.left-charts-box .charts-box {
+    height: 743px;
+}
+
+.right-charts-box {
+    width: 58%;
+}
+
+.left-charts-box .section {
+    border-right: 1px solid #e9f1fb;
+    margin-top: 20px;
+    padding: 0 26px;
+}
+
+.left-charts-box .section:nth-child(1) {
+    padding-left: 0;
+}
+
+.left-charts-box .section p {
+    margin-top: 11px;
+    color: #5ba0ff;
+}
+
+.left-charts-box .no-border {
+    border-right: none;
+}
+
+.right-charts-box .step-choice {
+    margin-top: 23px;
+}
+
+.right-charts-box .charts-box {
+    margin-top: 30px;
+    height: 341px;
+}
+
+.right-charts-box .bar-chart {
+    margin-top: 25px;
+}
+
+.content-icon {
+    vertical-align: middle;
+    font-size: 20px;
+    color: #b0aeae;
+    text-align: center;
+}
+
+.table-box {
+    margin-top: 10px
+}
+
+.table-down {
+    width: 35px;
+    height: 23px;
+    float: right;
+    border: 1px solid #e2e5ea;
+    border-radius: 15px;
+    text-align: center;
+    line-height: 23px;
+    font-size: 15px;
+    cursor: pointer;
+    color: #cccdd1;
+}
+
+
+/*:host /deep/ .choice-funnel ul>:first-child {
+    position: absolute;
+    height: 24px;
+    top: -1px;
+    width: 100%;
+    background-color: #ffffff;
+    color: #000;
+}*/
+
+.child-tag {
+    padding: 5px 10px;
+    margin: 0 10px;
+    color: #ffffff;
+    background-color: #d3d3d3;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+}
+
+.funnel-chart {
+    height: 700px;
+    width: 100%;
+    position: relative;
+}
+
+.charts-box {
+    width: 100%;
+    position: relative;
+}
+
+.abs-box {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    z-index: 999;
+}
+
+.abs-box span.ball {
+    color: #5ba0ff;
+    margin-right: 8px;
+}
+
+.abs-box div.ball-par {
+    margin-top: -4px;
+    margin-right: 32px;
+}
+
+.charts-handle-date,
+.charts-handle-num {
+    border: 1px solid #dfe7f2;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: -9px;
+    overflow: hidden;
+}
+
+.charts-handle-date .active,
+.charts-handle-num .active {
+    background: #5ba0ff;
+    color: #fff;
+}
+
+.charts-handle-date div.l {
+    padding: 5px 16px;
+    border-right: 1px solid #dfe7f2;
+}
+
+.charts-handle-date div.l:last-child {
+    border-right: none;
+}
+
+.charts-handle-num div.l {
+    padding: 5px 14px;
+    border-right: 1px solid #dfe7f2;
+}
+
+.charts-handle-num div.l:last-child {
+    border-right: none;
+}
+
+.pic-box {
+    position: absolute;
+    left: 50%;
+    top: 58px;
+    margin-left: -342px;
+}
+
+.funnel-add-btn-box {
+    position: absolute;
+    left: 50%;
+    bottom: 48px;
+    margin-left: -74px;
+}
+
+.funnel-add-btn-box p {
+    margin-top: 12px;
+    color: #b8bfc8;
+}
+
+.new-build-btn {
+    height: 32px;
+    display: inline-block;
+}
+
+:host /deep/ .content .ui-dropdown-items li:first-child {
+    background: #fff !important;
+    color: #5697f1 !important;
+    padding: 0 !important;
+}
+:host /deep/ .content .ui-dropdown-items li:first-child .add-funnel{
+    padding: 0.375em 0.75em;
+}
+
+/*下拉的人群细分css 从 select-child-crowd 转移过来*/
+
+:host /deep/ .ui-dialog {
+    width: 526px;
+    height: 347px;
+    padding: 28px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-content {
+    padding: 0;
+}
+
+.header {
+    padding-bottom: 10px;
+}
+
+.header div.l {
+    position: relative;
+}
+
+.header div.l .fa-search {
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    font-size: 14px;
+    color: #b8bfc8;
+}
+
+.header div.l .fa-times-circle {
+    position: absolute;
+    right: 112px;
+    top: 6px;
+    color: #dde2eb;
+    font-size: 17px;
+}
+
+.header div.l .span {
+    margin-left: 12px;
+    color: #959ca5;
+}
+
+.header div.r {
+    margin-top: 6px;
+    color: #5ba0ff;
+    cursor: pointer;
+}
+
+:host /deep/ .ui-dialog .header input {
+    width: 230px;
+    border: 1px solid #dfe7f2;
+    text-indent: 1.5em;
+}
+
+.panel {
+    width: 468px;
+    height: 190px;
+    border: 1px solid #dfe7f2;
+    overflow-y: scroll;
+    padding: 20px;
+}
+
+.panel .panel-body .select-content .ui-g-4 {
+    width: 33%;
+    margin-bottom: 20px;
+}
+
+.panel .panel-body .select-content .checked {
+    border: 1px solid #fff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.funnel-edit {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-image: url(/marketing/public/images/edit.svg);
+    /*background-image: url(../../../../../../public/images/edit.png);*/
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-left: 20px;
+}
+
+.funnel-delete {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-image: url(/marketing/public/images/delete.svg);
+    /*background-image: url(../../../../../../public/images/edit.png);*/
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-left: 20px;
+}
+
+/*确认删除弹框*/
+
+:host /deep/ .ui-dialog {
+    padding: 0 28px;
+}
+
+:host /deep/ .ui-confirmdialog-message {
+    color: #657180;
+    display: inline-block;
+    text-align: center;
+    font-size: 14px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-content {
+    padding-top: 25px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane {
+    border-top: none;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane button:nth-child(1) {
+    display: none;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane button:nth-child(2) {
+    width: 100%;
+    background: #ff6e6b;
+    color: #fff;
+    margin-top: 22px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane button:nth-child(2) .fa {
+    display: none;
+}

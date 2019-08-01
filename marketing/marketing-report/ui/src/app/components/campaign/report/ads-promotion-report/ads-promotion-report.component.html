@@ -1,0 +1,56 @@
+<main>
+	<div class="ads-promotion-report">
+		<div class="ads-promotion-report-head clearfix">
+			<div class="l">
+				<h4 class="title">投放名称：广告广告</h4>
+				<p><span class="name">投放概览</span><i class="fa fa-question-circle"></i>由于短信发送受运营商管控,概览数据建议72小时后查阅;</p>
+			</div>
+			<div class="r">
+				<ul class="clearfix devote-list">
+					<li class="r">
+						<p><span class="percent">14%</span>贡献率</p>
+						<p>流失客户挽回</p>
+					</li>
+					<li class="r">
+						<p><span class="percent">6%</span>贡献率</p>
+						<p>平均日活</p>
+					</li>
+					<li class="r">
+						<p><span class="percent">10%</span>贡献率</p>
+						<p>牛雄宝产品销量</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="state-box">
+			<ul class="state-list clearfix">
+				<li class="l" *ngFor="let list of lists">
+					<p class="type-num">{{list.num}}</p>
+					<p class="type-name">{{list.name}}</p>
+				</li>
+			</ul>
+		</div>
+		<div class="charts">
+			<h4 class="trend-title">趋势分析</h4>
+			<div class="click-choice clearfix">
+				<div class="l">
+					<button id="{{list.id}}" *ngFor="let list of lists" class="ui-button-secondary" (click)="onclick($event)" pButton type="button" label="{{list.name}}"></button>
+				</div>
+				<div class="r">
+					<common-charts-handle (onBar)="onBar($event)" (onChart)="onChart($event)"></common-charts-handle>
+				</div>
+			</div>			
+		</div>
+		<!--表格-->
+		<p-dataTable *ngIf="barShow" [value]="conts" [style]="{'margin':'15px 0'}" emptyMessage="暂无数据">
+		    <p-column [style]="{'text-align':'center'}" *ngFor="let col of cols" [field]="col.field" [header]="col.header"></p-column>
+		   
+		    <p-footerColumnGroup >
+		        <p-row>
+		            <p-column [style]="{'text-align':'center'}" *ngFor="let footer of footers" [footer]="footer.footer"></p-column>
+		        </p-row>
+		    </p-footerColumnGroup>
+		</p-dataTable>
+		<common-charts *ngIf="chartShow" [lists]="lists" [xdata]="xdata" [series]="series"></common-charts>
+	</div>
+</main>

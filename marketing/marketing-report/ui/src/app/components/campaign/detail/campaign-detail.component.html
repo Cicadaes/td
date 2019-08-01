@@ -1,0 +1,60 @@
+<main>
+    <div class="marketing-box">
+        <div class="basic-info">
+            <div class="change-name">
+                <input type="text" (keyup)="inputChange()" [(ngModel)]="campaignData.name" id="campaignName" [ngClass]="{'disable-input': isEditName, 'targetReachSituation': isEditName}" field="campaignData.name" [title]="campaignData.name" pInputText [disabled]="isEditName">
+                <div *ngIf="isEditName" class="name-button">
+                    <!--<a *ngIf="!disabledName" class="iconfonts icon-editor1" (click)="editNameInput()" aria-hidden="true"></a>-->
+                    <a *ngIf="!disabledName" title="编辑" class="edit" (click)="editNameInput()" aria-hidden="true"></a>
+                    <a class="report" *ngIf="campaignData.status != 1" title="报告" aria-hidden="true" (click)="goReport()"></a>
+                </div>
+                <div *ngIf="!isEditName" class="name-button">
+                    <a class="iconfonts icon-yes" (click)="updateName()" aria-hidden="true"></a>
+                    <a class="iconfonts icon-cancel1" (click)="cancelUpdateName()" aria-hidden="true"></a>
+                </div>
+            </div>
+            <p *ngIf="tipShow" class="warn-tip"><i class="iconfonts icon-empty1"></i>{{warnTip}}</p>
+            <div class="detail-info">
+                <label class="marketing-time">营销时间：</label>
+                <datePicker [value]="marketingValue" (onSelect)="onSelect($event)" *ngIf="!disabledTime"></datePicker>
+                <label *ngIf="disabledTime">{{campaignData.startTime | dataFormat:2}}~{{campaignData.endTime | dataFormat:2}}</label>
+                <label class="build-name">创建人：{{campaignData.creator}}</label>
+                <label *ngIf="campaignData.updater" class="build-name">最新修改：{{campaignData.updater}}</label>
+            </div>
+            <div class="description">
+                <label class="desc-tit">描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述：</label>
+                <p *ngIf="!isEditDesc" class="desc-word">{{campaignData.description}}</p>
+                <textarea [(ngModel)]="campaignData.description" *ngIf="isEditDesc" class="desc-text"></textarea>
+                <a *ngIf="!disabledName && !isEditDesc" style="vertical-align: top; margin-left:5px;" title="编辑" class="edit" (click)="editDescInput()" aria-hidden="true"></a>
+                <div *ngIf="isEditDesc" style="vertical-align: top; margin-left:5px;" class="name-button">
+                    <a class="iconfonts icon-yes" (click)="updateDesc()" aria-hidden="true"></a>
+                    <a class="iconfonts icon-cancel1" (click)="cancelUpdateDesc()" aria-hidden="true"></a>
+                </div>
+            </div>
+        </div>
+        <p *ngIf="descTipShow" style="margin-left:64px;" class="warn-tip"><i class="iconfonts icon-empty1"></i>营销活动描述长度不能超过80个中文字符。</p>
+        <!--<marketing-delivery-unit [isFinish]="isFinish"></marketing-delivery-unit>-->
+    </div>
+
+    <plan-target [campaignId]="campaignId" [isFinish]="campaignDetailDataCommunication.isFinish"></plan-target>
+
+    <!--里面内容抄的计划目标start-->
+    <equity-config [campaignId]="campaignId" [campaignStatus]="campaignDetailDataCommunication.campaignStatus" [equityList]="equityList" (onUpdateEquityList)="initialEquityList($event)" (getProcessResourceList)="initialMktProcessResource($event)"></equity-config>
+    <mkt-process [campaignId]="campaignId" [campaignStatus]="campaignDetailDataCommunication.campaignStatus" [equityList]="equityList" [processResourceList]="processResourceList" [userRight]="campaignDetailDataCommunication.userRight" (getProcessResourceList)="initialMktProcessResource($event)"
+        (changeLoading)="changeLoading($event)"></mkt-process>
+
+    <!--里面内容抄的计划目标end-->
+    <launch-unit></launch-unit>
+
+    <div *ngIf="loading" class="loading_background">
+        <!--<div class="loading_image">
+            <img src="../../../../../public/images/loading1.gif">
+        </div>-->
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+            </svg>
+        </div>
+    </div>
+    <p-growl [value]="msgs"></p-growl>
+</main>

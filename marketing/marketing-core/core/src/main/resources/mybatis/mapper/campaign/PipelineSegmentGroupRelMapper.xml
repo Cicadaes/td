@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.PipelineSegmentGroupRelDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.marketing.core.entity.campaign.PipelineSegmentGroupRel" >
+    <id column="id" property="id" />
+    <result column="pipeline_id" property="pipelineId" />
+    <result column="pipeline_node_id" property="pipelineNodeId" />
+    <result column="group_id" property="groupId" />
+    <result column="attr1" property="attr1" />
+    <result column="attr2" property="attr2" />
+    <result column="tenant_id" property="tenantId" />
+    <result column="create_time" property="createTime" />
+    <result column="creator" property="creator" />
+    <result column="create_by" property="createBy" />
+    <result column="updater" property="updater" />
+    <result column="update_by" property="updateBy" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+
+  <!-- TD_MKT_PIPELINE_SEGMENT_GROUP_REL table all fields -->
+  <sql id="Base_Column_List" >
+     `id`, `pipeline_id`, `pipeline_node_id`, `group_id`, `attr1`, `attr2`, `tenant_id`, `create_time`, `creator`, `create_by`, `updater`, `update_by`, `update_time`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and `id` ${idOperator} #{id}
+      </if>
+      <if test="pipelineId != null" >
+        and `pipeline_id` ${pipelineIdOperator} #{pipelineId}
+      </if>
+      <if test="pipelineNodeId != null" >
+        and `pipeline_node_id` ${pipelineNodeIdOperator} #{pipelineNodeId}
+      </if>
+      <if test="groupId != null" >
+        and `group_id` ${groupIdOperator} #{groupId}
+      </if>
+      <if test="attr1 != null" >
+        and `attr1` ${attr1Operator} #{attr1}
+      </if>
+      <if test="attr2 != null" >
+        and `attr2` ${attr2Operator} #{attr2}
+      </if>
+      <if test="tenantId != null" >
+        and `tenant_id` ${tenantIdOperator} #{tenantId}
+      </if>
+      <if test="createTime != null" >
+        and `create_time` ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and `create_time` &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and `create_time` &lt;= #{createTime2}
+      </if>
+      <if test="creator != null" >
+        and `creator` ${creatorOperator} #{creator}
+      </if>
+      <if test="createBy != null" >
+        and `create_by` ${createByOperator} #{createBy}
+      </if>
+      <if test="updater != null" >
+        and `updater` ${updaterOperator} #{updater}
+      </if>
+      <if test="updateBy != null" >
+        and `update_by` ${updateByOperator} #{updateBy}
+      </if>
+      <if test="updateTime != null" >
+        and `update_time` ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and `update_time` &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and `update_time` &lt;= #{updateTime2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.marketing.core.entity.campaign.PipelineSegmentGroupRel" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_MKT_PIPELINE_SEGMENT_GROUP_REL(<include refid="Base_Column_List" />)
+    values (#{id}, #{pipelineId}, #{pipelineNodeId}, #{groupId}, #{attr1}, #{attr2}, #{tenantId}, #{createTime}, #{creator}, #{createBy}, #{updater}, #{updateBy}, #{updateTime})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.marketing.core.entity.campaign.PipelineSegmentGroupRel" >
+    update TD_MKT_PIPELINE_SEGMENT_GROUP_REL
+       set `pipeline_id` = #{pipelineId},
+           `pipeline_node_id` = #{pipelineNodeId},
+           `group_id` = #{groupId},
+           `attr1` = #{attr1},
+           `attr2` = #{attr2},
+           `tenant_id` = #{tenantId},
+           `create_time` = #{createTime},
+           `creator` = #{creator},
+           `create_by` = #{createBy},
+           `updater` = #{updater},
+           `update_by` = #{updateBy},
+           `update_time` = #{updateTime}
+     where `id` = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.marketing.core.entity.campaign.PipelineSegmentGroupRel" >
+    update TD_MKT_PIPELINE_SEGMENT_GROUP_REL
+    <set >
+      <if test="pipelineId != null" >
+        `pipeline_id` = #{pipelineId},
+      </if>
+      <if test="pipelineNodeId != null" >
+        `pipeline_node_id` = #{pipelineNodeId},
+      </if>
+      <if test="groupId != null" >
+        `group_id` = #{groupId},
+      </if>
+      <if test="attr1 != null" >
+        `attr1` = #{attr1},
+      </if>
+      <if test="attr2 != null" >
+        `attr2` = #{attr2},
+      </if>
+      <if test="tenantId != null" >
+        `tenant_id` = #{tenantId},
+      </if>
+      <if test="createTime != null" >
+        `create_time` = #{createTime},
+      </if>
+      <if test="creator != null" >
+        `creator` = #{creator},
+      </if>
+      <if test="createBy != null" >
+        `create_by` = #{createBy},
+      </if>
+      <if test="updater != null" >
+        `updater` = #{updater},
+      </if>
+      <if test="updateBy != null" >
+        `update_by` = #{updateBy},
+      </if>
+      <if test="updateTime != null" >
+        `update_time` = #{updateTime},
+      </if>
+    </set>
+     where `id` = #{id}
+  </update>
+
+  <!-- 根据id查询 TD_MKT_PIPELINE_SEGMENT_GROUP_REL -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from TD_MKT_PIPELINE_SEGMENT_GROUP_REL
+     where `id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TD_MKT_PIPELINE_SEGMENT_GROUP_REL
+     where `id` = #{value}
+
+  </delete>
+
+  <!-- TD_MKT_PIPELINE_SEGMENT_GROUP_REL 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select count(1) from TD_MKT_PIPELINE_SEGMENT_GROUP_REL
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TD_MKT_PIPELINE_SEGMENT_GROUP_REL列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from TD_MKT_PIPELINE_SEGMENT_GROUP_REL
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+</mapper>

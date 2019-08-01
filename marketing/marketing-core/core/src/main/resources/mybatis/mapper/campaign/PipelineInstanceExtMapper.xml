@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.PipelineInstanceDao" >
+  <select id="findByCampaignId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List"/> from TD_MKT_PIPELINE_INSTANCE where campaign_id = #{campaignId}
+  </select>
+  <select id="findByPipelineDefinitionId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List"/> from TD_MKT_PIPELINE_INSTANCE where pipeline_definition_id = #{pipelineDefinitionId}
+  </select>
+</mapper>

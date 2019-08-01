@@ -1,0 +1,46 @@
+:host /deep/ .ui-dialog {
+    width: 640px;
+    height: 220px;
+}
+
+.xm-intensify-push-config {
+    padding-top: 22px;
+}
+.hw-intensify-push-config{
+    margin-top: 22px;
+    
+}
+.xm-intensify-push-config button,
+.hw-intensify-push-config button {
+    width: 84px;
+    background: #5ba0ff;
+}
+
+.xm-intensify-push-config input,
+.hw-intensify-push-config input {
+    width: 196px;
+    margin-right: 4px;
+    border: 1px solid #dee6ed;
+}
+
+.xm-intensify-push-config i.fa,
+.hw-intensify-push-config i.fa {
+    color: #ced1d5;
+    margin-right: 2px;
+}
+
+.question-tip {
+    left: 18px;
+    top: -30px;
+}
+
+.success_text {
+    color: #5cb85c;
+}
+
+.error_text {
+    color: #d9534f;
+}
+.secret-tip{
+    margin-left: 292px !important;
+}

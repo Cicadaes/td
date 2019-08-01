@@ -1,0 +1,114 @@
+<main class="main">
+    <h5 class="app_push_title">推广信息</h5>
+    <div class="app_push_list" style="padding-bottom: 0px">
+        <div class="app_push_list_left l"><span class="required">*</span>投放渠道</div>
+        <div class="app_push_list_right l">
+            <p-dropdown [style]="{'width':'256px'}" [disabled]="segmentCommunicationService.isUpdate == 0" [options]="channels" [(ngModel)]="promotionSms.channelCode" placeholder="请选择投放渠道" (onChange)="changeChannel()"></p-dropdown>
+        </div>
+    </div>
+    <p *ngIf="segmentCommunicationService.isError && segmentCommunicationService.isError.channelCode" style="margin-left: 60px;" class="warn-tip"><i class="iconfonts icon-empty1"></i>请选择投放渠道</p>
+    <div class="app_push_list" style="padding-top: 20px;">
+        <div class="app_push_list_left l">签名</div>
+        <div class="app_push_list_right l">
+            <input type="text" disabled="{{segmentCommunicationService.isUpdate === 0}}" pInputText class="select-num" [(ngModel)]="promotionSms.sign" />
+        </div>
+    </div>
+    <div class="app_push_list" style="padding-bottom: 20px;">
+        <div class="app_push_list_left l">通道号码</div>
+        <div class="app_push_list_right l">
+            <input type="text" disabled="{{segmentCommunicationService.isUpdate === 0}}" pInputText class="select-num" [(ngModel)]="promotionSms.channelNumber" />
+            <!--<input type="text" pInputText class="select-num" />-->
+        </div>
+    </div>
+    <!--<div class="app_push_list" style="margin-top: 20px;">
+        <div class="app_push_list_left l">
+            <label>黑名单</label>
+            <i class="fa fa-question-circle question-tip-box">
+                <div class="question-tip">
+                    <em></em>
+                    黑名单中包含的号码,将会从目标用户中剔除
+                </div>
+            </i>
+        </div>
+        <div class="app_push_list_right l">
+            <div [ngClass]="{'black-list-display':segmentCommunicationService.isUpdate === 0}">
+                <div class="l upload-area" *ngIf="!csvFileName">
+                    <div class="upload-show" [ngClass]="{'change-bg' : changeBg}">
+                        <i class="fa fa-upload"></i>
+                        <span>上传黑名单列表</span>
+                    </div>
+                    <input id="uploadCsv" [disabled]="segmentCommunicationService.isUpdate === 0" [ngClass]="{'show-update' : showUpdate}" class="upload-input" type="file" accept=".csv" (change)="selectFile($event)">
+                </div>
+                <p *ngIf="!csvFileName" class="l download prompt"><i class="fa fa-exclamation-circle"></i>请上传CSV格式文件，文件大小不能超过2M</p>
+            </div>
+            <div *ngIf="csvFileName" class="l upload-file-name prompt">
+                <span>{{csvFileName}}</span>
+                <span class="clear-file" (click)="clearFile()">清除</span>
+            </div>
+        </div>
+    </div>-->
+    
+    <div class="app_push_list no-bottom">
+        <div class="app_push_list_left l"><span class="required">*</span>短信内容</div>
+        <div class="app_push_list_right l">
+            <div class="msg-cont">
+                <p (click)="addLink()" [ngClass]="{'add-link-dis':segmentCommunicationService.isUpdate === 0}" class="add-link"><i style="margin:10px; vertical-align: middle; font-size: 18px;" class="fa fa-paperclip"></i>添加活动链接</p>
+                <div class="add-link-box" *ngIf="show">
+                    <!--<div class="link-div">
+                        <label>链接文字</label>
+                        <input class="link-input" disabled="{{segmentCommunicationService.isUpdate === 0}}" type="text" [(ngModel)]="promotionSms.message.messages[0].linkText" />
+                    </div>-->
+                    <div class="link-div">
+                        <label>链接地址</label>
+                        <input class="link-input" disabled="{{segmentCommunicationService.isUpdate === 0}}" (keyup)="inputChange()" type="text" [(ngModel)]="promotionSms.linkAddress" />
+                    </div>
+                    <p *ngIf="faultUrl" class="warn-tip" style="margin:5px 0 0 94px"><i class="iconfonts icon-empty1"></i>请输入正确的链接地址</p>
+                    <div style="padding-right:20px;margin:16px 0 0 28px">
+                        <i class="fa fa-exclamation-circle"></i>
+                        <span style="color:#959ba5;">为使短信中可以输入更多内容，链接地址建议输入长网址转换后的短网址</span>
+                    </div>
+                    <div class="r btn-handel">
+                        <button class="cancel" pButton type="text" (click)="cancel()" label="取消"></button>
+                        <button class="confirm" pButton type="text" [disabled]="segmentCommunicationService.isUpdate == 0" (click)="save()" label="确定"></button>
+                    </div>
+                </div>
+                <textarea id="smsContent" disabled="{{segmentCommunicationService.isUpdate === 0}}" class="short-msg-text" [(ngModel)]="promotionSms.content" maxlength="500" pInputTextarea (keyup)="smsContentChange()"></textarea>
+                <!-- 插入Json变量 -->
+                <div class="editor-input" *ngIf="segmentCommunicationService.isUpdate != 0 && segmentCommunicationService.quoteList && segmentCommunicationService.quoteList.length > 0">
+                    <label>单击标签在光标处插入变量</label>
+                    <ul class="json-list clearfix">
+                        <li *ngFor="let quote of segmentCommunicationService.quoteList" (mousedown)="jsonInsert('${'+quote+'}')">
+                            <i class="triangle"></i>
+                            <span>{{"${"+quote+"}"}}</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 上传权益的插入Json变量 -->
+                <!-- <div class="editor-input" style="margin-top: 0;min-height: 55px;">
+                    <div [ngClass]="{'black-list-display':segmentCommunicationService.isUpdate === 0}">
+                        <div class="l upload-area" *ngIf="!csvEquityFileName">
+                            <div class="upload-show">
+                                <i class="fa fa-upload"></i>
+                                <span>上传权益文件</span>
+                            </div>
+                            <input id="uploadEquityCsv" [disabled]="segmentCommunicationService.isUpdate === 0" [ngClass]="{'show-update' : showUpdate}" class="upload-input" type="file" accept=".csv" (change)="selectEquityFile($event)">
+                        </div>
+                        <p *ngIf="!csvEquityFileName" class="l download prompt"><i class="fa fa-exclamation-circle"></i>请上传CSV格式文件</p>
+                    </div>
+                    <div *ngIf="csvEquityFileName" class="l upload-file-name prompt">
+                        <span>{{csvEquityFileName}}</span>
+                        <span class="clear-file" (click)="clearEquityFile()">清除</span>
+                        <span class="insert-equity" (click)="jsonInsert('{$权益}')">插入权益</span>
+                    </div>
+                </div> -->
+                <p *ngIf="segmentCommunicationService.isError && segmentCommunicationService.isError.content" class="warn-tip"><i class="iconfonts icon-empty1"></i>请输入短信内容</p>
+                <!--<textarea id="smsContent" class="short-msg-text" (ngModelChange)="smsContentChange($event)" maxlength="500" pInputTextarea></textarea>-->
+                <p class="short-msg-desc clearfix" *ngIf="segmentCommunicationService.quoteList.length == 0">还可以输入 <span>{{limitSize}}</span> 个字符，如果内容超过70个字可能作为多条短信发送。</p>
+                <p class="short-msg-desc clearfix" *ngIf="segmentCommunicationService.quoteList && segmentCommunicationService.quoteList.length > 0">短信长度视变量值长度而定，如果内容超过70个字可能作为多条短信发送。</p>
+            </div>
+        </div>
+    </div>
+    <!--投放时间公共-->
+    <create-put-event-time [promotion]="promotionSms" [dateRange]="dateRange" [hideLoop]="true"></create-put-event-time>
+    <p-growl [value]="msgs" life="3000"></p-growl>
+</main>

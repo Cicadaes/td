@@ -1,0 +1,61 @@
+<main>
+    <div class="unit-header">
+        <div class="unit-header-info">
+            <div class="crowdName" *ngIf="launchUnit.crowdType == 1">Lookalike人群</div>
+            <div class="crowdName" *ngIf="launchUnit.crowdType == 2">场景人群</div>
+            <div class="crowdName" *ngIf="launchUnit.crowdType == 3 || launchUnit.crowdType == 4">精细化人群</div>
+            <div class="unit-haeder-name">
+                <span class="h2">{{launchUnit.crowdName}}</span>
+                <a *ngIf="launchUnit.crowdStatus == 2" class="personas" aria-hidden="true" (click)="personas(launchUnit.refId,launchUnit.crowdVersion,launchUnit.crowdName)"></a>
+            </div>
+            <div class="unit-header-update" *ngIf="launchUnit.crowdStatus == 2">
+                <label>更新时间：</label>
+                <span>{{launchUnit.crowdUpdateTime | dataFormat:2}}</span>
+                <i class="fa fa-refresh" aria-hidden="true" (click)="recountCrowd()" *ngIf="!campaignDetailDataCommunication.isFinish && launchUnit.crowdStatus != 1 && !updatedTime && launchUnit.crowdType !== 2"></i>
+                <i class="fa fa-refresh" aria-hidden="true" (click)="recountCrowd()" *ngIf="!campaignDetailDataCommunication.isFinish && launchUnit.crowdStatus != 1 && !updatedTime && launchUnit.crowdStatus != 2  && launchUnit.crowdType === 2"></i>
+                <!-- TODO 防止逻辑变回来 -->
+                <!-- <i class="fa fa-refresh" aria-hidden="true" (click)="recountCrowd()" *ngIf="!campaignDetailDataCommunication.isFinish && ((launchUnit.crowdType != 2 && launchUnit.crowdStatus != 1 && !updatedTime) || (launchUnit.crowdType == 2 && launchUnit.crowdStatus < 0))"></i> -->
+            </div>
+            <div class="size">
+                <label>人群人数：</label>
+                <span class="est-num" *ngIf="launchUnit.crowdStatus == 2">{{(launchUnit.estimatedSize || 0) | formatNumber}}</span>
+                <span class="error" *ngIf="launchUnit.crowdStatus < 0">计算失败</span>
+                <span class="unknown" *ngIf="launchUnit.crowdStatus == 0">未计算</span>
+                <span class="warning" *ngIf="launchUnit.crowdStatus == 1">计算中...</span>
+                <label class="push" *ngIf="launchUnit.crowdStatus == 2">
+                    可用于：应用推送
+                    <span class="for-num">{{(launchUnit.pushEstimatedSize || 0) | formatNumber}}</span>
+                    <span class="border">|</span>
+                    短信通道  
+                    <span class="for-num">{{(launchUnit.smsEstimatedSize || 0) | formatNumber}}</span>
+                    <span class="border">|</span>
+                    邮件通道  
+                    <span class="for-num">{{(launchUnit.edmEstimatedSize || 0) | formatNumber}}</span>
+                </label>
+                <i class="fa fa-refresh" aria-hidden="true" (click)="recountCrowd()" *ngIf="launchUnit.crowdStatus < 0 && !campaignDetailDataCommunication.isFinish"></i>
+            </div>
+        </div>
+
+        <div class="unit-handel" *ngIf="!campaignDetailDataCommunication.isFinish">
+            <a class="delete" (click)="delLaunchUnit(launchUnit.id)" aria-hidden="true" *ngIf="!campaignDetailDataCommunication.isFinish && !launchUnit.segmentList.length && launchUnit.crowdStatus != 1"></a>
+            <!-- TODO 修改占时不做 -->
+            <!--占时先隐藏-->
+            <!--<a class="iconfonts icon-editor1" (click)="updateCrowd()" aria-hidden="true" *ngIf="isRecountCrowd"><span>编辑</span></a>-->
+            <!--<span class="border">|</span>-->
+        </div>
+    </div>
+    <p-confirmDialog width="304" height="200" [acceptLabel]="acceptLabel"></p-confirmDialog>
+    <precise-crowd-form *ngIf="showPreciseCrowdDialog" (hidePreciseCrowdDialog)="hidePreciseCrowdDialog($event)" (isUpdatePreciesCrowd)="isUpdatePreciesCrowd($event)" [promotionCrowdId]="launchUnit.crowd.id" [showPreciseCrowdDialog]="showPreciseCrowdDialog"></precise-crowd-form>
+    <crowd-form *ngIf="showLookalikeCrowdDialog" (hideLookalikeCrowdDialog)="hideLookalikeCrowdDialog($event)" [dialogData]="dialogData" [showLookalikeCrowdDialog]="showLookalikeCrowdDialog"></crowd-form>
+    <div class="tab-box">
+        <p-tabView (onChange)="changeTabView($event)">
+            <p-tabPanel header="投放列表">
+                <push-list (changeCreatePush)="changeCreatePush($event)" [pushList]="launchUnit.segmentList" [crowdId]="launchUnit.crowdId" [unitData]="launchUnit" [unitId]="launchUnit.id"></push-list>
+            </p-tabPanel>
+            <p-tabPanel header="子人群列表" [headerStyle]="{'display': unitDataCommunicationService.isShowChildList ? 'inherit': 'none'}">
+                <sub-crowd-list [isFinish]="campaignDetailDataCommunication.isFinish" [launchUnit]="launchUnit"></sub-crowd-list>
+                <!--<sub-crowd-list *ngIf="tableViewIndex==1" [isFinish]="campaignDetailDataCommunication.isFinish" [launchUnit]="launchUnit"></sub-crowd-list>-->
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+</main>

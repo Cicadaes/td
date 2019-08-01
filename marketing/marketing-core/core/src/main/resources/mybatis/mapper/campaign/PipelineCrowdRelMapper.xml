@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.PipelineCrowdRelDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.marketing.core.entity.campaign.PipelineCrowdRel" >
+    <id column="id" property="id" />
+    <result column="campaign_id" property="campaignId" />
+    <result column="pipeline_id" property="pipelineId" />
+    <result column="pipeline_version" property="pipelineVersion" />
+    <result column="pipeline_node_id" property="pipelineNodeId" />
+    <result column="crowd_id" property="crowdId" />
+    <result column="crowd_verion" property="crowdVerion" />
+    <result column="crowd_ref_id" property="crowdRefId" />
+    <result column="calc_status" property="calcStatus" />
+    <result column="calc_type" property="calcType" />
+    <result column="calc_period" property="calcPeriod" />
+    <result column="calc_time" property="calcTime" />
+    <result column="tenant_id" property="tenantId" />
+    <result column="creator" property="creator" />
+    <result column="create_by" property="createBy" />
+    <result column="create_time" property="createTime" />
+    <result column="updater" property="updater" />
+    <result column="update_by" property="updateBy" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+
+  <!-- TD_MKT_PIPELINE_CROWD_REL table all fields -->
+  <sql id="Base_Column_List" >
+     `id`, `campaign_id`, `pipeline_id`, `pipeline_version`, `pipeline_node_id`, `crowd_id`, `crowd_verion`, `crowd_ref_id`, `calc_status`, `calc_type`, `calc_period`, `calc_time`, `tenant_id`, `creator`, `create_by`, `create_time`, `updater`, `update_by`, `update_time`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and `id` ${idOperator} #{id}
+      </if>
+      <if test="campaignId != null" >
+        and `campaign_id` ${campaignIdOperator} #{campaignId}
+      </if>
+      <if test="pipelineId != null" >
+        and `pipeline_id` ${pipelineIdOperator} #{pipelineId}
+      </if>
+      <if test="pipelineVersion != null" >
+        and `pipeline_version` ${pipelineVersionOperator} #{pipelineVersion}
+      </if>
+      <if test="pipelineNodeId != null" >
+        and `pipeline_node_id` ${pipelineNodeIdOperator} #{pipelineNodeId}
+      </if>
+      <if test="crowdId != null" >
+        and `crowd_id` ${crowdIdOperator} #{crowdId}
+      </if>
+      <if test="crowdVerion != null" >
+        and `crowd_verion` ${crowdVerionOperator} #{crowdVerion}
+      </if>
+      <if test="crowdRefId != null" >
+        and `crowd_ref_id` ${crowdRefIdOperator} #{crowdRefId}
+      </if>
+      <if test="calcStatus != null" >
+        and `calc_status` ${calcStatusOperator} #{calcStatus}
+      </if>
+      <if test="calcType != null" >
+        and `calc_type` ${calcTypeOperator} #{calcType}
+      </if>
+      <if test="calcPeriod != null" >
+        and `calc_period` ${calcPeriodOperator} #{calcPeriod}
+      </if>
+      <if test="calcTime != null" >
+        and `calc_time` ${calcTimeOperator} #{calcTime}
+      </if>
+      <if test="calcTime1 != null" >
+        and `calc_time` &gt;= #{calcTime1}
+      </if>
+      <if test="calcTime2 != null" >
+        and `calc_time` &lt;= #{calcTime2}
+      </if>
+      <if test="tenantId != null" >
+        and `tenant_id` ${tenantIdOperator} #{tenantId}
+      </if>
+      <if test="creator != null" >
+        and `creator` ${creatorOperator} #{creator}
+      </if>
+      <if test="createBy != null" >
+        and `create_by` ${createByOperator} #{createBy}
+      </if>
+      <if test="createTime != null" >
+        and `create_time` ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and `create_time` &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and `create_time` &lt;= #{createTime2}
+      </if>
+      <if test="updater != null" >
+        and `updater` ${updaterOperator} #{updater}
+      </if>
+      <if test="updateBy != null" >
+        and `update_by` ${updateByOperator} #{updateBy}
+      </if>
+      <if test="updateTime != null" >
+        and `update_time` ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and `update_time` &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and `update_time` &lt;= #{updateTime2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.marketing.core.entity.campaign.PipelineCrowdRel" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_MKT_PIPELINE_CROWD_REL(<include refid="Base_Column_List" />)
+    values (#{id}, #{campaignId}, #{pipelineId}, #{pipelineVersion}, #{pipelineNodeId}, #{crowdId}, #{crowdVerion}, #{crowdRefId}, #{calcStatus}, #{calcType}, #{calcPeriod}, #{calcTime}, #{tenantId}, #{creator}, #{createBy}, #{createTime}, #{updater}, #{updateBy}, #{updateTime})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.marketing.core.entity.campaign.PipelineCrowdRel" >
+    update TD_MKT_PIPELINE_CROWD_REL
+       set `campaign_id` = #{campaignId},
+           `pipeline_id` = #{pipelineId},
+           `pipeline_version` = #{pipelineVersion},
+           `pipeline_node_id` = #{pipelineNodeId},
+           `crowd_id` = #{crowdId},
+           `crowd_verion` = #{crowdVerion},
+           `crowd_ref_id` = #{crowdRefId},
+           `calc_status` = #{calcStatus},
+           `calc_type` = #{calcType},
+           `calc_period` = #{calcPeriod},
+           `calc_time` = #{calcTime},
+           `tenant_id` = #{tenantId},
+           `creator` = #{creator},
+           `create_by` = #{createBy},
+           `create_time` = #{createTime},
+           `updater` = #{updater},
+           `update_by` = #{updateBy},
+           `update_time` = #{updateTime}
+     where `id` = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.marketing.core.entity.campaign.PipelineCrowdRel" >
+    update TD_MKT_PIPELINE_CROWD_REL
+    <set >
+      <if test="campaignId != null" >
+        `campaign_id` = #{campaignId},
+      </if>
+      <if test="pipelineId != null" >
+        `pipeline_id` = #{pipelineId},
+      </if>
+      <if test="pipelineVersion != null" >
+        `pipeline_version` = #{pipelineVersion},
+      </if>
+      <if test="pipelineNodeId != null" >
+        `pipeline_node_id` = #{pipelineNodeId},
+      </if>
+      <if test="crowdId != null" >
+        `crowd_id` = #{crowdId},
+      </if>
+      <if test="crowdVerion != null" >
+        `crowd_verion` = #{crowdVerion},
+      </if>
+      <if test="crowdRefId != null" >
+        `crowd_ref_id` = #{crowdRefId},
+      </if>
+      <if test="calcStatus != null" >
+        `calc_status` = #{calcStatus},
+      </if>
+      <if test="calcType != null" >
+        `calc_type` = #{calcType},
+      </if>
+      <if test="calcPeriod != null" >
+        `calc_period` = #{calcPeriod},
+      </if>
+      <if test="calcTime != null" >
+        `calc_time` = #{calcTime},
+      </if>
+      <if test="tenantId != null" >
+        `tenant_id` = #{tenantId},
+      </if>
+      <if test="creator != null" >
+        `creator` = #{creator},
+      </if>
+      <if test="createBy != null" >
+        `create_by` = #{createBy},
+      </if>
+      <if test="createTime != null" >
+        `create_time` = #{createTime},
+      </if>
+      <if test="updater != null" >
+        `updater` = #{updater},
+      </if>
+      <if test="updateBy != null" >
+        `update_by` = #{updateBy},
+      </if>
+      <if test="updateTime != null" >
+        `update_time` = #{updateTime},
+      </if>
+    </set>
+     where `id` = #{id}
+  </update>
+
+  <!-- 根据id查询 TD_MKT_PIPELINE_CROWD_REL -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from TD_MKT_PIPELINE_CROWD_REL
+     where `id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TD_MKT_PIPELINE_CROWD_REL
+     where `id` = #{value}
+
+  </delete>
+
+  <!-- TD_MKT_PIPELINE_CROWD_REL 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select count(1) from TD_MKT_PIPELINE_CROWD_REL
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TD_MKT_PIPELINE_CROWD_REL列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from TD_MKT_PIPELINE_CROWD_REL
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+</mapper>

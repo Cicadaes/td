@@ -1,0 +1,118 @@
+@import './../common.scss';
+main {
+    .pipe-desc {
+        padding: 21px 20px 0px 32px;
+    }
+    .pipe-content {
+        padding: 0px 20px 0px 32px;
+        .distributary-type {
+            .type-list {
+                margin-top: 10px;
+                .type-radio {
+                    display: inline-block;
+                    cursor: pointer;
+                    @include user-select-none;
+                    &:not(:first-child) {
+                        margin-left: 44px;
+                    }
+                    .radio {
+                        margin-right: 8px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+        .branch-number {
+            margin: 24px 0 10px 0;
+            .required {
+                line-height: 32px;
+            }
+        }
+        .branch-val {
+            .val-list {
+                margin-top: 16px;
+                &>label {
+                    display: inline-block;
+                    margin-right: 20px;
+                }
+                &>input {
+                    @include input-style;
+                    width: 138px;
+                }
+            }
+            p {
+                margin-left: 31px;
+                color: #ff0000;
+            }
+        }
+        .branch-proportion {
+            .proportion-list {
+                margin-top: 16px;
+                input {
+                    @include input-style;
+                    width: 13%;
+                    margin-right: 4px;
+                    box-sizing: border-box;
+                }
+                label {
+                    display: inline-block;
+                    margin-right: 20px;
+                }
+            }
+        }
+        .branch-select {
+            margin-top: 20px;
+            .name {
+                line-height: 44px;
+            }
+            .branch-list {
+                margin-top: 8px;
+                background: #FFFFFF;
+                border: 1px solid #D7DDE4;
+                border-radius: 4px;
+                height: 100px;
+                padding: 16px;
+            }
+        }
+        .select-content .ui-g-4 {
+            width: 33%;
+            margin-bottom: 16px;
+            padding-left: 0;
+            cursor: pointer;
+            @include user-select-none;
+        }
+    }
+}
+
+:host /deep/ .ui-slider .ui-slider-handle {
+    width: 14px;
+    height: 14px;
+    box-sizing: border-box;
+    background-color: #FFFFFF;
+    top: -5px !important;
+    border: 2px solid #3399FF;
+}
+
+:host /deep/ .ui-inputtext {
+    height: 32px;
+    line-height: 21px;
+}
+
+:host /deep/ .ui-chkbox-label {
+    cursor: pointer;
+    @include user-select-none;
+}
+
+:host /deep/ .ui-dropdown.ui-state-disabled {
+    opacity: 1!important;
+}
+
+:host /deep/ .ui-state-disabled .ui-dropdown-label {
+    background-color: #F8F8F9!important;
+    color: rgba(23, 35, 61, 0.30)!important;
+}
+
+:host /deep/ .ui-state-disabled .ui-dropdown-trigger {
+    background-color: #F8F8F9!important;
+    color: rgba(23, 35, 61, 0.30)!important;
+}

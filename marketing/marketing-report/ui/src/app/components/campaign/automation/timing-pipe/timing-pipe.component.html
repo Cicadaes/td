@@ -1,0 +1,57 @@
+<main>
+    <div class="pipe-desc">
+        <base-desc textRequired="true" textTitle="组件名称" [(text)]="pipelineNodeCommunicationService.nodeData.name" [(desc)]="pipelineNodeCommunicationService.nodeData.description" [editFlag]="!pipelineNodeCommunicationService.editFlag"></base-desc>
+    </div>
+
+    <div class="pipe-content">
+        <div class="distributary-type pipe-item clearfix">
+            <label class="item-label l no-line-height"><span class="required">*</span>计时器类型</label>
+            <div class="type-list l">
+                <div class="type-radio" (click)="choosType('1');">
+                    <input class="radio" name="timing" type="radio" value="1" [(ngModel)]="pipelineNodeCommunicationService.nodeData.hourMeterType" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                    <span>目标计时器</span>
+                </div>
+                <div class="type-radio" (click)="choosType('2');">
+                    <input class="radio" name="timing" type="radio" value="2" [(ngModel)]="pipelineNodeCommunicationService.nodeData.hourMeterType" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                    <span>经时计时器</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="type-first" *ngIf="pipelineNodeCommunicationService.nodeData.hourMeterType == 1">
+            <p>等待直到满足以下条件停止计时：</p>
+            <p class="operate r" (click)="clearSetting();">清空设置</p>
+            <p-calendar placeholder="请选择时间" dataType="string" [(ngModel)]="stopTime" [minDate]="minDate" [maxDate]="maxDate" [defaultDate]="minDate" [inputStyle]="{'width': '130px' }" dateFormat="yy-mm-dd" [showIcon]="true" (onSelect)="changeTime()" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-calendar>
+            <p-dropdown placeholder="小时" [options]="hours" [style]="{'margin':'-2px 8px 0px 30px', 'width': '70px'}" [(ngModel)]="selectedHous" (onChange)="changeTime()" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+            <p-dropdown placeholder="分钟" [options]="minutes" [style]="{'margin-top':'-2px', 'width': '60px'}" [(ngModel)]="selectedMins" (onChange)="changeTime()" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+            <div class="behavior-setings" *ngFor="let setting of behaviorSettings;let i = index;">
+                <div [ngClass]="{'relation': true, 'disabled': '!pipelineNodeCommunicationService.editFlag'}" *ngIf="!setting.relation" (click)="changeRelation(true, i);">或者</div>
+                <div [ngClass]="{'relation': true, 'disabled': '!pipelineNodeCommunicationService.editFlag'}" *ngIf="setting.relation" (click)="changeRelation(false, i);">并且</div>
+                <div class="rule-detail">
+                    <p-dropdown [style]="{'width':'116px'}" placeholder="选择应用" [options]="appConfList" [(ngModel)]="setting.selectedApp" (onChange)="changeBehavior()" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                    <p-dropdown [style]="{'width':'156px'}" placeholder="选择事件" [options]="eventList" [(ngModel)]="setting.selectedEvent" (onChange)="changeBehavior()" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                    <i class="icon-del" (click)="delSetting(i);"></i>
+                </div>
+            </div>
+            <div class="help-div"></div>
+            <div class="add-rules" (click)="addSetting(behaviorSettings.length);">
+                <i class="fa fa-plus"></i>
+                <span>添加行为</span>
+            </div>
+        </div>
+
+        <div class="type-second" *ngIf="pipelineNodeCommunicationService.nodeData.hourMeterType == 2">
+            <p>经过以下时间停止计时：</p>
+            <div class="stop-time">
+                <input type="text" tdLimitNumberInput condition="PI" [acceptZero]="false" min="1" [(ngModel)]="afterDay" (input)="changeStop()" class="tI10" [disabled]="!pipelineNodeCommunicationService.editFlag" />
+                <label class="input-text">天</label>
+                <input type="text" tdLimitNumberInput condition="PI" min="0" max="23" [(ngModel)]="afterHours" (input)="changeStop()" class="tI10" [disabled]="!pipelineNodeCommunicationService.editFlag" />
+                <label class="input-text">小时</label>
+                <input type="text" tdLimitNumberInput condition="PI" min="0" max="59" [(ngModel)]="afterMinutes" (input)="changeStop()" class="tI10" [disabled]="!pipelineNodeCommunicationService.editFlag" />
+                <label class="input-text">分钟</label>
+            </div>
+        </div>
+    </div>
+
+    <p-growl [(value)]="msgs"></p-growl>
+</main>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.AppAndroidChannelConfigDao" >
+
+  <select id="getByAppConfigIdAndChannel" resultMap="BaseResultMap" parameterType="map">
+    select <include refid="Base_Column_List" /> 
+      from TD_MKT_APP_ANDROID_CHANNEL_CONFIG
+     where `app_config_id` = #{appConfigId} and code = #{channelCode}
+  </select>
+
+    <insert id="insertOrUpdate" parameterType="com.talkingdata.marketing.core.entity.campaign.AppAndroidChannelConfig">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into TD_MKT_APP_ANDROID_CHANNEL_CONFIG(<include refid="Base_Column_List" />)
+        values (#{id}, #{appConfigId}, #{name}, #{code}, #{thirdAppId}, #{key}, #{secret}, #{attr1}, #{attr2}, #{attr3}, #{tenantId}, #{creator}, #{createBy}, #{createTime}, #{updater}, #{updateBy}, #{updateTime})
+        ON DUPLICATE KEY UPDATE
+        <if test="appConfigId != null" >
+            `app_config_id` = #{appConfigId},
+        </if>
+        <if test="name != null" >
+            `name` = #{name},
+        </if>
+        <if test="code != null" >
+            `code` = #{code},
+        </if>
+        <if test="thirdAppId != null" >
+            `third_app_id` = #{thirdAppId},
+        </if>
+        <if test="key != null" >
+            `key` = #{key},
+        </if>
+        <if test="secret != null" >
+            `secret` = #{secret},
+        </if>
+        <if test="attr1 != null" >
+            `attr1` = #{attr1},
+        </if>
+        <if test="attr2 != null" >
+            `attr2` = #{attr2},
+        </if>
+        <if test="attr3 != null" >
+            `attr3` = #{attr3},
+        </if>
+        <if test="tenantId != null" >
+            `tenant_id` = #{tenantId},
+        </if>
+        <if test="creator != null" >
+            `creator` = #{creator},
+        </if>
+        <if test="createBy != null" >
+            `create_by` = #{createBy},
+        </if>
+        <if test="createTime != null" >
+            `create_time` = #{createTime},
+        </if>
+        <if test="updater != null" >
+            `updater` = #{updater},
+        </if>
+        <if test="updateBy != null" >
+            `update_by` = #{updateBy},
+        </if>
+        `update_time` = #{updateTime}
+    </insert>
+
+    <select id="getByAppConfigId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select <include refid="Base_Column_List" />
+        from TD_MKT_APP_ANDROID_CHANNEL_CONFIG
+        where `app_config_id` = #{appConfigId}
+    </select>
+</mapper>

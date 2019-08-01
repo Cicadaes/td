@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.PushReachReportDao" >
+    <select id="findByPipelineIdAndDate" resultMap="BaseResultMap" parameterType="map">
+        SELECT
+        `id`, `campaign_id`, `campaign_launch_unit_id`, `segment_id`, `channel_definition_id`, `pipeline_id`,
+        `pipeline_node_id`, `report_date`, `report_hour`, SUM(`send_count`) send_count,
+        SUM(`reach_count`) reach_count, SUM(`display_count`) display_count,
+        SUM(`click_count`) click_count, `tenant_id`
+        FROM
+        TD_MKT_PUSH_REACH_REPORT
+        WHERE pipeline_id=#{pipelineId} AND pipeline_node_id=#{pipelineNodeId} AND report_date=#{reportDate}
+    </select>
+
+    <select id="findByPipelineId" resultMap="BaseResultMap" parameterType="map">
+        SELECT
+        `id`, `campaign_id`, `campaign_launch_unit_id`, `segment_id`, `channel_definition_id`, `pipeline_id`,
+        `pipeline_node_id`, `report_date`, `report_hour`, SUM(`send_count`) send_count,
+        SUM(`reach_count`) reach_count, SUM(`display_count`) display_count,
+        SUM(`click_count`) click_count, `tenant_id`
+        FROM
+        TD_MKT_PUSH_REACH_REPORT
+        WHERE pipeline_id=#{pipelineId} AND pipeline_node_id=#{pipelineNodeId}
+    </select>
+
+    <select id="findTrendByPipelineId" resultMap="BaseResultMap" parameterType="map">
+        SELECT
+        `report_date`, `report_hour`,`send_count`, `reach_count`, `display_count`, `click_count`
+        FROM
+        TD_MKT_PUSH_REACH_REPORT
+        WHERE pipeline_id=#{pipelineId} AND pipeline_node_id=#{pipelineNodeId}
+        ORDER BY `report_date`, `report_hour`
+    </select>
+
+    <select id="findTrendBySegmentId" resultMap="BaseResultMap" parameterType="map">
+        SELECT
+        `report_date`, `report_hour`,`send_count`, `reach_count`, `display_count`, `click_count`
+        FROM
+        TD_MKT_PUSH_REACH_REPORT
+        WHERE segment_id=#{segmentId}
+        ORDER BY `report_date`, `report_hour`
+    </select>
+
+    <select id="findTrendByPage" resultMap="BaseResultMap"  parameterType="com.talkingdata.enterprise.base.page.BasePage" >
+        SELECT
+        `id`, `campaign_id`, `campaign_launch_unit_id`, `segment_id`, `channel_definition_id`, `pipeline_id`,
+        `pipeline_node_id`, `report_date`, `report_hour`, SUM(`send_count`) send_count,
+        SUM(`reach_count`) reach_count, SUM(`display_count`) display_count,
+        SUM(`click_count`) click_count, `tenant_id`
+        FROM
+        TD_MKT_PUSH_REACH_REPORT
+        WHERE 1=1
+        <if test="segmentId != null" >
+            and `segment_id` ${segmentIdOperator} #{segmentId}
+        </if>
+        <if test="pipelineId != null" >
+            and `pipeline_id` ${pipelineIdOperator} #{pipelineId}
+        </if>
+        <if test="pipelineNodeId != null" >
+            and `pipeline_node_id` ${pipelineNodeIdOperator} #{pipelineNodeId}
+        </if>
+        ORDER BY `report_date`, `report_hour`
+    </select>
+</mapper>

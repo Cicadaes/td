@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.CrowdTaskCalcObjectRecordDao" >
+  <select id="queryByCalcStatus" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from TD_MKT_CROWD_TASK_CALC_OBJECT_RECORD
+     where `status` = #{status}
+  </select>
+    <select id="queryByCrowdId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select <include refid="Base_Column_List" />
+        from TD_MKT_CROWD_TASK_CALC_OBJECT_RECORD
+        where `crowd_id` = #{crowdId} and status=1
+    </select>
+    <select id="querylatestByCrowdId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select <include refid="Base_Column_List" />
+        from TD_MKT_CROWD_TASK_CALC_OBJECT_RECORD
+        where `crowd_id` = #{crowdId} order by create_time desc limit 1
+    </select>
+    <select id="queryAllByCrowdId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select <include refid="Base_Column_List" />
+        from TD_MKT_CROWD_TASK_CALC_OBJECT_RECORD
+        where `crowd_id` = #{crowdId} order by create_time desc
+    </select>
+
+    <select id="findSceneByRefId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select <include refid="Base_Column_List" />
+        from TD_MKT_CROWD_TASK_CALC_OBJECT_RECORD
+        WHERE ref_id IN
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        AND status=1 AND crowd_type=2
+    </select>
+
+    <select id="getTodayAlreadyCalcRecord" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        from TD_MKT_CROWD_TASK_CALC_OBJECT_RECORD
+        WHERE `create_time` &gt;= #{date}
+    </select>
+
+    <delete id="deleteByCreateTime" parameterType="string">
+        delete from TD_MKT_CROWD_TASK_CALC_OBJECT_RECORD WHERE create_time > #{createTime}
+    </delete>
+</mapper>

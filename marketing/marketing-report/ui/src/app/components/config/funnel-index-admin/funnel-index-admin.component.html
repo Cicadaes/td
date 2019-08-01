@@ -1,0 +1,152 @@
+<main>
+    <!--<div class="admin-box">
+        <p-dropdown (onChange) = "changeSel()" [options]="selList" [(ngModel)]="selectedSel" [style]="{'min-width':'120px'}" ></p-dropdown>
+        <input class="update" type="button" value="添加" [disabled]="isabled" (click)="updateSel()" />
+    </div>-->
+    
+    <!--原先查询的要提交的列表-->
+    <!--<table *ngIf="tableList.length" width="100%" border="0" cellspacing="0" cellpadding="0" class="tab-activity">
+        <tr>
+            <th scope="col" >名称</th>
+            <th scope="col" >事件ID</th>
+            <th scope="col" >描述</th>
+            <th scope="col" >创建者</th>
+            <th scope="col" >创建时间</th>
+        </tr>
+        <tr *ngFor = "let item of tableList; let i=index" >
+            <td (click)="dialogShow(i)" title="点击可修改名称">
+                {{item.name}}
+            </td>
+            <td>{{item.eventId}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.name}}</td>
+            <td>
+                {{item.name}}
+                <input class="update" type="button" value="添加" [disabled]="isabled" (click)="updateTableSel(i)" />
+            </td>
+            
+        </tr>
+        
+    </table>-->
+    <!--新建删除操作-->
+    <div class="new-build-button">
+        <button [disabled]="isDisabled" type="button" (click)="newBuild()" ><span>+</span>新建</button>
+    </div>
+    <!--搜索-->
+    <div class="search-box">
+        <!--<span>名称：</span>-->
+        <input type="text" placeholder="请输入关键字" [(ngModel)]="searchName" class="change-name"   />
+        <!--<span>创建人：</span>
+        <input type="text" [(ngModel)]="searchBuilder" class="change-name"   />-->
+        <button class="search-btn" pButton type="button" (click)="search()" label="查询"></button>
+        <button class="cancel-btn" type="button" (click)="cancelSearch()" >取消</button>
+    </div>
+    <!--展示查询提交过的列表数据-->
+    <table *ngIf="updateTableList.length" width="100%" border="0" cellspacing="0" cellpadding="0" class="tab-activity">
+        <tr>
+            <th style="width:20%" scope="col" ><span style="padding-left:15px;">名称</span></th>
+            <th style="width:14%" scope="col" >事件ID</th>
+            <th style="width:26%" scope="col" >描述</th>
+            <th style="width:14%" scope="col" >创建人</th>
+            <th style="width:12%" scope="col" >创建时间</th>
+            <th style="width:14%" scope="col">操作</th>
+        </tr>
+        <tr *ngFor = "let item of updateTableList; let i=index" >
+            <td>
+                <span style="padding-left:15px;">{{item.name}}</span>
+            </td>
+            <td>{{item.eventId}}</td>
+            <td [title]="item.description || ''"><div class="description">{{item.description}}</div></td>
+            <td>{{item.creator}}</td>
+            <td>
+                {{item.createTime | date:'yyyy-MM-dd HH:mm'}}
+            </td>
+            <td>
+                <!--<button class="change" pButton type="button" (click)="change(i)" label="修改"></button>
+                <button class="del" pButton type="button" (click)="delete(i)" label="删除"></button>-->
+                <button class="change" type="button" (click)="change(i,item.id)" >编辑</button>
+                <button class="del" type="button" (click)="delete(i,item.id)" >删除</button> 
+            </td>
+        </tr>
+        
+    </table>
+    <p-growl [value]="msgs" life="3000"></p-growl>
+    <!--添加无数据显示语句-->
+    <p class="tip" *ngIf="!updateTableList.length">暂时没有数据...</p>
+    <!--新建弹框-->
+    <p-dialog header="新建" (onAfterHide) = "dialogHide()" [(visible)]="newDisplay" [draggable]="false" modal="modal" >
+        <div class="clearfix">
+            <span class="l">名称：</span>
+            <div class="r" style="width:80%;">
+                <input type="text" style="width:100%;" [(ngModel)]="newName" class="change-name"   />  
+            </div>          
+        </div>
+        <div class="event-div clearfix">
+            <span class="l">事件：</span>
+            <div class="r" style="width:80%;">
+                <p-dropdown (onChange) = "changeSel()" [options]="selList" [(ngModel)]="selectedSel" [style]="{'width':'100%'}" ></p-dropdown>                
+            </div>
+        </div>
+        <div class="clearfix">
+            <span class="desc l">描述：</span>
+            <div class="r" style="width:80%;">
+                <textarea (keyup)="textareaChange()" class="textarea" [(ngModel)]="newDesc"></textarea>                                
+            </div>
+        </div>
+        <p *ngIf="desWarnShow" class="warn-tip"><i class="iconfonts icon-empty1"></i>描述长度不能超过240个字符</p>
+        <p-footer>
+            <div class="config-handel">
+                <div (click)="confirmNew()" ><i class="fa fa-check"></i>保存</div>
+                <div (click)="cancelNew()">取消</div>
+            </div>
+        </p-footer>
+    </p-dialog>
+    <!--修改弹框-->
+    <p-dialog (onAfterHide) = "changeDialogHide()" header="修改" [(visible)]="changeDisplay" [draggable]="false" modal="modal" >
+        <div class="clearfix">
+            <span class="l">名称：</span>
+            <div class="r" style="width:80%;">
+                <input style="width:100%;" type="text" [(ngModel)]="changeName" class="change-name"   />
+            </div>            
+        </div>
+        <div class="event-div clearfix">
+            <span class="l">描述：</span>
+            <div class="r" style="width:80%;">
+                <textarea (keyup)="textareaChange()" class="textarea" [(ngModel)]="changeDesc"></textarea>
+            </div>
+        </div>
+        <p *ngIf="desWarnShow2" class="warn-tip"><i class="iconfonts icon-empty1"></i>描述长度不能超过240个字符</p>
+        <p-footer>
+            <div class="config-handel">
+                <div (click)="confirmChange()"><i class="fa fa-check"></i>保存</div>
+                <div (click)="cancelChange()" >取消</div>
+            </div>
+        </p-footer>
+    </p-dialog>
+    <!--提示活动在进行不能操作  -->
+    <p-dialog (onAfterHide) = "noticeDialogHide()" header="提示" [(visible)]="isActive" [draggable]="false" modal="modal" >
+        <p class="is-active">活动正在进行中，请勿操作！</p>
+        <p-footer>
+            <div class="config-handel">
+                <div (click)="confirmActive()"><i class="fa fa-check"></i>确定</div>
+                <div (click)="cancelActive()" >取消</div>
+            </div>
+        </p-footer>
+    </p-dialog>
+    <!--修改名称弹框-->
+    <!--<p-dialog header="修改名称" [(visible)]="display" [draggable]="false" modal="modal" >
+        <input type="text" [(ngModel)]="newName" class="change-name" placeholder="请输入修改的名称"  />
+        <p-footer>
+            <div class="r btn-handel">
+                <button class="confirm" type="button" pButton (click)="changeTabName()" label="确定"></button>
+                <button class="cancel" type="button" pButton (click)="dialogHide()" label="取消"></button>
+            </div>
+        </p-footer>
+    </p-dialog>-->
+    <!--删除确认弹框-->
+    <p-confirmDialog width="304" height="150" [acceptLabel]="acceptLabel" [rejectLabel]="rejectLabel"></p-confirmDialog>
+    <!--分页-->
+    <div>
+        <x-paginator [value]="value" (onPagesChange)="paginate($event)"></x-paginator>
+    </div>
+</main>

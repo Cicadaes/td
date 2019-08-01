@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.admin.ProductDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.marketing.core.entity.admin.Product" >
+    <id column="productid" property="productid" />
+    <result column="sequencenumber" property="sequencenumber" />
+    <result column="developerid" property="developerid" />
+    <result column="tenantcode" property="tenantcode" />
+    <result column="platform" property="platform" />
+    <result column="productype" property="productype" />
+    <result column="productname" property="productname" />
+    <result column="productmemo" property="productmemo" />
+    <result column="registertime" property="registertime" />
+    <result column="isdeleted" property="isdeleted" />
+    <result column="iscompensate" property="iscompensate" />
+    <result column="category" property="category" />
+    <result column="domain" property="domain" />
+    <result column="last_modify_time" property="lastModifyTime" />
+    <result column="isupgrade" property="isupgrade" />
+  </resultMap>
+
+  <!-- TD_MKT_PRODUCT table all fields -->
+  <sql id="Base_Column_List" >
+     `productid`, `sequencenumber`, `developerid`, `tenantcode`, `platform`, `productype`, `productname`, `productmemo`, `registertime`, `isdeleted`, `iscompensate`, `category`, `domain`, `last_modify_time`, `isupgrade`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="productid != null" >
+        and `productid` ${productidOperator} #{productid}
+      </if>
+      <if test="sequencenumber != null" >
+        and `sequencenumber` ${sequencenumberOperator} #{sequencenumber}
+      </if>
+      <if test="developerid != null" >
+        and `developerid` ${developeridOperator} #{developerid}
+      </if>
+      <if test="tenantcode != null" >
+        and `tenantcode` ${tenantcodeOperator} #{tenantcode}
+      </if>
+      <if test="platform != null" >
+        and `platform` ${platformOperator} #{platform}
+      </if>
+      <if test="productype != null" >
+        and `productype` ${productypeOperator} #{productype}
+      </if>
+      <if test="productname != null" >
+        and `productname` ${productnameOperator} #{productname}
+      </if>
+      <if test="productmemo != null" >
+        and `productmemo` ${productmemoOperator} #{productmemo}
+      </if>
+      <if test="registertime != null" >
+        and `registertime` ${registertimeOperator} #{registertime}
+      </if>
+      <if test="registertime1 != null" >
+        and `registertime` &gt;= #{registertime1}
+      </if>
+      <if test="registertime2 != null" >
+        and `registertime` &lt;= #{registertime2}
+      </if>
+      <if test="isdeleted != null" >
+        and `isdeleted` ${isdeletedOperator} #{isdeleted}
+      </if>
+      <if test="iscompensate != null" >
+        and `iscompensate` ${iscompensateOperator} #{iscompensate}
+      </if>
+      <if test="category != null" >
+        and `category` ${categoryOperator} #{category}
+      </if>
+      <if test="domain != null" >
+        and `domain` ${domainOperator} #{domain}
+      </if>
+      <if test="lastModifyTime != null" >
+        and `last_modify_time` ${lastModifyTimeOperator} #{lastModifyTime}
+      </if>
+      <if test="lastModifyTime1 != null" >
+        and `last_modify_time` &gt;= #{lastModifyTime1}
+      </if>
+      <if test="lastModifyTime2 != null" >
+        and `last_modify_time` &lt;= #{lastModifyTime2}
+      </if>
+      <if test="isupgrade != null" >
+        and `isupgrade` ${isupgradeOperator} #{isupgrade}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.marketing.core.entity.admin.Product" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="productid">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_MKT_PRODUCT(<include refid="Base_Column_List" />)
+    values (#{productid}, #{sequencenumber}, #{developerid}, #{tenantcode}, #{platform}, #{productype}, #{productname}, #{productmemo}, #{registertime}, #{isdeleted}, #{iscompensate}, #{category}, #{domain}, #{lastModifyTime}, #{isupgrade})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.marketing.core.entity.admin.Product" >
+    update TD_MKT_PRODUCT
+       set `sequencenumber` = #{sequencenumber},
+           `developerid` = #{developerid},
+           `tenantcode` = #{tenantcode},
+           `platform` = #{platform},
+           `productype` = #{productype},
+           `productname` = #{productname},
+           `productmemo` = #{productmemo},
+           `registertime` = #{registertime},
+           `isdeleted` = #{isdeleted},
+           `iscompensate` = #{iscompensate},
+           `category` = #{category},
+           `domain` = #{domain},
+           `last_modify_time` = #{lastModifyTime},
+           `isupgrade` = #{isupgrade}
+     where `productid` = #{productid}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.marketing.core.entity.admin.Product" >
+    update TD_MKT_PRODUCT
+    <set >
+      <if test="sequencenumber != null" >
+        `sequencenumber` = #{sequencenumber},
+      </if>
+      <if test="developerid != null" >
+        `developerid` = #{developerid},
+      </if>
+      <if test="tenantcode != null" >
+        `tenantcode` = #{tenantcode},
+      </if>
+      <if test="platform != null" >
+        `platform` = #{platform},
+      </if>
+      <if test="productype != null" >
+        `productype` = #{productype},
+      </if>
+      <if test="productname != null" >
+        `productname` = #{productname},
+      </if>
+      <if test="productmemo != null" >
+        `productmemo` = #{productmemo},
+      </if>
+      <if test="registertime != null" >
+        `registertime` = #{registertime},
+      </if>
+      <if test="isdeleted != null" >
+        `isdeleted` = #{isdeleted},
+      </if>
+      <if test="iscompensate != null" >
+        `iscompensate` = #{iscompensate},
+      </if>
+      <if test="category != null" >
+        `category` = #{category},
+      </if>
+      <if test="domain != null" >
+        `domain` = #{domain},
+      </if>
+      <if test="lastModifyTime != null" >
+        `last_modify_time` = #{lastModifyTime},
+      </if>
+      <if test="isupgrade != null" >
+        `isupgrade` = #{isupgrade},
+      </if>
+    </set>
+     where `productid` = #{productid}
+  </update>
+
+  <!-- 根据id查询 TD_MKT_PRODUCT -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from TD_MKT_PRODUCT
+     where `productid` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TD_MKT_PRODUCT
+     where `productid` = #{value}
+
+  </delete>
+
+  <!-- TD_MKT_PRODUCT 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select count(1) from TD_MKT_PRODUCT
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TD_MKT_PRODUCT列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from TD_MKT_PRODUCT
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+</mapper>

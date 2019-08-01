@@ -1,0 +1,286 @@
+:host /deep/ .ui-dialog {
+    padding: 0 28px;
+    padding-bottom: 20px;
+    width: 1000px;
+    height: 500px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-content {
+    padding: 0;
+}
+
+.content-section {
+    padding: 10px 0;
+}
+.steps-list{
+    border-bottom: 1px solid #e5e5e5;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.border {
+    border-bottom: 1px solid #dfe7f2;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+}
+
+.content-section .first-label {
+    margin-left: 25px;
+}
+
+.content-section .sencond-label {
+    margin-left: 150px;
+}
+
+.content-section .third-label {
+    margin-left: 185px;
+}
+.header{
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 12px 0;
+}
+.header div{
+    font-weight: bold;
+}
+.content-section .panel {
+    padding: 6px 12px;
+    border: 1px solid #e8e9ed;
+    border-radius: 5px;
+    background: #fbfbfd;
+}
+.panel .track,.panel .alias{
+    display: inline-block;
+    width: 68px;
+    height: 27px;
+    background: #ebeff2;
+    text-align: center;
+    line-height: 27px;
+    margin: 0 14px;
+    border-radius: 5px;
+}
+/*.del-step{
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #c6cfde;
+    font-size: 14px;
+    color: #498ac2;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    line-height: 20px;
+    margin-left: 12px;
+    font-weight: bold;
+}*/
+.steps-list .icon-cancel1{
+    font-size: 18px;
+    vertical-align: sub;
+    margin-left: 12px;
+    cursor: pointer;
+}
+.content-section .panel .fa-trash-o {
+    font-size: 16px;
+    color: #a7b0c4;
+    margin-left: 9px;
+}
+
+.content-section .add {
+    color: #5697f1;
+    cursor: pointer;
+}
+
+.content-section .add .fa {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.content-section .footer {
+    text-align: center;
+}
+
+
+/*新漏斗弹框样式*/
+
+.funnel-name input {
+    width: 496px;
+    height: 30px;
+    margin-left: 14px;
+    border: 1px solid #dfe7f2;
+    text-indent: 1em;
+    border-radius: 3px;
+}
+
+.steps-cont {
+    border: 1px solid #dfe7f2;
+}
+
+.steps-num {
+    border-bottom: 1px solid #dfe7f2;
+    padding: 10px 0;
+}
+
+.steps-num i {
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.steps-num span {
+    padding-left: 20px;
+    font-size: 14px;
+}
+
+.steps-add {
+    padding: 20px;
+}
+
+.steps-choice {
+    margin-left: 20px;
+}
+
+.common-div {
+    width: 88px;
+    height: 30px;
+    background: #e5e9ec;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 3px;
+}
+
+.steps-name {
+    margin: 0 8px;
+}
+
+.steps-text {
+    width: 166px;
+    height: 30px;
+    border: 1px solid #dfe7f2;
+    border-radius: 3px;
+    text-indent: 1em;
+}
+
+.behavior-attributes {
+    margin-left: 50px;
+    border-left: 1px dashed #d2d7dc;
+    padding: 20px 0 0 50px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.behavior-attributes .satisfy {
+    position: absolute;
+    top: 22px;
+    left: -42px;
+}
+
+.attributes-list>li {
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #f7f8f9;
+    border: 1px solid #dce1e7;
+}
+
+.attributes-form .form-input {
+    width: 160px;
+    height: 30px;
+    margin-left: 10px;
+    border: 1px solid #dce1e7;
+    border-radius: 3px;
+    text-indent: 1em;
+}
+
+.choice-name {
+    width: 220px;
+    height: 30px;
+    border: 1px solid #dce1e7;
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
+    background: #fff;
+}
+
+.input-name {
+    width: 220px;
+    height: 30px;
+    border: 1px solid #dce1e7;
+    border-radius: 3px;
+    text-indent: 1em;
+}
+
+.choice-name span {
+    padding: 5px;
+    display: inline-block;
+}
+
+.key-word {
+    width: 220px;
+    height: 40px;
+    border: 1px solid #dce1e7;
+    position: absolute;
+    left: -1px;
+    bottom: -39px;
+    display: none;
+}
+
+.key-word input {
+    width: 208px;
+    height: 28px;
+    border: 1px solid #dce1e7;
+    border-radius: 3px;
+    margin: 5px;
+    text-indent: 1em;
+}
+
+.key-word i {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+i.del-attr {
+    font-size: 18px;
+    margin-top: 5px;
+    cursor: pointer;
+    margin-left: 30px;
+}
+
+.add-attribute {
+    position: absolute;
+    bottom: -20px;
+    left: -32px;
+    color: #5f92e1;
+    cursor: pointer;
+}
+
+.add-steps {
+    color: #5f92e1;
+    cursor: pointer;
+    margin: 20px 0;
+    width: 100px;
+}
+
+.save {
+    width: 90px;
+    height: 30px;
+    background: #679fef;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 15px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.savefun {
+    width: 90px;
+    height: 30px;
+    background: #679fef;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 15px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.savefun:disabled {
+    cursor: default !important;
+    background: #cccccc !important;
+}

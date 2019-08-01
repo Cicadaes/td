@@ -1,0 +1,34 @@
+.charts-handle .down-load{
+	width:35px;
+	height:23px;
+	border:1px solid #e2e5ea;
+	border-radius: 15px;
+	text-align: center;
+    line-height: 23px;
+    font-size:15px;
+    cursor: pointer;
+    color:#cccdd1;
+    margin-left:15px;
+}
+.charts-handle .switch{
+	width:70px;
+	height:23px;
+	border:1px solid #e2e5ea;
+	border-radius: 15px;
+}
+.charts-handle .switch div{
+	width:34px;
+	height:23px;
+	text-align: center;
+	line-height: 23px;
+	font-size:15px;
+    cursor: pointer;
+    color:#cccdd1;
+}
+.charts-handle .switch div:nth-child(1){
+	border-right:1px solid #e2e5ea;
+	
+}
+.charts-handle .switch div.active{
+	color:#589fd7;
+}

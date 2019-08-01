@@ -1,0 +1,320 @@
+@import './../common.scss';
+.confirm {
+    background: #43A3FB;
+    color: #fff;
+    margin: 0 15px 0 13px;
+    border: none !important;
+}
+
+.chanel-number {
+    width: 159px;
+    height: 32px;
+    border: 1px solid #DDDEE1;
+    border-radius: 4px;
+    padding-left: 8px;
+    box-sizing: border-box;
+    margin-left: 15px;
+}
+
+.button-op {
+    width: 80px;
+    height: 32px;
+    border: 1px solid #D7DDE4;
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+button:disabled {
+    color: rgba(23, 35, 61, 0.30);
+    border: 1px solid #DCDEE2;
+}
+
+// 索引 目的 通过这样的形式 方便找到元素样式所在位置
+main {
+    .pipe-desc {
+        padding: 21px 20px 0px 32px;
+        padding-bottom: 16px;
+        .add-desc {
+            position: relative;
+            .pipe-item {
+                .item-label {
+                    i {
+                        margin-top: 7px;
+                    }
+                }
+            }
+            .push-group {
+                margin-top: 16px;
+                .item-input {
+                    border: 1px solid #D7DDE4;
+                    border-radius: 4px;
+                    input:disabled {
+                        border: 0px !important;
+                    }
+                    .disabled {
+                        background-color: #F8F8F9;
+                    }
+                }
+            }
+            .dropdown {
+                margin-top: 5px;
+                width: 263px;
+                max-height: 200px;
+                display: block;
+                z-index: 1001;
+                visibility: visible;
+                top: 29px;
+                right: 0px;
+                opacity: 1;
+                border-color: #dfe7f2;
+                background-color: #ffffff;
+                border: 1px solid #c7c7c7;
+                border-radius: 5px;
+                position: absolute;
+                -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+                -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+                box-sizing: border-box;
+                overflow-y: auto;
+                li {
+                    margin: 1px 0;
+                    border: 0 none;
+                    border-radius: 0;
+                    font-weight: normal;
+                    text-align: left;
+                    cursor: pointer;
+                    &:hover {
+                        background-color: #e5e5e5;
+                    }
+                    span {
+                        padding: 5px 10px;
+                        width: 220px;
+                        display: inline-block;
+                    }
+                    .delete {
+                        display: inline-block;
+                        width: 12px;
+                        height: 12px;
+                        background-image: url(/marketing/public/images/icon-close.svg);
+                        background-repeat: no-repeat;
+                        background-size: contain;
+                        cursor: pointer;
+                        vertical-align: initial;
+                    }
+                }
+            }
+            .push-times {
+                margin-top: 23px;
+                @include normal-font;
+            }
+        }
+    }
+    .pipe-content {
+        border-top: $border-top;
+        padding: 17px 20px 0px 32px;
+        .black-list {
+            margin-top: 17px;
+            margin-bottom: 16px;
+            .item-label {
+                margin-top: 11px;
+            }
+            .upload-area {
+                position: relative;
+                display: inline-block;
+                margin-left: 11px;
+                .upload-show {
+                    width: 110px;
+                    padding: 8px 16px;
+                    color: #BDC5D5;
+                    background: #F7F8F9;
+                    border: 1px solid #D7DDE4;
+                    border-radius: 100px;
+                }
+                span {
+                    color: #657180;
+                }
+                .blacklist-icon {
+                    background: $icon-shangchuan;
+                    margin-right: 4px;
+                    width: 16px;
+                    height: 12px;
+                    display: inline-block;
+                }
+                .csvFile-icon {
+                    background: $icon-jinggao;
+                    margin-right: 4px;
+                    width: 16px;
+                    height: 12px;
+                    display: inline-block;
+                }
+                .prompt {
+                    margin-top: 14px;
+                    color: #657180;
+                }
+            }
+            .upload-file-name {
+                display: inline-block;
+                margin-top: 10px;
+                margin-left: 10px;
+                .clear-file {
+                    color: #43A3FB;
+                    cursor: pointer;
+                }
+            }
+            .upload-input {
+                position: absolute;
+                left: 0;
+                top: 0;
+                opacity: 0;
+                height: 34px;
+                width: 144px;
+                cursor: pointer;
+            }
+        }
+        .sms-content {
+            .msg-cont {
+                width: 328px;
+                margin-top: 8px;
+                position: relative;
+            }
+            .short-msg-text {
+                @include textarea-style;
+                width: 326px;
+                height: 109px;
+            }
+            .short-msg-desc {
+                margin-top: 12px;
+                span {
+                    color: #5ba0ff;
+                }
+            }
+            .add-link {
+                cursor: pointer;
+                height: 32px;
+                background: #f3f8ff;
+                line-height: 32px;
+                border: 1px solid #dee6ed;
+                border-bottom: none;
+                color: #5ba0ff;
+                .link-icon {
+                    background: $icon-lianjie;
+                    margin-right: 6px;
+                    margin-left: 6px;
+                    width: 16px;
+                    height: 12px;
+                    display: inline-block;
+                }
+            }
+            .add-link-box {
+                width: 328px;
+                min-height: 157px;
+                position: absolute;
+                top: 50px;
+                left: 5px;
+                background: #fff;
+                border-radius: 4px;
+                box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
+                z-index: 9999;
+                padding-bottom: 12px;
+                &::before,
+                &::after {
+                    position: absolute;
+                    content: '';
+                    width: 14px;
+                    height: 14px;
+                    top: -7px;
+                    left: 14px;
+                    overflow: hidden;
+                    pointer-events: none;
+                    -webkit-transform: rotate(225deg);
+                    transform: rotate(225deg);
+                }
+                &::before {
+                    box-shadow: 2px 2px 2px rgba(0, 0, 0, .2);
+                }
+                &::after {
+                    bottom: -7px;
+                    background: #fff;
+                }
+                .link-div {
+                    padding: 16px 0 0 16px;
+                }
+                div:nth-child(2) {
+                    margin-left: 28px;
+                }
+                .link-input {
+                    width: 227px;
+                    height: 32px;
+                    border: 1px solid #dee6ed;
+                    border-radius: 4px;
+                    margin-left: 14px;
+                    text-indent: 1em;
+                }
+            }
+        }
+        .push-time {
+            margin-top: 21px;
+            .charts-handle-date {
+                width: 218px;
+                border: 1px solid #dfe7f2;
+                border-radius: 4px;
+                cursor: pointer;
+                overflow: hidden;
+                height: 32px;
+                display: inline-block;
+                margin-right: 50px;
+            }
+            .charts-handle-date .active {
+                background: #2D8CF0;
+                color: #fff;
+            }
+            .charts-handle-date div.l {
+                width: 72px;
+                height: 32px;
+                line-height: 32px;
+                text-align: center;
+                border-right: 1px solid #dfe7f2;
+                cursor: pointer;
+            }
+            .charts-handle-date div.l:last-child {
+                border-right: none;
+            }
+            .send-choice {
+                margin-top: 19px;
+            }
+        }
+        .pipe-number {
+            margin-top: 24px;
+        }
+        .test-push {
+            margin-top: 20px;
+        }
+    }
+}
+
+:host /deep/ .ui-state-disabled {
+    opacity: 1!important;
+}
+
+:host /deep/ .ui-state-disabled .ui-dropdown-label {
+    background-color: #F8F8F9!important;
+    color: rgba(23, 35, 61, 0.30)!important;
+}
+
+:host /deep/ .ui-state-disabled .ui-dropdown-trigger {
+    background-color: #F8F8F9!important;
+    color: rgba(23, 35, 61, 0.30)!important;
+}
+
+:host /deep/ .ui-widget:disabled {
+    opacity: 1;
+}
+
+:host /deep/ .ui-state-disabled.ui-button {
+    border: 1px solid #DCDEE2!important;
+    border-left-width: 0px!important;
+}
+
+:host /deep/ .ui-state-disabled.ui-button span {
+    color: rgba(23, 35, 61, 0.25);
+}

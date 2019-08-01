@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.SegmentDao" >
+
+    <resultMap id="segmentDto" type="com.talkingdata.marketing.core.entity.dto.SegmentDto" >
+        <id column="id" property="id" />
+        <result column="campaign_id" property="campaignId" />
+        <result column="campaign_launch_unit_id" property="campaignLaunchUnitId" />
+        <result column="crowd_id" property="crowdId" />
+        <result column="channel_definition_id" property="channelDefinitionId" />
+        <result column="name" property="name" />
+        <result column="status" property="status" />
+        <result column="cron" property="cronExpression" />
+        <result column="title" property="title" />
+        <result column="message" property="message" />
+        <result column="message_param" property="messageParam" />
+        <result column="channel_param" property="channelParam" />
+        <result column="tenant_id" property="tenantId" />
+        <result column="creator" property="creator" />
+        <result column="create_by" property="createBy" />
+        <result column="create_time" property="createTime" />
+        <result column="updater" property="updater" />
+        <result column="update_by" property="updateBy" />
+        <result column="update_time" property="updateTime" />
+        <result column="appointed_time" property="appointedTime" />
+        <result column="trigger_type" property="triggerType" />
+        <result column="sub_trigger_type" property="subTriggerType" />
+        <result column="start_time" property="startTime" />
+        <result column="end_time" property="endTime" />
+    </resultMap>
+
+    <select id="queryByStatus" resultMap="segmentDto" parameterType="map">
+        select a.*,b.start_time,b.end_time
+          from TD_MKT_SEGMENT a,TD_MKT_CAMPAIGN b
+         where a.campaign_id = b.id
+        and a.status in
+        <foreach collection="statusArray" index="index" item="status" open="(" separator="," close=")">
+          #{status}
+        </foreach>
+    </select>
+
+    <select id="queryBySegmentId" resultMap="segmentDto">
+        select a.*,b.start_time,b.end_time
+        from TD_MKT_SEGMENT a,TD_MKT_CAMPAIGN b
+        where a.campaign_id = b.id
+          and a.id = #{segmentId}
+    </select>
+
+
+    <select id="findByStatusAndCampaign" resultMap="BaseResultMap">
+        SELECT * FROM TD_MKT_SEGMENT WHERE
+        campaign_id=#{campaignId}
+        AND status IN
+        <foreach collection="statusList" index="index" item="status" open="(" separator="," close=")">
+            #{status}
+        </foreach>
+    </select>
+
+    <select id="queryByStatusAndUpdateType" resultMap="BaseResultMap">
+        select a.*,b.start_time,b.end_time
+        from TD_MKT_SEGMENT a,TD_MKT_CAMPAIGN b
+        where a.campaign_id = b.id
+        and a.status in
+        <foreach collection="statusArray" index="index" item="status" open="(" separator="," close=")">
+            #{status}
+        </foreach>
+    </select>
+
+    <select id="queryByIds" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        FROM TD_MKT_SEGMENT
+        WHERE id IN
+        <foreach collection="ids" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="getCountByName" resultType="integer">
+        select 1 from TD_MKT_SEGMENT where name =  #{name} limit 1;
+    </select>
+
+    <select id="getSegmentByStatusAndCampaign" resultMap="BaseResultMap">
+        SELECT s.* FROM TD_MKT_SEGMENT s LEFT JOIN TD_MKT_CAMPAIGN c on s.campaign_id = c.id WHERE
+        s.status IN
+        <foreach collection="statusList" index="index" item="status" open="(" separator="," close=")">
+            #{status}
+        </foreach>
+        AND s.crowd_update_type=#{crowdUpdateType}
+        AND c.status &lt;&gt; -1
+        AND c.start_time &lt;= now()
+        AND c.end_time &gt;= now()
+    </select>
+
+    <select id="queryByStatusList" resultMap="BaseResultMap">
+        SELECT * FROM TD_MKT_SEGMENT WHERE
+        status IN
+        <foreach collection="statusList" index="index" item="status" open="(" separator="," close=")">
+            #{status}
+        </foreach>
+    </select>
+
+    <update id="updateStatusByUnitId" >
+        UPDATE TD_MKT_SEGMENT SET status=#{status} where campaign_launch_unit_id=#{unitId}
+    </update>
+
+    <update id="updateCrowdVersion">
+        UPDATE TD_MKT_SEGMENT SET
+        `crowd_version`=#{crowdVersion}
+        WHERE id IN
+        <foreach collection="segmentIdList" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <delete id="deleteByCreateTime" parameterType="string">
+        delete from TD_MKT_SEGMENT WHERE create_time > #{createTime}
+    </delete>
+
+    <select id="findByCampaignLaunchUnitId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" /> FROM TD_MKT_SEGMENT WHERE campaign_launch_unit_id=#{campaignLaunchUnitId}
+    </select>
+</mapper>

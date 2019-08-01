@@ -1,0 +1,29 @@
+<main>
+    <p-dialog header="新建营销活动" [draggable]="false" [resizable]="false" [(visible)]="show" modal="modal" responsive="true" (onAfterHide)="afterHide()">
+        <div class="act-name clearfix">
+            <label class="l"><span class="required">*</span>活动名称</label>
+            <div class="r">
+                <input type="text" (keyup)="inputChange()" [(ngModel)]="campagin.name" required #name="ngModel" pInputText placeholder="请输入活动名称">
+            </div>
+        </div>
+        <p *ngIf="warnShow" class="warn-tip"><i class="iconfonts icon-empty1"></i>{{warnTip}}</p>
+        <div class="act-time clearfix">
+            <label class="l"><span class="required">*</span>活动时间</label>
+            <div class="r">
+                <datePicker [value]="marketingValue" (onSelect)="onSelect($event)"></datePicker>
+            </div>
+        </div>
+        <p class="desc"><i class="fa fa-exclamation-circle"></i>一旦投放活动开始即不可变更，请妥善设置</p>
+        <div class="clearfix description">
+            <label class="l"><span style="opacity: 0;">*</span>描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述</label>
+            <textarea (input)="textareaChange()" class="text-area r" [(ngModel)]="campagin.description"></textarea>
+        </div>
+        <p *ngIf="desWarnShow" class="warn-tip"><i class="iconfonts icon-empty1"></i>营销活动描述长度不能超过80个中文字符</p>
+        <p-footer>
+            <div class="r btn-handel">
+                <button class="cancel" type="text" pButton (click)="afterHide(show=!show)" label="取消"></button>
+                <button class="confirm dis-btn" type="text" pButton (click)="createCampagin()" [disabled]="isDisabled" label="确定"></button>
+            </div>
+        </p-footer>
+    </p-dialog>
+</main>

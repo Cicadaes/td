@@ -1,0 +1,617 @@
+main {
+    height: calc(100% - 65px);
+    height: -webkit-calc(100% - 65px);
+    height: -moz-calc(100% - 65px);
+    position: relative;
+    overflow: hidden;
+}
+
+.title {
+    height: 60px;
+    width: 100%;
+    background: #FBFBFC;
+    border: 1px solid #E7EBEF;
+    box-sizing: border-box;
+}
+
+.title .title-name {
+    display: inline-block;
+    padding: 17px 0 17px 24px;
+}
+
+.title .title-name .disable-input {
+    border: 0px!important;
+    background-color: transparent !important;
+    font-size: 16px;
+    color: #373D5D;
+    line-height: 16px;
+    font-family: PingFangSC-Regular;
+    max-width: 450px !important;
+    min-width: 200px !important;
+}
+
+.title .title-name .add-input {
+    padding-bottom: 3px;
+    border-bottom: 1px solid #ccc;
+}
+
+.title .title-name .edit {
+    vertical-align: text-bottom;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-image: url(marketing/public/images/icon-edit.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.title .title-name .icon-yes {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.title .title-name .icon-cancel1 {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.title .title-content {
+    float: right;
+    height: 50px;
+    margin: 4px 0;
+    /* display: inline-block; */
+}
+
+.title .title-content .time {
+    display: inline-block;
+}
+
+.title .title-content .time span {
+    padding-right: 16px;
+}
+
+.title .title-content .config {
+    margin-left: 24px;
+    padding: 15px 24px;
+    box-sizing: border-box;
+    border-left: 1px solid #EBEEF2;
+    border-right: 1px solid #EBEEF2;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.title .title-content .config .config-verify,
+.title .title-content .config .config-set {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+}
+
+.title .title-content .config .config-verify {
+    background-image: url(marketing/public/images/icon-verify.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-right: 21px;
+}
+
+.title .title-content .config .config-set {
+    background-image: url(marketing/public/images/icon-set.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.title .title-content .button {
+    display: inline-block;
+    margin-left: -3px;
+    margin: 0 10px 0 7px;
+}
+
+.title .title-content .button .cancel {
+    padding: 10px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.title .title-content .button .draft {
+    width: 80px;
+    height: 32px;
+    padding: 9px 15px;
+    margin: 0 5px 0 11px;
+    display: inline-block;
+    text-align: center;
+    box-sizing: border-box;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #657180;
+    line-height: 12px;
+    background: #FFFFFF;
+    border: 1px solid #D7DDE4;
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+.title .title-content .button .save {
+    font-weight: 100;
+    width: 80px;
+    height: 32px;
+    padding: 10px 16px;
+    display: inline-block;
+    text-align: center;
+    box-sizing: border-box;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #FFFFFF;
+    line-height: 12px;
+    background: #43A3FB;
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+.title .title-time {
+    display: inline-block;
+    padding: 17px 0 17px 24px;
+}
+
+.title .title-time span {
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    line-height: 17px;
+    color: #464C5B;
+}
+
+.title .title-time i {
+    display: inline-block;
+    cursor: pointer;
+    width: 14px;
+    height: 13px;
+    margin-left: 16px;
+    margin-right: 8px;
+    vertical-align: text-bottom;
+    background-image: url('marketing/public/images/icon-date.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.title .title-time span.des {
+    display: inline-block;
+    margin-left: 10px;
+    color: #1db9ff;
+}
+
+.title .title-time .button {
+    display: inline-block;
+    margin-left: -3px;
+    margin: 0 10px 0 7px;
+}
+
+.title .title-time .button .draft {
+    width: 80px;
+    height: 32px;
+    padding: 9px 15px;
+    margin: 0 5px 0 11px;
+    display: inline-block;
+    text-align: center;
+    box-sizing: border-box;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #657180;
+    line-height: 12px;
+    background: #FFFFFF;
+    border: 1px solid #D7DDE4;
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+.content {
+    width: 100%;
+    height: calc(100% - 60px);
+    height: -webkit-calc(100% - 60px);
+    height: -moz-calc(100% - 60px);
+    overflow: auto;
+    display: flex;
+}
+
+.content .left-operator {
+    width: 80px;
+    background: #FFFFFF;
+    height: 100%;
+    display: inline-block;
+    overflow-y: auto;
+}
+
+.content .left-operator .component-name {
+    padding: 10px 8px 10px 24px;
+    border-bottom: 1px solid #EBEEF2;
+}
+
+.content .left-operator .component-name span {
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #373D5D;
+    letter-spacing: 0;
+    line-height: 12px;
+}
+
+.content .left-operator .component-name .put-away {
+    width: 14px;
+    height: 14px;
+    display: block;
+    background-image: url(marketing/public/images/icon-put.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    float: right;
+}
+
+.content .left-operator .component .node {
+    text-align: center;
+    cursor: move;
+    padding: 8px 0;
+}
+
+.content .left-operator .component .node:hover {
+    background: rgba(205, 205, 205, 0.2);
+}
+
+.content .left-operator .component .node img {
+    width: 28px;
+    height: 28px;
+}
+
+.content .left-operator .component .node label {
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #9EA7B4;
+    letter-spacing: 0;
+    line-height: 12px;
+    margin-top: 5px;
+    display: block;
+}
+
+.content .hide-left-operator {
+    width: 24px;
+    background: #FFFFFF;
+    height: 100%;
+    display: inline-block;
+    overflow-y: auto;
+}
+
+.content .hide-left-operator .component-name {
+    padding: 5px 7px 20px 0px;
+    border-bottom: 1px solid #EBEEF2;
+}
+
+.content .hide-left-operator .component-name span {
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #373D5D;
+    letter-spacing: 0;
+    line-height: 12px;
+}
+
+.content .hide-left-operator .component-name .put-away {
+    width: 14px;
+    height: 14px;
+    display: block;
+    background-image: url(marketing/public/images/icon-put.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    float: right;
+    transform: rotate(90deg);
+}
+
+.content #pipeline {
+    flex: 1 0 auto;
+    /* width: calc(100% - 80px); */
+    background-color: #EEF0F3;
+    height: 100% !important;
+    display: inline-block;
+    margin-left: -3px;
+    cursor: pointer;
+}
+
+.content #pipeline.l-content {
+    width: calc(100% - 24px) !important;
+}
+
+.right {
+    position: absolute;
+    top: 60px;
+    right: -380px;
+    width: 389px;
+    height: calc(100% - 60px);
+    border: 1px solid #FFFFFF;
+    display: block;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    background: #FFFFFF;
+}
+
+.right.right_content {
+    right: 0;
+    animation: rightAnimation 1s;
+    -moz-animation: rightAnimation 1s;
+    -webkit-animation: rightAnimation 1s;
+    -o-animation: rightAnimation 1s;
+}
+
+
+/* pipeLine删除按钮浮动框样式 */
+
+.pipeline-message {
+    position: absolute;
+    padding-top: 10px;
+    cursor: auto;
+}
+
+.pipeline-message .top-triangle {
+    width: 0;
+    height: 0;
+    margin-left: 14px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #378CE4;
+}
+
+.pipeline-message .top {
+    width: 50px;
+    height: 20px;
+    background: #378CE4;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    box-shadow: 3px 3px 5px #888888;
+}
+
+.pipeline-message .bottom {
+    width: 50px;
+    height: 20px;
+    padding: 4px;
+    box-sizing: border-box;
+    text-align: center;
+    background: #fff;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 3px 3px 5px #888888;
+}
+
+.pipeline-message .bottom .delete {
+    display: inline-block;
+    cursor: pointer;
+    width: 15px;
+    height: 12px;
+    background-image: url('marketing/public/images/delete1.ico');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.pipeline-message .bottom .report {
+    display: inline-block;
+    cursor: pointer;
+    width: 15px;
+    height: 12px;
+    background-image: url('marketing/public/images/report.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
+/* pipeLine复位按钮样式 */
+
+.pipeline-button {
+    position: absolute;
+    bottom: 50px;
+    right: 60px;
+}
+
+.pipeline-button .reset-button {
+    width: 30px;
+    height: 30px;
+    background-color: #FFFFFF;
+    border: 1px solid #d4d4d4;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px #888888;
+}
+
+.pipeline-button .reset-button a {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    display: inline-block;
+    background-image: url('marketing/public/images/reset.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
+/* 提示框样式 */
+
+.notice-content {
+    font-size: 14px;
+    text-align: center;
+}
+
+.footer-button {
+    display: block;
+    padding: 0.375em 0.75em;
+}
+
+.notice-button {
+    margin-top: 24px;
+    text-align: center;
+    width: 100%;
+    padding: 0.2em;
+    font-size: 12px;
+    margin-bottom: 10px;
+    background-color: #ff6e6b;
+    color: #fff;
+    border: 1px solid transparent;
+    border-radius: 0.25em;
+    cursor: pointer;
+}
+
+.notice-button span {
+    padding: .25em 1em .25em 2.1em;
+    display: block;
+    line-height: normal;
+    box-sizing: border-box;
+}
+
+
+/*确认删除弹框*/
+
+:host /deep/ .ui-dialog {
+    padding: 0 28px;
+}
+
+:host /deep/ .ui-confirmdialog-message {
+    color: #657180;
+    display: inline-block;
+    text-align: center;
+    font-size: 14px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-content {
+    padding-top: 25px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane {
+    /* text-align: center; */
+    border-top: none;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane button:nth-child(1) {
+    float: inherit;
+    background-color: #fff;
+    color: #373a3c;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane button:nth-child(1):hover {
+    background-color: #f2f2f2;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane button:nth-child(2) {
+    background: #5ba0ff;
+    border-color: #5ba0ff;
+    color: #fff;
+    float: inherit;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane button:nth-child(1) .fa,
+:host /deep/ .ui-dialog .ui-dialog-buttonpane button:nth-child(2) .fa {
+    display: none;
+}
+
+:host /deep/ .ui-button-text-icon-left .ui-button-text {
+    padding: .25em 1em;
+}
+
+:host /deep/ .ui-tabview-panel.ui-widget-content {
+    padding: 0;
+}
+
+:host /deep/ .alreadySub .joint-link.joint-theme-default .link-tools .tool-remove {
+    transform: scale(0);
+}
+
+:host /deep/ .alreadySub .marker-vertices {
+    display: none;
+}
+
+:host /deep/ .datePicker .date-box .disabled {
+    background-color: #F8F8F9!important;
+    color: rgba(23, 35, 61, 0.30)!important;
+}
+
+:host /deep/ .joint-viewport .joint-link.joint-theme-default .connection-wrap {
+    transform: translate(8px, 0);
+}
+
+.overflow-scroll {
+    overflow: scroll;
+}
+
+.overflow-initial {
+    overflow: initial;
+    padding-right: 5px;
+}
+
+@keyframes rightAnimation {
+    from {
+        right: -40%;
+    }
+    to {
+        right: 0
+    }
+}
+
+@-moz-keyframes rightAnimation {
+    from {
+        right: -40%;
+    }
+    to {
+        right: 0
+    }
+}
+
+@-webkit-keyframes rightAnimation {
+    from {
+        right: -40%;
+    }
+    to {
+        right: 0
+    }
+}
+
+@-o-keyframes rightAnimation {
+    from {
+        right: -40%;
+    }
+    to {
+        right: 0
+    }
+}
+
+.right.hidden_right_content {
+    animation: hiddenRightAnimation 1s;
+    -moz-animation: hiddenRightAnimation 1s;
+    -webkit-animation: hiddenRightAnimation 1s;
+    -o-animation: hiddenRightAnimation 1s;
+}
+
+@keyframes hiddenRightAnimation {
+    from {
+        right: 0
+    }
+    to {
+        right: -40%;
+    }
+}
+
+@-moz-keyframes hiddenRightAnimation {
+    from {
+        right: 0
+    }
+    to {
+        right: -40%;
+    }
+}
+
+@-webkit-keyframes hiddenRightAnimation {
+    from {
+        right: 0
+    }
+    to {
+        right: -40%;
+    }
+}
+
+@-o-keyframes hiddenRightAnimation {
+    from {
+        right: 0
+    }
+    to {
+        right: -40%;
+    }
+}

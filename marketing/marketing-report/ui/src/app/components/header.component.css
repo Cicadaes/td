@@ -1,0 +1,35 @@
+.main {
+    height: 64px;
+    border-bottom: 1px solid #cccccc;
+    position: relative;
+    background: #fff;
+}
+
+
+/*header*/
+
+.header {
+    position: absolute;
+    left: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.header ul li a {
+    color: #657180;
+    font-size: 15px;
+}
+
+.header ul li a:last-child {
+    color: #1d2531;
+}
+
+.header ul li i {
+    color: #657180;
+    margin: 0 7px;
+    font-size: 15px;
+}
+
+.header ul li a.active {
+    color: #1d2531;
+}

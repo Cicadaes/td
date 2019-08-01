@@ -1,0 +1,134 @@
+<main (click)="hideDropDown()">
+    <div class="pipe-desc">
+        <base-desc textRequired="true" textTitle="组件名称" [(text)]="pipelineNodeCommunicationService.nodeData.name" [(desc)]="pipelineNodeCommunicationService.nodeData.description" [editFlag]="!pipelineNodeCommunicationService.editFlag"></base-desc>
+    </div>
+
+    <div class="crowd-info pipe-content">
+        <div class="crowd-type pipe-item clearfix">
+            <label class="item-label">
+                <span class="required">*</span>人群类型</label>
+            <div class="type-list">
+                <div class="type-radio" (click)="choosCrowdType('1');">
+                    <input class="radio" name="crowdType" type="radio" value="1" [(ngModel)]="pipelineNodeCommunicationService.nodeData.crowdType" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                    <label for="crowdType">Lookalike人群</label>
+                </div>
+                <div class="type-radio" (click)="choosCrowdType('2');">
+                    <input class="radio" name="crowdType" type="radio" value="2" [(ngModel)]="pipelineNodeCommunicationService.nodeData.crowdType" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                    <label for="crowdType">精细化人群</label>
+                </div>
+                <div class="type-radio" (click)="choosCrowdType('4');">
+                    <input class="radio" name="crowdType" type="radio" value="4" [(ngModel)]="pipelineNodeCommunicationService.nodeData.crowdType" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                    <label for="crowdType">一方人群</label>
+                </div>
+                <div *ngIf="authOfDMP" class="type-radio" (click)="choosCrowdType('3');">
+                    <input class="radio" name="crowdType" type="radio" value="3" [(ngModel)]="pipelineNodeCommunicationService.nodeData.crowdType" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                    <label for="crowdType">“用户运营”人群</label>
+                </div>
+            </div>
+        </div>
+        <div class="crowd-name pipe-item clearfix">
+            <label class="item-label">
+                <span class="required">*</span>人群名称</label>
+            <!-- <p-dropdown *ngIf="!!userCrowds.length" [style]="{'width':'254px','margin-left':'-8px'}" [options]="userCrowds" [(ngModel)]="selectCrowdData" placeholder="请选择人群" (onChange)="selectCrowd($event)" [filter]="true" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown> -->
+            <div *ngIf="userCrowds.length" class="select-dropdown">
+                <div [ngClass]="{'input': !pipelineNodeCommunicationService.editFlag}" (click)="showDropDown($event)">
+                    <input type="text" placeholder="请选择人群" [(ngModel)]="selectCrowdName" [disabled]="!pipelineNodeCommunicationService.editFlag" (input)="searchCrowd($event)" (focus)="getCrowdList()">
+                    <div class="button">
+                        <span></span>
+                    </div>
+                </div>
+                <div *ngIf="showDropdown" class="dropdown" (scroll)="getMoreCrowdList($event)">
+                    <ul>
+                        <li *ngFor="let item of userCrowds" (click)="selectCrowd(item)">{{item.label}}</li>
+                    </ul>
+                </div>
+            </div>
+            <p-dropdown *ngIf="!userCrowds.length" [style]="{'width':'254px','margin-left':'-8px'}" placeholder="无" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+            <div class="detail">
+                <p>详情信息</p>
+                <p *ngIf="pipelineNodeCommunicationService.nodeData.crowdType && pipelineNodeCommunicationService.nodeData.crowdType != 3" class="r create-crowd" (click)="createCrowd()">
+                    <span>+</span>新建人群</p>
+                <div [ngClass]="{'detail-content': true}">
+                    <h3 class="names first-name" *ngIf="selectCrowdData">人群名称</h3>
+                    <span style="color:#627182;" *ngIf="selectCrowdData">{{selectCrowdData && selectCrowdData.refName || selectCrowdData.name || "--"}}</span>
+                    <h3 class="last-time first-name" *ngIf="selectCrowdData">最后更新时间</h3>
+                    <span style="color:#627182;" *ngIf="selectCrowdData">{{(selectCrowdData && (selectCrowdData.lastUpdateTime || selectCrowdData.updateTime || selectCrowdData.createTime)
+                        | date:'yyyy-MM-dd HH:mm:ss') || "--"}}</span>
+                    <h3 class="estimate first-name" *ngIf="selectCrowdData">规模</h3>
+                    <span class="estimate-size" *ngIf="selectCrowdData && (selectCrowdData.estimatedSize || selectCrowdData.crowdCount)">{{selectCrowdData && (selectCrowdData.estimatedSize || selectCrowdData.crowdCount)}}人</span>
+                    <span style="color:#627182;" *ngIf="selectCrowdData && !selectCrowdData.estimatedSize && !selectCrowdData.crowdCount">--</span>
+                    <h3 class="desc first-name" *ngIf="selectCrowdData">人群描述</h3>
+                    <span style="color:#627182;" *ngIf="selectCrowdData" class="desc_content" [innerHtml]="selectCrowdData.description || '暂无描述'"></span>
+                </div>
+                <div class="autoUpdateCrowd" *ngIf="pipelineNodeCommunicationService.nodeData.crowdType == 2">
+                    <input type="checkbox" id="autoUpdateCrowd" [(ngModel)]="pipelineNodeCommunicationService.nodeData.autoUpdateCrowd" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                    <label for="autoUpdateCrowd">营销开始前自动更新人群</label>
+                </div>
+            </div>
+        </div>
+        <div class="crowd-calc pipe-item clearfix">
+            <label class="item-label">
+                <span class="required">*</span>人群计算频率</label>
+            <div class="interval-list">
+                <label *ngIf="pipelineNodeCommunicationService.nodeData.crowdType && pipelineNodeCommunicationService.nodeData.crowdType != 3" (click)="pipelineNodeCommunicationService.nodeData.period = ''">
+                    <input class="radio" name="calcInterval" type="radio" value="1" [(ngModel)]="pipelineNodeCommunicationService.nodeData.calcType" [disabled]="!pipelineNodeCommunicationService.editFlag">永不
+                </label>
+                <label *ngIf="pipelineNodeCommunicationService.nodeData.crowdType && pipelineNodeCommunicationService.nodeData.crowdType == 2" (click)="pipelineNodeCommunicationService.nodeData.period = ''">
+                    <input class="radio" name="calcInterval" type="radio" value="2" [(ngModel)]="pipelineNodeCommunicationService.nodeData.calcType" [disabled]="!pipelineNodeCommunicationService.editFlag">实时
+                </label>
+                <label *ngIf="pipelineNodeCommunicationService.nodeData.crowdType && (pipelineNodeCommunicationService.nodeData.crowdType == 1 || pipelineNodeCommunicationService.nodeData.crowdType == 2)">
+                    <input class="radio" name="calcInterval" type="radio" value="3" [(ngModel)]="pipelineNodeCommunicationService.nodeData.calcType" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                    <input class="input-text" type="text" disabled="{{pipelineNodeCommunicationService.nodeData.calcType !=='3' || !pipelineNodeCommunicationService.editFlag}}" [(ngModel)]="pipelineNodeCommunicationService.nodeData.period" tdLimitNumberInput condition="PI"/>天
+                </label>
+                <label *ngIf="pipelineNodeCommunicationService.nodeData.crowdType && pipelineNodeCommunicationService.nodeData.crowdType == 3">
+                    按照用户运营平台人群计算规则
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="inlet-rule pipe-content">
+        <p>进入规则
+            <span class="desc-text">（默认为同一用户不受次数和频率限制）</span>
+        </p>
+        <p>
+            <span [ngClass]="{'pointer': pipelineNodeCommunicationService.editFlag}" (click)="selectRule($event, '1')">
+                <input class="radio" type="checkbox" [(ngModel)]="lessThanDaysSelect" [disabled]="!pipelineNodeCommunicationService.editFlag" /> 同一用户</span>
+            <input type="text" [disabled]="!lessThanDaysSelect || !pipelineNodeCommunicationService.editFlag" [(ngModel)]="pipelineNodeCommunicationService.nodeData.lessThanDays" (input)="changeRule($event)" tdLimitNumberInput condition="PI" /> 天内不再进入
+        </p>
+        <p>
+            <span [ngClass]="{'pointer': pipelineNodeCommunicationService.editFlag}" (click)="selectRule($event, '2')">
+                <input class="radio" type="checkbox" [(ngModel)]="lessThanTimesSelect" [disabled]="!pipelineNodeCommunicationService.editFlag"> 同一用户进入次数不超过</span>
+            <input type="text" [disabled]="!lessThanTimesSelect || !pipelineNodeCommunicationService.editFlag" [(ngModel)]="pipelineNodeCommunicationService.nodeData.lessThanTimes" (input)="changeRule($event)" tdLimitNumberInput condition="PI">
+        </p>
+    </div>
+
+    <div class="no-entry pipe-content">
+        <label class="item-label">
+            禁止规则
+            <span class="desc-text">（满足如下条件的人禁止进入入口）</span>
+        </label>
+        <div class="rule-header">
+            <div class="rule-body" *ngFor="let rule of noEntryRules;let i = index">
+                <div *ngIf="i" [ngClass]="{'rule-button': true, 'pointer': pipelineNodeCommunicationService.editFlag}" (click)="changeRuleRelation(terminationNoEntryRelation)">{{terminationNoEntryRelation.label}}</div>
+                <!-- <p-dropdown [style]="{'width':'66px','position':'absolute','left':'-73px'}" placeholder="或者"></p-dropdown> -->
+                <p-dropdown [style]="{'width':'66px','position':'absolute','left':'-73px'}" placeholder="未发生" [options]="fristeNoEntry" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                <p-dropdown [style]="{'width':'135px'}" placeholder="请选择" [options]="secondNoEntry" [(ngModel)]="rule.second" (onChange)="selectNoEntry($event, rule)" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                <i *ngIf="!rule.second" [ngClass]="{'icon-del': true, 'r': true, 'pointer': pipelineNodeCommunicationService.editFlag}" (click)="delNoEntryRule(i);"></i>
+                <div *ngIf="rule.second" class="rule-content">
+                    <p-dropdown [style]="{'width':'135px'}" [options]="rule.forbidRuleList" placeholder="请选择"></p-dropdown>
+                    <b></b>
+                    <input type="text" tdLimitNumberInput condition="PI" [(ngModel)]="rule.number" />次
+                    <i [ngClass]="{'icon-del': true, 'r': true, 'pointer': pipelineNodeCommunicationService.editFlag}" (click)="delNoEntryRule(i);"></i>
+                </div>
+            </div>
+        </div>
+        <div class="add-rules" (click)="addNoEntryRule(noEntryRules.length);">
+            <i class="fa fa-plus"></i>
+            <span>添加规则</span>
+        </div>
+    </div>
+
+    <create-crowd *ngIf="showDialog" [showDialog]="showDialog" [dialogData]="dialogData" (hideDialog)="hideDialog($event)" (isCreate)="isCreate($event)"></create-crowd>
+    <p-growl [(value)]="msgs"></p-growl>
+</main>

@@ -1,0 +1,135 @@
+:host /deep/ .ui-dialog {
+    width: 825px;
+    height: 230px;
+    /*实际216*/
+}
+
+h3 {
+    margin-top: 12px;
+    color: #959ca5;
+}
+
+h3 strong {
+    color: #5ba0ff;
+}
+
+:host /deep/ .ui-fileupload .ui-fileupload-buttonbar {
+    padding: 0;
+}
+
+.upload-btn {
+    width: 100%;
+    background: #5ba0ff;
+    text-align: center;
+    line-height: 28px;
+    color: #fff;
+    border-radius: 3px;
+    font-family: '微软雅黑';
+}
+
+.ios-content-list1 {
+    margin-top: 20px;
+}
+
+.ios-content-list1 li:nth-child(1),
+.ios-content-list2 li:nth-child(1) {
+    margin-right: 20px;
+}
+
+.ios-content-list1 .btn-handel {
+    /*margin-top:5px;*/
+    margin-top: 0;
+}
+
+.no-pass {
+    width: 191px;
+    height: 30px;
+    border: 1px solid #dee6ed;
+    border-radius: 5px;
+    margin: 0 12px;
+    text-indent: 1em;
+}
+
+.book {
+    margin-top: 5px;
+}
+
+.question-tip-box {
+    font-size: 13px;
+    margin: 7px 12px 0 3px;
+}
+
+.question-tip-box .question-tip {
+    left: 19px;
+    top: -28px;
+}
+
+.question-tip-box .tip-prod {
+    left: 20px;
+    top: -19px;
+}
+
+.question-tip {
+    left: 15px;
+    top: -30px;
+}
+
+.ios-content-list2 {
+    margin-top: 20px;
+}
+
+.fa-box {
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+.fa-box i.icon-yes {
+    color: #61a4ff;
+    margin-right: 12px;
+}
+
+.fa-box i.icon-prompt2 {
+    color: #ff716e;
+}
+
+.text-input {
+    width: 171px;
+    height: 30px;
+    border: 1px solid #dee6ed;
+    border-radius: 5px;
+    text-indent: 1em;
+}
+
+
+/*自定义上传控件样式*/
+
+.upload-file-box {
+    position: relative;
+    width: 173px;
+    height: 30px;
+}
+
+.upload-file-box .upload-file {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.upload-file-box .text {
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+    border: 1px solid #dee6ed;
+    border-radius: 5px;
+}
+
+.file_tip {
+    padding-left: 95px;
+}
+
+.passwodr_tip {
+    padding-left: 415px;
+}

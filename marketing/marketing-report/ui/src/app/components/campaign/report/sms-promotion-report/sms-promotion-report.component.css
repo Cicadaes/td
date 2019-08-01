@@ -1,0 +1,261 @@
+main {
+    background-color: #fff;
+}
+.sms-promotion-report {
+    padding: 0 20px;
+}
+.sms-promotion-report-head {
+    padding-top: 25px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e1e4ed;
+}
+.sms-promotion-report-head h4.title {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+.sms-promotion-report-head span.name {
+    font-weight: bold;
+}
+.sms-promotion-report-head i.fa-question-circle {
+    margin: 0 5px;
+    font-size: 15px;
+}
+.question-tip {
+    left: 20px;
+    top: -57px;
+    font-size: 12px;
+    box-sizing: content-box;
+}
+.sms-promotion-report-head span.percent {
+    color: #6a9dee;
+    font-size: 16px;
+}
+.sms-promotion-report-head .devote-list li {
+    padding: 0 25px;
+    border-left: 2px solid #ebeef7;
+}
+.state-box .state-list {
+    /* padding-top: 25px; */
+    clear: both;
+}
+.state-box .border{
+    padding: 0 5px;
+    color: #dfe7f2;
+}
+.state-box a{
+    color: #0275d8;
+}
+.state-box .state-list li {
+    box-sizing: border-box;
+    width: 30%;
+    /*height:60px;*/
+    padding: 25px 30px;
+    border: 2px solid #e8edf3;
+}
+.state-box .state-list li:nth-child(2) {
+    margin-left: 5%;
+    position: relative;
+}
+.state-box .state-list li:nth-child(2) .fail-info{
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 15px;
+}
+.state-box .state-list li:nth-child(2) .fail-info div{
+    box-sizing: content-box;
+    width: 130px;
+    top: -47px;
+}
+.state-box .state-list li div.color-stick {
+    width: 26px;
+    height: 3px;
+}
+.state-box .state-list li .state-range {
+    margin: 15px 0;
+    line-height: 18px;
+}
+.state-box .state-list li .state-range span:first-child {
+    font-size: 14px;
+}
+.state-box .state-list li .state-range span:last-child {
+    font-size: 18px;
+}
+.state-box .state-list .color-stick1 {
+    background: #3ab4a5;
+}
+.state-box .state-list .color-stick2 {
+    background: #fe6f6b;
+}
+.state-box .state-list .color-stick3 {
+    background: #5ea0ff;
+}
+.state-box .state-list .color-font1 {
+    color: #3ab4a5;
+}
+.state-box .state-list .color-font2 {
+    color: #fe6f6b;
+}
+.state-box .state-list .color-font3 {
+    color: #5ea0ff;
+}
+.charts h4.trend-title {
+    font-weight: bold;
+    font-size: 12px;
+    padding-bottom: 15px;
+    margin-top: 20px;
+    border-bottom: 2px solid #ebeef7;
+}
+.charts .click-choice {
+    padding-top: 15px;
+}
+.click-choice .button {
+    background-color: #ffffff;
+    font-size: 12px;
+    padding: 8px 0;
+    margin-right: 20px;
+    cursor: pointer;
+}
+.click-choice .button.select {
+    border-bottom: 2px solid #5ba0ff;
+    border-radius: 0;
+}
+.click-choice .button span {
+    color: #5ba0ff;
+}
+/*自定义slider*/
+.slider-box {
+    position: relative;
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: #e7edf9;
+}
+.slider-box div.slider {
+    height: 6px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 3px;
+    background: #59d1c3;
+}
+.slider-box div.slider2 {
+    background: #ff8888;
+}
+.slider-box div.slider3 {
+    background: #5ba0ff;
+}
+/*循环时间样式*/
+.right-arrow1,
+.right-arrow2 {
+    width: 0;
+    height: 0;
+    display: block;
+    border-top: 10px transparent dashed;
+    border-right: 10px transparent dashed;
+    border-bottom: 10px transparent dashed;
+    border-left: 10px #ffffff solid;
+    overflow: hidden;
+}
+.right-arrow1 {
+    border-left: 10px #dfe7f2 solid;
+    margin-left: 13px;
+}
+.right-arrow2 {
+    border-left: 10px #ffffff solid;
+    margin: -20px 0px 0 12px;
+}
+.left-arrow1,
+.left-arrow2 {
+    width: 0;
+    height: 0;
+    display: block;
+    z-index: 5;
+    border-top: 10px transparent dashed;
+    border-left: 10px transparent dashed;
+    border-bottom: 10px transparent dashed;
+    border-right: 10px #ffffff solid;
+    overflow: hidden;
+}
+.left-arrow1 {
+    border-right: 10px #dfe7f2 solid;
+}
+.left-arrow2 {
+    left: 1px;
+    border-right: 10px #ffffff solid;
+    margin: -20px 0px 0 1px;
+}
+.sms-promotion-cycle {
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+.sms-promotion-cycle .sms-promotion-cycle-left,
+.sms-promotion-cycle .sms-promotion-cycle-right {
+    padding-top: 7px;
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    border: 1px solid #dfe7f2;
+    border-radius: 50%;
+    text-align: center;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.sms-promotion-cycle .sms-promotion-cycle-left-click,
+.sms-promotion-cycle .sms-promotion-cycle-right-click {
+    cursor: pointer;
+    border-color: #5ba0ff;
+}
+.sms-promotion-cycle .sms-promotion-cycle-left-click.default,
+.sms-promotion-cycle .sms-promotion-cycle-right-click.default {
+    border-color: #dfe7f2;
+}
+.sms-promotion-cycle .sms-promotion-cycle-left-click .left-arrow1 {
+    border-right-color: #5ba0ff;
+}
+.sms-promotion-cycle .sms-promotion-cycle-right-click .right-arrow1 {
+    border-left-color: #5ba0ff;
+}
+.sms-promotion-cycle .sms-promotion-cycle-timezone {
+    width: 90%;
+    height: 1px;
+    background: #d3d3d3;
+    display: flex;
+    justify-content: space-between;
+}
+.sms-promotion-cycle .sms-promotion-cycle-timezone .point {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #a7b0c4;
+    display: inline-block;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.sms-promotion-cycle .sms-promotion-cycle-timezone .point .time {
+    margin: 20px 0 0 -7px;
+    display: inline-block;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.sms-promotion-cycle .sms-promotion-cycle-timezone .point .otherTime {
+    margin: 20px 0 0 -28px;
+    display: inline-block;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.sms-promotion-cycle .sms-promotion-cycle-timezone .point.select {
+    width: 13px;
+    height: 13px;
+    background-color: #5ba0ff;
+    cursor: pointer;
+}
+.sms-promotion-cycle .sms-promotion-cycle-timezone .point.select .otherTime {
+    margin-top: 22px;
+    color: #5ba0ff;
+    cursor: pointer;
+}

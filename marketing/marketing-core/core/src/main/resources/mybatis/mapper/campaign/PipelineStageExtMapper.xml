@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.PipelineStageDao" >
+    <insert id="insertBatch" parameterType="list" useGeneratedKeys="true">
+        INSERT INTO TD_MKT_PIPELINE_STAGE
+        (`campaign_id`, `pipeline_definition_id`, `version`, `stage_name`, `diagram`, `trigger_type`, `cron_expression`, `interval`, `execute_times`, `tenant_id`, `creator`, `create_by`, `create_time`, `updater`, `update_by`, `update_time`)
+        VALUES
+        <foreach collection="stages" item="stage" index="index" separator=",">
+            (
+                #{stage.campaignId},
+                #{stage.pipelineDefinitionId},
+                #{stage.version},
+                #{stage.stageName},
+                #{stage.diagram},
+                #{stage.triggerType},
+                #{stage.cronExpression},
+                #{stage.interval},
+                #{stage.executeTimes},
+                #{stage.tenantId},
+                #{stage.creator},
+                #{stage.createBy},
+                #{stage.createTime},
+                #{stage.updater},
+                #{stage.updateBy},
+                #{stage.updateTime}
+            )
+        </foreach>
+    </insert>
+
+    <select id="findByCampaignId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" /> FROM TD_MKT_PIPELINE_STAGE WHERE campaign_id=#{campaignId}
+    </select>
+    <select id="findByPipelineDefinitionId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" /> FROM TD_MKT_PIPELINE_STAGE WHERE pipeline_definition_id=#{pipelineDefinitionId}
+    </select>
+
+    <delete id="deleteByCampaignIdAndPipelineIdAndVersion">
+        delete from
+          TD_MKT_PIPELINE_STAGE
+        where
+          campaign_id=#{campaignId}
+        AND
+          pipeline_definition_id=#{pipelineId}
+        <choose>
+            <when test="version == null">
+                AND
+                version IS NULL
+            </when>
+            <otherwise>
+                AND
+                version=#{version}
+            </otherwise>
+        </choose>
+        AND
+          tenant_id=#{tenantId}
+    </delete>
+</mapper>

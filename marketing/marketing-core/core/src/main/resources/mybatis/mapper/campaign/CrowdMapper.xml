@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.CrowdDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.marketing.core.entity.campaign.Crowd" >
+    <id column="id" property="id" />
+    <result column="crowd_type" property="crowdType" />
+    <result column="source" property="source" />
+    <result column="parent_id" property="parentId" />
+    <result column="ref_id" property="refId" />
+    <result column="attachment_id" property="attachmentId" />
+    <result column="last_update_time" property="lastUpdateTime" />
+    <result column="status" property="status" />
+    <result column="calc_status" property="calcStatus" />
+    <result column="last_version" property="lastVersion" />
+    <result column="estimated_size" property="estimatedSize" />
+    <result column="push_estimated_size" property="pushEstimatedSize" />
+    <result column="sms_estimated_size" property="smsEstimatedSize" />
+    <result column="ad_estimated_size" property="adEstimatedSize" />
+    <result column="edm_estimated_size" property="edmEstimatedSize" />
+    <result column="id_type" property="idType" />
+    <result column="ref_code" property="refCode" />
+    <result column="ref_name" property="refName" />
+    <result column="description" property="description" />
+    <result column="tenant_id" property="tenantId" />
+    <result column="creator" property="creator" />
+    <result column="create_by" property="createBy" />
+    <result column="create_time" property="createTime" />
+    <result column="start_time" property="startTime" />
+    <result column="end_time" property="endTime" />
+    <result column="updater" property="updater" />
+    <result column="update_by" property="updateBy" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+
+  <!-- TD_MKT_CROWD table all fields -->
+  <sql id="Base_Column_List" >
+     `id`, `crowd_type`, `source`, `parent_id`, `ref_id`, `attachment_id`, `last_update_time`, `status`, `calc_status`, `last_version`, `estimated_size`, `push_estimated_size`, `sms_estimated_size`, `ad_estimated_size`, `edm_estimated_size`, `id_type`, `ref_code`, `ref_name`, `description`, `tenant_id`, `creator`, `create_by`, `create_time`, `start_time`, `end_time`, `updater`, `update_by`, `update_time`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and `id` ${idOperator} #{id}
+      </if>
+      <if test="crowdType != null" >
+        and `crowd_type` ${crowdTypeOperator} #{crowdType}
+      </if>
+      <if test="source != null" >
+        and `source` ${sourceOperator} #{source}
+      </if>
+      <if test="parentId != null" >
+        and `parent_id` ${parentIdOperator} #{parentId}
+      </if>
+      <if test="refId != null" >
+        and `ref_id` ${refIdOperator} #{refId}
+      </if>
+      <if test="attachmentId != null" >
+        and `attachment_id` ${attachmentIdOperator} #{attachmentId}
+      </if>
+      <if test="lastUpdateTime != null" >
+        and `last_update_time` ${lastUpdateTimeOperator} #{lastUpdateTime}
+      </if>
+      <if test="lastUpdateTime1 != null" >
+        and `last_update_time` &gt;= #{lastUpdateTime1}
+      </if>
+      <if test="lastUpdateTime2 != null" >
+        and `last_update_time` &lt;= #{lastUpdateTime2}
+      </if>
+      <if test="status != null" >
+        and `status` ${statusOperator} #{status}
+      </if>
+      <if test="calcStatus != null" >
+        and `calc_status` ${calcStatusOperator} #{calcStatus}
+      </if>
+      <if test="lastVersion != null" >
+        and `last_version` ${lastVersionOperator} #{lastVersion}
+      </if>
+      <if test="estimatedSize != null" >
+        and `estimated_size` ${estimatedSizeOperator} #{estimatedSize}
+      </if>
+      <if test="pushEstimatedSize != null" >
+        and `push_estimated_size` ${pushEstimatedSizeOperator} #{pushEstimatedSize}
+      </if>
+      <if test="smsEstimatedSize != null" >
+        and `sms_estimated_size` ${smsEstimatedSizeOperator} #{smsEstimatedSize}
+      </if>
+      <if test="adEstimatedSize != null" >
+        and `ad_estimated_size` ${adEstimatedSizeOperator} #{adEstimatedSize}
+      </if>
+      <if test="edmEstimatedSize != null" >
+        and `edm_estimated_size` ${edmEstimatedSizeOperator} #{edmEstimatedSize}
+      </if>
+      <if test="idType != null" >
+        and `id_type` ${idTypeOperator} #{idType}
+      </if>
+      <if test="refCode != null" >
+        and `ref_code` ${refCodeOperator} #{refCode}
+      </if>
+      <if test="refName != null" >
+        and `ref_name` ${refNameOperator} #{refName}
+      </if>
+      <if test="description != null" >
+        and `description` ${descriptionOperator} #{description}
+      </if>
+      <if test="tenantId != null" >
+        and `tenant_id` ${tenantIdOperator} #{tenantId}
+      </if>
+      <if test="creator != null" >
+        and `creator` ${creatorOperator} #{creator}
+      </if>
+      <if test="createBy != null" >
+        and `create_by` ${createByOperator} #{createBy}
+      </if>
+      <if test="createTime != null" >
+        and `create_time` ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and `create_time` &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and `create_time` &lt;= #{createTime2}
+      </if>
+      <if test="startTime != null" >
+        and `start_time` ${startTimeOperator} #{startTime}
+      </if>
+      <if test="startTime1 != null" >
+        and `start_time` &gt;= #{startTime1}
+      </if>
+      <if test="startTime2 != null" >
+        and `start_time` &lt;= #{startTime2}
+      </if>
+      <if test="endTime != null" >
+        and `end_time` ${endTimeOperator} #{endTime}
+      </if>
+      <if test="endTime1 != null" >
+        and `end_time` &gt;= #{endTime1}
+      </if>
+      <if test="endTime2 != null" >
+        and `end_time` &lt;= #{endTime2}
+      </if>
+      <if test="updater != null" >
+        and `updater` ${updaterOperator} #{updater}
+      </if>
+      <if test="updateBy != null" >
+        and `update_by` ${updateByOperator} #{updateBy}
+      </if>
+      <if test="updateTime != null" >
+        and `update_time` ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and `update_time` &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and `update_time` &lt;= #{updateTime2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.marketing.core.entity.campaign.Crowd" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_MKT_CROWD(<include refid="Base_Column_List" />)
+    values (#{id}, #{crowdType}, #{source}, #{parentId}, #{refId}, #{attachmentId}, #{lastUpdateTime}, #{status}, #{calcStatus}, #{lastVersion}, #{estimatedSize}, #{pushEstimatedSize}, #{smsEstimatedSize}, #{adEstimatedSize}, #{edmEstimatedSize}, #{idType}, #{refCode}, #{refName}, #{description}, #{tenantId}, #{creator}, #{createBy}, #{createTime}, #{startTime}, #{endTime}, #{updater}, #{updateBy}, #{updateTime})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.marketing.core.entity.campaign.Crowd" >
+    update TD_MKT_CROWD
+       set `crowd_type` = #{crowdType},
+           `source` = #{source},
+           `parent_id` = #{parentId},
+           `ref_id` = #{refId},
+           `attachment_id` = #{attachmentId},
+           `last_update_time` = #{lastUpdateTime},
+           `status` = #{status},
+           `calc_status` = #{calcStatus},
+           `last_version` = #{lastVersion},
+           `estimated_size` = #{estimatedSize},
+           `push_estimated_size` = #{pushEstimatedSize},
+           `sms_estimated_size` = #{smsEstimatedSize},
+           `ad_estimated_size` = #{adEstimatedSize},
+           `edm_estimated_size` = #{edmEstimatedSize},
+           `id_type` = #{idType},
+           `ref_code` = #{refCode},
+           `ref_name` = #{refName},
+           `description` = #{description},
+           `tenant_id` = #{tenantId},
+           `creator` = #{creator},
+           `create_by` = #{createBy},
+           `create_time` = #{createTime},
+           `start_time` = #{startTime},
+           `end_time` = #{endTime},
+           `updater` = #{updater},
+           `update_by` = #{updateBy},
+           `update_time` = #{updateTime}
+     where `id` = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.marketing.core.entity.campaign.Crowd" >
+    update TD_MKT_CROWD
+    <set >
+      <if test="crowdType != null" >
+        `crowd_type` = #{crowdType},
+      </if>
+      <if test="source != null" >
+        `source` = #{source},
+      </if>
+      <if test="parentId != null" >
+        `parent_id` = #{parentId},
+      </if>
+      <if test="refId != null" >
+        `ref_id` = #{refId},
+      </if>
+      <if test="attachmentId != null" >
+        `attachment_id` = #{attachmentId},
+      </if>
+      <if test="lastUpdateTime != null" >
+        `last_update_time` = #{lastUpdateTime},
+      </if>
+      <if test="status != null" >
+        `status` = #{status},
+      </if>
+      <if test="calcStatus != null" >
+        `calc_status` = #{calcStatus},
+      </if>
+      <if test="lastVersion != null" >
+        `last_version` = #{lastVersion},
+      </if>
+      <if test="estimatedSize != null" >
+        `estimated_size` = #{estimatedSize},
+      </if>
+      <if test="pushEstimatedSize != null" >
+        `push_estimated_size` = #{pushEstimatedSize},
+      </if>
+      <if test="smsEstimatedSize != null" >
+        `sms_estimated_size` = #{smsEstimatedSize},
+      </if>
+      <if test="adEstimatedSize != null" >
+        `ad_estimated_size` = #{adEstimatedSize},
+      </if>
+      <if test="edmEstimatedSize != null" >
+        `edm_estimated_size` = #{edmEstimatedSize},
+      </if>
+      <if test="idType != null" >
+        `id_type` = #{idType},
+      </if>
+      <if test="refCode != null" >
+        `ref_code` = #{refCode},
+      </if>
+      <if test="refName != null" >
+        `ref_name` = #{refName},
+      </if>
+      <if test="description != null" >
+        `description` = #{description},
+      </if>
+      <if test="tenantId != null" >
+        `tenant_id` = #{tenantId},
+      </if>
+      <if test="creator != null" >
+        `creator` = #{creator},
+      </if>
+      <if test="createBy != null" >
+        `create_by` = #{createBy},
+      </if>
+      <if test="createTime != null" >
+        `create_time` = #{createTime},
+      </if>
+      <if test="startTime != null" >
+        `start_time` = #{startTime},
+      </if>
+      <if test="endTime != null" >
+        `end_time` = #{endTime},
+      </if>
+      <if test="updater != null" >
+        `updater` = #{updater},
+      </if>
+      <if test="updateBy != null" >
+        `update_by` = #{updateBy},
+      </if>
+      <if test="updateTime != null" >
+        `update_time` = #{updateTime},
+      </if>
+    </set>
+     where `id` = #{id}
+  </update>
+
+  <!-- 根据id查询 TD_MKT_CROWD -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from TD_MKT_CROWD
+     where `id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TD_MKT_CROWD
+     where `id` = #{value}
+
+  </delete>
+
+  <!-- TD_MKT_CROWD 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select count(1) from TD_MKT_CROWD
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TD_MKT_CROWD列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from TD_MKT_CROWD
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+</mapper>

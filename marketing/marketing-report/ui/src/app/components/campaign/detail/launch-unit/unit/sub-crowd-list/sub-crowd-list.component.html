@@ -1,0 +1,71 @@
+<main>
+    <div class="crowd-list-header clearfix">
+        <div *ngIf="!isFinish" class="l new-build" (click)="newSubCrowd()">
+            <i class="iconfonts icon-new"></i>
+            <span>新建子人群</span>
+        </div>
+        <div class="r search-box">
+            <i class="fa fa-search"></i>
+            <i *ngIf="searchData" class="iconfonts icon-empty1" (click)="delText()"></i>
+            <input type="text" pInputText placeholder="输入关键字进行检索" [(ngModel)]="searchData" (keyup)="search($event)">
+        </div>
+    </div>
+    <div class="crowd-list-body" *ngIf="subCrowdList && subCrowdList.length">
+        <p-dataTable [value]="subCrowdList" [emptyMessage]="message" emptyMessage="暂无数据">
+            <p-column header="所属投放名称">
+                <template let-crowd="rowData" pTemplate="body">
+                    <span *ngIf="crowd.segmentId">{{crowd.refName.substr(0,crowd.refName.lastIndexOf("-"))}}</span>
+                    <span *ngIf="!crowd.segmentId">--</span>                    
+                </template>
+            </p-column>
+            <p-column header="子人群名称">
+                <template let-crowd="rowData" pTemplate="body">
+                    <span *ngIf="crowd.segmentId">{{crowd.refName.substr(crowd.refName.lastIndexOf("-") + 1)}}</span>
+                    <span *ngIf="!crowd.segmentId">{{crowd.refName}}</span>                    
+                </template>
+            </p-column>
+            <p-column header="人群预估规模">
+                <template let-crowd="rowData" pTemplate="body">
+                    <span style="color:#ff7979;" *ngIf="crowd.calcStatus < 0">计算失败</span>
+                    <span *ngIf="crowd.calcStatus == 1">计算中</span>
+                    <!-- | 广告 ：{{crowd.adEstimatedSize}} 短信广告目前没有-->
+                    <span *ngIf="crowd.calcStatus == 2"><b style="color: #5ba0ff;">{{crowd.estimatedSize || 0}} </b>(应用推送 ：{{crowd.pushEstimatedSize || 0}} | 短信通道 ：{{crowd.smsEstimatedSize || 0}} | 邮件通道 ：{{crowd.edmEstimatedSize || 0}})</span>
+                </template>
+            </p-column>
+            <p-column header="操作" [style]="{'width':'150px'}">
+                <template let-data="rowData" let-index="i" pTemplate="body">
+                    <a *ngIf="data.calcStatus == 2" (click)="crowdPortrait(data)" [ngClass]="{'view': true, 'blue': data.calcStatus == 2}" title="查看画像"></a>
+                    <a *ngIf="data.calcStatus != 2" class="view2" title="查看画像"></a>
+                    <a *ngIf="data.calcStatus == 2" (click)="getDownload(data.id)" style="margin: 0 18px;" class="iconfonts icon-down blue" title="人群导出"></a>
+                    <a *ngIf="data.calcStatus != 2" class="iconfonts icon-down" style="margin: 0 18px;" title="人群导出"></a>
+                    <a *ngIf="!isFinish && data.calcStatus == 2 && campaignDetailDataCommunication.userRight === 'marketing_ADMIN'" (click)="createPush(data)" [ngClass]="{'iconfonts icon-new': true, 'blue': data.calcStatus == 2}" title="创建投放"></a>
+                    <a *ngIf="data.calcStatus < 0" class="iconfonts icon-play blue" (click)="recountCrowd(data, i)" title="重新计算"></a>
+                </template>
+            </p-column>
+        </p-dataTable>
+        <!--<div class="page-box">
+            <div class="clearfix page-box-cont">
+                <div class="l total-num">共<span>100</span>条</div>
+                <p-paginator class="l" rows="10" totalRecords="total"></p-paginator>
+                <div class="l go-page">
+                    前往<input type="text">页
+                </div>
+            </div>
+        </div>-->
+        <div>
+            <x-paginator [value]="value" [page]="page" (onPagesChange)="paginate($event)"></x-paginator>
+        </div>
+    </div>
+    <crowd-form *ngIf="showLookalikeCrowdDialog" (hideLookalikeCrowdDialog)="hideLookalikeCrowdDialog($event)" [dialogData]="dialogData" [parentId]="parentId" [showLookalikeCrowdDialog]="showLookalikeCrowdDialog"></crowd-form>
+    <!-- <create-put-event *ngIf="showCreatePutDialog" (hideCreatePutDialog)="hideCreatePutDialog($event)" [crowdId]="createPutCrowdId" [subCrowdVersion]="createPutCrowdVersion" [showCreatePutDialog]="showCreatePutDialog"></create-put-event> -->
+    <p-dialog header="人群导出" [draggable]="false" [resizable]="false" [(visible)]="display" modal="modal" responsive="true" (onAfterHide)="afterDialogHide()">
+        <p-footer>
+            <p>人群导出开始，请稍后到登陆邮箱查收邮件下载附件。</p>
+            <div class="r btn-handel">
+                <button class="cancel" type="text" pButton (click)="cancel()" label="取消"></button>
+                <button class="confirm dis-btn" type="text" pButton (click)="confirm()" label="确定"></button>
+            </div>
+        </p-footer>
+    </p-dialog>
+    <p-confirmDialog width="360" height="200" acceptLabel="确认更新"></p-confirmDialog>
+</main>

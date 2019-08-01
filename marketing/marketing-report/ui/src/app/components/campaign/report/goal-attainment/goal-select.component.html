@@ -1,0 +1,26 @@
+<main>
+    <p-dialog [draggable]="false" [(visible)]="display" [showHeader]="false" modal="modal" [contentStyle]="{'min-height': '310px'}" width="350" height="335px" (onAfterHide)="dismissModel()">
+        <div class="content">
+            <label>人群名称：</label>
+            <p-dropdown [options]="CrowdNameList" [(ngModel)]="selectCrowd" [tabindex]="crowdIndex"></p-dropdown>
+        </div>
+        <div class="content">
+            <label>投放名称：</label>
+            <p-dropdown [options]="PushNameList" [(ngModel)]="selectPush"></p-dropdown>
+        </div>
+        <div class="content-button">
+            <span (click)="selectContrastData()">添加对比</span>
+        </div>
+        <div></div>
+        <div class="select-content">
+            <div *ngFor="let select of selectList;let i = index;" class="tag">
+                <span class="compare-name" [title]="select.label">{{select.label}}</span>
+                <a (click)="deleteSelectContrast(i)"><i class="fa fa-times"></i></a>
+            </div>
+        </div>
+        <div class="select-footer">
+            <button pButton type="button" class="ui-button-info" (click)="dismissModel()" label="确定"></button>
+            <button pButton type="button" class="ui-button-secondary" (click)="dismissModel()" label="取消"></button>
+        </div>
+    </p-dialog>
+</main>

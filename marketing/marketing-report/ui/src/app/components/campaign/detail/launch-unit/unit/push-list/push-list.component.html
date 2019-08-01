@@ -1,0 +1,155 @@
+<main>
+    <div class="push-data-header">
+        <div *ngIf="((!pushList.length && !campaignDetailDataCommunication.isFinish) && unitDataCommunicationService.isCreatePush || (unitDataCommunicationService.isSceneCrowd && unitDataCommunicationService.calcStatus == 2 && !pushList.length && !campaignDetailDataCommunication.isFinish)) && campaignDetailDataCommunication.userRight === 'marketing_ADMIN'"
+            class="put-btn-box clearfix">
+            <div class="l put-btn" (click)="showCreatePut()">+</div>
+            <p class="l">点击创建第一个投放</p>
+        </div>
+        <!-- <create-put-event *ngIf="showCreatePutDialog" (hideCreatePutDialog)="hideCreatePutDialog()" [crowdId]="crowdId" [showCreatePutDialog]="showCreatePutDialog"></create-put-event> -->
+    </div>
+    <div class="push-data-body" *ngIf="pushList.length">
+        <p-dataTable [value]="pushList" [emptyMessage]="message" emptyMessage="暂无数据">
+            <p-column header="投放方式">
+                <!--1草稿2等待开始3进行中4暂停5循环中6已结束7失败-->
+                <template let-push="rowData" let-index="rowIndex" pTemplate="body">
+                    <!--<div class="mode-push" [ngClass]="{grey: push.status==1,blue:push.status==2,yellow:push.status==4,green:push.status==3||push.status==5||push.status==6,red:push.status==7}" >
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                        <div *ngIf="(!campaignDetailDataCommunication.isFinish || index != (pushList.length - 1)) && (!unitDataCommunicationService.isSceneCrowd || (pushList.length !== 1) && index != (pushList.length - 1))" class="bottom-line line"></div>
+                    </div>-->
+                    <div *ngIf="push.channelType == 1" class="mode-push" [ngClass]="{grey: push.status==1,blue:push.status==2,yellow:push.status==4,green:push.status==3||push.status==5||push.status==6,red:push.status==7}">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                        <div *ngIf="(!campaignDetailDataCommunication.isFinish || index != (pushList.length - 1)) && (!unitDataCommunicationService.isSceneCrowd || (pushList.length !== 1)) && (unitDataCommunicationService.isCreatePush || index != (pushList.length - 1))" class="bottom-line line"></div>
+                    </div>
+                    <div *ngIf="push.channelType == 2 || push.channelType == null" class="mode-msg" [ngClass]="{grey: push.status==1,blue:push.status==2,yellow:push.status==4,green:push.status==3||push.status==5||push.status==6,red:push.status==7}">
+                        <i class="fa fa-commenting" aria-hidden="true"></i>
+                        <div *ngIf="(!campaignDetailDataCommunication.isFinish || index != (pushList.length - 1)) && (!unitDataCommunicationService.isSceneCrowd || (pushList.length !== 1)) && (unitDataCommunicationService.isCreatePush || index != (pushList.length - 1))" class="bottom-line line"></div>
+                    </div>
+                    <div *ngIf="push.channelType == 3" class="mode-msg" [ngClass]="{grey: push.status==1,blue:push.status==2,yellow:push.status==4,green:push.status==3||push.status==5||push.status==6,red:push.status==7}">
+                        <i class="fa fa-envelope " aria-hidden="true"></i>
+                        <!--  || (unitDataCommunicationService.isSceneCrowd && index != (pushList.length - 1)) -->
+                        <div *ngIf="(!campaignDetailDataCommunication.isFinish || index != (pushList.length - 1)) && (!unitDataCommunicationService.isSceneCrowd || (pushList.length !== 1)) && (unitDataCommunicationService.isCreatePush || index != (pushList.length - 1))" class="bottom-line line"></div>
+                    </div>
+                    <!--<div *ngIf="push==3" class="mode-ad">
+                        <span class="advertisement-logo">AD</span>
+                    </div>-->
+                </template>
+            </p-column>
+            <p-column header="投放时间">
+                <template let-push="rowData" pTemplate="body">
+                    <p [title]="push | formatPromotionData" class="name">{{push | formatPromotionData}}</p>
+                </template>
+            </p-column>
+            <p-column [style]="{'width':'22%'}" field="name" header="投放名称">
+                <template let-data="rowData" pTemplate="body">
+                    <p class="name" [title]="data.name">{{data.name}}</p>
+                </template>
+            </p-column>
+            <p-column field="targetCount" header="目标用户数">
+                <template let-data="rowData" pTemplate="body">
+                    <p *ngIf="data.subCrowdName">{{data.targetCount | formatData}}</p>
+                    <p *ngIf="!data.subCrowdName">{{estimatedSizeMap[data.channelType] | formatData}}</p>
+                </template>
+            </p-column>
+            <p-column [style]="{'width':'22%'}" field="subCrowdName" header="子人群引用">
+                <template let-push="rowData" pTemplate="body">
+                    <p class="name" [title]="push.subCrowdName ? push.subCrowdName :'无'">{{push.subCrowdName ? push.subCrowdName :"无"}}</p>
+                </template>
+            </p-column>
+            <!--等待开始：蓝色 进行中：绿色 已结束；绿色 循环中：绿色 已暂停：黄色 草稿：灰色 失败：红色-->
+            <p-column field="status" header="状态">
+                <template let-push="rowData" let-i="rowIndex" pTemplate="body">
+                    <span *ngIf="push.status==1">
+                        <i class="fa fa-circle circle" aria-hidden="true" style="color: #ccc;"></i>草稿     
+                    </span>
+                    <span *ngIf="push.status==2">
+                        <i class="fa fa-circle circle" aria-hidden="true" style="color: #5ba0ff;"></i>等待开始
+                    </span>
+                    <span *ngIf="push.status==3">
+                        <i class="fa fa-circle circle" aria-hidden="true" style="color: #5dc3b7;"></i>进行中
+                    </span>
+                    <span *ngIf="push.status==4">
+                        <i class="fa fa-circle circle" aria-hidden="true" style="color: #f90;"></i>已暂停
+                        <a class="iconfonts icon-play play" (click)="startOrPausePush(push, i, 5)" aria-hidden="true"></a>
+                    </span>
+                    <span *ngIf="push.status==5">
+                        <i class="fa fa-circle circle" aria-hidden="true" style="color: #5dc3b7;"></i>循环中
+                        <a class="iconfonts icon-suspended play" (click)="startOrPausePush(push, i, 4)" aria-hidden="true"></a>
+                    </span>
+                    <span *ngIf="push.status==6">
+                        <i class="fa fa-circle circle" aria-hidden="true" style="color: #5dc3b7;"></i>已结束
+                        <!--<a class="iconfonts icon-suspended play" (click)="startOrPausePush(push, i, 4)" aria-hidden="true"></a>-->
+                    </span>
+                    <span *ngIf="push.status==7">
+                        <i class="fa fa-circle circle" aria-hidden="true" style="color: #ff7979;"></i>投放失败
+                    </span>
+                </template>
+            </p-column>
+            <p-column header="操作" [style]="{'width':'150px'}">
+                <template let-push="rowData" let-index="rowIndex" pTemplate="body">
+                    <!--状态1草稿2等待开始3进行中4已暂停5循环中6已结束-->
+                    <!--等待开始状态的投放操作按钮应为“编辑”和“删除”，投放中、循环中、已暂停和已结束的操作按钮应为“查看详情”和“查看报告”-->
+                    <div class="last-td" *ngIf="push.status == 1">
+                        <!--编辑-->
+                        <a *ngIf="!campaignDetailDataCommunication.isFinish && campaignDetailDataCommunication.userRight === 'marketing_ADMIN'" title="编辑" (click)="detailPush(push, 1)" class="iconfonts icon-editor1"></a>
+                        <!--查看-->
+                        <a *ngIf="campaignDetailDataCommunication.userRight !== 'marketing_ADMIN'" (click)="detailPush(push, 0)" class="iconfonts icon-view" title="查看"></a>
+                        <!--删除-->
+                        <a *ngIf="!campaignDetailDataCommunication.isFinish && campaignDetailDataCommunication.userRight === 'marketing_ADMIN'" title="删除" (click)="del(push, index)" class="iconfonts icon-delete2"></a>
+                    </div>
+                    <div class="last-td" *ngIf="push.status == 2">
+                        <!--编辑-->
+                        <a *ngIf="!campaignDetailDataCommunication.isFinish && campaignDetailDataCommunication.userRight === 'marketing_ADMIN'" title="编辑" (click)="detailPush(push, 1)" class="iconfonts icon-editor1"></a>
+                        <!--报告-->
+                        <!--<a (click)="crowdReport(push, index)" class="iconfonts icon-report" title="报告"></a>-->
+                        <!-- 查看 -->
+                        <a *ngIf="campaignDetailDataCommunication.userRight !== 'marketing_ADMIN'" (click)="detailPush(push, 0)" class="iconfonts icon-view" title="查看"></a>
+                        <!--删除-->
+                        <a *ngIf="!campaignDetailDataCommunication.isFinish && campaignDetailDataCommunication.userRight === 'marketing_ADMIN'" title="删除" (click)="del(push, index)" class="iconfonts icon-delete2"></a>
+                    </div>
+                    <div class="last-td" *ngIf="push.status == 3">
+                        <!--查看-->
+                        <a (click)="detailPush(push, 0)" class="iconfonts icon-view" title="查看"></a>
+                        <!--报告-->
+                        <a (click)="crowdReport(push, index)" class="report" title="报告"></a>
+                        <!--删除-->
+                        <!--<a *ngIf="!campaignDetailDataCommunication.isFinish" title="删除" (click)="del(push, index)" class="iconfonts icon-delete2"></a>-->
+                    </div>
+                    <div class="last-td" *ngIf="push.status == 4">
+                        <!--查看-->
+                        <a (click)="detailPush(push, 0)" class="iconfonts icon-view" title="查看"></a>
+                        <!--报告-->
+                        <a (click)="crowdReport(push, index)" class="report" title="报告"></a>
+                        <!--删除-->
+                        <!--<a *ngIf="!campaignDetailDataCommunication.isFinish" title="删除" (click)="del(push, index)" class="iconfonts icon-delete2"></a>-->
+                    </div>
+                    <div class="last-td" *ngIf="push.status == 5">
+                       <!--查看-->
+                        <a (click)="detailPush(push, 0)" class="iconfonts icon-view" title="查看"></a>
+                        <!--报告-->
+                        <a (click)="crowdReport(push, index)" class="report" title="报告"></a>
+                        <!--删除-->
+                        <!--<a *ngIf="!campaignDetailDataCommunication.isFinish" title="删除" (click)="del(push, index)" class="iconfonts icon-delete2"></a>-->
+                    </div>
+                    <div class="last-td" *ngIf="push.status == 6">
+                        <!--查看-->
+                        <a (click)="detailPush(push, 0)" class="iconfonts icon-view" title="查看"></a>
+                        <!--报告-->
+                        <a (click)="crowdReport(push, index)" class="report" title="报告"></a>
+                        <!--删除-->
+                        <!--<a *ngIf="!campaignDetailDataCommunication.isFinish" title="删除" (click)="del(push, index)" class="iconfonts icon-delete2"></a>-->
+                    </div>
+                    <div class="last-td" *ngIf="push.status == 7">
+                        <!--查看-->
+                        <a (click)="detailPush(push, 0)" class="iconfonts icon-view" title="查看"></a>
+                        <!--报告-->
+                        <!--<a (click)="crowdReport(push, index)" class="iconfonts icon-report" title="报告"></a>-->
+                        <!--删除-->
+                        <!--<a *ngIf="!campaignDetailDataCommunication.isFinish" title="删除" (click)="del(push, index)" class="iconfonts icon-delete2"></a>-->
+                    </div>
+                </template>
+            </p-column>
+        </p-dataTable>
+        <div *ngIf="!campaignDetailDataCommunication.isFinish && unitDataCommunicationService.isCreatePush && !unitDataCommunicationService.isSceneCrowd && campaignDetailDataCommunication.userRight === 'marketing_ADMIN'" class="new-add-btn" (click)="showCreatePut()">+</div>
+    </div>
+    <p-confirmDialog width="360" height="200" acceptLabel="确定删除"></p-confirmDialog>
+</main>

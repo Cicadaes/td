@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.AppIosChannelConfigDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.marketing.core.entity.campaign.AppIosChannelConfig" >
+    <id column="id" property="id" />
+    <result column="app_config_id" property="appConfigId" />
+    <result column="prod_file_name" property="prodFileName" />
+    <result column="prod_expiry_date" property="prodExpiryDate" />
+    <result column="prod_pem" property="prodPem" />
+    <result column="dev_file_name" property="devFileName" />
+    <result column="dev_expiry_date" property="devExpiryDate" />
+    <result column="dev_pem" property="devPem" />
+    <result column="tenant_id" property="tenantId" />
+    <result column="creator" property="creator" />
+    <result column="create_by" property="createBy" />
+    <result column="create_time" property="createTime" />
+    <result column="updater" property="updater" />
+    <result column="update_by" property="updateBy" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+
+  <!-- TD_MKT_APP_IOS_CHANNEL_CONFIG table all fields -->
+  <sql id="Base_Column_List" >
+     `id`, `app_config_id`, `prod_file_name`, `prod_expiry_date`, `prod_pem`, `dev_file_name`, `dev_expiry_date`, `dev_pem`, `tenant_id`, `creator`, `create_by`, `create_time`, `updater`, `update_by`, `update_time`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and `id` ${idOperator} #{id}
+      </if>
+      <if test="appConfigId != null" >
+        and `app_config_id` ${appConfigIdOperator} #{appConfigId}
+      </if>
+      <if test="prodFileName != null" >
+        and `prod_file_name` ${prodFileNameOperator} #{prodFileName}
+      </if>
+      <if test="prodExpiryDate != null" >
+        and `prod_expiry_date` ${prodExpiryDateOperator} #{prodExpiryDate}
+      </if>
+      <if test="prodExpiryDate1 != null" >
+        and `prod_expiry_date` &gt;= #{prodExpiryDate1}
+      </if>
+      <if test="prodExpiryDate2 != null" >
+        and `prod_expiry_date` &lt;= #{prodExpiryDate2}
+      </if>
+      <if test="prodPem != null" >
+        and `prod_pem` ${prodPemOperator} #{prodPem}
+      </if>
+      <if test="devFileName != null" >
+        and `dev_file_name` ${devFileNameOperator} #{devFileName}
+      </if>
+      <if test="devExpiryDate != null" >
+        and `dev_expiry_date` ${devExpiryDateOperator} #{devExpiryDate}
+      </if>
+      <if test="devExpiryDate1 != null" >
+        and `dev_expiry_date` &gt;= #{devExpiryDate1}
+      </if>
+      <if test="devExpiryDate2 != null" >
+        and `dev_expiry_date` &lt;= #{devExpiryDate2}
+      </if>
+      <if test="devPem != null" >
+        and `dev_pem` ${devPemOperator} #{devPem}
+      </if>
+      <if test="tenantId != null" >
+        and `tenant_id` ${tenantIdOperator} #{tenantId}
+      </if>
+      <if test="creator != null" >
+        and `creator` ${creatorOperator} #{creator}
+      </if>
+      <if test="createBy != null" >
+        and `create_by` ${createByOperator} #{createBy}
+      </if>
+      <if test="createTime != null" >
+        and `create_time` ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and `create_time` &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and `create_time` &lt;= #{createTime2}
+      </if>
+      <if test="updater != null" >
+        and `updater` ${updaterOperator} #{updater}
+      </if>
+      <if test="updateBy != null" >
+        and `update_by` ${updateByOperator} #{updateBy}
+      </if>
+      <if test="updateTime != null" >
+        and `update_time` ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and `update_time` &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and `update_time` &lt;= #{updateTime2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.marketing.core.entity.campaign.AppIosChannelConfig" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_MKT_APP_IOS_CHANNEL_CONFIG(<include refid="Base_Column_List" />)
+    values (#{id}, #{appConfigId}, #{prodFileName}, #{prodExpiryDate}, #{prodPem}, #{devFileName}, #{devExpiryDate}, #{devPem}, #{tenantId}, #{creator}, #{createBy}, #{createTime}, #{updater}, #{updateBy}, #{updateTime})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.marketing.core.entity.campaign.AppIosChannelConfig" >
+    update TD_MKT_APP_IOS_CHANNEL_CONFIG
+       set `app_config_id` = #{appConfigId},
+           `prod_file_name` = #{prodFileName},
+           `prod_expiry_date` = #{prodExpiryDate},
+           `prod_pem` = #{prodPem},
+           `dev_file_name` = #{devFileName},
+           `dev_expiry_date` = #{devExpiryDate},
+           `dev_pem` = #{devPem},
+           `tenant_id` = #{tenantId},
+           `creator` = #{creator},
+           `create_by` = #{createBy},
+           `create_time` = #{createTime},
+           `updater` = #{updater},
+           `update_by` = #{updateBy},
+           `update_time` = #{updateTime}
+     where `id` = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.marketing.core.entity.campaign.AppIosChannelConfig" >
+    update TD_MKT_APP_IOS_CHANNEL_CONFIG
+    <set >
+      <if test="appConfigId != null" >
+        `app_config_id` = #{appConfigId},
+      </if>
+      <if test="prodFileName != null" >
+        `prod_file_name` = #{prodFileName},
+      </if>
+      <if test="prodExpiryDate != null" >
+        `prod_expiry_date` = #{prodExpiryDate},
+      </if>
+      <if test="prodPem != null" >
+        `prod_pem` = #{prodPem},
+      </if>
+      <if test="devFileName != null" >
+        `dev_file_name` = #{devFileName},
+      </if>
+      <if test="devExpiryDate != null" >
+        `dev_expiry_date` = #{devExpiryDate},
+      </if>
+      <if test="devPem != null" >
+        `dev_pem` = #{devPem},
+      </if>
+      <if test="tenantId != null" >
+        `tenant_id` = #{tenantId},
+      </if>
+      <if test="creator != null" >
+        `creator` = #{creator},
+      </if>
+      <if test="createBy != null" >
+        `create_by` = #{createBy},
+      </if>
+      <if test="createTime != null" >
+        `create_time` = #{createTime},
+      </if>
+      <if test="updater != null" >
+        `updater` = #{updater},
+      </if>
+      <if test="updateBy != null" >
+        `update_by` = #{updateBy},
+      </if>
+      <if test="updateTime != null" >
+        `update_time` = #{updateTime},
+      </if>
+    </set>
+     where `id` = #{id}
+  </update>
+
+  <!-- 根据id查询 TD_MKT_APP_IOS_CHANNEL_CONFIG -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from TD_MKT_APP_IOS_CHANNEL_CONFIG
+     where `id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TD_MKT_APP_IOS_CHANNEL_CONFIG
+     where `id` = #{value}
+
+  </delete>
+
+  <!-- TD_MKT_APP_IOS_CHANNEL_CONFIG 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select count(1) from TD_MKT_APP_IOS_CHANNEL_CONFIG
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TD_MKT_APP_IOS_CHANNEL_CONFIG列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from TD_MKT_APP_IOS_CHANNEL_CONFIG
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+</mapper>

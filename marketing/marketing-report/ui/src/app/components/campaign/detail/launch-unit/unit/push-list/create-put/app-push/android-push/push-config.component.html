@@ -1,0 +1,70 @@
+<main>
+    <p-dialog header="Android推送配置" [(visible)]="show" [draggable]="false" responsive="true" (onAfterHide)="afterHide()">
+        <div *ngIf="show">
+            <h3>除了提供内建的TD推送外，TalkingData还支持使用 <strong>第三方推送平台</strong> 发送消息，只需简单配置</h3>
+            <div class="android-td-push">
+                <p>TalkingData</p>
+                <span>TD推送</span>
+            </div>
+            <div class="android-content">
+                <table style = "position : relative;" *ngFor="let pushConfig of pushConfigList; let i = index;">
+                    <tr>
+                        <td>推送平台</td>
+                        <td *ngIf="pushConfig.channel==3">appID</td>
+                        <td>appKey</td>
+                        <td>MasterSecret</td>
+                        <td></td>
+                    </tr>
+                    <tr *ngIf="pushConfig.channel==4">
+                        <td>
+                            <p-dropdown [style]="{'width':'85px','height':'30px'}" [options]="pushPlatform[i]" [(ngModel)]="pushConfig.channel"></p-dropdown>
+                            <!--<p-dropdown [style]="{'width':'85px','height':'30px'}" [disabled]="true" [options]="pushPlatform" [(ngModel)]="pushConfig.channel"></p-dropdown>-->
+                        </td>
+                        <td>
+                            <input class="appkey" type="text" pInputText [(ngModel)]="pushConfig.thirdKey">
+                        </td>
+                        <td>
+                            <input class="secret" type="text" pInputText [(ngModel)]="pushConfig.thirdSecret">
+                        </td>
+                        <td>
+                            <!--<button pButton type="button" (click)="update(i)" label="更新"></button>-->
+                            <div class="btn-handel">
+                                <button class="confirm" type="text" (click)="bind(i)" pButton label="绑定"></button>
+                                <button class="cancel" type="text" (click)="del(i)" pButton label="删除"></button>
+                                <i class="fa fa-check-circle-o" aria-hidden="true" *ngIf="pushConfig.editStatus==1"></i>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr *ngIf="pushConfig.channel==3">
+                        <td>
+                            <p-dropdown [style]="{'width':'85px','height':'30px'}" [options]="pushPlatform[i]" [(ngModel)]="pushConfig.channel"></p-dropdown>
+                            <!--<p-dropdown [style]="{'width':'85px','height':'30px'}" [disabled]="true" [options]="pushPlatform" [(ngModel)]="pushConfig.channel"></p-dropdown>-->
+                        </td>
+                        <td>
+                            <input class="appkey" type="text" pInputText [(ngModel)]="pushConfig.thirdApp">
+                        </td>
+                        <td>
+                            <input class="secret" type="text" pInputText [(ngModel)]="pushConfig.thirdKey">
+                        </td>
+                        <td>
+                            <input class="secret" type="text" pInputText [(ngModel)]="pushConfig.thirdSecret">
+                        </td>
+                        <td style="padding-right:0;">
+                            <!--<button pButton type="button" (click)="update(i)" label="更新"></button>-->
+                            <div class="btn-handel">
+                                <button class="confirm" (click)="bind(i)" type="text" pButton label="绑定"></button>
+                                <button class="cancel" type="text" (click)="del(i)" pButton label="删除"></button>
+                                <i class="fa fa-check-circle-o" aria-hidden="true" *ngIf="pushConfig.editStatus==1"></i>
+                            </div>
+
+                        </td>
+                    </tr>
+                    <p style = "position : absolute; left : 0; bottom : -5px;" *ngIf="isError[i]" class="warn-tip"><i class="iconfonts icon-empty1"></i>{{isError[i]}}。</p>
+                </table>
+            </div>
+            <div class="button" *ngIf="pushConfigList.length < 2">
+                <p (click)="addConf()"><i class="iconfonts icon-new"></i><span>添加新推送配置</span></p>
+            </div>
+        </div>
+    </p-dialog>
+</main>

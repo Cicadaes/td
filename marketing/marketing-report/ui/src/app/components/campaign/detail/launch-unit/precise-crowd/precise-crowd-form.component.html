@@ -1,0 +1,122 @@
+<main class="acc-people">
+    <p-dialog header="精细化人群" [(visible)]="show" [draggable]="false" modal="modal" responsive="true" (onAfterHide)="afterDialogHide()">
+        <div *ngIf="show">
+            <span class="tips"><i>*</i> 投放单元人群不支持二次编辑，请谨慎创建/选择</span>
+            <div class="pricese-crowd-first">
+                <h4 class="pricese-crowd-tit" (click)="showdivfirst()"><b><span [ngClass]="{'show-span': !select2, 'hide-span': select2}"></span></b>已有人群 <span>向选定人群推送消息</span></h4>
+                <div [ngClass]="{'ui-g':'true','show': !select2, 'hide': select2}">
+                    <div class="ui-g-6">
+                        <label class="selcet-crowd-tit"><b>选择人群</b>(请从下方选择一个已创建好的人群)</label>
+                        <div class="content">
+                            <div class="search-box search-box-special">
+                                <i class="fa fa-search" style="font-size: 15px"></i>
+                                <span>|</span>
+                                <i *ngIf="preciseCrowdName" class="iconfonts icon-empty1" (click)="delText()"></i>
+                                <input class="search_input" type="text" [(ngModel)]="preciseCrowdName" (keyup)="change()" pInputText placeholder="请输入人群名称">
+                            </div>
+                            <p-dataTable [value]="crowdList" emptyMessage="暂无数据" selectionMode="single" [(selection)]="crowdInfo">
+                                <p-column>
+                                    <template let-crowd="rowData" pTemplate="body">
+                                        {{crowd.name}}
+                                        <!-- {{crowd.name.split('-')[1] || crowd.name}} -->
+                                    </template>
+                                </p-column>
+                                <p-column>
+                                    <template let-crowd="rowData" pTemplate="body">
+                                        {{crowd.crowdCount}}人
+                                    </template>
+                                </p-column>
+                                <p-footerColumnGroup *ngIf="showLoadMore">
+                                    <p-row>
+                                        <p-column colspan="2">
+                                            <template pTemplate="footer">
+                                                <div style="width:100%" style="text-align:center;">
+                                                    <a (click)="loadMoreCrowd()">点击加载更多</a>
+                                                </div>
+                                            </template>
+                                        </p-column>
+                                    </p-row>
+                                </p-footerColumnGroup>
+                            </p-dataTable>
+                        </div>
+                    </div>
+                    <div class="ui-g-6">
+                        <h3 class="name first-name">人群名称</h3>
+                        <span style="color:#627182;">{{crowdInfo && (crowdInfo.name.split('-')[1] || crowdInfo.name)}}</span>
+                        <h3 class="last-time first-name">最后更新时间</h3>
+                        <span style="color:#627182;">{{crowdInfo && crowdInfo.updateDataTime | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                        <h3 class="estimate first-name">规模</h3>
+                        <span class="estimate-size">{{crowdInfo && crowdInfo.crowdCount}}</span>
+                        <span style="color:#627182;">人</span>
+                        <h3 class="desc first-name">人群描述</h3>
+                        <span style="color:#627182;" *ngIf="crowdInfo" class="desc_content" [innerHtml]="crowdInfo.description || '暂无描述'"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="pricese-crowd-seond">
+                <h4 class="pricese-crowd-tit" (click)="showdiv()"><b><span [ngClass]="{'show-span': select2, 'hide-span': !select2}"></span></b>一方ID上传 <span>支持tdId、phoneNum、IMEI、IDFA、AndroidId、MAC、email七种用户识别ID</span></h4>
+                <div [ngClass]="{'id-update-box':'true','show': select2, 'hide': !select2}">
+                    <div>
+                        <h3>人群名称</h3>
+                        <div class="content">
+                            <input [(ngModel)]="csvCrowdName" type="text" pInputText (keyup)="changeName()" placeholder="请输入人群名称">
+                        </div>
+                        <p *ngIf="isErr" class="warn-tip"><i class="fa fa-exclamation-circle"></i>{{errMsg}}</p>
+                    </div>
+                    <div class="file-update">
+                        <div class="upload-box clearfix">
+                            <div class="l upload-area">
+                                <div class="upload-show" [ngClass]="{'change-bg' : changeBg}">
+                                    <i class="fa fa-upload"></i>
+                                    <span>上传文件</span>
+                                </div>
+                                <input id="uploadCsv" class="upload-input" type="file" accept=".csv" (change)="selectFile($event)">
+                            </div>
+                            <p *ngIf="!csvFileName || isFileErr" class="l download"><a href="/marketing/public/template/上传模板.zip">模板下载</a><i class="fa fa-exclamation-circle"></i>请上传CSV格式文件，文件大小不能超过2M</p>
+                            <div *ngIf="csvFileName && !isFileErr" class="l upload-file-name">
+                                <span>{{csvFileName}}</span>
+                                <span class="clear-file" (click)="clearFile()">清除</span>
+                            </div>
+                        </div>
+                        <p *ngIf="noFile" class="warn-tip"><i class="fa fa-exclamation-circle"></i>请先上传文件。</p>
+                        <p class="preview">预览效果
+                            <span *ngIf="csvFileName && !isFileErr">文件中共包含 ：{{csvData['tdId'] || 0}}个TDID | {{csvData['phoneNum'] || 0}}个手机号 | {{csvData['IMEI'] || 0}}个IMEI | {{csvData['IDFA'] || 0}}个IDFA | {{csvData['AndroidId'] || 0}}个AndroidId | {{csvData['MAC'] || 0}}个MAC | {{csvData['email'] || 0}}个email</span>
+                            <span style="color: #ff6e6b" *ngIf="isFileErr && !noFile">{{isFileErrMsg}}</span>
+                        </p>
+                        <div class="tabel default" *ngIf="isFileErr">
+                            <span>因上传文件存在异常值无法正常显示...</span>
+                        </div>
+                        <div class="tabel default" *ngIf="!isFileErr && tableTitle.length===0">
+                            <span>文件...</span>
+                        </div>
+                        <div class="tabel" *ngIf="!isFileErr && tableTitle.length!==0">
+                            <table>
+                                <tr class="title">
+                                    <th [title]="i" *ngFor="let i of tableTitle">{{i}}</th>
+                                </tr>
+                                <tr *ngFor="let j of tableList">
+                                    <td [title]="j[i]" *ngFor="let i of tableTitle">{{j[i]}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="previewVariable" *ngIf="!isFileErr && quotes && quotes.length!==0">
+                            <p>消息体可引用变量</p>
+                            <ul class="json-list clearfix">
+                                <li *ngFor="let i of quotes">
+                                    <i class="triangle"></i>
+                                    <!--<i class="radius"></i>
+                                    <i class="json-add"></i>-->
+                                    <span (click)="jsonInsert('{greet}')">{{'+{$' + i + '}'}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="r btn-handel">
+                <button class="cancel" pButton type="text" (click)="cancel()" label="取消"></button>
+                <button [disabled]="isDisabled" class="confirm" pButton type="text" (click)="save()" label="确定"></button>
+            </div>
+        </div>
+    </p-dialog>
+</main>

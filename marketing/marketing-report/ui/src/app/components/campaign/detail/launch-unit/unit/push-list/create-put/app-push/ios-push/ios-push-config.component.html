@@ -1,0 +1,128 @@
+<main>
+    <p-dialog header="IOS推送配置" [(visible)]="show" [draggable]="false" responsive="true" (onAfterHide)="afterHide()">
+        <div *ngIf="show">
+            <h3>申请使用苹果官方推送服务 <strong>APNS</strong>，将获得的推送服务证书配置在下方</h3>
+            <p-growl [value]="msgs" life="3000"></p-growl>
+            <div class="ios-content">
+                <ul class="ios-content-list1 clearfix" *ngIf="segmentCommunicationService.appConf[0] && segmentCommunicationService.appConf[0].devExpiryDate && !editDevStatus">
+                    <li class="l clearfix">
+                        <p class="l book">
+                            IOS 测试证书
+                        </p>
+                        <i class="fa fa-question-circle question-tip-box l">
+							<div class="question-tip">
+								<em></em>
+								推送测试服务器使用的证书，通常用于与正式系统隔离来做推送测试
+							</div>
+						</i>
+                        <input class="text-input l" type="text" readonly="readonly" [(ngModel)]="segmentCommunicationService.appConf[0].devFilename" />
+                    </li>
+                    <li class="l clearfix">
+                        <button style="margin-right:10px;background: #5ba0ff;" class="confirm" type="text" pButton (click)="editDevStatus = true" label="更新"></button>
+                    </li>
+                    <li class="l clearfix">
+                        <p class="l book">失效时间：{{segmentCommunicationService.appConf[0].devExpiryDate}}</p>
+                    </li>
+                    <li class="r clearfix">
+                        <div class="r fa-box clearfix">
+                            <i class="l iconfonts icon-yes" *ngIf="segmentCommunicationService.appConf[0].devExpiryDate && !devIsExpiration"></i>
+                            <i class="l iconfonts icon-prompt2" *ngIf="segmentCommunicationService.appConf[0].devExpiryDate && devIsExpiration"></i>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="ios-content-list1 clearfix" *ngIf="!segmentCommunicationService.appConf[0] || null == segmentCommunicationService.appConf[0].devExpiryDate || editDevStatus">
+                    <li class="l clearfix">
+                        <p class="l book">
+                            IOS 测试证书
+                        </p>
+                        <i class="fa fa-question-circle question-tip-box l">
+							<div class="question-tip">
+								<em></em>
+								推送测试服务器使用的证书，通常用于与正式系统隔离来做推送测试
+							</div>
+						</i>
+                        <div class="upload-file-box l">
+                            <!--<input class="upload-file" type="file" style="background-color: transparent;" (change)="selectedTestFile($event)">-->
+                            <input class="text text-input" type="text" readonly="readonly" placeholder="请使用.P12格式证书…" [(ngModel)]="segmentCommunicationService.appConf[0].devFilename" />
+                        </div>
+                    </li>
+                    <li class="l clearfix" style="margin-right:10px;">
+                        <div class="upload-file-box l" style="width:54px;">
+                            <input class="upload-file" type="file" style="background-color: transparent;" (change)="selectedTestFile($event)">
+                            <button class="upload-btn">上传</button>
+                        </div>
+                    </li>
+                    <li class="l clearfix" *ngIf="pwdTestShow">
+                        <p class="l book">证书密码</p>
+                        <input class="no-pass l" type="text" [(ngModel)]="testPwd" placeholder="未设置密码请直接点击确定" />
+                        <div class="btn-handel r">
+                            <button class="confirm" type="text" pButton (click)="upload(0)" label="确定"></button>
+                            <button class="cancel" type="text" pButton (click)="editDevStatus = false" label="取消"></button>
+                        </div>
+                    </li>
+                </ul>
+                <p *ngIf="testTipShow" class="warn-tip file_tip"><i class="iconfonts icon-empty1"></i>证书格式有误，请重新上传</p>
+                <p *ngIf="testPasswordTip" class="warn-tip passwodr_tip"><i class="iconfonts icon-empty1"></i>密码并不能为空</p>
+                <ul class="ios-content-list1 clearfix" *ngIf="segmentCommunicationService.appConf[0] && segmentCommunicationService.appConf[0].prodExpiryDate && !editProStatus">
+                    <li class="l clearfix">
+                        <p class="l book">
+                            IOS 生产证书
+                        </p>
+                        <i class="fa fa-question-circle question-tip-box l">
+							<div class="question-tip tip-prod">
+								<em></em>
+								用在已上线产品的正式推送证书
+							</div>
+						</i>
+                        <input class="text-input" type="text" pInputText readonly [(ngModel)]="segmentCommunicationService.appConf[0].prodFilename">
+                    </li>
+                    <li class="l clearfix">
+                        <button style="margin-right:20px;background: #5ba0ff;" class="confirm" type="text" pButton (click)="editProStatus = true" label="更新"></button>
+                    </li>
+                    <li class="l clearfix">
+                        <p class="l book">失效时间：{{segmentCommunicationService.appConf[0].prodExpiryDate}}</p>
+                    </li>
+                    <li class="r clearfix">
+                        <div class="r fa-box clearfix">
+                            <i class="l iconfonts icon-yes" *ngIf="segmentCommunicationService.appConf[0].prodExpiryDate && !prodIsExpiration"></i>
+                            <i class="l iconfonts icon-prompt2" *ngIf="segmentCommunicationService.appConf[0].prodExpiryDate && !prodIsExpiration"></i>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="ios-content-list1 clearfix" *ngIf="!segmentCommunicationService.appConf[0] || null == segmentCommunicationService.appConf[0].prodExpiryDate || editProStatus">
+                    <li class="l clearfix">
+                        <p class="l book">
+                            IOS 生产证书
+                        </p>
+                        <i class="fa fa-question-circle question-tip-box l">
+							<div class="question-tip tip-prod">
+								<em></em>
+								用在已上线产品的正式推送证书
+							</div>
+						</i>
+                        <div class="upload-file-box l">
+                            <!--<input class="upload-file" type="file" style="background-color: transparent;" (change)="selectedProFile($event)">-->
+                            <input class="text text-input" type="text" readonly="readonly" placeholder="请使用.P12格式证书…" [(ngModel)]="segmentCommunicationService.appConf[0].prodFilename" />
+                        </div>
+                    </li>
+                    <li class="l clearfix" style="margin-right:10px;">
+                        <div class="upload-file-box l" style="width:54px;">
+                            <input class="upload-file" type="file" style="background-color: transparent;" (change)="selectedProFile($event)">
+                            <button class="upload-btn">上传</button>
+                        </div>
+                    </li>
+                    <li class="l clearfix" *ngIf="pwdProShow">
+                        <p class="l book">证书密码</p>
+                        <input class="no-pass" type="text" [(ngModel)]="proPwd" placeholder="未设置密码请直接点击确定" />
+                        <div class="btn-handel r">
+                            <button class="confirm" type="text" pButton (click)="upload(1)" label="确定"></button>
+                            <button class="cancel" type="text" pButton (click)="cancel()" label="取消"></button>
+                        </div>
+                    </li>
+                </ul>
+                <p *ngIf="proTipShow" class="warn-tip file_tip"><i class="iconfonts icon-empty1"></i>证书格式有误，请重新上传</p>
+                <p *ngIf="prodPasswordTip" class="warn-tip passwodr_tip"><i class="iconfonts icon-empty1"></i>密码不能为空</p>
+            </div>
+        </div>
+    </p-dialog>
+</main>

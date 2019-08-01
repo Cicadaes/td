@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.CampaignLaunchUnitDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.marketing.core.entity.campaign.CampaignLaunchUnit" >
+    <id column="id" property="id" />
+    <result column="campaign_id" property="campaignId" />
+    <result column="crowd_id" property="crowdId" />
+    <result column="first_send_time" property="firstSendTime" />
+    <result column="crowd_name" property="crowdName" />
+    <result column="crowd_version" property="crowdVersion" />
+    <result column="crowd_update_time" property="crowdUpdateTime" />
+    <result column="status" property="status" />
+    <result column="estimated_size" property="estimatedSize" />
+    <result column="push_estimated_size" property="pushEstimatedSize" />
+    <result column="sms_estimated_size" property="smsEstimatedSize" />
+    <result column="edm_estimated_size" property="edmEstimatedSize" />
+    <result column="ad_estimated_size" property="adEstimatedSize" />
+    <result column="tenant_id" property="tenantId" />
+    <result column="creator" property="creator" />
+    <result column="create_by" property="createBy" />
+    <result column="create_time" property="createTime" />
+    <result column="updater" property="updater" />
+    <result column="update_by" property="updateBy" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+
+  <!-- TD_MKT_CAMPAIGN_LAUNCH_UNIT table all fields -->
+  <sql id="Base_Column_List" >
+     `id`, `campaign_id`, `crowd_id`, `first_send_time`, `crowd_name`, `crowd_version`, `crowd_update_time`, `status`, `estimated_size`, `push_estimated_size`, `sms_estimated_size`, `edm_estimated_size`, `ad_estimated_size`, `tenant_id`, `creator`, `create_by`, `create_time`, `updater`, `update_by`, `update_time`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and `id` ${idOperator} #{id}
+      </if>
+      <if test="campaignId != null" >
+        and `campaign_id` ${campaignIdOperator} #{campaignId}
+      </if>
+      <if test="crowdId != null" >
+        and `crowd_id` ${crowdIdOperator} #{crowdId}
+      </if>
+      <if test="firstSendTime != null" >
+        and `first_send_time` ${firstSendTimeOperator} #{firstSendTime}
+      </if>
+      <if test="firstSendTime1 != null" >
+        and `first_send_time` &gt;= #{firstSendTime1}
+      </if>
+      <if test="firstSendTime2 != null" >
+        and `first_send_time` &lt;= #{firstSendTime2}
+      </if>
+      <if test="crowdName != null" >
+        and `crowd_name` ${crowdNameOperator} #{crowdName}
+      </if>
+      <if test="crowdVersion != null" >
+        and `crowd_version` ${crowdVersionOperator} #{crowdVersion}
+      </if>
+      <if test="crowdUpdateTime != null" >
+        and `crowd_update_time` ${crowdUpdateTimeOperator} #{crowdUpdateTime}
+      </if>
+      <if test="crowdUpdateTime1 != null" >
+        and `crowd_update_time` &gt;= #{crowdUpdateTime1}
+      </if>
+      <if test="crowdUpdateTime2 != null" >
+        and `crowd_update_time` &lt;= #{crowdUpdateTime2}
+      </if>
+      <if test="status != null" >
+        and `status` ${statusOperator} #{status}
+      </if>
+      <if test="estimatedSize != null" >
+        and `estimated_size` ${estimatedSizeOperator} #{estimatedSize}
+      </if>
+      <if test="pushEstimatedSize != null" >
+        and `push_estimated_size` ${pushEstimatedSizeOperator} #{pushEstimatedSize}
+      </if>
+      <if test="smsEstimatedSize != null" >
+        and `sms_estimated_size` ${smsEstimatedSizeOperator} #{smsEstimatedSize}
+      </if>
+      <if test="edmEstimatedSize != null" >
+        and `edm_estimated_size` ${edmEstimatedSizeOperator} #{edmEstimatedSize}
+      </if>
+      <if test="adEstimatedSize != null" >
+        and `ad_estimated_size` ${adEstimatedSizeOperator} #{adEstimatedSize}
+      </if>
+      <if test="tenantId != null" >
+        and `tenant_id` ${tenantIdOperator} #{tenantId}
+      </if>
+      <if test="creator != null" >
+        and `creator` ${creatorOperator} #{creator}
+      </if>
+      <if test="createBy != null" >
+        and `create_by` ${createByOperator} #{createBy}
+      </if>
+      <if test="createTime != null" >
+        and `create_time` ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and `create_time` &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and `create_time` &lt;= #{createTime2}
+      </if>
+      <if test="updater != null" >
+        and `updater` ${updaterOperator} #{updater}
+      </if>
+      <if test="updateBy != null" >
+        and `update_by` ${updateByOperator} #{updateBy}
+      </if>
+      <if test="updateTime != null" >
+        and `update_time` ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and `update_time` &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and `update_time` &lt;= #{updateTime2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.marketing.core.entity.campaign.CampaignLaunchUnit" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_MKT_CAMPAIGN_LAUNCH_UNIT(<include refid="Base_Column_List" />)
+    values (#{id}, #{campaignId}, #{crowdId}, #{firstSendTime}, #{crowdName}, #{crowdVersion}, #{crowdUpdateTime}, #{status}, #{estimatedSize}, #{pushEstimatedSize}, #{smsEstimatedSize}, #{edmEstimatedSize}, #{adEstimatedSize}, #{tenantId}, #{creator}, #{createBy}, #{createTime}, #{updater}, #{updateBy}, #{updateTime})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.marketing.core.entity.campaign.CampaignLaunchUnit" >
+    update TD_MKT_CAMPAIGN_LAUNCH_UNIT
+       set `campaign_id` = #{campaignId},
+           `crowd_id` = #{crowdId},
+           `first_send_time` = #{firstSendTime},
+           `crowd_name` = #{crowdName},
+           `crowd_version` = #{crowdVersion},
+           `crowd_update_time` = #{crowdUpdateTime},
+           `status` = #{status},
+           `estimated_size` = #{estimatedSize},
+           `push_estimated_size` = #{pushEstimatedSize},
+           `sms_estimated_size` = #{smsEstimatedSize},
+           `edm_estimated_size` = #{edmEstimatedSize},
+           `ad_estimated_size` = #{adEstimatedSize},
+           `tenant_id` = #{tenantId},
+           `creator` = #{creator},
+           `create_by` = #{createBy},
+           `create_time` = #{createTime},
+           `updater` = #{updater},
+           `update_by` = #{updateBy},
+           `update_time` = #{updateTime}
+     where `id` = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.marketing.core.entity.campaign.CampaignLaunchUnit" >
+    update TD_MKT_CAMPAIGN_LAUNCH_UNIT
+    <set >
+      <if test="campaignId != null" >
+        `campaign_id` = #{campaignId},
+      </if>
+      <if test="crowdId != null" >
+        `crowd_id` = #{crowdId},
+      </if>
+      <if test="firstSendTime != null" >
+        `first_send_time` = #{firstSendTime},
+      </if>
+      <if test="crowdName != null" >
+        `crowd_name` = #{crowdName},
+      </if>
+      <if test="crowdVersion != null" >
+        `crowd_version` = #{crowdVersion},
+      </if>
+      <if test="crowdUpdateTime != null" >
+        `crowd_update_time` = #{crowdUpdateTime},
+      </if>
+      <if test="status != null" >
+        `status` = #{status},
+      </if>
+      <if test="estimatedSize != null" >
+        `estimated_size` = #{estimatedSize},
+      </if>
+      <if test="pushEstimatedSize != null" >
+        `push_estimated_size` = #{pushEstimatedSize},
+      </if>
+      <if test="smsEstimatedSize != null" >
+        `sms_estimated_size` = #{smsEstimatedSize},
+      </if>
+      <if test="edmEstimatedSize != null" >
+        `edm_estimated_size` = #{edmEstimatedSize},
+      </if>
+      <if test="adEstimatedSize != null" >
+        `ad_estimated_size` = #{adEstimatedSize},
+      </if>
+      <if test="tenantId != null" >
+        `tenant_id` = #{tenantId},
+      </if>
+      <if test="creator != null" >
+        `creator` = #{creator},
+      </if>
+      <if test="createBy != null" >
+        `create_by` = #{createBy},
+      </if>
+      <if test="createTime != null" >
+        `create_time` = #{createTime},
+      </if>
+      <if test="updater != null" >
+        `updater` = #{updater},
+      </if>
+      <if test="updateBy != null" >
+        `update_by` = #{updateBy},
+      </if>
+      <if test="updateTime != null" >
+        `update_time` = #{updateTime},
+      </if>
+    </set>
+     where `id` = #{id}
+  </update>
+
+  <!-- 根据id查询 TD_MKT_CAMPAIGN_LAUNCH_UNIT -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from TD_MKT_CAMPAIGN_LAUNCH_UNIT
+     where `id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    update TD_MKT_CAMPAIGN_LAUNCH_UNIT set status=-1
+     where `id` = #{value}
+
+  </delete>
+
+  <!-- TD_MKT_CAMPAIGN_LAUNCH_UNIT 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select count(1) from TD_MKT_CAMPAIGN_LAUNCH_UNIT
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TD_MKT_CAMPAIGN_LAUNCH_UNIT列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from TD_MKT_CAMPAIGN_LAUNCH_UNIT
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+</mapper>

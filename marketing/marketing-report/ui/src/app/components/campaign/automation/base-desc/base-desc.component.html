@@ -1,0 +1,20 @@
+<main class="base-desc">
+    <div class="pipe-item clearfix">
+        <label class="item-label title-label l">
+            <p class="required l" *ngIf="textRequired">*</p>
+                {{textTitle || '组件名称'}}
+        </label>
+        <div class="item-input r ">
+            <input class="title" [(ngModel)]="text" type="text" tdLimitInputLength max="26" type="text" placeholder="请输入内容" [disabled]="editFlag">
+        </div>
+    </div>
+    <div class="pipe-item clearfix">
+        <label class="item-label">
+            <p class="required l" *ngIf="descRequired">*</p>
+            {{descTitle || '描述'}}
+        </label>
+        <div class="item-input r">
+            <textarea class="desc" [(ngModel)]="desc" tdLimitInputLength max="80" rows="5" cols="30" placeholder="请输入内容" [disabled]="editFlag"></textarea>
+        </div>
+    </div>
+</main>

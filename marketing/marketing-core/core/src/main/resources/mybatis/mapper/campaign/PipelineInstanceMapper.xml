@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.PipelineInstanceDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.marketing.core.entity.campaign.PipelineInstance" >
+    <id column="id" property="id" />
+    <result column="campaign_id" property="campaignId" />
+    <result column="pipeline_definition_id" property="pipelineDefinitionId" />
+    <result column="version" property="version" />
+    <result column="status" property="status" />
+    <result column="start_time" property="startTime" />
+    <result column="end_time" property="endTime" />
+    <result column="submit_time" property="submitTime" />
+    <result column="tenant_id" property="tenantId" />
+    <result column="creator" property="creator" />
+    <result column="create_by" property="createBy" />
+    <result column="create_time" property="createTime" />
+    <result column="updater" property="updater" />
+    <result column="updateBy" property="updateBy" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+
+  <!-- TD_MKT_PIPELINE_INSTANCE table all fields -->
+  <sql id="Base_Column_List" >
+     `id`, `campaign_id`, `pipeline_definition_id`, `version`, `status`, `start_time`, `end_time`, `submit_time`, `tenant_id`, `creator`, `create_by`, `create_time`, `updater`, `updateBy`, `update_time`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and `id` ${idOperator} #{id}
+      </if>
+      <if test="campaignId != null" >
+        and `campaign_id` ${campaignIdOperator} #{campaignId}
+      </if>
+      <if test="pipelineDefinitionId != null" >
+        and `pipeline_definition_id` ${pipelineDefinitionIdOperator} #{pipelineDefinitionId}
+      </if>
+      <if test="version != null" >
+        and `version` ${versionOperator} #{version}
+      </if>
+      <if test="status != null" >
+        and `status` ${statusOperator} #{status}
+      </if>
+      <if test="startTime != null" >
+        and `start_time` ${startTimeOperator} #{startTime}
+      </if>
+      <if test="startTime1 != null" >
+        and `start_time` &gt;= #{startTime1}
+      </if>
+      <if test="startTime2 != null" >
+        and `start_time` &lt;= #{startTime2}
+      </if>
+      <if test="endTime != null" >
+        and `end_time` ${endTimeOperator} #{endTime}
+      </if>
+      <if test="endTime1 != null" >
+        and `end_time` &gt;= #{endTime1}
+      </if>
+      <if test="endTime2 != null" >
+        and `end_time` &lt;= #{endTime2}
+      </if>
+      <if test="submitTime != null" >
+        and `submit_time` ${submitTimeOperator} #{submitTime}
+      </if>
+      <if test="submitTime1 != null" >
+        and `submit_time` &gt;= #{submitTime1}
+      </if>
+      <if test="submitTime2 != null" >
+        and `submit_time` &lt;= #{submitTime2}
+      </if>
+      <if test="tenantId != null" >
+        and `tenant_id` ${tenantIdOperator} #{tenantId}
+      </if>
+      <if test="creator != null" >
+        and `creator` ${creatorOperator} #{creator}
+      </if>
+      <if test="createBy != null" >
+        and `create_by` ${createByOperator} #{createBy}
+      </if>
+      <if test="createTime != null" >
+        and `create_time` ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and `create_time` &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and `create_time` &lt;= #{createTime2}
+      </if>
+      <if test="updater != null" >
+        and `updater` ${updaterOperator} #{updater}
+      </if>
+      <if test="updateBy != null" >
+        and `updateBy` ${updateByOperator} #{updateBy}
+      </if>
+      <if test="updateTime != null" >
+        and `update_time` ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and `update_time` &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and `update_time` &lt;= #{updateTime2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.marketing.core.entity.campaign.PipelineInstance" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_MKT_PIPELINE_INSTANCE(<include refid="Base_Column_List" />)
+    values (#{id}, #{campaignId}, #{pipelineDefinitionId}, #{version}, #{status}, #{startTime}, #{endTime}, #{submitTime}, #{tenantId}, #{creator}, #{createBy}, #{createTime}, #{updater}, #{updateBy}, #{updateTime})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.marketing.core.entity.campaign.PipelineInstance" >
+    update TD_MKT_PIPELINE_INSTANCE
+       set `campaign_id` = #{campaignId},
+           `pipeline_definition_id` = #{pipelineDefinitionId},
+           `version` = #{version},
+           `status` = #{status},
+           `start_time` = #{startTime},
+           `end_time` = #{endTime},
+           `submit_time` = #{submitTime},
+           `tenant_id` = #{tenantId},
+           `creator` = #{creator},
+           `create_by` = #{createBy},
+           `create_time` = #{createTime},
+           `updater` = #{updater},
+           `updateBy` = #{updateBy},
+           `update_time` = #{updateTime}
+     where `id` = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.marketing.core.entity.campaign.PipelineInstance" >
+    update TD_MKT_PIPELINE_INSTANCE
+    <set >
+      <if test="campaignId != null" >
+        `campaign_id` = #{campaignId},
+      </if>
+      <if test="pipelineDefinitionId != null" >
+        `pipeline_definition_id` = #{pipelineDefinitionId},
+      </if>
+      <if test="version != null" >
+        `version` = #{version},
+      </if>
+      <if test="status != null" >
+        `status` = #{status},
+      </if>
+      <if test="startTime != null" >
+        `start_time` = #{startTime},
+      </if>
+      <if test="endTime != null" >
+        `end_time` = #{endTime},
+      </if>
+      <if test="submitTime != null" >
+        `submit_time` = #{submitTime},
+      </if>
+      <if test="tenantId != null" >
+        `tenant_id` = #{tenantId},
+      </if>
+      <if test="creator != null" >
+        `creator` = #{creator},
+      </if>
+      <if test="createBy != null" >
+        `create_by` = #{createBy},
+      </if>
+      <if test="createTime != null" >
+        `create_time` = #{createTime},
+      </if>
+      <if test="updater != null" >
+        `updater` = #{updater},
+      </if>
+      <if test="updateBy != null" >
+        `updateBy` = #{updateBy},
+      </if>
+      <if test="updateTime != null" >
+        `update_time` = #{updateTime},
+      </if>
+    </set>
+     where `id` = #{id}
+  </update>
+
+  <!-- 根据id查询 TD_MKT_PIPELINE_INSTANCE -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from TD_MKT_PIPELINE_INSTANCE
+     where `id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TD_MKT_PIPELINE_INSTANCE
+     where `id` = #{value}
+
+  </delete>
+
+  <!-- TD_MKT_PIPELINE_INSTANCE 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select count(1) from TD_MKT_PIPELINE_INSTANCE
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TD_MKT_PIPELINE_INSTANCE列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from TD_MKT_PIPELINE_INSTANCE
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+</mapper>

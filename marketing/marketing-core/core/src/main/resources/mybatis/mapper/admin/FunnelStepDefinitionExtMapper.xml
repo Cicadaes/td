@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.admin.FunnelStepDefinitionDao" >
+    <delete id="deleteByCreateTime" parameterType="string">
+        delete from TD_MKT_FUNNEL_STEP_DEFINITION WHERE create_time > #{createTime}
+    </delete>
+
+    <select id="selectByPrimaryKeys" parameterType="List" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM TD_MKT_FUNNEL_STEP_DEFINITION
+    WHERE id IN
+    <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+        #{id}
+    </foreach>
+    </select>
+</mapper>

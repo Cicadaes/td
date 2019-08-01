@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.PipelineDefinitionDao" >
+
+    <resultMap id="pipelineDefinitionDto" type="com.talkingdata.marketing.core.entity.dto.PipelineDefinitionDto" >
+        <id column="id" property="id" />
+        <result column="campaign_id" property="campaignId" />
+        <result column="name" property="name" />
+        <result column="status" property="status" />
+        <result column="version" property="version" />
+        <result column="diagram" property="diagram" />
+        <result column="rule_definition" property="ruleDefinition" />
+        <result column="start_time" property="startTime" />
+        <result column="end_time" property="endTime" />
+        <result column="tenant_id" property="tenantId" />
+        <result column="description" property="description" />
+        <result column="creator" property="creator" />
+        <result column="create_by" property="createBy" />
+        <result column="create_time" property="createTime" />
+        <result column="updater" property="updater" />
+        <result column="update_by" property="updateBy" />
+        <result column="update_time" property="updateTime" />
+        <result column="campaign_name" property="campaignName" />
+    </resultMap>
+
+    <sql id="Base_Simple_Column_List" >
+        `id`, `campaign_id`, `name`, `status`, `version`, `start_time`, `end_time`, `tenant_id`, `description`, `creator`, `create_by`, `create_time`, `updater`, `update_by`, `update_time`
+    </sql>
+
+    <select id="findByCampaignId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select <include refid="Base_Column_List" />
+        from TD_MKT_PIPELINE_DEFINITION
+        where `campaign_id` = #{campaignId}
+    </select>
+
+    <select id="queryByPage" resultMap="pipelineDefinitionDto" parameterType="map">
+        SELECT a.*,b.name as campaign_name FROM `TD_MKT_PIPELINE_DEFINITION` a
+        LEFT JOIN TD_MKT_CAMPAIGN b on a.campaign_id = b.id
+        where 1= 1
+        <if test="campaignId != null" >
+            and a.campaign_id = #{campaignId}
+        </if>
+        <if test="creator != null" >
+            and a.creator like concat('%', #{creator}, '%')
+        </if>
+        <if test="updater != null" >
+            and a.updater like concat('%', #{updater}, '%')
+        </if>
+        <if test="updateTime1!=null">
+            <![CDATA[
+              and a.update_time >= #{updateTime1} AND a.update_time <= #{updateTime2}
+            ]]>
+        </if>
+        <if test="name != null" >
+            AND a.name like concat('%', #{name}, '%')
+        </if>
+        <if test="statusList != null" >
+            AND a.status in
+            <foreach collection="statusList" index="index" item="status" open="(" separator="," close=")">
+                #{status}
+            </foreach>
+        </if>
+        order by a.update_time desc
+        <if test="offset!=null">
+            LIMIT #{offset},#{limit}
+        </if>
+    </select>
+
+    <select id="countByPage" resultType="int" parameterType="map">
+        SELECT count(a.id) FROM `TD_MKT_PIPELINE_DEFINITION` a
+        LEFT JOIN TD_MKT_CAMPAIGN b on a.campaign_id = b.id
+        where 1= 1
+        <if test="campaignId != null" >
+            and a.campaign_id = #{campaignId}
+        </if>
+        <if test="creator != null" >
+            and a.creator like concat('%', #{creator}, '%')
+        </if>
+        <if test="updater != null" >
+            and a.updater like concat('%', #{updater}, '%')
+        </if>
+        <if test="updateTime1!=null">
+            <![CDATA[
+              and a.update_time >= #{updateTime1} AND a.update_time <= #{updateTime2}
+            ]]>
+        </if>
+        <if test="name != null" >
+            AND a.name like concat('%', #{name}, '%')
+        </if>
+        <if test="statusList != null" >
+            AND a.status in
+            <foreach collection="statusList" index="index" item="status" open="(" separator="," close=")">
+                #{status}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="selectSimpleInstanceByIds" parameterType="java.util.Set" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Simple_Column_List"/>
+        FROM TD_MKT_PIPELINE_DEFINITION
+        WHERE id IN
+        <foreach collection="set" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+</mapper>

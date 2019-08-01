@@ -1,0 +1,12 @@
+<main>
+    <div class="main" *ngIf="!isSetPage && indexSerivice.show">
+        <div class="header">
+            <ul class="clearfix">
+                <li class="l" *ngFor="let item of navList;let i = index;">
+                    <a [routerLink]="item.url">{{item.name}}</a>
+                    <i *ngIf="i!==navList.length-1">＞</i>
+                </li>
+            </ul>
+        </div>
+    </div>
+</main>

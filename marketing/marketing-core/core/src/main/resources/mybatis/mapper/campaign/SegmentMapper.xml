@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.SegmentDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.marketing.core.entity.campaign.Segment" >
+    <id column="id" property="id" />
+    <result column="campaign_id" property="campaignId" />
+    <result column="campaign_launch_unit_id" property="campaignLaunchUnitId" />
+    <result column="crowd_id" property="crowdId" />
+    <result column="crowd_version" property="crowdVersion" />
+    <result column="channel_definition_id" property="channelDefinitionId" />
+    <result column="name" property="name" />
+    <result column="status" property="status" />
+    <result column="crowd_update_type" property="crowdUpdateType" />
+    <result column="cron_expression" property="cronExpression" />
+    <result column="title" property="title" />
+    <result column="message" property="message" />
+    <result column="message_param" property="messageParam" />
+    <result column="channel_param" property="channelParam" />
+    <result column="description" property="description" />
+    <result column="tenant_id" property="tenantId" />
+    <result column="creator" property="creator" />
+    <result column="create_by" property="createBy" />
+    <result column="create_time" property="createTime" />
+    <result column="updater" property="updater" />
+    <result column="update_by" property="updateBy" />
+    <result column="update_time" property="updateTime" />
+    <result column="appointed_time" property="appointedTime" />
+    <result column="trigger_type" property="triggerType" />
+    <result column="sub_trigger_type" property="subTriggerType" />
+    <result column="last_send_time" property="lastSendTime" />
+    <result column="send_total_count" property="sendTotalCount" />
+    <result column="last_send_count" property="lastSendCount" />
+  </resultMap>
+
+  <!-- TD_MKT_SEGMENT table all fields -->
+  <sql id="Base_Column_List" >
+     `id`, `campaign_id`, `campaign_launch_unit_id`, `crowd_id`, `crowd_version`, `channel_definition_id`, `name`, `status`, `crowd_update_type`, `cron_expression`, `title`, `message`, `message_param`, `channel_param`, `description`, `tenant_id`, `creator`, `create_by`, `create_time`, `updater`, `update_by`, `update_time`, `appointed_time`, `trigger_type`, `sub_trigger_type`, `last_send_time`, `send_total_count`, `last_send_count`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and `id` ${idOperator} #{id}
+      </if>
+      <if test="campaignId != null" >
+        and `campaign_id` ${campaignIdOperator} #{campaignId}
+      </if>
+      <if test="campaignLaunchUnitId != null" >
+        and `campaign_launch_unit_id` ${campaignLaunchUnitIdOperator} #{campaignLaunchUnitId}
+      </if>
+      <if test="crowdId != null" >
+        and `crowd_id` ${crowdIdOperator} #{crowdId}
+      </if>
+      <if test="crowdVersion != null" >
+        and `crowd_version` ${crowdVersionOperator} #{crowdVersion}
+      </if>
+      <if test="channelDefinitionId != null" >
+        and `channel_definition_id` ${channelDefinitionIdOperator} #{channelDefinitionId}
+      </if>
+      <if test="name != null" >
+        and `name` ${nameOperator} #{name}
+      </if>
+      <if test="status != null" >
+        and `status` ${statusOperator} #{status}
+      </if>
+      <if test="crowdUpdateType != null" >
+        and `crowd_update_type` ${crowdUpdateTypeOperator} #{crowdUpdateType}
+      </if>
+      <if test="cronExpression != null" >
+        and `cron_expression` ${cronExpressionOperator} #{cronExpression}
+      </if>
+      <if test="title != null" >
+        and `title` ${titleOperator} #{title}
+      </if>
+      <if test="message != null" >
+        and `message` ${messageOperator} #{message}
+      </if>
+      <if test="messageParam != null" >
+        and `message_param` ${messageParamOperator} #{messageParam}
+      </if>
+      <if test="channelParam != null" >
+        and `channel_param` ${channelParamOperator} #{channelParam}
+      </if>
+      <if test="description != null" >
+        and `description` ${descriptionOperator} #{description}
+      </if>
+      <if test="tenantId != null" >
+        and `tenant_id` ${tenantIdOperator} #{tenantId}
+      </if>
+      <if test="creator != null" >
+        and `creator` ${creatorOperator} #{creator}
+      </if>
+      <if test="createBy != null" >
+        and `create_by` ${createByOperator} #{createBy}
+      </if>
+      <if test="createTime != null" >
+        and `create_time` ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and `create_time` &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and `create_time` &lt;= #{createTime2}
+      </if>
+      <if test="updater != null" >
+        and `updater` ${updaterOperator} #{updater}
+      </if>
+      <if test="updateBy != null" >
+        and `update_by` ${updateByOperator} #{updateBy}
+      </if>
+      <if test="updateTime != null" >
+        and `update_time` ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and `update_time` &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and `update_time` &lt;= #{updateTime2}
+      </if>
+      <if test="appointedTime != null" >
+        and `appointed_time` ${appointedTimeOperator} #{appointedTime}
+      </if>
+      <if test="appointedTime1 != null" >
+        and `appointed_time` &gt;= #{appointedTime1}
+      </if>
+      <if test="appointedTime2 != null" >
+        and `appointed_time` &lt;= #{appointedTime2}
+      </if>
+      <if test="triggerType != null" >
+        and `trigger_type` ${triggerTypeOperator} #{triggerType}
+      </if>
+      <if test="subTriggerType != null" >
+        and `sub_trigger_type` ${subTriggerTypeOperator} #{subTriggerType}
+      </if>
+      <if test="lastSendTime != null" >
+        and `last_send_time` ${lastSendTimeOperator} #{lastSendTime}
+      </if>
+      <if test="lastSendTime1 != null" >
+        and `last_send_time` &gt;= #{lastSendTime1}
+      </if>
+      <if test="lastSendTime2 != null" >
+        and `last_send_time` &lt;= #{lastSendTime2}
+      </if>
+      <if test="sendTotalCount != null" >
+        and `send_total_count` ${sendTotalCountOperator} #{sendTotalCount}
+      </if>
+      <if test="lastSendCount != null" >
+        and `last_send_count` ${lastSendCountOperator} #{lastSendCount}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.marketing.core.entity.campaign.Segment" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_MKT_SEGMENT(<include refid="Base_Column_List" />)
+    values (#{id}, #{campaignId}, #{campaignLaunchUnitId}, #{crowdId}, #{crowdVersion}, #{channelDefinitionId}, #{name}, #{status}, #{crowdUpdateType}, #{cronExpression}, #{title}, #{message}, #{messageParam}, #{channelParam}, #{description}, #{tenantId}, #{creator}, #{createBy}, #{createTime}, #{updater}, #{updateBy}, #{updateTime}, #{appointedTime}, #{triggerType}, #{subTriggerType}, #{lastSendTime}, #{sendTotalCount}, #{lastSendCount})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.marketing.core.entity.campaign.Segment" >
+    update TD_MKT_SEGMENT
+       set `campaign_id` = #{campaignId},
+           `campaign_launch_unit_id` = #{campaignLaunchUnitId},
+           `crowd_id` = #{crowdId},
+           `crowd_version` = #{crowdVersion},
+           `channel_definition_id` = #{channelDefinitionId},
+           `name` = #{name},
+           `status` = #{status},
+           `crowd_update_type` = #{crowdUpdateType},
+           `cron_expression` = #{cronExpression},
+           `title` = #{title},
+           `message` = #{message},
+           `message_param` = #{messageParam},
+           `channel_param` = #{channelParam},
+           `description` = #{description},
+           `tenant_id` = #{tenantId},
+           `creator` = #{creator},
+           `create_by` = #{createBy},
+           `create_time` = #{createTime},
+           `updater` = #{updater},
+           `update_by` = #{updateBy},
+           `update_time` = #{updateTime},
+           `appointed_time` = #{appointedTime},
+           `trigger_type` = #{triggerType},
+           `sub_trigger_type` = #{subTriggerType},
+           `last_send_time` = #{lastSendTime},
+           `send_total_count` = #{sendTotalCount},
+           `last_send_count` = #{lastSendCount}
+     where `id` = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.marketing.core.entity.campaign.Segment" >
+    update TD_MKT_SEGMENT
+    <set >
+      <if test="campaignId != null" >
+        `campaign_id` = #{campaignId},
+      </if>
+      <if test="campaignLaunchUnitId != null" >
+        `campaign_launch_unit_id` = #{campaignLaunchUnitId},
+      </if>
+      <if test="crowdId != null" >
+        `crowd_id` = #{crowdId},
+      </if>
+      <if test="crowdVersion != null" >
+        `crowd_version` = #{crowdVersion},
+      </if>
+      <if test="channelDefinitionId != null" >
+        `channel_definition_id` = #{channelDefinitionId},
+      </if>
+      <if test="name != null" >
+        `name` = #{name},
+      </if>
+      <if test="status != null" >
+        `status` = #{status},
+      </if>
+      <if test="crowdUpdateType != null" >
+        `crowd_update_type` = #{crowdUpdateType},
+      </if>
+      <if test="cronExpression != null" >
+        `cron_expression` = #{cronExpression},
+      </if>
+      <if test="title != null" >
+        `title` = #{title},
+      </if>
+      <if test="message != null" >
+        `message` = #{message},
+      </if>
+      <if test="messageParam != null" >
+        `message_param` = #{messageParam},
+      </if>
+      <if test="channelParam != null" >
+        `channel_param` = #{channelParam},
+      </if>
+      <if test="description != null" >
+        `description` = #{description},
+      </if>
+      <if test="tenantId != null" >
+        `tenant_id` = #{tenantId},
+      </if>
+      <if test="creator != null" >
+        `creator` = #{creator},
+      </if>
+      <if test="createBy != null" >
+        `create_by` = #{createBy},
+      </if>
+      <if test="createTime != null" >
+        `create_time` = #{createTime},
+      </if>
+      <if test="updater != null" >
+        `updater` = #{updater},
+      </if>
+      <if test="updateBy != null" >
+        `update_by` = #{updateBy},
+      </if>
+      <if test="updateTime != null" >
+        `update_time` = #{updateTime},
+      </if>
+      <if test="appointedTime != null" >
+        `appointed_time` = #{appointedTime},
+      </if>
+      <if test="triggerType != null" >
+        `trigger_type` = #{triggerType},
+      </if>
+      <if test="subTriggerType != null" >
+        `sub_trigger_type` = #{subTriggerType},
+      </if>
+      <if test="lastSendTime != null" >
+        `last_send_time` = #{lastSendTime},
+      </if>
+      <if test="sendTotalCount != null" >
+        `send_total_count` = #{sendTotalCount},
+      </if>
+      <if test="lastSendCount != null" >
+        `last_send_count` = #{lastSendCount},
+      </if>
+    </set>
+     where `id` = #{id}
+  </update>
+
+  <!-- 根据id查询 TD_MKT_SEGMENT -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from TD_MKT_SEGMENT
+     where `id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TD_MKT_SEGMENT
+     where `id` = #{value}
+
+  </delete>
+
+  <!-- TD_MKT_SEGMENT 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select count(1) from TD_MKT_SEGMENT
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TD_MKT_SEGMENT列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from TD_MKT_SEGMENT
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.CampaignLaunchUnitDao" >
+
+    <update id="resetCrowdVersion" >
+        update TD_MKT_CAMPAIGN_LAUNCH_UNIT
+        <set>
+            `crowd_version` = NULL,
+            `crowd_update_time` = NULL,
+            `estimated_size` = NULL ,
+            `push_estimated_size` = NULL ,
+            `sms_estimated_size` = NULL ,
+            `ad_estimated_size` = NULL
+        </set>
+        WHERE id IN
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <update id="updateInCalcUnitByCrowdId">
+        update TD_MKT_CAMPAIGN_LAUNCH_UNIT
+        <set>
+            `crowd_version` = #{campaignLaunchUnit.crowdVersion},
+            `crowd_update_time` = #{campaignLaunchUnit.crowdUpdateTime},
+            `estimated_size` =  #{campaignLaunchUnit.estimatedSize} ,
+            `push_estimated_size` =  #{campaignLaunchUnit.pushEstimatedSize} ,
+            `sms_estimated_size` =  #{campaignLaunchUnit.smsEstimatedSize} ,
+            `ad_estimated_size` =  #{campaignLaunchUnit.adEstimatedSize}
+        </set>
+        WHERE `crowd_id` = #{crowdId}
+        AND `crowd_version` IS NULL
+    </update>
+
+    <delete id="deleteByCreateTime" parameterType="string">
+        delete from TD_MKT_CAMPAIGN_LAUNCH_UNIT WHERE create_time > #{createTime}
+    </delete>
+
+    <select id="findByCampaignId" resultMap="BaseResultMap" parameterType="map">
+        select <include refid="Base_Column_List" />
+        from TD_MKT_CAMPAIGN_LAUNCH_UNIT
+        where `campaign_id` = #{campaignId}
+    </select>
+</mapper>

@@ -1,0 +1,155 @@
+.launch-box {
+    margin-top: 20px;
+    background: #fff;
+    box-shadow: 0 1px 1px 0 #CED3D9;
+    border-radius: 4px;
+}
+
+.launch-box .unit-add {
+    height: 54px;
+}
+
+.launch-box .blue-mark {
+    color: skyblue;
+    padding: 0 15px;
+}
+
+.launch-box h2.l {
+    font-size: 14px;
+    color: #464C5B;
+    line-height: 14px;
+    padding: 20px;
+}
+
+.launch-box .unit-add .new_icon.r {
+    margin: 11px 20px;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background-image: url(marketing/public/images/icon-new.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+}
+
+.launch-box .unit-add .pic-box {
+    position: absolute;
+    left: 50%;
+    top: 58px;
+    margin-left: -353px;
+}
+
+.unit-add .unit-add-btn-box p {
+    margin-left: -20px;
+    margin-top: 12px;
+    color: #b8bfc8;
+}
+
+.loader {
+    text-align: center;
+    margin-top: 10px;
+    height: 20px;
+    line-height: 20px;
+    background: #fff;
+    box-shadow: 0 1px 1px 0 #CED3D9;
+    border-radius: 4px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+
+/* loading */
+
+.loading {
+    width: 85px;
+    height: 5px;
+    display: inline-block;
+    text-align: center;
+}
+
+.loading span {
+    display: inline-block;
+    width: 5px;
+    height: 100%;
+    margin-right: 5px;
+    background: #9d9e9d;
+    -webkit-animation: load 1.04s ease infinite;
+}
+
+.loading span:last-child {
+    margin-right: 0px;
+}
+
+@-webkit-keyframes load {
+    0% {
+        opacity: 1;
+        -webkit-transform: scale(1.2);
+    }
+    100% {
+        opacity: .2;
+        -webkit-transform: scale(.2);
+    }
+}
+
+.loading span:nth-child(1) {
+    -webkit-animation-delay: 0.13s;
+}
+
+.loading span:nth-child(2) {
+    -webkit-animation-delay: 0.26s;
+}
+
+.loading span:nth-child(3) {
+    -webkit-animation-delay: 0.39s;
+}
+
+.loading span:nth-child(4) {
+    -webkit-animation-delay: 0.52s;
+}
+
+.loading span:nth-child(5) {
+    -webkit-animation-delay: 0.65s;
+}
+
+
+/*确认删除弹框*/
+
+:host /deep/ .ui-dialog {
+    padding: 0 28px;
+}
+
+:host /deep/ .ui-confirmdialog-message {
+    color: #657180;
+    display: inline-block;
+    text-align: center;
+    font-size: 14px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-content {
+    padding-top: 25px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane {
+    border-top: none;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane button:nth-child(1) {
+    display: none;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane button:nth-child(2) {
+    width: 100%;
+    background: #ff6e6b;
+    color: #fff;
+    margin-top: 22px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane button:nth-child(2) .fa {
+    display: none;
+}
+
+:host /deep/ .ui-tabview-panel.ui-widget-content {
+    padding: 0;
+}

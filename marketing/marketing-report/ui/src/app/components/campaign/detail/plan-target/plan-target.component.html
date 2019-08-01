@@ -1,0 +1,39 @@
+<main>
+    <div class="plan-box">
+        <div class="plan-add" [ngClass]="{'has-data':planTargets.length}">
+            <h2 class="l">计划目标</h2>
+            <i class="new_icon r" *ngIf="!isFinish" (click)="addTab()"></i>
+        </div>
+        <div *ngIf="planTargets.length" class="plan-target-box clearfix">
+            <div *ngFor="let plan of planTargets;let i = index" [style.marginBottom]="tipShow && plan.isAdding && i > 1 ? '13px' : null" class="plan-target-content">
+                <div *ngIf="plan.isAdding && !isFinish" class="plan-target">
+                    <label class="tipWrap">
+                        监测指标
+                        <p *ngIf="targetShow && plan.isAdding" class="warn-tip"><i class="iconfonts icon-empty1"></i>{{targetContent}}</p>
+                    </label>
+                    <p-dropdown [style]="{'margin-left': '-3px', 'width':'31.2%','height':'33px','border':'1px solid #dee6ed', 'box-sizing': 'border-box'}" [panelStyle]="{'height':'33px'}" [options]="plan.monitorTarget" [(ngModel)]="plan.selectedmonTarget" placeholder="请选择指标"></p-dropdown>
+                    <label class="tipWrap">
+                        预期达成
+                        <p *ngIf="tipShow && plan.isAdding" class="warn-tip"><i class="iconfonts icon-empty1"></i>{{tipContent}}</p>                             
+                    </label>
+                    <input class="new-num" (keyup)="inputChange()" name="points" oninput="if(value.length>15)value=value.slice(0,15)" type="text" [(ngModel)]="plan.reachCount" />
+                    <i class="icon-done" (click)="createPlan(plan, i)"></i>
+                    <i class="icon-close1" (click)="cancel(i)"></i>
+                </div>
+                <div *ngIf="!plan.isAdding" class="plan-target" [ngClass]="{'show-info': !plan.isAdding}">
+                    <!-- <div>监测指标</div> -->
+                    <label>监测指标</label>
+                    <!--<p-dropdown [style]="{'width':'188px','height':'30px','border':'1px solid #dee6ed','margin':'0 20px 0 12px'}" disabled="true" [options]="plan.monitorTarget" [(ngModel)]="plan.selectedmonTarget" placeholder="请选择指标"></p-dropdown>-->
+                    <span class="monitor-name" [title]="plan.name">{{plan.name}}</span>
+                    <label>预期达成</label>
+                    <span class="plan_count">{{plan.reachCount | formatNumber}}</span>
+                    <i *ngIf="!isFinish" class="icon-edit" (click)="reEditPlan(i)"></i>
+                    <i *ngIf="!isFinish" class="icon-del" (click)="delPlan(plan,i)"></i>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <p-confirmDialog width="304" height="200" [acceptLabel]="acceptLabel"></p-confirmDialog>
+    <p-growl [value]="msgs" life="3000"></p-growl>
+</main>

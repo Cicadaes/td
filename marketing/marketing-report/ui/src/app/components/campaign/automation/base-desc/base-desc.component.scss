@@ -1,0 +1,34 @@
+@import './../common.scss';
+
+.base-desc {
+    .title {
+        @include input-style;
+        width: 263px;
+    }
+
+    .desc {
+        @include textarea-style;
+        width: 263px;
+        height: 56px;
+    }
+}
+
+.pipe-item {
+    margin-bottom: 16px;
+
+    .item-label {
+        @include bold-font;
+        line-height: 32px;
+    }
+
+    .item-input {
+        .text {
+            @include input-style;
+            width: 263px;
+        }
+    }
+
+    .no-line-height {
+        line-height: 16px !important;
+    }
+}

@@ -1,0 +1,35 @@
+<main>
+    <h2>推广信息</h2>
+    <hr/>
+    <div class="control-group">
+        <label class="control-label">数据密钥</label>
+        <div class="controls">
+            <input id="secretKey" class="form-control" type="text" pInputText [(ngModel)]="secretKey" readonly><a class="secretkey-btn" data-clipboard-target="#secretKey" alt="Copy to secretKey" (click)="copySecretKey()">复制</a>
+            <p class="hint">广告平台需要数据密钥进行数据提取</p>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label"><span class="required">*</span>投放渠道</label>
+        <div class="controls">
+            <p-dropdown [style]="{'width':'50%'}" [options]="pushChannels" [(ngModel)]="selectedChannel">
+                <template let-channel pTemplate="item">
+                    <div style="position: relative;height: 25px;">
+                        <!--<img style="width:24px;position:absolute;top:1px;left:5px"/>-->
+                        <!--<div style="font-size:14px;float:right;margin-top:4px">{{car.label}}</div>-->
+                        <div style="font-size:14px;margin-top:4px">{{channel.label}}</div>
+                    </div>
+                </template>
+            </p-dropdown>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label"><span class="required">*</span>投放时间</label>
+        <div class="controls">
+            <input type="text" class="form-control" pInputText value="TODO:时间插件" disabled/>
+            <p class="hint">在活动结束后，同步在广告网络的人群数据包，将会自动删除。</p>
+        </div>
+    </div>
+
+</main>

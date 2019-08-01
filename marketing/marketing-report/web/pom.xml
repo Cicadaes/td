@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.talkingdata.marketing</groupId>
+		<artifactId>marketing-report</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>web</artifactId>
+
+	<dependencies>
+		<!--内部依赖 -->
+		<dependency>
+			<groupId>com.talkingdata.marketing</groupId>
+			<artifactId>core</artifactId>
+		</dependency>
+		<!-- 第三方库 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jetty</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-cas</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>velocity</artifactId>
+					<groupId>velocity</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.caucho</groupId>
+			<artifactId>hessian</artifactId>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>jdk.tools</groupId>
+			<artifactId>jdk.tools</artifactId>
+			<version>1.8</version>
+			<scope>system</scope>
+			<systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>marketing-report</finalName>
+		<plugins>
+			<!--<plugin> -->
+			<!--<groupId>pl.project13.maven</groupId> -->
+			<!--<artifactId>git-commit-id-plugin</artifactId> -->
+			<!--<version>2.1.14</version> -->
+			<!--<executions> -->
+			<!--<execution> -->
+			<!--<goals> -->
+			<!--<goal>revision</goal> -->
+			<!--</goals> -->
+			<!--</execution> -->
+			<!--</executions> -->
+			<!--<configuration> -->
+			<!--<dateFormat>yyyy-MM-dd HH:mm:ss:Z </dateFormat> -->
+			<!--<verbose>true</verbose> -->
+			<!--<dotGitDirectory>${project.basedir}/.git</dotGitDirectory> -->
+			<!--<skipPoms>false</skipPoms> -->
+			<!--<generateGitPropertiesFile>true</generateGitPropertiesFile> -->
+			<!--<generateGitPropertiesFilename>target/git.properties</generateGitPropertiesFilename> -->
+			<!--<failOnNoGitDirectory>true</failOnNoGitDirectory> -->
+			<!--<includeOnlyProperties> -->
+			<!--<includeOnlyProperty>^git.commit.id.abbrev$</includeOnlyProperty> -->
+			<!--<includeOnlyProperty>^git.commit.id$</includeOnlyProperty> -->
+			<!--<includeOnlyProperty>^git.commit.id.describe$</includeOnlyProperty> -->
+			<!--<includeOnlyProperty>^git.commit.time$</includeOnlyProperty> -->
+			<!--<includeOnlyProperty>^git.build.time$</includeOnlyProperty> -->
+			<!--</includeOnlyProperties> -->
+			<!--<abbrevLength>40</abbrevLength> -->
+			<!--<gitDescribe> -->
+			<!--<skip>false</skip> -->
+			<!--<always>true</always> -->
+			<!--<abbrev>20</abbrev> -->
+			<!--<dirty>-dirty</dirty> -->
+			<!--<forceLongFormat>false</forceLongFormat> -->
+			<!--</gitDescribe> -->
+			<!--</configuration> -->
+			<!--</plugin> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>**/*.xml</exclude>
+						<exclude>**/*.txt</exclude>
+						<exclude>**/*.sh</exclude>
+						<exclude>**/*.properties</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+							<includeScope>runtime</includeScope>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!--专用 -->
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<attach>false</attach>
+							<descriptors>
+								<descriptor>${basedir}/src/main/resources/assembly/assembly.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!--spring-boot打包 -->
+			<!--<plugin> -->
+			<!--<groupId>org.springframework.boot</groupId> -->
+			<!--<artifactId>spring-boot-maven-plugin</artifactId> -->
+			<!--<configuration> -->
+			<!--<mainClass>com.talkingdata.marketing.Application</mainClass> -->
+			<!--<finalName>marketing-web</finalName> -->
+			<!--</configuration> -->
+			<!--<executions> -->
+			<!--<execution> -->
+			<!--<goals> -->
+			<!--<goal>repackage</goal> -->
+			<!--</goals> -->
+			<!--</execution> -->
+			<!--</executions> -->
+			<!--</plugin> -->
+			<!--sonar -->
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.2</version>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>

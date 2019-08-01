@@ -1,0 +1,105 @@
+:host /deep/ .ui-dialog {
+    width: 347px;
+    /*height: 268px;*/
+    padding: 0 28px;
+    overflow: visible;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-content {
+    padding: 0;
+    overflow: visible;
+}
+
+.act-name {
+    margin-top: 20px;
+}
+
+.act-time {
+    margin-top: 23px;
+}
+
+.act-name div.r,
+.act-time div.r {
+    width: 80%;
+}
+
+:host /deep/ .act-time .date-box {
+    border: 1px solid #dee6ed;
+    width: 100%;
+    border-radius: 3px;
+}
+
+:host /deep/ .act-time .datePicker {
+    width: 100%;
+}
+
+:host /deep/ .pinput {
+    width: 37.08em !important;
+}
+
+:host /deep/ .ui-inputtext {
+    border-bottom-color: #e5e5e5 !important;
+}
+
+:host /deep/ .act-time .datePicker .date-box .ui-inputtext {
+    border: none !important;
+}
+
+:host /deep/ .act-time span.ui-inputtext {
+    border: none;
+}
+
+.act-name label.l,
+.act-time label.l {
+    margin-top: 5px;
+}
+
+.act-name input,
+.act-time input {
+    width: 100%;
+    height: 30px;
+}
+.description{
+    margin-top: 10px;
+}
+textarea.text-area{
+    width: 80%;
+    height: 50px;
+    resize: none;
+    border:1px solid #e5e5e5;
+    border-radius: 3px;
+    text-indent: 1em;
+    color: #55595c;
+}
+.desc {
+    margin: 9px 0 0 70px;
+    color: #959ca5;
+}
+
+.desc i {
+    color: #ced1d5;
+    margin-right: 8px;
+}
+
+:host /deep/ .dbtn-blue {
+    background: #0275d8 !important;
+    border-radius: 3px !important;
+    color: #fff !important;
+}
+
+:host /deep/ .dbtn-gray {
+    background: #fff !important;
+    color: #000 !important;
+}
+
+.dis-btn:disabled {
+    cursor: default!important;
+    background: #cccccc!important;
+}
+:host /deep/ .warn-tip{
+    display:inline-block;
+    margin-left:70px;
+}
+.btn-handel{
+    margin: 13px 0 13px 0;
+}

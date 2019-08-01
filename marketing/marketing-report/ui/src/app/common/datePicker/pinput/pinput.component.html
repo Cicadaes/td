@@ -1,0 +1,16 @@
+<div class="pinput-sel pcl">
+    <span class="ui-inputtext">时间范围：{{time.start|date:"yyyy-MM-dd"}}{{time.end?"-":""}}{{time.end|date:"yyyy-MM-dd"}}</span>
+    <ul class="input-range">
+        <li *ngFor="let sel of config.ranges"><a (click)="selDay(sel.day)">{{sel.label}}</a></li>
+    </ul>
+</div>
+<div class="pdate-box">
+    <pdate [ranges]="time" [config]="config"></pdate>
+</div>
+<div class="input-button">
+    <a data-et='1' class="dbtn dbtn-gray" (click)="close($event)">取消</a>
+
+    <a data-et='1' class="dbtn dbtn-blue" (click)="confirm($event)">确定</a>
+</div>
+
+<p-growl [value]="msgs"></p-growl>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.SmsReachReportDao" >
+  <select id="findTimeaxisBySegmentId" resultType="string" parameterType="java.lang.Integer">
+    SELECT report_date FROM `TD_MKT_SMS_REACH_REPORT` where segment_id = #{segmentId} GROUP BY report_date ORDER BY create_time ASC
+  </select>
+
+    <select id="findTimeaxisByPipelineId" resultType="string" parameterType="map">
+        SELECT report_date FROM `TD_MKT_SMS_REACH_REPORT` where pipeline_id = #{pipelineId} AND pipeline_node_id=#{pipelineNodeId} GROUP BY report_date ORDER BY create_time ASC
+    </select>
+
+    <select id="findByPipelineIdAndDate" resultMap="BaseResultMap" parameterType="map">
+        SELECT
+        `id`, `campaign_id`, `segment_id`, `pipeline_id`, `pipeline_node_id`, `report_date`, `report_hour`, SUM(`succ_count`) succ_count, SUM(`fail_count`) fail_count,
+        SUM(`unknown_count`) unknown_count, SUM(`click_count`) click_count, SUM(`independent_click_count`) independent_click_count, SUM(`click_ip_count`) click_ip_count,
+        SUM(`click_link_count`) click_link_count, SUM(`insufficient_balance_count`) insufficient_balance_count, SUM(`invalid_phone_number_count`) invalid_phone_number_count,
+        SUM(`unsubscribe_count`) unsubscribe_count, SUM(`blacklist_count`) blacklist_count, SUM(`unconnect_count`) unconnect_count, SUM(`overrun_fail_count`) overrun_fail_count,
+        SUM(`other`) other, `tenant_id`
+        FROM
+        TD_MKT_SMS_REACH_REPORT
+        WHERE pipeline_id=#{pipelineId} AND pipeline_node_id=#{pipelineNodeId} AND report_date=#{reportDate}
+        <if test='granularity == "h"'>
+            GROUP BY report_date, report_hour
+            ORDER BY report_date, report_hour;
+        </if>
+        <if test='granularity == "d"'>
+            GROUP BY report_date
+            ORDER BY report_date;
+        </if>
+    </select>
+
+    <select id="findByPipelineId" resultMap="BaseResultMap" parameterType="map">
+        SELECT
+        `id`, `campaign_id`, `segment_id`, `pipeline_id`, `pipeline_node_id`, `report_date`, `report_hour`, SUM(`succ_count`) succ_count, SUM(`fail_count`) fail_count,
+        SUM(`unknown_count`) unknown_count, SUM(`click_count`) click_count, SUM(`independent_click_count`) independent_click_count, SUM(`click_ip_count`) click_ip_count,
+        SUM(`click_link_count`) click_link_count, SUM(`insufficient_balance_count`) insufficient_balance_count, SUM(`invalid_phone_number_count`) invalid_phone_number_count,
+        SUM(`unsubscribe_count`) unsubscribe_count, SUM(`blacklist_count`) blacklist_count, SUM(`unconnect_count`) unconnect_count, SUM(`overrun_fail_count`) overrun_fail_count,
+        SUM(`other`) other, `tenant_id`, `create_time`, `creator`, `create_by`, `updater`, `update_by`, `update_time`
+        FROM
+        TD_MKT_SMS_REACH_REPORT
+        WHERE pipeline_id=#{pipelineId} AND pipeline_node_id=#{pipelineNodeId}
+        <if test='granularity == "h"'>
+            GROUP BY report_date, report_hour
+            ORDER BY report_date, report_hour;
+        </if>
+        <if test='granularity == "d"'>
+            GROUP BY report_date
+            ORDER BY report_date;
+        </if>
+    </select>
+
+    <select id="findBySegmentIdAndDate" resultMap="BaseResultMap" parameterType="map">
+        SELECT
+        `id`, `campaign_id`, `segment_id`, `pipeline_id`, `pipeline_node_id`, `report_date`, `report_hour`, SUM(`succ_count`) succ_count, SUM(`fail_count`) fail_count,
+        SUM(`unknown_count`) unknown_count, SUM(`click_count`) click_count, SUM(`independent_click_count`) independent_click_count, SUM(`click_ip_count`) click_ip_count,
+        SUM(`click_link_count`) click_link_count, SUM(`insufficient_balance_count`) insufficient_balance_count, SUM(`invalid_phone_number_count`) invalid_phone_number_count,
+        SUM(`unsubscribe_count`) unsubscribe_count, SUM(`blacklist_count`) blacklist_count, SUM(`unconnect_count`) unconnect_count, SUM(`overrun_fail_count`) overrun_fail_count,
+        SUM(`other`) other, `tenant_id`
+        FROM
+        TD_MKT_SMS_REACH_REPORT
+        WHERE segment_id=#{segmentId} AND report_date=#{reportDate}
+        <if test='granularity == "h"'>
+            GROUP BY report_date, report_hour
+            ORDER BY report_date, report_hour;
+        </if>
+        <if test='granularity == "d"'>
+            GROUP BY report_date
+            ORDER BY report_date;
+        </if>
+    </select>
+
+    <select id="findBySegmentId" resultMap="BaseResultMap" parameterType="map">
+        SELECT
+        `id`, `campaign_id`, `segment_id`, `pipeline_id`, `pipeline_node_id`, `report_date`, `report_hour`, SUM(`succ_count`) succ_count, SUM(`fail_count`) fail_count,
+        SUM(`unknown_count`) unknown_count, SUM(`click_count`) click_count, SUM(`independent_click_count`) independent_click_count, SUM(`click_ip_count`) click_ip_count,
+        SUM(`click_link_count`) click_link_count, SUM(`insufficient_balance_count`) insufficient_balance_count, SUM(`invalid_phone_number_count`) invalid_phone_number_count,
+        SUM(`unsubscribe_count`) unsubscribe_count, SUM(`blacklist_count`) blacklist_count, SUM(`unconnect_count`) unconnect_count, SUM(`overrun_fail_count`) overrun_fail_count,
+        SUM(`other`) other, `tenant_id`, `create_time`, `creator`, `create_by`, `updater`, `update_by`, `update_time`
+        FROM
+        TD_MKT_SMS_REACH_REPORT
+        WHERE segment_id=#{segmentId}
+        <if test='granularity == "h"'>
+            GROUP BY report_date, report_hour
+            ORDER BY report_date, report_hour;
+        </if>
+        <if test='granularity == "d"'>
+            GROUP BY report_date
+            ORDER BY report_date;
+        </if>
+    </select>
+
+  <insert id="batchInsert" parameterType="java.util.List">
+      <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+          SELECT LAST_INSERT_ID()
+      </selectKey>
+      INSERT INTO TD_MKT_SMS_REACH_REPORT(<include refid="Base_Column_List" />)
+      VALUES
+      <foreach collection="list" item="item" index="index" separator=",">
+          (#{item.id}, #{item.campaignId}, #{item.segmentId}, #{item.pipelineId}, #{item.pipelineNodeId}, #{item.reportDate}, #{item.reportHour}, #{item.succCount}, #{item.failCount}, #{item.unknownCount}, #{item.clickCount}, #{item.independentClickCount}, #{item.clickIpCount}, #{item.tenantId}, #{item.createTime}, #{item.creator}, #{item.createBy}, #{item.updater}, #{item.updateBy}, #{item.updateTime})
+      </foreach>
+  </insert>
+
+  <insert id="insertOrUpdate" parameterType="com.talkingdata.marketing.core.entity.campaign.SmsReachReport" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO TD_MKT_SMS_REACH_REPORT
+    (`campaign_id`, `segment_id`, `pipeline_id`, `pipeline_node_id`, `report_date`, `report_hour`, `succ_count`, `fail_count`, `unknown_count`, `click_count`, `independent_click_count`, `click_ip_count`, `tenant_id`, `create_time`, `creator`, `create_by`, `updater`, `update_by`, `update_time`)
+    VALUES (#{campaignId}, #{segmentId}, #{reportDate}, #{reportHour}, #{succCount}, #{failCount}, #{unknownCount}, #{clickCount}, #{independentClickCount}, #{clickIpCount}, #{tenantId}, #{createTime}, #{creator}, #{createBy}, #{updater}, #{updateBy}, #{updateTime})
+    ON DUPLICATE KEY
+    UPDATE
+    <if test="succCount != null" >
+      `succ_count` = `succ_count`+#{succCount},
+    </if>
+    <if test="failCount != null" >
+      `fail_count` = `fail_count`+#{failCount},
+    </if>
+    `update_time` = #{updateTime}
+  </insert>
+</mapper>

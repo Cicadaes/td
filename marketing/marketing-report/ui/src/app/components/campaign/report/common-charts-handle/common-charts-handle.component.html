@@ -1,0 +1,15 @@
+<main>
+    <div class="clearfix charts-handle">
+        <a *ngIf="!hideDownload" class="r down-load" href="{{downloadUrl}}">
+            <i class="iconfonts icon-down"></i>
+        </a>
+        <div class="r clearfix switch">
+            <div class="l" (click)="getChart(true)" [ngClass]="{active:isChart}">
+                <i class="iconfonts icon-chart"></i>
+            </div>
+            <div class="r" (click)="getBar(true)" [ngClass]="{active:isBar}">
+                <i class="iconfonts icon-list"></i>
+            </div>
+        </div>
+    </div>
+</main>

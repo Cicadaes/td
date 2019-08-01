@@ -1,0 +1,204 @@
+$border-top: 1px solid #EBEEF2; // 分割线
+$item-height: 32px; // 大多数框的高度
+$input-border: 1px solid #D7DDE4;
+$input-border-raius: 4px;
+$input-text-indent: 6px;
+$input-bg: #FFFFFF;
+$input-box-sizing: border-box;
+$input-padding: 10px 6px;
+$textarea-padding: 5px 6px;
+$info-icon: url('./../../../../../../public/images/icon-info.svg') center no-repeat; // info-icon 位置
+$android-icon: url('./../../../../../../public/images/icon-android.svg') center no-repeat;
+$android-active-icon: url('./../../../../../../public/images/icon-android-active.svg') center no-repeat;
+$ios-icon: url('./../../../../../../public/images/icon-ios.svg') center no-repeat;
+$ios-active-icon: url('./../../../../../../public/images/icon-ios-active.svg') center no-repeat;
+$icon-shangchuan: url('./../../../../../../public/images/icon－shangchuan.svg') center no-repeat;
+$icon-jinggao: url('./../../../../../../public/images/icon－jinggao.svg') center no-repeat;
+$icon-lianjie: url('./../../../../../../public/images/icon－lianjie.svg') center no-repeat;
+$icon-del: url('./../../../../../../public/images/icon-del.svg') center no-repeat;
+$icon-add: url('./../../../../../../public/images/add.svg') center no-repeat;
+// 复用输入框
+@mixin input-style {
+    @include normal-font;
+    background: $input-bg;
+    border: $input-border;
+    border-radius: $input-border-raius;
+    box-sizing: $input-box-sizing;
+    height: $item-height;
+    padding: $input-padding;
+}
+
+// 复用输入框
+@mixin textarea-style {
+    @include normal-font;
+    background: $input-bg;
+    border: $input-border;
+    border-radius: $input-border-raius;
+    box-sizing: $input-box-sizing;
+    padding: $textarea-padding;
+    resize: none;
+}
+
+@mixin user-select-none {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+// 表示很明显的字体 看起来好像加粗一样
+@mixin bold-font {
+    font-family: PingFangSC-Semibold;
+    font-size: 12px;
+    color: #464C5B;
+}
+
+// 表示普通字体
+@mixin normal-font {
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #464C5B;
+}
+
+// * 表示 必填
+.required {
+    font-size: 14px;
+    display: inline-block;
+    margin: 0 5px 0 -10px;
+    color: red !important;
+}
+
+// 将一个小的部分当作一组 复用多个元素
+.pipe-item {
+    .item-label {
+        @include bold-font;
+        line-height: 32px;
+        &>.l {
+            @include bold-font;
+        }
+        // 左侧提示
+        .icon-info {
+            position: relative;
+            display: block;
+            width: 16px;
+            height: 16px;
+            margin-left: 5px;
+            margin-top: -1px;
+            background: $info-icon;
+            cursor: pointer;
+        }
+    }
+    .item-input {
+        .text {
+            @include input-style;
+            border: 0px;
+            width: 246px;
+        }
+        .dropdown-trigger {
+            width: 17px;
+            height: 32px;
+            padding: 5px;
+            margin-left: -4px;
+            vertical-align: top;
+            box-sizing: border-box;
+            display: inline-block;
+            span {
+                padding-top: 5px;
+                display: inline-block;
+                font: 14px/1 FontAwesome;
+                font-size: inherit;
+                text-rendering: auto;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                &:before {
+                    content: "\f0d7";
+                }
+            }
+        }
+    }
+    // 短小的输入框
+    .lite-num-input {
+        @include input-style;
+        width: 40px;
+        margin: 0 3px;
+    }
+    // 右侧提示
+    .check-info {
+        .l {
+            margin-left: 5px;
+            cursor: pointer;
+        }
+        .icon-info {
+            position: relative;
+            width: 16px;
+            height: 16px;
+            margin-top: -1px;
+            background: $info-icon;
+            cursor: pointer;
+        }
+    }
+    .no-line-height {
+        line-height: 16px !important;
+    }
+    // 封装的开关按钮效果不太好，需要采用这种方法增强
+    .item-trigger {
+        position: relative;
+        height: 16px;
+        cursor: pointer;
+        &>input {
+            width: 36px;
+            height: 16px;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .trigger {
+            position: absolute;
+            right: 0;
+            top: 0;
+            cursor: pointer;
+        }
+    }
+}
+
+input:disabled,
+textarea:disabled {
+    cursor: default!important;
+    background: #F8F8F9!important;
+    border: 1px solid #DCDEE2!important;
+    color: rgba(23, 35, 61, 0.30)!important;
+}
+
+:host /deep/ .ui-tooltip .ui-tooltip-text {
+    padding: 5px 10px !important;
+    border-radius: 8px !important;
+    white-space: normal !important;
+    max-width: 250px !important;
+    min-width: 150px !important;
+    background: rgba(55, 60, 71, .85) !important;
+}
+
+:host /deep/ .ui-tooltip-left .ui-tooltip-arrow {
+    border: 6px solid #f5f6f8 !important;
+    border-color: #f5f6f8 rgba(55, 60, 71, .85) !important;
+    border-width: 6px 0 6px 6px !important;
+    margin-top: -6px !important;
+    right: 16px !important;
+}
+
+:host /deep/ .ui-tooltip-right .ui-tooltip-arrow {
+    border: 6px solid #f5f6f8 !important;
+    border-color: #f5f6f8 rgba(55, 60, 71, .85) !important;
+    border-width: 6px 6px 6px 0 !important;
+    margin-top: -6px !important;
+    left: -1px !important;
+}
+
+:host /deep/ .ui-tooltip.ui-tooltip-left,
+{
+    padding: 0 22px !important;
+}
+
+:host /deep/ .ui-tooltip.ui-tooltip-right {
+    padding: 0 5px !important;
+}

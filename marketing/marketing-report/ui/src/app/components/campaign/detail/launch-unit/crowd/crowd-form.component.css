@@ -1,0 +1,354 @@
+.panel-wap {
+    padding: 0px 20px 20px 20px;
+}
+
+:host /deep/.ui-dialog {
+    height: 500px;
+}
+
+:host /deep/.ui-dialog .ui-dialog-content {
+    padding: 12px 0;
+    width: 100% !important;
+}
+
+:host /deep/ .funnel-choice {
+    margin-right: 30px;
+    margin-left: 20px;
+}
+
+.color-special {
+    color: red;
+}
+
+.grunt-crowd {
+    margin-left: 30px;
+}
+
+.grunt-crowd {
+    color: #5F93E1;
+    text-decoration: underline;
+}
+
+.panel-bottom-btn {
+    font-size: 14px;
+    padding: 8px 0px;
+    text-align: center;
+    width: 176px;
+    background-color: #c7cdd3;
+    color: #000;
+    border-radius: 5px;
+}
+
+.panel-bottom-true {
+    background-color: #42a3fb;
+    color: #fff;
+}
+
+:host /deep/ .panel-bottom {
+    margin-top: 30px;
+    position: relative
+}
+
+
+/*:host /deep/ .ui-dropdown-label:hover{
+    background: #fff !important;
+}*/
+
+:host /deep/ .ui-dropdown label.ui-dropdown-label {
+    /*display: none;*/
+}
+
+:host /deep/ .ui-dropdown-panel .ui-dropdown-list {
+    border-color: #dfe7f2;
+    height: 108px !important;
+    width: 100%;
+}
+
+:host /deep/ .ui-dialog {
+    top: 50% !important;
+    left: 50% !important;
+    padding: 0 28px;
+    transform: translate(-50%, -50%);
+}
+
+
+/*:host /deep/ .ui-dropdown .ui-dropdown-trigger .fa {
+    color: #55595c;
+    margin-top: 1.2em;
+}*/
+
+.cancel {
+    color: #000;
+    background: #fff;
+    margin-left: 126px;
+    margin-right: 30px;
+}
+
+.cancel:hover {
+    background: #f2f2f2 !important;
+}
+
+:host /deep/ .ui-dropdown-items li:first-child {
+    background: #fff !important;
+    color: #5697f1 !important;
+}
+
+:host /deep/ .ui-dropdown-label {
+    background: #fff !important;
+}
+
+:host /deep/ .ui-dialog:hover .ui-dropdown-trigger {
+    background: #fff !important;
+}
+
+.tips {
+    font-weight: bold;
+}
+
+.tips i {
+    color: red;
+}
+
+
+/*自定义下拉列表*/
+
+.choice-box {
+    margin-top: 8px;
+}
+
+.btn-handel {
+    margin-top: 40px;
+}
+
+.dropdown-list {
+    display: inline-block;
+    width: 348px;
+    height: 28px;
+    border: 1px solid #dfe7f2;
+    vertical-align: middle;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+}
+
+i.fa-sort-down {
+    margin: 5px;
+}
+
+.dropdown-list-ul {
+    width: calc(100% + 2px);
+    height: 110px;
+    border: 1px solid #dfe7f2;
+    position: absolute;
+    left: -1px;
+    top: 26px;
+    overflow-y: scroll;
+    z-index: 100;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0px 0px 5px #ddd;
+    background: #fff;
+}
+
+:host /deep/ .ui-dropdown-label {
+    opacity: 0;
+}
+
+:host /deep/ .ui-dropdown:hover {
+    background: #fff !important;
+}
+
+:host /deep/ .change-opacity {
+    opacity: 0 !important;
+}
+
+.pricese-crowd-first {
+    width: 800px;
+}
+
+.pricese-crowd-first .ui-g {
+    border: 1px solid #d3d8e3;
+    margin-top: 15px;
+}
+
+.pricese-crowd-first .ui-g-6 {
+    padding: 20px;
+    max-height: 300px;
+    overflow: auto;
+}
+
+.pricese-crowd-first .ui-g-6:last-child {
+    border-left: 1px solid #e6eefa;
+}
+
+.selcet-crowd-tit b {
+    margin-right: 8px;
+    color: #000000;
+    font-weight: normal;
+}
+
+.selcet-crowd-tit {
+    color: #acb0b8;
+}
+
+.first-name {
+    color: #000000;
+    font-size: 12px;
+    line-height: 12px;
+}
+
+.first-name span {
+    font-size: 12px;
+    line-height: 12px;
+}
+
+.search-box-special {
+    border-bottom: 0px !important;
+    background: #fbfcfe;
+    color: #cacfd6;
+    position: relative;
+}
+
+.new-build-btn {
+    height: 30px;
+    display: inline-block;
+    padding: 7px 20px 8px 20px;
+}
+
+.content {
+    margin-top: 12px;
+}
+
+.content a {
+    color: #5ba0ff;
+}
+
+:host /deep/ .ui-datatable .ui-datatable-thead {
+    display: none;
+}
+
+:host /deep/ .ui-datatable .ui-datatable-data tr.ui-datatable-even.ui-state-highlight {
+    background: #dfecff;
+    border: none;
+}
+
+:host /deep/ .ui-datatable .ui-datatable-data tr.ui-datatable-odd.ui-state-highlight {
+    background: #dfecff;
+    border: none;
+}
+
+:host /deep/ .ui-datatable .ui-datatable-data tr td {
+    padding: 10px;
+    font-size: 12px;
+    line-height: 12px;
+}
+
+:host /deep/ .ui-datatable .ui-datatable-data tr td:nth-child(2) {
+    text-align: right
+}
+
+:host /deep/ .ui-datatable .ui-datatable-data tr:first-child td {
+    border-top: 0px;
+}
+
+:host /deep/ .ui-datatable .ui-datatable-data tr:last-child td {
+    border-bottom: 0px;
+}
+
+:host /deep/ .ui-accordion .ui-accordion-content .ui-g .ui-g-6 {
+    padding: 20px;
+}
+
+:host /deep/ .ui-accordion .ui-accordion-content .ui-g .ui-g-6:nth-child(2) {
+    height: 300px;
+    overflow-y: scroll;
+}
+
+:host /deep/ .ui-accordion .ui-accordion-content .ui-g .ui-g-6:nth-child(1) {
+    border-right: 1px solid #e6eefa;
+}
+
+:host /deep/ .ui-accordion .ui-accordion-content .ui-g .ui-g-6:nth-child(1) label {
+    color: #959ba5;
+}
+
+:host /deep/ .ui-accordion .ui-accordion-content .ui-g .ui-g-6:nth-child(1) b {
+    color: #464c5b;
+    margin-right: 8px;
+}
+
+.name {
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+.last-time,
+.estimate {
+    margin: 20px 0 6px 0;
+    font-weight: bold;
+}
+
+.estimate-size {
+    /*font-size: 30px;
+    line-height: 30px;
+    color: #5ba0ff;*/
+    color: #627182;
+}
+
+.desc {
+    margin: 20px 0 6px 0;
+    font-weight: bold;
+}
+
+.btn-handel {
+    margin-top: 75px !important;
+}
+
+:host /deep/ .ui-datatable .ui-datatable-tablewrapper {
+    /*width: calc(100% + 5px);*/
+    height: 200px;
+    overflow-y: auto;
+    border-width: 1px 1px 1px 1px;
+    border-color: #dfe7f2;
+    border-style: solid;
+}
+
+.search-box-special {
+    border-bottom: 0px !important;
+    color: #cacfd6;
+    position: relative;
+    background: #fbfcfe;
+}
+
+.search-box-special input {
+    background: #fbfcfe;
+}
+
+.search-box {
+    height: 30px;
+    border: 1px solid #dee6ed;
+    border-radius: 4px 4px 0 0;
+    background: #fbfcfe;
+}
+
+.search-box input {
+    border: none;
+}
+
+.search-box .fa-search {
+    color: #b8bfc8;
+    margin: 0 6px;
+}
+
+.search_input {
+    padding: 7px 0px;
+    width: 320px;
+}
+
+i.icon-empty1 {
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 7px;
+    font-size: 16px;
+    color: #e2e7ed;
+}

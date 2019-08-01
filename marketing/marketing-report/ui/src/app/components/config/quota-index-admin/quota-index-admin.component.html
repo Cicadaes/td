@@ -1,0 +1,106 @@
+<main>
+    <div class="quota-index-box">
+        <div>
+            <button [disabled]="isDisabled" pButton type="button" (click)="newBuild()" label="新建"></button>
+        </div>
+        <!--搜索-->
+        <div class="search-box">
+            <span>名称：</span>
+            <input type="text" [(ngModel)]="searchName" class="change-name"   />
+            <span>创建人：</span>
+            <input type="text" [(ngModel)]="searchBuilder" class="change-name"   />
+            <button pButton type="button" (click)="search()" label="查询"></button>
+            
+        </div>
+        <!--展示查询提交过的列表数据-->
+        <table *ngIf="updateTableList.length" width="100%" border="0" cellspacing="0" cellpadding="0" class="tab-activity">
+            <tr>
+                <th scope="col" >名称</th>
+                <th scope="col" >事件ID</th>
+                <th scope="col" >描述</th>
+                <th scope="col" >创建人</th>
+                <th scope="col" >创建时间</th>
+                <th scope="col">操作</th>
+            </tr>
+            <tr *ngFor = "let item of updateTableList; let i=index" >
+                <td style="width:20%">
+                    {{item.name}}
+                </td>
+                <td style="width:16%">{{item.eventId}}</td>
+                <td style="width:26%">{{item.description}}</td>
+                <td style="width:15%">{{item.createBy}}</td>
+                <td style="width:10%">
+                    {{item.createTime | date:'yyyy-MM-dd HH:mm'}}
+                </td>
+                <td style="width:14%;">
+                    <button class="change" pButton type="button" (click)="change(i)" label="修改"></button>
+                    <button class="del" pButton type="button" (click)="delete(i)" label="删除"></button>                
+                </td>
+            </tr>
+            
+        </table>
+        <p-growl [value]="msgs" life="3000"></p-growl>
+        <!--添加无数据显示语句-->
+        <p class="tip" *ngIf="!updateTableList.length">暂时没有数据...</p>
+        <!--新建弹框-->
+        <p-dialog header="新建" (onAfterHide) = "dialogHide()" [(visible)]="newDisplay" [draggable]="false" modal="modal" >
+            <div class="clearfix">
+                <span class="l">名称：</span>
+                <div class="r" style="width:80%;">
+                    <input type="text" style="width:100%;" [(ngModel)]="newName" class="change-name"   />  
+                </div>          
+            </div>
+            <div class="event-div clearfix">
+                <span class="l">指标：</span>
+                <div class="r" style="width:80%;">
+                    <p-dropdown (onChange) = "changeSel()" [options]="selList" [(ngModel)]="selectedSel" [style]="{'width':'100%'}" ></p-dropdown>                
+                </div>
+            </div>
+            <div class="event-div clearfix">
+                <span class="l">所属图表：</span>
+                <div class="r" style="width:80%;">
+                    <p-dropdown (onChange) = "changeSel()" [options]="chartList" [(ngModel)]="selectedChart" [style]="{'width':'100%'}" ></p-dropdown>                
+                </div>
+            </div>
+            <div class="clearfix">
+                <span class="desc l">描述：</span>
+                <div class="r" style="width:80%;">
+                    <textarea class="textarea" [(ngModel)]="newDesc"></textarea>                                
+                </div>
+            </div>
+            <p-footer>
+                <div class="r btn-handel">
+                    <button class="cancel" type="button" pButton (click)="cancelNew()" label="取消"></button>
+                    <button class="confirm" type="button" pButton (click)="confirmNew()" label="确定"></button>
+                </div>
+            </p-footer>
+        </p-dialog>
+        <!--修改弹框-->
+        <p-dialog (onAfterHide) = "changeDialogHide()" header="修改" [(visible)]="changeDisplay" [draggable]="false" modal="modal" >
+            <div class="clearfix">
+                <span class="l">名称：</span>
+                <div class="r" style="width:80%;">
+                    <input style="width:100%;" type="text" [(ngModel)]="changeName" class="change-name"   />
+                </div>            
+            </div>
+            <div class="event-div clearfix">
+                <span class="l">描述：</span>
+                <div class="r" style="width:80%;">
+                    <textarea class="textarea" [(ngModel)]="changeDesc"></textarea>
+                </div>
+            </div>
+            <p-footer>
+                <div class="r btn-handel">
+                    <button class="cancel" type="button" pButton (click)="cancelChange()" label="取消"></button>
+                    <button class="confirm" type="button" pButton (click)="confirmChange()" label="确定"></button>
+                </div>
+            </p-footer>
+        </p-dialog>
+        <!--删除确认弹框-->
+        <p-confirmDialog width="304" height="150" [acceptLabel]="acceptLabel" [rejectLabel]="rejectLabel"></p-confirmDialog>
+        <!--分页-->
+        <div>
+            <x-paginator [value]="value" (onPagesChange)="paginate($event)"></x-paginator>
+        </div>
+    </div>
+</main>

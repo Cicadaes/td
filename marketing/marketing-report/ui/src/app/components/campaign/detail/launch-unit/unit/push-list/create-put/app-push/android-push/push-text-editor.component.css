@@ -1,0 +1,134 @@
+/*:host /deep/ .ui-widget-content {
+    border: 0 none;
+    background: #c3cbd6;
+    height:16px;
+    vertical-align:middle;
+}*/
+
+.rich-text {
+    color: #000;
+}
+
+.span-desc {
+    margin-right: 10px;
+}
+
+.span-desc i {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: top;
+}
+
+.editor-input {
+    border: 1px solid #cccccc;
+    border-top: none;
+    padding: 13px;
+    background-color: #f3f8ff;
+    color: #657180;
+}
+
+.editor-down {
+    border: 1px solid #cccccc;
+    border-top: none;
+    border-radius: 0 0 3px 3px;
+    padding: 13px;
+    background-color: #f3f8ff;
+    color: #657180;
+}
+
+.question-tip {
+    left: 20px;
+    top: -30px;
+}
+
+.err-tip {
+    margin-top: 4px;
+    color: #ff6e6b;
+}
+
+.err-tip .icon-empty1 {
+    font-size: 16px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.err-tip span {
+    vertical-align: middle;
+}
+
+.json-list {
+    width: 100%;
+    height: auto;
+    padding-top: 5px;
+}
+
+.json-list li {
+    height: 26px;
+    line-height: 26px;
+    margin: 5px 15px;
+    text-align: center;
+    float: left;
+    position: relative;
+    background: #5ba0ff;
+    padding: 0 10px 0 5px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+.json-list li span {
+    color: #ffffff;
+    font-size: 12px;
+}
+
+.json-list li .triangle {
+    position: absolute;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-top: 13px solid transparent;
+    border-right: 13px solid #5ba0ff;
+    border-bottom: 13px solid transparent;
+    left: -12px;
+    top: 0;
+}
+
+.text_editor_title input:disabled {
+    background: transparent !important;
+}
+.special-rich-text {
+    color: #464c5b;
+}
+.text_input_push{
+    color: #464c5b;
+    font-family: 'Microsoft YaHei';
+}
+.text_input_push:disabled{
+    background: #fff !important;
+    opacity: 0.3 !important;
+}
+.text_input_push:disabled:hover{
+    opacity: 0.3;
+}
+div.disabled-show{
+    width: 100%; 
+    height :100%; 
+    opacity: 0.3; 
+    border-radius:3px 3px 0 0; 
+    border: 1px solid #dee6ed;
+    user-select: none;
+}
+:host /deep/ .ql-editor p{
+    color: #464c5b !important;
+    font-family: 'Microsoft YaHei' !important;
+    
+}
+:host /deep/ .ui-chkbox-box{
+    border: 1px solid rgba(101,113,128,0.6) !important;
+}
+:host /deep/ .ui-state-disabled{
+    border: 1px solid rgba(101,113,128,0.4) !important;
+}
+:host /deep/ span.disabled{
+    opacity: .3;
+}

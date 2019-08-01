@@ -1,0 +1,97 @@
+<main>
+    <div class="dataHead">
+        <div class="control-group clearfix">
+            <label class="control-label l">过滤选项</label>
+            <div class="controls l">
+                共<span class="act-num">{{campaigns.total || 0}}</span>个营销活动
+            </div>
+        </div>
+
+        <div class="control-group clearfix">
+            <label class="control-label l">活动时间</label>
+            <div class="controls l">
+                <datePicker [value]="marketingValue" (onSelect)="onSelect($event)"></datePicker>
+            </div>
+        </div>
+
+        <div class="control-group clearfix">
+            <label class="control-label l">活动状态</label>
+            <div class="controls l btn-box">
+                <p-selectButton [options]="campaignStatus" [(ngModel)]="selectedCampaignStatus" (onChange)="changeStatus($event)"></p-selectButton>
+            </div>
+        </div>
+        <div class="control-group clearfix">
+            <label class="control-label l">活动名称</label>
+            <div class="controls search-activity l">
+                <i class="fa fa-search"></i>
+                <i *ngIf="searchText" class="iconfonts icon-empty1" (click)="delText()"></i>
+                <input [(ngModel)]="searchText" type="text" pInputText size="50" placeholder="输入活动名称进行检索" (keyup)="searchByName()">
+            </div>
+        </div>
+    </div>
+
+    <div class="dataBody">
+        <div class="ui-widget-header clearfix">
+            <div class="l">
+                <p>活动列表</p>
+                <!--<i class="iconfonts icon-prompt1"></i>
+                <i class="fa fa-search"></i>
+                <i *ngIf="searchText" class="iconfonts icon-empty1" (click)="delText()"></i>
+                <input [(ngModel)]="searchText" type="text" pInputText size="50" placeholder="输入活动名称进行检索" (keyup)="searchByName()">-->
+            </div>
+            <div class="download r" (click)="downloadCampaignList()">
+                <i class="down_icon"></i>
+            </div>
+        </div>
+        <p-dataTable [value]="campaigns.data" [emptyMessage]="message">
+            <p-column field="name" header="活动名称">
+                <template let-data="rowData" pTemplate="body">
+                    <p class="name" [title]="data.name">{{data.name}}</p>
+                </template>
+            </p-column>
+            <p-column field="dateRange" header="活动时间">
+                <template pTemplate="header">
+                    <div (click)="sortDate()">
+                        <span>活动时间</span>
+                        <!--<div style="display: inline-block; vertical-align: sub;">
+                            <p style="display: block;" class="fa fa-caret-up"></p>
+                            <p style="display: block;margin-top:-6px;" class="fa fa-caret-down"></p>
+                        </div>-->
+                    </div>
+                </template>
+            </p-column>
+            <p-column header="活动状态">
+                <template let-data="rowData" pTemplate="body">
+                    <div *ngIf="data.status==1"><span class="waiting">●</span>等待开始</div>
+                    <div *ngIf="data.status==2"><span class="doing">●</span>进行中</div>
+                    <div *ngIf="data.status==3"><span class="done">●</span>已结束</div>
+                </template>
+            </p-column>
+            <p-column field="creator" header="创建人">
+                <template let-data="rowData" pTemplate="body">
+                    <p class="creator" [title]="data.creator">{{data.creator}}</p>
+                </template>
+            </p-column>
+            <p-column field="targetReachSituation" header="描述">
+                <template let-data="rowData" pTemplate="body">
+                    <p class="targetReachSituation" [title]="data.description">{{data.description}}</p>
+                </template>
+            </p-column>
+            <p-column header="操作" [style]="{'width':'150px'}">
+                <template let-data="rowData" pTemplate="body">
+                    <a title="详情" class="details" style="margin-right:16px;" (click)="detail(data.id)" aria-hidden="true">详情</a>
+                    <a title="报告" *ngIf="data.status != 1" class="report" style="margin-right:16px;" (click)="report(data.id)" aria-hidden="true">报告</a>
+                    <a *ngIf="data.status == 1" title="删除" class="delete" style="margin-right:16px;" (click)="delConfirm(data)" aria-hidden="true">删除</a>
+                    <a title="克隆" class="clone" (click)="cloneCampaign(data)" aria-hidden="true">克隆</a>
+                </template>
+            </p-column>
+
+        </p-dataTable>
+        <div>
+            <x-paginator [value]="value" [page]="queryListParam.page" (onPagesChange)="paginate($event)"></x-paginator>
+        </div>
+        <p-confirmDialog width="304" height="225" acceptLabel="确定删除"></p-confirmDialog>
+        <!--新建营销活动-->
+        <new-campaign (hideNewMarketing)="hideMarketingDialog($event)" (errorMessage)="errorMessage($event)" [cloneId]="cloneId" [showNewMarketingDialog]="showNewMarketing"></new-campaign>
+    </div>
+</main>

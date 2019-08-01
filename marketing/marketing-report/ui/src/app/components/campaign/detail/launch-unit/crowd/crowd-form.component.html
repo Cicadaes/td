@@ -1,0 +1,74 @@
+<main class="crowd_form">
+    <p-dialog header="{{name}}" [(visible)]="show" [draggable]="false" width="{{wt}}" height="{{ht}}" [resizable]="false" [contentStyle]="{'height': 'calc(100% - 40px)'}" modal="modal" responsive="true" (onAfterHide)="afterDialogHide()">
+        <!--<button *ngIf="show && showsence=='1'" style="" pButton type="button" label="返回" (click)="goback()"></button>-->
+        <my-iframe [src]="src" *ngIf="show && showsence=='1'"></my-iframe>
+        <span *ngIf="showsence == '2'" class="tips"><i>*</i> 投放单元人群不支持二次编辑，请谨慎创建/选择</span>
+        <div class="choice-box" *ngIf="showsence == '2'">
+            <div class="panel clearfix panel-wap-wap">
+                <div class="new-build-btn" (click)="addPersonCrowd()">
+                    <i class="iconfonts icon-new"></i>
+                    <span>新建{{name}}</span>
+                </div>
+                <div class="pricese-crowd-first">
+                    <div class="ui-g show">
+                        <div class="ui-g-6">
+                            <label class="selcet-crowd-tit"><b>选择人群</b>(请从下方选择一个已创建好的人群)</label>
+                            <div class="content">
+                                <!--模糊搜索，以后可能会打开-->
+                                <div class="search-box search-box-special">
+                                    <i class="fa fa-search" style="font-size: 15px"></i>
+                                    <span>|</span>
+                                    <i *ngIf="searchCrowdName" class="iconfonts icon-empty1" (click)="delText()"></i>
+                                    <input class="search_input" type="text" [(ngModel)]="searchCrowdName" (keyup)="changeCrowdName()" pInputText placeholder="请输入人群名称">
+                                </div>
+                                <p-dataTable [value]="crowdList" emptyMessage="暂无数据" selectionMode="single" [(selection)]="selectCrowdData">
+                                    <p-column>
+                                        <template let-crowd="rowData" pTemplate="body">
+                                            {{crowd.refName || crowd.refName}}
+                                        </template>
+                                    </p-column>
+                                    <p-column>
+                                        <template let-crowd="rowData" pTemplate="body">
+                                            {{crowd.estimatedSize}}人
+                                        </template>
+                                    </p-column>
+                                    <p-footerColumnGroup *ngIf="showLoadMore">
+                                        <p-row>
+                                            <p-column colspan="2">
+                                                <template pTemplate="footer">
+                                                    <div style="width:100%" style="text-align:center;">
+                                                        <a (click)="loadMoreCrowd()">点击加载更多</a>
+                                                    </div>
+                                                </template>
+                                            </p-column>
+                                        </p-row>
+                                    </p-footerColumnGroup>
+                                </p-dataTable>
+                            </div>
+                        </div>
+                        <div class="ui-g-6">
+                            <h3 class="name first-name">人群名称</h3>
+                            <span style="color:#627182;">{{selectCrowdData && (selectCrowdData.refName || selectCrowdData.name) || "--"}}</span>
+                            <h3 *ngIf="tp == 'scene'" class="last-time first-name">有效区间</h3>
+                            <span *ngIf="tp == 'scene' && (!selectCrowdData || !selectCrowdData.startTime || !selectCrowdData.endTime)" style="color:#627182">--</span>
+                            <span *ngIf="tp == 'scene' && selectCrowdData && selectCrowdData.startTime && selectCrowdData.endTime" style="color:#627182">{{selectCrowdData.startTime | date:'yyyy-MM-dd'}} ~ {{selectCrowdData.endTime | date:'yyyy-MM-dd'}}</span>
+                            <h3 class="last-time first-name">最后更新时间</h3>
+                            <span style="color:#627182;">{{(selectCrowdData && (selectCrowdData.lastUpdateTime || selectCrowdData.updateTime || selectCrowdData.createTime) | date:'yyyy-MM-dd HH:mm:ss') || "--"}}</span>
+                            <h3 class="estimate first-name">规模</h3>
+                            <span class="estimate-size" *ngIf="selectCrowdData">{{selectCrowdData && selectCrowdData.estimatedSize}}人</span>
+                            <span style="color:#627182;" *ngIf="!selectCrowdData">--</span>
+                            <h3 class="desc first-name">人群描述</h3>
+                            <span style="color:#627182;" *ngIf="selectCrowdData" class="desc_content" [innerHtml]="selectCrowdData.description || '暂无描述'"></span>
+                            <span style="color:#627182;" *ngIf="!selectCrowdData" class="desc_content" [innerHtml]="'--'"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="r btn-handel">
+                    <button class="cancel" type="text" pButton (click)="cancel()" label="取消"></button>
+                    <button class="confirm dis-btn" type="text" pButton (click)="saveOldCrowd()" label="确定"></button>
+                </div>
+            </div>
+        </div>
+    </p-dialog>
+    <p-growl [(value)]="msgs"></p-growl>
+</main>

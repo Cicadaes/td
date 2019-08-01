@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd ">
+    <id>release</id>
+
+    <formats>
+        <format>dir</format>
+        <!--<format>tar.gz</format>-->
+    </formats>
+
+    <!--各模块打包为tar.gz包-->
+    <files>
+        <file>
+            <source>../marketing-batch/target/marketing-batch-release.tar.gz</source>
+            <outputDirectory>/</outputDirectory>
+            <destName>marketing-batch.tar.gz</destName>
+        </file>
+        <file>
+            <source>../marketing-report/web/target/marketing-report-release.tar.gz</source>
+            <outputDirectory>/</outputDirectory>
+            <destName>marketing-report.tar.gz</destName>
+        </file>
+        <file>
+            <source>../marketing-streaming/target/marketing-streaming-release.tar.gz</source>
+            <outputDirectory>/</outputDirectory>
+            <destName>marketing-streaming.tar.gz</destName>
+        </file>
+    </files>
+
+    <!--各模块打包为目录-->
+    <!--<fileSets>-->
+        <!--<fileSet>-->
+            <!--<directory>../marketing-batch/target/marketing-batch-release/marketing-batch</directory>-->
+            <!--<outputDirectory>/marketing-batch</outputDirectory>-->
+            <!--<filtered>true</filtered>-->
+        <!--</fileSet>-->
+        <!--<fileSet>-->
+            <!--<directory>../marketing-report/web/target/marketing-report-release/marketing-report</directory>-->
+            <!--<outputDirectory>/marketing-report</outputDirectory>-->
+            <!--<filtered>true</filtered>-->
+        <!--</fileSet>-->
+        <!--<fileSet>-->
+            <!--<directory>../marketing-streaming/target/marketing-streaming-release/marketing-streaming</directory>-->
+            <!--<outputDirectory>/marketing-streaming</outputDirectory>-->
+            <!--<filtered>true</filtered>-->
+        <!--</fileSet>-->
+    <!--</fileSets>-->
+</assembly>

@@ -1,0 +1,135 @@
+<main>
+    <div class="control-group">
+        <div style="padding-bottom:8px;">
+            <h2 style="font-size: 12px;">
+                <span class="required">*</span>消息内容
+            </h2>
+            <span class="inRight">
+                <p-checkbox [disabled]="segmentCommunicationService.isUpdate == 0" [(ngModel)]="pushData[pieceIndex].action" binary="true"></p-checkbox>静默推送
+            </span>
+        </div>
+        <div style="width :100%; height :95px;">
+            <textarea *ngIf="!segmentCommunicationService.quoteList || segmentCommunicationService.quoteList == 0" style="width:100%; height: 100%; border-radius:3px 3px 0 0;  resize: none;" pInputTextarea disabled="{{pushData[pieceIndex].action || segmentCommunicationService.isUpdate === 0 || false}}"
+                [(ngModel)]="pushData[pieceIndex].message"></textarea>
+            <textarea id="insertData" *ngIf="segmentCommunicationService.quoteList && segmentCommunicationService.quoteList.length > 0" style="width:100%; height: 100%; border-radius:3px 3px 0 0; resize: none;" [(ngModel)]="pushData[pieceIndex].message" pInputTextarea
+                disabled="{{pushData[pieceIndex].action || segmentCommunicationService.isUpdate === 0 || false}}"></textarea>
+        </div>
+        <div *ngIf="segmentCommunicationService.quoteList && segmentCommunicationService.quoteList.length > 0" class="editor-input">
+            <label>单击标签在光标处插入变量</label>
+            <ul class="json-list clearfix">
+                <li *ngFor="let quote of segmentCommunicationService.quoteList">
+                    <i class="triangle"></i>
+                    <span (click)="jsonInsert('{' + quote + '}')">{{'+{$' + quote + '}'}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <p *ngIf="segmentCommunicationService.isError && segmentCommunicationService.isError.content && segmentCommunicationService.isError.content.indexOf(pieceIndex) != -1" class="warn-tip">
+        <i class="iconfonts icon-empty1"></i>请填写消息内容。
+    </p>
+
+
+    <div class="text_editor_title clear">
+        <span class="r">
+            <input type="checkbox" id="checkbox_ios1" class="chk_3" [(ngModel)]="isCustomSound" (click)="changeSound()" disabled="{{pushData[pieceIndex].action || segmentCommunicationService.isUpdate === 0 || false}}" />
+            <label [ngClass]="{disabled: pushData[pieceIndex].action || segmentCommunicationService.isUpdate === 0 || false}" for="checkbox_c1"></label>
+        </span>
+        <em>自定义声音</em>
+        <i class="fa fa-question-circle question-tip-box">
+            <div class="question-tip">
+                <em></em>
+                自定义推送到达时播放的提示声音
+            </div>
+        </i>
+    </div>
+
+    <div class="text_editor_input">
+        <input *ngIf="!pushData[pieceIndex].action && isCustomSound" type="text" placeholder="请输入应用包中声音文件名" class="text_input_push" [disabled]="!isCustomSound || pushData[pieceIndex].action || segmentCommunicationService.isUpdate === 0 || false" [(ngModel)]="pushData[pieceIndex].soundName">
+    </div>
+
+    <div class="text_editor_title">
+        <span class="r">
+            <input type="checkbox" id="checkbox_ios2" class="chk_3" [(ngModel)]="isDigitalAngle" disabled="{{pushData[pieceIndex].action || segmentCommunicationService.isUpdate === 0 || false}}" />
+            <label [ngClass]="{disabled: pushData[pieceIndex].action || segmentCommunicationService.isUpdate === 0 || false}" for="checkbox_c1"></label>
+        </span>
+        <em>数字角标</em>
+        <i class="fa fa-question-circle question-tip-box">
+            <div class="question-tip">
+                <em></em>
+                推送到达时在应用图标右上角显示数字标注
+            </div>
+        </i>
+    </div>
+
+    <div class="text_editor_input">
+        <input *ngIf="!pushData[pieceIndex].action && isDigitalAngle" type="text" placeholder="请输入小于99的整数" class="text_input_push" [disabled]="!isDigitalAngle || pushData[pieceIndex].action || segmentCommunicationService.isUpdate === 0 || false" [(ngModel)]="pushData[pieceIndex].badge">
+    </div>
+
+    <div class="text_editor_title">
+        <span class="r">
+            <input type="checkbox" id="checkbox_ios3" class="chk_3" [(ngModel)]="pushData[pieceIndex].isVibration" [disabled]="segmentCommunicationService.isUpdate === 0 "  (change)="changeCustom()" />
+            <label [ngClass]="{disabled: pushData[pieceIndex].action || segmentCommunicationService.isUpdate === 0 || false}" for="checkbox_c1"></label>
+        </span>
+        <em>自定义参数</em>
+        <i class="fa fa-question-circle question-tip-box">
+            <div class="question-tip params">
+                <em></em>
+                在推送的内容里面附加自定义参数，参数将透传至应用，由应用自行处理
+            </div>
+        </i>
+    </div>
+
+    <div class="text_editor_list" *ngIf="pushData[pieceIndex].isVibration">
+        <dl style="float:none;" *ngFor="let list of pushData[pieceIndex].extendAttr; let i = index;">
+            <dt>键 (key）</dt>
+            <dd><input type="text" disabled="{{segmentCommunicationService.isUpdate === 0}}" placeholder="请输入key" class="text_input_push" [(ngModel)]="list['key']"></dd>
+            <dt>值 (value）</dt>
+            <dd><input type="text" disabled="{{segmentCommunicationService.isUpdate === 0}}" placeholder="请输入value" class="text_input_push" [(ngModel)]="list['value']"></dd>
+            <span *ngIf="i != 0" class="iconfont icon-delete" (click)="deleteEx(i)"></span>
+        </dl>
+        <p *ngIf="exError" class="warn-tip"><i class="iconfonts icon-empty1"></i>请先填写key和value。</p>
+        <div *ngIf="segmentCommunicationService.isUpdate !== 0" class="text_editor_button" (click)="addEx()">
+            <span class="iconfont icon-add"></span>
+            <span>新增自定义程序值</span>
+        </div>
+    </div>
+
+    <!--<div class="control-group">
+        <label class="control-label">点击通知后的行为</label>
+        <div class="controls">
+            <p-radioButton [disabled]="silentPush" value="0" label="打开应用" [(ngModel)]="afterNoticeBehavior"></p-radioButton>
+            <br>
+            <p-radioButton [disabled]="silentPush" value="1" label="深度链接" [(ngModel)]="afterNoticeBehavior"></p-radioButton>
+            <input type="text" *ngIf="afterNoticeBehavior=='1'" pInputText placeholder="请输入深度链接">
+        </div>
+    </div>-->
+
+
+    <div class="text_editor_title">
+        <em>
+            <span class="required">*</span>
+            推送通道
+            <!-- <a (click)="showDialog = !showDialog" class="text_title_btn">配置</a> -->
+        </em>
+    </div>
+
+    <!--<div class="text_choose_list clearfix">
+        <ul>
+            <li class="text_choose_color">APNS<br>测试通道 </li>
+            <li>APNS<br>极光推送</li>
+        </ul>
+    </div>-->
+
+    <div class="clearfix selected-btn">
+        <ios-push-config (hideDialog)="hideMsgConfigDialog($event)" [showDialog]="showDialog" [app]="msgConfig.appid"></ios-push-config>
+        <p-selectButton [options]="iosPushTypes" [disabled]="segmentCommunicationService.isUpdate == 0" [(ngModel)]="pushData[pieceIndex].prod"></p-selectButton>
+    </div>
+    <create-put-event-time [promotion]="msgConfig" [dateRange]="dateRange"></create-put-event-time>
+    <div class="control-group control-group-last">
+        <p>
+            <p-checkbox [disabled]="segmentCommunicationService.isUpdate == 0" [(ngModel)]="pushData[pieceIndex].ttlType" binary="true"></p-checkbox>发送时处于离线的用户，如在
+            <p-dropdown [disabled]="segmentCommunicationService.isUpdate == 0" [style]="{'width':'84px'}" [options]="offLinePushTimes" [(ngModel)]="pushData[pieceIndex].timeToLive"></p-dropdown>
+            恢复在线，仍然进行推送
+        </p>
+    </div>
+</main>

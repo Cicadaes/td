@@ -1,0 +1,7 @@
+:hover /deep/ tr>th {
+    overflow: visible;
+}
+
+:host /deep/ tr th:first-child {
+    width: 149px;
+}

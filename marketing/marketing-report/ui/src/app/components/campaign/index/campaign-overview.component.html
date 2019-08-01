@@ -1,0 +1,73 @@
+<main>
+
+    <div class="dataHead">
+        <p class="title">当前年度营销计划完成情况</p>
+        <ul class="list">
+            <li>
+                <span class="mkt_count">{{campaignOverview.total}}</span>
+                <p class="font-slender">总营销活动数</p>
+            </li>
+            <li>
+                <span class="mkt_count">{{campaignOverview.finish}}</span><span class="percentage">({{campaignOverview.finishPercent || 0.00}}%)</span>
+                <div class="progress_bar">
+                    <div class="progress_percent" [ngStyle]="{'width': (campaignOverview.finishPercent || 0) + '%'}"></div>
+                </div>
+                <p class="font-slender">已完成活动数</p>
+            </li>
+            <li>
+                <span class="mkt_count">{{campaignOverview.inProgress}}</span><span class="percentage">({{campaignOverview.inProgressPercent || 0.00}}%)</span>
+                <div class="progress_bar">
+                    <div class="progress_percent" [ngStyle]="{'width': (campaignOverview.inProgressPercent || 0) + '%'}"></div>
+                </div>
+                <p class="font-slender">进行中活动数</p>
+            </li>
+            <li>
+                <span class="mkt_count">{{campaignOverview.notStart}}</span><span class="percentage">({{campaignOverview.notStartPercent || 0.00}}%)</span>
+                <div class="progress_bar">
+                    <div class="progress_percent" [ngStyle]="{'width': (campaignOverview.notStartPercent || 0) + '%'}"></div>
+                </div>
+                <p class="font-slender">未开始活动数</p>
+            </li>
+        </ul>
+    </div>
+    <div class="dataBody">
+        <div class="top">
+            <div class="top-name">
+                营销活动计划表
+            </div>
+            <div *ngFor="let y of yearList;let i = index;" [ngStyle]="{'width': y.width}" [ngClass]="{'top-time': true, 'top-time-left-border': !!i}">
+                {{y.year}}
+            </div>
+        </div>
+        <div class="table-title">
+            <div class="title-name">活动名称</div>
+            <div class="title-month" *ngFor="let m of monthList;let i = index">
+                <div *ngIf="i==0" class="table-title-left" (click)="beforeMonth()"></div>
+                <div *ngIf="i==11" class="table-title-rigth" (click)="afterMonth()"></div>
+                {{m}}月
+            </div>
+        </div>
+        <div id="content" class="table-content">
+            <div class="content-list" *ngFor="let data of campaignList;">
+                <div class="content-name">
+                    <span [title]="data.name">{{data.name}}</span>
+                    <a (click)="report(data.id)">报告</a>
+                    <a (click)="detail(data.id)">详情</a>
+                </div>
+                <div class="content-table" *ngFor="let m of monthList;"></div>
+                <div class="content-plan">
+                    <div class="time-end" [ngStyle]="{'left': data.endLeft, 'width': data.endWidth}"></div>
+                    <div class="time-future" [ngStyle]="{'left': data.futureLeft, 'width': data.futureWidth}"></div>
+                    <div *ngIf="data.left" class="question-tip" [ngStyle]="{'left': data.tipLeft}">
+                        <em></em> {{data.startTime | dataFormat:'2'}}~{{data.endTime | dataFormat:'2'}}
+                        <span>{{data.status | campaignStatus}}</span>
+                    </div>
+                    <div *ngIf="!data.left" class="question-tip rigth-tip" [ngStyle]="{'left': data.tipLeft}">
+                        <em></em> {{data.startTime | dataFormat:'2'}}~{{data.endTime | dataFormat:'2'}}
+                        <span>{{data.status | campaignStatus}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

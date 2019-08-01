@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.CrowdDao">
+
+      <select id="queryByCampaignAndName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        FROM TD_MKT_CROWD
+        WHERE 1 = 1
+        <if test="name!=null">AND ref_name LIKE concat('%', #{name}, '%')</if>
+      </select>
+
+      <select id="findParentByCampaignId" resultMap="BaseResultMap">
+          select c.*
+          FROM TD_MKT_CROWD c,TD_MKT_SEGMENT_CROWD_REL r
+          WHERE r.campaign_id=#{campaignId}
+          AND c.parent_id=0
+          AND c.id = r.crowd_id
+      </select>
+
+      <select id="selectByIds" parameterType="List" resultMap="BaseResultMap">
+          SELECT <include refid="Base_Column_List"/>
+          FROM TD_MKT_CROWD
+          WHERE id IN
+            <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+      </select>
+
+    <select id="queryByStatus" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select <include refid="Base_Column_List" />
+        from TD_MKT_CROWD
+        where `status` = #{status}
+    </select>
+
+    <select id="queryByRefId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select <include refid="Base_Column_List" />
+        from TD_MKT_CROWD
+        where `ref_id` = #{refId} and status = 2 order by id DESC limit 1
+    </select>
+
+    <select id="queryByType" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        from TD_MKT_CROWD
+        where `crowd_type` = #{type} AND status IN
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        <![CDATA[
+             AND start_time <= #{now} AND end_time >= #{now}
+        ]]>
+    </select>
+
+    <select id="queryByParentId" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        from TD_MKT_CROWD
+        where `parent_Id` = #{parentId}
+    </select>
+
+    <update id="updateByRefId" parameterType="com.talkingdata.marketing.core.entity.campaign.Crowd">
+        update TD_MKT_CROWD
+        <set >
+            <if test="lastUpdateTime != null" >
+                `last_update_time` = #{lastUpdateTime},
+            </if>
+            <if test="status != null" >
+                `status` = #{status},
+            </if>
+            <if test="estimatedSize != null" >
+                `estimated_size` = #{estimatedSize},
+            </if>
+            <if test="pushEstimatedSize != null" >
+                `push_estimated_size` = #{pushEstimatedSize},
+            </if>
+            <if test="smsEstimatedSize != null" >
+                `sms_estimated_size` = #{smsEstimatedSize},
+            </if>
+            <if test="adEstimatedSize != null" >
+                `ad_estimated_size` = #{adEstimatedSize},
+            </if>
+        </set>
+        where `ref_id` = #{refId}
+    </update>
+
+    <update id="resetCrowdVersion" >
+        update TD_MKT_CROWD
+        <set>
+            `last_version` = NULL,
+            `calc_status` = #{calcStatus},
+            `estimated_size` = NULL ,
+            `push_estimated_size` = NULL ,
+            `sms_estimated_size` = NULL ,
+            `ad_estimated_size` = NULL
+        </set>
+        WHERE id IN
+        <foreach collection="crowdIdList" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <delete id="deleteByCreateTime" parameterType="string">
+        delete from TD_MKT_CROWD WHERE create_time > #{createTime}
+    </delete>
+
+
+    <select id="queryByStatusIn" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        from TD_MKT_CROWD
+        where 1=1
+        <trim suffixOverrides="," >
+            <if test="crowdPage.refName != null" >
+                and `ref_name` ${crowdPage.refNameOperator} #{crowdPage.refName}
+            </if>
+            <if test="crowdPage.crowdType != null" >
+                and `crowd_type` ${crowdPage.crowdTypeOperator} #{crowdPage.crowdType}
+            </if>
+        </trim>
+        AND `status` IN
+        <foreach collection="statusList" index="index" item="status" open="(" separator="," close=")">
+            #{status}
+        </foreach>
+        <if test="crowdPage.pager.orderCondition != null and crowdPage.pager.orderCondition != ''" >
+            ${crowdPage.pager.orderCondition}
+        </if>
+        <if test="crowdPage.pager.mysqlQueryCondition != null and crowdPage.pager.mysqlQueryCondition != ''" >
+            ${crowdPage.pager.mysqlQueryCondition}
+        </if>
+
+    </select>
+
+
+    <select id="queryCountByStatusIn" resultType="java.lang.Integer">
+        select count(1)
+        from TD_MKT_CROWD
+        where 1=1
+        <trim suffixOverrides="," >
+            <if test="crowdPage.refName != null" >
+                and `ref_name` ${crowdPage.refNameOperator} #{crowdPage.refName}
+            </if>
+            <if test="crowdPage.crowdType != null" >
+                and `crowd_type` ${crowdPage.crowdTypeOperator} #{crowdPage.crowdType}
+            </if>
+        </trim>
+        AND `status` IN
+        <foreach collection="statusList" index="index" item="status" open="(" separator="," close=")">
+            #{status}
+        </foreach>
+    </select>
+
+
+</mapper>

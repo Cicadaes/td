@@ -1,0 +1,10 @@
+<main>
+    <div class="tab">
+        <div [ngClass]="{'tab_overview':true,'active':!seleted}" (click)="seleted=!seleted;">流程列表</div>
+        <div [ngClass]="{'tab_overview':true,'active':seleted}" (click)="seleted=!seleted;">下线历史</div>
+    </div>
+
+    <process-list *ngIf="!seleted" ></process-list>
+
+    <offline-list *ngIf="seleted"></offline-list>
+</main>

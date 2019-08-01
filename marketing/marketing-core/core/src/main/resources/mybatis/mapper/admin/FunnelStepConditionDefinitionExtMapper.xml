@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.admin.FunnelStepConditionDefinitionDao" >
+
+    <insert id="insertBatch" parameterType="List">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+          SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO TD_MKT_FUNNEL_STEP_CONDITION_DEFINITION (<include refid="Base_Column_List" />)
+        VALUES
+          <foreach collection="list" item="funnelStepConditionDefinition" separator=",">
+              (
+               #{funnelStepConditionDefinition.id}, #{funnelStepConditionDefinition.funnelStepDefinitionId}, #{funnelStepConditionDefinition.key},
+               #{funnelStepConditionDefinition.operator}, #{funnelStepConditionDefinition.value}, #{funnelStepConditionDefinition.tenantId},
+               #{funnelStepConditionDefinition.creator}, #{funnelStepConditionDefinition.createBy},#{funnelStepConditionDefinition.createTime},
+               #{funnelStepConditionDefinition.updater}, #{funnelStepConditionDefinition.updateBy}, #{funnelStepConditionDefinition.updateTime}
+              )
+          </foreach>
+    </insert>
+
+    <select id="selectByIds" parameterType="List" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM TD_MKT_FUNNEL_STEP_CONDITION_DEFINITION
+        WHERE funnel_step_definition_id IN
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <delete id="deleteByCreateTime" parameterType="string">
+        delete from TD_MKT_FUNNEL_STEP_CONDITION_DEFINITION WHERE create_time > #{createTime}
+    </delete>
+</mapper>

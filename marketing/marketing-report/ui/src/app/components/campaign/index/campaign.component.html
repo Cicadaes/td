@@ -1,0 +1,32 @@
+<main *ngIf="indexSerivice.show">
+
+    <div class="tab">
+        <div [ngClass]="{'tab_overview':true,'active':!configService.indexSelect}" (click)="configService.indexSelect=false;">活动总览</div>
+        <div [ngClass]="{'tab_overview':true,'active':configService.indexSelect}" (click)="configService.indexSelect=true;">活动列表</div>
+        <div class="new-build-btn r" (click)="showNewMarketing = !showNewMarketing">
+            <i class="add_icon"></i>
+            <span class="font-slender">新建营销活动</span>
+        </div>
+    </div>
+
+    <div [ngClass]="{'hidden': configService.indexSelect, 'overview': true}">
+        <campaign-overview #overview [seleted]="!configService.indexSelect"></campaign-overview>
+    </div>
+    <div [ngClass]="{'hidden': !configService.indexSelect, 'content': true}">
+        <campaign-list (updateCampaignList)="updateCampaignList()" (changeLoading)="changeLoading($event)" (errorMessage)="errorMessage($event)"></campaign-list>
+    </div>
+
+    <!--新建营销活动-->
+    <new-campaign (hideNewMarketing)="hideMarketingDialog($event)" (errorMessage)="errorMessage($event)" [showNewMarketingDialog]="showNewMarketing"></new-campaign>
+
+    <!--加载中-->
+    <div *ngIf="loading && configService.indexSelect" class="loading_background">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+            </svg>
+        </div>
+    </div>
+    <!--报错提示-->
+    <p-growl [(value)]="msgs"></p-growl>
+</main>

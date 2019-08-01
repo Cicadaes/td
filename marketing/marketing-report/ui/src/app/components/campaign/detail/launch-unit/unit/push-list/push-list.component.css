@@ -1,0 +1,281 @@
+.advertisement-logo {
+    background-color: #63a5ff;
+    color: #fff;
+    padding: 2px 5px;
+    border-radius: 2px;
+    font-size: 10px;
+}
+
+.put-btn-box {
+    margin-left: 5px;
+    margin-bottom: 100px;
+    width: 200px;
+}
+
+.put-btn-box .put-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #5ba0ff;
+    border-radius: 4px;
+    color: #5ba0ff;
+    text-align: center;
+    line-height: 30px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.put-btn-box p {
+    margin-top: 7px;
+    margin-left: 12px;
+}
+
+.last-td {
+    width: 95px;
+}
+
+.last-td a {
+    /*color: #7d8793;*/
+    font-size: 16px;
+}
+
+.last-td .icon-view {
+    color: #5ba0ff;
+}
+
+.last-td a:nth-child(2) {
+    margin: 0 18px;
+}
+
+
+/*列表样式*/
+
+:host /deep/ .skin-blue .content .ui-widget-content {
+    padding: 0;
+}
+
+:host /deep/ .push-data-body .ui-datatable thead>tr>th {
+    border: none;
+    background: #fff;
+}
+
+:host /deep/ .push-data-body .ui-datatable thead>tr>th:first-child {
+    width: 80px;
+    padding-left: 0;
+}
+
+:host /deep/ .push-data-body .ui-datatable thead>tr>th:nth-child(6) {
+    width: 110px;
+}
+
+:host /deep/ .push-data-body .ui-datatable thead>tr>th:last-child {
+    width: 95px !important;
+}
+
+:host /deep/ .push-data-body .ui-datatable tbody {
+    border: none;
+}
+
+:host /deep/ .push-data-body .ui-datatable tbody>tr {
+    border: none;
+}
+
+:host /deep/ .push-data-body .ui-datatable tbody>tr>td {
+    border: none;
+    padding: 14px 10px;
+    overflow: visible;
+}
+:host /deep/ .push-data-body .ui-datatable tbody>tr>td:nth-child(2) p.name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+:host /deep/ .push-data-body .ui-datatable tbody>tr>td:nth-child(3) p.name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+:host /deep/ .push-data-body .ui-datatable tbody>tr>td:nth-child(5) p.name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+:host /deep/ .push-data-body .ui-datatable thead tr th {
+    padding: 10px 10px;
+}
+
+
+/*投放列表第一列图标*/
+
+.mode-push,
+.mode-msg {
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    line-height: 32px;
+    color: #fff;
+    border-radius: 4px;
+    position: relative;
+}
+
+.mode-push {
+    background: #ff7979;
+}
+
+.mode-msg {
+    background: #5dc3b7;
+}
+
+.mode-push div.line,
+.mode-msg div.line {
+    width: 1px;
+    height: 28px;
+    position: absolute;
+}
+
+.mode-push div.line {
+    background: #ff7979;
+}
+
+.mode-msg div.line {
+    background: #5dc3b7;
+}
+
+.mode-push div.bottom-line,
+.mode-msg div.bottom-line {
+    left: 15px;
+    bottom: -28px;
+}
+
+
+/*根据状态显示不同颜色样式*/
+
+
+/*灰色*/
+
+.grey {
+    background: #ccc;
+}
+
+.grey div.line {
+    background: #ccc;
+}
+
+
+/*蓝色*/
+
+.blue {
+    background: #5ba0ff;
+}
+
+.blue div.line {
+    background: #5ba0ff;
+}
+
+
+/*绿色*/
+
+.green {
+    background: #5dc3b7;
+}
+
+.green div.line {
+    background: #5dc3b7;
+}
+
+
+/*红色*/
+
+.red {
+    background: #ff7979;
+}
+
+.yellow {
+    background: #f90;
+}
+
+.red div.line {
+    background: #ff7979;
+}
+
+.new-add-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #5ba0ff;
+    color: #5ba0ff;
+    text-align: center;
+    line-height: 30px;
+    font-size: 14px;
+    margin: 14px 0 0 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.circle {
+    font-size: 12px;
+    vertical-align: middle;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.play {
+    font-size: 16px;
+    vertical-align: text-bottom;
+    /*margin-left: 10px;*/
+}
+
+
+/*确认删除弹框*/
+
+:host /deep/ .ui-dialog {
+    padding: 0 28px;
+}
+
+:host /deep/ .ui-confirmdialog-message {
+    color: #657180;
+    display: inline-block;
+    text-align: center;
+    font-size: 14px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-content {
+    padding-top: 25px;
+}
+
+:host /deep/ .ui-dialog .ui-widget-header {
+    padding-bottom: 28px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane {
+    margin-top: -15px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane {
+    border-top: none;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane button:nth-child(1) {
+    display: none;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane button:nth-child(2) {
+    width: 100%;
+    background: #ff6e6b;
+    color: #fff;
+    margin-top: 22px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane button:nth-child(2) .fa {
+    display: none;
+}
+
+.report {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    /*background-image: url(../../../../../../public/images/report.svg);*/
+    background-image: url(/marketing/public/images/report.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+}

@@ -1,0 +1,125 @@
+<main>
+    <!-- pipe-desc start -->
+    <div class="pipe-desc">
+        <base-desc textRequired="true" textTitle="投放名称" [(text)]="pipelineNodeCommunicationService.nodeData.name" [(desc)]="pipelineNodeCommunicationService.nodeData.description" [editFlag]="!pipelineNodeCommunicationService.editFlag"></base-desc>
+        <div class="add-desc">
+            <div class="pipe-item clearfix push-group">
+                <label class="item-label l">
+                    <span class="l">投放组</span>
+                    <i class="icon-info l" #groupPoint tooltipPosition="right" pTooltip="按“回车”键添加新投放组" [appendTo]="groupPoint"></i>
+                </label>
+                <div class="item-input r" (click)="showGroups($event)">
+                    <input class="text" type="text" placeholder="请输入内容" [(ngModel)]="pipelineNodeCommunicationService.nodeData.groupName" [disabled]="!pipelineNodeCommunicationService.editFlag" (input)="getGroupList()" (keydown)="saveGroup($event)" (focus)="getGroupList()"
+                    />
+                    <div [ngClass]="{'dropdown-trigger': true, 'disabled': !pipelineNodeCommunicationService.editFlag}">
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="showGroupList" class="dropdown">
+                <ul>
+                    <li *ngFor="let item of groupList">
+                        <span (click)="selectGroup(item)">{{item.groupName}}</span>
+                        <i class="delete" (click)="deleteGroup(item)"></i>
+                    </li>
+                </ul>
+            </div>
+            <div class="pipe-item clearfix push-times">
+                同一用户最多可收到
+                <input class="lite-num-input" tdLimitNumberInput condition="PI" type="text" [ngModel]="inputPositiveInteger(pipelineNodeCommunicationService.nodeData.maxDeliveryCount)" (ngModelChange)="pipelineNodeCommunicationService.nodeData.maxDeliveryCount=inputPositiveInteger($event);"
+                    [disabled]="!pipelineNodeCommunicationService.editFlag"> 次，频率不低于
+                <input class="lite-num-input" tdLimitNumberInput condition="PI" type="text" [ngModel]="inputPositiveInteger(pipelineNodeCommunicationService.nodeData.frequency)" (ngModelChange)="pipelineNodeCommunicationService.nodeData.frequency=inputPositiveInteger($event);"
+                    [disabled]="!pipelineNodeCommunicationService.editFlag">天
+            </div>
+        </div>
+    </div>
+    <!-- pipe-desc end -->
+
+    <div class="pipe-content">
+        <div class="pipe-item clearfix">
+            <label class="item-label l">
+                <span class="required">*</span>投放渠道</label>
+            <p-dropdown [style]="{'width':'263px','float':'right'}" [options]="channels" [(ngModel)]="pipelineNodeCommunicationService.nodeData.channelCode" placeholder="请选择投放渠道" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+        </div>
+        <div class="pipe-item pipe-number clearfix">
+            <label class="item-label l">通道号码</label>
+            <input type="text" class="chanel-number l" [(ngModel)]="pipelineNodeCommunicationService.nodeData.shortCode" [disabled]="!pipelineNodeCommunicationService.editFlag">
+            <button class="button-op confirm l" type="button" (click)="testDialog = true" [disabled]="!pipelineNodeCommunicationService.editFlag">测试发送</button>
+        </div>
+        <div class="pipe-item clearfix black-list">
+            <label class="item-label l no-line-height">
+                <span class="l">黑名单</span>
+                <i class="icon-info r" #iconInfo pTooltip="黑名单中包含的号码将会从目标用户中剔除" tooltipPosition="right" [appendTo]="iconInfo"></i>
+            </label>
+            <div class="upload-area" *ngIf="!csvFileName">
+                <div class="upload-show">
+                    <i class="blacklist-icon"></i>
+                    <span>上传黑名单列表</span>
+                </div>
+                <input id="uploadCsv" class="upload-input" type="file" accept=".csv" (change)="selectFile($event)" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                <p class="l download prompt">
+                    <i class="csvFile-icon"></i>请上传CSV格式文件，文件大小不能超过2M</p>
+            </div>
+            <div *ngIf="csvFileName" class="upload-file-name prompt">
+                <span>{{csvFileName}}</span>
+                <span class="clear-file" (click)="clearFile()">清除</span>
+            </div>
+        </div>
+        <div class="pipe-item clearfix sms-content">
+            <label class="item-label">
+                <span class="required">*</span>短信内容</label>
+            <div class="msg-cont put-in">
+                <textarea id="smsContent" class="short-msg-text" (keyup)="inputContent()" [(ngModel)]="pipelineNodeCommunicationService.nodeData.content" maxlength="500" pInputTextarea [disabled]="!pipelineNodeCommunicationService.editFlag"></textarea>
+                <p *ngIf="false" class="warn-tip">
+                    <i class="iconfonts icon-empty1"></i>请输入短信内容。 </p>
+                <p class="short-msg-desc">
+                    还可以输入
+                    <span>{{limitSize}}</span> 个字符，当前内容作为
+                    <span>1</span> 条短信发送
+                </p>
+            </div>
+        </div>
+        <div class="pipe-item clearfix push-time">
+            <label class="item-label">
+                <span class="required">*</span>投放时间</label>
+            <div class="charts-handle-date clearfix r">
+                <div class="l" [ngClass]="{active:isRightNow}" (click)="changeRightNow();">立即发送</div>
+                <div class="l" [ngClass]="{active:isFixTime}" (click)="changeFixTime();">定时发送</div>
+                <div class="l" [ngClass]="{active:isLoopTime}" (click)="changeLoop();">循环发送</div>
+            </div>
+            <ul class="send-choice">
+                <li *ngIf="sendType == 2 && !selectedLoop">
+                    <p-calendar placeholder="请选择时间" dataType="string" [(ngModel)]="sendTime" [inputStyle]="{'width': '130px' }" dateFormat="yy-mm-dd" [showIcon]="true" (onSelect)="changeTime()" [minDate]="startTime" [maxDate]="endTime" [defaultDate]="startTime" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-calendar>
+                    <p-dropdown [options]="hours" [style]="{'margin':'-2px 8px 0px 30px', 'width': '70px'}" [(ngModel)]="selectedHous" (click)="changeTime()" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                    <p-dropdown [options]="minutes" [style]="{'margin-top':'-2px', 'width': '60px'}" [(ngModel)]="selectedMins" (click)="changeTime()" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                    <!--<p *ngIf="segmentCommunicationService.isError && segmentCommunicationService.isError.sendTime" class="warn-tip"><i class="iconfonts icon-empty1"></i>{{segmentCommunicationService.isError.sendTime}}</p>-->
+                </li>
+                <li *ngIf="selectedLoop">
+                    <!--选择日周月-->
+                    <p-dropdown placeholder="选择类型" [style]="{'vertical-align':'middle', 'width':'80px', 'margin-right': '8px'}" (onChange)="sLoop($event)" [options]="period" [(ngModel)]="subTriggerType" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                    <p-dropdown placeholder="选择日期" [style]="{'width':'80px', 'margin-right': '8px'}" *ngIf="subTriggerType && subTriggerType==4" [style]="{'vertical-align':'middle'}" [options]="week" [(ngModel)]="cycleVal" (onChange)="changeLoopTime();" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                    <p-dropdown placeholder="选择日期" [style]="{'width':'80px', 'margin-right': '8px'}" *ngIf="subTriggerType && subTriggerType==5" [style]="{'vertical-align':'middle'}" [options]="month" [(ngModel)]="cycleVal" (onChange)="changeLoopTime();" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                    <p-dropdown [options]="hours" [style]="{'margin':'0px 8px 0px 0px', 'width': '51px'}" [(ngModel)]="cycleHour" (onChange)="changeLoopTime();" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                    <p-dropdown [options]="minutes" [style]="{'margin-top':'0px', 'width': '51px'}" [(ngModel)]="cycleMinute" (onChange)="changeLoopTime();" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                </li>
+            </ul>
+        </div>
+
+        <div class="pipe-item clearfix test-push">
+
+            <p-dialog header="短信测试发送" [(visible)]="testDialog" modal="true" width="300" height="200" [style]="{'padding': '0 28px'}">
+                <div class="push-info">
+                    <label>手机号码：</label>
+                    <input type="text" class="chanel-number" [(ngModel)]="sendCellphone" style="width: 190px;" oninput="if(value.length>11)value=value.slice(0,11)" (keyup)="inputCellphone()">
+                </div>
+                <p *ngIf="faultCellphone" class="warn-tip" style="margin-left: 70px">
+                    <i class="iconfonts icon-empty1"></i>请输入正确的手机号！</p>
+                <div class="r btn-handel" style="margin-top: 20px;">
+                    <button class="button-op cancel" type="button" (click)="testDialog = false;">取消</button>
+                    <button class="button-op confirm" type="button" (click)="sendTestMsg()">确定</button>
+                </div>
+            </p-dialog>
+        </div>
+    </div>
+    <p-growl [(value)]="msgs"></p-growl>
+</main>

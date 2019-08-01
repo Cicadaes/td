@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.EdmReachReportDao" >
+  <select id="findTimeaxisBySegmentId" resultType="string" parameterType="java.lang.Integer">
+    SELECT report_date FROM `TD_MKT_EDM_REACH_REPORT` where segment_id = #{segmentId} GROUP BY report_date ORDER BY create_time ASC
+  </select>
+
+  <select id="findBySegmentIdAndDate" resultMap="BaseResultMap" parameterType="map">
+    SELECT
+    id,campaign_id,segment_id,pipeline_id,pipeline_node_id,report_date,report_hour,SUM(succ_count) succ_count,SUM(fail_count) fail_count,
+    SUM(invalid_address_count) invalid_address_count,SUM(server_rejected_count) server_rejected_count,SUM(unknown_count) unknown_count,
+    SUM(read_count) read_count,SUM(person_read_count) person_read_count,SUM(click_link_count) click_link_count,tenant_id
+    FROM TD_MKT_EDM_REACH_REPORT
+    WHERE segment_id = #{segmentId}
+    <if test='reportDate != null'>
+      AND report_date=#{reportDate}
+    </if>
+    <if test='granularity == "h"'>
+      GROUP BY report_date, report_hour
+      ORDER BY report_date, report_hour;
+    </if>
+    <if test='granularity == "d"'>
+      GROUP BY report_date
+      ORDER BY report_date;
+    </if>
+    <!--GROUP BY segment_id,report_date,report_hour-->
+    <!--<if test="startTimeInDay != null" >-->
+      <!--<![CDATA[-->
+        <!--and create_time >= #{startTimeInDay}-->
+      <!--]]>-->
+    <!--</if>-->
+    <!--<if test="endTimeInDay != null" >-->
+      <!--<![CDATA[-->
+        <!--and create_time <= #{endTimeInDay}-->
+      <!--]]>-->
+    <!--</if>-->
+    <!--ORDER BY report_date,report_hour ASC-->
+  </select>
+
+  <select id="findByPipelineId" resultMap="BaseResultMap" parameterType="map">
+    SELECT
+    id,campaign_id,segment_id,pipeline_id,pipeline_node_id,report_date,report_hour,SUM(succ_count) succ_count,SUM(fail_count) fail_count,
+    SUM(invalid_address_count) invalid_address_count,SUM(server_rejected_count) server_rejected_count,SUM(unknown_count) unknown_count,
+    SUM(read_count) read_count,SUM(person_read_count) person_read_count,SUM(click_link_count) click_link_count,tenant_id
+    FROM TD_MKT_EDM_REACH_REPORT
+    WHERE pipeline_id=#{pipelineId} AND pipeline_node_id=#{pipelineNodeId}
+    <if test='granularity == "h"'>
+      GROUP BY report_date, report_hour
+      ORDER BY report_date, report_hour;
+    </if>
+    <if test='granularity == "d"'>
+      GROUP BY report_date
+      ORDER BY report_date;
+    </if>
+  </select>
+
+  <select id="findByPipelineIdAndDate" resultMap="BaseResultMap" parameterType="map">
+    SELECT
+    id,campaign_id,segment_id,pipeline_id,pipeline_node_id,report_date,report_hour,SUM(succ_count) succ_count,SUM(fail_count) fail_count,
+    SUM(invalid_address_count) invalid_address_count,SUM(server_rejected_count) server_rejected_count,SUM(unknown_count) unknown_count,
+    SUM(read_count) read_count,SUM(person_read_count) person_read_count,SUM(click_link_count) click_link_count,tenant_id
+    FROM TD_MKT_EDM_REACH_REPORT
+    WHERE pipeline_id=#{pipelineId} AND pipeline_node_id=#{pipelineNodeId} AND report_date=#{reportDate}
+    <if test='granularity == "h"'>
+      GROUP BY report_date, report_hour
+      ORDER BY report_date, report_hour;
+    </if>
+    <if test='granularity == "d"'>
+      GROUP BY report_date
+      ORDER BY report_date;
+    </if>
+  </select>
+
+  <insert id="batchInsert" parameterType="java.util.List">
+    INSERT INTO TD_MKT_EDM_REACH_REPORT(<include refid="Base_Column_List" />)
+    VALUES
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id}, #{item.campaignId}, #{item.segmentId}, #{item.reportDate}, #{item.reportHour}, #{item.succCount}, #{item.failCount}, #{item.invalidAddressCount}, #{item.serverRejectedCount}, #{item.unknownCount}, #{item.readCount}, #{item.personReadCount}, #{item.clickLinkCount}, #{item.tenantId}, #{item.createTime}, #{item.creator}, #{item.createBy}, #{item.updater}, #{item.updateBy}, #{item.updateTime})
+    </foreach>
+  </insert>
+
+  <insert id="insertOrUpdate" parameterType="com.talkingdata.marketing.core.entity.campaign.EdmReachReport" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO TD_MKT_EDM_REACH_REPORT
+    (`id`, `campaign_id`, `segment_id`, `report_date`, `report_hour`, `succ_count`, `fail_count`, `invalid_address_count`, `server_rejected_count`, `unknown_count`, `read_count`, `person_read_count`, `click_link_count`, `tenant_id`, `create_time`, `creator`, `create_by`, `updater`, `update_by`, `update_time`)
+    VALUES (#{id}, #{campaignId}, #{segmentId}, #{reportDate}, #{reportHour}, #{succCount}, #{failCount}, #{invalidAddressCount}, #{serverRejectedCount}, #{unknownCount}, #{readCount}, #{personReadCount}, #{clickLinkCount}, #{tenantId}, #{createTime}, #{creator}, #{createBy}, #{updater}, #{updateBy}, #{updateTime})
+    ON DUPLICATE KEY
+    UPDATE
+    <if test="succCount != null" >
+      `succ_count` = `succ_count`+#{succCount},
+    </if>
+    <if test="failCount != null" >
+      `fail_count` = `fail_count`+#{failCount},
+    </if>
+    <if test="readCount != null" >
+      `read_count` = `read_count`+#{readCount},
+    </if>
+    `update_time` = #{updateTime}
+  </insert>
+</mapper>

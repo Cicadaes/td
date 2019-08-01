@@ -1,0 +1,32 @@
+<main>
+    <h2>监测信息</h2><hr/>
+    <div class="control-group">
+        <label class="control-label">曝光监测</label>
+        <div class="controls">
+            <input class="form-control" type="text" pInputText [(ngModel)]="exposureMonitor" >
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">活动页</label>
+        <div class="controls">
+            <p-radioButton name="groupname" value="true" label="包含" [(ngModel)]="selectedValue"></p-radioButton>
+            <p-radioButton name="groupname" value="false" label="不包含" [(ngModel)]="selectedValue"></p-radioButton>
+        </div>
+    </div>
+    <div *ngIf="selectedValue=='true'">
+        <div class="control-group">
+            <label class="control-label">活动页地址</label>
+            <div class="controls">
+                <input type="text" class="form-control" pInputText placeholder="请输入活动名称" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">点击监测链接</label>
+            <div class="controls">
+                <input type="text" class="form-control" pInputText value="{{clickMonitorUrl}}" />
+            </div>
+        </div>
+    </div>
+</main>

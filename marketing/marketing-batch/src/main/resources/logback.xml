@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+   scan:当此属性设置为true时，配置文件如果发生改变，将会被重新加载
+   scanPeriod:监测配置文件是否有修改的时间间隔(默认单位是毫秒)
+   debug:为true是打印logback内部日志信息，实时查看logback运行状态
+-->
+<configuration scan="true" scanPeriod="6 hour" debug="false">
+
+    <contextName>marketing</contextName>
+    <!--配置外部资源-->
+    <property resource="config/config.properties" />
+    <!--全局日志级别-->
+    <property name="ROOT_LEVEL" value="INFO" />
+    <!--日志名称-->
+    <property name="DEBUG_LOG_FILE_NAME" value="marketing-batch-debug" />
+    <property name="INFO_LOG_FILE_NAME" value="marketing-batch-info" />
+    <property name="WARN_LOG_FILE_NAME" value="marketing-batch-warn" />
+    <property name="ERROR_LOG_FILE_NAME" value="marketing-batch-error" />
+    <property name="ALL_LOG_FILE_NAME" value="marketing" />
+    <!--保存多少天日志，超过会覆盖-->
+    <property name="MAX_HISTORY" value="30" />
+    <property name="LOG_PATH" value="${log.file.path}" />
+    <!-- 彩色日志 -->
+    <!-- 彩色日志依赖的渲染类 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+    <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+    <!-- 彩色日志格式 -->
+    <property name="BASE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%msg%n" />
+    <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}" />
+    <!-- Appender配置：5种 1.控制台输出、2.DEBUG级别、3.INFO级别、4.WARN级别、5.ERROR级别-->
+    <appender name="CONSOLE_APPENDER" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                ${CONSOLE_LOG_PATTERN}
+            </Pattern>
+        </layout>
+    </appender>
+    <appender name="ALL_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/${ALL_LOG_FILE_NAME}.log.%d</fileNamePattern>
+            <maxHistory>${MAX_HISTORY}</maxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                ${BASE_LOG_PATTERN}
+            </Pattern>
+        </layout>
+    </appender>
+    <!--Logger配置-->
+    <!--
+        -日志级别小到大->TRACE,DEBUG,INFO,WARN,ERROR,ALL,OFF
+        -设置全局日志级别，此处设为INFO
+        -DEBUG级别的日志最好单独配置，如dao层的日志主要是SQL
+    -->
+    <root level="${ROOT_LEVEL}">
+        <appender-ref ref="CONSOLE_APPENDER" />
+        <appender-ref ref="ALL_APPENDER" />
+    </root>
+
+    <logger name="com.talkingdata.marketing.core.dao" level="DEBUG" />
+    <logger name="com.talkingdata.marketing.batch.dao" level="DEBUG" />
+
+</configuration>

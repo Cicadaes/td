@@ -1,0 +1,35 @@
+.content {
+    margin: 10px;
+}
+
+.content-button {
+    margin: 10px;
+    text-align: right;
+}
+
+.content-button span {
+    cursor: pointer
+}
+
+.select-content {
+    border: 1px solid #d3d3d3;
+    height: 150px;
+    overflow: auto;
+}
+
+.select-content .tag {
+    display: inline-block;
+    border: 1px solid #d3d3d3;
+    padding: 5px; 
+}
+.select-content .tag span.compare-name{
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 128px;
+}
+.select-footer {
+    margin: 10px;
+    text-align: center;
+}

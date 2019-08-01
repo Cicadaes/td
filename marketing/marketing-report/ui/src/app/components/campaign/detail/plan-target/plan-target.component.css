@@ -1,0 +1,241 @@
+main {
+    margin-top: 20px;
+}
+
+.plan-box {
+    background: #fff;
+    box-shadow: 0 1px 1px 0 #CED3D9;
+    border-radius: 4px;
+}
+
+.plan-box h2.l {
+    font-size: 14px;
+    color: #464C5B;
+    line-height: 14px;
+    padding: 20px;
+}
+
+.plan-add {
+    height: 54px;
+}
+
+.plan-add .new_icon.r {
+    margin: 11px 20px;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background-image: url(marketing/public/images/icon-new.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+}
+
+.plan-add.has-data {
+    height: 48px;
+}
+
+.plan-box .plan-add.has-data h2.l {
+    padding: 17px 20px;
+}
+
+.plan-box .plan-add.has-data .new_icon.r {
+    margin: 8px 20px;
+}
+
+.plan-box .plan-target-box {
+    border-top: 1px solid #E1E8F0;
+    padding: 8px 20px;
+}
+
+.plan-box .plan-target-box .plan-target-content {
+    padding-left: 20px;
+    float: left;
+    display: block;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.plan-box .plan-target-box .plan-target-content:first-child,
+.plan-box .plan-target-box .plan-target-content:nth-of-type(3) {
+    padding-left: 0;
+}
+
+.plan-box .plan-target-box .plan-target-content:nth-of-type(3),
+.plan-box .plan-target-box .plan-target-content:nth-of-type(4) {
+    padding-top: 16px;
+}
+
+.plan-box .plan-target-box .plan-target {
+    background: #F4F7FB;
+    height: 48px;
+    color: #657180;
+    line-height: 12px;
+    position: relative;
+}
+
+.plan-box .plan-target-box .plan-target label {
+    font-size: 12px;
+    color: #657180;
+    line-height: 12px;
+    font-weight: 100;
+    display: inline-block;
+    padding: 18px 16px 18px 24px;
+}
+
+.plan-box .plan-target-box .plan-target label:nth-of-type(2) {
+    margin-left: -3px;
+}
+
+.plan-box .plan-target-box .plan-target.show-info {
+    box-sizing: border-box;
+}
+
+.plan-box .plan-target-box .plan-target.show-info span {
+    color: #464C5B;
+    line-height: 12px;
+}
+
+.plan-box .plan-target-box .plan-target.show-info .monitor-name {
+    display: inline-block;
+    width: 31.2%;
+    margin-left: -3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: text-bottom;
+}
+
+.plan-box .plan-target-box .plan-target .icon-done {
+    display: inline-block;
+    width: 16px;
+    height: 11px;
+    background-image: url(marketing/public/images/icon-done.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+    position: absolute;
+    top: 18px;
+    right: 45px;
+}
+
+.plan-box .plan-target-box .plan-target .icon-close1 {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    background-image: url(marketing/public/images/icon-close.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+    position: absolute;
+    top: 18px;
+    right: 16px;
+}
+
+.plan-box .plan-target-box .plan-target .icon-edit {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-image: url(marketing/public/images/icon-edit.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    position: absolute;
+    top: 17px;
+    right: 46px;
+}
+
+.plan-box .plan-target-box .plan-target .icon-del {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url(marketing/public/images/icon-del.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    position: absolute;
+    top: 16px;
+    right: 14px;
+}
+
+.plan-box .plan-target-box .new-num {
+    display: inline-block;
+    width: 23%;
+    height: 33px;
+    border-radius: 4px;
+    margin-left: -3px;
+    color: #55595E;
+    padding-left: 8px;
+    background: #FFFFFF;
+    border: 1px solid #D7DDE4;
+    box-sizing: border-box;
+}
+
+.plan-box .plan-target-box .new-num:read-only {
+    color: #ccc;
+}
+
+.tipWrap {
+    position: relative;
+}
+
+.tipWrap p.warn-tip {
+    position: absolute;
+    display: inline-block;
+    top: 100%;
+    left: 100%;
+    white-space: nowrap;
+}
+
+.plan-box .plan-target-box .plan_count {
+    width: 23%;
+    padding-left: 8px;
+    display: inline-block;
+    color: #464C5B;
+    line-height: 12px;
+    margin-left: -3px;
+}
+
+
+/*确认删除弹框*/
+
+:host /deep/ .ui-dialog {
+    padding: 0 28px;
+}
+
+:host /deep/ .ui-confirmdialog-message {
+    color: #657180;
+    display: inline-block;
+    text-align: center;
+    font-size: 14px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-content {
+    padding-top: 25px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane {
+    border-top: none;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane button:nth-child(1) {
+    display: none;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane button:nth-child(2) {
+    width: 100%;
+    background: #ff6e6b;
+    color: #fff;
+    margin-top: 22px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane button:nth-child(2) .fa {
+    display: none;
+}
+
+:host /deep/ .ui-tabview-panel.ui-widget-content {
+    padding: 0;
+}
+
+:host /deep/ .ui-dropdown label.ui-dropdown-label {
+    height: 31px;
+}

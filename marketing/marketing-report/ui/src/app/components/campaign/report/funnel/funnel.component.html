@@ -1,0 +1,163 @@
+<main>
+    <div class="content" *ngIf="showTrendCharts">
+        <p-growl [value]="msgs"></p-growl>
+        <div class="content-section choice-funnel">
+            <div>
+                <label class="funnel-choice">漏斗选择</label>
+                <p-dropdown (click)="focusList()" [style]="{'width':'238px','height':'30px'}" [options]="funnelList" (onChange)="selectFunnel()" [(ngModel)]="selectFunnelId" [style]="{'min-width': '200px'}" placeholder="请选择漏斗">
+                    <template let-funnel pTemplate="item">
+						<div class="add-funnel" style="text-indent: 1em;" *ngIf="funnel.value === 'add'" (click)="addFunnel($event)">
+							{{funnel.label}}
+						</div>
+						<div style="text-indent: 1em;" *ngIf="funnel.value !== 'add'">{{funnel.label}}</div>
+					</template>
+                </p-dropdown>
+                <!--产品说下面两个功能暂时隐藏-->
+                <p-checkbox style="margin-left:20px;" name="defaultFunnelGroup" binary="true" (onChange)="saveDefaultFunnel()" [(ngModel)]="defFun.defaultFlag" label="设为默认"></p-checkbox>
+                <div class="funnel-edit" (click)="editFunnel()"></div>
+                <div title="删除" class="funnel-delete" (click)="delConfirm()"></div>
+                <!--<a style="float: right;color: #5ba0ff;">查看漏斗列表</a>-->
+            </div>
+            <!--<div class="sub-box">
+                <label class="sub-devide">人群细分</label>
+                (click)="showSelectCrowd = true" (click)="op.toggle($event)"
+                <input (click)="op.toggle($event)" style="width:238px;height:30px;border:1px solid #dee6ed;border-radius: 4px;" placeholder="请选择" type="text" class="sub-text" />
+                <span *ngFor="let crowd of childCrowdList"><span style="margin:0 8px;"><span [ngStyle]="{'color':crowd.color,'font-size':'20px'}">●</span> {{crowd.refName}}</span>
+                </span>
+            </div>-->
+            <select-child-crowd [showSelectCrowd]="showSelectCrowd" (hideSelectCrowd)="hideSelectCrowdDialog($event)" [campaignId]="campaignId" (checkedCrowdList)="checkedCrowdList($event)"></select-child-crowd>
+        </div>
+    </div>
+    <div class="trans-view-title" *ngIf="showTrendCharts">
+        <h3>转化概览</h3>
+        <i class="fa fa-question-circle question-tip-box">
+            <div class="question-tip" style="width:300px; left:16px;top:-60px;">
+                <em></em>
+                起始用户数：漏斗第一步事件达成的用户数 <br>
+                终点用户数：漏斗最后一步事件达成的用户数<br>
+                整体转化率：漏斗从第一步到最后一步的用户转化率，即终点用户数/起始用户数<br>
+                该步转化率：从漏斗第一步到该步骤的用户转化率<br>
+                步骤间转化率：从上一步到该步骤的用户转化率
+            </div>
+        </i>
+    </div>
+    <div class="trans-view-box" *ngIf="showTrendCharts">
+        <div class="clearfix">
+            <div class="l left-charts-box">
+                <div class="clearfix">
+                    <div class="section l">
+                        <span>起始用户数</span>
+                        <p><span *ngFor='let view of transOverview'><span [ngStyle]="{'color':view.color}">{{view.startDeviceCount | formatNumber}}  </span></span>
+                        </p>
+                    </div>
+                    <div class="section l">
+                        <span>终点用户数</span>
+                        <p><span *ngFor='let view of transOverview'><span [ngStyle]="{'color':view.color}">{{view.endDeviceCount | formatNumber}}  </span></span>
+                        </p>
+                    </div>
+                    <div class="section no-border l">
+                        <span>整体转化率</span>
+                        <p><span *ngFor='let view of transOverview'><span [ngStyle]="{'color':view.color}">{{view.wholeConvertRate}}  </span></span>
+                        </p>
+                    </div>
+                </div>
+                <!--漏斗图-->
+                <div class="charts-box">
+                    <div id="funnelID" class="funnel-chart"></div>
+                </div>
+            </div>
+            <div class="r right-charts-box">
+                <div class="clearfix step-choice">
+                    <div class="l">
+                        <span>第</span>
+                        <p-dropdown (onChange)="changeTrendStep()" [style]="{'min-width':'65px','margin':'0 12px'}" [options]="step1" [(ngModel)]="selectedStep1"></p-dropdown>
+                        <span>到第</span>
+                        <p-dropdown (onChange)="changeTrendStep()" [style]="{'min-width':'65px','margin':'0 12px'}" [options]="step2" [(ngModel)]="selectedStep2"></p-dropdown>
+                        <span>步转化趋势</span>
+                    </div>
+
+                </div>
+                <!--折线图-->
+                <div class="charts-box">
+                    <div class="abs-box clearfix">
+                        <div class="charts-handle-date clearfix l">
+                            <div class="l" (click)="getDay()" [ngClass]="{active:isDay}">日</div>
+                            <div class="l" (click)="getWeek()" [ngClass]="{active:isWeek}">周</div>
+                            <div class="l" (click)="getMonth()" [ngClass]="{active:isMonth}">月</div>
+                        </div>
+                    </div>
+                    <div id="lineID" style="height: 300px; width: 100%"></div>
+                </div>
+
+                <!--终点事件累计完成趋势图-->
+                <div>
+                    <span>终点事件累计完成趋势图</span>
+                </div>
+                <div class="charts-box bar-chart">
+                    <div class="abs-box clearfix">
+                        <div class="charts-handle-num clearfix l">
+                            <div class="l" (click)="getDay(2)" [ngClass]="{active:isDay2}">日</div>
+                            <div class="l" (click)="getWeek(2)" [ngClass]="{active:isWeek2}">周</div>
+                            <div class="l" (click)="getMonth(2)" [ngClass]="{active:isMonth2}">月</div>
+                        </div>
+                    </div>
+                    <div id="barID" style="height: 300px; width: 100%"></div>
+                </div>
+            </div>
+        </div>
+        <div class="trans-view-title">
+            <!-- 占时隐藏 -->
+            <!-- <h3>漏斗详情(用户数/该步转换率)</h3> -->
+            <h3>漏斗详情</h3>
+            <div class="table-down" (click)="download()"><i class="iconfonts icon-down"></i></div>
+            <span style="float: right;"><span *ngFor="let crowd of childCrowdList"><span style="margin:0 8px;"><span [ngStyle]="{'color':crowd.color,'font-size':'20px'}">●</span> {{crowd.refName}}</span>
+            </span>
+            </span>
+        </div>
+        <div class="table-box">
+            <!--<div class="table-box" *ngIf="selectFunnelId && ''!=crowdIdList">-->
+            <funnel-table [funnelId]="sFunnelId" [crowdIds]="childCrowdList"></funnel-table>
+        </div>
+    </div>
+    <div class="trans-view-box" *ngIf="!showTrendCharts" style="text-align: center;height: 318px;padding-top: 10px;position: relative;">
+        <div class="pic-box">
+            <img src="../../../../../../public/images/unit-add.png" />
+        </div>
+        <div class="funnel-add-btn-box">
+            <div class="new-build-btn" (click)="addFunnel($event)">
+                <i class="iconfonts icon-new"></i>
+                <span>新建漏斗</span>
+            </div>
+            <div style="clear: both;"></div>
+            <p>您还未新建任何漏斗，请添加！</p>
+        </div>
+    </div>
+    <add-funnel *ngIf="showAddFunnel" [showAddFunnel]="showAddFunnel" (hideAddFunnel)="hideAddFunnelDialog($event)" (showSuccessDialog)="showSuccessDialog($event)"></add-funnel>
+    <common-success-dialog [showSuccess]="showSuccess"></common-success-dialog>
+    <p-confirmDialog width="304" height="225" acceptLabel="确定删除"></p-confirmDialog>
+    <!--下拉方式的人群细分-->
+    <!--<p-overlayPanel #op>
+        <div class="header clearfix">
+            <div class="l">
+                <input type="text" pInputText [style]="{'width':'230px'}" [(ngModel)]="searchParams" placeholder="搜索人群" (keyup)="search()">
+                <span class="span">最多可选2个人群</span>
+                <i class="fa fa-search"></i>
+                <i class="fa fa-times-circle"></i>
+            </div>
+            <div class="r cancel-choice" (click)="cancelChoice()">
+                取消选择
+            </div>
+        </div>
+        <div class="panel">
+            <div class="select-content ui-g clearfix">
+                <div class="ui-g-4" *ngFor="let crowd of crowdList; let i = index">
+                    <p-checkbox [disabled]="crowd.dis" (onChange)="selectedCrowd(i)" name="group1" value="{{crowd.id}}" label="{{crowd.refName}}" [(ngModel)]="selectList"></p-checkbox>                    
+                </div>
+            </div>
+        </div>
+        <div class="r btn-handel">
+            <button class="cancel" pButton type="text" (click)="closeDialog()" label="取消"></button>
+            <button class="confirm" pButton type="text" (click)="save()" label="确定"></button>
+        </div>
+    </p-overlayPanel>-->
+</main>

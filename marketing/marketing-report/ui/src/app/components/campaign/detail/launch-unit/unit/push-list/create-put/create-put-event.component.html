@@ -1,0 +1,41 @@
+<main>
+    <p-dialog header="{{header}}" [(visible)]="show" modal="modal" responsive="true" (onAfterHide)="afterDialogHide()">
+        <div class="put-event">
+            <div class="put-event-cont adapt-cont">
+                <div class="event-name">
+                    <label><span class="required">*</span>投放名称</label>
+                    <input type="text" (keyup)="inputChange()" pInputText [disabled]="isUpdate === 0" [(ngModel)]="promotionInfo.name" placeholder="请输入投放名称">
+                    <i class="fa fa-exclamation-circle"></i>
+                    <span>自动保存间隔3分钟</span>
+                    <p-checkbox binary="true" [disabled]="isUpdate === 0" [(ngModel)]="promotionInfo.crowdUpdateType" style="margin-left: 60px;" label="投放前自动刷新人群配置"></p-checkbox>
+                </div>
+                <p *ngIf="segmentCommunicationService.isError && segmentCommunicationService.isError.name" class="warn-tip">
+                    <i class="iconfonts icon-empty1"></i>{{segmentNameNotice}}
+                </p>
+                <div class="put-event-tab">
+                    <p-tabView (onChange)="handleChange($event)">
+                        <p-tabPanel header="应用推送" [selected]="panelIndex == 0" [disabled]="panelIndex != 0 && isUpdate == 0">
+                            <app-push-message *ngIf="panelIndex == 0"></app-push-message>
+                        </p-tabPanel>
+                        <p-tabPanel header="短信通知" [selected]="panelIndex == 1" [disabled]="panelIndex != 1 && isUpdate == 0">
+                            <create-put-event-msg *ngIf="panelIndex == 1"></create-put-event-msg>
+                        </p-tabPanel>
+                        <p-tabPanel header="邮件投放" [selected]="panelIndex == 2" [disabled]="panelIndex != 2 && isUpdate == 0">
+                            <edm-push *ngIf="panelIndex == 2"></edm-push>
+                        </p-tabPanel>
+                        <!--<p-tabPanel header="互联网广告">
+                            <internet-push-marketing></internet-push-marketing>
+                            <internet-monitor-marketing></internet-monitor-marketing>
+                        </p-tabPanel>-->
+                    </p-tabView>
+                </div>
+            </div>
+            <div class="footer clearfix">
+                <button pButton *ngIf="isUpdate" class="ui-button-success" type="button" (click)="submit(1)" label="保存草稿"></button>
+                <button pButton *ngIf="isUpdate" class="ui-button-info" [disabled]="isSubmit" type="button" (click)="submit(2)" label="确认提交"></button>
+                <button pButton *ngIf="isUpdate" class="ui-button-secondary" type="button" (click)="cancel()" label="取消"></button>
+            </div>
+            <p-growl [value]="msgs" sticky="sticky"></p-growl>
+        </div>
+    </p-dialog>
+</main>

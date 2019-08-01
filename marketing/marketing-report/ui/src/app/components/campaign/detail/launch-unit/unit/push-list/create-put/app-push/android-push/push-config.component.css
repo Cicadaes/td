@@ -1,0 +1,73 @@
+:host /deep/ .ui-dialog{
+	width:783px;
+	
+}
+:host /deep/ .ui-dialog .ui-dialog-content{
+	height:0;
+	min-height:390px;
+}
+.android-content{
+	/*overflow-y: scroll;*/
+}
+h3 {
+    padding: 10px 0 20px 0;
+    color:#959ca5;
+    font-size: 12px;
+}
+h3 strong{
+	color:#464c5b;
+	padding:0 6px;
+}
+.android-td-push {
+    border-bottom:1px solid #dfe7f2;
+    padding-bottom: 14px;
+}
+
+.android-td-push p {
+    color:#464c5b;
+    font-size: 13px;
+    margin-bottom:12px;
+}
+
+.android-td-push span {
+    display: inline-block;
+    width:80px;
+    height:38px;
+    color:#5ba0ff;
+    border: 1px solid #5ba0ff;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 38px;
+}
+
+table {
+    margin: 13px 0;
+}
+
+table tr td {
+    padding-right: 8px;
+    padding-bottom:12px;
+}
+table input{
+	height:30px;
+}
+.button{
+	margin-top:15px;
+	padding-bottom:15px;
+}
+.button p{
+    cursor: pointer;
+    color:#5697f1;
+}
+.button p i{
+	margin-right:8px;
+    font-size: 16px;
+}
+.button p span{
+    display: inline-block;
+    font-size: 13px;
+    vertical-align: text-bottom;
+}
+.btn-handel{
+	margin-top:0;
+}

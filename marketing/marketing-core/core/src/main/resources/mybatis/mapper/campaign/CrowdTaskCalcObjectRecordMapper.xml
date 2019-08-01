@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.CrowdTaskCalcObjectRecordDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.marketing.core.entity.campaign.CrowdTaskCalcObjectRecord" >
+    <id column="id" property="id" />
+    <result column="crowd_id" property="crowdId" />
+    <result column="crowd_name" property="crowdName" />
+    <result column="crowd_type" property="crowdType" />
+    <result column="status" property="status" />
+    <result column="start_time" property="startTime" />
+    <result column="finish_time" property="finishTime" />
+    <result column="error_info" property="errorInfo" />
+    <result column="tenant_id" property="tenantId" />
+    <result column="creator" property="creator" />
+    <result column="create_by" property="createBy" />
+    <result column="create_time" property="createTime" />
+    <result column="updater" property="updater" />
+    <result column="update_by" property="updateBy" />
+    <result column="update_time" property="updateTime" />
+    <result column="ref_id" property="refId" />
+    <result column="retry" property="retry" />
+    <result column="max_retry" property="maxRetry" />
+  </resultMap>
+
+  <!-- TD_MKT_CROWD_TASK_CALC_OBJECT_RECORD table all fields -->
+  <sql id="Base_Column_List" >
+     `id`, `crowd_id`, `crowd_name`, `crowd_type`, `status`, `start_time`, `finish_time`, `error_info`, `tenant_id`, `creator`, `create_by`, `create_time`, `updater`, `update_by`, `update_time`, `ref_id`, `retry`, `max_retry`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and `id` ${idOperator} #{id}
+      </if>
+      <if test="crowdId != null" >
+        and `crowd_id` ${crowdIdOperator} #{crowdId}
+      </if>
+      <if test="crowdName != null" >
+        and `crowd_name` ${crowdNameOperator} #{crowdName}
+      </if>
+      <if test="crowdType != null" >
+        and `crowd_type` ${crowdTypeOperator} #{crowdType}
+      </if>
+      <if test="status != null" >
+        and `status` ${statusOperator} #{status}
+      </if>
+      <if test="startTime != null" >
+        and `start_time` ${startTimeOperator} #{startTime}
+      </if>
+      <if test="startTime1 != null" >
+        and `start_time` &gt;= #{startTime1}
+      </if>
+      <if test="startTime2 != null" >
+        and `start_time` &lt;= #{startTime2}
+      </if>
+      <if test="finishTime != null" >
+        and `finish_time` ${finishTimeOperator} #{finishTime}
+      </if>
+      <if test="finishTime1 != null" >
+        and `finish_time` &gt;= #{finishTime1}
+      </if>
+      <if test="finishTime2 != null" >
+        and `finish_time` &lt;= #{finishTime2}
+      </if>
+      <if test="errorInfo != null" >
+        and `error_info` ${errorInfoOperator} #{errorInfo}
+      </if>
+      <if test="tenantId != null" >
+        and `tenant_id` ${tenantIdOperator} #{tenantId}
+      </if>
+      <if test="creator != null" >
+        and `creator` ${creatorOperator} #{creator}
+      </if>
+      <if test="createBy != null" >
+        and `create_by` ${createByOperator} #{createBy}
+      </if>
+      <if test="createTime != null" >
+        and `create_time` ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and `create_time` &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and `create_time` &lt;= #{createTime2}
+      </if>
+      <if test="updater != null" >
+        and `updater` ${updaterOperator} #{updater}
+      </if>
+      <if test="updateBy != null" >
+        and `update_by` ${updateByOperator} #{updateBy}
+      </if>
+      <if test="updateTime != null" >
+        and `update_time` ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and `update_time` &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and `update_time` &lt;= #{updateTime2}
+      </if>
+      <if test="refId != null" >
+        and `ref_id` ${refIdOperator} #{refId}
+      </if>
+      <if test="retry != null" >
+        and `retry` ${retryOperator} #{retry}
+      </if>
+      <if test="maxRetry != null" >
+        and `max_retry` ${maxRetryOperator} #{maxRetry}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.marketing.core.entity.campaign.CrowdTaskCalcObjectRecord" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_MKT_CROWD_TASK_CALC_OBJECT_RECORD(<include refid="Base_Column_List" />)
+    values (#{id}, #{crowdId}, #{crowdName}, #{crowdType}, #{status}, #{startTime}, #{finishTime}, #{errorInfo}, #{tenantId}, #{creator}, #{createBy}, #{createTime}, #{updater}, #{updateBy}, #{updateTime}, #{refId}, #{retry}, #{maxRetry})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.marketing.core.entity.campaign.CrowdTaskCalcObjectRecord" >
+    update TD_MKT_CROWD_TASK_CALC_OBJECT_RECORD
+       set `crowd_id` = #{crowdId},
+           `crowd_name` = #{crowdName},
+           `crowd_type` = #{crowdType},
+           `status` = #{status},
+           `start_time` = #{startTime},
+           `finish_time` = #{finishTime},
+           `error_info` = #{errorInfo},
+           `tenant_id` = #{tenantId},
+           `creator` = #{creator},
+           `create_by` = #{createBy},
+           `create_time` = #{createTime},
+           `updater` = #{updater},
+           `update_by` = #{updateBy},
+           `update_time` = #{updateTime},
+           `ref_id` = #{refId},
+           `retry` = #{retry},
+           `max_retry` = #{maxRetry}
+     where `id` = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.marketing.core.entity.campaign.CrowdTaskCalcObjectRecord" >
+    update TD_MKT_CROWD_TASK_CALC_OBJECT_RECORD
+    <set >
+      <if test="crowdId != null" >
+        `crowd_id` = #{crowdId},
+      </if>
+      <if test="crowdName != null" >
+        `crowd_name` = #{crowdName},
+      </if>
+      <if test="crowdType != null" >
+        `crowd_type` = #{crowdType},
+      </if>
+      <if test="status != null" >
+        `status` = #{status},
+      </if>
+      <if test="startTime != null" >
+        `start_time` = #{startTime},
+      </if>
+      <if test="finishTime != null" >
+        `finish_time` = #{finishTime},
+      </if>
+      <if test="errorInfo != null" >
+        `error_info` = #{errorInfo},
+      </if>
+      <if test="tenantId != null" >
+        `tenant_id` = #{tenantId},
+      </if>
+      <if test="creator != null" >
+        `creator` = #{creator},
+      </if>
+      <if test="createBy != null" >
+        `create_by` = #{createBy},
+      </if>
+      <if test="createTime != null" >
+        `create_time` = #{createTime},
+      </if>
+      <if test="updater != null" >
+        `updater` = #{updater},
+      </if>
+      <if test="updateBy != null" >
+        `update_by` = #{updateBy},
+      </if>
+      <if test="updateTime != null" >
+        `update_time` = #{updateTime},
+      </if>
+      <if test="refId != null" >
+        `ref_id` = #{refId},
+      </if>
+      <if test="retry != null" >
+        `retry` = #{retry},
+      </if>
+      <if test="maxRetry != null" >
+        `max_retry` = #{maxRetry},
+      </if>
+    </set>
+     where `id` = #{id}
+  </update>
+
+  <!-- 根据id查询 TD_MKT_CROWD_TASK_CALC_OBJECT_RECORD -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from TD_MKT_CROWD_TASK_CALC_OBJECT_RECORD
+     where `id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TD_MKT_CROWD_TASK_CALC_OBJECT_RECORD
+     where `id` = #{value}
+
+  </delete>
+
+  <!-- TD_MKT_CROWD_TASK_CALC_OBJECT_RECORD 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select count(1) from TD_MKT_CROWD_TASK_CALC_OBJECT_RECORD
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TD_MKT_CROWD_TASK_CALC_OBJECT_RECORD列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from TD_MKT_CROWD_TASK_CALC_OBJECT_RECORD
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+</mapper>

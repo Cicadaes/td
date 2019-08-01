@@ -1,0 +1,83 @@
+<main>
+    <div class="process-box">
+        <div class="process-add">
+            <h2 class="l">营销流程<span class="blue-mark" *ngIf="processResourceList.length !== 0">(&nbsp;{{processResourceList.length}}&nbsp;)</span></h2>
+            <i class="new_icon r" *ngIf="campaignStatus === 1 || campaignStatus === 2" (click)="addTab()"></i>
+            <div *ngIf="campaignStatus !== 3 && processResourceList?.length > 0" class="r">
+                <span *ngIf="!marginReConfigBool && userRight === 'marketing_ADMIN'" class="reassignment" (click)="reassignment()">{{campaignStatus === 1 ? '修改配比' : '余量重配'}}</span>
+                <div *ngIf="marginReConfigBool" class="reassignment">
+                    <button class="confirm" (click)="confirmReassignment()">确定</button>
+                    <button class="canel" (click)="canelReassignment()">取消</button>
+                </div>
+            </div>
+        </div>
+        <div *ngFor="let pr of processResourceList;let i = index;" class="mkt-process-content">
+            <div class="process-info">
+                <div class="process-name">
+                    <span *ngIf="!pr.processNameEditing">{{pr.name || '新建营销流程'}}</span>
+                    <input *ngIf="pr.processNameEditing" class="edit-process-name" [(ngModel)]="pr.name" type="text">
+                    <div *ngIf="!pr.processNameEditing && editFlag(pr.status, true) && campaignStatus !== 3" class="name-button">
+                        <a title="编辑" class="edit" (click)="editProcessName(pr)" aria-hidden="true"></a>
+                    </div>
+                    <div *ngIf="pr.processNameEditing" class="name-button">
+                        <a (click)="saveProcessName(pr)" class="iconfonts icon-yes" aria-hidden="true"></a>
+                        <a (click)="cancelProcessName(pr)" class="iconfonts icon-cancel1" aria-hidden="true"></a>
+                    </div>
+                    <div class="process-status" [ngStyle]="{'background-color': getProcessStatus(pr.status).color}">{{getProcessStatus(pr.status).tip}}</div>
+                </div>
+                <p class="process-time">
+                    <label>起止时间：</label>
+                    <span *ngIf="pr.processNameEditing || !editFlag(pr.status, true) || campaignStatus === 3">{{pr.startTime | dataFormat:2}} ~ {{pr.endTime | dataFormat:2}}</span>
+                    <datePicker *ngIf="!pr.processNameEditing && editFlag(pr.status, true) && campaignStatus !== 3" [value]="pr.marketingValue" (onSelect)="onSelect(pr, $event)"></datePicker>
+                </p>
+                <div class="process-confs" *ngIf="campaignStatus === 1">
+                    <p>权益配置</p>
+                    <div *ngFor="let pre of pr.pipelineEquityConfigDefinitionDtos;let ie = index;" class="equity-conf ui-g">
+                        <div class="equity-name ui-g-5">
+                            <span [class.decorous]="true" [title]="pre.name">{{pre.name}}</span>
+                        </div>
+                        <div class="precent ui-g-3">
+                            <label>配比</label>
+                            <input class="eq-input" tdLimitNumberInput condition="pfp" [disabled]="true" (input)="preAndMarginRel(i, ie, false)" min="0" max="100" [ngModel]="pre.precent" (ngModelChange)="pre.precent=$event" type="text">%
+                        </div>
+                        <div class="total-count ui-g-4">
+                            <label>总量</label>
+                            <input class="eq-input" tdLimitNumberInput condition="pi" [disabled]="!editFlag(pr.status, pr.isAdding)" (input)="preAndMarginRel(i, ie, true)" min="0" [max]="pre.total" [ngModel]="pre.count" (ngModelChange)="pre.count=$event" type="text">
+                        </div>
+                        <p *ngIf="!pre.isRight" class="warn-tip"><i class="iconfonts icon-empty1"></i>1{{pre.isRight}}{{warnTip}}</p>
+                    </div>
+                </div>
+                <div class="process-confs" *ngIf="campaignStatus === 2 || campaignStatus === 3">
+                    <p [class.decorous]="!marginReConfigBool">权益配置</p>
+                    <div *ngFor="let pre of pr.pipelineEquityConfigDefinitionDtos;let ie = index;" class="equity-conf ui-g">
+                        <div class="equity-name ui-g-5">
+                            <span [class.decorous]="marginReConfigBool" [title]="pre.name">{{pre.name}}</span>
+                        </div>
+                        <div *ngIf="editFlag(pr.status, pr.isAdding)" class="precent ui-g-3">
+                            <label>配比</label>
+                            <input class="eq-input" tdLimitNumberInput condition="pfp" (input)="true" min="0" max="100" [ngModel]="pre.precent" (ngModelChange)="pre.precent=$event" type="text">%
+                        </div>
+                        <div *ngIf="editFlag(pr.status, pr.isAdding)" class="total-count ui-g-4">
+                            <label>总量</label>
+                            <input class="eq-input" tdLimitNumberInput condition="pi" (input)="preAndMarginRel(i, ie, true)" min="0" [max]="pre.total" [ngModel]="pre.count" (ngModelChange)="pre.count=$event" type="text">
+                        </div>
+                        <div *ngIf="!editFlag(pr.status, pr.isAdding)" class="precent ui-g-7">
+                            <label [class.decorous]="!marginReConfigBool" *ngIf="campaignStatus === 2">余量</label>
+                            <label [class.decorous]="!marginReConfigBool" *ngIf="campaignStatus === 3">下发量</label>
+                            <p *ngIf="campaignStatus === 2" class="margin">{{pre.remain | number: '1.0-0'}}&nbsp;/&nbsp;{{pre.count | number: '1.0-0'}}&nbsp;({{resolveNaN(pre.remain, pre.count) * 100 | number: '1.0-1'}}%)</p>
+                            <p *ngIf="campaignStatus === 3" class="margin">{{(pre.count - pre.remain) | number: '1.0-0'}}&nbsp;/&nbsp;{{pre.count | number: '1.0-0'}}&nbsp;({{resolveNaN((pre.count - pre.remain), pre.count) * 100 | number: '1.0-1'}}%)</p>
+                        </div>
+                        <p *ngIf="!pre.isRight" class="warn-tip"><i class="iconfonts icon-empty1"></i>2{{pre.isRight}}{{warnTip}}</p>
+                    </div>
+                </div>
+                <div class="some_icon">
+                    <i class="iconfonts icon-view lookover" *ngIf="!lookoverFlag(pr.status) || campaignStatus == 3" (click)="editMarginContent(i, pr.status)"></i>
+                    <i class="edit" *ngIf="lookoverFlag(pr.status) && campaignStatus !== 3" (click)="editMarginContent(i, pr.status)"></i>
+                    <i class="canel" *ngIf="deleteFlag(pr.status, campaignStatus)  && campaignStatus !== 3" (click)="deletePipeline(pr.id)"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p-confirmDialog width="304" height="200" acceptLabel="确认删除"></p-confirmDialog>
+    <p-growl [value]="msgs" life="3000"></p-growl>
+</main>

@@ -1,0 +1,324 @@
+main{
+    padding: 20px;
+}
+
+.push-config{
+    background: #fff;
+    padding: 10px 20px;
+}
+
+.push-config:first-child button {
+    width: 84px;
+    background: #5ba0ff;
+}
+
+.push-config:not(:first-child){
+    margin-top: 30px;
+}
+.push-config .config-title{
+    height: 30px;
+    border-bottom: 1px solid #E1E8F0;
+}
+
+.push-config .config-title p{
+    font-size: 14px;
+    color: #464C5B;
+    line-height: 30px;
+}
+:host /deep/ .ui-dialog{
+    width:400px;
+    padding: 0 20px;
+    padding-bottom:20px;
+    overflow:visible;
+}
+:host /deep/ .ui-dialog-content {
+    padding:10px 0 0 0 !important;
+}
+:host /deep/ .ui-dialog-buttonpane{
+    margin-top:20px;
+}
+.event-div{
+    margin:10px 0;
+}
+.clearfix{
+    margin: 10px 0;
+}
+.textarea{
+    width:100%;
+    height:100px;
+    text-indent: .5em;
+    color:#000;
+    resize: none;
+    border: 1px solid #dfe7f2;
+    border-radius: 3px;
+}
+span.desc{
+    display: inline-block;
+    vertical-align: top;
+}
+span.l{
+    margin-top:5px;
+}
+.change-name{
+    width:250px;
+    height:30px;
+    text-indent: .5em;
+    border-radius: 3px 0 0 3px;
+    border: 1px solid #dfe7f2;
+}
+
+
+/*Android推送配置*/
+h3 {
+    padding: 10px 0 20px 0;
+    color:#959ca5;
+    font-size: 12px;
+}
+h3 strong{
+	color:#464c5b;
+	padding:0 6px;
+}
+.android-td-push {
+    border-bottom:1px solid #dfe7f2;
+    padding-bottom: 14px;
+}
+
+.android-td-push p {
+    color:#464c5b;
+    font-size: 13px;
+    margin-bottom:12px;
+}
+
+.android-td-push span {
+    display: inline-block;
+    width:80px;
+    height:38px;
+    color:#5ba0ff;
+    border: 1px solid #5ba0ff;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 38px;
+}
+
+.android-content .appkey,
+.android-content .secret {
+    width: 196px;
+    height: 32px;
+    padding-left: 5px;
+    margin-right: 4px;
+    border: 1px solid #dee6ed;
+}
+
+table {
+    margin: 13px 0;
+}
+
+table tr td {
+    padding-right: 8px;
+    padding-bottom:12px;
+}
+table input{
+	height:30px;
+}
+.button{
+	margin-top:15px;
+	padding-bottom:15px;
+}
+.button p{
+    cursor: pointer;
+    color:#5697f1;
+    display: inline-block;
+}
+.button p i{
+	margin-right:8px;
+    font-size: 16px;
+}
+.button p span{
+    display: inline-block;
+    font-size: 13px;
+    vertical-align: text-bottom;
+}
+.btn-handel{
+	margin-top:0;
+}
+
+.btn-handel .icon-yes{
+	font-size: 16px;
+    color: #61a4ff;
+}
+
+/*Android增强配置*/
+.xm-intensify-push-config,
+.hw-intensify-push-config{
+    height: 80px;
+    line-height: 80px;
+}
+.xm-intensify-push-config {
+    border-bottom: 1px dashed #E1E8F0;
+}
+
+.xm-intensify-push-config button,
+.hw-intensify-push-config button {
+    width: 84px;
+    background: #5ba0ff;
+}
+
+.xm-intensify-push-config input,
+.hw-intensify-push-config input {
+    width: 196px;
+    height: 32px;
+    padding-left: 5px;
+    margin-right: 4px;
+    border: 1px solid #dee6ed;
+}
+
+.xm-intensify-push-config i.fa,
+.hw-intensify-push-config i.fa {
+    color: #ced1d5;
+    margin-right: 2px;
+}
+
+.question-tip {
+    left: 18px;
+    top: -30px;
+}
+
+.success_text {
+    color: #5cb85c;
+}
+
+.error_text {
+    color: #d9534f;
+}
+.secret-tip{
+    margin-left: 292px !important;
+}
+
+/*IOS推送配置*/
+h3 {
+    color: #959ca5;
+}
+
+h3 strong {
+    color: #5ba0ff;
+}
+
+:host /deep/ .ui-fileupload .ui-fileupload-buttonbar {
+    padding: 0;
+}
+
+.upload-btn {
+    width: 100%;
+    background: #5ba0ff;
+    text-align: center;
+    line-height: 28px;
+    color: #fff;
+    border-radius: 3px;
+    font-family: '微软雅黑';
+}
+
+.ios-content-list1 {
+    margin-top: 20px;
+}
+
+.ios-content-list1 li:nth-child(1),
+.ios-content-list2 li:nth-child(1) {
+    margin-right: 20px;
+}
+
+.ios-content-list1 .btn-handel {
+    /*margin-top:5px;*/
+    margin-top: 0;
+}
+
+.no-pass {
+    width: 191px;
+    height: 30px;
+    border: 1px solid #dee6ed;
+    border-radius: 5px;
+    margin: 0 12px;
+    text-indent: 1em;
+}
+
+.book {
+    margin-top: 5px;
+}
+
+.question-tip-box {
+    font-size: 13px;
+    margin: 7px 12px 0 3px;
+}
+
+.question-tip-box .question-tip {
+    left: 19px;
+    top: -28px;
+}
+
+.question-tip-box .tip-prod {
+    left: 20px;
+    top: -10px;
+}
+
+.question-tip {
+    left: 15px;
+    top: -30px;
+}
+
+.ios-content-list2 {
+    margin-top: 20px;
+}
+
+.fa-box {
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+.fa-box i.icon-yes {
+    color: #61a4ff;
+    margin-left: 12px;
+}
+
+.fa-box i.icon-prompt2 {
+    color: #ff716e;
+}
+
+.text-input {
+    width: 171px;
+    height: 30px;
+    border: 1px solid #dee6ed;
+    border-radius: 5px;
+    text-indent: 1em;
+}
+
+/*自定义上传控件样式*/
+
+.upload-file-box {
+    position: relative;
+    width: 173px;
+    height: 30px;
+}
+
+.upload-file-box .upload-file {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.upload-file-box .text {
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+    border: 1px solid #dee6ed;
+    border-radius: 5px;
+}
+
+.file_tip {
+    padding-left: 95px;
+}
+
+.passwodr_tip {
+    padding-left: 415px;
+}

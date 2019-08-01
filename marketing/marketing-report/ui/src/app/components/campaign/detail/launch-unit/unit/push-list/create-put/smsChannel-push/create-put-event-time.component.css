@@ -1,0 +1,156 @@
+.put-event-time {
+    margin-top: 25px;
+}
+
+.put-event-time label b {
+    color: #FF0000;
+}
+
+.inline-b {
+    display: inline-block;
+}
+
+.send-button {
+    margin-left: 13px;
+}
+
+
+/*.send-button .active {
+    background: #0275d8;
+    color: #fff;
+}*/
+
+.send-button div {
+    cursor: pointer;
+    padding: 5px;
+    margin-right: -3px;
+    display: inline-block;
+}
+
+.send-button div:nth-child(2) {
+    border-left: 1px solid #c7ccd3;
+    border-right: 1px solid #c7ccd3;
+}
+
+.put-event-time input {
+    -webkit-appearance: checkbox;
+    vertical-align: sub;
+}
+
+.put-event-time select {
+    height: 25px;
+    border: 1px solid #ccc;
+    -webkit-appearance: default-button;
+}
+
+.choice-time {
+    margin-top: 10px;
+    margin-left: 65px;
+}
+
+.send-choice {
+    margin: 12px 0 0 60px;
+}
+
+.send-choice li {
+    margin-bottom: 24px;
+}
+
+.put-event-time .select-num {
+    width: 256px;
+    height: 30px;
+    -webkit-appearance: none;
+}
+
+.app_push_list {
+    margin-top: 24px;
+}
+
+:host /deep/ .ui-dropdown-items-wrapper {
+    max-height: 100px !important;
+}
+
+.gruop-select {
+    margin-bottom: 10px;
+}
+
+:host /deep/ .ui-radiobutton-box {
+    background: #fff !important;
+    position: relative !important;
+}
+
+:host /deep/ .ui-state-active .ui-radiobutton-icon {
+    content: '' !important;
+    position: absolute !important;
+    background: #5ba0ff !important;
+    width: 6px;
+    height: 6px;
+    top: 3px !important;
+    right: 3px !important;
+    border-radius: 3px;
+}
+
+:host /deep/ .fa-circle:before {
+    content: '' !important;
+}
+
+:host /deep/ .ui-inputtext:disabled {
+    background: #fff !important;
+    opacity: 0.3 !important;
+}
+
+:host /deep/ button.ui-state-disabled {
+    background: #fff !important;
+    opacity: 0.3 !important;
+}
+
+
+/*:host /deep/ .ui-state-active .ui-radiobutton-icon{
+    content: '' !important;
+}*/
+
+
+/*重写radio 时间选择*/
+
+.put-event-time .send-button input {
+    -webkit-appearance: radio;
+}
+
+.send-button input[type='radio'] {
+    margin-left: 2px;
+    margin-right: 2px;
+    display: none;
+}
+
+.send-button label:before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+    border-radius: 100%;
+    vertical-align: middle;
+    border: 2px solid #E4E4E4;
+    background: #F9F9F9;
+}
+
+.send-button label.active:before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+    border-radius: 100%;
+    vertical-align: middle;
+    border: 2px solid #E4E4E4;
+    background: #5ba0ff;
+}
+
+.send-button input,
+.send-button label {
+    cursor: pointer;
+}
+
+.disabled {
+    cursor: default !important;
+}

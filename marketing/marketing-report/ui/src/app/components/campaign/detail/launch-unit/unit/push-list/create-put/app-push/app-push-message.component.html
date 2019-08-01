@@ -1,0 +1,62 @@
+<main>
+    <div class="clearfix">
+        <div class="l edit">
+            <p class="app_push_title">推广信息</p>
+            <div class="app_push_list">
+                <div class="app_push_list_left l"><span class="required">*</span>目标平台</div>
+                <div class="app_push_list_right l">
+                    <div class="check-phone-content" (click)="select('android')" [ngClass]="{'check-phone-content-border-blue':selectPhoneClass, 'disabled': segmentCommunicationService.isUpdate == 0}">
+                        <span class="iconfont icon-android"></span>
+                        <em>Android</em>
+                    </div>
+                    <div class="check-phone-content" (click)="select('ios')" [ngClass]="{'check-phone-content-border-blue':!selectPhoneClass, 'disabled': segmentCommunicationService.isUpdate == 0}">
+                        <span class="iconfont icon-iphone"></span>
+                        <em>iOS</em>
+                    </div>
+                </div>
+            </div>
+
+            <div class="app_push_list">
+                <div class="app_push_list_left l"><span class="required">*</span>App选择</div>
+                <div class="app_push_list_right l">
+                    <p-dropdown [style]="{'width':'220px'}" [disabled]="segmentCommunicationService.isUpdate == 0" [options]="pushAppList" [(ngModel)]="promotionPushReq.appid" (onChange)="changeApp($event)"></p-dropdown>
+                    <!--<div class="app-select" *ngFor="let app of pushAppList; let i = index">
+						<p-checkbox name="appCheck" value="index" [(ngModel)]="selectAppList"></p-checkbox>
+						<span>{{app.appName}} [<b>{{app.count}}</b>]</span>
+					</div>-->
+                </div>
+            </div>
+
+            <div class="app_push_list">
+                <div class="app_push_list_left l">推送内容</div>
+                <div class="app_push_list_right l">
+                    <app-push-piece *ngFor="let piece of selectPieceList;" [index]="piece" [showIndex]="showIndex" (deletePiece)="deletePiece($event)"></app-push-piece>
+                    <div class="app-push-add l" *ngIf="selectPieceList.length < 3 && segmentCommunicationService.isUpdate !== 0" (click)="addPiece()">
+                        <h2>+</h2>
+                        <h3>A/B Test对比方案</h3>
+                    </div>
+                    <div class="app_push_content">
+                        <push-text-editor *ngIf="promotionPushReq.platform == 'android'"></push-text-editor>
+                        <android-msg-config *ngIf="promotionPushReq.platform == 'android'"></android-msg-config>
+                        <ios-msg-config *ngIf="promotionPushReq.platform == 'ios'"></ios-msg-config>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="promotionPushReq.platform === 'ios'" class="r phone1">
+            <div class="msg-box">
+                <h3>(应用名称)<span class="now">now</span></h3>
+                <p>{{promotionPushReq.iosData[pieceIndex] && promotionPushReq.iosData[pieceIndex].message || '消息内容'}}</p>
+                <p class="slide">slide to view</p>
+            </div>
+        </div>
+        <div *ngIf="promotionPushReq.platform === 'android'" class="r phone2">
+            <div class="msg-icon"></div>
+            <div class="msg-box">
+                <h3 style="width:242px;">{{promotionPushReq.androidData[pieceIndex] && promotionPushReq.androidData[pieceIndex].title || '消息标题'}}</h3>
+                <p [innerHtml]="promotionPushReq.androidData[pieceIndex] && promotionPushReq.androidData[pieceIndex].message || '消息内容'"></p>
+            </div>
+        </div>
+    </div>
+</main>

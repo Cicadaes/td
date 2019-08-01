@@ -1,0 +1,194 @@
+:host /deep/ .ui-dialog {
+    top: 50% !important;
+    left: 50% !important;
+    padding: 0 28px;
+    transform: translate(-50%, -50%);
+}
+
+.id-update-box {
+    border: 1px solid #d3d8e3;
+    border-top: 0px;
+    padding: 20px;
+}
+
+.id-update-box .content input {
+    width: 270px;
+    height: 30px;
+    border: 1px solid #dee6ed;
+}
+
+.id-update-box .content {
+    margin-top: 12px;
+}
+
+.id-update-box .content a {
+    color: #5ba0ff;
+}
+
+.file-update {
+    margin: 12px 0 20px 0;
+    height: 250px;
+    overflow-y: auto;
+}
+
+.upload-area {
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-area .upload-show {
+    cursor: pointer;
+    border-radius: 15px;
+    background: #5ba0ff;
+    padding: 8px 16px;
+    color: #fff;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.upload-area .upload-show .fa-upload {
+    margin-right: 8px;
+    font-size: 13px;
+}
+
+.upload-area .upload-show span {
+    color: #fff;
+}
+
+.upload-area .upload-input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: -33px;
+    opacity: 0;
+}
+
+.upload-file-name {
+    padding: 10px 0 0 10px;
+}
+
+.upload-file-name span {
+    color: #000000;
+}
+
+.upload-file-name span:last-child {
+    color: #5A99ED;
+}
+
+.file-update .download {
+    padding: 9px 0 0 12px;
+}
+
+.file-update .download a {
+    color: #5697f1;
+    font-size: 12px;
+    margin-right: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.file-update .download i {
+    color: #ced1d5;
+    margin: 0px 3px;
+}
+
+.preview {
+    padding: 10px 0px;
+}
+
+span {
+    color: #acb0b8;
+}
+
+span.clear-file {
+    cursor: pointer;
+}
+
+.tabel {
+    min-width: 100%;
+    width: 100%;
+    overflow: auto;
+    border: 1px solid #DEE6EC;
+    border-radius: 5px 5px 0 0;
+}
+
+.tabel.default {
+    height: 100px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+table tr {
+    border-bottom: 1px solid #DEE6EC;
+}
+
+table tr:last-child {
+    border-bottom: none;
+}
+
+table .title {
+    background-color: #fbfcfe
+}
+
+table tr th,
+table tr td {
+    padding: 5px 20px;
+    white-space: nowrap;
+}
+
+.previewVariable {
+    padding: 12px;
+    border: 1px solid #DEE6EC;
+    border-top: none;
+    background-color: #f3f8ff;
+}
+
+.json-list {
+    width: 100%;
+    height: auto;
+    padding-top: 5px;
+}
+
+.json-list li {
+    height: 26px;
+    line-height: 26px;
+    margin: 5px 15px;
+    text-align: center;
+    float: left;
+    position: relative;
+    background: #5ba0ff;
+    padding: 0 10px 0 5px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+.json-list li span {
+    color: #ffffff;
+    font-size: 12px;
+}
+
+.json-list li .triangle {
+    position: absolute;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-top: 13px solid transparent;
+    border-right: 13px solid #5ba0ff;
+    border-bottom: 13px solid transparent;
+    left: -12px;
+    top: 0;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.PipelineCrowdRelDao" >
+
+    <delete id="deleteByPipelineInfoAndCrowdId" parameterType="com.talkingdata.marketing.core.entity.campaign.PipelineCrowdRel">
+        delete from TD_MKT_PIPELINE_CROWD_REL
+        where `campaign_id` = #{campaignId} and `pipeline_id` = #{pipelineId} and `pipeline_version` = #{pipelineVersion}
+        <if test="crowdId != null" >
+            and `crowd_id` = #{crowdId}
+        </if>
+    </delete>
+    <select id="findByPipelineInfo" resultMap="BaseResultMap" parameterType="map">
+        SELECT <include refid="Base_Column_List" />
+        FROM TD_MKT_PIPELINE_CROWD_REL
+        WHERE `pipeline_id`=#{pipelineId} AND `pipeline_node_id`=#{pipelineNodeId}
+    </select>
+
+</mapper>

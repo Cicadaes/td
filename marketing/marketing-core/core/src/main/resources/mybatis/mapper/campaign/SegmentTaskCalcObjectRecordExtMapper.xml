@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.SegmentTaskCalcObjectRecordDao" >
+
+  <select id="queryByParam" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" />
+    from TD_MKT_SEGMENT_TASK_CALC_OBJECT_RECORD
+    where `segment_id` = #{segmentId} AND `type`=#{tp}
+    <if test="startDate!=null || endDate != null">
+      AND start_time BETWEEN #{startDate} AND #{endDate}
+    </if>
+
+  </select>
+
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="map">
+    select <include refid="Base_Column_List" />
+    from TD_MKT_SEGMENT_TASK_CALC_OBJECT_RECORD
+    where 1 = 1
+    <if test="page.segmentId != null" >
+      and `segment_id` ${page.segmentIdOperator} #{page.segmentId}
+    </if>
+    <if test="page.pipelineId != null" >
+      and `pipeline_id` ${page.pipelineIdOperator} #{page.pipelineId}
+    </if>
+    <if test="page.pipelineNodeId != null" >
+      and `pipeline_node_id` ${page.pipelineNodeIdOperator} #{page.pipelineNodeId}
+    </if>
+    <if test="page.type != null" >
+      and `type` ${page.typeOperator} #{page.type}
+    </if>
+    <if test="startDate!=null || endDate != null">
+      AND start_time BETWEEN #{startDate} AND #{endDate}
+    </if>
+
+  </select>
+
+  <!-- 根据id查询 TD_MKT_SEGMENT_TASK_CALC_OBJECT_RECORD -->
+  <select id="queryByCreateTime" resultMap="BaseResultMap" parameterType="map">
+    select <include refid="Base_Column_List" />
+    from TD_MKT_SEGMENT_TASK_CALC_OBJECT_RECORD
+    where
+    <![CDATA[
+         create_time >= #{statDate}
+      ]]>
+  </select>
+
+  <select id="selectByCampaignIds" parameterType="List" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM TD_MKT_SEGMENT_TASK_CALC_OBJECT_RECORD
+    WHERE campaign_id IN
+    <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+  </select>
+
+  <select id="queryByStatusAndType" parameterType="List" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM TD_MKT_SEGMENT_TASK_CALC_OBJECT_RECORD
+    WHERE `type`=#{tp} AND
+    `status` IN
+    <foreach collection="statusList" index="index" item="status" open="(" separator="," close=")">
+      #{status}
+    </foreach>
+  </select>
+
+  <select id="getTodayAlreadyCalcRecord"  resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from TD_MKT_SEGMENT_TASK_CALC_OBJECT_RECORD
+    WHERE `create_time` &gt;= #{date}
+  </select>
+
+  <delete id="deleteByCreateTime" parameterType="string">
+    delete from TD_MKT_SEGMENT_TASK_CALC_OBJECT_RECORD WHERE create_time > #{createTime}
+  </delete>
+
+  <select id="queryBySegmentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM TD_MKT_SEGMENT_TASK_CALC_OBJECT_RECORD
+    WHERE `segment_id`=#{segmentId}
+  </select>
+
+  <select id="selectBySegmentIds" parameterType="List" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM TD_MKT_SEGMENT_TASK_CALC_OBJECT_RECORD
+    WHERE segment_id IN
+    <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+  </select>
+
+  <select id="selectByPipelineId" parameterType="map" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM TD_MKT_SEGMENT_TASK_CALC_OBJECT_RECORD
+    WHERE pipeline_id =#{pipelineId} AND pipeline_node_id=#{pipelineNodeId}
+  </select>
+</mapper>

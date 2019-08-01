@@ -1,0 +1,25 @@
+<main>
+    <div class="pipe-desc">
+        <base-desc textRequired="true" textTitle="组件名称" [(text)]="pipelineNodeCommunicationService.nodeData.name" [(desc)]="pipelineNodeCommunicationService.nodeData.description" [editFlag]="!pipelineNodeCommunicationService.editFlag"></base-desc>
+    </div>
+
+    <div class="pipe-content">
+        <label>采集时间</label>
+        <div class="pc-content clearify">
+            <datePicker [value]="marketingValue" (onClick)="onDateClick($event)" (onSelect)="onSelect($event)" [disabled]="!pipelineNodeCommunicationService.editFlag"></datePicker>
+            <a class="reset" (click)="reset()">重置</a>
+        </div>
+        <label>行为路径：</label>
+        <div class="path-container">
+            <div class="path-content">
+                <img src="./../../../../../../public/images/component-entrance.svg" alt="入口" />
+                <label>高净值人群</label>
+            </div>
+            <span class="triLine"></span>
+            <div class="path-content">
+                <img src="../../../../../../public/images/component-trigger.svg" alt="触发器" />
+                <label>未点击活动链接</label>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,83 @@
+<main>
+    <div class="title">
+        <div class="title-name" *ngIf="editFlag">
+            <input type="text" [style.width]="titleNameWidth + 'px'" [(ngModel)]="pipeLineName" (input)="checkTitleNameWidth($event.target.value);" [ngClass]="{'disable-input': true, 'add-input': isEdit}" [disabled]="!isEdit">
+            <a *ngIf="!isEdit" title="编辑" class="edit" (click)="editNameInput()" aria-hidden="true"></a>
+            <a *ngIf="isEdit" class="iconfonts icon-yes" (click)="updateName()" aria-hidden="true"></a>
+            <a *ngIf="isEdit" class="iconfonts icon-cancel1" (click)="cancelUpdateName()" aria-hidden="true"></a>
+        </div>
+        <div class="title-content" *ngIf="editFlag">
+            <div class="time">
+                <span>流程起止时间</span>
+                <datePicker [disabled]="!editFlag" [value]="marketingValue" (onSelect)="onSelect($event)"></datePicker>
+            </div>
+            <div class="config">
+                <a *ngIf="editFlag" class="config-verify" aria-hidden="true" (click)="check()"></a>
+                <a class="config-set" aria-hidden="true" (click)="showRule()"></a>
+            </div>
+            <div class="button">
+                <label *ngIf="editFlag" class="cancel" (click)="goBack()">取消</label>
+                <label *ngIf="editFlag" class="draft" (click)="saveDraft('back')">保存草稿</label>
+                <label *ngIf="editFlag" class="save" (click)="save()">提交</label>
+            </div>
+        </div>
+        <div class="title-time" *ngIf="!editFlag">
+            <div class="button">
+                <label class="draft" (click)="goBack()">返回</label>
+            </div>
+            <span>流程起止时间</span>
+            <i></i>
+            <span>{{marketingValue.placeholder}}</span>
+            <span class="des">{{textDes}}</span>
+        </div>
+        <!-- <div style="border: 1px solid #b5b5b5; padding: 2px 5px;display: inline-block" (click)="showDetail()">点击右边弹出</div> -->
+    </div>
+    <div class="content">
+        <div [ngClass]="{'left-operator': isOperatorShow, 'hide-left-operator': !isOperatorShow}" (click)="hideDetail()" *ngIf="editFlag">
+            <div class="component-name">
+                <span *ngIf="isOperatorShow">组件</span>
+                <a title="收起" [ngClass]="{'put-away': true, 'hide-put-away': !isOperatorShow}" aria-hidden="true" (click)="packUp()"></a>
+            </div>
+            <div class="component" *ngIf="isOperatorShow">
+                <div class="node" *ngFor="let item of pipelineComponentArr" draggable="true" (dragstart)="drag($event, item)">
+                    <img [src]="item.icon">
+                    <label>{{item.name}}</label>
+                </div>
+            </div>
+        </div>
+        <div id="pipeline" [ngClass]="{'alreadySub': !pipelineNodeCommunicationService.editFlag, 'l-content': !isOperatorShow}" (drop)="drop($event)" (dragover)="allowDrop($event)">
+            <div class="pipeline-message" [ngStyle]="{'display': deleteStyle, 'top': top, 'left': left}" (mouseenter)="mouserover()" (mouseleave)="mouseout()">
+                <div class="top-triangle"></div>
+                <div class="top"></div>
+                <div class="bottom">
+                    <i *ngIf="editFlag" class="delete" (click)="deleteNode()"></i>
+                    <i *ngIf="reportNodeData && reqData && (reqData.status === 6 || reqData.status === 8)" class="report" (click)="showReport()"></i>
+                </div>
+            </div>
+            <div class="pipeline-button">
+                <div class="reset-button">
+                    <a (click)="resetOrigin()"></a>
+                </div>
+            </div>
+        </div>
+        <div [ngClass]="{'right': true, 'right_content': isDetail, 'hidden_right_content': !isDetail, 'overflow-scroll': overflow, 'overflow-initial': !overflow}">
+            <inlet-pipe tdProhibitedToUse [usable]="!editFlag" *ngIf="showRightContent == 'entrance'" [nodeData]="pipelineNodeCommunicationService.nodeData"></inlet-pipe>
+            <timing-pipe tdProhibitedToUse [usable]="!editFlag" *ngIf="showRightContent == 'hourMeter'" [nodeData]="pipelineNodeCommunicationService.nodeData" [startTime]="pipelineNodeCommunicationService.startTime" [endTime]="pipelineNodeCommunicationService.endTime"></timing-pipe>
+            <distributary-pipe tdProhibitedToUse [usable]="!editFlag" *ngIf="showRightContent == 'split'" [nodeData]="pipelineNodeCommunicationService.nodeData"></distributary-pipe>
+            <trigger-pipe tdProhibitedToUse (changeOverflow)="changeRightContentOverflow($event)" [usable]="!editFlag" *ngIf="showRightContent == 'trigger'" [nodeData]="pipelineNodeCommunicationService.nodeData" [startTime]="pipelineNodeCommunicationService.startTime"
+                [endTime]="pipelineNodeCommunicationService.endTime"></trigger-pipe>
+            <sms-pipe tdProhibitedToUse [usable]="!editFlag" *ngIf="showRightContent == 'shortMessage'" [nodeData]="pipelineNodeCommunicationService.nodeData" [startTime]="pipelineNodeCommunicationService.startTime" [endTime]="pipelineNodeCommunicationService.endTime"></sms-pipe>
+            <result-crowd-pipe tdProhibitedToUse (changeOverflow)="changeRightContentOverflow($event)" [usable]="!editFlag" *ngIf="showRightContent === 'generate'" [nodeData]="pipelineNodeCommunicationService.nodeData" [startTime]="pipelineNodeCommunicationService.startTime"
+                [endTime]="pipelineNodeCommunicationService.endTime"></result-crowd-pipe>
+            <push-pipe tdProhibitedToUse [usable]="!editFlag" *ngIf="showRightContent == 'push'" [nodeData]="pipelineNodeCommunicationService.nodeData" [startTime]="pipelineNodeCommunicationService.startTime" [endTime]="pipelineNodeCommunicationService.endTime"></push-pipe>
+            <filter-pipe tdProhibitedToUse [usable]="!editFlag" *ngIf="showRightContent == 'filter'" [nodeData]="pipelineNodeCommunicationService.nodeData"></filter-pipe>
+            <global-rule tdProhibitedToUse [usable]="!editFlag" *ngIf="showRightContent == 'rule'"></global-rule>
+        </div>
+    </div>
+    <p-growl [(value)]="msgs"></p-growl>
+    <p-confirmDialog width="300" height="190" [acceptLabel]="'确定'" [rejectLabel]="'取消'"></p-confirmDialog>
+    <p-dialog [header]="title" [draggable]="false" [resizable]="false" [(visible)]="showReportDialog" modal="modal" [contentStyle]="{'width': '1000px', 'height': '500px'}">
+        <push-pipe-report *ngIf="showReportDialog && reportNodeData && reportNodeData.type === 'push'" [campaignId]="campaignId" [pipeLineId]="pipeLineId" [pipeLineNodeId]="reportNodeData.id" [nodeData]="reportNodeData"></push-pipe-report>
+        <sms-pipe-report *ngIf="showReportDialog && reportNodeData && reportNodeData.type === 'shortMessage'" [campaignId]="campaignId" [pipeLineId]="pipeLineId" [nodeData]="reportNodeData"></sms-pipe-report>
+    </p-dialog>
+</main>

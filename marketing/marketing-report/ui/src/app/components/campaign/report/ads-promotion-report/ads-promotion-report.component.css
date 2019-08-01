@@ -1,0 +1,52 @@
+.ads-promotion-report{
+	padding:0 20px;
+}
+.ads-promotion-report-head{
+	padding-top:25px;
+	padding-bottom:20px;
+	border-bottom:2px solid #e1e4ed;
+}
+.ads-promotion-report-head h4.title{
+	font-weight: bold;
+	font-size:14px;
+	margin-bottom:15px;
+}
+.ads-promotion-report-head span.name{
+	font-weight: bold;
+}
+.ads-promotion-report-head i.fa-question-circle{
+	margin:0 5px;
+	font-size:15px;
+}
+.ads-promotion-report-head span.percent{
+	color:#6a9dee;
+	font-size:16px;
+}
+.ads-promotion-report-head .devote-list li{
+	padding:0 25px;
+	border-left:2px solid #ebeef7;
+}
+.state-box .state-list{
+	height:105px;
+	margin:15px 0;
+	border:2px solid #e9ecf5;
+}
+.state-box .state-list li{
+	/*margin-right:;*/
+	padding:30px;
+}
+.state-box .state-list li p.type-num{
+	color:#5c93cc;
+	font-size:18px;
+	margin-bottom:10px;
+}
+.charts h4.trend-title{
+	font-weight: bold;
+	font-size: 15px;
+	padding-bottom:15px;
+	margin-top:20px;
+	border-bottom:2px solid #ebeef7;
+}
+.charts .click-choice{
+	padding-top:15px;
+}

@@ -1,0 +1,84 @@
+<main class="main">
+    <h5 class="app_push_title">推广信息</h5>
+    <div class="app_push_list">
+        <div class="app_push_list_left l"><span class="required">*</span>投放渠道</div>
+        <div class="app_push_list_right l">
+            <p-dropdown [style]="{'width':'256px'}" [disabled]="segmentCommunicationService.isUpdate == 0" [options]="channels" [(ngModel)]="promotionEdm.channelCode" placeholder="请选择投放渠道" (onChange)="changeChannel()"></p-dropdown>
+            <p *ngIf="segmentCommunicationService.isError && segmentCommunicationService.isError.channelCode" style="margin-top: 6px;" class="warn-tip"><i class="iconfonts icon-empty1"></i>请选择投放渠道。</p>
+        </div>
+    </div>
+
+    <div class="app_push_list">
+        <div class="app_push_list_left l"><span class="required">*</span>邮件标题</div>
+        <div class="app_push_list_right l">
+            <input type="text" disabled="{{segmentCommunicationService.isUpdate === 0}}" pInputText class="select-num" [(ngModel)]="promotionEdm.title" (input)="segmentCommunicationService.isError.title = false" />
+            <p *ngIf="segmentCommunicationService.isError && segmentCommunicationService.isError.title" style="margin-top: 6px;" class="warn-tip"><i class="iconfonts icon-empty1"></i>请输入邮件标题。</p>
+        </div>
+    </div>
+
+    <div class="app_push_list">
+        <div class="app_push_list_left l"><span class="required">*</span>发件人</div>
+        <div class="app_push_list_right l">
+            <input type="text" disabled="{{segmentCommunicationService.isUpdate === 0}}" pInputText class="select-num" [(ngModel)]="promotionEdm.fromName" (input)="segmentCommunicationService.isError.fromName = false" />
+            <p *ngIf="segmentCommunicationService.isError && segmentCommunicationService.isError.fromName" style="margin-top: 6px;" class="warn-tip"><i class="iconfonts icon-empty1"></i>请输入发件人。</p>
+        </div>
+    </div>
+
+    <div class="app_push_list">
+        <div class="app_push_list_left l"><span class="required">*</span>发件人邮箱</div>
+        <div class="app_push_list_right l">
+            <input type="text" disabled="{{segmentCommunicationService.isUpdate === 0}}" pInputText class="select-num" [(ngModel)]="promotionEdm.fromAddress" (change)="checkEdmail(promotionEdm.fromAddress)" (input)="segmentCommunicationService.isError.fromAddress = false"
+            />
+            <p *ngIf="segmentCommunicationService.isError && segmentCommunicationService.isError.fromAddress" style="margin-top: 6px;" class="warn-tip"><i class="iconfonts icon-empty1"></i>发件人邮箱格式有误。</p>
+        </div>
+    </div>
+
+    <!--<div class="app_push_list">
+        <div class="app_push_list_left l">回复人</div>
+        <div class="app_push_list_right l">
+            <input type="text" disabled="{{segmentCommunicationService.isUpdate === 0}}" pInputText class="select-num" [(ngModel)]="promotionEdm.message.replyName" (input)="segmentCommunicationService.isError.replyName = false"/>
+        </div>
+    </div>
+
+    <div class="app_push_list">
+        <div class="app_push_list_left l">回复邮箱</div>
+        <div class="app_push_list_right l">
+            <input type="text" disabled="{{segmentCommunicationService.isUpdate === 0}}" pInputText class="select-num" [(ngModel)]="promotionEdm.message.replyAddress" (input)="segmentCommunicationService.isError.replyAddress = false"/>
+            <p *ngIf="segmentCommunicationService.isError && segmentCommunicationService.isError.replyAddress" style="margin-top: 6px;" class="warn-tip"><i class="iconfonts icon-empty1"></i>回复地址格式有误。</p>
+        </div>
+    </div>-->
+
+    <div class="app_push_list" style="padding-bottom: 0px;">
+        <div class="app_push_list_left l"><span class="required">*</span>邮件内容</div>
+        <div class="app_push_list_right l type-list" style="padding: 0;">
+            <!-- <div class="type-radio" (click)="choosContentType('1');">
+                <input class="radio" name="contentType" type="radio" value="1" [disabled]="segmentCommunicationService.isUpdate === 0" [(ngModel)]="promotionEdm.message.contentType"><label>从本地上传</label>
+            </div>
+            <div class="type-radio" (click)="choosContentType('2');">
+                <input class="radio" name="contentType" type="radio" value="2" [disabled]="segmentCommunicationService.isUpdate === 0" [(ngModel)]="promotionEdm.message.contentType"><label>从网址导入</label>
+            </div> -->
+
+            <div *ngIf="promotionEdm.contentType == 1">
+                <div class="l upload-area" *ngIf="!promotionEdm.fileName">
+                    <div class="upload-show" [ngClass]="{'change-bg' : changeBg}">
+                        <i class="fa fa-upload"></i>
+                        <span>上传HTML</span>
+                    </div>
+                    <input id="uploadCsv" [disabled]="segmentCommunicationService.isUpdate === 0" [ngClass]="{'show-update' : showUpdate}" class="upload-input" type="file" (change)="selectFile($event)">
+                </div>
+                <p *ngIf="segmentCommunicationService.isError && segmentCommunicationService.isError.fileName" style="line-height: 32px;margin-top: 6px;" class="warn-tip"><i class="iconfonts icon-empty1"></i>请上传HTML文件。</p>
+            </div>
+            <div *ngIf="promotionEdm.contentType == 1 && promotionEdm.fileName" class="l upload-file-name prompt">
+                <span>{{promotionEdm.fileName}}</span>
+                <span class="clear-file" *ngIf="segmentCommunicationService.isUpdate != 0" (click)="clearFile()">清除</span>
+            </div>
+
+            <div *ngIf="promotionEdm.contentType == 2">
+                <input type="text" disabled="{{segmentCommunicationService.isUpdate === 0}}" pInputText class="select-num" [(ngModel)]="promotionEdm.importUrl" title="{{promotionEdm.importUrl}}" (input)="segmentCommunicationService.isError.importUrl = false" placeholder="请填写有效链接地址" />
+                <p *ngIf="segmentCommunicationService.isError && segmentCommunicationService.isError.importUrl" style="margin-top: 6px;" class="warn-tip"><i class="iconfonts icon-empty1"></i>网址格式有误。</p>
+            </div>
+        </div>
+    </div>
+    <!--投放时间公共-->
+    <create-put-event-time [promotion]="promotionEdm" [dateRange]="dateRange" [hideLoop]="true"></create-put-event-time>
+</main>

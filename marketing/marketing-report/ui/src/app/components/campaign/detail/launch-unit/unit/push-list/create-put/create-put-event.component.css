@@ -1,0 +1,186 @@
+@media screen and (max-width:1920px) {
+     :host /deep/ .ui-dialog {
+        width: 1250px;
+        height: 100%;
+    }
+}
+
+@media screen and (max-width:1680px) {
+     :host /deep/ .ui-dialog {
+        width: 1200px;
+        height: 100%;
+    }
+}
+
+@media screen and (max-width:1440px) {
+     :host /deep/ .ui-dialog {
+        width: 1100px;
+        height: 100%;
+    }
+}
+
+@media screen and (max-width:1366px) {
+     :host /deep/ .ui-dialog {
+        width: 980px;
+        height: 100%;
+    }
+}
+
+:host /deep/ .ui-dialog .ui-dialog-content {
+    height: calc(100% - 65px);
+    padding: 0;
+    overflow: visible;
+}
+
+:host /deep/ .put-event-tab .ui-tabview .ui-tabview-panel {
+    padding: 0;
+    overflow-y: scroll;
+    height: calc(100% - 105px);
+}
+
+:host /deep/ .put-event-tab .ui-tabview .ui-tabview-nav li {
+    width: 120px;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid #E1E8F0;
+    border-bottom: none;
+    border-radius: 2px 2px 1px 1px;
+}
+
+:host /deep/ .put-event-tab .ui-tabview .ui-tabview-nav li.ui-state-active {
+    border-color: #dfe7f2;
+    position: relative;
+    border-top: 2px solid #6baaff;
+    background: #fff;
+}
+
+:host /deep/ .put-event-tab .ui-tabview .ui-tabview-nav li.ui-state-default a {
+    height: 40px;
+    width: 100%;
+    line-height: 40px;
+    padding: 0;
+    text-align: center;
+}
+
+:host /deep/ .put-event-tab .ui-tabview .ui-tabview-nav li.ui-state-default a span {
+    font-size: 14px;
+    color: #464C5B;
+    letter-spacing: 0;
+}
+
+.put-event {
+    height: 100%;
+}
+
+.footer {
+    float: left;
+    width: 100%;
+    padding: 10px 0;
+    border-top: 1px solid #CFCFCF;
+}
+
+.footer :first-child {
+    float: left;
+}
+
+.footer button {
+    float: right;
+}
+
+.ui-button-secondary {
+    border: 0px;
+}
+
+.put-event-cont {}
+
+.event-name {
+    margin: 15px 0 0 0;
+}
+
+.event-name label b {
+    color: #ff0000;
+}
+
+.event-name input {
+    width: 256px;
+    height: 30px;
+    margin-left: 8px;
+}
+
+.event-name i {
+    color: #ced1d5;
+    margin: 0 8px 0 15px;
+}
+
+.event-name input {
+    color: #959ca5;
+}
+
+.event-name input:disabled {
+    opacity: 0.3;
+    background: #fff !important;
+}
+
+.put-event-tab {
+    margin: 15px 0 0 0;
+    height: 100%;
+}
+
+:host /deep/ .put-event-tab .ui-tabview.ui-tabview-top .ui-tabview-nav li:nth-child(1) {
+    margin-left: 0;
+}
+
+:host /deep/ .put-event-tab .ui-tabview.ui-tabview-top .ui-tabview-nav li:nth-child(2) {
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+:host /deep/ .put-event-tab .ui-widget-content.ui-tabview.ui-tabview-top {
+    height: 100%;
+}
+
+:host /deep/ .put-event-tab .ui-tabview-panels {
+    padding: 0;
+    height: 100%
+}
+
+.footer {
+    float: left;
+    width: 100%;
+    padding: 10px 0;
+    border-top: 1px solid #CFCFCF;
+}
+
+:host /deep/ .footer .ui-button-success {
+    background: #4cc7b9;
+    border-color: #4cc7b9;
+}
+
+:host /deep/ .footer .ui-button-info {
+    background: #5ba0ff;
+    border-color: #5ba0ff;
+}
+
+.footer :first-child {
+    float: left;
+}
+
+.footer button {
+    float: right;
+}
+
+.ui-button-secondary {
+    border: 0px;
+}
+
+input:disabled {
+    opacity: 1;
+    color: #000000;
+    border: 1px solid #dee6ed;
+    background: #ebebe5 !important;
+}
+
+p.warn-tip {
+    display: inline-block;
+    margin-left: 64px;
+}

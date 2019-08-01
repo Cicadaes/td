@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.admin.CampaignTargetDefinitionDao" >
+
+    <select id="selectByIds" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" />
+      from TD_MKT_CAMPAIGN_TARGET_DEFINITION
+     where `id` IN
+     <foreach collection="ids" index="index" item="id" open="(" separator="," close=")">
+      #{id}
+     </foreach>
+
+    </select>
+
+    <delete id="deleteByCreateTime" parameterType="string">
+        delete from TD_MKT_CAMPAIGN_TARGET_DEFINITION WHERE create_time > #{createTime}
+    </delete>
+
+</mapper>

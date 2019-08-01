@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.CampaignTargetConfigDao" >
+
+    <insert id="insertOrUpdate" parameterType="com.talkingdata.marketing.core.entity.campaign.CampaignTargetConfig" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO TD_MKT_CAMPAIGN_TARGET_CONFIG
+          (`campaign_id`,`target_definition_id`,`name`,`value`,`metric_type`,`tenant_id`,`creator`,`create_by`,`create_time`)
+        VALUES
+          (#{campaignId},#{targetDefinitionId},#{name},#{value},#{metricType},#{tenantId},#{creator},#{createBy},#{createTime})
+        ON DUPLICATE KEY
+        UPDATE
+          `value`=#{value},updater=#{updater},update_by=#{updateBy},update_time=#{updateTime}
+    </insert>
+
+    <delete id="deleteByUniqueIndex">
+      DELETE FROM TD_MKT_CAMPAIGN_TARGET_CONFIG
+      WHERE campaign_id=#{campaignId} AND target_definition_id=#{targetDefinitionId} AND metric_type=#{metricType}
+    </delete>
+
+    <select id="getByCampaignIds" resultMap="BaseResultMap">
+        SELECT `id`, `campaign_id`, `target_definition_id`, `name`, `value`, `metric_type`
+        FROM TD_MKT_CAMPAIGN_TARGET_CONFIG
+        WHERE campaign_id IN
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <delete id="deleteByCreateTime" parameterType="string">
+        delete from TD_MKT_CAMPAIGN_TARGET_CONFIG WHERE create_time > #{createTime}
+    </delete>
+
+</mapper>

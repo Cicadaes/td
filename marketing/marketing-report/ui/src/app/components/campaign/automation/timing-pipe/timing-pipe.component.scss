@@ -1,0 +1,142 @@
+@import './../common.scss';
+.icon-del {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: $icon-del;
+    background-size: contain;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-left: 13px;
+}
+
+main {
+    .pipe-desc {
+        padding: 21px 20px 0px 32px;
+    }
+    .pipe-content {
+        padding: 17px 20px 0px 32px;
+        .distributary-type {
+            margin-bottom: 16px;
+            .type-list {
+                display: inline-block;
+                .type-radio {
+                    display: inline-block;
+                    cursor: pointer;
+                    margin-left: 24px;
+                    .radio {
+                        margin-right: 8px;
+                        vertical-align: text-bottom;
+                    }
+                }
+            }
+        }
+        .type-first {
+            p:first-child {
+                display: inline-block;
+                color: rgba(28, 36, 56, 0.80);
+                margin-bottom: 24px;
+            }
+            .operate {
+                display: inline-block;
+                color: #2D8CF0;
+                margin-right: 19px;
+                cursor: pointer;
+            }
+            .behavior-setings {
+                margin-left: 30px;
+                border-left: 1px solid #EBEEF2;
+            }
+            .help-div {
+                height: 16px;
+                margin-left: 30px;
+                border-left: 1px solid #EBEEF2;
+            }
+            .behavior-setings {
+                .relation {
+                    display: inline-block;
+                    background: #FFFFFF;
+                    border: 1px solid #DDDEE1;
+                    border-radius: 4px;
+                    height: 32px;
+                    width: 66px;
+                    line-height: 32px;
+                    text-align: center;
+                    margin-top: 16px;
+                    margin-left: -30px;
+                    @include user-select-none;
+                    cursor: pointer;
+                }
+                .disabled {
+                    background-color: #F8F8F9 !important;
+                }
+                .rule-detail {
+                    margin-top: 16px;
+                    background: #F4F7FB;
+                    height: 48px;
+                    width: 327px;
+                    padding: 8px;
+                    box-sizing: border-box;
+                    margin-left: -30px;
+                }
+            }
+            .add-rules {
+                display: inline-block;
+                width: 85px;
+                height: 32px;
+                background: #2D8CF0;
+                border-radius: 4px;
+                line-height: 32px;
+                padding-left: 10px;
+                box-sizing: border-box;
+                color: #fff;
+                @include user-select-none;
+                cursor: pointer;
+            }
+        }
+        .type-second {
+            .stop-time {
+                margin-top: 16px;
+                input {
+                    @include input-style;
+                    width: 65px;
+                }
+                .input-text {
+                    margin: 0 10px 0 8px;
+                }
+            }
+        }
+    }
+}
+
+:host /deep/ .ui-inputtext {
+    padding: 0.65em 0.75em;
+}
+
+:host /deep/ .ui-dropdown.ui-state-disabled {
+    opacity: 1!important;
+}
+
+:host /deep/ .ui-state-disabled .ui-dropdown-label {
+    background-color: #F8F8F9!important;
+    color: rgba(23, 35, 61, 0.30)!important;
+}
+
+:host /deep/ .ui-state-disabled .ui-dropdown-trigger {
+    background-color: #F8F8F9!important;
+    color: rgba(23, 35, 61, 0.30)!important;
+}
+
+:host /deep/ input.ui-widget:disabled {
+    opacity: 1;
+    color: rgba(23, 35, 61, 0.25);
+}
+
+:host /deep/ .ui-state-disabled.ui-button {
+    border: 1px solid #DCDEE2!important;
+    border-left-width: 0px!important;
+}
+
+:host /deep/ .ui-state-disabled.ui-button span {
+    color: rgba(23, 35, 61, 0.25);
+}

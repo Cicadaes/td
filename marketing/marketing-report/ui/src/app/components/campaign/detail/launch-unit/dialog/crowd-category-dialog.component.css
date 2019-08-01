@@ -1,0 +1,41 @@
+:host /deep/ .choice-box .ui-dialog {
+    width: 585px;
+    height: 335px;
+    padding: 0 28px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-content {
+    padding: 24px 0;
+}
+
+.content {
+    width: 172px;
+    height: 228px;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.content:nth-child(2) {
+    margin: 0 34px;
+}
+
+.content-image {
+    width: 150px;
+    height: 100px;
+    margin: 19px auto;
+}
+
+.content h3 {
+    margin-top: 14px;
+    font-size: 15px;
+    color: #464c5b;
+}
+
+.content p {
+    margin: 10px auto;
+    color: #657180;
+    width: 150px;
+    text-align: center;
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.AppConfigDao" >
+  <select id="getByAppId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+    from TD_MKT_APP_CONFIG
+    where `app_id` = #{appId}
+  </select>
+  <select id="queryByAppIdOrPid" resultMap="BaseResultMap" parameterType="map">
+    select <include refid="Base_Column_List" />
+    from TD_MKT_APP_CONFIG
+    where `app_id` = #{appId} or product_id = #{productId}
+  </select>
+</mapper>

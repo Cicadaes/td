@@ -1,0 +1,79 @@
+@import './../common.scss';
+main {
+    .pipe-desc {
+        padding: 21px 20px 0px 32px;
+    }
+    .pipe-content {
+        padding: 0px 20px 0px 32px;
+        .pc-content {
+            padding: 24px 0;
+            .datePicker {
+                width: 245px;
+            }
+            .reset {
+                margin-left: 32px
+            }
+        }
+        .path-container {
+            padding-top: 21px;
+            .path-content {
+                overflow: hidden;
+                img {
+                    width: 44px;
+                    height: 44px;
+                    float: left;
+                }
+                label {
+                    line-height: 17px;
+                    margin-left: 21px;
+                    float: left;
+                    margin-top: 12px;
+                }
+            }
+        }
+    }
+}
+
+.triLine {
+    display: block;
+    width: 2px;
+    height: 22px;
+    background-color: #D8D8D8;
+    margin-left: 21px;
+    margin-top: 1px;
+    margin-bottom: 4px;
+    position: relative
+}
+
+.triLine::after {
+    content: ' ';
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom: -5px;
+    left: -2px;
+    border-width: 3px;
+    line-height: 0px;
+    display: block;
+    border-style: solid;
+    border-bottom-color: transparent;
+    border-top-color: #D8D8D8;
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+
+:host /deep/ .datePicker #pinput-box .pinput {
+    left: -140px;
+}
+
+// :host /deep/ .ui-state-disabled {
+//     opacity: 1!important;
+// }
+// :host /deep/ .ui-state-disabled .ui-dropdown-label {
+//     background-color: #F8F8F9!important;
+//     color: rgba(23, 35, 61, 0.30)!important;
+// }
+// :host /deep/ .ui-state-disabled .ui-dropdown-trigger {
+//     background-color: #F8F8F9!important;
+//     color: rgba(23, 35, 61, 0.30)!important;
+// }

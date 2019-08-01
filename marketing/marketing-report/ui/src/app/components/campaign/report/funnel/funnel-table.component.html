@@ -1,0 +1,12 @@
+<main>
+    <p-dataTable [value]="funnelList" [rows]="10" emptyMessage="暂无数据">
+        <p-column *ngFor="let event of eventList; let i = index;" field="{{event}}" header="{{event}}">
+            <template let-funnel="rowData" let-index="rowIndex" pTemplate="body">
+                <span><span *ngIf="i == 0 && crowdColor.length > 0" [ngStyle]="{'color':crowdColor[index%2],'font-size':'20px', 'vertical-align': 'middle'}">●</span>{{funnel[event]}}</span>
+            </template>
+        </p-column>
+    </p-dataTable>
+    <div>
+        <x-paginator [value]="value" [page]="pageNum" (onPagesChange)="paginate($event)"></x-paginator>
+    </div>
+</main>

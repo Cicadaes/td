@@ -1,0 +1,282 @@
+<main>
+    <div class="push-config">
+        <p style="display: inline-block;font-size: 14px;color: #464C5B;"><span class="required">*</span>App选择：</p>
+        <p-dropdown [style]="{'width':'150px','height':'30px','margin':'0 10px'}" [options]="appConfList" [(ngModel)]="selectedAppConf" (onChange)="changeApp($event);"></p-dropdown>
+        <button class="confirm" (click)="newApp();" type="text" pButton label="新建app"></button>
+    </div>
+
+    <!--新建弹框-->
+    <p-dialog header="新建APP" [(visible)]="newDisplay" [draggable]="false" modal="modal" >
+        <div class="clearfix">
+            <div class="l" style="width: 20%;">
+                <span style="line-height: 30px;">AppID：</span>
+            </div>
+            <div class="l" style="width:70%;">
+                <input type="text" style="width:100%;" [(ngModel)]="appInfo.appId" class="change-name" />  
+            </div>          
+        </div>
+        <div class="clearfix">
+            <div class="l" style="width: 20%;">
+                <span style="line-height: 30px;">App名称：</span>
+            </div>
+            <div class="l" style="width:70%;">
+                <input type="text" style="width:100%;" [(ngModel)]="appInfo.appName" class="change-name" />  
+            </div>          
+        </div>
+        <div class="clearfix">
+            <div class="l" style="width: 20%;">
+                <span style="line-height: 30px;">产品ID：</span>
+            </div>
+            <div class="l" style="width:70%;">
+                <input type="number" style="width:100%;" [(ngModel)]="appInfo.productId" class="change-name" />  
+            </div>          
+        </div>
+        <div class="clearfix">
+            <div class="l" style="width: 20%;">
+                <span class="desc" style="line-height: 30px;">APP描述：</span>
+            </div>
+            <div class="l" style="width:70%;">
+                <textarea (keyup)="textareaChange()" class="textarea" [(ngModel)]="appInfo.description"></textarea>
+            </div>
+        </div>
+        <p *ngIf="desWarnShow" class="warn-tip"><i class="iconfonts icon-empty1"></i>描述长度不能超过240个字符</p>
+        <p-footer>
+            <div class="config-handel">
+                <div (click)="confirmNew()" ><i class="fa fa-check"></i>保存</div>
+                <div (click)="cancelNew()">取消</div>
+            </div>
+        </p-footer>
+    </p-dialog>
+
+    <div class="push-config">
+        <div class="config-title">
+            <p>Android推送配置</p>
+        </div>
+        <h3>除了提供内建的TD推送外，TalkingData还支持使用 <strong>第三方推送平台</strong> 发送消息，只需简单配置</h3>
+        <div class="android-td-push">
+            <p>TalkingData</p>
+            <span>TD推送</span>
+        </div>
+        <div class="android-content">
+            <table style = "position : relative;" *ngFor="let pushConfig of pushConfigList; let i = index;">
+                <tr>
+                    <td>推送平台</td>
+                    <td *ngIf="pushConfig.channel==3">appID</td>
+                    <td>appKey</td>
+                    <td>MasterSecret</td>
+                    <td></td>
+                </tr>
+                <tr *ngIf="pushConfig.channel==4">
+                    <td>
+                        <p-dropdown [disabled]="pushConfig.editStatus==1" [style]="{'width':'85px','height':'30px'}" [options]="pushPlatform[i]" [(ngModel)]="pushConfig.channel"></p-dropdown>
+                    </td>
+                    <td>
+                        <input [disabled]="pushConfig.editStatus==1" class="appkey" type="text" pInputText [(ngModel)]="pushConfig.thirdKey">
+                    </td>
+                    <td>
+                        <input [disabled]="pushConfig.editStatus==1" class="secret" type="text" pInputText [(ngModel)]="pushConfig.thirdSecret">
+                    </td>
+                    <td>
+                        <div class="btn-handel">
+                            <button class="confirm" type="text" (click)="bind(i)" pButton label="绑定"></button>
+                            <button class="cancel" type="text" (click)="del(i)" pButton label="删除"></button>
+                            <i class="iconfonts icon-yes" *ngIf="pushConfig.editStatus==1"></i>
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngIf="pushConfig.channel==3">
+                    <td>
+                        <p-dropdown [disabled]="pushConfig.editStatus==1" [style]="{'width':'85px','height':'30px'}" [options]="pushPlatform[i]" [(ngModel)]="pushConfig.channel"></p-dropdown>
+                    </td>
+                    <td>
+                        <input [disabled]="pushConfig.editStatus==1" class="appkey" type="text" pInputText [(ngModel)]="pushConfig.thirdApp">
+                    </td>
+                    <td>
+                        <input [disabled]="pushConfig.editStatus==1" class="secret" type="text" pInputText [(ngModel)]="pushConfig.thirdKey">
+                    </td>
+                    <td>
+                        <input [disabled]="pushConfig.editStatus==1" class="secret" type="text" pInputText [(ngModel)]="pushConfig.thirdSecret">
+                    </td>
+                    <td style="padding-right:0;">
+                        <div class="btn-handel">
+                            <button class="confirm" (click)="bind(i)" type="text" pButton label="绑定"></button>
+                            <button class="cancel" type="text" (click)="del(i)" pButton label="删除"></button>
+                            <i class="iconfonts icon-yes" *ngIf="pushConfig.editStatus==1"></i>
+                        </div>
+
+                    </td>
+                </tr>
+                <p style = "position : absolute; left : 0; bottom : -5px;" *ngIf="isError[i]" class="warn-tip"><i class="iconfonts icon-empty1"></i>{{isError[i]}}。</p>
+            </table>
+        </div>
+        <div class="button" *ngIf="pushConfigList.length < 2">
+            <p (click)="addConf()"><i class="iconfonts icon-new"></i><span>添加新推送配置</span></p>
+        </div>
+    </div>
+    
+
+    <div class="push-config">
+        <div class="config-title">
+            <p>Android增强配置</p>
+        </div>
+        <div class="xm-intensify-push-config">
+            <span>小米增强通道</span>
+            <i class="fa fa-question-circle question-tip-box">
+                <div class="question-tip">
+                    <em></em>
+                    配置小米推送所需的参数，需要和开发者在小米开发者平台创建的应用配置信息保持一致。
+                </div>
+            </i>
+            <span></span>
+            <input type="text" pInputText [(ngModel)]="appConf.xmApp" placeholder="小米AppID">
+            <input type="text" pInputText [(ngModel)]="appConf.xmSecret" placeholder="小米Secret">
+            <button type="button" pButton (click)="bindXm()" label="绑定"></button>
+            <span *ngIf="des && des.xm" [ngClass]="{'success_text': des.tp, 'error_text': !des.tp}">{{des.xm}}</span>
+        </div>
+        <!--<p *ngIf="error && error.xm" [ngClass]="{'secret-tip': error.xm=='secret', 'warn-tip': true}" style="margin-left: 90px;"><i class="iconfonts icon-empty1"></i>请填写{{error.xm}}</p>-->
+        <div class="hw-intensify-push-config">
+            <span>华为增强通道</span>
+            <i class="fa fa-question-circle question-tip-box">
+                <div class="question-tip">
+                    <em></em>
+                    配置华为推送所需的参数，需要和开发者在华为开发者平台创建的应用配置信息保持一致。
+                </div>
+            </i>
+            <span></span>
+            <input type="text" pInputText [(ngModel)]="appConf.hwApp" placeholder="华为AppID">
+            <input type="text" pInputText [(ngModel)]="appConf.hwSecret" placeholder="华为Secret">
+            <button type="button" pButton (click)="bindHw()" label="绑定"></button>
+            <span *ngIf="des && des.hw" [ngClass]="{'success_text': des.tp, 'error_text': !des.tp}">{{des.hw}}</span>
+        </div>
+        <!--<p *ngIf="error && error.hw" [ngClass]="{'secret-tip': error.hw=='secret', 'warn-tip': true}" style="margin-left: 90px;"><i class="iconfonts icon-empty1"></i>请填写{{error.hw}}</p>-->
+    </div>
+
+
+    <div class="push-config">
+        <div class="config-title">
+            <p>IOS推送配置</p>
+        </div>
+        <h3>申请使用苹果官方推送服务 <strong>APNS</strong>，将获得的推送服务证书配置在下方</h3>
+        <div class="ios-content">
+            <ul class="ios-content-list1 clearfix" *ngIf="appConf && appConf.devExpiryDate && !editDevStatus">
+                <li class="l clearfix">
+                    <p class="l book">
+                        IOS 测试证书
+                    </p>
+                    <i class="fa fa-question-circle question-tip-box l">
+                        <div class="question-tip">
+                            <em></em>
+                            推送测试服务器使用的证书，通常用于与正式系统隔离来做推送测试
+                        </div>
+                    </i>
+                    <input class="text-input l" type="text" readonly="readonly" [(ngModel)]="appConf.devFilename" />
+                </li>
+                <li class="l clearfix">
+                    <button style="margin-right:10px;background: #5ba0ff;" class="confirm" type="text" pButton (click)="update(0)" label="更新"></button>
+                </li>
+                <li class="l clearfix">
+                    <p class="l book">失效时间：{{appConf.devExpiryDate}}</p>
+                </li>
+                <li class="l clearfix">
+                    <div class="r fa-box clearfix">
+                        <i class="l iconfonts icon-yes" *ngIf="appConf.devExpiryDate && !devIsExpiration"></i>
+                        <i class="l iconfonts icon-prompt2" *ngIf="appConf.devExpiryDate && devIsExpiration"></i>
+                    </div>
+                </li>
+            </ul>
+            <ul class="ios-content-list1 clearfix" *ngIf="!appConf || null == appConf.devExpiryDate || editDevStatus">
+                <li class="l clearfix">
+                    <p class="l book">
+                        IOS 测试证书
+                    </p>
+                    <i class="fa fa-question-circle question-tip-box l">
+                        <div class="question-tip">
+                            <em></em>
+                            推送测试服务器使用的证书，通常用于与正式系统隔离来做推送测试
+                        </div>
+                    </i>
+                    <div class="upload-file-box l">
+                        <input class="upload-file" type="file" style="background-color: transparent;" (change)="selectedTestFile($event)">
+                        <input class="text text-input" type="text" readonly="readonly" placeholder="请使用.P12格式证书…" [(ngModel)]="appConf.devFilename" />
+                    </div>
+                </li>
+                <li class="l clearfix" style="margin-right:10px;">
+                    <div class="upload-file-box l" style="width:54px;">
+                        <input class="upload-file" type="file" style="background-color: transparent;" (change)="selectedTestFile($event)">
+                        <button class="upload-btn">上传</button>
+                    </div>
+                </li>
+                <li class="l clearfix" *ngIf="pwdTestShow">
+                    <p class="l book">证书密码</p>
+                    <input class="no-pass l" type="text" [(ngModel)]="testPwd" placeholder="未设置密码请直接点击确定" />
+                    <div class="btn-handel r">
+                        <button class="confirm" type="text" pButton (click)="upload(0)" label="确定"></button>
+                        <button class="cancel" type="text" pButton (click)="cancel(0)" label="取消"></button>
+                    </div>
+                </li>
+            </ul>
+            <p *ngIf="testTipShow" class="warn-tip file_tip"><i class="iconfonts icon-empty1"></i>证书格式有误，请重新上传</p>
+            <p *ngIf="testPasswordTip" class="warn-tip passwodr_tip"><i class="iconfonts icon-empty1"></i>密码并不能为空</p>
+            <ul class="ios-content-list1 clearfix" *ngIf="appConf && appConf.prodExpiryDate && !editProStatus">
+                <li class="l clearfix">
+                    <p class="l book">
+                        IOS 生产证书
+                    </p>
+                    <i class="fa fa-question-circle question-tip-box l">
+                        <div class="question-tip tip-prod">
+                            <em></em>
+                            用在已上线产品的正式推送证书
+                        </div>
+                    </i>
+                    <input class="text-input" type="text" pInputText readonly [(ngModel)]="appConf.prodFilename">
+                </li>
+                <li class="l clearfix">
+                    <button style="margin-right:10px;background: #5ba0ff;" class="confirm" type="text" pButton (click)="update(1)" label="更新"></button>
+                </li>
+                <li class="l clearfix">
+                    <p class="l book">失效时间：{{appConf.prodExpiryDate}}</p>
+                </li>
+                <li class="l clearfix">
+                    <div class="r fa-box clearfix">
+                        <i class="l iconfonts icon-yes" *ngIf="appConf.prodExpiryDate && !prodIsExpiration"></i>
+                        <i class="l iconfonts icon-prompt2" *ngIf="appConf.prodExpiryDate && prodIsExpiration"></i>
+                    </div>
+                </li>
+            </ul>
+            <ul class="ios-content-list1 clearfix" *ngIf="!appConf || null == appConf.prodExpiryDate || editProStatus">
+                <li class="l clearfix">
+                    <p class="l book">
+                        IOS 生产证书
+                    </p>
+                    <i class="fa fa-question-circle question-tip-box l">
+                        <div class="question-tip tip-prod">
+                            <em></em>
+                            用在已上线产品的正式推送证书
+                        </div>
+                    </i>
+                    <div class="upload-file-box l">
+                        <input class="upload-file" type="file" style="background-color: transparent;" (change)="selectedProFile($event)">
+                        <input class="text text-input" type="text" readonly="readonly" placeholder="请使用.P12格式证书…" [(ngModel)]="appConf.prodFilename" />
+                    </div>
+                </li>
+                <li class="l clearfix" style="margin-right:10px;">
+                    <div class="upload-file-box l" style="width:54px;">
+                        <input class="upload-file" type="file" style="background-color: transparent;" (change)="selectedProFile($event)">
+                        <button class="upload-btn">上传</button>
+                    </div>
+                </li>
+                <li class="l clearfix" *ngIf="pwdProShow">
+                    <p class="l book">证书密码</p>
+                    <input class="no-pass" type="text" [(ngModel)]="proPwd" placeholder="未设置密码请直接点击确定" />
+                    <div class="btn-handel r">
+                        <button class="confirm" type="text" pButton (click)="upload(1)" label="确定"></button>
+                        <button class="cancel" type="text" pButton (click)="cancel(1)" label="取消"></button>
+                    </div>
+                </li>
+            </ul>
+            <p *ngIf="proTipShow" class="warn-tip file_tip"><i class="iconfonts icon-empty1"></i>证书格式有误，请重新上传</p>
+            <p *ngIf="prodPasswordTip" class="warn-tip passwodr_tip"><i class="iconfonts icon-empty1"></i>密码不能为空</p>
+        </div>
+    </div>
+    <p-growl [value]="msgs" life="3000"></p-growl>
+</main>

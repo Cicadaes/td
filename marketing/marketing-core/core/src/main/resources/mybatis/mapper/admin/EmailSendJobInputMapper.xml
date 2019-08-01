@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.admin.EmailSendJobInputDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.marketing.core.entity.admin.EmailSendJobInput" >
+    <id column="id" property="id" />
+    <result column="email_server_code" property="emailServerCode" />
+    <result column="email_template_code" property="emailTemplateCode" />
+    <result column="to" property="to" />
+    <result column="title" property="title" />
+    <result column="content" property="content" />
+    <result column="cc" property="cc" />
+    <result column="bcc" property="bcc" />
+    <result column="retry" property="retry" />
+    <result column="maxRetry" property="maxRetry" />
+    <result column="attachment_path" property="attachmentPath" />
+    <result column="attachment_display_name" property="attachmentDisplayName" />
+    <result column="status" property="status" />
+    <result column="create_time" property="createTime" />
+  </resultMap>
+
+  <!-- TD_MKT_EMAIL_SEND_JOB_INPUT table all fields -->
+  <sql id="Base_Column_List" >
+     `id`, `email_server_code`, `email_template_code`, `to`, `title`, `content`, `cc`, `bcc`, `retry`, `maxRetry`, `attachment_path`, `attachment_display_name`, `status`, `create_time`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and `id` ${idOperator} #{id}
+      </if>
+      <if test="emailServerCode != null" >
+        and `email_server_code` ${emailServerCodeOperator} #{emailServerCode}
+      </if>
+      <if test="emailTemplateCode != null" >
+        and `email_template_code` ${emailTemplateCodeOperator} #{emailTemplateCode}
+      </if>
+      <if test="to != null" >
+        and `to` ${toOperator} #{to}
+      </if>
+      <if test="title != null" >
+        and `title` ${titleOperator} #{title}
+      </if>
+      <if test="content != null" >
+        and `content` ${contentOperator} #{content}
+      </if>
+      <if test="cc != null" >
+        and `cc` ${ccOperator} #{cc}
+      </if>
+      <if test="bcc != null" >
+        and `bcc` ${bccOperator} #{bcc}
+      </if>
+      <if test="retry != null" >
+        and `retry` ${retryOperator} #{retry}
+      </if>
+      <if test="maxRetry != null" >
+        and `maxRetry` ${maxRetryOperator} #{maxRetry}
+      </if>
+      <if test="attachmentPath != null" >
+        and `attachment_path` ${attachmentPathOperator} #{attachmentPath}
+      </if>
+      <if test="attachmentDisplayName != null" >
+        and `attachment_display_name` ${attachmentDisplayNameOperator} #{attachmentDisplayName}
+      </if>
+      <if test="status != null" >
+        and `status` ${statusOperator} #{status}
+      </if>
+      <if test="createTime != null" >
+        and `create_time` ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and `create_time` &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and `create_time` &lt;= #{createTime2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.marketing.core.entity.admin.EmailSendJobInput" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_MKT_EMAIL_SEND_JOB_INPUT(<include refid="Base_Column_List" />)
+    values (#{id}, #{emailServerCode}, #{emailTemplateCode}, #{to}, #{title}, #{content}, #{cc}, #{bcc}, #{retry}, #{maxRetry}, #{attachmentPath}, #{attachmentDisplayName}, #{status}, #{createTime})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.marketing.core.entity.admin.EmailSendJobInput" >
+    update TD_MKT_EMAIL_SEND_JOB_INPUT
+       set `email_server_code` = #{emailServerCode},
+           `email_template_code` = #{emailTemplateCode},
+           `to` = #{to},
+           `title` = #{title},
+           `content` = #{content},
+           `cc` = #{cc},
+           `bcc` = #{bcc},
+           `retry` = #{retry},
+           `maxRetry` = #{maxRetry},
+           `attachment_path` = #{attachmentPath},
+           `attachment_display_name` = #{attachmentDisplayName},
+           `status` = #{status},
+           `create_time` = #{createTime}
+     where `id` = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.marketing.core.entity.admin.EmailSendJobInput" >
+    update TD_MKT_EMAIL_SEND_JOB_INPUT
+    <set >
+      <if test="emailServerCode != null" >
+        `email_server_code` = #{emailServerCode},
+      </if>
+      <if test="emailTemplateCode != null" >
+        `email_template_code` = #{emailTemplateCode},
+      </if>
+      <if test="to != null" >
+        `to` = #{to},
+      </if>
+      <if test="title != null" >
+        `title` = #{title},
+      </if>
+      <if test="content != null" >
+        `content` = #{content},
+      </if>
+      <if test="cc != null" >
+        `cc` = #{cc},
+      </if>
+      <if test="bcc != null" >
+        `bcc` = #{bcc},
+      </if>
+      <if test="retry != null" >
+        `retry` = #{retry},
+      </if>
+      <if test="maxRetry != null" >
+        `maxRetry` = #{maxRetry},
+      </if>
+      <if test="attachmentPath != null" >
+        `attachment_path` = #{attachmentPath},
+      </if>
+      <if test="attachmentDisplayName != null" >
+        `attachment_display_name` = #{attachmentDisplayName},
+      </if>
+      <if test="status != null" >
+        `status` = #{status},
+      </if>
+      <if test="createTime != null" >
+        `create_time` = #{createTime},
+      </if>
+    </set>
+     where `id` = #{id}
+  </update>
+
+  <!-- 根据id查询 TD_MKT_EMAIL_SEND_JOB_INPUT -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from TD_MKT_EMAIL_SEND_JOB_INPUT
+     where `id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TD_MKT_EMAIL_SEND_JOB_INPUT
+     where `id` = #{value}
+
+  </delete>
+
+  <!-- TD_MKT_EMAIL_SEND_JOB_INPUT 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select count(1) from TD_MKT_EMAIL_SEND_JOB_INPUT
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TD_MKT_EMAIL_SEND_JOB_INPUT列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from TD_MKT_EMAIL_SEND_JOB_INPUT
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+</mapper>

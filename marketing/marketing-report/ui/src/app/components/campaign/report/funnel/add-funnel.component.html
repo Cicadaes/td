@@ -1,0 +1,39 @@
+<main>
+    <p-dialog [(header)]="pannelTitle" [(visible)]="display" [draggable]="false" modal="modal" [contentStyle]="{'height': '400px','overflow': 'auto'}" (onAfterHide)="closeDialog()">
+        <!--新的漏斗弹框-->
+        <div class="content-section funnel-name">
+            <label>漏斗名称</label>
+            <input type="text" [(ngModel)]="funnelName" (keyup)="changeName()" placeholder="请填写漏斗名称">
+            <p *ngIf="nameTipShow" style="margin-left:65px" class="warn-tip"><i class="iconfonts icon-empty1"></i>{{nameTip}}</p>
+        </div>
+        <div class="header clearfix">
+            <div class="l" style="width:20%;padding-left:23px;">步骤</div>
+            <div class="l" style="width:30%;">事件名称</div>
+            <div class="l" style="width:40%;">步骤别名</div>
+        </div>
+        <div class="content-section steps-list" *ngFor="let step of stepsList; let i = index">
+            <div class="panel">
+                <label>step{{i + 1}}:</label>
+                <span class="track">追踪依据</span>
+                <div style="display: inline-block;" *ngFor="let attr of step.funnelStepConditionDefinitions; let j = index">
+                    <p-dropdown [(ngModel)]="attr.key" (onChange)="changeFunnel(i,j, $event)" [style]="{'min-width':'186px'}" [options]="funnelList"></p-dropdown>
+                </div>
+                <span class="alias">步骤别名</span>
+                <input style="width:186px" type="text" (keyup)="changeStepName()" pInputText [(ngModel)]="step.name">
+                <i *ngIf="stepsList.length > 3" class="iconfonts icon-cancel1" (click)="delSteps(i)"></i>
+            </div>
+        </div>
+        <p *ngIf="stepTipShow" style="display: inline-block" class="warn-tip"><i class="iconfonts icon-empty1"></i>{{stepTip}}</p>
+        <div class="add-steps" (click)="addSteps()" *ngIf="stepsList && stepsList.length < 10">
+            <i class="fa fa-plus"></i>
+            <span>添加步骤</span>
+        </div>
+        <p-footer>
+            <div class="r btn-handel" style="margin-top:0;">
+                <button class="cancel" type="text" pButton (click)="closeDialog()" label="取消"></button>
+                <button class="confirm dis-btn" type="text" [disabled]="isSubmit" pButton (click)="submit()" label="确定"></button>
+            </div>
+        </p-footer>
+    </p-dialog>
+    <p-growl [value]="msgs" life="3000"></p-growl>
+</main>

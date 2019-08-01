@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.EquityRecordHistoryDao" >
+
+  <insert id="batchInsert" parameterType="List">
+    INSERT INTO TD_MKT_EQUITY_RECORD_HISTORY (<include refid="Base_Column_List" />)
+    VALUES
+    <foreach collection="equityRecordHistoryList" item="equityRecordHistory" separator=",">
+      (
+      #{equityRecordHistory.id}, #{equityRecordHistory.campaignId}, #{equityRecordHistory.pipelineDefinitionId},
+      #{equityRecordHistory.equityConfigId}, #{equityRecordHistory.equityCode}, #{equityRecordHistory.equityValue},
+      #{equityRecordHistory.status},#{equityRecordHistory.tenantId},
+      #{equityRecordHistory.creator}, #{equityRecordHistory.createBy},#{equityRecordHistory.createTime},
+      #{equityRecordHistory.updater}, #{equityRecordHistory.updateBy}, #{equityRecordHistory.updateTime}
+      )
+    </foreach>
+  </insert>
+</mapper>

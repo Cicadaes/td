@@ -1,0 +1,13 @@
+<main>
+    <div [ngClass]="{'select-push-piece': true, 'selectd': selectd, 'select-push-piece-child3':child3}" (click)="onSelect()">
+        <span class="close" (click)="delete()" *ngIf="segmentCommunicationService.isUpdate !== 0">
+            <i class="fa fa-times"></i>
+        </span>
+        <em>{{piece.type}}</em>
+        <h3>推送内容<span>{{piece.type}}</span></h3>
+        <h4>
+            <span>{{piece.flowCount}}%</span> 流量
+        </h4>
+        <p-slider [disabled]="segmentCommunicationService.isUpdate === 0" [(ngModel)]="piece.flowCount" [style]="{'width':'127px'}" [min]="min" [max]="max" [animate]="true" (onChange)="changeFlowCount()"></p-slider>
+    </div>
+</main>

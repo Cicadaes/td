@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                    http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+                    http://www.springframework.org/schema/context
+                    http://www.springframework.org/schema/context/spring-context-4.3.xsd
+                    http://www.springframework.org/schema/cache
+                    http://www.springframework.org/schema/cache/spring-cache-4.3.xsd
+                    http://www.springframework.org/schema/tx
+                    http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:marketing.properties</value>
+                <value>file:///nfs/config/marketing/marketing.properties</value>
+                <value>classpath:marketing-streaming.properties</value>
+                <value>file:///nfs/config/marketing/marketing-streaming.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="marketing-streaming" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:marketing-streaming.properties</value>
+                <value>file:///nfs/config/marketing/marketing-streaming.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="username" value="${appdb.connection.username}"/>
+        <property name="password" value="${appdb.connection.password}"/>
+        <property name="url" value="${appdb.connection.url}"/>
+        <property name="driverClassName" value="${appdb.connection.driver_class}"/>
+        <property name="initialSize" value="${appdb.connection.initialSize}"/>
+        <property name="maxTotal" value="${appdb.connection.maxTotal}"/>
+        <property name="maxIdle" value="${connection.maxIdle}"/>
+        <property name="minIdle" value="${connection.minIdle}"/>
+        <property name="maxWaitMillis" value="${connection.maxWaitMillis}"/>
+        <property name="removeAbandonedOnMaintenance" value="${connection.removeAbandonedOnMaintenance}"/>
+        <property name="removeAbandonedOnBorrow" value="${connection.removeAbandonedOnBorrow}"/>
+        <property name="removeAbandonedTimeout" value="${connection.removeAbandonedTimeout}"/>
+        <property name="logAbandoned" value="${connection.logAbandoned}"/>
+        <property name="poolPreparedStatements" value="${connection.poolPreparedStatements}"/>
+        <property name="maxOpenPreparedStatements" value="${connection.maxOpenPreparedStatements}"/>
+        <property name="testOnBorrow" value="${connection.testOnBorrow}"/>
+        <property name="testOnReturn" value="${connection.testOnReturn}"/>
+        <property name="testWhileIdle" value="${connection.testWhileIdle}"/>
+        <property name="validationQuery" value="${connection.validationQuery}"/>
+        <property name="minEvictableIdleTimeMillis" value="${connection.minEvictableIdleTimeMillis}"/>
+        <property name="timeBetweenEvictionRunsMillis" value="${connection.timeBetweenEvictionRunsMillis}"/>
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <context:component-scan base-package="com.talkingdata.marketing"/>
+
+    <!-- 事务管理器 -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <cache:annotation-driven cache-manager="ehCacheCacheManager"/>
+
+    <!--声明一个缓存管理器（EhCacheCacheManager） 这里的实现代码是通过传入EhCache的CacheManager实例实现的 -->
+    <bean id="ehCacheCacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+        <property name="cacheManager" ref="ehcache"/>
+    </bean>
+
+    <!--这里并不是EhCacheManagerFactoryBean的实例，而是EhCache中CacheManager的一个实例  -->
+    <!--因为Spring和EhCache都定义了CacheManager类型  -->
+    <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:/ehcache-config.xml"/>
+        <property name="shared" value="true"/>
+    </bean>
+
+    <bean id="jedisConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="${redis.maxActive}"/>
+        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <property name="maxWaitMillis" value="${redis.maxWait}"/>
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+    </bean>
+    <!-- redis连接工厂 -->
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="hostName" value="${redis.host}"/>
+        <property name="port" value="${redis.port}"/>
+        <property name="password" value="${redis.password}"/>
+        <property name="poolConfig" ref="jedisConfig"/>
+    </bean>
+    <!-- redis操作模板，这里采用尽量面向对象的模板 -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+    </bean>
+
+</beans>

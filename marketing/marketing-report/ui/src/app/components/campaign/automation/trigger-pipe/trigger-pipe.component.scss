@@ -1,0 +1,212 @@
+@import './../common.scss';
+.pointer {
+    cursor: pointer;
+}
+
+input:disabled {
+    color: #419bf4;
+}
+
+.icon-info {
+    vertical-align: top;
+    margin-left: 8px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: $info-icon;
+    background-size: cover;
+    cursor: pointer;
+}
+
+.icon-del {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: $icon-del;
+    background-size: contain;
+}
+
+main {
+    .pipe-desc {
+        padding: 21px 20px 0px 32px;
+    }
+    .pipe-content {
+        border-top: $border-top;
+        padding: 17px 20px 0px 32px;
+        .monitor-time {
+            margin-bottom: 16px;
+            &>p {
+                display: block;
+                margin-top: 16px;
+                &>input[type=radio] {
+                    cursor: pointer;
+                    margin-right: 8px;
+                }
+                &>span {
+                    cursor: pointer;
+                    @include user-select-none;
+                }
+            }
+            .item-label {
+                margin-top: 0;
+            }
+            .next-distance {
+                .times {
+                    @include input-style;
+                    height: 32px;
+                    width: 80px;
+                    margin: 0 5px;
+                }
+            }
+        }
+        &.logical-type {
+            margin-bottom: 16px;
+            .select-logic {
+                width: 100%;
+                margin-top: 24px;
+                .radio-label {
+                    margin-right: 26px;
+                    &>input[type=radio] {
+                        margin-right: 8px;
+                    }
+                }
+            }
+        }
+        &.trigger-type {
+            .abs-box {
+                display: inline-block;
+                margin: 16px 0;
+                span.ball {
+                    color: #5ba0ff;
+                    margin-right: 8px;
+                }
+                .charts-handle-date {
+                    border-radius: 4px;
+                    overflow: hidden;
+                    height: 32px;
+                    box-sizing: border-box;
+                    .active {
+                        background: #2D8CF0;
+                        border: 1px solid #2D8CF0!important;
+                        color: #fff;
+                    }
+                    div.l {
+                        padding: 7px 23px;
+                        border: 1px solid #dfe7f2;
+                        box-sizing: border-box;
+                        height: 32px;
+                    }
+                    div.l:first-child {
+                        border-right: none;
+                    }
+                    div.l:last-child {
+                        border-left: none;
+                    }
+                }
+            }
+            .event-div .event-case,
+            .target-div .target-case {
+                @include user-select-none;
+                display: inline-block;
+                height: 32px;
+                width: 66px;
+                background: #EBEEF2;
+                border-radius: 4px;
+                line-height: 32px;
+                text-align: center;
+                color: #464C5B;
+                margin-bottom: 16px;
+            }
+            .event-div .case-info,
+            .target-div .target-info {
+                display: inline-block;
+                width: 327px;
+                height: 48px;
+                background: #F4F7FB;
+                margin-bottom: 16px;
+            }
+            .event-div .case-info .branch-name {
+                @include input-style;
+                width: 85px;
+                height: 32px;
+                margin: 8px;
+            }
+            .event-div .case-info .small-input,
+            .target-div .target-info .small-input {
+                @include input-style;
+                width: 85px;
+                height: 32px;
+                margin: 8px;
+            }
+            .target-div .target-info .target-num {
+                @include input-style;
+                width: 64px;
+                height: 32px;
+                margin: 8px;
+            }
+            .target-div .target-info .branch-name {
+                @include input-style;
+                width: 130px;
+                height: 32px;
+                margin: 8px;
+            }
+            .case-info .icon-del,
+            .target-info .icon-del {
+                vertical-align: sub;
+            }
+            .add-event {
+                @include user-select-none;
+                margin-bottom: 16px;
+                color: #5f92e1;
+                width: 65px !important;
+                .add-icon {
+                    font-size: 14px;
+                    display: inline-block;
+                    margin-right: 8px;
+                }
+            }
+        }
+        &.last-content {
+            padding-bottom: 20px;
+            .rules {
+                margin-top: 14px;
+                @include user-select-none;
+                input[type='checkbox'] {
+                    margin-right: 8px;
+                    cursor: pointer;
+                }
+                .rule-val {
+                    width: 64px;
+                    margin: 0 8px;
+                }
+                &>input[type=text] {
+                    @include input-style;
+                    height: 32px;
+                }
+            }
+        }
+    }
+}
+
+:host /deep/ .datePicker #pinput-box .pinput {
+    left: -140px;
+}
+
+:host /deep/ .ui-dropdown .ui-inputtext {
+    height: 30px;
+    line-height: 19px;
+}
+
+:host /deep/ .ui-state-disabled {
+    opacity: 1!important;
+}
+
+:host /deep/ .ui-state-disabled .ui-dropdown-label {
+    background-color: #F8F8F9!important;
+    color: rgba(23, 35, 61, 0.30)!important;
+}
+
+:host /deep/ .ui-state-disabled .ui-dropdown-trigger {
+    background-color: #F8F8F9!important;
+    color: rgba(23, 35, 61, 0.30)!important;
+}

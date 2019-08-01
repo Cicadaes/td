@@ -1,0 +1,207 @@
+<main>
+    <div class="pipe-desc">
+        <base-desc textRequired="true" textTitle="组件名称" [(text)]="pipelineNodeCommunicationService.nodeData.name" [(desc)]="pipelineNodeCommunicationService.nodeData.description" [editFlag]="!pipelineNodeCommunicationService.editFlag"></base-desc>
+    </div>
+
+    <div class="pipe-content">
+        <div class="pipe-item clearfix monitor-time">
+            <label class="item-label">
+                <span class="required">*</span>监测时间</label>
+            <p class="time-range" for="monitorTime" (click)="pipelineNodeCommunicationService.nodeData.lessThanHour = ''">
+                <input type="radio" name="monitorTime" value="1" [(ngModel)]="pipelineNodeCommunicationService.nodeData.monitorType" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                <datePicker [disabled]="pipelineNodeCommunicationService.nodeData.monitorType != 1 || !pipelineNodeCommunicationService.editFlag" [value]="marketingValue" (onSelect)="onSelect($event)" (onClick)="onDateClick($event)"></datePicker>
+            </p>
+            <p class="next-distance">
+                <span (click)="pipelineNodeCommunicationService.nodeData.monitorType = '2'">
+                    <input type="radio" name="monitorTime" value="2" [(ngModel)]="pipelineNodeCommunicationService.nodeData.monitorType" [disabled]="!pipelineNodeCommunicationService.editFlag"> 距到达上一节点
+                </span>
+                <input class="times" disabled="{{pipelineNodeCommunicationService.nodeData.monitorType != '2' || !pipelineNodeCommunicationService.editFlag}}" tdLimitNumberInput condition="PI" type="text" [(ngModel)]="pipelineNodeCommunicationService.nodeData.lessThanHour">                小时内
+            </p>
+        </div>
+    </div>
+
+    <div class="pipe-content logical-type">
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                <span class="required l  no-line-height">*</span>
+                <span class="l  no-line-height">逻辑类型</span>
+                <i class="icon-info l no-line-height" #logicalType tooltipPosition="right" pTooltip="单分支触发 - 用户每次仅可触发一条分支;多分支触发 - 用户每次可同时触发多条分支"
+                    [appendTo]="logicalType"></i>
+            </label>
+        </div>
+        <div class="select-logic">
+            <label [ngClass]="{'radio-label': true, 'pointer': pipelineNodeCommunicationService.editFlag}" (click)="exLoop('1')">
+                <input [ngClass]="{'pointer': pipelineNodeCommunicationService.editFlag}" type="radio" name="logic" value="1" [(ngModel)]="pipelineNodeCommunicationService.nodeData.branchType" (onChange)="exLoop('1')" [disabled]="!pipelineNodeCommunicationService.editFlag">单分支触发</label>
+            <label [ngClass]="{'radio-label': true, 'pointer': pipelineNodeCommunicationService.editFlag}" (click)="exLoop('2')">
+                <input [ngClass]="{'pointer': pipelineNodeCommunicationService.editFlag}" type="radio" name="logic" value="2" [(ngModel)]="pipelineNodeCommunicationService.nodeData.branchType" (onChange)="exLoop('2')" [disabled]="!pipelineNodeCommunicationService.editFlag">多分支触发</label>
+        </div>
+    </div>
+
+    <div class="pipe-content trigger-type">
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                <span class="required l  no-line-height">*</span>
+                <span class="l  no-line-height">触发类型</span>
+            </label>
+        </div>
+        <div class="abs-box">
+            <div [ngClass]="{'charts-handle-date': true, 'clearfix': true, 'pointer': pipelineNodeCommunicationService.editFlag}">
+                <div class="l" [ngClass]="{active: pipelineNodeCommunicationService.nodeData.targetType === 'event'}" (click)="changeEvent();">事件</div>
+                <div class="l" [ngClass]="{active: pipelineNodeCommunicationService.nodeData.targetType === 'target'}" (click)="changeTarget();">指标</div>
+            </div>
+        </div>
+
+        <!-- 事件配置开始 -->
+        <div class="single-event put-in" *ngIf="pipelineNodeCommunicationService.nodeData.targetType === 'event'">
+            <div class="event-div" *ngIf="pipelineNodeCommunicationService.nodeData.branchType == '1'">
+                <div class="single-branch" *ngFor="let branch of pipelineNodeCommunicationService.nodeData.eventList;let i = index;">
+                    <div class="event-case">
+                        <span *ngIf="i == 0">If</span>
+                        <span *ngIf="i != 0">If Else</span>
+                    </div>
+                    <div class="case-info">
+                        <input type="text" class="branch-name" [(ngModel)]="branch.name" placeholder="分支名称" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                        <p-dropdown [style]="{'width':'156px','top': '-1px','margin-right':'8px'}" [options]="eventList | triggerEvent: pipelineNodeCommunicationService.nodeData.eventList: i" [(ngModel)]="branch.code" placeholder="选择事件" (onChange)="selectEvent($event, i)" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                        <i *ngIf="i" [ngClass]="{'icon-del': true, 'pointer': pipelineNodeCommunicationService.editFlag}" (click)="delSingleBranch(pipelineNodeCommunicationService.nodeData.eventList, i);"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="event-div" *ngIf="pipelineNodeCommunicationService.nodeData.branchType == '2'">
+                <div class="single-branch" *ngFor="let branch of pipelineNodeCommunicationService.nodeData.eventMultipleBranchList;let i = index;">
+                    <div class="event-case">
+                        <span>Case</span>
+                    </div>
+                    <div class="case-info">
+                        <input type="text" class="branch-name" [(ngModel)]="branch.name" placeholder="分支名称" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                        <p-dropdown [style]="{'width':'156px','top': '-1px','margin-right':'8px'}" [options]="eventList" [(ngModel)]="branch.code" placeholder="选择事件" (onChange)="selectEvent($event, i)" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                        <i *ngIf="i" [ngClass]="{'icon-del': true, 'pointer': pipelineNodeCommunicationService.editFlag}" (click)="delSingleBranch(pipelineNodeCommunicationService.nodeData.eventMultipleBranchList, i);"></i>
+                    </div>
+                </div>
+            </div>
+            <div [ngClass]="{'add-event': true, 'pointer': pipelineNodeCommunicationService.editFlag}" (click)="addSingleBranch();">
+                <span class="add-icon">+</span>添加分支
+            </div>
+            <div class="target-div">
+                <div class="target-case" *ngIf="pipelineNodeCommunicationService.nodeData.branchType == '1'">
+                    Else
+                </div>
+                <div class="target-info" *ngIf="pipelineNodeCommunicationService.nodeData.branchType == '1'">
+                    <input type="text" class="branch-name" placeholder="分支名称" [(ngModel)]="pipelineNodeCommunicationService.nodeData.otherName" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                </div>
+                <div class="target-case">
+                    同时满足
+                </div>
+                <div class="target-info" *ngFor="let cond of pipelineNodeCommunicationService.nodeData.conditions;let i = index;">
+                    <p-dropdown [style]="{'width':'85px','top': '-2px','margin-left':'8px','line-height':'32px'}" [(ngModel)]="cond.target" [options]="otherTargetList" placeholder="选择指标" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                    <p-dropdown [style]="{'width':'75px','top': '-2px','margin-left':'8px','line-height':'32px'}" [(ngModel)]="cond.code" [options]="compareList" placeholder="大于" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                    <input tdLimitNumberInput condition="PI" *ngIf="cond.code !== '&&'" type="text" class="target-num" [(ngModel)]="cond.number" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                    <input tdLimitNumberInput condition="PI" *ngIf="cond.code === '&&'" type="text" class="small-input" style="margin: 8px 0 0 8px;width: 45px;" [(ngModel)]="cond.first" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                    <span *ngIf="cond.code === '&&'">~</span>
+                    <input tdLimitNumberInput condition="PI" *ngIf="cond.code === '&&'" type="text" class="small-input" style="margin: 8px 8px 0 0;width: 45px;" [(ngModel)]="cond.second" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                    <i class="icon-del" (click)="delConditions(i);"></i>
+                </div>
+            </div>
+            <p [ngClass]="{'add-event': true, 'pointer': pipelineNodeCommunicationService.editFlag}" (click)="addCondition(pipelineNodeCommunicationService.nodeData.conditions);">
+                <span class="add-icon">+</span>添加条件</p>
+        </div>
+
+        <!-- 指标配置开始 -->
+        <div class="single-target put-in" *ngIf="pipelineNodeCommunicationService.nodeData.targetType === 'target'">
+            <div class="event-div">
+                <div class="event-case">
+                    指标
+                </div>
+                <p-dropdown [style]="{'width':'156px'}" [(ngModel)]="pipelineNodeCommunicationService.nodeData.otherTarget" [options]="targetList" placeholder="选择指标" (onChange)="selectTargetGetName($event, i)" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                <div *ngIf="pipelineNodeCommunicationService.nodeData.branchType == '1'">
+                    <div class="single-branch" *ngFor="let branch of pipelineNodeCommunicationService.nodeData.targetList;let i = index;">
+                        <div class="event-case" style="display: block;">
+                            <span *ngIf="i == 0">If</span>
+                            <span *ngIf="i != 0">If Else</span>
+                        </div>
+                        <div class="case-info">
+                            <input type="text" class="branch-name" [(ngModel)]="branch.name" placeholder="分支名称" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                            <p-dropdown [style]="{'width': '75px', 'top': '-1px'}" [(ngModel)]="branch.code" [options]="compareList" placeholder="大于" (onChange)="checkParams()" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                            <input tdLimitNumberInput condition="PI" *ngIf="branch.code !== '&&'" type="text" class="branch-name" [(ngModel)]="branch.number" (blur)="checkParams()" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                            <input tdLimitNumberInput condition="PI" *ngIf="branch.code === '&&'" type="text" class="small-input" style="margin: 8px 0 0 8px;width: 45px;" [(ngModel)]="branch.first" (blur)="checkParams()" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                            <span *ngIf="branch.code === '&&'">~</span>
+                            <input tdLimitNumberInput condition="PI" *ngIf="branch.code === '&&'" type="text" class="small-input" style="margin: 8px 8px 0 0;width: 45px;" [(ngModel)]="branch.second" (blur)="checkParams()" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                            <i *ngIf="i" [ngClass]="{'icon-del': true, 'pointer': pipelineNodeCommunicationService.editFlag}" (click)="delSingleBranch(pipelineNodeCommunicationService.nodeData.targetList, i);"></i>
+                        </div>
+                        <span *ngIf="targetErrMsg[i]" style="font-size: 13px;display: inline-block;margin-top: -4px;color: red;margin-bottom: 13px;">{{targetErrMsg[i]}}</span>
+                    </div>
+                </div>
+                <div *ngIf="pipelineNodeCommunicationService.nodeData.branchType == '2'">
+                    <div class="single-branch" *ngFor="let branch of pipelineNodeCommunicationService.nodeData.targetMultipleBranchList;let i = index;">
+                        <div class="event-case" style="display: block;">
+                            <span>Case</span>
+                        </div>
+                        <div class="case-info">
+                            <input type="text" class="branch-name" [(ngModel)]="branch.name" placeholder="分支名称" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                            <p-dropdown [style]="{'width': '75px', 'top': '-1px'}" [(ngModel)]="branch.code" [options]="compareList" placeholder="大于" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                            <input tdLimitNumberInput condition="PI" *ngIf="branch.code !== '&&'" type="text" class="branch-name" [(ngModel)]="branch.number" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                            <input tdLimitNumberInput condition="PI" *ngIf="branch.code === '&&'" type="text" class="small-input" style="margin: 8px 0 0 8px;width: 45px;" [(ngModel)]="branch.first" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                            <span *ngIf="branch.code === '&&'">~</span>
+                            <input tdLimitNumberInput condition="PI" *ngIf="branch.code === '&&'" type="text" class="small-input" style="margin: 8px 8px 0 0;width: 45px;" [(ngModel)]="branch.second" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                            <i *ngIf="i" [ngClass]="{'icon-del': true, 'pointer': pipelineNodeCommunicationService.editFlag}" (click)="delSingleBranch(pipelineNodeCommunicationService.nodeData.targetMultipleBranchList, i);"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p [ngClass]="{'add-event': true, 'pointer': pipelineNodeCommunicationService.editFlag}" (click)="addSingleBranch();">
+                <span class="add-icon">+</span>添加分支
+            </p>
+
+            <div class="target-div">
+                <div class="target-case" style="display: block;margin-bottom: 16px;" *ngIf="pipelineNodeCommunicationService.nodeData.branchType == '1'">
+                    Else
+                </div>
+                <div class="target-info" *ngIf="pipelineNodeCommunicationService.nodeData.branchType == '1'">
+                    <input type="text" class="branch-name" placeholder="分支名称" [(ngModel)]="pipelineNodeCommunicationService.nodeData.otherName" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                </div>
+                <div class="target-case">
+                    同时满足
+                </div>
+                <div class="target-info" *ngFor="let cond of pipelineNodeCommunicationService.nodeData.conditions;let i = index;">
+                    <p-dropdown [style]="{'width':'85px','top': '-1px','margin-left':'8px'}" [(ngModel)]="cond.target" [options]="otherTargetList" placeholder="选择指标" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                    <p-dropdown [style]="{'width':'75px','top': '-1px','margin-left':'8px'}" [(ngModel)]="cond.code" [options]="compareList" placeholder="大于" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                    <input tdLimitNumberInput condition="PI" *ngIf="cond.code !== '&&'" type="text" class="target-num" [(ngModel)]="cond.number" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                    <input tdLimitNumberInput condition="PI" *ngIf="cond.code === '&&'" type="text" class="small-input" style="margin: 8px 0 0 8px;width: 45px;" [(ngModel)]="cond.first" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                    <span *ngIf="cond.code === '&&'">~</span>
+                    <input tdLimitNumberInput condition="PI" *ngIf="cond.code === '&&'" type="text" class="small-input" style="margin: 8px 8px 0 0;width: 45px;" [(ngModel)]="cond.second" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                    <i class="icon-del" (click)="delConditions(i);"></i>
+                </div>
+            </div>
+            <p [ngClass]="{'add-event': true, 'pointer': pipelineNodeCommunicationService.editFlag}" (click)="addCondition(pipelineNodeCommunicationService.nodeData.conditions);">
+                <span class="add-icon">+</span>添加条件</p>
+        </div>
+    </div>
+
+    <div class="pipe-content last-content">
+        <p>
+            <label>触发规则（默认为同一用户不受限可反复触发）：</label>
+        </p>
+        <div [ngClass]="{'rules': true, 'pointer': pipelineNodeCommunicationService.editFlag}" *ngIf="pipelineNodeCommunicationService.nodeData.targetType === 'event' || pipelineNodeCommunicationService.nodeData.branchType == '2'">
+            <span (click)="selectRule($event,'1')">
+                <input type="checkbox" value="1" name="rule" [(ngModel)]="lessThanDaysSelect" [disabled]="!pipelineNodeCommunicationService.editFlag">同一用户
+            </span>
+            <input class="rule-val" type="text" [(ngModel)]="pipelineNodeCommunicationService.nodeData.sameUserLessThanDays" tdLimitNumberInput condition="PI" (input)="changeRule($event)" [disabled]="!lessThanDaysSelect || !pipelineNodeCommunicationService.editFlag">天内不被重复触发
+        </div>
+        <div [ngClass]="{'rules': true, 'pointer': pipelineNodeCommunicationService.editFlag}" *ngIf="pipelineNodeCommunicationService.nodeData.targetType === 'event' || pipelineNodeCommunicationService.nodeData.branchType == '2'">
+            <span (click)="selectRule($event,'2')">
+                <input type="checkbox" value="2" name="rule" [(ngModel)]="lessThanTimesSelect" [disabled]="!pipelineNodeCommunicationService.editFlag">同一用户重复触发次数不超过
+            </span>
+            <input class="rule-val" type="text" [(ngModel)]="pipelineNodeCommunicationService.nodeData.sameUserLessThanTimes" tdLimitNumberInput condition="PI" (input)="changeRule($event)" [disabled]="!lessThanTimesSelect || !pipelineNodeCommunicationService.editFlag">次
+        </div>
+        <div [ngClass]="{'rules': true, 'pointer': pipelineNodeCommunicationService.editFlag}" *ngIf="pipelineNodeCommunicationService.nodeData.targetType === 'target' && pipelineNodeCommunicationService.nodeData.branchType == '1'">
+            <span>
+                <input type="checkbox" value="1" name="targetRule" (click)="checkRadio($event,'one')" [ngModel]="check_one" [disabled]="!pipelineNodeCommunicationService.editFlag">同一用户达到更大的指标值可再次触达
+            </span>
+        </div>
+        <div [ngClass]="{'rules': true, 'pointer': pipelineNodeCommunicationService.editFlag}" *ngIf="pipelineNodeCommunicationService.nodeData.targetType === 'target' && pipelineNodeCommunicationService.nodeData.branchType == '1'">
+            <span>
+                <input type="checkbox" value="0" name="targetRule" (click)="checkRadio($event,'two')" [ngModel]="check_two" [disabled]="!pipelineNodeCommunicationService.editFlag">同一用户达到更小的指标值可再次触达
+            </span>
+        </div>
+    </div>
+    <p-growl [(value)]="msgs"></p-growl>
+</main>

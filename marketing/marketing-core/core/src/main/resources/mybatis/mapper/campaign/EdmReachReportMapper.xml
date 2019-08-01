@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.EdmReachReportDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.marketing.core.entity.campaign.EdmReachReport" >
+    <id column="id" property="id" />
+    <result column="campaign_id" property="campaignId" />
+    <result column="segment_id" property="segmentId" />
+    <result column="pipeline_id" property="pipelineId" />
+    <result column="pipeline_node_id" property="pipelineNodeId" />
+    <result column="report_date" property="reportDate" />
+    <result column="report_hour" property="reportHour" />
+    <result column="succ_count" property="succCount" />
+    <result column="fail_count" property="failCount" />
+    <result column="invalid_address_count" property="invalidAddressCount" />
+    <result column="server_rejected_count" property="serverRejectedCount" />
+    <result column="unknown_count" property="unknownCount" />
+    <result column="read_count" property="readCount" />
+    <result column="person_read_count" property="personReadCount" />
+    <result column="click_link_count" property="clickLinkCount" />
+    <result column="account_close_count" property="accountCloseCount" />
+    <result column="insufficient_balance_count" property="insufficientBalanceCount" />
+    <result column="tenant_id" property="tenantId" />
+    <result column="create_time" property="createTime" />
+    <result column="creator" property="creator" />
+    <result column="create_by" property="createBy" />
+    <result column="updater" property="updater" />
+    <result column="update_by" property="updateBy" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+
+  <!-- TD_MKT_EDM_REACH_REPORT table all fields -->
+  <sql id="Base_Column_List" >
+     `id`, `campaign_id`, `segment_id`, `pipeline_id`, `pipeline_node_id`, `report_date`, `report_hour`, `succ_count`, `fail_count`, `invalid_address_count`, `server_rejected_count`, `unknown_count`, `read_count`, `person_read_count`, `click_link_count`, `account_close_count`, `insufficient_balance_count`, `tenant_id`, `create_time`, `creator`, `create_by`, `updater`, `update_by`, `update_time`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and `id` ${idOperator} #{id}
+      </if>
+      <if test="campaignId != null" >
+        and `campaign_id` ${campaignIdOperator} #{campaignId}
+      </if>
+      <if test="segmentId != null" >
+        and `segment_id` ${segmentIdOperator} #{segmentId}
+      </if>
+      <if test="pipelineId != null" >
+        and `pipeline_id` ${pipelineIdOperator} #{pipelineId}
+      </if>
+      <if test="pipelineNodeId != null" >
+        and `pipeline_node_id` ${pipelineNodeIdOperator} #{pipelineNodeId}
+      </if>
+      <if test="reportDate != null" >
+        and `report_date` ${reportDateOperator} #{reportDate}
+      </if>
+      <if test="reportHour != null" >
+        and `report_hour` ${reportHourOperator} #{reportHour}
+      </if>
+      <if test="succCount != null" >
+        and `succ_count` ${succCountOperator} #{succCount}
+      </if>
+      <if test="failCount != null" >
+        and `fail_count` ${failCountOperator} #{failCount}
+      </if>
+      <if test="invalidAddressCount != null" >
+        and `invalid_address_count` ${invalidAddressCountOperator} #{invalidAddressCount}
+      </if>
+      <if test="serverRejectedCount != null" >
+        and `server_rejected_count` ${serverRejectedCountOperator} #{serverRejectedCount}
+      </if>
+      <if test="unknownCount != null" >
+        and `unknown_count` ${unknownCountOperator} #{unknownCount}
+      </if>
+      <if test="readCount != null" >
+        and `read_count` ${readCountOperator} #{readCount}
+      </if>
+      <if test="personReadCount != null" >
+        and `person_read_count` ${personReadCountOperator} #{personReadCount}
+      </if>
+      <if test="clickLinkCount != null" >
+        and `click_link_count` ${clickLinkCountOperator} #{clickLinkCount}
+      </if>
+      <if test="accountCloseCount != null" >
+        and `account_close_count` ${accountCloseCountOperator} #{accountCloseCount}
+      </if>
+      <if test="insufficientBalanceCount != null" >
+        and `insufficient_balance_count` ${insufficientBalanceCountOperator} #{insufficientBalanceCount}
+      </if>
+      <if test="tenantId != null" >
+        and `tenant_id` ${tenantIdOperator} #{tenantId}
+      </if>
+      <if test="createTime != null" >
+        and `create_time` ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and `create_time` &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and `create_time` &lt;= #{createTime2}
+      </if>
+      <if test="creator != null" >
+        and `creator` ${creatorOperator} #{creator}
+      </if>
+      <if test="createBy != null" >
+        and `create_by` ${createByOperator} #{createBy}
+      </if>
+      <if test="updater != null" >
+        and `updater` ${updaterOperator} #{updater}
+      </if>
+      <if test="updateBy != null" >
+        and `update_by` ${updateByOperator} #{updateBy}
+      </if>
+      <if test="updateTime != null" >
+        and `update_time` ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and `update_time` &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and `update_time` &lt;= #{updateTime2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.marketing.core.entity.campaign.EdmReachReport" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_MKT_EDM_REACH_REPORT(<include refid="Base_Column_List" />)
+    values (#{id}, #{campaignId}, #{segmentId}, #{pipelineId}, #{pipelineNodeId}, #{reportDate}, #{reportHour}, #{succCount}, #{failCount}, #{invalidAddressCount}, #{serverRejectedCount}, #{unknownCount}, #{readCount}, #{personReadCount}, #{clickLinkCount}, #{accountCloseCount}, #{insufficientBalanceCount}, #{tenantId}, #{createTime}, #{creator}, #{createBy}, #{updater}, #{updateBy}, #{updateTime})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.marketing.core.entity.campaign.EdmReachReport" >
+    update TD_MKT_EDM_REACH_REPORT
+       set `campaign_id` = #{campaignId},
+           `segment_id` = #{segmentId},
+           `pipeline_id` = #{pipelineId},
+           `pipeline_node_id` = #{pipelineNodeId},
+           `report_date` = #{reportDate},
+           `report_hour` = #{reportHour},
+           `succ_count` = #{succCount},
+           `fail_count` = #{failCount},
+           `invalid_address_count` = #{invalidAddressCount},
+           `server_rejected_count` = #{serverRejectedCount},
+           `unknown_count` = #{unknownCount},
+           `read_count` = #{readCount},
+           `person_read_count` = #{personReadCount},
+           `click_link_count` = #{clickLinkCount},
+           `account_close_count` = #{accountCloseCount},
+           `insufficient_balance_count` = #{insufficientBalanceCount},
+           `tenant_id` = #{tenantId},
+           `create_time` = #{createTime},
+           `creator` = #{creator},
+           `create_by` = #{createBy},
+           `updater` = #{updater},
+           `update_by` = #{updateBy},
+           `update_time` = #{updateTime}
+     where `id` = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.marketing.core.entity.campaign.EdmReachReport" >
+    update TD_MKT_EDM_REACH_REPORT
+    <set >
+      <if test="campaignId != null" >
+        `campaign_id` = #{campaignId},
+      </if>
+      <if test="segmentId != null" >
+        `segment_id` = #{segmentId},
+      </if>
+      <if test="pipelineId != null" >
+        `pipeline_id` = #{pipelineId},
+      </if>
+      <if test="pipelineNodeId != null" >
+        `pipeline_node_id` = #{pipelineNodeId},
+      </if>
+      <if test="reportDate != null" >
+        `report_date` = #{reportDate},
+      </if>
+      <if test="reportHour != null" >
+        `report_hour` = #{reportHour},
+      </if>
+      <if test="succCount != null" >
+        `succ_count` = #{succCount},
+      </if>
+      <if test="failCount != null" >
+        `fail_count` = #{failCount},
+      </if>
+      <if test="invalidAddressCount != null" >
+        `invalid_address_count` = #{invalidAddressCount},
+      </if>
+      <if test="serverRejectedCount != null" >
+        `server_rejected_count` = #{serverRejectedCount},
+      </if>
+      <if test="unknownCount != null" >
+        `unknown_count` = #{unknownCount},
+      </if>
+      <if test="readCount != null" >
+        `read_count` = #{readCount},
+      </if>
+      <if test="personReadCount != null" >
+        `person_read_count` = #{personReadCount},
+      </if>
+      <if test="clickLinkCount != null" >
+        `click_link_count` = #{clickLinkCount},
+      </if>
+      <if test="accountCloseCount != null" >
+        `account_close_count` = #{accountCloseCount},
+      </if>
+      <if test="insufficientBalanceCount != null" >
+        `insufficient_balance_count` = #{insufficientBalanceCount},
+      </if>
+      <if test="tenantId != null" >
+        `tenant_id` = #{tenantId},
+      </if>
+      <if test="createTime != null" >
+        `create_time` = #{createTime},
+      </if>
+      <if test="creator != null" >
+        `creator` = #{creator},
+      </if>
+      <if test="createBy != null" >
+        `create_by` = #{createBy},
+      </if>
+      <if test="updater != null" >
+        `updater` = #{updater},
+      </if>
+      <if test="updateBy != null" >
+        `update_by` = #{updateBy},
+      </if>
+      <if test="updateTime != null" >
+        `update_time` = #{updateTime},
+      </if>
+    </set>
+     where `id` = #{id}
+  </update>
+
+  <!-- 根据id查询 TD_MKT_EDM_REACH_REPORT -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from TD_MKT_EDM_REACH_REPORT
+     where `id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TD_MKT_EDM_REACH_REPORT
+     where `id` = #{value}
+
+  </delete>
+
+  <!-- TD_MKT_EDM_REACH_REPORT 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select count(1) from TD_MKT_EDM_REACH_REPORT
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TD_MKT_EDM_REACH_REPORT列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.enterprise.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from TD_MKT_EDM_REACH_REPORT
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+</mapper>

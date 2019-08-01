@@ -1,0 +1,59 @@
+<main>
+    <div class="pipe-desc">
+        <base-desc textRequired="true" textTitle="组件名称" [(text)]="pipelineNodeCommunicationService.nodeData.name" [(desc)]="pipelineNodeCommunicationService.nodeData.description" [editFlag]="!pipelineNodeCommunicationService.editFlag"></base-desc>
+    </div>
+    <div class="pipe-content">
+        <div class="filter-info pipe-item clearfix">
+            <label class="item-label"><span class="required">*</span>过滤条件</label>
+            <div class="tag-infomation" *ngFor="let tagData of pipelineNodeCommunicationService.nodeData.tagRowKeyList;let i = index;">
+                <div *ngIf="i" [ngClass]="{'infomation-relation': true, 'disabled': !pipelineNodeCommunicationService.editFlag}" (click)="changeRelation()">{{relationData.name}}</div>
+                <div class="infomation">
+                    <span>标签</span>
+                    <p-dropdown placeholder="请选择标签" [options]="tagList | filterTags: pipelineNodeCommunicationService.nodeData.tagRowKeyList: i" [style]="{'margin':'-2px 8px 0px 30px', 'width': '140px'}" [(ngModel)]="pipelineNodeCommunicationService.nodeData.tagRowKeyList[i]"
+                        (click)="checkTagRepaet($event, i)" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+                    <i *ngIf="i" class="icon-del" (click)="delTag(i);"></i>
+                </div>
+            </div>
+            <div class="add-tag" (click)="addTag(pipelineNodeCommunicationService.nodeData.tagRowKeyList.length)">
+                <i></i> 添加标签
+            </div>
+
+            <!-- 不按照原型的来 -->
+            <!-- <div class="property-infomation">
+                        <div class="infomation-header">
+                            <span>属性信息</span>
+                        </div>
+                        <div class="infomation-content">
+                            <div class="infomation-text">
+                                添加人群属性信息
+                            </div>
+                            <div class="infomation-add-button">
+                                添加
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-line"></div>
+                    <div class="info-button" (click)="changePropertyType()">{{propertyType}}</div>
+                    <div class="info-line"></div>
+                    <div class="behavior-infomation">
+                        <div class="infomation-header">
+                            <span>行为信息</span>
+                        </div>
+                        <div class="infomation-content">
+                            <div class="infomation-text">
+                                添加人群行为信息
+                            </div>
+                            <div class="infomation-add-button">
+                                添加
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-line"></div>
+                    <div class="add-behavior">
+                        <i></i> 添加行为块
+                    </div> -->
+        </div>
+    </div>
+
+    <p-growl [(value)]="msgs"></p-growl>
+</main>

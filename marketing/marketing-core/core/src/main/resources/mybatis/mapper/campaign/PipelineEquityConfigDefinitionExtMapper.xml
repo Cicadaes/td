@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.marketing.core.dao.campaign.PipelineEquityConfigDefinitionDao" >
+  <delete id="deleteByPipelineDefinitionId" parameterType="java.lang.Integer">
+      delete from TD_MKT_PIPELINE_EQUITY_CONFIG_DEFINITION where `pipeline_definition_id` = #{pipelineDefinitionId}
+  </delete>
+    <select id="findByPipelineDefinitionIdList" resultMap="BaseResultMap" parameterType="map">
+        select <include refid="Base_Column_List" /> from TD_MKT_PIPELINE_EQUITY_CONFIG_DEFINITION
+        where pipeline_definition_id IN
+        <foreach collection="idList" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+    <delete id="deleteByEquityConfigId" parameterType="java.lang.Integer">
+        delete from TD_MKT_PIPELINE_EQUITY_CONFIG_DEFINITION where `equity_config_id` = #{equityConfigId}
+    </delete>
+
+    <delete id="updateNameByEquityConfigId">
+        UPDATE TD_MKT_PIPELINE_EQUITY_CONFIG_DEFINITION SET `name`=#{equityConfigName} WHERE `equity_config_id`=#{equityConfigId}
+    </delete>
+</mapper>

@@ -1,0 +1,37 @@
+<main>
+    <div class="sub-box">
+        <label class="sub-devide">人群细分</label>
+        <div (click)="op.toggle($event)" class="sub-text">
+            <span>请选择</span>
+        </div>
+        <span *ngFor="let crowd of childCrowdList"><span style="margin:0 8px;"><span [ngStyle]="{'color':crowd.color,'font-size':'20px','vertical-align': 'middle'}">●</span> {{crowd.refName}}</span>
+        </span>
+    </div>
+    <!--<p-dialog [(visible)]="display" [draggable]="false" [showHeader]="false" [dismissableMask]="true" modal="modal" (onAfterHide)="closeDialog()">-->
+    <p-overlayPanel #op>
+        <div class="header clearfix">
+            <div class="l">
+                <input class="text-indent" type="text" pInputText [style]="{'width':'230px'}" [(ngModel)]="searchParams" placeholder="搜索人群" (keyup)="search()">
+                <span class="span">最多可选2个人群</span>
+                <i class="fa fa-search"></i>
+                <i class="fa fa-times-circle" *ngIf="searchParams" (click)="clearSearch();"></i>
+            </div>
+            <div class="r cancel-choice" (click)="cancelChoice()">
+                取消选择
+            </div>
+        </div>
+        <div class="panel">
+            <div class="select-content ui-g clearfix">
+                <div class="ui-g-4" *ngFor="let crowd of crowdList; let i = index">
+                    <p-checkbox [disabled]="crowd.dis" (onChange)="selectedCrowd(i)" name="group1" value="{{crowd.id}}" label="{{crowd.refName}}" [(ngModel)]="selectList"></p-checkbox>
+                </div>
+            </div>
+        </div>
+        <div class="r btn-handel">
+            <button class="cancel" pButton type="text" (click)="closeDialog(op)" label="取消"></button>
+            <button class="confirm" pButton type="text" (click)="save(op)" label="确定"></button>
+        </div>
+    </p-overlayPanel>
+    <!--</p-dialog>-->
+    <p-growl [value]="msgs" life="3000"></p-growl>
+</main>

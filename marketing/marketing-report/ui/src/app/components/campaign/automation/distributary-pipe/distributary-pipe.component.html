@@ -1,0 +1,76 @@
+<main>
+    <div class="pipe-desc">
+        <base-desc textRequired="true" textTitle="组件名称" [(text)]="pipelineNodeCommunicationService.nodeData.name" [(desc)]="pipelineNodeCommunicationService.nodeData.description" [editFlag]="!pipelineNodeCommunicationService.editFlag"></base-desc>
+    </div>
+
+    <div class="pipe-content">
+        <div class="distributary-type pipe-item clearfix">
+            <label class="item-label"><p class="required">*</p>分流类型</label>
+            <div class="type-list">
+                <div class="type-radio" (click)="choosType('1');">
+                    <input class="radio" name="distributary" type="radio" value="1" [(ngModel)]="pipelineNodeCommunicationService.nodeData.splitType" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                    <span>人数</span>
+                </div>
+                <div class="type-radio" (click)="choosType('2');">
+                    <input class="radio" name="distributary" type="radio" value="2" [(ngModel)]="pipelineNodeCommunicationService.nodeData.splitType" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                    <span>占比</span>
+                </div>
+                <div class="type-radio" (click)="choosType('3');">
+                    <input class="radio" name="distributary" type="radio" value="3" [(ngModel)]="pipelineNodeCommunicationService.nodeData.splitType" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                    <span>维度</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="branch-number pipe-item clearfix" *ngIf="pipelineNodeCommunicationService.nodeData.splitType == 1 || pipelineNodeCommunicationService.nodeData.splitType == 2">
+            <label class="item-label"><p class="required">*</p>分支数量</label>
+            <p-dropdown [options]="branchNumberList" NumberInput [(ngModel)]="pipelineNodeCommunicationService.nodeData.count" (onChange)="changeBranchNumber($event)" [style]="{'width':'261px','height':'32px','margin-right': '8px','float':'right', 'line-height':'32px'}"
+                placeholder="请选择" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+        </div>
+
+        <div class="branch-number pipe-item clearfix" *ngIf="pipelineNodeCommunicationService.nodeData.splitType == 3">
+            <label class="item-label"><p class="required">*</p>维度选择</label>
+            <p-dropdown [options]="dimensionList" [(ngModel)]="pipelineNodeCommunicationService.nodeData.dimensionCode" (onChange)="changeDimension($event)" [style]="{'width':'261px','height':'32px','margin-right': '8px','float':'right','line-height': '32px'}" placeholder="请选择"
+                [disabled]="!pipelineNodeCommunicationService.editFlag"></p-dropdown>
+
+        </div>
+
+        <div class="branch-val pipe-item clearfix" *ngIf="pipelineNodeCommunicationService.nodeData.splitType == 1">
+            <label class="item-label">分支数值</label>
+            <ng-container *ngFor="let val of pipelineNodeCommunicationService.nodeData.branchList;let i = index;">
+                <div class="val-list">
+                    <label>{{val.name}}</label>
+                    <input tdLimitNumberInput condition="PI" class="tI-10" type="text" [(ngModel)]="val.min" maxlength="15" (input)="checkNumber(val, i)" [disabled]="!pipelineNodeCommunicationService.editFlag">&nbsp;—&nbsp;
+                    <input tdLimitNumberInput condition="PI" class="tI-10" type="text" [(ngModel)]="val.max" maxlength="15" (input)="checkNumber(val, i)" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                </div>
+                <p *ngIf="errorList[i]">请输入正确的范围</p>
+            </ng-container>
+        </div>
+
+        <div class="branch-proportion pipe-item clearfix" *ngIf="pipelineNodeCommunicationService.nodeData.splitType == 2">
+            <label class="item-label">分支占比</label>
+            <div class="proportion-list" *ngFor="let val of pipelineNodeCommunicationService.nodeData.branchList;let i = index;">
+                <label>{{val.name}}</label>
+                <input type="text" [value]="val.percent" (input)="changeInputRatio($event, i);" [disabled]="!pipelineNodeCommunicationService.editFlag">
+                <span>%</span>
+                <p-slider [ngModel]="val.percent" (onChange)="changeRatio($event, i);" [style]="{'width':'208px', 'display': 'inline-block', 'height': '4px', 'margin-left': '15px'}" [min]="min" [max]="max" [animate]="true" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-slider>
+            </div>
+        </div>
+
+        <div class="branch-select pipe-item clearfix" *ngIf="pipelineNodeCommunicationService.nodeData.splitType == 3">
+            <label class="item-label">分支选择</label>
+            <div class="branch-list">
+                <div class="select-content" style="margin-bottom: 12px;" *ngIf="dimensions && dimensions.length > 0">
+                    <p-checkbox [(ngModel)]="selectAll" binary="true" label="全选" (onChange)="selectAllDimension();" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-checkbox>
+                </div>
+                <div class="select-content ui-g clearfix">
+                    <div class="ui-g-4" *ngFor="let dimension of dimensions; let i = index">
+                        <p-checkbox name="group1" value="{{dimension.value}}" label="{{dimension.name}}" (onChange)="bindDimension($event)" [(ngModel)]="selectDimension" [disabled]="!pipelineNodeCommunicationService.editFlag"></p-checkbox>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</main>

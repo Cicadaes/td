@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+    <diskStore path="java.io.tmpdir"/>
+     <!-- cache 配置
+   		name 缓存名称 唯一
+   		maxEntriesLocalHeap 最大缓存对象数
+   		eternal 缓存对象是否永久生效   =true永久生效 timeToLiveSeconds 属性禁用
+   		timeToLiveSeconds 缓存对象过期时间  单位秒
+   		timeToIdleSeconds 缓存对象过期前的空闲时间 单位秒
+   		overflowToDisk 缓存对象超出最大值时是否写入磁盘 写入位置参照 java虚拟机 java.io.tmpdir
+   		statistics 是否统计
+   		cacheEventListenerFactory 分布式ehcache配置 缓存监控  非分布式禁用
+    -->
+    <defaultCache
+            maxEntriesLocalHeap="10000"
+            eternal="false"
+            timeToLiveSeconds="86400"
+            overflowToDisk="false"
+            statistics="false">
+    </defaultCache>
+
+    <!-- pipeline配置 -->
+    <cache
+            name="pipelineCache"
+    		maxEntriesLocalHeap="2000"
+            eternal="false"
+            timeToLiveSeconds="86400"
+            overflowToDisk="true"
+            statistics="false">
+	</cache>
+
+    <!-- behavior配置   timeToLiveSeconds:缓存自创建日期起至失效时的间隔时间-->
+    <cache
+            name="behaviorCache"
+            maxEntriesLocalHeap="2000"
+            eternal="false"
+            timeToLiveSeconds="7200"
+            overflowToDisk="true"
+            statistics="false">
+    </cache>
+
+    <!-- pipelineDefinitionCache配置 营销流程定义缓存-->
+    <cache
+            name="pipelineDefinitionCache"
+            maxEntriesLocalHeap="2000"
+            eternal="false"
+            timeToLiveSeconds="86400"
+            overflowToDisk="true"
+            statistics="false">
+    </cache>
+
+    <!-- pipelineInstanceCache配置 营销流程实例缓存-->
+    <cache
+            name="pipelineInstanceCache"
+            maxEntriesLocalHeap="2000"
+            eternal="false"
+            timeToLiveSeconds="86400"
+            overflowToDisk="true"
+            statistics="false">
+    </cache>
+
+    <!-- pipelineUserInstanceCache配置 营销流程用户实例缓存-->
+    <cache
+            name="pipelineUserInstanceCache"
+            maxEntriesLocalHeap="2000"
+            eternal="false"
+            timeToLiveSeconds="86400"
+            overflowToDisk="true"
+            statistics="false">
+    </cache>
+
+    <!-- pipelineEnterCache配置 全局进入规则缓存-->
+    <cache
+            name="pipelineEnterCache"
+            maxEntriesLocalHeap="2000"
+            eternal="false"
+            timeToLiveSeconds="86400"
+            overflowToDisk="true"
+            statistics="false">
+    </cache>
+
+    <!-- pipelineTerminationCache配置 全局禁止规则缓存-->
+    <cache
+            name="pipelineTerminationCache"
+            maxEntriesLocalHeap="2000"
+            eternal="false"
+            timeToLiveSeconds="86400"
+            overflowToDisk="true"
+            statistics="false">
+    </cache>
+</ehcache>
