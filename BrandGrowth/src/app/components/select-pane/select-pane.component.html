@@ -1,0 +1,43 @@
+<div class="select-data">
+  <div class="header"
+    [style.border-bottom-left-radius.px]="fold ? 0 : 4" 
+    [style.border-bottom-right-radius.px]="fold ? 0 : 4"
+  >
+    <h3 *ngIf="title">{{title}}</h3>
+    <label nz-checkbox [(ngModel)]="allSelect.isSelect" 
+      (ngModelChange)="selectAll($event)" 
+      [nzIndeterminate]="allSelect.indeterminate"
+    >
+      <span>全部链接</span>
+    </label>
+  </div>
+  <div class="pane-wrap clearfix" *ngIf="fold" 
+    [style.border-bottom-left-radius.px]="!fold ? 0 : 4" 
+    [style.border-bottom-right-radius.px]="!fold ? 0 : 4"
+  >
+    <div class="pane">
+      <div class="item" *ngFor="let option of _value">
+        <label nz-checkbox 
+          [(ngModel)]="option.isSelect" 
+          [nzIndeterminate]="option.indeterminate"
+          (ngModelChange)="selectGroup($event, option)"
+          [title]="option.title"
+        >
+          <span class="ellipsis">{{option.title}}</span>
+        </label>
+        <div class="divider" *ngIf="option.children">
+          <label nz-checkbox *ngFor="let op of option.children" 
+            [(ngModel)]="op.isSelect"
+            (ngModelChange)="selectSingle($event, op, option)"
+          >
+            <span class="ellipsis">{{op.title}}</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="_shouldFold">
+    <i *ngIf="!fold" (click)="fold=true" class="anticon anticon-plus-circle-o"></i>
+    <i *ngIf="fold" (click)="fold=false" class="anticon anticon-minus-circle-o"></i>
+  </div>
+</div>

@@ -1,0 +1,97 @@
+@import '../../../assets/styles/common.less';
+
+:host ::ng-deep main {
+  // padding-left: 24px;
+
+  .title {
+    font-family: PingFangSC-Medium;
+    font-weight: 600;
+    font-size: 14px;
+    color: #1C2438;
+    line-height: 14px;
+    padding-bottom: 20px;
+  }
+
+  .ranking-list {
+    height: 360px;
+    overflow-y: auto;
+    // padding-right: 15px;
+
+    .ranking-item {
+      padding: 10px 0;
+      overflow: hidden;
+
+      &:nth-child(1) .budge {
+        background: #FF8454;
+        color: #fff;
+      }
+
+      &:nth-child(2) .budge {
+        background: #FCC45F;
+        color: #fff;
+      }
+
+      &:nth-child(3) .budge {
+        background: #2DE2C5;
+        color: #fff;
+      }
+
+      .budge {
+        display: block;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 20px;
+        font-family: HelveticaNeue-Medium;
+        font-size: 14px;
+        color: rgba(28,36,56,0.80);
+        background: rgba(28,36,56,0.16);
+        margin-right: 8px;
+        float: left;
+      }
+
+      .item-name {
+        .BG-ellipsis;
+        width: 88px;
+        float: left;
+        font-family: PingFangSC-Regular;
+        font-size: 14px;
+        color: #495060;
+        line-height: 20px;
+      }
+
+      .percent {
+        font-family: HelveticaNeue;
+        font-size: 14px;
+        color: #80848F;
+        line-height: 20px;
+        float: left;
+      }
+
+      &-progress {
+        width: 64px;
+        float: right;
+        // margin-left: 16px;
+
+        .ant-progress-bg {
+          border-radius: 0;
+        }
+      }
+    }
+  }
+}
+
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background: rgba(28,36,56,0.08);
+  border-radius: 6px;
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  background: rgba(28,36,56,0.16);
+  border-radius: 6px;
+}

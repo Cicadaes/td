@@ -1,0 +1,63 @@
+<main class="header">
+  <div nz-row>
+    <h1 class="logo">
+      <a class="toAccout" routerLink=""></a>
+      <a class="toMarketing" routerLink="/entry"></a>
+    </h1>
+    <select-bar *ngIf="(guard$ | async).isTimeExist" [itemList]="itemList"></select-bar>
+    <div class="tags">
+      <ul class="tag-list">
+        <li class="tag-item help">
+          <a>
+            <i class="icon-question"></i>
+          </a>
+        </li>
+        <li class="tag-item manage-center">
+          <a routerLink="/manage-center" routerLinkActive="active">
+            <i class="icon-manage"></i>
+          </a>
+        </li>
+        <li class="tag-item messages">
+          <a (click)="showModalForComponent()">
+            <i class="icon-news"></i>
+          </a>
+        </li>
+        <li class="tag-item userInfo">
+          <user-info></user-info>
+        </li>
+        <li class="tag-item langChange">
+          <a>
+            <i class="icon-zh"></i>
+          </a>
+          <!-- <a><i class="icon-en"></i></a> -->
+        </li>
+      </ul>
+    </div>
+  </div>
+  <cm-modal>
+    <nz-modal
+      [nzVisible]="isVisible" 
+      [nzTitle]="'消息公告'" 
+      [nzContent]="modalContent" 
+      [nzFooter]="false"
+      (nzOnCancel)="isVisible = false">
+      <ng-template #modalContent>
+        <div>
+          <nz-collapseset nzAccordion>
+            <nz-collapse *ngFor="let info of noticeInfo">
+              <p 
+                class="header-modal-collapse-title" 
+                collapse-title
+                (click)="onChangeNoticeInfo(info.groupid, info.status === 0)">
+                <i ng-if="info.status === 0"></i> 
+                <b [title]="info.title">{{ info.title }}</b>
+                <span>{{ info.sendtime }}</span>
+              </p>
+              <p [innerHtml]="info.content"></p>
+            </nz-collapse>
+          </nz-collapseset>
+        </div>
+      </ng-template>
+    </nz-modal>
+  </cm-modal>
+</main>

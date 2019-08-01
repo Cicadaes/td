@@ -1,0 +1,140 @@
+@import '../../../../assets/styles/common.less';
+
+:host ::ng-deep .header {
+  background: #192744;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
+  z-index: 5;
+  padding: 0;
+  height: 64px;
+  line-height: 64px;
+  overflow: hidden;
+  flex: 0 0 auto;
+  
+  &-modal-collapse-title {
+
+    & > i {
+      width: 10px;
+      height: 10px;
+      float: left;
+      margin: 5px 8px 0 0;
+      border-radius: 100%;
+      background: rgb(255, 85, 0);
+    }
+
+    & > b {
+      display: inline-block;
+      width: 250px;
+      .BG-ellipsis;
+    }
+
+    & > span {
+      float: right;
+      padding-right: 20px;
+    }
+  }
+}
+
+.logo {
+  background: url('./../../../../assets/images/logo.png') center no-repeat;
+
+  & > a {
+    display: block;
+  }
+
+  .toAccout {
+    height: 64px;
+    width: 74px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .toMarketing {
+    height: 64px;
+    width: 166px;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  vertical-align: middle;
+  width: 240px;
+  height: 64px;
+  position: relative;
+  float: left;
+  cursor: pointer;
+}
+
+.tags {
+  float: right;
+  display: block;
+
+  .tag-item {
+    // height: 16px;
+    // width: 16px;
+    display: inline-block;
+    // vertical-align: middle;
+    margin-right: 26px;
+
+    
+    & > a {
+      display: block;
+      height: 100%;
+      width: 100%;
+      opacity: 0.56;
+      color: #FFFFFF;
+      font-size: 16px;
+      text-decoration: none;
+
+      &.active {
+        opacity: 1;
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          height: 0;
+          width: 0;
+          border: 7px solid #fff;
+          bottom: 3px;
+          left: 50%;
+          transform: translateX(-50%);
+          border-top-color: transparent;
+          border-left-color: transparent;
+          border-right-color: transparent;
+        }
+      }
+    }
+  }
+
+  .help {
+    margin-right: 28px;
+  }
+
+  .manage-center {
+    margin-right: 29px;;
+  }
+
+  .messages {
+    margin-right: 29px;
+  }
+
+  .userInfo {
+    margin-right: 28px;
+    width: 31px;
+  }
+
+  .langChange {
+    margin-right: 24px;
+    width: 24px;
+    height: 24px;
+
+    & > a {
+      font-size: 24px;
+    }
+  }
+}

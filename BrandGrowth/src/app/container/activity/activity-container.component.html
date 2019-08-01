@@ -1,0 +1,94 @@
+<div class="ac_main">
+  <div class="ac_header">
+    <div class="ac_left">
+      <a (click)='create("新建营销活动")'>
+        <span>
+          <i class="anticon anticon-plus"></i> 新建营销活动</span>
+      </a>
+    </div>
+    <div class="ac_right">
+      <nz-input [nzType]="'search'" [nzPlaceHolder]="'请输入关键词进行检索'" [(ngModel)]="search" (nzOnSearch)="onSearch($event)" (nzBlur) ='blur()'>
+      </nz-input>
+    </div>
+  </div>
+  <div class='ac_tab'>
+    <nz-table #nzTable 
+    class='content'  
+    nzIsPagination = 'true'
+    [nzAjaxData]="tableData"
+    [(nzPageIndex)]="_current"
+    [(nzPageSize)]="_pageSize"
+    [(nzTotal)]= '_total'
+    (nzPageIndexChange)='PageIndexChange($event)'
+    (nzPageSizeChange)='PageSizeChange($event)'
+    nzShowSizeChanger
+    [nzCustomNoResult] ='isResult'>
+      <thead nz-thead>
+        <tr>
+          <th nz-th style="width:200px">
+            <span>营销活动名称</span>
+          </th>
+          <th nz-th>
+            <span>活动状态</span>
+          </th>
+          <th nz-th>
+            <span>监测链接数</span>
+          </th>
+          <th nz-th >
+            <span (click)="sort('impression_pv')">曝光</span>
+            <nz-table-sort [(nzValue)]="sortMap.impression_pv" (nzValueChange)="sort('impression_pv',$event)"></nz-table-sort>      
+          </th>
+          <th nz-th >
+            <span (click)="sort('impression_anti')">异常曝光</span>
+            <nz-table-sort [(nzValue)]="sortMap.impression_anti" (nzValueChange)="sort('impression_anti',$event)"></nz-table-sort>
+          </th>
+          <th nz-th >
+            <span (click)="sort('click_pv')">点击</span>
+            <nz-table-sort [(nzValue)]="sortMap.click_pv" (nzValueChange)="sort('click_pv',$event)"></nz-table-sort>
+          </th>
+          <th nz-th >
+            <span (click)="sort('click_anti')">异常点击</span>
+            <nz-table-sort [(nzValue)]="sortMap.click_anti" (nzValueChange)="sort('click_anti',$event)"></nz-table-sort>
+          </th>
+          <th nz-th style="width:120px">
+            <span>操作</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody nz-tbody>
+        <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+          <td nz-td 
+            (click)='inDetail(data)' 
+            class="ac-tab-name"
+            [title]='data.name'>
+            {{data.name}}
+          </td>
+          <td nz-td class="_actStatus">         
+            <nz-popover>
+              <nz-progress [ngModel]='data.status' [nzShowInfo]="false" nz-popover></nz-progress>
+              <ng-template #nzTemplate *ngIf='data.status<=0'>
+                <span >为期<b>{{data.allDay}}</b>天 距开始还有<b>{{data.beStart}}</b>天</span>             
+              </ng-template>
+            </nz-popover>
+          </td>
+          <td nz-td>{{ data.count === '--' ? data.count : (data.count | number) }}</td>
+          <td nz-td>{{ data.exposure === '--' ? data.exposure : (data.exposure | number) }}</td>
+          <td nz-td>{{ data.abnormalEp === '--' ? data.abnormalEp : (data.abnormalEp | number) }}</td>
+          <td nz-td>{{ data.click === '--' ? data.click : (data.click | number) }}</td>
+          <td nz-td>{{ data.abnormalCk === '--' ? data.abnormalCk : (data.abnormalCk | number) }}</td>
+          <td nz-td style="width:120px">
+            <span>
+              <a (click)='inDetail(data)'>查看</a>
+            </span>
+            <span>
+              <a (click)='toEdit(data)'>编辑</a>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+      <div noResult>正在加载中</div>
+
+    </nz-table>
+    
+  </div>
+</div>

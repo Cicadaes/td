@@ -1,0 +1,49 @@
+<main>
+  <h3 class="title">{{topTitle}}</h3>
+  <nz-card>
+    <ng-template #title>
+      <ul class="sites">
+        <li *ngFor="let item of itemList">
+          <span [class.active]="item.tag == selectedItemTag"  (click)="changeSelectItem(item.tag)">
+            <img *ngIf="item.cover" [src]="item.cover" [alt]="item.title">
+            {{item.title}}
+          </span>
+          <i class="anticon anticon-close-circle-o" (click)="delete(item.tag)"></i>
+        </li>
+      </ul>
+      <span *ngIf="itemList.length === 0">请先添加{{desc}}</span>
+    </ng-template>
+    <ng-template #extra>
+      <ng-container [ngTemplateOutlet]="extraElementRef"></ng-container>
+    </ng-template>
+    <ng-template #body>
+      <nz-row>
+        <ng-container [ngTemplateOutlet]="moreDetailElementRef"></ng-container>
+      </nz-row>
+      <nz-row>
+        <nz-col nzSpan="12" *ngFor="let item of contentValue">
+          <nz-row class="metric-view-items">
+            <ng-container *ngFor="let metric of item.metrics;let mIndex = index;">
+              <metric-view-item nz-col [left]="mIndex > 0" [nzSpan]="24 / item.metrics.length" [metricTitle]="metric.label" [metricInfo]="metric.value">
+                <ng-template #metricContent>
+                  <i *ngIf="metric.trend" [class.rotate45]="metric.trend == 'up'" [class.rotate135]="metric.trend == 'down'" class="anticon anticon-arrow-up"></i>    
+                </ng-template>
+              </metric-view-item>       
+            </ng-container>
+          </nz-row>
+        </nz-col>
+      </nz-row>
+      <nz-row>
+        <nz-col nzSpan="12" *ngFor="let item of contentValue">
+          <ng-container *ngFor="let chart of item.chartConfig">
+            <chart-table-wrap>
+              <ng-template #contentChart>
+                <chart-line [config]="chart" [height]="300"></chart-line>
+              </ng-template>
+            </chart-table-wrap>
+          </ng-container>
+        </nz-col>
+      </nz-row>
+    </ng-template>
+  </nz-card>
+</main>

@@ -1,0 +1,15 @@
+<ul class="marketing-center-table" nz-row>
+  <li 
+    nz-col 
+    [nzSpan]="6" 
+    class="item" 
+    *ngFor="let el of itemList; let i = index"
+    [class.item-hover]="el.info !== ''">
+    <span class="circle">
+      <i [class]="el.circle"></i>
+    </span>
+    <h5 class="title">{{el.title}}</h5>
+    <p class="info">{{el.info}}</p>
+    <a class="mask" [routerLink]="el.link"></a>
+  </li>
+</ul>

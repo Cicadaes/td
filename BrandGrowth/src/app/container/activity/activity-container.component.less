@@ -1,0 +1,162 @@
+@import '../../../assets/styles/common.less';
+
+.ac_header{
+    width:100%; 
+    height:84px;
+  }
+  
+  .ac_left{
+     float:left; 
+     line-height: 84px;
+  }
+  .ac_left span{
+     padding: 10px 25px;
+     margin: 24px 0;
+     background:#3399FF;
+     border-radius: 20px;
+     color:#fff;
+  }
+  
+  .ac_right{
+      float:right;
+      line-height: 84px;
+  }
+  :host ::ng-deep .ant-input-affix-wrapper .ant-input:not(:first-child){ 
+      padding: 10px 25px; 
+      margin: 24px 0; 
+      width:160px;
+      height:36px;
+      border: 1px solid #DDDEE1;
+      border-radius: 20px;
+  }
+  
+  :host ::ng-deep .ac_tab{
+      width:100%;
+      background: #FFFFFF;
+      box-shadow: 0 1px 2px 0 rgba(28,36,56,0.15);
+      border-radius: 4px;
+  }
+  :host ::ng-deep .ant-table-body tr{
+      height:40px;
+  }
+  :host ::ng-deep .ant-table{
+    width:100%;
+  }
+  
+  :host ::ng-deep .ant-table-pagination.ant-pagination {
+      width: 100%;
+      text-align: right;
+      padding:0 24px;
+      
+  }
+  :host ::ng-deep  .ant-progress-status-success .ant-progress-bg{
+    background:#108ee9;
+  }
+ 
+  :host ::ng-deep .ant-pagination-options{
+      float:left;
+  }
+  :host ::ng-deep .ant-pagination-options{
+      margin-left:0;
+  }
+
+  :host ::ng-deep .ant-progress-inner{
+    border-radius: 0;
+    width:80px;
+  }
+  :host ::ng-deep .ant-progress-bg{ 
+    border-radius: 0;
+    width:auto;
+    height:10px;
+  }
+  :host ::ng-deep .ant-table-row td:first-child a,
+  :host ::ng-deep .ant-table-row td{
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: rgba(28,36,56,0.80);
+    line-height: 14px;
+  }
+  :host ::ng-deep .ant-table-thead >tr th span{
+    font-family: PingFangSC-Semibold;
+    font-size: 12px;
+    color: rgba(28,36,56,0.80);
+
+  }
+  .content  .ant-table-row td:nth-child(3),
+  .content  .ant-table-row td:nth-child(4),
+  .content  .ant-table-row td:nth-child(5),
+  .content  .ant-table-row td:nth-child(6),
+  .content  .ant-table-row td:nth-child(7),
+ {
+  text-align: right;
+}
+:host ::ng-deep .ant-input-search{
+  width: 300px;
+  height:36px;
+  border-radius: 50px;
+  text-indent: 2em;
+}
+:host ::ng-deep .ant-input-affix-wrapper .ant-input-suffix{
+  left:7px;
+  right:280px;
+
+}
+.content {
+    .ant-table-row td:nth-child(2),
+    .ant-table-row td:nth-child(8),
+    thead>tr th:nth-child(2),
+    thead>tr th:nth-child(8),
+    thead>tr th:nth-child(3),
+    thead>tr th:nth-child(4),
+    thead>tr th:nth-child(5),
+   thead>tr th:nth-child(6),
+   thead>tr th:nth-child(7){
+    text-align: center;
+   }
+   thead>tr th:nth-child(4),
+   thead>tr th:nth-child(5),
+  thead>tr th:nth-child(6),
+  thead>tr th:nth-child(7){
+    span{
+      cursor: pointer;
+    }
+  }
+   .ant-table-row td, thead>tr th{
+    padding-left:20px;
+    padding-right:20px;
+   }   
+} 
+
+// 修改状态的进度条颜色
+:host ::ng-deep ._actStatus {
+  & .ant-progress-inner {
+    background-color: rgba(28,36,56,0.08);
+
+    & > .ant-progress-bg {
+      background-color: #3399FF;
+    }
+  }
+}
+
+// 修改Table样式
+:host ::ng-deep .ac {
+
+  &-tab {
+
+    &-name {
+      font-family: PingFangSC-Regular;
+      font-size: 14px;
+      color: rgba(28,36,56,0.80);
+      line-height: 14px;
+      max-width:200px;
+      cursor:pointer;
+      .BG-ellipsis;
+
+      &:hover {
+        color: #3399FF;
+      }
+    }
+  }
+}
+
+

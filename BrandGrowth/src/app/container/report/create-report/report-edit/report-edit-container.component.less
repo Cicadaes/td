@@ -1,0 +1,180 @@
+.schedule {
+  height: 22px;
+  width: 528px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 25px (1200px-528px)/2;
+
+  .sch-item {
+
+    &.inactive {
+      .badge {
+        background: rgba(23,35,61,0.03);
+      }
+
+      .text {
+        font-family: PingFangSC-Regular;
+        font-size: 14px;
+        color: rgba(28,36,56,0.56);
+        line-height: 14px;
+      }
+    }
+
+    .badge {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 14px;
+      font-family: PingFangSC-Regular;
+      line-height: 22px;
+      background: #3399FF;
+      color: #fff;
+    }
+
+    .text {
+      display: inline-block;
+      font-family: PingFangSC-Medium;
+      font-size: 14px;
+      color: rgba(28,36,56,0.80);
+      line-height: 22px;
+      margin-left: 20px;
+    }
+  }
+
+  .divider {
+    height: 1px;
+    width: 80px;
+    background: #2D8CF0;
+    display: flex;
+    align-self: center;
+
+    &.inactive {
+      background: rgba(23,35,61,0.03);
+    }
+  }
+}
+
+.btn-group {
+  .next {
+    width: (1200px-144px)/5;
+  }
+
+  .back {
+    width: 160px;
+    margin-left: 16px;
+  }
+}
+
+:host ::ng-deep .ant-btn {
+  height: 36px;
+}
+
+:host ::ng-deep .ant-form-horizontal {
+  .ant-form-item {
+    &-label {
+      text-align: left;
+      line-height: 36px;
+
+      & > label {
+        font-family: PingFangSC-Semibold;
+        font-size: 14px;
+        color: rgba(29,36,54,0.80);
+
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .ant-input {
+    width: 300px;
+    height: 36px;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: rgba(28,36,56,0.56);
+  }
+
+  .ant-calendar-picker {
+    .ant-calendar-picker-input {
+      .ant-calendar-range-picker-input {
+        width: 43%;
+        height: 28px;
+        font-family: HelveticaNeue;
+        font-size: 14px;
+        color: rgba(28,36,56,0.80);
+        line-height: 2;
+      }
+
+      .ant-calendar-range-picker-separator {
+        line-height: 28px;
+      }
+    }
+  }
+
+  #search {
+    width: 23%;
+
+    .ant-input-prefix {
+      left: 16px;
+    }
+
+    .ant-input {
+      border-radius: 20px;
+      width: 200px;
+    }
+
+    .ant-input:not(:first-child) {
+      padding-left: 36px;
+    }
+  }
+
+  .checkbox-group {
+    .select-data-bar {
+      margin-bottom: 16px;
+
+      .select-data-detail {
+        font-family: PingFangSC-Regular;
+        font-size: 14px;
+        color: rgba(28,36,56,0.80);
+      }
+    }
+  }
+}
+
+:host ::ng-deep .ant-card-body {
+  padding: 48px;
+}
+
+:host ::ng-deep .ant-select-selection {
+  height: 36px;
+  width: 300px;
+
+  .ant-select-selection__rendered {
+    line-height: 36px;
+
+    .ant-select-selection__placeholder {
+      font-family: PingFangSC-Regular;
+      font-size: 14px;
+    }
+
+    .ant-select-selection-selected-value {
+      font-family: PingFangSC-Regular;
+      font-size: 14px;
+      color: rgba(28,36,56,0.80);
+    }
+  }
+}
+
+:host ::ng-deep .ant-checkbox-wrapper {
+  line-height: 36px;
+  
+  & > span {
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: rgba(28,36,56,0.80);
+  }
+}

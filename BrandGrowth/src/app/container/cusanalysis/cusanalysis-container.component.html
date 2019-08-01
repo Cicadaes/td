@@ -1,0 +1,88 @@
+<div class="cus-analysis">
+  <div class="cus-analysis-operation">
+    <cm-button>
+      <button
+        class="cus-analysis-operation-add" 
+        nz-button 
+        nzType="primary" 
+        nzSize="large"
+        (click)="onOperation()">
+        <i class="anticon anticon-plus"></i><span>新建客群画像</span>
+      </button>
+    </cm-button>
+    <div class="cus-analysis-operation-right">
+      <cm-input class="cus-analysis-operation-right-input">
+        <nz-input
+          [nzType]="'search'"
+          [(ngModel)]="_searchParam"
+          nzPlaceHolder="搜索"
+          nzSize="large"
+          (nzOnSearch)="onSearch($event)"
+          (nzBlur) ='onBlur()'></nz-input>
+      </cm-input>
+    </div>
+  </div>
+  <nz-card class="cus-analysis-content">
+    <ng-template #title>
+      <h4 class="cus-analysis-content-title">客群列表</h4>
+    </ng-template>
+    <ng-template #body>
+      <div class="cus-analysis-content-table">
+        <nz-table 
+          #nzTable 
+          nzShowSizeChanger
+          [nzAjaxData]="_tableData" 
+          [nzTotal]="_total"
+          [(nzPageIndex)]="_currentPage"
+          (nzPageIndexChange)="getTableList()"
+          [(nzPageSize)]="_pageSize"
+          (nzPageSizeChange)="getTableList(true)"
+          nzShowSizeChanger
+          [nzCustomNoResult]="true">
+          <thead nz-thead>
+            <tr>
+              <th nz-th nzWidth="230px"><p class="cus-analysis-content-table-name">客群画像名称</p></th>
+              <th nz-th nzWidth="180px"><span>活动状态</span></th>
+              <th nz-th><span>监测链接数</span></th>
+              <th nz-th><span>设备数预估</span></th>
+              <th nz-th><span>IP数预估</span></th>
+              <th nz-th nzWidth="230px"><span>创建时间</span></th>
+              <th nz-th><span>操作</span></th>
+            </tr>
+          </thead>
+          <tbody nz-tbody>
+            <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+              <td nz-td [title]="data.name">
+                <p class="cus-analysis-content-table-name" (click)="toDetails(data)">{{ data.name }}</p>
+              </td>
+              <td nz-td class="cus-analysis-content-table-status">
+                <p *ngIf="data.stateInfo === '刷新中...'">{{ data.stateInfo }}</p>
+                <nz-popover *ngIf="data.stateInfo !== '刷新中...'">
+                  <nz-progress [ngModel]='data.stateInfo.value' [nzShowInfo]="false" nz-popover></nz-progress>
+                  <ng-template #nzTemplate *ngIf="data.stateInfo.info">
+                    <span><b>{{data.stateInfo.str}}</b> {{data.stateInfo.info}}</span>             
+                  </ng-template>
+                </nz-popover>
+              </td>
+              <td nz-td><p class="cus-analysis-content-table-number">{{ data.monitorLinksNum | number }}</p></td>
+              <td nz-td><p class="cus-analysis-content-table-number">{{ (data.deviceEvalute | number) || '--' }}</p></td>
+              <td nz-td><p class="cus-analysis-content-table-number">{{ (data.ipEvalute | number) || '--' }}</p></td>
+              <td nz-td><p>{{ data.createTime }}</p></td>
+              <td nz-td>
+                <span 
+                  class="cus-analysis-content-table-edit"
+                  (click)="onOperation(data)">编辑</span>
+                <span
+                  class="cus-analysis-content-table-edit"
+                  (click)="onRefresh(data)">刷新</span>
+                <!-- 功能暂缓，后端尚无接口支持 -->
+                <span class="cus-analysis-content-table-edit">下载</span>
+              </td>
+            </tr>
+          </tbody>
+          <p style="text-align: center" noResult>{{ noTableResult }}</p>
+        </nz-table>
+      </div>
+    </ng-template>
+  </nz-card>
+</div>

@@ -1,0 +1,48 @@
+<div class="operator crowd-mgr" nz-row>
+  <div class="create" nz-col nzSpan="4">
+    <button nz-button [nzType]="'primary'" (click)='create("新建人群")'>
+      <i class="icon-add"></i>
+      <span>新建人群</span>
+    </button>
+  </div>
+  <div class="delete" nz-col nzSpan="2" nzOffset="12">
+    <button nz-button (click)="deleteCrowd()">
+      <i class="icon-del"></i>
+      <span>删除</span>
+    </button>
+  </div>
+  <div class="search" nz-col nzSpan="6">
+    <nz-input [(ngModel)]="searchValue" nzPlaceHolder="输入关键词进行检索">
+      <ng-template #prefix>
+        <i class="anticon anticon-search"></i>
+      </ng-template>
+    </nz-input>
+  </div>
+</div>
+<common-table cardTitle="受众管理" [columns]="columns" [data]="data | farray:['name']:searchValue" (checkedItemChange)="getDisplayData($event)"></common-table>
+<ng-template #crowdAttr 
+  let-personAttrNum="personAttrNum"
+  let-areaNum="areaNum"
+  let-perferNum="perferNum"
+  let-personAttres="personAttres"
+  let-areas="areas"
+  let-perferes="perferes"
+>
+  <nz-dropdown>
+    <p nz-dropdown>人口属性: {{personAttrNum}} 地理位置: {{areaNum}} 应用偏好 : {{perferNum}}</p>
+    <div class="crowd-mgr-col-bar" nz-dropdown-custom>
+      <p>
+        <strong>人口属性:</strong>
+        <span [title]="personAttres">{{personAttres}}</span>
+      </p>
+      <p>
+        <strong>地理位置:</strong>
+        <span [title]="areas">{{areas}}</span>
+      </p>
+      <p>
+        <strong>应用偏好:</strong>
+        <span [title]="perferes">{{perferes}}</span>
+      </p>
+    </div>
+  </nz-dropdown>
+</ng-template>

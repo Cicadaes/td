@@ -1,0 +1,129 @@
+:host ::ng-deep .brand-index {
+  width: 100%;
+  background: #FFFFFF;
+  box-shadow: 0 1px 2px 0 rgba(28,36,56,0.15);
+  border-radius: 4px;
+  margin: 30px 0px 20px;
+
+  .ant-table table {
+    font-size: 14px;
+  }
+
+  .ant-table-thead > tr > th:first-child ,.ant-table-tbody > tr > td:first-child {
+    padding-left: 20px;
+  }
+
+  .anticon-arrow-up {
+    color: #19BE6B;
+  }
+
+  .anticon-arrow-down {
+    color: #ED4014;
+  }
+
+  &-tit {
+    padding: 0px 20px;
+    font-family: PingFangSC-Medium;
+    font-size: 16px;
+    color: #1C2438;
+    height: 118px;
+
+    h3 {
+      height: 58px;
+      line-height: 58px;
+    }
+
+    ul {
+      height: 60px;
+      width: 100%;
+      font-family: PingFangSC-Medium;
+      font-size: 14px;
+
+      li {
+        height: 40px;
+        line-height: 40px;
+        margin-right: 8px;
+        background: rgba(28,36,56,0.06);
+        border-radius: 2px;
+        padding: 0px 7px 0px 16px;
+        color: rgba(28,36,56,0.80);
+        float: left;
+
+        .hot-input {
+          border: 0;
+          border: none;
+          height: 30px;
+          line-height: 30px;
+          border-bottom: 1px solid rgba(28, 36, 56, 0);
+          background: rgba(28, 36, 56, 0);
+          outline: none;
+        }
+
+        span {
+          margin-right: 20px;
+        }
+
+        span:hover {
+          cursor: pointer;
+        }
+
+        .anticon-close-circle-o:hover {
+          cursor: pointer;
+        }
+      }
+
+      .hover-class:hover {
+        -webkit-transition:background-color 1s;
+        background-color: #3399FF;
+        color: #FFFFFF;
+      }
+
+      .bg-color {
+        -webkit-transition:background-color 1s;
+        background-color: #3399FF;
+        color: #FFFFFF;
+      }
+
+      li:last-child {
+        margin-right: 0px;
+      }
+
+      .add {
+        color: rgba(28,36,56,0.56);
+      }
+    }
+    
+  }
+
+  &-chart {
+    width: 100%;
+    height: 371px;
+  }
+
+  .color-circle {
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    border-radius: 8px;
+    margin-right: 10px;
+  }
+
+  .color {
+
+    &-blue {
+      background: #3399FF;
+    }
+
+    &-green {
+      background: #2DE2C5;
+    }
+
+    &-yellow {
+      background: #FCC45F;
+    }
+
+    &-orange {
+      background: #FF8454;
+    }
+  }
+}

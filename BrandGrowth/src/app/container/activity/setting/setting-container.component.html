@@ -1,0 +1,10 @@
+<div class="sc_main">
+    <ul class="tabs"> 
+        <li *ngFor="let tab of tabs let i=index" (click)='changes(tab.id)'  [ngClass]="{'borderDown': selectedIndex == i+1 }">{{tab.name}}</li>
+    </ul>
+    <div  class="cc_main">
+            <base-setting *ngIf="!(selectedIndex==2) && !(selectedIndex==3)"></base-setting>
+            <protect-setting *ngIf="selectedIndex==2"></protect-setting>
+            <connect-setting *ngIf="selectedIndex==3"></connect-setting>
+    </div>
+</div>

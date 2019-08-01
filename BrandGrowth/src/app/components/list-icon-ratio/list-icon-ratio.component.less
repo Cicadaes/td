@@ -1,0 +1,59 @@
+.list-icon-ratio {
+  overflow: hidden;
+
+  &-item {
+    border-bottom: 1px solid rgba(28,36,56,0.08);
+    display: flex;
+    padding: 16px 8px 16px 0;
+
+    &:first-child {
+      border-top: 1px solid rgba(28,36,56,0.08);
+    }
+
+    &-icon {
+      background: rgba(161, 177, 219, 0.856);
+      display: inline-block;
+      width: 36px;
+      height: 36px;
+    }
+
+    &-content {
+      height: 36px;
+      margin: 0 12px;
+      flex: auto;
+      overflow: hidden;
+
+      & > p {
+        font-family: PingFangSC-Regular;
+        font-size: 14px;
+        color: rgba(28,36,56,0.80);
+        line-height: 14px;
+        margin-bottom: 8px;
+      }
+    }
+
+    &-value {
+      width: 50px;
+      height: 36px;
+      text-align: right;
+      font-weight: 400;
+      font-family: HelveticaNeue;
+      font-size: 14px;
+      color: rgba(28,36,56,0.56);
+      line-height: 56px;
+    }
+  }
+}
+
+:host ::ng-deep .list-icon-ratio {
+
+  &-item {
+
+    &-content {
+      
+      & .ant-progress-bg {
+        background-color: #3399FF;
+      }
+    }
+  }
+}

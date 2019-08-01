@@ -1,0 +1,202 @@
+<div class="detection">
+  <div class="detection-selected">
+    <cm-select>
+      <nz-select 
+        style="width: 200px;"
+        [(ngModel)]="selected"
+        (ngModelChange)="onSelectedChange($event)"
+        nzPlaceHolder="未查询到数据">
+        <nz-option *ngFor="let option of probeList" [nzLabel]="option.name" [nzValue]="option.id">
+        </nz-option>
+      </nz-select>
+    </cm-select>
+    <!-- 添加 => 将区域与当前活动绑定，添加到区域下拉选项中 -->
+    <!-- 目前不支持添加，产品对于添加逻辑还需更改 -->
+    <!-- <cm-button>
+      <button nz-button [nzType]="'primary'">
+      <span><i class="anticon anticon-plus"></i>添加</span>
+      </button>
+    </cm-button> -->
+  </div>
+  <nz-card class="detection-card detection-card-nopadding detection-card-top">
+    <ng-template #title>
+      线下到访分析
+    </ng-template>
+    <ng-template #extra>
+      <div>
+        <cm-button>
+          <nz-button-group>
+            <button 
+              nz-button
+              [nzType]="buttonType === 'hour' ? 'primary' : 'default'"
+              (click)="onChangeType('hour')">
+              <span>时</span>
+            </button>
+            <button nz-button
+              [nzType]="buttonType === 'day' ? 'primary' : 'default'"
+              (click)="onChangeType('day')">
+              <span>日</span>
+            </button>
+            <button
+              nz-button 
+              [nzType]="buttonType === 'week' ? 'primary' : 'default'" 
+              (click)="onChangeType('week')">
+              <span>周</span>
+            </button>
+          </nz-button-group>
+        </cm-button>
+        <span 
+          class="BG-download-style"
+          (click)="downloadData('analyze')">
+          <i class="icon icon-download"></i>
+        </span>
+      </div>
+    </ng-template>
+    <ng-template #body>
+      <nz-row>
+        <nz-col nzSpan="18" class="detection-card-nopadding-metric">
+          <nz-row>
+            <metric-view-item
+              nz-col
+              class="detection-card-nopadding-metric-item"
+              [nzSpan]="6"
+              metricTitle="活动到访人数"
+              metricInfo="{{ arrivalCount | number }}"></metric-view-item>
+            <metric-view-item
+              nz-col
+              left
+              class="detection-card-nopadding-metric-item"
+              [nzSpan]="6"
+              metricTitle="活动到访率"
+              metricInfo="{{ arrivalRate }}"></metric-view-item>
+            <metric-view-item
+              nz-col
+              left
+              class="detection-card-nopadding-metric-item"
+              [nzSpan]="6"
+              metricTitle="新访客"
+              metricInfo="{{ newCustom | number }}"></metric-view-item>
+            <metric-view-item
+              nz-col
+              left
+              class="detection-card-nopadding-metric-item"
+              [nzSpan]="6"
+              metricTitle="老访客"
+              metricInfo="{{ oldCustom | number }}"></metric-view-item>
+          </nz-row>
+          <chart-table-wrap>
+            <ng-template #contentChart>
+              <chart-line [config]="lineChart" [height]="364"></chart-line>
+            </ng-template>
+            <ng-template #contentTable>
+              <table-move
+                [tableColumns]="tableColumn" 
+                [tableData]="tableData" 
+                tableHeight="330"></table-move>
+            </ng-template>
+          </chart-table-wrap>
+        </nz-col>
+        <nz-col class="detection-card-nopadding-metric-pie" nzSpan="6">
+          <h4>访客线下分布</h4>
+          <chart-pie [config]="positionData"></chart-pie>
+        </nz-col>
+      </nz-row>
+    </ng-template>
+  </nz-card>
+  <nz-card class="detection-card detection-card-nopadding detection-card-visit">
+    <ng-template #title>
+      访问数据
+    </ng-template>
+    <ng-template #body>
+      <div nz-row>
+        <div class="detection-card-nopadding-item detection-card-visit-item" nz-col [nzSpan]="6">
+          <h4>广告格式分布</h4>
+          <chart-pie [config]="adtypeChart"></chart-pie>
+        </div>
+        <div class="detection-card-nopadding-item detection-card-visit-item" nz-col [nzSpan]="6">
+          <h4>监测链接分布</h4>
+          <chart-pie [config]="monitorChart"></chart-pie>
+        </div>
+        <div class="detection-card-nopadding-item detection-card-visit-item" nz-col [nzSpan]="6">
+          <h4>渠道类型分布</h4>
+          <chart-pie [config]="mediaChart"></chart-pie>
+        </div>
+        <div class="detection-card-nopadding-item detection-card-visit-item" nz-col [nzSpan]="6">
+          <h4>渠道分布</h4>
+          <div class="detection-card-nopadding-item-content">
+            <list-icon-ratio [config]="mediaList"></list-icon-ratio>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </nz-card>
+  <nz-card class="detection-card detection-card-nopadding">
+    <ng-template #title>
+      设备和系统分布
+    </ng-template>
+    <ng-template #body>
+      <div nz-row>
+        <div class="detection-card-nopadding-item" nz-col [nzSpan]="12">
+          <chart-treemap [config]="deviceChartData"></chart-treemap>
+        </div>
+        <div class="detection-card-nopadding-item" nz-col [nzSpan]="12">
+          <nz-row>
+            <metric-view-item 
+              nz-col [nzSpan]="12" 
+              metricTitle="来自IOS系统" 
+              [metricInfo]="iosMetrice"></metric-view-item>
+            <metric-view-item 
+              nz-col 
+              left 
+              [nzSpan]="12" 
+              metricTitle="来自Android系统" 
+              [metricInfo]="androidMetrice"></metric-view-item>
+            <metric-view-item
+              class="detection-card-nopadding-item-metric"
+              nz-col 
+              [nzSpan]="12" 
+              metricTitle="来自{{ iosBrandMetrice.brand }}" 
+              [metricInfo]="iosBrandMetrice.value"></metric-view-item>
+            <metric-view-item 
+              class="detection-card-nopadding-item-metric"
+              nz-col 
+              left 
+              [nzSpan]="12" 
+              metricTitle="来自{{ androidBrandMetrice.brand }}"
+              [metricInfo]="androidBrandMetrice.value"></metric-view-item>
+            <metric-view-item 
+              nz-col 
+              [nzSpan]="12" 
+              metricTitle="平板来自{{ iosDtMetrice.dt }}" 
+              [metricInfo]="iosDtMetrice.value"></metric-view-item>
+            <metric-view-item 
+              nz-col left 
+              [nzSpan]="12" 
+              metricTitle="来自{{ androidDtMetrice.dt }}" 
+              [metricInfo]="androidDtMetrice.value"></metric-view-item>
+          </nz-row>
+        </div>
+      </div>
+    </ng-template>
+  </nz-card>
+  <nz-card class="detection-card detection-card-nopadding detection-card-area">
+    <ng-template #title>
+      区域分布
+    </ng-template>
+    <ng-template #body>
+      <nz-row>
+        <nz-col nzSpan="12" class="detection-card-nopadding-item  detection-card-area-item">
+          <h4>省份分布</h4>
+          <chart-map [data]="provinceChart" [height]="350"></chart-map>
+        </nz-col>
+        <div class="detection-card-nopadding-item  detection-card-area-item" nz-col [nzSpan]="6">
+          <h4>线级城市占比</h4>
+          <chart-pie [config]="levelCityChart"></chart-pie>
+        </div>
+        <nz-col nzSpan="6" class="detection-card-nopadding-item  detection-card-area-item">
+          <proportion-ranking [data]="cityChart"></proportion-ranking>
+        </nz-col>
+      </nz-row>
+    </ng-template>
+  </nz-card>
+</div>

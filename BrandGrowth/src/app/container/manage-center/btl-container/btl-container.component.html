@@ -1,0 +1,85 @@
+<div class="manage-btl">
+  <div class="manage-btl-operation">
+    <cm-button>
+      <button
+        class="manage-btl-operation-add" 
+        nz-button 
+        nzType="primary" 
+        nzSize="large"
+        (click)="create()">
+        <i class="anticon anticon-plus"></i><span>新建区域</span>
+      </button>
+    </cm-button>
+    <div class="manage-btl-operation-right">
+      <cm-button>
+        <!-- *ngIf="selectedList.length > 0" -->
+        <button 
+          class="manage-btl-operation-right-del" 
+          nz-button 
+          nzType="default" 
+          nzSize="large"
+          (click)="onDelete()">
+          <i class="anticon anticon-delete"></i><span>删除</span>
+        </button>
+      </cm-button>
+      <cm-input class="manage-btl-operation-right-input">
+        <nz-input
+          [nzType]="'search'"
+          [(ngModel)]="btlFilter"
+          nzPlaceHolder="输入关键词进行检索"
+          nzSize="large"></nz-input>
+      </cm-input>
+    </div>
+  </div>
+  <nz-card class="manage-btl-content">
+    <ng-template #title>
+      <h4 class="manage-btl-content-title">线下区域管理</h4>
+    </ng-template>
+    <ng-template #body>
+      <div class="manage-btl-content-table">
+        <nz-table 
+          #nzTable 
+          [nzDataSource]="_tableData | farray:['name']:btlFilter" 
+          [nzPageSize]="10" 
+          nzShowSizeChanger
+          [nzCustomNoResult]="true">
+          <thead nz-thead>
+            <tr>
+              <th nz-th nzCheckbox>
+                <label 
+                  nz-checkbox
+                  [(ngModel)]="_allChecked" 
+                  [nzIndeterminate]="_indeterminate"
+                  (ngModelChange)="_checkAll($event)"></label>
+              </th>
+              <th nz-th>名称</th>
+              <th nz-th><span>构建类型</span></th>
+              <th nz-th><span>描述</span></th>
+              <th nz-th><span>最近修改时间</span></th>
+              <th nz-th><span>操作</span></th>
+            </tr>
+          </thead>
+          <tbody nz-tbody>
+            <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+              <td nz-td nzCheckbox>
+                <label
+                  nz-checkbox 
+                  [(ngModel)]="data.checked" 
+                  (ngModelChange)="onChangeChecked($event)"></label>
+              </td>
+              <td nz-td [title]="data.name"><p class="manage-btl-content-table-name">{{ data.name }}</p></td>
+              <td nz-td>{{ data.typeCn }}</td>
+              <td nz-td [title]="data.remark"><p class="manage-btl-content-table-remark">{{ data.remark }}</p></td>
+              <td nz-td><p class="manage-btl-content-table-name">{{ data.optime }}</p></td>
+              <td nz-td><span class="manage-btl-content-table-edit" (click)="onEdit(data)">编辑</span></td>
+            </tr>
+          </tbody>
+          <p style="text-align: center" noResult>{{ noTableResult }}</p>
+        </nz-table>
+      </div>
+    </ng-template>
+  </nz-card>
+  <div *ngIf="deleteLoading" class="manage-btl-loading">
+    <nz-spin nzTip="删除中..."></nz-spin>
+  </div>
+</div>

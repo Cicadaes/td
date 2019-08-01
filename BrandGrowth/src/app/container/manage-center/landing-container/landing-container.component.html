@@ -1,0 +1,25 @@
+
+<div class="operator" nz-row>
+  <div class="create" nz-col nzSpan="4">
+    <button nz-button [nzType]="'primary'" (click)='create("新增着陆页")'>
+      <i class="icon-add"></i>
+      <span>添加新着陆页</span>
+    </button>
+  </div>
+  <div class="delete" nz-col nzSpan="2" nzOffset="12">
+    <button nz-button (click)="deleteCrowd()">
+      <i class="icon-del"></i>
+      <span>删除</span>
+    </button>
+  </div>
+  <div class="search" nz-col nzSpan="6"> 
+    <nz-input [(ngModel)]="searchValue" nzPlaceHolder="输入关键词进行检索">
+      <ng-template #prefix>
+        <i class="anticon anticon-search"></i>
+      </ng-template>
+    </nz-input>
+  </div>
+</div>
+<common-table cardTitle="着陆页管理" [columns]="columns" [data]="data | farray:['name']:searchValue"
+(checkedItemChange)="getDisplayData($event)"
+></common-table>

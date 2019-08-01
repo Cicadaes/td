@@ -1,0 +1,161 @@
+.schedule {
+  height: 22px;
+  width: 528px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 25px (1200px-528px)/2;
+
+  .sch-item {
+    &.inactive {
+      .badge {
+        background: rgba(23,35,61,0.03);
+      }
+
+      .text {
+        font-family: PingFangSC-Regular;
+        font-size: 14px;
+        color: rgba(28,36,56,0.56);
+        line-height: 14px;
+      }
+    }
+    
+    .badge {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 14px;
+      font-family: PingFangSC-Regular;
+      line-height: 22px;
+      background: #3399FF;
+      color: #fff;
+    }
+
+    .text {
+      display: inline-block;
+      font-family: PingFangSC-Medium;
+      font-size: 14px;
+      color: rgba(28,36,56,0.80);
+      line-height: 22px;
+      margin-left: 20px;
+    }
+  }
+
+  .divider {
+    height: 1px;
+    width: 80px;
+    background: #2D8CF0;
+    display: flex;
+    align-self: center;
+
+    &.inactive {
+      background: rgba(23,35,61,0.03);
+    }
+  }
+}
+
+.template {
+  display: block;
+  float: left;
+  margin-right: 24px;
+  width: 210px;
+  height: 290px;
+  background: #FFFFFF;
+  border: 1px solid rgba(28,36,56,0.15);
+  margin-bottom: 40px;
+  cursor: pointer;
+
+  &:nth-child(5n) {
+    margin-right: 0;
+  }
+
+  &.active {
+    border: 2px solid #3399FF;
+    box-sizing: border-box;
+
+    & .cover > img {
+      padding: 8px;
+    }
+
+    & .cover.custom > img {
+      padding: 0;
+    }
+  }
+
+  .cover {
+    height: 136px;
+    cursor: pointer;
+
+    &.custom {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+
+      & > img {
+        height: 56px;
+        width: 56px;
+      }
+    }
+
+    & > img {
+      height: 100%;
+      width: 100%;
+      cursor: pointer;
+    }
+  }
+
+  .detail {
+    padding: 15px 24px;
+    cursor: pointer;
+
+    .title {
+      font-family: PingFangSC-Medium;
+      font-size: 16px;
+      color: rgba(28,36,56,0.80);
+      margin-bottom: 15px;
+      cursor: pointer;
+
+      &.custom {
+        text-align: center;
+      }
+    }
+  
+    .intro {
+      font-family: PingFangSC-Regular;
+      font-size: 14px;
+      color: rgba(28,36,56,0.55);
+      line-height: 24px;
+      height: 72px;
+      cursor: pointer;
+
+      &.custom {
+        text-align: center;
+      }
+    }
+  
+    .link {
+      font-family: PingFangSC-Regular;
+      font-size: 14px;
+      color: #3399FF;
+      line-height: 20px;
+      cursor: pointer;
+    }
+  }
+}
+
+.btn-group {
+  .next {
+    width: (1200px-144px)/5;
+  }
+
+  .back {
+    width: 160px;
+    margin-left: 16px;
+  }
+}
+
+:host ::ng-deep .ant-btn {
+  height: 36px;
+}

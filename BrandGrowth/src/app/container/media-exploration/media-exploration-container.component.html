@@ -1,0 +1,73 @@
+<div class="ac_main">
+    <div class="ac_header">
+      <div class="ac_left">
+        <a >
+          <span (click)='create("新建媒体探索")'>
+             <i class="anticon anticon-plus"></i>
+             新建媒体探索
+          </span>
+        </a>
+      </div>
+      <div class="ac_right">
+        <nz-input [nzType]="'search'" 
+                  [nzPlaceHolder]="'请输入关键词进行检索'" 
+                  [(ngModel)]='search' 
+                  (nzOnSearch)="onSearch($event)" 
+                  (nzBlur)='blur()' >
+        </nz-input>
+      </div>
+    </div>
+    <nz-card style="width:1200px;">
+        <ng-template #title>
+           探索列表
+        </ng-template>
+        <ng-template #body>
+             <nz-table #nzTable 
+                      nzIsPagination = 'true'
+                      [nzAjaxData]="_dataSet" 
+                      [(nzPageSize)]="_pageSize" 
+                      [(nzPageIndex)]='_currentPage'
+                      [(nzTotal)]= '_total'
+                      (nzPageIndexChange)='PageIndexChange($event)'
+                      (nzPageSizeChange)='PageSizeChange($event)'
+                      nzShowSizeChanger>
+                <thead nz-thead>
+                  <tr>
+                    <th nz-th><span>名称</span></th>
+                    <th nz-th><span>状态</span></th>
+                    <th nz-th><span>监测链接数</span></th>
+                    <th nz-th><span>设备数预估</span></th>
+                    <th nz-th><span>IP数预估</span></th>
+                    <th nz-th><span>创建时间</span></th>
+                    <th nz-th><span>操作</span></th>
+                  </tr>
+                </thead>
+                <tbody nz-tbody>
+                  <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                    <td  class="ac-tab-name" nz-td [title]='data.name' (click)='inDetail(data)'>{{data.name}}</td>
+                    <td nz-td class="_actStatus">  
+                        <p *ngIf="data.stateInfo === '刷新中...'">{{ data.stateInfo }}</p>
+                        <nz-popover *ngIf="data.stateInfo !== '刷新中...'">
+                          <nz-progress [ngModel]='data.stateInfo.value' [nzShowInfo]="false" nz-popover></nz-progress>
+                          <ng-template #nzTemplate *ngIf="data.stateInfo.info">
+                            <span><b>{{data.stateInfo.str}}</b> {{data.stateInfo.info}}</span>             
+                          </ng-template>
+                        </nz-popover>
+                    </td>
+                    <td nz-td>{{data.monitorLinksNum}}</td>
+                    <td nz-td>{{data.deviceEvalute}}</td>
+                    <td nz-td>{{data.ipEvalute}}</td>
+                    <td nz-td>{{data.createTime}}</td>
+                    <td nz-td>
+                      <span (click)= 'edit("编辑媒体探索",data)'>编辑</span>
+                      <span (click) ='refresh(data)'>刷新</span>
+                      <span (click)='download(data)'>下载</span>
+                    </td>
+                  </tr>
+                </tbody>
+            </nz-table>
+        </ng-template>
+      </nz-card>
+  </div>
+  
+  

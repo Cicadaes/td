@@ -1,0 +1,93 @@
+@import '../../../../assets/styles/common.less';
+
+.detection {
+  padding-bottom: 24px;
+
+  &-selected {
+    margin-top: 24px;
+  }
+
+  &-card {
+
+    &-visit {
+
+      &-item {
+        height: 445px;
+      }
+    }
+
+    &-area {
+
+      &-item {
+        height: 445px;
+      }
+    }
+
+    &-nopadding {
+      .BG-scroll;
+      
+      &-item {
+        border-left: 1px solid #DDDEE1;
+        padding: 24px;
+
+        &-metric {
+          margin: 44px 0;
+        }
+
+        &:first-child { 
+          border: none;
+        }
+
+        & > h4 {
+          font-weight: 600;
+          font-family: PingFangSC-Medium;
+          font-size: 14px;
+          color: #1C2438;
+          line-height: 14px;
+          margin-bottom: 32px;
+        }
+
+        &-content {
+          height: 346px;
+          overflow-y: auto;
+        }
+      }
+    }
+  }
+}
+
+:host ::ng-deep .detection {
+  &-card {
+    margin-top: 24px;
+    
+    &-nopadding {
+
+      & > .ant-card-body {
+        padding: 0;
+      }
+
+      &-metric {
+        padding: 24px;
+
+        &-item {
+          height: 90px;
+        }
+
+        &-pie {
+          border-left: 1px solid #DDDEE1;
+          padding: 24px;
+          height: 502px;
+
+          & > h4 {
+            font-weight: 600;
+            font-family: PingFangSC-Medium;
+            font-size: 14px;
+            color: #1C2438;
+            line-height: 14px;
+            margin-bottom: 32px;
+          }
+        }
+      }
+    }
+  }
+}

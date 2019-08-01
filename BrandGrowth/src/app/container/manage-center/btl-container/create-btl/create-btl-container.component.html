@@ -1,0 +1,82 @@
+<div class="operation-btl">
+  <cm-steps class="operation-btl-steps">
+    <nz-steps [(nzCurrent)]="current">
+      <nz-step [nzTitle]="'区域类型'">
+        <ng-template #nzIcon>
+          <span class="operation-btl-steps-icon operation-btl-steps-icon-checked">1</span>
+        </ng-template>
+      </nz-step>
+      <nz-step [nzTitle]="'编辑信息'">
+        <ng-template #nzIcon>
+          <span class="operation-btl-steps-icon"
+            [class.operation-btl-steps-icon-checked]="current > 0">2</span>
+        </ng-template>
+      </nz-step>
+      <!-- <nz-step [nzTitle]="'完成提交'">
+        <ng-template #nzIcon>
+          <span class="operation-btl-steps-icon"
+            [class.operation-btl-steps-icon-checked]="current > 1">3</span>
+        </ng-template>
+      </nz-step> -->
+    </nz-steps>
+    <div class="operation-btl-steps-content">
+      <!-- 第一步：选择区域类型 -->
+      <div *ngIf="current === 0" class="operation-btl-steps-content-step operation-btl-steps-content-step1">
+        <div class="operation-btl-steps-content-step1-cardGroup">
+          <option-card
+            class="operation-btl-steps-content-step1-card"
+            [isChecked]="btlType === 'probe'"
+            optionTitle="探针"
+            optionInfo="上传wifi探针信息构建区域"
+            (click)="btlType = 'probe'">
+            <ng-template #optionImage>
+              <img src="../../../../../assets/images/probe.png">
+            </ng-template>
+          </option-card>
+          <option-card
+            class="operation-btl-steps-content-step1-card"
+            [isChecked]="btlType === 'poi'"
+            optionTitle="POI"
+            optionInfo="手动标记位置构建区域"
+            (click)="btlType = 'poi'">
+            <ng-template #optionImage>
+              <img src="../../../../../assets/images/poi.png">
+            </ng-template></option-card>
+        </div>
+        <div class="operation-btl-steps-content-step1-button">
+          <cm-button>
+            <button 
+              style="width: 211px; margin-right: 16px;" 
+              nz-button 
+              [nzType]="'primary'"
+              (click)="nextStep(0)">
+              <span>下一步</span>
+            </button>
+          </cm-button>
+          <cm-button>
+            <button 
+              style="width: 160px;" 
+              nz-button 
+              [nzType]="'default'"
+              (click)="goBack()">
+              <span>取消</span>
+            </button>
+          </cm-button>
+        </div>
+      </div>
+      <!-- 第二步：编辑区域信息 -->
+      <div *ngIf="current === 1" class="operation-btl-steps-content-step operation-btl-steps-content-step2">
+        <div *ngIf="btlType === 'probe'">
+          <probe-operation-container></probe-operation-container>
+        </div>
+        <div *ngIf="btlType === 'poi'">
+          <poi-operation-container></poi-operation-container>
+        </div>
+      </div>
+      <!-- 第三步：完成提交 -->
+      <!-- <div *ngIf="current === 2" class="operation-btl-steps-content-step operation-btl-steps-content-step3">
+        step3
+      </div> -->
+    </div>
+  </cm-steps>
+</div>

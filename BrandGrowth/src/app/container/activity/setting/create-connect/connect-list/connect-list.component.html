@@ -1,0 +1,51 @@
+<nz-card [nzBordered]="false" [nzNoHovering]="false">
+  <ng-template #title>
+    <cm-checkbox>
+      <label 
+        nz-checkbox 
+        [(ngModel)]="allChecked" 
+        (ngModelChange)="updateAllChecked()" 
+        [nzIndeterminate]="indeterminate">
+        <span>所有的监测链接</span>
+      </label>
+    </cm-checkbox>
+  </ng-template>
+  <ng-template #extra>
+    <a (click)="emptyAll()">清空已选</a>
+  </ng-template>
+  <ng-template #body>
+    <div class="checkList">
+      <div class="sortList">
+        <ul>
+          <li 
+            *ngFor="let item of indexGroupData; let i = index" 
+            (click)="indexGroupDataChange(i)" 
+            [class.onSelected]="item._$isSelected">
+            {{item.name}}
+          </li>
+        </ul>
+      </div>
+      <div class="checkopt">
+        <cm-checkbox *ngFor="let item of indexGroupData">
+          <nz-checkbox-group 
+            *ngIf="item._$isSelected"
+            [(ngModel)]="item.itemList" 
+            (ngModelChange)="updateSingleChecked(item.itemList)"></nz-checkbox-group>
+        </cm-checkbox>
+      </div>
+    </div>
+    <div class="checkedList">
+      <ul>
+        <li *ngFor="let item of checkedOptions">
+          {{item.value}}
+          <span (click)="delete(item)">
+            <i class="anticon anticon-close"></i>
+          </span>
+        </li>
+      </ul>
+      <div class="countNum">
+        <span>已选<b>{{ count }}</b>个</span>
+      </div>
+    </div>
+  </ng-template>
+</nz-card>

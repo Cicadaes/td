@@ -1,0 +1,87 @@
+@import '../../../../../assets/styles/common.less';
+
+:host ::ng-deep .probe-operation{
+  padding: 24px;
+
+  & a {
+    text-decoration: none;
+  }
+
+  &-row {
+    display: flex;
+    
+    &-label {
+      width: 96px;
+      text-align: left;
+      .BG-form-label;
+    }
+
+    &-name {
+      width: 300px;
+    }
+
+    &-upload {
+      width: 400px;
+
+      &-btn {
+        width: 96px;
+        margin-right: 16px;
+        float: left;
+      }
+
+      &-file {
+        height: 24px;
+        line-height: 24px;
+        font-size: 12px;
+        margin-top: 8px;
+        width: 96px;
+        position: relative;
+        border-radius: 2px;
+
+        & > span {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          display: block;
+          width: 80px;
+          padding-left: 16px;
+          cursor: pointer;
+        }
+
+        & .anticon-paper-clip {
+          position: absolute;
+          left: 0;
+          top: 6px;
+        }
+
+        & .anticon-close {
+          display: none;
+          position: absolute;
+          right: 5px;
+          top: 6px;
+          cursor: pointer;
+        }
+
+        &:hover {
+          background: #ecf6fd;
+
+          & .anticon-close {
+            display: block;
+          }
+        }
+      }
+
+      & > p {
+        font-family: PingFangSC-Regular;
+        font-size: 14px;
+        color: #7F8490;
+        line-height: 14px;
+      }
+    }
+
+    &-info {
+      width: 624px;
+      min-height: 80px;
+    }
+  }
+}

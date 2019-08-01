@@ -1,0 +1,24 @@
+.nav-list {
+  display: flex;
+  float: left;
+
+  .nav-item {
+    & > a {
+      height: 56px;
+      line-height: 56px;
+      display: block;
+      margin-right: 24px;
+      font-family: PingFangSC-Regular;
+      font-size: 14px;
+      color: rgba(28,36,56,0.80);
+      letter-spacing: 0;
+      text-decoration: none;
+
+      &.active {
+        font-family: PingFangSC-Medium;
+        color: #3399FF;
+        border-bottom: 2px solid #3399FF;
+      }
+    }
+  }
+}

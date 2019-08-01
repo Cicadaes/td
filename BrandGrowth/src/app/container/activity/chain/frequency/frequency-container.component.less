@@ -1,0 +1,122 @@
+@import '../../../../../assets/styles/common.less';
+
+.chain-frequency {
+  padding: 20px 0; 
+
+  &-card {
+    border-radius: 4px;
+    margin-bottom: 24px;
+    overflow: hidden;
+
+    &-distribution {
+
+      &-metric {
+        padding: 0 24px;
+
+        &-item {
+          padding-top: 24px;
+          height: 104px;
+          border-bottom: 1px solid rgba(28,36,56,0.08);
+
+          &:last-child {
+            border: none;
+          }
+        }
+      }
+    }
+
+    &-channel {
+
+      &-item {
+        height: 439px;
+        overflow: hidden;
+      }
+    }
+
+    &-metric {
+      overflow: auto;
+
+      &-wrap {
+        padding: 24px 0 24px 24px;
+      }
+
+      &-item {
+        width: 168px;
+        float: left;
+        // display: inline-block;
+
+        &:first-child {
+          width: 146px;
+        }
+      }
+    }
+
+    &-nopadding {
+      .BG-scroll;
+      
+      &-item {
+        border-right: 1px solid #DDDEE1;
+        padding: 24px;
+
+        &-metric {
+          margin: 44px 0;
+        }
+
+        &:last-child { 
+          border: none;
+        }
+
+        & > h4 {
+          font-weight: 600;
+          font-family: PingFangSC-Medium;
+          font-size: 14px;
+          color: #1C2438;
+          line-height: 14px;
+          margin-bottom: 32px;
+        }
+
+        &-content {
+          height: 346px;
+          overflow-y: auto;
+        }
+      }
+    }
+  }
+}
+
+
+// 修改组件内样式
+:host ::ng-deep .chain-frequency {
+  
+  .ant-card-head-title {
+    font-size: 16px;
+  }
+
+  &-card-metric {
+    &-item {
+      overflow: hidden;
+      .BG-progress-color-1;
+
+      &-overclock {
+
+        & .metric-view-item-text-title {
+          color: #FF8454;
+        }
+
+        & .chain-frequency-card-metric-item-progress {
+          .BG-progress-color-4;
+        }
+      }
+    }
+  }
+
+  &-card {
+
+    &-nopadding {
+
+      & > .ant-card-body {
+        padding: 0;
+      }
+    }
+  }
+}

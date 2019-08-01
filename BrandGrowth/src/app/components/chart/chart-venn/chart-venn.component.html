@@ -1,0 +1,13 @@
+<div 
+  class="chart-venn-box"
+  [ngClass]="chartClass">
+  <div class="venn-chart">
+    <div
+      [id]="vennId"
+      [ngStyle]="chartStyle"
+      #vennChart></div>
+  </div>
+  <div class="venn-chart-legend">
+    <chart-legend [config]="legendData"></chart-legend>
+  </div>
+</div>

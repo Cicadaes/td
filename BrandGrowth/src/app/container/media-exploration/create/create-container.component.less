@@ -1,0 +1,196 @@
+@import '../../../../assets/styles/common.less';
+
+:host ::ng-deep .main{
+    width:1200px;
+    background:#fff;
+    min-height:500px;
+    padding:46px;
+    margin-top:26px;
+    .ant-form-item-label{
+      text-align: left;
+    }
+    .ant-form-item-label label{
+        font-family: PingFangSC-Semibold;
+        font-size: 14px;
+        color: rgba(29,36,54,0.80);
+    }
+   .ant-input{
+    width:300px;
+   } 
+   .ant-form-item{
+     margin-bottom:34px;
+   }
+  
+   .ant-form-item-control
+   {
+       width:300px;
+       &:first-child{
+         display:block;
+       }
+    .add{
+        padding:6px 10px;
+        border: 1px solid #3399FF;
+        border-radius: 20px;
+        font-family: PingFangSC-Regular;
+        font-size: 14px;
+        color: #3399FF;
+        line-height: 14px;
+        margin-right:20px;
+        display:inline-block;
+        cursor: pointer;
+    }
+    .add-count{
+      display:inline-block;
+        button{
+            border:none;
+            background:#fff;
+        }
+    }
+  
+    .ant-btn-primary{
+        width:300px;
+        height:32px;
+    }
+   }
+   .time_explore{
+    font-family: PingFangSC-Regular;
+    font-size: 18px;
+    color: rgba(28,36,56,0.80);
+    button{
+      border:none;
+      background:#fff;
+      outline:none;
+    }
+}
+  .peopGroup{
+      width:600px;
+      clear:both;
+      margin-left:132px;
+     li{
+         margin-top:10px;
+         padding:4px 10px;
+         background: #3399FF;
+         border-radius: 4px;
+         color:#fff;
+         margin-right:10px;
+         float:left;
+         span{
+          margin-right:0px;
+          margin-left:5px;
+          cursor: pointer;
+         }
+     } 
+  }
+  .medGroup{
+    clear:both;
+    margin-left:132px;
+      li{
+        display:flex;
+        align-items: center;
+        padding-top:13px;
+          p{
+           width:240px;
+           height:36px;     
+           line-height:36px;     
+           background: rgba(28,36,56,0.03);
+           border: 1px solid rgba(28,36,56,0.16);
+           border-radius: 4px;
+           text-indent: 1em;
+          }
+          span{    
+            width:16px;
+            height:16px;
+            line-height: 12px;
+            text-align: center;
+            border: 1px solid #BBBEC4;
+            border-radius: 100%;
+            color:#BBBEC4;
+            margin-left:8px;
+            cursor: pointer;
+          }
+      }
+  }
+}
+:host ::ng-deep .cusanalysis-modal,
+:host ::ng-deep #cusanalysis-modal-media {
+
+    &-input-search {
+      margin-right: 32px;
+      float: right;
+      margin-top: -2px;
+  
+      & .ant-input {
+        border-radius: 20px !important;
+        width: 160px;
+        padding-left: 24px;
+      }
+  
+      & .ant-input-affix-wrapper .ant-input-suffix {
+        left: 7px;
+        right: 192px;
+  
+        & > i {
+          color: rgba(28,36,56,0.56);
+        }
+      }
+    }
+  
+    & .ant-modal-body {
+      padding: 0;
+    }
+  
+    &-checkbox {
+  
+      &-wrap {
+        overflow-y: auto;
+        max-height: 384px;
+      }
+  
+      & .ant-checkbox-wrapper {
+        display: block;
+        height: 48px;
+        border-bottom: 1px solid rgba(28,36,56,0.06);
+        margin: 0;
+        padding-left: 16px;
+        line-height: 48px;
+        overflow: hidden;
+  
+        & > .ant-checkbox {
+          float: left;
+          margin-top: 18px;
+  
+          & + span {
+            float: left;
+            width: 350px;
+            .BG-ellipsis;
+            padding-left: 12px;
+          }
+        }
+      }
+    }
+  
+    & .ant-modal-footer {
+      padding-top: 16px;
+      padding-bottom: 16px;
+    }
+  
+    &-footer {
+  
+      &-checked {
+        padding-left: 8px;
+        line-height: 34px;
+        float: left;
+        font-family: PingFangSC-Regular;
+        font-size: 14px;
+        color: rgba(28,36,56,0.80);
+  
+        & > b {
+          display: inline-block;
+          padding: 0 8px;
+        }
+      }
+    }
+  }
+.vertical-center-modal{
+    margin:0 auto;
+}

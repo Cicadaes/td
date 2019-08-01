@@ -1,0 +1,122 @@
+@import '../../../../assets/styles/common.less';
+
+.protect{
+  background: #FFFFFF;
+  box-shadow: 0 1px 2px 0 rgba(28,36,56,0.30);
+ .ant-col-6{
+  width:200px;
+  height:104px;
+  margin-top:24px;
+  background: #FFFFFF;
+  padding:26px 0;
+  padding-left:26px;
+  
+  }
+  
+  .metric-view-item-text-title{
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #80848F;
+    line-height: 14px;
+  }
+  .metric-view-item-text-info{
+    font-family: HelveticaNeue;
+    font-size: 24px;
+    color: #1C2438;
+    line-height: 24px;
+  }
+ 
+}
+:host ::ng-deep .ant-col-12
+{
+  margin-top: 24px !important;
+  
+}
+:host ::ng-deep .ant-col-24{
+  margin-top: 24px !important;
+  padding-left:0 !important;
+  padding-right:0 !important;
+}
+:host ::ng-deep .ant-row:last-child{
+  margin-left:0 !important;
+  margin-right:0 !important;
+
+}
+:host ::ng-deep  .fixed table td{
+  text-align: center;
+}
+
+:host ::ng-deep .ant-table-thead >tr th,
+:host ::ng-deep .ant-table-tbody >tr td,
+:host ::ng-deep .ant-table-tfoot >tr td{
+  text-align: center;
+  font-family: PingFangSC-Medium;
+  font-size: 14px;
+  color: rgba(28,36,56,0.80);
+  line-height: 14px;
+}
+
+:host ::ng-deep .ant-table-body tfoot>tr td{
+  text-align: center;
+  font-family: PingFangSC-Medium;
+  font-size: 14px;
+  color: rgba(28,36,56,0.80);
+  line-height: 14px;
+}
+
+:host ::ng-deep .table-card .ant-card-body{
+  padding:0;
+
+}
+:host ::ng-deep .content {
+  .ant-table-row > td ,
+  tfoot > tr td{
+    text-align: right;
+    padding-left:20px;
+    padding-right:20px;
+  }
+  .ant-table-row > td i{
+    font-size:10px;
+    color: rgba(23,35,61,0.55);
+  }
+  .ant-table-row > td:first-child ,
+  thead > tr th:first-child,
+  tfoot > tr td:first-child{
+    text-align: left;
+    padding-left:20px;
+    // width:150px;
+    // overflow: hidden;
+  }
+  .channel_name{
+    .BG-ellipsis;
+    width: 130px;
+    display: inline-block; 
+  }
+ .IndentSize td:first-child{
+    // width:150px;
+    // overflow: hidden;
+    cursor: pointer;
+ }
+}
+:host ::ng-deep .content .ant-table-body{
+  .BG-scroll;
+}
+:host ::ng-deep .ant-table-bordered .ant-table-tbody > tr > td,
+:host ::ng-deep .ant-table-bordered .ant-table-thead > tr > th{
+  border-right:0;
+}
+.ant-table-row-expand-icon{
+    position:absolute;
+    background:transparent;
+    width:70px;
+    height:35px;
+    border:0;
+}
+.ant-table-row-expanded:after,
+.ant-table-row-collapsed:after{
+  content:""
+}
+
+.sort-span {
+  cursor: pointer;
+}

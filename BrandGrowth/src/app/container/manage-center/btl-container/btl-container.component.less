@@ -1,0 +1,114 @@
+@import '../../../../assets/styles/common.less';
+
+.manage-btl {
+
+  &-operation {
+    margin: 24px 0;
+
+    &-right {
+      float: right;
+    }
+  }
+
+  &-content {
+
+    &-table {
+
+      &-name {
+        width: 180px;
+        .BG-ellipsis;
+      }
+
+      &-remark {
+        width: 300px;
+        .BG-ellipsis;
+      }
+
+      &-edit {
+        display: block;
+        width: 50px;
+        color:#2D8CF0;
+        cursor: pointer;
+
+        &:hover {
+          color: #3399ff;
+        }
+      }
+    }
+  }
+}
+
+:host ::ng-deep .manage-btl {
+
+  &-operation {
+
+    &-add {
+      border-radius: 20px !important;
+      height: 36px;
+    }
+
+    &-right {
+
+      &-del {
+        border-radius: 20px !important;
+      }
+
+      &-input {
+        display: inline-block;
+        margin-left: 16px;
+
+        & .ant-input {
+          border-radius: 20px !important;
+          width: 240px;
+          padding-left: 24px;
+        }
+
+        & .ant-input-affix-wrapper .ant-input-suffix {
+          left: 7px;
+          right: 192px;
+
+          & > i {
+            color: rgba(28,36,56,0.56);
+          }
+        }
+      }
+    }
+  }
+
+  &-content {
+
+    & .ant-card-body {
+      padding: 0;
+      padding-top: 1px;
+
+      & .ant-table-thead {
+        & > tr > th {
+          border-bottom: 1px solid #e9e9e9;
+        }
+      }
+
+      & .ant-table-pagination.ant-pagination {
+        width: 100%;
+        text-align: right;
+        padding:0 24px;
+
+        & .ant-pagination-options {
+          float: left;
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  &-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.35);
+    padding-top: 20%;
+    text-align: center;
+  }
+}

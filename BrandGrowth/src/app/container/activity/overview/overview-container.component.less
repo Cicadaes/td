@@ -1,0 +1,48 @@
+@import '../../../../assets/styles/common.less';
+
+.overview {
+  padding: 20px 0;
+
+  &-card {
+    border-radius: 4px;
+    margin-bottom: 24px;
+
+    &-media {
+      width: 360px;
+      display: flex;
+      flex-wrap: wrap;
+      float: right;
+
+      &-item {
+        width: 20%;
+        height: 28px;
+        margin-bottom: 8px;
+
+        & > span {
+          .BG-ellipsis;
+          display: block;
+          background: rgba(28,36,56,0.08);
+          border-radius: 14px;
+          width: 64px;
+          text-align: center;
+          font-family: PingFangSC-Regular;
+          font-size: 12px;
+          color: rgba(28,36,56,0.80);
+          line-height: 28px;
+        }
+      }
+    }
+  }
+}
+
+// 修改组件内样式
+:host ::ng-deep .overview {
+  .ant-card-head-title {
+    font-size: 16px;
+  }
+
+  &-card-metric {
+    display: block;
+    margin-bottom: 24px;
+  }
+}

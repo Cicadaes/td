@@ -1,0 +1,170 @@
+<common-card class="container new-chain">
+  <form nz-form [formGroup]="validateForm">
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col nzSpan="3">
+        <label nz-form-item-required for="campaign">营销活动</label>
+      </div>
+      <div nz-form-control nz-col nzSpan="6">
+        <nz-select nzAllowClear [nzDisabled]="_isEdit" [nzPlaceHolder]="'请选择营销活动...'" nzShowSearch formControlName="campaign" (nzOpenChange)="initialActpageList()">
+          <nz-option *ngFor="let option of _activityOptions" [nzLabel]="option.label" [nzValue]="option.value">
+          </nz-option>
+        </nz-select>
+        <!-- <cm-sortselector [cmSortOptions]="_activityOptions" [cmPlaceHolder]="'请选择营销活动...'" [cmMode]="'single'" formControlName="campaign"></cm-sortselector> -->
+        <div nz-form-explain *ngIf="getFormControl('campaign').dirty&&getFormControl('campaign').hasError('required')">此为必填项!</div>
+      </div>
+    </div>
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col nzSpan="3">
+        <label nz-form-item-required for="channels">推广渠道</label>
+      </div>
+      <div nz-form-control nz-col nzSpan="6">
+        <!-- <nz-select nzAllowClear [nzDisabled]="_isEdit" [nzPlaceHolder]="'请选择推广渠道...'" nzShowSearch formControlName="channels">
+          <nz-option *ngFor="let option of _channelOptions" [nzLabel]="option.label" [nzValue]="option.value">
+          </nz-option>
+          <nz-option [nzDisabled]="true" *ngIf="_channelOptions.length === 0" nzLabel="未查询到数据"></nz-option>
+        </nz-select> -->
+        <cm-sortselector [cmSortOptions]="_channelOptions" [cmPlaceHolder]="'请选择推广渠道...'" [cmMode]="'single'" formControlName="channels"></cm-sortselector>        
+        <div nz-form-explain *ngIf="getFormControl('channels').dirty&&getFormControl('channels').hasError('required')">此为必填项!</div>
+      </div>
+    </div>
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col nzSpan="3">
+        <label nz-form-item-required for="aCompany">代理公司</label>
+      </div>
+      <div nz-form-control nz-col nzSpan="6">
+        <nz-input [nzPlaceHolder]="'请输入代理公司...'" formControlName="aCompany" [nzId]="'aCompany'"></nz-input>
+        <div nz-form-explain *ngIf="getFormControl('aCompany').dirty&&getFormControl('aCompany').hasError('required')">此为必填项!</div>
+      </div>
+    </div>
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col nzSpan="3">
+        <label nz-form-item-required for="adformat">广告格式</label>
+      </div>
+      <div nz-form-control nz-col nzSpan="6">
+        <nz-select nzAllowClear [nzPlaceHolder]="'请选择广告格式...'" nzShowSearch formControlName="adformat">
+          <nz-option *ngFor="let option of _adformatOptions" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+          </nz-option>
+          <nz-option [nzDisabled]="true" *ngIf="_adformatOptions.length === 0" nzLabel="未查询到数据"></nz-option>
+        </nz-select>
+        <div nz-form-explain *ngIf="getFormControl('adformat').dirty&&getFormControl('adformat').hasError('required')">此为必填项!</div>
+      </div>
+    </div>
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col nzSpan="3">
+        <label nz-form-item-required for="chain">监测链接名称</label>
+      </div>
+      <div nz-form-control nz-col nzSpan="6">
+        <nz-input [nzPlaceHolder]="'请输入监测链接名称...'" formControlName="chain" [nzId]="'chain'"></nz-input>
+        <div nz-form-explain *ngIf="getFormControl('chain').dirty&&getFormControl('chain').hasError('required')">此为必填项!</div>
+      </div>
+    </div>
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col nzSpan="3">
+        <label for="expProd">曝光预估量</label>
+      </div>
+      <div nz-form-control nz-col nzSpan="6">
+        <nz-input-number [nzPlaceHolder]="'请输入曝光预估量...'" formControlName="expProd" [nzMin]="0" [nzStep]="1"></nz-input-number>
+      </div>
+    </div>
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col nzSpan="3">
+        <label for="usePage">使用活动页</label>
+      </div>
+      <div nz-form-control nz-col nzSpan="6">
+        <nz-radio-group formControlName="usePage" (ngModelChange)="addRequiredValidatorToFormControl($event, 'sActPage')">
+          <label nz-radio [nzDisabled]="_isEdit" [nzValue]="1">
+            <span>是</span>
+          </label>
+          <label nz-radio [nzDisabled]="_isEdit" [nzValue]="0">
+            <span>否</span>
+          </label>
+        </nz-radio-group>
+        <div nz-form-explain *ngIf="getFormControl('usePage').dirty&&getFormControl('usePage').hasError('required')">此为必填项!</div>
+      </div>
+    </div>
+    <div nz-form-item nz-row *ngIf="getFormControl('usePage').value == 1">
+      <div nz-form-label nz-col nzSpan="3">
+        <label for="sActPage">选择活动页</label>
+      </div>
+      <div nz-form-control nz-col nzSpan="6">
+        <nz-select nzAllowClear [nzDisabled]="_isEdit" [nzPlaceHolder]="'请选择活动页...'" nzShowSearch formControlName="sActPage">
+          <nz-option *ngFor="let option of _activityPageOptions" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+          </nz-option>
+          <nz-option [nzDisabled]="true" *ngIf="_activityPageOptions.length === 0" nzLabel="未查询到数据"></nz-option>
+        </nz-select>
+        <div nz-form-explain *ngIf="getFormControl('sActPage').dirty&&getFormControl('sActPage').hasError('required')">此为必填项!</div>
+      </div>
+      <div nz-form-label  nz-col nzSpan="6"  nzPush="1">
+        <label>没有活动页？<a [routerLink]="['/manage-center/landing/create-landing', '新增着陆页']">前往创建</a></label>
+      </div>
+    </div>
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col nzSpan="3">
+        <label for="clickProd">点击预估量</label>
+      </div>
+      <div nz-form-control nz-col nzSpan="6">
+        <nz-input-number [nzPlaceHolder]="'请输入点击预估量...'" formControlName="clickProd" [nzMin]="0" [nzStep]="1"></nz-input-number>
+      </div>
+    </div>
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col nzSpan="3">
+        <label for="actBudget">活动预算</label>
+      </div>
+      <div nz-form-control nz-col nzSpan="6">
+        <nz-input-number [nzPlaceHolder]="'请输入活动预算...'" formControlName="actBudget" [nzMin]="0" [nzStep]="1"></nz-input-number>
+      </div>
+    </div>
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col nzSpan="3">
+        <label for="shopAnalysis">到店分析</label>
+      </div>
+      <div nz-form-control nz-col nzSpan="6" (ngModelChange)="addRequiredValidatorToFormControl($event, 'sActPage')">
+        <nz-radio-group formControlName="shopAnalysis" (ngModelChange)="addRequiredValidatorToFormControl($event, 'offlineArea')">
+          <label nz-radio [nzDisabled]="_isEdit" [nzValue]="1">
+            <span>是</span>
+          </label>
+          <label nz-radio [nzDisabled]="_isEdit" [nzValue]="0">
+            <span>否</span>
+          </label>
+        </nz-radio-group>
+        <div nz-form-explain *ngIf="getFormControl('shopAnalysis').dirty&&getFormControl('shopAnalysis').hasError('required')">此为必填项!</div>
+      </div>
+      <!-- <div nz-form-control nz-col nzSpan="6" nzPush="1" *ngIf="getFormControl('shopAnalysis').value == 1">
+        <nz-select nzAllowClear [nzPlaceHolder]="'请选择线下区域...'" nzShowSearch [nzDisabled]="_isEdit" formControlName="offlineArea">
+          <nz-option *ngFor="let option of _probeListOptions" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+          </nz-option>
+          <nz-option [nzDisabled]="true" *ngIf="_probeListOptions.length === 0" nzLabel="未查询到数据"></nz-option>
+        </nz-select>
+        <div nz-form-explain *ngIf="getFormControl('offlineArea').dirty&&getFormControl('offlineArea').hasError('required')">此为必填项!</div>
+      </div>
+      <div nz-form-label  nz-col nzSpan="6"  nzPush="2" *ngIf="getFormControl('shopAnalysis').value == 1">
+        <label>没有到店人群？<a [routerLink]="['/manage-center/crowd/create', '新建人群']">前往创建</a></label>
+      </div> -->
+    </div>
+    <div nz-form-item nz-row *ngIf="getFormControl('shopAnalysis').value == 1">
+      <div nz-form-label nz-col nzSpan="3">
+        <label for="sActPage">选择线下区域</label>
+      </div>
+      <div nz-form-control nz-col nzSpan="6" *ngIf="getFormControl('shopAnalysis').value == 1">
+        <nz-select nzAllowClear [nzPlaceHolder]="'请选择线下区域...'" nzShowSearch [nzDisabled]="_isEdit" formControlName="offlineArea">
+          <nz-option *ngFor="let option of _probeListOptions" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+          </nz-option>
+          <nz-option [nzDisabled]="true" *ngIf="_probeListOptions.length === 0" nzLabel="未查询到数据"></nz-option>
+        </nz-select>
+        <div nz-form-explain *ngIf="getFormControl('offlineArea').dirty&&getFormControl('offlineArea').hasError('required')">此为必填项!</div>
+      </div>
+      <div nz-form-label  nz-col nzSpan="6"  nzPush="1" *ngIf="getFormControl('shopAnalysis').value == 1">
+        <label>没有到店人群？<a [routerLink]="['/manage-center/crowd/create', '新建人群']">前往创建</a></label>
+      </div>
+    </div>
+    <div nz-form-item nz-row></div>
+    <div nz-form-item nz-row>
+      <div *ngIf="!_isEdit" class="mutiSubmit" nz-form-control nz-col [nzSpan]="7" [nzOffset]="3">
+        <button nz-button (click)="resetCreatePage()" [nzType]="'primary'">提交并继续创建</button>
+      </div>
+      <div class="submit" nz-form-control nz-col [nzSpan]="4">
+        <button nz-button (click)="backChain()">提交</button>
+      </div>
+    </div>
+  </form>
+</common-card>

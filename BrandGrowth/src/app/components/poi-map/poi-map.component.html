@@ -1,0 +1,140 @@
+<div class="poi-map-wrap">
+  <div class="poi-map">
+    <!-- poi 标题 -->
+    <h3 class="poi-map-title">
+      <span>
+        <i class="anticon anticon-close" (click)="closePoiMap()"></i>
+        <b>添加POI</b>
+      </span>
+      <button
+        class="poi-map-title-btn" 
+        nz-button
+        nzSize="large"
+        nzType="primary"
+        (click)="savePoiData()">保存</button>
+    </h3>
+    <!-- poi 地图内容 -->
+    <div class="poi-map-content">
+      <!-- POI 地图 -->
+      <div id="poi-map-content-map" class="poi-map-content-map"></div>
+      <!-- POI 地图弹窗 -->
+      <div 
+        *ngIf="poiMapModal" 
+        class="poi-map-content-modal"
+        [ngStyle]="poiMapModalPosition">
+        <h4>添加标记<i class="anticon anticon-close" (click)="cancel()"></i></h4>
+        <div class="poi-map-content-modal-content">
+          <p class="poi-map-content-modal-content-name">
+            <b>名称</b>
+            <cm-input 
+              class="poi-map-content-modal-content-name-input"
+              [class.poi-map-content-modal-content-name-input-warning]="requiredMessage">
+              <nz-input 
+                [(ngModel)]="poiName" 
+                nzPlaceHolder="请输入POI名称" 
+                (ngModelChange)="onChangePoiName($event)"></nz-input>
+            </cm-input>
+          </p>
+          <p *ngIf="requiredMessage" class="poi-map-content-modal-content-required">POI名称不能为空！</p>
+          <div *ngIf="poiMapModalType === 'marker'" class="poi-map-content-modal-content-marker">
+            <p>以上面POI为中心点，圈定半径为几公里内人群？<br />拖动下面气泡设定（单位为 km）。</p>
+            <nz-row>
+              <nz-col nzSpan="16">
+                <cm-slider>
+                  <nz-slider 
+                    [nzMin]="0.01" 
+                    [nzMax]="5" 
+                    [nzStep]="0.01" 
+                    [(ngModel)]="markerRadius"
+                    (ngModelChange)="onRadiusChange($event)"></nz-slider>
+                </cm-slider>
+              </nz-col>
+              <div nz-col nzSpan="4">
+                <cm-input-number>
+                  <nz-input-number 
+                    [nzMin]="0.01" 
+                    [nzMax]="5" 
+                    [nzStep]="0.01" 
+                    [ngStyle]="{ 'marginLeft': '16px' }"
+                    [(ngModel)]="markerRadius"
+                    (ngModelChange)="onRadiusChange($event)"></nz-input-number>
+                </cm-input-number>
+              </div>
+            </nz-row>
+          </div>
+          <div class="poi-map-content-modal-content-btn">
+            <cm-button>
+              <button nz-button [nzType]="'primary'" (click)=saveDrawInfo()>
+                <span>确认</span>
+              </button>
+            </cm-button>
+            <cm-button style="margin-left: 16px;">
+              <button nz-button [nzType]="'default'" (click)="cancel()">
+                <span>取消</span>
+              </button>
+            </cm-button>
+          </div>
+        </div>
+      </div>
+      <!-- POI 工具栏 -->
+      <div class="poi-map-content-tools">
+        <!-- 检索框 -->
+        <nz-select
+          class="poi-map-content-tools-search"
+          nzAllowClear
+          nzPlaceHolder="请输入POI名称..."
+          nzNotFoundContent="无法找到"
+          [(ngModel)]="searchContent"
+          (nzSearchChange)="onSearchMap($event)"
+          (ngModelChange)="onSearchDraw($event)"
+          nzShowSearch>
+          <nz-option
+            *ngFor="let option of searchOptions"
+            [nzLabel]="option.value"
+            [nzValue]="option">
+          </nz-option>
+        </nz-select>
+        <!-- 绘制工具 -->
+        <div class="poi-map-content-tools-draw">
+          <cm-button class="poi-map-content-tools-draw-btn">
+            <button 
+              nzSize="large" 
+              nz-button 
+              nzType="default"
+              (click)="setDrawingModeType(drawingManager.DRAWINGMODELTYPES[0])">
+              <span>锚点工具</span>
+            </button>
+          </cm-button>
+          <cm-button class="poi-map-content-tools-draw-btn">
+            <button 
+              nzSize="large" 
+              nz-button 
+              [nzType]="'default'"
+              (click)="setDrawingModeType(drawingManager.DRAWINGMODELTYPES[1])">
+              <span>围栏工具</span>
+            </button>
+          </cm-button>
+        </div>
+        <!-- 地图缩放工具 -->
+        <cm-button class="poi-map-content-tools-zoom">
+          <nz-button-group>
+            <button nz-button nzSize="large" (click)="setScale(true)"><i class="anticon anticon-plus"></i></button>
+            <button nz-button nzSize="large" (click)="setScale(false)"><i class="anticon anticon-minus"></i></button>
+          </nz-button-group>
+        </cm-button>
+      </div>
+      <!-- POI 已选项 -->
+      <div class="poi-map-content-map-tags">
+        <ul class="poi-map-content-map-tags-wrap">
+          <li *ngFor="let item of selectedList; let i = index;">
+            <p [title]="item.customName" (click)="onClickTag(item)">{{ item.customName }}</p>
+            <i class="anticon anticon-close" (click)="onDeleteTag(i)"></i>
+          </li>
+        </ul>
+        <div class="poi-map-content-map-tags-selected">
+          已选 <b>{{ selectedList.length }}</b> 个
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

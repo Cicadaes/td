@@ -1,0 +1,91 @@
+<div class="analysis-details-base">
+  <div nz-row class="analysis-details-base-row">
+    <div nz-col [nzSpan]="12" class="analysis-details-base-row-col">
+      <h4>男性分布</h4>
+      <div class="analysis-details-base-item analysis-details-base-item-men">
+        <div class="analysis-details-base-item-progress">
+          <chart-progress 
+            [progressName]="maleAndAgeIndex.key.name" 
+            [progressValue]="maleAndAgeIndex.key.percent"></chart-progress>
+        </div>
+        <ul class="analysis-details-base-item-ageIndex">
+          <li *ngFor="let item of maleAndAgeIndex.value">
+            <span>{{ item.name || '--' }}</span>
+            <b>{{ item.percent | fpercent }}</b>
+            <div class="analysis-details-base-item-ageIndex-progress">
+              <cm-progress>
+                <nz-progress [ngModel]="item.percent * 100" [nzShowInfo]="false"></nz-progress>
+              </cm-progress>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="12" class="analysis-details-base-row-col">
+      <h4>女性分布</h4>
+      <div class="analysis-details-base-item analysis-details-base-item-women">
+        <div class="analysis-details-base-item-progress">
+          <chart-progress 
+            [progressName]="femaleAndAgeIndex.key.name" 
+            [progressValue]="femaleAndAgeIndex.key.percent"
+            colorIndex="3" 
+            progressColor="#FCC45F"></chart-progress>
+        </div>
+        <ul class="analysis-details-base-item-ageIndex">
+          <li *ngFor="let item of femaleAndAgeIndex.value">
+            <span>{{ item.name || '--' }}</span>
+            <b>{{ item.percent | fpercent }}</b>
+            <div class="analysis-details-base-item-ageIndex-progress">
+              <cm-progress>
+                <nz-progress [ngModel]="item.percent * 100" [nzShowInfo]="false"></nz-progress>
+              </cm-progress>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div nz-row class="analysis-details-base-row">
+    <div nz-col [nzSpan]="6" class="analysis-details-base-row-col">
+      <h4>已婚分布</h4>
+      <div class="analysis-details-base-row-col-progress">
+        <chart-progress
+          [progressName]="married.name"
+          [progressValue]="married.percent"></chart-progress>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="6" class="analysis-details-base-row-col">
+      <h4>有车分布</h4>
+      <div class="analysis-details-base-row-col-progress">
+        <chart-progress
+          [progressName]="carsOwner.name"
+          [progressValue]="carsOwner.percent"></chart-progress>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="12" class="analysis-details-base-row-col">
+      <h4>年龄分布</h4>
+      <div class="analysis-details-base-row-col-age">
+        <chart-bar [height]='225' [config]="ageIndex"></chart-bar>
+      </div>
+    </div>
+  </div>
+  <div nz-row class="analysis-details-base-row">
+    <div nz-col [nzSpan]="18" class="analysis-details-base-row-col">
+      <h4>地域分布</h4>
+      <div class="analysis-details-base-row-col-map">
+        <div>
+          <chart-map [data]="areas" [height]="350"></chart-map>
+        </div>
+        <div>
+          <proportion-ranking [rankTitle]="false" [data]="cities"></proportion-ranking>
+        </div>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="6" class="analysis-details-base-row-col">
+      <h4>线级城市占比</h4>
+      <div class="analysis-details-base-row-col-cityLevel">
+        <chart-pie [config]="cityDistributes"></chart-pie>
+      </div>
+    </div>
+  </div>
+</div>

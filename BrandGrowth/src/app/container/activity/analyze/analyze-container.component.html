@@ -1,0 +1,175 @@
+<div class="analyze">
+  <nz-card class="analyze-card analyze-card-nopadding">
+    <ng-template #body>
+      <div nz-row>
+        <metric-view-item
+          nz-col
+          class="analyze-card-nopadding-metric"
+          [nzSpan]="6"
+          metricTitle="页面访问数（PV）"
+          metricInfo="{{ pageenterPv | number }}"
+          [class.analyze-card-nopadding-metric-checked]="metricChecked === 'pageenterPvChart'"
+          (onClickMetric)="onClickMetric('pageenterPvChart')">
+          <ng-template #metricContent>
+            <chart-line mini [config]="pageenterPvChart" [height]="45"></chart-line>
+          </ng-template>
+        </metric-view-item>
+        <metric-view-item
+          nz-col
+          class="analyze-card-nopadding-metric"
+          [nzSpan]="6"
+          left
+          metricTitle="页面访问数（UV）"
+          metricInfo="{{ pageenterUv | number }}"
+          [class.analyze-card-nopadding-metric-checked]="metricChecked === 'pageenterUvChart'"
+          (onClickMetric)="onClickMetric('pageenterUvChart')">
+          <ng-template #metricContent>
+            <chart-line mini [config]="pageenterUvChart" [height]="45"></chart-line>
+          </ng-template>
+        </metric-view-item>
+        <metric-view-item
+          nz-col
+          class="analyze-card-nopadding-metric"
+          [nzSpan]="6"
+          left
+          metricTitle="转化数"
+          metricInfo="{{ pageenterClickPv | number }}"
+          [class.analyze-card-nopadding-metric-checked]="metricChecked === 'pageenterClickPvChart'"
+          (onClickMetric)="onClickMetric('pageenterClickPvChart')">
+          <ng-template #metricContent>
+            <chart-line mini [config]="pageenterClickPvChart" [height]="45"></chart-line>
+          </ng-template>
+        </metric-view-item>
+        <metric-view-item
+          nz-col
+          class="analyze-card-nopadding-metric"
+          [nzSpan]="6"
+          left
+          metricTitle="转化率"
+          [metricInfo]="pageenterClickRate"
+          [class.analyze-card-nopadding-metric-checked]="metricChecked === 'pageenterClickRateChart'"
+          (onClickMetric)="onClickMetric('pageenterClickRateChart')">
+          <ng-template #metricContent>
+            <chart-line mini [config]="pageenterClickRateChart" [height]="45"></chart-line>
+          </ng-template>
+        </metric-view-item>
+      </div>
+    </ng-template>
+  </nz-card>
+  <nz-card class="analyze-card-line">
+    <ng-template #body>
+      <div class="analyze-card-line-button-group">
+        <cm-button>
+          <nz-radio-group [(ngModel)]="buttonType">
+            <label 
+              nz-radio-button [nzValue]="'hour'"
+              (click)="onChangeType('hour')"><span>时</span></label>
+            <label 
+              nz-radio-button [nzValue]="'day'"
+              (click)="onChangeType('day')"><span>日</span></label>
+            <label 
+              nz-radio-button [nzValue]="'week'"
+              (click)="onChangeType('week')"><span>周</span></label>
+          </nz-radio-group>
+        </cm-button>
+      </div>
+      <chart-line [config]="lineChart" [height]="252"></chart-line>
+    </ng-template>
+  </nz-card>
+  <nz-card class="analyze-card analyze-card-nopadding analyze-card-visit">
+    <ng-template #title>
+      访问数据
+    </ng-template>
+    <ng-template #body>
+      <div nz-row>
+        <div class="analyze-card-nopadding-item analyze-card-visit-item" nz-col [nzSpan]="6">
+          <h4>广告格式分布</h4>
+          <chart-pie [config]="adtypeChart"></chart-pie>
+        </div>
+        <div class="analyze-card-nopadding-item analyze-card-visit-item" nz-col [nzSpan]="6">
+          <h4>监测链接分布</h4>
+          <chart-pie [config]="monitorChart"></chart-pie>
+        </div>
+        <div class="analyze-card-nopadding-item analyze-card-visit-item" nz-col [nzSpan]="6">
+          <h4>渠道类型分布</h4>
+          <chart-pie [config]="mediaChart"></chart-pie>
+        </div>
+        <div class="analyze-card-nopadding-item analyze-card-visit-item" nz-col [nzSpan]="6">
+          <h4>渠道分布</h4>
+          <div class="analyze-card-nopadding-item-content">
+            <list-icon-ratio [config]="mediaList"></list-icon-ratio>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </nz-card>
+  <nz-card class="analyze-card analyze-card-nopadding">
+    <ng-template #title>
+      设备和系统分布
+    </ng-template>
+    <ng-template #body>
+      <div nz-row>
+        <div class="analyze-card-nopadding-item" nz-col [nzSpan]="12">
+          <chart-treemap [config]="deviceChartData"></chart-treemap>
+        </div>
+        <div class="analyze-card-nopadding-item" nz-col [nzSpan]="12">
+          <nz-row>
+            <metric-view-item 
+              nz-col [nzSpan]="12" 
+              metricTitle="来自IOS系统" 
+              [metricInfo]="iosMetrice"></metric-view-item>
+            <metric-view-item 
+              nz-col 
+              left 
+              [nzSpan]="12" 
+              metricTitle="来自Android系统" 
+              [metricInfo]="androidMetrice"></metric-view-item>
+            <metric-view-item
+              class="analyze-card-nopadding-item-metric"
+              nz-col 
+              [nzSpan]="12" 
+              metricTitle="来自{{ iosBrandMetrice.brand }}" 
+              [metricInfo]="iosBrandMetrice.value"></metric-view-item>
+            <metric-view-item 
+              class="analyze-card-nopadding-item-metric"
+              nz-col 
+              left 
+              [nzSpan]="12" 
+              metricTitle="来自{{ androidBrandMetrice.brand }}"
+              [metricInfo]="androidBrandMetrice.value"></metric-view-item>
+            <metric-view-item 
+              nz-col 
+              [nzSpan]="12" 
+              metricTitle="平板来自{{ iosDtMetrice.dt }}" 
+              [metricInfo]="iosDtMetrice.value"></metric-view-item>
+            <metric-view-item 
+              nz-col left 
+              [nzSpan]="12" 
+              metricTitle="来自{{ androidDtMetrice.dt }}" 
+              [metricInfo]="androidDtMetrice.value"></metric-view-item>
+          </nz-row>
+        </div>
+      </div>
+    </ng-template>
+  </nz-card>
+  <nz-card class="analyze-card analyze-card-nopadding analyze-card-area">
+    <ng-template #title>
+      区域分布
+    </ng-template>
+    <ng-template #body>
+      <nz-row>
+        <nz-col nzSpan="12" class="analyze-card-nopadding-item analyze-card-area-item">
+          <h4>省份分布</h4>
+          <chart-map [data]="provinceChart" [height]="350"></chart-map>
+        </nz-col>
+        <div class="analyze-card-nopadding-item analyze-card-area-item" nz-col [nzSpan]="6">
+          <h4>线级城市占比</h4>
+          <chart-pie [config]="levelCityChart"></chart-pie>
+        </div>
+        <nz-col nzSpan="6" class="analyze-card-nopadding-item analyze-card-area-item">
+          <proportion-ranking [data]="cityChart"></proportion-ranking>
+        </nz-col>
+      </nz-row>
+    </ng-template>
+  </nz-card>
+</div>

@@ -1,0 +1,125 @@
+<nz-card>
+  <ng-template #body>
+    <metric-view-item 
+      nz-col 
+      [nzSpan]="4" 
+      metricTitle="异常曝光率" 
+      [metricInfo]="(metricData.impression_anti/metricData.impression_pv) | fpercent" 
+      metricInfoSize="20">
+      <ng-template #metricContent>
+        <chart-line mini [config]="line1" [height]="30"></chart-line>
+      </ng-template>
+    </metric-view-item>
+    <metric-view-item 
+      nz-col 
+      [nzSpan]="4" 
+      left 
+      metricTitle="异常曝光" 
+      [metricInfo]="metricData.impression_anti" 
+      metricInfoSize="20">
+      <ng-template #metricContent>
+        <chart-line mini [config]="line2" [height]="30"></chart-line>
+      </ng-template>
+    </metric-view-item>
+    <metric-view-item 
+      nz-col 
+      [nzSpan]="4" 
+      left 
+      metricTitle="曝光" 
+      [metricInfo]="metricData.impression_pv" 
+      metricInfoSize="20">
+      <ng-template #metricContent>
+        <chart-line mini [config]="line3" [height]="30"></chart-line>
+      </ng-template>
+    </metric-view-item>
+    <metric-view-item 
+      nz-col 
+      [nzSpan]="4" 
+      left 
+      metricTitle="异常点击率"
+      [metricInfo]="(metricData.click_anti/ metricData.click_pv) | fpercent" 
+      metricInfoSize="20">
+      <ng-template #metricContent>
+        <chart-line mini [config]="line4" [height]="30"></chart-line>
+      </ng-template>
+    </metric-view-item>
+    <metric-view-item 
+      nz-col 
+      [nzSpan]="4" 
+      left
+      metricTitle="异常点击"
+      [metricInfo]="metricData.click_anti" 
+      metricInfoSize="20">
+      <ng-template #metricContent>
+        <chart-line mini [config]="line5" [height]="30"></chart-line>
+      </ng-template>
+    </metric-view-item>
+    <metric-view-item 
+      nz-col 
+      [nzSpan]="4" 
+      left 
+      metricTitle="点击" 
+      [metricInfo]="metricData.click_pv" 
+      metricInfoSize="20">
+      <ng-template #metricContent>
+        <chart-line mini [config]="line6" [height]="30"></chart-line>
+      </ng-template>
+    </metric-view-item>
+  </ng-template>
+</nz-card>
+
+<div class='noPadding'>
+  <nz-card class="chain-details-card chain-details-card-small">
+    <ng-template #title>
+      曝光异常分析
+    </ng-template>
+    <ng-template #body>
+      <div nz-col [nzSpan]="16">
+        <chart-table-wrap>
+          <ng-template #contentChart>
+              <chart-line [config]="chartLineConfig" height="400"></chart-line>
+          </ng-template>
+          <ng-template #contentTable>
+              <table-move
+              [tableColumns]="lineTableHeader_improssion" 
+              [tableData]="lineTableContent" 
+              tableHeight="400">
+            </table-move>
+          </ng-template>
+        </chart-table-wrap>
+      </div>
+        <div nz-col [nzSpan]="8">
+            <chart-venn [config]='chartVennImpressionConfig' vennId='chart-venn'></chart-venn>
+        </div>
+    </ng-template>
+  </nz-card>
+</div>
+
+<div  class='noPadding'>
+<nz-card class="chain-details-card chain-details-card-small">
+        <ng-template #title>
+          点击异常分析
+        </ng-template>
+        <ng-template #body>
+          <div nz-col [nzSpan]="16">
+            <chart-table-wrap>
+              <ng-template #contentChart>
+                <div  >
+                  <chart-line [config]="chartLineClickConfig" height="400"></chart-line>
+                </div>
+              </ng-template>
+              <ng-template #contentTable>
+                  <table-move
+                  [tableColumns]="lineTableHeader_click" 
+                  [tableData]="lineTableContent" 
+                  tableHeight="400">
+                </table-move>
+              </ng-template>
+            </chart-table-wrap>
+          </div>
+          <div nz-col [nzSpan]="8">
+              <chart-venn [config]='chartVennClickConfig' vennId='chart-venn1'></chart-venn>
+          </div>
+        </ng-template>
+      </nz-card>
+</div>

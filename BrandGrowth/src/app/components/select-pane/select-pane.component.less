@@ -1,0 +1,66 @@
+.select-data {
+  width: 624px;
+  margin-top: 12px;
+  position: relative;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    background: #F7F8F8;
+    border: 1px solid #D7DDE4;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    height: 36px;
+    padding: 0 12px;
+  }
+
+  .pane {
+    padding:  0;
+
+    &-wrap {
+      border: 1px solid #D7DDE4;
+      border-radius: 4px;
+      border-top: none;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    .item {
+      display: flex;
+      flex-direction: column;
+      float: left;
+      margin: 0 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      .divider {
+        padding-top: 5px;
+        border-top: 1px solid #D7DDE4;;
+        margin-top: 5px;
+        display: flex;
+        flex-direction: column;
+        
+        .ant-checkbox-wrapper {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  .anticon {
+    position: absolute;
+    right: -25px;
+    top: 10px;
+    height: 16px;
+    width: 16px;
+    font-size: 16px;
+    color: #BBBEC4;
+  }
+
+  .ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}

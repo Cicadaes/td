@@ -1,0 +1,62 @@
+@import '../../../assets/styles/common.less';
+
+.metric-view-item {
+  padding-right: 24px;
+  // 右侧边框
+  &-left {
+    padding-left: 24px;
+    border-left: 1px solid #DDDEE1;
+  }
+  
+  // 内容模块排列方式
+  &-horizontal {
+    // overflow: auto;
+    display: flex;
+    justify-content: space-between;
+
+    &-content {
+      margin-left: 24px;
+      // overflow: hidden;
+      float: right;
+    }
+
+    & > .metric-view-item-text {
+      // float: left;
+      min-width: 84px;
+      max-width: 154px;
+
+      // &-title {
+        // max-width: 154px;
+        // .BG-ellipsis;
+      // }
+
+      &-info {
+        max-width: 154px;
+        .BG-ellipsis;
+      }
+    }
+  }
+
+  &-text {
+    &-title {
+      font-family: PingFangSC-Regular;
+      font-size: 14px;
+      color: #80848F;
+      line-height: 14px;
+      // max-width: 154px;
+      cursor: context-menu;
+      // .BG-ellipsis;
+    }
+
+    &-info {
+      font-family: HelveticaNeue;
+      font-size: 24px;
+      color: #1C2438;
+      line-height: 24px;
+      margin-top: 15px;
+      cursor: context-menu;
+      max-width: 154px;
+      .BG-ellipsis;
+    }
+  }
+}

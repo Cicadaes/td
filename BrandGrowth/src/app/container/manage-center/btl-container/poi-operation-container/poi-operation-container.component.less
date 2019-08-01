@@ -1,0 +1,58 @@
+@import '../../../../../assets/styles/common.less';
+
+:host ::ng-deep .poi-operation{
+  padding: 24px;
+
+  &-row {
+    display: flex;
+    
+    &-label {
+      width: 96px;
+      text-align: left;
+      .BG-form-label;
+    }
+
+    &-name {
+      width: 300px;
+    }
+
+    &-info {
+      width: 624px;
+      min-height: 80px;
+    }
+
+    &-poi {
+
+      &-btn {
+        width: 96px;
+      }
+
+      &-list {
+        margin-top: 8px;
+        width: 600px;
+
+        &-item {
+          display: inline-block;
+          position: relative;
+          padding: 0 24px 0 16px;
+          margin-right: 16px;
+          border-radius: 32px;
+          line-height: 32px;
+          background: aliceblue;
+
+          & > p {
+            width: 60px;
+            .BG-ellipsis;
+          }
+
+          & > i {
+            position: absolute;
+            right: 8px;
+            top: 10px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

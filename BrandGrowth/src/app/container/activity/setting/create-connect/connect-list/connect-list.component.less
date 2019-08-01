@@ -1,0 +1,129 @@
+@import '../../../../../../assets/styles/common.less';
+
+:host ::ng-deep .ant-card{
+  width:802px !important;
+  border-radius: 0 0 4px 4px;
+}
+:host ::ng-deep .ant-card-body .ant-checkbox-wrapper + .ant-checkbox-wrapper{
+  margin-left:0 !important;
+}
+:host ::ng-deep .ant-card-body {
+  padding: 0 !important;
+  height:336px;
+  border: 1px solid #D7DDE4;
+  border-radius: 0 0 4px 4px;
+}
+:host ::ng-deep  .ant-card-head{
+  background: #F7F8F8;
+  border: 1px solid #D7DDE4;
+  border-radius: 4px 4px 0 0;
+  height: 32px;
+  line-height: 30px;
+}
+:host ::ng-deep .ant-checkbox-wrapper + span, .ant-checkbox + span{
+  font-family: PingFangSC-Semibold;
+  font-size: 14px;
+  color: rgba(28,36,56,0.80);
+  line-height: 14px;
+}
+.checkList{
+  width:590px;
+  float:left;
+  height:100%;
+  padding:24px 0 24px 16px;
+  border-right:1px solid #ccc;
+}
+.checkedList{
+  float:left;
+  width:208px;
+  padding:24px;
+}
+.checkedList ul{
+  .BG-scroll;
+  width:100%;
+  height:282px;
+  overflow-y:auto;
+  border-bottom:1px solid #DDDEE1;
+  li{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    padding:6px;
+    background: #3399FF;
+    border-radius: 2px;
+    line-height: 12px;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #FFFFFF;
+    margin-bottom:12px;
+    span{   
+      float:right;  
+      padding-left:5px;   
+      font-family: PingFangSC-Regular;
+      font-size: 12px;
+      color: #FFFFFF;
+      cursor: pointer;
+    }
+  }
+}
+.sortList{
+  width:100%;
+  height:30px;
+  line-height: 30px;
+  ul{
+    width:100%;
+    li{
+      float:left;
+      margin-right:32px;
+      font-family: PingFangSC-Regular;
+      font-size: 14px;
+      letter-spacing: -0px;
+      line-height: 14px;
+      cursor: pointer;
+   }
+  }
+  
+}
+:host ::ng-deep .checkopt{
+  max-height: 256px;
+  overflow-y: auto;
+
+  .ant-checkbox-wrapper{
+    width:180px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    padding:12px 0; 
+    clear: both;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: rgba(28,36,56,0.80);
+    letter-spacing: -0px;
+    line-height: 14px;
+  }
+}
+.countNum{
+  width:100%;
+  text-align: center;
+
+  span {
+    padding:24px 0;
+    border-radius: 1px;
+    margin:0 24px;
+
+    b {
+      color: #3399FF;
+      font-weight: 500;
+      border:none;
+      outline: none;
+      // width:30px;
+      padding:0 8px;
+    }
+  }
+  
+}
+.onSelected{
+  color: #3399FF;
+
+}
+

@@ -1,0 +1,138 @@
+<div class="media-customer">
+  <div class="media-customer-fix-header">
+    <slider-metric [metricData]="data" (onClick)="checked($event)" [checked]='isCheck'>
+    </slider-metric>
+  </div>
+  <div class="media-customer-fix-body">
+    <nz-row nzGutter="24">
+      <nz-col nzSpan="12">
+        <nz-card class="chain-details-card chain-details-card-small">
+          <ng-template #title>
+            目标受众分布
+          </ng-template>
+          <ng-template #body>
+            <div class="custom-total">
+              <div class="custom-total-pie">
+                <chart-progress progressName="综合" progressValue="{{progressValue}}"></chart-progress>
+              </div>
+              <ul class="custom-total-list">
+                <li *ngFor="let item of customerData">
+                  <span>{{item.name}}</span>
+                  <b>{{item.ratio}}%</b>
+                  <div>
+                    <cm-progress>
+                      <nz-progress [ngModel]="item.ratio" [nzShowInfo]="false" [nzStrokeWidth]="7"></nz-progress>
+                    </cm-progress>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </ng-template>
+        </nz-card>
+      </nz-col>
+      <nz-col nzSpan="12">
+        <nz-card class="chain-details-card chain-details-card-small tab">
+          <ng-template #title>
+            高度关联媒体
+          </ng-template>
+          <ng-template #body>
+            <cm-table>
+              <nz-table #nzTable [nzDataSource]="tabData" nzIsPagination='false' [nzScroll]="{ y: 290}">
+                <ng-template #nzFixedHeader>
+                  <thead nz-thead>
+                    <tr>
+                      <th nz-th>
+                        <span>名称</span>
+                      </th>
+                      <th nz-th>
+                        <span>关联度</span>
+                      </th>
+                      <th nz-th>
+                        <span>目标人群综合占比</span>
+                      </th>
+                    </tr>
+                  </thead>
+                </ng-template>
+                <tbody nz-tbody>
+                  <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                    <td nz-td>
+                      {{data.mediaName}}
+                    </td>
+                    <td nz-td class="tab-relev">
+                      <span>{{data.ratio}}%</span>
+                      <div>
+                        <cm-progress>
+                          <nz-progress [ngModel]="29" [nzShowInfo]="false" [nzStrokeWidth]="7"></nz-progress>
+                        </cm-progress>
+                      </div>
+                    </td>
+                    <td nz-td class="tab-precent">
+                      <span>
+                        {{data.ratio}}%
+                      </span>
+                      <div>
+                        <cm-progress>
+                          <nz-progress [ngModel]="29" [nzShowInfo]="false" [nzStrokeWidth]="7"></nz-progress>
+                        </cm-progress>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </nz-table>
+            </cm-table>
+          </ng-template>
+        </nz-card>
+      </nz-col>
+    </nz-row>
+    <nz-row nzGutter="24">
+      <nz-col nzSpan="24">
+        <nz-card class="chain-details-card chain-details-card-small">
+          <ng-template #title>
+            媒体基础特征分布
+          </ng-template>
+          <ng-template #body>
+            <div class="media-base">
+              <div class="media-base-rader" nz-col [nzSpan]="12">
+                <chart-radar class="analysis-details-business-row-col-radar-chart" [config]="radarConfig" [height]="280"></chart-radar>
+              </div>
+              <div nz-col [nzSpan]="12" class="media-base-item">
+                <metric-view-item *ngFor="let item of metric" nz-col [nzSpan]="8" left [metricTitle]="item.name" metricInfo="{{ item.pre }}%">
+                  <ng-template #metricContent>
+                    <cm-progress>
+                      <nz-progress [ngModel]="item.pre" [nzShowInfo]="false" [nzStrokeWidth]="5"></nz-progress>
+                    </cm-progress>
+                  </ng-template>
+                </metric-view-item>
+              </div>
+            </div>
+          </ng-template>
+        </nz-card>
+      </nz-col>
+    </nz-row>
+    <nz-row nzGutter="24">
+      <nz-col nzSpan="24">
+        <nz-card class="chain-details-card chain-details-card-small">
+          <ng-template #title>
+            媒体兴趣特征分布
+          </ng-template>
+          <ng-template #body>
+            <div class="media-base">
+              <div class="media-base-rader" nz-col [nzSpan]="12">
+                <chart-radar class="analysis-details-business-row-col-radar-chart" [config]="radar" [height]="280"></chart-radar>
+              </div>
+              <div nz-col [nzSpan]="12" class="media-base-item" style="overflow-y:scroll;height:300px">
+                <metric-view-item *ngFor="let item of metricData" nz-col [nzSpan]="8" left [metricTitle]="item.name" metricInfo="{{ item.pre }}%">
+                  <ng-template #metricContent>
+                    <cm-progress>
+                      <nz-progress [ngModel]="item.pre" [nzShowInfo]="false" [nzStrokeWidth]="5"></nz-progress>
+                    </cm-progress>
+                  </ng-template>
+                </metric-view-item>
+              </div>
+            </div>
+          </ng-template>
+        </nz-card>
+      </nz-col>
+    </nz-row>
+  </div>
+</div>

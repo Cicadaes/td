@@ -1,0 +1,22 @@
+<nz-input-group class="special-rangepicker-wrap" [nzCompact]="true" *ngIf="(guardMessage$ | async).isSpecialExist">
+  <button nz-button (click)="setDateRange(0)">今日</button>
+  <button nz-button (click)="setDateRange(1)">昨日</button>
+  <button nz-button (click)="setDateRange(6)">近七日</button>
+  <nz-rangepicker
+    [ngModel]="_dateRange" 
+    (ngModelChange)="_dateRange=$event;_dateRangeChange($event)"
+    [nzFormat]="'YYYY-MM-DD'"
+    [nzDisabledDate]="_disabledDate"
+    class="special-rangepicker"
+  ></nz-rangepicker>
+</nz-input-group>
+<div class="common-rangepicker-wrap">
+  <nz-rangepicker
+    *ngIf="!(guardMessage$ | async).isSpecialExist"
+    [ngModel]="_dateRange" 
+    (ngModelChange)="_dateRange=$event;_dateRangeChange($event)"
+    [nzFormat]="'YYYY-MM-DD'"
+    [nzDisabledDate]="_disabledDate"
+    class="common-rangepicker"
+  ></nz-rangepicker>
+</div>

@@ -1,0 +1,46 @@
+:host ::ng-deep main {
+  background: #fff;
+  box-shadow: 0 1px 4px 0 #E3E8EE;
+
+  .container {
+    width: 1200px;
+    margin: auto;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+
+    .breadcrumb {
+      padding: 21px 0;
+      flex: 1 0 auto;
+
+      .ant-breadcrumb-link {
+        font-family: PingFangSC-Medium;
+        font-size: 14px;
+        color: rgba(-2147483648,18,26,0.80);
+        letter-spacing: 0;
+        line-height: 14px;
+      }
+      
+      .ant-breadcrumb-separator {
+        font-size: 14px;
+      }
+
+      & > a {
+        font-family: PingFangSC-Regular;
+        font-size: 14px;
+        color: rgba(28,36,56,0.56);
+        letter-spacing: 0;
+        line-height: 14px;
+      }
+    }
+
+    .nav {
+      .nav-item > a {
+        height: auto !important;
+        line-height: 14px !important;
+        padding-top: 8px;
+        padding-bottom: 18px;
+      }
+    }
+  }
+}

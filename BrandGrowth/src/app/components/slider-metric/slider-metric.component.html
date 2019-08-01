@@ -1,0 +1,27 @@
+<div class="roll-wrap">
+  <!-- (mousemove)="leftMouse()"  -->
+  <div 
+    class="roll-arrow-left" 
+    id="roll-arrow-left" 
+    (click)="left()" 
+    [ngStyle]="leftAllowed">
+    <i class="anticon anticon-left"></i>
+  </div>
+  <div class="roll-center" id="roll-center">
+    <ul class="roll-center-u" [ngStyle]="style">
+      <li *ngFor="let item of metricData let i=index;" (click)="onclick(i)" [ngClass]="{'checked':i==checked}">
+        <h5 *ngIf="item.title">{{item.title}}</h5>
+        <P>{{item.info}}</P>
+        <span>{{item.content}}</span>
+      </li>
+    </ul>
+  </div>
+  <!-- (mousemove)="rightMouse()"  -->
+  <div 
+    class="roll-arrow-right" 
+    id='roll-arrow-right' 
+    (click)="right()" 
+    [ngStyle]="rightAllowed">
+    <i class="anticon anticon-right"></i>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<nz-dropdown class="user-info-bar" nzPlacement="bottomRight">
+  <a class="ant-dropdown-link" nz-dropdown>
+    <i class="tag icon-user"></i>
+    <i class="anticon anticon-down"></i>
+  </a>
+  <div nz-dropdown-custom>
+    <div class="user-info-pane">
+      <a class="user-info-header">
+        <i></i>
+        <p>{{_userData.developer.email}}</p>
+      </a>
+      <div class="user-info-content">
+        <div class="user-info-flow">
+          <span>剩余流量</span>
+          <a>{{_userData.leftFlow}}</a>
+        </div>
+        <div class="user-info-flow-process">
+          <nz-progress [ngModel]="_userData.leftFlow / ( _userData.developer.flow * 100 )" [nzShowInfo]="false" [nzStrokeWidth]="5"></nz-progress>
+        </div>
+        <p>有效期至 {{_userData.developer.flowEndTime | date:'yyyy.MM.dd'}}</p>
+      </div>
+      <div class="user-info-footer">
+        <button nz-button nzSize="large">
+          <span>账户中心</span>
+        </button>
+        <button nz-button nzSize="large">
+          <span>退出登录</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nz-dropdown>

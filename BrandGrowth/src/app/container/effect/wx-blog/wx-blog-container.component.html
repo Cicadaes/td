@@ -1,0 +1,86 @@
+<effect-template
+  [topTitle]="'微信公众号'"
+  [desc]="'公众号'"
+>
+  <ng-template #moreDetail>
+    <nz-row class="wx-metrics">
+      <metric-view-item nz-col [nzSpan]="4" metricTitle="访问次数" [metricInfo]="10000 | number"></metric-view-item>
+      <metric-view-item nz-col left [nzSpan]="4" metricTitle="同比" [metricInfo]="80 | percent"></metric-view-item>
+      <metric-view-item nz-col left [nzSpan]="4" metricTitle="对比年度均值" [metricInfo]="10000 | number"></metric-view-item>
+      <metric-view-item nz-col left [nzSpan]="4" metricTitle="同比" [metricInfo]="80 | percent"></metric-view-item>
+      <metric-view-item nz-col left [nzSpan]="4" metricTitle="对比年度均值" [metricInfo]="10000 | number"></metric-view-item>
+      <metric-view-item nz-col left [nzSpan]="4" metricTitle="同比" [metricInfo]="80 | percent"></metric-view-item>
+    </nz-row>
+  </ng-template>
+  <ng-template #extra>
+    <button nz-button class="add" (click)="openCreateModel('wx', wxContentTpl)">
+      <i class="anticon anticon-plus"></i>
+      <span>添加公众号</span>
+    </button>
+  </ng-template>
+</effect-template>
+<effect-template
+  [topTitle]="'微博'"
+  [desc]="'微博'"
+>
+  <ng-template #extra>
+    <button nz-button class="add" (click)="openCreateModel('blog', blogContentTpl)">
+      <i class="anticon anticon-plus"></i>
+      <span>添加微博</span>
+    </button>
+  </ng-template>
+</effect-template>
+<!-- 微信公众号 对话框 start -->
+<ng-template #wxContentTpl>
+  <form nz-form class="contentTpl">
+    <div nz-row>
+      <div nz-form-label nz-col nzSpan="6">
+        <label>公众号名称</label>
+      </div>
+      <div nz-form-control nz-col nzSpan="12">
+        <nz-select [(ngModel)]="selectedWx" 
+          [ngModelOptions]="{ standalone: true }" 
+          nzAllowClear 
+          nzShowSearch 
+          nzPlaceHolder="请输入公众号名称" 
+          nzSize="large"
+        >
+          <nz-option *ngFor="let option of appFlowListApp" [nzLabel]="option.label" [nzValue]="option.value">
+            <ng-template #nzOptionTemplate>
+              <img *ngIf="option.value.appimg" [src]="option.value.appimg" [alt]="option.value.productname">
+              {{option.label}}
+            </ng-template>
+          </nz-option>
+        </nz-select>
+      </div>
+    </div>
+  </form>
+</ng-template>
+<!-- 微信公众号 对话框 end -->
+<!-- 微博 对话框 start -->
+<ng-template #blogContentTpl>
+  <form nz-form class="contentTpl">
+    <div nz-row>
+      <div nz-form-label nz-col nzSpan="6">
+        <label>微博名称</label>
+      </div>
+      <div nz-form-control nz-col nzSpan="12">
+        <nz-select [(ngModel)]="selectedBlog" 
+          [ngModelOptions]="{ standalone: true }" 
+          nzAllowClear 
+          nzShowSearch 
+          nzPlaceHolder="请输入微博名称" 
+          nzSize="large"
+        >
+          <nz-option *ngFor="let option of appFlowListApp" [nzLabel]="option.label" [nzValue]="option.value">
+            <ng-template #nzOptionTemplate>
+              <img *ngIf="option.value.appimg" [src]="option.value.appimg" [alt]="option.value.productname">
+              {{option.label}}
+            </ng-template>
+          </nz-option>
+        </nz-select>
+      </div>
+    </div>
+  </form>
+</ng-template>
+<!-- 微博 对话框 end -->

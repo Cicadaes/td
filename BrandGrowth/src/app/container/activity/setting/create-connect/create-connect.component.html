@@ -1,0 +1,38 @@
+<div class="creCon_main">
+  <form nz-form [formGroup]="validateForm">
+    <dl>
+      <dt>链接组名称</dt>
+      <dd>
+        <nz-input 
+          [nzType]="'text'" 
+          formControlName="monitorGroupName" 
+          [nzPlaceHolder]="'请输入链接组名称'" 
+          [(ngModel)]="monitorgroupName"></nz-input>
+        <div 
+          style="color:#f00" 
+          *ngIf="getFormControl('monitorGroupName').dirty&&getFormControl('monitorGroupName').hasError('required')">
+          链接组名称不能为空
+        </div>
+      </dd>
+    </dl>
+    <dl>
+      <dt>监测链接</dt>
+      <dd>
+        <connect-list (onVoted)="onVoted($event)" [detail]="detail"></connect-list>
+      </dd>
+    </dl>
+    <dl>
+      <dt></dt>
+      <dd>
+        <cm-button>
+          <button nz-button [nzType]="'primary'" (click)="save()">
+            <span>保存</span>
+          </button>
+          <button nz-button [nzType]="'default'" (click)="cancel()">
+            <span>取消</span>
+          </button>
+        </cm-button>
+      </dd>
+    </dl>
+  </form>
+</div>

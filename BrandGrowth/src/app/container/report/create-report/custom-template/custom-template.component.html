@@ -1,0 +1,49 @@
+<main class="report-preview-wrap">
+  <div class="report-preview">
+    <div class="header">
+      <div class="title">
+        <i class="anticon anticon-close" (click)="closeSiderBar()"></i>
+        自定义模版
+      </div>
+      <button nz-button nzType="primary" (click)="save()">
+        <span>保存</span>
+      </button>
+    </div>
+    <div class="content">
+      <nz-card>
+        <ng-template #body>
+          <div class="container">
+            <div class="left">
+              <h3 class="l-title">图标选择</h3>
+              <ul class="l-list">
+                <li *ngFor="let item of parsedListDiyChart">
+                  <h4 class="second-level-title">
+                    <span>{{item.chartCatagory}}</span>
+                    <i *ngIf="item.fold" (click)="item.fold=!item.fold" class="anticon anticon-down"></i>
+                    <i *ngIf="!item.fold" (click)="item.fold=!item.fold" class="anticon anticon-up"></i>
+                  </h4>
+                  <nz-checkbox-group 
+                    *ngIf="item.fold" 
+                    [(ngModel)]="item.children" 
+                    [ngModelOptions]="{ standalone: true }"
+                    (ngModelChange)="saveReportPpt()"
+                  ></nz-checkbox-group>
+                </li>
+              </ul>
+            </div>
+            <div class="right">
+              <h3 class="r-title">预览</h3>
+              <div class="r-box">
+                <ng-container *ngFor="let ldc of parsedListDiyChart">
+                  <ng-container *ngFor="let item of ldc.children">
+                    <img *ngIf="item.checked" [src]="'/assets/images/报告散图/' + item.label + '.png'">
+                  </ng-container>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </nz-card>
+    </div>
+  </div>
+</main>

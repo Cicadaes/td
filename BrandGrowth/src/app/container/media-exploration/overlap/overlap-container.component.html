@@ -1,0 +1,45 @@
+<div class="main_cc">
+  <div class="overlap">
+    <h3 class="overlap-tit">
+      媒体重叠度
+    </h3>
+    <div class="overlap-list" *ngIf="tableDataFlag" >
+        <table class="table-left">
+            <thead>
+                <tr>
+                    <th>
+                        <div>媒体</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let obj of tableData">
+                    <td><div>{{obj[0].name}}</div></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="overlap-table">
+          <table class="table-content">
+            <thead>
+                <tr>
+                    <th *ngFor="let one of tableData">
+                        <div>{{one[0].name}}</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of tableData">
+                    <td *ngFor="let one of item">
+                      <div *ngIf="one['value'] != -1" [ngClass]="one['value'] >= percentageColor[4] ? 'first': (one['value'] >= percentageColor[3] ? 'second' : (one['value'] >= percentageColor[2] ? 'third' : (one['value'] >= percentageColor[1] ? 'fourth' : 'fifth')))">{{one['value']}}%</div>
+                      <div *ngIf="one['value'] == -1" class="zero" >N/A</div>
+                    </td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+    <div class="overlap-list" *ngIf="!tableDataFlag" >
+      <div class="overlap-list-no-data">暂无数据</div>
+    </div>
+  </div>
+</div>  

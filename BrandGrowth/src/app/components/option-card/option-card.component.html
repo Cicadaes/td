@@ -1,0 +1,14 @@
+<div
+  class="option-card"
+  [class.option-card-checked]="isChecked">
+  <div class="option-card-image">
+    <div>
+      <ng-template [ngTemplateOutlet]="optionImage"></ng-template>
+    </div>
+  </div>
+  <div class="option-card-content"
+  [style.height.px]="isChecked ? (height - 4) : height"><!-- 选中状态会超出4px，边框增加的问题 -->
+    <h4>{{ optionTitle }}</h4>
+    <p>{{ optionInfo }}</p>
+  </div>
+</div>

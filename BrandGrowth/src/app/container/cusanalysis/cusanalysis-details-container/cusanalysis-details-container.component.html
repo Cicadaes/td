@@ -1,0 +1,42 @@
+<div class="cus-analysis-details">
+  <div class="cus-analysis-details-select">
+    <div class="cus-analysis-details-select-content">
+      <nz-select
+        class="cus-analysis-details-select-content-move"
+        nzPlaceHolder="选择客群画像"
+        [(ngModel)]="urlInfo.id"
+        (ngModelChange)="onSelectChange($event)"
+        nzShowSearch>
+        <nz-option
+          *ngFor="let option of cusSelectList"
+          [nzLabel]="option.label"
+          [nzValue]="option.value">
+        </nz-option>
+      </nz-select>
+    </div>
+  </div>
+  <div class="cus-analysis-details-header">
+    <div class="cus-analysis-details-header-content">
+      <slider-metric
+        [metricData]="metricData"
+        [checked]='isCheckMetric'
+        (onClick)="onMetricClick($event)"></slider-metric>
+    </div>
+  </div>
+  <div class="cus-analysis-details-tabs">
+    <cm-tabs class="cus-analysis-details-tabs-wrap">
+      <nz-tabset [(nzSelectedIndex)]="selectedIndex">
+        <nz-tab 
+          *ngFor="let tab of tabList"
+          (nzSelect)="setTabContent(tab)">
+            <ng-template #nzTabHeading>
+              {{ tab.name }}
+            </ng-template>
+        </nz-tab>
+      </nz-tabset>
+    </cm-tabs>
+    <div class="cus-analysis-details-tabs-content">
+      <ng-container #detailsMove></ng-container>
+    </div>
+  </div>
+</div>

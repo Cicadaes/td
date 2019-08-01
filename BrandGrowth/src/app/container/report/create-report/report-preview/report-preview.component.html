@@ -1,0 +1,16 @@
+<main class="report-preview-wrap">
+  <div class="report-preview">
+    <div class="header">
+      <div class="title">
+        <i class="anticon anticon-close" (click)="closeSiderBar()"></i>
+        报告预览
+      </div>
+    </div>
+    <div class="content">
+      <img *ngIf="reportType == 10" src="/assets/images/rowdata-preview.png">
+      <img *ngIf="reportType == 20" src="/assets/images/day-preview.png">
+      <img *ngIf="reportType == 30" src="/assets/images/week-preview.png">
+      <img *ngIf="reportType == 40" src="/assets/images/report-preview.png">
+    </div>
+  </div>
+</main>

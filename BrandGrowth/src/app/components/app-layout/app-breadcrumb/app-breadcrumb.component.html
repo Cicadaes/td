@@ -1,0 +1,14 @@
+<main>
+  <div class="container clearfix" [style.display]="(guard$ | async).isFilterTimeExist ? 'flex' : null">
+    <nz-breadcrumb class="breadcrumb">
+      <nz-breadcrumb-item *ngIf="_breadcrumbItems.length === 1 && _breadcrumbItems[0].path !== 'entry'">
+          <a routerLink="/entry">营销中心</a>
+      </nz-breadcrumb-item>
+      <nz-breadcrumb-item *ngFor="let item of _breadcrumbItems">
+        <a (click)="navigate(item)">{{item.outlet && _secondLevelName ? _secondLevelName : item.title}}</a>
+      </nz-breadcrumb-item>
+    </nz-breadcrumb>
+    <nav-list *ngIf="itemList" [itemList]="itemList" class="nav"></nav-list>
+    <select-time *ngIf="(guard$ | async).isFilterTimeExist"></select-time>
+  </div>
+</main>

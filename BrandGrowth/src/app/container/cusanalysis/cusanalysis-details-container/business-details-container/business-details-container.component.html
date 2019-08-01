@@ -1,0 +1,125 @@
+<div class="analysis-details-business">
+  <div nz-row class="analysis-details-business-crowd">
+    <div nz-col [nzSpan]="6" class="analysis-details-business-crowd-col">
+      <div class="analysis-details-business-crowd-col-item">
+        <h4>电商网购指数</h4>
+        <p class="analysis-details-business-crowd-col-item-text">123</p>
+        <chart-bar [height]='40' [config]="chartBarConfig"></chart-bar>
+      </div>
+      <div class="analysis-details-business-crowd-col-item">
+        <h4>人群规模</h4>
+        <p class="analysis-details-business-crowd-col-item-text" style="margin-bottom: 16px;">123</p>
+        <cm-progress class="analysis-details-business-crowd-col-item-progress">
+          <nz-progress [ngModel]="30"></nz-progress>
+        </cm-progress>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="18" class="analysis-details-business-crowd-features">
+      <h4>人群第一特征</h4>
+      <div nz-row class="analysis-details-business-crowd-features-content">
+        <metric-view-item
+          class="analysis-details-business-crowd-features-content-item"
+          *ngFor="let item of primaryFeature; let i = index;"
+          nz-col
+          horizontal
+          [nzSpan]="6"
+          [left]="i % 4 !== 0"
+          [metricTitle]="item.name"
+          metricInfo="{{ item.percent }}%">
+          <ng-template #metricContent>
+            <cm-progress>
+              <nz-progress [ngModel]="item.percent" [nzType]="'circle'" [nzWidth]="60" [nzFormat]="_formatNull"></nz-progress>
+            </cm-progress>
+          </ng-template>
+        </metric-view-item>
+      </div>
+    </div>
+  </div>
+  <div nz-row class="analysis-details-business-row">
+    <div nz-col [nzSpan]="18" class="analysis-details-business-row-col">
+      <h4>类别TGI指数</h4>
+      <div class="analysis-details-business-row-col-radar">
+        <chart-radar 
+          class="analysis-details-business-row-col-radar-chart" 
+          [config]="catTgiIndex"
+          [height]="440"></chart-radar>
+        <ul class="analysis-details-business-row-col-radar-rank">
+          <li 
+            class="analysis-details-business-row-col-radar-rank-item"
+            *ngFor="let item of catTgiIndexRank; let i = index">
+            <b>{{ i + 1 }}</b>
+            <p>{{ item.name }}</p>
+            <span>{{ item.count }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="6" class="analysis-details-business-row-col">
+      <h4>类别分布和占比</h4>
+      <div>
+        <chart-pie [config]="catDistributionIndex"></chart-pie>
+      </div>
+    </div>
+  </div>
+  <div class="analysis-details-business-table">
+    <div class="analysis-details-business-table-operation">
+      <h4>
+        应用触达
+        <!-- 应用类别的筛选 -->
+        <cm-select style="float: right;">
+          <nz-select style="width: 200px;" [(ngModel)]="appSelect">
+            <nz-option 
+              *ngFor="let option of appSelectOptions" 
+              [nzLabel]="option.label" 
+              [nzValue]="option.value">
+            </nz-option>
+          </nz-select>
+        </cm-select>
+      </h4>
+    </div>
+    <!-- 数据的 Top 20 -->
+    <div class="analysis-details-business-table-content">
+        <nz-table 
+        #nzTable 
+        [nzAjaxData]="appIndex" 
+        [nzIsPagination]="false"
+        [nzCustomNoResult]="true">
+        <thead nz-thead>
+          <tr>
+            <th nz-th nzWidth="212px"><span>应用名称</span></th>
+            <th nz-th nzWidth="185px"><span>所属行业</span></th>
+            <th nz-th nzWidth="190px"><span>人群规模</span></th>
+            <th nz-th><span>人群占比</span></th>
+            <th nz-th><span>活跃度</span></th>
+          </tr>
+        </thead>
+        <tbody nz-tbody>
+          <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+            <td nz-td [title]="data.name"><p class="analysis-details-business-table-content-name">{{ data.name }}</p></td>
+            <td nz-td><p>{{ data.cat }}</p></td>
+            <td nz-td><p class="analysis-details-business-table-content-number">{{ data.userScale | number }}</p></td>
+            <td nz-td>
+              <p class="analysis-details-business-table-content-progress">
+                <span>{{ (data.userPercent) || '--' }}%</span>
+                <nz-progress 
+                  class="analysis-details-business-table-content-progress-move"
+                  [ngModel]='data.userPercent || 0' 
+                  [nzShowInfo]="false"></nz-progress>
+              </p>
+            </td>
+            <td nz-td>
+              <p class="analysis-details-business-table-content-progress">
+                <span>{{ (data.userActiveRate) || '--' }}%</span>
+                <nz-progress
+                  class="analysis-details-business-table-content-progress-move"
+                  [ngModel]='data.userActiveRate || 0' 
+                  [nzShowInfo]="false"></nz-progress>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+        <p style="text-align: center" noResult>{{ noTableResult }}</p>
+      </nz-table>
+    </div>
+  </div>
+</div>

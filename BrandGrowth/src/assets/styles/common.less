@@ -1,0 +1,111 @@
+@BG-color-1: #3399FF;
+@BG-color-2: #2DE2C5;
+@BG-color-3: #FCC45F;
+@BG-color-4: #FF8454;
+@BG-color-5: #EE2D57;
+
+.BG-ellipsis {
+  /* 文字溢出隐藏 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.BG-scroll {
+  /* 设置滚动条的样式 */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background: rgba(28,36,56,0.08);
+    border-radius: 6px;
+  }
+
+  /* 滚动条滑块 */
+  ::-webkit-scrollbar-thumb {
+    background: rgba(28,36,56,0.16);
+    border-radius: 6px;
+  }
+}
+
+// 表单label样式修改
+.BG-form-label {
+
+  &.ant-form-item-label label {
+    font-family: PingFangSC-Semibold;
+    font-size: 14px;
+    color: rgba(29,36,54,0.80);
+    line-height: 14px;
+    font-weight: bold;
+
+    &::after {
+      display: none;
+    }
+  }
+}
+
+.BG-icon-font-style {
+  font-size: 16px;
+  display: inline-block;
+  cursor: pointer;
+  color: #80848F; 
+}
+
+.BG-download-style {
+  .BG-icon-font-style;
+  margin-left: 16px;
+}
+
+.BG-progress-color-1 {
+  // 修改状态的进度条颜色
+  & .ant-progress-outer > .ant-progress-inner > .ant-progress-bg {
+    background-color: @BG-color-1;
+  }
+
+  & .ant-progress-inner > .rc-progress-circle > .rc-progress-circle-path {
+    stroke: @BG-color-1;
+  }
+}
+
+.BG-progress-color-2 {
+  // 修改状态的进度条颜色
+  & .ant-progress-outer > .ant-progress-inner > .ant-progress-bg {
+    background-color: @BG-color-2;
+  }
+
+  & .ant-progress-inner > .rc-progress-circle > .rc-progress-circle-path {
+    stroke: @BG-color-2;
+  }
+}
+
+.BG-progress-color-3 {
+  // 修改状态的进度条颜色
+  & .ant-progress-outer > .ant-progress-inner > .ant-progress-bg {
+    background-color: @BG-color-3;
+  }
+
+  & .ant-progress-inner > .rc-progress-circle > .rc-progress-circle-path {
+    stroke: @BG-color-3;
+  }
+}
+
+.BG-progress-color-4 {
+  // 修改状态的进度条颜色
+  & .ant-progress-outer > .ant-progress-inner > .ant-progress-bg {
+    background-color: @BG-color-4;
+  }
+
+  & .ant-progress-inner > .rc-progress-circle > .rc-progress-circle-path {
+    stroke: @BG-color-4;
+  }
+}
+
+.BG-progress-color-5 {
+  // 修改状态的进度条颜色
+  & .ant-progress-outer > .ant-progress-inner > .ant-progress-bg {
+    background-color: @BG-color-5;
+  }
+
+  & .ant-progress-inner > .rc-progress-circle > .rc-progress-circle-path {
+    stroke: @BG-color-5;
+  }
+}

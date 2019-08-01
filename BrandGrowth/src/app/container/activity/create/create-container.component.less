@@ -1,0 +1,172 @@
+.cc_main{
+  width:100%;
+  background: #F2F2F3;
+}
+:host ::ng-deep .steps-content {
+  margin-top: 16px;
+  background: #FFFFFF;
+  box-shadow: 0 2px 8px 0 #E3E8EE;
+  border-radius: 4px;
+  min-height: 250px;
+  text-align: center;
+  padding: 48px;
+  width: 1200px;
+
+  &-form { 
+    &-control {
+      .ant-form-item-control nz-input{
+          width:300px !important;
+      }
+      .ant-calendar-picker {
+         width:300px !important;
+      }
+    }
+  }
+}
+
+:host ::ng-deep .ant-steps{
+  width: 100%;
+  margin-top:24px;
+  padding: 0 450px;
+  background: #F2F2F3;
+}
+:host ::ng-deep  .ant-steps .ant-steps-head,
+:host ::ng-deep .ant-steps .ant-steps-main,
+:host ::ng-deep .ant-steps .ant-steps-title{
+  background: #F2F2F3;
+}
+
+:host ::ng-deep .ant-form-item-control{
+  text-align: left;
+  width:300px;
+}
+:host ::ng-deep .enWidth .ant-form-item-control{
+  width:auto !important;
+}
+
+:host ::ng-deep .ant-btn{
+  width: 300px;
+  height: 36px;
+  border-radius: 4px;
+
+  &-default {
+    margin-left: 24px;
+  }
+}
+
+:host ::ng-deep .ant-form{
+
+  &-item {
+
+    &-label {
+      text-align: left;
+
+      & > label {
+        font-weight: bold;
+        color: rgba(28,36,56,0.80);
+      }
+    }
+
+    &-control {
+
+      & .item-width-300 {
+        width: 300px;
+      }
+    }
+  }
+
+  &-explain {
+    text-align: left;
+  }
+}
+.recentBrand{
+  padding-top:12px;
+  clear:both;
+  float:left;
+  margin-left:138px;
+  span{
+    padding:5px 16px;
+    border:1px solid rgba(28,36,56,0.35);
+    border-radius:30px;
+    margin-right:6px;
+    opacity: 0.32;
+    font-family: PingFangSC-Regular;
+    color: #1C2438;
+    cursor: pointer;
+  }
+}
+// :host ::ng-deep .diet{
+//   .ant-form-item:nth-child(2){
+//     .ant-form-item-control{
+//       width:auto;
+//     }
+//   }
+ 
+// }
+.tradeBox {
+  width: 688px;
+}
+.tradeList{
+  width:140px;
+  height:102px;
+  text-align:center;
+  border: 1px solid #DDDEE1;
+  border-radius: 4px;
+  margin-right:16px;
+  margin-bottom:16px;
+  cursor: pointer;
+  &:hover{
+    .onSelected;
+  }
+}
+.tradeList dd,.tradeList dt{
+  display:flex;
+  align-items:center;
+  justify-content: center ;
+  flex-direction: row;
+  text-align: center;
+}
+.tradeList dt{
+  margin-top:30px;
+  i:before{
+    font-size:14px;
+  }
+}
+.onSelected {
+  border: 2px solid #2D8CF0 !important;
+  color:#2D8CF0
+}
+.onExposure {
+  border: 1px solid #2D8CF0 !important;
+  color: #2D8CF0;
+  font-weight: 600;
+}
+.peopleGroup{
+  width:120px;
+  height:36px;
+  border: 1px solid #3399FF;
+  border-radius: 20px;
+  line-height: 36px;
+  span{
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #3399FF;
+    line-height: 14px;
+    font-style: normal;
+  }
+}
+.exposure{
+  width:36px;
+  height:36px;
+  line-height: 36px;
+  text-align: center;
+  background: #FFFFFF;
+  border: 1px solid rgba(28,36,56,0.16);
+  border-radius: 4px;
+  display: inline-block;
+  margin-right:8px;
+  cursor: pointer;
+  &:hover{
+    .onExposure;
+  }
+}

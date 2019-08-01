@@ -1,0 +1,10 @@
+<div class="bar-chart-box">
+  <ng-template [ngTemplateOutlet]="chartExpand"></ng-template>
+  <div
+    id="bar-chart"
+    class="bar-chart"
+    [ngStyle]="chartStyle"
+    #barChart>
+    <cm-chart [option]="_myChartOption"></cm-chart>
+  </div>
+</div>

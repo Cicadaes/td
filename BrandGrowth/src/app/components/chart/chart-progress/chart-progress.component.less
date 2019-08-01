@@ -1,0 +1,76 @@
+@import '../../../../assets/styles/common.less';
+
+.chart-progress {
+
+  &-content {
+    width: 140px;
+    height: 140px;
+    position: relative;
+
+    &-format {
+      width: 140px;
+      text-align: center;
+      top: 50px;
+      position: absolute;
+
+      & > p {
+        font-family: HelveticaNeue;
+        font-size: 24px;
+        color: #495060;
+        line-height: 20px;
+      }
+
+      & > h4 {
+        margin-top: 8px;
+        font-family: PingFangSC-Regular;
+        font-size: 14px;
+        color: rgba(28,36,56,0.56);
+        line-height: 12px;
+      }
+    }
+  }
+
+  &-legend {
+    margin-top: 24px;
+    width: 140px;
+    text-align: center;
+
+    & > span {
+      width: 12px;
+      height: 12px;
+      display: inline-block;
+      border-radius: 2px;
+      margin-right: 8px;
+    }
+
+    & > p {
+      display: inline-block;
+      font-family: PingFangSC-Regular;
+      font-size: 14px;
+      color: rgba(28,36,56,0.80);
+      line-height: 14px;
+    }
+  }
+}
+
+:host ::ng-deep .color {
+  &-1 {
+    .BG-progress-color-1;
+  }
+
+  &-2 {
+    .BG-progress-color-2;
+  }
+
+  &-3 {
+    .BG-progress-color-3;
+  }
+
+  &-4 {
+    .BG-progress-color-4;
+  }
+
+  &-5 {
+    .BG-progress-color-5;
+  }
+}

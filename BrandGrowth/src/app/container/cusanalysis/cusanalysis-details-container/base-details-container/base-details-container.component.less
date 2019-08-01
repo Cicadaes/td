@@ -1,0 +1,130 @@
+@import '../../../../../assets/styles/common.less';
+
+.analysis-details-base {
+  padding-top: 40px;
+
+  &-row {
+
+    &:first-child {
+  
+      & > .analysis-details-base-row-col {
+        padding-top: 0;
+        border-top: none;
+      }
+    }
+
+    &:last-child {
+  
+      & > .analysis-details-base-row-col {
+        height: 460px;
+      }
+    }
+
+    &-col {
+      height: 325px;
+      padding: 40px;
+      border-top: 1px solid #EDEEEF;
+      border-left: 1px solid #EDEEEF;
+
+      &:first-child {
+        border-left: none;
+      }
+
+      & > h4 {
+        font-family: PingFangSC-Medium;
+        font-size: 14px;
+        color: rgba(28,36,56,0.80);
+        line-height: 16px;
+      }
+
+      &-progress {
+        padding: 40px;
+      }
+
+      &-map {
+        display: flex;
+
+        & > div {
+          display: inline-block;
+
+          &:first-child {
+            flex: 1;
+          }
+
+          &:last-child {
+            width: 250px;
+          }
+        }
+      }
+    }
+  }
+
+  &-item {
+    display: flex;
+
+    &-progress {
+      padding: 50px;
+      flex: 1;
+    }
+
+    &-ageIndex {
+      width: 260px;
+      padding-top: 40px;
+
+      & > li {
+        height: 40px;
+        border-bottom: 1px solid #EDEEEF;
+        line-height: 40px;
+
+        & > span {
+          float: left;
+          width: 100px;
+          font-family: PingFangSC-Regular;
+          font-size: 14px;
+          color: #495060;
+          .BG-ellipsis;          
+        }
+
+        & > b {
+          font-family: HelveticaNeue-Medium;
+          font-size: 14px;
+          color: rgba(28,36,56,0.80);
+          font-weight: 500;
+        }      
+      }
+
+      &-progress {
+        float: right;
+        width: 100px;
+      }  
+    }
+  }
+}
+
+:host ::ng-deep .analysis-details-base {
+
+  &-item {
+
+    &-ageIndex {
+
+      &-progress {
+        // 修改状态的进度条颜色
+        & .ant-progress-outer > .ant-progress-inner {
+          border-radius: 0;
+          background-color: rgba(28,36,56,0.08);
+
+          & > .ant-progress-bg {
+            border-radius: 0;
+            width:auto;
+            height: 8px;
+            background-color: #3399FF;
+          }
+        }
+
+        &-women {
+          .BG-progress-color-3;
+        }
+      }
+    }
+  }
+}

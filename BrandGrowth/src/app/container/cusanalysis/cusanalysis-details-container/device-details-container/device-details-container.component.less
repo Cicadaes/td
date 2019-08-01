@@ -1,0 +1,64 @@
+.analysis-details-device {
+  padding-top: 40px;
+  padding-bottom: 56px;
+  overflow: hidden;
+
+  &-brand,
+  &-type,
+  &-features {
+    padding: 40px;
+    border-bottom: 1px solid #EDEEEF;
+
+    & > h4 {
+      font-family: PingFangSC-Medium;
+      font-size: 14px;
+      color: rgba(28,36,56,0.80);
+      line-height: 16px;
+    }
+  }
+
+  &-brand {
+    padding-top: 0;
+    height: 340px;
+  }
+
+  &-type {
+    height: 352px;
+
+    &-item {
+      display: flex;
+
+      & > li {
+        flex: 1;
+        padding-top: 40px;  
+        padding-left: 40px;  
+      }
+    }
+  }
+
+  &-features {
+    overflow: hidden;
+    height: 373px;
+  }
+
+  &-row {
+
+    &-col {
+      height: 456px;
+      padding: 40px;
+      border-left: 1px solid #EDEEEF;
+
+      &:first-child {
+        border-left: none;
+      }
+
+      & > h4 {
+        font-family: PingFangSC-Medium;
+        font-size: 14px;
+        color: rgba(28,36,56,0.80);
+        line-height: 16px;
+      }
+    }
+  }
+  
+}

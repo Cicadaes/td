@@ -1,0 +1,112 @@
+<main class="chain-container">
+  <button nz-button class="newChain" (click)="toCreateChain();false">
+    <i class="anticon anticon-plus"></i>
+    <span>新建监测链接</span>
+  </button>
+  <filtrate-card [channels]="_newChannels" [adFormats]="_newAdFormats" [groupList]="_newMonitorgroupList" [channelsLength]="(_datacontent.length - 1) > 0 ? (_datacontent.length - 1) : 0"
+    (onSelectorChange)="getMetricData($event)" [filterDieSpread]="filterDieSpread" (onDimensionChange)="getDimensionValue($event)"></filtrate-card>
+  <common-search-card (onSearchChange)="getFilteredData($event)" [dataSource]="_datacontent | farray:['monitorName', 'urlShort', 'channelName']:_inputValue"
+  [csvParams]="_csvParams">
+    <ng-template #addOnBefore>
+      <label style="margin-left: 20px;" *ngIf="dimensionValue == 'monitor'" nz-radio [(ngModel)]="filterDieSpread">
+        <span>过滤僵尸监测链接</span>
+      </label>
+    </ng-template>
+    <cm-table-fixed>
+      <nz-table class="left-content"  #nzTableleft [nzDataSource]="_datacontent | farray:['monitorName', 'urlShort', 'channelName']:_inputValue" [nzIsPagination]="false"
+        rowfixedOrient="left">
+        <thead nz-thead>
+          <tr>
+            <th nz-th width="250px">
+              <span>名称</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody nz-tbody>
+          <tr nz-tbody-tr *ngFor="let dataleft of nzTableleft.data;let i = index">
+            <td nz-td class="activityName" width="250px" *ngIf="!dataleft.total">
+              <div class="bar-left">
+                <i class="anticon anticon-star heart" *ngIf="!dataleft.important && dataleft.monitorName" (click)="markImportMonitorLink(dataleft.activityKey, dataleft.monitor)"></i>
+                <i class="anticon anticon-star heart active" *ngIf="dataleft.important && dataleft.monitorName" (click)="cancleImportMonitorLink(dataleft.activityKey, dataleft.monitor)"></i>
+                <a (click)="toMonitorDetail(dataleft.monitorName, dataleft.monitorLinkId)"  *ngIf="dataleft.monitorName" class="text" [title]="dataleft.monitorName">{{dataleft.monitorName}}</a>
+                <a  *ngIf="!dataleft.monitorName" class="text" [title]="dataleft.channelName">{{dataleft.channelName}}</a>
+              </div>
+              <div class="bar-right" *ngIf="dataleft.monitorName">
+                <nz-dropdown [nzPlacement]="'bottomRight'">
+                  <a nz-dropdown>
+                    <i class="icon-link"></i>
+                  </a>
+                  <div class="copyBar" nz-dropdown-custom>
+                    <p>
+                      <span>曝光监测链接：{{removeLastQuestionMark(dataleft) + 'action=impression'}}</span>
+                      <button nz-button ngxClipboard [cbContent]="removeLastQuestionMark(dataleft) + 'action=impression'">复制</button>
+                    </p>
+                    <p>
+                      <span>点击监测链接：{{removeLastQuestionMark(dataleft)}}</span>
+                      <button nz-button ngxClipboard [cbContent]="removeLastQuestionMark(dataleft)">复制</button>
+                    </p>
+                  </div>
+                </nz-dropdown>
+                <a
+                  title="编辑"
+                  [routerLink]="['/activity/chain/edit/', dataleft.monitorName, dataleft.monitorLinkId || dataleft.monitor]">
+                  <i class="icon-info"></i>
+                </a>
+                <a
+                  title="删除"
+                  (click)="deleteMonitorLink(dataleft.activityKey, dataleft.monitor)">
+                  <i class="icon-del"></i>
+                </a>
+              </div>
+            </td>
+            <td nz-td class="activityName" width="250px" *ngIf="dataleft.total">
+              <a *ngIf="dataleft.monitorName" [routerLink]="['/activity/chain/details/total', { channelId: dataleft.channelId ? dataleft.channelId : '', adType: dataleft.adType ? dataleft.adType : '' }]" style="margin-left: 40px;">{{dataleft.monitorName}}</a>
+              <span *ngIf="!dataleft.monitorName" class="dataleft.monitorName"  style="margin-left: 10px;">{{dataleft.channelName}}</span>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+      <nz-table #nzTable class="content" [nzDataSource]="_datacontent | farray:['monitorName', 'urlShort', 'channelName']:_inputValue" [nzIsPagination]="false">
+        <thead nz-thead>
+          <tr>
+            <th nz-th width="250px">
+              <span>名称</span>
+            </th>
+            <th nz-th>
+              <span (click)="sort('impression_pv')">曝光</span>
+              <nz-table-sort [(nzValue)]="sortMap.impression_pv" (nzValueChange)="sort('impression_pv',$event)"></nz-table-sort>
+            </th>
+            <th nz-th>
+              <span (click)="sort('impression_uv')">独立曝光</span>
+              <nz-table-sort [(nzValue)]="sortMap.impression_uv" (nzValueChange)="sort('impression_uv',$event)"></nz-table-sort>
+            </th>
+            <th nz-th>
+              <span (click)="sort('click_pv')">点击</span>
+              <nz-table-sort [(nzValue)]="sortMap.click_pv" (nzValueChange)="sort('click_pv',$event)"></nz-table-sort>
+            </th>
+            <th nz-th>
+              <span (click)="sort('click_uv')">独立点击</span>
+              <nz-table-sort [(nzValue)]="sortMap.click_uv" (nzValueChange)="sort('click_uv',$event)"></nz-table-sort>
+            </th>
+            <th nz-th>
+              <span (click)="sortClickRate('click_uv', 'impression_uv')">点击率</span>
+              <nz-table-sort [(nzValue)]="sortMap.click_rate" (nzValueChange)="sortClickRate('click_uv', 'impression_uv', $event)"></nz-table-sort>
+            </th>
+          </tr>
+        </thead>
+        <tbody nz-tbody>
+          <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+            <td nz-td width="250px">
+              <a routerLink='details'>{{data.monitorName}}</a>
+            </td>
+            <td nz-td class="chain-table-td-style">{{data.impression_pv | number}}</td>
+            <td nz-td class="chain-table-td-style">{{data.impression_uv | number}}</td>
+            <td nz-td class="chain-table-td-style">{{data.click_pv | number}}</td>
+            <td nz-td class="chain-table-td-style">{{data.click_uv | number}}</td>
+            <td nz-td class="chain-table-td-style">{{(data.click_pv / data.impression_pv) | fpercent}}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </cm-table-fixed>
+  </common-search-card>
+</main>

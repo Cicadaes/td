@@ -1,0 +1,52 @@
+<div class="schedule">
+  <div class="sch-item">
+    <span class="badge">1</span>
+    <p class="text">报告类型</p>
+  </div>
+  <span class="divider"></span>
+  <div class="sch-item inactive">
+    <span class="badge">2</span>
+    <p class="text">编辑信息</p>
+  </div>
+  <span class="divider inactive"></span>
+  <div class="sch-item inactive">
+    <span class="badge">3</span>
+    <p class="text">完成提交</p>
+  </div>
+</div>
+<nz-card>
+  <ng-template #body>
+    <div class="cubes clearfix">
+      <dl class="template" [class.active]="this.selectedOption === item.reportType" *ngFor="let item of templateOptions" (click)="selectTemplateOption(item)">
+        <dt class="cover" [class.custom]="item.custom">
+          <img [src]="item.cover" [alt]="item.name" />
+        </dt>
+        <dd class="detail">
+          <h3 class="title" [class.custom]="item.custom">{{item.title}}</h3>
+          <p class="intro" [class.custom]="item.custom">{{item.intro}}</p>
+          <a class="link" *ngIf="!item.custom" (click)="showReportPreview(item)">预览<i class="anticon anticon-arrow-right"></i></a>
+        </dd>
+      </dl>
+    </div>
+    <div class="btn-group" nz-row>
+      <button (click)="nextStep()" nz-button class="next" nz-col nzSpan="5" nzType="primary">
+        <span>下一步</span>
+      </button>
+      <button (click)="backUp()" nz-button class="back" nz-col nzSpan="5">
+        <span>取消</span>
+      </button>
+    </div>
+  </ng-template>
+</nz-card>
+<report-preview *ngIf="shouldReportPreviewShow" 
+  (closeSider)="closeReportPreviewShow($event)"
+  [reportType]="reportType"
+></report-preview>
+<custom-template *ngIf="shouldCustomTemplateShow"
+  (closeSider)="closeCustomTemplateShow($event)"
+  [listDiyChart]="listDiyChart"
+  [reportModel]="reportModel"
+  [isEdit]="isEdit"
+  [id]="id"
+  [name]="name"
+></custom-template>

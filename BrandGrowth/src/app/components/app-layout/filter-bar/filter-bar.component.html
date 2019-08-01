@@ -1,0 +1,12 @@
+<main>
+  <div class="container">
+    <nav-list [itemList]="itemList" *ngIf="(guard$ | async).isNavExist"></nav-list>
+    <div class="extra">
+      <select-campaign 
+        *ngIf="(guard$ | async).isCampExist"
+        [activityList]="activityList"
+      ></select-campaign>
+      <select-time *ngIf="(guard$ | async).isTimeExist"></select-time>
+    </div>
+  </div>
+</main>

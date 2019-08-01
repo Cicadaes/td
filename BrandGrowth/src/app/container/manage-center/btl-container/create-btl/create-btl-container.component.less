@@ -1,0 +1,81 @@
+.operation-btl {
+  margin: 24px auto;
+
+  &-steps {
+
+    &-content {
+      background: #FFFFFF;
+      box-shadow: 0 1px 2px 0 rgba(28,36,56,0.15);
+      border-radius: 4px;
+      margin-top: 24px;
+      padding: 24px 24px 208px;
+
+      &-step1 {
+        
+        &-button {
+          margin-top: 31px;
+        }
+      }
+    }
+  }
+}
+
+:host ::ng-deep .operation-btl {
+
+  &-steps {
+
+    & .ant-steps {
+      width: 30%;
+      margin: 0 auto;
+
+      & .ant-steps-head, & .ant-steps-item .ant-steps-title {
+        background: #F2F2F3;
+      }
+      
+      & .ant-steps-item.ant-steps-status-process .ant-steps-title,
+       & .ant-steps-item.ant-steps-status-wait .ant-steps-title, {
+        font-family: PingFangSC-Regular;
+      }
+      & .ant-steps-item.ant-steps-status-finish .ant-steps-title {
+        font-family: PingFangSC-Regular;
+        color: rgba(28,36,56,0.56) !important;
+      }
+      & .ant-steps-item.ant-steps-status-wait .ant-steps-title {
+        color: rgba(28,36,56,0.56) !important;
+      }
+    }
+
+    &-icon {
+      float: left;
+      width: 24px;
+      height: 24px;
+      background: rgba(23,35,61,0.3);
+      font-family: HelveticaNeue;
+      font-size: 14px;
+      color: #FFFFFF;
+      line-height: 24px;
+      border-radius: 100%;
+
+      &-checked {
+        background: #2D8CF0;
+      }
+    }
+
+    &-content {
+
+      &-step1 {
+        overflow: hidden;
+
+        &-cardGroup {
+          overflow: hidden;
+          display: block;
+        }
+        
+        &-card {
+          float: left;
+          margin-right: 24px;
+        }
+      }
+    }
+  }
+}

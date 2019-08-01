@@ -1,0 +1,19 @@
+<nz-card class="search-card">
+  <ng-template #title>
+    <nz-input #search class="search-input" [nzType]="'text'" [(ngModel)]="inputValue" (ngModelChange)="searchInputChange($event)" [nzPlaceHolder]="'输入关键词或短链进行检索'">
+      <ng-template #prefix>
+        <i class="anticon anticon-search"></i>
+      </ng-template>
+    </nz-input>
+    <ng-template [ngTemplateOutlet]="_addOnHeaderBefore">
+    </ng-template>
+  </ng-template>
+  <ng-template #extra>
+    <a class="down" (click)="download()">
+      <i class="icon-download"></i>
+    </a>
+  </ng-template>
+  <ng-template #body>
+    <ng-content></ng-content>
+  </ng-template>
+</nz-card>

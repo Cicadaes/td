@@ -1,0 +1,17 @@
+<div 
+  class="pie-chart-box"
+  [ngClass]="chartClass">
+  <div
+    id="pie-chart"
+    class="pie-chart"
+    [ngStyle]="chartStyle">
+    <cm-chart [option]="_myChartOption" #pieChart></cm-chart>
+  </div>
+  <div class="pie-chart-legend">
+    <chart-legend
+      [valueUnit]="valueUnit"
+      [config]="legendData"
+      (onHoverList)="onHoverList($event)"
+      (onMouseLeave)="onMouseLeave($event)"></chart-legend>
+  </div>
+</div>

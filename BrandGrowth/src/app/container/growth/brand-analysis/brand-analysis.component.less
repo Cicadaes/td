@@ -1,0 +1,309 @@
+:host ::ng-deep .brand-analysis {
+  width: 100%;
+  background-color:transparent; 
+  margin: 30px 0px 20px;
+
+  .brand-analysis-brand-volume-wap {
+    background: #FFFFFF;
+    box-shadow: 0 1px 2px 0 rgba(28,36,56,0.30);
+    border-radius: 4px;
+  }
+
+  &-tit {
+    padding: 0px 20px;
+    font-family: PingFangSC-Medium;
+    font-size: 16px;
+    color: #1C2438;
+    height: 118px;
+    background-color: #FFFFFF;
+    border-radius: 4px;
+
+    h3 {
+      height: 58px;
+      line-height: 58px;
+    }
+
+    ul {
+      height: 60px;
+      width: 100%;
+      font-family: PingFangSC-Medium;
+      font-size: 14px;
+
+      li {
+        height: 40px;
+        line-height: 40px;
+        margin-right: 8px;
+        background: rgba(28,36,56,0.06);
+        border-radius: 2px;
+        padding: 0px 7px 0px 16px;
+        color: rgba(28,36,56,0.80);
+        float: left;
+
+        .hot-input {
+          border: 0;
+          border: none;
+          height: 30px;
+          line-height: 30px;
+          border-bottom: 1px solid rgba(28, 36, 56, 0);
+          background: rgba(28, 36, 56, 0);
+          outline: none;
+        }
+
+        span {
+          margin-right: 20px;
+        }
+
+        span:hover {
+          cursor: pointer;
+        }
+
+        .anticon-close-circle-o:hover {
+          cursor: pointer;
+        }
+      }
+
+      .hover-class:hover {
+        -webkit-transition:background-color 1s;
+        background-color: #3399FF;
+        color: #FFFFFF;
+      }
+
+      .bg-color {
+        -webkit-transition:background-color 1s;
+        background-color: #3399FF;
+        border-radius: 2px;
+        color: #FFFFFF;
+      }
+
+      li:last-child {
+        margin-right: 0px;
+      }
+
+      .add {
+        color: rgba(28,36,56,0.56);
+      }
+    }
+  }
+
+  &-title {
+    height: 58px;
+    line-height: 58px;
+    font-family: PingFangSC-Medium;
+    font-size: 16px;
+    color: #1C2438;
+    width: 100%;
+    background-color: transparent;
+    border-bottom: 1px solid #DDDEE1;
+    padding: 0px 24px;
+  }
+
+  .color {
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    border-radius: 8px;
+    margin-right: 10px;
+
+    &-blue {
+      background: #2D8CF0;
+    }
+
+    &-green {
+      background: #2DE2C5;
+    }
+
+    &-yellow {
+      background: #FCC45F;
+    }
+
+    &-orange {
+      background: #FF8454;
+    }
+  }
+
+  .download {
+    float: right;
+    .BG-download-style {
+      font-size: 16px;
+      cursor: pointer;
+      color: #80848F;
+    }
+  }
+
+  &-chart {
+    width: 100%;
+    height: 382px;
+    background: #FFFFFF;
+    box-shadow: 0 1px 2px 0 rgba(28,36,56,0.30);
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+
+    &-left, &-right{
+      width: 49%;
+      background-color: #FFFFFF;
+      box-shadow: 0 1px 2px 0 rgba(28,36,56,0.30);
+      border-radius: 4px;
+    }
+
+    &-content {
+      width: 100%;
+      padding: 24px 24px 37px 24px;
+    }
+
+  }
+
+  &-brand-volume {
+    width: 100%;
+    height: 474px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: #FFFFFF;
+    margin-bottom: 24px;
+
+    &-border {
+      height: 474px;
+      width: 1px;
+      background-color: #DDDEE1;
+    }
+
+    &-tendency {
+      width: 76%;
+      height: 418px;
+
+      &-top {
+        height: 98px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        &-one {
+          width: 25%;
+          box-sizing: border-box;
+          height: 50px;
+          border-right: 1px solid #DDDEE1;
+          margin: 24px 0px;
+          padding-left: 21px;
+          font-family: PingFangSC-Regular;
+          font-size: 20px;
+          color: #1C2438;
+          line-height: 20px;
+
+          p {
+            font-family: PingFangSC-Regular;
+            font-size: 14px;
+            color: #80848F;
+            line-height: 14px;
+            margin-bottom: 16px;
+          }
+        }
+
+        &-one:nth-child(4) {
+          border-right: 0px;
+        }
+      }
+
+      &-chart {
+        width: 100%;
+        padding: 0px 28px 41px 31px;
+      }
+    }
+
+    &-ranking {
+      width: 23%;
+      height: 435px;
+      padding: 24px;
+
+      .pie-chart-legend {
+        margin-top: 58px;
+      }
+
+      h4 {
+        font-family: PingFangSC-Medium;
+        font-size: 14px;
+        color: #1C2438;
+        height: 70px;
+      }
+    }
+  }
+
+  &-media-volume {
+    height: 382px;
+    background-color: transparent; 
+    box-shadow: 0 0px 0px 0 rgba(28,36,56,0);
+
+    &-special {
+      padding-top: 70px;
+      padding-left: 0px;
+    }
+
+    .pie-chart-legend {
+      margin-top: -35px;
+    }
+  }
+
+  &-popular-feelings {
+    background-color: #FFFFFF;
+  }
+
+  &-popular-feelings-top {
+    background-color: transparent;
+    height: 750px;
+    box-shadow: 0 0px 0px 0 rgba(28,36,56,0);
+    margin-bottom: 0px;
+
+    &-div {
+      border-bottom: 1px solid #DDDEE1;
+      padding: 24px 24px 30px 24px;
+
+      h3 {
+        font-family: PingFangSC-Medium;
+        font-size: 14px;
+        color: #1C2438;
+        //line-height: 36px;
+        height: 30px;
+
+        span {
+          color: rgba(28,36,56,0.40);
+          margin-left: 16px;
+
+          b {
+            font-weight: 300;
+          }
+        }
+
+        span:last-child {
+          float: right;
+          margin-left: 0px;
+        }
+      }
+
+      p {
+        text-overflow: -o-ellipsis-lastline;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        font-family: PingFangSC-Regular;
+        font-size: 14px;
+        color: rgba(28,36,56,0.80);
+        line-height: 26px;
+      }
+    }
+
+    &-div:nth-child(5) {
+      border-bottom: 0px;
+    }
+
+    &-negative-content, &-positive-content {
+      height: 756px;
+      width: 100%;
+    }
+  }
+
+}

@@ -1,0 +1,94 @@
+<form 
+  class="poi-operation"
+  nz-form 
+  [formGroup]="validateForm">
+  <div class="poi-operation-row" nz-form-item>
+    <div class="poi-operation-row-label" nz-form-label>
+      <label>区域名称</label>
+    </div>
+    <div nz-form-control class="poi-operation-row-name">
+      <nz-input 
+        formControlName="name"
+        nzId="name"
+        nzPlaceHolder="请输入线下区域名称，30字节以内…" 
+        nzType="text" 
+        nzSize="large">
+      </nz-input>
+      <div 
+        nz-form-explain 
+        *ngIf="getFormControl('name').dirty&&getFormControl('name').hasError('required')">
+        区域名称不能为空！
+      </div>
+      <div 
+        nz-form-explain 
+        *ngIf="getFormControl('name').dirty&&getFormControl('name').hasError('maxlength')">
+        区域名称不得超过30字节！
+      </div>
+    </div>
+  </div>
+  <div class="poi-operation-row" nz-form-item>
+    <div class="poi-operation-row-label" nz-form-label>
+      <label>区域描述</label>
+    </div>
+    <div nz-form-control class="poi-operation-row-info">
+      <nz-input 
+        [nzRows]="4"
+        formControlName="remark"
+        nzId="remark"
+        nzType="textarea" 
+        nzPlaceHolder="请输入线下区域描述内容，100字节以内…"
+        nzSize="large">
+      </nz-input>
+      <div 
+        nz-form-explain 
+        *ngIf="getFormControl('remark').dirty&&getFormControl('remark').hasError('required')">
+        区域描述不能为空！
+      </div>
+      <div 
+        nz-form-explain 
+        *ngIf="getFormControl('remark').dirty&&getFormControl('remark').hasError('maxlength')">
+        区域描述不得超过100字节！
+      </div>
+    </div>
+  </div>
+  <div class="poi-operation-row" nz-form-item>
+    <div class="poi-operation-row-label" nz-form-label>
+      <label>POI信息</label>
+    </div>
+    <div nz-form-control class="poi-operation-row-poi">
+      <cm-button class="poi-operation-row-poi-btn">
+        <button
+          nz-button 
+          [nzType]="'primary'"
+          (click)="onChangePoiMap(true)">
+          <span>添加POI</span>
+        </button>
+      </cm-button>
+      <ul *ngIf="selectedList.length > 0" class="poi-operation-row-poi-list">
+        <li class="poi-operation-row-poi-list-item" *ngFor="let item of selectedList; let i = index">
+          <p [title]="item.customName">{{ item.customName }}</p>
+          <i class="anticon anticon-close" (click)="delSelected(i)"></i>
+        </li>
+      </ul>
+      <div nz-form-explain *ngIf="poiJsonState">请添加POI信息！</div>
+      <poi-map 
+        *ngIf="poiMapShow"
+        [selectedData]="selectedList"
+        (onSavePoiMap)="changePoiMapData($event)"
+        (onClosePoiMap)="onChangePoiMap(false)"></poi-map>
+    </div>
+  </div>
+  <div class="poi-operation-row" nz-form-item>
+    <div class="poi-operation-row-label" nz-form-label>
+    </div>
+    <div nz-form-control>
+      <button
+        style="width: 240px; margin-right: 16px;" 
+        nz-button 
+        [nzType]="'primary'" 
+        [nzSize]="'large'"
+        (click)="submitForm()">保存</button>
+      <button style="width: 96px; border: none" nz-button [nzSize]="'large'" (click)="onCancel()">取消</button>
+    </div>
+  </div>
+</form>

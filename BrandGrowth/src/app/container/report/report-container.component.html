@@ -1,0 +1,37 @@
+<div class="operator crowd-mgr" nz-row>
+  <div class="create" nz-col nzSpan="4">
+    <button nz-button [nzType]="'primary'" (click)='create("新建报告")'>
+      <i class="icon-add"></i>
+      <span>新建营销报告</span>
+    </button>
+  </div>
+  <div class="search" nz-col nzSpan="6" nzOffset="14">
+    <nz-input [(ngModel)]="searchValue" #search nzPlaceHolder="输入关键词进行检索">
+      <ng-template #prefix>
+        <i class="anticon anticon-search"></i>
+      </ng-template>
+    </nz-input>
+  </div>
+</div>
+<common-table 
+  cardTitle="报告列表" 
+  [columns]="columns" 
+  [data]="data"
+  [showCheckBox]="false"
+  isPagination="false"
+>
+  <ng-template #costomPagination>
+    <nz-pagination
+      class="costomPagination" 
+      [nzPageIndex]="currentPage" 
+      [nzTotal]="totalCount" 
+      nzShowSizeChanger
+      [nzPageSize]="pageSize"
+      (nzPageSizeChange)="pageSizeChange($event)"
+      (nzPageIndexChange)="pageIndexChange($event)"
+    ></nz-pagination>
+  </ng-template>
+</common-table>
+<ng-template #progress let-state="state">
+  <nz-progress [ngModel]="state" [nzShowInfo]="false"></nz-progress>
+</ng-template>

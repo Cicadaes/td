@@ -1,0 +1,18 @@
+<main class="layout">
+  <app-header [itemList]="marketingCenterItemList">
+  </app-header>
+  <filter-bar 
+    [itemList]="navList" 
+    [activityList]="_activityList"
+    *ngIf="(guard$ | async).isFilterExist"
+  ></filter-bar>
+  <app-breadcrumb 
+    *ngIf="(guard$ | async).isBreadExist"
+    [itemList]="(guard$ | async).breadNavList" 
+  ></app-breadcrumb>
+  <app-content id="app-content" #appContent>
+    <ng-content></ng-content>
+    <app-footer></app-footer>
+  </app-content>
+</main>
+

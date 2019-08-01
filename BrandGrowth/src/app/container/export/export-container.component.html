@@ -1,0 +1,52 @@
+<div class="zw_ac_main">
+  <div class="zw_ac_header">
+    <div class="zw_ac_left">
+      <a (click)='create("新建数据导出")'>
+        <span>
+          <i class="anticon anticon-plus"></i> 新建导出任务
+        </span>
+      </a>
+    </div>
+    <div class="zw_search">
+      <nz-input [(ngModel)]="searchValue" nzPlaceHolder="搜索">
+        <ng-template #prefix>
+          <i class="anticon anticon-search"></i>
+        </ng-template>
+      </nz-input>
+    </div>
+  </div>
+  <div class="zw_export_list">
+    <ng-template ngFor let-item [ngForOf]="exportList | farray:['taskName']:searchValue" let-i="index">
+      <div class="zw_export_list_one">
+        <div class="zw_export_list_one_top">
+          <h3>{{item.taskName}}</h3>
+          <p *ngIf="item.eventId == 1">曝光日志数据</p>
+          <p *ngIf="item.eventId == 2">点击日志数据</p>
+          <nz-dropdown [nzTrigger]="'click'" nzClickHide=“true” class="zw_data_button"  (nzVisibleChange)="getMonitorLink($event,item)">
+            <a href class="ant-dropdown-link" nz-dropdown >{{getArrayLength(item.monitorLinkIds)}}个数据源</a>
+            <ul class="zw_export_list_one_dropdown" nz-dropdown-custom [ngStyle]="{'height': '140px','overflow-y': 'auto'}" *ngIf="item.dataSource" >
+              <li *ngFor="let one of item.dataSource">{{one.name}}</li>
+            </ul>
+          </nz-dropdown>
+          <div>
+            <p>导出时段</p>
+            <p>{{item.startTime}} ~ {{item.entTime}}</p>
+          </div>
+        </div>
+        <p class="zw_border_bottom"></p>
+        <div class="zw_button_menu">
+          <button nz-button [nzType]="'primary'" *ngIf="item.state == '100'" [nzSize]="'large'" (click)='download(item)'>
+            <span>下载</span>
+          </button>
+          <button nz-button [nzType]="'default'" *ngIf="item.state == '100'" [nzSize]="'large'" (click)='delete(item)'>
+            <span>删除</span>
+          </button>
+          <div class="zw_downloadAgain_button" *ngIf="item.state == '-1'" (click)='again(item)'>导出失败，点击重试</div>
+          <div class="zw_again_button_wap" *ngIf="item.state != '-1' && item.state != '100'"><!-- 初始化条 -->
+            <div class="zw_again_button"></div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

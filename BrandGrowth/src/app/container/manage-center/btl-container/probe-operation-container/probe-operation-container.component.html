@@ -1,0 +1,109 @@
+<form 
+  nz-form 
+  class="probe-operation" 
+  [formGroup]="validateForm">
+  <div class="probe-operation-row" nz-form-item>
+    <div class="probe-operation-row-label" nz-form-label>
+      <label>区域名称</label>
+    </div>
+    <div nz-form-control class="probe-operation-row-name">
+      <nz-input 
+        formControlName="name"
+        nzId="name"
+        nzPlaceHolder="请输入线下区域名称，30字节以内…" 
+        nzType="text" 
+        nzSize="large">
+      </nz-input>
+      <div 
+        nz-form-explain 
+        *ngIf="getFormControl('name').dirty&&getFormControl('name').hasError('required')">
+        区域名称不能为空！
+      </div>
+      <div 
+        nz-form-explain 
+        *ngIf="getFormControl('name').dirty&&getFormControl('name').hasError('maxlength')">
+        区域名称不得超过30字节！
+      </div>
+    </div>
+  </div>
+  <div class="probe-operation-row" nz-form-item>
+    <div class="probe-operation-row-label" nz-form-label>
+      <label>区域描述</label>
+    </div>
+    <div nz-form-control class="probe-operation-row-info">
+      <nz-input 
+        [nzRows]="4"
+        formControlName="remark"
+        nzId="remark"
+        nzType="textarea" 
+        nzPlaceHolder="请输入到店人群描述内容，100字节以内…"
+        nzSize="large">
+      </nz-input>
+      <div 
+        nz-form-explain 
+        *ngIf="getFormControl('remark').dirty&&getFormControl('remark').hasError('required')">
+        区域描述不能为空！
+      </div>
+      <div 
+        nz-form-explain 
+        *ngIf="getFormControl('remark').dirty&&getFormControl('remark').hasError('maxlength')">
+        区域描述不得超过100字节！
+      </div>
+    </div>
+  </div>
+  <div class="probe-operation-row" nz-form-item>
+    <div class="probe-operation-row-label" nz-form-label>
+      <label>导入探针</label>
+    </div>
+    <div nz-form-control class="probe-operation-row-upload">
+      <div style="overflow: hidden;">
+        <nz-upload
+          nzId="probeFile"
+          class="probe-operation-row-upload-btn"
+          nzAccept=".csv"
+          [nzLimit]="1"
+          [(nzFileList)]="fileList"
+          [nzBeforeUpload]="beforeUpload"
+          [nzSize]="10240">
+          <button nz-button [nzType]="'primary'" [nzSize]="'large'">上传文件</button>
+        </nz-upload>
+        <button style="width: 96px;" nz-button [nzSize]="'large'">
+          <a [href]="downloadUrl" download>下载模板</a>
+        </button>
+      </div>
+      <div *ngIf="sourceFile !== '' && fileList.length === 0">
+        <p class="probe-operation-row-upload-file">
+          <i class="anticon anticon-paper-clip"></i>
+          <span>{{ sourceFile }}</span>
+          <i (click)="sourceFile = ''" class="anticon anticon-close"></i>
+        </p>
+      </div>
+      <p>仅支持.csv格式的文件，文件大小不可以超过10M</p>
+      <div 
+        style="color: #f04134"
+        nz-form-explain 
+        *ngIf="probeFileState">
+        请上传区域文件！
+      </div>
+      <div 
+        style="color: #f04134"
+        nz-form-explain 
+        *ngIf="probeFileType">
+        区域文件仅支持.csv格式的文件！
+      </div>
+    </div>
+  </div>
+  <div class="probe-operation-row" nz-form-item>
+    <div class="probe-operation-row-label" nz-form-label>
+    </div>
+    <div nz-form-control>
+      <button
+        style="width: 240px; margin-right: 16px;" 
+        nz-button 
+        [nzType]="'primary'" 
+        [nzSize]="'large'"
+        (click)="submitForm()">保存</button>
+      <button style="width: 96px; border: none" nz-button [nzSize]="'large'" (click)="onCancel()">取消</button>
+    </div>
+  </div>
+</form>

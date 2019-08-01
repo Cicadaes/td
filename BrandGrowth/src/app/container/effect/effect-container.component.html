@@ -1,0 +1,67 @@
+<effect-template [topTitle]="'WEB流量'" [desc]="'WEB'">
+</effect-template>
+<effect-template [topTitle]="'APP流量'" 
+  [desc]="'APP'" [itemList]="parsedAppFlowList"
+  [selectedItemTag]="currAppFlow && currAppFlow['id']"
+  (onVated)="refreshAppFlowData($event)"
+  (onDeleteItem)="deleteAssignApp($event)"
+  [contentValue]="parsedAppFlowData">
+  <ng-template #extra>
+    <button nz-button class="add" (click)="openCreateModel('app', appContentTpl)">
+      <i class="anticon anticon-plus"></i>
+      <span>添加APP</span>
+    </button>
+  </ng-template>
+</effect-template>
+<!-- app流量 对话框 start -->
+<ng-template #appContentTpl>
+  <form nz-form class="contentTpl">
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col nzSpan="6">
+        <label>APP来源</label>
+      </div>
+      <div nz-form-control nz-col nzSpan="12">
+        <nz-radio-group [(ngModel)]="appOrigin" nzSize="large" [ngModelOptions]="{ standalone: true }">
+          <label nz-radio [nzValue]="'Ad Tracking'">
+            <span>Ad Tracking</span>
+          </label>
+          <!-- <label nz-radio [nzValue]="'APP ID'">
+            <span>APP ID</span>
+          </label> -->
+        </nz-radio-group>
+      </div>
+    </div>
+    <div nz-form-item nz-row *ngIf="appOrigin === 'APP ID'">
+      <div nz-form-label nz-col nzSpan="6">
+        <label>选择APP</label>
+      </div>
+      <div nz-form-control nz-col nzSpan="12">
+        <nz-input nzPlaceHolder="请输入APP ID"  nzSize="large" [(ngModel)]="appId" [ngModelOptions]="{ standalone: true }"></nz-input>
+      </div>
+    </div>
+    <div nz-form-item nz-row *ngIf="appOrigin === 'Ad Tracking'">
+      <div nz-form-label nz-col nzSpan="6">
+        <label>APP名称</label>
+      </div>
+      <div nz-form-control nz-col nzSpan="12">
+        <nz-select [(ngModel)]="selectedApp" 
+          [ngModelOptions]="{ standalone: true }" 
+          nzAllowClear 
+          nzShowSearch 
+          nzPlaceHolder="请选择APP" 
+          nzSize="large"
+        >
+          <nz-option *ngFor="let option of appFlowListApp" [nzLabel]="option.label" [nzValue]="option.value">
+            <ng-template #nzOptionTemplate>
+              <img *ngIf="option.value.appimg" [src]="option.value.appimg" [alt]="option.value.productname">
+              {{option.label}}
+            </ng-template>
+          </nz-option>
+        </nz-select>
+      </div>
+    </div>
+  </form>
+</ng-template>
+<!-- app流量 对话框 end -->
+<!-- web流量 对话框 start -->
+<!-- web流量 对话框 end -->

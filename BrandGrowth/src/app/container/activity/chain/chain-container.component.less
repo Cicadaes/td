@@ -1,0 +1,136 @@
+.chain-container {
+  .newChain {
+    min-width: 135px;
+    height: 36px;
+    background: #3399FF;
+    border-radius: 20px;
+    margin-top: 24px;
+  
+    & > span {
+      font-family: PingFangSC-Regular;
+      font-size: 14px;
+      color: #FFFFFF;
+      line-height: 14px;
+    }
+  
+    & > i {
+      color: #fff;
+    }
+  }
+  
+  .activityName {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    i {
+      font-size: 14px;
+      cursor: pointer;
+    }
+  
+    .bar-left {
+      display: flex;
+
+      .heart {
+        margin-left: 20px;
+        color: rgba(28,36,56,0.32);
+  
+        &.active {
+          color: orange;
+        }
+      }
+    
+      .text {
+        margin-left: 8px;
+        overflow: hidden;
+        width: 100px;
+        display: block;
+        cursor: pointer;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-family: PingFangSC-Regular;
+        color: rgba(28,36,56,0.80);
+      }
+    }
+  
+    .bar-right {
+      display: flex;
+      width: 100px;
+      justify-content: space-around;
+
+      & > * {
+        visibility: hidden;
+      }
+  
+      & a > i {
+        color: rgba(28,36,56,0.32);
+
+        &:hover {
+          color: #108ee9;
+        }
+      }
+  
+      .ant-dropdown-trigger {
+        display: block;
+      }
+    }
+
+    &:hover > .bar-right > * {
+      visibility: visible;
+    }
+  }
+
+  .content {
+    th {
+      text-align: center;
+      padding-left: 20px;
+      padding-right: 20px;
+      & > span {
+        cursor: pointer;
+        user-select: none;
+      }
+    }
+    td {
+      text-align: right;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .chain-table-td-style {
+      padding-right: 85px;
+    }
+  }
+
+  .left-content {
+    th {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+}
+
+.copyBar {
+  background: #FFFFFF;
+  box-shadow: 0 0 12px 0 rgba(28,36,56,0.24);
+  border-radius: 4px;
+  padding: 16px;
+
+  & > p {
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: rgba(28,36,56,0.80);
+    line-height: 14px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    &:first-child {
+      margin-bottom: 12px;
+    }
+
+    & > button {
+      margin-left: 10px;
+    }
+  }
+}

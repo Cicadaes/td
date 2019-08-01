@@ -1,0 +1,12 @@
+<ul class="list-icon-ratio">
+  <li class="list-icon-ratio-item" *ngFor="let item of config">
+    <!-- <span class="list-icon-ratio-item-icon">icon</span> -->
+    <div class="list-icon-ratio-item-content">
+      <p>{{ item.name }}</p>
+      <cm-progress>
+        <nz-progress [ngModel]="item.value" [nzStrokeWidth]="4" [nzShowInfo]="false"></nz-progress>
+      </cm-progress>
+    </div>
+    <b class="list-icon-ratio-item-value">{{ item.value }}%</b>
+  </li>
+</ul>

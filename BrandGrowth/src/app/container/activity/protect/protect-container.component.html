@@ -1,0 +1,276 @@
+<div class="protect">
+  <metric-view-item nz-col [nzSpan]="6" metricTitle="异常曝光率" [metricInfo]="(metricData.impression_anti /metricData.impression_pv) | fpercent"
+    metricInfoSize="30">
+  </metric-view-item>
+  <metric-view-item nz-col [nzSpan]="6" left metricTitle="异常曝光" [metricInfo]="metricData.impression_anti" metricInfoSize="30">
+  </metric-view-item>
+  <metric-view-item nz-col [nzSpan]="6" left metricTitle="曝光" metricInfoSize="30" [metricInfo]="metricData.impression_pv">
+  </metric-view-item>
+  <metric-view-item nz-col [nzSpan]="6" left metricTitle="异常点击率" [metricInfo]="(metricData.click_anti / metricData.click_pv) | fpercent"
+    metricInfoSize="30">
+  </metric-view-item>
+  <metric-view-item nz-col [nzSpan]="6" left metricTitle="异常点击" [metricInfo]="metricData.click_anti" metricInfoSize="30">
+  </metric-view-item>
+  <metric-view-item nz-col [nzSpan]="6" left metricTitle="点击" [metricInfo]="metricData.click_pv" metricInfoSize="30">
+  </metric-view-item>
+</div>
+<nz-row nzGutter="24">
+  <nz-col nzSpan="12">
+    <nz-card class="chain-details-card chain-details-card-small">
+      <ng-template #title>
+        异常曝光走势
+      </ng-template>
+      <ng-template #extra>
+        <div>
+          <span class="BG-download-style" (click)="downLoadLineImpression()">
+            <i class="icon icon-download"></i>
+          </span>
+        </div>
+      </ng-template>
+      <ng-template #body>
+        <chart-table-wrap>
+          <ng-template #contentChart>
+            <chart-line [config]="chartLineImpressionConfig"></chart-line>
+          </ng-template>
+          <ng-template #contentTable>
+            <table-move [tableColumns]="lineTableHeader_improssion" [tableData]="lineTableContent" tableHeight="226">
+            </table-move>
+          </ng-template>
+        </chart-table-wrap>
+      </ng-template>
+    </nz-card>
+  </nz-col>
+  <nz-col nzSpan="12">
+    <nz-card class="chain-details-card chain-details-card-small">
+      <ng-template #title>
+        异常点击走势
+      </ng-template>
+      <ng-template #extra>
+        <div>
+          <span class="BG-download-style" (click)="downLoadLineClick()">
+            <i class="icon icon-download"></i>
+          </span>
+        </div>
+      </ng-template>
+      <ng-template #body>
+        <chart-table-wrap>
+          <ng-template #contentChart>
+            <chart-line [config]="chartLineClickConfig"></chart-line>
+          </ng-template>
+          <ng-template #contentTable>
+            <table-move [tableColumns]="lineTableHeader_click" [tableData]="lineTableContent" tableHeight="226">
+            </table-move>
+          </ng-template>
+        </chart-table-wrap>
+      </ng-template>
+    </nz-card>
+  </nz-col>
+</nz-row>
+<nz-row nzGutter="24">
+  <nz-col nzSpan="12">
+    <nz-card class="chain-details-card chain-details-card-small">
+      <ng-template #title>
+        异常曝光来源分析
+      </ng-template>
+      <ng-template #extra>
+        <div>
+          <span class="BG-download-style" (click)="downLoadVenn('chartVennImpressionConfig')">
+            <i class="icon icon-download"></i>
+          </span>
+        </div>
+      </ng-template>
+      <ng-template #body>
+        <chart-venn [config]='chartVennImpressionConfig' vennId='chart-venn1' horizontal='true'></chart-venn>
+      </ng-template>
+    </nz-card>
+  </nz-col>
+  <nz-col nzSpan="12">
+    <nz-card class="chain-details-card chain-details-card-small">
+      <ng-template #title>
+        异常点击来源分析
+      </ng-template>
+      <ng-template #extra>
+        <div>
+          <span class="BG-download-style" (click)="downLoadVenn('chartVennClickConfig')">
+            <i class="icon icon-download"></i>
+          </span>
+        </div>
+      </ng-template>
+      <ng-template #body>
+        <chart-venn [config]='chartVennClickConfig' vennId='chart-venn2' horizontal='true'></chart-venn>
+      </ng-template>
+    </nz-card>
+  </nz-col>
+</nz-row>
+<nz-row nzGutter="24">
+  <nz-col nzSpan="12">
+    <nz-card class="chain-details-card chain-details-card-small">
+      <ng-template #title>
+        曝光异常TOP分析
+      </ng-template>
+      <ng-template #extra>
+        <div>
+          <span class="BG-download-style" (click)="downLoadBarImpression()">
+            <i class="icon icon-download"></i>
+          </span>
+        </div>
+      </ng-template>
+      <ng-template #body>
+        <chart-table-wrap>
+          <ng-template #contentChart>
+            <chart-bar [config]="chartBarConfig_impression"></chart-bar>
+          </ng-template>
+          <ng-template #contentTable>
+            <div style="height: 226px">
+              <table-move [tableColumns]="barTableHeader_impression" [tableData]="barTableContent" tableHeight="226">
+              </table-move>
+            </div>
+          </ng-template>
+        </chart-table-wrap>
+      </ng-template>
+    </nz-card>
+
+  </nz-col>
+  <nz-col nzSpan="12">
+    <nz-card class="chain-details-card chain-details-card-small">
+      <ng-template #title>
+        点击异常TOP分析
+      </ng-template>
+      <ng-template #extra>
+        <div>
+          <span class="BG-download-style" (click)="downLoadBarClick()">
+            <i class="icon icon-download"></i>
+          </span>
+        </div>
+      </ng-template>
+      <ng-template #body>
+        <chart-table-wrap>
+          <ng-template #contentChart>
+            <chart-bar [config]="chartBarConfig_click"></chart-bar>
+          </ng-template>
+          <ng-template #contentTable>
+            <div style="height: 226px">
+              <table-move [tableColumns]="barTableHeader_click" [tableData]="barTableContent" tableHeight="226">
+              </table-move>
+            </div>
+          </ng-template>
+        </chart-table-wrap>
+      </ng-template>
+    </nz-card>
+
+  </nz-col>
+</nz-row>
+<nz-row nzGutter="24">
+  <nz-col nzSpan="24">
+    <nz-card class="chain-details-card chain-details-card-small">
+      <ng-template #title>
+        异常数据详情
+      </ng-template>
+      <ng-template #extra>
+        <div>
+          <span class="BG-download-style" (click)='downLoadTable()'>
+            <i class="icon icon-download"></i>
+          </span>
+        </div>
+      </ng-template>
+      <ng-template #body>
+        <cm-table-fixed>
+          <nz-table #nzTable class="content" [nzShowTotal]='true' [nzBordered]="true" [nzDataSource]="tableLeft" [nzIsPagination]="false">
+            <thead nz-thead>
+              <tr>
+                <th nz-th [nzWidth]="'150px'">
+                  <span style="display: inline-block;">媒体</span>
+                </th>
+                <th nz-th>
+                  <span class="sort-span" (click)="sort('totalImpression_anti')">异常曝光-防护总览</span>
+                  <nz-table-sort [(nzValue)]="sortMap.totalImpression_anti" (nzValueChange)="sort('totalImpression_anti',$event)"></nz-table-sort>
+                </th>
+                <th nz-th>
+                  <span class="sort-span" (click)="sort('totalImpression_anti_ip')">异常曝光-IP 总览</span>
+                  <nz-table-sort [(nzValue)]="sortMap.totalImpression_anti_ip" (nzValueChange)="sort('totalImpression_anti_ip',$event)"></nz-table-sort>
+                </th>
+                <th nz-th>
+                  <span class="sort-span" (click)="sort('totalImpression_anti_device')">异常曝光-设备防护</span>
+                  <nz-table-sort [(nzValue)]="sortMap.totalImpression_anti_device" (nzValueChange)="sort('totalImpression_anti_device',$event)"></nz-table-sort>
+                </th>
+                <th nz-th>
+                  <span class="sort-span" (click)="sort('totalClick_anti')">异常点击-防护总览</span>
+                  <nz-table-sort [(nzValue)]="sortMap.totalClick_anti" (nzValueChange)="sort('totalClick_anti',$event)"></nz-table-sort>
+                </th>
+                <th nz-th>
+                  <span class="sort-span" (click)="sort('totalClick_anti_ip')">异常点击-IP 总览</span>
+                  <nz-table-sort [(nzValue)]="sortMap.totalClick_anti_ip" (nzValueChange)="sort('totalClick_anti_ip',$event)"></nz-table-sort>
+                </th>
+                <th nz-th>
+                  <span class="sort-span" (click)="sort('totalClick_anti_device')">异常点击-设备防护</span>
+                  <nz-table-sort [(nzValue)]="sortMap.totalClick_anti_device" (nzValueChange)="sort('totalClick_anti_device',$event)"></nz-table-sort>
+                </th>
+              </tr>
+            </thead>
+            <tbody nz-tbody>
+              <ng-template ngFor let-data [ngForOf]="nzTable.data" let-i='index'>
+                <tr nz-tbody-tr [rowHighlight]="{rowIndex:i}">
+                  <td nz-td>
+                    <i class="anticon anticon-right" *ngIf="!data.expand"></i>
+                    <i class="anticon anticon-down" *ngIf="data.expand"></i>
+                    <nz-row-expand-icon nzShowExpand=true [(nzExpand)]="data.expand" style="display: inline-block;">
+                    </nz-row-expand-icon>
+                    <span class="channel_name">{{data.channelName}}</span>
+                  </td>
+                  <td nz-td >{{data.totalImpression_anti}}</td>
+                  <td nz-td >{{data.totalImpression_anti_ip}}</td>
+                  <td nz-td >{{data.totalImpression_anti_device}}</td>
+                  <td nz-td >{{data.totalClick_anti}}</td>
+                  <td nz-td >{{data.totalClick_anti_ip}}</td>
+                  <td nz-td >{{data.totalClick_anti_device}}</td>
+                </tr>
+                <!-- 折叠部分 -->
+                <ng-template ngFor let-item [ngForOf]='data.activityList'>
+                  <tr nz-tbody-tr *ngIf="data.expand" style="background: #F8F8F9;" class="IndentSize">
+                    <td nz-td style="cursor:pointer;" (click)='details(item)'>
+                      <nz-row-indent [nzIndentSize]="1"></nz-row-indent>
+                     <span class="channel_name"> {{item.monitorName}}</span>
+                    </td>
+                    <td nz-td >{{item.impression_anti}}</td>
+                    <td nz-td >{{item.impression_anti_ip}}</td>
+                    <td nz-td >{{item.impression_anti_device}}</td>
+                    <td nz-td >{{item.click_anti}}</td>
+                    <td nz-td >{{item.click_anti_ip}}</td>
+                    <td nz-td >{{item.click_anti_device}}</td>
+                  </tr>
+                </ng-template>
+              </ng-template>
+            </tbody>
+            <tfoot nz-tfoot>
+              <tr nz-tfoot-tr>
+                <!-- 被隐藏 -->
+                <td nz-td style="height:51px;">
+                  总计
+                </td>
+                <!-- 正常显示 -->
+                <td nz-td style="height:51px;width:300px">
+                  {{total.allTotalImpression_anti}}
+                </td>
+                <td nz-td style="height:51px;width:300px">
+                  {{total.allTotalImpression_anti_ip}}
+                </td>
+                <td nz-td style="height:51px;width:300px">
+                  {{total.allTotalImpression_anti_device}}
+                </td>
+                <td nz-td style="height:51px;width:300px">
+                  {{total.allTotalClick_anti}}
+                </td>
+                <td nz-td style="height:51px;width:300px">
+                  {{total.allTotalClick_anti_ip}}
+                </td>
+                <td nz-td style="height:51px;width:300px">
+                  {{total.allTotalClick_anti_device}}
+                </td>
+              </tr>
+            </tfoot>
+          </nz-table>
+        </cm-table-fixed>
+      </ng-template>
+    </nz-card>
+  </nz-col>
+</nz-row>

@@ -1,0 +1,160 @@
+.container.new-chain {
+  .ant-card-body {
+    padding: 48px 24px 192px 37px;
+  }
+
+  .ant-form-item-label {
+    height: 36px;
+
+    & > label {
+      font-family: PingFangSC-Semibold;
+      font-size: 14px;
+      color: rgba(29,36,54,0.80);
+      line-height: 36px;
+      margin-left: 10px;
+
+      &.ant-form-item-required {
+        margin-left: 0;
+      }
+
+      &:after {
+        content: '';
+      }
+    }
+  }
+
+  .ant-input {
+    width: 300px;
+    height: 36px;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: rgba(28,36,56,0.80);
+    line-height: 14px;
+  }
+
+  .ant-input-number {
+    width: 300px;
+    height: 36px;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: rgba(28,36,56,0.80);
+    line-height: 14px;
+
+    .ant-input-number-input {
+      line-height: 36px;
+      height: 34px;
+    }
+  }
+
+  .ant-select {
+    width: 300px;
+
+    .ant-select-selection--single  {
+      height: 36px;
+      
+      .ant-select-selection__rendered {
+        font-family: PingFangSC-Regular;
+        font-size: 14px;
+        color: rgba(28,36,56,0.80);
+        line-height: 36px;
+      }
+    }
+  }
+
+  form .has-feedback > .ant-select .ant-select-arrow, 
+  form .has-feedback > .ant-select .ant-select-selection__clear, 
+  form .has-feedback :not(.ant-input-group-addon) > .ant-select .ant-select-arrow, 
+  form .has-feedback :not(.ant-input-group-addon) > .ant-select .ant-select-selection__clear {
+    right: 12px;
+  }
+
+  .has-success.has-feedback:after, 
+  .has-warning.has-feedback:after, 
+  .has-error.has-feedback:after, 
+  .is-validating.has-feedback:after { 
+    height: 36px;
+    font-size: 16px;
+    line-height: 36px;
+    right: -15px;
+  }
+
+  .ant-btn {
+    height: 36px;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    line-height: 14px;
+  }
+
+  .mutiSubmit .ant-btn {
+    width: 300px;
+  }
+
+  .submit .ant-btn {
+    width: 200px;
+  }
+
+  .ant-form-item {
+    margin-bottom: 32px;
+
+    .ant-form-item-label {
+      text-align: left;
+    }
+  }
+
+  .ant-radio-wrapper {
+    height: 36px;
+    line-height: 36px;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: rgba(28,36,56,0.80);
+
+    .ant-radio {
+      vertical-align: middle;
+    }
+  }
+
+  .ant-form-explain {
+    color: #f04134;
+  }
+
+  .cm-sortselector-selection {
+    min-width: 300px;
+    display: block;
+
+    .cm-sortselector-selection__rendered {
+      display: block;
+      line-height: 35px;
+      min-height: 35px;
+      margin-bottom: 0;
+      font-size: 14px;
+      color: rgba(28,36,56,0.80);
+
+      .cm-sortselector-selection__placeholder {
+        font-size: 14px;
+        opacity: 0.65;
+      }
+    }
+
+    .ant-select-selection__choice {
+      height: 28px;
+      line-height: 28px;
+
+      .ant-select-selection__choice__remove {
+        font-size: 14px;
+        top: 5px;
+        right: 15px;
+      }
+    }
+
+    .ant-select-search {
+      font-size: 14px;
+      height: 28px;
+      line-height: 28px;
+      font-family: PingFangSC-Regular;
+    }
+  }
+}
+
+.cm-sortselector-dropdown {
+  height: 250px;
+}

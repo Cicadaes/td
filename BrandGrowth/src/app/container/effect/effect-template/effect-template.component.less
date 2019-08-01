@@ -1,0 +1,86 @@
+main {
+  .title {
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: rgba(28,36,56,0.56);
+    line-height: 22px;
+    padding-top: 24px;
+    padding-bottom: 16px;
+  }
+}
+
+:host ::ng-deep .ant-card {
+  .ant-card-head {
+    height: 80px;
+    line-height: 80px;
+
+    .sites {
+      display: flex;
+
+      & > li {
+        margin-right: 24px;
+        display: flex;
+        align-items: center;
+
+        & .anticon.anticon-close-circle-o {
+          display: block;
+          margin-left: 10px;
+          color: #D9DADD;
+        }
+
+        & > span {
+          font-family: PingFangSC-Medium;
+          font-size: 16px;
+          color: #1C2438;
+          display: block;
+          min-width: 176px;
+          height: 79px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          &.active {
+            border-bottom: 2px solid #2d8cf0;
+          }
+        }
+      }
+    }
+  }
+
+  .metric-view-items {
+    margin: 24px;
+
+    & .anticon.anticon-arrow-up {
+      position: absolute;
+      right: 20px;
+      bottom: 0px;
+      font-size: 16px;
+      color: #19BE6B;
+
+      &.rotate45 {
+        transform: rotate(45deg);
+      }
+
+      &.rotate135 {
+        transform: rotate(135deg);
+      }
+    }
+  }
+
+  .chart-table-wrap-button {
+    display: none;
+  }
+
+  .ant-card-body {
+    padding: 0;
+
+    nz-col {
+      border-right: 1px solid #D9DADD;
+    }
+
+    .chart-table-wrap {
+      padding-bottom: 40px;
+    }
+  }
+}

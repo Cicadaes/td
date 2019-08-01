@@ -1,0 +1,215 @@
+@import '../../../../assets/styles/common.less';
+
+.cus-analysis-operation {
+  
+  &-content {
+    background: #FFFFFF;
+    box-shadow: 0 1px 2px 0 rgba(28,36,56,0.15);
+    border-radius: 4px;
+    margin-top: 20px;
+    padding: 48px 48px 162px;
+  }
+}
+
+:host ::ng-deep .cus-analysis-operation {
+  
+  &-content {
+
+    &-row {
+      display: flex;
+    
+      &-label {
+        width: 104px;
+        text-align: left;
+        .BG-form-label;
+      }
+
+      &-name {
+        width: 300px;
+      }
+
+      &-monitorLinks {
+        overflow: hidden;
+        width: 624px;
+
+        & .ant-btn {
+          float: left;
+          width: 140px;
+          height: 36px;
+          border-radius: 18px;
+          line-height: 34px;
+          border-color: #3399ff;
+          color: #3399ff;
+          margin-right: 16px;
+          margin-bottom: 8px;
+
+          & > i {
+            color: #3399ff;
+            margin-right: 16px;
+          }
+        }
+
+        &-item {
+          float: left;
+          width: 140px;
+          border-radius: 16px;
+          height: 36px;
+          position: relative;
+          background: #F2F2F3;
+          padding: 0px 16px;
+          margin-right: 16px;
+          margin-bottom: 8px;
+
+          & > p {
+            line-height: 36px;
+            font-family: PingFangSC-Regular;
+            font-size: 14px;
+            color: rgba(28,36,56,0.80);
+            padding-right: 16px;
+            .BG-ellipsis;
+          }
+
+          & > i {
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            border-radius: 100%;
+            display: block;
+            position: absolute;
+            background: #FFFFFF;
+            right: 8px;
+            top: 8px;
+            cursor: pointer;
+          }
+        }
+      }
+
+      &-text {
+
+        & p {
+          font-family: PingFangSC-Regular;
+          font-size: 18px;
+          color: rgba(28,36,56,0.80);
+        }
+      }
+
+      &-relation {
+        overflow: hidden;
+
+        &-item {
+          border: 1px solid #DDDEE1;
+          border-radius: 4px;
+          width: 140px;
+          height: 102px;
+          float: left;
+          margin-right: 16px;
+          cursor: pointer;
+
+          &:hover {
+            border-color: #3399ff;
+            & > span {
+              color: #3399ff;
+            }
+          }
+
+          & > span {
+            display: block;
+            text-align: center;
+            font-family: PingFangSC-Regular;
+            font-size: 14px;
+            color: rgba(28,36,56,0.56);
+            margin-top: 16px;
+          }
+
+          &-checked {
+            border: 2px solid #2D8CF0;
+
+            & > span {
+              color: #2D8CF0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+:host ::ng-deep .cusanalysis-modal {
+
+  &-input-search {
+    margin-right: 32px;
+    float: right;
+    margin-top: -2px;
+
+    & .ant-input {
+      border-radius: 20px !important;
+      width: 160px;
+      padding-left: 24px;
+    }
+
+    & .ant-input-affix-wrapper .ant-input-suffix {
+      left: 7px;
+      right: 192px;
+
+      & > i {
+        color: rgba(28,36,56,0.56);
+      }
+    }
+  }
+
+  & .ant-modal-body {
+    padding: 0;
+  }
+
+  &-checkbox {
+
+    &-wrap {
+      overflow-y: auto;
+      max-height: 384px;
+    }
+
+    & .ant-checkbox-wrapper {
+      display: block;
+      height: 48px;
+      border-bottom: 1px solid rgba(28,36,56,0.06);
+      margin: 0;
+      padding-left: 16px;
+      line-height: 48px;
+      overflow: hidden;
+
+      & > .ant-checkbox {
+        float: left;
+        margin-top: 18px;
+
+        & + span {
+          float: left;
+          width: 350px;
+          .BG-ellipsis;
+          padding-left: 12px;
+        }
+      }
+    }
+  }
+
+  & .ant-modal-footer {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  &-footer {
+
+    &-checked {
+      padding-left: 8px;
+      line-height: 34px;
+      float: left;
+      font-family: PingFangSC-Regular;
+      font-size: 14px;
+      color: rgba(28,36,56,0.80);
+
+      & > b {
+        display: inline-block;
+        padding: 0 8px;
+      }
+    }
+  }
+}

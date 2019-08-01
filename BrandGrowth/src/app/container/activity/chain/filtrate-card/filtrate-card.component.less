@@ -1,0 +1,157 @@
+.filtrate-list-title {
+  display: block;
+  float: left;
+  min-width: 70px;
+  height: 14px;
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: rgba(28,36,56,0.56);
+  line-height: 24px;
+}
+
+.filtrate-list-item {
+  float: left;
+  text-align: center;
+  line-height: 24px;
+
+  & > a {
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: rgba(28,36,56,0.80);
+    line-height: 14px;
+    margin: 0 12px;
+  }
+
+  &.active > a {
+    color: #3399FF;
+  }
+}
+
+:host ::ng-deep .filtrate {
+  margin: 24px 0 0;
+  border-radius: 4px;
+
+  .title {
+    float: left;
+    margin-right: 24.8px;
+
+    a {
+      font-family: PingFangSC-Medium;
+      font-size: 16px;
+      color: rgba(28,36,56,0.80);
+      line-height: 16px;
+    }
+
+    i {
+      margin-left: 8.2px;
+    }
+  }
+
+  .selectBox {
+    display: inline-block;
+    vertical-align: middle;
+    background: #3399FF;
+    border-radius: 2px;
+    height: 24px;
+    min-width: 70px;
+    padding: 6px 8px;
+
+    &.mr8 {
+      margin-right: 8px;
+    }
+
+    &.mr24 {
+      margin-right: 24px;
+    }
+
+    & > .selectTitle {
+      float: left;
+      font-family: PingFangSC-Regular;
+      font-size: 12px;
+      color: #FFFFFF;
+      line-height: 12px;
+    }
+
+    & > i {
+      float: right;
+      margin-left: 15px;
+      line-height: 12px;
+      color: #FFFFFF;
+      cursor: pointer;
+    }
+  }
+
+  .chainNum {
+    display: inline-block;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: rgba(28,36,56,0.80);
+    line-height: 12px;
+  }
+
+  .channel {
+    display: block;
+    overflow: hidden;
+    transition: 1s;
+
+    & > li {
+      .filtrate-list-item;
+    }
+
+    &-wrap {
+      position: relative;
+
+      & .anticon {
+        position: absolute;
+        right: 0px;
+        top: 6px;
+      }
+
+      & > span {
+        .filtrate-list-title
+      }
+
+      padding-bottom: 12px;
+    }
+  }
+
+  .divider {
+    display: block;
+    margin-right: 100px;
+    height: 1px;
+    background:#DDDEE1
+  }
+
+  .adFormat {
+    display: block;
+    overflow: hidden;
+
+    & > li {
+      .filtrate-list-item
+    }
+
+    &-wrap {
+      position: relative;
+
+      & .anticon {
+        position: absolute;
+        right: 0px;
+        top: 12px;
+      }
+
+      & > span {
+        .filtrate-list-title;
+      }
+
+      padding-top: 12px;
+    }
+  }
+}
+
+:host ::ng-deep .ant-card-body {
+  padding: 0;
+}
+
+:host ::ng-deep .anticon {
+  cursor: pointer;
+}

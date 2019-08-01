@@ -1,0 +1,20 @@
+<div class="chart-progress">
+  <div class="chart-progress-content">
+    <cm-progress>
+      <nz-progress 
+        [ngClass]="_color"
+        [ngModel]="progressValue" 
+        [nzType]="'circle'" 
+        [nzFormat]="_formatNull"
+        [nzWidth]="140"></nz-progress>
+    </cm-progress>
+    <div class="chart-progress-content-format">
+      <p>{{ progressValue }}%</p>
+      <h4>{{ progressName }}</h4>
+    </div>
+  </div>
+  <div class="chart-progress-legend">
+    <span [style.background]="progressColor"></span>
+    <p>{{ progressName }}占比</p>
+  </div>
+</div>

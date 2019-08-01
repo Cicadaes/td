@@ -1,0 +1,18 @@
+<div class="chart-table-wrap">
+  <div class="chart-table-wrap-button">
+    <span class="chart-table-wrap-button-icon" (click)="onChangeButtonType('chart')">
+      <i class="icon-curve BG-icon-font-style "
+        [class.chart-table-wrap-button-icon-checked]="buttonType === 'chart'"></i>
+    </span>
+    <span class="chart-table-wrap-button-icon" (click)="onChangeButtonType('table')">
+      <i class="icon-table BG-icon-font-style"
+        [class.chart-table-wrap-button-icon-checked]="buttonType === 'table'"></i>
+    </span>
+  </div>
+  <div *ngIf="buttonType === 'chart'">
+    <ng-template [ngTemplateOutlet]="contentChart"></ng-template>
+  </div>
+  <div *ngIf="buttonType === 'table'" class="chart-table-wrap-table">
+    <ng-template [ngTemplateOutlet]="contentTable"></ng-template>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="brand-index">
+  <div class="brand-index-tit">
+    <h3>品牌指数</h3>
+    <ul>
+      <li [ngClass]="{'bg-color': hotWordIndex == itemIndex, 'hover-class': 'true'}" *ngFor="let item of hotWordList;let itemIndex=index" (click)="switcHoverOne(item, itemIndex, $event)">
+        <span title="{{item.keyword}}">{{item.keyword}}</span>
+        <i class="anticon anticon-close-circle-o" (click)="deleteOne(item, $event)"></i>
+      </li>
+      <li (click)="addOne()" *ngIf="hotWordLength < 5 && addHotWordFlag" class="add">
+          <i class="anticon anticon-plus"></i>
+        <span>添加</span>
+      </li>
+      <li *ngIf="!addHotWordFlag">
+          <input class="hot-input" maxlength="8" [(ngModel)]="hotWordName" placeholder="请输入热词" (keyup.enter)="addNewHotWord(hotWordName)"> 
+          <i class="anticon anticon-close-circle-o" (click)="cancel()"></i>
+      </li>
+    </ul>
+  </div>
+  <div class="brand-index-table">
+      <nz-table #nzTable [nzDataSource]='tableData' [nzIsPagination]='false'>
+          <thead nz-thead>
+            <tr>
+              <th nz-th><span>指数类别</span></th>
+              <th nz-th><span>活动期平均指数</span></th>
+              <th nz-th><span>对比整体指数</span></th>
+              <th nz-th><span>指数环比</span></th>
+              <th nz-th><span>指数同比</span></th>
+              <th nz-th><span>整体平均指数</span></th>
+            </tr>
+          </thead>
+          <tbody nz-tbody>
+            <tr nz-tbody-tr *ngFor="let item of tableData;let i = index;" >
+              <td nz-td>
+                <b [ngClass]="{'color-blue':i == 0 , 'color-green':i == 1 , 'color-yellow':i == 2 , 'color-orange':i == 3 , 'color-circle': true}" ></b>
+                {{item.name}}
+              </td>
+              <td nz-td>{{item.average}}</td>
+              <td nz-td>
+                {{item.total}}
+                <i class="anticon anticon-arrow-up" *ngIf="item.totalType == 'up'"></i>
+                <i class="anticon anticon-arrow-down" *ngIf="item.totalType == 'down'"></i>
+              </td>
+              <td nz-td>
+                {{item.per}}
+                <i class="anticon anticon-arrow-up" *ngIf="item.perType == 'up'"></i>
+                <i class="anticon anticon-arrow-down" *ngIf="item.perType == 'down'"></i>
+              </td>
+              <td nz-td>
+                {{item.per2}}
+                <i class="anticon anticon-arrow-up" *ngIf="item.per2Type == 'up'"></i>
+                <i class="anticon anticon-arrow-down" *ngIf="item.per2Type == 'down'"></i>
+              </td>
+              <td nz-td>{{item.tAverage}}</td>
+            </tr>
+          </tbody>
+      </nz-table>
+  </div>
+  <div class="brand-index-chart">
+      <chart-line mini [config]="chartData" [height]="340"></chart-line>
+  </div>
+</div>

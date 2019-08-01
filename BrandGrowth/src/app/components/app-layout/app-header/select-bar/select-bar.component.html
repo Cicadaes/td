@@ -1,0 +1,21 @@
+<nz-dropdown class="select-bar" nzPlacement="bottomCenter">
+  <a class="ant-dropdown-link" nz-dropdown>
+    <span class="circle">
+      <i [class]="selectItem.circle"></i>
+    </span>
+    <span class="text">{{selectItem.title}}</span>
+    <i class="anticon anticon-down"></i>
+  </a>
+  <div nz-dropdown-custom class="select-pane">
+    <ul nz-row>
+      <li nz-col [nzSpan]="6" class="select-item" *ngFor="let el of itemList">
+        <span class="select-circle">
+          <i [class]="el.circle"></i>
+        </span>
+        <a [routerLink]="el.link" class="select-mask"></a>
+        <a class="select-title">{{el.title}}</a>
+        <i class="divider"></i>
+      </li>
+    </ul>
+  </div>
+</nz-dropdown>

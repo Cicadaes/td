@@ -1,0 +1,176 @@
+@import '../../../assets/styles/common.less';
+
+.zw_ac_header {
+  width: 100%; 
+  height: 84px;
+}
+  
+.zw_ac_left {
+    float: left; 
+    line-height: 84px;
+}
+
+.zw_ac_left span {
+    padding: 10px 25px;
+    margin: 24px 0;
+    background: #3399FF;
+    border-radius: 20px;
+    color: #fff;
+}
+
+.zw_ac_right{
+  float:right;
+  line-height: 84px;
+}
+
+.zw_export_list_one_dropdown {
+  background-color: #FFFFFF;
+  outline: none;
+  position: relative;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  background-color: #fff;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 6px rgba(0,0,0,.2);
+  box-shadow: 0 1px 6px rgba(0,0,0,.2);
+  background-clip: padding-box;
+
+  li {
+    padding: 7px 8px;
+    margin: 0;
+    clear: both;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(0,0,0,.65);
+    white-space: nowrap;
+
+  }
+}
+
+.zw_search {
+  float: right;
+  margin-right: 25px;
+
+  .ant-input-affix-wrapper .ant-input { 
+    padding: 0px 25px; 
+    margin: 24px 0; 
+    width: 160px;
+    height: 36px;
+    border: 1px solid #DDDEE1;
+    border-radius: 20px;
+  }
+}
+
+.zw_export_list {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+  .zw_export_list_one {
+    width: 23%;
+    height: 286px;
+    margin-right: 2%;
+    background: #FFFFFF;
+    box-shadow: 0 1px 2px 0 rgba(28,36,56,0.15);
+    border-radius: 4px;
+    border: 1px solid #DDDEE1;
+    margin-bottom: 20px;
+    font-size: 14px;
+
+    .zw_export_list_one_top {
+      padding: 20px 30px;
+
+      h3 {
+        height: 26px;
+        line-height: 26px;
+      }
+
+      .zw_data_button {
+        background: rgba(28,36,56,0.01);
+        border: 1px solid rgba(28,36,56,0.15);
+        border-radius: 4px;
+        text-align: center;
+        line-height: 32px;
+        height: 32px;
+        width: 100%;
+        margin: 20px 0px;
+        position: relative;
+
+        .ant-dropdown-link {
+          display: block;
+          text-decoration: none;
+          color: rgba(28,36,56,0.80);
+        }
+      }
+    }
+
+    .zw_border_bottom {
+      border-bottom: 1px solid rgba(28,36,56,0.06);
+    }
+
+    .zw_button_menu {
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      .ant-btn-primary {
+        width: 45%;
+      }
+
+      .ant-btn-default {
+        width: 45%;
+      }
+
+      .zw_downloadAgain_button {
+        width: 100%;
+        background: #FF9900;
+        height: 32px;
+        color: #FFFFFF;
+        line-height: 32px;
+        border-radius: 4px;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      .zw_again_button_wap {
+        width: 100%;
+        height: 10px;
+        border-radius: 4px;
+        background: rgba(23,35,61,0.06);
+        margin-top: 12px;
+        position: relative;
+
+        .zw_again_button{
+          width: 50%;
+          height: 10px;
+          border-radius: 4px;
+          background: #19BE6B;
+          display: inline-block;
+          position: absolute;
+          top: 0;
+          
+        }
+      }
+    }
+  }
+
+  .zw_export_list_one:nth-child(4n) {
+    margin-right: 0px;
+  }
+
+  .zw_export_list_one:hover {
+    -webkit-transition:border 2s;
+    border-color: #3399FF;
+  }
+}
+
+
+
+
+
+
+

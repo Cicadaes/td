@@ -1,0 +1,101 @@
+@import '../../../../assets/styles/common.less';
+
+.analyze {
+
+  &-card {
+
+    &-line {
+      margin-top: 0;
+      border-top: none;
+
+      &-button-group {
+        text-align: right;
+        margin-right: 24px;
+      }
+    }
+
+    &-visit {
+
+      &-item {
+        height: 445px;
+      }
+    }
+
+    &-area {
+
+      &-item {
+        height: 445px;
+      }
+    }
+
+    &-nopadding {
+      .BG-scroll;
+
+      
+      &-item {
+        border-right: 1px solid #DDDEE1;
+        padding: 24px;
+
+        &-metric {
+          margin: 44px 0;
+        }
+
+        &:last-child { 
+          border: none;
+        }
+
+        & > h4 {
+          font-weight: 600;
+          font-family: PingFangSC-Medium;
+          font-size: 14px;
+          color: #1C2438;
+          line-height: 14px;
+          margin-bottom: 32px;
+        }
+
+        &-content {
+          height: 346px;
+          overflow-y: auto;
+        }
+      }
+    }
+  }
+}
+
+:host ::ng-deep .analyze {
+  &-card {
+    margin-top: 24px;
+
+    &-line {
+      padding: 24px 0 24px 24px;
+      
+      & > .ant-card-body {
+        padding: 0;
+      }
+    }
+    
+    &-nopadding {
+
+      & > .ant-card-body {
+        padding: 0;
+      }
+
+      &-metric {
+
+        &-checked {
+          background-color: #3399ff;
+
+          & .metric-view-item-text-title, & .metric-view-item-text-info {
+            color: #ffffff;
+          }
+        }
+
+        & .metric-view-item {
+          padding: 24px;
+          height: 156px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+@import '../../../../assets/styles/common.less';
+:host ::ng-deep .ant-card .ant-table .ant-table-thead > tr > th:nth-child(2),
+:host ::ng-deep .ant-card .ant-table .ant-table-tbody > tr > td:nth-child(2){
+    max-width:200px;
+    width:200px;
+    .BG-ellipsis;
+}
+:host ::ng-deep .ant-card .ant-table .ant-table-thead > tr > th:nth-child(4),
+:host ::ng-deep .ant-card .ant-table .ant-table-tbody > tr > td:nth-child(4){
+    max-width:400px;
+    width:300px;
+    .BG-ellipsis;
+}
+:host ::ng-deep .operator {
+    padding: 24px 0;
+    .create {
+      & .ant-btn {
+        height: 36px;
+        border-radius: 20px;
+      }
+    }
+  
+    .delete {
+      & .ant-btn {
+        height: 36px;
+        border-radius: 50px;
+      }
+    }
+  
+    .search {
+      & .ant-input {
+        height: 36px;
+        border-radius: 20px;
+        padding-left: 34px;
+  
+        &-affix-wrapper .ant-input-prefix {
+          left: 16px;
+        }
+      }
+    }
+  }
+  .ant-table-thead > tr  th:nth-child(2),
+  .ant-table-tbody > tr  td:nth-child(2),
+  .ant-table-thead > tr  th:nth-child(4),
+  .ant-table-tbody > tr  td:nth-child(4),{
+    max-width: 300px;
+    .BG-ellipsis;
+  }

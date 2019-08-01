@@ -1,0 +1,73 @@
+<div class="bubble">
+  <!-- ani_auto -->
+  <div class="bubble_min ani_top_top" [class.ani_auto]="bubbleAnimation" [class.ani_time_8]="bubbleAnimation"></div>
+  <div class="bubble_min ani_top_top" [class.ani_auto]="bubbleAnimation" [class.ani_time_10]="bubbleAnimation"></div>
+  <div class="bubble_min ani_top_top" [class.ani_auto]="bubbleAnimation" [class.ani_time_12]="bubbleAnimation"></div>
+  <div class="bubble_min ani_top_top" [class.ani_auto]="bubbleAnimation" [class.ani_time_10]="bubbleAnimation"></div>
+  <div class="bubble_min ani_top_top" [class.ani_auto]="bubbleAnimation" [class.ani_time_12]="bubbleAnimation"></div>
+  <div class="bubble_min ani_top_top" [class.ani_auto]="bubbleAnimation" [class.ani_time_10]="bubbleAnimation"></div>
+  <div class="bubble_min ani_top_top" [class.ani_auto]="bubbleAnimation" [class.ani_time_8]="bubbleAnimation"></div>
+
+  <div class="bubble_list">
+    <div 
+      *ngIf="data[5]"
+      class="bubble_item ani_top_bottom"
+      [class.ani_auto]="bubbleAnimation"
+      [class.ani_time_10]="bubbleAnimation">
+      <p *ngIf="data[5]">
+        <span>{{ data[5].name }}</span>
+        <i>{{ data[5].value }}%</i>
+      </p>
+    </div>
+    <div 
+      *ngIf="data[2]"
+      class="bubble_item ani_bottom_top"
+      [class.ani_auto]="bubbleAnimation" 
+      [class.ani_time_8]="bubbleAnimation">
+      <p *ngIf="data[2]">
+        <span>{{ data[2].name }}</span>
+        <i>{{ data[2].value }}%</i>
+      </p>
+    </div>
+    <div
+      *ngIf="data[4]"
+      class="bubble_item ani_top_bottom" 
+      [class.ani_auto]="bubbleAnimation" 
+      [class.ani_time_12]="bubbleAnimation">
+      <p *ngIf="data[4]">
+        <span>{{ data[4].name }}</span>
+        <i>{{ data[4].value }}%</i>
+      </p>
+    </div>
+    <div 
+      *ngIf="data[0]"
+      class="bubble_item ani_top_bottom"
+      [class.ani_auto]="bubbleAnimation"
+      [class.ani_time_8]="bubbleAnimation">
+      <p *ngIf="data[0]">
+        <span>{{ data[0].name }}</span>
+        <i>{{ data[0].value }}%</i>
+      </p>
+    </div>
+    <div 
+      *ngIf="data[1]"
+      class="bubble_item ani_bottom_top"
+      [class.ani_auto]="bubbleAnimation" 
+      [class.ani_time_10]="bubbleAnimation">
+      <p *ngIf="data[1]">
+        <span>{{ data[1].name }}</span>
+        <i>{{ data[1].value }}%</i>
+      </p>
+    </div>
+    <div 
+      *ngIf="data[3]"
+      class="bubble_item ani_top_bottom"
+      [class.ani_auto]="bubbleAnimation" 
+      [class.ani_time_12]="bubbleAnimation">
+      <p *ngIf="data[3]">
+        <span>{{ data[3].name }}</span>
+        <i>{{ data[3].value }}%</i>
+      </p>
+    </div>
+  </div>
+</div>

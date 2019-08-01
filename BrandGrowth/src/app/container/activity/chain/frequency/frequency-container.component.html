@@ -1,0 +1,165 @@
+<div class="chain-frequency">
+    <nz-card class="chain-frequency-card chain-frequency-card-nopadding chain-frequency-card-metric-wrap">
+      <ng-template #body>
+        <div class="chain-frequency-card-metric">
+          <div class="chain-frequency-card-metric-item">
+            <metric-view-item
+              metricTitle="频次.1"
+              [metricInfo]="_frequencyData[1] | fpercent">
+              <ng-template #metricContent>
+                <cm-progress class="chain-frequency-card-metric-item-progress">
+                  <nz-progress [ngModel]="_frequencyData[1] * 100" [nzStrokeWidth]="5" [nzShowInfo]="false"></nz-progress>
+                </cm-progress>
+              </ng-template>
+            </metric-view-item>
+          </div>
+          <div class="chain-frequency-card-metric-item">
+            <metric-view-item
+              left
+              metricTitle="频次.2"
+              [metricInfo]="_frequencyData[2] | fpercent">
+              <ng-template #metricContent>
+                <cm-progress class="chain-frequency-card-metric-item-progress">
+                  <nz-progress [ngModel]="_frequencyData[2] * 100" [nzStrokeWidth]="5" [nzShowInfo]="false"></nz-progress>
+                </cm-progress>
+              </ng-template>
+            </metric-view-item>
+          </div>
+          <div class="chain-frequency-card-metric-item">
+            <metric-view-item
+              left
+              metricTitle="频次.3"
+              [metricInfo]="_frequencyData[3] | fpercent">
+              <ng-template #metricContent>
+                <cm-progress class="chain-frequency-card-metric-item-progress">
+                  <nz-progress [ngModel]="_frequencyData[3] * 100" [nzStrokeWidth]="5" [nzShowInfo]="false"></nz-progress>
+                </cm-progress>
+              </ng-template>
+            </metric-view-item>
+          </div>
+          <div class="chain-frequency-card-metric-item">
+            <metric-view-item
+              left
+              metricTitle="频次.4"
+              [metricInfo]="_frequencyData[4] | fpercent">
+              <ng-template #metricContent>
+                <cm-progress class="chain-frequency-card-metric-item-progress">
+                  <nz-progress [ngModel]="_frequencyData[4] * 100" [nzStrokeWidth]="5" [nzShowInfo]="false"></nz-progress>
+                </cm-progress>
+              </ng-template>
+            </metric-view-item>
+          </div>
+          <div class="chain-frequency-card-metric-item">
+            <metric-view-item
+              left
+              metricTitle="频次.5"
+              [metricInfo]="_frequencyData[5] | fpercent">
+              <ng-template #metricContent>
+                <cm-progress class="chain-frequency-card-metric-item-progress">
+                  <nz-progress [ngModel]="_frequencyData[5] * 100" [nzStrokeWidth]="5" [nzShowInfo]="false"></nz-progress>
+                </cm-progress>
+              </ng-template>
+            </metric-view-item>
+          </div>
+          <div class="chain-frequency-card-metric-item">
+            <metric-view-item
+              left
+              metricTitle="频次.6"
+              [metricInfo]="_frequencyData[6] | fpercent">
+              <ng-template #metricContent>
+                <cm-progress class="chain-frequency-card-metric-item-progress">
+                  <nz-progress [ngModel]="_frequencyData[6] * 100" [nzStrokeWidth]="5" [nzShowInfo]="false"></nz-progress>
+                </cm-progress>
+              </ng-template>
+            </metric-view-item>
+          </div>
+          <div class="chain-frequency-card-metric-item-overclock chain-frequency-card-metric-item">
+            <metric-view-item
+              left
+              metricTitle="频次.7+"
+              [metricInfo]="_frequencyData[7] | fpercent">
+              <ng-template #metricContent>
+                <cm-progress class="chain-frequency-card-metric-item-progress">
+                  <nz-progress 
+                    [ngModel]="_frequencyData[7] * 100" 
+                    [nzStrokeWidth]="5" 
+                    [nzShowInfo]="false" 
+                    [nzStatus]="'exception'"></nz-progress>
+                </cm-progress>
+              </ng-template>
+            </metric-view-item>
+          </div>
+        </div>
+      </ng-template>
+    </nz-card>
+    <nz-card class="chain-frequency-card chain-frequency-card-nopadding">
+      <ng-template #title>
+        曝光频次分布
+      </ng-template>
+      <ng-template #body>
+        <div nz-row>
+          <div
+            class="chain-frequency-card-distribution-chart chain-frequency-card-nopadding-item"
+            nz-col
+            [nzSpan]="18">
+            <chart-table-wrap>
+              <ng-template #contentChart>
+                <chart-line [config]="_distributedFrequencyData" [height]="264"></chart-line>
+              </ng-template>
+              <ng-template #contentTable>
+                <table-move
+                  [tableColumns]="_distributedFrequencyTableData.column" 
+                  [tableData]="_distributedFrequencyTableData.content"
+                  tableHeight="250"></table-move>
+              </ng-template>
+            </chart-table-wrap>
+          </div>
+          <div class="chain-frequency-card-distribution-metric" nz-col [nzSpan]="6">
+            <div class="chain-frequency-card-distribution-metric-item">
+              <metric-view-item
+                metricTitle="平均每台设备曝光"
+                [metricInfo]="(_totalImpressionPv / _totalEquipmentNum | fnumber) + '次'"></metric-view-item>
+            </div>
+            <div class="chain-frequency-card-distribution-metric-item">
+              <metric-view-item
+                metricTitle="超频曝光占比"
+                [metricInfo]="((_totalImpressionOverclock / _totalImpressionPv * 100) | fnumber) + '%'"></metric-view-item>
+            </div>
+            <div class="chain-frequency-card-distribution-metric-item">
+              <metric-view-item
+                metricTitle="占总超频曝光比"
+                [metricInfo]="((_totalImpressionOverclock / _allMonitorImpressionOverclock * 100) | fnumber) + '%'"></metric-view-item>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </nz-card>
+    <nz-card class="chain-frequency-card chain-frequency-card-nopadding">
+      <ng-template #title>
+        曝光数据
+      </ng-template>
+      <ng-template #body>
+        <div nz-row>
+          <div class="chain-frequency-card-channel-item chain-frequency-card-nopadding-item" nz-col [nzSpan]="18">
+            <chart-table-wrap>
+                <ng-template #contentChart>
+                  <chart-line [config]="_channelData" [height]="383"></chart-line>
+                </ng-template>
+                <ng-template #contentTable>
+                  <table-move
+                    [tableColumns]="_channelTableData.column" 
+                    [tableData]="_channelTableData.content"
+                    tableHeight="380"></table-move>
+                </ng-template>
+              </chart-table-wrap>
+          </div>
+          <div class="chain-frequency-card-channel-item chain-frequency-card-nopadding-item" nz-col [nzSpan]="6">
+            <h4>渠道超频曝光占比</h4>
+            <div class="chain-frequency-card-nopadding-item-content">
+              <list-icon-ratio [config]="_distributedChannelData"></list-icon-ratio>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </nz-card>
+  </div>

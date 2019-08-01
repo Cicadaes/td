@@ -1,0 +1,146 @@
+<div class="brand-analysis">
+  <div class="brand-analysis-brand-volume-wap">
+      <div class="brand-analysis-tit">
+          <h3>品牌声量趋势</h3>
+          <ul>
+            <li [ngClass]="{'bg-color': hotWordIndex == itemIndex, 'hover-class': 'true'}" *ngFor="let item of hotWordList;let itemIndex=index" (click)="switcHoverOne(item, itemIndex, $event)">
+              <span title="{{item.keyword}}">{{item.keyword}}</span>
+              <i class="anticon anticon-close-circle-o" (click)="deleteOne(item, $event)"></i>
+            </li>
+            <li (click)="addOne()" *ngIf="hotWordLength < 5 && addHotWordFlag" class="add">
+                <i class="anticon anticon-plus"></i>
+              <span>添加</span>
+            </li>
+            <li *ngIf="!addHotWordFlag">
+                <input class="hot-input" maxlength="8" [(ngModel)]="hotWordName" placeholder="请输入热词" (keyup.enter)="addNewHotWord(hotWordName)">
+            </li>
+          </ul>
+      </div>
+      <div class="brand-analysis-brand-volume">
+        <div class="brand-analysis-brand-volume-tendency">
+          <div class="brand-analysis-brand-volume-tendency-top">
+            <div class="brand-analysis-brand-volume-tendency-top-one" *ngFor="let item of brandVolumeList;let itemIndex=index" >
+              <p>
+                <!-- <b [ngClass]="{'color':true ,'color-blue':itemIndex==0, 'color-green':itemIndex==1, 'color-yellow':itemIndex==2, 'color-orange':itemIndex==3}" ></b> -->
+                {{item.name}}
+              </p>
+              {{item.value}}
+            </div>
+          </div>
+          <div class="brand-analysis-brand-volume-tendency-chart">
+            <chart-table-wrap>
+              <ng-template #contentChart>
+                <chart-line [config]="brandLineChart" [height]="330"></chart-line>
+              </ng-template>
+              <ng-template #contentTable>
+                <table-move
+                  [tableColumns]="brandTableColumn" 
+                  [tableData]="brandTableData" 
+                  tableHeight="330">
+                </table-move>
+              </ng-template>
+            </chart-table-wrap>
+          </div>
+        </div>
+        <div class="brand-analysis-brand-volume-border"></div>
+        <div class="brand-analysis-brand-volume-ranking">
+            <h4>品牌声量分布</h4>
+            <chart-pie [config]="brandRankingChart" [height]="170"></chart-pie>
+        </div>
+      </div>
+  </div>
+  <div class="brand-analysis-media-volume brand-analysis-chart">
+    <div class="brand-analysis-media-volume-chunk brand-analysis-chart-left">
+      <h3 class="brand-analysis-title">
+        媒体声量
+        <div class="download">
+          <span class="BG-download-style" (click)="downLoadMediaChunkData('mediaVolumeChart')">
+            <i class="icon icon-download"></i>
+          </span>
+        </div>
+      </h3>
+      <div class="brand-analysis-media-volume-chart brand-analysis-media-volume-special brand-analysis-chart-content">
+        <chart-pie [config]="mediaVolumeChart" [valueUnit]="'条'" [height]="170" [horizontal]="true"></chart-pie>
+      </div>
+    </div>
+    <div class="brand-analysis-media-volume-tendency brand-analysis-chart-right">
+      <h3 class="brand-analysis-title">
+        媒体声量分布和排行
+        <div class="download">
+          <span class="BG-download-style" (click)="downLoadMediaTendencyData()">
+            <i class="icon icon-download"></i>
+          </span>
+        </div>
+      </h3>
+      <div class="brand-analysis-media-volume-chart brand-analysis-chart-content">
+        <chart-table-wrap>
+          <ng-template #contentChart>
+            <chart-bar [config]="mediaBarChart" [height]="260"></chart-bar>
+          </ng-template>
+          <ng-template #contentTable>
+            <div style="height: 260px">
+              <table-move [tableColumns]="mediaTableColumn" [tableData]="mediaTableContent" tableHeight="260">
+              </table-move>
+            </div>
+          </ng-template>
+        </chart-table-wrap>
+      </div>
+      
+    </div>
+  </div>
+  <div class="brand-analysis-popular-feelings brand-analysis-chart">
+    <h3 class="brand-analysis-title">
+      舆情热词分布
+      <div class="download">
+        <span class="BG-download-style" (click)="downLoadMediaBar()">
+          <i class="icon icon-download"></i>
+        </span>
+      </div>
+    </h3>
+    <div class="brand-analysis-popular-feelings-chart brand-analysis-chart-content">
+        <chart-table-wrap>
+          <ng-template #contentChart>
+            <chart-bar [config]="popularFeelingsChart" [height]="260"></chart-bar>
+          </ng-template>
+          <ng-template #contentTable>
+            <div style="height: 260px">
+              <table-move [tableColumns]="popularFeelingsTableColumn" [tableData]="popularFeelingsTableContent" tableHeight="260">
+              </table-move>
+            </div>
+          </ng-template>
+        </chart-table-wrap>
+    </div>
+  </div>
+  <div class="brand-analysis-popular-feelings-top brand-analysis-chart">
+    <div class="brand-analysis-popular-feelings-top-positive brand-analysis-chart-left">
+      <h3 class="brand-analysis-title">TOP5正面舆情热词</h3>
+      <div class="brand-analysis-popular-feelings-top-positive-content">
+        <div class="brand-analysis-popular-feelings-top-div" *ngFor="let item of top5PositiveWord" >
+          <h3>
+              {{item.title}}
+              <span>{{item.time}}</span>
+              <span>
+                  <b>{{item.source}}</b> / <b>{{item.count}}</b> 
+              </span>
+            </h3>
+            <p>{{item.contenct}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="brand-analysis-popular-feelings-top-negative brand-analysis-chart-right">
+      <h3 class="brand-analysis-title">TOP5负面舆情热词</h3>
+      <div class="brand-analysis-popular-feelings-top-negative-content">
+          <div class="brand-analysis-popular-feelings-top-div" *ngFor="let item of top5NegativeWord" >
+            <h3>
+              {{item.title}}
+              <span>{{item.time}}</span>
+              <span>
+                  <b>{{item.source}}</b> / <b>{{item.count}}</b> 
+              </span>
+            </h3>
+            <p>{{item.contenct}}</p>
+          </div>
+      </div>
+    </div>
+  </div> 
+</div>

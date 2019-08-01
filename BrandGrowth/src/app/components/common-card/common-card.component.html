@@ -1,0 +1,13 @@
+<nz-card class="common-card">
+  <ng-template #title *ngIf="cardTitle">
+    {{cardTitle}}
+  </ng-template>
+  <ng-template #extra>
+    <a class="down">
+      <i class="icon-download"></i>
+    </a>
+  </ng-template>
+  <ng-template #body>
+    <ng-content></ng-content>
+  </ng-template>
+</nz-card>

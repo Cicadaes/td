@@ -1,0 +1,143 @@
+@import '../../../assets/styles/common.less';
+
+.ac_header{
+    width:100%; 
+    height:84px;
+  }
+  
+  .ac_left{
+     float:left; 
+     line-height: 84px;
+  }
+  .ac_left span{
+     text-align: center; 
+     display:block;
+     width:135px;
+     height:36px;
+     margin: 24px 0;
+     background:#3399FF;
+     border-radius: 20px;
+     color:#fff;
+     font-family: PingFangSC-Regular;
+     font-size: 14px;
+     color: #FFFFFF;
+     line-height: 36px;
+     i{
+         font-family: PingFangSC-Regular;
+         font-style:normal;
+         font-size: 14px;
+
+     }
+  }
+  
+  .ac_right{
+      float:right;
+      line-height: 84px;
+  }
+  :host ::ng-deep .ant-input-affix-wrapper .ant-input:not(:first-child){ 
+    padding: 10px 25px; 
+    margin: 24px 0; 
+    width:240px;
+    height:36px;
+    border: 1px solid #DDDEE1;
+    border-radius: 20px;
+}
+:host ::ng-deep.ant-pagination {
+    width: 100%;
+    text-align: right;
+    padding:0 24px;
+}
+:host ::ng-deep.ant-pagination-options{
+    float:left;
+    margin-left:0;
+}
+:host ::ng-deep .ant-card .ant-table .ant-table-thead > tr > th:first-child,
+:host ::ng-deep .ant-card .ant-table .ant-table-tbody > tr > td:first-child{
+    max-width:230px;
+    width:230px;
+    .BG-ellipsis;
+}
+
+:host ::ng-deep .ant-input-search{
+    width: 300px;
+    height:36px;
+    border-radius: 50px;
+    text-indent: 2em;
+  }
+  :host ::ng-deep .ant-input-affix-wrapper .ant-input-suffix{
+    left:7px;
+    right:280px;
+  }
+:host ::ng-deep .ant-card{
+    background: #FFFFFF;
+    box-shadow: 0 1px 2px 0 rgba(28,36,56,0.15);
+    border-radius: 4px;
+    width:100%;
+    .ant-card-head{
+        height:56px;
+        font-family: PingFangSC-Medium;
+        // font-size: 16px;
+        color: #1C2438;
+        line-height: 56px;
+        border-bottom:1px solid rgba(28,36,56,0.10);
+        .ant-card-head-title{
+            font-family: PingFangSC-Medium;
+            font-size: 16px;
+            color: #1C2438;
+        }
+    }
+    .ant-card-body{
+        padding:0
+    }
+    .ant-table {
+        width:100%;
+        margin-top: 1px;
+        .ant-table-thead > tr > th {
+            height:40px !important;
+            padding:10px 20px;
+            background: #F8F8F9;
+            font-family: PingFangSC-Medium;
+            // font-size: 14px;
+            color: rgba(28,36,56,0.80);
+        }
+        .ant-table-tbody > tr{
+            height:49px;
+            border-top:1px solid rgba(28,36,56,0.10);
+        }
+        .ant-table-tbody >tr td{
+            font-family: PingFangSC-Regular;
+            // font-size: 14px;
+            padding:0px 20px;
+            color: rgba(28,36,56,0.80);
+            line-height: 14px;
+            border-top:1px solid rgba(28,36,56,0.10);
+        }
+        .ant-table-tbody >tr td:last-child{
+            span{
+                margin-right:16px;
+                color:#2D8CF0;
+                cursor: pointer
+            }
+
+        }
+    }
+}
+:host ::ng-deep ._actStatus {
+    & .ant-progress-inner {
+        width:100px;
+      background-color: rgba(28,36,56,0.08);
+      border-radius: 0;  
+  
+      & > .ant-progress-bg {
+        border-radius: 0;  
+        background-color: #3399FF;
+      }
+    }
+  }
+
+// 修改Table样式
+:host ::ng-deep .ant-card .ant-table .ant-table-tbody > tr > td:first-child:hover{
+  cursor:pointer; 
+  color: #3399FF;
+}
+

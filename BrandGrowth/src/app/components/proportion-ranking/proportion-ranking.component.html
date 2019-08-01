@@ -1,0 +1,13 @@
+<main>
+  <h3 class="title" *ngIf="rankTitle">城市分布</h3>
+  <ul class="ranking-list">
+    <li class="ranking-item clearfix" *ngFor="let el of _data;let i = index;">
+      <span class="budge">{{i + 1}}</span>
+      <span class="item-name">{{el.name}}</span>
+      <span class="percent">{{el.value}}%</span>
+      <cm-progress class="ranking-item-progress">
+        <nz-progress [ngModel]="el.value" [nzStrokeWidth]="i > 2 ? 8 : 10" [nzShowInfo]="false"></nz-progress>
+      </cm-progress>
+    </li>
+  </ul>
+</main>

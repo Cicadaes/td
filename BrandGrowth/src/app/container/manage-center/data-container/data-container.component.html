@@ -1,0 +1,62 @@
+<div class="ac_main">
+    <div class="ac_header">
+      <div class="ac_left">
+        <a >
+          <span (click)='create("新建数据回调")'><i class="anticon anticon-plus"></i>
+             新建数据回调</span>
+        </a>
+      </div>
+      <div class="ac_right">
+        <nz-input [nzType]="'text'" [nzPlaceHolder]="'请输入关键词进行检索'" [(ngModel)]='search' >
+          <ng-template #prefix>
+            <i class="anticon anticon-search"></i>
+          </ng-template>
+        </nz-input>
+      </div>
+    </div>
+    <nz-card style="width:1200px;">
+        <ng-template #title>
+           数据管理
+        </ng-template>
+        <ng-template #body>
+             <nz-table #nzTable 
+                      [nzDataSource]="_dataSet | farray:['name']:search" 
+                      [nzPageSize]="10" 
+                      nzShowSizeChanger>
+                <thead nz-thead>
+                  <tr>
+                    <th nz-th><span>名称</span></th>
+                    <th nz-th><span>活动</span></th>
+                    <th nz-th><span>事件</span></th>
+                    <th nz-th><span>数据发送数</span></th>
+                    <th nz-th><span>最后操作时间</span></th>
+                    <th nz-th><span>状态</span></th>
+                    <th nz-th><span>操作</span></th>
+                  </tr>
+                </thead>
+                <tbody nz-tbody>
+                  <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                    <td nz-td [title]='data.name'>{{data.name}}</td>
+                    <td nz-td>{{data.activityName}}</td>
+                    <td nz-td>{{data.chName}}</td>
+                    <td nz-td>{{data.developerId}}</td>
+                    <td nz-td>{{data.optime}}</td>
+                    <td nz-td >
+                      <nz-switch [ngModel]="data.enabled" (click)='changeSwitch(data,$event)' *ngIf="data.enabled >=0">
+                        <span checked>启用</span>
+                        <span unchecked>停用</span>
+                      </nz-switch>
+                      <cm-button>
+                        <button nz-button [nzType]="'default'" *ngIf="!(data.enabled >=0)" (click)="ping(data)">调试</button>
+                    </cm-button>
+                
+                    </td>
+                    <td nz-td (click)='edit("编辑数据回调",data)'>编辑</td>
+                  </tr>
+                </tbody>
+            </nz-table>
+        </ng-template>
+      </nz-card>
+  </div>
+  
+  

@@ -1,0 +1,212 @@
+<div class="chain-details">
+  <nz-card class="chain-details-card">
+    <ng-template #body>
+      <div nz-row>
+        <metric-view-item
+          nz-col
+          [nzSpan]="5"
+          metricTitle="曝光"
+          [metricInfo]="_impressionData.impression_pv | number"></metric-view-item>
+        <metric-view-item
+          nz-col
+          [nzSpan]="5"
+          left
+          metricTitle="独立曝光"
+          [metricInfo]="_impressionData.impression_uv | number"></metric-view-item>
+        <metric-view-item
+          nz-col
+          [nzSpan]="5"
+          left
+          metricTitle="曝光IP数"
+          [metricInfo]="_impressionData.impression_ip | number"></metric-view-item>
+        <metric-view-item
+          nz-col
+          [nzSpan]="4"
+          left
+          metricTitle="异常曝光占比"
+          [metricInfo]="(_impressionData.impression_anti / _impressionData.impression_pv) | fpercent"></metric-view-item>
+        <metric-view-item
+          nz-col
+          left
+          [nzSpan]="5"
+          metricTitle="携带设备ID"
+          [metricInfo]="_impressionData.device_impression_pv | number"></metric-view-item>
+      </div>
+    </ng-template>
+  </nz-card>
+  <nz-card class="chain-details-card chain-details-card-small">
+    <ng-template #title>
+      曝光趋势
+    </ng-template>
+    <ng-template #extra>
+      <div>
+        <span class="BG-download-style" (click)="downloadImpressionTrendCsv()">
+          <i class="icon icon-download"></i>
+        </span>
+      </div>
+    </ng-template>
+    <ng-template #body>
+      <chart-table-wrap>
+        <ng-template #contentChart>
+          <chart-line [config]="_impressionTrend"></chart-line>
+        </ng-template>
+        <ng-template #contentTable>
+          <table-move
+            [tableColumns]="_tableColumn" 
+            [tableData]="_tableData" 
+            tableHeight="250"></table-move>
+        </ng-template>
+      </chart-table-wrap>
+    </ng-template>
+  </nz-card>
+  <nz-card class="chain-details-card chain-details-card-small chain-details-card-right">
+    <ng-template #title>
+      曝光时段
+    </ng-template>
+    <ng-template #extra>
+      <div>
+        <cm-button>
+          <nz-button-group>
+            <button nz-button
+              [nzType]="_impressionTimeslotType === 'monitor_hour' ? 'primary' : 'default'"
+              (click)="getParsedImpressionTimeslot('monitor_hour')">
+              <span>日</span>
+            </button>
+            <button
+              nz-button 
+              [nzType]="_impressionTimeslotType === 'monitor_week' ? 'primary' : 'default'" 
+              (click)="getParsedImpressionTimeslot('monitor_week')">
+              <span>周</span>
+            </button>
+          </nz-button-group>
+        </cm-button>
+        <span class="BG-download-style" (click)="downloadImpressionTimeslotCsv()">
+          <i class="icon icon-download"></i>
+        </span>
+      </div>
+    </ng-template>
+    <ng-template #body>
+      <div class="chain-details-card-chart-polay">
+        <chart-polay
+          *ngIf="_impressionTimeslotType === 'monitor_hour'"
+          [class.chain-details-card-chart-polay-chart]="true"
+          [chartType]="'day'"
+          [config]="_impressionTimeslot"></chart-polay>
+        <chart-polay
+          *ngIf="_impressionTimeslotType === 'monitor_week'"
+          [class.chain-details-card-chart-polay-chart]="true"
+          [chartType]="'week'"
+          [config]="_impressionTimeslot"></chart-polay>
+        <div
+          class="chain-details-card-chart-polay-text">
+          <p>曝光高频时段</p>
+          <h4>{{ _maxImpressionTimeslot }}</h4>
+        </div>
+      </div>
+    </ng-template>
+  </nz-card>
+  <nz-card class="chain-details-card chain-details-card-nopadding">
+    <ng-template #title>
+      曝光数据
+    </ng-template>
+    <ng-template #body>
+      <div nz-row>
+        <div class="chain-details-card-nopadding-item impressionData" nz-col [nzSpan]="6">
+          <h4>广告格式分布</h4>
+          <chart-pie [config]="_distributedAdType"></chart-pie>
+        </div>
+        <div class="chain-details-card-nopadding-item impressionData" nz-col [nzSpan]="6">
+          <h4>监测链接分布</h4>
+          <chart-pie [config]="_distributedMonitor"></chart-pie>
+        </div>
+        <div class="chain-details-card-nopadding-item impressionData" nz-col [nzSpan]="6">
+          <h4>渠道类型分布</h4>
+          <chart-pie [config]="_distributedMediaType"></chart-pie>
+        </div>
+        <div class="chain-details-card-nopadding-item impressionData" nz-col [nzSpan]="6">
+          <h4>渠道分布</h4>
+          <div class="chain-details-card-nopadding-item-content">
+            <list-icon-ratio [config]="_distributedChannel"></list-icon-ratio>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </nz-card>
+  <nz-card class="chain-details-card chain-details-card-nopadding">
+    <ng-template #title>
+      曝光设备分析
+    </ng-template>
+    <ng-template #body>
+      <div nz-row>
+        <div class="chain-details-card-nopadding-item impressionDt" nz-col [nzSpan]="12">
+          <chart-treemap [config]="_equipmentAnalysis"></chart-treemap>
+        </div>
+        <div class="chain-details-card-nopadding-item impressionDt" nz-col [nzSpan]="12">
+          <nz-row>
+            <metric-view-item
+              nz-col
+              [nzSpan]="12"
+              [metricTitle]="'来自' + _osAnalysis.os[0].label + '系统'"
+              [metricInfo]="_osAnalysis.os[0].value | fpercent"></metric-view-item>
+            <metric-view-item
+              nz-col
+              [nzSpan]="12"
+              [metricTitle]="'来自' + _osAnalysis.os[1].label + '系统'"
+              [metricInfo]="_osAnalysis.os[1].value | fpercent"></metric-view-item>
+          </nz-row>
+          <nz-row>
+            <metric-view-item
+              nz-col
+              [nzSpan]="12"
+              [metricTitle]="'来自' + _osAnalysis.brand[0].label"
+              [metricInfo]="_osAnalysis.brand[0].value | fpercent"></metric-view-item>
+            <metric-view-item
+              nz-col
+              [nzSpan]="12"
+              [metricTitle]="'来自' + _osAnalysis.brand[1].label"
+              [metricInfo]="_osAnalysis.brand[1].value | fpercent"></metric-view-item>
+          </nz-row>
+          <nz-row>
+            <metric-view-item
+              nz-col
+              [nzSpan]="12"
+              [metricTitle]="'来自' + _osAnalysis.dt[0].label"
+              [metricInfo]="_osAnalysis.dt[0].value | fpercent"></metric-view-item>
+            <metric-view-item
+              nz-col
+              [nzSpan]="12"
+              [metricTitle]="'来自' + _osAnalysis.dt[1].label"
+              [metricInfo]="_osAnalysis.dt[1].value | fpercent"></metric-view-item>
+          </nz-row>
+        </div>
+      </div>
+    </ng-template>
+  </nz-card>
+  <nz-card class="chain-details-card chain-details-card-nopadding">
+    <ng-template #title>
+      您的广告曝光来自哪些区域？
+    </ng-template>
+    <ng-template #extra>
+      <div>
+        <span class="BG-download-style" (click)="downloadImpressionMapCsv()">
+          <i class="icon icon-download"></i>
+        </span>
+      </div>
+    </ng-template>
+    <ng-template #body>
+      <nz-row>
+        <nz-col nzSpan="12" class="chain-details-card-nopadding-item impressionAdType">
+          <h4>省份分布</h4>
+          <chart-map [title]="'省份分布'" [data]="_provinceAnalysis" [height]="350"></chart-map>
+        </nz-col>
+        <div class="chain-details-card-nopadding-item impressionAdType" nz-col [nzSpan]="6">
+          <h4>线级城市占比</h4>
+          <chart-pie [config]="_cityLevelAnalysis"></chart-pie>
+        </div>
+        <nz-col nzSpan="6" class="chain-details-card-nopadding-item impressionAdType">
+          <proportion-ranking [data]="_cityAnalysis"></proportion-ranking>
+        </nz-col>
+      </nz-row>
+    </ng-template>
+  </nz-card>
+</div>

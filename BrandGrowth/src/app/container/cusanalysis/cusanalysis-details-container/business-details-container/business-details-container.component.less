@@ -1,0 +1,251 @@
+@import '../../../../../assets/styles/common.less';
+
+.analysis-details-business {
+  padding-top: 40px;
+  padding-bottom: 113px;
+  overflow: hidden;
+
+  &-row {
+    border-bottom: 1px solid #EDEEEF;
+
+    &-col {
+      padding: 40px;
+      height: 573px;
+
+      &:first-child {
+        border-right: 1px solid #EDEEEF;
+      }
+
+      & > h4 {
+        font-family: PingFangSC-Medium;
+        font-size: 14px;
+        color: rgba(28,36,56,0.80);
+        line-height: 16px;
+      }
+
+      &-radar {
+        padding-top: 40px;
+        display: flex;
+
+        &-chart {
+          flex: 1;
+        }
+
+        &-rank {
+          max-height: 440px;
+          overflow-y: auto;
+          width: 250px;
+          .BG-scroll;
+
+          &-item {
+            overflow: hidden;
+            height: 40px;
+            line-height: 40px;
+
+            &:nth-child(1) > b {
+              background: #FF8454;
+              color: #fff;
+            }
+      
+            &:nth-child(2) > b {
+              background: #FCC45F;
+              color: #fff;
+            }
+      
+            &:nth-child(3) > b {
+              background: #2DE2C5;
+              color: #fff;
+            }
+
+            & > b {
+              float: left;
+              width: 20px;
+              height: 20px;
+              margin-top: 10px;
+              margin-right: 16px;
+              background: #DADCDF;
+              font-family: HelveticaNeue-Medium;
+              font-size: 14px;
+              color: rgba(28,36,56,0.80);
+              border-radius: 20px;
+              text-align: center;
+              font-weight: 500;
+              line-height: 22px;
+            }
+
+            & > p {
+              display: inline-block;
+              width: 120px;
+              .BG-ellipsis;
+              font-family: PingFangSC-Regular;
+              font-size: 14px;
+              color: #495060;
+            }
+
+            & > span {
+              float: right;
+              font-family: HelveticaNeue;
+              font-size: 14px;
+              color: #80848F;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &-crowd {
+
+    &-col {
+
+      &-item {
+        padding: 24px 40px;
+        border-bottom: 1px solid #EDEEEF;
+        border-right: 1px solid #EDEEEF;
+        height: 160px;
+
+        &:first-child {
+          padding-top: 0;
+          height: 120px;
+        }
+
+        & > h4 {
+          font-family: PingFangSC-Medium;
+          font-size: 14px;
+          color: rgba(28,36,56,0.80);
+          line-height: 16px;
+        }
+
+        &-text {
+          margin-top: 16px;
+          // margin-bottom: 8px;
+          font-family: PingFangSC-Regular;
+          font-size: 24px;
+          color: #1C2438;
+        }
+      }
+    }
+
+    &-features {
+      height: 280px;
+      padding: 0 40px 40px;
+      border-bottom: 1px solid #EDEEEF;
+
+      & > h4 {
+        font-family: PingFangSC-Medium;
+        font-size: 14px;
+        color: rgba(28,36,56,0.80);
+        line-height: 16px;
+      }
+    }
+  }
+
+  &-table {
+    // height: 685px;
+    padding: 40px 40px 0;
+
+    &-operation {
+
+      & > h4 {
+        font-family: PingFangSC-Medium;
+        font-size: 14px;
+        color: rgba(28,36,56,0.80);
+        line-height: 28px;
+        // overflow: hidden;
+        margin-bottom: 24px;
+      }
+    }
+  }
+}
+
+:host ::ng-deep .analysis-details-business {
+
+  &-crowd {
+
+    &-col {
+
+      &-item {
+
+        &-progress {
+    
+          // 修改进度条颜色
+          & .ant-progress-outer {
+            width: 170px;
+            & > .ant-progress-inner {
+              background-color: rgba(28,36,56,0.08) !important;
+
+              & > .ant-progress-bg {
+                background-color: #3399FF;
+              }
+            }
+          }
+          // 修改进度条文本样式
+          & .ant-progress-text {
+            font-family: PingFangSC-Medium;
+            font-size: 14px;
+            color: #1C2438;
+          }
+        }
+      }
+    }
+
+    &-features {
+
+      &-content {
+        padding-top: 40px;
+
+        &-item {
+          margin: 22px 0;
+
+          & .metric-view-item-horizontal-content {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+
+  &-table {
+
+    &-content {
+
+      &-name {
+        width: 160px;
+        .BG-ellipsis;
+      }
+
+      &-number {
+        width: 60px;
+        text-align: right;
+      }
+
+      &-progress {
+        overflow: hidden;
+
+        & > span {
+          width: 52px;
+          float: left;
+          margin-right: 16px;
+        }
+
+        &-move {
+          float: left;
+
+          // 修改状态的进度条颜色
+          & .ant-progress-outer > .ant-progress-inner {
+            border-radius: 0;
+            width: 100px;
+            background-color: rgba(28,36,56,0.08);
+
+            & > .ant-progress-bg {
+              border-radius: 0;
+              width:auto;
+              height: 8px;
+              background-color: #3399FF;
+            }
+          }
+        }
+      }
+    }
+  }
+}

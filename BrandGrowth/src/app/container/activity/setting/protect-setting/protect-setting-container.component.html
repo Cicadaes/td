@@ -1,0 +1,76 @@
+<div>
+  <div class="protectCon">
+    <div class="regular">
+      <div class='re_left'>规则设置</div>
+      <div class="re_right">
+        <div *ngFor="let item of tradeData">
+          <h5>{{item.paramCn}}</h5>
+          <p>{{item.content}} <span>{{item.limitCount}}</span> {{item.content1}}</p>
+          <nz-row>
+            <nz-col nzSpan="12">
+              <cm-slider>
+                <nz-slider
+                  [nzMin]="0" 
+                  [nzMax]="50" 
+                  [nzStep]="1" 
+                  [(ngModel)]='item.limitCount'
+                  (nzOnAfterChange)="onAfterChange($event)"
+                 ></nz-slider>
+              </cm-slider>
+            </nz-col>
+            <nz-col nzSpan="4">
+              <cm-input-number>
+                <nz-input-number 
+                  [nzMin]="0" 
+                  [nzMax]="50" 
+                  [ngStyle]="{ marginLeft: '16px' }" 
+                  [nzStep]="1" 
+                  [(ngModel)]='item.limitCount'></nz-input-number>
+              </cm-input-number>
+            </nz-col>
+          </nz-row>
+        </div>
+        <button nz-button [nzType]="'primary'" (click)='save()'>
+            <span>保存</span>
+          </button>    
+      </div>
+      <!-- <div class="service">
+            <div class="se_left">服务设置</div>
+            <div class="se_right">
+                <div>
+                    <dl><dt>IP黑名单服务</dt>
+                        <dd>
+                            <cm-switch>
+                                <nz-switch [ngModel]="true" [nzSize]="'small'"></nz-switch>
+                            </cm-switch>
+                        </dd>
+                    </dl>
+                    <dl><dt>IP黑名单服务</dt>
+                        <dd>
+                            <cm-switch>
+                                <nz-switch [ngModel]="true" [nzSize]="'small'"></nz-switch>
+                            </cm-switch>
+                        </dd>
+                    </dl>
+                </div>
+                <div>
+                    <dl><dt>IP黑名单服务</dt>
+                        <dd>
+                            <cm-switch>
+                                <nz-switch [ngModel]="true" [nzSize]="'small'"></nz-switch>
+                            </cm-switch>
+                        </dd>
+                    </dl>
+                    <dl><dt>IP黑名单服务</dt>
+                        <dd>
+                            <cm-switch>
+                                <nz-switch [ngModel]="true" [nzSize]="'small'"></nz-switch>
+                            </cm-switch>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div> -->
+    </div>
+  
+  </div>

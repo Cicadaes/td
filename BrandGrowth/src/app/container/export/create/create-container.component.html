@@ -1,0 +1,107 @@
+<nz-card class="main">
+    <ng-template #body>
+      <form nz-form #validateForm="ngForm">
+        <div nz-form-item nz-row>
+          <div nz-form-label nz-col [nzSpan]="2">
+            <label for="name">选择活动</label>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="21" [nzOffset]="1" class="steps-content-form-control">
+            <nz-select 
+              (ngModelChange)="changeValue($event,'selectacEvent')" 
+              [nzSize]="'large'" 
+              #selectacEvent1="ngModel" 
+              [(ngModel)]="selectacEvent" 
+              [nzPlaceHolder]="'请选择活动'" 
+              nzAllowClear 
+              name="selectacEvent" 
+              nzShowSearch >
+                <nz-option
+                  *ngFor="let option of acoptions"
+                  [nzLabel]="option.label"
+                  [nzValue]="option">
+                </nz-option>
+              </nz-select>
+            <div nz-form-explain *ngIf="selectacEventFlag">活动不能为空!</div>
+          </div>
+        </div>
+        <div nz-form-item nz-row>
+          <div nz-form-label nz-col [nzSpan]="2">
+            <label for="time">时间范围</label>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="21" [nzOffset]="1" class="steps-content-form-control">
+              <nz-rangepicker 
+              (ngModelChange)="changeValue($event,'dateRange')"
+              name="time"
+              #dateRange1="ngModel"
+              [(ngModel)]="dateRange" 
+              [nzFormat]="'YYYY-MM-DD'" 
+              [nzDisabledDate]="_disabledDate"></nz-rangepicker>
+            <div nz-form-explain *ngIf="dateRangeFlag">时间范围不能为空!</div>
+          </div>
+        </div>
+        <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="2">
+              <label for="name">选择事件</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="21" [nzOffset]="1" class="steps-content-form-control">
+              <nz-select (ngModelChange)="changeValue($event,'selectEvent')" [nzSize]="'large'" #selectEvent1="ngModel" [(ngModel)]="selectEvent" [nzPlaceHolder]="'请选择事件'" nzAllowClear name="selectEvent">
+                  <nz-option
+                    *ngFor="let option of eventList"
+                    [nzLabel]="option.label"
+                    [nzValue]="option">
+                  </nz-option>
+                </nz-select>
+              <div nz-form-explain *ngIf="selectEventFlag">事件不能为空!</div>
+            </div>
+          </div>
+        <div nz-form-item nz-row>
+          <div nz-form-label nz-col [nzSpan]="2">
+            <label>选择监测链接</label>
+          </div>
+          <div nz-col [nzSpan]="21" [nzOffset]="1">
+            <div class="export-wap" >
+              <h3 class="export-tit"  *ngIf="!getMonitorListFlag">
+                {{selectacEvent && selectacEvent['label']}}
+                <p class="all-check">
+                  <label nz-checkbox [(ngModel)]="allCheckedFlag" name="all" (ngModelChange)="allChecked($event)" [nzIndeterminate]="allTndeterminateFlag">
+                    <span>全部链接</span>
+                  </label>
+                </p>
+              </h3>
+              <div class="no-data" *ngIf="getMonitorListFlag">
+                暂无数据
+              </div>
+              <div class="export-list"  *ngIf="!getMonitorListFlag">
+                <div class="monitor-link-one" *ngFor="let item of monitorLink">
+                  <div class="monitor-link-one-top" title='{{item.channelName}}'>
+                      <label nz-checkbox [(ngModel)]="item.isSelect" [ngModelOptions]="{standalone: true}" (ngModelChange)="updateAllChecked($event, item)" [nzIndeterminate]="item.indeterminate"></label>
+                      <span>{{item.channelName}}</span>
+                  </div>
+                  <p class="border-bottom"></p>
+                  <div class="monitor-link-one-bottom">
+                    <ul>
+                      <li *ngFor="let one of item.monitorList" title='{{one.name}}'>
+                        <label nz-checkbox [(ngModel)]="one.isSelect" [ngModelOptions]="{standalone: true}" (ngModelChange)="updateSingleChecked($event, item);"></label>
+                        <span>{{one.name}}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div nz-form-explain *ngIf="monitorLinkFlag" class="tooltip">请选择监测链接!</div>
+            <button nz-button [nzType]="'primary'" (click)="confirm();" *ngIf='!isDisable'>
+              <span>确定</span>
+            </button>
+            <button nz-button [nzType]="'primary'" *ngIf='isDisable' disabled>
+              <span>确定</span>
+            </button>
+            <button nz-button [nzType]="'default'" (click)="cancel();">
+              <span>取消</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </ng-template>
+  </nz-card>
+  

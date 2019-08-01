@@ -1,0 +1,219 @@
+<div class="overview">
+  <nz-card class="overview-card">
+    <ng-template #title>
+      您的营销活动简析
+    </ng-template>
+    <ng-template #extra>
+      <div>
+        <span 
+          class="BG-download-style"
+          (click)="downloadData('activity')">
+          <i class="icon icon-download"></i>
+        </span>
+      </div>
+    </ng-template>
+    <ng-template #body>
+      <div nz-row>
+        <metric-view-item
+          nz-col
+          [nzSpan]="6"
+          metricTitle="投放期 {{ advertisementFlight }}"
+          metricInfo="{{ advertisementFlightNumber }} 天"
+          metricInfoSize="30"></metric-view-item>
+        <metric-view-item
+          nz-col
+          [nzSpan]="6"
+          left
+          metricTitle="监测链接数"
+          metricInfo="{{ monitoringLink }} 个"
+          metricInfoSize="30"></metric-view-item>
+        <metric-view-item
+          nz-col
+          left
+          horizontal
+          [nzSpan]="12"
+          metricTitle="投放的媒体数"
+          metricInfo="{{ mediaList.length }} 个"
+          metricInfoSize="30">
+          <ng-template #metricContent>
+            <ul class="overview-card-media">
+              <li 
+                *ngFor="let item of mediaListFilter" 
+                [title]="item"
+                class="overview-card-media-item">
+                <span>{{ item }}</span>
+              </li>
+            </ul>
+          </ng-template>
+        </metric-view-item>
+      </div>
+    </ng-template>
+  </nz-card>
+  <nz-card class="overview-card">
+    <ng-template #title>
+      您的营销活动曝光简析
+    </ng-template>
+    <ng-template #extra>
+      <div>
+        <span class="BG-download-style"
+        (click)="downloadData('impression')">
+          <i class="icon icon-download"></i>
+        </span>
+      </div>
+    </ng-template>
+    <ng-template #body>
+      <div nz-row>
+        <div nz-col
+          [nzSpan]="12">
+          <metric-view-item
+            class="overview-card-metric"
+            horizontal
+            metricTitle="曝光"
+            metricInfo="{{ impressionPvCount | number }}">
+            <ng-template #metricContent>
+              <div style="width: 320px">
+                <chart-line mini [config]="impressionPvDay" [height]="60"></chart-line>
+              </div>
+            </ng-template>
+          </metric-view-item>
+          <metric-view-item
+            class="overview-card-metric"
+            horizontal
+            metricTitle="独立曝光"
+            metricInfo="{{ impressionUvCount | number }}">
+            <ng-template #metricContent>
+              <div style="width: 320px">
+                <chart-line mini [config]="impressionUvDay" [height]="60"></chart-line>
+              </div>
+            </ng-template></metric-view-item>
+          <metric-view-item
+            horizontal
+            metricTitle="曝光IP"
+            metricInfo="{{ impressionIpCount | number }}">
+            <ng-template #metricContent>
+              <div style="width: 320px">
+                <chart-line mini [config]="impressionIpDay" [height]="60"></chart-line>
+              </div>
+            </ng-template></metric-view-item>
+        </div>
+        <div nz-col
+          [nzSpan]="6">
+          <metric-view-item
+            class="overview-card-metric"
+            horizontal
+            left
+            metricTitle="携带设备ID"
+            metricInfo="{{ impressionDevice }}"></metric-view-item>
+          <metric-view-item
+            class="overview-card-metric"
+            horizontal
+            left
+            metricTitle="来自手机端平台"
+            metricInfo="{{ impressionMob }}"></metric-view-item>
+          <metric-view-item
+            horizontal
+            left
+            metricTitle="异常曝光占比"
+            metricInfo="{{ impressionAnti }}"></metric-view-item>
+        </div>
+        <div nz-col
+          [nzSpan]="6">
+          <metric-view-item
+            horizontal
+            left
+            class="overview-card-metric"
+            metricTitle="平均每台设备曝光"
+            metricInfo="{{ impressionAverage }}"></metric-view-item>
+          <metric-view-item
+            horizontal
+            left
+            class="overview-card-metric"
+            metricTitle="曝光高频时段"
+            metricInfo="{{ impressionHighFre }}"></metric-view-item>
+        </div>
+      </div>
+    </ng-template>
+  </nz-card>
+  <nz-card class="overview-card">
+    <ng-template #title>
+      您的营销活动点击简析
+    </ng-template>
+    <ng-template #extra>
+      <div>
+        <span class="BG-download-style"
+        (click)="downloadData('click')">
+          <i class="icon icon-download"></i>
+        </span>
+      </div>
+    </ng-template>
+    <ng-template #body>
+      <div nz-row>
+        <div nz-col
+          [nzSpan]="12">
+          <metric-view-item
+            class="overview-card-metric"
+            horizontal
+            metricTitle="点击"
+            metricInfo="{{ clickPvCount | number }}">
+            <ng-template #metricContent>
+              <div style="width: 320px">
+                <chart-line mini [config]="clickPvDay" [height]="60"></chart-line>
+              </div>
+            </ng-template>
+          </metric-view-item>
+          <metric-view-item
+            class="overview-card-metric"
+            horizontal
+            metricTitle="独立点击"
+            metricInfo="{{ clickUvCount | number }}">
+            <ng-template #metricContent>
+              <div style="width: 320px">
+                <chart-line mini [config]="clickUvDay" [height]="60"></chart-line>
+              </div>
+            </ng-template>
+          </metric-view-item>
+          <metric-view-item
+            horizontal
+            metricTitle="点击IP"
+            metricInfo="{{ clickIpCount | number }}">
+            <ng-template #metricContent>
+              <div style="width: 320px">
+                <chart-line mini [config]="clickIpDay" [height]="60"></chart-line>
+              </div>
+            </ng-template>
+          </metric-view-item>
+        </div>
+        <div nz-col
+          [nzSpan]="6">
+          <metric-view-item
+            class="overview-card-metric"
+            left
+            metricTitle="携带设备ID"
+            metricInfo="{{ clickDevice }}"></metric-view-item>
+          <metric-view-item
+            class="overview-card-metric"
+            left
+            metricTitle="来自手机端平台"
+            metricInfo="{{ clickMob }}"></metric-view-item>
+          <metric-view-item
+            left
+            metricTitle="异常点击占比"
+            metricInfo="{{ clickAnti }}"></metric-view-item>
+        </div>
+        <div nz-col
+          [nzSpan]="6">
+          <metric-view-item
+            left
+            class="overview-card-metric"
+            metricTitle="平均每台设备点击"
+            metricInfo="{{ clickAverage }}"></metric-view-item>
+          <metric-view-item
+            left
+            class="overview-card-metric"
+            metricTitle="点击高频时段"
+            metricInfo="{{ clickHighFre }}"></metric-view-item>
+        </div>
+      </div>
+    </ng-template>
+  </nz-card>
+</div>

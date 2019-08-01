@@ -1,0 +1,137 @@
+<div class="main">
+  <form nz-form [formGroup]="validateForm">
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col [nzSpan]="3">
+        <label >名称</label>
+      </div>
+      <div nz-form-control nz-col [nzSpan]="21" class="steps-content-form-control">
+        <nz-input [nzSize]="'large'" [nzPlaceHolder]="'请输入名称...'" [(ngModel)]="names" name="name" formControlName="callBackName"></nz-input>
+        <div *ngIf="validateForm.controls.callBackName.dirty&&validateForm.controls.callBackName.hasError('required')" nz-form-explain>
+          名称不能为空！
+        </div>
+      </div>
+    </div>
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col [nzSpan]="3">
+        <label for="peoGroup" >目标人群</label>
+      </div>
+      <div nz-form-control nz-col [nzSpan]="21" class="steps-content-form-control">
+        <span class="add" (click)="showModel()">
+          <i class="anticon anticon-plus"></i>添加人群</span>
+        <div class="add-count">已选择
+          <button>{{peoGroupChecked.length}}</button>个人群
+        </div>
+        <div *ngIf="ispeoChecked" nz-form-explain style="color:#f04134">
+          请选择人群
+        </div>
+      </div>
+      <ul class="peopGroup">
+
+        <li *ngFor="let item of peoGroupChecked">{{item.label}}
+          <span (click)="deletePeo(item)">
+            <i class="anticon anticon-close"></i>
+          </span>
+        </li>
+      </ul>
+    </div>
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col [nzSpan]="3">
+        <label for="medGroup" >目标媒体</label>
+      </div>
+      <div nz-form-control nz-col [nzSpan]="21" class="steps-content-form-control">
+        <span class="add" (click)="showMedia()">
+          <i class="anticon anticon-plus"></i>添加媒体</span>
+        <div class="add-count">已选择
+          <button>{{medGroupChecked.length}}</button>个媒体
+        </div>
+        <div *ngIf="ismedChecked" nz-form-explain style="color:#f04134">
+          请选择媒体
+        </div>
+      </div>
+      <ul class="medGroup">
+        <li *ngFor="let item of medGroupChecked">
+          <p>{{item.label}}</p>
+          <span (click)="deleteMed(item)">-</span>
+        </li>
+      </ul>
+    </div>
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col [nzSpan]="3">
+        <label for="callBackName">探索时间预估</label>
+      </div>
+      <div nz-form-control nz-col [nzSpan]="21" class="steps-content-form-control">
+        <div class="time_explore">
+          <button>2</button>个小时</div>
+      </div>
+    </div>
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col [nzSpan]="3">
+      </div>
+      <div nz-form-control nz-col [nzSpan]="21" class="steps-content-form-control">
+        <cm-button>
+          <button nz-button [nzType]="'primary'" (click)="save()">
+            <span>提交</span>
+          </button>
+        </cm-button>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- 选择人群 -->
+<nz-modal [nzVisible]="modalVisible" [nzTitle]="modalTitle1" [nzContent]="modalContent1" [nzFooter]="modalFooter1" [nzMaskClosable]="false"
+  (nzOnCancel)="modalCancel()" class="cusanalysis-modal">
+  <ng-template #modalTitle1>
+    选择人群
+    <cm-input class="cusanalysis-modal-input-search">
+      <nz-input [nzType]="'search'" [nzPlaceHolder]="'输入关键词检索'" [(ngModel)]="modalSearch"></nz-input>
+    </cm-input>
+  </ng-template>
+  <ng-template #modalContent1>
+    <div class="cusanalysis-modal-checkbox-wrap">
+      <cm-checkbox class="cusanalysis-modal-checkbox">
+        <nz-checkbox-group [ngModel]="peoGroupList | farray:['label']:modalSearch" (ngModelChange)="onchangeLinks(peoGroupList)"></nz-checkbox-group>
+      </cm-checkbox>
+    </div>
+  </ng-template>
+  <ng-template #modalFooter1>
+    <p class="cusanalysis-modal-footer-checked">
+      已选择
+      <b>{{peocheckCount.length}}</b>个人群
+    </p>
+    <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="modalCancel()">
+      取 消
+    </button>
+    <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="handleOk()">
+      确 认
+    </button>
+  </ng-template>
+</nz-modal>
+<!-- 添加媒体 -->
+<nz-modal [nzVisible]="mediaVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter" [nzMaskClosable]="false"
+  (nzOnCancel)="Cancel()" class="cusanalysis-modal-media" id="cusanalysis-modal-media">
+  <ng-template #modalTitle>
+    选择媒体
+    <cm-input class="cusanalysis-modal-input-search">
+      <nz-input [nzType]="'search'" [nzPlaceHolder]="'输入关键词检索'" [(ngModel)]="mediaSearch"></nz-input>
+    </cm-input>
+  </ng-template>
+  <ng-template #modalContent>
+    <div class="cusanalysis-modal-checkbox-wrap">
+      <cm-checkbox class="cusanalysis-modal-checkbox">
+        <nz-checkbox-group [ngModel]="medGroupList | farray:['label']:mediaSearch" (ngModelChange)="onchangeLink(medGroupList)"></nz-checkbox-group>
+      </cm-checkbox>
+    </div>
+  </ng-template>
+  <ng-template #modalFooter>
+    <p class="cusanalysis-modal-footer-checked">
+      已选择
+      <b>{{medCheckCount.length}}</b>个媒体
+    </p>
+    <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="Cancel()">
+      取 消
+    </button>
+    <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="Ok()">
+      确 认
+    </button>
+  </ng-template>
+</nz-modal>

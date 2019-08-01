@@ -1,0 +1,14 @@
+<nz-select
+  style="width: 168px;margin-right: 8px;"
+  *ngIf="moduleName"
+  [nzPlaceHolder]="(selectedOption && selectedOption.label) || '请选择' + moduleLabel"
+  [(ngModel)]="selectedOption.value"
+  (ngModelChange)="setGlobalCampaignOption($event)"
+  nzShowSearch
+>
+  <nz-option
+    *ngFor="let option of searchOptions"
+    [nzLabel]="option.label"
+    [nzValue]="option.value">
+  </nz-option>
+</nz-select>

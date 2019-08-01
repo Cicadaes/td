@@ -1,0 +1,48 @@
+:host ::ng-deep .common-rangepicker-wrap {
+  width: 200px;
+  
+  .common-rangepicker {
+    .ant-calendar-picker-input {
+      height: 36px;
+      border-radius: 50px;
+  
+      .ant-calendar-range-picker-separator {
+        line-height: 26px;
+      }
+    }
+  } 
+}
+
+:host ::ng-deep .special-rangepicker-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .ant-btn {
+    height: 36px;
+  }
+
+  .special-rangepicker {
+    width: 200px;
+
+    .ant-calendar-picker-input {
+      height: 36px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      display: flex;
+  
+      .ant-calendar-range-picker-separator {
+        line-height: 26px;
+      }
+    }
+  }
+
+  &.ant-input-group.ant-input-group-compact > * {
+    border-right-width: 1px;
+    margin-left: -1px;
+
+    &:hover, &:focus {
+      z-index: 2;
+    }
+  }
+}

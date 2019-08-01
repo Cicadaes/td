@@ -1,0 +1,54 @@
+<div class="analysis-details-device">
+  <div class="analysis-details-device-brand">
+    <h4>品牌和机型</h4>
+    <div class="analysis-details-device-brand-item">
+      <chart-treemap [config]=""></chart-treemap>
+    </div>
+  </div>
+  <div class="analysis-details-device-type">
+    <h4>设备类型</h4>
+    <ul class="analysis-details-device-type-item">
+      <li>
+        <chart-progress progressName="手机" colorIndex="1"></chart-progress>
+      </li>
+      <li>
+        <chart-progress progressName="平板" colorIndex="2" progressColor="#2DE2C5"></chart-progress>
+      </li>
+      <li>
+        <chart-progress progressName="智能电视" colorIndex="3" progressColor="#FCC45F"></chart-progress>
+      </li>
+      <li>
+        <chart-progress progressName="电视盒子" colorIndex="4" progressColor="#FF8454"></chart-progress>
+      </li>
+      <li>
+        <chart-progress progressName="其他" colorIndex="5" progressColor="#EE2D57"></chart-progress>
+      </li>
+    </ul>
+  </div>
+  <div class="analysis-details-device-features">
+    <h4>设备特性</h4>
+    <div class="analysis-details-device-features-item">
+      <chart-bubble></chart-bubble>
+    </div>
+  </div>
+  <div class="analysis-details-device-row">
+    <div nz-col [nzSpan]="8" class="analysis-details-device-row-col">
+      <h4>设备价格</h4>
+      <div class="analysis-details-device-row-col-item">
+        <chart-pie [config]="pieConfig"></chart-pie>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="8" class="analysis-details-device-row-col">
+      <h4>联网方式</h4>
+      <div class="analysis-details-device-row-col-item">
+        <chart-pie [config]="pieConfig"></chart-pie>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="8" class="analysis-details-device-row-col">
+      <h4>运营商分布</h4>
+      <div class="analysis-details-device-row-col-item">
+        <chart-pie [config]="pieConfig"></chart-pie>
+      </div>
+    </div>
+  </div>
+</div>

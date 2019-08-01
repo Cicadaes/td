@@ -1,0 +1,17 @@
+<div 
+  class="metric-view-item" 
+  [ngClass]="currentClasses"
+  (click)="onClick()">
+  <div class="metric-view-item-text">
+    <h4 [title]="metricTitle" class="metric-view-item-text-title">
+      {{ metricTitle }}
+    </h4>
+    <p [title]="metricInfo" class="metric-view-item-text-info" [ngStyle]="fontStyle">
+      {{ metricInfo }}
+    </p>
+  </div>
+  <div class="metric-view-item-content" [class.metric-view-item-horizontal-content]="horizontal">
+    <ng-template [ngTemplateOutlet]="metricContent">
+    </ng-template>
+  </div>
+</div>

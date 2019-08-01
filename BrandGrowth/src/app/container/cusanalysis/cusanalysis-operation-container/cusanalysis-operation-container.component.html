@@ -1,0 +1,152 @@
+<cm-form>
+  <form
+    nz-form
+    [formGroup]="validateForm"
+    class="cus-analysis-operation-content">
+    <div class="cus-analysis-operation-content-row" nz-form-item>
+      <div class="cus-analysis-operation-content-row-label" nz-form-label>
+        <label>客群名称</label>
+      </div>
+      <div nz-form-control class="cus-analysis-operation-content-row-name">
+        <nz-input
+          formControlName="name"
+          nzId="name"
+          nzPlaceHolder="请输入客群画像名称，30字节以内…" 
+          nzType="text" 
+          nzSize="large">
+        </nz-input>
+        <div 
+          nz-form-explain 
+          *ngIf="getFormControl('name').dirty&&getFormControl('name').hasError('required')">
+          客群名称不能为空！
+        </div>
+        <div 
+          nz-form-explain 
+          *ngIf="getFormControl('name').dirty&&getFormControl('name').hasError('maxlength')">
+          客群名称不得超过30字节！
+        </div>
+      </div>
+    </div>
+    <div class="cus-analysis-operation-content-row" nz-form-item>
+      <div class="cus-analysis-operation-content-row-label" nz-form-label>
+        <label>监测链接</label>
+      </div>
+      <ul nz-form-control class="cus-analysis-operation-content-row-monitorLinks">
+        <button nz-button (click)="showModal()">
+          <i class="anticon anticon-plus" style="font-weight: bolder;"></i>添加链接
+        </button>
+        <li 
+          class="cus-analysis-operation-content-row-monitorLinks-item"
+          *ngFor="let item of getFormControl('monitorLinks').value">
+          <p>{{ item.label }}</p>
+          <i class="anticon anticon-close" (click)="onDel(item)"></i>
+        </li>
+      </ul>
+    </div>
+    <div class="cus-analysis-operation-content-row" nz-form-item>
+      <div class="cus-analysis-operation-content-row-label" nz-form-label>
+        <label>管理权限</label>
+      </div>
+      <div nz-form-control>
+        <nz-radio-group formControlName="metricData">
+          <label
+            *ngFor="let item of metricDataList"
+            nz-radio [nzValue]="item.key">
+            <span>{{ item.value }}</span>
+          </label>
+        </nz-radio-group>
+      </div>
+    </div>
+    <div class="cus-analysis-operation-content-row" nz-form-item>
+      <div class="cus-analysis-operation-content-row-label" nz-form-label>
+        <label>数据关系</label>
+      </div>
+      <ul nz-form-control class="cus-analysis-operation-content-row-relation">
+        <li 
+          *ngFor="let item of dataRelationList" 
+          class="cus-analysis-operation-content-row-relation-item"
+          [class.cus-analysis-operation-content-row-relation-item-checked]="getFormControl('dataRelation').value === item.key"
+          (click)="onCheckedRelation(item.key)">
+          <span>{{ item.value }}</span>
+        </li>
+      </ul>
+    </div>
+    <div class="cus-analysis-operation-content-row" nz-form-item>
+      <div class="cus-analysis-operation-content-row-label" nz-form-label>
+        <label>人群总量预估</label>
+      </div>
+      <div nz-form-control class="cus-analysis-operation-content-row-text">
+        <p>398,800,800</p>
+      </div>
+    </div>
+    <div class="cus-analysis-operation-content-row" nz-form-item>
+      <div class="cus-analysis-operation-content-row-label" nz-form-label>
+        <label>画像时间预估</label>
+      </div>
+      <div nz-form-control class="cus-analysis-operation-content-row-text">
+        <p>2个小时</p>
+      </div>
+    </div>
+    <div class="cus-analysis-operation-content-row" nz-form-item>
+      <div class="cus-analysis-operation-content-row-label" nz-form-label>
+        <label></label>
+      </div>
+      <div nz-form-control>
+        <button
+          style="width: 240px; margin-right: 16px;" 
+          nz-button 
+          [nzType]="'primary'" 
+          [nzSize]="'large'"
+          (click)="submitForm()">
+          提交
+        </button>
+      </div>
+    </div>
+  </form>
+</cm-form>
+<nz-modal 
+  [nzVisible]="modalVisible" 
+  [nzTitle]="modalTitle" 
+  [nzContent]="modalContent" 
+  [nzFooter]="modalFooter" 
+  [nzMaskClosable]="false"
+  (nzOnCancel)="handleCancel()"
+  class="cusanalysis-modal">
+  <ng-template #modalTitle>
+    选择监测链接
+    <nz-popover>
+      <i class="anticon anticon-exclamation-circle-o" style="color: #f04134;" nz-popover></i>
+      <ng-template #nzTemplate>
+        <p style="font-size: 12px; padding: 8px; font-weight: 600;">
+          由于隐私条款画像人群样本数不能低于1,000，系统自动过滤不符合条件的人群。
+        </p>
+      </ng-template>
+    </nz-popover>
+    <cm-input class="cusanalysis-modal-input-search">
+      <nz-input 
+        [nzType]="'search'" 
+        [nzPlaceHolder]="'输入关键词检索'" 
+        [(ngModel)]="modalSearch"></nz-input>
+    </cm-input>
+  </ng-template>
+  <ng-template #modalContent>
+    <div class="cusanalysis-modal-checkbox-wrap">
+      <cm-checkbox class="cusanalysis-modal-checkbox">
+        <nz-checkbox-group 
+          [ngModel]="modalMonitorLinksList | farray:['label']:modalSearch"
+          (ngModelChange)="onchangeLinks(modalMonitorLinksList)"></nz-checkbox-group>
+      </cm-checkbox>
+    </div>
+  </ng-template>
+  <ng-template #modalFooter>
+    <p class="cusanalysis-modal-footer-checked">
+      已选择<b>{{ checkedCount }}</b>个监测链接
+    </p>
+    <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancel()">
+      取 消
+    </button>
+    <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="handleOk()">
+      确 认
+    </button>
+  </ng-template>
+</nz-modal>

@@ -1,0 +1,14 @@
+<ul class="chart-legend">
+  <li
+    class="chart-legend-item" 
+    *ngFor="let item of _list; let i = index"
+    (mouseenter)="onHover(i)"
+    (mouseout)="onLeave(i)">
+    <span
+      class="chart-legend-item-color"
+      [style.background-color]="item.color"
+      [style.opacity]="item.opacity || 1"></span>
+    <b class="chart-legend-item-name" [title]="item.name">{{ item.name }}</b>
+    <span class="chart-legend-item-value">{{ item.value }}{{ valueUnit }}</span>
+  </li>
+</ul>

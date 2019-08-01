@@ -1,0 +1,178 @@
+<div class="click-details">
+    <nz-card class="click-details-card">
+      <ng-template #body>
+        <div nz-row>
+          <metric-view-item
+            nz-col
+            [nzSpan]="4"
+            metricTitle="点击"
+            [metricInfo]="_clickData.click_pv | number"></metric-view-item>
+          <metric-view-item
+            nz-col
+            [nzSpan]="4"
+            left
+            metricTitle="独立点击"
+            [metricInfo]="_clickData.click_uv | number"></metric-view-item>
+          <metric-view-item
+            nz-col
+            [nzSpan]="4"
+            left
+            metricTitle="点击IP"
+            [metricInfo]="_clickData.click_ip | number"></metric-view-item>
+          <metric-view-item
+            nz-col
+            [nzSpan]="3"
+            left
+            metricTitle="点击率"
+            [metricInfo]="(_clickData.click_pv / _clickData.impression_pv) | fpercent"></metric-view-item>
+          <metric-view-item
+            nz-col
+            left
+            [nzSpan]="3"
+            metricTitle="携带设备ID"
+            [metricInfo]="_clickData.device_click_pv | number"></metric-view-item>
+          <metric-view-item
+            nz-col
+            left
+            [nzSpan]="3"
+            metricTitle="平均点击频次"
+            [metricInfo]="((_clickData.click_pv / _clickData.click_uv) | fnumber) + '次'"></metric-view-item>
+          <metric-view-item
+            nz-col
+            left
+            [nzSpan]="3"
+            metricTitle="异常点击占比"
+            [metricInfo]="(_clickData.click_anti / _clickData.click_pv) | fpercent"></metric-view-item>
+        </div>
+      </ng-template>
+    </nz-card>
+    <nz-card class="click-details-card">
+      <ng-template #title>
+        点击趋势
+      </ng-template>
+      <ng-template #extra>
+        <div>
+          <span class="BG-download-style" (click)="downloadClickTrendCsv()">
+            <i class="icon icon-download"></i>
+          </span>
+        </div>
+      </ng-template>
+      <ng-template #body>
+        <chart-table-wrap>
+          <ng-template #contentChart>
+            <chart-line [config]="_clickTrend"></chart-line>
+          </ng-template>
+          <ng-template #contentTable>
+            <table-move
+              [tableColumns]="_tableColumn" 
+              [tableData]="_tableData" 
+              tableHeight="250"></table-move>
+          </ng-template>
+        </chart-table-wrap>
+      </ng-template>
+    </nz-card>
+    <nz-card class="click-details-card click-details-card-nopadding">
+      <ng-template #title>
+        点击数据
+      </ng-template>
+      <ng-template #body>
+        <div nz-row>
+          <div class="click-details-card-nopadding-item" nz-col [nzSpan]="6">
+            <h4>广告格式分布</h4>
+            <chart-pie [config]="_distributedAdType"></chart-pie>
+          </div>
+          <div class="click-details-card-nopadding-item" nz-col [nzSpan]="6">
+            <h4>监测链接分布</h4>
+            <chart-pie [config]="_distributedMonitor"></chart-pie>
+          </div>
+          <div class="click-details-card-nopadding-item" nz-col [nzSpan]="6">
+            <h4>渠道类型分布</h4>
+            <chart-pie [config]="_distributedMediaType"></chart-pie>
+          </div>
+          <div class="click-details-card-nopadding-item" nz-col [nzSpan]="6">
+            <h4>渠道分布</h4>
+            <div class="click-details-card-nopadding-item-content">
+              <list-icon-ratio [config]="_distributedChannel"></list-icon-ratio>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </nz-card>
+    <nz-card class="click-details-card click-details-card-nopadding">
+      <ng-template #title>
+        点击设备分析
+      </ng-template>
+      <ng-template #body>
+        <div nz-row>
+          <div class="click-details-card-nopadding-item equipmentAnalyze" nz-col [nzSpan]="12">
+            <chart-treemap [config]="_equipmentAnalysis"></chart-treemap>
+          </div>
+          <div class="click-details-card-nopadding-item equipmentAnalyze" nz-col [nzSpan]="12">
+            <nz-row>
+              <metric-view-item
+                nz-col
+                [nzSpan]="12"
+                [metricTitle]="'来自' + _osAnalysis.os[0].label + '系统'"
+                [metricInfo]="_osAnalysis.os[0].value | fpercent"></metric-view-item>
+              <metric-view-item
+                nz-col
+                [nzSpan]="12"
+                [metricTitle]="'来自' + _osAnalysis.os[1].label + '系统'"
+                [metricInfo]="_osAnalysis.os[1].value | fpercent"></metric-view-item>
+            </nz-row>
+            <nz-row>
+              <metric-view-item
+                nz-col
+                [nzSpan]="12"
+                [metricTitle]="'来自' + _osAnalysis.brand[0].label"
+                [metricInfo]="_osAnalysis.brand[0].value | fpercent"></metric-view-item>
+              <metric-view-item
+                nz-col
+                [nzSpan]="12"
+                [metricTitle]="'来自' + _osAnalysis.brand[1].label"
+                [metricInfo]="_osAnalysis.brand[1].value | fpercent"></metric-view-item>
+            </nz-row>
+            <nz-row>
+              <metric-view-item
+                nz-col
+                [nzSpan]="12"
+                [metricTitle]="'来自' + _osAnalysis.dt[0].label"
+                [metricInfo]="_osAnalysis.dt[0].value | fpercent"></metric-view-item>
+              <metric-view-item
+                nz-col
+                [nzSpan]="12"
+                [metricTitle]="'来自' + _osAnalysis.dt[1].label"
+                [metricInfo]="_osAnalysis.dt[1].value | fpercent"></metric-view-item>
+            </nz-row>
+          </div>
+        </div>
+      </ng-template>
+    </nz-card>
+    <nz-card class="click-details-card click-details-card-nopadding">
+      <ng-template #title>
+        您的广告点击来自哪些区域？
+      </ng-template>
+      <ng-template #extra>
+        <div>
+          <span class="BG-download-style" (click)="downloadClickMapCsv()">
+            <i class="icon icon-download"></i>
+          </span>
+        </div>
+      </ng-template>
+      <ng-template #body>
+        <nz-row>
+          <nz-col nzSpan="12" class="click-details-card-nopadding-item">
+            <h4>省份分布</h4>
+            <chart-map [data]="_provinceAnalysis" [height]="350"></chart-map>
+          </nz-col>
+          <div class="click-details-card-nopadding-item" nz-col [nzSpan]="6">
+            <h4>线级城市占比</h4>
+            <chart-pie [config]="_cityLevelAnalysis"></chart-pie>
+          </div>
+          <nz-col nzSpan="6" class="click-details-card-nopadding-item">
+            <proportion-ranking [data]="_cityAnalysis"></proportion-ranking>
+          </nz-col>
+        </nz-row>
+      </ng-template>
+    </nz-card>
+  </div>

@@ -1,0 +1,73 @@
+<nz-card class="filtrate">
+  <ng-template #title>
+    <cm-dropdown>
+      <nz-dropdown class="title">
+        <p class="ant-dropdown-link" nz-dropdown>
+          <a>{{_dimension.label}}</a>
+          <i class="anticon anticon-down"></i>
+        </p>
+        <ul nz-menu>
+          <li nz-menu-item *ngFor="let el of _options" (click)="_dimension=el;getMetricData()">
+            <a>{{el.label}}</a>
+          </li>
+        </ul>
+      </nz-dropdown>
+    </cm-dropdown>
+    <div class="selectBox mr8" *ngIf="selectChannel && _dimension.value === 'monitor'">
+      <span class="selectTitle">渠道：{{selectChannel.localName}}</span>
+      <!-- <span class="selectTitle">渠道：{{selectChannel.name}}</span> -->
+      <i (click)="removeSelector('Channel')" class="anticon anticon-close"></i>
+    </div>
+    <div class="selectBox mr8" *ngIf="selectAdformat">
+      <span class="selectTitle">广告格式：{{selectAdformat.name}}</span>
+      <i (click)="removeSelector('Adformat')" class="anticon anticon-close"></i>
+    </div>
+    <div class="selectBox mr24" *ngIf="selectGroupItem">
+      <span class="selectTitle">监测链接组：{{selectGroupItem.name}}</span>
+      <i (click)="removeSelector('GroupItem')" class="anticon anticon-close"></i>
+    </div>
+    <p class="chainNum">共&nbsp;{{channelsLength}}&nbsp;个{{_dimension.value === 'monitor' ? '监测链接' : '渠道'}}</p>
+  </ng-template>
+  <ng-template #body>
+    <div [ngStyle]="{ padding: (channels.length > 0 || adFormats.length > 0 || groupList.length > 0) ? '12px 24px' : '0' }">
+      <!-- 渠道列表 -->
+      <div class="channel-wrap clearfix" *ngIf="channels.length > 0 && _dimension.value === 'monitor'"
+        [style.border-bottom]="adFormats.length > 0 || groupList.length > 0 ? '1px dotted #DDDEE1' : 'none'"
+      >
+        <span>渠道：</span>
+        <!-- [ngStyle]="{ height: openChannels ? 'auto' : '24px' }" -->
+        <ul class="channel clearfix">
+          <li *ngFor="let ch of channels;let i = index;" [class.active]="selectChannel && selectChannel.id && ch.id === selectChannel.id">
+            <a (click)="chooseSelector('Channel', ch)" *ngIf="i <= 10 || openChannels">{{ch.localName}}</a>
+            <!-- <a (click)="chooseSelector('Channel', ch)" *ngIf="i <= 10 || openChannels">{{ch.name}}</a> -->
+          </li>
+        </ul>
+        <i class="anticon" *ngIf="channels && channels.length > 10" [class.anticon-down]="!openChannels" [class.anticon-up]="openChannels" (click)="openChannels=!openChannels"></i>
+      </div>
+      <!-- <span class="divider" *ngIf="adFormats.length > 0 || groupList.length > 0"></span> -->
+      <!-- 广告格式列表 -->
+      <div class="adFormat-wrap clearfix" *ngIf="adFormats.length > 0"
+        [ngStyle]="{ 'border-bottom': groupList.length > 0 ? '1px dotted #DDDEE1' : 'none', 'padding-bottom': groupList.length > 0 ? '12px' : 0 }"
+      >
+        <span>广告格式：</span>
+        <ul class="adFormat clearfix">
+          <li *ngFor="let ad of adFormats;let i = index;" [class.active]="selectAdformat && selectAdformat.id && ad.id === selectAdformat.id">
+            <a (click)="chooseSelector('Adformat', ad)" *ngIf="i <= 10 || openAdFormats">{{ad.name}}</a>
+          </li>
+        </ul>
+        <i class="anticon" *ngIf="adFormats && adFormats.length > 10" [class.anticon-down]="!openAdFormats" [class.anticon-up]="openAdFormats" (click)="openAdFormats=!openAdFormats"></i>
+      </div>
+      <!-- <span class="divider" *ngIf="groupList.length > 0"></span> -->
+      <!-- 监测链接组列表 -->
+      <div class="adFormat-wrap clearfix" *ngIf="groupList.length > 0">
+        <span>监测链接组：</span>
+        <ul class="adFormat clearfix">
+          <li *ngFor="let group of groupList;let i = index;" [class.active]="selectGroupItem && selectGroupItem.id && group.id === selectGroupItem.id">
+            <a (click)="chooseSelector('GroupItem', group)" *ngIf="i <= 10 || openGroupList">{{group.name}}</a>
+          </li>
+        </ul>
+        <i class="anticon" *ngIf="groupList && groupList.length > 10" [class.anticon-down]="!openGroupList" [class.anticon-up]="openGroupList" (click)="openGroupList=!openGroupList"></i>
+      </div>
+    </div>
+  </ng-template>
+</nz-card>
