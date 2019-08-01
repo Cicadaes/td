@@ -1,0 +1,66 @@
+:host ::ng-deep .api-search-list {
+    padding: 20px 0px 20px 50px;
+}
+
+:host ::ng-deep .api-search-wrap {
+    background-color: #ffffff;
+}
+
+:host ::ng-deep .api-search-one {
+    border-bottom: 1px solid rgba(23,35,61,0.10);
+    padding: 16px 0px;
+}
+
+:host ::ng-deep .ant-form-item {
+    margin-bottom: 0px;
+}
+
+:host ::ng-deep .api-search-one-title {
+    font-size: 18px;
+    color: #0B1100;
+    cursor: pointer;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+:host ::ng-deep .api-search-one-title b {
+    font-weight: normal;
+    color: #2185F0;
+}
+
+:host ::ng-deep .api-search-one-desc b {
+    font-weight: normal;
+    color: #2185F0;
+}
+
+:host ::ng-deep .api-search-one-desc {
+    font-size: 14px;
+    color: rgba(11,17,-2147483648,0.75);
+    margin-bottom: 5px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+:host ::ng-deep .api-search-one-bot span {
+    font-size: 13px;
+    color: rgba(23,35,61,0.35);
+}
+
+:host ::ng-deep .api-search-last {
+    padding: 20px 0px 60px 0px;
+    clear: both;
+}
+
+:host ::ng-deep .api-search-last-page {
+    float: right;
+}
+
+:host ::ng-deep .loading-div {
+    margin: auto;
+    text-align: center;
+    padding: 200px;
+}

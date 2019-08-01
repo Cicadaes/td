@@ -1,0 +1,22 @@
+<div nz-row>
+    <div nz-col nzSpan="6">
+        <img alt="图片" src="./assets/images/logo.jpg" height="28px" width="220px" style="float: right; margin-top: 17px; margin-right: 20px;" />
+    </div>
+    <div nz-col nzSpan="14">
+        <ul class="api-nav">
+            <li *ngFor="let item of tabs" [ngClass]="{'api-nav-active': index === item.id}" (click)="change(item);">
+                <i class="{{item.icon}}"></i>
+                {{item.name}}
+            </li>
+        </ul>
+        <div class="api-top-search">
+            <nz-input-group nzSearch [nzSuffix]="suffixIconButton" nzSize="large">
+                <input type="text" nz-input placeholder="请输入API名称或描述关键字进行查询，多个关键字之间以空格分隔" (keyup)="onSearch($event, 'keyup')" [(ngModel)]="searchValue">
+            </nz-input-group>
+            <ng-template #suffixIconButton>
+                <button nz-button nzType="primary" nzSearch nzSize="large" style="width: 80px;" (click)="onSearch(searchValue, 'click');"><i class="anticon anticon-search"></i></button>
+            </ng-template>
+        </div>
+    </div>
+    <div nz-col nzSpan="4"></div>
+</div>

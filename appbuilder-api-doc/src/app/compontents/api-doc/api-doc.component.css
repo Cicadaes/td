@@ -1,0 +1,302 @@
+:host ::ng-deep .api-wrap {
+    background-color: #ffffff;
+    padding-top: 16px;
+}
+
+:host ::ng-deep .no-api-wrap {
+    text-align: center;
+    line-height: 200px;
+    font-size: 24px;
+}
+
+:host ::ng-deep .shadow {
+    transition: all 1s ease;
+}
+
+:host ::ng-deep .anticon-up, .anticon-down {
+    cursor: pointer;
+    float: right;
+    margin-top: 16px;
+    margin-right: 4px;
+    color: rgba(23,35,61,0.55);
+}
+
+:host ::ng-deep .api-header {
+    height: 48px;
+    line-height: 48px;
+    font-size: 16px;
+    color: #17233D;
+    font-weight: normal;
+    padding-right: 16px;
+    border-bottom: 1px solid  rgba(23,35,61,0.10);
+    margin-bottom: 0px;
+    position: relative;
+}
+
+:host ::ng-deep .api-header-tree {
+    position: absolute;
+    z-index: 1000;
+    top: 48px;
+    right: 0px;
+    width: 240px;
+    height: 300px;
+    padding: 16px;
+    background-color: #ffffff;
+    overflow-y: auto;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-shadow: 0px 0px 4px 1px rgba(23,35,61,0.10);
+}
+
+:host ::ng-deep .api-product-name {
+    height: 60px;
+    overflow: hidden;
+}
+
+:host ::ng-deep .api-product-name-left {
+    float: left;
+    height: 60px;
+    line-height: 60px;
+    font-size: 16px;
+    color: #17233D;
+    width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 700;
+}
+
+:host ::ng-deep .api-product-name-right {
+    float: right;
+}
+
+:host ::ng-deep .api-header .anticon-home {
+    float: right;
+    margin-top: 17px;
+    color: rgba(23,35,61,0.55);
+    cursor: pointer;
+}
+
+:host ::ng-deep .ant-tree ul i {
+   font-size:10px;
+}
+
+:host ::ng-deep .custom-node {
+    line-height: 32px;
+    width: calc(100% - 24px);
+    float: right;
+    font-size: 14px;
+    color: rgba(23,35,61,0.55);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+:host ::ng-deep .ant-tree li span.ant-tree-switcher, .ant-tree li span.ant-tree-iconEle {
+    margin: 0;
+    width: 14px;
+    height: 32px;
+    line-height: 32px;
+    display: inline-block;
+    vertical-align: top;
+    border: 0 none;
+    cursor: pointer;
+    outline: none;
+    text-align: center;
+}
+
+
+:host ::ng-deep .level-date {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    float: left;
+    width: 176px;
+    cursor: default;
+}
+
+:host ::ng-deep .level-two {
+    font-size: 14px;
+    color: rgba(23,35,61,0.75);
+    width: 160px;
+    cursor: pointer;
+}
+
+:host ::ng-deep .api-one {
+    padding: 8px 0px 6px 0px;
+    border-bottom: 1px solid rgba(23,35,61,0.10);
+}
+
+:host ::ng-deep .api-one .select-api-one {
+    color: #2185F0;
+}
+
+:host ::ng-deep .api-one h3 {
+    font-size: 14px;
+    color: rgba(23,35,61,0.75);
+    cursor: pointer;
+    width: 240px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap
+}
+
+:host ::ng-deep .api-one-p {
+    width: 240px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap
+}
+
+:host ::ng-deep .api-one h3 a {
+    font-size: 14px;
+    color: rgba(23,35,61,0.75);
+    cursor: pointer;
+}
+
+:host ::ng-deep .api-center-content-base {
+    margin-bottom: 28px;
+}
+
+:host ::ng-deep .api-center-content-base-tit {
+    font-size: 24px;
+    color: #17233D;
+    margin: 40px 0px 24px 0px;
+}
+
+:host ::ng-deep .api-one p {
+    font-size: 13px;
+    color: rgba(23,35,61,0.55);
+    margin: 0px !important;
+    width: 240px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap
+}
+
+:host ::ng-deep .api-center {
+    padding: 0px 24px 60px 40px;
+}
+
+:host ::ng-deep .api-left {
+    padding-bottom: 60px;
+}
+
+:host ::ng-deep .api-right {
+    margin-top: 80px;
+    padding: 0px 12px;
+}
+
+:host ::ng-deep .api-border-left {
+    border-left: 1px solid rgba(23,35,61,0.10);
+}
+
+:host ::ng-deep .api-border-right {
+    border-right: 1px solid rgba(23,35,61,0.10);
+}
+
+:host ::ng-deep .content-one {
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+:host ::ng-deep .content-one p {
+    float: left;
+    margin-bottom: 0px;
+}
+
+:host ::ng-deep .content-one .content-one-label {
+    width: 70px;
+    font-size: 13px;
+    color: #0B1100;
+}
+
+:host ::ng-deep .content-one .content-one-value {
+    width: calc(100% - 70px);
+    font-size: 13px;
+    color: rgba(23,35,61,0.75);
+}
+
+:host ::ng-deep .requestMethodClass {
+    background: #2185F0;
+    border-radius: 2px;
+    display: inline-block;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    color: #ffffff;
+    margin-right: 10px;
+    padding: 0px 6px;
+}
+
+:host ::ng-deep .api-center-content-one {
+    margin-bottom: 28px;
+    position: relative;
+}
+
+:host ::ng-deep .api-center-content-one-tit {
+    font-size: 18px;
+    color: #17233D;
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid rgba(23,35,61,0.10);
+    margin: 0px;
+    font-weight: 700;
+}
+
+:host ::ng-deep .api-center-content-one-text {
+    word-wrap: break-word;
+    word-break: break-all；
+}
+
+:host ::ng-deep .api-center-content-one-child {
+    margin-top: 10px;
+}
+
+:host ::ng-deep .api-center-content-one-child-tit {
+    font-size: 14px;
+    color: #17233D;
+    height: 46px;
+    line-height: 46px;
+    margin: 0px;
+    font-weight: 700;
+}
+
+:host ::ng-deep .api-center-content-one-child-textarea {
+    background: rgba(23,35,61,0.03);
+    border: 1px solid rgba(23,35,61,0.15);
+    overflow-x: auto;
+    overflow-y: auto;
+    width: 100%;
+    height: 200px;
+}
+
+:host ::ng-deep .api-center-content-one-content {
+    padding: 20px 24px;
+    height: 60px;
+    text-align: center;
+}
+
+:host ::ng-deep .ant-select-selection {
+    border: none;
+}
+
+:host ::ng-deep .ant-select-open .ant-select-selection {
+    border-color: #4ca7fc;
+    outline: 0;
+    box-shadow: 0 0 0 0px rgba(33,133,240,.2);
+}
+
+:host ::ng-deep .ant-select-selection__rendered {
+    display: block;
+    margin-left: 0px; 
+    margin-right: 0px; 
+    position: relative;
+    line-height: 30px;
+}
+
+:host ::ng-deep .ant-anchor-ink:before {
+    width: 1px;
+}

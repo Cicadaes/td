@@ -1,0 +1,43 @@
+<nz-layout>
+    <nz-header style="padding: 0px 24px;">
+        <app-top [value]="value" [index]="1"></app-top>
+    </nz-header>
+    <nz-content>
+        <div nz-row class="api-search-wrap">
+            <div nz-col nzSpan="6">
+                <!-- 用于页面布局 -->
+            </div>
+            <ng-template #tableTotal>
+                <div>
+                    总共 {{total}} 条
+                </div>
+            </ng-template>
+            <div nz-col nzSpan="14">
+                <div class="loading-div" *ngIf="loading" >
+                    <nz-spin></nz-spin>
+                </div>
+                <div class="api-search-list" *ngIf="!total && !loading" style="padding: 70px 60px 70px 0px; text-align: center;">暂无数据</div>
+                <div class="api-search-list" *ngIf="total && !loading">
+                    <div class="api-search-one" *ngFor="let item of interfaceData" >
+                        <h3 class="api-search-one-title" (click)="detail(item);" [innerHTML]="item.name | keyword:value" title="{{item.name}}"></h3>
+                        <div class="api-search-one-desc" [innerHTML]="item.description | keyword:value" title="{{item.description}}"></div>
+                        <div class="api-search-one-bot">
+                            <span>最后更新：</span>
+                            <span>{{item.updateTime}}</span>
+                            <nz-divider nzType="vertical"></nz-divider>
+                            <span>版本：</span>
+                            <span>{{item.versionName}}</span>
+                        </div>
+                    </div>
+
+                    <div class="api-search-last">
+                        <div class="api-search-last-page">
+                            <nz-pagination nzShowSizeChanger [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageSizeChange)="refreshData(true)"
+                            (nzPageIndexChange)="refreshData()" [nzTotal]="total" [nzShowTotal]="tableTotal"></nz-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nz-content>
+</nz-layout>

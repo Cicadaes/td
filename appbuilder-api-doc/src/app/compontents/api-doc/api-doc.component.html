@@ -1,0 +1,367 @@
+<nz-layout id="api-doc">
+    <nz-header style="padding: 0px 24px;">
+        <app-top [value]="''" [index]="1"></app-top>
+    </nz-header>
+    <nz-content id="module_0" >
+        <div nz-row class="api-wrap" *ngIf="apiFlag">
+            <div nz-col nzSpan="6" [ngClass]="{'api-left': true, 'api-border-right': viewHeight === 1}">
+                <div style="width: 240px; float: right;" #apiLeft>
+                    <h3 class="api-header">
+                        目录
+                        <i class="anticon anticon-home" (click)="change();"></i>
+                        <div class="api-header-tree" *ngIf="flag">
+                            <div *ngIf="flag && nodes.length < 1">还没有分类信息</div>
+                            <nz-tree *ngIf="flag && nodes.length" [(ngModel)]="nodes" (nzClick)="showDetail($event);"
+                                [nzDefaultExpandedKeys]="expandKeys">
+                                <ng-template #nzTreeTemplate let-node>
+                                    <span class="custom-node">
+                                        <span title="{{node.title}}" [ngClass]="{'level-one': node.level === 0, 'level-two': node.level === 1, 'level-date': true}">
+                                            {{node.title}}
+                                        </span>
+                                    </span>
+                                </ng-template>
+                            </nz-tree>
+                        </div>
+                    </h3>
+                    <div class="api-product-name" *ngIf="nodes.length">
+                        <div class="api-product-name-left" title="{{catalogsItem.name}} / {{item.name}}">
+                            {{catalogsItem.name}} / {{item.name}}
+                        </div>
+                        <div class="api-product-name-right">
+                            <nz-select [nzPlaceHolder]="'请选择版'" style="width: 70px; margin-top: 15px;" [(ngModel)]="selectedVersion"
+                                nzShowSearch (ngModelChange)="changeVersion($event)">
+                                <nz-option *ngFor="let option of versionList;let i = index;" [nzLabel]="option.version"
+                                    [nzValue]="option.id" nzCustomContent>
+                                    {{option.version}}
+                                </nz-option>
+                            </nz-select>
+                        </div>
+                    </div>
+                    <div class="api-product-name" *ngIf="nodes.length < 1" style="padding: 20px; text-align: center">暂无数据</div>
+                    <div class="api-list-wap" *ngIf="inrefaceList.length">
+                        <div class="api-one" *ngFor="let item of inrefaceList">
+                            <h3 title="{{item.name}}">
+                                <a (click)="getInterfaceDetail(item.id, 'yes');goTo('api-doc');" [ngClass]="{'select-api-one': apiId && apiId === item.id}">{{item.name}}</a>
+                            </h3>
+                            <p title="{{item.description}}">{{item.description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div nz-col nzSpan="14" [ngClass]="{'api-center': true, 'api-border-left': viewHeight === 2}" #apiCenter>
+                <div *ngIf="_interfaceDetailDate && !_interfaceDetailDate['id']" style="padding: 70px 0px; text-align:center;">暂无数据</div>
+                <h3 class="api-cneter-tit" *ngIf="_interfaceDetailDate && _interfaceDetailDate['id']">
+                    <nz-breadcrumb nzSeparator=">">
+                        <nz-breadcrumb-item>
+                            <span title="{{catalogsItem['name']}}">{{catalogsItem['name'] | setValueLengthPipe:10}}</span>
+                        </nz-breadcrumb-item>
+                        <nz-breadcrumb-item>
+                            <span title="{{item['name']}}">{{item['name'] | setValueLengthPipe:10}}</span>
+                        </nz-breadcrumb-item>
+                        <nz-breadcrumb-item>
+                            <span title="{{_interfaceDetailDate['name']}}">{{_interfaceDetailDate['name'] |
+                                setValueLengthPipe:10}}</span>
+                        </nz-breadcrumb-item>
+                    </nz-breadcrumb>
+                </h3>
+                <div class="api-center-content" *ngIf="_interfaceDetailDate && _interfaceDetailDate['id']">
+                    <div class="api-center-content-base" id="module_1">
+                        <h3 class="api-center-content-base-tit">{{_interfaceDetailDate['name']}}</h3>
+                        <div class="api-center-content-base-text">
+                            <div class="content-one">
+                                <p class="content-one-label">接口路径：</p>
+                                <p class="content-one-value" style="width: calc(100% - 120px); word-wrap: break-word;word-break: break-all;">
+                                    <span class="requestMethodClass" *ngIf="_interfaceDetailDate && _interfaceDetailDate['requestMethod']">{{_interfaceDetailDate['requestMethod']}}</span>
+                                    {{_interfaceDetailDate['domainName']}}{{_interfaceDetailDate['uri']}}{{_interfaceDetailDate['path']}}
+                                </p>
+                            </div>
+
+                            <div class="content-one">
+                                <p class="content-one-label">通讯方式：</p>
+                                <p class="content-one-value">
+                                    <span *ngIf="_interfaceDetailDate && _interfaceDetailDate['syncType'] && _interfaceDetailDate['syncType'] === 1">同步</span>
+                                    <span *ngIf="_interfaceDetailDate && _interfaceDetailDate['syncType'] && _interfaceDetailDate['syncType'] === 2">异步</span>
+                                </p>
+                            </div>
+
+                            <div class="content-one">
+                                <p class="content-one-label">更新日期：</p>
+                                <p class="content-one-value">{{_interfaceDetailDate['updateTime']}}</p>
+                            </div>
+
+                            <div class="content-one">
+                                <p class="content-one-label">接口描述：</p>
+                                <p class="content-one-value">{{_interfaceDetailDate['description']}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="api-center-content-one" id="module_2">
+                        <h3 class="api-center-content-one-tit" style="margin-bottom: 19px;">接口简介</h3>
+                        <div *ngIf="_interfaceDetailDate && _interfaceDetailDate['summary']" class="api-center-content-one-text">{{_interfaceDetailDate['summary']}}</div>
+                        <div class="api-center-content-one-content" *ngIf="!(_interfaceDetailDate && _interfaceDetailDate['summary'])">暂无数据</div>
+                    </div>
+
+                    <div class="api-center-content-one" id="module_3">
+                        <h3 class="api-center-content-one-tit">请求参数</h3>
+                        <!-- <div class="api-center-content-one-content" *ngIf="!_requestHeadersTable.length && !_requestQueryTable.length && !_requestBodyTable.length">暂无数据</div> -->
+                        <div>
+                            <div class="api-center-content-one-child" id="module_5">
+                                <h3 class="api-center-content-one-child-tit">Headers</h3>
+                                <div class="api-center-content-one-child-table">
+                                    <nz-table #requestHeadersTable [nzData]="_requestHeadersTable" [nzFrontPagination]="false"
+                                        [nzShowPagination]="false" [nzBordered]="false" nzSize="middle">
+                                        <thead>
+                                            <tr>
+                                                <th [nzWidth]="'30%'">参数名</th>
+                                                <th [nzWidth]="'10%'">是否必需</th>
+                                                <th [nzWidth]="'30%'">参数值示例</th>
+                                                <th [nzWidth]="'30%'">备注</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let data of requestHeadersTable.data">
+                                                <td>{{data.paramName}}</td>
+                                                <td><span *ngIf="data.requireType === 'yes'">是</span><span *ngIf="data.requireType === 'no'">否</span></td>
+                                                <td>{{data.paramExample}}</td>
+                                                <td>{{data.comment}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </nz-table>
+                                </div>
+                            </div>
+
+                            <div class="api-center-content-one-child" id="module_6">
+                                <h4 class="api-center-content-one-child-tit">Query</h4>
+                                <div class="api-center-content-one-child-table">
+                                    <nz-table #requestQueryTable [nzData]="_requestQueryTable" [nzFrontPagination]="false"
+                                        [nzShowPagination]="false" [nzBordered]="false" nzSize="middle">
+                                        <thead>
+                                            <tr>
+                                                <th [nzWidth]="'20%'">参数名</th>
+                                                <th [nzWidth]="'10%'">类型</th>
+                                                <th [nzWidth]="'10%'">是否必需</th>
+                                                <th [nzWidth]="'30%'">参数值示例</th>
+                                                <th [nzWidth]="'30%'">备注</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let data of requestQueryTable.data">
+                                                <td>{{data.paramName}}</td>
+                                                <td>{{data.paramType}}</td>
+                                                <td><span *ngIf="data.requireType === 'yes'">是</span><span *ngIf="data.requireType === 'no'">否</span></td>
+                                                <td>{{data.paramExample}}</td>
+                                                <td>{{data.comment}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </nz-table>
+                                </div>
+                            </div>
+
+                            <div class="api-center-content-one-child" id="module_7">
+                                <h4 class="api-center-content-one-child-tit">Body</h4>
+                                <div class="api-center-content-one-child-table">
+                                    <nz-table #requestBodyTable [nzData]="_requestBodyTable" [nzFrontPagination]="false"
+                                        [nzShowPagination]="false" [nzBordered]="false" nzSize="middle">
+                                        <thead>
+                                            <tr>
+                                                <th [nzWidth]="'10%'">层级</th>
+                                                <th [nzWidth]="'10%'">参数名</th>
+                                                <th [nzWidth]="'10%'">类型</th>
+                                                <th [nzWidth]="'10%'">是否必需</th>
+                                                <th [nzWidth]="'30%'">参数值示例</th>
+                                                <th [nzWidth]="'30%'">备注</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <ng-template ngFor let-data [ngForOf]="requestBodyTable.data">
+                                                <ng-template ngFor let-item [ngForOf]="expandDataCache['resquestBody' + data.paramName]">
+                                                    <tr *ngIf="(item.parent&&item.parent.expand)||!(item.parent)">
+                                                        <td [nzIndentSize]="item.level*20" [nzShowExpand]="false"
+                                                            [nzExpand]="true">
+                                                            {{item.level}}
+                                                        </td>
+                                                        <td>{{item.paramName}}</td>
+                                                        <td>{{item.paramType}}</td>
+                                                        <td><span *ngIf="item.requireType === 'yes'">是</span><span
+                                                                *ngIf="item.requireType === 'no'">否</span></td>
+                                                        <td>{{item.paramExample}}</td>
+                                                        <td>{{item.comment}}</td>
+                                                    </tr>
+                                                </ng-template>
+                                            </ng-template>
+                                        </tbody>
+                                    </nz-table>
+                                </div>
+                            </div>
+
+                            <div class="api-center-content-one-child" id="module_8">
+                                <h4 class="api-center-content-one-child-tit">请求示例</h4>
+                                <div class="api-center-content-one-child-textarea">
+                                    <p style="word-break: break-all;">请求地址：{{_interfaceDetailDate['domainName']}}{{_interfaceDetailDate['uri']}}{{_interfaceDetailDate['path']}}{{parmasStr}}</p>
+                                    <p *ngIf="htmlRequestBody">请求Body：</p>
+                                    <div #requestBody [innerHtml]="htmlRequestBody"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="api-center-content-one" id="module_4">
+                        <h3 class="api-center-content-one-tit">返回结果</h3>
+                        <div class="api-center-content-one-content-child">
+                            <div class="api-center-content-one-child" id="module_9">
+                                <h4 class="api-center-content-one-child-tit">Headers</h4>
+                                <div class="api-center-content-one-child-table">
+                                    <nz-table #responseHeadersTable [nzData]="_responseHeadersTable"
+                                        [nzFrontPagination]="false" [nzShowPagination]="false" [nzBordered]="false"
+                                        nzSize="middle">
+                                        <thead>
+                                            <tr>
+                                                <th [nzWidth]="'30%'">参数名</th>
+                                                <th [nzWidth]="'10%'">是否必需</th>
+                                                <th [nzWidth]="'30%'">参数值示例</th>
+                                                <th [nzWidth]="'30%'">备注</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let data of responseHeadersTable.data">
+                                                <td>{{data.paramName}}</td>
+                                                <td><span *ngIf="data.requireType === 'yes'">是</span><span *ngIf="data.requireType === 'no'">否</span></td>
+                                                <td>{{data.paramExample}}</td>
+                                                <td>{{data.comment}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </nz-table>
+                                </div>
+                            </div>
+
+                            <div class="api-center-content-one-child" id="module_10">
+                                <h4 class="api-center-content-one-child-tit">正常返回</h4>
+                                <div class="api-center-content-one-child-table">
+                                    <div class="api-center-content-one-child-table">
+                                        <nz-table #responseSuccessTable [nzData]="_responseSuccessTable"
+                                            [nzFrontPagination]="false" [nzShowPagination]="false" [nzBordered]="false"
+                                            nzSize="middle">
+                                            <thead>
+                                                <tr>
+                                                    <th [nzWidth]="'10%'">层级</th>
+                                                    <th [nzWidth]="'10%'">参数名</th>
+                                                    <th [nzWidth]="'10%'">类型</th>
+                                                    <th [nzWidth]="'10%'">是否必需</th>
+                                                    <th [nzWidth]="'30%'">参数值示例</th>
+                                                    <th [nzWidth]="'30%'">备注</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <ng-template ngFor let-data [ngForOf]="responseSuccessTable.data">
+                                                    <ng-template ngFor let-item [ngForOf]="expandDataCache['responseSuccess' + data.paramName]">
+                                                        <tr *ngIf="(item.parent&&item.parent.expand)||!(item.parent)">
+                                                            <td [nzIndentSize]="item.level*20" [nzShowExpand]="false"
+                                                                [nzExpand]="true">
+                                                                {{item.level}}
+                                                            </td>
+                                                            <td>{{item.paramName}}</td>
+                                                            <td>{{item.paramType}}</td>
+                                                            <td><span *ngIf="item.requireType === 'yes'">是</span><span
+                                                                    *ngIf="item.requireType === 'no'">否</span></td>
+                                                            <td>{{item.paramExample}}</td>
+                                                            <td>{{item.comment}}</td>
+                                                        </tr>
+                                                    </ng-template>
+                                                </ng-template>
+                                            </tbody>
+                                        </nz-table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="api-center-content-one-child" *ngIf="htmlResponseSuccess">
+                                <h4 class="api-center-content-one-child-tit">数据示例</h4>
+                                <div class="api-center-content-one-child-textarea" [innerHtml]="htmlResponseSuccess"></div>
+                            </div>
+
+                            <div class="api-center-content-one-child" id="module_11">
+                                <h4 class="api-center-content-one-child-tit">失败返回</h4>
+                                <div class="api-center-content-one-child-table">
+                                    <div class="api-center-content-one-child-table">
+                                        <nz-table #responseFailTable [nzData]="_responseFailTable" [nzFrontPagination]="false"
+                                            [nzShowPagination]="false" [nzBordered]="false" nzSize="middle">
+                                            <thead>
+                                                <tr>
+                                                    <th [nzWidth]="'10%'">层级</th>
+                                                    <th [nzWidth]="'10%'">参数名</th>
+                                                    <th [nzWidth]="'10%'">类型</th>
+                                                    <th [nzWidth]="'10%'">是否必需</th>
+                                                    <th [nzWidth]="'30%'">参数值示例</th>
+                                                    <th [nzWidth]="'30%'">备注</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <ng-template ngFor let-data [ngForOf]="responseFailTable.data">
+                                                    <ng-template ngFor let-item [ngForOf]="expandDataCache['responseFail' + data.paramName]">
+                                                        <tr *ngIf="(item.parent&&item.parent.expand)||!(item.parent)">
+                                                            <td [nzIndentSize]="item.level*20" [nzShowExpand]="false"
+                                                                [nzExpand]="true">
+                                                                {{item.level}}
+                                                            </td>
+                                                            <td>{{item.paramName}}</td>
+                                                            <td>{{item.paramType}}</td>
+                                                            <td><span *ngIf="item.requireType === 'yes'">是</span><span
+                                                                    *ngIf="item.requireType === 'no'">否</span></td>
+                                                            <td>{{item.paramExample}}</td>
+                                                            <td>{{item.comment}}</td>
+                                                        </tr>
+                                                    </ng-template>
+                                                </ng-template>
+                                            </tbody>
+                                        </nz-table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="api-center-content-one-child" *ngIf="htmlResponseFail">
+                                <h4 class="api-center-content-one-child-tit">数据示例</h4>
+                                <div class="api-center-content-one-child-textarea" [innerHtml]="htmlResponseFail"></div>
+                            </div>
+
+                            <div class="api-center-content-one-child" id="module_12">
+                                <h4 class="api-center-content-one-child-tit">返回码</h4>
+                                <div class="api-center-content-one-child-table">
+                                    <nz-table #codeTable [nzData]="_codeTable" [nzFrontPagination]="false"
+                                        [nzShowPagination]="false" [nzBordered]="false" nzSize="middle">
+                                        <thead>
+                                            <tr>
+                                                <th [nzWidth]="'30%'">返回码</th>
+                                                <th [nzWidth]="'35%'">返回码解释</th>
+                                                <th [nzWidth]="'35%'">解决方法</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let data of codeTable.data">
+                                                <td>{{data.code}}</td>
+                                                <td>{{data.reason}}</td>
+                                                <td>{{data.solution}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </nz-table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div nz-col nzSpan="4" class="api-right" *ngIf="inrefaceList.length">
+                <nz-anchor [nzAffix]="true" [nzShowInkInFixed]="true">
+                    <nz-link nzHref="#module_{{item.id}}" nzTitle="{{item.name}}" *ngFor="let item of navList">
+                        <ng-container *ngIf="item.children">
+                            <nz-link nzHref="#module_{{one.id}}" nzTitle="{{one.name}}" *ngFor="let one of item.children"></nz-link>
+                        </ng-container>
+                    </nz-link>
+                </nz-anchor>
+            </div>
+        </div>
+        <div nz-row class="api-wrap no-api-wrap" *ngIf="!apiFlag">
+            此API接口未发布
+        </div>
+    </nz-content>
+</nz-layout>
