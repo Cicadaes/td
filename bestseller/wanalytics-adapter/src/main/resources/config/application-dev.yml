@@ -1,0 +1,69 @@
+collector.url: http://172.23.4.137:8083/g/ow
+app:
+  name: adapter application
+  description: adapter
+server:
+  port: 8080
+  contextPath: /api/
+spring:
+  profiles:
+    active: dev
+  redis:
+    expire: 3600
+    pool:
+      max-total: 50
+      max-idle: 5
+      min-idle: 5
+      timeout: 500
+      ftp-lock-key: lock
+      ftp-directory-lock-key: directoryNum
+  sentinel:
+    host: 172.23.4.138:26379,172.23.4.139:26379
+    master: mymaster
+ftp:
+  host: h3crd-wlan1.chinacloudapp.cn
+  port: 21
+  username: bestseller
+  password: bestsellersecurity
+  passiveMode: true
+  encoding: UTF-8
+  timeout: 10000
+  localPath: /attachment/wifianalytics/bestseller/
+  remotePath: /bestseller/
+  downFileNum: 20
+  fixedDelay: 10000
+  fixMinute: 10
+logback:
+  loglevel: WARN
+kafka:
+  producer:
+    servers: kafka01.td.com:9092
+    retries: 0
+    batchSize: 4096
+    linger: 1
+    bufferMemory: 40960
+  consumer:
+    servers: kafka01.td.com:9092
+    enableAutoCommit: true
+    sessionTimeout: 6000
+    autoCommitInterval: 100
+    topic: wifi.collector.test
+    groupId: null
+    autoOffsetReset: latest
+    concurrency: 10
+executors:
+  corePoolSize: 5
+  maxPoolSize: 50
+  queueCapacity: 10000
+alarm:
+  cron: 0 15 */1 * * ?
+mail:
+  recipients: yinglei.li@tendcloud.com
+  address: yinglei.li@tendcloud.com
+  password: babytong.871011
+  host: smtp.office365.com
+  port: 587
+  auth: true
+  starttls: true
+  name: wifianalyticsChange.mail
+  transType: smtp

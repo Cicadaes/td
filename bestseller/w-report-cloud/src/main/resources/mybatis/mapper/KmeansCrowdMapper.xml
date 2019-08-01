@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.KmeansCrowdDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.KmeansCrowd">
+        <result column="id" property="id"/>
+        <result column="crowd_name" property="crowdName"/>
+        <result column="seed_crowd_id" property="seedCrowdId"/>
+        <result column="seed_crowd_name" property="seedCrowdName"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+        <result column="dimensionality" property="dimensionality"/>
+        <result column="date_type" property="dateType"/>
+        <result column="classification" property="classification"/>
+        <result column="project_id" property="projectId"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="creator" property="creator"/>
+        <result column="create_time" property="createTime"/>
+        <result column="updator" property="updator"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="exec_id" property="execId"/>
+    </resultMap>
+
+    <!-- TD_KMEANS_CROWD table all fields -->
+    <sql id="Base_Column_List">
+        id,crowd_name,seed_crowd_id,seed_crowd_name,start_date,end_date,dimensionality,date_type,classification,project_id,tenant_id,creator,create_time,updator,update_time,exec_id
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="crowdName != null and crowdName != ''">
+                and crowd_name = #{crowdName}
+            </if>
+            <if test="seedCrowdId != null and seedCrowdId != ''">
+                and seed_crowd_id = #{seedCrowdId}
+            </if>
+            <if test="seedCrowdName != null and seedCrowdName != ''">
+                and seed_crowd_name = #{seedCrowdName}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and start_date = #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and end_date = #{endDate}
+            </if>
+            <if test="dimensionality != null and dimensionality != ''">
+                and dimensionality = #{dimensionality}
+            </if>
+            <if test="dateType != null and dateType != ''">
+                and date_type = #{dateType}
+            </if>
+            <if test="classification != null and classification != ''">
+                and classification = #{classification}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="execId != null and execId != ''">
+                and exec_id = #{execId}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_KMEANS_CROWD(id,crowd_name,seed_crowd_id,seed_crowd_name,start_date,end_date,dimensionality,date_type,classification,project_id,tenant_id,creator,create_time,updator,update_time,exec_id)
+        values(#{id},#{crowdName},#{seedCrowdId},#{seedCrowdName},#{startDate},#{endDate},#{dimensionality},#{dateType},#{classification},#{projectId},#{tenantId},#{creator},now(),#{updator},now(),#{execId})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_KMEANS_CROWD set
+        crowd_name=#{crowdName},seed_crowd_id=#{seedCrowdId},seed_crowd_name=#{seedCrowdName},start_date=#{startDate},end_date=#{endDate},dimensionality=#{dimensionality},date_type=#{dateType},classification=#{classification},project_id=#{projectId},tenant_id=#{tenantId},creator=#{creator},create_time=now(),updator=#{updator},update_time=now(),exec_id=#{execId}
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_KMEANS_CROWD set
+        <trim suffixOverrides=",">
+            <if test="crowdName != null  ">
+                crowd_name=#{crowdName},
+            </if>
+            <if test="seedCrowdId != null  ">
+                seed_crowd_id=#{seedCrowdId},
+            </if>
+            <if test="seedCrowdName != null  ">
+                seed_crowd_name=#{seedCrowdName},
+            </if>
+            <if test="startDate != null  ">
+                start_date=#{startDate},
+            </if>
+            <if test="endDate != null  ">
+                end_date=#{endDate},
+            </if>
+            <if test="dimensionality != null  ">
+                dimensionality=#{dimensionality},
+            </if>
+            <if test="dateType != null  ">
+                date_type=#{dateType},
+            </if>
+            <if test="classification != null  ">
+                classification=#{classification},
+            </if>
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updator != null  ">
+                updator=#{updator},
+            </if>
+            <if test="updateTime != null  ">
+                update_time=#{updateTime},
+            </if>
+            <if test="execId != null  ">
+                exec_id=#{execId},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 聚类客群参数表 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_KMEANS_CROWD where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_KMEANS_CROWD where id = #{id}
+    </delete>
+
+    <!-- 聚类客群参数表 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_KMEANS_CROWD
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询聚类客群参数表列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_KMEANS_CROWD
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+</mapper>

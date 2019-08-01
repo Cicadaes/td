@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.BsUserDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="td.enterprise.entity.BsUser" >
+	<result column="id" property="id"/>
+	<result column="user_id" property="userId"/>
+	<result column="name" property="name"/>
+	<result column="ky_sign" property="kySign"/>
+	<result column="group_sign" property="groupSign"/>
+	<result column="logical_city_code" property="logicalCityCode"/>
+	<result column="department" property="department"/>
+	<result column="position" property="position"/>
+	<result column="logical_city" property="logicalCity"/>
+	<result column="brand_full_name" property="brandFullName"/>
+	<result column="brand_short_name" property="brandShortName"/>
+	<result column="sync_date" property="syncDate"/>
+	<result column="email" property="email"/>
+	<result column="tenant_sign" property="tenantSign"/>
+	<result column="shop_code" property="shopCode"/>
+	<result column="user_sign" property="userSign"/>
+  </resultMap>
+       
+  <!-- TD_BS_USER table all fields -->
+  <sql id="Base_Column_List" >
+	 id,user_id,name,ky_sign,group_sign,logical_city_code,department,position,logical_city,brand_full_name,brand_short_name,sync_date,email,tenant_sign,shop_code,user_sign
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="userId != null and userId != ''" >
+        and user_id =  #{userId}
+	  </if>
+	      <if test="name != null and name != ''" >
+        and name =  #{name}
+	  </if>
+	      <if test="kySign != null and kySign != ''" >
+        and ky_sign =  #{kySign}
+	  </if>
+	      <if test="groupSign != null and groupSign != ''" >
+        and group_sign =  #{groupSign}
+	  </if>
+	      <if test="logicalCityCode != null and logicalCityCode != ''" >
+        and logical_city_code =  #{logicalCityCode}
+	  </if>
+	      <if test="department != null and department != ''" >
+        and department =  #{department}
+	  </if>
+	      <if test="position != null and position != ''" >
+        and position =  #{position}
+	  </if>
+	      <if test="logicalCity != null and logicalCity != ''" >
+        and logical_city =  #{logicalCity}
+	  </if>
+	      <if test="brandFullName != null and brandFullName != ''" >
+        and brand_full_name =  #{brandFullName}
+	  </if>
+	      <if test="brandShortName != null and brandShortName != ''" >
+        and brand_short_name =  #{brandShortName}
+	  </if>
+	      <if test="syncDate != null and syncDate != ''" >
+        and sync_date =  #{syncDate}
+	  </if>
+	      <if test="email != null and email != ''" >
+        and email =  #{email}
+	  </if>
+	      <if test="tenantSign != null and tenantSign != ''" >
+        and tenant_sign =  #{tenantSign}
+	  </if>
+	      <if test="shopCode != null and shopCode != ''" >
+        and shop_code =  #{shopCode}
+	  </if>
+	      <if test="userSign != null and userSign != ''" >
+        and user_sign =  #{userSign}
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+      insert into 
+TD_BS_USER(id,user_id,name,ky_sign,group_sign,logical_city_code,department,position,logical_city,brand_full_name,brand_short_name,sync_date,email,tenant_sign,shop_code,user_sign)
+ values(#{id},#{userId},#{name},#{kySign},#{groupSign},#{logicalCityCode},#{department},#{position},#{logicalCity},#{brandFullName},#{brandShortName},#{syncDate},#{email},#{tenantSign},#{shopCode},#{userSign})
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+      update TD_BS_USER set user_id=#{userId},name=#{name},ky_sign=#{kySign},group_sign=#{groupSign},logical_city_code=#{logicalCityCode},department=#{department},position=#{position},logical_city=#{logicalCity},brand_full_name=#{brandFullName},brand_short_name=#{brandShortName},sync_date=#{syncDate},email=#{email},tenant_sign=#{tenantSign},shop_code=#{shopCode},user_sign=#{userSign} where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+      update TD_BS_USER set 
+		<if test="userId != null  ">
+		user_id=#{userId},
+	</if>
+	<if test="name != null  ">
+		name=#{name},
+	</if>
+	<if test="kySign != null  ">
+		ky_sign=#{kySign},
+	</if>
+	<if test="groupSign != null  ">
+		group_sign=#{groupSign},
+	</if>
+	<if test="logicalCityCode != null  ">
+		logical_city_code=#{logicalCityCode},
+	</if>
+	<if test="department != null  ">
+		department=#{department},
+	</if>
+	<if test="position != null  ">
+		position=#{position},
+	</if>
+	<if test="logicalCity != null  ">
+		logical_city=#{logicalCity},
+	</if>
+	<if test="brandFullName != null  ">
+		brand_full_name=#{brandFullName},
+	</if>
+	<if test="brandShortName != null  ">
+		brand_short_name=#{brandShortName},
+	</if>
+	<if test="syncDate != null  ">
+		sync_date=#{syncDate},
+	</if>
+	<if test="email != null  ">
+		email=#{email},
+	</if>
+	<if test="tenantSign != null  ">
+		tenant_sign=#{tenantSign},
+	</if>
+	<if test="shopCode != null  ">
+		shop_code=#{shopCode},
+	</if>
+	<if test="userSign != null  ">
+		user_sign=#{userSign},
+	</if>
+	update_time = now() 
+	where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 用户表 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+      select <include refid="Base_Column_List" /> 
+	 from TD_BS_USER where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+      delete from TD_BS_USER where id = #{id}
+  </delete>
+
+  <!-- 用户表 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_BS_USER 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询用户表列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_BS_USER 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <!-- 通过user_id查询用户表列表 add by liyinglei 2018-01-08 -->
+  <select id="queryListByUserId" resultMap="BaseResultMap"  parameterType="map">
+	select * from TD_BS_USER 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  
+</mapper>   

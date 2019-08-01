@@ -1,0 +1,106 @@
+# ===================================================================
+# Spring Boot configuration.
+#
+# This configuration will be overriden by the Spring profile you use,
+# for example application-dev.yml if you use the "dev" profile.
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+management:
+  context-path: /management
+  health:
+    mail:
+      enabled: false # When using the MailService, configure an SMTP server and set this to true
+spring:
+  application:
+    name: W-Report
+  profiles:
+        # The commented value for `active` can be replaced with valid Spring profiles to load.
+        # Otherwise, it will be filled in by maven when building the WAR file
+        # Either way, it can be overridden by `--spring.profiles.active` value passed in the commandline or `-Dspring.profiles.active` set in `JAVA_OPTS`
+    active: #spring.profiles.active#
+  jackson:
+    serialization.write_dates_as_timestamps: false
+
+  datasource:
+    name: wifianalytics_merge
+    url: jdbc:mysql://172.23.5.150:3306/wifianalytics?characterEncoding=utf-8&&zeroDateTimeBehavior=convertToNull&&autoReconnect=true
+    username: wifianalytics
+    password: wifianalytics
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    filters: stat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+  redis:
+    expire: 3600
+    pool:
+      max-idle: 8
+      min-idle: 0
+      max-active: 8
+      max-wait: -1
+  sentinel:
+    host: 172.23.5.151:26379
+    master: mymaster
+
+security:
+  filter-order: 5   # menufiler order是10， munufiler需要在spring security filer chain 之后
+
+server:
+  context-path: /wreport
+
+mybatis:
+  config-locations: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+# =======================Wreport Properties==========================
+
+app:
+  service:
+    security: http://localhost:8080/wreport/j_spring_cas_security_check
+    home: http://localhost:8080/wreport
+cas:
+  service:
+    login: http://172.23.5.108/sso/login
+    logout: http://172.23.5.108/sso/logout
+  url:
+    prefix: http://172.23.5.108/sso
+
+#JOB
+systemcode: wreport
+#--------
+
+appcode: wreport
+apptaken: e10adc3949ba59abbe56e057f20f883e
+menu: MENU
+button: BUTTON
+manifest-build-version: 1.0.0
+azkabanUrl: ""
+azkabanUserName: ""
+azkabanPassword: ""
+passengerDistributionMaxSensor: 50
+dmp-console-url: http://172.23.5.115:8899/config/admin
+upload:
+  path:  /nfs
+
+
+
+async:
+  corePoolSize: 2
+  maxPoolSize: 50
+  queueCapacity: 10000

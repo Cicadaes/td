@@ -1,0 +1,2 @@
+type=command
+command=bash -x /home/hadoop/wanalytics/etl/bin/ProjectIndexTask.sh -schedulerTaskLogId '${schedule.task.log.id}' -date '${azkaban.flow.start.year}-${azkaban.flow.start.month}-${azkaban.flow.start.day}' --hour "${azkaban.flow.start.hour}"

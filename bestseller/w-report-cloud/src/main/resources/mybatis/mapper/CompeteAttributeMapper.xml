@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.CompeteAttributeDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="td.enterprise.entity.CompeteAttribute" >
+	<result column="id" property="id"/>
+	<result column="tenant_id" property="tenantId"/>
+	<result column="compete_id" property="competeId"/>
+	<result column="data_sources" property="dataSources"/>
+	<result column="status" property="status"/>
+	<result column="start_date" property="startDate"/>
+	<result column="end_date" property="endDate"/>
+	<result column="creator" property="creator"/>
+	<result column="create_by" property="createBy"/>
+	<result column="create_time" property="createTime"/>
+	<result column="updater" property="updater"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="update_time" property="updateTime"/>
+  </resultMap>
+       
+  <!-- TD_COMPETE_ATTRIBUTE table all fields -->
+  <sql id="Base_Column_List" >
+	 id,tenant_id,compete_id,data_sources,status,start_date,end_date,creator,create_by,create_time,updater,update_by,update_time
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="tenantId != null and tenantId != ''" >
+        and tenant_id =  #{tenantId}
+	  </if>
+	      <if test="competeId != null and competeId != ''" >
+        and compete_id =  #{competeId}
+	  </if>
+	      <if test="dataSources != null and dataSources != ''" >
+        and data_sources =  #{dataSources}
+	  </if>
+	      <if test="status != null and status != ''" >
+        and status =  #{status}
+	  </if>
+	      <if test="startDate != null and startDate != ''" >
+        and start_date =  #{startDate}
+	  </if>
+	      <if test="endDate != null and endDate != ''" >
+        and end_date =  #{endDate}
+	  </if>
+	      <if test="creator != null and creator != ''" >
+        and creator =  #{creator}
+	  </if>
+	      <if test="createBy != null and createBy != ''" >
+        and create_by =  #{createBy}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	      <if test="updater != null and updater != ''" >
+        and updater =  #{updater}
+	  </if>
+	      <if test="updateBy != null and updateBy != ''" >
+        and update_by =  #{updateBy}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+      insert into 
+TD_COMPETE_ATTRIBUTE(id,tenant_id,compete_id,data_sources,status,start_date,end_date,creator,create_by,create_time,updater,update_by,update_time)
+ values(#{id},#{tenantId},#{competeId},#{dataSources},#{status},#{startDate},#{endDate},#{creator},#{createBy},now(),#{updater},#{updateBy},now())
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+      update TD_COMPETE_ATTRIBUTE set tenant_id=#{tenantId},compete_id=#{competeId},data_sources=#{dataSources},status=#{status},start_date=#{startDate},end_date=#{endDate},creator=#{creator},create_by=#{createBy},updater=#{updater},update_by=#{updateBy},update_time=now() where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+      update TD_COMPETE_ATTRIBUTE set 
+		<if test="tenantId != null  ">
+		tenant_id=#{tenantId},
+	</if>
+	<if test="competeId != null  ">
+		compete_id=#{competeId},
+	</if>
+	<if test="dataSources != null  ">
+		data_sources=#{dataSources},
+	</if>
+	<if test="status != null  ">
+		status=#{status},
+	</if>
+	<if test="startDate != null  ">
+		start_date=#{startDate},
+	</if>
+	<if test="endDate != null  ">
+		end_date=#{endDate},
+	</if>
+	<if test="creator != null  ">
+		creator=#{creator},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updater != null  ">
+		updater=#{updater},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	update_time = now() 
+	where id=#{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateById" parameterType="Object" >
+      update TD_COMPETE_ATTRIBUTE set
+	<if test="tenantId != null  ">
+		tenant_id=#{tenantId},
+	</if>
+	<if test="dataSources != null  ">
+		data_sources=#{dataSources},
+	</if>
+	<if test="status != null  ">
+		status=#{status},
+	</if>
+	<if test="startDate != null  ">
+		start_date=#{startDate},
+	</if>
+	<if test="endDate != null  ">
+		end_date=#{endDate},
+	</if>
+	<if test="creator != null  ">
+		creator=#{creator},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updater != null  ">
+		updater=#{updater},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	update_time = now()
+	where compete_id=#{competeId}
+  </update>
+
+  <!-- 根据id查询 竞品项目属性 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+      select <include refid="Base_Column_List" /> 
+	 from TD_COMPETE_ATTRIBUTE where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+      delete from TD_COMPETE_ATTRIBUTE where id = #{id}
+  </delete>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByCompeteId" parameterType="java.lang.String">
+      delete from TD_COMPETE_ATTRIBUTE where compete_id = #{competeId}
+  </delete>
+
+  <!-- 竞品项目属性 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_COMPETE_ATTRIBUTE 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询竞品项目属性列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_COMPETE_ATTRIBUTE 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+</mapper>   

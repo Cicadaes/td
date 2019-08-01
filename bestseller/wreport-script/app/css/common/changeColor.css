@@ -1,0 +1,680 @@
+/**/
+
+/*侧边栏背景色*/
+.menu-left-root, .logout, #logo_div {
+    background-color: #36474F !important;
+}
+
+/*顶部菜单*/
+.top-bar, .case_con {
+    background-color: #fff !important;
+}
+
+/*搜索框*/
+.search {
+    background-color: #FFFFFF !important;
+}
+
+.switch-more-search {
+    background-color: #02aea2 !important;
+    margin: 0 0 0 5px;
+    padding: 4px 6px 3px;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.switch-more-search2 {
+    background-color: #02aea2 !important;
+    margin: 0 0 0 5px !important;
+    padding: 4px 6px 3px !important;
+    border-radius: 4px !important;
+    color: #fff !important;
+}
+
+.search input {
+    color: #AEB8E6 !important;
+}
+
+/*点击后的背景色*/
+.menu-item.active, .menu-item.item-link:hover {
+    background-color: #273238 !important;
+    color: #FFFFFF !important;
+    border-left-color: #0BA99F;
+}
+
+/*滚动条颜色*/
+::-webkit-scrollbar-thumb {
+    background: #eeeeee !important;
+}
+
+/*管理的边框颜色*/
+.account, .rule {
+    background-color: #36474F !important;
+    border-color: #36474F !important;
+}
+
+.logout a.active {
+    border-color: #0BA99F !important;
+    background-color: #273238 !important;
+}
+
+/*管理的浮窗样式*/
+.logout > .dropdown-ul {
+    background-color: rgba(0, 199, 100, 0.8) !important;
+}
+
+.logout > .dropdown-ul:before {
+    border-top-color: rgba(0, 199, 100, 0.8) !important;
+}
+
+.logout > .dropdown-ul > li.li01 {
+    border-color: #FFF !important;
+}
+
+.logout > .dropdown-ul > li > a {
+    color: #FFF !important;
+}
+
+/*弹窗footer背景色*/
+.modal-footer {
+    background-color: #0BA99F !important;
+}
+
+/* css代码整理 */
+/*operator-panel*/
+.operator-panel .btn-add:hover {
+    background: #02aea2;
+}
+
+.operator-panel .btn-add {
+    background: #02aea2;
+}
+
+.probe_right .probe_addProbe {
+    background: #02aea2 !important;
+}
+
+.dd_2:HOVER {
+    background: #02aea2 !important;
+    color: #FFFFFF !important;
+}
+
+.com_compete_btn {
+    background-color: #02aea2 !important;
+}
+
+/*构建聚类页面下拉框*/
+.select > ul > li:hover {
+    cursor: pointer;
+    background: #02aea2 !important;
+}
+
+/*构建客群添加行为按钮*/
+.add_btn_div {
+    color: #02aea2 !important;
+}
+
+.build_add_btn .add_left {
+    background: #02aea2 !important;
+}
+
+.build_add_btn .add_right {
+    background: #02aea2 !important;
+}
+
+/* 提交等按钮 */
+.submit_btn_1 .btn-primary1, .submit_btn_1 .btn-primary1:hover {
+    background: #02aea2 url(../../images/icon-check.png) no-repeat 8px 5px;
+    background-size: 17px 14px;
+}
+
+.detpeople em i {
+    background: #02aea2 !important;
+}
+
+.icon_orange .icon_compare {
+    background: #02aea2 !important;
+}
+
+.agecon ul li b{
+    border-top: 1px solid #02aea2;
+}
+
+.color_boy{
+    color: #02aea2;
+}
+.color_girl{
+    color: #BE6BE1;
+}
+.color_unknown{
+    color: #9EA7B4;
+}
+
+.agecon ul li b em {
+    background: #02aea2 !important;
+}
+
+.agecon ul li.age_red b em {
+    background: #BE6BE1 !important;
+}
+
+.agecon ul li span em {
+    background-color: #02aea2 !important;
+}
+
+.agecon ul li.age_red span em {
+    background: #CA89E5 !important;
+}
+
+/* 房间上下游 百分比背景色  */
+.ranking ul li.rank_num_one span em {
+    /* background: #5F92E1;  */
+    background: #02aea2 !important;
+}
+
+.ranking ul li.rank_num_1 span em {
+    background: #02aea2 !important;
+}
+
+.robe_mud_traffic .robe_red {
+    color: #02aea2 !important;
+}
+
+.drag_left, .drag_right {
+    background: #02aea2 !important;
+}
+
+.drag_slider {
+    background: #02aea2 !important;
+    border-top: 1px solid #02aea2 !important;
+}
+
+.drag_slider::after {
+    border-top: 5px solid #02aea2 !important;
+}
+
+.media_drag_time {
+    background: #02aea2 !important;
+}
+
+.job_icon {
+    background: #02aea2 !important;
+}
+
+/* 黑名单管理 下载表格 */
+.downloadTab {
+    line-height: 3;
+    color: #02aea2 !important;
+}
+
+.downloadTab i:hover {
+    color: #02aea2 !important;
+}
+
+.btn.btn-primary.ml-10 {
+    background: #02aea2 !important;
+}
+
+.switch-more-search a {
+    color: #fff !important;
+}
+
+.btn .btn-primary .btn-sm .ml-10 {
+    background: #02aea2 !important;
+}
+
+/*projectlist*/
+.addshopGroup {
+    background: #02aea2 !important;
+}
+
+.addshopGroup > span {
+    background: url(../../images/add_icon_green.png) no-repeat;
+    background-size: 100%;
+}
+
+.tab_shopG .tab_now {
+    color: #000;
+    border-bottom: 2px solid #01AD9F !important;
+}
+
+.batchSet.tab_now2 {
+    color: #000;
+    border-bottom: 2px solid #01AD9F !important;
+}
+
+.search_btn_project {
+    background: #02aea2 !important;
+}
+
+.color_rose {
+    /* background: #96d02e; */
+    background: #02aea2 !important;
+}
+
+.color_pink {
+    /* background: #f1cbcb; */
+    /* background: rgb(124,192,255);#96d02e; */
+    /* 第二个框框的颜色   */
+    background: #7bd7ce !important;
+}
+
+.customArriveTimeOptionTooltip {
+    background-color: #02aea2 !important;
+}
+
+/*.comRoom_tab {*/
+/*background-color: #02aea2 !important;*/
+/*}*/
+
+.roomCL_btn {
+    background: #02aea2 !important;
+}
+
+.new_analysis_btn {
+    background: #02aea2 !important;
+}
+
+.new_analysis_btn2 {
+    background: #f5f7f9 !important;
+    border: 1px solid #D7DDE4;
+    color: #C3CCD5;
+}
+
+.new_analysis_btn2:hover {
+    color: #C3CCD5;
+    cursor: text;
+}
+
+.goBack_ {
+    color: #02aea2 !important;
+}
+
+.goBack_:hover {
+    color: #02aea2 !important;
+}
+
+.drag_slider {
+    border-top: 1px solid #02aea2 !important;
+    background: #02aea2 !important;
+}
+
+.job_icon {
+    background: #02aea2 !important;
+}
+
+.may_make {
+    color: #02aea2 !important;
+}
+
+.data_show_1 li:hover {
+    background: #02aea2;
+    cursor: pointer;
+}
+
+.roomD_to_search {
+    background: #02aea2 !important;
+}
+
+.robe_mud_1 {
+    /* width: 240px; */
+    border: 1px solid #02aea2;
+}
+
+.des_container .describe {
+    border: 1px solid #02aea2;
+}
+
+.color_red {
+    background: #02aea2 !important;
+}
+
+.downloadTab:hover {
+    line-height: 3;
+    color: #02aea2;
+}
+
+.btn-sref-sm.active {
+    border: 0;
+    color: #000 !important;
+    border-bottom: 2px solid #02aea2 !important;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+.robe_mud {
+    border: 1px solid #02aea2 !important;
+}
+
+.helpOpened_download:hover {
+    background-image: url(../../images/download_green.png);
+    background-repeat: no-repeat;
+    background-position: 4px -2px !important;
+}
+
+.helpOpened:hover {
+    background-image: url(../../images/help.png);
+    background-repeat: no-repeat;
+    background-position: 4px -2px !important;
+}
+
+.lejicishu {
+    background: #02aea2 !important;
+}
+
+.setBtn {
+    background: #02aea2 !important;
+}
+
+.setNav {
+    color: #02aea2 !important;
+}
+
+.settingBox .settingProject ul li {
+    background: #02aea2 !important;
+}
+
+.roomCom_btn {
+    background-color: #02aea2 !important;
+}
+
+.TD_MonthPicke_MonthList .TD_MonthPicke_month.chooes {
+    background: #02aea2 !important;
+    color: #fff;
+}
+
+.DatePicke_operation_r .DatePicke_confirm, .DatePicke_operation .TD_WeekPicke_Confirm {
+    background: #02aea2;
+}
+
+.DatePicke_operation_r .DatePicke_confirm, .DatePicke_operation .TD_WeekPicke_Confirm:hover {
+    background: #02aea2;
+}
+
+.DatePicke_operation_r .DatePicke_cancel, .DatePicke_operation .TD_WeekPicke_cancle {
+    color: #02aea2;
+}
+
+.start_end {
+    background: #02aea2 !important;
+}
+
+.form-actions span font a.confirm {
+    background: #02aea2 !important;
+}
+
+.form-actions span font a.confirm {
+    background: #02aea2 !important;
+}
+
+.zy_icon {
+    background: url(../../images/icon_set_green.png) no-repeat;
+}
+
+.icon_marry {
+    background-position: 0 -141px;
+}
+
+.icon_child {
+    background-position: -40px -141px;
+}
+
+.icon_car {
+    background-position: -80px -141px;
+}
+
+.boy_icon {
+    background-position: -232px -35px;
+}
+
+.girl_icon {
+    background-position: -232px -93px;
+}
+
+.compare_boy {
+    background: url(../../images/gender_rate_boy_green.png) repeat-x;
+}
+
+.icons-add {
+    width: 14px;
+    height: 14px;
+    background-position: -98px -466px !important;
+}
+
+.icons-more-export {
+    width: 22px;
+    height: 23px;
+    background-position: -183px -282px !important;
+    cursor: pointer;
+}
+
+.icons {
+    background: url(../../images/icons_green.png) no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+    background-size: 300px 898px;
+}
+
+.color_gray {
+    background: #7bd7ce !important;
+}
+
+.icon_people {
+    width: 28px;
+    height: 21px;
+    display: block;
+    margin: 0 auto;
+    background-position: -157px -36px !important;
+}
+
+.analysis_list_active {
+    background-color: #02aea2;
+    color: #FFF;
+    border-radius: 4px;
+}
+
+.trueSelectProject {
+    background-color: #02aea2;
+}
+
+.settingLetters ul li a:hover {
+    color: #02aea2;
+}
+
+.specialBj:hover {
+    color: #02aea2;
+}
+
+.btn-blue-hg37 {
+    background: #02aea2 !important;
+}
+
+.shopdatalist li .check_ {
+    background: url(../../images/check.png) no-repeat;
+    background-size: 100%;
+}
+
+.checkall .check_ {
+    background: url(../../images/check.png) no-repeat;
+    background-size: 100%;
+}
+
+.check_set {
+    background: url(../../images/check.png) no-repeat;
+    background-size: 104%;
+}
+
+/* 确定提交按钮 */
+.btn-blue-hg36 {
+    background: #02aea2 !important;
+}
+
+.case_select_con li:hover {
+    background: #02aea2;
+    color: #fff;
+}
+
+.ser_txt dt span, .ser_txt dd span {
+    margin-right: 10px;
+    display: block;
+    float: left;
+    width: 110px;
+    color: #02aea2 !important;
+    font-weight: normal;
+}
+
+.tip_close:hover {
+    color: #02aea2 !important;
+}
+
+.form-actions span font a.cancelFilter {
+    color: #02aea2 !important;
+}
+
+.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+    background: #02aea2 !important;
+    border-radius: 3px;
+}
+
+.ng-table-pager .page-count-box select {
+
+    color: #02aea2 !important;
+
+}
+
+.ng-table-pager .page-count-box select > option:hover,
+.ng-table-pager .page-count-box select > option:focus {
+    background-color: #02aea2 !important;
+}
+
+.probe-tips li b {
+    border-left: 5px solid #02aea2 !important;
+}
+
+.probe-tips li em {
+    color: #02aea2 !important;
+}
+
+.probe-tips strong {
+    border-left: 5px solid #02aea2 !important;
+    border-bottom: 5px solid #02aea2 !important;
+}
+
+.font_color {
+    color: #02aea2;
+}
+
+.ng-table-operator > a:hover {
+    color: #02aea2;
+}
+
+option:hover {
+    background-color: #ddd !important;
+}
+
+.ng-table-pager .page-count-box .tb-refresh {
+    display: inline-block;
+    vertical-align: top;
+    width: 20px;
+    height: 20px;
+    background: url(../../images/i-refresh4.png) no-repeat center;
+    background-size: 16px 16px;
+    cursor: pointer;
+    margin: 15px 0 0 0;
+}
+
+/* 确定提交按钮 */
+.btn-blue-hg36 {
+    background: #02aea2 !important;
+}
+
+.downloadData_history_down:HOVER {
+    color: #02aea2 !important;
+}
+
+.persons-type:hover {
+    border: 1px solid #02aea2 !important;
+    box-shadow: 0 2px 2px #7BD7CE !important;
+}
+
+.change_theme {
+    color: #02aea2 !important;
+}
+
+.change_theme:hover {
+    color: #666f7b !important;
+}
+
+.change_color_ {
+    color: #02aea2 !important;
+}
+
+/* 查看店铺探针详情 */
+.sensor_select {
+    border-bottom: 2px solid #02aea2 !important;
+}
+
+.form-actions span b a.confirm {
+    background: #02aea2 !important;
+}
+.form-actions span b a.cancelFilter  {
+    color: #02aea2 !important;
+}
+.import_pensors {
+    background-color: #02aea2 !important;
+}
+.downList li:hover {
+    color: #02aea2 !important;
+}
+
+.strengthSetBtn {
+    background: #02aea2;
+}
+
+.StrengthTestBtn {
+    border: 1px solid #02aea2;
+    color: #02aea2;
+}
+
+.sensorLockTrue {
+    border: 1px solid #02aea2;
+}
+.sensorLockTrue b {
+    background: #02aea2;
+}
+
+.size14 {
+    font-size: 14px;
+}
+
+.select_correlatAna_box .settingProject ul li {
+    background: #02aea2;
+}
+
+.child_list_one li .checkedOne {
+    background: url(../../images/check.png) no-repeat;
+    background-size: 100%;
+}
+
+.coorrectDetail ul li:hover {
+    color: #02aea2;
+}
+
+.pop-box .btn-box .btn-blue {
+    background: #02aea2;
+}
+
+/* 新增预警设置 */
+.warningBtn {
+    background: #02aea2;
+}
+
+.simulationCheck_check {
+    background: url(../../images/check.png) no-repeat;
+    background-size: 100%;
+}
+
+.addProjectElement:hover {
+    color: #02aea2;
+    cursor: pointer;
+}

@@ -1,0 +1,21 @@
+<div id="con-left" class="con-left con-left-hide has-not-scroll">
+    <a title="返回主页" class="logo" id="logo" href="javascript:;" ng-click="goToProductList();" style="background-size: auto 50%;"></a>
+    <div class="scroll-box fl" id="nav-scroll" style="height: 569px;">
+        <div class="nav-left" id="nav-bar" style="max-height: 569px;">
+            <div class="content_mid" style="">
+                <div ng-repeat="app in authAppList" appcode="{{app.appCode}}" class="li">
+                    <a href="javascript:;">
+                        <div class="nav-img"><i class="icons-nav icon-nav-{{app.appCode}}"></i><i class="i-a"></i></div>
+                        <div class="nav-name">{{app.appName}}</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_scroll hide">
+            <div class="scroll_border">
+                <div class="scroll_btn" style="top: -189.667px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="app-tip" style="display: none; top: 472px;">酷炫报表</div>
+</div>

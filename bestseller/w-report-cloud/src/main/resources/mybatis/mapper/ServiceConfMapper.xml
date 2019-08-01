@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.ServiceConfDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.ServiceConf">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="service" property="service"/>
+        <result column="token" property="token"/>
+        <result column="appkey" property="appkey"/>
+        <result column="type" property="type"/>
+        <result column="status" property="status"/>
+        <result column="description" property="description"/>
+        <result column="system_code" property="systemCode"/>
+        <result column="attr1" property="attr1"/>
+        <result column="attr2" property="attr2"/>
+        <result column="attr3" property="attr3"/>
+        <result column="attr4" property="attr4"/>
+        <result column="creator" property="creator"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="updater" property="updater"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- TD_SERVICE_CONF table all fields -->
+    <sql id="Base_Column_List">
+        id,name,code,service,token,appkey,type,status,description,system_code,attr1,attr2,attr3,attr4,creator,create_by,create_time,updater,update_by,update_time
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="code != null and code != ''">
+                and code = #{code}
+            </if>
+            <if test="service != null and service != ''">
+                and service = #{service}
+            </if>
+            <if test="token != null and token != ''">
+                and token = #{token}
+            </if>
+            <if test="appkey != null and appkey != ''">
+                and appkey = #{appkey}
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+            <if test="systemCode != null and systemCode != ''">
+                and system_code = #{systemCode}
+            </if>
+            <if test="attr1 != null and attr1 != ''">
+                and attr1 = #{attr1}
+            </if>
+            <if test="attr2 != null and attr2 != ''">
+                and attr2 = #{attr2}
+            </if>
+            <if test="attr3 != null and attr3 != ''">
+                and attr3 = #{attr3}
+            </if>
+            <if test="attr4 != null and attr4 != ''">
+                and attr4 = #{attr4}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_SERVICE_CONF(id,name,code,service,token,appkey,type,status,description,system_code,attr1,attr2,attr3,attr4,creator,create_by,create_time,updater,update_by,update_time)
+        values(#{id},#{name},#{code},#{service},#{token},#{appkey},#{type},#{status},#{description},#{systemCode},#{attr1},#{attr2},#{attr3},#{attr4},#{creator},#{createBy},now(),#{updater},#{updateBy},now())
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_SERVICE_CONF set
+        name=#{name},code=#{code},service=#{service},token=#{token},appkey=#{appkey},type=#{type},status=#{status},description=#{description},system_code=#{systemCode},attr1=#{attr1},attr2=#{attr2},attr3=#{attr3},attr4=#{attr4},creator=#{creator},create_by=#{createBy},create_time=now(),updater=#{updater},update_by=#{updateBy},update_time=now()
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_SERVICE_CONF set
+        <trim suffixOverrides=",">
+            <if test="name != null  ">
+                name=#{name},
+            </if>
+            <if test="code != null  ">
+                code=#{code},
+            </if>
+            <if test="service != null  ">
+                service=#{service},
+            </if>
+            <if test="token != null  ">
+                token=#{token},
+            </if>
+            <if test="appkey != null  ">
+                appkey=#{appkey},
+            </if>
+            <if test="type != null  ">
+                type=#{type},
+            </if>
+            <if test="status != null  ">
+                status=#{status},
+            </if>
+            <if test="description != null  ">
+                description=#{description},
+            </if>
+            <if test="systemCode != null  ">
+                system_code=#{systemCode},
+            </if>
+            <if test="attr1 != null  ">
+                attr1=#{attr1},
+            </if>
+            <if test="attr2 != null  ">
+                attr2=#{attr2},
+            </if>
+            <if test="attr3 != null  ">
+                attr3=#{attr3},
+            </if>
+            <if test="attr4 != null  ">
+                attr4=#{attr4},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="createBy != null  ">
+                create_by=#{createBy},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updater != null  ">
+                updater=#{updater},
+            </if>
+            <if test="updateBy != null  ">
+                update_by=#{updateBy},
+            </if>
+            <if test="updateTime != null  ">
+                update_time=#{updateTime},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 服务接口 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_SERVICE_CONF where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_SERVICE_CONF where id = #{id}
+    </delete>
+
+    <!-- 服务接口 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_SERVICE_CONF
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询服务接口列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_SERVICE_CONF
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+    <select id="findServiceConfByCode" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_SERVICE_CONF where code = #{code}
+    </select>
+</mapper>

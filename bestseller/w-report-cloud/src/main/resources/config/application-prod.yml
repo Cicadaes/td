@@ -1,0 +1,92 @@
+# ===================================================================
+# Spring Boot configuration for the "dev" profile.
+#
+# This configuration overrides the application.yml file.
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+spring:
+  profiles:
+    active: prod
+    include: sso
+
+  datasource:
+    name: wifianalytics
+    url: jdbc:mysql://${database.host}:${database:port}/${database.name}?characterEncoding=utf-8&&zeroDateTimeBehavior=convertToNull&&autoReconnect=true
+    username: ${database.user}
+    password: ${database.password}
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    filters: stat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+  redis:
+    expire: 3600
+    pool:
+      max-idle: 8
+      min-idle: 0
+      max-active: 8
+      max-wait: -1
+  sentinel:
+    host: ${sentinel.host}
+    master: ${sentinel.master}
+
+server:
+    port: ${server.port}
+
+
+
+mybatis:
+  config-locations: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+# =======================Wreport Properties==========================
+
+app:
+  service:
+    security: ${wreport.client.url}/j_spring_cas_security_check
+    home: ${wreport.client.url}
+cas:
+  service:
+    login: ${proxy.server}/sso/login
+    logout: ${proxy.server}/sso/logout
+  url:
+    prefix: ${proxy.server}/sso
+
+#JOB
+systemcode: wreport
+#--------
+
+appcode: ${appcode}
+apptaken: e10adc3949ba59abbe56e057f20f883e
+menu: MENU
+button: BUTTON
+manifest-build-version: 1.0.0
+azkabanUrl: ""
+azkabanUserName: ""
+azkabanPassword: ""
+passengerDistributionMaxSensor: 50
+dmp-console-url: ${config.server.url}
+upload:
+  path:  ${upload.path}
+
+apigateway-mcUrl: http://router.apigateway.talkingdata.com/sbsmc
+apigateway-appKey: 82461359
+apigateway-appSecret: 7ad584d0a22a42f9b1eca8e718b1ecd3
+apigateway-appSignature: 0840fa7116945e9ecc08d6df5354fd0a
+apigateway-tid: TGae14bdaa428744f59714fab0cd06916f
+apigateway-tkey: 57f0764da4e14c96bdc5f4118e0bd47b

@@ -1,0 +1,802 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="hadoop (generated)" id="1482806264305-1">
+        <createTable tableName="SYS_AUDIT_LOG">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="systemCode" remarks="所属子系统" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="createTime" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="actorUmId" remarks="执行人umid" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="actorName" remarks="执行人姓名" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="operationType" remarks="操作类型，业务系统自己定义" type="VARCHAR(10)"/>
+            <column name="targetType" remarks="目标类型，业务系统自己定义" type="VARCHAR(10)"/>
+            <column name="targetId" remarks="目标的Id" type="VARCHAR(500)"/>
+            <column name="result" remarks="操作结果，业务系统自己定义" type="VARCHAR(10)"/>
+            <column name="description" remarks="描述" type="VARCHAR(1024)"/>
+            <column name="beforeValue" remarks="执行前参数json值" type="VARCHAR(2048)"/>
+            <column name="afterValue" remarks="执行后参数json值" type="VARCHAR(2048)"/>
+            <column name="exception" remarks="异常信息" type="VARCHAR(2048)"/>
+            <column name="returnValue" remarks="返回值" type="VARCHAR(2048)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-2">
+        <createTable tableName="SYS_BUSINESS_SYSTEM">
+            <column autoIncrement="true" name="id" remarks="@view[title:唯一标识,filter:false,searchResult:true,form:false]&#10;@comment[value:唯一标识]" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" remarks="@view[title:系统中文名,filter:true,searchResult:true,form:true]&#10;@comment[value:系统中文名]" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code" remarks="@view[title:系统英文名,filter:true,searchResult:true,form:true]&#10;@comment[value:系统英文名,唯一]" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" remarks="@view[title:描述,filter:true,searchResult:true,form:true]&#10;@comment[value:描述]" type="VARCHAR(256)"/>
+            <column name="accessUrl" remarks="@view[title:系统首页的URL,filter:false,searchResult:true,form:true]&#10;@comment[value:系统首页的URL]" type="VARCHAR(256)"/>
+            <column name="serverUrl" remarks="@view[title:IP访问的URL,filter:false,searchResult:true,form:true]&#10;@comment[value:IP访问的URL，如果是集群，则用逗号分开]" type="VARCHAR(256)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="MTime" remarks="@view[title:最后更新时间,filter:false,searchResult:true,form:false,formatter:formatTimeStamp]&#10;@comment[value:最后更新时间]" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="CTime" remarks="@view[title:创建时间,filter:false,searchResult:true,form:false,formatter:formatTimeStamp]&#10;@comment[value:创建时间]" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-3">
+        <createTable tableName="SYS_CACHEINFO">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="cacheName" remarks="缓存名，英文，只读" type="VARCHAR(128)"/>
+            <column name="maxEntity" remarks="缓存中能存放对象的最大数量，只读" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="maxLiveTime" remarks="缓存对象的过期时间，单位毫秒，只读" type="BIGINT"/>
+            <column name="description" remarks="缓存描述，只读" type="VARCHAR(200)"/>
+            <column name="systemCode" remarks="所属子系统" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="MTime" remarks="最后更新时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="CTime" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-4">
+        <createTable tableName="SYS_DIC">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" remarks="字典英文名" type="VARCHAR(128)"/>
+            <column name="description" remarks="字典中文描述" type="VARCHAR(200)"/>
+            <column name="dicKey" remarks="字典编码" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="systemCode" remarks="所属子系统" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="MTime" remarks="最后更新时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="CTime" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-5">
+        <createTable tableName="SYS_DIC_ITEM">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="dicItemKey" remarks="字典编码" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dicItemValue" remarks="值" type="VARCHAR(256)"/>
+            <column name="dicId" remarks="字典的Id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="parentId" remarks="父项名称" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="MTime" remarks="最后更新时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="CTime" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-6">
+        <createTable tableName="SYS_EMAIL_RECEIVE_JOB_INPUT">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="subject" remarks="主题" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="addresser" remarks="发件人" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="content" remarks="接收内容" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="taskId" remarks="任务ID" type="BIGINT"/>
+            <column name="status" remarks="状态：1，已接收，2，已处理，-1，无效邮件" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="createTime" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-7">
+        <createTable tableName="SYS_EMAIL_SEND_JOB_INPUT">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="emailServerCode" remarks="邮件服务器Code" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="to" remarks="发送至地址" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" remarks="发送title" type="VARCHAR(1024)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="content" remarks="发送内容" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cc" type="VARCHAR(1024)"/>
+            <column name="status" remarks="1，未发送，2，以发送，3，重试中，4，已同步，-1，异常" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bcc" type="VARCHAR(1024)"/>
+            <column name="retry" remarks="重试次数" type="INT"/>
+            <column name="maxRetry" remarks="最大重试次" type="INT"/>
+            <column defaultValue="0000-00-00 00:00:00" name="createTime" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="modifyTime" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-8">
+        <createTable tableName="SYS_EMAIL_SERVER_CONFIG">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="code" remarks="服务器代码" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" remarks="服务器名" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mailHost" remarks="主机" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="smtpPort" remarks="smtp端口" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="useSsl" remarks="用户Ssl" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER" remarks="用户" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="passWord" remarks="密码" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="systemCode" remarks="所属子系统" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="MTime" remarks="最后更新时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="CTime" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-9">
+        <createTable tableName="SYS_EMAIL_TEMPLATE">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="code" remarks="模板代码" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" remarks="标题" type="VARCHAR(1024)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="content" remarks="说明" type="VARCHAR(2048)"/>
+            <column name="systemCode" remarks="所属系统" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="MTime" remarks="最后更新时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="CTime" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-10">
+        <createTable tableName="SYS_INFO">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="title" remarks="标题" type="VARCHAR(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="content" remarks="内容" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_date" remarks="开始生效日期" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date" remarks="结束日期" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" remarks="创建时间" type="TIMESTAMP"/>
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-11">
+        <createTable tableName="SYS_JOB_CONFIG">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" remarks="任务名称" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="className" remarks="任务的实现类" type="VARCHAR(1024)"/>
+            <column name="intervall" type="VARCHAR(20)"/>
+            <column name="startTime" remarks="任务的起始时间，为null则立刻开始" type="TIMESTAMP"/>
+            <column name="endTime" remarks="任务的终止时间，为null则永不终止" type="TIMESTAMP"/>
+            <column name="repeatTime" remarks="任务的最大重复次数，非0则生效" type="INT"/>
+            <column name="executeTime" remarks="任务的执行次数" type="INT"/>
+            <column name="status" remarks="状态，1，有效，0，无效" type="INT"/>
+            <column name="jkey" remarks="任务的唯一英文代码" type="VARCHAR(36)"/>
+            <column name="systemCode" remarks="所属子系统" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="triggerType" remarks="定时任务触发类型，S:simpleTrigger，C：cronTrigger" type="VARCHAR(2)"/>
+            <column name="cronExpression" remarks="cron表达式" type="VARCHAR(60)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="MTime" remarks="最后更新时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="CTime" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-12">
+        <createTable tableName="SYS_PARAM">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="paramKey" remarks="参数英文名" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="paramValue" remarks="参数值" type="VARCHAR(60)"/>
+            <column name="description" remarks="参数的说明" type="VARCHAR(200)"/>
+            <column name="pw" remarks="是否是密码，如果是，则在界面上不显示" type="VARCHAR(60)"/>
+            <column name="systemCode" remarks="所属系统编码" type="VARCHAR(20)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="MTime" remarks="最后更新时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="CTime" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-13">
+        <createTable tableName="TD_PARAM">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="param_key" remarks="参数英文名" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="param_value" remarks="参数值" type="TEXT"/>
+            <column name="description" remarks="参数的说明" type="VARCHAR(200)"/>
+            <column name="system_code" remarks="所属系统编码" type="VARCHAR(41)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)"/>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)"/>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="parent_code" remarks="父配置系统编码" type="VARCHAR(40)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-14">
+        <createTable tableName="TD_PARAM_COPY">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="param_key" remarks="参数英文名" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="param_value" remarks="参数值" type="TEXT"/>
+            <column name="description" remarks="参数的说明" type="VARCHAR(200)"/>
+            <column name="system_code" remarks="所属系统编码" type="VARCHAR(41)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)"/>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)"/>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="parent_code" remarks="父配置系统编码" type="VARCHAR(40)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-15">
+        <createTable tableName="UM_APP">
+            <column autoIncrement="true" name="rid" remarks="@view[title:唯一标识,filter:false,searchResult:true,form:false]&#13;&#10;@comment[value:唯一标识]" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="app_code" remarks="@view[title:应用系统代码,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:应用系统代码，如SMS]" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="app_name" remarks="@view[title:应用系统名称,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:应用系统名称]" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="app_version" type="VARCHAR(100)"/>
+            <column name="app_desc" remarks="@view[title:应用系统说明,filter:true,searchResult:false,form:true]&#13;&#10;@comment[value:应用系统说明]" type="VARCHAR(100)"/>
+            <column name="app_token" remarks="@view[title:应用系统令牌,filter:true,searchResult:false,form:true]&#13;&#10;@comment[value:应用系统令牌]" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="app_role_prefix" remarks="@view[title:系统角色前缀,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:自动生成为ROLE_+ appId +_]" type="VARCHAR(60)"/>
+            <column name="ext_attr1" remarks="@view[title:应用系统扩展属性1,filter:true,searchResult:true,form:true] @comment[value:应用系统扩展属性1]" type="VARCHAR(100)"/>
+            <column name="ext_attr2" remarks="@view[title:应用系统扩展属性2,filter:true,searchResult:true,form:true] @comment[value:应用系统扩展属性2]" type="VARCHAR(100)"/>
+            <column name="ext_attr3" remarks="@view[title:应用系统扩展属性3,filter:true,searchResult:true,form:true] @comment[value:应用系统扩展属性3]" type="VARCHAR(100)"/>
+            <column name="ext_attr4" type="VARCHAR(100)"/>
+            <column defaultValueNumeric="0" name="status" remarks="@view[title:状态,filter:true,searchResult:true,form:true,dictionary:Status] @comment[value:状态 0启用 1禁用]" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" remarks="0000-00-00 00:00:00' COMMENT '@view[title:创建时间,filter:true,searchResult:true,form:true,formatter:formatTimeStamp1]@comment[value:创建时间]" type="TIMESTAMP"/>
+            <column name="update_time" remarks="@view[title:修改时间,filter:true,searchResult:true,form:true,formatter:formatTimeStamp1]@comment[value:最后修改时间，取系统时间]" type="TIMESTAMP"/>
+            <column name="op_umid" remarks="@view[title:操作UMID,filter:true,searchResult:true,form:true] @comment[value:操作UMID]" type="VARCHAR(45)"/>
+            <column defaultValueNumeric="0" name="type" remarks="App类型 0为主应用，1为从应用" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-16">
+        <createTable tableName="UM_APP_CONFIG">
+            <column autoIncrement="true" name="rid" remarks="唯一标识" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="cfg_code" remarks="参数代码" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cfg_name" remarks="参数名称" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cfg_value" remarks="参数值" type="VARCHAR(100)"/>
+            <column defaultValueNumeric="0" name="type" remarks="状态" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="app_id" remarks="UM_APP id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-17">
+        <createTable tableName="UM_ATTACHMENT">
+            <column autoIncrement="true" name="rid" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" remarks="附件名称" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="path" remarks="附件目录地址" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="type" remarks="附件类型 :0为其他 1为合同" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="tenant" name="owner" remarks="拥有者" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="owner_id" remarks="拥有者id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-18">
+        <createTable tableName="UM_DEPARTMENT">
+            <column autoIncrement="true" name="rid" remarks="@view[title:唯一标识,filter:false,searchResult:true,form:false]@comment[value:唯一标识]" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="dept_code" remarks="@view[title:部门代码,filter:false,searchResult:true,form:true]@comment[value:部门代码]" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dept_name" remarks="@view[title:部门名称,filter:false,searchResult:true,form:true]@comment[value:部门名称]" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dept_desc" remarks="@view[title:部门描述,filter:false,searchResult:true,form:true]@comment[value:部门描述]" type="VARCHAR(200)"/>
+            <column name="tenantId" type="INT"/>
+            <column defaultValueNumeric="0" name="parent_rid" remarks="@view[title:上级部门ID,filter:false,searchResult:true,form:true]@comment[value:唯一标识]" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" remarks="@view[title:创建时间,filter:false,searchResult:true,form:false]@comment[value:创建时间]" type="TIMESTAMP"/>
+            <column name="update_time" remarks="@view[title:更新时间,filter:false,searchResult:true,form:false]@comment[value:更新时间]" type="TIMESTAMP"/>
+            <column name="op_umid" remarks="@view[title:op_umid,filter:false,searchResult:true,form:false]@comment[value:op_umid]" type="VARCHAR(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-19">
+        <createTable tableName="UM_DEPT_USER">
+            <column autoIncrement="true" name="rid" remarks="@view[title:唯一标识,filter:false,searchResult:false,form:false] @comment[value:唯一标识]" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="dept_rid" remarks="@view[title:部门记录id,filter:true,searchResult:true,form:true] @comment[value:部门记录id]" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_rid" remarks="@view[title:用户记录ID,filter:true,searchResult:true,form:true] @comment[value:用户记录ID]" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="S" name="user_type" remarks="@view[title:用户类别,filter:true,searchResult:true,form:true,dictionary:UserType] @comment[value:用户类别：1.普通职员 S，缺省2.管理员 A，有权维护部门人员信息3.领导 L4.联系人 C]" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="user_order" remarks="@view[title:同一用户类别中的用户序号，缺省为0,filter:true,searchResult:true,form:true] @comment[value:同一用户类别中的用户序号，缺省为0]" type="INT"/>
+            <column name="create_time" remarks="@view[title:创建时间,filter:true,searchResult:true,form:true,formatter:formatTimeStamp1] @comment[value:创建时间]" type="TIMESTAMP"/>
+            <column name="update_time" remarks="@view[title:修改时间,filter:true,searchResult:true,form:true,formatter:formatTimeStamp1]@comment[value:最后修改时间，取系统时间]" type="TIMESTAMP"/>
+            <column name="op_umid" remarks="@view[title:操作UMID,filter:true,searchResult:true,form:true] @comment[value:操作UMID]" type="VARCHAR(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-20">
+        <createTable tableName="UM_DMPTHEME">
+            <column autoIncrement="true" name="rid" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="code" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="VARCHAR(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1" name="type" remarks="1：图片，2：文本" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tenant_code" type="VARCHAR(50)"/>
+            <column name="create_time" type="TIMESTAMP"/>
+            <column name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-21">
+        <createTable tableName="UM_RESOURCE">
+            <column autoIncrement="true" name="rid" remarks="@view[title:唯一标识,filter:false,searchResult:true,form:false]&#13;&#10;@comment[value:唯一标识]" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="app_rid" remarks="@view[title:应用系统记录ID,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:应用系统记录ID]" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="resource_type_rid" remarks="@view[title:资源类别记录ID,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:资源类别记录ID]" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="parent_resource_rid" remarks="@view[title:上级资源记录id,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:上级资源记录id]" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="resource_code" remarks="@view[title:资源代码，即业务ID,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:资源代码，即业务ID]" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="resource_name" remarks="@view[title:资源名称,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:资源名称]" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="resource_desc" remarks="@view[title:描述,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:描述]" type="VARCHAR(100)"/>
+            <column defaultValueNumeric="0" name="resource_order" remarks="@view[title:资源序号，缺省为0,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:资源序号，缺省为0]" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="resource_uri" remarks="@view[title:资源地址,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:资源地址，如url、action]" type="VARCHAR(100)"/>
+            <column defaultValueNumeric="0" name="is_action" remarks="@view[title:是否上级资源的操作,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:是否对上级资源的操作，缺省为0，代表为不是，为1时可表示页面里的新增、修改等操作]" type="INT"/>
+            <column name="action" remarks="@view[title:具体操作,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:具体操作，is_action为1时才可填入，应用系统自己定义]" type="VARCHAR(50)"/>
+            <column name="ext_attr1" remarks="@view[title:扩展属性1,filter:true,searchResult:true,form:true] @comment[value:扩展属性1]" type="VARCHAR(5000)"/>
+            <column name="ext_attr2" remarks="@view[title:应用系统扩展属性2,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:表示 dcds 系统 ua_ext_resource_type 表 resource_type_id]" type="VARCHAR(100)"/>
+            <column name="ext_attr3" remarks="@view[title:应用系统扩展属性3,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:应用系统扩展属性3]" type="VARCHAR(100)"/>
+            <column name="ext_attr4" remarks="@view[title:应用系统扩展属性4,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:应用系统扩展属性4]" type="VARCHAR(500)"/>
+            <column name="ext_attr5" remarks="@view[title:应用系统扩展属性5,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:应用系统扩展属性5]" type="VARCHAR(500)"/>
+            <column name="ext_attr6" type="VARCHAR(500)"/>
+            <column name="create_time" remarks="0000-00-00 00:00:00' COMMENT '@view[title:创建时间,filter:true,searchResult:true,form:true,formatter:formatTimeStamp1]@comment[value:创建时间]" type="TIMESTAMP"/>
+            <column name="update_time" remarks="@view[title:修改时间,filter:true,searchResult:true,form:true,formatter:formatTimeStamp1]@comment[value:最后修改时间，取系统时间]" type="TIMESTAMP"/>
+            <column name="op_umid" remarks="@view[title:操作UMID,filter:true,searchResult:true,form:true] @comment[value:操作UMID]" type="VARCHAR(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-22">
+        <createTable tableName="UM_RESOURCE_TYPE">
+            <column autoIncrement="true" name="rid" remarks="@view[title:唯一标识,filter:false,searchResult:false,form:false] @comment[value:唯一标识]" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="app_rid" type="INT"/>
+            <column name="resource_type_code" remarks="@view[title:资源类别代码，即业务ID,filter:true,searchResult:true,form:true] @comment[value:资源类别代码，即业务ID]" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="resource_type_name" remarks="@view[title:资源类别名称,filter:true,searchResult:true,form:true] @comment[value:资源类别名称]" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="resource_type_desc" remarks="@view[title:资源类别说明,filter:true,searchResult:true,form:true] @comment[value:资源类别说明]" type="VARCHAR(100)"/>
+            <column defaultValueNumeric="0" name="status" remarks="@view[title:状态,filter:true,searchResult:true,form:true,dictionary:Status] @comment[value:状态 0启用 1禁用]" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" remarks="@view[title:创建时间,filter:true,searchResult:true,form:true,formatter:formatTimeStamp1] @comment[value:创建时间]" type="TIMESTAMP"/>
+            <column name="update_time" remarks="@view[title:修改时间,filter:true,searchResult:true,form:true,formatter:formatTimeStamp1]@comment[value:最后修改时间，取系统时间]" type="TIMESTAMP"/>
+            <column name="op_umid" remarks="@view[title:操作UMID,filter:true,searchResult:true,form:true] @comment[value:操作UMID]" type="VARCHAR(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-23">
+        <createTable tableName="UM_ROLE">
+            <column autoIncrement="true" name="rid" remarks="@view[title:唯一标识,filter:false,searchResult:true,form:false]&#13;&#10;@comment[value:唯一标识]" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="app_rid" remarks="@view[title:应用系统记录ID,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:应用系统记录ID]" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_code" remarks="@view[title:角色代码,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:角色代码，即业务ID]" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_name" remarks="@view[title:角色名称,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:角色名称]" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tenantId" type="INT"/>
+            <column name="role_desc" remarks="@view[title:描述,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:描述]" type="VARCHAR(50)"/>
+            <column defaultValueNumeric="0" name="status" remarks="角色状态：0 启用 1 禁用" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" remarks="0000-00-00 00:00:00' COMMENT '@view[title:创建时间,filter:true,searchResult:true,form:true,formatter:formatTimeStamp1]@comment[value:创建时间]" type="TIMESTAMP"/>
+            <column name="update_time" remarks="@view[title:修改时间,filter:true,searchResult:true,form:true,formatter:formatTimeStamp1]@comment[value:最后修改时间，取系统时间]" type="TIMESTAMP"/>
+            <column name="op_umid" remarks="@view[title:操作UMID,filter:true,searchResult:true,form:true] @comment[value:操作UMID]" type="VARCHAR(50)"/>
+            <column defaultValueNumeric="0" name="type" remarks="角色类型：0为用户在um上手工创建的角色，1为用户创建App时系统自动创建的角色，2为租户购买App时系统自动创建的管理员角色，3为租户购买App时系统自动为管理员模板创建的角色，4为租户购买App时系统自动为普通用户模板创建的角色" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-24">
+        <createTable tableName="UM_ROLE_RESOURCE">
+            <column autoIncrement="true" name="rid" remarks="@view[title:唯一标识,filter:false,searchResult:false,form:false] @comment[value:唯一标识]" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="role_rid" remarks="@view[title:角色记录ID,filter:true,searchResult:true,form:true] @comment[value:角色记录ID]" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="resource_rid" remarks="@view[title:资源记录ID,filter:true,searchResult:true,form:true] @comment[value:资源记录ID]" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" remarks="@view[title:创建时间,filter:true,searchResult:true,form:true,formatter:formatTimeStamp1] @comment[value:创建时间]" type="TIMESTAMP"/>
+            <column name="op_umid" remarks="@view[title:操作UMID,filter:true,searchResult:true,form:true] @comment[value:操作UMID]" type="VARCHAR(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-25">
+        <createTable tableName="UM_ROLE_USER">
+            <column autoIncrement="true" name="rid" remarks="@view[title:唯一标识,filter:false,searchResult:false,form:false] @comment[value:唯一标识]" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="role_rid" remarks="@view[title:角色记录ID,filter:true,searchResult:true,form:true] @comment[value:角色记录ID]" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_rid" remarks="@view[title:用户记录ID,filter:true,searchResult:true,form:true] @comment[value:用户记录ID]" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="is_grantable" remarks="@view[title:是否可授权给他人,filter:true,searchResult:true,form:true,dictionary:GrantableStatus] @comment[value:是否可授权给他人，缺省0 不可以，1 可以]" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="granted_by" remarks="授权人的umid" type="VARCHAR(50)"/>
+            <column name="create_time" type="datetime(6)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-26">
+        <createTable tableName="UM_TEMPLETMANAGE">
+            <column autoIncrement="true" name="tid" remarks="@view[title:唯一标识,filter:false,searchResult:true,form:false]&#13;&#10;@comment[value:唯一标识]" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="rid" remarks="@view[title:应用系统记录ID,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:角色ID]" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="t_name" remarks="@view[title:角色名称,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:角色名称]" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tenantId" type="INT"/>
+            <column name="t_desc" remarks="@view[title:描述,filter:true,searchResult:true,form:true]&#13;&#10;@comment[value:描述]" type="VARCHAR(50)"/>
+            <column name="create_time" remarks="0000-00-00 00:00:00' COMMENT '@view[title:创建时间,filter:true,searchResult:true,form:true,formatter:formatTimeStamp1]@comment[value:创建时间]" type="TIMESTAMP"/>
+            <column name="update_time" remarks="@view[title:修改时间,filter:true,searchResult:true,form:true,formatter:formatTimeStamp1]@comment[value:最后修改时间，取系统时间]" type="TIMESTAMP"/>
+            <column name="op_umid" remarks="@view[title:操作UMID,filter:true,searchResult:true,form:true] @comment[value:操作UMID]" type="VARCHAR(50)"/>
+            <column defaultValueNumeric="0" name="type" remarks="1：system创建的管理员模板，2：system创建的普通用户模板" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-27">
+        <createTable tableName="UM_TENANT">
+            <column autoIncrement="true" name="rid" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="ca_code" remarks="公司code" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ca_name" remarks="公司全称" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ca_short_name" remarks="公司简称" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" remarks="联系电话" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fax" remarks="公司传真" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="admin_name" remarks="管理员姓名" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="admin_email" remarks="管理员登陆账号" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="admin_phone" remarks="管理员联系方式" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="status" remarks="状态" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contract_start_date" remarks="合同生效日" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contract_end_date" remarks="合同到期日" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建日期" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="更新日期" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="op_umid" remarks="创建人" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-28">
+        <createTable tableName="UM_TENANT_APP">
+            <column autoIncrement="true" name="rid" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="tenant_id" remarks="租户id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="app_id" remarks="APP_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="app_code" remarks="appCode" type="VARCHAR(20)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-29">
+        <createTable tableName="UM_TENANT_APP_CONFIG">
+            <column autoIncrement="true" name="rid" remarks="唯一标识" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="cfg_code" remarks="参数代码" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cfg_name" remarks="参数名称" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cfg_value" remarks="参数值" type="VARCHAR(100)"/>
+            <column defaultValueNumeric="0" name="type" remarks="状态" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tenant_app_id" remarks="UM_TENANT_APP id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-30">
+        <createTable tableName="UM_USER">
+            <column autoIncrement="true" name="rid" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="umid" remarks="用户UMID" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_name" remarks="用户名称" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_password" remarks="用户密码" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_desc" remarks="用户描述" type="VARCHAR(200)"/>
+            <column name="gender" remarks="性别" type="CHAR(1)"/>
+            <column name="birthday" remarks="生日" type="date"/>
+            <column name="email" remarks="电子邮箱" type="VARCHAR(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="telphone" remarks="集团电话" type="VARCHAR(20)"/>
+            <column name="mobile" remarks="手机" type="VARCHAR(20)"/>
+            <column name="title" remarks="职位" type="VARCHAR(50)"/>
+            <column name="departmentId" remarks="所属部门ID" type="INT"/>
+            <column name="departmentName" remarks="部门名称" type="VARCHAR(50)"/>
+            <column defaultValueNumeric="0" name="status" remarks="用户状态：0 启用 1 禁用" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" remarks="创建时间" type="TIMESTAMP"/>
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP"/>
+            <column name="op_umid" remarks="操作人员umid" type="VARCHAR(50)"/>
+            <column name="tenant_id" type="INT"/>
+            <column name="proxy_umid" remarks="代理租户登陆账户" type="VARCHAR(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-31">
+        <addUniqueConstraint columnNames="app_code" constraintName="app_UNIQUE" tableName="UM_APP"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-32">
+        <addUniqueConstraint columnNames="app_id, cfg_code" constraintName="app_id" tableName="UM_APP_CONFIG"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-33">
+        <addUniqueConstraint columnNames="ca_code" constraintName="ca_code" tableName="UM_TENANT"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-34">
+        <addUniqueConstraint columnNames="dept_code" constraintName="dept_id_UNIQUE" tableName="UM_DEPARTMENT"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-35">
+        <addUniqueConstraint columnNames="dept_rid, user_type, user_rid" constraintName="dept_user_UNIQUE" tableName="UM_DEPT_USER"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-36">
+        <addUniqueConstraint columnNames="app_rid, resource_type_rid, resource_code" constraintName="resource_UNIQUE" tableName="UM_RESOURCE"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-37">
+        <addUniqueConstraint columnNames="resource_type_code" constraintName="resource_type_code_UNIQUE" tableName="UM_RESOURCE_TYPE"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-38">
+        <addUniqueConstraint columnNames="resource_type_name" constraintName="resource_type_name_UNIQUE" tableName="UM_RESOURCE_TYPE"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-39">
+        <addUniqueConstraint columnNames="app_rid, role_code" constraintName="role_UNIQUE" tableName="UM_ROLE"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-40">
+        <addUniqueConstraint columnNames="role_rid, user_rid" constraintName="role_users_UNIQUE" tableName="UM_ROLE_USER"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-41">
+        <addUniqueConstraint columnNames="tenant_app_id, cfg_code" constraintName="tenant_app_id" tableName="UM_TENANT_APP_CONFIG"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-42">
+        <addUniqueConstraint columnNames="umid" constraintName="umid_UNIQUE" tableName="UM_USER"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-43">
+        <createIndex indexName="dic_name" tableName="SYS_DIC">
+            <column name="name"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-44">
+        <createIndex indexName="role_resource_UNIQUE" tableName="UM_ROLE_RESOURCE">
+            <column name="role_rid"/>
+            <column name="resource_rid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-45">
+        <createView fullDefinition="false" viewName="V_APP_ADMIN_MENU">select `um`.`UM_RESOURCE`.`rid` AS `rid`,`um`.`UM_RESOURCE`.`app_rid` AS `app_rid`,`um`.`UM_RESOURCE`.`resource_type_rid` AS `resource_type_rid`,`um`.`UM_RESOURCE`.`parent_resource_rid` AS `parent_resource_rid`,`um`.`UM_RESOURCE`.`resource_code` AS `resource_code`,`um`.`UM_RESOURCE`.`resource_name` AS `resource_name`,`um`.`UM_RESOURCE`.`resource_desc` AS `resource_desc`,`um`.`UM_RESOURCE`.`resource_order` AS `resource_order`,`um`.`UM_RESOURCE`.`resource_uri` AS `resource_uri`,`um`.`UM_RESOURCE`.`is_action` AS `is_action`,`um`.`UM_RESOURCE`.`action` AS `action`,`um`.`UM_RESOURCE`.`ext_attr1` AS `ext_attr1`,`um`.`UM_RESOURCE`.`ext_attr2` AS `ext_attr2`,`um`.`UM_RESOURCE`.`ext_attr3` AS `ext_attr3`,`um`.`UM_RESOURCE`.`ext_attr4` AS `ext_attr4`,`um`.`UM_RESOURCE`.`ext_attr5` AS `ext_attr5`,`um`.`UM_RESOURCE`.`ext_attr6` AS `ext_attr6`,`um`.`UM_RESOURCE`.`create_time` AS `create_time`,`um`.`UM_RESOURCE`.`update_time` AS `update_time`,`um`.`UM_RESOURCE`.`op_umid` AS `op_umid` from `um`.`UM_RESOURCE` where (`um`.`UM_RESOURCE`.`rid` in (1,10,12,13,7,8,9))</createView>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-46">
+        <createView fullDefinition="false" viewName="V_COMMON_MENU">select `um`.`UM_RESOURCE`.`rid` AS `rid`,`um`.`UM_RESOURCE`.`app_rid` AS `app_rid`,`um`.`UM_RESOURCE`.`resource_type_rid` AS `resource_type_rid`,`um`.`UM_RESOURCE`.`parent_resource_rid` AS `parent_resource_rid`,`um`.`UM_RESOURCE`.`resource_code` AS `resource_code`,`um`.`UM_RESOURCE`.`resource_name` AS `resource_name`,`um`.`UM_RESOURCE`.`resource_desc` AS `resource_desc`,`um`.`UM_RESOURCE`.`resource_order` AS `resource_order`,`um`.`UM_RESOURCE`.`resource_uri` AS `resource_uri`,`um`.`UM_RESOURCE`.`is_action` AS `is_action`,`um`.`UM_RESOURCE`.`action` AS `action`,`um`.`UM_RESOURCE`.`ext_attr1` AS `ext_attr1`,`um`.`UM_RESOURCE`.`ext_attr2` AS `ext_attr2`,`um`.`UM_RESOURCE`.`ext_attr3` AS `ext_attr3`,`um`.`UM_RESOURCE`.`ext_attr4` AS `ext_attr4`,`um`.`UM_RESOURCE`.`ext_attr5` AS `ext_attr5`,`um`.`UM_RESOURCE`.`ext_attr6` AS `ext_attr6`,`um`.`UM_RESOURCE`.`create_time` AS `create_time`,`um`.`UM_RESOURCE`.`update_time` AS `update_time`,`um`.`UM_RESOURCE`.`op_umid` AS `op_umid` from `um`.`UM_RESOURCE` where (`um`.`UM_RESOURCE`.`rid` in (7,9,1))</createView>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806264305-47">
+        <createView fullDefinition="false" viewName="V_SYSTEM_MENU">select `um`.`UM_RESOURCE`.`rid` AS `rid`,`um`.`UM_RESOURCE`.`app_rid` AS `app_rid`,`um`.`UM_RESOURCE`.`resource_type_rid` AS `resource_type_rid`,`um`.`UM_RESOURCE`.`parent_resource_rid` AS `parent_resource_rid`,`um`.`UM_RESOURCE`.`resource_code` AS `resource_code`,`um`.`UM_RESOURCE`.`resource_name` AS `resource_name`,`um`.`UM_RESOURCE`.`resource_desc` AS `resource_desc`,`um`.`UM_RESOURCE`.`resource_order` AS `resource_order`,`um`.`UM_RESOURCE`.`resource_uri` AS `resource_uri`,`um`.`UM_RESOURCE`.`is_action` AS `is_action`,`um`.`UM_RESOURCE`.`action` AS `action`,`um`.`UM_RESOURCE`.`ext_attr1` AS `ext_attr1`,`um`.`UM_RESOURCE`.`ext_attr2` AS `ext_attr2`,`um`.`UM_RESOURCE`.`ext_attr3` AS `ext_attr3`,`um`.`UM_RESOURCE`.`ext_attr4` AS `ext_attr4`,`um`.`UM_RESOURCE`.`ext_attr5` AS `ext_attr5`,`um`.`UM_RESOURCE`.`ext_attr6` AS `ext_attr6`,`um`.`UM_RESOURCE`.`create_time` AS `create_time`,`um`.`UM_RESOURCE`.`update_time` AS `update_time`,`um`.`UM_RESOURCE`.`op_umid` AS `op_umid` from `um`.`UM_RESOURCE` where (`um`.`UM_RESOURCE`.`rid` in (1,2,3,10,11))</createView>
+    </changeSet>
+</databaseChangeLog>

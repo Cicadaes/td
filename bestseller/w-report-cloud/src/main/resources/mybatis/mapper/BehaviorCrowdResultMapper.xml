@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.BehaviorCrowdResultDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.BehaviorCrowdResult">
+        <result column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="project_id" property="projectId"/>
+        <result column="crowd_id" property="crowdId"/>
+        <result column="run_date" property="runDate"/>
+        <result column="tag_code" property="tagCode"/>
+        <result column="tag_name" property="tagName"/>
+        <result column="metric_value" property="metricValue"/>
+        <result column="cycle_statistics" property="cycleStatistics"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+        <result column="exec_id" property="execId"/>
+    </resultMap>
+
+    <!-- TD_BEHAVIOR_CROWD_RESULT table all fields -->
+    <sql id="Base_Column_List">
+        id,tenant_id,project_id,crowd_id,run_date,tag_code,tag_name,metric_value,cycle_statistics,start_date,end_date,exec_id
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="crowdId != null and crowdId != ''">
+                and crowd_id = #{crowdId}
+            </if>
+            <if test="runDate != null and runDate != ''">
+                and run_date = #{runDate}
+            </if>
+            <if test="tagCode != null and tagCode != ''">
+                and tag_code = #{tagCode}
+            </if>
+            <if test="tagName != null and tagName != ''">
+                and tag_name = #{tagName}
+            </if>
+            <if test="metricValue != null and metricValue != ''">
+                and metric_value = #{metricValue}
+            </if>
+            <if test="cycleStatistics != null and cycleStatistics != ''">
+                and cycle_statistics = #{cycleStatistics}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and start_date = #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and end_date = #{endDate}
+            </if>
+            <if test="execId != null and execId != ''">
+                and exec_id = #{execId}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_BEHAVIOR_CROWD_RESULT(id,tenant_id,project_id,crowd_id,run_date,tag_code,tag_name,metric_value,cycle_statistics,start_date,end_date,exec_id)
+        values(#{id},#{tenantId},#{projectId},#{crowdId},#{runDate},#{tagCode},#{tagName},#{metricValue},#{cycleStatistics},#{startDate},#{endDate},#{execId})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_BEHAVIOR_CROWD_RESULT set
+        tenant_id=#{tenantId},project_id=#{projectId},crowd_id=#{crowdId},run_date=#{runDate},tag_code=#{tagCode},tag_name=#{tagName},metric_value=#{metricValue},cycle_statistics=#{cycleStatistics},start_date=#{startDate},end_date=#{endDate},exec_id=#{execId}
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_BEHAVIOR_CROWD_RESULT set
+        <trim suffixOverrides=",">
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="crowdId != null  ">
+                crowd_id=#{crowdId},
+            </if>
+            <if test="runDate != null  ">
+                run_date=#{runDate},
+            </if>
+            <if test="tagCode != null  ">
+                tag_code=#{tagCode},
+            </if>
+            <if test="tagName != null  ">
+                tag_name=#{tagName},
+            </if>
+            <if test="metricValue != null  ">
+                metric_value=#{metricValue},
+            </if>
+            <if test="cycleStatistics != null  ">
+                cycle_statistics=#{cycleStatistics},
+            </if>
+            <if test="startDate != null  ">
+                start_date=#{startDate},
+            </if>
+            <if test="endDate != null  ">
+                end_date=#{endDate},
+            </if>
+            <if test="execId != null  ">
+                exec_id=#{execId},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 自定义行为客群计算结果表 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_BEHAVIOR_CROWD_RESULT where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_BEHAVIOR_CROWD_RESULT where id = #{id}
+    </delete>
+
+    <!-- 自定义行为客群计算结果表 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_BEHAVIOR_CROWD_RESULT
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询自定义行为客群计算结果表列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_BEHAVIOR_CROWD_RESULT
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- 根据code查询 人群标签 -->
+    <select id="selectByCodesIn" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_BEHAVIOR_CROWD_RESULT
+        WHERE 1=1
+        <if test="tenantId != null and tenantId != ''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="projectId != null and projectId != ''">
+            and project_id = #{projectId}
+        </if>
+        <if test="tagName != null ">
+            and tag_name = #{tagName}
+        </if>
+        <if test="list != null  ">
+            and tag_code in
+            <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="execId != null  ">
+            and exec_id = #{execId}
+        </if>
+    </select>
+
+
+    <!-- 应用偏好 -->
+    <select id="selectForRadar" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT
+        a.tenant_id,
+        a.project_id,
+        a.crowd_id,
+        a.tag_code,
+        b.tag_name,
+        a.metric_value,
+        a.run_date,
+        a.cycle_statistics,
+        a.start_date,
+        a.end_date
+        FROM
+        TD_BEHAVIOR_CROWD_RESULT a
+        JOIN
+        TD_TAGS_INFO b
+        ON
+        a.tag_name = b.tag_code
+        WHERE 1=1 and a.tag_name LIKE '0201%'
+        <if test="tenantId != null and tenantId != ''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="projectId != null">
+            and project_id = #{projectId}
+        </if>
+        <if test="crowdId != null">
+            and crowd_id = #{crowdId}
+        </if>
+        <if test="cycleStatistics != null">
+            and cycle_statistics = #{cycleStatistics}
+        </if>
+        <if test=" execId != null and execId != '' ">
+            AND exec_id = #{execId}
+        </if>
+        <if test="runDate != null and runDate != ''">
+            and run_date = #{runDate}
+        </if>
+    </select>
+
+    <!-- 应用偏好，人群总数 -->
+    <select id="selectForRadarPeopleNum" resultType="java.lang.Integer" parameterType="java.util.Map">
+        SELECT
+        IFNULL(sum(metric_value),0) AS metric_value
+        FROM
+        TD_BEHAVIOR_CROWD_RESULT
+        WHERE tag_name = '0301'
+
+        <if test="tenantId != null and tenantId != ''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="projectId != null">
+            and project_id = #{projectId}
+        </if>
+        <if test="crowdId != null">
+            and crowd_id = #{crowdId}
+        </if>
+        <if test="cycleStatistics != null">
+            and cycle_statistics = #{cycleStatistics}
+        </if>
+        <if test=" execId != null and execId != '' ">
+            AND exec_id = #{execId}
+        </if>
+        <if test="runDate != null and runDate != ''">
+            and run_date = #{runDate}
+        </if>
+    </select>
+
+    <!-- queryLatestRow -->
+    <select id="queryLatestRow" resultMap="BaseResultMap" parameterType="Object">
+        select * from TD_BEHAVIOR_CROWD_RESULT t
+        <where>
+            1=1 and t.tag_code LIKE '02%'
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="crowdId != null">
+                and crowd_id = #{crowdId}
+            </if>
+            <if test=" cycleStatistics != null and cycleStatistics != '' ">
+                AND t.cycle_statistics = #{cycleStatistics}
+            </if>
+            <if test=" execId != null and execId != '' ">
+                AND t.exec_id = #{execId}
+            </if>
+            <if test=" runDate != null and runDate != '' ">
+                <![CDATA[ AND t.run_date <= #{runDate}]]>
+            </if>
+        </where>
+        order by run_date desc limit 1;
+    </select>
+
+</mapper>

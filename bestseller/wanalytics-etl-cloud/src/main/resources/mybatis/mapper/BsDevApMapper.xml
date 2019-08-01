@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.BsDevApDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="td.enterprise.entity.BsDevAp" >
+	<result column="id" property="id"/>
+	<result column="ap_sn" property="apSn"/>
+	<result column="ap_ip" property="apIp"/>
+	<result column="ap_name" property="apName"/>
+	<result column="ap_model" property="apModel"/>
+	<result column="ap_version" property="apVersion"/>
+	<result column="ap_status" property="apStatus"/>
+	<result column="ap_online_time" property="apOnlineTime"/>
+	<result column="ap_mac" property="apMac"/>
+	<result column="ac_sn" property="acSn"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_time" property="updateTime"/>
+	<result column="run_date" property="runDate"/>
+  </resultMap>
+       
+  <!-- TD_BS_DEV_AP table all fields -->
+  <sql id="Base_Column_List" >
+	 id,ap_sn,ap_ip,ap_name,ap_model,ap_version,ap_status,ap_online_time,ap_mac,ac_sn,create_time,update_time,run_date
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="apSn != null and apSn != ''" >
+        and ap_sn =  #{apSn}
+	  </if>
+	      <if test="apIp != null and apIp != ''" >
+        and ap_ip =  #{apIp}
+	  </if>
+	      <if test="apName != null and apName != ''" >
+        and ap_name =  #{apName}
+	  </if>
+	      <if test="apModel != null and apModel != ''" >
+        and ap_model =  #{apModel}
+	  </if>
+	      <if test="apVersion != null and apVersion != ''" >
+        and ap_version =  #{apVersion}
+	  </if>
+	      <if test="apStatus != null and apStatus != ''" >
+        and ap_status =  #{apStatus}
+	  </if>
+	      <if test="apOnlineTime != null and apOnlineTime != ''" >
+        and ap_online_time =  #{apOnlineTime}
+	  </if>
+	      <if test="apMac != null and apMac != ''" >
+        and ap_mac =  #{apMac}
+	  </if>
+	      <if test="acSn != null and acSn != ''" >
+        and ac_sn =  #{acSn}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+	      <if test="runDate != null and runDate != ''" >
+        and run_date =  #{runDate}
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+      insert into 
+TD_BS_DEV_AP(id,ap_sn,ap_ip,ap_name,ap_model,ap_version,ap_status,ap_online_time,ap_mac,ac_sn,create_time,update_time,run_date)
+ values(#{id},#{apSn},#{apIp},#{apName},#{apModel},#{apVersion},#{apStatus},#{apOnlineTime},#{apMac},#{acSn},now(),now(),#{runDate})
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+      update TD_BS_DEV_AP set ap_sn=#{apSn},ap_ip=#{apIp},ap_name=#{apName},ap_model=#{apModel},ap_version=#{apVersion},ap_status=#{apStatus},ap_online_time=#{apOnlineTime},ap_mac=#{apMac},ac_sn=#{acSn},update_time=now(),run_date=#{runDate} where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+      update TD_BS_DEV_AP set 
+		<if test="apSn != null  ">
+		ap_sn=#{apSn},
+	</if>
+	<if test="apIp != null  ">
+		ap_ip=#{apIp},
+	</if>
+	<if test="apName != null  ">
+		ap_name=#{apName},
+	</if>
+	<if test="apModel != null  ">
+		ap_model=#{apModel},
+	</if>
+	<if test="apVersion != null  ">
+		ap_version=#{apVersion},
+	</if>
+	<if test="apStatus != null  ">
+		ap_status=#{apStatus},
+	</if>
+	<if test="apOnlineTime != null  ">
+		ap_online_time=#{apOnlineTime},
+	</if>
+	<if test="apMac != null  ">
+		ap_mac=#{apMac},
+	</if>
+	<if test="acSn != null  ">
+		ac_sn=#{acSn},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	<if test="runDate != null  ">
+		run_date=#{runDate},
+	</if>
+	update_time = now() 
+	where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 绫致店铺设备关系 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+      select <include refid="Base_Column_List" /> 
+	 from TD_BS_DEV_AP where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+      delete from TD_BS_DEV_AP where id = #{id}
+  </delete>
+
+  <!-- 绫致店铺设备关系 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_BS_DEV_AP 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询绫致店铺设备关系列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_BS_DEV_AP 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <!-- 批量插入记录 add by liyinglei 2017-10-17 -->
+  <insert id="batchInsert" parameterType="java.util.List">  
+     insert into 
+		TD_BS_DEV_AP(ap_sn,ap_ip,ap_name,ap_model,ap_version,ap_status,ap_online_time,
+		ap_mac,ac_sn,create_time,update_time,run_date)
+ 	 values  
+     <foreach collection="list" item="item" index="index" separator="," >  
+         (#{item.apSn},#{item.apIp},#{item.apName},#{item.apModel},#{item.apVersion},#{item.apStatus},
+         #{item.apOnlineTime},#{item.apMac},#{item.acSn},now(),now(),#{item.runDate})  
+     </foreach>  
+  </insert>
+  
+  <!-- 按周期删除数据 add by liyinglei 2017-11-24 -->
+  <delete id="deleteByRunDate" parameterType="Object">
+      delete from TD_BS_DEV_AP where run_date = #{runDate}
+  </delete>
+  
+</mapper>   

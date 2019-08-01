@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>td.enterprise</groupId>
+    <artifactId>wanalytics</artifactId>
+    <packaging>pom</packaging>
+    <name>wanalytics</name>
+    <version>2.0</version>
+    <properties>
+      <file-repository.url>file://${project.basedir}/file-repository</file-repository.url>
+    </properties>    
+
+    <repositories>
+        <!--一些公司内部依赖暂时提交在源码里，以后需要统一放在公司maven repository-->
+        <repository>
+            <id>lib</id>
+            <name>Local Central Repository</name>
+            <url>${file-repository.url}</url>
+            <snapshots>
+              <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <!-- ignore tests by default. -->
+            <plugin>  
+                <groupId>org.apache.maven.plugins</groupId>  
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>  
+                    <skipTests>true</skipTests>  
+                </configuration>  
+            </plugin>            
+        </plugins>      
+    </build>
+
+	<!-- 待聚合模块 -->
+	<modules>
+		<module>w-queryservice-cloud</module>
+		<module>w-report-cloud</module>
+		<module>wanalytics-etl-cloud</module>
+		<module>w-offline-compute-cloud</module>
+        <module>wanalytics-adapter</module>
+        <module>wifianalytics-processor</module>
+        <module>offline-alarm</module>
+        <module>wanalytics-queryservice</module>
+	</modules>
+</project>

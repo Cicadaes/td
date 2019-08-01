@@ -1,0 +1,168 @@
+<!-- 导航条 -->
+<div class="nav_bar_top" >
+    <span  class = "nav_bar_normal nav_bar_btn" ng-click="go_sensorManege()">{{constants.field_sensor_sensorManege}}</span>
+    <span> > </span>
+    <span>{{constants.field_sensor_StrengthSet}}</span>
+</div>
+
+<div style = "padding: 20px;padding-top: 0px;height: 510px;margin-top: 20px;">
+    <div id="smallscreen" style = "overflow-y:auto; overflow-x: hidden;margin-right: -20px; padding-right: 16px;">
+
+        <!-- 责任信息 -->
+        <div class="form-horizontal-panel model_panel seeStroeDetail" style = "overflow: hidden; padding-bottom: 20px;">
+            <div class="shopGroupTit" style = "margin-bottom: 20px;">{{constants.field_sensor_StrengthSet}}</div>
+            <!-- 强度设置 -->
+            <form>
+                <ul class = "sensorEquList">
+                    <li>
+                        <span class = "sensorStrengthSet">{{constants.field_sensor_sensorCode}}</span>
+                        <span class = "sensorEqui" >{{sensor.sensorCode}}</span>
+                    </li>
+                    <li></li>
+                    <li class = "sensorEquiLi" style="margin-right: 10px;">
+                        <span class = "sensorStrengthSet">{{constants.label_sensor}}{{constants.label_space}}{{constants.field_sensor_strength}}</span>
+                        <input type="text"  autocomplete="off" class = "strengthValue" id = "strengthValue" ng-model = "minRssi" placeholder="{{constants.label_please_input}}{{constants.label_space}}{{constants.field_sensor_strength}}">
+                    </li>
+                    <li>
+                        <div style="float: left;margin-right: 20px;">
+                            <button type="button" class="new_analysis_btn" style="width: 86px;" ng-click = "saveMinRssi()">{{constants.btn_project_createsave}}</button>
+                        </div>
+                        <div style="float: left;" >
+                            <button type="button" class="new_analysis_btn" ng-click = "cancelMinRssi()" style="background: #fff !important;color: #657180;">{{constants.btn_project_createcancle}}</button>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+
+        <div class="form-horizontal-panel model_panel seeStroeDetail" style = "overflow: hidden; padding-bottom: 20px;">
+            <div class="shopGroupTit" style = "margin-bottom: 20px;">{{constants.field_sensor_StrengthTest}}
+                <!-- 刷新按钮 -->
+                <div class = "refresh StrengthTestBtn" ng-click="refreshList()" ng-if="!flag">
+                    {{constants.label_refresh}}
+                </div>
+                <!-- 开始测试按钮 -->
+                <div class = "startTest StrengthTestBtn" ng-click="startTest()" ng-if="flag">
+                    {{constants.btn_start_test}}
+                </div>
+            </div>
+            <!-- 探针测试 -->
+             <div class = "startTestList_wap" ng-if="!flag">
+                 <!-- 探针测试左边 -->
+                 <div class = "startTestList startTestListLeft" >
+                     <!-- 顶部 -->
+                    <div class = "startTestListTop startTestListLeftTop">
+                        <div class = "refreshTime">
+                            <b>{{constants.field_sensor_StrengthTest_time}}：</b>
+                            <span>{{testTime}}</span>
+                        </div>
+                        <ul class = "lockingTab">
+                           <li style="margin-right: 10px;">
+                               <span ng-class="tabType == 'all'?'sensorLockTrue':'sensorLock'" ng-click="changeType('all')">
+                                   <b></b>
+                               </span>
+                               <span>{{constants.field_sensor_StrengthTest_all_btn}}</span>
+                           </li>
+                            <li>
+                               <span ng-class="tabType == 'lock'?'sensorLockTrue':'sensorLock'" ng-click="changeType('lock')">
+                                   <b></b>
+                               </span>
+                                <span>{{constants.field_sensor_StrengthTest_clock_btn}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                     <!-- 列表 -->
+                     <div class = "macList">
+                        <div class = "macListTit">
+                            <p>{{constants.field_sensormanage_mac}}</p>
+                            <p>{{constants.label_sensor}}{{constants.label_space}}{{constants.field_sensor_strength}}</p>
+                            <p>{{constants.label_operation}}</p>
+                        </div>
+                         <ul style="overflow-y:auto; overflow-x: hidden;height: 260px;">
+                            <li ng-repeat="one in macListLeft track by $index">
+                                <div>{{one.sensorMac}}</div>
+                                <div>{{one.minRssi}}</div>
+                                <div>
+                                    <span class = "sensorStrRight sensorStrLock" ng-if="one.lock == '1'" ng-click = "toBeNotLock(one,$event)"></span>
+                                    <span class = "sensorStrRight sensorStrNotLock" ng-if="one.lock == '0'" ng-click = "toBeLock(one,$event)"></span>
+                                    <span class = "sensorStrRight" ng-click = "goNote(one,$event)"></span>
+                                </div>
+                            </li>
+                         </ul>
+                     </div>
+
+                 </div>
+                 <!-- 探针测试右边 -->
+                 <div class = "startTestList startTestListRight">
+                     <!-- top -->
+                     <div class = "startTestListTop startTestListRightTop" style="position: relative;">
+                         <b class = "size14">{{constants.field_sensor_StrengthTest_presentation}}</b>
+                         <!-- 保存按钮 -->
+                         <div class = "saveMacNode" ng-click = "saveMacNode();"></div>
+                         <!--<div class="helpOpened_download" ng-click="exportReport_Sensor();"  style="float:right;position: absolute;top:-10px;right:0px;"></div>-->
+                     </div>
+                     <!-- 列表 -->
+                     <div class = "macList testReportList">
+                         <div class = "testReport">
+                             <p>{{constants.field_sensor_StrengthTest_time}}</p>
+                             <p>{{constants.field_sensormanage_mac}}</p>
+                             <p>{{constants.label_sensor}}{{constants.label_space}}{{constants.field_sensor_strength}}</p>
+                             <p>{{constants.field_compete_description}}</p>
+                             <p>{{constants.label_operation}}</p>
+                         </div>
+                         <ul style="overflow-y:auto; overflow-x: hidden;height: 260px;">
+                             <li ng-repeat="one in dataR track by $index">
+                                 <div>
+                                     {{one.time | date:'yyyy-MM-dd'}}
+                                 </div>
+                                 <div>{{one.sensorMac}}</div>
+                                 <div>{{one.minRssi}}</div>
+                                 <div class = "sensorNoteRemarks">
+                                     <span class = "sensorRemarks" ng-click = "updateRemark(one,$event)">{{one.remark}}</span>
+                                     <span class = "font_color remarksbtn" ng-if="one.remark == '' ||one.remark == null " ng-click = "updateRemark(one,$event)">{{constants.field_compete_description}}</span>
+                                     <input type="text"  autocomplete="off" class  = "remarkInput"/>
+                                 </div>
+                                 <div>
+                                     <span class = "sensorStrRight sensorNoteDelete " ng-click = "removeOne($index,$event)"></span>
+                                 </div>
+                             </li>
+                         </ul>
+                     </div>
+
+                 </div>
+             </div>
+
+            <div class = "startTestList_wap" ng-if="flag">
+                <!-- 探针测试左边 -->
+                <div class = "startTestList startTestListLeft" >
+                    <!-- 顶部 -->
+                    <div class = "startTestListTop startTestListLeftTop">
+                        <div class = "refreshTime colorgray">
+                            <b>{{constants.field_sensor_StrengthTest_time}}：</b>
+                            <span>{{testTime}}</span>
+                        </div>
+                    </div>
+                    <!-- 列表 -->
+                    <div class = "macList testReportList colorgray" style = "height: 260px;line-height: 260px;font-size: 18px;text-align: center;">{{constants.prompt__sensor_StrengthTest_tostart}}</div>
+                </div>
+                <!-- 探针测试右边 -->
+                <div class = "startTestList startTestListRight">
+                    <!-- top -->
+                    <div class = "startTestListTop startTestListRightTop" style="position: relative;">
+                        <b class = "size14 colorgray">{{constants.field_sensor_StrengthTest_presentation}}</b>
+                    </div>
+                    <!-- 列表 -->
+                    <div class = "macList testReportList colorgray"  style = "height: 260px;line-height: 260px;font-size: 18px;text-align: center;">{{constants.prompt__sensor_StrengthTest_tostart}}</div>
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+

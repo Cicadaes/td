@@ -1,0 +1,499 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="youyu.dong" id="1505896200586-2">
+        <createTable tableName="TD_HOUR_REAL_TIME_METRIC">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="shop_code" remarks="店铺代码" type="varchar(60)"/>
+            <column name="shop" remarks="店铺" type="varchar(100)"/>
+
+            <column name="brand" remarks="品牌" type="varchar(100)"/>
+            <column name="region" remarks="大区" type="varchar(100)"/>
+            <column name="city" remarks="城市" type="varchar(100)"/>
+            <column name="province" remarks="省" type="varchar(100)"/>
+            <column name="channel" remarks="渠道" type="varchar(100)"/>
+            <column name="mall" remarks="商场" type="varchar(127)"/>
+
+            <column name="date" remarks="日期" type="varchar(60)"/>
+            <column name="hour" remarks="小时" type="varchar(60)"/>
+            <column name="active_hour_users" remarks="入店每小时客流" type="int"/>
+            <column name="front_hour_users" remarks="周边每小时客流" type="int"/>
+            <column name="stay_hour_users" remarks="停留每小时客流" type="int"/>
+
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="youyu.dong" id="1505896200586-3">
+        <createTable tableName="TD_DAY_REAL_TIME_METRIC">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="shop_code" remarks="店铺代码" type="varchar(60)"/>
+            <column name="shop" remarks="店铺" type="varchar(100)"/>
+
+            <column name="brand" remarks="品牌" type="varchar(100)"/>
+            <column name="region" remarks="大区" type="varchar(100)"/>
+            <column name="city" remarks="城市" type="varchar(100)"/>
+            <column name="province" remarks="省" type="varchar(100)"/>
+            <column name="channel" remarks="渠道" type="varchar(100)"/>
+            <column name="mall" remarks="商场" type="varchar(127)"/>
+
+            <column name="date" remarks="日期" type="varchar(60)"/>
+            <column name="week" remarks="周" type="varchar(60)"/>
+            <column name="month" remarks="月份" type="varchar(60)"/>
+
+            <column name="active_new_users" remarks="进店新客" type="int"/>
+            <column name="active_old_users" remarks="进店老客" type="int"/>
+            <column name="active_users" remarks="进店人数" type="int"/>
+
+            <column name="stay_new_users" remarks="停留新客" type="int"/>
+            <column name="stay_old_users" remarks="停留老客" type="int"/>
+            <column name="stay_users" remarks="停留人数" type="int"/>
+
+            <column name="front_users" remarks="周边人数" type="int"/>
+            <column name="jump_users" remarks="跳出人数" type="int"/>
+
+            <column name="high_active_users" remarks="高活跃人数" type="int"/>
+            <column name="middle_active_users" remarks="中活跃人数" type="int"/>
+            <column name="low_active_users" remarks="低活跃人数" type="int"/>
+            <column name="sleep_active_users" remarks="沉睡人数" type="int"/>
+
+            <column name="high_stay_users" remarks="高活跃停留人数" type="int"/>
+            <column name="middle_stay_users" remarks="中活跃停留人数" type="int"/>
+            <column name="low_stay_users" remarks="低活跃停留人数" type="int"/>
+            <column name="sleep_stay_users" remarks="沉睡停留人数" type="int"/>
+
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="youyu.dong" id="1505896200586-4">
+        <createTable tableName="TD_DAY_NEW_METRIC">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="shop_code" remarks="店铺代码" type="varchar(60)"/>
+            <column name="shop" remarks="店铺" type="varchar(100)"/>
+
+            <column name="brand" remarks="品牌" type="varchar(100)"/>
+            <column name="region" remarks="大区" type="varchar(100)"/>
+            <column name="city" remarks="城市" type="varchar(100)"/>
+            <column name="province" remarks="省" type="varchar(100)"/>
+            <column name="channel" remarks="渠道" type="varchar(100)"/>
+            <column name="mall" remarks="商场" type="varchar(127)"/>
+
+            <column name="date" remarks="日期" type="varchar(60)"/>
+            <column name="week" remarks="周" type="varchar(60)"/>
+            <column name="month" remarks="月份" type="varchar(60)"/>
+
+            <column name="active_user_new_rate" remarks="新客占比" type="double"/>
+            <column name="active_user_old_rate" remarks="老客占比" type="double"/>
+            <column name="enter_rate" remarks="入店率" type="double"/>
+            <column name="stay_rate" remarks="停留率" type="double"/>
+            <column name="stay_duration" remarks="停留时长" type="double"/>
+
+            <column name="high_rate" remarks="高活跃客占比" type="double"/>
+            <column name="middle_rate" remarks="中活跃客占比" type="double"/>
+            <column name="low_rate" remarks="低活跃客占比" type="double"/>
+            <column name="sleep_rate" remarks="沉睡客占比" type="double"/>
+
+            <column name="recent7Users" remarks="近7日入店客流" type="int"/>
+            <column name="recent30HighRate" remarks="近30日高活跃客群占比" type="double"/>
+
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="youyu.dong" id="1505896200586-5">
+        <createTable tableName="TD_DAY_OFFLINE_METRIC">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="shop_code" remarks="店铺代码" type="varchar(60)"/>
+            <column name="shop" remarks="店铺" type="varchar(100)"/>
+
+            <column name="brand" remarks="品牌" type="varchar(100)"/>
+            <column name="region" remarks="大区" type="varchar(100)"/>
+            <column name="city" remarks="城市" type="varchar(100)"/>
+            <column name="province" remarks="省" type="varchar(100)"/>
+            <column name="channel" remarks="渠道" type="varchar(100)"/>
+            <column name="mall" remarks="商场" type="varchar(127)"/>
+
+            <column name="date" remarks="日期" type="varchar(60)"/>
+            <column name="week" remarks="周" type="varchar(60)"/>
+            <column name="month" remarks="月份" type="varchar(60)"/>
+
+            <column name="active_duration" remarks="到访总时长" type="int"/>
+            <column name="active_times" remarks="到访总次数" type="int"/>
+            <column name="stay_duration" remarks="停留总时长" type="int"/>
+            <column name="stay_times" remarks="停留总次数" type="int"/>
+            <column name="visit_time_duration" remarks="次均到访时长" type="int"/>
+            <column name="stay_time_duration" remarks="次均停留时长" type="int"/>
+
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="youyu.dong" id="1505896200586-6">
+        <createTable tableName="TD_DAY_PARTY_METRIC">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="shop_code" remarks="店铺代码" type="varchar(60)"/>
+            <column name="shop" remarks="店铺" type="varchar(100)"/>
+
+            <column name="brand" remarks="品牌" type="varchar(100)"/>
+            <column name="region" remarks="大区" type="varchar(100)"/>
+            <column name="city" remarks="城市" type="varchar(100)"/>
+            <column name="province" remarks="省" type="varchar(100)"/>
+            <column name="channel" remarks="渠道" type="varchar(100)"/>
+            <column name="mall" remarks="商场" type="varchar(127)"/>
+
+            <column name="date" remarks="日期" type="varchar(60)"/>
+            <column name="week" remarks="周" type="varchar(60)"/>
+            <column name="month" remarks="月份" type="varchar(60)"/>
+
+            <column name="sales_amount" remarks="销售金额" type="double"/>
+            <column name="order_count" remarks="订单数" type="int"/>
+            <column name="order_average_price" remarks="订单均价" type="double"/>
+            <column name="singular_count" remarks="件单数" type="int"/>
+            <column name="receipt_count" remarks="转化数,小票数" type="int"/>
+            <column name="member_count" remarks="会员数" type="int"/>
+            <column name="potential_count" remarks="潜客数" type="int"/>
+
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="youyu.dong" id="1505896200586-7">
+        <createTable tableName="TD_WEEK_REAL_TIME_METRIC">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="shop_code" remarks="店铺代码" type="varchar(60)"/>
+            <column name="shop" remarks="店铺" type="varchar(100)"/>
+
+            <column name="brand" remarks="品牌" type="varchar(100)"/>
+            <column name="region" remarks="大区" type="varchar(100)"/>
+            <column name="city" remarks="城市" type="varchar(100)"/>
+            <column name="province" remarks="省" type="varchar(100)"/>
+            <column name="channel" remarks="渠道" type="varchar(100)"/>
+            <column name="mall" remarks="商场" type="varchar(127)"/>
+
+            <column name="year" remarks="年份" type="varchar(60)"/>
+            <column name="week_of_year" remarks="1年中第几周" type="varchar(60)"/>
+
+            <column name="active_new_users" remarks="进店新客" type="int"/>
+            <column name="active_old_users" remarks="进店老客" type="int"/>
+            <column name="active_users" remarks="进店人数" type="int"/>
+
+            <column name="stay_new_users" remarks="停留新客" type="int"/>
+            <column name="stay_old_users" remarks="停留老客" type="int"/>
+            <column name="stay_users" remarks="停留人数" type="int"/>
+
+            <column name="front_users" remarks="周边人数" type="int"/>
+            <column name="jump_users" remarks="跳出人数" type="int"/>
+
+            <column name="high_active_users" remarks="高活跃人数" type="int"/>
+            <column name="middle_active_users" remarks="中活跃人数" type="int"/>
+            <column name="low_active_users" remarks="低活跃人数" type="int"/>
+            <column name="sleep_active_users" remarks="沉睡人数" type="int"/>
+
+            <column name="high_stay_users" remarks="高活跃停留人数" type="int"/>
+            <column name="middle_stay_users" remarks="中活跃停留人数" type="int"/>
+            <column name="low_stay_users" remarks="低活跃停留人数" type="int"/>
+            <column name="sleep_stay_users" remarks="沉睡停留人数" type="int"/>
+
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="youyu.dong" id="1505896200586-8">
+        <createTable tableName="TD_WEEK_NEW_METRIC">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="shop_code" remarks="店铺代码" type="varchar(60)"/>
+            <column name="shop" remarks="店铺" type="varchar(100)"/>
+
+            <column name="brand" remarks="品牌" type="varchar(100)"/>
+            <column name="region" remarks="大区" type="varchar(100)"/>
+            <column name="city" remarks="城市" type="varchar(100)"/>
+            <column name="province" remarks="省" type="varchar(100)"/>
+            <column name="channel" remarks="渠道" type="varchar(100)"/>
+            <column name="mall" remarks="商场" type="varchar(127)"/>
+
+            <column name="year" remarks="年份" type="varchar(60)"/>
+            <column name="week_of_year" remarks="1年中第几周" type="varchar(60)"/>
+
+            <column name="active_user_new_rate" remarks="新客占比" type="double"/>
+            <column name="active_user_old_rate" remarks="老客占比" type="double"/>
+            <column name="enter_rate" remarks="入店率" type="double"/>
+            <column name="stay_rate" remarks="停留率" type="double"/>
+            <column name="stay_duration" remarks="停留时长" type="double"/>
+
+
+            <column name="high_rate" remarks="高活跃客占比" type="double"/>
+            <column name="middle_rate" remarks="中活跃客占比" type="double"/>
+            <column name="low_rate" remarks="低活跃客占比" type="double"/>
+            <column name="sleep_rate" remarks="沉睡客占比" type="double"/>
+
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="youyu.dong" id="1505896200586-9">
+        <createTable tableName="TD_WEEK_OFFLINE_METRIC">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="shop_code" remarks="店铺代码" type="varchar(60)"/>
+            <column name="shop" remarks="店铺" type="varchar(100)"/>
+
+            <column name="brand" remarks="品牌" type="varchar(100)"/>
+            <column name="region" remarks="大区" type="varchar(100)"/>
+            <column name="city" remarks="城市" type="varchar(100)"/>
+            <column name="province" remarks="省" type="varchar(100)"/>
+            <column name="channel" remarks="渠道" type="varchar(100)"/>
+            <column name="mall" remarks="商场" type="varchar(127)"/>
+
+            <column name="year" remarks="年份" type="varchar(60)"/>
+            <column name="week_of_year" remarks="1年中第几周" type="varchar(60)"/>
+
+            <column name="active_duration" remarks="到访总时长" type="int"/>
+            <column name="active_times" remarks="到访总次数" type="int"/>
+            <column name="stay_duration" remarks="停留总时长" type="int"/>
+            <column name="stay_times" remarks="停留总次数" type="int"/>
+            <column name="visit_time_duration" remarks="次均到访时长" type="int"/>
+            <column name="stay_time_duration" remarks="次均停留时长" type="int"/>
+
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="youyu.dong" id="1505896200586-10">
+        <createTable tableName="TD_WEEK_PARTY_METRIC">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="shop_code" remarks="店铺代码" type="varchar(60)"/>
+            <column name="shop" remarks="店铺" type="varchar(100)"/>
+
+            <column name="brand" remarks="品牌" type="varchar(100)"/>
+            <column name="region" remarks="大区" type="varchar(100)"/>
+            <column name="city" remarks="城市" type="varchar(100)"/>
+            <column name="province" remarks="省" type="varchar(100)"/>
+            <column name="channel" remarks="渠道" type="varchar(100)"/>
+            <column name="mall" remarks="商场" type="varchar(127)"/>
+
+            <column name="year" remarks="年份" type="varchar(60)"/>
+            <column name="week_of_year" remarks="1年中第几周" type="varchar(60)"/>
+
+            <column name="sales_amount" remarks="销售金额" type="double"/>
+            <column name="order_count" remarks="订单数" type="int"/>
+            <column name="order_average_price" remarks="订单均价" type="double"/>
+            <column name="singular_count" remarks="件单数" type="int"/>
+            <column name="receipt_count" remarks="转化数,小票数" type="int"/>
+            <column name="member_count" remarks="会员数" type="int"/>
+            <column name="potential_count" remarks="潜客数" type="int"/>
+
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="youyu.dong" id="1505896200586-11">
+        <createTable tableName="TD_MONTH_REAL_TIME_METRIC">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="shop_code" remarks="店铺代码" type="varchar(60)"/>
+            <column name="shop" remarks="店铺" type="varchar(100)"/>
+
+            <column name="brand" remarks="品牌" type="varchar(100)"/>
+            <column name="region" remarks="大区" type="varchar(100)"/>
+            <column name="city" remarks="城市" type="varchar(100)"/>
+            <column name="province" remarks="省" type="varchar(100)"/>
+            <column name="channel" remarks="渠道" type="varchar(100)"/>
+            <column name="mall" remarks="商场" type="varchar(127)"/>
+
+            <column name="year" remarks="年份" type="varchar(60)"/>
+            <column name="month" remarks="1年中第几月" type="varchar(60)"/>
+
+            <column name="active_new_users" remarks="进店新客" type="int"/>
+            <column name="active_old_users" remarks="进店老客" type="int"/>
+            <column name="active_users" remarks="进店人数" type="int"/>
+
+            <column name="stay_new_users" remarks="停留新客" type="int"/>
+            <column name="stay_old_users" remarks="停留老客" type="int"/>
+            <column name="stay_users" remarks="停留人数" type="int"/>
+
+            <column name="front_users" remarks="周边人数" type="int"/>
+            <column name="jump_users" remarks="跳出人数" type="int"/>
+
+            <column name="high_active_users" remarks="高活跃人数" type="int"/>
+            <column name="middle_active_users" remarks="中活跃人数" type="int"/>
+            <column name="low_active_users" remarks="低活跃人数" type="int"/>
+            <column name="sleep_active_users" remarks="沉睡人数" type="int"/>
+
+            <column name="high_stay_users" remarks="高活跃停留人数" type="int"/>
+            <column name="middle_stay_users" remarks="中活跃停留人数" type="int"/>
+            <column name="low_stay_users" remarks="低活跃停留人数" type="int"/>
+            <column name="sleep_stay_users" remarks="沉睡停留人数" type="int"/>
+
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="youyu.dong" id="1505896200586-12">
+        <createTable tableName="TD_MONTH_NEW_METRIC">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="shop_code" remarks="店铺代码" type="varchar(60)"/>
+            <column name="shop" remarks="店铺" type="varchar(100)"/>
+
+            <column name="brand" remarks="品牌" type="varchar(100)"/>
+            <column name="region" remarks="大区" type="varchar(100)"/>
+            <column name="city" remarks="城市" type="varchar(100)"/>
+            <column name="province" remarks="省" type="varchar(100)"/>
+            <column name="channel" remarks="渠道" type="varchar(100)"/>
+            <column name="mall" remarks="商场" type="varchar(127)"/>
+
+            <column name="year" remarks="年份" type="varchar(60)"/>
+            <column name="month" remarks="1年中第几月" type="varchar(60)"/>
+
+            <column name="active_user_new_rate" remarks="新客占比" type="double"/>
+            <column name="active_user_old_rate" remarks="老客占比" type="double"/>
+            <column name="enter_rate" remarks="入店率" type="double"/>
+            <column name="stay_rate" remarks="停留率" type="double"/>
+            <column name="stay_duration" remarks="停留时长" type="double"/>
+
+
+            <column name="high_rate" remarks="高活跃客占比" type="double"/>
+            <column name="middle_rate" remarks="中活跃客占比" type="double"/>
+            <column name="low_rate" remarks="低活跃客占比" type="double"/>
+            <column name="sleep_rate" remarks="沉睡客占比" type="double"/>
+
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="youyu.dong" id="1505896200586-13">
+        <createTable tableName="TD_MONTH_OFFLINE_METRIC">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="shop_code" remarks="店铺代码" type="varchar(60)"/>
+            <column name="shop" remarks="店铺" type="varchar(100)"/>
+
+            <column name="brand" remarks="品牌" type="varchar(100)"/>
+            <column name="region" remarks="大区" type="varchar(100)"/>
+            <column name="city" remarks="城市" type="varchar(100)"/>
+            <column name="province" remarks="省" type="varchar(100)"/>
+            <column name="channel" remarks="渠道" type="varchar(100)"/>
+            <column name="mall" remarks="商场" type="varchar(127)"/>
+
+            <column name="year" remarks="年份" type="varchar(60)"/>
+            <column name="month" remarks="1年中第几月" type="varchar(60)"/>
+
+            <column name="active_duration" remarks="到访总时长" type="int"/>
+            <column name="active_times" remarks="到访总次数" type="int"/>
+            <column name="stay_duration" remarks="停留总时长" type="int"/>
+            <column name="stay_times" remarks="停留总次数" type="int"/>
+            <column name="visit_time_duration" remarks="次均到访时长" type="int"/>
+            <column name="stay_time_duration" remarks="次均停留时长" type="int"/>
+
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="youyu.dong" id="1505896200586-14">
+        <createTable tableName="TD_MONTH_PARTY_METRIC">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="shop_code" remarks="店铺代码" type="varchar(60)"/>
+            <column name="shop" remarks="店铺" type="varchar(100)"/>
+
+            <column name="brand" remarks="品牌" type="varchar(100)"/>
+            <column name="region" remarks="大区" type="varchar(100)"/>
+            <column name="city" remarks="城市" type="varchar(100)"/>
+            <column name="province" remarks="省" type="varchar(100)"/>
+            <column name="channel" remarks="渠道" type="varchar(100)"/>
+            <column name="mall" remarks="商场" type="varchar(127)"/>
+
+            <column name="year" remarks="年份" type="varchar(60)"/>
+            <column name="month" remarks="1年中第几月" type="varchar(60)"/>
+
+            <column name="sales_amount" remarks="销售金额" type="double"/>
+            <column name="order_count" remarks="订单数" type="int"/>
+            <column name="order_average_price" remarks="订单均价" type="double"/>
+            <column name="singular_count" remarks="件单数" type="int"/>
+            <column name="receipt_count" remarks="转化数,小票数" type="int"/>
+            <column name="member_count" remarks="会员数" type="int"/>
+            <column name="potential_count" remarks="潜客数" type="int"/>
+
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="youyu.dong" id="1505896200586-21">
+        <createTable tableName="TD_METRIC_META">
+
+            <column name="field_name" remarks="品牌" type="varchar(100)"/>
+            <column name="field_code" remarks="大区" type="varchar(100)" />
+            <column name="field_table" remarks="城市" type="varchar(100)" />
+            <column name="field_size" remarks="省" type="varchar(100)" />
+
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

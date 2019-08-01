@@ -1,0 +1,66 @@
+<!-- 导航条 -->
+<div class="nav_bar_top" >
+    <span>{{constants.table_projectPlaces}}</span>
+</div>
+
+<div class="clrfix operator-panel">
+    <span class="btn-add" ng-click="newClick()" data-toggle="modal" data-target="#projectPlaceDialog">
+        <i class="icons icons-add"></i>{{constants.btn_create_place}}
+    </span>
+    <span class="btn-add" ng-click="saveIndex()">
+        {{constants.btn_projectPlace_saveSort}}
+    </span>
+</div>
+
+<div class="ng-table-container">
+    <div class="ng-table-head clrfix">
+        <div class="search" data-search role="search"></div>
+    </div>
+    <div class="row_highlight">
+        <table ng-table="tableParams" class="table table-special sortable-container grid" sv-root sv-part="$data">
+            <thead>
+            <tr>
+                <th ng-style="table_width_1"></th>
+                <th ng-style="table_width_2">{{constants.field_projectPlace_placeName}}</th>
+                <th ng-style="table_width_3">{{constants.field_projectPlace_diagramName}}</th>
+                <th ng-style="table_width_4">{{constants.field_projectPlace_description}}</th>
+                <th ng-style="table_width_5">{{constants.label_operation}}</th>
+            </tr>
+            </thead>
+            <tbody ng-style="table_max_height">
+            <tr ng-repeat="projectPlace in projectPlaces" sv-element="opts" class="well grid"
+                style="overflow-y:auto;">
+                <td ng-style="table_width_1" style="text-align: center;" sv-handle>
+                    <!-- 已有图片 -->
+                    <div ng-if="projectPlace.picUrl!=null">
+                        <img style="width:80px;height:40px;" ng-src="pic/{{projectPlace.picUrl}}" src="">
+                    </div>
+                    <!--默认图片 -->
+                    <img class="" style="width:80px;height:40px;background: #e3e5ea;" ng-if="projectPlace.picUrl==null" src="" ng-src="images/small_picture.png">
+                </td>
+                <td ng-style="table_width_2" sv-handle>
+                    <div>{{projectPlace.placeName}}</div>
+                </td>
+                <td ng-style="table_width_3" sv-handle>
+                    <div>{{projectPlace.diagramName}}</div>
+                </td>
+                <td ng-style="table_width_4">
+                    <div>{{projectPlace.description}}</div>
+                </td>
+                <td ng-style="table_width_5">
+                    <div>
+                        <span data-toggle="modal" data-target="#probeDeployDialog" id="newsensor_{{projectPlace.id}}" ng-click="probeDeploy(projectPlace);" class="font_color">{{deployTitle}}</span>
+                        <span data-toggle="modal" data-target="#projectPlaceDialog" ng-click="modifyClick(projectPlace);" class="font_color" title="">{{constants.label_edit}}</span>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div project-place-dialog></div>
+
+<div probe-deploy-dialog></div>
+
+<div sensor-dialog></div>

@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.TenantDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.Tenant">
+        <result column="id" property="id"/>
+        <result column="um_tenant_id" property="umTenantId"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="tenant_name" property="tenantName"/>
+        <result column="type" property="type"/>
+        <result column="company" property="company"/>
+        <result column="contacter" property="contacter"/>
+        <result column="contact" property="contact"/>
+        <result column="description" property="description"/>
+        <result column="create_by" property="createBy"/>
+        <result column="creator" property="creator"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="updater" property="updater"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="full_name" property="fullName"/>
+        <result column="login_time" property="loginTime"/>
+    </resultMap>
+
+    <!-- TD_TENANT table all fields -->
+    <sql id="Base_Column_List">
+        id,um_tenant_id,tenant_id,tenant_name,type,company,contacter,contact,description,create_by,creator,create_time,update_by,updater,update_time,full_name,login_time
+    </sql>
+
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="umTenantId != null and umTenantId != ''">
+                and um_tenant_id = #{umTenantId}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="tenantName != null and tenantName != ''">
+                and tenant_name = #{tenantName}
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="company != null and company != ''">
+                and company = #{company}
+            </if>
+            <if test="contacter != null and contacter != ''">
+                and contacter = #{contacter}
+            </if>
+            <if test="contact != null and contact != ''">
+                and contact = #{contact}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+            <if test="fullName != null and fullName != ''">
+                and full_name = #{fullName}
+            </if>
+            <if test="loginTime != null and loginTime != ''">
+                and login_time = #{loginTime}
+            </if>
+            <if test="q != null and q != ''">
+                and (tenant_name like CONCAT('%','${q}','%' ) or full_name like CONCAT('%','${q}','%' ))
+            </if>
+        </trim>
+    </sql>
+
+    <sql id="Base_Where_Clause_umids">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="tenantName != null and tenantName != ''">
+                and tenant_name = #{tenantName}
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="company != null and company != ''">
+                and company = #{company}
+            </if>
+            <if test="contacter != null and contacter != ''">
+                and contacter = #{contacter}
+            </if>
+            <if test="contact != null and contact != ''">
+                and contact = #{contact}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+            <if test="fullName != null and fullName != ''">
+                and full_name = #{fullName}
+            </if>
+            <if test="loginTime != null and loginTime != ''">
+                and login_time = #{loginTime}
+            </if>
+            <if test="q != null and q != ''">
+                and (tenant_name like CONCAT('%','${q}','%' ) or full_name like CONCAT('%','${q}','%' ))
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_TENANT(id,um_tenant_id,tenant_id,tenant_name,type,company,contacter,contact,description,create_by,creator,create_time,update_by,updater,update_time,full_name,login_time)
+        values(#{id},#{umTenantId},#{tenantId},#{tenantName},#{type},#{company},#{contacter},#{contact},#{description},#{createBy},#{creator},now(),#{updateBy},#{updater},now(),#{fullName},#{loginTime})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_TENANT set
+        um_tenant_id=#{umTenantId},tenant_id=#{tenantId},tenant_name=#{tenantName},type=#{type},company=#{company},contacter=#{contacter},contact=#{contact},description=#{description},create_by=#{createBy},creator=#{creator},create_time=now(),update_by=#{updateBy},updater=#{updater},update_time=now(),full_name=#{fullName},login_time=#{loginTime}
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_TENANT set
+            <if test="umTenantId != null  ">
+                um_tenant_id=#{umTenantId},
+            </if>
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="tenantName != null  ">
+                tenant_name=#{tenantName},
+            </if>
+            <if test="type != null  ">
+                type=#{type},
+            </if>
+            <if test="company != null  ">
+                company=#{company},
+            </if>
+            <if test="contacter != null  ">
+                contacter=#{contacter},
+            </if>
+            <if test="contact != null  ">
+                contact=#{contact},
+            </if>
+            <if test="description != null  ">
+                description=#{description},
+            </if>
+            <if test="createBy != null  ">
+                create_by=#{createBy},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updateBy != null  ">
+                update_by=#{updateBy},
+            </if>
+            <if test="updater != null  ">
+                updater=#{updater},
+            </if>
+            <if test="fullName != null  ">
+                full_name=#{fullName},
+            </if>
+            <if test="loginTime != null  ">
+                login_time=#{loginTime},
+            </if>
+            update_time=now()
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 租户信息 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_TENANT where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_TENANT where id = #{id}
+    </delete>
+
+    <!-- 租户信息 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_TENANT
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询租户信息列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_TENANT
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- 合作伙伴拥有的厂商数-->
+    <select id="queryBytend" resultMap="BaseResultMap" parameterType="Object">
+        select distinct
+        <include refid="Base_Column_a"/>
+        from TD_SENSOR_SERIESSS_REL b,TD_SENSOR c,TD_TENANT d where d.tenant_id=b.tenant_id and
+        b.sensor_mac=c.sensor_mac
+        <include refid="queryBytend_where"/>
+        group by d.tenant_id
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!--<select id="queryBytendCount" resultType="java.lang.Integer"  parameterType="Object">
+      select count(distinct d.tenant_id)
+        from TD_SENSOR_SERIESSS_REL b,TD_SENSOR c,TD_TENANT d where d.tenant_id=b.tenant_id and b.sensor_mac=c.sensor_mac
+      <include refid="queryBytend_where"/>
+    </select>-->
+
+    <sql id="queryBytend_where">
+        <trim suffixOverrides=",">
+            <if test="tenantId != null and tenantId != ''">
+                and c.tenant_id = #{tenantId}
+            </if>
+            <if test="type != null and type != ''">
+                and d.type = #{type}
+            </if>
+        </trim>
+    </sql>
+
+    <sql id="Base_Column_a">
+        d.id,d.um_tenant_id,d.tenant_id,d.tenant_name,d.type,d.company,d.contacter,d.contact,d.description,d.create_by,d.creator,d.create_time,d.update_by,d.updater,d.update_time,d.full_name,d.login_time
+    </sql>
+
+    <!-- 通过umid查找租户 -->
+    <select id="queryByUmid" resultMap="BaseResultMap" parameterType="String">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_TENANT
+        <where>
+            <choose>
+                <when test="umid != null and umid != ''">
+                    umid = #{umid}
+                </when>
+                <otherwise>
+                    1 = 0
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <!-- 通过id查找租户 -->
+    <select id="queryById" resultMap="BaseResultMap" parameterType="String">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_TENANT
+        <where>
+            <choose>
+                <when test="id != null and id != ''">
+                    tenant_id = #{id}
+                </when>
+                <otherwise>
+                    1 = 0
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <!-- <select id="queryByUmids" resultMap="BaseResultMap" parameterType="Object">
+         select distinct
+         <include refid="Base_Column_List" />
+         from TD_TENANT
+         <include refid="Base_Where_Clause_umids"/>
+         and umid in
+         <foreach item="item" index="index" collection="umids" open="(" separator="," close=")">
+             #{item}
+         </foreach>
+         <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+        ${pager.orderCondition}
+          </if>
+         <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+             ${pager.mysqlQueryCondition}
+         </if>
+     </select>  -->
+
+    <!--<select id="queryByUmidsCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(distinct id)
+        from TD_TENANT
+        <include refid="Base_Where_Clause_umids"/>
+        and umid in
+	    <foreach item="item" index="index" collection="umids" open="(" separator="," close=")">  
+	        #{item} 
+	    </foreach>  
+    </select>  -->
+
+    <!--<select id="queryByUmidsSensorData" resultMap="BaseResultMap" parameterType="Object">
+        select distinct 
+			tt.tenant_id as partid,
+			tt.tenant_name as partname,
+			srt.r_hard_id as hardid,
+			srt.tr_hard_name as hardname
+		
+		from (
+			select t.tenant_id, t.tenant_name
+				from TD_TENANT t
+			where 1=1 
+			<if test="tenantPartId != null and tenantPartId != ''" >
+			  and t.id = #{tenantPartId} 
+			</if>
+			<if test="umids != null">
+			  and t.umid in
+			  <foreach item="item" index="index" collection="umids" open="(" separator="," close=")">  
+			    #{item} 
+			  </foreach>  
+			</if>
+		)tt
+		
+		join(
+			select p.id,p.project_name,p.tenant_id as p_part_id
+				from TD_PROJECT p
+			where 1=1 
+			<if test="projectId != null and projectId != ''" >
+			  and p.id = #{projectId}
+			</if>
+		)pt
+		on tt.tenant_id=pt.p_part_id
+		
+		join(
+			select s.id,s.sensor_name,s.tenant_id as s_part_id 
+				from TD_SENSOR s
+			where 1=1 
+			<if test="sensorId != null and sensorId != ''" >
+			  and s.id = #{sensorId}
+			</if>
+		)st
+		on tt.tenant_id=st.s_part_id
+		
+		join(
+			select srr.r_hard_id, srr.r_part_id, tr.tenant_name as tr_hard_name
+			from (
+				select r.tenant_id as r_hard_id ,sr.tenant_id as r_part_id
+				from TD_SENSOR_SERIESSS_REL r
+				join TD_SENSOR sr
+				on r.sensor_mac=sr.sensor_mac
+				<if test="tenantHardId != null and tenantHardId != ''" >
+				  and r.tenant_id = #{tenantHardId}
+				</if>
+			)srr
+			join TD_TENANT tr
+			on srr.r_hard_id=tr.tenant_id
+			
+		)srt
+		on tt.tenant_id=srt.r_part_id;
+    </select> -->
+
+    <!--<select id="queryByUmidsSensorDataNoTenant" resultMap="BaseResultMap" parameterType="Object">
+       select tenant_name as tenantPartName, tenant_id as tenantPartId FROM TD_TENANT where 1=1 and type='2'
+       <if test="umids != null">
+         and umid in
+         <foreach item="item" index="index" collection="umids" open="(" separator="," close=")">
+           #{item}
+         </foreach>
+       </if>
+   </select> -->
+
+
+    <!--<select id="queryByUmidsSensorDataHaveTenant" resultMap="BaseResultMap" parameterType="Object">
+      select hzsname as tenantPartName,tid as tenantPartId from (select DISTINCT b.tenant_id as hzs,a.tenant_id as fd,c.tenant_name as hzsname,c.tenant_id as tid, c.umid as umid
+      from
+      TD_SENSOR_SERIESSS_REL a,
+      TD_SENSOR_INSTALL_INFO b,
+      TD_TENANT c
+      where
+      a.sensor_mac=b.sensor_mac
+      and c.tenant_id=b.tenant_id
+      ) m
+      left join TD_TENANT t
+      on m.fd = t.tenant_id
+      where 1=1
+      <if test="tenantHardId != null  ">
+      and t.id=#{tenantHardId}
+      </if>
+      <if test="umids != null">
+      and m.umid in
+        <foreach item="item" index="index" collection="umids" open="(" separator="," close=")">
+          #{item}
+        </foreach>
+      </if>
+  </select>-->
+
+</mapper>   

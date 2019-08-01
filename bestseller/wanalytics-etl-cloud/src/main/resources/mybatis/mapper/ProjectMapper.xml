@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.ProjectDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.Project" >
+        <result column="id" property="id"/>
+        <result column="project_name" property="projectName"/>
+        <result column="status" property="status"/>
+        <result column="project_type" property="projectType"/>
+        <result column="project_position" property="projectPosition"/>
+        <result column="opening_time" property="openingTime"/>
+        <result column="closing_time" property="closingTime"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="creator" property="creator"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="updater" property="updater"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="longitude" property="longitude"/>
+        <result column="latitude" property="latitude"/>
+        <result column="city" property="city"/>
+        <result column="related_id" property="relatedId"/>
+        <result column="affiliation" property="affiliation"/>
+        <result column="description" property="description"/>
+        <result column="project_num" property="projectNum"/>
+        <result column="project_remark" property="projectRemark"/>
+        <result column="area" property="area"/>
+        <result column="orderline" property="orderline"/>
+        <result column="pic_url" property="picUrl"/>
+        <result column="default_crowd" property="defaultCrowd"/>
+        <result column="category" property="category"/>
+        <result column="brand" property="brand"/>
+        <result column="type_id" property="typeId"/>
+        <!--下面两个字段项目中不采用-->
+        <result column="ssid_count" property="ssidCount"/>
+        <result column="room_count" property="roomCount"/>
+
+        <!--下面几个字段是后加的-->
+        <result column="region" property="region"/>
+        <result column="province" property="province"/>
+        <result column="channel" property="channel"/>
+        <result column="mall" property="mall"/>
+        <result column="down_nums" property="downNums"/>
+		
+		<result column="logical_city" property="logicalCity"/>
+        <result column="county" property="county"/>
+        <result column="city_type" property="cityType"/>
+        <result column="city_level" property="cityLevel"/>
+
+        <result column="projectParentName" property="projectParentName"/>
+        <result column="c_city_cn_name" property="cityCnName"/>
+
+    </resultMap>
+    
+    <!-- TD_PROJECT table all fields -->
+    <sql id="Base_Column_List" >
+	  id,project_name,status,project_type,project_position,opening_time,closing_time,tenant_id,creator,create_by,
+	  create_time,updater,update_by,update_time,longitude,latitude,city,related_id,affiliation,description,project_num,
+	  project_remark,area,orderline,pic_url,default_crowd,category,brand,type_id,region,province,channel,mall,down_nums,logical_city,county,city_type,city_level,c_city_cn_name
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="projectName != null and projectName != ''" >
+                and project_name =  #{projectName}
+            </if>
+            <if test="status != null and status != ''" >
+                and status =  #{status}
+            </if>
+            <if test="projectType != null" >
+                and project_type =  #{projectType}
+            </if>
+            <if test="projectType == null " >
+                and project_type in(1,5,6,11)
+            </if>
+            <if test="projectPosition != null and projectPosition != ''" >
+                and project_position =  #{projectPosition}
+            </if>
+            <if test="openingTime != null and openingTime != ''" >
+                and opening_time =  #{openingTime}
+            </if>
+            <if test="closingTime != null and closingTime != ''" >
+                and closing_time =  #{closingTime}
+            </if>
+            <if test="tenantId != null and tenantId != ''" >
+                and tenant_id =  #{tenantId}
+            </if>
+            <if test="creator != null and creator != ''" >
+                and creator =  #{creator}
+            </if>
+            <if test="createBy != null and createBy != ''" >
+                and create_by =  #{createBy}
+            </if>
+            <if test="createTime != null and createTime != ''" >
+                and create_time =  #{createTime}
+            </if>
+            <if test="updater != null and updater != ''" >
+                and updater =  #{updater}
+            </if>
+            <if test="updateBy != null and updateBy != ''" >
+                and update_by =  #{updateBy}
+            </if>
+            <if test="updateTime != null and updateTime != ''" >
+                and update_time =  #{updateTime}
+            </if>
+            <if test="longitude != null and longitude != ''" >
+                and longitude =  #{longitude}
+            </if>
+            <if test="latitude != null and latitude != ''" >
+                and latitude =  #{latitude}
+            </if>
+            <if test="city != null and city != ''" >
+                and city =  #{city}
+            </if>
+            <if test="relatedId != null and relatedId != ''" >
+                and related_id =  #{relatedId}
+            </if>
+            <if test="affiliation != null and affiliation != ''" >
+                and affiliation =  #{affiliation}
+            </if>
+            <if test="description != null and description != ''" >
+                and description =  #{description}
+            </if>
+            <if test="projectNum != null and projectNum != ''" >
+                and project_num =  #{projectNum}
+            </if>
+            <if test="projectRemark != null and projectRemark != ''" >
+                and project_remark =  #{projectRemark}
+            </if>
+            <if test="area != null and area != ''" >
+                and area =  #{area}
+            </if>
+            <if test="orderline != null and orderline != ''" >
+                and orderline =  #{orderline}
+            </if>
+            <if test="picUrl != null and picUrl != ''" >
+                and pic_url =  #{picUrl}
+            </if>
+            <if test="defaultCrowd != null and defaultCrowd != ''" >
+                and default_crowd =  #{defaultCrowd}
+            </if>
+            <if test="category != null and category != ''" >
+                and category =  #{category}
+            </if>
+            <if test="brand != null and brand != ''" >
+                and brand =  #{brand}
+            </if>
+            <if test="typeId != null and typeId != ''" >
+                and type_id =  #{typeId}
+            </if>
+
+            <if test="region != null and region != ''" >
+                and region =  #{region}
+            </if>
+            <if test="province != null and province != ''" >
+                and province =  #{province}
+            </if>
+            <if test="channel != null and channel != ''" >
+                and channel =  #{channel}
+            </if>
+            <if test="mall != null and mall != ''" >
+                and mall =  #{mall}
+            </if>
+            <if test="downNums != null and downNums != '' ">
+                and down_nums=#{downNums},
+            </if>
+ 			<if test="logicalCity != null and logicalCity != ''" >
+                and logical_city =  #{logicalCity}
+            </if>
+            <if test="county != null and county != ''" >
+                and county =  #{county}
+            </if>
+            <if test="cityType != null and cityType != ''" >
+                and city_type =  #{cityType}
+            </if>
+            <if test="cityLevel != null and cityLevel != ''" >
+                and city_level =  #{cityLevel}
+            </if>
+        </trim>
+    </sql>
+    <update id="updatePicUrlById" parameterType="Object">
+        update TD_PROJECT_PLACE set pic_url=#{picUrl} where project_id=#{id}
+    </update>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object" >
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_PROJECT(id,project_name,status,project_type,project_position,opening_time,closing_time,tenant_id,creator,create_by,create_time,updater,update_by,update_time,longitude,latitude,city,related_id,affiliation,description,project_num,project_remark,area,orderline,pic_url,default_crowd,category,brand,type_id,region,province,channel,mall,down_nums)
+        values(#{id},#{projectName},#{status},#{projectType},#{projectPosition},#{openingTime},#{closingTime},#{tenantId},#{creator},#{createBy},now(),#{updater},#{updateBy},now(),#{longitude},#{latitude},#{city},#{relatedId},#{affiliation},#{description},#{projectNum},#{projectRemark},#{area},#{orderline},#{picUrl},#{defaultCrowd},#{category},#{brand},#{typeId},#{region},#{province},#{channel},#{mall},#{downNums})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object" >
+        update TD_PROJECT set project_name=#{projectName},status=#{status},project_type=#{projectType},project_position=#{projectPosition},opening_time=#{openingTime},closing_time=#{closingTime},tenant_id=#{tenantId},creator=#{creator},create_by=#{createBy},create_time=now(),updater=#{updater},update_by=#{updateBy},update_time=now(),longitude=#{longitude},latitude=#{latitude},city=#{city},related_id=#{relatedId},affiliation=#{affiliation},description=#{description},project_num=#{projectNum},project_remark=#{projectRemark},area=#{area},orderline=#{orderline},pic_url=#{picUrl},default_crowd=#{defaultCrowd},category=#{category},brand=#{brand},type_id=#{typeId},region=#{region},province=#{province},channel=#{channel},mall=#{mall},down_nums=#{downNums}) where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object" >
+        update TD_PROJECT set
+        <trim  suffixOverrides="," >
+            <if test="projectName != null  ">
+                project_name=#{projectName},
+            </if>
+            <if test="status != null  ">
+                status=#{status},
+            </if>
+            <if test="projectType != null  ">
+                project_type=#{projectType},
+            </if>
+            <if test="projectPosition != null  ">
+                project_position=#{projectPosition},
+            </if>
+            <if test="openingTime != null  ">
+                opening_time=#{openingTime},
+            </if>
+            <if test="closingTime != null  ">
+                closing_time=#{closingTime},
+            </if>
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="createBy != null  ">
+                create_by=#{createBy},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updater != null  ">
+                updater=#{updater},
+            </if>
+            <if test="updateBy != null  ">
+                update_by=#{updateBy},
+            </if>
+            <if test="updateTime != null  ">
+                update_time=#{updateTime},
+            </if>
+            <if test="longitude != null  ">
+                longitude=#{longitude},
+            </if>
+            <if test="latitude != null  ">
+                latitude=#{latitude},
+            </if>
+            <if test="city != null  ">
+                city=#{city},
+            </if>
+            <if test="relatedId != null  ">
+                related_id=#{relatedId},
+            </if>
+            <if test="affiliation != null  ">
+                affiliation=#{affiliation},
+            </if>
+            <if test="description != null  ">
+                description=#{description},
+            </if>
+            <if test="projectNum != null  ">
+                project_num=#{projectNum},
+            </if>
+            <if test="projectRemark != null  ">
+                project_remark=#{projectRemark},
+            </if>
+            <if test="area != null  ">
+                area=#{area},
+            </if>
+            <if test="orderline != null  ">
+                orderline=#{orderline},
+            </if>
+            <if test="picUrl != null  ">
+                pic_url=#{picUrl},
+            </if>
+            <if test="defaultCrowd != null  ">
+                default_crowd=#{defaultCrowd},
+            </if>
+            <if test="category != null  ">
+                category=#{category},
+            </if>
+            <if test="brand != null  ">
+                brand=#{brand},
+            </if>
+            <if test="typeId != null  ">
+                type_id=#{typeId},
+            </if>
+            <if test="region != null  ">
+                region=#{region},
+            </if>
+            <if test="province != null  ">
+                province=#{province},
+            </if>
+            <if test="channel != null  ">
+                channel=#{channel},
+            </if>
+            <if test="mall != null  ">
+                mall=#{mall},
+            </if>
+            <if test="downNums != null  ">
+                down_nums=#{downNums},
+            </if>
+            <if test="logicalCity != null and logicalCity != ''" >
+                and logical_city =  #{logicalCity}
+            </if>
+            <if test="county != null and county != ''" >
+                and county =  #{county}
+            </if>
+            <if test="cityType != null and cityType != ''" >
+                and city_type =  #{cityType}
+            </if>
+            <if test="cityLevel != null and cityLevel != ''" >
+                and city_level =  #{cityLevel}
+            </if>
+
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 项目 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_PROJECT where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_PROJECT where id = #{id}
+    </delete>
+
+ 	<select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_PROJECT
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+
+    <select id="findProjectNumByType" resultType="String" parameterType="java.util.List">
+        select project_num
+        from TD_PROJECT
+        where
+        status=1
+        and
+        project_type in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="findProjectIdsByType" resultType="java.lang.Integer" parameterType="java.util.List">
+        select id
+        from TD_PROJECT
+        where
+        status=1
+        and
+        project_type in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    
+    <select id="findProjectsByType" resultMap="BaseResultMap" parameterType="java.util.List">
+        select * 
+        from TD_PROJECT
+        where
+        status=1
+        and
+        project_type in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    
+</mapper>

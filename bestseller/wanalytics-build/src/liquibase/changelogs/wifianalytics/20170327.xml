@@ -1,0 +1,31 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	<changeSet author="yunlong.wang" id="1490583119100-1">
+        	<createTable tableName="TD_SENSOR_CHECK" remarks="探针实时监控配置表">
+                    <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+               			<constraints primaryKey="true"/>
+            		</column>
+            		<column name="mac" remarks="传感器mac地址" type="varchar(64)"/>
+					<column name="ap_mac" remarks="客户手机mac" type="varchar(64)"/>            		
+            </createTable>
+    	</changeSet>
+    
+       <changeSet author="yunlong.wang" id="1490583119100-2">
+        	<createTable tableName="TD_SENSOR_CHECK_LOG" remarks="探针实时监控日志表">
+                    <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+               			<constraints primaryKey="true"/>
+            		</column>
+            		<column name="mac" remarks="传感器mac地址" type="varchar(64)"/>
+					<column name="ap_mac" remarks="客户手机mac" type="varchar(64)"/>
+					<column name="time" remarks="时间" type="varchar(64)"/>
+					<column name="signal" remarks="信号强度" type="varchar(500)"/>  
+            </createTable>
+    	</changeSet>
+		<changeSet author="yunlong.wang" id="1490583119100-3">
+			<createIndex indexName="IDX_AP_MAC" tableName="TD_SENSOR_CHECK_LOG">
+        	    <column name="ap_mac"/>
+			</createIndex>
+    	</changeSet>
+</databaseChangeLog>
+
+  

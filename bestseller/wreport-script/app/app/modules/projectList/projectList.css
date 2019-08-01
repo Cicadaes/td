@@ -1,0 +1,316 @@
+/*营业时间*/
+.business_time .td_select ul {
+    max-height: 124px;
+}
+
+.business_time .colon, .business_time .until {
+    width: 10px;
+    float: left;
+    text-align: center;
+}
+
+.business_time .until {
+    width: 20px;
+}
+
+/**
+project_
+ */
+.project_mins_message {
+    color: #C9C9C9;
+    float: left !important;
+    display: block !important;
+}
+
+/*全部项目*/
+.project_top {
+    padding-top: 61px;
+}
+
+.project_tit {
+    width: 100%;
+    height: 38px;
+    position: fixed;
+    z-index: 1;
+}
+
+.project_tit ul {
+    height: 38px;
+    width: 1140px;
+    margin: 0 auto;
+}
+
+.project_tit ul li {
+    line-height: 34px;
+    margin-left: 10px;
+    border-bottom: 4px solid transparent;
+}
+
+.project_tit ul li a:hover {
+    color: #464c5b;
+}
+
+.project_tit ul li.project_red {
+    border-bottom: 4px solid #e35758;
+}
+
+.project_tit ul li.project_red a {
+    color: #464c5b;
+}
+
+/* .project_con {
+    padding: 10px 0 20px 0;
+    width: 1140px;
+    margin: 0 auto;
+    position: relative;
+    height: 420px;
+} */
+
+.project_con {
+    padding: 0 0 20px;
+    width: 1140px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.project_con * {
+    box-sizing: content-box !important;
+    -webkit-box-sizing: content-box !important;
+    -moz-box-sizing: content-box !important;
+}
+
+.project_con dl {
+    width: 320px;
+    height: 240px;
+    float: left;
+    margin: 10px;
+    background: #fff;
+    box-shadow: 0 2px 2px #ced3d9;
+    padding: 10px;
+}
+
+.project_con dl dt {
+    width: 100%;
+    height: 215px;
+    position: relative;
+    overflow: hidden;
+}
+
+.project_con dl dt a {
+    display: block;
+}
+
+.project_con dl dt .project_picture {
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    transition: all 1s;
+}
+
+.project_con dl dt a:hover .project_picture {
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+.project_picture {
+    width: 340px;
+    height: 215px;
+    background-size: cover;
+}
+
+.project_con dl dt b {
+    padding: 0 10px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    top: 12px;
+    z-index: 1;
+}
+
+.project_blue dt b {
+    background: rgba(49, 170, 255, .9);
+    background: #31aaff ;
+}
+
+.project_purple dt b {
+    background: rgba(0, 0, 0, .6);
+    background: #000 ;
+}
+
+.project_con dl dd {
+    margin-top: 4px;
+    height: 35px;
+    line-height: 28px;
+    font-size: 14px;
+}
+
+/* .controls dd span {
+    float: right;
+    margin-top: 8px;
+    display: none;
+} */
+
+.project_con dl dd span {
+    float: right;
+    margin-top: 4px;
+    display: none;
+}
+
+.project_con dl:hover span {
+    display: block;
+}
+
+.project_con b {
+    font-weight: normal;
+}
+
+.project_con b a {
+    color: #000;
+}
+
+.project_con b a:hover {
+    color: #464c5b;
+}
+
+.project_top {
+    padding-top: 0 !important;
+}
+
+.project_tit ul li.project_red {
+    border-bottom: 4px solid #FFFFFF !important;
+}
+
+.project_tit ul li.project_red:HOVER {
+    border-bottom: 4px solid #5f93e1 !important;
+}
+
+.project_tit ul li.project_red_choose {
+    border-bottom: 4px solid #5f93e1 !important;
+}
+
+.project_tit ul li.project_red_choose a {
+    color: #464c5b !important;
+}
+
+.project_type_list {
+    width: 200px;
+    position: fixed;
+    z-index: 2;
+    background-color: #fff;
+    border: 0 solid #c7ccd3;
+    border-radius: 5px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+
+.project_type_list li {
+    padding: 0 10px;
+}
+
+.project_type_list li:hover {
+    background: #679fef;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.project_type_select {
+    height: 34px;
+    border-bottom: 1px solid #c7ccd3;
+    line-height: 34px;
+    padding: 0;
+    width: 200px;
+}
+
+.project_mins_message_s {
+    color: #464c5b;
+    margin-left: 10px;
+}
+
+/* 查看店铺探针详情*/
+.sensor_select {
+    border-bottom: 2px solid #43A3FB;
+}
+
+.macTotal,.logTotal {
+    display:none;
+    font-size: 14px;
+}
+
+.total_block {
+    display:block;
+}
+
+/*新增店铺探针详情*/
+.form-horizontal .shopGroupnew_wap {
+    width:33%;
+}
+.shopGroupnew_wap span {
+    left: 250px;
+}
+.shopGinform_wap .spanspecial {
+    top: 36px;
+    right: -188px;
+}
+
+.seeStroeDetail .control-group {
+    float: left;
+    width: 33%;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    position: relative;
+}
+.seeStroeDetail .control-group .control-label {
+    float: left;
+    min-width: 75px;
+    text-align: right;
+    padding: 0;
+    margin: 0;
+    line-height: 30px;
+    height: 30px;
+    font-weight: normal;
+    color: #666f7b;
+    margin-right: 30px;
+    font-size: 14px;
+    color: #464C5B;
+}
+.seeStroeDetail .controls {
+    float: left;
+    line-height: 30px;
+    position: relative;
+    width: 42%;
+    max-width: 88%;
+}
+.stroedetail li {
+    float: left;
+    height: 80px;
+    line-height: 80px;
+    width: 20%;
+    padding: 0px 15px;
+}
+.stroedetail li:first-child {
+    margin-left: 20px;
+    padding: 0px 0px;
+    width: 30%;
+}
+
+.addProjectElement:hover {
+    color: #43A3FB;
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .modal-dialog-small-project {
+        width: 600px;
+        margin: 230px auto;
+    }
+    .modal-dialog-target {
+        margin: 100px auto;
+    }
+    .modal-dialog-download {
+        margin: 170px auto;
+    }
+}

@@ -1,0 +1,79 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="kai.zhang" id="1509615116006-1">
+        <createTable tableName="TD_METRIC_DAY_OFFLINE">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="interval_2" remarks="0-1分钟区间驻留次数" type="BIGINT(11)"
+                    defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="interval_5" remarks="1-5分钟区间驻留次数" type="BIGINT(11)"
+                    defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="interval_10" remarks="5-15分钟区间驻留次数" type="BIGINT(11)"
+                    defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="interval_15" remarks=">15分钟区间驻留次数" type="BIGINT(11)"
+                    defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" remarks="项目id" type="BIGINT(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_name" remarks="项目名称" type="varchar(100)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_type" remarks="项目类型" type="BIGINT(11)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="region" remarks="大区" type="varchar(100)"/>
+            <column name="channel" remarks="渠道" type="varchar(100)"/>
+            <column name="brand" remarks="品牌" type="varchar(100)"/>
+            <column name="province" remarks="省" type="varchar(100)"/>
+            <column name="city" remarks="城市" type="varchar(100)"/>
+            <column name="mall" remarks="日期" type="varchar(100)"/>
+            <column name="date" remarks="商场" type="varchar(10)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+            <column name="week_of_year" remarks="周" type="varchar(10)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+            <column name="month" remarks="月份" type="varchar(10)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active_duration" remarks="到访总时长" type="INT" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active_times" remarks="到访总次数" type="INT" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="stay_duration" remarks="停留总时长" type="INT" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="stay_times" remarks="停留时间" type="INT" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_time" remarks="修改时间" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kai.zhang" id="1509615116006-2">
+        <addUniqueConstraint
+                columnNames="project_id, date"
+                constraintName="id_date"
+                deferrable="true"
+                disabled="true"
+                initiallyDeferred="true"
+                tableName="TD_METRIC_DAY_OFFLINE"
+        />
+    </changeSet>
+</databaseChangeLog>

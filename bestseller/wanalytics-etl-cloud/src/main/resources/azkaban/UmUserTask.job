@@ -1,0 +1,3 @@
+#UmUserTask.job
+type=command
+command=bash -x /home/hadoop/wanalytics/etl/bin/um/UmUserTask.sh -schedulerTaskLogId "${schedule.task.log.id}"

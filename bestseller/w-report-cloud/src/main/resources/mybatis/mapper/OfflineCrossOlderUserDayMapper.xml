@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.OfflineCrossOlderUserDayDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.OfflineCrossOlderUserDay">
+        <result column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="project_id" property="projectId"/>
+        <result column="month" property="month"/>
+        <result column="date" property="date"/>
+        <result column="cross_users" property="crossUsers"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- TD_OFFLINE_CROSS_OLDER_USER_DAY table all fields -->
+    <sql id="Base_Column_List">
+        id,tenant_id,project_id,month,date,cross_users,update_time
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="month != null and month != ''">
+                and month = #{month}
+            </if>
+            <if test="date != null and date != ''">
+                and date = #{date}
+            </if>
+            <if test="crossUsers != null and crossUsers != ''">
+                and cross_users = #{crossUsers}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into TD_OFFLINE_CROSS_OLDER_USER_DAY(id,tenant_id,project_id,month,date,cross_users,update_time)
+        values(#{id},#{tenantId},#{projectId},#{month},#{date},#{crossUsers},now())
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_OFFLINE_CROSS_OLDER_USER_DAY set
+        tenant_id=#{tenantId},project_id=#{projectId},month=#{month},date=#{date},cross_users=#{crossUsers},update_time=now()
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_OFFLINE_CROSS_OLDER_USER_DAY set
+        <trim suffixOverrides=",">
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="month != null  ">
+                month=#{month},
+            </if>
+            <if test="date != null  ">
+                date=#{date},
+            </if>
+            <if test="crossUsers != null  ">
+                cross_users=#{crossUsers},
+            </if>
+            <if test="updateTime != null  ">
+                update_time=#{updateTime},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 项目每天跨店老客 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_OFFLINE_CROSS_OLDER_USER_DAY where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_OFFLINE_CROSS_OLDER_USER_DAY where id = #{id}
+    </delete>
+
+    <!-- 项目每天跨店老客 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_OFFLINE_CROSS_OLDER_USER_DAY
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询项目每天跨店老客列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_OFFLINE_CROSS_OLDER_USER_DAY
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- 项目里跨店老客数量 -->
+    <select id="querySumByList" resultType="java.lang.Integer" parameterType="Object">
+        select sum(cross_users) as cross_users
+        from TD_OFFLINE_CROSS_OLDER_USER_DAY
+        where
+        tenant_id = #{tenantId}
+        and project_id = #{projectId}
+        and month = #{month}
+    </select>
+</mapper>

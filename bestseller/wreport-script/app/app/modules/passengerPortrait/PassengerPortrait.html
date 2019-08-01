@@ -1,0 +1,57 @@
+<div class="stage" style="height: 44px; z-index: 99; overflow: initial;"></div>
+<div class="">
+    <div id="container" class="container" style="width: auto">
+
+        <div class="passenger_tit">
+            <div class="" style="color:#000; padding: 7px 0; width: 700px; float: left;">
+                <select class="form-control job_region_select" ng-model="crowd_id_1" title="" ng-change="changeParam(1)"
+                        style="">
+                    <option ng-repeat="x in crowdList" value="{{x.id}}" ng-selected="x.id==compare_obj_1.id">
+                        {{x.name}}
+                    </option>
+                </select>
+                <select class="form-control job_region_select" ng-model="comp_time_1" title="" ng-change="changeParam(1)"
+                        style="">
+                    <option ng-repeat="x in dateList" value="{{x}}" ng-selected="x==comp_time_1">
+                        {{x}}
+                    </option>
+                </select>
+                <!--
+                <select class="form-control job_region_select" ng-model="crowd_id_2" title="" ng-change="changeParam(2)"
+                        style="">
+                    <option ng-repeat="x in crowdList" value="{{x.id}}" ng-selected="x.id==compare_obj_2.id">
+                        {{x.name}}
+                    </option>
+                </select>
+                <select class="form-control job_region_select" ng-model="comp_time_2" title="" ng-change="changeParam(2)"
+                        style="">
+                    <option ng-repeat="x in dateList" value="{{x}}" ng-selected="x==comp_time_2">
+                        {{x}}
+                    </option>
+                </select>
+                -->
+            </div>
+
+            <div indicators indicators-url="'passengerPeople'" class="tips1"></div>
+
+            <div ng-if="false" class="float-right use-content-box">
+                <span style="padding: 5px;">不同客群指标对比</span>
+                <div ng-click="click()" class="td-btn-switch td-l" style="margin: 10px 5px;" ng-class="{'td-checked-box':panel_open}">
+                    <div class="td-open-check">
+                        <i>开</i>
+                    </div>
+                    <span></span>
+                    <i>关</i>
+                </div>
+            </div>
+        </div>
+
+        <div class="margin_bottom_panel">
+
+            <div com-people-property></div>
+            <div com-people-expense></div>
+            <div com-people-app></div>
+        </div>
+    </div>
+</div>
+

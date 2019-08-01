@@ -1,0 +1,31 @@
+<!-- 导航条 -->
+<div class="nav_bar_top nav_bar_top_border">
+    <span>设备管理</span>
+</div>
+
+<!-- 二级导航 -->
+<div class = "nav_bar_second_wap">
+    <ul class = "nav_bar_second">
+        <li ng-class="{'now_tab': tabType == '1'}" ng-click="changeTabType('1')">运维管理</li>
+        <li ng-class="{'now_tab': tabType == '2'}" ng-click="changeTabType('2')">探针管理</li>
+
+    </ul>
+
+    <!-- 预警设置 -->
+    <div class = "warningBtn" data-toggle="modal" data-target="#warningSettingDialog" >
+        {{constants.field_warning_setting}}
+    </div>
+</div>
+
+
+
+<!-- 设备概况 -->
+<!--   运维管理   -->
+<div project-store-manage ng-if="tabType == '1'" style="position:relative;margin-top:20px;"></div>
+
+<!-- 探针管理 -->
+<div sensor-manage ng-if="tabType == '2'"></div>
+
+
+<!-- 预警设置弹框 -->
+<div warning-setting-dialog></div>

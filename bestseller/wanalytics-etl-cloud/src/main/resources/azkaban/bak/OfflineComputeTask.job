@@ -1,0 +1,3 @@
+#OfflineCompute.job
+type=command
+command=bash -x /home/hadoop/wanalytics/etl/bin/OfflineComputeTask.sh  -schedulerTaskLogId "${schedule.task.log.id}" -date "${azkaban.flow.start.year}-${azkaban.flow.start.month}-${azkaban.flow.start.day}"

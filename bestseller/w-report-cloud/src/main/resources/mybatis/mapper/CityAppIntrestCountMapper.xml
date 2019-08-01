@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.CityAppIntrestCountDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.CityAppIntrestCount">
+        <result column="id" property="id"/>
+        <result column="city_name" property="cityName"/>
+        <result column="run_date" property="runDate"/>
+        <result column="tag_name" property="tagName"/>
+        <result column="metric_value" property="metricValue"/>
+    </resultMap>
+
+    <!-- TD_CITY_APP_INTREST_COUNT table all fields -->
+    <sql id="Base_Column_List">
+        id,city_name,run_date,tag_name,metric_value
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="cityName != null and cityName != ''">
+                and city_name = #{cityName}
+            </if>
+            <if test="runDate != null and runDate != ''">
+                and run_date = #{runDate}
+            </if>
+            <if test="tagName != null and tagName != ''">
+                and tag_name = #{tagName}
+            </if>
+            <if test="metricValue != null and metricValue != ''">
+                and metric_value = #{metricValue}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into TD_CITY_APP_INTREST_COUNT(id,city_name,run_date,tag_name,metric_value)
+        values(#{id},#{cityName},#{runDate},#{tagName},#{metricValue})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_CITY_APP_INTREST_COUNT set
+        city_name=#{cityName},run_date=#{runDate},tag_name=#{tagName},metric_value=#{metricValue} where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_CITY_APP_INTREST_COUNT set
+        <trim suffixOverrides=",">
+            <if test="cityName != null  ">
+                city_name=#{cityName},
+            </if>
+            <if test="runDate != null  ">
+                run_date=#{runDate},
+            </if>
+            <if test="tagName != null  ">
+                tag_name=#{tagName},
+            </if>
+            <if test="metricValue != null  ">
+                metric_value=#{metricValue},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 应用偏好提升度 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_CITY_APP_INTREST_COUNT where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_CITY_APP_INTREST_COUNT where id = #{id}
+    </delete>
+
+    <!-- 应用偏好提升度 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_CITY_APP_INTREST_COUNT
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- queryLatestRow -->
+    <select id="queryLatestRow" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_CITY_APP_INTREST_COUNT
+        where 1=1
+        <if test="cityName != null and cityName != ''">
+            and city_name = #{cityName}
+        </if>
+        <if test=" runDate != null and runDate != '' ">
+            <![CDATA[ AND run_date <= #{runDate}]]>
+        </if>
+        order by run_date desc limit 1;
+    </select>
+
+    <!-- 查询应用偏好提升度列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_CITY_APP_INTREST_COUNT
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.CrowdBlackListDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.CrowdBlackList">
+        <result column="id" property="id"/>
+        <result column="project_id" property="projectId"/>
+        <result column="device_mac" property="deviceMac"/>
+        <result column="source" property="source"/>
+        <result column="status" property="status"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="creator" property="creator"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="updater" property="updater"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="filter_reason" property="filterReason"/>
+    </resultMap>
+
+    <!-- TD_CROWD_BLACK_LIST table all fields -->
+    <sql id="Base_Column_List">
+        id,project_id,device_mac,source,status,tenant_id,creator,create_by,create_time,updater,update_by,update_time,filter_reason
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="deviceMac != null and deviceMac != ''">
+                and device_mac = #{deviceMac}
+            </if>
+            <if test="source != null and source != ''">
+                and source = #{source}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert ignore into
+        TD_CROWD_BLACK_LIST(id,project_id,device_mac,source,status,tenant_id,creator,create_by,create_time,updater,update_by,update_time,filter_reason)
+        values(#{id},#{projectId},#{deviceMac},#{source},#{status},#{tenantId},#{creator},#{createBy},now(),#{updater},#{updateBy},now(),#{filterReason})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_CROWD_BLACK_LIST set
+        project_id=#{projectId},device_mac=#{deviceMac},source=#{source},status=#{status},tenant_id=#{tenantId},creator=#{creator},create_by=#{createBy},create_time=now(),updater=#{updater},update_by=#{updateBy},update_time=now()
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_CROWD_BLACK_LIST set
+        <trim suffixOverrides=",">
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="deviceMac != null  ">
+                device_mac=#{deviceMac},
+            </if>
+            <if test="source != null  ">
+                source=#{source},
+            </if>
+            <if test="status != null  ">
+                status=#{status},
+            </if>
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="createBy != null  ">
+                create_by=#{createBy},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updater != null  ">
+                updater=#{updater},
+            </if>
+            <if test="updateBy != null  ">
+                update_by=#{updateBy},
+            </if>
+            <if test="updateTime != null  ">
+                update_time=#{updateTime},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 人群黑名单 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_CROWD_BLACK_LIST where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_CROWD_BLACK_LIST where id = #{id}
+    </delete>
+
+    <!-- 人群黑名单 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_CROWD_BLACK_LIST
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询人群黑名单列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_CROWD_BLACK_LIST
+        <include refid="Base_Where_Clause"/>
+        order by create_time desc
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+</mapper>

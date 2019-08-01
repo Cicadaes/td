@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.MetricMonthDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="td.enterprise.entity.MetricMonth" >
+	<result column="id" property="id"/>
+	<result column="brand" property="brand"/>
+	<result column="region" property="region"/>
+	<result column="city" property="city"/>
+	<result column="province" property="province"/>
+	<result column="channel" property="channel"/>
+	<result column="mall" property="mall"/>
+	<result column="project_name" property="projectName"/>
+	<result column="project_type" property="projectType"/>
+	<result column="project_id" property="projectId"/>
+	<result column="year" property="year"/>
+	<result column="month" property="month"/>
+	<result column="active_new_users" property="activeNewUsers"/>
+	<result column="active_old_users" property="activeOldUsers"/>
+	<result column="active_users" property="activeUsers"/>
+	<result column="stay_new_users" property="stayNewUsers"/>
+	<result column="stay_old_users" property="stayOldUsers"/>
+	<result column="stay_users" property="stayUsers"/>
+	<result column="front_users" property="frontUsers"/>
+	<result column="jump_users" property="jumpUsers"/>
+	<result column="high_active_users" property="highActiveUsers"/>
+	<result column="middle_active_users" property="middleActiveUsers"/>
+	<result column="low_active_users" property="lowActiveUsers"/>
+	<result column="sleep_active_users" property="sleepActiveUsers"/>
+	<result column="high_stay_users" property="highStayUsers"/>
+	<result column="middle_stay_users" property="middleStayUsers"/>
+	<result column="low_stay_users" property="lowStayUsers"/>
+	<result column="sleep_stay_users" property="sleepStayUsers"/>
+	<result column="active_duration" property="activeDuration"/>
+	<result column="active_times" property="activeTimes"/>
+	<result column="stay_duration" property="stayDuration"/>
+	<result column="stay_times" property="stayTimes"/>
+	<result column="interval_2" property="interval2"/>
+	<result column="interval_5" property="interval5"/>
+	<result column="interval_10" property="interval10"/>
+	<result column="interval_15" property="interval15"/>
+	<result column="visit_cycle" property="visitCycle"/>
+	<result column="sales_amount" property="salesAmount"/>
+	<result column="order_count" property="orderCount"/>
+	<result column="member_count" property="memberCount"/>
+	<result column="potential_count" property="potentialCount"/>
+	<result column="update_time" property="updateTime"/>
+	<result column="average_order_nums" property="averageOrderNums"/>
+	<result column="city_level" property="cityLevel"/>
+	<result column="project_num" property="projectNum"/>
+	<result column="new_active_duration" property="newActiveDuration"/>
+	<result column="new_active_time" property="newActiveTime"/>
+	<result column="old_active_duration" property="oldActiveDuration"/>
+	<result column="old_active_time" property="oldActiveTime"/>
+	<result column="logical_city" property="logicalCity"/>
+	<result column="tenant_id" property="tenantId"/>
+	<result column="sales_count" property="salesCount"/>
+	<result column="order_count_gt1" property="orderCountGt1"/>
+	<result column="vip_sales_amount" property="vipSalesAmount"/>
+	<result column="vip_order_count" property="vipOrderCount"/>
+	<result column="vip_sales_count" property="vipSalesCount"/>
+	<result column="vip_order_count_gt1" property="vipOrderCountGt1"/>
+	<result column="non_vip_sales_amount" property="nonVipSalesAmount"/>
+	<result column="non_vip_order_count" property="nonVipOrderCount"/>
+	<result column="non_vip_sales_count" property="nonVipSalesCount"/>
+	<result column="non_vip_order_count_gt1" property="nonVipOrderCountGt1"/>
+	<result column="c_city_cn_name" property="cCityCnName"/>
+  </resultMap>
+  
+  <sql id="Base_Column_Sum_Month_List" >
+        brand,
+		region,
+		city,
+		province,
+		channel,
+		mall,
+		project_name,
+		project_type,
+		project_id,
+		YEAR(date) year,
+		month,
+		city_level,
+		project_num,
+		logical_city,
+		tenant_id,
+		c_city_cn_name,
+		SYSDATE(),
+		SUM(active_new_users) active_new_users,
+		SUM(active_old_users) active_old_users,
+		SUM(active_users) active_users,
+		SUM(stay_new_users) stay_new_users,
+		SUM(stay_old_users) stay_old_users,
+		SUM(stay_users) stay_users,
+		SUM(front_users) front_users,
+		SUM(jump_users) jump_users,
+		SUM(high_active_users) high_active_users,
+		SUM(middle_active_users) middle_active_users,
+		SUM(low_active_users) low_active_users,
+		SUM(sleep_active_users) sleep_active_users,
+		SUM(high_stay_users) high_stay_users,
+		SUM(middle_stay_users) middle_stay_users,
+		SUM(low_stay_users) low_stay_users,
+		SUM(sleep_stay_users) sleep_stay_users,
+		SUM(active_duration) active_duration,
+		SUM(active_times) active_times,
+		SUM(stay_duration) stay_duration,
+		SUM(stay_times) stay_times,
+		SUM(interval_2) interval_2,
+		SUM(interval_5) interval_5,
+		SUM(interval_10) interval_10,
+		SUM(interval_15) interval_15,
+		SUM(visit_cycle) visit_cycle,
+		SUM(sales_amount) sales_amount,
+		SUM(order_count) order_count,
+		SUM(member_count) member_count,
+		SUM(potential_count) potential_count,
+		SUM(new_active_duration) AS new_active_duration,
+		SUM(new_active_time) AS new_active_time,
+		SUM(old_active_duration) AS old_active_duration,
+		SUM(old_active_time) AS old_active_time,
+		SUM(sales_count)AS sales_count,
+		SUM(order_count_gt1)AS order_count_gt1,
+		SUM(vip_sales_amount) AS vip_sales_amount,
+		SUM(vip_order_count) AS vip_order_count,
+		SUM(vip_sales_count) AS vip_sales_count,
+		SUM(vip_order_count_gt1) AS vip_order_count_gt1,
+		SUM(non_vip_sales_amount) AS non_vip_sales_amount,
+		SUM(non_vip_order_count) AS non_vip_order_count,
+		SUM(non_vip_sales_count) AS non_vip_sales_count,
+		SUM(non_vip_order_count_gt1) AS non_vip_order_count_gt1
+    </sql>
+       
+  <!-- TD_METRIC_MONTH table all fields -->
+  <sql id="Base_Column_List" >
+	 id,brand,region,city,province,channel,mall,project_name,project_type,project_id,year,month,active_new_users,active_old_users,active_users,stay_new_users,stay_old_users,stay_users,front_users,jump_users,high_active_users,middle_active_users,low_active_users,sleep_active_users,high_stay_users,middle_stay_users,low_stay_users,sleep_stay_users,active_duration,active_times,stay_duration,stay_times,interval_2,interval_5,interval_10,interval_15,visit_cycle,sales_amount,order_count,member_count,potential_count,update_time,city_level,project_num,new_active_duration,new_active_time,old_active_duration,old_active_time,logical_city,tenant_id,sales_count,order_count_gt1,vip_sales_amount,vip_order_count,vip_sales_count,vip_order_count_gt1,non_vip_sales_amount,non_vip_order_count,non_vip_sales_count,non_vip_order_count_gt1,c_city_cn_name
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="brand != null and brand != ''" >
+        and brand =  #{brand}
+	  </if>
+	      <if test="region != null and region != ''" >
+        and region =  #{region}
+	  </if>
+	      <if test="city != null and city != ''" >
+        and city =  #{city}
+	  </if>
+	      <if test="province != null and province != ''" >
+        and province =  #{province}
+	  </if>
+	      <if test="channel != null and channel != ''" >
+        and channel =  #{channel}
+	  </if>
+	      <if test="mall != null and mall != ''" >
+        and mall =  #{mall}
+	  </if>
+	      <if test="projectName != null and projectName != ''" >
+        and project_name =  #{projectName}
+	  </if>
+	      <if test="projectType != null and projectType != ''" >
+        and project_type =  #{projectType}
+	  </if>
+	      <if test="projectId != null and projectId != ''" >
+        and project_id =  #{projectId}
+	  </if>
+	      <if test="year != null and year != ''" >
+        and year =  #{year}
+	  </if>
+	      <if test="month != null and month != ''" >
+        and month =  #{month}
+	  </if>
+	      <if test="activeNewUsers != null and activeNewUsers != ''" >
+        and active_new_users =  #{activeNewUsers}
+	  </if>
+	      <if test="activeOldUsers != null and activeOldUsers != ''" >
+        and active_old_users =  #{activeOldUsers}
+	  </if>
+	      <if test="activeUsers != null and activeUsers != ''" >
+        and active_users =  #{activeUsers}
+	  </if>
+	      <if test="stayNewUsers != null and stayNewUsers != ''" >
+        and stay_new_users =  #{stayNewUsers}
+	  </if>
+	      <if test="stayOldUsers != null and stayOldUsers != ''" >
+        and stay_old_users =  #{stayOldUsers}
+	  </if>
+	      <if test="stayUsers != null and stayUsers != ''" >
+        and stay_users =  #{stayUsers}
+	  </if>
+	      <if test="frontUsers != null and frontUsers != ''" >
+        and front_users =  #{frontUsers}
+	  </if>
+	      <if test="jumpUsers != null and jumpUsers != ''" >
+        and jump_users =  #{jumpUsers}
+	  </if>
+	      <if test="highActiveUsers != null and highActiveUsers != ''" >
+        and high_active_users =  #{highActiveUsers}
+	  </if>
+	      <if test="middleActiveUsers != null and middleActiveUsers != ''" >
+        and middle_active_users =  #{middleActiveUsers}
+	  </if>
+	      <if test="lowActiveUsers != null and lowActiveUsers != ''" >
+        and low_active_users =  #{lowActiveUsers}
+	  </if>
+	      <if test="sleepActiveUsers != null and sleepActiveUsers != ''" >
+        and sleep_active_users =  #{sleepActiveUsers}
+	  </if>
+	      <if test="highStayUsers != null and highStayUsers != ''" >
+        and high_stay_users =  #{highStayUsers}
+	  </if>
+	      <if test="middleStayUsers != null and middleStayUsers != ''" >
+        and middle_stay_users =  #{middleStayUsers}
+	  </if>
+	      <if test="lowStayUsers != null and lowStayUsers != ''" >
+        and low_stay_users =  #{lowStayUsers}
+	  </if>
+	      <if test="sleepStayUsers != null and sleepStayUsers != ''" >
+        and sleep_stay_users =  #{sleepStayUsers}
+	  </if>
+	      <if test="activeDuration != null and activeDuration != ''" >
+        and active_duration =  #{activeDuration}
+	  </if>
+	      <if test="activeTimes != null and activeTimes != ''" >
+        and active_times =  #{activeTimes}
+	  </if>
+	      <if test="stayDuration != null and stayDuration != ''" >
+        and stay_duration =  #{stayDuration}
+	  </if>
+	      <if test="stayTimes != null and stayTimes != ''" >
+        and stay_times =  #{stayTimes}
+	  </if>
+	      <if test="interval2 != null and interval2 != ''" >
+        and interval_2 =  #{interval2}
+	  </if>
+	      <if test="interval5 != null and interval5 != ''" >
+        and interval_5 =  #{interval5}
+	  </if>
+	      <if test="interval10 != null and interval10 != ''" >
+        and interval_10 =  #{interval10}
+	  </if>
+	      <if test="interval15 != null and interval15 != ''" >
+        and interval_15 =  #{interval15}
+	  </if>
+	      <if test="visitCycle != null and visitCycle != ''" >
+        and visit_cycle =  #{visitCycle}
+	  </if>
+	      <if test="salesAmount != null and salesAmount != ''" >
+        and sales_amount =  #{salesAmount}
+	  </if>
+	      <if test="orderCount != null and orderCount != ''" >
+        and order_count =  #{orderCount}
+	  </if>
+
+	      <if test="memberCount != null and memberCount != ''" >
+        and member_count =  #{memberCount}
+	  </if>
+	      <if test="potentialCount != null and potentialCount != ''" >
+        and potential_count =  #{potentialCount}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+
+	      <if test="cityLevel != null and cityLevel != ''" >
+        and city_level =  #{cityLevel}
+	  </if>
+	      <if test="projectNum != null and projectNum != ''" >
+        and project_num =  #{projectNum}
+	  </if>
+	      <if test="newActiveDuration != null and newActiveDuration != ''" >
+        and new_active_duration =  #{newActiveDuration}
+	  </if>
+	      <if test="newActiveTime != null and newActiveTime != ''" >
+        and new_active_time =  #{newActiveTime}
+	  </if>
+	      <if test="oldActiveDuration != null and oldActiveDuration != ''" >
+        and old_active_duration =  #{oldActiveDuration}
+	  </if>
+	      <if test="oldActiveTime != null and oldActiveTime != ''" >
+        and old_active_time =  #{oldActiveTime}
+	  </if>
+	      <if test="logicalCity != null and logicalCity != ''" >
+        and logical_city =  #{logicalCity}
+	  </if>
+	      <if test="tenantId != null and tenantId != ''" >
+        and tenant_id =  #{tenantId}
+	  </if>
+	      <if test="salesCount != null and salesCount != ''" >
+        and sales_count =  #{salesCount}
+	  </if>
+	      <if test="orderCountGt1 != null and orderCountGt1 != ''" >
+        and order_count_gt1 =  #{orderCountGt1}
+	  </if>
+	      <if test="vipSalesAmount != null and vipSalesAmount != ''" >
+        and vip_sales_amount =  #{vipSalesAmount}
+	  </if>
+	      <if test="vipOrderCount != null and vipOrderCount != ''" >
+        and vip_order_count =  #{vipOrderCount}
+	  </if>
+	      <if test="vipSalesCount != null and vipSalesCount != ''" >
+        and vip_sales_count =  #{vipSalesCount}
+	  </if>
+	      <if test="vipOrderCountGt1 != null and vipOrderCountGt1 != ''" >
+        and vip_order_count_gt1 =  #{vipOrderCountGt1}
+	  </if>
+	      <if test="nonVipSalesAmount != null and nonVipSalesAmount != ''" >
+        and non_vip_sales_amount =  #{nonVipSalesAmount}
+	  </if>
+	      <if test="nonVipOrderCount != null and nonVipOrderCount != ''" >
+        and non_vip_order_count =  #{nonVipOrderCount}
+	  </if>
+	      <if test="nonVipSalesCount != null and nonVipSalesCount != ''" >
+        and non_vip_sales_count =  #{nonVipSalesCount}
+	  </if>
+	      <if test="nonVipOrderCountGt1 != null and nonVipOrderCountGt1 != ''" >
+        and non_vip_order_count_gt1 =  #{nonVipOrderCountGt1}
+	  </if>
+	      <if test="cCityCnName != null and cCityCnName != ''" >
+        and c_city_cn_name =  #{cCityCnName}
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+      insert into 
+TD_METRIC_MONTH(id,brand,region,city,province,channel,mall,project_name,project_type,project_id,year,month,active_new_users,active_old_users,active_users,stay_new_users,stay_old_users,stay_users,front_users,jump_users,high_active_users,middle_active_users,low_active_users,sleep_active_users,high_stay_users,middle_stay_users,low_stay_users,sleep_stay_users,active_duration,active_times,stay_duration,stay_times,interval_2,interval_5,interval_10,interval_15,visit_cycle,sales_amount,order_count,member_count,potential_count,update_time,city_level,project_num,new_active_duration,new_active_time,old_active_duration,old_active_time,logical_city,tenant_id,sales_count,order_count_gt1,vip_sales_amount,vip_order_count,vip_sales_count,vip_order_count_gt1,non_vip_sales_amount,non_vip_order_count,non_vip_sales_count,non_vip_order_count_gt1,c_city_cn_name)
+ values(#{id},#{brand},#{region},#{city},#{province},#{channel},#{mall},#{projectName},#{projectType},#{projectId},#{year},#{month},#{activeNewUsers},#{activeOldUsers},#{activeUsers},#{stayNewUsers},#{stayOldUsers},#{stayUsers},#{frontUsers},#{jumpUsers},#{highActiveUsers},#{middleActiveUsers},#{lowActiveUsers},#{sleepActiveUsers},#{highStayUsers},#{middleStayUsers},#{lowStayUsers},#{sleepStayUsers},#{activeDuration},#{activeTimes},#{stayDuration},#{stayTimes},#{interval2},#{interval5},#{interval10},#{interval15},#{visitCycle},#{salesAmount},#{orderCount},#{memberCount},#{potentialCount},now(),#{cityLevel},#{projectNum},#{newActiveDuration},#{newActiveTime},#{oldActiveDuration},#{oldActiveTime},#{logicalCity},#{tenantId},#{salesCount},#{orderCountGt1},#{vipSalesAmount},#{vipOrderCount},#{vipSalesCount},#{vipOrderCountGt1},#{nonVipSalesAmount},#{nonVipOrderCount},#{nonVipSalesCount},#{nonVipOrderCountGt1},#{cCityCnName})
+  </insert>
+  
+  <!-- 插入新记录  add by liyinglei 2017-12-21 -->
+  <insert id="insertOrUpdate" parameterType="Object" >
+    insert into TD_METRIC_MONTH 
+    (brand,region,city,province,channel,mall,project_name,project_type,project_id,year,month,city_level,project_num,logical_city,tenant_id,c_city_cn_name,update_time,active_new_users,active_old_users,active_users,stay_new_users,stay_old_users,stay_users,front_users,jump_users,high_active_users,middle_active_users,low_active_users,sleep_active_users,high_stay_users,middle_stay_users,low_stay_users,sleep_stay_users,active_duration,active_times,stay_duration,stay_times,interval_2,interval_5,interval_10,interval_15,visit_cycle,sales_amount,order_count,member_count,potential_count,new_active_duration,new_active_time,old_active_duration,old_active_time,sales_count,order_count_gt1,vip_sales_amount,vip_order_count,vip_sales_count,vip_order_count_gt1,non_vip_sales_amount,non_vip_order_count,non_vip_sales_count,non_vip_order_count_gt1)
+ 	SELECT <include refid="Base_Column_Sum_Month_List" /> 
+		from TD_METRIC_DAY t where <![CDATA[ date >= #{startDate} and date <= #{endDate} ]]> 
+		AND CONCAT(YEAR(t.date),t.`month`,t.project_id,t.tenant_id) NOT IN (SELECT CONCAT(m.`year`,m.`month`,m.project_id,m.tenant_id) FROM TD_METRIC_MONTH m )
+		group by brand,region,city,province,channel,mall,project_name,project_type,project_id,logical_city,
+		tenant_id,c_city_cn_name,YEAR(date),month,city_level,project_num
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+      update TD_METRIC_MONTH set brand=#{brand},region=#{region},city=#{city},province=#{province},channel=#{channel},mall=#{mall},project_name=#{projectName},project_type=#{projectType},project_id=#{projectId},year=#{year},month=#{month},active_new_users=#{activeNewUsers},active_old_users=#{activeOldUsers},active_users=#{activeUsers},stay_new_users=#{stayNewUsers},stay_old_users=#{stayOldUsers},stay_users=#{stayUsers},front_users=#{frontUsers},jump_users=#{jumpUsers},high_active_users=#{highActiveUsers},middle_active_users=#{middleActiveUsers},low_active_users=#{lowActiveUsers},sleep_active_users=#{sleepActiveUsers},high_stay_users=#{highStayUsers},middle_stay_users=#{middleStayUsers},low_stay_users=#{lowStayUsers},sleep_stay_users=#{sleepStayUsers},active_duration=#{activeDuration},active_times=#{activeTimes},stay_duration=#{stayDuration},stay_times=#{stayTimes},interval_2=#{interval2},interval_5=#{interval5},interval_10=#{interval10},interval_15=#{interval15},visit_cycle=#{visitCycle},sales_amount=#{salesAmount},order_count=#{orderCount},member_count=#{memberCount},potential_count=#{potentialCount},update_time=now(),city_level=#{cityLevel},project_num=#{projectNum},new_active_duration=#{newActiveDuration},new_active_time=#{newActiveTime},old_active_duration=#{oldActiveDuration},old_active_time=#{oldActiveTime},logical_city=#{logicalCity},tenant_id=#{tenantId},sales_count=#{salesCount},order_count_gt1=#{orderCountGt1},vip_sales_amount=#{vipSalesAmount},vip_order_count=#{vipOrderCount},vip_sales_count=#{vipSalesCount},vip_order_count_gt1=#{vipOrderCountGt1},non_vip_sales_amount=#{nonVipSalesAmount},non_vip_order_count=#{nonVipOrderCount},non_vip_sales_count=#{nonVipSalesCount},non_vip_order_count_gt1=#{nonVipOrderCountGt1},c_city_cn_name=#{cCityCnName} where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+      update TD_METRIC_MONTH set 
+		<if test="brand != null  ">
+		brand=#{brand},
+	</if>
+	<if test="region != null  ">
+		region=#{region},
+	</if>
+	<if test="city != null  ">
+		city=#{city},
+	</if>
+	<if test="province != null  ">
+		province=#{province},
+	</if>
+	<if test="channel != null  ">
+		channel=#{channel},
+	</if>
+	<if test="mall != null  ">
+		mall=#{mall},
+	</if>
+	<if test="projectName != null  ">
+		project_name=#{projectName},
+	</if>
+	<if test="projectType != null  ">
+		project_type=#{projectType},
+	</if>
+	<if test="projectId != null  ">
+		project_id=#{projectId},
+	</if>
+	<if test="year != null  ">
+		year=#{year},
+	</if>
+	<if test="month != null  ">
+		month=#{month},
+	</if>
+	<if test="activeNewUsers != null  ">
+		active_new_users=#{activeNewUsers},
+	</if>
+	<if test="activeOldUsers != null  ">
+		active_old_users=#{activeOldUsers},
+	</if>
+	<if test="activeUsers != null  ">
+		active_users=#{activeUsers},
+	</if>
+	<if test="stayNewUsers != null  ">
+		stay_new_users=#{stayNewUsers},
+	</if>
+	<if test="stayOldUsers != null  ">
+		stay_old_users=#{stayOldUsers},
+	</if>
+	<if test="stayUsers != null  ">
+		stay_users=#{stayUsers},
+	</if>
+	<if test="frontUsers != null  ">
+		front_users=#{frontUsers},
+	</if>
+	<if test="jumpUsers != null  ">
+		jump_users=#{jumpUsers},
+	</if>
+	<if test="highActiveUsers != null  ">
+		high_active_users=#{highActiveUsers},
+	</if>
+	<if test="middleActiveUsers != null  ">
+		middle_active_users=#{middleActiveUsers},
+	</if>
+	<if test="lowActiveUsers != null  ">
+		low_active_users=#{lowActiveUsers},
+	</if>
+	<if test="sleepActiveUsers != null  ">
+		sleep_active_users=#{sleepActiveUsers},
+	</if>
+	<if test="highStayUsers != null  ">
+		high_stay_users=#{highStayUsers},
+	</if>
+	<if test="middleStayUsers != null  ">
+		middle_stay_users=#{middleStayUsers},
+	</if>
+	<if test="lowStayUsers != null  ">
+		low_stay_users=#{lowStayUsers},
+	</if>
+	<if test="sleepStayUsers != null  ">
+		sleep_stay_users=#{sleepStayUsers},
+	</if>
+	<if test="activeDuration != null  ">
+		active_duration=#{activeDuration},
+	</if>
+	<if test="activeTimes != null  ">
+		active_times=#{activeTimes},
+	</if>
+	<if test="stayDuration != null  ">
+		stay_duration=#{stayDuration},
+	</if>
+	<if test="stayTimes != null  ">
+		stay_times=#{stayTimes},
+	</if>
+	<if test="interval2 != null  ">
+		interval_2=#{interval2},
+	</if>
+	<if test="interval5 != null  ">
+		interval_5=#{interval5},
+	</if>
+	<if test="interval10 != null  ">
+		interval_10=#{interval10},
+	</if>
+	<if test="interval15 != null  ">
+		interval_15=#{interval15},
+	</if>
+	<if test="visitCycle != null  ">
+		visit_cycle=#{visitCycle},
+	</if>
+	<if test="salesAmount != null  ">
+		sales_amount=#{salesAmount},
+	</if>
+	<if test="orderCount != null  ">
+		order_count=#{orderCount},
+	</if>
+
+	<if test="memberCount != null  ">
+		member_count=#{memberCount},
+	</if>
+	<if test="potentialCount != null  ">
+		potential_count=#{potentialCount},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+
+	<if test="cityLevel != null  ">
+		city_level=#{cityLevel},
+	</if>
+	<if test="projectNum != null  ">
+		project_num=#{projectNum},
+	</if>
+	<if test="newActiveDuration != null  ">
+		new_active_duration=#{newActiveDuration},
+	</if>
+	<if test="newActiveTime != null  ">
+		new_active_time=#{newActiveTime},
+	</if>
+	<if test="oldActiveDuration != null  ">
+		old_active_duration=#{oldActiveDuration},
+	</if>
+	<if test="oldActiveTime != null  ">
+		old_active_time=#{oldActiveTime},
+	</if>
+	<if test="logicalCity != null  ">
+		logical_city=#{logicalCity},
+	</if>
+	<if test="tenantId != null  ">
+		tenant_id=#{tenantId},
+	</if>
+	<if test="salesCount != null  ">
+		sales_count=#{salesCount},
+	</if>
+	<if test="orderCountGt1 != null  ">
+		order_count_gt1=#{orderCountGt1},
+	</if>
+	<if test="vipSalesAmount != null  ">
+		vip_sales_amount=#{vipSalesAmount},
+	</if>
+	<if test="vipOrderCount != null  ">
+		vip_order_count=#{vipOrderCount},
+	</if>
+	<if test="vipSalesCount != null  ">
+		vip_sales_count=#{vipSalesCount},
+	</if>
+	<if test="vipOrderCountGt1 != null  ">
+		vip_order_count_gt1=#{vipOrderCountGt1},
+	</if>
+	<if test="nonVipSalesAmount != null  ">
+		non_vip_sales_amount=#{nonVipSalesAmount},
+	</if>
+	<if test="nonVipOrderCount != null  ">
+		non_vip_order_count=#{nonVipOrderCount},
+	</if>
+	<if test="nonVipSalesCount != null  ">
+		non_vip_sales_count=#{nonVipSalesCount},
+	</if>
+	<if test="nonVipOrderCountGt1 != null  ">
+		non_vip_order_count_gt1=#{nonVipOrderCountGt1},
+	</if>
+	<if test="cCityCnName != null  ">
+		c_city_cn_name=#{cCityCnName},
+	</if>
+	update_time = now() 
+	where id=#{id}
+  </update>
+  
+  <!-- 修改记录，只修改只不为空的字段  按 project_id tenant_id year month update-->
+  <update id="updateBySelective" parameterType="Object" >
+      update TD_METRIC_MONTH set 
+		<if test="brand != null  ">
+		brand=#{brand},
+	</if>
+	<if test="region != null  ">
+		region=#{region},
+	</if>
+	<if test="city != null  ">
+		city=#{city},
+	</if>
+	<if test="province != null  ">
+		province=#{province},
+	</if>
+	<if test="channel != null  ">
+		channel=#{channel},
+	</if>
+	<if test="mall != null  ">
+		mall=#{mall},
+	</if>
+	<if test="projectName != null  ">
+		project_name=#{projectName},
+	</if>
+	<if test="projectType != null  ">
+		project_type=#{projectType},
+	</if>
+	<if test="activeNewUsers != null  ">
+		active_new_users=#{activeNewUsers},
+	</if>
+	<if test="activeOldUsers != null  ">
+		active_old_users=#{activeOldUsers},
+	</if>
+	<if test="activeUsers != null  ">
+		active_users=#{activeUsers},
+	</if>
+	<if test="stayNewUsers != null  ">
+		stay_new_users=#{stayNewUsers},
+	</if>
+	<if test="stayOldUsers != null  ">
+		stay_old_users=#{stayOldUsers},
+	</if>
+	<if test="stayUsers != null  ">
+		stay_users=#{stayUsers},
+	</if>
+	<if test="frontUsers != null  ">
+		front_users=#{frontUsers},
+	</if>
+	<if test="jumpUsers != null  ">
+		jump_users=#{jumpUsers},
+	</if>
+	<if test="highActiveUsers != null  ">
+		high_active_users=#{highActiveUsers},
+	</if>
+	<if test="middleActiveUsers != null  ">
+		middle_active_users=#{middleActiveUsers},
+	</if>
+	<if test="lowActiveUsers != null  ">
+		low_active_users=#{lowActiveUsers},
+	</if>
+	<if test="sleepActiveUsers != null  ">
+		sleep_active_users=#{sleepActiveUsers},
+	</if>
+	<if test="highStayUsers != null  ">
+		high_stay_users=#{highStayUsers},
+	</if>
+	<if test="middleStayUsers != null  ">
+		middle_stay_users=#{middleStayUsers},
+	</if>
+	<if test="lowStayUsers != null  ">
+		low_stay_users=#{lowStayUsers},
+	</if>
+	<if test="sleepStayUsers != null  ">
+		sleep_stay_users=#{sleepStayUsers},
+	</if>
+	<if test="activeDuration != null  ">
+		active_duration=#{activeDuration},
+	</if>
+	<if test="activeTimes != null  ">
+		active_times=#{activeTimes},
+	</if>
+	<if test="stayDuration != null  ">
+		stay_duration=#{stayDuration},
+	</if>
+	<if test="stayTimes != null  ">
+		stay_times=#{stayTimes},
+	</if>
+	<if test="interval2 != null  ">
+		interval_2=#{interval2},
+	</if>
+	<if test="interval5 != null  ">
+		interval_5=#{interval5},
+	</if>
+	<if test="interval10 != null  ">
+		interval_10=#{interval10},
+	</if>
+	<if test="interval15 != null  ">
+		interval_15=#{interval15},
+	</if>
+	<if test="visitCycle != null  ">
+		visit_cycle=#{visitCycle},
+	</if>
+	<if test="salesAmount != null  ">
+		sales_amount=#{salesAmount},
+	</if>
+	<if test="orderCount != null  ">
+		order_count=#{orderCount},
+	</if>
+
+	<if test="memberCount != null  ">
+		member_count=#{memberCount},
+	</if>
+	<if test="potentialCount != null  ">
+		potential_count=#{potentialCount},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+
+	<if test="cityLevel != null  ">
+		city_level=#{cityLevel},
+	</if>
+	<if test="projectNum != null  ">
+		project_num=#{projectNum},
+	</if>
+	<if test="newActiveDuration != null  ">
+		new_active_duration=#{newActiveDuration},
+	</if>
+	<if test="newActiveTime != null  ">
+		new_active_time=#{newActiveTime},
+	</if>
+	<if test="oldActiveDuration != null  ">
+		old_active_duration=#{oldActiveDuration},
+	</if>
+	<if test="oldActiveTime != null  ">
+		old_active_time=#{oldActiveTime},
+	</if>
+	<if test="logicalCity != null  ">
+		logical_city=#{logicalCity},
+	</if>
+	<if test="salesCount != null  ">
+		sales_count=#{salesCount},
+	</if>
+	<if test="orderCountGt1 != null  ">
+		order_count_gt1=#{orderCountGt1},
+	</if>
+	<if test="vipSalesAmount != null  ">
+		vip_sales_amount=#{vipSalesAmount},
+	</if>
+	<if test="vipOrderCount != null  ">
+		vip_order_count=#{vipOrderCount},
+	</if>
+	<if test="vipSalesCount != null  ">
+		vip_sales_count=#{vipSalesCount},
+	</if>
+	<if test="vipOrderCountGt1 != null  ">
+		vip_order_count_gt1=#{vipOrderCountGt1},
+	</if>
+	<if test="nonVipSalesAmount != null  ">
+		non_vip_sales_amount=#{nonVipSalesAmount},
+	</if>
+	<if test="nonVipOrderCount != null  ">
+		non_vip_order_count=#{nonVipOrderCount},
+	</if>
+	<if test="nonVipSalesCount != null  ">
+		non_vip_sales_count=#{nonVipSalesCount},
+	</if>
+	<if test="nonVipOrderCountGt1 != null  ">
+		non_vip_order_count_gt1=#{nonVipOrderCountGt1},
+	</if>
+	<if test="cCityCnName != null  ">
+		c_city_cn_name=#{cCityCnName},
+	</if>
+	update_time = now() 
+	where project_id=#{projectId} and tenant_id=#{tenantId}
+	and year=#{year} and month=#{month}
+  </update>
+ 
+  <!-- 根据id查询 TD_METRIC_MONTH -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+      select <include refid="Base_Column_List" /> 
+	 from TD_METRIC_MONTH where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+      delete from TD_METRIC_MONTH where id = #{id}
+  </delete>
+
+  <!-- TD_METRIC_MONTH 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_METRIC_MONTH 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询TD_METRIC_MONTH列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_METRIC_MONTH 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <!-- 通过日期查询指标月表 add by liyinglei 2017-12-21 -->
+	<select id="queryListByDate" resultMap="BaseResultMap" parameterType="Object">
+		select * from TD_METRIC_MONTH
+		where 1= 1 
+		<if test="startDate != null and startDate != ''">
+			and concat(year,"-",month) &gt;= #{startDate}
+		</if>
+		<if test="endDate != null and endDate != ''">
+			and concat(year,"-",month) &lt;= #{endDate}
+		</if>
+	</select>
+  
+</mapper>   

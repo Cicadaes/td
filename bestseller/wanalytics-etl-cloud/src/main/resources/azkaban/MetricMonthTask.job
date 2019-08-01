@@ -1,0 +1,2 @@
+type=command
+command=bash -x /home/hadoop/wanalytics/etl/bin/MetricMonthTask.sh --startDate "${azkaban.flow.start.year}-${azkaban.flow.start.month}-${azkaban.flow.start.day}" --endDate "${azkaban.flow.start.year}-${azkaban.flow.start.month}-${azkaban.flow.start.day}" --type "month" --schedulerTaskLogId "${schedule.task.log.id}" 

@@ -1,0 +1,127 @@
+
+.top-bar {
+    height: 60px;
+    width: 100%;
+    background-color: #36474F !important;
+    border-bottom: 1px solid #E7EBEF;
+}
+
+/*顶部菜单*/
+.top-bar, .case_con {
+    background-color: #FFF !important;
+}
+
+.case_header {
+    height: 60px;
+    position: relative;
+    z-index: 999;
+    float: left;
+    width: auto;
+    padding: 15px 0 15px 40px;
+}
+
+.topbar_select_item {
+    color: #a8afbf;
+    font-size: 14px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.topbar_select_item:hover {
+    color: #999;
+}
+
+.case_tit {
+    width: 100%;
+    cursor: pointer;
+    height: 30px;
+    color: #ccc;
+    line-height: 30px;
+    font-size: 14px;
+}
+
+.case_tit .icon_down {
+    margin-top: 12px;
+    margin-left: 10px;
+}
+
+.case_con {
+    background: #333B69;
+    padding: 0 10px 10px 10px;
+    position: absolute;
+    left: 15px;
+    top: 60px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    max-height: 300px;
+    overflow-y: scroll;
+    width: 180px;
+    height: 280px;
+}
+
+/* 搜索框样式 */
+.case_con > input {
+    display: block;
+    margin: 0 auto 0;
+    background: #666;
+    line-height: 30px;
+    height: 30px;
+    width: 135px;
+    color: #fff;
+    text-indent: 12px;
+}
+
+.case_select {
+    margin-left: 5px;
+    position: relative;
+}
+
+.case_select p {
+    min-width: 200px;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/*select*/
+.case_select_con {
+    width: 200px;
+    background: #fff;
+    position: absolute;
+    border-radius: 5px;
+    box-shadow: 0 0 8px rgba(58, 65, 77, .5);
+}
+
+.case_select_con li {
+    font-size: 12px;
+    padding: 0 14px;
+    line-height: 34px;
+    height: 34px;
+    cursor: pointer;
+}
+
+.case_select_con li:hover {
+    background: #57a7ff;
+    color: #fff;
+}
+
+.case_select_con li:first-child {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.case_select_con li:last-child {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.case_select .icon_down {
+    border-top: 5px solid #868e9a;
+    margin-left: 35px;
+    position: relative;
+    top: 13px;
+}
+
+.case_select {
+    min-width: 100px;
+}

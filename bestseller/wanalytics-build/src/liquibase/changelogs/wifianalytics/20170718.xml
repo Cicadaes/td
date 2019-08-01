@@ -1,0 +1,37 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="hao.yang" id="1500375021386-1">
+        <addColumn tableName="TD_SENSOR">
+            <column name="sensor_version" type="varchar(60)" remarks="探针型号"/>
+            <column name="sensor_type" type="varchar(60)" remarks="探针类型"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet author="hao.yang" id="1500375021386-2">
+        <createTable tableName="TD_SENSOR_TEST">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="sensor_id" type="BIGINT" remarks="探针id"/>
+            <column name="tenant_id" remarks="租户id" type="varchar(60)"/>
+            <column name="project_id" remarks="项目id" type="BIGINT" />
+            <column name="data_json" remarks="数据" type="text" />
+            <column name="status" remarks="状态" type="int(2)" />
+            <column name="create_by" remarks="创建者账号" type="varchar(127)" />
+            <column name="creator" remarks="创建人" type="varchar(127)" />
+            <column name="create_time" remarks="创建时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改者账号" type="varchar(127)" />
+            <column name="updater" remarks="修改人" type="varchar(127)" />
+            <column name="update_time" remarks="修改时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

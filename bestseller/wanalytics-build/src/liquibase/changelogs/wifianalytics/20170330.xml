@@ -1,0 +1,78 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<changeSet author="Yan" id="1487758688000-1">
+        	<addColumn tableName="TD_PROJECT">
+            		<column name="pic_url" type="VARCHAR(128)" remarks="项目图片"/>
+        	</addColumn>
+			<addColumn tableName="TD_PROJECT_PLACE">
+            		<column name="pic_url" type="VARCHAR(128)" remarks="场地图片"/>
+        	</addColumn>
+    </changeSet>
+    
+    <changeSet author="ran.li" id="1490862645000-1">
+        	<createTable tableName="TD_TENANT" remarks="租户">
+        	        <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+               			<constraints primaryKey="true"/>
+            		</column>
+            		<column name="um_tenant_id" remarks="UM租户ID" type="varchar(64)" />
+					<column name="tenant_id" remarks="租户ID" type="varchar(64)" />
+					<column name="tenant_name" remarks="租户名称" type="varchar(64)" />
+					<column name="type" remarks="类型" type="int(2)" />
+					<column name="company" remarks="公司名称" type="varchar(64)" />
+					<column name="contacter" remarks="联系人" type="varchar(64)" />
+					<column name="contact" remarks="联系方式" type="varchar(64)" />
+					<column name="description" remarks="描述" type="varchar(256)" />
+					<column name="full_name" remarks="全称" type="varchar(64)" />
+					<column name="login_time" remarks="最后登录时间" type="TIMESTAMP" />
+
+					<column name="create_by" remarks="创建者账号" type="varchar(128)" />
+            		<column name="creator" remarks="创建人" type="varchar(128)" />
+            		<column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                		<constraints nullable="false"/>
+					</column>
+            		<column name="update_by" remarks="修改者账号" type="varchar(128)" />
+					<column name="updater" remarks="修改人" type="varchar(128)" />
+            		<column defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+					    <constraints nullable="false"/>
+            		</column>
+            </createTable>
+    </changeSet>
+	
+	<changeSet author="ran.li" id="1490862645000-2">
+        	<createTable tableName="TD_RECEIVE_CONFIG" remarks="接受配置表">
+        	        <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+               			<constraints primaryKey="true"/>
+            		</column>
+            		<column name="unique_id" remarks="TD_TENANT表/STORM LOG中租户唯一ID(tenant_id)" type="varchar(64)" />
+					<column name="urls" remarks="接收数据地址" type="varchar(1023)" />
+					<column name="receive_mode" remarks="接收方式:0 实时/1 间隔" type="int" />
+					<column name="receive_interval" remarks="接收间隔" type="int(32)" />
+					<column name="retry_times" remarks="失败重试次数" type="int(16)" />
+					<column name="retry_interval" remarks="失败重试间隔" type="int(32)" />
+					<column name="time_unit" remarks="时间单位" type="int" />
+					<column name="filter_mac" remarks="过滤伪MAC:0 不过滤/1 过滤" type="int" />
+					<column name="filter_signal" remarks="过滤异常信号:0 不过滤/1 过滤" type="int" />
+					<column name="status" remarks="状态:-1 失效/1 有效" type="int" />
+					<column name="alarm_threshold" remarks="报警阈值" type="bigint(256)" />
+					<column name="local_threshold" remarks="落入本地阈值" type="bigint(256)" />
+					<column name="message_number" remarks="报警阈值" type="bigint(256)" />
+					<column name="kafka_topic" remarks="租户对应的kafka队列名" type="varchar(64)" />
+					<column name="sftp_pwd" remarks="sftp账号密码" type="varchar(64)" />
+					<column name="is_tenant" remarks="是否为租户:0 不是/1 是" type="int" />
+
+					<column name="create_by" remarks="创建者账号" type="varchar(128)" />
+            		<column name="creator" remarks="创建人" type="varchar(128)" />
+            		<column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                		<constraints nullable="false"/>
+					</column>
+            		<column name="update_by" remarks="修改者账号" type="varchar(128)" />
+					<column name="updater" remarks="修改人" type="varchar(128)" />
+					<column defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+					    <constraints nullable="false"/>
+            		</column>
+            </createTable>
+    </changeSet>
+    
+    
+</databaseChangeLog>

@@ -1,0 +1,696 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="hadoop (generated)" id="1490755671396-86">
+        <createTable tableName="offline_active_frequency_distribution_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="room_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="frequency" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-87">
+        <createTable tableName="offline_active_user_day_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-88">
+        <createTable tableName="offline_active_user_duration_day_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-89">
+        <createTable tableName="offline_active_user_hour_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="hour" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-90">
+        <createTable tableName="offline_active_user_room_day_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="room_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-91">
+        <createTable tableName="offline_active_user_room_times_day_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="room_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-92">
+        <createTable tableName="offline_active_user_sensor_hour_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="sensor_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="hour" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-93">
+        <createTable tableName="offline_active_user_times_day_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-94">
+        <createTable tableName="offline_enter_new_user_day_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-95">
+        <createTable tableName="offline_enter_old_user_day_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-96">
+        <createTable tableName="offline_enter_times_distribution_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="room_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="duration" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-97">
+        <createTable tableName="offline_enter_user_day_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-98">
+        <createTable tableName="offline_enter_user_degree_duration_counter">
+            <column name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" remarks="true或者false" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="room_number" remarks="房间个数" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="metric_value" remarks="进店次数" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-99">
+        <createTable tableName="offline_enter_user_degree_times_counter">
+            <column name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" remarks="true或者false" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="room_number" remarks="进入房间个数" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="metric_value" remarks="进店次数" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-100">
+        <createTable tableName="offline_enter_user_room_day_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="room_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-101">
+        <createTable tableName="offline_enter_user_room_times_day_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="room_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-102">
+        <createTable tableName="offline_enter_user_times_day_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-103">
+        <createTable tableName="offline_new_user_day_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-104">
+        <createTable tableName="offline_new_user_sensor_day_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="sensor_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-105">
+        <createTable tableName="offline_old_user_day_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-106">
+        <createTable tableName="offline_old_user_sensor_day_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="sensor_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-107">
+        <createTable tableName="offline_project_enter_duration_distribute_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0" name="duration" remarks="进店分布，5，15，30,60,100等" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-108">
+        <createTable tableName="offline_project_user_times_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="month" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="offset" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-109">
+        <createTable tableName="offline_stay_new_user_day_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-110">
+        <createTable tableName="offline_stay_old_user_day_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-111">
+        <createTable tableName="offline_stay_user_day_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-112">
+        <createTable tableName="offline_stay_user_duration_day_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-113">
+        <createTable tableName="offline_stay_user_room_day_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="room_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-114">
+        <createTable tableName="offline_stay_user_room_duration_day_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="room_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-115">
+        <createTable tableName="offline_stay_user_room_times_day_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="room_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-116">
+        <createTable tableName="offline_stay_user_room_tracks_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="room_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="track_type" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="track_room_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-117">
+        <createTable tableName="offline_stay_user_times_day_counter">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="metric_value" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-123">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, room_id, date, frequency" constraintName="PRIMARY" tableName="offline_active_frequency_distribution_counter"/>
+    </changeSet>
+	 <changeSet author="hadoop (generated)" id="1490755671396-124">
+        <addPrimaryKey columnNames="tenant_id, project_id, date" constraintName="PRIMARY" tableName="offline_active_user_day_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-125">
+        <addPrimaryKey columnNames="tenant_id, project_id, date" constraintName="PRIMARY" tableName="offline_active_user_duration_day_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-126">
+        <addPrimaryKey columnNames="tenant_id, project_id, date, hour" constraintName="PRIMARY" tableName="offline_active_user_hour_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-127">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, room_id, date" constraintName="PRIMARY" tableName="offline_active_user_room_day_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-128">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, room_id, date" constraintName="PRIMARY" tableName="offline_active_user_room_times_day_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-129">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, sensor_id, date, hour" constraintName="PRIMARY" tableName="offline_active_user_sensor_hour_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-130">
+        <addPrimaryKey columnNames="tenant_id, project_id, date" constraintName="PRIMARY" tableName="offline_active_user_times_day_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-131">
+        <addPrimaryKey columnNames="tenant_id, project_id, date" constraintName="PRIMARY" tableName="offline_enter_new_user_day_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-132">
+        <addPrimaryKey columnNames="tenant_id, project_id, date" constraintName="PRIMARY" tableName="offline_enter_old_user_day_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-133">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, room_id, date, duration" constraintName="PRIMARY" tableName="offline_enter_times_distribution_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-134">
+        <addPrimaryKey columnNames="tenant_id, project_id, date" constraintName="PRIMARY" tableName="offline_enter_user_day_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-135">
+        <addPrimaryKey columnNames="tenant_id, project_id, date, room_number, type" constraintName="PRIMARY" tableName="offline_enter_user_degree_duration_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-136">
+        <addPrimaryKey columnNames="tenant_id, project_id, date, type, room_number" constraintName="PRIMARY" tableName="offline_enter_user_degree_times_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-137">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, room_id, date" constraintName="PRIMARY" tableName="offline_enter_user_room_day_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-138">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, room_id, date" constraintName="PRIMARY" tableName="offline_enter_user_room_times_day_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-139">
+        <addPrimaryKey columnNames="tenant_id, project_id, date" constraintName="PRIMARY" tableName="offline_enter_user_times_day_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-140">
+        <addPrimaryKey columnNames="tenant_id, project_id, date" constraintName="PRIMARY" tableName="offline_new_user_day_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-141">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, sensor_id, date" constraintName="PRIMARY" tableName="offline_new_user_sensor_day_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-142">
+        <addPrimaryKey columnNames="tenant_id, project_id, date" constraintName="PRIMARY" tableName="offline_old_user_day_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-143">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, sensor_id, date" constraintName="PRIMARY" tableName="offline_old_user_sensor_day_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-144">
+        <addPrimaryKey columnNames="tenant_id, project_id, date, duration" constraintName="PRIMARY" tableName="offline_project_enter_duration_distribute_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-145">
+        <addPrimaryKey columnNames="tenant_id, project_id, date, offset" constraintName="PRIMARY" tableName="offline_project_user_times_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-146">
+        <addPrimaryKey columnNames="tenant_id, project_id, date" constraintName="PRIMARY" tableName="offline_stay_new_user_day_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-147">
+        <addPrimaryKey columnNames="tenant_id, project_id, date" constraintName="PRIMARY" tableName="offline_stay_old_user_day_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-148">
+        <addPrimaryKey columnNames="tenant_id, project_id, date" constraintName="PRIMARY" tableName="offline_stay_user_day_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-149">
+        <addPrimaryKey columnNames="tenant_id, project_id, date" constraintName="PRIMARY" tableName="offline_stay_user_duration_day_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-150">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, room_id, date" constraintName="PRIMARY" tableName="offline_stay_user_room_day_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-151">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, room_id, date" constraintName="PRIMARY" tableName="offline_stay_user_room_duration_day_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-152">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, room_id, date" constraintName="PRIMARY" tableName="offline_stay_user_room_times_day_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-153">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, room_id, track_type, track_room_id, date" constraintName="PRIMARY" tableName="offline_stay_user_room_tracks_counter"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1490755671396-154">
+        <addPrimaryKey columnNames="tenant_id, project_id, date" constraintName="PRIMARY" tableName="offline_stay_user_times_day_counter"/>
+    </changeSet>
+</databaseChangeLog>

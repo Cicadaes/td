@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.DownloadDataDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.DownloadData">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="type" property="type"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+        <result column="sequence" property="sequence"/>
+        <result column="is_recurring" property="isRecurring"/>
+        <result column="duration" property="duration"/>
+        <result column="status" property="status"/>
+        <result column="file_path" property="filePath"/>
+        <result column="project_id" property="projectId"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="create_by" property="createBy"/>
+        <result column="creator" property="creator"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="updater" property="updater"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- TD_DOWNLOAD_DATA table all fields -->
+    <sql id="Base_Column_List">
+        id,name,code,type,start_date,end_date,sequence,is_recurring,duration,status,file_path,project_id,tenant_id,create_by,creator,create_time,update_by,updater,update_time
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="code != null and code != ''">
+                and code = #{code}
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and start_date = #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and end_date = #{endDate}
+            </if>
+            <if test="sequence != null and sequence != ''">
+                and sequence = #{sequence}
+            </if>
+            <if test="isRecurring != null and isRecurring != ''">
+                and is_recurring = #{isRecurring}
+            </if>
+            <if test="duration != null and duration != ''">
+                and duration = #{duration}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="filePath != null and filePath != ''">
+                and file_path = #{filePath}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="multiStatusValue != null and multiStatusValue != ''">
+                and status in (${multiStatusValue})
+            </if>
+            <if test="q != null and q != ''">
+                and name like CONCAT('%','${q}','%' )
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_DOWNLOAD_DATA(id,name,code,type,start_date,end_date,sequence,is_recurring,duration,status,file_path,project_id,tenant_id,create_by,creator,create_time,update_by,updater,update_time)
+        values(#{id},#{name},#{code},#{type},#{startDate},#{endDate},#{sequence},#{isRecurring},#{duration},#{status},#{filePath},#{projectId},#{tenantId},#{createBy},#{creator},now(),#{updateBy},#{updater},now())
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_DOWNLOAD_DATA set
+        name=#{name},code=#{code},type=#{type},start_date=#{startDate},end_date=#{endDate},sequence=#{sequence},is_recurring=#{isRecurring},duration=#{duration},status=#{status},file_path=#{filePath},project_id=#{projectId},tenant_id=#{tenantId},create_by=#{createBy},creator=#{creator},create_time=now(),update_by=#{updateBy},updater=#{updater},update_time=now()
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_DOWNLOAD_DATA set
+        <trim suffixOverrides=",">
+            <if test="name != null  ">
+                name=#{name},
+            </if>
+            <if test="code != null  ">
+                code=#{code},
+            </if>
+            <if test="type != null  ">
+                type=#{type},
+            </if>
+            <if test="startDate != null  ">
+                start_date=#{startDate},
+            </if>
+            <if test="endDate != null  ">
+                end_date=#{endDate},
+            </if>
+            <if test="sequence != null  ">
+                sequence=#{sequence},
+            </if>
+            <if test="isRecurring != null  ">
+                is_recurring=#{isRecurring},
+            </if>
+            <if test="duration != null  ">
+                duration=#{duration},
+            </if>
+            <if test="status != null  ">
+                status=#{status},
+            </if>
+            <if test="filePath != null  ">
+                file_path=#{filePath},
+            </if>
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="createBy != null  ">
+                create_by=#{createBy},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updateBy != null  ">
+                update_by=#{updateBy},
+            </if>
+            <if test="updater != null  ">
+                updater=#{updater},
+            </if>
+            <if test="updateTime != null  ">
+                update_time=#{updateTime},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 数据下载 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_DOWNLOAD_DATA where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_DOWNLOAD_DATA where id = #{id}
+    </delete>
+
+    <!-- 数据下载 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_DOWNLOAD_DATA
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询数据下载列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_DOWNLOAD_DATA
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <select id="queryByprojectList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_DOWNLOAD_DATA
+        <include refid="Base_Where_Clause"/>
+        <if test="null !=projectlist and projectlist.size > 0">
+            and project_id in
+            <foreach collection="projectlist" open="(" separator="," close=")" item="item">
+                #{item}
+            </foreach>
+        </if>
+        ORDER BY sequence DESC
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <select id="queryCountByprojectList" resultType="java.lang.Integer" parameterType="Object">
+        select
+        count(1)
+        from TD_DOWNLOAD_DATA
+        <include refid="Base_Where_Clause"/>
+        <if test="null !=projectlist and projectlist.size > 0">
+            and project_id in
+            <foreach collection="projectlist" open="(" separator="," close=")" item="item">
+                #{item}
+            </foreach>
+        </if>
+    </select>
+
+
+    <select id="queryNeedRun" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_DOWNLOAD_DATA where status=1 or status=0
+    </select>
+
+    <select id="selectbiggersequence" resultType="java.lang.Integer" parameterType="Object">
+        select sequence from TD_DOWNLOAD_DATA where 1=1
+        <trim suffixOverrides=",">
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+        </trim>
+        ORDER BY sequence DESC LIMIT 1
+    </select>
+</mapper>

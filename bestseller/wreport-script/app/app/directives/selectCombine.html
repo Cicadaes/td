@@ -1,0 +1,52 @@
+<div class="select-combine-box" ng-show="showSelectBox">
+    <div class="top clrfix">
+        <div class="top-select-box fl">
+            <div class="fl">
+                <div class="select-item" ng-click="showLabelList(label)">
+                    <span>{{label.name}}</span><i class="down-triangle fr"></i>
+                </div>
+                <ol class="select-list"  ng-show="label.isShowList" >
+                    <li ng-click="selectLabel(labelObj)" ng-repeat="labelObj in label.list">{{labelObj.value}}</li>
+                </ol>
+            </div>
+            <div class="fl">
+                <div class="select-item" ng-click="showLabelList(agency)">
+                    <span>{{agency.name}}</span><i class="down-triangle fr"></i>
+                </div>
+                <ol class="select-list" ng-show="agency.isShowList">
+                    <li ng-click="selectLabel(agencyObj)" ng-repeat="agencyObj in agency.list">{{agencyObj.value}}</li>
+                </ol>
+            </div>
+            <div class="fl">
+                <div class="select-item"  ng-click="showLabelList(city)">
+                    <span>{{city.name}}</span><i class="down-triangle fr"></i>
+                </div>
+                <ol class="select-list" ng-show="city.isShowList">
+                    <li ng-click="selectLabel(cityObj)" ng-repeat="cityObj in city.list">{{cityObj.value}}</li>
+                </ol>
+            </div>
+            <div class="fl">
+                <div class="select-item"  ng-click="showLabelList(brand)">
+                    <span>{{brand.name}}</span><i class="down-triangle fr"></i>
+                </div>
+                <ol class="select-list" ng-show="brand.isShowList">
+                    <li ng-click="selectLabel(brandObj)" ng-repeat="brandObj in brand.list">{{brandObj.value}}</li>
+                </ol>
+            </div>
+        </div>
+        <input class="select-search fr" type="text">
+    </div>
+    <div class="select-content clrfix">
+        <ul class="fl select-content-left clrfix">
+            <li class="selected-store fl" ng-repeat="selectedStore in selectedStorelList"><span>{{selectedStore.value}}</span><i class="clr-store fr">×</i></li>
+        </ul>
+        <ol class="fl select-content-right">
+            <li ng-click="selectStore(store)" class="store-item fl" ng-repeat="store in storeList"><span>{{store.value}}</span></li>
+        </ol>
+    </div>
+    <div class="select-operation clrfix">
+        <div class="confirm fl" ng-click="confirmSelect()">确定</div>
+        <div class="cancel fl" ng-click="cancelSelect()">返回</div>
+    </div>
+
+</div>

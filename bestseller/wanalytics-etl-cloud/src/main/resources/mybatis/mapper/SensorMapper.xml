@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.SensorDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.Sensor">
+        <result column="id" property="id"/>
+        <result column="sensor_code" property="sensorCode"/>
+        <result column="sensor_name" property="sensorName"/>
+        <result column="sensor_mac" property="sensorMac"/>
+        <result column="status" property="status"/>
+        <result column="description" property="description"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="creator" property="creator"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="updater" property="updater"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="project_id" property="projectId"/>
+        <result column="min_rssi" property="minRssi"/>
+        <result column="is_outside" property="isOutside"/>
+        <result column="room_id" property="roomId"/>
+        <result column="room_name" property="roomName"/>
+        <result column="position_description" property="positionDescription"/>
+        <result column="distance" property="distance"/>
+        <result column="position_description" property="positionDescription"/>
+        <result column="is_outside" property="isOutside"/>
+        <result column="distance" property="distance"/>
+        <result column="sum_hours" property="sumHours"/>
+        <result column="raw_data_quantity" property="rawDataQuantity"/>
+        <result column="processed_data" property="processedData"/>
+        <result column="compared" property="compared"/>
+        <result column="project_name" property="projectName"/>
+        <result column="project_num" property="projectNum"/>
+        <result column="log_hours" property="logHours"/>
+        <result column="normal" property="normal"/>
+        <result column="no_log_duration" property="noLogDuration"/>
+        <result column="sensor_version" property="sensorVersion"/>
+        <result column="sensor_type" property="sensorType"/>
+    </resultMap>
+
+    <!-- TD_SENSOR table all fields -->
+    <sql id="Base_Column_List">
+        id,sensor_code,sensor_name,sensor_mac,status,description,tenant_id,creator,create_by,
+        create_time,updater,update_by,update_time,project_id,min_rssi,is_outside,room_id,room_name,
+        position_description,distance,sum_hours,raw_data_quantity,processed_data,compared,sensor_version,sensor_type
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="sensorCode != null and sensorCode != ''">
+                and sensor_code = #{sensorCode}
+            </if>
+            <if test="sensorName != null and sensorName != ''">
+                and sensor_name = #{sensorName}
+            </if>
+            <if test="sensorMac != null and sensorMac != ''">
+                and sensor_mac = #{sensorMac}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="projectId != null">
+                and project_id = #{projectId}
+            </if>
+            <if test="minRssi != null and minRssi != ''">
+                and min_rssi = #{minRssi}
+            </if>
+            <if test="isOutside != null and isOutside != ''">
+                and is_outside = #{isOutside}
+            </if>
+            <if test="roomId != null and roomId != ''">
+                and room_id = #{roomId}
+            </if>
+            <if test="roomName != null and roomName != ''">
+                and room_name = #{roomName}
+            </if>
+            <if test="positionDescription != null and positionDescription != ''">
+                and position_description = #{positionDescription}
+            </if>
+            <if test="distance != null and distance != ''">
+                and distance = #{distance}
+            </if>
+            <if test="sumHours != null and sumHours != ''" >
+                and sum_hours =  #{sumHours}
+            </if>
+            <if test="rawDataQuantity != null and rawDataQuantity != ''" >
+                and raw_data_quantity =  #{rawDataQuantity}
+            </if>
+            <if test="processedData != null and processedData != ''" >
+                and processed_data =  #{processedData}
+            </if>
+            <if test="compared != null and compared != ''" >
+                and compared =  #{compared}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_SENSOR(id,sensor_code,sensor_name,sensor_mac,status,description,tenant_id,creator,create_by,create_time,updater,update_by,update_time,room_id,room_name,project_id,position_description,min_rssi,is_outside,distance,sum_hours,raw_data_quantity,processed_data,compared,sensor_version,sensor_type)
+        values(#{id},#{sensorCode},#{sensorName},#{sensorMac},#{status},#{description},#{tenantId},#{creator},#{createBy},now(),#{updater},#{updateBy},now(),#{roomId},#{roomName},#{projectId},#{positionDescription},#{minRssi},#{isOutside},#{distance},#{sumHours},#{rawDataQuantity},#{processedData},#{compared}
+        ,#{sensorVersion},#{sensorType})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_SENSOR set
+        sensor_code=#{sensorCode},sensor_name=#{sensorName},sensor_mac=#{sensorMac},status=#{status},description=#{description},tenant_id=#{tenantId},creator=#{creator},create_by=#{createBy},create_time=now(),updater=#{updater},update_by=#{updateBy},update_time=now(),room_id=#{roomId},room_name=#{roomName},
+        project_id=#{projectId},position_description=#{positionDescription},min_rssi=#{minRssi},is_outside=#{isOutside},distance=#{distance},sum_hours=#{sumHours},raw_data_quantity=#{rawDataQuantity},processed_data=#{processedData},compared=#{compared}
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_SENSOR set
+            <if test="sensorCode != null  ">
+                sensor_code=#{sensorCode},
+            </if>
+            <if test="sensorName != null  ">
+                sensor_name=#{sensorName},
+            </if>
+            <if test="sensorMac != null  ">
+                sensor_mac=#{sensorMac},
+            </if>
+            <if test="status != null  ">
+                status=#{status},
+            </if>
+            <if test="description != null  ">
+                description=#{description},
+            </if>
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="createBy != null  ">
+                create_by=#{createBy},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updater != null  ">
+                updater=#{updater},
+            </if>
+            <if test="updateBy != null  ">
+                update_by=#{updateBy},
+            </if>
+            <if test="roomId != null  ">
+                room_id=#{roomId},
+            </if>
+            <if test="roomName != null  ">
+                room_name=#{roomName},
+            </if>
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="positionDescription != null  ">
+                position_description=#{positionDescription},
+            </if>
+            <if test="minRssi != null and minRssi != ''">
+                min_rssi = #{minRssi},
+            </if>
+            <if test="isOutside != null and isOutside != ''">
+                is_outside = #{isOutside},
+            </if>
+            <if test="distance != null and distance != ''">
+                distance = #{distance},
+            </if>
+            <if test="sumHours != null  ">
+                sum_hours=#{sumHours},
+            </if>
+            <if test="rawDataQuantity != null  ">
+                raw_data_quantity=#{rawDataQuantity},
+            </if>
+            <if test="processedData != null  ">
+                processed_data=#{processedData},
+            </if>
+            <if test="compared != null  ">
+                compared=#{compared},
+            </if>
+            <if test="sensorVersion != null  ">
+                sensor_version=#{sensorVersion},
+            </if>
+            <if test="sensorType != null  ">
+                sensor_type=#{sensorType},
+            </if>
+        update_time=now()
+        where id=#{id}
+    </update>
+
+    <!-- 通过mac修改记录，只修改只不为空的字段 -->
+    <update id="updateByMac" parameterType="Object">
+        update TD_SENSOR set
+            <if test="sensorCode != null  ">
+                sensor_code=#{sensorCode},
+            </if>
+            <if test="sensorName != null  ">
+                sensor_name=#{sensorName},
+            </if>
+            <if test="sensorMac != null  ">
+                sensor_mac=#{sensorMac},
+            </if>
+            <if test="status != null  ">
+                status=#{status},
+            </if>
+            <if test="description != null  ">
+                description=#{description},
+            </if>
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="createBy != null  ">
+                create_by=#{createBy},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updater != null  ">
+                updater=#{updater},
+            </if>
+            <if test="updateBy != null  ">
+                update_by=#{updateBy},
+            </if>
+            <if test="roomId != null  ">
+                room_id=#{roomId},
+            </if>
+            <if test="roomName != null  ">
+                room_name=#{roomName},
+            </if>
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="positionDescription != null  ">
+                position_description=#{positionDescription},
+            </if>
+            <if test="minRssi != null and minRssi != ''">
+                min_rssi = #{minRssi},
+            </if>
+            <if test="isOutside != null and isOutside != ''">
+                is_outside = #{isOutside},
+            </if>
+            <if test="distance != null and distance != ''">
+                distance = #{distance},
+            </if>
+            <if test="sumHours != null  ">
+                sum_hours=#{sumHours},
+            </if>
+            <if test="rawDataQuantity != null  ">
+                raw_data_quantity=#{rawDataQuantity},
+            </if>
+            <if test="processedData != null  ">
+                processed_data=#{processedData},
+            </if>
+            <if test="compared != null  ">
+                compared=#{compared},
+            </if>
+            <if test="sensorVersion != null  ">
+                sensor_version=#{sensorVersion},
+            </if>
+            <if test="sensorType != null  ">
+                sensor_type=#{sensorType},
+            </if>
+        update_time=now()
+        where sensor_mac=#{sensorMac}
+    </update>
+
+    <!-- 根据id查询 探针 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_SENSOR where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_SENSOR where id = #{id}
+    </delete>
+
+    <!-- 探针 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_SENSOR
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询探针列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_SENSOR
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+</mapper>

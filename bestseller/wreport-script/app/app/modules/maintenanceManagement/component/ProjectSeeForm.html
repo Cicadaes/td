@@ -1,0 +1,67 @@
+﻿<!-- 导航条 -->
+<div class="nav_bar_top" >
+	<span  class = "nav_bar_normal nav_bar_btn" ng-click="go_project_shop()">运维管理</span>
+	<span> > </span>
+	<span>详情</span>
+</div>
+
+<div style = "padding: 20px;padding-top: 0px;height: 510px;">
+	<div id="smallscreen" style = "overflow-y:auto; overflow-x: hidden;margin-right: -20px; padding-right: 16px;">
+		<!-- top模块 -->
+		<div class="form-horizontal-panel model_panel" style = "overflow: hidden; padding-bottom: 20px; width: 100%;height: 80px;margin-top: 20px;">
+			<ul class = "sensorEquList">
+				<li><span class = "sensorEqui" ng-bind='stroeName'></span></li>
+				<li></li>
+				<li class = "sensorEquiLi">
+					<dt class = "sensorEqui" style="height: 30px;">{{data.sensorNum}}</dt>
+					<dd>{{constants.field_storemanage_sensorcount}}</dd>
+				</li>
+				<li class = "sensorEquiLi">
+					<dt class = "sensorEqui">{{data.healthRate}} %</dt>
+					<dd>{{constants.field_storemanage_heath}}</dd>
+				</li>
+				<li  class = "sensorEquiLi">
+					<dt class = "sensorEqui">{{data.noLogDuration}}<span> {{constants.field_batchset_time_company_hour}}</span></dt>
+					<dd>{{constants.field_storemanage_nologduration}}</dd>
+				</li>
+				<!-- 30日平均无日志时长 -->
+				<li  class = "sensorEquiLi">
+					<dt class = "sensorEqui">{{data.thirtyNoLogDuration}}<span> {{constants.field_batchset_time_company_hour}}</span></dt>
+					<dd>{{constants.field_storemanage_nologduration30}}</dd>
+				</li>
+			</ul>
+			<div class="tips1">
+				<div class="panel-title-button">
+					<div class="helpOpened_download" ng-click="exportReportEqu();" style=" margin-top: 20px;margin-right: 30px;"></div>
+				</div>
+			</div>
+		</div>
+
+ 			
+ 			<!-- chart 图标模块 -->
+		 	<div class = "see_chart_wap">
+		 		<!-- 一个echart图表 -->
+			 	<div class="form-horizontal-panel model_panel margin_bottom_panel" style = "overflow: hidden;  width: 100%;" ng-repeat="sensorOne in sensorList">
+					<div>
+			    		<div class="passenger_tit">{{constants.label_sensor}}    <span>{{sensorOne.sensorName}}</span></div>
+					    <div class="">
+							<ul class = "tab_shopG page_shopG" style = "overflow: hidden;">
+								<li class = "macs sensor_select" ng-click="changeType(sensorOne.id,'1',$event)">{{constants.btn_store_sensor_macs}}</li>
+								<li class = "logs" ng-click="changeType(sensorOne.id,'2',$event)">{{constants.btn_store_sensor_logs}}</li>
+							</ul>
+						</div>
+			    		<!-- echart 图表 -->
+			            <div class="trend clearfix">
+			            	<!--<p class = "macTotal total_block">{{constants.label_sum_count}} <span style="color:#02aea2;margin-left: 10px;">{{sensorOne.macTotal}}</span><p>
+			            	<p class = "logTotal">{{constants.label_sum_count}} <span style="color:#02aea2;margin-left: 10px;">{{sensorOne.logTotal}}</span><p>-->
+					        <div class="" style="padding:0px;height: 300px;">
+					            <div class="" id='chart_detail_{{sensorOne.id}}' style="height: inherit;"></div>
+					        </div>
+				    	</div>
+		            </div>
+			    </div>
+		 	</div>
+	</div>	
+</div>
+
+

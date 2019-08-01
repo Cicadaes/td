@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.ThresholdDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="td.enterprise.entity.Threshold" >
+	<result column="id" property="id"/>
+	<result column="project_id" property="projectId"/>
+	<result column="crowd_come" property="crowdCome"/>
+	<result column="crowd_bounce" property="crowdBounce"/>
+	<result column="crowd_stay" property="crowdStay"/>
+	<result column="crowd_active_high_begin" property="crowdActiveHighBegin"/>
+	<result column="crowd_active_high_end" property="crowdActiveHighEnd"/>
+	<result column="crowd_active_medium_begin" property="crowdActiveMediumBegin"/>
+	<result column="crowd_active_medium_end" property="crowdActiveMediumEnd"/>
+	<result column="crowd_active_low_begin" property="crowdActiveLowBegin"/>
+	<result column="crowd_active_low_end" property="crowdActiveLowEnd"/>
+	<result column="crowd_sleep" property="crowdSleep"/>
+	<result column="strength_crowd_before" property="strengthCrowdBefore"/>
+	<result column="strength_crowd_come" property="strengthCrowdCome"/>
+	<result column="frequency_interval_time" property="frequencyIntervalTime"/>
+	<result column="sales_consecutive_day" property="salesConsecutiveDay"/>
+	<result column="sales_come_day" property="salesComeDay"/>
+	<result column="sales_stay_time" property="salesStayTime"/>
+	<result column="black_consecutive_day" property="blackConsecutiveDay"/>
+	<result column="black_come_day" property="blackComeDay"/>
+	<result column="black_stay_time" property="blackStayTime"/>
+	<result column="creator" property="creator"/>
+	<result column="create_by" property="createBy"/>
+	<result column="create_time" property="createTime"/>
+	<result column="updater" property="updater"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="update_time" property="updateTime"/>
+  </resultMap>
+  
+  <!-- TD_THRESHOLD table all fields -->
+  <sql id="Base_Column_List" >
+	 id,project_id,crowd_come,crowd_bounce,crowd_stay,crowd_active_high_begin,crowd_active_high_end,crowd_active_medium_begin,crowd_active_medium_end,crowd_active_low_begin,crowd_active_low_end,crowd_sleep,strength_crowd_before,strength_crowd_come,frequency_interval_time,sales_consecutive_day,sales_come_day,sales_stay_time,black_consecutive_day,black_come_day,black_stay_time,creator,create_by,create_time,updater,update_by,update_time
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="projectId != null and projectId != ''" >
+        and project_id =  #{projectId}
+	  </if>
+	      <if test="crowdCome != null and crowdCome != ''" >
+        and crowd_come =  #{crowdCome}
+	  </if>
+	      <if test="crowdBounce != null and crowdBounce != ''" >
+        and crowd_bounce =  #{crowdBounce}
+	  </if>
+	      <if test="crowdStay != null and crowdStay != ''" >
+        and crowd_stay =  #{crowdStay}
+	  </if>
+	      <if test="crowdActiveHighBegin != null and crowdActiveHighBegin != ''" >
+        and crowd_active_high_begin =  #{crowdActiveHighBegin}
+	  </if>
+	      <if test="crowdActiveHighEnd != null and crowdActiveHighEnd != ''" >
+        and crowd_active_high_end =  #{crowdActiveHighEnd}
+	  </if>
+	      <if test="crowdActiveMediumBegin != null and crowdActiveMediumBegin != ''" >
+        and crowd_active_medium_begin =  #{crowdActiveMediumBegin}
+	  </if>
+	      <if test="crowdActiveMediumEnd != null and crowdActiveMediumEnd != ''" >
+        and crowd_active_medium_end =  #{crowdActiveMediumEnd}
+	  </if>
+	      <if test="crowdActiveLowBegin != null and crowdActiveLowBegin != ''" >
+        and crowd_active_low_begin =  #{crowdActiveLowBegin}
+	  </if>
+	      <if test="crowdActiveLowEnd != null and crowdActiveLowEnd != ''" >
+        and crowd_active_low_end =  #{crowdActiveLowEnd}
+	  </if>
+	      <if test="crowdSleep != null and crowdSleep != ''" >
+        and crowd_sleep =  #{crowdSleep}
+	  </if>
+	      <if test="strengthCrowdBefore != null and strengthCrowdBefore != ''" >
+        and strength_crowd_before =  #{strengthCrowdBefore}
+	  </if>
+	      <if test="strengthCrowdCome != null and strengthCrowdCome != ''" >
+        and strength_crowd_come =  #{strengthCrowdCome}
+	  </if>
+	      <if test="frequencyIntervalTime != null and frequencyIntervalTime != ''" >
+        and frequency_interval_time =  #{frequencyIntervalTime}
+	  </if>
+	      <if test="salesConsecutiveDay != null and salesConsecutiveDay != ''" >
+        and sales_consecutive_day =  #{salesConsecutiveDay}
+	  </if>
+	      <if test="salesComeDay != null and salesComeDay != ''" >
+        and sales_come_day =  #{salesComeDay}
+	  </if>
+	      <if test="salesStayTime != null and salesStayTime != ''" >
+        and sales_stay_time =  #{salesStayTime}
+	  </if>
+	      <if test="blackConsecutiveDay != null and blackConsecutiveDay != ''" >
+        and black_consecutive_day =  #{blackConsecutiveDay}
+	  </if>
+	      <if test="blackComeDay != null and blackComeDay != ''" >
+        and black_come_day =  #{blackComeDay}
+	  </if>
+	      <if test="blackStayTime != null and blackStayTime != ''" >
+        and black_stay_time =  #{blackStayTime}
+	  </if>
+	      <if test="creator != null and creator != ''" >
+        and creator =  #{creator}
+	  </if>
+	      <if test="createBy != null and createBy != ''" >
+        and create_by =  #{createBy}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	      <if test="updater != null and updater != ''" >
+        and updater =  #{updater}
+	  </if>
+	      <if test="updateBy != null and updateBy != ''" >
+        and update_by =  #{updateBy}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+      insert into 
+TD_THRESHOLD(id,project_id,crowd_come,crowd_bounce,crowd_stay,crowd_active_high_begin,crowd_active_high_end,crowd_active_medium_begin,crowd_active_medium_end,crowd_active_low_begin,crowd_active_low_end,crowd_sleep,strength_crowd_before,strength_crowd_come,frequency_interval_time,sales_consecutive_day,sales_come_day,sales_stay_time,black_consecutive_day,black_come_day,black_stay_time,creator,create_by,create_time,updater,update_by,update_time)
+ values(#{id},#{projectId},#{crowdCome},#{crowdBounce},#{crowdStay},#{crowdActiveHighBegin},#{crowdActiveHighEnd},#{crowdActiveMediumBegin},#{crowdActiveMediumEnd},#{crowdActiveLowBegin},#{crowdActiveLowEnd},#{crowdSleep},#{strengthCrowdBefore},#{strengthCrowdCome},#{frequencyIntervalTime},#{salesConsecutiveDay},#{salesComeDay},#{salesStayTime},#{blackConsecutiveDay},#{blackComeDay},#{blackStayTime},#{creator},#{createBy},now(),#{updater},#{updateBy},now())
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+      update TD_THRESHOLD set project_id=#{projectId},crowd_come=#{crowdCome},crowd_bounce=#{crowdBounce},crowd_stay=#{crowdStay},crowd_active_high_begin=#{crowdActiveHighBegin},crowd_active_high_end=#{crowdActiveHighEnd},crowd_active_medium_begin=#{crowdActiveMediumBegin},crowd_active_medium_end=#{crowdActiveMediumEnd},crowd_active_low_begin=#{crowdActiveLowBegin},crowd_active_low_end=#{crowdActiveLowEnd},crowd_sleep=#{crowdSleep},strength_crowd_before=#{strengthCrowdBefore},strength_crowd_come=#{strengthCrowdCome},frequency_interval_time=#{frequencyIntervalTime},sales_consecutive_day=#{salesConsecutiveDay},sales_come_day=#{salesComeDay},sales_stay_time=#{salesStayTime},black_consecutive_day=#{blackConsecutiveDay},black_come_day=#{blackComeDay},black_stay_time=#{blackStayTime},creator=#{creator},create_by=#{createBy},updater=#{updater},update_by=#{updateBy},update_time=now() where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+      update TD_THRESHOLD set 
+		<if test="projectId != null  ">
+		project_id=#{projectId},
+	</if>
+	<if test="crowdCome != null  ">
+		crowd_come=#{crowdCome},
+	</if>
+	<if test="crowdBounce != null  ">
+		crowd_bounce=#{crowdBounce},
+	</if>
+	<if test="crowdStay != null  ">
+		crowd_stay=#{crowdStay},
+	</if>
+	<if test="crowdActiveHighBegin != null  ">
+		crowd_active_high_begin=#{crowdActiveHighBegin},
+	</if>
+	<if test="crowdActiveHighEnd != null  ">
+		crowd_active_high_end=#{crowdActiveHighEnd},
+	</if>
+	<if test="crowdActiveMediumBegin != null  ">
+		crowd_active_medium_begin=#{crowdActiveMediumBegin},
+	</if>
+	<if test="crowdActiveMediumEnd != null  ">
+		crowd_active_medium_end=#{crowdActiveMediumEnd},
+	</if>
+	<if test="crowdActiveLowBegin != null  ">
+		crowd_active_low_begin=#{crowdActiveLowBegin},
+	</if>
+	<if test="crowdActiveLowEnd != null  ">
+		crowd_active_low_end=#{crowdActiveLowEnd},
+	</if>
+	<if test="crowdSleep != null  ">
+		crowd_sleep=#{crowdSleep},
+	</if>
+	<if test="strengthCrowdBefore != null  ">
+		strength_crowd_before=#{strengthCrowdBefore},
+	</if>
+	<if test="strengthCrowdCome != null  ">
+		strength_crowd_come=#{strengthCrowdCome},
+	</if>
+	<if test="frequencyIntervalTime != null  ">
+		frequency_interval_time=#{frequencyIntervalTime},
+	</if>
+	<if test="salesConsecutiveDay != null  ">
+		sales_consecutive_day=#{salesConsecutiveDay},
+	</if>
+	<if test="salesComeDay != null  ">
+		sales_come_day=#{salesComeDay},
+	</if>
+	<if test="salesStayTime != null  ">
+		sales_stay_time=#{salesStayTime},
+	</if>
+	<if test="blackConsecutiveDay != null  ">
+		black_consecutive_day=#{blackConsecutiveDay},
+	</if>
+	<if test="blackComeDay != null  ">
+		black_come_day=#{blackComeDay},
+	</if>
+	<if test="blackStayTime != null  ">
+		black_stay_time=#{blackStayTime},
+	</if>
+	<if test="creator != null  ">
+		creator=#{creator},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updater != null  ">
+		updater=#{updater},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	update_time = now() 
+	where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 阈值表 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+      select <include refid="Base_Column_List" /> 
+	 from TD_THRESHOLD where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+      delete from TD_THRESHOLD where id = #{id}
+  </delete>
+
+  <!-- 阈值表 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_THRESHOLD 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询阈值表列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_THRESHOLD 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  
+  <select id="queryListByProject" resultMap="BaseResultMap"  parameterType="td.enterprise.entity.Project">
+	SELECT tt.* 
+	FROM TD_THRESHOLD tt JOIN TD_PROJECT tp 
+	on tt.project_id=tp.id 
+	where 1=1
+    <trim suffixOverrides="," >
+	  <if test="projectType != null and projectType != ''" >
+        and tp.project_type =  #{projectType}
+	  </if>
+	      <if test="status != null and status != ''" >
+        and tp.status =  #{status}
+	  </if>
+	</trim>
+  </select>
+  
+  
+</mapper>   

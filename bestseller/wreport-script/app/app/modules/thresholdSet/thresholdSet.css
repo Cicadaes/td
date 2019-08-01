@@ -1,0 +1,50 @@
+.table_threshold > thead > tr > th {
+    width: calc(100% / 9);
+}
+.settingListLeft{
+    float: left;
+    width: 43%;
+}
+.settingListRight {
+    float: left;
+}
+
+.settingLetters ul li .thresholdValue_edit_btn
+{
+    display: inline;
+    cursor: pointer;
+    margin-right: 30px;
+}
+
+.thresholdValue_edit_term {
+    font-weight: normal;
+    display: inline-block;
+    width: 140px;
+    height: 60px;
+    float: left;
+}
+
+.thresholdValue_edit_list_wap {
+    display: inline-block;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    float: left;
+    height: 60px;
+    width: 50%;
+
+}
+
+.thresholdValue_edit_list {
+    font-weight: normal;
+}
+
+.edit_frame {
+    height: 60px;
+    display: none;
+}
+
+
+.closeSetShow {
+    display: inline-block;
+}

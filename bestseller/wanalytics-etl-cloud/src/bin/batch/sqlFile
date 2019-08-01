@@ -1,0 +1,1 @@
+select  distinct  t0.tenant_id,t0.id as project_id ,t1.id as crowd_id,t1.type as crowd_type  from TD_PROJECT t0 ,TD_CROWD t1 where t0.tenant_id = t1.tenant_id  and t0.id = t1.attr1  and t0.status = 1

@@ -1,0 +1,74 @@
+<div class="stage" style="height: 44px; z-index: 99; overflow: initial;"></div>
+<div class="" style="overflow: hidden;">
+    <div class="passenger_tit">
+        <div class="btn-group" style="width: 500px; float: left; padding-top: 10px;">
+            <span id="t_passenger_portrait_tab_2" class="btn btn-sref-sm" ng-class="{'active': listType == 1}" ng-click="chooseTab(1)">
+                区域分布
+            </span>
+            <span id="t_passenger_portrait_tab_0" class="btn btn-sref-sm" ng-class="{'active': listType == 2}" ng-click="chooseTab(2)">
+                职住来源
+            </span>
+        </div>
+
+        <div ng-if="false" class="float-right use-content-box">
+            <span style="padding: 5px;">不同客群指标对比</span>
+            <div ng-click="click()" class="td-btn-switch td-l" style="margin: 10px 5px;" ng-class="{'td-checked-box':panel_open}">
+                <div class="td-open-check">
+                    <i>开</i>
+                </div>
+                <span></span>
+                <i>关</i>
+            </div>
+        </div>
+    </div>
+    <div class="jobcontainer">
+        <div class="job_map">
+            <div id="passengerJobs-map1" style="float: left;"></div>
+            <div id="passengerJobs-map2" style="float: left;"></div>
+        </div>
+        <div class="job_tip_div"></div>
+
+        <div class="job_content clearfix">
+
+            <div ng-if="true" class="job_region_top" style="color:#000; padding: 10px 20px;">
+                <select class="form-control job_region_select" ng-change="changeCity(city)" ng-model="city" name="city"
+                        style="" title="">
+                    <option ng-repeat="city in cityList" value="{{city}}" ng-selected="$index == 0">
+                        {{city}}
+                    </option>
+                </select>
+
+                <span ng-show="panel_open" style="float: left; width: 200px; height: 30px;"></span>
+                <select class="form-control job_region_select" ng-model="crowd_id_1" title="" ng-change="changeCrowd_1(crowd_id_1)"
+                        style="" title="">
+                    <option ng-repeat="x in crowdList" value="{{x.id}}" ng-selected="$index == 0">
+                        {{x.name}}
+                    </option>
+                </select>
+                <select class="form-control job_region_select" ng-model="comp_time_1" title="" ng-change="changeTime_1(comp_time_1)"
+                        style="" title="">
+                    <option ng-repeat="x in dateList" value="{{x}}" ng-selected="x==comp_time_1">
+                        {{x}}
+                    </option>
+                </select>
+
+                <span ng-show="panel_open" style="float: left; padding: 0 10px; color: #FFF; height: 30px; line-height: 30px; margin-left: 10px;"> VS </span>
+                <select ng-show="panel_open" class="form-control job_region_select" ng-model="crowd_id_2" title="" ng-change="changeCrowd_2(crowd_id_2)"
+                        style="" title="">
+                    <option ng-repeat="x in crowdList" value="{{x.id}}" ng-selected="x.id==crowd_id_2">
+                        {{x.name}}
+                    </option>
+                </select>
+                <select ng-show="panel_open" class="form-control job_region_select" ng-model="comp_time_2" title="" ng-change="changeTime_2(comp_time_2)"
+                        style="" title="">
+                    <option ng-repeat="x in dateList" value="{{x}}" ng-selected="x==comp_time_2">
+                        {{x}}
+                    </option>
+                </select>
+            </div>
+
+            <div map-control="test"></div> <!-- 地图缩放按钮 -->
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="yunlong.wang" id="1500978529314-1">
+        <createTable tableName="offline_stay_user_project_tracks_counter" remarks="上下游指标统计">
+            <column name="analysiss_id" remarks="路径分析任务ID" type="BIGINT"/>
+            <column name="tenant_id" remarks="租户id" type="BIGINT"/>
+            <column name="up_project_id" remarks="上游项目id" type="BIGINT" />
+            <column name="down_project_id" remarks="下游项目id" type="BIGINT" />
+            <column name="date" remarks="日期" type="varchar(32)" />
+            <column name="metric_value" remarks="次数" type="BIGINT" />
+            <column name="update_time" remarks="修改或更新时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

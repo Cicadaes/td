@@ -1,0 +1,305 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>客流运营平台</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="shortcut icon" type="image/x-icon" href="images/corner-maik-bs.png" media="screen"/>
+
+    <!-- build:css css/common/common.css -->
+    <link rel="stylesheet" type="text/css" href="css/libs/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/libs/ng-table.css">
+    <link rel="stylesheet" type="text/css" href="css/libs/ng-table-ext.css">
+    <link rel="stylesheet" type="text/css" href="css/libs/ng-table-search.css">
+    <!-- endbuild -->
+    <!-- build:css css/common/main.css -->
+    <link rel="stylesheet" type="text/css" href="app/common/access.css">
+    <link rel="stylesheet" type="text/css" href="app/common/accordion.css">
+    <link rel="stylesheet" type="text/css" href="app/common/common.css">
+    <link rel="stylesheet" type="text/css" href="app/common/tcc.css">
+    <link rel="stylesheet" type="text/css" href="app/common/tips.css">
+    <link rel="stylesheet" type="text/css" href="app/common/topBar.css">
+    <link rel="stylesheet" type="text/css" href="app/dialog/modal.css">
+    <link rel="stylesheet" type="text/css" href="app/modules/dataMgr/component/comProbeDeploy.css">
+    <link rel="stylesheet" type="text/css" href="app/modules/dataMgr/sensorList.css">
+    <link rel="stylesheet" type="text/css" href="app/modules/passengerJobs/passengerJobs.css">
+    <link rel="stylesheet" type="text/css" href="app/modules/passengerPortrait/passengerPortrait.css">
+    <link rel="stylesheet" type="text/css" href="app/modules/projectList/projectList.css">
+    <link rel="stylesheet" type="text/css" href="app/modules/projectList/storeSensorManage.css">
+    <link rel="stylesheet" type="text/css" href="app/modules/dataMgr/sensorList.css">
+    <link rel="stylesheet" type="text/css" href="app/modules/correlationAnalysis/correlationAnalysis.css">
+
+    <link rel="stylesheet" type="text/css" href="css/common/main.css">
+    <link rel="stylesheet" type="text/css" href="css/common/main2.css">
+    <link rel="stylesheet" type="text/css" href="css/common/main3.css">
+
+    <link rel="stylesheet" type="text/css" href="css/common/style.css">
+    <link rel="stylesheet" type="text/css" href="css/common/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/common/layout_me.css">
+    <link rel="stylesheet" type="text/css" href="css/common/create_poi.css">
+    <link rel="stylesheet" type="text/css" href="css/common/public.css">
+    <link rel="stylesheet" type="text/css" href="css/common/datwill_style.css">
+
+    <!-- bs 阈值设置-->
+    <link rel="stylesheet" type="text/css" href="app/modules/thresholdSet/thresholdSet.css">
+    <!-- endbuild -->
+
+    <script>
+        var TD = TD || {};
+        TD.Util = {};
+        var define = function (param) {
+        };
+        var appConfig = {
+            baseUrl: '/wreport_new',
+            thisWindow: window,
+            language: "chinese",
+            authAppList: [
+                {
+                    "rid": 110,
+                    "appCode": "datacloud",
+                    "appName": "数据管家",
+                    "appDesc": "全域数据处理助你构筑数据价值平台",
+                    "appToken": "e10adc3949ba59abbe56e057f20f883e",
+                    "appRolePrefix": "datacloud",
+                    "extAttr1": "数据管家",
+                    "extAttr2": "{\"href\":\"/datacloudUI\",\"target\":\"_self\"}",
+                    "extAttr3": "1",
+                    "status": 0,
+                    "createTime": 1506416809000,
+                    "updateTime": 1507964024000,
+                    "opUmid": null
+                },
+                {
+                    "rid": 112,
+                    "appCode": "marketing",
+                    "appName": "营销闭环平台",
+                    "appDesc": "全面工具帮你打通数据营销闭环",
+                    "appToken": "cd9cca1029470f39e7edcf521c608337",
+                    "appRolePrefix": "MKT",
+                    "extAttr1": "1",
+                    "extAttr2": "{\"href\":\"/marketing\",\"target\":\"_self\"}",
+                    "extAttr3": "1",
+                    "status": 0,
+                    "createTime": 1507893293000,
+                    "updateTime": 1507893293000,
+                    "opUmid": "UMAdmin"
+                },
+                {
+                    "rid": 9,
+                    "appCode": "wreport",
+                    "appName": "客流运营平台",
+                    "appDesc": "",
+                    "appToken": "e10adc3949ba59abbe56e057f20f883e",
+                    "appRolePrefix": "wreport",
+                    "extAttr1": "2",
+                    "extAttr2": "{\"href\":\"/wreport_new\",\"target\":\"_self\"}",
+                    "extAttr3": "1",
+                    "status": 0,
+                    "createTime": 1481566318000,
+                    "updateTime": 1514865135000,
+                    "opUmid": null
+                },
+                {
+                    "rid": 109,
+                    "appCode": "DMP",
+                    "appName": "用户运营平台",
+                    "appDesc": "精准人群标签助力优化投放和营销效果",
+                    "appToken": "e10adc3949ba59abbe56e057f20f883e",
+                    "appRolePrefix": "DMP",
+                    "extAttr1": "用户管家",
+                    "extAttr2": "/dmp-web",
+                    "extAttr3": "1",
+                    "status": 0,
+                    "createTime": 1476174701000,
+                    "updateTime": 1502190925000,
+                    "opUmid": null
+                },
+                {
+                    "rid": 65,
+                    "appCode": "report",
+                    "appName": "移动运营平台",
+                    "appDesc": "全面运营指标透析掌握用户行为",
+                    "appToken": "e10adc3949ba59abbe56e057f20f883e",
+                    "appRolePrefix": "report",
+                    "extAttr1": "2",
+                    "extAttr2": "/report",
+                    "extAttr3": "1",
+                    "status": 0,
+                    "createTime": 1461091924000,
+                    "updateTime": 1495678987000,
+                    "opUmid": null
+                },
+                {
+                    "rid": 114,
+                    "appCode": "custom-report",
+                    "appName": "自定义报表",
+                    "appDesc": "企业级大数据可视化工具轻松创建图形表格",
+                    "appToken": "c69ba1439d772099ead75e2f176e0791",
+                    "appRolePrefix": "custom-report",
+                    "extAttr1": "2",
+                    "extAttr2": "/custom-report",
+                    "extAttr3": "1",
+                    "status": 0,
+                    "createTime": null,
+                    "updateTime": null,
+                    "opUmid": null
+                }
+            ]
+        };
+
+        if (window.parent && window.parent.location.pathname == "/enterprise/") {
+            window.parent.location.href = window.parent.location.origin + "/wreport_new/"
+        }
+    </script>
+
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=VifdHexZT4WOMrFYCQUZGorpRNjiRHer"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script>
+
+    <!--加载鼠标绘制工具-->
+    <script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+    <link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css"/>
+    <!--加载检索信息窗口-->
+    <script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.js"></script>
+    <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.css"/>
+
+    <!-- build:js app/common.js -->
+    <script type="text/javascript" src="libs/jquery/jquery-1.12.3.js"></script>
+
+    <script type="text/javascript" src="libs/echarts/echarts.min.js"></script>
+    <script type="text/javascript" src="libs/echarts/china.js"></script>
+
+    <script type="text/javascript" src="app/util/constants.js"></script>
+    <script type="text/javascript" src="libs/tdmap/tdmap.js"></script>
+
+    <script type="text/javascript" src="app/util/chartOption.js"></script>
+    <script type="text/javascript" src="app/util/mapFunction.js"></script>
+
+    <script type="text/javascript" src="libs/flowchart/flowchart.js"></script>
+
+    <script type="text/javascript" src="libs/heatmap/heatmap.js"></script>
+
+    <script type="text/javascript" src="main.js"></script>
+    <!-- endbuild -->
+
+</head>
+
+<body ng-app="wreport.app">
+<div id="directBar" ui-view="directBar" role="directBar" class=""></div>
+<div id="accordion" ui-view="accordion" role="accordion" class="menu-left-root has-scroll"></div>
+<div class="con-box">
+    <div ui-view="topbar" ng-cloak=""></div>
+    <div class="content" id="content">
+        <div id="content_main" ui-view="content" class="alteration" style="position:relative;overflow-y:auto; overflow-x: hidden;"></div>
+    </div>
+</div>
+
+<!-- build:js app/main.js -->
+
+<!-- angular和路由 -->
+<script type="text/javascript" src="libs/angular/angular.js"></script>
+<script type="text/javascript" src="libs/angular-locale/angular-locale_zh.js"></script>
+<script type="text/javascript" src="libs/angular-ui-router/angular-ui-router.js"></script>
+
+<script type="text/javascript" src="libs/bootstrap/bootstrap.js"></script>
+
+<!-- 异步请求 -->
+<script type="text/javascript" src="libs/restangular/restangular.js"></script>
+<script type="text/javascript" src="libs/restangular/underscore.js"></script>
+<script type="text/javascript" src="libs/restangular/lodash.js"></script>
+
+<!-- 表格和上传 -->
+<script type="text/javascript" src="libs/ng-table/ng-table.js"></script>
+<script type="text/javascript" src="libs/ng-file-upload/ng-file-upload-shim.js"></script>
+<script type="text/javascript" src="libs/ng-file-upload/ng-file-upload.js"></script>
+
+<!-- 弹框，拖拽弹框 -->
+<script type="text/javascript" src="libs/ngDraggable/ngDraggable.js"></script>
+<script type="text/javascript" src="libs/ngDraggable/ngDraggableDialogDirective.js"></script>
+
+<!-- 场地部署，拖拽排序 -->
+<script type="text/javascript" src="libs/angular-sortable-view/angular-sortable-view.js"></script>
+
+<!-- 工具 -->
+<script type="text/javascript" src="app/util/customUtilJS.js"></script>
+
+<script type="text/javascript" src="libs/calender/util.js"></script>
+<script type="text/javascript" src="libs/calender/month.js"></script>
+<script type="text/javascript" src="libs/calender/week.js"></script>
+<script type="text/javascript" src="libs/calender/calendar_base.js"></script>
+<script type="text/javascript" src="libs/calender/day_week_month.js"></script>
+
+<script type="text/javascript" src="app/app.js"></script>
+<script type="text/javascript" src="app/states/common/state.js"></script>
+<script type="text/javascript" src="app/services/common/CommonUrl.js"></script>
+<script type="text/javascript" src="app/services/common/CommonFunc.js"></script>
+<script type="text/javascript" src="app/services/common/ChartService.js"></script>
+<script type="text/javascript" src="app/services/common/CommonService.js"></script>
+<script type="text/javascript" src="app/services/common/DicService.js"></script>
+<script type="text/javascript" src="app/common/AccordionMenuController.js"></script>
+<script type="text/javascript" src="app/common/DirectBarController.js"></script>
+<script type="text/javascript" src="app/common/TopBarController.js"></script>
+<script type="text/javascript" src="app/common/ExternPagesController.js"></script>
+<script type="text/javascript" src="app/common/SearchController.js"></script>
+
+<script type="text/javascript" src="libs/calender/TdCalendar/TdDateCondition.js"></script>
+<script type="text/javascript" src="libs/calender/TdCalendar/TdWeekMonthPicke.js"></script>
+
+<script type="text/javascript" src="app/modules/dataMgr/ProjectPlaceListController.js"></script>
+<script type="text/javascript" src="app/modules/dataMgr/component/ComProbeDeployController.js"></script>
+
+<script type="text/javascript" src="app/modules/toolBox/TargetManagementListController.js"></script>
+
+<!-- 新增探针勘测-->
+<!-- 新增在projectList中组件抽离-->
+
+<script type="text/javascript" src="app/modules/passengerPortrait/PassengerPortraitController.js"></script>
+<script type="text/javascript" src="app/modules/passengerJobs/PassengerJobsComeController.js"></script>
+<script type="text/javascript" src="app/modules/passengerJobs/PassengerRegionController.js"></script>
+<script type="text/javascript" src="app/modules/reportMain/ReportMainController.js"></script>
+<script type="text/javascript" src="app/modules/reportMain/LoadingController.js"></script>
+
+<script type="text/javascript" src="app/directives/compareButton.directive.js"></script>
+<script type="text/javascript" src="app/directives/mapControl.directive.js"></script>
+<script type="text/javascript" src="app/directives/indicators.directive.js"></script>
+<script type="text/javascript" src="app/directives/TdFlowChart.directive.js"></script>
+<script type="text/javascript" src="app/directives/selectCombine.directive.js"></script>
+<script type="text/javascript" src="app/directives/TdCheckenDialog.directive.js"></script>
+
+<script type="text/javascript" src="app/modules/passengerPortrait/component/ComPeopleCompareController.js"></script>
+<script type="text/javascript" src="app/modules/passengerPortrait/component/ComPeopleAppController.js"></script>
+<script type="text/javascript" src="app/modules/passengerPortrait/component/ComPeopleExpenseController.js"></script>
+<script type="text/javascript" src="app/modules/passengerPortrait/component/ComPeopleMediaController.js"></script>
+<script type="text/javascript" src="app/modules/passengerPortrait/component/ComPeoplePropertyController.js"></script>
+
+<!-- bs 项目管理 -->
+<script type="text/javascript" src="app/modules/projectManagement/projectManagementController.js"></script>
+<script type="text/javascript" src="app/modules/projectManagement/component/projectNewController.js"></script>
+<script type="text/javascript" src="app/modules/projectManagement/component/projectDetailController.js"></script>
+
+<!-- bs 阈值设置 -->
+<script type="text/javascript" src="app/modules/thresholdSet/thresholdSetController.js"></script>
+<script type="text/javascript" src="app/modules/thresholdSet/component/storeThresholdSetDetailController.js"></script>
+<script type="text/javascript" src="app/modules/thresholdSet/component/storeThresholdSettingController.js"></script>
+
+<!--bs 图纸管理-->
+<script type="text/javascript" src="app/modules/blueprintManagement/BlueprintListController.js"></script>
+
+<!--bs 排行榜-->
+<script type="text/javascript" src="app/modules/projectRankingList/ProjectRankingListController.js"></script>
+<script type="text/javascript" src="app/modules/projectRankingList/component/MechanismRankingListController.js"></script>
+<script type="text/javascript" src="app/modules/projectRankingList/component/OperativeRankingListController.js"></script>
+<script type="text/javascript" src="app/modules/projectRankingList/component/ProvinceRankingListController.js"></script>
+
+<!--bs 运维管理-->
+<script type="text/javascript" src="app/modules/maintenanceManagement/MaintenanceManagementController.js"></script>
+<script type="text/javascript" src="app/modules/maintenanceManagement/component/ProjectStoreManageController.js"></script>
+<script type="text/javascript" src="app/modules/maintenanceManagement/component/SensorManageController.js"></script>
+<script type="text/javascript" src="app/modules/maintenanceManagement/component/ProjectSeeFormController.js"></script>
+<script type="text/javascript" src="app/modules/maintenanceManagement/component/SensorDetailController.js"></script>
+<script type="text/javascript" src="app/modules/maintenanceManagement/component/SensorStrengthSetController.js"></script>
+
+<!-- endbuild -->
+
+</body>
+</html>

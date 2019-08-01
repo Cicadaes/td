@@ -1,0 +1,417 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="hadoop (generated)" id="1482806340406-1">
+        <createTable tableName="active_executing_flows">
+            <column defaultValueNumeric="0" name="exec_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="host" type="VARCHAR(255)"/>
+            <column name="port" type="INT"/>
+            <column name="update_time" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-2">
+        <createTable tableName="active_sla">
+            <column name="exec_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="job_name" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="check_time" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rule" type="TINYINT(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="enc_type" type="TINYINT(3)"/>
+            <column name="options" type="LONGBLOB">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-3">
+        <createTable tableName="execution_flows">
+            <column autoIncrement="true" name="exec_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="flow_id" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="TINYINT(3)"/>
+            <column name="submit_user" type="VARCHAR(64)"/>
+            <column name="submit_time" type="BIGINT"/>
+            <column name="update_time" type="BIGINT"/>
+            <column name="start_time" type="BIGINT"/>
+            <column name="end_time" type="BIGINT"/>
+            <column name="enc_type" type="TINYINT(3)"/>
+            <column name="flow_data" type="LONGBLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-4">
+        <createTable tableName="execution_jobs">
+            <column name="exec_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="flow_id" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="job_id" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="attempt" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_time" type="BIGINT"/>
+            <column name="end_time" type="BIGINT"/>
+            <column name="status" type="TINYINT(3)"/>
+            <column name="input_params" type="LONGBLOB"/>
+            <column name="output_params" type="LONGBLOB"/>
+            <column name="attachments" type="LONGBLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-5">
+        <createTable tableName="execution_logs">
+            <column name="exec_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="name" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="attempt" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="enc_type" type="TINYINT(3)"/>
+            <column defaultValueNumeric="0" name="start_byte" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_byte" type="INT"/>
+            <column name="log" type="LONGBLOB"/>
+            <column name="upload_time" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-6">
+        <createTable tableName="project_events">
+            <column name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="event_type" type="TINYINT(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="event_time" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(64)"/>
+            <column name="message" type="VARCHAR(512)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-7">
+        <createTable tableName="project_files">
+            <column name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="chunk" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="size" type="INT"/>
+            <column name="file" type="LONGBLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-8">
+        <createTable tableName="project_flows">
+            <column name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="flow_id" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_time" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="encoding_type" type="TINYINT(3)"/>
+            <column name="json" type="BLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-9">
+        <createTable tableName="project_permissions">
+            <column name="project_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_time" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="permissions" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isGroup" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-10">
+        <createTable tableName="project_properties">
+            <column name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_time" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="encoding_type" type="TINYINT(3)"/>
+            <column name="property" type="BLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-11">
+        <createTable tableName="project_versions">
+            <column name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="upload_time" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uploader" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="file_type" type="VARCHAR(16)"/>
+            <column name="file_name" type="VARCHAR(128)"/>
+            <column name="md5" type="BINARY(16)"/>
+            <column name="num_chunks" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-12">
+        <createTable tableName="projects">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active" type="BIT"/>
+            <column name="modified_time" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT"/>
+            <column name="last_modified_by" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="enc_type" type="TINYINT(3)"/>
+            <column name="settings_blob" type="LONGBLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-13">
+        <createTable tableName="properties">
+            <column name="name" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_time" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="VARCHAR(256)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-14">
+        <createTable tableName="schedules">
+            <column autoIncrement="true" name="schedule_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_name" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="flow_name" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(16)"/>
+            <column name="first_sched_time" type="BIGINT"/>
+            <column name="timezone" type="VARCHAR(64)"/>
+            <column name="period" type="VARCHAR(16)"/>
+            <column name="last_modify_time" type="BIGINT"/>
+            <column name="next_exec_time" type="BIGINT"/>
+            <column name="submit_time" type="BIGINT"/>
+            <column name="submit_user" type="VARCHAR(128)"/>
+            <column name="enc_type" type="TINYINT(3)"/>
+            <column name="schedule_options" type="LONGBLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-15">
+        <createTable tableName="triggers">
+            <column autoIncrement="true" name="trigger_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="trigger_source" type="VARCHAR(128)"/>
+            <column name="modify_time" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="enc_type" type="TINYINT(3)"/>
+            <column name="data" type="LONGBLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-16">
+        <addPrimaryKey columnNames="exec_id" constraintName="PRIMARY" tableName="active_executing_flows"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-17">
+        <addPrimaryKey columnNames="exec_id, job_name" constraintName="PRIMARY" tableName="active_sla"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-18">
+        <addPrimaryKey columnNames="exec_id, job_id, attempt" constraintName="PRIMARY" tableName="execution_jobs"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-19">
+        <addPrimaryKey columnNames="exec_id, name, attempt, start_byte" constraintName="PRIMARY" tableName="execution_logs"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-20">
+        <addPrimaryKey columnNames="project_id, version, chunk" constraintName="PRIMARY" tableName="project_files"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-21">
+        <addPrimaryKey columnNames="project_id, version, flow_id" constraintName="PRIMARY" tableName="project_flows"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-22">
+        <addPrimaryKey columnNames="project_id, name" constraintName="PRIMARY" tableName="project_permissions"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-23">
+        <addPrimaryKey columnNames="project_id, version, name" constraintName="PRIMARY" tableName="project_properties"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-24">
+        <addPrimaryKey columnNames="project_id, version" constraintName="PRIMARY" tableName="project_versions"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-25">
+        <addPrimaryKey columnNames="name, type" constraintName="PRIMARY" tableName="properties"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-26">
+        <addUniqueConstraint columnNames="id" constraintName="project_id" tableName="projects"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-27">
+        <createIndex indexName="ex_flows_end_time" tableName="execution_flows">
+            <column name="end_time"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-28">
+        <createIndex indexName="ex_flows_flows" tableName="execution_flows">
+            <column name="project_id"/>
+            <column name="flow_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-29">
+        <createIndex indexName="ex_flows_start_time" tableName="execution_flows">
+            <column name="start_time"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-30">
+        <createIndex indexName="ex_flows_time_range" tableName="execution_flows">
+            <column name="start_time"/>
+            <column name="end_time"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-31">
+        <createIndex indexName="ex_job_id" tableName="execution_jobs">
+            <column name="project_id"/>
+            <column name="job_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-32">
+        <createIndex indexName="ex_log_attempt" tableName="execution_logs">
+            <column name="exec_id"/>
+            <column name="name"/>
+            <column name="attempt"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-33">
+        <createIndex indexName="ex_log_index" tableName="execution_logs">
+            <column name="exec_id"/>
+            <column name="name"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-34">
+        <createIndex indexName="exec_id" tableName="execution_jobs">
+            <column name="exec_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-35">
+        <createIndex indexName="exec_job" tableName="execution_jobs">
+            <column name="exec_id"/>
+            <column name="job_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-36">
+        <createIndex indexName="file_version" tableName="project_files">
+            <column name="project_id"/>
+            <column name="version"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-37">
+        <createIndex indexName="flow_index" tableName="project_flows">
+            <column name="project_id"/>
+            <column name="version"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-38">
+        <createIndex indexName="log" tableName="project_events">
+            <column name="project_id"/>
+            <column name="event_time"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-39">
+        <createIndex indexName="permission_index" tableName="project_permissions">
+            <column name="project_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-40">
+        <createIndex indexName="project_name" tableName="projects">
+            <column name="name"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-41">
+        <createIndex indexName="properties_index" tableName="project_properties">
+            <column name="project_id"/>
+            <column name="version"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-42">
+        <createIndex indexName="sched_project_id" tableName="schedules">
+            <column name="project_id"/>
+            <column name="flow_name"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806340406-43">
+        <createIndex indexName="version_index" tableName="project_versions">
+            <column name="project_id"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

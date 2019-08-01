@@ -1,0 +1,76 @@
+<!-- 按条件搜索  -->
+<!--<div class="search_project2" style="float:right;position: absolute;top:-67px;right:20px;">
+    <input id="setVal2" style = "width: 200px;" placeholder="{{constants.label_please_input}}{{constants.label_space}}{{constants.field_storemanage_name}}/{{constants.field_storemanage_person}}" ng-keyup="myKeyupstore($event)" ng-model = "storesearchvalue">
+</div>-->
+<div class = "ng-table-container" style="margin-top: 10px;">
+	  	<div class="row_highlight" style="position:relative;">
+			<table ng-table="storeTableParams" class="table ng-table-responsive table-hover" style="overflow-y: auto;display: block;">
+				<thead>
+						<h3 class="ng-table-head">
+								店铺列表<span style="margin-left:8px;">{{sensorTotal}}</span>
+								<!-- 按条件搜索  -->
+								<div class="search_project2" style="float:right;position: absolute;top:10px;right:50px;margin-right:10px;width: 180px;">
+									<input  id="setVal2" style="margin-top:-16px;height:12px;" placeholder="{{constants.label_please_input}}{{constants.label_space}}{{constants.field_storemanage_name}}/{{constants.field_storemanage_person}}" ng-keyup="myKeyupstore($event)" ng-model = "storesearchvalue"/>
+								</div>
+							</h3>
+				<tr style="">
+					<th ng-style="table_width_1"><span>{{constants.field_storemanage_name}}</span></th>
+					<th ng-style="table_width_2" ><span>{{constants.field_storemanage_person}} </span></th>
+					<th ng-style="table_width_3" ><span>{{constants.field_storemanage_sensorcount}}</span></th>
+					<th ng-style="table_width_4" ng-class="storetype == 'hours'?'sensorSelectWap':'sensorNotSelect'" ng-click = "heath_sort('heath')">
+						<span  style="position: relative;">
+							{{constants.field_storemanage_heath}}
+							<b ng-class="storeselect == 'heathup'?'storeselect':(storeselect == 'heathdown'?'sensor_sort_1':'sensor_sort1')"></b>
+							<b ng-class="storeselect == 'heathdown'?'storeselect':(storeselect == 'heathup'?'sensor_sort_2':'sensor_sort2')"></b>
+						</span>
+					</th>
+					<th ng-style="table_width_5" ng-class="storetype == 'logs'?'sensorSelectWap':'sensorNotSelect'" ng-click = "log_sort('logs')">
+						<span style="position: relative;">
+							{{constants.field_storemanage_nologduration}}
+							<b ng-class="storeselect == 'logsup'?'storeselect':(storeselect == 'logsdown'?'sensor_sort_1':'sensor_sort1')"></b>
+							<b ng-class="storeselect == 'logsdown'?'storeselect':(storeselect == 'logsup'?'sensor_sort_2':'sensor_sort2')"></b>
+						</span>
+					</th>
+					<th ng-style="table_width_6"><span>{{constants.label_operation}} </span></th>
+				</tr>
+				</thead>
+				<tbody ng-style="table_max_height" id="table_size">
+				<tr ng-repeat="record in $data track by $index">
+					<td ng-style="table_width_1" ><div>{{record.projectName}}</div></td>
+					<td ng-style="table_width_2" ><div ng-mouseenter="seeDetail(record,$event)"  ng-mouseleave="closeDetail($event)">{{record.principal}}</div></td>
+					<td ng-style="table_width_3" ><div>{{record.sensorNum}}</div></td>
+					<td ng-style="table_width_4" >
+						<div>
+							<i class = "indicatorLight redLight" ng-show="record.healthRate < '60'"></i>
+							<i class = "indicatorLight orangeLight" ng-show="record.healthRate >= '60' && record.healthRate < '100'"></i>
+							<i class = "indicatorLight greenLight" ng-show="record.healthRate == '100'"></i>
+							{{record.healthRate}} %
+						</div>
+					</td>
+					<td ng-style="table_width_5" >
+						<div>
+							<i class = "indicatorLight redLight" ng-show="record.noLogDuration > '3'"></i>
+							<i class = "indicatorLight orangeLight" ng-show="record.noLogDuration > '0' && record.noLogDuration <= '3'"></i>
+							<i class = "indicatorLight greenLight" ng-show="record.noLogDuration == '0'"></i>
+							{{record.noLogDuration}}
+						</div>
+					</td>
+					<td ng-style="table_width_6" ><div ng-click="seeProject2(record)">{{constants.label_view}}</div></td>
+
+				</tbody>
+			</table>
+	      	<div id = "detailDiv" class = "detailDiv" ng-style="seeDetailDiv">
+				<h3>{{constants.field_storemanage_persondetail}}</h3>
+				<ul>
+					<li><span>{{constants.field_storemanage_person}}</span>{{obj.principal}}</li>
+					<li><span>{{constants.field_storemanage_position}}</span>{{obj.position}}</li>
+					<li><span>{{constants.field_storemanage_department}}</span>{{obj.department}}</li>
+					<li><span>{{constants.field_storemanage_email}}</span>{{obj.email}}</li>
+					<li><span>{{constants.field_storemanage_phone1}}</span>{{obj.phone1}}</li>
+					<li><span>{{constants.field_storemanage_phone2}}</span>{{obj.phone2}}</li>
+				</ul>
+			</div>
+	   </div>   	
+</div>
+
+

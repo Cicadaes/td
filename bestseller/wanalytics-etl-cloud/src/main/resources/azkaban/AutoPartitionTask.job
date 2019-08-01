@@ -1,0 +1,2 @@
+type=command
+command=bash -x /home/hadoop/wanalytics/etl/bin/AutoPartitionTask.sh --year "${azkaban.flow.start.year}" --interval 1  --schedulerTaskLogId "${schedule.task.log.id}" 

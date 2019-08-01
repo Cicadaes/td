@@ -1,0 +1,20 @@
+/*stack-bar条图start*/
+
+.stack-bar .headerTab a {
+    padding: 3px 8px;
+    border-radius: 3px;
+    border: 1px solid #666;
+    color: #000;
+}
+
+.stack-bar .headerTab a:last-child {
+    margin-left: -1px;
+}
+
+.stack-bar .headerTab a.selected {
+    color: #fff;
+    background: #ccc;
+}
+
+
+/*stack-bar条图end*/

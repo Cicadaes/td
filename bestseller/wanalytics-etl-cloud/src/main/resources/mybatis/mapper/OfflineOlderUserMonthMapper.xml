@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.OfflineOlderUserMonthDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.OfflineOlderUserMonth">
+        <result column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="project_id" property="projectId"/>
+        <result column="month" property="month"/>
+        <result column="old_users" property="oldUsers"/>
+        <result column="times" property="times"/>
+        <result column="days" property="days"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- TD_OFFLINE_OLDER_USER_MONTH table all fields -->
+    <sql id="Base_Column_List">
+        id, tenant_id,project_id,month,old_users,times,days,update_time
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="month != null and month != ''">
+                and month = #{month}
+            </if>
+            <if test="oldUsers != null and oldUsers != ''">
+                and old_users = #{oldUsers}
+            </if>
+            <if test="times != null and times != ''">
+                and times = #{times}
+            </if>
+            <if test="days != null and days != ''">
+                and days = #{days}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into TD_OFFLINE_OLDER_USER_MONTH(tenant_id,project_id,month,old_users,times,days,update_time)
+        values(#{tenantId},#{projectId},#{month},#{oldUsers},#{times},#{days},now())
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_OFFLINE_OLDER_USER_MONTH set
+        project_id=#{projectId},month=#{month},old_users=#{oldUsers},times=#{times},days=#{days},update_time=now() where
+        tenant_id=#{tenantId}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_OFFLINE_OLDER_USER_MONTH set
+        <trim suffixOverrides=",">
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="month != null  ">
+                month=#{month},
+            </if>
+            <if test="oldUsers != null  ">
+                old_users=#{oldUsers},
+            </if>
+            <if test="times != null  ">
+                times=#{times},
+            </if>
+            <if test="days != null  ">
+                days=#{days},
+            </if>
+            <if test="updateTime != null  ">
+                update_time=#{updateTime},
+            </if>
+        </trim>
+        where tenant_id=#{tenantId}
+    </update>
+
+    <!-- 根据id查询 月度老客统计表 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_OFFLINE_OLDER_USER_MONTH where tenant_id = #{tenantId}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_OFFLINE_OLDER_USER_MONTH where tenant_id = #{tenantId}
+    </delete>
+
+    <!-- 月度老客统计表 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_OFFLINE_OLDER_USER_MONTH
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询月度老客统计表列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_OFFLINE_OLDER_USER_MONTH
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <select id="findOne" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_OFFLINE_OLDER_USER_MONTH
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <delete id="batchDeleteByProjectAndDate" parameterType="Object">
+        delete from TD_OFFLINE_OLDER_USER_MONTH where project_id = #{projectId} and month = #{month}
+    </delete>
+
+    <insert id="batchSelectAndInsert" useGeneratedKeys="true" parameterType="java.util.List">
+        INSERT INTO TD_OFFLINE_OLDER_USER_MONTH(tenant_id, project_id, month, old_users, times, days)
+        SELECT t.tenant_id, d.project_id, t.month, t.old_users, t.times, t.days
+        FROM
+        (SELECT s.tenant_id, s.month, SUM(IFNULL(s.old_users,0)) AS old_users, SUM(IFNULL(s.times,0)) AS times,
+        SUM(IFNULL(s.days,0)) AS days
+        FROM TD_OFFLINE_OLDER_USER_MONTH s
+        WHERE s.project_id IN (
+        SELECT r.project_id FROM TD_PROJECT_RELATION r
+        WHERE r.project_parent_id = #{projectId})
+        AND s.month = #{month}
+        GROUP BY s.tenant_id, s.month
+        )t,
+        (SELECT DISTINCT project_parent_id AS project_id FROM TD_PROJECT_RELATION WHERE project_parent_id = #{projectId}
+        )d
+    </insert>
+</mapper>

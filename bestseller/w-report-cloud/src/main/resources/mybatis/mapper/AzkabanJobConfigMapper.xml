@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.AzkabanJobConfigDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.AzkabanJobConfig">
+        <result column="id" property="id"/>
+        <result column="project_name" property="projectName"/>
+        <result column="project_desc" property="projectDesc"/>
+        <result column="job_file_path" property="jobFilePath"/>
+        <result column="flow_name" property="flowName"/>
+        <result column="schedule_time" property="scheduleTime"/>
+        <result column="schedule_date" property="scheduleDate"/>
+        <result column="is_recurring" property="isRecurring"/>
+        <result column="recurring_period" property="recurringPeriod"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <!-- TD_AZKABAN_JOB_CONFIG table all fields -->
+    <sql id="Base_Column_List">
+        id,project_name,project_desc,job_file_path,flow_name,schedule_time,schedule_date,is_recurring,recurring_period,status
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="projectName != null and projectName != ''">
+                and project_name = #{projectName}
+            </if>
+            <if test="projectDesc != null and projectDesc != ''">
+                and project_desc = #{projectDesc}
+            </if>
+            <if test="jobFilePath != null and jobFilePath != ''">
+                and job_file_path = #{jobFilePath}
+            </if>
+            <if test="flowName != null and flowName != ''">
+                and flow_name = #{flowName}
+            </if>
+            <if test="scheduleTime != null and scheduleTime != ''">
+                and schedule_time = #{scheduleTime}
+            </if>
+            <if test="scheduleDate != null and scheduleDate != ''">
+                and schedule_date = #{scheduleDate}
+            </if>
+            <if test="isRecurring != null and isRecurring != ''">
+                and is_recurring = #{isRecurring}
+            </if>
+            <if test="recurringPeriod != null and recurringPeriod != ''">
+                and recurring_period = #{recurringPeriod}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_AZKABAN_JOB_CONFIG(id,project_name,project_desc,job_file_path,flow_name,schedule_time,schedule_date,is_recurring,recurring_period,status)
+        values(#{id},#{projectName},#{projectDesc},#{jobFilePath},#{flowName},#{scheduleTime},#{scheduleDate},#{isRecurring},#{recurringPeriod},#{status})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_AZKABAN_JOB_CONFIG set
+        project_name=#{projectName},project_desc=#{projectDesc},job_file_path=#{jobFilePath},flow_name=#{flowName},schedule_time=#{scheduleTime},schedule_date=#{scheduleDate},is_recurring=#{isRecurring},recurring_period=#{recurringPeriod},status=#{status}
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_AZKABAN_JOB_CONFIG set
+        <trim suffixOverrides=",">
+            <if test="projectName != null  ">
+                project_name=#{projectName},
+            </if>
+            <if test="projectDesc != null  ">
+                project_desc=#{projectDesc},
+            </if>
+            <if test="jobFilePath != null  ">
+                job_file_path=#{jobFilePath},
+            </if>
+            <if test="flowName != null  ">
+                flow_name=#{flowName},
+            </if>
+            <if test="scheduleTime != null  ">
+                schedule_time=#{scheduleTime},
+            </if>
+            <if test="scheduleDate != null  ">
+                schedule_date=#{scheduleDate},
+            </if>
+            <if test="isRecurring != null  ">
+                is_recurring=#{isRecurring},
+            </if>
+            <if test="recurringPeriod != null  ">
+                recurring_period=#{recurringPeriod},
+            </if>
+            <if test="status != null  ">
+                status=#{status},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 Azkaban任务配置表 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_AZKABAN_JOB_CONFIG where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_AZKABAN_JOB_CONFIG where id = #{id}
+    </delete>
+
+    <!-- Azkaban任务配置表 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_AZKABAN_JOB_CONFIG
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询Azkaban任务配置表列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_AZKABAN_JOB_CONFIG
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- 查询Azkaban任务配置表列表 -->
+    <select id="queryByValidList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_AZKABAN_JOB_CONFIG
+        <include refid="Base_Where_Clause"/>
+        and project_name is not null and project_name != ''
+        and project_desc is not null and project_desc != ''
+        and job_file_path is not null and job_file_path != ''
+        and flow_name is not null and flow_name != ''
+    </select>
+
+</mapper>

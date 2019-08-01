@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.CrowdDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.Crowd">
+        <result column="id" property="id"/>
+        <result column="tag_id" property="tagId"/>
+        <result column="tag_code" property="tagCode"/>
+        <result column="tag_name" property="tagName"/>
+        <result column="tag_type" property="tagType"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="source" property="source"/>
+        <result column="status" property="status"/>
+        <result column="calc_status" property="calcStatus"/>
+        <result column="description" property="description"/>
+        <result column="crowd_count" property="crowdCount"/>
+        <result column="update_data_time" property="updateDataTime"/>
+        <result column="create_by" property="createBy"/>
+        <result column="creator" property="creator"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="type" property="type"/>
+        <result column="touch_point_type" property="touchPointType"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="attr1" property="attr1"/>
+        <result column="attr2" property="attr2"/>
+        <result column="attr3" property="attr3"/>
+        <result column="attr4" property="attr4"/>
+        <result column="attr5" property="attr5"/>
+    </resultMap>
+
+    <!-- TD_CROWD table all fields -->
+    <sql id="Base_Column_List">
+        id,tag_id,tag_code,tag_name,tag_type,name,code,source,status,calc_status,description,crowd_count,update_data_time,create_by,creator,update_by,create_time,update_time,type,touch_point_type,tenant_id,attr1,attr2,attr3,attr4,attr5
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="tagId != null and tagId != ''">
+                and tag_id = #{tagId}
+            </if>
+            <if test="tagCode != null and tagCode != ''">
+                and tag_code = #{tagCode}
+            </if>
+            <if test="tagName != null and tagName != ''">
+                and tag_name = #{tagName}
+            </if>
+            <if test="tagType != null and tagType != ''">
+                and tag_type = #{tagType}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="code != null and code != ''">
+                and code = #{code}
+            </if>
+            <if test="source != null and source != ''">
+                and source = #{source}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="calcStatus != null and calcStatus != ''">
+                and calc_status = #{calcStatus}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+            <if test="crowdCount != null and crowdCount != ''">
+                and crowd_count = #{crowdCount}
+            </if>
+            <if test="updateDataTime != null and updateDataTime != ''">
+                and update_data_time = #{updateDataTime}
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="touchPointType != null and touchPointType != ''">
+                and touch_point_type = #{touchPointType}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="attr1 != null and attr1 != ''">
+                and attr1 = #{attr1}
+            </if>
+            <if test="attr2 != null and attr2 != ''">
+                and attr2 = #{attr2}
+            </if>
+            <if test="attr3 != null and attr3 != ''">
+                and attr3 = #{attr3}
+            </if>
+            <if test="attr4 != null and attr4 != ''">
+                and attr4 = #{attr4}
+            </if>
+            <if test="attr5 != null and attr5 != ''">
+                and attr5 = #{attr5}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_CROWD(id,tag_id,tag_code,tag_name,tag_type,name,code,source,status,calc_status,description,crowd_count,update_data_time,create_by,creator,update_by,create_time,update_time,type,touch_point_type,tenant_id,attr1,attr2,attr3,attr4,attr5)
+        values(#{id},#{tagId},#{tagCode},#{tagName},#{tagType},#{name},#{code},#{source},#{status},#{calcStatus},#{description},#{crowdCount},#{updateDataTime},#{createBy},#{creator},#{updateBy},now(),now(),#{type},#{touchPointType},#{tenantId},#{attr1},#{attr2},#{attr3},#{attr4},#{attr5})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_CROWD set
+        tag_id=#{tagId},tag_code=#{tagCode},tag_name=#{tagName},tag_type=#{tagType},name=#{name},code=#{code},source=#{source},status=#{status},calc_status=#{calcStatus},description=#{description},crowd_count=#{crowdCount},update_data_time=#{updateDataTime},create_by=#{createBy},creator=#{creator},update_by=#{updateBy},create_time=now(),update_time=now(),type=#{type},touch_point_type=#{touchPointType},tenant_id=#{tenantId},attr1=#{attr1},attr2=#{attr2},attr3=#{attr3},attr4=#{attr4},attr5=#{attr5}
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_CROWD set
+        <trim suffixOverrides=",">
+            <if test="tagId != null  ">
+                tag_id=#{tagId},
+            </if>
+            <if test="tagCode != null  ">
+                tag_code=#{tagCode},
+            </if>
+            <if test="tagName != null  ">
+                tag_name=#{tagName},
+            </if>
+            <if test="tagType != null  ">
+                tag_type=#{tagType},
+            </if>
+            <if test="name != null  ">
+                name=#{name},
+            </if>
+            <if test="code != null  ">
+                code=#{code},
+            </if>
+            <if test="source != null  ">
+                source=#{source},
+            </if>
+            <if test="status != null  ">
+                status=#{status},
+            </if>
+            <if test="calcStatus != null  ">
+                calc_status=#{calcStatus},
+            </if>
+            <if test="description != null  ">
+                description=#{description},
+            </if>
+            <if test="crowdCount != null  ">
+                crowd_count=#{crowdCount},
+            </if>
+            <if test="updateDataTime != null  ">
+                update_data_time=#{updateDataTime},
+            </if>
+            <if test="createBy != null  ">
+                create_by=#{createBy},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="updateBy != null  ">
+                update_by=#{updateBy},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updateTime != null  ">
+                update_time=#{updateTime},
+            </if>
+            <if test="type != null  ">
+                type=#{type},
+            </if>
+            <if test="touchPointType != null  ">
+                touch_point_type=#{touchPointType},
+            </if>
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="attr1 != null  ">
+                attr1=#{attr1},
+            </if>
+            <if test="attr2 != null  ">
+                attr2=#{attr2},
+            </if>
+            <if test="attr3 != null  ">
+                attr3=#{attr3},
+            </if>
+            <if test="attr4 != null  ">
+                attr4=#{attr4},
+            </if>
+            <if test="attr5 != null  ">
+                attr5=#{attr5},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateCrowdsById" parameterType="Object">
+        update TD_CROWD set
+        <trim suffixOverrides=",">
+            <if test="tagId != null  ">
+                tag_id=#{tagId},
+            </if>
+            <if test="tagCode != null  ">
+                tag_code=#{tagCode},
+            </if>
+            <if test="tagName != null  ">
+                tag_name=#{tagName},
+            </if>
+            <if test="tagType != null  ">
+                tag_type=#{tagType},
+            </if>
+            <if test="name != null  ">
+                name=#{name},
+            </if>
+            <if test="code != null  ">
+                code=#{code},
+            </if>
+            <if test="source != null  ">
+                source=#{source},
+            </if>
+            <if test="status != null  ">
+                status=#{status},
+            </if>
+            <if test="calcStatus != null  ">
+                calc_status=#{calcStatus},
+            </if>
+            <if test="description != null  ">
+                description=#{description},
+            </if>
+            <if test="crowdCount != null  ">
+                crowd_count=#{crowdCount},
+            </if>
+            <if test="updateDataTime != null  ">
+                update_data_time=#{updateDataTime},
+            </if>
+            <if test="createBy != null  ">
+                create_by=#{createBy},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="updateBy != null  ">
+                update_by=#{updateBy},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updateTime != null  ">
+                update_time=#{updateTime},
+            </if>
+            <if test="type != null  ">
+                type=#{type},
+            </if>
+            <if test="touchPointType != null  ">
+                touch_point_type=#{touchPointType},
+            </if>
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="attr2 != null  ">
+                attr2=#{attr2},
+            </if>
+            <if test="attr3 != null  ">
+                attr3=#{attr3},
+            </if>
+            <if test="attr4 != null  ">
+                attr4=#{attr4},
+            </if>
+            <if test="attr5 != null  ">
+                attr5=#{attr5},
+            </if>
+        </trim>
+        where  attr1=#{attr1}
+    </update>
+
+    <!-- 根据id查询 人群 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_CROWD where id = #{id}
+        and status=1
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_CROWD where id = #{id}
+    </delete>
+
+    <!-- 人群 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_CROWD
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询人群列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_CROWD
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- 根据项目id及人群类型查询 -->
+    <select id="findOneByProjectIdAndType" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_CROWD where attr1 = #{0}
+        and type = #{1}
+        and status=1
+    </select>
+</mapper>

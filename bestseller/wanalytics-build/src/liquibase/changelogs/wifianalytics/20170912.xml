@@ -1,0 +1,67 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="yinglei.li" id="1505223352830-1">
+        <createTable tableName="TD_CROWD_SALES_LIST">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="project_id" remarks="案场id" type="BIGINT(20)"/>
+            <column name="device_mac" remarks="设备mac" type="varchar(64)" />
+            <column name="source" remarks="来源 1：手工录入，2：批量导入,3： 自动过滤, 4: 停留时长过长, 5:非营业时间出现 , 6:非移动设备mac" type="int(2)" />
+            <column name="status" remarks="状态" type="int(2)" />
+            <column name="create_by" remarks="创建者账号" type="varchar(128)" />
+            <column name="creator" remarks="创建人" type="varchar(128)" />
+            <column name="create_time" remarks="创建时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改者账号" type="varchar(128)" />
+            <column name="updater" remarks="修改人" type="varchar(128)" />
+            <column name="update_time" remarks="修改时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="yinglei.li" id="1505223352830-2">
+        <createTable tableName="TD_THRESHOLD">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="project_id" remarks="案场id" type="BIGINT(20)"/>
+            <column name="crowd_come" remarks="入店客流时间阈值" type="int(4)" />
+            <column name="crowd_bounce" remarks="跳出客流时间阈值" type="int(4)" />
+            <column name="crowd_stay" remarks="停留客流时间阈值" type="int(4)" />
+            <column name="crowd_active_high_begin" remarks="高活跃客流时间阈值" type="int(4)" />
+            <column name="crowd_active_high_end" remarks="高活跃客流时间阈值" type="int(4)" />
+            <column name="crowd_active_medium_begin" remarks="中活跃客流时间阈值" type="int(4)" />
+            <column name="crowd_active_medium_end" remarks="中活跃客流时间阈值" type="int(4)" />
+            <column name="crowd_active_low_begin" remarks="低活跃客流时间阈值" type="int(4)" />
+            <column name="crowd_active_low_end" remarks="低活跃客流时间阈值" type="int(4)" />
+            <column name="crowd_sleep" remarks="沉睡客流时间阈值" type="int(4)" />
+            <column name="strength_crowd_before" remarks="店前客流强度" type="int(4)" />
+            <column name="strength_crowd_come" remarks="入店客流强度" type="int(4)" />
+            <column name="frequency_interval_time" remarks="次数间隔时间" type="int(4)" />
+            <column name="sales_consecutive_day" remarks="店员连续天数" type="int(5)" />
+            <column name="sales_come_day" remarks="店员入店天数" type="int(5)" />
+            <column name="sales_stay_time" remarks="店员一天内入店停留时间累计小时" type="int(2)" />
+            <column name="black_consecutive_day" remarks="黑名单连续天数" type="int(5)" />
+            <column name="black_come_day" remarks="黑名单入店天数" type="int(5)" />
+            <column name="black_stay_time" remarks="黑名单一天内入店停留时间累计小时" type="int(2)" />
+            <column name="create_by" remarks="创建者账号" type="varchar(128)" />
+            <column name="creator" remarks="创建人" type="varchar(128)" />
+            <column name="create_time" remarks="创建时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改者账号" type="varchar(128)" />
+            <column name="updater" remarks="修改人" type="varchar(128)" />
+            <column name="update_time" remarks="修改时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

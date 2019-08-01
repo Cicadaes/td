@@ -1,0 +1,343 @@
+/*全局样式*/
+
+* {
+    font-family: "PingFangSC-Regular", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+th {
+    text-align: left
+}
+
+:focus {
+    outline: 0
+}
+
+select:focus {
+    outline: 0 !important;
+}
+
+body,
+input,
+textarea,
+select,
+button {
+    /*-webkit-appearance: none;*/
+    border: 0;
+    outline: 0;
+    font-size: 12px;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+.clearfix:after {
+    content: '.';
+    line-height: 0;
+    height: 0;
+    display: block;
+    clear: both;
+    visibility: hidden;
+}
+
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video,
+input {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: 0;
+    text-decoration: none;
+    list-style: none;
+    font-style: normal;
+    outline: none;
+}
+
+a:visited,
+a:link {
+    text-decoration: none;
+    outline: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a {
+    transition: background-color .5s ease 0s, width .5s ease 0s, border-color .5s ease 0s, border-width .5s ease 0s;
+    -webkit-transition: background-color .5s ease 0s, width .5s ease 0s;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.angle {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #000;
+    float: right;
+    margin-top: 15px;
+    margin-right: 6px;
+}
+
+/*控制下拉菜单显示隐藏*/
+.select_ {
+    display: none;
+}
+
+.select > ul {
+    position: absolute;
+    z-index: 100;
+    left: 0;
+    top: 36px;
+    width: 120px;
+    background: #fff;
+    padding-bottom: 0;
+    border: 1px solid #ccc;
+    margin-top: 0;
+}
+
+.select > ul > li {
+    text-align: left;
+    text-indent: 30px;
+}
+
+/*构建客群新增*/
+.behaviour_wap {
+    height: 50px;
+    margin: 15px 20px 0 20px;
+    border-bottom: 1px dashed #ccc;
+}
+
+.behaviour_wap select {
+    width: 110px;
+    float: left;
+    margin-right: 10px;
+}
+
+.behaviour_wap span {
+    width: auto;
+    float: left;
+    margin-right: 10px;
+    line-height: 36px;
+}
+
+.behaviour_wap input {
+    width: 100px;
+    float: left;
+    margin-right: 10px;
+}
+
+.select {
+    position: relative;
+    border: 1px solid #ccc;
+    height: 36px;
+    border-radius: 5px;
+}
+
+.and_or {
+    display: none;
+}
+
+.addclass_display {
+    display: block;
+}
+
+/* 添加条件按钮 */
+
+.build_add_btn {
+    z-index: 1;
+    float: left;
+    width: 20px;
+    height: 20px;
+    position: relative;
+}
+
+.build_add_btn .add_left {
+    position: absolute;
+    left: 7px;
+    top: 4px;
+    display: block;
+    width: 3px;
+    height: 16px;
+    background: #43A3FB;
+}
+
+.build_add_btn .add_right {
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 11px;
+    width: 16px;
+    height: 3px;
+    background: #43A3FB;
+}
+
+/*构建客群添加行为按钮*/
+.add_btn_div {
+    width: 100px;
+    overflow: hidden;
+    margin-left: 30px;
+    margin-top: 20px;
+    font-size: 16px;
+    color: #43A3FB;
+}
+
+.add_btn_div span {
+    float: left;
+}
+
+@media screen and  (max-width: 1366px) {
+
+    #bigscreen {
+        height: 510px;
+    }
+
+    #smallscreen {
+        height: 570px;
+    }
+
+    #smallscreen_wap {
+        height: 570px;
+    }
+
+    #batchSet {
+        height: 600px;
+    }
+
+    #batchSet_ {
+        height: 600px;
+    }
+
+    #batchSet_1 {
+        height: 600px;
+    }
+}
+
+@media screen and (min-width: 1367px) {
+    #smallscreen {
+        height: 860px;
+    }
+
+    #smallscreen_wap {
+        height: 860px;
+    }
+
+    #batchSet {
+        height: 910px;
+    }
+
+    #batchSet_ {
+        height: 910px;
+    }
+
+    #batchSet_1 {
+        height: 910px;
+    }
+
+}
+
+/* 新增加搜索功能 */
+.search_project input {
+    width: 200px;
+    height: 30px;
+    background: transparent;
+    border-bottom: 1px solid #ccc;
+    text-indent: 10px;
+}
+
+.search_project button {
+    height: 30px;
+    line-height: 30px;
+    background: #5F92E0;
+    color: #fff;
+    border-radius: 4px;
+    padding: 0 20px;
+}

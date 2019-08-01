@@ -1,0 +1,296 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="youyu.dong" id="1507953600055-1">
+        <createTable tableName="TD_METRIC_DAY_ACTIVE">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="brand" remarks="品牌" type="varchar(100)"/>
+            <column name="region" remarks="大区" type="varchar(100)"/>
+            <column name="city" remarks="城市" type="varchar(100)"/>
+            <column name="province" remarks="省" type="varchar(100)"/>
+            <column name="channel" remarks="渠道" type="varchar(100)"/>
+            <column name="mall" remarks="商场" type="varchar(127)"/>
+            <column name="project_name" remarks="项目名称" type="varchar(100)"/>
+            <column name="project_type" remarks="项目类型(1：店铺 2：自定义 3：物理城市 4：品牌城市 5：品牌大区 6：品牌 7: 商场 8：渠道 9：物理省份 10：品牌省份)" type="int"/>
+            <column name="project_id" remarks="项目id(TD_PROJECT)" type="int"/>
+            <column name="project_num" remarks="店铺编号ID" type="varchar(100)"/>
+            <column name="date" remarks="日期" type="varchar(10)"/>
+            <column name="week_of_year" remarks="周" type="varchar(10)"/>
+            <column name="month" remarks="月份" type="varchar(10)"/>
+            <column name="active_new_users" remarks="进店新客" type="int"/>
+            <column name="active_old_users" remarks="进店老客" type="int"/>
+            <column name="active_users" remarks="进店人数" type="int"/>
+            <column name="stay_new_users" remarks="停留新客" type="int"/>
+            <column name="stay_old_users" remarks="停留老客" type="int"/>
+            <column name="stay_users" remarks="停留人数" type="int"/>
+            <column name="front_users" remarks="周边人数" type="int"/>
+            <column name="jump_users" remarks="跳出人数" type="int"/>
+            <column name="high_active_users" remarks="高活跃人数" type="int"/>
+            <column name="middle_active_users" remarks="中活跃人数" type="int"/>
+            <column name="low_active_users" remarks="低活跃人数" type="int"/>
+            <column name="sleep_active_users" remarks="沉睡人数" type="int"/>
+            <column name="high_stay_users" remarks="高活跃停留人数" type="int"/>
+            <column name="middle_stay_users" remarks="中活跃停留人数" type="int"/>
+            <column name="low_stay_users" remarks="低活跃停留人数" type="int"/>
+            <column name="sleep_stay_users" remarks="沉睡停留人数" type="int"/>
+            <column name="recent7Users" remarks="近7日入店客流" type="int"/>
+            <column name="recent30HighRate" remarks="近30日高活跃客群占比" type="int"/>
+            <column name="active_duration" remarks="到访总时长" type="int"/>
+            <column name="active_times" remarks="到访总次数" type="int"/>
+            <column name="stay_duration" remarks="停留总时长" type="int"/>
+            <column name="stay_times" remarks="停留总次数" type="int"/>
+            <column name="interval_2" remarks="1-2两分钟区间次数" type="int"/>
+            <column name="interval_5" remarks="2到5分钟区间次数" type="int"/>
+            <column name="interval_10" remarks="5-10分钟区间次数" type="int"/>
+            <column name="interval_15" remarks="10-15分钟区间次数" type="int"/>
+            <column name="interval_30" remarks="15-30分钟区间次数" type="int"/>
+
+            <column name="duration_new_5" remarks="0-5到访新客次数" type="int"/>
+            <column name="duration_new_15" remarks="5-15到访新客次数" type="int"/>
+            <column name="duration_new_30" remarks="15-30到访新客次数" type="int"/>
+            <column name="duration_new_60" remarks=">30到访新客次数" type="int"/>
+
+            <column name="duration_old_5" remarks="0-5到访老客次数" type="int"/>
+            <column name="duration_old_15" remarks="5-15到访老客次数" type="int"/>
+            <column name="duration_old_30" remarks="15-30到访老客次数" type="int"/>
+            <column name="duration_old_60" remarks=">30到访老客次数" type="int"/>
+
+            <column name="high_active_5" remarks="0-5高活跃人群次数" type="int"/>
+            <column name="high_active_15" remarks="5-15高活跃人群次数" type="int"/>
+            <column name="high_active_30" remarks="15-30高活跃人群次数" type="int"/>
+            <column name="high_active_60" remarks=">30高活跃人群次数" type="int"/>
+
+            <column name="middle_active_5" remarks="0-5中活跃人群次数" type="int"/>
+            <column name="middle_active_15" remarks="5-15中活跃人群次数" type="int"/>
+            <column name="middle_active_30" remarks="15-30中活跃人群次数" type="int"/>
+            <column name="middle_active_60" remarks=">30中活跃人群次数" type="int"/>
+
+            <column name="low_active_5" remarks="0-5低活跃人群次数" type="int"/>
+            <column name="low_active_15" remarks="5-15低活跃人群次数" type="int"/>
+            <column name="low_active_30" remarks="15-30低活跃人群次数" type="int"/>
+            <column name="low_active_60" remarks=">30低活跃人群次数" type="int"/>
+
+            <column name="sleep_active_5" remarks="0-5沉睡人群次数" type="int"/>
+            <column name="sleep_active_15" remarks="5-15沉睡人群次数" type="int"/>
+            <column name="sleep_active_30" remarks="15-30沉睡人群次数" type="int"/>
+            <column name="sleep_active_60" remarks=">30沉睡人群次数" type="int"/>
+
+            <column name="time_old_1" remarks="1次老客到访次数" type="int"/>
+            <column name="time_old_2" remarks="2次老客到访次数" type="int"/>
+            <column name="time_old_3" remarks="3-5次老客到访次数" type="int"/>
+            <column name="time_old_5" remarks="大于5次老客到访次数" type="int"/>
+
+            <column name="old_interval" remarks="入店老客间隔" type="int"/>
+            <column name="visit_cycle" remarks="到访周期" type="int"/>
+
+            <column name="new_active_duration" remarks="新客到访时长" type="int"/>
+            <column name="new_active_time" remarks="新客到访次数" type="int"/>
+            <column name="old_active_duration" remarks="老客到访时长" type="int"/>
+            <column name="old_active_time" remarks="老客到访次数" type="int"/>
+
+            <column name="city_level" remarks="城市类别：1 一线城市 2：二线城市 3：三线城市" type="int"/>
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="youyu.dong" id="1507953600055-2">
+        <createTable tableName="TD_METRIC_WEEK_ACTIVE">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="brand" remarks="品牌" type="varchar(100)"/>
+            <column name="region" remarks="大区" type="varchar(100)"/>
+            <column name="city" remarks="城市" type="varchar(100)"/>
+            <column name="province" remarks="省" type="varchar(100)"/>
+            <column name="channel" remarks="渠道" type="varchar(100)"/>
+            <column name="mall" remarks="商场" type="varchar(127)"/>
+            <column name="project_name" remarks="项目名称" type="varchar(100)"/>
+            <column name="project_type" remarks="项目类型(1：店铺 2：自定义 3：物理城市 4：品牌城市 5：品牌大区 6：品牌 7: 商场 8：渠道 9：物理省份 10：品牌省份)" type="int"/>
+            <column name="project_id" remarks="项目id(TD_PROJECT)" type="int"/>
+            <column name="project_num" remarks="店铺编号ID" type="varchar(100)"/>
+            <column name="year" remarks="年份" type="varchar(4)"/>
+            <column name="week_of_year" remarks="周" type="varchar(10)"/>
+            <column name="active_new_users" remarks="进店新客" type="int"/>
+            <column name="active_old_users" remarks="进店老客" type="int"/>
+            <column name="active_users" remarks="进店人数" type="int"/>
+            <column name="stay_new_users" remarks="停留新客" type="int"/>
+            <column name="stay_old_users" remarks="停留老客" type="int"/>
+            <column name="stay_users" remarks="停留人数" type="int"/>
+            <column name="front_users" remarks="周边人数" type="int"/>
+            <column name="jump_users" remarks="跳出人数" type="int"/>
+            <column name="high_active_users" remarks="高活跃人数" type="int"/>
+            <column name="middle_active_users" remarks="中活跃人数" type="int"/>
+            <column name="low_active_users" remarks="低活跃人数" type="int"/>
+            <column name="sleep_active_users" remarks="沉睡人数" type="int"/>
+            <column name="high_stay_users" remarks="高活跃停留人数" type="int"/>
+            <column name="middle_stay_users" remarks="中活跃停留人数" type="int"/>
+            <column name="low_stay_users" remarks="低活跃停留人数" type="int"/>
+            <column name="sleep_stay_users" remarks="沉睡停留人数" type="int"/>
+            <column name="recent7Users" remarks="近7日入店客流" type="int"/>
+            <column name="recent30HighRate" remarks="近30日高活跃客群占比" type="int"/>
+            <column name="active_duration" remarks="到访总时长" type="int"/>
+            <column name="active_times" remarks="到访总次数" type="int"/>
+            <column name="stay_duration" remarks="停留总时长" type="int"/>
+            <column name="stay_times" remarks="停留总次数" type="int"/>
+            <column name="interval_2" remarks="1-2两分钟区间次数" type="int"/>
+            <column name="interval_5" remarks="2到5分钟区间次数" type="int"/>
+            <column name="interval_10" remarks="5-10分钟区间次数" type="int"/>
+            <column name="interval_15" remarks="10-15分钟区间次数" type="int"/>
+            <column name="interval_30" remarks="15-30分钟区间次数" type="int"/>
+
+            <column name="duration_new_5" remarks="0-5到访新客次数" type="int"/>
+            <column name="duration_new_15" remarks="5-15到访新客次数" type="int"/>
+            <column name="duration_new_30" remarks="15-30到访新客次数" type="int"/>
+            <column name="duration_new_60" remarks=">30到访新客次数" type="int"/>
+
+            <column name="duration_old_5" remarks="0-5到访老客次数" type="int"/>
+            <column name="duration_old_15" remarks="5-15到访老客次数" type="int"/>
+            <column name="duration_old_30" remarks="15-30到访老客次数" type="int"/>
+            <column name="duration_old_60" remarks=">30到访老客次数" type="int"/>
+
+            <column name="high_active_5" remarks="0-5高活跃人群次数" type="int"/>
+            <column name="high_active_15" remarks="5-15高活跃人群次数" type="int"/>
+            <column name="high_active_30" remarks="15-30高活跃人群次数" type="int"/>
+            <column name="high_active_60" remarks=">30高活跃人群次数" type="int"/>
+
+            <column name="middle_active_5" remarks="0-5中活跃人群次数" type="int"/>
+            <column name="middle_active_15" remarks="5-15中活跃人群次数" type="int"/>
+            <column name="middle_active_30" remarks="15-30中活跃人群次数" type="int"/>
+            <column name="middle_active_60" remarks=">30中活跃人群次数" type="int"/>
+
+            <column name="low_active_5" remarks="0-5低活跃人群次数" type="int"/>
+            <column name="low_active_15" remarks="5-15低活跃人群次数" type="int"/>
+            <column name="low_active_30" remarks="15-30低活跃人群次数" type="int"/>
+            <column name="low_active_60" remarks=">30低活跃人群次数" type="int"/>
+
+            <column name="sleep_active_5" remarks="0-5沉睡人群次数" type="int"/>
+            <column name="sleep_active_15" remarks="5-15沉睡人群次数" type="int"/>
+            <column name="sleep_active_30" remarks="15-30沉睡人群次数" type="int"/>
+            <column name="sleep_active_60" remarks=">30沉睡人群次数" type="int"/>
+
+            <column name="time_old_1" remarks="1次老客到访次数" type="int"/>
+            <column name="time_old_2" remarks="2次老客到访次数" type="int"/>
+            <column name="time_old_3" remarks="3-5次老客到访次数" type="int"/>
+            <column name="time_old_5" remarks="大于5次老客到访次数" type="int"/>
+
+            <column name="old_interval" remarks="入店老客间隔" type="int"/>
+            <column name="visit_cycle" remarks="到访周期" type="int"/>
+
+            <column name="new_active_duration" remarks="新客到访时长" type="int"/>
+            <column name="new_active_time" remarks="新客到访次数" type="int"/>
+            <column name="old_active_duration" remarks="老客到访时长" type="int"/>
+            <column name="old_active_time" remarks="老客到访次数" type="int"/>
+
+            <column name="city_level" remarks="城市类别：1 一线城市 2：二线城市 3：三线城市" type="int"/>
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="youyu.dong" id="1507953600055-3">
+        <createTable tableName="TD_METRIC_MONTH_ACTIVE">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="brand" remarks="品牌" type="varchar(100)"/>
+            <column name="region" remarks="大区" type="varchar(100)"/>
+            <column name="city" remarks="城市" type="varchar(100)"/>
+            <column name="province" remarks="省" type="varchar(100)"/>
+            <column name="channel" remarks="渠道" type="varchar(100)"/>
+            <column name="mall" remarks="商场" type="varchar(127)"/>
+            <column name="project_name" remarks="项目名称" type="varchar(100)"/>
+            <column name="project_type" remarks="项目类型(1：店铺 2：自定义 3：物理城市 4：品牌城市 5：品牌大区 6：品牌 7: 商场 8：渠道 9：物理省份 10：品牌省份)" type="int"/>
+            <column name="project_id" remarks="项目id(TD_PROJECT)" type="int"/>
+            <column name="project_num" remarks="店铺编号ID" type="varchar(100)"/>
+            <column name="year" remarks="年份" type="varchar(4)"/>
+            <column name="month" remarks="月份" type="varchar(2)"/>
+            <column name="active_new_users" remarks="进店新客" type="int"/>
+            <column name="active_old_users" remarks="进店老客" type="int"/>
+            <column name="active_users" remarks="进店人数" type="int"/>
+            <column name="stay_new_users" remarks="停留新客" type="int"/>
+            <column name="stay_old_users" remarks="停留老客" type="int"/>
+            <column name="stay_users" remarks="停留人数" type="int"/>
+            <column name="front_users" remarks="周边人数" type="int"/>
+            <column name="jump_users" remarks="跳出人数" type="int"/>
+            <column name="high_active_users" remarks="高活跃人数" type="int"/>
+            <column name="middle_active_users" remarks="中活跃人数" type="int"/>
+            <column name="low_active_users" remarks="低活跃人数" type="int"/>
+            <column name="sleep_active_users" remarks="沉睡人数" type="int"/>
+            <column name="high_stay_users" remarks="高活跃停留人数" type="int"/>
+            <column name="middle_stay_users" remarks="中活跃停留人数" type="int"/>
+            <column name="low_stay_users" remarks="低活跃停留人数" type="int"/>
+            <column name="sleep_stay_users" remarks="沉睡停留人数" type="int"/>
+            <column name="recent7Users" remarks="近7日入店客流" type="int"/>
+            <column name="recent30HighRate" remarks="近30日高活跃客群占比" type="int"/>
+            <column name="active_duration" remarks="到访总时长" type="int"/>
+            <column name="active_times" remarks="到访总次数" type="int"/>
+            <column name="stay_duration" remarks="停留总时长" type="int"/>
+            <column name="stay_times" remarks="停留总次数" type="int"/>
+            <column name="interval_2" remarks="1-2两分钟区间次数" type="int"/>
+            <column name="interval_5" remarks="2到5分钟区间次数" type="int"/>
+            <column name="interval_10" remarks="5-10分钟区间次数" type="int"/>
+            <column name="interval_15" remarks="10-15分钟区间次数" type="int"/>
+            <column name="interval_30" remarks="15-30分钟区间次数" type="int"/>
+
+            <column name="duration_new_5" remarks="0-5到访新客次数" type="int"/>
+            <column name="duration_new_15" remarks="5-15到访新客次数" type="int"/>
+            <column name="duration_new_30" remarks="15-30到访新客次数" type="int"/>
+            <column name="duration_new_60" remarks=">30到访新客次数" type="int"/>
+
+            <column name="duration_old_5" remarks="0-5到访老客次数" type="int"/>
+            <column name="duration_old_15" remarks="5-15到访老客次数" type="int"/>
+            <column name="duration_old_30" remarks="15-30到访老客次数" type="int"/>
+            <column name="duration_old_60" remarks=">30到访老客次数" type="int"/>
+
+            <column name="high_active_5" remarks="0-5高活跃人群次数" type="int"/>
+            <column name="high_active_15" remarks="5-15高活跃人群次数" type="int"/>
+            <column name="high_active_30" remarks="15-30高活跃人群次数" type="int"/>
+            <column name="high_active_60" remarks=">30高活跃人群次数" type="int"/>
+
+            <column name="middle_active_5" remarks="0-5中活跃人群次数" type="int"/>
+            <column name="middle_active_15" remarks="5-15中活跃人群次数" type="int"/>
+            <column name="middle_active_30" remarks="15-30中活跃人群次数" type="int"/>
+            <column name="middle_active_60" remarks=">30中活跃人群次数" type="int"/>
+
+            <column name="low_active_5" remarks="0-5低活跃人群次数" type="int"/>
+            <column name="low_active_15" remarks="5-15低活跃人群次数" type="int"/>
+            <column name="low_active_30" remarks="15-30低活跃人群次数" type="int"/>
+            <column name="low_active_60" remarks=">30低活跃人群次数" type="int"/>
+
+            <column name="sleep_active_5" remarks="0-5沉睡人群次数" type="int"/>
+            <column name="sleep_active_15" remarks="5-15沉睡人群次数" type="int"/>
+            <column name="sleep_active_30" remarks="15-30沉睡人群次数" type="int"/>
+            <column name="sleep_active_60" remarks=">30沉睡人群次数" type="int"/>
+
+            <column name="time_old_1" remarks="1次老客到访次数" type="int"/>
+            <column name="time_old_2" remarks="2次老客到访次数" type="int"/>
+            <column name="time_old_3" remarks="3-5次老客到访次数" type="int"/>
+            <column name="time_old_5" remarks="大于5次老客到访次数" type="int"/>
+
+            <column name="old_interval" remarks="入店老客间隔" type="int"/>
+            <column name="visit_cycle" remarks="到访周期" type="int"/>
+
+            <column name="new_active_duration" remarks="新客到访时长" type="int"/>
+            <column name="new_active_time" remarks="新客到访次数" type="int"/>
+            <column name="old_active_duration" remarks="老客到访时长" type="int"/>
+            <column name="old_active_time" remarks="老客到访次数" type="int"/>
+
+            <column name="city_level" remarks="城市类别：1 一线城市 2：二线城市 3：三线城市" type="int"/>
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

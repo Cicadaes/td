@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.ProjectAttributeDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="td.enterprise.entity.ProjectAttribute" >
+	<result column="id" property="id"/>
+	<result column="project_id" property="projectId"/>
+	<result column="principal" property="principal"/>
+	<result column="position" property="position"/>
+	<result column="department" property="department"/>
+	<result column="email" property="email"/>
+	<result column="phone1" property="phone1"/>
+	<result column="phone2" property="phone2"/>
+	<result column="type" property="type"/>
+	<result column="status" property="status"/>
+	<result column="create_by" property="createBy"/>
+	<result column="creator" property="creator"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="updater" property="updater"/>
+	<result column="update_time" property="updateTime"/>
+  </resultMap>
+       
+  <!-- TD_PROJECT_ATTRIBUTE table all fields -->
+  <sql id="Base_Column_List" >
+	 id,project_id,principal,position,department,email,phone1,phone2,type,status,create_by,creator,create_time,update_by,updater,update_time
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="projectId != null and projectId != ''" >
+        and project_id =  #{projectId}
+	  </if>
+	      <if test="principal != null and principal != ''" >
+        and principal =  #{principal}
+	  </if>
+	      <if test="position != null and position != ''" >
+        and position =  #{position}
+	  </if>
+	      <if test="department != null and department != ''" >
+        and department =  #{department}
+	  </if>
+	      <if test="email != null and email != ''" >
+        and email =  #{email}
+	  </if>
+	      <if test="phone1 != null and phone1 != ''" >
+        and phone1 =  #{phone1}
+	  </if>
+	      <if test="phone2 != null and phone2 != ''" >
+        and phone2 =  #{phone2}
+	  </if>
+	      <if test="type != null and type != ''" >
+        and type =  #{type}
+	  </if>
+	      <if test="status != null and status != ''" >
+        and status =  #{status}
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+      insert into
+	  TD_PROJECT_ATTRIBUTE(id,project_id,principal,position,department,email,phone1,phone2,type,status,create_by,creator,create_time,update_by,updater,update_time)
+	  values(#{id},#{projectId},#{principal},#{position},#{department},#{email},#{phone1},#{phone2},#{type},#{status},#{createBy},#{creator},now(),#{updateBy},#{updater},now())
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+      update TD_PROJECT_ATTRIBUTE set project_id=#{projectId},principal=#{principal},position=#{position},department=#{department},email=#{email},phone1=#{phone1},phone2=#{phone2},type=#{type},status=#{status},create_by=#{createBy},creator=#{creator},update_by=#{updateBy},updater=#{updater},update_time=now() where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+      update TD_PROJECT_ATTRIBUTE set 
+	<if test="projectId != null  ">
+		project_id=#{projectId},
+	</if>
+	<if test="principal != null  ">
+		principal=#{principal},
+	</if>
+	<if test="position != null  ">
+		position=#{position},
+	</if>
+	<if test="department != null  ">
+		department=#{department},
+	</if>
+	<if test="email != null  ">
+		email=#{email},
+	</if>
+	<if test="phone1 != null  ">
+		phone1=#{phone1},
+	</if>
+	<if test="phone2 != null  ">
+		phone2=#{phone2},
+	</if>
+	<if test="type != null  ">
+		type=#{type},
+	</if>
+	<if test="status != null  ">
+		status=#{status},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="creator != null  ">
+		creator=#{creator},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="updater != null  ">
+		updater=#{updater},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	update_time=now()
+	where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 项目属性表 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+      select <include refid="Base_Column_List" /> 
+	 from TD_PROJECT_ATTRIBUTE where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+      delete from TD_PROJECT_ATTRIBUTE where id = #{id}
+  </delete>
+
+  <!-- 项目属性表 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_PROJECT_ATTRIBUTE 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询项目属性表列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_PROJECT_ATTRIBUTE 
+	<include refid="Base_Where_Clause"/>
+  </select>
+</mapper>   

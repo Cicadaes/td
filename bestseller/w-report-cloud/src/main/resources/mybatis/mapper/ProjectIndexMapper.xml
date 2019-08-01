@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.ProjectIndexDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.ProjectIndex" >
+        <result column="id" property="id"/>
+        <result column="project_id" property="projectId"/>
+        <result column="project_name" property="projectName"/>
+        <result column="project_type" property="projectType"/>
+        <result column="project_num" property="projectNum"/>
+        <result column="status" property="status"/>
+        <result column="today_flow" property="todayFlow"/>
+        <result column="seven_days_flow" property="sevenDaysFlow"/>
+        <result column="thirty_days_flow" property="thirtyDaysFlow"/>
+        <result column="seven_chain" property="sevenChain"/>
+        <result column="thirty_chain" property="thirtyChain"/>
+        <result column="sensor_num" property="sensorNum"/>
+        <result column="health_rate" property="healthRate"/>
+        <result column="no_log_duration" property="noLogDuration"/>
+        <result column="thirty_no_log_duration" property="thirtyNoLogDuration"/>
+        <result column="ssid_count" property="ssidCount"/>
+        <result column="room_count" property="roomCount"/>
+        <result column="create_by" property="createBy"/>
+        <result column="creator" property="creator"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="updater" property="updater"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <resultMap id="ProjectUserRelationVM" type="td.enterprise.web.vm.ProjectIndexVM" extends="BaseResultMap">
+        <result property="favorite" column="favorite"/>
+    </resultMap>
+
+    <!-- TD_PROJECT_INDEX table all fields -->
+    <sql id="Base_Column_List" >
+        id,project_id,project_name,project_type,project_num,status,today_flow,seven_days_flow,thirty_days_flow,seven_chain,thirty_chain,sensor_num,health_rate,no_log_duration,thirty_no_log_duration,ssid_count,room_count,create_by,creator,create_time,update_by,updater,update_time
+    </sql>
+
+    <!-- TD_PROJECT_INDEX table all fields alias of prjs -->
+    <sql id="Base_Column_List_PRJS">
+        prjs.project_id AS id,prjs.project_id,prjs.project_name,prjs.project_type,prjs.project_num,prjs.status,prjs.today_flow,prjs.seven_days_flow,
+        prjs.thirty_days_flow,prjs.seven_chain,prjs.thirty_chain,prjs.create_by,prjs.creator,prjs.create_time,prjs.update_by,prjs.updater,prjs.update_time
+    </sql>
+
+    <!-- TD_PROJECT_INDEX table all fields alias of pj -->
+    <sql id="Base_Column_List_PJ">
+        pj.id,pj.project_id,pj.project_name,pj.project_type,pj.project_num,pj.status,pj.today_flow,pj.seven_days_flow,
+        pj.thirty_days_flow,pj.seven_chain,pj.thirty_chain,pj.create_by,pj.creator,pj.create_time,pj.update_by,pj.updater,pj.update_time
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause_PJ">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and pj.id = #{id}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and pj.project_id = #{projectId}
+            </if>
+            <if test="projectName != null and projectName != ''">
+                and pj.project_name = #{projectName}
+            </if>
+            <if test="projectType != null and projectType != ''">
+                and pj.project_type = #{projectType}
+            </if>
+            <if test="projectNum != null and projectNum != ''">
+                and pj.project_num = #{projectNum}
+            </if>
+            <if test="status != null and status != ''">
+                and pj.status = #{status}
+            </if>
+            <if test="todayFlow != null and todayFlow != ''">
+                and pj.today_flow = #{todayFlow}
+            </if>
+            <if test="sevenDaysFlow != null and sevenDaysFlow != ''">
+                and pj.seven_days_flow = #{sevenDaysFlow}
+            </if>
+            <if test="thirtyDaysFlow != null and thirtyDaysFlow != ''">
+                and pj.thirty_days_flow = #{thirtyDaysFlow}
+            </if>
+            <if test="sevenChain != null and sevenChain != ''">
+                and pj.seven_chain = #{sevenChain}
+            </if>
+            <if test="thirtyChain != null and thirtyChain != ''">
+                and pj.thirty_chain = #{thirtyChain}
+            </if>
+            <if test="q != null and q != ''">
+                and (pj.project_name like CONCAT('%','${q}','%' ) or pj.project_num like CONCAT('%','${q}','%' ))
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides="," >
+            <if test="id != null and id != ''" >
+                and id =  #{id}
+            </if>
+            <if test="projectId != null and projectId != ''" >
+                and project_id =  #{projectId}
+            </if>
+            <if test="projectName != null and projectName != ''" >
+                and project_name =  #{projectName}
+            </if>
+            <if test="projectType != null and projectType != ''" >
+                and project_type =  #{projectType}
+            </if>
+            <if test="projectNum != null and projectNum != ''" >
+                and project_num =  #{projectNum}
+            </if>
+            <if test="status != null and status != ''" >
+                and status =  #{status}
+            </if>
+            <if test="todayFlow != null and todayFlow != ''" >
+                and today_flow =  #{todayFlow}
+            </if>
+            <if test="sevenDaysFlow != null and sevenDaysFlow != ''" >
+                and seven_days_flow =  #{sevenDaysFlow}
+            </if>
+            <if test="thirtyDaysFlow != null and thirtyDaysFlow != ''" >
+                and thirty_days_flow =  #{thirtyDaysFlow}
+            </if>
+            <if test="sevenChain != null and sevenChain != ''" >
+                and seven_chain =  #{sevenChain}
+            </if>
+            <if test="thirtyChain != null and thirtyChain != ''" >
+                and thirty_chain =  #{thirtyChain}
+            </if>
+            <if test="sensorNum != null and sensorNum != ''" >
+                and sensor_num =  #{sensorNum}
+            </if>
+            <if test="healthRate != null and healthRate != ''" >
+                and health_rate =  #{healthRate}
+            </if>
+            <if test="noLogDuration != null and noLogDuration != ''" >
+                and no_log_duration =  #{noLogDuration}
+            </if>
+            <if test="thirtyNoLogDuration != null and thirtyNoLogDuration != ''" >
+                and thirty_no_log_duration =  #{thirtyNoLogDuration}
+            </if>
+            <if test="ssidCount != null and ssidCount != ''" >
+                and ssid_count =  #{ssidCount}
+            </if>
+            <if test="roomCount != null and roomCount != ''" >
+                and room_count =  #{roomCount}
+            </if>
+            <if test="q != null and q != ''">
+                and (project_name like CONCAT('%','${q}','%' ) or project_num like CONCAT('%','${q}','%' ))
+            </if>
+        </trim>
+    </sql>
+
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_PROJECT_INDEX(id,project_id,project_name,project_type,project_num,status,today_flow,seven_days_flow,thirty_days_flow,seven_chain,thirty_chain,create_by,creator,create_time,update_by,updater,update_time)
+        values(#{id},#{projectId},#{projectName},#{projectType},#{projectNum},#{status},#{todayFlow},#{sevenDaysFlow},#{thirtyDaysFlow},#{sevenChain},#{thirtyChain},#{createBy},#{creator},now(),#{updateBy},#{updater},now())
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_PROJECT_INDEX set
+        project_id=#{projectId},project_name=#{projectName},project_type=#{projectType},project_num=#{projectNum},status=#{status},today_flow=#{todayFlow},seven_days_flow=#{sevenDaysFlow},thirty_days_flow=#{thirtyDaysFlow},seven_chain=#{sevenChain},thirty_chain=#{thirtyChain},create_by=#{createBy},creator=#{creator},create_time=now(),update_by=#{updateBy},updater=#{updater},update_time=now()
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_PROJECT_INDEX set
+        <trim suffixOverrides=",">
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="projectName != null  ">
+                project_name=#{projectName},
+            </if>
+            <if test="projectType != null  ">
+                project_type=#{projectType},
+            </if>
+            <if test="projectNum != null  ">
+                project_num=#{projectNum},
+            </if>
+            <if test="status != null  ">
+                status=#{status},
+            </if>
+            <if test="todayFlow != null  ">
+                today_flow=#{todayFlow},
+            </if>
+            <if test="sevenDaysFlow != null  ">
+                seven_days_flow=#{sevenDaysFlow},
+            </if>
+            <if test="thirtyDaysFlow != null  ">
+                thirty_days_flow=#{thirtyDaysFlow},
+            </if>
+            <if test="sevenChain != null  ">
+                seven_chain=#{sevenChain},
+            </if>
+            <if test="thirtyChain != null  ">
+                thirty_chain=#{thirtyChain},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 项目指标 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_PROJECT_INDEX where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_PROJECT_INDEX where id = #{id}
+    </delete>
+
+    <!-- 项目指标 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_PROJECT_INDEX
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询项目指标列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_PROJECT_INDEX
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- 查询项目指标详情 -->
+    <select id="queryListByOrder" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_PROJECT_INDEX
+        <include refid="Base_Where_Clause"/>
+        and project_id in
+        <foreach collection="projectIds" open="(" separator="," close=")" item="item">
+            #{item}
+        </foreach>
+        <if test="sort != null and sort != ''">
+            order by ${sort}
+            <if test="order != null and order != ''">
+                ${order}
+            </if>
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- 查询项目指标总数 -->
+    <select id="queryListByOrderCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1)
+        from TD_PROJECT_INDEX
+        <include refid="Base_Where_Clause"/>
+        and project_id in
+        <foreach collection="projectIds" open="(" separator="," close=")" item="item">
+            #{item}
+        </foreach>
+    </select>
+
+    <!-- 关联用户表查询项目列表 -->
+    <select id="queryByListWithUserRelation" resultMap="ProjectUserRelationVM" parameterType="Object">
+        SELECT<include refid="Base_Column_List_PRJS"/>
+        ,tp.longitude, tp.latitude
+        <if test="umid != null and umid != ''">
+            ,IFNULL(faved.id, -1) AS favorite
+        </if>
+        FROM (SELECT
+        <include refid="Base_Column_List_PJ"/>
+        FROM TD_PROJECT_INDEX pj
+        <include refid="Base_Where_Clause_PJ"/>
+        <if test="null !=projectIds and projectIds.size > 0">
+            AND pj.project_id IN
+            <foreach collection="projectIds" open="(" separator="," close=")" item="item">
+                #{item}
+            </foreach>
+        </if>
+        <if test="null ==projectIds or projectIds.size == 0">
+            AND 1=0
+        </if>
+        ) prjs
+        LEFT JOIN TD_PROJECT tp
+        ON prjs.project_id = tp.id
+        <if test="umid != null and umid != ''">
+            LEFT JOIN (SELECT top.project_id, top.order_index
+            FROM TD_PROJECT_USER_RELATION top
+            WHERE top.type = 2
+            AND top.status = 1
+            AND top.login = #{umid}
+            ) upped ON prjs.project_id = upped.project_id
+            <choose>
+                <when test="userRelationType != null and userRelationType == 2">
+                    JOIN
+                </when>
+                <otherwise>
+                    LEFT JOIN
+                </otherwise>
+            </choose>
+            (SELECT fav.project_id, fav.id
+            FROM TD_PROJECT_USER_RELATION fav
+            WHERE fav.type = 1
+            AND fav.status = 1
+            AND fav.login = #{umid}
+            ) faved ON prjs.project_id = faved.project_id
+        GROUP BY prjs.project_id
+        ORDER BY
+            <if test="sort != null and sort != ''">
+                ${sort}
+                <if test="order != null and order != ''">
+                    ${order},
+                </if>
+            </if>
+            upped.order_index DESC, prjs.project_id ASC
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- 关联用户表查询项目列表总数 -->
+    <select id="queryByListWithUserRelationCount" resultType="java.lang.Integer" parameterType="Object">
+        SELECT COUNT(1)
+        FROM (SELECT
+        <include refid="Base_Column_List_PJ"/>
+        FROM TD_PROJECT_INDEX pj
+        <include refid="Base_Where_Clause_PJ"/>
+        <if test="null !=projectIds and projectIds.size > 0">
+            AND pj.project_id IN
+            <foreach collection="projectIds" open="(" separator="," close=")" item="item">
+                #{item}
+            </foreach>
+        </if>
+        <if test="null ==projectIds or projectIds.size == 0">
+            AND 1=0
+        </if>
+        ) prjs
+        <if test="umid != null and umid != ''">
+            LEFT JOIN (SELECT top.project_id, top.order_index
+            FROM TD_PROJECT_USER_RELATION top
+            WHERE top.type = 2
+            AND top.status = 1
+            AND top.login = #{umid}
+            ) upped ON prjs.project_id = upped.project_id
+            <choose>
+                <when test="userRelationType != null and userRelationType == 2">
+                    JOIN
+                </when>
+                <otherwise>
+                    LEFT JOIN
+                </otherwise>
+            </choose>
+            (SELECT fav.project_id, fav.id
+            FROM TD_PROJECT_USER_RELATION fav
+            WHERE fav.type = 1
+            AND fav.status = 1
+            AND fav.login = #{umid}
+            ) faved ON prjs.project_id = faved.project_id
+        </if>
+    </select>
+</mapper>   

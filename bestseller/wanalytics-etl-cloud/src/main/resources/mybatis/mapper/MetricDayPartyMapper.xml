@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.MetricDayPartyDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="td.enterprise.entity.MetricDayParty" >
+	<result column="id" property="id"/>
+	<result column="brand" property="brand"/>
+	<result column="region" property="region"/>
+	<result column="city" property="city"/>
+	<result column="province" property="province"/>
+	<result column="channel" property="channel"/>
+	<result column="mall" property="mall"/>
+	<result column="project_name" property="projectName"/>
+	<result column="project_type" property="projectType"/>
+	<result column="project_id" property="projectId"/>
+	<result column="date" property="date"/>
+	<result column="week_of_year" property="weekOfYear"/>
+	<result column="month" property="month"/>
+	<result column="sales_amount" property="salesAmount"/>
+	<result column="order_count" property="orderCount"/>
+	<result column="order_average_price" property="orderAveragePrice"/>
+	<result column="singular_count" property="singularCount"/>
+	<result column="member_count" property="memberCount"/>
+	<result column="potential_count" property="potentialCount"/>
+	<result column="update_time" property="updateTime"/>
+  </resultMap>
+       
+  <!-- TD_METRIC_DAY_PARTY table all fields -->
+  <sql id="Base_Column_List" >
+	 id,brand,region,city,province,channel,mall,project_name,project_type,project_id,date,week_of_year,month,sales_amount,order_count,order_average_price,singular_count,member_count,potential_count,update_time
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="brand != null and brand != ''" >
+        and brand =  #{brand}
+	  </if>
+	      <if test="region != null and region != ''" >
+        and region =  #{region}
+	  </if>
+	      <if test="city != null and city != ''" >
+        and city =  #{city}
+	  </if>
+	      <if test="province != null and province != ''" >
+        and province =  #{province}
+	  </if>
+	      <if test="channel != null and channel != ''" >
+        and channel =  #{channel}
+	  </if>
+	      <if test="mall != null and mall != ''" >
+        and mall =  #{mall}
+	  </if>
+	      <if test="projectName != null and projectName != ''" >
+        and project_name =  #{projectName}
+	  </if>
+	      <if test="projectType != null and projectType != ''" >
+        and project_type =  #{projectType}
+	  </if>
+	      <if test="projectId != null and projectId != ''" >
+        and project_id =  #{projectId}
+	  </if>
+	      <if test="date != null and date != ''" >
+        and date =  #{date}
+	  </if>
+	      <if test="weekOfYear != null and weekOfYear != ''" >
+        and week_of_year =  #{weekOfYear}
+	  </if>
+	      <if test="month != null and month != ''" >
+        and month =  #{month}
+	  </if>
+	      <if test="salesAmount != null and salesAmount != ''" >
+        and sales_amount =  #{salesAmount}
+	  </if>
+	      <if test="orderCount != null and orderCount != ''" >
+        and order_count =  #{orderCount}
+	  </if>
+	      <if test="orderAveragePrice != null and orderAveragePrice != ''" >
+        and order_average_price =  #{orderAveragePrice}
+	  </if>
+	      <if test="singularCount != null and singularCount != ''" >
+        and singular_count =  #{singularCount}
+	  </if>
+	      <if test="memberCount != null and memberCount != ''" >
+        and member_count =  #{memberCount}
+	  </if>
+	      <if test="potentialCount != null and potentialCount != ''" >
+        and potential_count =  #{potentialCount}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+      insert into 
+TD_METRIC_DAY_PARTY(id,brand,region,city,province,channel,mall,project_name,project_type,project_id,date,week_of_year,month,sales_amount,order_count,order_average_price,singular_count,member_count,potential_count,update_time)
+ values(#{id},#{brand},#{region},#{city},#{province},#{channel},#{mall},#{projectName},#{projectType},#{projectId},#{date},#{weekOfYear},#{month},#{salesAmount},#{orderCount},#{orderAveragePrice},#{singularCount},#{memberCount},#{potentialCount},now())
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+      update TD_METRIC_DAY_PARTY set brand=#{brand},region=#{region},city=#{city},province=#{province},channel=#{channel},mall=#{mall},project_name=#{projectName},project_type=#{projectType},project_id=#{projectId},date=#{date},week_of_year=#{weekOfYear},month=#{month},sales_amount=#{salesAmount},order_count=#{orderCount},order_average_price=#{orderAveragePrice},singular_count=#{singularCount},member_count=#{memberCount},potential_count=#{potentialCount},update_time=now() where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+      update TD_METRIC_DAY_PARTY set 
+		<if test="brand != null  ">
+		brand=#{brand},
+	</if>
+	<if test="region != null  ">
+		region=#{region},
+	</if>
+	<if test="city != null  ">
+		city=#{city},
+	</if>
+	<if test="province != null  ">
+		province=#{province},
+	</if>
+	<if test="channel != null  ">
+		channel=#{channel},
+	</if>
+	<if test="mall != null  ">
+		mall=#{mall},
+	</if>
+	<if test="projectName != null  ">
+		project_name=#{projectName},
+	</if>
+	<if test="projectType != null  ">
+		project_type=#{projectType},
+	</if>
+	<if test="projectId != null  ">
+		project_id=#{projectId},
+	</if>
+	<if test="date != null  ">
+		date=#{date},
+	</if>
+	<if test="weekOfYear != null  ">
+		week_of_year=#{weekOfYear},
+	</if>
+	<if test="month != null  ">
+		month=#{month},
+	</if>
+	<if test="salesAmount != null  ">
+		sales_amount=#{salesAmount},
+	</if>
+	<if test="orderCount != null  ">
+		order_count=#{orderCount},
+	</if>
+	<if test="orderAveragePrice != null  ">
+		order_average_price=#{orderAveragePrice},
+	</if>
+	<if test="singularCount != null  ">
+		singular_count=#{singularCount},
+	</if>
+	<if test="memberCount != null  ">
+		member_count=#{memberCount},
+	</if>
+	<if test="potentialCount != null  ">
+		potential_count=#{potentialCount},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	update_time = now() 
+	where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 一方数据日指标 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+      select <include refid="Base_Column_List" /> 
+	 from TD_METRIC_DAY_PARTY where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+      delete from TD_METRIC_DAY_PARTY where id = #{id}
+  </delete>
+
+  <!-- 一方数据日指标 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_METRIC_DAY_PARTY 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询一方数据日指标列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_METRIC_DAY_PARTY 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <!-- 通过周期删除记录 add by liyinglei 2017-11-27 -->
+  <delete id="deleteByRunDate" parameterType="Object">
+      delete from TD_METRIC_DAY_PARTY where date = #{runDate}
+  </delete>
+  
+  <!-- 批量保存一方数据日指标(历史认证数据)  add by liyinglei 2017-11-08 -->
+  <insert id="batchInsert" parameterType="Object" useGeneratedKeys="false" >
+  	INSERT INTO TD_METRIC_DAY_PARTY (brand,region,city,province,channel,mall,project_name,
+		project_type,project_id,`date`,week_of_year,`month`,member_count,potential_count,project_num,logical_city)
+	SELECT p.brand,p.region,p.city,p.province,p.channel,p.mall,p.project_name,p.project_type,p.id `project_id`,
+		h.run_date `date`, (select weekofyear(curdate())) `week_of_year`,month(curdate()) `month`,
+		COUNT(IF(h.user_type = '2',TRUE,NULL)) `member_count`, COUNT(IF(h.user_type IN ('6','7'),TRUE,NULL)) `potential_count`,p.project_num,p.logical_city
+	 FROM TD_PROJECT p 
+	LEFT JOIN TD_BS_SHOP s ON p.project_num = s.shop_code
+	LEFT JOIN TD_BS_AUTH_HISTORY h ON s.shop_id = h.shop_id
+	WHERE p.project_type = '1'
+	AND s.run_date=#{runDate}
+	AND h.run_date=#{runDate}
+	AND s.shop_code = p.project_num
+	GROUP BY p.brand,p.region,p.city,p.province,p.channel,p.mall,p.project_name,p.project_type,p.id,`date`,`week_of_year`,`month`
+  </insert>
+  
+</mapper>   

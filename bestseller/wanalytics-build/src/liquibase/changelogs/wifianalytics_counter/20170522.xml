@@ -1,0 +1,18 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="junmin.li" id="1495420226314-1">
+        <createTable tableName="offline_month_metric_counter" remarks="项目月度统计">
+            <column name="tenant_id" remarks="租户id" type="varchar(31)"/>
+            <column name="project_id" remarks="项目id" type="BIGINT" />
+            <column name="month" remarks="月份" type="varchar(7)" />
+            <column name="type" remarks="days:月均光顾日数,times月均光顾次数" type="varchar(20)" />
+            <column name="metric_value" remarks="指标值" type="varchar(10)" />
+            <column name="update_time" remarks="修改或更新时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+</databaseChangeLog>

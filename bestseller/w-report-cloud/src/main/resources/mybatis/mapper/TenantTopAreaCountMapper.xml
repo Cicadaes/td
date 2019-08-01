@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.TenantTopAreaCountDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.TenantTopAreaCount">
+        <result column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="project_id" property="projectId"/>
+        <result column="crowd_id" property="crowdId"/>
+        <result column="run_date" property="runDate"/>
+        <result column="area_type" property="areaType"/>
+        <result column="metric_value" property="metricValue"/>
+        <result column="cycle_statistics" property="cycleStatistics"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+        <result column="area_name" property="areaName"/>
+    </resultMap>
+
+    <!-- TD_TENANT_TOP_AREA_COUNT table all fields -->
+    <sql id="Base_Column_List">
+        id,tenant_id,project_id,crowd_id,run_date,area_type,metric_value,cycle_statistics,start_date,end_date,area_name
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="crowdId != null and crowdId != ''">
+                and crowd_id = #{crowdId}
+            </if>
+            <if test="runDate != null and runDate != ''">
+                and run_date = #{runDate}
+            </if>
+            <if test="areaType != null and areaType != ''">
+                and area_type = #{areaType}
+            </if>
+            <if test="metricValue != null and metricValue != ''">
+                and metric_value = #{metricValue}
+            </if>
+            <if test="cycleStatistics != null and cycleStatistics != ''">
+                and cycle_statistics = #{cycleStatistics}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and start_date = #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and end_date = #{endDate}
+            </if>
+            <if test="areaName != null and areaName != ''">
+                and area_name = #{areaName}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause_New">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="crowdId != null and crowdId != ''">
+                and crowd_id = #{crowdId}
+            </if>
+            <if test="runDate != null and runDate != ''">
+                <![CDATA[ AND run_date <= #{runDate}]]>
+            </if>
+            <if test="areaType != null and areaType != ''">
+                and area_type = #{areaType}
+            </if>
+            <if test="metricValue != null and metricValue != ''">
+                and metric_value = #{metricValue}
+            </if>
+            <if test="cycleStatistics != null and cycleStatistics != ''">
+                and cycle_statistics = #{cycleStatistics}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and start_date = #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and end_date = #{endDate}
+            </if>
+            <if test="areaName != null and areaName != ''">
+                and area_name = #{areaName}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_TENANT_TOP_AREA_COUNT(id,tenant_id,project_id,crowd_id,run_date,area_type,metric_value,cycle_statistics,start_date,end_date,area_name)
+        values(#{id},#{tenantId},#{projectId},#{crowdId},#{runDate},#{areaType},#{metricValue},#{cycleStatistics},#{startDate},#{endDate},#{areaName})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_TENANT_TOP_AREA_COUNT set
+        tenant_id=#{tenantId},project_id=#{projectId},crowd_id=#{crowdId},run_date=#{runDate},area_type=#{areaType},metric_value=#{metricValue},cycle_statistics=#{cycleStatistics},start_date=#{startDate},end_date=#{endDate},area_name=#{areaName}
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_TENANT_TOP_AREA_COUNT set
+        <trim suffixOverrides=",">
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="crowdId != null  ">
+                crowd_id=#{crowdId},
+            </if>
+            <if test="runDate != null  ">
+                run_date=#{runDate},
+            </if>
+            <if test="areaType != null  ">
+                area_type=#{areaType},
+            </if>
+            <if test="metricValue != null  ">
+                metric_value=#{metricValue},
+            </if>
+            <if test="cycleStatistics != null  ">
+                cycle_statistics=#{cycleStatistics},
+            </if>
+            <if test="startDate != null  ">
+                start_date=#{startDate},
+            </if>
+            <if test="endDate != null  ">
+                end_date=#{endDate},
+            </if>
+            <if test="areaName != null  ">
+                area_name=#{areaName},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 TopN小区 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_TENANT_TOP_AREA_COUNT where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_TENANT_TOP_AREA_COUNT where id = #{id}
+    </delete>
+
+    <!-- TopN小区 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_TENANT_TOP_AREA_COUNT
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询TopN小区列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_TENANT_TOP_AREA_COUNT
+        <include refid="Base_Where_Clause"/>
+        order by metric_value desc
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+
+    <select id="queryByListNew" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_TENANT_TOP_AREA_COUNT
+        <include refid="Base_Where_Clause_New"/>
+        and run_date = (select run_date from TD_TENANT_TOP_AREA_COUNT
+        <include refid="Base_Where_Clause_New"/>
+        <if test="runDate != null and runDate != ''">
+            <![CDATA[ and run_date <= #{runDate}]]>
+        </if>
+        order by run_date desc limit 1)
+        order by metric_value desc
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <select id="queryByListNewSum" resultType="java.lang.Long" parameterType="Object">
+        select sum(metric_value)
+        from TD_TENANT_TOP_AREA_COUNT
+        <include refid="Base_Where_Clause_New"/>
+        and run_date = (select run_date from TD_TENANT_TOP_AREA_COUNT
+        <include refid="Base_Where_Clause_New"/>
+        <if test="runDate != null and runDate != ''">
+            <![CDATA[ and run_date <= #{runDate}]]>
+        </if>
+        order by run_date desc limit 1)
+    </select>
+
+    <select id="queryLatestRow" resultMap="BaseResultMap" parameterType="Object">
+        select * from TD_TENANT_TOP_AREA_COUNT t
+        <where>
+            1=1
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="crowdId != null">
+                and crowd_id = #{crowdId}
+            </if>
+            <if test=" cycleStatistics != null and cycleStatistics != '' ">
+                and t.cycle_statistics = #{cycleStatistics}
+            </if>
+            <if test=" runDate != null and runDate != '' ">
+                <![CDATA[ AND t.run_date <= #{runDate}]]>
+            </if>
+        </where>
+        order by t.run_date desc limit 1
+    </select>
+
+
+    <delete id="batchDeleteByProjectAndDate" parameterType="Object">
+        delete from TD_TENANT_TOP_AREA_COUNT where project_id = #{projectId} and run_date = #{runDate}
+    </delete>
+
+    <insert id="batchSelectAndInsert" useGeneratedKeys="true" parameterType="java.util.List">
+        INSERT INTO
+        TD_TENANT_TOP_AREA_COUNT(tenant_id,project_id,crowd_id,run_date,area_type,metric_value,cycle_statistics,start_date,end_date,area_name)
+        SELECT t.tenant_id, d.project_id, c.crowd_id, t.run_date, t.area_type, t.metric_value, t.cycle_statistics,
+        t.start_date, t.end_date, t.area_name
+        FROM
+        (SELECT s.tenant_id, s.type, s.run_date, s.area_type, SUM(IFNULL(s.metric_value,0)) AS metric_value,
+        s.cycle_statistics, s.start_date, s.end_date, s.area_name
+        FROM
+        (SELECT DISTINCT tb.tenant_id, cd.type, tb.run_date, tb.area_type, tb.metric_value, tb.cycle_statistics,
+        tb.start_date, tb.end_date, tb.area_name
+        FROM TD_TENANT_TOP_AREA_COUNT tb
+        JOIN TD_CROWD cd
+        ON tb.project_id = cd.attr1
+        AND tb.crowd_id = cd.id
+        WHERE tb.project_id IN (
+        SELECT r.project_id FROM TD_PROJECT_RELATION r
+        WHERE r.project_parent_id = #{projectId})
+        AND tb.run_date = #{runDate}
+        )s
+        GROUP BY s.tenant_id, s.type, s.run_date, s.area_type, s.cycle_statistics, s.start_date, s.end_date, s.area_name
+        )t,
+        (SELECT DISTINCT project_parent_id AS project_id FROM TD_PROJECT_RELATION WHERE project_parent_id = #{projectId}
+        )d,
+        (SELECT DISTINCT id AS crowd_id, type, attr1 FROM TD_CROWD
+        )c
+        WHERE c.attr1 = d.project_id
+        AND c.type = t.type
+    </insert>
+</mapper>

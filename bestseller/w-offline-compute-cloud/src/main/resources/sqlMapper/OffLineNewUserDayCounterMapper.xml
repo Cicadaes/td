@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OffLineNewUserDayCounterMapper">
+
+    <insert id="insert" parameterType="java.util.List">
+        INSERT INTO wifianalytics_counter.offline_new_user_day_counter
+        (
+        tenant_id,
+        project_id,
+        date,
+        metric_value
+        ) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.tenant_id},
+            #{item.project_id},
+            #{item.date},
+            #{item.count}
+            )
+        </foreach>
+          ON DUPLICATE KEY UPDATE metric_value = VALUES(metric_value)
+    </insert>
+
+
+</mapper>

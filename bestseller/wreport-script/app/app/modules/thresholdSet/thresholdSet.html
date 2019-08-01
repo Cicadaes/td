@@ -1,0 +1,105 @@
+<!-- 导航条 -->
+<div class="nav_bar_top" >
+    <span>阈值设置</span>
+</div>
+
+<div class = "model_top_bar_bottom">
+    <!-- 设置按钮 -->
+    <div class = "add_btn_wap" ng-click = "goSetting($event);">
+        <span class = "add_btn_text">设置</span>
+    </div>
+
+    <!-- 批量设置按条件搜索  -->
+    <div class="search_project2">
+        <input placeholder="{{constants.label_input_key_word}}" ng-keyup="myKeyup($event)" ng-model="searchText"/>
+    </div>
+
+    <!-- 清除浮动 -->
+    <div style="clear:both;"></div>
+
+    <!-- 设置table -->
+    <div class="ng-table-container">
+        <h3 class="ng-table-head" id="batchSetTit">
+            店铺列表
+        </h3>
+        <div class="row_highlight">
+            <table ng-table="tableParams" class="table table_threshold table-special">
+                <thead>
+                <tr>
+                    <th style="width: 55px;">
+                        <span class="check_one set_checkOne check_all" ng-click="check_all($event)" ></span>
+                    </th>
+                    <th ng-style="table_width_1">
+                        <span class="setTabTit">名称</span>
+                    </th>
+                    <th ng-style="table_width_2">
+                        <span class="setTabTit">shopcode</span>
+                    </th>
+                    <th ng-style="table_width_3">
+                        <span class="setTabTit">更新时间</span>
+                    </th>
+                    <th ng-style="table_width_4">
+                        <span class="setTabTit">入店客流</span>
+                    </th>
+                    <th ng-style="table_width_5">
+                        <span class="setTabTit">入店信号强度</span>
+                    </th>
+                    <th ng-style="table_width_6">
+                        <span class="setTabTit">周边信号强度</span>
+                    </th>
+
+                    <th ng-style="table_width_7">
+                        <span class="setTabTit">黑名单</span>
+                    </th>
+                    <th ng-style="table_width_8">
+                        <span class="setTabTit">营业时间</span>
+                    </th>
+                    <th ng-style="table_width_9">
+                        <span class="setTabTit">{{constants.label_operation}}</span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody ng-style="table_max_height">
+                <tr ng-repeat="record in set_List">
+                    <td style="position:relative;width: 55px;">
+                        <span class="check_one set_checkOne" ng-click="check_one(record,$event)"></span>
+                    </td>
+                    <td ng-style="table_width_1">
+                        <span >{{record.projectName}}</span>
+                    </td>
+                    <td ng-style="table_width_2">
+                        <span >{{record.projectNum}}</span>
+                    </td>
+                    <td ng-style="table_width_3">
+                        <span ng-show="record.updateTime!=null">{{record.updateTime | date:'yyyy-MM-dd'}}</span>
+                    </td>
+                    <td ng-style="table_width_4">
+                        <span ng-show="record.crowdCome==null">未设置</span>
+                        <span ng-show="record.crowdCome!=null">{{record.crowdCome}}</span>
+                    </td>
+                    <td ng-style="table_width_5">
+                        <span ng-show="record.strengthCrowdCome==null">未设置</span>
+                        <span ng-show="record.strengthCrowdCome!=null">{{record.strengthCrowdCome}}</span>
+                    </td>
+                    <td ng-style="table_width_6">
+                        <span ng-show="record.strengthCrowdBefore==null">未设置</span>
+                        <span ng-show="record.strengthCrowdBefore!=null">{{record.strengthCrowdBefore}}</span>
+                    </td>
+                    <td ng-style="table_width_7">
+                        <span ng-show="record.blackConsecutiveDay==null">未设置</span>
+                        <span ng-show="record.blackConsecutiveDay!=null">连续{{record.blackConsecutiveDay}}天，入店{{record.blackComeDay}}天</span>
+                    </td>
+                    <td ng-style="table_width_8">
+                        <span ng-show="record.openingTime!=null">{{record.openingTime}} - {{record.closingTime}}</span>
+                        <span ng-show="record.openingTime==null">未设置</span>
+                    </td>
+                    <td ng-style="table_width_9">
+                        <span class = "operation_btn" ng-click="seeDetail(record)">查看</span>
+                        <span class = "operation_btn" ng-click="reductionDetail(record)">还原</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

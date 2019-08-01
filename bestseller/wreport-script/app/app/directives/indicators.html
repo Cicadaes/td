@@ -1,0 +1,19 @@
+<div>
+    <div class="helpOpened" ng-click="showIndicator($event)"></div>
+    <div class="server indicator_panel" style="display: block;" ng-show="indicator_show">
+        <div class="ser_title">
+            <b class="l">{{constants.prompt_definition}}</b>
+            <i class="tip_close glyphicon glyphicon-remove-circle float-right" style="margin: 10px; font-size: 16px;" ng-click="showIndicator($event)"></i>
+        </div>
+        <img ng-src="images/triangle.png" src="" style="color: #FFF; border: 0; position: absolute; right: 5px; height:18px; width:25px; top:-18px; "/>
+        <div class="ser_txt">
+            <dl>
+                <dt ng-repeat="indicator in indicators" class="clrfix">
+                    <span>{{indicator.name}}：</span>
+                    <small>{{indicator.value}}</small>
+                </dt>
+            </dl>
+        </div>
+    </div>
+</div>
+

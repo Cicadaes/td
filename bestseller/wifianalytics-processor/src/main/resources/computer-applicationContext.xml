@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- configure file import -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath*:sysConfig.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="counterDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${td.olap.counter.jdbc.enterprise.driverClassName}" />
+		<property name="url" value="${td.olap.counter.jdbc.enterprise.url}" />
+		<property name="username" value="${td.olap.counter.jdbc.enterprise.username}" />
+		<property name="password" value="${td.olap.counter.jdbc.enterprise.password}" />
+		<property name="initialSize" value="${td.olap.counter.jdbc.enterprise.initialSize}"></property>
+		<property name="maxActive" value="${td.olap.counter.jdbc.enterprise.maxActive}"></property>
+		<property name="maxIdle" value="${td.olap.counter.jdbc.enterprise.maxIdle}"></property>
+		<property name="minIdle" value="${td.olap.counter.jdbc.enterprise.minIdle}"></property>
+		<property name="testOnBorrow" value="${td.olap.counter.jdbc.enterprise.testOnBorrow}"></property>
+		<property name="validationQuery" value="${td.olap.counter.jdbc.enterprise.validationQuery}"></property>
+	</bean>
+	<bean id="bitmapDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${td.olap.bitmap.jdbc.enterprise.driverClassName}" />
+		<property name="url" value="${td.olap.bitmap.jdbc.enterprise.url}" />
+		<property name="username" value="${td.olap.bitmap.jdbc.enterprise.username}" />
+		<property name="password" value="${td.olap.bitmap.jdbc.enterprise.password}" />
+		<property name="initialSize" value="${td.olap.bitmap.jdbc.enterprise.initialSize}"></property>
+		<property name="maxActive" value="${td.olap.bitmap.jdbc.enterprise.maxActive}"></property>
+		<property name="maxIdle" value="${td.olap.bitmap.jdbc.enterprise.maxIdle}"></property>
+		<property name="minIdle" value="${td.olap.bitmap.jdbc.enterprise.minIdle}"></property>
+		<property name="testOnBorrow" value="${td.olap.bitmap.jdbc.enterprise.testOnBorrow}"></property>
+		<property name="validationQuery" value="${td.olap.bitmap.jdbc.enterprise.validationQuery}"></property>
+	</bean>
+	
+	<bean id = "counterJdbcTemplate"   
+         class = "org.springframework.jdbc.core.JdbcTemplate">   
+         <property name = "dataSource" ref="counterDataSource"/>   
+    </bean> 
+    <bean id = "bitmapJdbcTemplate"   
+         class = "org.springframework.jdbc.core.JdbcTemplate">   
+         <property name = "dataSource" ref="bitmapDataSource"/>   
+    </bean>  
+    
+    <bean class="td.olap.bitmap.dao.JdbcTemplateSource">
+    	<property name="counterJdbcTemplate" ref="counterJdbcTemplate"/>
+    	<property name="bitmapJdbcTemplate" ref="bitmapJdbcTemplate"/>    	
+    </bean>
+
+
+</beans>

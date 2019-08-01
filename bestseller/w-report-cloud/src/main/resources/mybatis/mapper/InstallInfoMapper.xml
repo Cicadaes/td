@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.InstallInfoDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.InstallInfo">
+        <result column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="project_id" property="projectId"/>
+        <result column="project_place_id" property="projectPlaceId"/>
+        <result column="related_id" property="relatedId"/>
+        <result column="related_type" property="relatedType"/>
+        <result column="related_attribute" property="relatedAttribute"/>
+        <result column="longitude" property="longitude"/>
+        <result column="latitude" property="latitude"/>
+        <result column="description" property="description"/>
+        <result column="status" property="status"/>
+        <result column="creator" property="creator"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="updater" property="updater"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="customized_info" property="customizedInfo"/>
+    </resultMap>
+
+    <resultMap id="InstallInfoWithInfoVM" type="td.enterprise.web.vm.InstallInfoWithInfoVM"
+               extends="BaseResultMap">
+    </resultMap>
+
+    <!-- TD_INSTALL_INFO table all fields -->
+    <sql id="Base_Column_List">
+	 id,tenant_id,project_id,project_place_id,related_id,related_type,related_attribute,longitude,latitude,description,status,customized_info
+    </sql>
+
+    <sql id="Base_Column_List_Info">
+	 t.id,t.tenant_id,t.project_id,t.project_place_id,t.related_id,t.related_type,t.related_attribute,t.longitude,t.latitude,t.description,t.status,customized_info
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="projectPlaceId != null and projectPlaceId != ''">
+                and project_place_id = #{projectPlaceId}
+            </if>
+            <if test="relatedId != null and relatedId != ''">
+                and related_id = #{relatedId}
+            </if>
+            <if test="relatedType != null and relatedType != ''">
+                and related_type = #{relatedType}
+            </if>
+            <if test="relatedAttribute != null and relatedAttribute != ''">
+                and related_attribute = #{relatedAttribute}
+            </if>
+            <if test="longitude != null and longitude != ''">
+                and longitude = #{longitude}
+            </if>
+            <if test="latitude != null and latitude != ''">
+                and latitude = #{latitude}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="customizedInfo != null and customizedInfo != ''">
+                and customized_info = #{customizedInfo}
+            </if>
+        </trim>
+    </sql>
+
+    <sql id="Base_Where_Clause_Info">
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and t.id = #{id}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and t.project_id = #{projectId}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and t.tenant_id = #{tenantId}
+            </if>
+            <if test="projectPlaceId != null and projectPlaceId != ''">
+                and t.project_place_id = #{projectPlaceId}
+            </if>
+            <if test="relatedId != null and relatedId != ''">
+                and t.related_id = #{relatedId}
+            </if>
+            <if test="relatedType != null and relatedType != ''">
+                and t.related_type = #{relatedType}
+            </if>
+            <if test="relatedAttribute != null and relatedAttribute != ''">
+                and t.related_attribute = #{relatedAttribute}
+            </if>
+            <if test="longitude != null and longitude != ''">
+                and t.longitude = #{longitude}
+            </if>
+            <if test="latitude != null and latitude != ''">
+                and t.latitude = #{latitude}
+            </if>
+            <if test="description != null and description != ''">
+                and t.description = #{description}
+            </if>
+            <if test="status != null and status != ''">
+                and t.status = #{status}
+            </if>
+            <if test="customizedInfo != null and customizedInfo != ''">
+                and t.customized_info = #{customizedInfo}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_INSTALL_INFO(id,tenant_id,project_id,project_place_id,related_id,related_type,related_attribute,longitude,latitude,description,status,creator,create_by,create_time,updater,update_by,update_time,customized_info)
+        values(#{id},#{tenantId},#{projectId},#{projectPlaceId},#{relatedId},#{relatedType},#{relatedAttribute},#{longitude},#{latitude},#{description},#{status},#{creator},#{createBy},now(),#{updater},#{updateBy},now(),#{customizedInfo})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+      update TD_INSTALL_INFO set tenant_id=#{tenantId},project_id=#{projectId},project_place_id=#{projectPlaceId},related_id=#{relatedId},related_type=#{relatedType},related_attribute=#{relatedAttribute},longitude=#{longitude},latitude=#{latitude},description=#{description},status=#{status},creator=#{creator},create_by=#{createBy},create_time=now(),updater=#{updater},update_by=#{updateBy},update_time=now(),customized_info=#{customizedInfo} where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_INSTALL_INFO set
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="projectPlaceId != null  ">
+                project_place_id=#{projectPlaceId},
+            </if>
+            <if test="relatedId != null  ">
+                related_id=#{relatedId},
+            </if>
+            <if test="relatedType != null  ">
+                related_type=#{relatedType},
+            </if>
+            <if test="relatedAttribute != null  ">
+                related_attribute=#{relatedAttribute},
+            </if>
+            <if test="longitude != null  ">
+                longitude=#{longitude},
+            </if>
+            <if test="latitude != null  ">
+                latitude=#{latitude},
+            </if>
+            <if test="description != null  ">
+                description=#{description},
+            </if>
+            <if test="status != null  ">
+                status=#{status},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="createBy != null  ">
+                create_by=#{createBy},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updater != null  ">
+                updater=#{updater},
+            </if>
+            <if test="updateBy != null  ">
+                update_by=#{updateBy},
+            </if>
+            <if test="customizedInfo != null  ">
+                customized_info=#{customizedInfo},
+            </if>
+        update_time=now()
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 安装归属表 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_INSTALL_INFO where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+      delete from TD_INSTALL_INFO where id = #{id}
+    </delete>
+
+    <!-- 安装归属表 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_INSTALL_INFO
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 安装归属表 列表总数-->
+    <select id="getCount4JudgeUpdatePermissions" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_BS_USER where user_id=#{user_id}  and shop_code=(select project_num from TD_PROJECT where project_type=1 and status=1 and id=#{project_id})
+    </select>
+
+    <!-- 查询安装归属表列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_INSTALL_INFO
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <select id="queryByListWithInfo" resultMap="InstallInfoWithInfoVM" parameterType="Object">
+        select
+        <include refid="Base_Column_List_Info"/>
+
+        <choose>
+            <when test="relatedType != null and relatedType == 2">
+                ,project.project_name as name
+                ,project.id as code
+                from TD_INSTALL_INFO t left join TD_PROJECT project
+                on t.related_id=project.id
+                where project.status = #{status}
+                and project.project_name is not null
+            </when>
+            <otherwise>
+                ,sensor.sensor_name as name
+                ,sensor.sensor_code as code
+                from TD_INSTALL_INFO t left join TD_SENSOR sensor
+                on t.related_id=sensor.id
+                where sensor.status = #{status}
+                and sensor.sensor_name is not null
+            </otherwise>
+        </choose>
+
+        <include refid="Base_Where_Clause_Info"/>
+
+    </select>
+
+    <select id="queryByListSensor4Shop" resultMap="InstallInfoWithInfoVM" parameterType="Object">
+        select
+        <include refid="Base_Column_List_Info"/>
+                ,sensor.sensor_name as name
+                ,sensor.sensor_code as code
+                from TD_SENSOR sensor left join TD_INSTALL_INFO t
+                on t.related_id=sensor.id
+                where sensor.sensor_name is not null
+                <trim suffixOverrides=",">
+                    <if test="status != null and status != ''">
+                        and sensor.status = #{status}
+                    </if>
+                    <if test="projectId != null and projectId != ''">
+                        and sensor.project_id = #{projectId}
+                    </if>
+                </trim>
+        <include refid="Base_Where_Clause_Info"/>
+
+    </select>
+
+    <delete id="cleanInstallOfShop" parameterType="Object">
+        update TD_INSTALL_INFO set project_place_id=null,longitude=0, latitude=0 where project_id=#{id}
+    </delete>
+</mapper>   

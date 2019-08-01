@@ -1,0 +1,393 @@
+<!-- 导航条 -->
+<div class="nav_bar_top" >
+    <span  class = "nav_bar_normal nav_bar_btn" ng-click="goThresholdSet()">阈值设置</span>
+    <span> > </span>
+    <span>{{constants.label_set}}</span>
+</div>
+
+<!-- 作头部锁定-->
+<div id="batchSet" style="overflow: hidden;width:100%;padding:20px;">
+    <div id="batchSet_" style="overflow: hidden;width:100%;">
+        <div id="batchSet_1" style="overflow-y:auto; overflow-x: hidden;width:102%;">
+            <form class="form-horizontal clrfix" >
+                <!--设置项-->
+                <div class="settingBox">
+                    <label class="settingTit">{{constants.field_batchset_projects}}</label>
+                    <div class="settingList settingProject">
+                        <ul>
+                            <li ng-repeat="aaa in id">
+                                <i>{{aaa.projectName}}</i>
+                                <span ng-click="removeOne(aaa)"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--客流阈值-->
+                <div class="settingBox">
+                    <label class="settingTit">客流阈值</label>
+                    <div class="settingList settingLetters">
+                        <ul>
+                            <li style="position:relative;margin-top: -4px;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term">入店客流</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                        <b class = "thresholdValue_edit_list" ng-if="olddata.crowdCome != null">停留超过 {{olddata.crowdCome}} 分钟 <i ng-if="chooseProjectCount > 1">,...</i></b>
+                                    </p>
+                                </div>
+                                <div class = "settingListRight">
+                                    <span class = "thresholdValue_edit_btn" ng-click="editPassenger($event)">编辑</span>
+                                    <div class = "edit_frame">
+                                        停留超过
+                                        <input class="black_set"  title=""  ng-model="incoming_passenger"> 分钟
+                                        <p class="closeSet" ng-click="makeTrue($event,'incoming')"></p>
+                                    </div>
+
+                                </div>
+
+                            </li>
+                            <li style="position:relative;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term">跳出客流</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                        <b class = "thresholdValue_edit_list" ng-if="olddata.crowdBounce != null">停留小于 {{olddata.crowdBounce}} 分钟<i ng-if="chooseProjectCount != 1">,...</i></b>
+                                    </p>
+
+                                </div>
+                                <div class = "settingListRight">
+                                    <span class = "thresholdValue_edit_btn" ng-click="editPassenger($event)">编辑</span>
+                                    <div  class = "edit_frame">
+                                        停留小于
+                                        <input class="black_set"  title="" ng-model="jump_passenger"> 分钟
+                                        <p class="closeSet" ng-click="makeTrue($event,'jump')"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="position:relative;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term">停留客流</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                        <b class = "thresholdValue_edit_list" ng-if="olddata.crowdStay != null">停留超过 {{olddata.crowdStay}} 分钟<i ng-if="chooseProjectCount > 1">,...</i></b>
+                                    </p>
+
+                                </div>
+                                <div class = "settingListRight">
+                                    <span class = "thresholdValue_edit_btn" ng-click="editPassenger($event)">编辑</span>
+                                    <div class = "edit_frame">
+                                        停留超过
+                                        <input class="black_set"  title="" ng-model="stay_passenger"> 分钟
+                                         <p class="closeSet" ng-click="makeTrue($event,'stay')"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="position:relative;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term">高活跃客流</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                       <b class = "thresholdValue_edit_list" ng-if="olddata.crowdActiveHighBegin != null">距上次到访 {{olddata.crowdActiveHighBegin}} - {{olddata.crowdActiveHighEnd}} 天<i ng-if="chooseProjectCount > 1">,...</i></b>
+                                    </p>
+
+                                </div>
+                                <div class = "settingListRight">
+                                    <span class = "thresholdValue_edit_btn" ng-click="editPassenger($event)">编辑</span>
+                                    <div class = "edit_frame">
+                                        距上次到访
+                                        <input class="black_set"  title="" ng-model="high_active1"> - <input class="black_set"  title="" ng-model="high_active2"> 天
+                                        <p class="closeSet" ng-click="makeTrue($event,'highActive')"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="position:relative;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term">中活跃客流</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                       <b class = "thresholdValue_edit_list" ng-if="olddata.crowdActiveMediumBegin != null">距上次到访 {{olddata.crowdActiveMediumBegin}} - {{olddata.crowdActiveMediumEnd}} 天<i ng-if="chooseProjectCount > 1">,...</i></b>
+                                    </p>
+
+                                </div>
+                                <div class = "settingListRight">
+                                    <span class = "thresholdValue_edit_btn" ng-click="editPassenger($event)">编辑</span>
+                                    <div class = "edit_frame">
+                                        距上次到访
+                                        <input class="black_set"  title="" ng-model="middle_active1"> - <input class="black_set"  title="" ng-model="middle_active2"> 天
+                                        <p class="closeSet" ng-click="makeTrue($event,'middleActive')"></p>
+                                    </div>
+
+                                </div>
+                            </li>
+                            <li style="position:relative;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term">低活跃客流</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                        <b class = "thresholdValue_edit_list" ng-if="olddata.crowdActiveLowBegin != null">距上次到访 {{olddata.crowdActiveLowBegin}} - {{olddata.crowdActiveLowEnd}} 天<i ng-if="chooseProjectCount > 1">,...</i></b>
+                                    </p>
+
+                                </div>
+                                <div class = "settingListRight">
+                                    <span class = "thresholdValue_edit_btn" ng-click="editPassenger($event)">编辑</span>
+                                    <div class = "edit_frame">
+                                        距上次到访
+                                        <input class="black_set"  title="" ng-model="low_active1"> - <input class="black_set"  title="" ng-model="low_active2"> 天
+                                        <p class="closeSet" ng-click="makeTrue($event,'lowActive')"></p>
+                                    </div>
+
+                                </div>
+                            </li>
+                            <li style="position:relative;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term">沉睡客流</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                        <b class = "thresholdValue_edit_list" ng-if="olddata.crowdSleep != null">距上次到访大于 {{olddata.crowdSleep}} 天<i ng-if="chooseProjectCount > 1">,...</i></b>
+                                    </p>
+
+                                </div>
+                                <div class = "settingListRight">
+                                    <span class = "thresholdValue_edit_btn" ng-click="editPassenger($event)">编辑</span>
+                                    <div class = "edit_frame">
+                                        距上次到访大于
+                                        <input class="black_set"  title="" ng-model="sleep_active"> 天
+                                        <p class="closeSet" ng-click="makeTrue($event,'sleepActive')"></p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 强度阈值 -->
+                <div class="settingBox">
+                    <label class="settingTit">强度阈值</label>
+                    <div class="settingList settingLetters">
+                        <ul>
+                            <li style="position:relative;margin-top: -4px;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term">周边客流</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                        <b class = "thresholdValue_edit_list" ng-if="olddata.strengthCrowdBefore != null">强度大于 {{olddata.strengthCrowdBefore}}<i ng-if="chooseProjectCount > 1">,...</i></b>
+
+                                    </p>
+
+                                </div>
+                                <div class = "settingListRight">
+                                    <span class = "thresholdValue_edit_btn" ng-click="editPassenger($event)">编辑</span>
+                                    <div class = "edit_frame">
+                                        强度大于
+                                        <input class="black_set"  title=""  ng-model="before_store">
+                                        <p class="closeSet" ng-click="makeTrue($event,'beforeStore')"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="position:relative;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term">入店客流</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                        <b class = "thresholdValue_edit_list" ng-if="olddata.strengthCrowdCome != null">强度大于 {{olddata.strengthCrowdCome }}<i ng-if="chooseProjectCount > 1">,...</i></b>
+                                    </p>
+
+                                </div>
+                                <div class = "settingListRight">
+                                    <span class = "thresholdValue_edit_btn" ng-click="editPassenger($event)">编辑</span>
+                                    <div class = "edit_frame">
+                                        强度大于
+                                        <input class="black_set"  title=""  ng-model="enter_store">
+                                        <p class="closeSet" ng-click="makeTrue($event,'enterStore')"></p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 次数阈值 -->
+                <div class="settingBox">
+                    <label class="settingTit">次数阈值</label>
+                    <div class="settingList settingLetters">
+                        <ul>
+                            <li style="position:relative;margin-top: -4px;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term">次数间隔时间</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                        <b class = "thresholdValue_edit_list" ng-if="olddata.frequencyIntervalTime != null">间隔时间大于 {{olddata.frequencyIntervalTime }} 分钟<i ng-if="chooseProjectCount > 1">,...</i></b>
+                                    </p>
+                                </div>
+                                <div class = "settingListRight">
+                                    <span class = "thresholdValue_edit_btn" ng-click="editPassenger($event)">编辑</span>
+                                    <div class = "edit_frame">
+                                        间隔时间   大于
+                                        <input class="black_set"  title="" ng-model="interval_count"> 分钟
+                                        <p class="closeSet" ng-click="makeTrue($event,'intervalCount')"></p>
+                                    </div>
+                                </div>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+
+                <!-- 店员阈值 -->
+                <!--<div class="settingBox">-->
+                    <!--<label class="settingTit">店员阈值</label>-->
+                    <!--<div class="settingList settingLetters">-->
+                        <!--<ul>-->
+                            <!--<li style="position:relative;margin-top: -4px;">-->
+                                <!--<div class = "settingListLeft">-->
+                                    <!--<label class = "thresholdValue_edit_term">店员</label>-->
+                                    <!--<p class="thresholdValue_edit_list_wap">-->
+                                       <!--<b class = "thresholdValue_edit_list" ng-if="olddata.salesComeDay != null">连续 {{olddata.salesComeDay}} 天，入店 {{olddata.salesStayTime}} 天</b>-->
+                                    <!--</p>-->
+                                <!--</div>-->
+                                <!--<div class = "settingListRight">-->
+                                    <!--<span class = "thresholdValue_edit_btn" ng-click="editPassenger($event)">编辑</span>-->
+                                    <!--<div class = "edit_frame">-->
+                                        <!--连续-->
+                                        <!--<input class="black_set"  title=""  ng-model="clerk_day1"> 天，入店-->
+                                        <!--<input class="black_set"  title=""  ng-model="clerk_day2"> 天-->
+                                        <!--<p class="closeSet" ng-click="makeTrue($event,'clerkDay')"></p>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+
+                            <!--</li>-->
+                            <!--<li style="position:relative;">-->
+                                <!--<div class = "settingListLeft">-->
+                                    <!--<label class = "thresholdValue_edit_term"></label>-->
+                                    <!--<p class="thresholdValue_edit_list_wap" style="width: 64%;">-->
+                                        <!--<b class = "thresholdValue_edit_list" ng-if="olddata.salesStayTime != null">一天内入店停留时间累积超过 {{olddata.salesStayTime}} 分钟</b>-->
+                                    <!--</p>-->
+                                <!--</div>-->
+                                <!--<div class = "settingListRight">-->
+                                    <!--<span class = "thresholdValue_edit_btn" ng-click="editPassenger($event)">编辑</span>-->
+                                    <!--<div class = "edit_frame">-->
+                                        <!--一天内入店停留时间累积超过-->
+                                        <!--<input class="black_set"  title="" ng-model="moreThan_day"> 小时-->
+                                        <!--<p class="closeSet" ng-click="makeTrue($event,'moreThanDay')"></p>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+
+                            <!--</li>-->
+                            <!--<li style="position:relative;">-->
+                                <!--<div class = "settingListLeft">-->
+                                    <!--<label class = "thresholdValue_edit_term"></label>-->
+                                    <!--<p class="thresholdValue_edit_list_wap">-->
+                                        <!--<b class = "thresholdValue_edit_list" ng-show="salesFileName">{{salesFileName}}</b>-->
+                                    <!--</p>-->
+                                <!--</div>-->
+                                <!--<div class = "settingListRight">-->
+                                    <!--<span class = "thresholdValue_edit_btn" ng-click="editPassenger($event)">编辑</span>-->
+                                    <!--<div class = "edit_frame">-->
+                                        <!--<div style="display: inline;color: #43A3FB ;cursor: pointer;margin-right: 15px;text-decoration: underline;" ngf-select="import_file($files,'clerk')" accept="application/vnd.ms-excel" ngf-multiple="true" ngf-max-size="'800KB'" ng-model="uploadFile">-->
+                                           <!--上传名单-->
+                                        <!--</div>-->
+                                        <!--<div style="display: inline;cursor: pointer;text-decoration: underline;" >-->
+                                            <!--<a href="data/threshold_sales_mac_import_template.xls" target="_blank" class="downloadTab">范例</a>-->
+                                        <!--</div>-->
+                                        <!--<p class="closeSet" ng-click="makeTrue($event)"></p>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</li>-->
+                            <!--<i style="display: block; margin-top: 20px;margin-bottom: 20px;color: #43A3FB ;">注： 店员阈值优先级高于黑名单阈值，即 某设备被判断为“店员”后，即使触发黑名单阈值，也不会被标记进入黑名单</i>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--黑名单-->
+                <div class="settingBox">
+                    <label class="settingTit">黑名单阈值</label>
+                    <span class="settingList settingLetters settingBlackList">
+                         <ul>
+                            <li style="position:relative;margin-top: -4px;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term">黑名单</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                        <b class = "thresholdValue_edit_list"  ng-if="olddata.blackConsecutiveDay != null">连续 {{olddata.blackConsecutiveDay}} 天，入店 {{olddata.blackComeDay}} 天<i ng-if="chooseProjectCount > 1">,...</i></b>
+                                    </p>
+                                </div>
+                                <div class = "settingListRight">
+                                    <span class = "thresholdValue_edit_btn" ng-click="editPassenger($event)">编辑</span>
+                                    <div class = "edit_frame">
+                                        连续
+                                        <input class="black_set"  title="" ng-model="black_day1" > 天，入店
+                                        <input class="black_set"  title="" ng-model="black_day2" > 天
+                                        <p class="closeSet" ng-click="makeTrue($event,'blackDay')"></p>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li style="position:relative;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term"></label>
+                                    <p class="thresholdValue_edit_list_wap" style="width: 62%;">
+                                        <b class = "thresholdValue_edit_list"ng-if="olddata.blackStayTime != null">一天内入店停留时间累积超过 {{olddata.blackStayTime}} 分钟<i ng-if="chooseProjectCount > 1">,...</i></b>
+                                    </p>
+                                </div>
+                                <div class = "settingListRight">
+                                    <span class = "thresholdValue_edit_btn" ng-click="editPassenger($event)">编辑</span>
+                                    <div class = "edit_frame">
+                                        一天内入店停留时间累积超过
+                                        <input class="black_set"  title="" ng-model="blackMoreThan_day"> 分钟
+                                        <p class="closeSet" ng-click="makeTrue($event,'blackMoreThanDay')"></p>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li style="position:relative;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term"></label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                         <b class = "thresholdValue_edit_list" ng-show="!blackFileName">{{olddata.blackFileName}}</b>
+                                         <b class = "thresholdValue_edit_list" ng-show="blackFileName">{{blackFileName}}<i ng-if="chooseProjectCount > 1">,...</i></b>
+                                    </p>
+                                </div>
+                                <div class = "settingListRight">
+                                    <!--<span class = "thresholdValue_edit_btn" ng-click="editPassenger($event)">编辑</span>-->
+                                    <div class = "edit_frame closeSetShow">
+                                        <div style="display: inline;color: #43A3FB ;cursor: pointer;margin-right: 15px;text-decoration: underline;" ngf-select="import_file($files,'black')" accept="application/vnd.ms-excel" ngf-multiple="true" ngf-max-size="'800KB'" ng-model="uploadFile">
+                                           上传名单
+                                        </div>
+
+                                        <div style="display: inline;cursor: pointer;text-decoration: underline;" >
+                                            <a href="data/threshold_black_mac_import_template.xls" target="_blank" class="downloadTab">范例</a>
+                                        </div>
+                                        <!--<p class="closeSet closeSetShow" ng-click="makeTrue($event)"></p>-->
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </span>
+                </div>
+
+                <!-- 营业时间阈值 -->
+                <div class="settingBox">
+                    <label class="settingTit">营业时间阈值</label>
+                    <span class="settingList settingLetters settingBlackList">
+                         <ul>
+                            <li style="position:relative;margin-top: -4px;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term">营业时间</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                        <b class = "thresholdValue_edit_list" ng-if="olddata.openingTime != null">{{olddata.openingTime}}</b> <i ng-if="olddata.openingTime != null">--</i>
+                                        <b class = "thresholdValue_edit_list" ng-if="olddata.closingTime != null">{{olddata.closingTime}}<i ng-if="chooseProjectCount > 1">,...</i></b>
+                                    </p>
+
+                                </div>
+                                <div class = "settingListRight">
+                                    <span class = "thresholdValue_edit_btn" ng-click="editPassenger($event)">编辑</span>
+                                    <div  class = "edit_frame">
+                                        <input class="black_set"  title="" ng-model = "open_time1">:<input class="black_set"  title="" ng-model = "open_time2">
+                                        --
+                                        <input class="black_set"  title="" ng-model = "close_time1">:<input class="black_set"  title="" ng-model = "close_time2">
+                                        <p class="closeSet" ng-click="makeTrue($event,'businessHours')"></p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </span>
+                </div>
+            </form>
+            <!--按钮-->
+            <div class="form-horizontal-btns clrfix" style="padding-bottom: 20px;">
+                <button type="button" class="form-btn btn-blue-hg35 btn-blue-hg37 form-btn2" ng-click="saveProject(project)">{{constants.btn_project_createsave}}</button>
+                <a ng-click="go_project_batchSet()" class="bform-btn btn-white-hg35 form-btn2" style="width: 135px;">{{constants.btn_project_createcancle}}</a>
+            </div>
+        </div>
+    </div>
+</div>

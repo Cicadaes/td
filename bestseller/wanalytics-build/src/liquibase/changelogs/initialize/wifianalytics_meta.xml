@@ -1,0 +1,182 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="hadoop (generated)" id="1482803928367-1">
+        <createTable tableName="TD_COLUMN">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" remarks="column name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" remarks="int/string/long/double/boolean" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fact_id" remarks="fact table id fk" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="not_null" remarks="是否可为空" type="BIT"/>
+            <column defaultValueNumeric="0" name="length" remarks="长度" type="INT UNSIGNED"/>
+            <column name="another_name" remarks="别名" type="VARCHAR(50)"/>
+            <column name="data_app_id" remarks="数据应用id" type="VARCHAR(32)"/>
+            <column name="tenant_id" remarks="租户id" type="VARCHAR(32)"/>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="update_time" remarks="数据更新时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803928367-2">
+        <createTable tableName="TD_CUBE">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="owner" remarks="?" type="VARCHAR(20)"/>
+            <column name="description" remarks="描述" type="VARCHAR(256)"/>
+            <column name="fact_table_id" remarks="事实表ID" type="INT"/>
+            <column name="domain_id" remarks="域ID" type="INT"/>
+            <column name="data_app_id" remarks="数据应用id" type="VARCHAR(32)"/>
+            <column name="tenant_id" remarks="租户id" type="VARCHAR(32)"/>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="update_time" remarks="数据更新时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803928367-3">
+        <createTable tableName="TD_DIMENSION">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="cube_id" remarks="立方体ID" type="INT"/>
+            <column name="name" remarks="名称" type="VARCHAR(64)"/>
+            <column name="default_value" remarks="默认值" type="VARCHAR(256)"/>
+            <column name="display_name" remarks="显示名称" type="VARCHAR(255)"/>
+            <column name="column_id" remarks="pk of column" type="INT"/>
+            <column name="type" remarks="维度类型" type="INT"/>
+            <column name="data_app_id" remarks="数据应用id" type="VARCHAR(32)"/>
+            <column name="tenant_id" remarks="租户id" type="VARCHAR(32)"/>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="update_time" remarks="数据更新时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803928367-4">
+        <createTable tableName="TD_DOMAIN">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="domain" type="VARCHAR(100)"/>
+            <column name="description" type="VARCHAR(500)"/>
+            <column name="data_app_id" remarks="数据应用id" type="VARCHAR(32)"/>
+            <column name="tenant_id" remarks="租户id" type="VARCHAR(32)"/>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="update_time" remarks="数据更新时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803928367-5">
+        <createTable tableName="TD_FACT_TABLE">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="VARCHAR(10)"/>
+            <column name="domain_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_app_id" remarks="数据应用id" type="VARCHAR(32)"/>
+            <column name="tenant_id" remarks="租户id" type="VARCHAR(32)"/>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="update_time" remarks="数据更新时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803928367-6">
+        <createTable tableName="TD_METRIC">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="cube_id" remarks="立方体ID" type="INT"/>
+            <column name="name" remarks="metric name" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" remarks="count/sum/distinct count/linner count/other" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="column_id" remarks="column id fk" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="compute_by" remarks="bitmap/counter" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_app_id" remarks="数据应用id" type="VARCHAR(32)"/>
+            <column name="tenant_id" remarks="租户id" type="VARCHAR(32)"/>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="update_time" remarks="数据更新时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

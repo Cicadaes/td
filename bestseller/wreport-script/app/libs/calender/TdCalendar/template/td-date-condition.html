@@ -1,0 +1,30 @@
+<div class="time clrfix" ng-click="showCalendar($event);">
+		<i ng-if="displayValue" class="glyphicon glyphicon-calendar" style="margin-top:-5px;"></i>
+		<span ng-if="displayValue">{{displayValue}}</span>
+		<i ng-if="displayValue" class="glyphicon glyphicon-chevron-down ml-10" style="margin-top:-5px;"></i>
+</div>
+
+<div class="popover" ng-click="day_pick_click($event)" tabindex="-1" ng-if="panel_show" style="width: 590px;max-width: 590px;top: 26px; display: block;">
+	<div>
+		<div class="popoverFormTitle popoverFormTitleMax">
+			<span class="fl" style="height: 28px;padding: 5px; color: #FFF">{{util.language(lan, "time")}}：</span>
+			<span style="float: left; background: #F8F8F8;height: 28px;padding: 5px;border-radius: 5px;width: 190px;">
+				<i class="glyphicon glyphicon-calendar"></i>
+				<input class="displayTime" readonly="readonly" type="text" ng-model="start_end" style="border: 0;margin-top: -2px;background: #F8F8F8;line-height: 13px; ;width:160px;" title=""/>
+			</span>
+
+			<div ng-if="fastSelectDays && fastSelectDays.length > 0" class="fl" ng-repeat="fs in fastSelectDays">
+				<a href="javascript:" ng-click="changeDate(fs.key)">{{fs.label}}</a>
+			</div>
+		</div>
+		<div id="calendar" class="calendarForm calendarFormwidth"></div>
+		<div class="form-actions">
+			<span>
+				<b>
+		       		<a href="javascript:" ng-click="cancelPanel()" class="cancelFilter Sievecolse r">{{util.language(lan, "Cancel")}}</a>
+		            <a href="javascript:" ng-click="changeDateRange()" class="confirm Sievecolse r">{{util.language(lan, "Confirm")}}</a>
+	           	</b>
+			</span>
+		</div>
+	</div>
+</div>

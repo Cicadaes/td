@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.BsAuthHistoryDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="td.enterprise.entity.BsAuthHistory" >
+	<result column="id" property="id"/>
+	<result column="ap_group_id" property="apGroupId"/>
+	<result column="ap_mac" property="apMac"/>
+	<result column="upstream" property="upstream"/>
+	<result column="downstream" property="downstream"/>
+	<result column="user_group" property="userGroup"/>
+	<result column="shop_id" property="shopId"/>
+	<result column="user_type" property="userType"/>
+	<result column="access_start_time" property="accessStartTime"/>
+	<result column="access_duration" property="accessDuration"/>
+	<result column="access_ac_ip" property="accessAcIp"/>
+	<result column="user_mac" property="userMac"/>
+	<result column="user_ip" property="userIp"/>
+	<result column="vendor" property="vendor"/>
+	<result column="terminal_model" property="terminalModel"/>
+	<result column="access_duration_sum" property="accessDurationSum"/>
+	<result column="login_freq_sum" property="loginFreqSum"/>
+	<result column="upstream_sum" property="upstreamSum"/>
+	<result column="downstream_sum" property="downstreamSum"/>
+	<result column="offline_type" property="offlineType"/>
+	<result column="mobile_no" property="mobileNo"/>
+	<result column="user_name" property="userName"/>
+	<result column="app_auth_id" property="appAuthId"/>
+	<result column="app_account" property="appAccount"/>
+	<result column="preliminary" property="preliminary"/>
+	<result column="open_id" property="openId"/>
+	<result column="nickname" property="nickname"/>
+	<result column="sex" property="sex"/>
+	<result column="province" property="province"/>
+	<result column="city" property="city"/>
+	<result column="country" property="country"/>
+	<result column="headimgurl" property="headimgurl"/>
+	<result column="unionid" property="unionid"/>
+	<result column="tid" property="tid"/>
+	<result column="app_id" property="appId"/>
+	<result column="mobile_decode" property="mobileDecode"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_time" property="updateTime"/>
+	<result column="run_date" property="runDate"/>
+  </resultMap>
+       
+  <!-- TD_BS_AUTH_HISTORY table all fields -->
+  <sql id="Base_Column_List" >
+	 id,ap_group_id,ap_mac,upstream,downstream,user_group,shop_id,user_type,access_start_time,access_duration,access_ac_ip,user_mac,user_ip,vendor,terminal_model,access_duration_sum,login_freq_sum,upstream_sum,downstream_sum,offline_type,mobile_no,user_name,app_auth_id,app_account,preliminary,open_id,nickname,sex,province,city,country,headimgurl,unionid,tid,app_id,mobile_decode,create_time,update_time,run_date
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="apGroupId != null and apGroupId != ''" >
+        and ap_group_id =  #{apGroupId}
+	  </if>
+	      <if test="apMac != null and apMac != ''" >
+        and ap_mac =  #{apMac}
+	  </if>
+	      <if test="upstream != null and upstream != ''" >
+        and upstream =  #{upstream}
+	  </if>
+	      <if test="downstream != null and downstream != ''" >
+        and downstream =  #{downstream}
+	  </if>
+	      <if test="userGroup != null and userGroup != ''" >
+        and user_group =  #{userGroup}
+	  </if>
+	      <if test="shopId != null and shopId != ''" >
+        and shop_id =  #{shopId}
+	  </if>
+	      <if test="userType != null and userType != ''" >
+        and user_type =  #{userType}
+	  </if>
+	      <if test="accessStartTime != null and accessStartTime != ''" >
+        and access_start_time =  #{accessStartTime}
+	  </if>
+	      <if test="accessDuration != null and accessDuration != ''" >
+        and access_duration =  #{accessDuration}
+	  </if>
+	      <if test="accessAcIp != null and accessAcIp != ''" >
+        and access_ac_ip =  #{accessAcIp}
+	  </if>
+	      <if test="userMac != null and userMac != ''" >
+        and user_mac =  #{userMac}
+	  </if>
+	      <if test="userIp != null and userIp != ''" >
+        and user_ip =  #{userIp}
+	  </if>
+	      <if test="vendor != null and vendor != ''" >
+        and vendor =  #{vendor}
+	  </if>
+	      <if test="terminalModel != null and terminalModel != ''" >
+        and terminal_model =  #{terminalModel}
+	  </if>
+	      <if test="accessDurationSum != null and accessDurationSum != ''" >
+        and access_duration_sum =  #{accessDurationSum}
+	  </if>
+	      <if test="loginFreqSum != null and loginFreqSum != ''" >
+        and login_freq_sum =  #{loginFreqSum}
+	  </if>
+	      <if test="upstreamSum != null and upstreamSum != ''" >
+        and upstream_sum =  #{upstreamSum}
+	  </if>
+	      <if test="downstreamSum != null and downstreamSum != ''" >
+        and downstream_sum =  #{downstreamSum}
+	  </if>
+	      <if test="offlineType != null and offlineType != ''" >
+        and offline_type =  #{offlineType}
+	  </if>
+	      <if test="mobileNo != null and mobileNo != ''" >
+        and mobile_no =  #{mobileNo}
+	  </if>
+	      <if test="userName != null and userName != ''" >
+        and user_name =  #{userName}
+	  </if>
+	      <if test="appAuthId != null and appAuthId != ''" >
+        and app_auth_id =  #{appAuthId}
+	  </if>
+	      <if test="appAccount != null and appAccount != ''" >
+        and app_account =  #{appAccount}
+	  </if>
+	      <if test="preliminary != null and preliminary != ''" >
+        and preliminary =  #{preliminary}
+	  </if>
+	      <if test="openId != null and openId != ''" >
+        and open_id =  #{openId}
+	  </if>
+	      <if test="nickname != null and nickname != ''" >
+        and nickname =  #{nickname}
+	  </if>
+	      <if test="sex != null and sex != ''" >
+        and sex =  #{sex}
+	  </if>
+	      <if test="province != null and province != ''" >
+        and province =  #{province}
+	  </if>
+	      <if test="city != null and city != ''" >
+        and city =  #{city}
+	  </if>
+	      <if test="country != null and country != ''" >
+        and country =  #{country}
+	  </if>
+	      <if test="headimgurl != null and headimgurl != ''" >
+        and headimgurl =  #{headimgurl}
+	  </if>
+	      <if test="unionid != null and unionid != ''" >
+        and unionid =  #{unionid}
+	  </if>
+	      <if test="tid != null and tid != ''" >
+        and tid =  #{tid}
+	  </if>
+	      <if test="appId != null and appId != ''" >
+        and app_id =  #{appId}
+	  </if>
+	      <if test="mobileDecode != null and mobileDecode != ''" >
+        and mobile_decode =  #{mobileDecode}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+	      <if test="runDate != null and runDate != ''" >
+        and run_date =  #{runDate}
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+      insert into 
+TD_BS_AUTH_HISTORY(id,ap_group_id,ap_mac,upstream,downstream,user_group,shop_id,user_type,access_start_time,access_duration,access_ac_ip,user_mac,user_ip,vendor,terminal_model,access_duration_sum,login_freq_sum,upstream_sum,downstream_sum,offline_type,mobile_no,user_name,app_auth_id,app_account,preliminary,open_id,nickname,sex,province,city,country,headimgurl,unionid,tid,app_id,mobile_decode,create_time,update_time,run_date)
+ values(#{id},#{apGroupId},#{apMac},#{upstream},#{downstream},#{userGroup},#{shopId},#{userType},#{accessStartTime},#{accessDuration},#{accessAcIp},#{userMac},#{userIp},#{vendor},#{terminalModel},#{accessDurationSum},#{loginFreqSum},#{upstreamSum},#{downstreamSum},#{offlineType},#{mobileNo},#{userName},#{appAuthId},#{appAccount},#{preliminary},#{openId},#{nickname},#{sex},#{province},#{city},#{country},#{headimgurl},#{unionid},#{tid},#{appId},#{mobileDecode},now(),now(),#{runDate})
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+      update TD_BS_AUTH_HISTORY set ap_group_id=#{apGroupId},ap_mac=#{apMac},upstream=#{upstream},downstream=#{downstream},user_group=#{userGroup},shop_id=#{shopId},user_type=#{userType},access_start_time=#{accessStartTime},access_duration=#{accessDuration},access_ac_ip=#{accessAcIp},user_mac=#{userMac},user_ip=#{userIp},vendor=#{vendor},terminal_model=#{terminalModel},access_duration_sum=#{accessDurationSum},login_freq_sum=#{loginFreqSum},upstream_sum=#{upstreamSum},downstream_sum=#{downstreamSum},offline_type=#{offlineType},mobile_no=#{mobileNo},user_name=#{userName},app_auth_id=#{appAuthId},app_account=#{appAccount},preliminary=#{preliminary},open_id=#{openId},nickname=#{nickname},sex=#{sex},province=#{province},city=#{city},country=#{country},headimgurl=#{headimgurl},unionid=#{unionid},tid=#{tid},app_id=#{appId},mobile_decode=#{mobileDecode},update_time=now(),run_date=#{runDate} where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+      update TD_BS_AUTH_HISTORY set 
+		<if test="apGroupId != null  ">
+		ap_group_id=#{apGroupId},
+	</if>
+	<if test="apMac != null  ">
+		ap_mac=#{apMac},
+	</if>
+	<if test="upstream != null  ">
+		upstream=#{upstream},
+	</if>
+	<if test="downstream != null  ">
+		downstream=#{downstream},
+	</if>
+	<if test="userGroup != null  ">
+		user_group=#{userGroup},
+	</if>
+	<if test="shopId != null  ">
+		shop_id=#{shopId},
+	</if>
+	<if test="userType != null  ">
+		user_type=#{userType},
+	</if>
+	<if test="accessStartTime != null  ">
+		access_start_time=#{accessStartTime},
+	</if>
+	<if test="accessDuration != null  ">
+		access_duration=#{accessDuration},
+	</if>
+	<if test="accessAcIp != null  ">
+		access_ac_ip=#{accessAcIp},
+	</if>
+	<if test="userMac != null  ">
+		user_mac=#{userMac},
+	</if>
+	<if test="userIp != null  ">
+		user_ip=#{userIp},
+	</if>
+	<if test="vendor != null  ">
+		vendor=#{vendor},
+	</if>
+	<if test="terminalModel != null  ">
+		terminal_model=#{terminalModel},
+	</if>
+	<if test="accessDurationSum != null  ">
+		access_duration_sum=#{accessDurationSum},
+	</if>
+	<if test="loginFreqSum != null  ">
+		login_freq_sum=#{loginFreqSum},
+	</if>
+	<if test="upstreamSum != null  ">
+		upstream_sum=#{upstreamSum},
+	</if>
+	<if test="downstreamSum != null  ">
+		downstream_sum=#{downstreamSum},
+	</if>
+	<if test="offlineType != null  ">
+		offline_type=#{offlineType},
+	</if>
+	<if test="mobileNo != null  ">
+		mobile_no=#{mobileNo},
+	</if>
+	<if test="userName != null  ">
+		user_name=#{userName},
+	</if>
+	<if test="appAuthId != null  ">
+		app_auth_id=#{appAuthId},
+	</if>
+	<if test="appAccount != null  ">
+		app_account=#{appAccount},
+	</if>
+	<if test="preliminary != null  ">
+		preliminary=#{preliminary},
+	</if>
+	<if test="openId != null  ">
+		open_id=#{openId},
+	</if>
+	<if test="nickname != null  ">
+		nickname=#{nickname},
+	</if>
+	<if test="sex != null  ">
+		sex=#{sex},
+	</if>
+	<if test="province != null  ">
+		province=#{province},
+	</if>
+	<if test="city != null  ">
+		city=#{city},
+	</if>
+	<if test="country != null  ">
+		country=#{country},
+	</if>
+	<if test="headimgurl != null  ">
+		headimgurl=#{headimgurl},
+	</if>
+	<if test="unionid != null  ">
+		unionid=#{unionid},
+	</if>
+	<if test="tid != null  ">
+		tid=#{tid},
+	</if>
+	<if test="appId != null  ">
+		app_id=#{appId},
+	</if>
+	<if test="mobileDecode != null  ">
+		mobile_decode=#{mobileDecode},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	<if test="runDate != null  ">
+		run_date=#{runDate},
+	</if>
+	update_time = now() 
+	where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 绫致店铺设备关系 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+      select <include refid="Base_Column_List" /> 
+	 from TD_BS_AUTH_HISTORY where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+      delete from TD_BS_AUTH_HISTORY where id = #{id}
+  </delete>
+
+  <!-- 绫致店铺设备关系 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_BS_AUTH_HISTORY 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询绫致店铺设备关系列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_BS_AUTH_HISTORY 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <!-- 批量插入记录 add by liyinglei 2017-10-18 -->
+  <insert id="batchInsert" parameterType="java.util.List">  
+     insert into 
+		TD_BS_AUTH_HISTORY(ap_group_id,ap_mac,upstream,downstream,user_group,shop_id,
+		user_type,access_start_time,access_duration,access_ac_ip,user_mac,user_ip,
+		vendor,terminal_model,access_duration_sum,login_freq_sum,upstream_sum,
+		downstream_sum,offline_type,mobile_no,user_name,app_auth_id,app_account,
+		preliminary,open_id,nickname,sex,province,city,country,headimgurl,unionid,tid,
+		app_id,mobile_decode,create_time,update_time,run_date)
+ 	 values  
+     <foreach collection="list" item="item" index="index" separator="," >  
+         (#{item.apGroupId},#{item.apMac},#{item.upstream},#{item.downstream},#{item.userGroup},#{item.shopId},
+         #{item.userType},#{item.accessStartTime},#{item.accessDuration},#{item.accessAcIp},#{item.userMac},#{item.userIp},
+         #{item.vendor},#{item.terminalModel},#{item.accessDurationSum},#{item.loginFreqSum},#{item.upstreamSum},
+         #{item.downstreamSum},#{item.offlineType},#{item.mobileNo},#{item.userName},#{item.appAuthId},#{item.appAccount},
+         #{item.preliminary},#{item.openId},#{item.nickname},#{item.sex},#{item.province},#{item.city},#{item.country},#{item.headimgurl},#{item.unionid},#{item.tid},
+         #{item.appId},#{item.mobileDecode},#{item.createTime},#{item.updateTime},#{item.runDate})
+     </foreach>  
+   </insert>
+   
+   <!-- 按周期删除数据 add by liyinglei 2017-11-24 -->
+  <delete id="deleteByRunDate" parameterType="Object">
+      delete from TD_BS_AUTH_HISTORY where run_date = #{runDate}
+  </delete>
+  
+</mapper>   

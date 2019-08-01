@@ -1,0 +1,3 @@
+type=command
+command=bash -x /home/hadoop/wanalytics/etl/bin/offline/OfflineMetricDayActiveTask.sh --date "${azkaban.flow.start.year}-${azkaban.flow.start.month}-${azkaban.flow.start.day}" --schedulerTaskLogId "${schedule.task.log.id}"
+dependencies=OfflineJumpTask

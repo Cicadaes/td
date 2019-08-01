@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+  <!-- 建表语句 -->
+  <include file="../initialize/wifianalytics_counter.xml" relativeToChangelogFile="true"/>
+
+  <!-- 初始化数据 -->
+  <include file="./20170302.xml" relativeToChangelogFile="true"/>
+  <include file="./20170307.xml" relativeToChangelogFile="true"/>
+  <include file="./20170308.sql" relativeToChangelogFile="true"/>
+  <include file="./20170421.xml" relativeToChangelogFile="true"/>
+  <include file="./20170522.xml" relativeToChangelogFile="true"/>
+  <include file="./20170613.sql" relativeToChangelogFile="true"/>
+  <include file="./20170614.xml" relativeToChangelogFile="true"/>
+  <include file="./20170725.xml" relativeToChangelogFile="true"/>
+  <include file="./20180130.sql" relativeToChangelogFile="true"/>
+
+</databaseChangeLog> 

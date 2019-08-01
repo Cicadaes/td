@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- status=debug 可以查看log4j的装配过程 -->
+<configuration status="off">
+    <appenders>
+        <!-- console -->
+        <Console name="STDOUT">
+            <PatternLayout pattern="%d [%-5p] Thread[%t] Column[%l] :%m%n"/>
+        </Console>
+        <!-- custom log -->
+        <!--<RollingFile name="file" fileName="logs/file.log"-->
+        <!--filePattern="logs/$${date:yyyy-MM}/file.log.%d{yyyy-MM-dd-HH}.%i">-->
+        <!--<PatternLayout>-->
+        <!--<Pattern>%d [%-5p] Thread[%t] Column[%l] :%m%n</Pattern>-->
+        <!--</PatternLayout>-->
+        <!--<Policies>-->
+        <!--<TimeBasedTriggeringPolicy/>-->
+        <!--<SizeBasedTriggeringPolicy size="1GB"/>-->
+        <!--</Policies>-->
+        <!--</RollingFile>-->
+        <RollingFile name="debug" fileName="logs/debug.log" filePattern="logs/debug.log.%d{yyyy-MM-dd}">
+            <Filters>
+                <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="info" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="NEUTRAL"/>
+            </Filters>
+            <PatternLayout>
+                <Pattern>%d [%-5p] Thread[%t] Column[%l] :%m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="info" fileName="logs/info.log" filePattern="logs/info.log.%d{yyyy-MM-dd}">
+            <Filters>
+                <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="debug" onMatch="DENY" onMismatch="NEUTRAL"/>
+            </Filters>
+            <PatternLayout>
+                <Pattern>%d [%-5p] Thread[%t] Column[%l] :%m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="data" fileName="logs/data.log" bufferedIO="true" immediateFlush="false" bufferSize="10240"
+                     filePattern="logs/data-$${date:yyyy-MM}/data.log.%d{yyyy-MM-dd-HH}.%i">
+            <PatternLayout>
+                <Pattern>%m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="1GB"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="offline" fileName="logs/offline.log" bufferedIO="true" immediateFlush="false" bufferSize="10240"
+                     filePattern="logs/offline-$${date:yyyy-MM}/offline.log.%d{yyyy-MM-dd-HH}.%i">
+            <PatternLayout>
+                <Pattern>%m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="1GB"/>
+            </Policies>
+        </RollingFile>
+        
+         <RollingFile name="wifidata" fileName="logs/data.log" bufferedIO="true" immediateFlush="false" bufferSize="10240"
+                     filePattern="logs/wifidata-$${date:yyyy-MM}/wifidata.log.%d{yyyy-MM-dd-HH}.%i">
+            <PatternLayout>
+                <Pattern>%m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="1GB"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="error" fileName="logs/error.log" filePattern="logs/error.log.%d{yyyy-MM-dd}">
+            <PatternLayout>
+                <Pattern>%d [%-5p] Thread[%t] Column[%l] :%m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+    </appenders>
+    <loggers>
+        <!--<root level="ALL">-->
+        <!--<appender-ref ref="STDOUT"/>-->
+        <!--</root>-->
+        <!--<Logger name="com.talkingdata" level="ALL" additivity="false">-->
+        <!--<AppenderRef ref="STDOUT"/>-->
+        <!--</Logger>-->
+        <Logger name="com.talkingdata.analytics" level="DEBUG" additivity="false">
+            <AppenderRef ref="debug"/>
+            <AppenderRef ref="info"/>
+        </Logger>
+
+        <Logger name="data" level="INFO" additivity="false">
+            <AppenderRef ref="data"/>
+        </Logger>
+        <Logger name="offline" level="INFO" additivity="false">
+            <AppenderRef ref="offline"/>
+        </Logger>
+         <Logger name="wifidata" level="INFO" additivity="false">
+            <AppenderRef ref="wifidata"/>
+        </Logger>
+        <Logger name="error" level="ERROR" additivity="false">
+            <AppenderRef ref="error"/>
+        </Logger>
+
+
+    </loggers>
+</configuration>

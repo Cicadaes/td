@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.DmkDao">
+    <!-- Result Map  values (#{id},#{mac},#{tdid})-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.DmkEntity" >
+        <result column="id" property="id"/>
+        <result column="mac" property="mac"/>
+        <result column="tdid" property="tdid"/>
+    </resultMap>
+
+
+
+    <insert id="insertList" parameterType="java.util.List">
+        insert into TD_DMK_IDMAPPING
+        (id,mac,tdid ) VALUES
+        <foreach collection="list" item="item" index="index"
+                 separator=",">
+            	(#{item.id},#{item.mac} ,#{item.tdid})
+        </foreach>
+
+    </insert>
+
+</mapper>

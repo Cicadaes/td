@@ -1,0 +1,255 @@
+@charset "utf-8";
+.contents .content {
+    padding: 20px;
+}
+
+.font_color {
+    color: #43A3FB;
+}
+
+.icons {
+    background: url(../../images/icons_blue.png) no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+    background-size: 300px 898px;
+}
+
+/*设备类型*/
+.icon-touchpointtype1 {
+    width: 25px;
+    height: 23px;
+    background-position: -93px -146px;
+}
+
+.icon-touchpointtype2 {
+    width: 25px;
+    height: 23px;
+    background-position: -93px -192px;
+}
+
+.icon-touchpointtype3 {
+    width: 25px;
+    height: 23px;
+    background-position: -93px -236px;
+}
+
+.icon-touchpointtype99 {
+    width: 25px;
+    height: 23px;
+    background-position: -93px -101px;
+}
+
+/*列表操作更多图标*/
+.icons-more {
+    width: 22px;
+    height: 16px;
+    background-position: -49px -288px;
+    cursor: pointer;
+    vertical-align: top;
+}
+
+.icons-more-export {
+    width: 22px;
+    height: 23px;
+    background-position: -183px -282px;
+    cursor: pointer;
+}
+
+.icons-more-launch {
+    width: 22px;
+    height: 23px;
+    background-position: -183px -372px;
+    cursor: pointer;
+}
+
+.icons-more-refresh {
+    width: 22px;
+    height: 23px;
+    background-position: -183px -327px;
+    cursor: pointer;
+}
+
+.icons-more-delete {
+    width: 22px;
+    height: 23px;
+    background-position: -183px -236px;
+    cursor: pointer;
+}
+
+.icons-more-relation {
+    width: 22px;
+    height: 23px;
+    background-position: -183px -146px;
+    cursor: pointer;
+}
+
+.icons-more-records {
+    width: 22px;
+    height: 23px;
+    background-position: -183px -194px;
+    cursor: pointer;
+}
+
+/*添加按钮*/
+.icons-add {
+    width: 14px;
+    height: 14px;
+    background-position: -98px -466px;
+}
+
+/*返回图标*/
+.icons-arrow-left {
+    width: 22px;
+    height: 23px;
+    background-position: -49px -553px;
+}
+
+/*operator-panel*/
+.operator-panel {
+    padding: 14px 20px;
+}
+
+.operator-panel .btn-add .icons-add {
+    float: left;
+    margin: 9px 8px 0 0;
+}
+
+.operator-panel .btn-add {
+    min-width: 100px;
+}
+
+/*css分组*/
+.operator-panel .btn-add {
+    float: left;
+    border: none;
+    margin-right: 10px;
+    background: #43A3FB;
+    color: #fff;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 20px;
+    display: inline-block;
+    border-radius: 16px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.operator-panel .btn-add:hover {
+    background: #43A3FB;
+}
+
+/*button*/
+/*.btn-primary,*/
+/*.btn-primary:hover,*/
+/*.btn-primary:active,*/
+/*.btn-primary:focus{text-align: center;background:#5f92e1;border:1px solid #5f92e1;}*/
+
+.btn-blue-hg35,
+.btn-blue-hg35:hover,
+.btn-blue-hg35:active,
+.btn-blue-hg35:focus {
+    text-align: center;
+    cursor: pointer;
+    background: #5f92e1;
+    border: 1px solid #5f92e1;
+    border-radius: 3px;
+    display: inline-block;
+    padding: 0 25px;
+    height: 35px;
+    line-height: 35px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.btn-blue-hg40,
+.btn-blue-hg40:hover,
+.btn-blue-hg40:active,
+.btn-blue-hg40:focus {
+    text-align: center;
+    cursor: pointer;
+    background: #5f92e1;
+    border: 1px solid #5f92e1;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 0 25px;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.btn-green-hg40,
+.btn-green-hg40:hover,
+.btn-green-hg40:active,
+.btn-green-hg40:focus {
+    text-align: center;
+    cursor: pointer;
+    background: #5bc27d;
+    border: 1px solid #5bc27d;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 0 25px;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.btn-gray-hg35,
+.btn-gray-hg35:hover,
+.btn-gray-hg35:active,
+.btn-gray-hg35:focus {
+    text-align: center;
+    cursor: pointer;
+    background: #f5f6f8;
+    border: 1px solid #f5f6f8;
+    border-radius: 3px;
+    display: inline-block;
+    padding: 0 25px;
+    height: 35px;
+    line-height: 35px;
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.btn-gray-hg40,
+.btn-gray-hg40:hover,
+.btn-gray-hg40:active,
+.btn-gray-hg40:focus {
+    text-align: center;
+    cursor: pointer;
+    background: #f5f6f8;
+    border: 1px solid #f5f6f8;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 0 25px;
+    height: 40px;
+    line-height: 40px;
+    color: #666;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.btn-white-hg35,
+.btn-white-hg35:hover,
+.btn-white-hg35:active,
+.btn-white-hg35:focus {
+    text-align: center;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    display: inline-block;
+    padding: 0 25px;
+    height: 35px;
+    line-height: 35px;
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+

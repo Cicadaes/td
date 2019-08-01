@@ -1,0 +1,394 @@
+.customLeft {
+    float: left;
+}
+.customRight {
+    float: right;
+}
+/*  顶层导航条  */
+.nav_bar_top {
+    height: 56px;
+    line-height: 56px;
+    font-size: 14px;
+    padding-left: 20px;
+    background: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(31,37,68,0.06);
+    color: #464C5B;
+    font-weight: 600;
+}
+
+.nav_bar_top_border {
+    border-bottom: 1px solid #e1e8f0;
+}
+
+/*  二级导航条 （带有Tab切换的导航） */
+.nav_bar_second_wap {
+    height: 40px;
+    line-height: 40px;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #818596;
+    background: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(31,37,68,0.06);
+}
+
+.nav_bar_second {
+    padding-left: 10px;
+    height: 40px;
+    float: left;
+}
+
+.nav_bar_second li {
+    height: 40px;
+    float: left;
+    margin: 0px 10px;
+    cursor: pointer;
+}
+
+.now_tab {
+    border-bottom: 2px solid #43A3FB;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box; /* Firefox */
+    -webkit-box-sizing:border-box; /* Safari */
+    color: #404560;
+}
+
+/* 添加按钮样式 */
+.add_btn_wap {
+    float: left;
+    background: #43A3FB;
+    padding: 0px 15px;
+    height: 30px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    margin: 0px 0px 15px 20px;
+    cursor: pointer;
+}
+
+.add_btn_plus {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin: 6px 10px 0px 0px;
+    background: url(../../images/add_icon_blue.png) no-repeat;
+    background-size: 100%;
+}
+
+.add_btn_text {
+    float: left;
+    line-height: 30px;
+    color: #fff;
+    text-align: center;
+    display: inline-block;
+    min-width: 50px;
+}
+
+.table_average > thead > tr > th {
+    width: calc(100% / 6);
+}
+
+.table_average > thead > tr > th:first-child {
+    padding:0px 0px 0px 21px;
+}
+
+.operation_btn {
+    margin-right: 10px;
+}
+
+.operation_btn:hover {
+    color: #43A3FB;
+}
+
+/* table的表头 */
+.ng-table-head {
+    font-size: 14px;
+    line-height: 44px;
+    color: #464C5B;
+    border-top: none;
+    font-weight: 600;
+}
+
+.nav_bar_normal {
+    font-weight: normal;
+}
+
+.nav_bar_btn {
+    cursor: pointer;
+}
+
+/* 模块样式 */
+.form-horizontal-panel {
+    background: #fff;
+    border: 1px solid #e8e9ed;
+    border-bottom: 2px solid #e8e9ed;
+    border-radius: 5px;
+    padding: 0;
+    margin-bottom: 20px;
+    color: #000;
+}
+
+.shopGroupTit {
+    font-size: 14px;
+    color: #464C5B;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 20px;
+    border-bottom: 1px solid #dedfe3;
+    font-weight: 600;
+}
+
+
+/*检索框*/
+.search_project2 {
+    float: right;
+    width: 220px;
+    height: 30px;
+    border: 1px solid #D5DCE3;
+    border-radius: 22px;
+    background: url(../../images/shearch.png) 12px center no-repeat #fff !important;
+    background-size: 6% 44% !important;
+    position: relative;
+    cursor: pointer;
+    color: #657180;
+}
+
+.search_project2 input {
+    margin-top: 7px;
+    margin-left: 44px;
+}
+
+.model_top_bar_bottom {
+    margin-top: 15px;
+}
+
+.form-horizontal .text-left-label {
+    min-width: 100px;
+    margin-left: 30px;
+    font-size: 14px;
+    color: #464C5B;
+    text-align: left;
+}
+
+.form-horizontal .projectDetailList {
+    padding: 20px 0px;
+    margin-top: 0px;
+    border-bottom: 1px solid #e1e8f0;
+}
+
+.check_ {
+    background: url(../../images/check2.svg) no-repeat;
+    background-size: 100%;
+    border: 0px;
+}
+
+/* 过滤器下拉框样式 */
+.drop-down-wap {
+    width: 120px;
+    height: 32px;
+    border: 1px solid #D7DDE4;
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    color: #404560;
+    background: #fff;
+}
+
+.drop-down-wap span {
+    position: absolute;
+    top: 0px;
+    left: 16px;
+    width:70px;
+    height:32px;
+    line-height:32px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.drop-down-wap .drop-down-wap-ul {
+    position: absolute;
+    top: 34px;
+    left: 0px;
+    z-index: 33;
+    text-align: center;
+    width: 120px;
+    height: 180px;
+    background: #FFFFFF;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.17);
+    border-radius: 4px;
+    padding-top: 6px;
+}
+
+.drop-down-wap .drop-down-wap-ul h3 {
+    font-weight: bold;
+    line-height: 32px;
+    font-size: 12px;
+    color: #404560;
+    text-align: left;
+    text-indent: 15px;
+}
+
+.drop-down-wap .drop-down-wap-ul h3:hover {
+    color: #43A3FB;
+}
+
+.drop-down-wap .drop-down-wap-ul ul {
+    position: absolute;
+    top: 32px;
+    width: 120px;
+    height: 147px;
+    overflow-y: auto;
+}
+
+
+
+.drop-down-wap ul li {
+    line-height: 32px;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0px 15px;
+}
+
+
+
+.drop-down-wap ul li:hover {
+    color: #43A3FB;
+    background: rgba(28,36,56,0.03);
+}
+
+
+.customTriangle {
+    position: absolute;
+    right: 8px;
+    top: 14px;
+    float: left;
+    width: 0;
+    height: 0;
+    border-left: 4.5px solid transparent;
+    border-right: 4.5px solid transparent;
+    border-top: 5px solid #818596;
+}
+
+/* 模拟单选框 */
+.customRadio {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #DDDEE1;
+    border-radius: 100%;
+    margin-right: 6px;
+    cursor: pointer;
+    float: left;
+    margin-top: 4px;
+}
+
+.customRadio b {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    background: #fff;
+    margin: 0 auto;
+    margin-top: 3px;
+}
+
+.customRadioCheck {
+    display: block;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #3399FF;
+    border-radius: 100%;
+    margin-right: 6px;
+    cursor: pointer;
+    float: left;
+    margin-top: 4px;
+}
+
+.customRadioCheck b {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    background: #3399FF;
+    margin: 0 auto;
+    margin-top: 3px;
+}
+
+/* 模拟复选框样式 */
+.customChecked {
+    display: block;
+    width: 12px;
+    height: 12px;
+    background: #FFFFFF;
+    border: 1px solid #D7DDE4;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.marginTop {
+    margin-top: 10px;
+    margin-right: 8px;
+}
+
+.customCheckedText {
+    font-size: 12px;
+    color: #404560;
+    font-weight: normal;
+}
+
+/* 选中样式 */
+.customCheckedTrue {
+    display: block;
+    width: 12px;
+    height: 12px;
+    background: url(../../images/check2.png) no-repeat;
+    background-size: 100%;
+    border: 1px solid #D7DDE4;
+    border-radius: 2px;
+}
+
+
+.table-projectRanking th{
+    white-space: nowrap !important;
+}
+.table-projectRanking td{
+    white-space: nowrap !important;
+    text-align: left;
+}
+body,.table-projectRanking{
+    font-size:12px !important;
+}
+.table-projectRanking{
+    empty-cells:show !important;
+    border-collapse: collapse !important;
+    margin:0 auto !important;
+    width:100%;
+}
+
+h1,h2,h3{
+    font-size:12px !important;
+}
+
+.table-projectRanking.tab_css_1 td,.table-projectRanking.tab_css_1 th{
+    padding: 8px 12px 8px !important;
+}
+
+.table-projectRanking.tab_css_2 td,.table-projectRanking.tab_css_2 th{
+    padding: 8px 30px 8px !important;
+}
+
+
+.table-projectRanking.tab_css_1 th:first-child {
+    padding-right: 20px !important;
+}
+
+table.no-gesture-table .normal{
+    cursor:default !important;
+}
+table.no-gesture-table .gesture{
+    cursor: pointer !important;
+}
+

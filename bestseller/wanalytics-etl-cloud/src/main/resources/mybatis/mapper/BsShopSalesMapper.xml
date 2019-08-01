@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--suppress ALL -->
+<mapper namespace="td.enterprise.dao.BsShopSalesDao" >
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.BsShopSales" >
+        <result column="shop_name" property="shopName"/>
+        <result column="shop_code" property="shopCode"/>
+        <result column="sales_amount" property="salesAmount"/>
+        <result column="order_count" property="orderCount"/>
+        <result column="sales_count" property="salesCount"/>
+        <result column="order_count_gt1" property="orderCountGt1"/>
+        <result column="vip_sales_amount" property="vipSalesAmount"/>
+        <result column="vip_order_count" property="vipOrderCount"/>
+        <result column="vip_sales_count" property="vipSalesCount"/>
+        <result column="vip_order_count_gt1" property="vipOrderCountGt1"/>
+        <result column="non_vip_sales_amount" property="nonVipSalesAmount"/>
+        <result column="non_vip_order_count" property="nonVipOrderCount"/>
+        <result column="non_vip_sales_count" property="nonVipSalesCount"/>
+        <result column="non_vip_order_count_gt1" property="nonVipOrderCountGt1"/>
+        <result column="date_id" property="dateId"/>
+    </resultMap>
+
+    <!-- 根据sync_date 查询一方销售数据 -->
+    <select id="listBsShopSalesBySyncDate"  resultMap="BaseResultMap" parameterType="String">
+        SELECT 
+          shop_name, shop_code, sales_amount, order_count, sales_count, order_count_gt1, vip_sales_amount, vip_order_count, vip_sales_count, vip_order_count_gt1, non_vip_sales_amount, non_vip_order_count, non_vip_sales_count, non_vip_order_count_gt1, date_id
+        FROM BS_SHOP_SALES
+        WHERE DATE_FORMAT(sync_date, "%Y-%m-%d") = #{syncDate}
+    </select>
+
+</mapper>

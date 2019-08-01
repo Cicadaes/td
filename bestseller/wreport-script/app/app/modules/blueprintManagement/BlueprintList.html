@@ -1,0 +1,70 @@
+<div class="nav_bar_top">
+    <span>图纸管理</span>
+</div>
+
+
+<div class="ng-table-container mt-20">
+    <div class="ng-table-head clrfix">
+        店铺列表
+        <!--<div class="search" data-search role="search"></div>-->
+        <!-- 批量设置按条件搜索  -->
+        <div class="search_project2" style="margin-top:7px;margin-right: 0px;">
+            <input placeholder="{{constants.label_input_key_word}}" ng-keyup="myKeyup($event)" ng-model="searchText" style="height: 20px;margin: -17px 0px 0px 37px;"/>
+        </div>
+    </div>
+    <div class="row_highlight">
+        <table ng-table="tableParams" class="table table-special">
+            <thead>
+            <tr>
+                <th ng-style="table_width_1">名称</th>
+                <th ng-style="table_width_2">ID</th>
+                <th ng-style="table_width_3">更新时间</th>
+                <th ng-style="table_width_4">状态</th>
+                <!--<th ng-style="table_width_4" id="blueprintStatus" style="position:relative;" tabindex="1">-->
+                    <!--<span class="setTabTit">图纸</span>-->
+                    <!--<div class="css3Triangle"></div>-->
+                    <!--<ul id="blueprintStatus_" class="downList downList_">-->
+                        <!--<li ng-repeat="set in sensorStatus" ng-click="blueprintStatusSelect(set.value)">{{set.key}}</li>-->
+                    <!--</ul>-->
+                <!--</th>-->
+                <!--<th ng-style="table_width_5" id="sensortype" style="position:relative;" tabindex="1">-->
+                    <!--<span class="setTabTit">探针部署</span>-->
+                    <!--<div class="css3Triangle"></div>-->
+                    <!--<ul id="sensortype_" class="downList downList_">-->
+                        <!--<li ng-repeat="set in sensorStatus" ng-click="sensortypeSelect(set.value)">{{set.key}}</li>-->
+                    <!--</ul>-->
+                <!--</th>-->
+                <th ng-style="table_width_5">操作</th>
+            </tr>
+            </thead>
+            <tbody ng-style="table_max_height">
+            <tr ng-repeat="projectPlace in $data" style="overflow-y:auto;">
+                <td ng-style="table_width_1">
+                    <div>{{projectPlace.projectName}}</div>
+                </td>
+                <td ng-style="table_width_2">
+                    <div>{{projectPlace.projectNum}}</div>
+                </td>
+                <td ng-style="table_width_3">
+                    <div>{{projectPlace.updateTime | date:'yyyy-MM-dd HH:mm:ss'}}</div>
+                </td>
+                <td ng-style="table_width_4">
+                    <div>{{projectPlace.picUrl ? "已上传" : "未上传"}}</div>
+                </td>
+                <!--<td ng-style="table_width_5">-->
+                    <!--<div>{{customCrowd.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</div>-->
+                <!--</td>-->
+                <td ng-style="table_width_5">
+                    <div class="ng-table-operator">
+                        <a href="javascript:" ngf-select ngf-change="import_file_pic($files,projectPlace)" accept="image/png,image/jpeg" ngf-multiple="true" ngf-max-size="'5MB'" ng-model="projectPlace.file" title="">图纸上传</a>
+                        <a href="javascript:" data-toggle="modal" data-target="#probeDeployDialog" ng-click="probeDeploy(projectPlace);" title="">探针部署</a>
+                        <a href="javascript:" ng-click="reductionBlueprint(projectPlace);" title="">清空</a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div probe-deploy-dialog></div>

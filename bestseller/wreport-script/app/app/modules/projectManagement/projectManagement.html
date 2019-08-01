@@ -1,0 +1,96 @@
+<!-- 导航条 -->
+<div class="nav_bar_top nav_bar_top_border">
+    <span>项目管理</span>
+</div>
+
+<!-- 二级导航 -->
+<div class = "nav_bar_second_wap">
+    <ul class = "nav_bar_second">
+        <li ng-class="{'now_tab': tabType == 'barnd'}" ng-click = "changTab('barnd');">品牌公司</li>
+        <li ng-class="{'now_tab': tabType == 'area'}" ng-click = "changTab('area');">大区</li>
+        <li ng-class="{'now_tab': tabType == 'city'}" ng-click = "changTab('city');">城市</li>
+        <li ng-class="{'now_tab': tabType == 'store'}" ng-click = "changTab('store');">门店</li>
+        <li ng-class="{'now_tab': tabType == 'custom'}" ng-click = "changTab('custom');">自定义</li>
+    </ul>
+</div>
+
+
+
+<div class = "model_top_bar_bottom">
+    <!-- 添加项目按钮 -->
+    <div class = "add_btn_wap" ng-click = "addProject($event);" ng-show="tabType == 'custom'">
+        <span class = "add_btn_plus"></span>
+        <span class = "add_btn_text">添加项目</span>
+    </div>
+
+
+    <!-- 清除浮动 -->
+    <div style="clear:both;"></div>
+
+    <!-- 设置table -->
+    <div class="ng-table-container">
+        <h3 class="ng-table-head" id="batchSetTit">
+            {{constants.table_project_list}}
+            <!-- 搜索框 -->
+
+            <div indicators indicators-url="'passengerTrend_1'" class="tips1"></div>
+            <div class="helpOpened_download" ng-click="exportReport();" style=" "></div>
+
+            <div class="search_project2" style="margin-top:10px;margin-right: 8px;width: 150px;height: 24px;background-size: 8% 46% !important;">
+                <input placeholder="{{constants.label_input_key_word}}" ng-keyup="myKeyUp($event)" ng-model="searchText"
+                       style="height: 20px;margin: -24px 0px 0px 37px;width: 100px;font-weight: normal;font-size: 12px;"/>
+            </div>
+        </h3>
+        <div class="row_highlight">
+            <table ng-table="tableParamsSet" class="table table-special" style="display: block;">
+                <thead>
+                <tr>
+                    <th ng-style = "table_width_1">
+                        <span class="setTabTit">名称</span>
+                    </th>
+                    <th ng-style = "table_width_2">
+                        <span class="setTabTit">Shop Code</span>
+                    </th>
+                    <th ng-style = "table_width_3">
+                        <span class="setTabTit">更新时间</span>
+                    </th>
+                    <th ng-style = "table_width_4">
+                        <span class="setTabTit">下游数量</span>
+                    </th>
+                    <th ng-style = "table_width_5">
+                        <span class="setTabTit">门址信息</span>
+                    </th>
+                    <th ng-style = "table_width_6">
+                        <span class="setTabTit">{{constants.label_operation}}</span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody ng-style="table_max_height">
+                <tr ng-repeat="record in set_List">
+                    <td ng-style = "table_width_1">
+                        <div >{{record.projectName}}</div>
+                    </td>
+                    <td ng-style = "table_width_2">
+                        <div >{{record.projectNum}}</div>
+                    </td>
+                    <td ng-style = "table_width_3">
+                        <div >{{record.updateTime | date:'yyyy-MM-dd'}}</div>
+                    </td>
+                    <td ng-style = "table_width_4">
+                        <div>{{record.downNums}}</div>
+                    </td>
+                    <td ng-style = "table_width_5">
+                        <div>{{record.projectPosition}}</div>
+                    </td>
+                    <td ng-style = "table_width_6">
+                        <span class = "operation_btn" ng-click="seeOne(record,$event)">查看</span>
+                        <span class = "operation_btn" ng-click="updateOne(record,$event)" ng-show="tabType == 'custom'">编辑</span>
+                        <span class = "operation_btn" ng-click="removeOne(record,$event)" ng-show="tabType == 'custom'">删除</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.talkingdata</groupId>
+        <artifactId>centralized-configuration</artifactId>
+        <version>0.0.1</version>
+    </parent>
+
+    <groupId>com.talkingdata.datacloud</groupId>
+    <artifactId>data-report</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <git_project>data-report</git_project>
+        <java_source_version>1.8</java_source_version>
+        <java_target_version>1.8</java_target_version>
+        <spring.version>4.3.6.RELEASE</spring.version>
+        <spring.boot.version>1.5.1.RELEASE</spring.boot.version>
+        <spring.cloud.version>1.2.1.RELEASE</spring.cloud.version>
+        <junit.version>4.10</junit.version>
+        <fastjson.version>1.2.9</fastjson.version>
+        <druid.version>1.0.16</druid.version>
+        <slf4j.version>1.7.21</slf4j.version>
+        <aspectj.version>1.8.5</aspectj.version>
+        <jackson.version>2.6.5</jackson.version>
+        <codehaus.jackson.version>1.8.5</codehaus.jackson.version>
+        <mysql.version>6.0.5</mysql.version>
+        <mybatis.version>3.4.0</mybatis.version>
+        <hadoop.version>2.6.0-cdh5.5.2</hadoop.version>
+        <hbase.version>1.0.0-cdh5.5.2</hbase.version>
+        <spark.version>2.1.0</spark.version>
+        <scala.version>2.11.8</scala.version>
+        <scala.binary.version>2.11.8</scala.binary.version>
+        <alluxio.version>1.2.0</alluxio.version>
+        <libthrift.version>0.9.3</libthrift.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <scm>
+        <connection>scm:git:ssh://git@${git_ip}/git/${git_project}.git</connection>
+        <developerConnection>scm:git:ssh://git@${git_ip}/git/${git_project}.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <modules>
+        <module>data-cloud-core</module>
+        <module>data-cloud-visual</module>
+        <module>data-source-adapter</module>
+    </modules>
+
+    <dependencyManagement>
+
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>1.2.1.RELEASE</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-eureka</artifactId>
+                <version>${spring.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-cas</artifactId>
+                <version>3.2.5.RELEASE</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jetty</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+
+            <!--security-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-config</artifactId>
+                <version>${spring.cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-sleuth</artifactId>
+                <version>1.1.3.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-zuul</artifactId>
+                <version>${spring.cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-autoconfigure</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-netflix-eureka-client</artifactId>
+                <version>${spring.cloud.version}</version>
+            </dependency>
+
+            <!-- Provided -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-tomcat</artifactId>
+                <scope>provided</scope>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-jasper</artifactId>
+		        <version>8.5.11</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-cache</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.sf.ehcache</groupId>
+                <artifactId>ehcache</artifactId>
+                <version>2.10.3</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <scope>test</scope>
+                <version>${spring.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>1.2.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-oxm</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.mashape.unirest</groupId>
+                <artifactId>unirest-java</artifactId>
+                <version>1.4.9</version>
+            </dependency>
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>1.3.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.dom4j</groupId>
+                <artifactId>dom4j</artifactId>
+                <version>2.0.0</version>
+            </dependency>
+
+            <!-- commons -->
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>1.3.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>2.6</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.4</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>3.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.9</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-xml</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-core-asl</artifactId>
+                <version>${codehaus.jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-xc</artifactId>
+                <version>${codehaus.jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-jaxrs</artifactId>
+                <version>${codehaus.jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>${codehaus.jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jdom</groupId>
+                <artifactId>jdom</artifactId>
+                <version>1.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>xom</groupId>
+                <artifactId>xom</artifactId>
+                <version>1.2.5</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jstl</artifactId>
+                <version>1.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.1.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.5</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jsp-api</artifactId>
+                <version>2.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.mysql.jdbc</groupId>
+                <artifactId>com.springsource.com.mysql.jdbc</artifactId>
+                <version>5.1.6</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>3.13</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>19.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.sf.supercsv</groupId>
+                <artifactId>super-csv</artifactId>
+                <version>2.4.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.typesafe</groupId>
+                <artifactId>config</artifactId>
+                <version>1.2.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.codehaus.plexus</groupId>
+                <artifactId>plexus-utils</artifactId>
+                <version>3.0.10</version>
+            </dependency>
+
+            <dependency>
+                <groupId>dom4j</groupId>
+                <artifactId>dom4j</artifactId>
+                <version>1.6.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jacoco</groupId>
+                <artifactId>org.jacoco.agent</artifactId>
+                <version>0.5.7.201204190339</version>
+                <classifier>runtime</classifier>
+            </dependency>
+
+            <!--Alvin: Spark依赖问题，需要web.war中使用下面的指定版本-->
+            <dependency>
+                <groupId>com.fasterxml.jackson.module</groupId>
+                <artifactId>jackson-module-scala_2.11</artifactId>
+                <version>2.6.5</version>
+            </dependency>
+
+        </dependencies>
+
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>org.jacoco.agent</artifactId>
+            <classifier>runtime</classifier>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <!--<version>0.5.7.201204190339</version>-->
+                <version>0.7.4.201502262128</version>
+                <executions>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <environment>local</environment>
+                <um.jdbc_url>jdbc:mysql://172.23.4.54:3306/um_saas_tenant</um.jdbc_url>
+                <um.jdbc_username>datacloud</um.jdbc_username>
+                <um.jdbc_password>datacloud@talkingdata</um.jdbc_password>
+                <!--sso config-->
+                <sso.client>http://172.23.4.46</sso.client>
+                <sso.url>http://172.23.4.46</sso.url>
+                <um.rmi.url>http://172.23.4.46/um/remoting/SecurityService</um.rmi.url>
+                <jdbc_url_catalog>jdbc:mysql://172.23.4.54:3306/wherehows</jdbc_url_catalog>
+                <jdbc_username_catalog>datacloud</jdbc_username_catalog>
+                <jdbc_password_catalog>datacloud@talkingdata</jdbc_password_catalog>
+                <jdbc_url_factory>jdbc:mysql://172.23.4.54:3306/ent_datacloud</jdbc_url_factory>
+                <jdbc_username_factory>datacloud</jdbc_username_factory>
+                <jdbc_password_factory>datacloud@talkingdata</jdbc_password_factory>
+                <jdbc_url_report>jdbc:mysql://172.23.4.54:3306/ent_datacloud</jdbc_url_report>
+                <jdbc_username_report>datacloud</jdbc_username_report>
+                <jdbc_password_report>datacloud@talkingdata</jdbc_password_report>
+                <jdbc_url_visual>jdbc:mysql://172.23.4.54:3306/visual</jdbc_url_visual>
+                <jdbc_username_visual>datacloud</jdbc_username_visual>
+                <jdbc_password_visual>datacloud@talkingdata</jdbc_password_visual>
+                <jdbc_url_monitor>jdbc:mysql://172.23.4.54:3306/console</jdbc_url_monitor>
+                <jdbc_username_monitor>datacloud</jdbc_username_monitor>
+                <jdbc_password_monitor>datacloud@talkingdata</jdbc_password_monitor>
+                <!--<fs.defaultFS>hdfs://localhost:9000/</fs.defaultFS>-->
+                <fs.defaultFS>hdfs:// 172.23.4.46:8020/</fs.defaultFS>
+                <snipe.api.url>http://172.23.6.2:9090/web</snipe.api.url>
+                <azkaban.url>http://172.23.6.3:8081</azkaban.url>
+                <azkaban.default.username>azkaban</azkaban.default.username>
+                <azkaban.default.password>123456</azkaban.default.password>
+                <kylin.url>http://172.23.6.3:7070</kylin.url>
+                <kylin.default.username>ADMIN</kylin.default.username>
+                <kylin.default.password>KYLIN</kylin.default.password>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <environment>test</environment>
+                <um.jdbc_url>jdbc:mysql://172.23.4.47:3306/um_saas_tenant</um.jdbc_url>
+                <um.jdbc_username>datacloud</um.jdbc_username>
+                <um.jdbc_password>datacloud@talkingdata</um.jdbc_password>
+                <!--sso config-->
+                <sso.client>http://172.23.4.47</sso.client>
+                <sso.url>http://172.23.4.47</sso.url>
+                <um.rmi.url>http://172.23.4.47/um/remoting/SecurityService</um.rmi.url>
+                <jdbc_url_catalog>jdbc:mysql://172.23.4.47:3306/wherehows</jdbc_url_catalog>
+                <jdbc_username_catalog>datacloud</jdbc_username_catalog>
+                <jdbc_password_catalog>datacloud@talkingdata</jdbc_password_catalog>
+                <jdbc_url_factory>jdbc:mysql://172.23.4.47:3306/ent_datacloud</jdbc_url_factory>
+                <jdbc_username_factory>datacloud</jdbc_username_factory>
+                <jdbc_password_factory>datacloud@talkingdata</jdbc_password_factory>
+                <jdbc_url_report>jdbc:mysql://172.23.4.47:3306/ent_datacloud</jdbc_url_report>
+                <jdbc_username_report>datacloud</jdbc_username_report>
+                <jdbc_password_report>datacloud@talkingdata</jdbc_password_report>
+                <jdbc_url_visual>jdbc:mysql://172.23.4.47:3306/visual</jdbc_url_visual>
+                <jdbc_username_visual>datacloud</jdbc_username_visual>
+                <jdbc_password_visual>datacloud@talkingdata</jdbc_password_visual>
+                <jdbc_url_monitor>jdbc:mysql://172.23.4.47:3306/console</jdbc_url_monitor>
+                <jdbc_username_monitor>datacloud</jdbc_username_monitor>
+                <jdbc_password_monitor>datacloud@talkingdata</jdbc_password_monitor>
+                <!--<fs.defaultFS>hdfs://localhost:9000/</fs.defaultFS>-->
+                <fs.defaultFS>hdfs:// 172.23.4.46:8020/</fs.defaultFS>
+                <snipe.api.url>http://172.23.6.4:9090</snipe.api.url>
+                <azkaban.url>http://172.23.6.4:8081</azkaban.url>
+                <azkaban.default.username>azkaban</azkaban.default.username>
+                <azkaban.default.password>123456</azkaban.default.password>
+                <kylin.url>http://172.23.6.3:7070</kylin.url>
+                <kylin.default.username>ADMIN</kylin.default.username>
+                <kylin.default.password>KYLIN</kylin.default.password>
+            </properties>
+        </profile>
+        <profile>
+            <id>staging</id>
+            <properties>
+                <environment>test</environment>
+                <um.jdbc_url>jdbc:mysql://172.23.4.47:3306/um_saas_tenant</um.jdbc_url>
+                <um.jdbc_username>datacloud</um.jdbc_username>
+                <um.jdbc_password>datacloud@talkingdata</um.jdbc_password>
+                <!--sso config-->
+                <sso.client>http://medemo.tenddata.com</sso.client>
+                <sso.url>http://medemo.tenddata.com</sso.url>
+                <um.rmi.url>http://medemo.tenddata.com/um/remoting/SecurityService</um.rmi.url>
+                <jdbc_url_catalog>jdbc:mysql://172.23.4.47:3306/wherehows</jdbc_url_catalog>
+                <jdbc_username_catalog>datacloud</jdbc_username_catalog>
+                <jdbc_password_catalog>datacloud@talkingdata</jdbc_password_catalog>
+                <jdbc_url_factory>jdbc:mysql://172.23.4.47:3306/ent_datacloud</jdbc_url_factory>
+                <jdbc_username_factory>datacloud</jdbc_username_factory>
+                <jdbc_password_factory>datacloud@talkingdata</jdbc_password_factory>
+                <jdbc_url_report>jdbc:mysql://172.23.4.47:3306/ent_datacloud</jdbc_url_report>
+                <jdbc_username_report>datacloud</jdbc_username_report>
+                <jdbc_password_report>datacloud@talkingdata</jdbc_password_report>
+                <jdbc_url_visual>jdbc:mysql://172.23.6.249:3306/visual</jdbc_url_visual>
+                <jdbc_username_visual>datacloud</jdbc_username_visual>
+                <jdbc_password_visual>datacloud@talkingdata</jdbc_password_visual>
+                <jdbc_url_monitor>jdbc:mysql://172.23.4.47:3306/console</jdbc_url_monitor>
+                <jdbc_username_monitor>datacloud</jdbc_username_monitor>
+                <jdbc_password_monitor>datacloud@talkingdata</jdbc_password_monitor>
+                <!--<fs.defaultFS>hdfs://localhost:9000/</fs.defaultFS>-->
+                <fs.defaultFS>hdfs://172.23.4.46:8020/</fs.defaultFS>
+                <snipe.api.url>http://172.23.6.4:9090</snipe.api.url>
+                <azkaban.url>http://172.23.6.4:8081</azkaban.url>
+                <azkaban.default.username>azkaban</azkaban.default.username>
+                <azkaban.default.password>123456</azkaban.default.password>
+                <kylin.url>http://172.23.6.3:7070</kylin.url>
+                <kylin.default.username>ADMIN</kylin.default.username>
+                <kylin.default.password>KYLIN</kylin.default.password>
+            </properties>
+        </profile>
+    </profiles>
+
+</project>
+

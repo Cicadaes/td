@@ -1,0 +1,3 @@
+#SendCollectorDataTask.job
+type=command
+command=bash -x /home/hadoop/wanalytics/etl/bin/SendCollectorDataTask.sh  -schedulerTaskLogId "${schedule.task.log.id}" -dataPath "${dataPath}"  -url "${url}"

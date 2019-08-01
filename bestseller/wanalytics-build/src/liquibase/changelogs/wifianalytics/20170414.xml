@@ -1,0 +1,47 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="ran.li" id="1492168272000-1">
+        <createTable tableName="TD_CROSS_ANALYSIS" remarks="交叉分析表">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="project_id" remarks="项目id" type="varchar(127)" />
+            <column name="analysis_name" remarks="交叉分析名称" type="varchar(127)" />
+            <column name="x_axis" remarks="X轴" type="varchar(63)" />
+            <column name="y_axis" remarks="Y轴" type="varchar(63)" />
+            <column name="start_date" remarks="开始时间" type="varchar(127)" />
+            <column name="end_date" remarks="结束时间" type="varchar(127)" />
+
+            <column name="create_by" remarks="创建者账号" type="varchar(128)" />
+            <column name="creator" remarks="创建人" type="varchar(128)" />
+            <column name="create_time" remarks="创建时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改者账号" type="varchar(128)" />
+            <column name="updater" remarks="修改人" type="varchar(128)" />
+            <column name="update_time" remarks="修改时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="ran.li" id="1492168272000-2">
+        <addColumn tableName="TD_PROJECT_SALES_VOLUMN">
+            <column name="cross_analysis_id" type="BIGINT" remarks="交叉分析id"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet author="ran.li" id="1492168272000-3">
+        <addColumn tableName="TD_PROJECT_SALES_VOLUMN">
+            <column name="passenger_flow" type="int(15)" remarks="客流量"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet author="ran.li" id="1492168272000-4">
+        <addColumn tableName="TD_CROSS_ANALYSIS">
+            <column name="status" type="int(2)" remarks="状态"/>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

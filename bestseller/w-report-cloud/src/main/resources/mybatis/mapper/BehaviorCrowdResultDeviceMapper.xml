@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.BehaviorCrowdResultDeviceDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.BehaviorCrowdResultDevice">
+        <result column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="project_id" property="projectId"/>
+        <result column="crowd_id" property="crowdId"/>
+        <result column="run_date" property="runDate"/>
+        <result column="device_attr_type" property="deviceAttrType"/>
+        <result column="device_attr_name" property="deviceAttrName"/>
+        <result column="metric_value" property="metricValue"/>
+        <result column="cycle_statistics" property="cycleStatistics"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+        <result column="exec_id" property="execId"/>
+    </resultMap>
+
+    <!-- TD_BEHAVIOR_CROWD_RESULT_DEVICE table all fields -->
+    <sql id="Base_Column_List">
+        id,tenant_id,project_id,crowd_id,run_date,device_attr_type,device_attr_name,metric_value,cycle_statistics,start_date,end_date,exec_id
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="crowdId != null and crowdId != ''">
+                and crowd_id = #{crowdId}
+            </if>
+            <if test="runDate != null and runDate != ''">
+                and run_date = #{runDate}
+            </if>
+            <if test="deviceAttrType != null and deviceAttrType != ''">
+                and device_attr_type = #{deviceAttrType}
+            </if>
+            <if test="deviceAttrName != null and deviceAttrName != ''">
+                and device_attr_name = #{deviceAttrName}
+            </if>
+            <if test="metricValue != null and metricValue != ''">
+                and metric_value = #{metricValue}
+            </if>
+            <if test="cycleStatistics != null and cycleStatistics != ''">
+                and cycle_statistics = #{cycleStatistics}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and start_date = #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and end_date = #{endDate}
+            </if>
+            <if test="execId != null and execId != ''">
+                and exec_id = #{execId}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_BEHAVIOR_CROWD_RESULT_DEVICE(id,tenant_id,project_id,crowd_id,run_date,device_attr_type,device_attr_name,metric_value,cycle_statistics,start_date,end_date,exec_id)
+        values(#{id},#{tenantId},#{projectId},#{crowdId},#{runDate},#{deviceAttrType},#{deviceAttrName},#{metricValue},#{cycleStatistics},#{startDate},#{endDate},#{execId})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_BEHAVIOR_CROWD_RESULT_DEVICE set
+        tenant_id=#{tenantId},project_id=#{projectId},crowd_id=#{crowdId},run_date=#{runDate},device_attr_type=#{deviceAttrType},device_attr_name=#{deviceAttrName},metric_value=#{metricValue},cycle_statistics=#{cycleStatistics},start_date=#{startDate},end_date=#{endDate},exec_id=#{execId}
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_BEHAVIOR_CROWD_RESULT_DEVICE set
+        <trim suffixOverrides=",">
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="crowdId != null  ">
+                crowd_id=#{crowdId},
+            </if>
+            <if test="runDate != null  ">
+                run_date=#{runDate},
+            </if>
+            <if test="deviceAttrType != null  ">
+                device_attr_type=#{deviceAttrType},
+            </if>
+            <if test="deviceAttrName != null  ">
+                device_attr_name=#{deviceAttrName},
+            </if>
+            <if test="metricValue != null  ">
+                metric_value=#{metricValue},
+            </if>
+            <if test="cycleStatistics != null  ">
+                cycle_statistics=#{cycleStatistics},
+            </if>
+            <if test="startDate != null  ">
+                start_date=#{startDate},
+            </if>
+            <if test="endDate != null  ">
+                end_date=#{endDate},
+            </if>
+            <if test="execId != null  ">
+                exec_id=#{execId},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 自定义行为客群-人群消费结果表 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_BEHAVIOR_CROWD_RESULT_DEVICE where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_BEHAVIOR_CROWD_RESULT_DEVICE where id = #{id}
+    </delete>
+
+    <!-- 自定义行为客群-人群消费结果表 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_BEHAVIOR_CROWD_RESULT_DEVICE
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询自定义行为客群-人群消费结果表列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_BEHAVIOR_CROWD_RESULT_DEVICE
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- 根据code查询 人群标签 -->
+    <select id="selectByCodesIn" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_BEHAVIOR_CROWD_RESULT_DEVICE
+        WHERE device_attr_name != '-1'
+        <if test="tenantId != null and tenantId != ''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="projectId != null and projectId != ''">
+            and project_id = #{projectId}
+        </if>
+        <if test="deviceAttrType != null  ">
+            and device_attr_type=#{deviceAttrType}
+        </if>
+        <if test="list != null  ">
+            and device_attr_name in
+            <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="execId !=null">
+            and exec_id=#{execId}
+        </if>
+    </select>
+</mapper>

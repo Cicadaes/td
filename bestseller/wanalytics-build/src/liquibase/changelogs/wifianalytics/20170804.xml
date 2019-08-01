@@ -1,0 +1,38 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="hao.yang" id="1501831379479-1">
+        <addColumn tableName="TD_PROJECT_INDEX">
+            <column name="ssid_count" type="int(4)" remarks="SSID数量"/>
+            <column name="room_count" type="int(4)" remarks="房间数量"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet author="hao.yang" id="1501831379479-2">
+        <createTable tableName="TD_COMPETE_ATTRIBUTE">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="tenant_id" remarks="租户id" type="varchar(60)"/>
+            <column name="compete_id" remarks="竞品项目ID" type="BIGINT" />
+            <column name="data_sources" remarks="数据源类型" type="varchar(64)" />
+            <column name="status" remarks="状态" type="int(2)" />
+            <column name="start_date" remarks="开始日期" type="varchar(128)" />
+            <column name="end_date" remarks="结束日期" type="varchar(128)" />
+            <column name="create_by" remarks="创建者账号" type="varchar(128)" />
+            <column name="creator" remarks="创建人" type="varchar(128)" />
+            <column name="create_time" remarks="创建时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改者账号" type="varchar(128)" />
+            <column name="updater" remarks="修改人" type="varchar(128)" />
+            <column name="update_time" remarks="修改时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

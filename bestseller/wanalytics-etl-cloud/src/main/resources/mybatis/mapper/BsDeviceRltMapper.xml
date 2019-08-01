@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.BsDeviceRltDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="td.enterprise.entity.BsDeviceRlt" >
+	<result column="id" property="id"/>
+	<result column="dev_sn" property="devSn"/>
+	<result column="dev_model" property="devModel"/>
+	<result column="shop_id" property="shopId"/>
+	<result column="dev_type" property="devType"/>
+	<result column="aliasname" property="aliasname"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_time" property="updateTime"/>
+	<result column="run_date" property="runDate"/>
+  </resultMap>
+       
+  <!-- TD_BS_DEVICE_RLT table all fields -->
+  <sql id="Base_Column_List" >
+	 id,dev_sn,dev_model,shop_id,dev_type,aliasname,create_time,update_time,run_date
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="devSn != null and devSn != ''" >
+        and dev_sn =  #{devSn}
+	  </if>
+	      <if test="devModel != null and devModel != ''" >
+        and dev_model =  #{devModel}
+	  </if>
+	      <if test="shopId != null and shopId != ''" >
+        and shop_id =  #{shopId}
+	  </if>
+	      <if test="devType != null and devType != ''" >
+        and dev_type =  #{devType}
+	  </if>
+	      <if test="aliasname != null and aliasname != ''" >
+        and aliasname =  #{aliasname}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+	      <if test="runDate != null and runDate != ''" >
+        and run_date =  #{runDate}
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+      insert into 
+TD_BS_DEVICE_RLT(id,dev_sn,dev_model,shop_id,dev_type,aliasname,create_time,update_time,run_date)
+ values(#{id},#{devSn},#{devModel},#{shopId},#{devType},#{aliasname},now(),now(),#{runDate})
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+      update TD_BS_DEVICE_RLT set dev_sn=#{devSn},dev_model=#{devModel},shop_id=#{shopId},dev_type=#{devType},aliasname=#{aliasname},update_time=now(),run_date=#{runDate} where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+      update TD_BS_DEVICE_RLT set 
+		<if test="devSn != null  ">
+		dev_sn=#{devSn},
+	</if>
+	<if test="devModel != null  ">
+		dev_model=#{devModel},
+	</if>
+	<if test="shopId != null  ">
+		shop_id=#{shopId},
+	</if>
+	<if test="devType != null  ">
+		dev_type=#{devType},
+	</if>
+	<if test="aliasname != null  ">
+		aliasname=#{aliasname},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	<if test="runDate != null  ">
+		run_date=#{runDate},
+	</if>
+	update_time = now() 
+	where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 绫致店铺设备关系 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+      select <include refid="Base_Column_List" /> 
+	 from TD_BS_DEVICE_RLT where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+      delete from TD_BS_DEVICE_RLT where id = #{id}
+  </delete>
+
+  <!-- 绫致店铺设备关系 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_BS_DEVICE_RLT 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询绫致店铺设备关系列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_BS_DEVICE_RLT 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <!-- 批量插入记录 add by liyinglei 2017-10-17 -->
+  <insert id="batchInsert" parameterType="java.util.List">  
+     insert into 
+		TD_BS_DEVICE_RLT(dev_sn,dev_model,shop_id,dev_type,aliasname,create_time,update_time,run_date)
+     values  
+     <foreach collection="list" item="item" index="index" separator="," >  
+         (#{item.devSn},#{item.devModel},#{item.shopId},#{item.devType},#{item.aliasname},now(),now(),#{item.runDate})  
+     </foreach>  
+   </insert>
+   
+   <!-- 查询最近的列表  add by liyinglei 2017-10-19 -->
+  <select id="queryListByRecent" resultMap="BaseResultMap"  parameterType="Object">
+	SELECT t.* FROM TD_BS_DEVICE_RLT t WHERE 
+		t.run_date = (SELECT MAX(t1.run_date) FROM TD_BS_DEVICE_RLT t1)
+  </select>
+  
+  <!-- 按周期删除数据 add by liyinglei 2017-11-24 -->
+  <delete id="deleteByRunDate" parameterType="Object">
+      delete from TD_BS_DEVICE_RLT where run_date = #{runDate}
+  </delete>
+  
+</mapper>   

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.BehaviorCrowdDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.BehaviorCrowd">
+        <result column="id" property="id"/>
+        <result column="crowd_name" property="crowdName"/>
+        <result column="param_json" property="paramJson"/>
+        <result column="creator" property="creator"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="exec_id" property="execId"/>
+        <result column="status" property="status"/>
+        <result column="calc_status" property="calcStatus"/>
+        <result column="project_id" property="projectId"/>
+        <result column="tenant_id" property="tenantId"/>
+    </resultMap>
+
+    <!-- TD_BEHAVIOR_CROWD table all fields -->
+    <sql id="Base_Column_List">
+        id,crowd_name,param_json,creator,create_by,update_by,create_time,update_time,exec_id,status,calc_status,project_id,tenant_id
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="crowdName != null and crowdName != ''">
+                and crowd_name = #{crowdName}
+            </if>
+            <if test="paramJson != null and paramJson != ''">
+                and param_json = #{paramJson}
+            </if>
+            <if test="execId != null and execId != ''">
+                and exec_id = #{execId}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="calcStatus != null and calcStatus != ''">
+                and calc_status = #{calcStatus}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_BEHAVIOR_CROWD(id,crowd_name,param_json,creator,create_by,update_by,create_time,update_time,exec_id,status,calc_status,project_id,tenant_id)
+        values(#{id},#{crowdName},#{paramJson},#{creator},#{createBy},#{updateBy},now(),now(),#{execId},#{status},#{calcStatus},#{projectId},#{tenantId})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_BEHAVIOR_CROWD set
+        crowd_name=#{crowdName},param_json=#{paramJson},creator=#{creator},create_by=#{createBy},update_by=#{updateBy},create_time=now(),update_time=now(),exec_id=#{execId},status=#{status},calc_status=#{calcStatus},project_id=#{projectId},tenant_id=#{tenantId}
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_BEHAVIOR_CROWD set
+        <trim suffixOverrides=",">
+            <if test="crowdName != null  ">
+                crowd_name=#{crowdName},
+            </if>
+            <if test="paramJson != null  ">
+                param_json=#{paramJson},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="createBy != null  ">
+                create_by=#{createBy},
+            </if>
+            <if test="updateBy != null  ">
+                update_by=#{updateBy},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updateTime != null  ">
+                update_time=#{updateTime},
+            </if>
+            <if test="execId != null  ">
+                exec_id=#{execId},
+            </if>
+            <if test="status != null  ">
+                status=#{status},
+            </if>
+            <if test="calcStatus != null  ">
+                calc_status=#{calcStatus},
+            </if>
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 行为客群计算参数 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_BEHAVIOR_CROWD where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_BEHAVIOR_CROWD where id = #{id}
+    </delete>
+
+    <!-- 行为客群计算参数 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_BEHAVIOR_CROWD
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询行为客群计算参数列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_BEHAVIOR_CROWD
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,152 @@
+<!-- 导航条 -->
+<div class="nav_bar_top" >
+    <span class = "nav_bar_normal nav_bar_btn" ng-click="go_sensorManege()">{{constants.field_sensor_sensorManege}}</span>
+    <span> > </span>
+    <span>{{constants.field_sensor_sensorDetail}}</span>
+</div>
+
+<div style = "padding: 20px;padding-top: 0px;height: 510px;margin-top: 20px;">
+    <div id="smallscreen" style = "overflow-y:auto; overflow-x: hidden;margin-right: -20px; padding-right: 16px;">
+
+        <!-- 责任信息 -->
+        <div class="form-horizontal-panel model_panel seeStroeDetail" style = "overflow: hidden; padding-bottom: 20px;">
+            <div class="shopGroupTit" style = "margin-bottom: 20px;">{{constants.field_sensorDetail_Tit1}}</div>
+            <!-- 探针ID -->
+            <div class="control-group" style="width:50%">
+                <label class="control-label shopGroup shopGroupnew" style="text-align: left;margin-left:50px;">{{constants.field_sensor_sensorCode}}</label>
+                <div class="controls shopGinform_wap shopGroupnew_wap">
+                    <p>{{sensor.sensorCode}}</p>
+                </div>
+            </div>
+            <!-- 探针别名 -->
+            <div class="control-group" style="width:50%">
+                <label class="control-label shopGroup shopGroupnew" style="text-align: left;margin-left:50px;">{{constants.field_sensor_sensorName}}</label>
+                <div class="controls shopGinform_wap shopGroupnew_wap">
+                    <p>{{sensor.sensorName}}</p>
+                </div>
+            </div>
+            <!-- MAC地址 -->
+            <div class="control-group" style="width:50%">
+                <label class="control-label shopGroup shopGroupnew" style="text-align: left;margin-left:50px;">{{constants.field_sensor_sensorMac}}</label>
+                <div class="controls shopGinform_wap shopGroupnew_wap">
+                    <p>{{sensor.sensorMac}}</p>
+                </div>
+            </div>
+            <!-- 探针型号 -->
+            <div class="control-group" style="width:50%">
+                <label class="control-label shopGroup shopGroupnew" style="text-align: left;margin-left:50px;">{{constants.field_sensor_sensorModel}}</label>
+                <div class="controls shopGinform_wap shopGroupnew_wap">
+                    <p>{{sensor.sensorVersion}}</p>
+                </div>
+            </div>
+            <!-- 探针类型 -->
+            <div class="control-group" style="width:50%">
+                <label class="control-label shopGroup shopGroupnew" style="text-align: left;margin-left:50px;">{{constants.field_sensor_sensorType}}</label>
+                <div class="controls shopGinform_wap shopGroupnew_wap">
+                    <p>{{sensor.sensorType}}</p>
+                </div>
+            </div>
+            <!-- 位置描述 -->
+            <div class="control-group" style="width:50%">
+                <label class="control-label shopGroup shopGroupnew" style="text-align: left;margin-left:50px;">{{constants.field_sensor_positionDescription}}</label>
+                <div class="controls shopGinform_wap shopGroupnew_wap">
+                    <p>{{sensor.positionDescription}}</p>
+                </div>
+            </div>
+            <!-- 开通时间 -->
+            <div class="control-group" style="width:50%">
+                <label class="control-label shopGroup shopGroupnew" style="text-align: left;margin-left:50px;">{{constants.field_sensormanage_creattime}}</label>
+                <div class="controls shopGinform_wap shopGroupnew_wap">
+                    <p>{{sensor.createTime | date:'yyyy-MM-dd'}}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- chart 图标模块 -->
+        <div class = "see_chart_wap">
+            <div class="shopGroupTit" style = "margin-bottom: 20px;background:#fff;margin-bottom:-1px;border-top-left-radius:0px;border-top-right-radius:0px;position:relative;">
+                {{constants.field_sensorDetail_Tit2}}
+                <div class="helpOpened_download" ng-click="exportReportSensorDetail();" style=" margin-top: 15px;margin-right: 0px;"></div>
+            </div>
+            <!-- 一个echart图表 -->
+            <div class="form-horizontal-panel model_panel margin_bottom_panel" style = "overflow: hidden;  width: 100%;bordar-top:0px;">
+                <div>
+                    <div class="">
+                        <ul class = "tab_shopG page_shopG" style = "overflow: hidden;">
+                            <li class = "macs sensor_select" ng-click="changeType(sensorOne.id,'1',$event)">{{constants.btn_store_sensor_macs}}</li>
+                            <li class = "logs" ng-click="changeType(sensorOne.id,'2',$event)">{{constants.btn_store_sensor_logs}}</li>
+                        </ul>
+                    </div>
+                    <!-- echart 图表 -->
+                    <div class="trend clearfix">
+                        <p class = "macTotal total_block">{{constants.label_sum_count}} <span style="color:#02aea2;margin-left: 10px;">{{sensor.macTotal}}</span><p>
+                        <p class = "logTotal">{{constants.label_sum_count}} <span style="color:#02aea2;margin-left: 10px;">{{sensor.logTotal}}</span><p>
+                        <div class="" style="padding:0px;height: 300px;">
+                            <div class="" id='chart_detail' style="height: inherit;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row_highlight">
+            <h3 class="ng-table-head">
+                {{constants.field_sensorDetail_Tit3}}
+                <!-- 搜索框 -->
+                <!--<div class="search_project2" style="float:right;position: absolute;top:10px;right:50px;margin-right:10px;width: 180px;">
+                    <input id="searchSensor" placeholder="{{constants.label_input_key_word}}" ng-keyup="myKeyupsensor($event)" ng-model = "sensorsearchvalue"/>
+                </div>-->
+                <!-- 下载按钮 -->
+               <!-- <div class="helpOpened_download" ng-click="exportReport_Sensor();"  style="float:right;position: absolute;top:7px;right:18px;"></div>-->
+            </h3>
+            <table ng-table="tableParams" class="table table-special">
+                <thead>
+                    <th>
+                        <span>{{constants.field_sensorDetail_editTime}}</span><!--{{constants.field_sensor_positionDescription}}-->
+                    </th>
+                    <th>
+                        <span>{{constants.field_sensorDetail_editPerson}}</span><!--field_sensor_sensorName-->
+                    </th>
+                    <th>
+                        <span>{{constants.field_project_typeId}} </span>
+                    </th>
+
+                    <th>
+                        <span>{{constants.field_sensor_StrengthSet}}</span>
+                    </th>
+
+                    <th>
+                        <span>{{constants.field_sensor_positionDescription}}</span>
+                    </th>
+                </thead>
+                <tbody ng-style="table_max_height" style="display: block;overflow-y: auto;overflow-x: hidden;">
+                    <tr ng-repeat="sensor in sensorList">
+                        <td>
+                            <div>{{sensor.newSensor.updateTime | date:'yyyy-MM-dd'}}</div>
+                        </td>
+                        <td>
+                            <div>{{sensor.newSensor.updater}}</div>
+                        </td>
+                        <td>
+                            <div>{{sensor.newSensor.sensorType}}</div>
+                        </td>
+                        <!-- 探针强度 -->
+                        <td>
+                            <div>{{sensor.newSensor.minRssi}}</div>
+                        </td>
+                        <!-- 探针位置描述 -->
+                        <td>
+                            <div>{{sensor.newSensor.positionDescription}}</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,531 @@
+<div class = "rankListDropWap">
+    <!-- filter - filter -->
+    <div class="drop-down-wap customLeft" tabindex=1 style="margin-right: 10px;" ng-click="filterShow($event,'filterCount')">
+        <span>{{filterCountText}}</span>
+        <b class = "customTriangle" ng-if="groupSign"></b>
+        <div class = "drop-down-wap-ul"  ng-show="filterCountFlage" style="height: 180px;">
+            <ul style="top:6px;">
+                <li ng-repeat = "one in filterList" ng-click="changeFilterCount($event, one.type,one)" title="{{one.name}}">{{one.name}}</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- 品牌filter -->
+    <div class="drop-down-wap customLeft" tabindex=1 style="margin-right: 10px;" ng-click="filterShow($event,'filterBrand')" ng-if="dropDownWapBrandFlage">
+        <span>{{filterBrandText}}</span>
+        <b class = "customTriangle"></b>
+        <div class = "drop-down-wap-ul" ng-show="filterBrandFlage" style="height: 180px;">
+            <h3 ng-click="filterDataListAll($event,'brand');">全部品牌</h3>
+            <ul>
+                <li ng-repeat = "one in brandFilterList" ng-click="filterDataList($event, one.type, 'brand',one)" title="{{one.projectName}}">{{one.projectName}}</li>
+            </ul>
+        </div>
+    </div>
+    <!-- 大区filter -->
+    <div class="drop-down-wap customLeft" tabindex=1 style="margin-right: 10px;" ng-click="filterShow($event,'filterLargeArea')" ng-if="dropDownWapLargeAreaFlage && group_sign != 'N'" >
+        <span>{{filterLargeAreaText}}</span>
+        <b class = "customTriangle"></b>
+        <div class = "drop-down-wap-ul" ng-show="filterLargeAreaFlage">
+            <h3 ng-click="filterDataListAll($event,'lagerArea');">全部大区</h3>
+            <ul>
+                <li ng-repeat = "one in largeAreaFilterList" ng-click="filterDataList($event, one.type, 'lagerArea',one)" title="{{one.projectName}}">{{one.projectName}}</li>
+            </ul>
+        </div>
+    </div>
+    <!-- 城市filter -->
+    <div class="drop-down-wap customLeft" tabindex=1  style="margin-right: 10px;"  ng-click="filterShow($event,'filterCity')" ng-if="dropDownWapCityFlag && group_sign != 'N'">
+        <span>{{filterCityText}}</span>
+        <b class = "customTriangle"></b>
+        <div class = "drop-down-wap-ul" ng-show="filterCityFlage">
+            <h3 ng-click="filterDataListAll($event,'city');">全部城市</h3>
+            <ul >
+                <li ng-repeat = "one in cityList" ng-click="filterDataList($event, one.type, 'city',one)" title="{{one.projectName}}">{{one.projectName}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- 数据列表table -->
+<div class="ng-table-container">
+    <h3 class="ng-table-head">
+        指标列表
+        <!-- 下载按钮 -->
+        <div class="helpOpened_download" ng-click="exportReport();" style="margin-top: 14px; margin-left: 2px;"></div>
+
+        <!-- 设置按钮 -->
+        <div class = "set-add-index customRight" ng-click="setAddIndexShow();"></div>
+
+        <!-- 搜索框 -->
+        <div class="search_project2" style="margin-top:11px;margin-right: 0px;width: 150px;height: 24px;background-size: 8% 46% !important;">
+            <input placeholder="{{constants.label_input_key_word}}" ng-keyup="myKeyUpMechanism($event)" ng-model="searchTextMechanism"
+                   style="height: 20px;margin: -24px 0px 0px 37px;width: 100px;font-weight: normal;font-size: 12px;"/>
+        </div>
+    </h3>
+    <div class="row_highlight" style="overflow: auto;width: 100%;">
+        <table ng-table="tableParamsMechanishm" border="1" class="tab_css_1 getWidth table-projectRanking">
+            <thead>
+            <th style="width: 120px;position: relative;">
+                <div class = "collection-wap" style="width: 80px;">
+                    <p ng-class="collectType?'customRadioCheck':'customRadio'" ng-click="changeCollectionType($event)" style="float: left;">
+                        <b></b>
+                    </p>
+                    <span style="float: left;margin-top: 4px;">显示收藏</span>
+                </div>
+            </th>
+            <th>名称 </th>
+            <th>Shop Code</th>
+            <th ng-class="sortType == 'activeUsers'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('activeUsers')">
+                <span style="position: relative;">
+                    入店客流
+                    <b ng-class="sortSelect == 'activeUsersUp'?'sortSelect':(sortSelect == 'activeUsersDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'activeUsersDown'?'sortSelect':(sortSelect == 'activeUsersUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>
+            <th>环比</th>
+            <!--<th ng-class="sortType == 'activeUsersChainRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('activeUsersChainRate')">-->
+                <!--<span style="position: relative;">-->
+                    <!--环比-->
+                    <!--<b ng-class="sortSelect == 'activeUsersChainRateUp'?'sortSelect':(sortSelect == 'activeUsersChainRateDown'?'sensor_sort_1':'sensor_sort1')"></b>-->
+                    <!--<b ng-class="sortSelect == 'activeUsersChainRateDown'?'sortSelect':(sortSelect == 'activeUsersChainRateUp'?'sensor_sort_2':'sensor_sort2')"></b>-->
+                <!--</span>-->
+            <!--</th>-->
+            <th ng-class="sortType == 'frontUsers'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('frontUsers')">
+                <span style="position: relative;">
+                    周边客流
+                    <b ng-class="sortSelect == 'frontUsersUp'?'sortSelect':(sortSelect == 'frontUsersDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'frontUsersDown'?'sortSelect':(sortSelect == 'frontUsersUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>
+            <th>环比</th>
+            <!--<th ng-class="sortType == 'frontUsersChainRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('frontUsersChainRate')">-->
+                <!--<span style="position: relative;">-->
+                    <!--环比-->
+                    <!--<b ng-class="sortSelect == 'frontUsersChainRateUp'?'sortSelect':(sortSelect == 'frontUsersChainRateDown'?'sensor_sort_1':'sensor_sort1')"></b>-->
+                    <!--<b ng-class="sortSelect == 'frontUsersChainRateDown'?'sortSelect':(sortSelect == 'frontUsersChainRateUp'?'sensor_sort_2':'sensor_sort2')"></b>-->
+                <!--</span>-->
+            <!--</th>-->
+            <th ng-class="sortType == 'stayUsers'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('stayUsers')">
+                <span style="position: relative;">
+                    停留客流
+                    <b ng-class="sortSelect == 'stayUsersUp'?'sortSelect':(sortSelect == 'stayUsersDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'stayUsersDown'?'sortSelect':(sortSelect == 'stayUsersUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>
+            <th>环比</th>
+            <!--<th ng-class="sortType == 'stayUsersChainRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('stayUsersChainRate')">-->
+                <!--<span style="position: relative;">-->
+                    <!--环比-->
+                    <!--<b ng-class="sortSelect == 'stayUsersChainRateUp'?'sortSelect':(sortSelect == 'stayUsersChainRateDown'?'sensor_sort_1':'sensor_sort1')"></b>-->
+                    <!--<b ng-class="sortSelect == 'stayUsersChainRateDown'?'sortSelect':(sortSelect == 'stayUsersChainRateUp'?'sensor_sort_2':'sensor_sort2')"></b>-->
+                <!--</span>-->
+            <!--</th>-->
+            <th ng-class="sortType == 'jumpUsers'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('jumpUsers')" ng-if="indexListMap.jumpUsers">
+                <span style="position: relative;">
+                    跳出客流
+                    <b ng-class="sortSelect == 'jumpUsersUp'?'sortSelect':(sortSelect == 'jumpUsersDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'jumpUsersDown'?'sortSelect':(sortSelect == 'jumpUsersUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>
+            <th ng-if="indexListMap.jumpUsers && indexListMap.mom">环比</th>
+            <!--<th ng-class="sortType == 'jumpUsersChainRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('jumpUsersChainRate')" ng-if="indexListMap.jumpUsers && indexListMap.mom">-->
+                <!--<span style="position: relative;">-->
+                    <!--环比-->
+                    <!--<b ng-class="sortSelect == 'jumpUsersChainRateUp'?'sortSelect':(sortSelect == 'jumpUsersChainRateDown'?'sensor_sort_1':'sensor_sort1')"></b>-->
+                    <!--<b ng-class="sortSelect == 'jumpUsersChainRateDown'?'sortSelect':(sortSelect == 'jumpUsersChainRateUp'?'sensor_sort_2':'sensor_sort2')"></b>-->
+                <!--</span>-->
+            <!--</th>-->
+            <!--<th ng-class="sortType == 'incomingMember'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('incomingMember')" ng-if="indexListMap.incomingMember">-->
+                <!--<span style="position: relative;">-->
+                    <!--入店会员-->
+                    <!--<b ng-class="sortSelect == 'incomingMemberUp'?'sortSelect':(sortSelect == 'incomingMemberDown'?'sensor_sort_1':'sensor_sort1')"></b>-->
+                    <!--<b ng-class="sortSelect == 'incomingMemberDown'?'sortSelect':(sortSelect == 'incomingMemberUp'?'sensor_sort_2':'sensor_sort2')"></b>-->
+                <!--</span>-->
+            <!--</th>-->
+            <!--<th ng-if="indexListMap.incomingMember && indexListMap.mom">环比</th>-->
+            <!--<th ng-class="sortType == 'incomingMemberChainRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('incomingMemberChainRate')" ng-if="indexListMap.incomingMember && indexListMap.mom">-->
+                <!--<span style="position: relative;">-->
+                    <!--环比-->
+                    <!--<b ng-class="sortSelect == 'incomingMemberChainRateUp'?'sortSelect':(sortSelect == 'incomingMemberChainRateDown'?'sensor_sort_1':'sensor_sort1')"></b>-->
+                    <!--<b ng-class="sortSelect == 'incomingMemberChainRateDown'?'sortSelect':(sortSelect == 'incomingMemberChainRateUp'?'sensor_sort_2':'sensor_sort2')"></b>-->
+                <!--</span>-->
+            <!--</th>-->
+            <th ng-class="sortType == 'potentialCount'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('potentialCount')" ng-if="indexListMap.potentialCount">
+                <span style="position: relative;">
+                    微信认证数
+                    <b ng-class="sortSelect == 'potentialCountUp'?'sortSelect':(sortSelect == 'potentialCountDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'potentialCountDown'?'sortSelect':(sortSelect == 'potentialCountUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>
+            <th ng-if="indexListMap.potentialCount && indexListMap.mom">环比</th>
+            <!--<th ng-class="sortType == 'potentialCountChainRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('potentialCountChainRate')" ng-if="indexListMap.potentialCount && indexListMap.mom">-->
+                <!--<span style="position: relative;">-->
+                    <!--环比-->
+                    <!--<b ng-class="sortSelect == 'potentialCountChainRateUp'?'sortSelect':(sortSelect == 'potentialCountChainRateDown'?'sensor_sort_1':'sensor_sort1')"></b>-->
+                    <!--<b ng-class="sortSelect == 'potentialCountChainRateDown'?'sortSelect':(sortSelect == 'potentialCountChainRateUp'?'sensor_sort_2':'sensor_sort2')"></b>-->
+                <!--</span>-->
+            <!--</th>-->
+            <th ng-class="sortType == 'memberCount'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('memberCount')" ng-if="indexListMap.memberCount">
+                <span style="position: relative;">
+                    手机认证数
+                    <b ng-class="sortSelect == 'memberCountUp'?'sortSelect':(sortSelect == 'memberCountDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'memberCountDown'?'sortSelect':(sortSelect == 'memberCountUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>
+            <th ng-if="indexListMap.memberCount && indexListMap.mom">环比</th>
+            <!--<th ng-class="sortType == 'memberCountChainRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('memberCountChainRate')" ng-if="indexListMap.memberCount && indexListMap.mom">-->
+                <!--<span style="position: relative;">-->
+                    <!--环比-->
+                    <!--<b ng-class="sortSelect == 'memberCountChainRateUp'?'sortSelect':(sortSelect == 'memberCountChainRateDown'?'sensor_sort_1':'sensor_sort1')"></b>-->
+                    <!--<b ng-class="sortSelect == 'memberCountChainRateDown'?'sortSelect':(sortSelect == 'memberCountChainRateUp'?'sensor_sort_2':'sensor_sort2')"></b>-->
+                <!--</span>-->
+            <!--</th>-->
+            <th ng-class="sortType == 'activeUserNewRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('activeUserNewRate')" ng-if="indexListMap.activeUserNewRate">
+                <span style="position: relative;">
+                    新客占比
+                    <b ng-class="sortSelect == 'activeUserNewRateUp'?'sortSelect':(sortSelect == 'activeUserNewRateDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'activeUserNewRateDown'?'sortSelect':(sortSelect == 'activeUserNewRateUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>
+            <th ng-if="indexListMap.activeUserNewRate && indexListMap.mom">环比</th>
+            <!--<th ng-class="sortType == 'activeUserNewRateChainRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('activeUserNewRateChainRate')" ng-if="indexListMap.activeUserNewRate && indexListMap.mom">-->
+                <!--<span style="position: relative;">-->
+                    <!--环比-->
+                    <!--<b ng-class="sortSelect == 'activeUserNewRateChainRateUp'?'sortSelect':(sortSelect == 'activeUserNewRateChainRateDown'?'sensor_sort_1':'sensor_sort1')"></b>-->
+                    <!--<b ng-class="sortSelect == 'activeUserNewRateChainRateDown'?'sortSelect':(sortSelect == 'activeUserNewRateChainRateUp'?'sensor_sort_2':'sensor_sort2')"></b>-->
+                <!--</span>-->
+            <!--</th>-->
+            <th ng-class="sortType == 'activeUserOldRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('activeUserOldRate')" ng-if="indexListMap.activeUserOldRate">
+                <span style="position: relative;">
+                    老客占比
+                    <b ng-class="sortSelect == 'activeUserOldRateUp'?'sortSelect':(sortSelect == 'activeUserOldRateDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'activeUserOldRateDown'?'sortSelect':(sortSelect == 'activeUserOldRateUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>
+            <th ng-if="indexListMap.activeUserOldRate && indexListMap.mom">环比</th>
+            <!--<th ng-class="sortType == 'activeUserOldRateChainRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('activeUserOldRateChainRate')" ng-if="indexListMap.activeUserOldRate && indexListMap.mom">-->
+                <!--<span style="position: relative;">-->
+                    <!--环比-->
+                    <!--<b ng-class="sortSelect == 'activeUserOldRateChainRateUp'?'sortSelect':(sortSelect == 'activeUserOldRateChainRateDown'?'sensor_sort_1':'sensor_sort1')"></b>-->
+                    <!--<b ng-class="sortSelect == 'activeUserOldRateChainRateDown'?'sortSelect':(sortSelect == 'activeUserOldRateChainRateUp'?'sensor_sort_2':'sensor_sort2')"></b>-->
+                <!--</span>-->
+            <!--</th>-->
+            <th ng-class="sortType == 'highRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('highRate')" ng-if="indexListMap.highRate">
+                <span style="position: relative;">
+                    高活跃客占比
+                    <b ng-class="sortSelect == 'highRateUp'?'sortSelect':(sortSelect == 'highRateDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'highRateDown'?'sortSelect':(sortSelect == 'highRateUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>
+            <th ng-if="indexListMap.highRate && indexListMap.mom">环比</th>
+            <!--<th ng-class="sortType == 'highRateChainRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('highRateChainRate')" ng-if="indexListMap.highRate && indexListMap.mom">-->
+                <!--<span style="position: relative;">-->
+                    <!--环比-->
+                    <!--<b ng-class="sortSelect == 'highRateChainRateUp'?'sortSelect':(sortSelect == 'highRateChainRateDown'?'sensor_sort_1':'sensor_sort1')"></b>-->
+                    <!--<b ng-class="sortSelect == 'highRateChainRateDown'?'sortSelect':(sortSelect == 'highRateChainRateUp'?'sensor_sort_2':'sensor_sort2')"></b>-->
+                <!--</span>-->
+            <!--</th>-->
+            <th ng-class="sortType == 'middleRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('middleRate')" ng-if="indexListMap.middleRate">
+                <span style="position: relative;">
+                    中活跃客占比
+                    <b ng-class="sortSelect == 'middleRateUp'?'sortSelect':(sortSelect == 'middleRateDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'middleRateDown'?'sortSelect':(sortSelect == 'middleRateUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>
+            <th ng-if="indexListMap.middleRate && indexListMap.mom">环比</th>
+            <!--<th ng-class="sortType == 'middleRateChainRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('middleRateChainRate')" ng-if="indexListMap.middleRate && indexListMap.mom">-->
+                <!--<span style="position: relative;">-->
+                    <!--环比-->
+                    <!--<b ng-class="sortSelect == 'middleRateChainRateUp'?'sortSelect':(sortSelect == 'middleRateChainRateDown'?'sensor_sort_1':'sensor_sort1')"></b>-->
+                    <!--<b ng-class="sortSelect == 'middleRateChainRateDown'?'sortSelect':(sortSelect == 'middleRateChainRateUp'?'sensor_sort_2':'sensor_sort2')"></b>-->
+                <!--</span>-->
+            <!--</th>-->
+            <th ng-class="sortType == 'lowRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('lowRate')" ng-if="indexListMap.lowRate">
+                <span style="position: relative;">
+                    低活跃客占比
+                    <b ng-class="sortSelect == 'lowRateUp'?'sortSelect':(sortSelect == 'lowRateDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'lowRateDown'?'sortSelect':(sortSelect == 'lowRateUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>
+            <th ng-if="indexListMap.lowRate && indexListMap.mom">环比</th>
+            <!--<th ng-class="sortType == 'lowRateChainRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('lowRateChainRate')" ng-if="indexListMap.lowRate && indexListMap.mom">
+                <span style="position: relative;">
+                    环比
+                    <b ng-class="sortSelect == 'lowRateChainRateUp'?'sortSelect':(sortSelect == 'lowRateChainRateDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'lowRateChainRateDown'?'sortSelect':(sortSelect == 'lowRateChainRateUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>-->
+            <th ng-class="sortType == 'sleepRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('sleepRate')" ng-if="indexListMap.sleepRate">
+                <span style="position: relative;">
+                    沉睡客占比
+                    <b ng-class="sortSelect == 'sleepRateUp'?'sortSelect':(sortSelect == 'sleepRateDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'sleepRateDown'?'sortSelect':(sortSelect == 'sleepRateUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>
+            <th ng-if="indexListMap.sleepRate && indexListMap.mom">环比</th>
+           <!-- <th ng-class="sortType == 'sleepRateChainRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('sleepRateChainRate')" ng-if="indexListMap.sleepRate && indexListMap.mom">
+                <span style="position: relative;">
+                    环比
+                    <b ng-class="sortSelect == 'sleepRateChainRateUp'?'sortSelect':(sortSelect == 'sleepRateChainRateDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'sleepRateChainRateDown'?'sortSelect':(sortSelect == 'sleepRateChainRateUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>-->
+            <th ng-class="sortType == 'stayDurationPerTime'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('stayDurationPerTime')" ng-if="indexListMap.stayDurationPerTime">
+                <span style="position: relative;">
+                    入店平均停留时长
+                    <b ng-class="sortSelect == 'stayDurationPerTimeUp'?'sortSelect':(sortSelect == 'stayTimeDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'stayDurationPerTimeDown'?'sortSelect':(sortSelect == 'stayTimeUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>
+            <th ng-if="indexListMap.stayDurationPerTime && indexListMap.mom">环比</th>
+            <!--<th ng-class="sortType == 'stayTimeChainRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('stayTimeChainRate')" ng-if="indexListMap.stayTime && indexListMap.mom">-->
+                <!--<span style="position: relative;">-->
+                    <!--环比-->
+                    <!--<b ng-class="sortSelect == 'stayTimeChainRateUp'?'sortSelect':(sortSelect == 'stayTimeChainRateDown'?'sensor_sort_1':'sensor_sort1')"></b>-->
+                    <!--<b ng-class="sortSelect == 'stayTimeChainRateDown'?'sortSelect':(sortSelect == 'stayTimeChainRateUp'?'sensor_sort_2':'sensor_sort2')"></b>-->
+                <!--</span>-->
+            <!--</th>-->
+            <th ng-class="sortType == 'enterRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('enterRate')" ng-if="indexListMap.enterRate">
+                <span style="position: relative;">
+                    入店率
+                    <b ng-class="sortSelect == 'enterRateUp'?'sortSelect':(sortSelect == 'enterRateDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'enterRateDown'?'sortSelect':(sortSelect == 'enterRateUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>
+            <th ng-if="indexListMap.enterRate && indexListMap.mom">环比</th>
+           <!-- <th ng-class="sortType == 'enterRateChainRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('enterRateChainRate')" ng-if="indexListMap.enterRate && indexListMap.mom">
+                <span style="position: relative;">
+                    环比
+                    <b ng-class="sortSelect == 'enterRateChainRateUp'?'sortSelect':(sortSelect == 'enterRateChainRateDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'enterRateChainRateDown'?'sortSelect':(sortSelect == 'enterRateChainRateUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>-->
+            <th ng-class="sortType == 'stayRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('stayRate')" ng-if="indexListMap.stayRate">
+                <span style="position: relative;">
+                    停留率
+                    <b ng-class="sortSelect == 'stayRateUp'?'sortSelect':(sortSelect == 'stayRateDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'stayRateDown'?'sortSelect':(sortSelect == 'stayRateUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>
+            <th ng-if="indexListMap.stayRate && indexListMap.mom">环比</th>
+            <!--<th ng-class="sortType == 'stayRateChainRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('stayRateChainRate')" ng-if="indexListMap.stayRate && indexListMap.mom">
+                <span style="position: relative;">
+                    环比
+                    <b ng-class="sortSelect == 'stayRateChainRateUp'?'sortSelect':(sortSelect == 'stayRateChainRateDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'stayRateChainRateDown'?'sortSelect':(sortSelect == 'stayRateChainRateUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>-->
+            <th ng-class="sortType == 'jumpRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('jumpRate')" ng-if="indexListMap.jumpRate">
+                <span style="position: relative;">
+                    跳出率
+                    <b ng-class="sortSelect == 'jumpRateUp'?'sortSelect':(sortSelect == 'jumpRateDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'jumpRateDown'?'sortSelect':(sortSelect == 'jumpRateUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>
+            <th ng-if="indexListMap.jumpRate && indexListMap.mom">环比</th>
+            <!--<th ng-class="sortType == 'jumpRateChainRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('jumpRateChainRate')" ng-if="indexListMap.jumpRate && indexListMap.mom">
+                <span style="position: relative;">
+                    环比
+                    <b ng-class="sortSelect == 'jumpRateChainRateUp'?'sortSelect':(sortSelect == 'jumpRateChainRateDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'jumpRateChainRateDown'?'sortSelect':(sortSelect == 'jumpRateChainRateUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>-->
+            <th ng-class="sortType == 'salesAmount'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('salesAmount')" ng-if="indexListMap.salesAmount">
+                <span style="position: relative;">
+                    销售金额
+                    <b ng-class="sortSelect == 'salesAmountUp'?'sortSelect':(sortSelect == 'salesAmountDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'salesAmountDown'?'sortSelect':(sortSelect == 'salesAmountUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>
+            <th ng-if="indexListMap.salesAmount && indexListMap.mom">环比</th>
+            <!--<th ng-class="sortType == 'salesAmountChainRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('salesAmountChainRate')" ng-if="indexListMap.salesAmount && indexListMap.mom">
+                <span style="position: relative;">
+                    环比
+                    <b ng-class="sortSelect == 'salesAmountChainRateUp'?'sortSelect':(sortSelect == 'salesAmountChainRateDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'salesAmountChainRateDown'?'sortSelect':(sortSelect == 'salesAmountChainRateUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>-->
+            <th ng-class="sortType == 'orderCount'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('orderCount')" ng-if="indexListMap.orderCount">
+                <span style="position: relative;">
+                    订单数
+                    <b ng-class="sortSelect == 'orderCountUp'?'sortSelect':(sortSelect == 'orderCountDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'orderCountDown'?'sortSelect':(sortSelect == 'orderCountUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>
+            <th ng-if="indexListMap.orderCount && indexListMap.mom">环比</th>
+            <!--<th ng-class="sortType == 'orderCountChainRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('orderCountChainRate')" ng-if="indexListMap.orderCount && indexListMap.mom">
+                <span style="position: relative;">
+                    环比
+                    <b ng-class="sortSelect == 'orderCountChainRateUp'?'sortSelect':(sortSelect == 'orderCountChainRateDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'orderCountChainRateDown'?'sortSelect':(sortSelect == 'orderCountChainRateUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>-->
+            <th ng-class="sortType == 'orderAveragePrice'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('orderAveragePrice')" ng-if="indexListMap.orderAveragePrice">
+                <span style="position: relative;">
+                    VPC
+                    <b ng-class="sortSelect == 'orderAveragePriceUp'?'sortSelect':(sortSelect == 'orderAveragePriceDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'orderAveragePriceDown'?'sortSelect':(sortSelect == 'orderAveragePriceUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>
+            <th ng-if="indexListMap.orderAveragePrice && indexListMap.mom">环比</th>
+            <!--<th ng-class="sortType == 'orderAveragePriceChainRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('orderAveragePriceChainRate')" ng-if="indexListMap.orderAveragePrice && indexListMap.mom">
+                <span style="position: relative;">
+                    环比
+                    <b ng-class="sortSelect == 'orderAveragePriceChainRateUp'?'sortSelect':(sortSelect == 'orderAveragePriceChainRateDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'orderAveragePriceChainRateDown'?'sortSelect':(sortSelect == 'orderAveragePriceChainRateUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>-->
+            <th ng-class="sortType == 'singularPrice'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('singularPrice')" ng-if="indexListMap.singularPrice">
+                <span style="position: relative;">
+                    件单价
+                    <b ng-class="sortSelect == 'singularPriceUp'?'sortSelect':(sortSelect == 'singularPriceDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'singularPriceDown'?'sortSelect':(sortSelect == 'singularPriceUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>
+            <th ng-if="indexListMap.singularPrice && indexListMap.mom">环比</th>
+            <!--<th ng-class="sortType == 'singularPriceChainRate'?'sensorSelectWap':'sensorNotSelect'" ng-click = "sort_index('singularPriceChainRate')" ng-if="indexListMap.singularPrice && indexListMap.mom">
+                <span style="position: relative;">
+                    环比
+                    <b ng-class="sortSelect == 'singularPriceChainRateUp'?'sortSelect':(sortSelect == 'singularPriceChainRateDown'?'sensor_sort_1':'sensor_sort1')"></b>
+                    <b ng-class="sortSelect == 'singularPriceChainRateDown'?'sortSelect':(sortSelect == 'singularPriceChainRateUp'?'sensor_sort_2':'sensor_sort2')"></b>
+                </span>
+            </th>-->
+            </thead>
+            <tr class="tr_css" align="center" ng-repeat="record in detail_List" ng-click="openProject(record,$event)">
+                <td style="position: relative;width: 120px;">
+                    <a class="star1" ng-if="record.favorite > 0 " href="javascript:void(0)" ng-click="makeStar(record,$event)" style="margin-right:8px;top:4px;left:36%;"></a>
+                    <a class="star2" ng-if="record.favorite <= 0 " href="javascript:void(0)" ng-click="makeStar(record,$event)" style="margin-right:8px;top:4px;left:36%;"></a>
+                </td>
+                <td style="width: 120px;">{{record.projectName}}</td>
+                <td >{{record.projectNum}}</td>
+                <td>{{record.activeUsers | number}}</td>
+                <td>
+                    <i style="float: left;width: 64px;">{{record.activeUsersChainRate | number:1}} %</i>
+                    <span class="zy_icon icon_decline ng-scope" ng-if="record.activeUsersChainRateFlag == 'DOWN'"></span>
+                    <span class="zy_icon icon_up" ng-if="record.activeUsersChainRateFlag == 'UP'"></span>
+                </td>
+                <td>{{record.frontUsers | number}}</td>
+                <td>
+                    <i style="float: left;width: 64px;">{{record.frontUsersChainRate | number:1}} %</i>
+                    <span class="zy_icon icon_decline ng-scope" ng-if="record.frontUsersChainRateFlag == 'DOWN'"></span>
+                    <span class="zy_icon icon_up" ng-if="record.frontUsersChainRateFlag == 'UP'"></span>
+                </td>
+                <td>{{record.stayUsers | number}}</td>
+                <td>
+                    <i style="float: left;width: 64px;">{{record.stayUsersChainRate | number:1}} %</i>
+                    <span class="zy_icon icon_decline ng-scope" ng-if="record.stayUsersChainRateFlag == 'DOWN'"></span>
+                    <span class="zy_icon icon_up" ng-if="record.stayUsersChainRateFlag == 'UP'"></span>
+                </td>
+                <td ng-if="indexListMap.jumpUsers">{{record.jumpUsers | number}}</td>
+                <td ng-if="indexListMap.jumpUsers && indexListMap.mom">
+                    <i style="float: left;width: 64px;">{{record.jumpUsersChainRate | number:1}} %</i>
+                    <span class="zy_icon icon_decline ng-scope" ng-if="record.jumpUsersChainRateFlag == 'DOWN'"></span>
+                    <span class="zy_icon icon_up" ng-if="record.jumpUsersChainRateFlag == 'UP'"></span>
+                </td>
+                <!--<td ng-if="indexListMap.memberCount">{{record.memberCount}}</td>-->
+                <!--<td ng-if="indexListMap.memberCount && indexListMap.mom">{{record.memberCountChainRate}}</td>-->
+                <td ng-if="indexListMap.potentialCount">{{record.potentialCount | number}}</td>
+                <td ng-if="indexListMap.potentialCount && indexListMap.mom">
+                    <i style="float: left;width: 64px;">{{record.potentialCountChainRate | number:1}} %</i>
+                    <span class="zy_icon icon_decline ng-scope" ng-if="record.potentialCountChainRateFlag == 'DOWN'"></span>
+                    <span class="zy_icon icon_up" ng-if="record.potentialCountChainRateFlag == 'UP'"></span>
+                </td>
+                <td ng-if="indexListMap.memberCount">{{record.memberCount | number}}</td>
+                <td ng-if="indexListMap.memberCount && indexListMap.mom">
+                    <i style="float: left;width: 64px;">{{record.memberCountChainRate | number:1}} %</i>
+                    <span class="zy_icon icon_decline ng-scope" ng-if="record.memberCountChainRateFlag == 'DOWN'"></span>
+                    <span class="zy_icon icon_up" ng-if="record.memberCountChainRateFlag == 'UP'"></span>
+                </td>
+                <td ng-if="indexListMap.activeUserNewRate">{{record.activeUserNewRate | number:1}} %</td>
+                <td ng-if="indexListMap.activeUserNewRate && indexListMap.mom">
+                    <i style="float: left;width: 64px;">{{record.frontUsersChainRate | number:1}} %</i>
+                    <span class="zy_icon icon_decline ng-scope" ng-if="record.frontUsersChainRateFlag == 'DOWN'"></span>
+                    <span class="zy_icon icon_up" ng-if="record.frontUsersChainRateFlag == 'UP'"></span>
+                </td>
+                <td ng-if="indexListMap.activeUserOldRate">{{record.activeUserOldRate | number:1}} %</td>
+                <td ng-if="indexListMap.activeUserOldRate && indexListMap.mom">
+                    <i style="float: left;width: 64px;">{{record.activeUserOldRateChainRate | number:1}} %</i>
+                    <span class="zy_icon icon_decline ng-scope" ng-if="record.activeUserOldRateChainRateFlag == 'DOWN'"></span>
+                    <span class="zy_icon icon_up" ng-if="record.activeUserOldRateChainRateFlag == 'UP'"></span>
+                </td>
+                <td ng-if="indexListMap.highRate">{{record.highRate | number:1}} %</td>
+                <td ng-if="indexListMap.highRate && indexListMap.mom">
+                    <i style="float: left;width: 64px;">{{record.highRateChainRate | number:1}} %</i>
+                    <span class="zy_icon icon_decline ng-scope" ng-if="record.highRateChainRateFlag == 'DOWN'"></span>
+                    <span class="zy_icon icon_up" ng-if="record.highRateChainRateFlag == 'UP'"></span>
+                </td>
+                <td ng-if="indexListMap.middleRate">{{record.middleRate | number:1}} %</td>
+                <td ng-if="indexListMap.middleRate && indexListMap.mom">
+                    <i style="float: left;width: 64px;">{{record.middleRateChainRate | number:1}} %</i>
+                    <span class="zy_icon icon_decline ng-scope" ng-if="record.middleRateChainRateFlag == 'DOWN'"></span>
+                    <span class="zy_icon icon_up" ng-if="record.middleRateChainRateFlag == 'UP'"></span>
+                </td>
+                <td ng-if="indexListMap.lowRate">{{record.lowRate | number:1}} %</td>
+                <td ng-if="indexListMap.lowRate && indexListMap.mom">
+                    <i style="float: left;width: 64px;">{{record.lowRateChainRate | number:1}} %</i>
+                    <span class="zy_icon icon_decline ng-scope" ng-if="record.lowRateChainRateFlag == 'DOWN'"></span>
+                    <span class="zy_icon icon_up" ng-if="record.lowRateChainRateFlag == 'UP'"></span>
+                </td>
+                <td ng-if="indexListMap.sleepRate">{{record.sleepRate | number:1}} %</td>
+                <td ng-if="indexListMap.sleepRate && indexListMap.mom">
+                    <i style="float: left;width: 64px;">{{record.sleepRateChainRate | number:1}} %</i>
+                    <span class="zy_icon icon_decline ng-scope" ng-if="record.sleepRateChainRateFlag == 'DOWN'"></span>
+                    <span class="zy_icon icon_up" ng-if="record.sleepRateChainRateFlag == 'UP'"></span>
+                </td>
+                <td ng-if="indexListMap.stayDurationPerTime">{{record.stayDurationPerTime | number:1}}</td>
+                <td ng-if="indexListMap.stayDurationPerTime && indexListMap.mom">
+                    <i style="float: left;width: 64px;">{{record.stayDurationPerTimeChainRate | number:1}} %</i>
+                    <span class="zy_icon icon_decline ng-scope" ng-if="record.stayDurationPerTimeChainRateFlag == 'DOWN'"></span>
+                    <span class="zy_icon icon_up" ng-if="record.stayDurationPerTimeChainRateFlag == 'UP'"></span>
+                </td>
+                <td ng-if="indexListMap.enterRate">{{record.enterRate | number:1}} %</td>
+                <td ng-if="indexListMap.enterRate && indexListMap.mom">
+                    <i style="float: left;width: 64px;">{{record.enterRateChainRate | number:1}} %</i>
+                    <span class="zy_icon icon_decline ng-scope" ng-if="record.enterRateChainRateFlag == 'DOWN'"></span>
+                    <span class="zy_icon icon_up" ng-if="record.enterRateChainRateFlag == 'UP'"></span>
+                </td>
+                <td ng-if="indexListMap.stayRate">{{record.stayRate | number:1}} %</td>
+                <td ng-if="indexListMap.stayRate && indexListMap.mom">
+                    <i style="float: left;width: 64px;">{{record.stayRateChainRate | number:1}} %</i>
+                    <span class="zy_icon icon_decline ng-scope" ng-if="record.stayRateChainRateFlag == 'DOWN'"></span>
+                    <span class="zy_icon icon_up" ng-if="record.stayRateChainRateFlag == 'UP'"></span>
+                </td>
+                <td ng-if="indexListMap.jumpRate">{{record.jumpRate | number:1}} %</td>
+                <td ng-if="indexListMap.jumpRate && indexListMap.mom">
+                    <i style="float: left;width: 64px;">{{record.jumpRateChainRate | number:1}} %</i>
+                    <span class="zy_icon icon_decline ng-scope" ng-if="record.jumpRateChainRateFlag == 'DOWN'"></span>
+                    <span class="zy_icon icon_up" ng-if="record.jumpRateChainRateFlag == 'UP'"></span>
+                </td>
+                <td ng-if="indexListMap.salesAmount">{{record.salesAmount | number}}</td>
+                <td ng-if="indexListMap.salesAmount && indexListMap.mom">
+                    <i style="float: left;width: 64px;">{{record.salesAmountChainRate | number:1}} %</i>
+                    <span class="zy_icon icon_decline ng-scope" ng-if="record.salesAmountChainRateFlag == 'DOWN'"></span>
+                    <span class="zy_icon icon_up" ng-if="record.salesAmountChainRateFlag == 'UP'"></span>
+                </td>
+                <td ng-if="indexListMap.orderCount">{{record.orderCount | number}}</td>
+                <td ng-if="indexListMap.orderCount && indexListMap.mom">
+                    <i style="float: left;width: 64px;">{{record.orderCountChainRate | number:1}} %</i>
+                    <span class="zy_icon icon_decline ng-scope" ng-if="record.orderCountChainRateFlag == 'DOWN'"></span>
+                    <span class="zy_icon icon_up" ng-if="record.orderCountChainRateFlag == 'UP'"></span>
+                </td>
+                <td ng-if="indexListMap.orderAveragePrice">{{record.orderAveragePrice | number:1}}</td>
+                <td ng-if="indexListMap.orderAveragePrice && indexListMap.mom">
+                    <i style="float: left;width: 64px;">{{record.orderAveragePriceChainRate | number:1}} %</i>
+                    <span class="zy_icon icon_decline ng-scope" ng-if="record.orderAveragePriceChainRateFlag == 'DOWN'"></span>
+                    <span class="zy_icon icon_up" ng-if="record.orderAveragePriceChainRateFlag == 'UP'"></span>
+                </td>
+                <td ng-if="indexListMap.singularPrice">{{record.singularPrice | number}}</td>
+                <td ng-if="indexListMap.singularPrice && indexListMap.mom">
+                    <i style="float: left;width: 64px;">{{record.singularPriceChainRate | number:1}} %</i>
+                    <span class="zy_icon icon_decline ng-scope" ng-if="record.singularPriceChainRateFlag == 'DOWN'"></span>
+                    <span class="zy_icon icon_up" ng-if="record.singularPriceChainRateFlag == 'UP'"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div td-checked-dialog class = "checkedList" ng-show="setAddIndexFlag" td-change="changeTypeDate" td-hide="setAddIndexHide" style="width: 560px !important;"></div>

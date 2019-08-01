@@ -1,0 +1,38 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="youyu.dong" id="1507640600055-1">
+        <createTable tableName="TD_CITY">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="code" remarks="编码" type="varchar(100)"/>
+            <column name="city" remarks="城市" type="varchar(100)"/>
+            <column name="level" remarks="城市等级：1，一线城市；2：二线城市；3，三线城市；4：四线城市" type="int"/>
+            <column name="pcode" remarks="省编码" type="varchar(100)"/>
+            <column name="province" remarks="省" type="varchar(100)"/>
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="youyu.dong" id="1507640600055-2">
+        <createTable tableName="TD_PROVINCE">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="code" remarks="编码" type="varchar(100)"/>
+            <column name="province" remarks="省" type="varchar(100)"/>
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

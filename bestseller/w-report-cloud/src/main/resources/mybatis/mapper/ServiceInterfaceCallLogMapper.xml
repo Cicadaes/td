@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.ServiceInterfaceCallLogDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.ServiceInterfaceCallLog">
+        <result column="id" property="id"/>
+        <result column="service_code" property="serviceCode"/>
+        <result column="service_name" property="serviceName"/>
+        <result column="type" property="type"/>
+        <result column="task_id" property="taskId"/>
+        <result column="run_date" property="runDate"/>
+        <result column="status" property="status"/>
+        <result column="crowd_id" property="crowdId"/>
+        <result column="crowd_name" property="crowdName"/>
+        <result column="project_id" property="projectId"/>
+        <result column="project_name" property="projectName"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="start_time" property="startTime"/>
+        <result column="finish_time" property="finishTime"/>
+        <result column="azkaban_exec_id" property="azkabanExecId"/>
+        <result column="param" property="param"/>
+        <result column="error_info" property="errorInfo"/>
+        <result column="creator" property="creator"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="updater" property="updater"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- TD_SERVICE_INTERFACE_CALL_LOG table all fields -->
+    <sql id="Base_Column_List">
+        id,service_code,service_name,type,task_id,run_date,status,crowd_id,crowd_name,project_id,project_name,tenant_id,start_time,finish_time,azkaban_exec_id,param,error_info,creator,create_by,create_time,updater,update_by,update_time
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="serviceCode != null and serviceCode != ''">
+                and service_code = #{serviceCode}
+            </if>
+            <if test="serviceName != null and serviceName != ''">
+                and service_name = #{serviceName}
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="taskId != null and taskId != ''">
+                and task_id = #{taskId}
+            </if>
+            <if test="runDate != null and runDate != ''">
+                and run_date = #{runDate}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="crowdId != null">
+                and crowd_id = #{crowdId}
+            </if>
+            <if test="crowdName != null and crowdName != ''">
+                and crowd_name = #{crowdName}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="projectName != null and projectName != ''">
+                and project_name = #{projectName}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="startTime != null">
+                and start_time = #{startTime}
+            </if>
+            <if test="finishTime != null">
+                and finish_time = #{finishTime}
+            </if>
+            <if test="azkabanExecId != null and azkabanExecId != ''">
+                and azkaban_exec_id = #{azkabanExecId}
+            </if>
+            <if test="param != null and param != ''">
+                and param = #{param}
+            </if>
+            <if test="errorInfo != null and errorInfo != ''">
+                and error_info = #{errorInfo}
+            </if>
+            <if test="beginTime!=null and endTime!=null">
+                <![CDATA[ AND (run_date between #{beginTime} and #{endTime})]]>
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_SERVICE_INTERFACE_CALL_LOG(id,service_code,service_name,type,task_id,run_date,status,crowd_id,crowd_name,project_id,project_name,tenant_id,start_time,finish_time,azkaban_exec_id,param,error_info,creator,create_by,create_time,updater,update_by,update_time)
+        values(#{id},#{serviceCode},#{serviceName},#{type},#{taskId},#{runDate},#{status},#{crowdId},#{crowdName},#{projectId},#{projectName},#{tenantId},#{startTime},#{finishTime},#{azkabanExecId},#{param},#{errorInfo},#{creator},#{createBy},now(),#{updater},#{updateBy},now())
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_SERVICE_INTERFACE_CALL_LOG set
+        service_code=#{serviceCode},service_name=#{serviceName},type=#{type},task_id=#{taskId},run_date=#{runDate},status=#{status},crowd_id=#{crowdId},crowd_name=#{crowdName},project_id=#{projectId},project_name=#{projectName},tenant_id=#{tenantId},start_time=#{startTime},finish_time=#{finishTime},azkaban_exec_id=#{azkabanExecId},param=#{param},error_info=#{errorInfo},creator=#{creator},create_by=#{createBy},create_time=now(),updater=#{updater},update_by=#{updateBy},update_time=now()
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_SERVICE_INTERFACE_CALL_LOG set
+        <trim suffixOverrides=",">
+            <if test="serviceCode != null  ">
+                service_code=#{serviceCode},
+            </if>
+            <if test="serviceName != null  ">
+                service_name=#{serviceName},
+            </if>
+            <if test="type != null  ">
+                type=#{type},
+            </if>
+            <if test="taskId != null  ">
+                task_id=#{taskId},
+            </if>
+            <if test="runDate != null  ">
+                run_date=#{runDate},
+            </if>
+            <if test="status != null  ">
+                status=#{status},
+            </if>
+            <if test="crowdId != null  ">
+                crowd_id=#{crowdId},
+            </if>
+            <if test="crowdName != null  ">
+                crowd_name=#{crowdName},
+            </if>
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="projectName != null  ">
+                project_name=#{projectName},
+            </if>
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="startTime != null  ">
+                start_time=#{startTime},
+            </if>
+            <if test="finishTime != null  ">
+                finish_time=#{finishTime},
+            </if>
+            <if test="azkabanExecId != null  ">
+                azkaban_exec_id=#{azkabanExecId},
+            </if>
+            <if test="param != null  ">
+                param=#{param},
+            </if>
+            <if test="errorInfo != null  ">
+                error_info=#{errorInfo},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="createBy != null  ">
+                create_by=#{createBy},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updater != null  ">
+                updater=#{updater},
+            </if>
+            <if test="updateBy != null  ">
+                update_by=#{updateBy},
+            </if>
+            <if test="updateTime != null  ">
+                update_time=#{updateTime},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 服务接口调用日志 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_SERVICE_INTERFACE_CALL_LOG where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_SERVICE_INTERFACE_CALL_LOG where id = #{id}
+    </delete>
+
+    <!-- 服务接口调用日志 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_SERVICE_INTERFACE_CALL_LOG
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询服务接口调用日志列表 -->
+    <select id="getLastIDMappingTaskId" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_SERVICE_INTERFACE_CALL_LOG
+        where
+        type = 1
+        and run_date = #{runDate}
+        and crowd_id = #{crowdId}
+        and project_id = #{projectId}
+        and tenant_id = #{tenantId}
+        and azkaban_exec_id = #{azkabanExecId}
+        order by id desc
+        limit 1
+    </select>
+
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_SERVICE_INTERFACE_CALL_LOG
+        <include refid="Base_Where_Clause"/>
+        order by id desc
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+</mapper>

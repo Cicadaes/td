@@ -1,0 +1,13 @@
+set hive.exec.compress.output=false;
+set hive.exec.compress.intermediate=true;
+
+set hive.join.cache.size=1000000;
+set hive.exec.copyfile.maxsize=300000000;
+set hive.map.aggr=true;
+set hive.groupby.skewindata=true;
+set io.sort.mb=100;
+
+set mapreduce.job.queuename=root.cip;
+set mapreduce.job.priority=HIGH;
+
+use wifianalytics;

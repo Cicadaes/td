@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OffLineActiveUserHourCubeMapper">
+
+    <insert id="insert" parameterType="java.util.List">
+        INSERT INTO offline_active_user_hour_cube
+        (
+        tenant_id,
+        project_id,
+        date,
+        data_type,
+        hour,
+        bitmap
+        ) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.tenant_id},
+            #{item.project_id},
+            #{item.date},
+            #{item.data_type},
+            #{item.hour},
+            #{item.bitmap}
+            )
+        </foreach>
+        ON DUPLICATE KEY UPDATE bitmap = VALUES(bitmap)
+    </insert>
+</mapper>

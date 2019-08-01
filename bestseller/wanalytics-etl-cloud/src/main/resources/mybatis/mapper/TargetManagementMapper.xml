@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.TargetManagementDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="td.enterprise.entity.TargetManagement" >
+	<result column="id" property="id"/>
+	<result column="target_name" property="targetName"/>
+	<result column="target_id" property="targetId"/>
+	<result column="target_value" property="targetValue"/>
+	<result column="current_value" property="currentValue"/>
+	<result column="start_date" property="startDate"/>
+	<result column="end_date" property="endDate"/>
+	<result column="finish_date" property="finishDate"/>
+	<result column="page_index" property="pageIndex"/>
+	<result column="is_recurring" property="isRecurring"/>
+	<result column="duration" property="duration"/>
+	<result column="publisher" property="publisher"/>
+	<result column="tenant_id" property="tenantId"/>
+	<result column="project_id" property="projectId"/>
+	<result column="create_by" property="createBy"/>
+	<result column="creator" property="creator"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="updater" property="updater"/>
+	<result column="update_time" property="updateTime"/>
+	<result column="operation_state" property="operationState"/>
+	
+  </resultMap>
+       
+  <!-- TD_TARGET_MANAGEMENT table all fields -->
+  <sql id="Base_Column_List" >
+	 id,target_name,target_id,target_value,current_value,start_date,end_date,finish_date,page_index,is_recurring,duration,publisher,tenant_id,project_id,create_by,creator,create_time,update_by,updater,update_time,operation_state
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="targetName != null and targetName != ''" >
+        and target_name =  #{targetName}
+	  </if>
+	      <if test="targetId != null and targetId != ''" >
+        and target_id =  #{targetId}
+	  </if>
+	      <if test="targetValue != null and targetValue != ''" >
+        and target_value =  #{targetValue}
+	  </if>
+	      <if test="currentValue != null and currentValue != ''" >
+        and current_value =  #{currentValue}
+	  </if>
+	      <if test="startDate != null and startDate != ''" >
+        and start_date =  #{startDate}
+	  </if>
+	      <if test="endDate != null and endDate != ''" >
+        and end_date =  #{endDate}
+	  </if>
+	      <if test="finishDate != null and finishDate != ''" >
+        and finish_date =  #{finishDate}
+	  </if>
+	      <if test="pageIndex != null and pageIndex != ''" >
+        and page_index =  #{pageIndex}
+	  </if>
+	      <if test="isRecurring != null and isRecurring != ''" >
+        and is_recurring =  #{isRecurring}
+	  </if>
+	      <if test="duration != null and duration != ''" >
+        and duration =  #{duration}
+	  </if>
+	      <if test="publisher != null and publisher != ''" >
+        and publisher =  #{publisher}
+	  </if>
+	      <if test="tenantId != null and tenantId != ''" >
+        and tenant_id =  #{tenantId}
+	  </if>
+	      <if test="projectId != null and projectId != ''" >
+        and project_id =  #{projectId}
+	  </if>
+	      <if test="createBy != null and createBy != ''" >
+        and create_by =  #{createBy}
+	  </if>
+	      <if test="creator != null and creator != ''" >
+        and creator =  #{creator}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	      <if test="updateBy != null and updateBy != ''" >
+        and update_by =  #{updateBy}
+	  </if>
+	      <if test="updater != null and updater != ''" >
+        and updater =  #{updater}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+	  	  <if test="q != null and q != ''" >
+        and target_name like CONCAT('%','${q}','%' )
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_TARGET_MANAGEMENT(id,target_name,target_id,target_value,current_value,start_date,end_date,finish_date,page_index,is_recurring,duration,publisher,tenant_id,project_id,create_by,creator,create_time,update_by,updater,update_time,operation_state)
+ values(#{id},#{targetName},#{targetId},#{targetValue},#{currentValue},#{startDate},#{endDate},#{finishDate},#{pageIndex},#{isRecurring},#{duration},#{publisher},#{tenantId},#{projectId},#{createBy},#{creator},now(),#{updateBy},#{updater},now(),#{operationState})
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+    update TD_TARGET_MANAGEMENT set target_name=#{targetName},target_id=#{targetId},target_value=#{targetValue},current_value=#{currentValue},start_date=#{startDate},end_date=#{endDate},finish_date=#{finishDate},page_index=#{pageIndex},is_recurring=#{isRecurring},duration=#{duration},publisher=#{publisher},tenant_id=#{tenantId},project_id=#{projectId},create_by=#{createBy},creator=#{creator},update_by=#{updateBy},updater=#{updater},update_time=now(),operation_state=#{operationState} where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+    update TD_TARGET_MANAGEMENT set 
+	<trim  suffixOverrides="," >
+	<if test="targetName != null  ">
+		target_name=#{targetName},
+	</if>
+	<if test="targetId != null  ">
+		target_id=#{targetId},
+	</if>
+	<if test="targetValue != null  ">
+		target_value=#{targetValue},
+	</if>
+	<if test="currentValue != null  ">
+		current_value=#{currentValue},
+	</if>
+	<if test="startDate != null  ">
+		start_date=#{startDate},
+	</if>
+	<if test="endDate != null  ">
+		end_date=#{endDate},
+	</if>
+	<if test="finishDate != null  ">
+		finish_date=#{finishDate},
+	</if>
+	<if test="pageIndex != null  ">
+		page_index=#{pageIndex},
+	</if>
+	<if test="isRecurring != null  ">
+		is_recurring=#{isRecurring},
+	</if>
+	<if test="duration != null  ">
+		duration=#{duration},
+	</if>
+	<if test="publisher != null  ">
+		publisher=#{publisher},
+	</if>
+	<if test="tenantId != null  ">
+		tenant_id=#{tenantId},
+	</if>
+	<if test="projectId != null  ">
+		project_id=#{projectId},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="creator != null  ">
+		creator=#{creator},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="updater != null  ">
+		updater=#{updater},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	</trim> where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 目标管理 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" /> 
+	 from TD_TARGET_MANAGEMENT where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+    delete 	 from TD_TARGET_MANAGEMENT where id = #{id}
+  </delete>
+
+  <!-- 目标管理 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_TARGET_MANAGEMENT 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询目标管理列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_TARGET_MANAGEMENT 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  
+  
+  <!-- 查询目标管理列表 （进行中的任务）-->
+  <select id="queryByNotFinishList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_TARGET_MANAGEMENT where 1=1 and (finish_date is null OR finish_date="") 
+    <trim suffixOverrides="," >
+      <if test="tenantId != null and tenantId != ''" >
+      		 and tenant_id =  #{tenantId}
+ 	  </if>
+      <if test="projectId != null and projectId != ''" >
+      		 and project_id =  #{projectId}
+      </if>
+      <if test="q != null and q != ''" >
+        and target_name like CONCAT('%','${q}','%' )
+	  </if>
+    </trim>
+  </select>
+  
+   <!-- 查询目标管理列表 （进行中的任务）(排序了)-->
+  <select id="queryByNotFinishListDesc" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_TARGET_MANAGEMENT where 1=1 and (finish_date is null OR finish_date="") 
+    <trim suffixOverrides="," >
+      <if test="tenantId != null and tenantId != ''" >
+      		 and tenant_id =  #{tenantId}
+ 	  </if>
+      <if test="projectId != null and projectId != ''" >
+      		 and project_id =  #{projectId}
+      </if>
+      <if test="q != null and q != ''" >
+        and target_name like CONCAT('%','${q}','%' )
+	  </if>
+    </trim>
+     ORDER BY page_index DESC
+	  <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  <select id="queryByNotFinishListDescCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1)
+	from TD_TARGET_MANAGEMENT where 1=1 and (finish_date is null OR finish_date="") 
+    <trim suffixOverrides="," >
+      <if test="tenantId != null and tenantId != ''" >
+      		 and tenant_id =  #{tenantId}
+ 	  </if>
+      <if test="projectId != null and projectId != ''" >
+      		 and project_id =  #{projectId}
+      </if>
+      <if test="q != null and q != ''" >
+        and target_name like CONCAT('%','${q}','%' )
+	  </if>
+    </trim>
+  </select>
+  
+   <!-- 查询目标管理列表 （历史任务）--> 
+   <select id="queryFinishList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_TARGET_MANAGEMENT where 1=1 and (finish_date is not null AND finish_date!="") 
+    <trim suffixOverrides="," >
+      <if test="tenantId != null and tenantId != ''" >
+      		 and tenant_id =  #{tenantId}
+ 	  </if>
+      <if test="projectId != null and projectId != ''" >
+      		 and project_id =  #{projectId}
+      </if>
+      <if test="q != null and q != ''" >
+        and target_name like CONCAT('%','${q}','%' )
+	  </if>
+	  <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+    </trim>
+  </select>
+  <select id="queryFinishListCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) 
+	from TD_TARGET_MANAGEMENT where 1=1 and (finish_date is not null AND finish_date!="") 
+    <trim suffixOverrides="," >
+      <if test="tenantId != null and tenantId != ''" >
+      		 and tenant_id =  #{tenantId}
+ 	  </if>
+      <if test="projectId != null and projectId != ''" >
+      		 and project_id =  #{projectId}
+      </if>
+      <if test="q != null and q != ''" >
+        and target_name like CONCAT('%','${q}','%' )
+	  </if>
+    </trim>
+  </select>
+     <!-- 查询该用户最大排序数--> 
+  <select id="querybiggerIndex" resultType="java.lang.Integer"  parameterType="Object">
+	select page_index from TD_TARGET_MANAGEMENT where 1=1  
+    <trim suffixOverrides="," >
+      <if test="tenantId != null and tenantId != ''" >
+      		 and tenant_id =  #{tenantId}
+ 	  </if>
+      <if test="projectId != null and projectId != ''" >
+      		 and project_id =  #{projectId}
+      </if>
+    </trim>
+     ORDER BY page_index DESC LIMIT 1
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</mapper>   

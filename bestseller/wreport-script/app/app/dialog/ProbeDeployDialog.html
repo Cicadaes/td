@@ -1,0 +1,100 @@
+<div class="modal" id="probeDeployDialog" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document" ng-style="model_width" style="margin: 0; left: 40px; top: 40px;">
+        <div class="modal-content">
+            <div class="modal-header" ng-drag-dialog="true">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+               <!-- <h4 class="modal-title"><b ng-if="drwName != null">{{constants.explain_projectplace_name}}：</b>{{drwName}}</h4>-->
+                <h4 class="modal-title">{{constants.explain_projectplace_alreadyDeployed}}：{{deployCount}}</h4>
+            </div>
+            <div class="modal-body" style="padding: 0">
+                <div class="probe_main" id="container" >
+                    <div class="probe_bottom" ng-style="model_height" style="height: 650px;">
+                        <div class="probe_left" style="width:100%;height:100%;">
+                            <div id="probe_map_div" ondrop="appConfig.DateProbe.dropProb(event)"
+                                 ondragover="appConfig.DateProbe.dragover(event)"
+                                 style="width:100%; height:100%; background: #FFFFFF;"></div>
+                        </div>
+                        <div class="probe_right" id="probe_right" style="position: relative;">
+                            <ul class="probe_ul">
+                                <li><em>*</em> {{constants.explain_projectplace_drag}}{{deployName}}{{constants.explain_projectplace_drag_explain}};</li>
+                                <li><em>*</em> {{constants.explain_projectplace_drag2}}{{deployName}}{{constants.explain_projectplace_drag_explain2}};</li>
+                            </ul>
+                            <div class="probe_select" ng-click="DateProbe.doFilterByStatus()">
+                                <p>
+                                    <span class="icon_down"></span>
+                                    <em>{{statusStr}}</em>
+                                </p>
+                                <ol class="probe_select_con" ng-show="show_filter">
+                                    <li ng-click="DateProbe.chooseStatus('99')"><span
+                                            class="black"></span>{{constants.label_all}}{{constants.label_space}}{{deployName}}
+                                    </li>
+                                    <li ng-click="DateProbe.chooseStatus('0')"><span
+                                            class="green"></span>{{constants.mapper_projectpalce_chooseStatus_notfurnished}}
+                                    </li>
+                                    <li ng-click="DateProbe.chooseStatus('1')"><span class="blue"></span>{{constants.mapper_projectpalce_chooseStatus_furnished}}</li>
+                                    <!--<li ng-click="DateProbe.chooseStatus('1')"><span class="blue"></span>{{constants.mapper_projectpalce_chooseStatus_thisplacefurnished}}</li>
+                                    <li ng-click="DateProbe.chooseStatus('2')"><span class="yellow"></span>{{constants.mapper_projectpalce_chooseStatus_thisplacenotfurnished}}</li>-->
+                                </ol>
+                            </div>
+                            <span ng-if="deployType == 2" class="probe_addProbe" ng-click="DateProbe.createOpen()" data-toggle="modal" data-target="#sensorDialog">
+                                <em><strong>+</strong>{{constants.label_add}}{{constants.label_space}}{{constants.table_sensor}}</em>
+                            </span>
+                            <div class="probe_search">
+                                <span></span>
+                                <input type="text" class="probe_search_text" ng-model="searchCondition"
+                                       placeholder="{{constants.label_input_key_word}}">
+                            </div>
+                            <div class="prodivlist" id="probe_list_main"
+                                 style="position: absolute; width: 100%; /* height: 550px; overflow-y: auto; overflow-x: hidden */">
+                                <ul class="probe_list_name">
+                                    <li style="width: 170px;"><em>{{deployName}}{{constants.field_sensormanage_mac_single}}</em></li>
+                                    <li style="width: 130px;"><span>{{deployName}}{{constants.field_sensormanage_name}}</span></li>
+                                </ul>
+                                <div ng-style="list_height" style="height: 550px; overflow-y: auto; overflow-x: hidden">
+                                    <ul class="probe_list_ul">
+                                        <li draggable="true" id="{{item.sensorId}}"
+                                            ng-repeat="item in probe_list"
+                                            ng-show="(currentStatus == 99 || currentStatus == item.color_status) && (searchCondition == null || searchCondition == '' || item.code.indexOf(searchCondition) != -1 || item.name.indexOf(searchCondition) != -1)"
+                                            ondragstart="appConfig.DateProbe.dragProb(event, this.id)"
+                                            ng-click="DateProbe.clickProb(item.sensorId)">
+
+                                            <i><img src="images/icon-id.png"/></i>
+                                            <em>{{item.codeMapper}}</em>
+                                            <strong ng-mouseover="DateProbe.tooltip($event,item.sensorName, item.sensorNameChange, $index)"
+                                                    ng-mouseleave="DateProbe.tooltip_out($event,item.sensorName)">{{item.nameMapper}}</strong>
+                                            <span ng-class="{'green':item.color_status==0, 'blue':item.color_status==1, 'yellow':item.color_status==2}"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="robe_mud" id="PassengerDistribution-divInfo"
+                         style="z-index: 99; position: absolute;">
+                        <p>{{deployName}}{{constants.field_sensormanage_mac_single}}：{{currentData.relatedAttribute}}</p>
+                        <p>{{deployName}}{{constants.field_sensormanage_name}}：{{currentData.name}}</p>
+                        <p>{{constants.explain_projectplace_position}}：{{currentData.description}}</p>
+                    </div>
+
+                    <div class="job_icon_map"
+                         style="z-index: 98; position: absolute; right: 340px; bottom: 60px;"
+                         id="passengerRegion-tools">
+                        <ul>
+                            <li><span class="zy_icon icon_location"></span></li>
+                            <li><span class="zy_icon icon_add"></span></li>
+                            <li><span class="zy_icon icon_minus"></span></li>
+                        </ul>
+                    </div>
+
+                    <img id="testImg" src="images/icon-id.png" style="position: absolute;left: -2000px">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary"  ng-click="DateProbe.saveDeploy()">{{constants.label_save}}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{constants.label_cancel}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+

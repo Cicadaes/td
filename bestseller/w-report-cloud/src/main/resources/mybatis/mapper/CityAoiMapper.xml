@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.CityAoiDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.CityAoi">
+        <result column="id" property="id"/>
+        <result column="rating" property="rating"/>
+        <result column="tel" property="tel"/>
+        <result column="cityname" property="cityname"/>
+        <result column="display_brand" property="displayBrand"/>
+        <result column="shape_region" property="shapeRegion"/>
+        <result column="address" property="address"/>
+        <result column="poiId" property="poiId"/>
+        <result column="name" property="name"/>
+        <result column="adcode" property="adcode"/>
+        <result column="location_lat" property="locationLat"/>
+        <result column="location_lng" property="locationLng"/>
+        <result column="templateData_tag" property="templatedataTag"/>
+        <result column="templateData_price" property="templatedataPrice"/>
+        <result column="templateData_aoi" property="templatedataAoi"/>
+        <result column="addtime" property="addtime"/>
+        <result column="updatetime" property="updatetime"/>
+        <result column="area_type" property="areaType"/>
+        <result column="bd09_location_lat" property="bd09LocationLat"/>
+        <result column="bd09_location_lng" property="bd09LocationLng"/>
+    </resultMap>
+
+    <!-- TD_CITY_AOI table all fields -->
+    <sql id="Base_Column_List">
+        id,rating,tel,cityname,display_brand,shape_region,address,poiId,name,adcode,location_lat,location_lng,templateData_tag,templateData_price,templateData_aoi,addtime,updatetime,area_type,bd09_location_lat,bd09_location_lng
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="rating != null and rating != ''">
+                and rating = #{rating}
+            </if>
+            <if test="tel != null and tel != ''">
+                and tel = #{tel}
+            </if>
+            <if test="cityname != null and cityname != ''">
+                and cityname = #{cityname}
+            </if>
+            <if test="displayBrand != null and displayBrand != ''">
+                and display_brand = #{displayBrand}
+            </if>
+            <if test="shapeRegion != null and shapeRegion != ''">
+                and shape_region = #{shapeRegion}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+            <if test="poiId != null and poiId != ''">
+                and poiId = #{poiId}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="adcode != null and adcode != ''">
+                and adcode = #{adcode}
+            </if>
+            <if test="locationLat != null and locationLat != ''">
+                and location_lat = #{locationLat}
+            </if>
+            <if test="locationLng != null and locationLng != ''">
+                and location_lng = #{locationLng}
+            </if>
+            <if test="templatedataTag != null and templatedataTag != ''">
+                and templateData_tag = #{templatedataTag}
+            </if>
+            <if test="templatedataPrice != null and templatedataPrice != ''">
+                and templateData_price = #{templatedataPrice}
+            </if>
+            <if test="templatedataAoi != null and templatedataAoi != ''">
+                and templateData_aoi = #{templatedataAoi}
+            </if>
+            <if test="addtime != null and addtime != ''">
+                and addtime = #{addtime}
+            </if>
+            <if test="updatetime != null and updatetime != ''">
+                and updatetime = #{updatetime}
+            </if>
+            <if test="areaType != null and areaType != ''">
+                and area_type = #{areaType}
+            </if>
+            <if test="bd09LocationLat != null and bd09LocationLat != ''">
+                and bd09_location_lat = #{bd09LocationLat}
+            </if>
+            <if test="bd09LocationLng != null and bd09LocationLng != ''">
+                and bd09_location_lng = #{bd09LocationLng}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_CITY_AOI(id,rating,tel,cityname,display_brand,shape_region,address,poiId,name,adcode,location_lat,location_lng,templateData_tag,templateData_price,templateData_aoi,addtime,updatetime,area_type,bd09_location_lat,bd09_location_lng)
+        values(#{id},#{rating},#{tel},#{cityname},#{displayBrand},#{shapeRegion},#{address},#{poiId},#{name},#{adcode},#{locationLat},#{locationLng},#{templatedataTag},#{templatedataPrice},#{templatedataAoi},#{addtime},#{updatetime},#{areaType},#{bd09LocationLat},#{bd09LocationLng})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_CITY_AOI set
+        rating=#{rating},tel=#{tel},cityname=#{cityname},display_brand=#{displayBrand},shape_region=#{shapeRegion},address=#{address},poiId=#{poiId},name=#{name},adcode=#{adcode},location_lat=#{locationLat},location_lng=#{locationLng},templateData_tag=#{templatedataTag},templateData_price=#{templatedataPrice},templateData_aoi=#{templatedataAoi},addtime=#{addtime},updatetime=now(),area_type=#{areaType},bd09_location_lat=#{bd09LocationLat},bd09_location_lng=#{bd09LocationLng}
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_CITY_AOI set
+        <trim suffixOverrides=",">
+            <if test="rating != null  ">
+                rating=#{rating},
+            </if>
+            <if test="tel != null  ">
+                tel=#{tel},
+            </if>
+            <if test="cityname != null  ">
+                cityname=#{cityname},
+            </if>
+            <if test="displayBrand != null  ">
+                display_brand=#{displayBrand},
+            </if>
+            <if test="shapeRegion != null  ">
+                shape_region=#{shapeRegion},
+            </if>
+            <if test="address != null  ">
+                address=#{address},
+            </if>
+            <if test="poiId != null  ">
+                poiId=#{poiId},
+            </if>
+            <if test="name != null  ">
+                name=#{name},
+            </if>
+            <if test="adcode != null  ">
+                adcode=#{adcode},
+            </if>
+            <if test="locationLat != null  ">
+                location_lat=#{locationLat},
+            </if>
+            <if test="locationLng != null  ">
+                location_lng=#{locationLng},
+            </if>
+            <if test="templatedataTag != null  ">
+                templateData_tag=#{templatedataTag},
+            </if>
+            <if test="templatedataPrice != null  ">
+                templateData_price=#{templatedataPrice},
+            </if>
+            <if test="templatedataAoi != null  ">
+                templateData_aoi=#{templatedataAoi},
+            </if>
+            <if test="addtime != null  ">
+                addtime=#{addtime},
+            </if>
+            <if test="updatetime != null  ">
+                updatetime=#{updatetime},
+            </if>
+            <if test="areaType != null  ">
+                area_type=#{areaType},
+            </if>
+            <if test="bd09LocationLat != null  ">
+                bd09_location_lat=#{bd09LocationLat},
+            </if>
+            <if test="bd09LocationLng != null  ">
+                bd09_location_lng=#{bd09LocationLng},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 城市围栏 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_CITY_AOI where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_CITY_AOI where id = #{id}
+    </delete>
+
+    <!-- 城市围栏 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_CITY_AOI
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询城市围栏列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_CITY_AOI
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+</mapper>

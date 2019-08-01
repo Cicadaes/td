@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+  <!-- 建表语句 -->
+  <include file="../initialize/um.xml" relativeToChangelogFile="true"/> 
+
+  <!-- 初始化数据 -->
+  <include file="../initialize/um/SYS_BUSINESS_SYSTEM.sql" relativeToChangelogFile="true"/> 
+  <include file="../initialize/um/SYS_DIC_ITEM.sql" relativeToChangelogFile="true"/> 
+  <include file="../initialize/um/SYS_DIC.sql" relativeToChangelogFile="true"/> 
+  <include file="../initialize/um/SYS_EMAIL_SERVER_CONFIG.sql" relativeToChangelogFile="true"/> 
+  <include file="../initialize/um/SYS_EMAIL_TEMPLATE.sql" relativeToChangelogFile="true"/> 
+  <include file="../initialize/um/SYS_JOB_CONFIG.sql" relativeToChangelogFile="true"/> 
+  <include file="../initialize/um/UM_APP_CONFIG.sql" relativeToChangelogFile="true"/> 
+  <include file="../initialize/um/UM_APP.sql" relativeToChangelogFile="true"/> 
+  <include file="../initialize/um/UM_ATTACHMENT.sql" relativeToChangelogFile="true"/> 
+  <include file="../initialize/um/UM_RESOURCE.sql" relativeToChangelogFile="true"/> 
+  <include file="../initialize/um/UM_RESOURCE_TYPE.sql" relativeToChangelogFile="true"/> 
+  <include file="../initialize/um/UM_ROLE_RESOURCE.sql" relativeToChangelogFile="true"/> 
+  <include file="../initialize/um/UM_ROLE.sql" relativeToChangelogFile="true"/> 
+  <include file="../initialize/um/UM_ROLE_USER.sql" relativeToChangelogFile="true"/> 
+  <include file="../initialize/um/UM_USER.sql" relativeToChangelogFile="true"/> 
+
+  <include file="./20170327.sql" relativeToChangelogFile="true"/>
+
+</databaseChangeLog> 

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.CityRegionDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.CityRegion">
+        <result column="id" property="id"/>
+        <result column="city_name" property="cityName"/>
+        <result column="region_name" property="regionName"/>
+        <result column="region_type" property="regionType"/>
+        <result column="longitude_bd" property="longitudeBd"/>
+        <result column="latitude_bd" property="latitudeBd"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="creator" property="creator"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="updater" property="updater"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- TD_CITY_REGION table all fields -->
+    <sql id="Base_Column_List">
+        id,city_name,region_name,region_type,longitude_bd,latitude_bd,order_no,creator,create_by,create_time,updater,update_by,update_time
+    </sql>
+
+    <!-- 根据区域名称统计人数 -->
+    <select id="querySumByList" resultType="java.util.HashMap" parameterType="Object">
+        SELECT
+        region_name name,
+        count(*) count
+        FROM
+        TD_CITY_REGION
+        <include refid="Base_Where_Clause"/>
+        GROUP BY
+        region_name
+        order by count
+    </select>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="cityName != null and cityName != ''">
+                and city_name = #{cityName}
+            </if>
+            <if test="regionName != null and regionName != ''">
+                and region_name = #{regionName}
+            </if>
+            <if test="regionType != null and regionType != ''">
+                and region_type = #{regionType}
+            </if>
+            <if test="longitudeBd != null and longitudeBd != ''">
+                and longitude_bd = #{longitudeBd}
+            </if>
+            <if test="latitudeBd != null and latitudeBd != ''">
+                and latitude_bd = #{latitudeBd}
+            </if>
+            <if test="orderNo != null and orderNo != ''">
+                and order_no = #{orderNo}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_CITY_REGION(id,city_name,region_name,region_type,longitude_bd,latitude_bd,order_no,creator,create_by,create_time,updater,update_by,update_time)
+        values(#{id},#{cityName},#{regionName},#{regionType},#{longitudeBd},#{latitudeBd},#{orderNo},#{creator},#{createBy},now(),#{updater},#{updateBy},now())
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_CITY_REGION set
+        city_name=#{cityName},region_name=#{regionName},region_type=#{regionType},longitude_bd=#{longitudeBd},latitude_bd=#{latitudeBd},order_no=#{orderNo},creator=#{creator},create_by=#{createBy},create_time=now(),updater=#{updater},update_by=#{updateBy},update_time=now()
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_CITY_REGION set
+        <trim suffixOverrides=",">
+            <if test="cityName != null  ">
+                city_name=#{cityName},
+            </if>
+            <if test="regionName != null  ">
+                region_name=#{regionName},
+            </if>
+            <if test="regionType != null  ">
+                region_type=#{regionType},
+            </if>
+            <if test="longitudeBd != null  ">
+                longitude_bd=#{longitudeBd},
+            </if>
+            <if test="latitudeBd != null  ">
+                latitude_bd=#{latitudeBd},
+            </if>
+            <if test="orderNo != null  ">
+                order_no=#{orderNo},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="createBy != null  ">
+                create_by=#{createBy},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updater != null  ">
+                updater=#{updater},
+            </if>
+            <if test="updateBy != null  ">
+                update_by=#{updateBy},
+            </if>
+            <if test="updateTime != null  ">
+                update_time=#{updateTime},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 城市区域地理位置范围 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_CITY_REGION where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_CITY_REGION where id = #{id}
+    </delete>
+
+    <!-- 城市区域地理位置范围 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_CITY_REGION
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询城市区域地理位置范围列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_CITY_REGION
+        <include refid="Base_Where_Clause"/>
+
+        <if test="regionNameIn != null and regionNameIn != ''">
+            and region_name in (${regionNameIn})
+        </if>
+
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- 查询区域名称 -->
+    <select id="queryRegionNameByType" resultMap="BaseResultMap" parameterType="Object">
+        select distinct region_name
+        from TD_CITY_REGION
+        where region_type=#{regionType} and city_name=#{cityName}
+    </select>
+
+    <!-- 根据区域名称，查询区域地理位置范围-->
+    <select id="queryRegionList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_CITY_REGION
+        where region_name=#{regionName} and city_name=#{cityName}
+        order by order_no asc
+    </select>
+</mapper>

@@ -1,0 +1,1199 @@
+/*=========日历组件filtercss==start==========*/
+
+.stage .filter-choice {
+    border: 1px solid #D7DDE4;
+    border-radius: 4px;
+    text-indent: 12px;
+    background: #FFFFFF;
+    width: 90px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
+    position: relative;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.stage .filter-choice .triangle_icon,
+.stage .date-btn .triangle_icon {
+    border-top: 5px solid #aaa;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+    right: 8px;
+    top: 12px;
+}
+
+.stage .calendar-text .triangle_icon{
+    right: 12px;
+}
+
+.stage .filter-choice-list {
+    display: none;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #D7DDE4;
+    border-radius: 4px;
+    text-align: left
+}
+
+.stage .filter-choice-list li{
+    padding-left: 12px;
+    text-indent: 0;
+    -webkit-transition: all linear .3s;
+    -moz-transition: all linear .3s;
+    transition: all linear .3s;
+}
+
+.stage .filter-choice-list li:hover {
+    background: #43A3FB;
+    color: #fff;
+}
+
+.stage .filter-calendar {
+    width: 220px;
+    height: 32px;
+    position: relative;
+    cursor: pointer;
+}
+
+.stage .date-calendar {
+    /*position: absolute;*/
+    width: 230px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #D7DDE4;
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    left: 0;
+    top: 0;
+    padding-left: 5px;
+    float: left;
+    cursor: pointer;
+    font-family: HelveticaNeue;
+    font-size: 14px;
+    color: #404560;
+    padding-left: 40px;
+    pointer-events: none;
+}
+
+.stage .icon-calendar {
+    background: url(./icon-calendar.svg) no-repeat center center /14px 14px;
+    width: 24px;
+    height: 24px;
+    display: block;
+    position: absolute;
+    left: 10px;
+    top: 4px;
+}
+
+.stage .show-date {
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #404560;
+}
+
+.stage .date-btn {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    border: 1px solid #D7DDE4;
+    border-radius: 0 4px 4px 0;
+    right: 0;
+    top: 0;
+    border-left: none;
+    float: left;
+}
+
+.stage .popoverFormTitle {
+    background: #686E7E;
+    height: 38px;
+    padding: 5px 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-size: 12px;
+}
+
+.stage .popoverFormTitle a {
+    color: #FFF !important;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.stage .popoverFormTitle>div {
+    padding: 5px;
+    background: #686E7E;
+    border-radius: 20px;
+    height: 28px;
+    margin-left: 4px;
+}
+
+.stage .popoverFormTitle>div:hover {
+    padding: 5px;
+    background: #444A5D;
+    border-radius: 20px;
+    height: 28px;
+}
+
+.stage .popoverFormTitle>div:hover a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.stage .popoverFormTitle .displayTime {
+    margin-top: 2px !important;
+}
+
+.stage .calendarForm {
+    padding: 0;
+}
+
+.stage .DatePicke {
+    width: 517px;
+    z-index: 899;
+    background: #FFFFFF;
+    box-shadow: 0 0 4px 1px rgba(0,0,0,0.10);
+    border-radius: 4px;
+}
+
+.stage .TD_Calendar_wrapper {
+    float: left;
+    width: 50%;
+}
+
+.stage .date-picke-label {
+    font-family: HelveticaNeue-Bold;
+    font-size: 12px;
+    color: #404560;
+    line-height: 24px;
+}
+
+.stage .date-picke-label .display-time {
+    font-weight: normal;
+    text-align: center;
+    float: left;
+    display: inline-block;
+    /*width: 150px;*/
+    height: 24px;
+    line-height: 24px;
+    font-family: HelveticaNeue-Bold;
+}
+
+.stage .date-picke-label .glyphicon {
+    float: left;
+    vertical-align: top;
+    margin-top: 6px;
+}
+
+.stage .DatePicke_tool {
+    padding: 12px;
+    background: #fff;
+    font-size: 12px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(28,36,56,0.10);
+}
+
+.stage .DatePicke_tool input {
+    width: 155px;
+    border: 0;
+    background: #fff;
+    border-radius: 1px;
+    vertical-align: middle;
+    height: 22px;
+    padding: 0 0 0 30px;
+    line-height: 22px;
+}
+
+.stage .DatePicke_tool_bar,
+.stage .DatePicke_contarst {
+    position: relative;
+}
+
+.stage .date_icon {
+    width: 15px;
+    height: 14px;
+    /**
+    background: url(../../images/calendar_icon.png) no-repeat 0 -36px;
+     */
+    display: inline-block;
+    position: absolute;
+    left: 60px;
+    top: 6px;
+}
+
+.stage .date_icon.date_icon_red {
+    background-position: 0 -50px;
+}
+
+.stage .DatePicke_content:after,
+.stage .DatePicke_operation:after,
+.stage .DatePicke_wrappper_content:after {
+    display: block;
+    clear: both;
+    height: 0;
+    content: "";
+}
+
+.stage .DatePicke_operation {
+    font-size: 12px;
+    background: #fff;
+    border-top: 1px solid rgba(28,36,56,0.10);
+    padding: 12px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.stage .DatePicke_operation_l {
+    float: left;
+    display: inline;
+    margin: 5px 0 0 10px;
+}
+
+.stage .DatePicke_operation_l input[type=checkbox] {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    /**
+    background: url(../../images/calendar_icon.png) no-repeat;
+     */
+}
+
+.stage .DatePicke_operation_l input[type=checkbox]:checked {
+    background-position: 0 -18px;
+}
+
+.stage .DatePicke_operation_l label {
+    margin-left: 6px;
+    position: relative;
+    top: -4px;
+    cursor: pointer;
+}
+
+.stage .DatePicke_operation_r {
+    width: 180px;
+    float: right;
+    display: inline;
+    margin-right: 10px;
+}
+
+.stage .DatePicke_operation_r a,
+.stage .DatePicke_operation a {
+    display: inline-block;
+    width:56px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    font-size: 12px;
+    float: right;
+}
+
+.stage .DatePicke_operation_r .DatePicke_confirm,
+.stage .DatePicke_operation .TD_WeekPicke_Confirm {
+    border: 1px solid transparent;
+    box-shadow: 0 0 0 #43A3FB inset;
+    background: #43A3FB;
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+    border-radius: 4px;
+    font-family: PingFangSC-Regular;
+}
+
+.stage .DatePicke_operation_r .DatePicke_confirm:hover,
+.stage .DatePicke_operation .TD_WeekPicke_Confirm:hover {
+    background: #4777c0;
+}
+
+.stage .DatePicke_operation_r .DatePicke_cancel,
+.stage .DatePicke_operation .TD_WeekPicke_cancle {
+    border: 1px solid transparent;
+    box-shadow: 0 0 0 #fff inset;
+    text-decoration: none;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: rgba(28,36,56,0.80);
+    line-height: 24px;
+}
+
+.stage .DatePicke_operation_r .DatePicke_cancel:hover,
+.stage .DatePicke_operation .TD_WeekPicke_cancle:hover {
+    color: #43A3FB;
+    background-color: transparent;
+}
+
+.stage .DatePicke_tools_datetype {
+    margin-left: 5px;
+    float: left;
+}
+
+.stage .DatePicke_tool_shortcut a,
+.stage .DatePicke_contarst a {
+    /* color: #fff; */
+    margin: 0 4px;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: none;
+    border: 1px solid #D7DDE4;
+    color: #657180;
+    min-width: 66px;
+    text-align: center;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+}
+
+.stage .DatePicke_tool_shortcut a:hover,
+.stage .DatePicke_contarst a:hover {
+    text-decoration: none;
+    /*color: #fff;*/
+}
+
+.stage .DatePicke_tools_datetype a {
+    color: #657180;
+    padding: 0 12px;
+    height: 26px;
+    line-height: 26px;
+    display: inline-block;
+    vertical-align: middle;
+    border: 1px solid #949bab;
+    margin-left: 8px;
+    text-decoration: none;
+}
+
+.stage .DatePicke_tools_datetype a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: #43A3FB;
+}
+
+.stage .DatePicke_tools_datetype .choose,
+.stage .DatePicke_tools_datetype a.choolse {
+    background: #43A3FB;
+    color: #fff;
+    text-decoration: none;
+}
+
+.stage .DatePicke_tool_shortcut .choose,
+.stage .DatePicke_tool_shortcut a.choolse,
+.stage .DatePicke_contarst .choose,
+.stage .choolse {
+    background: #43A3FB;
+    border-color: #43A3FB;
+    color: #fff;
+    text-decoration: none;
+}
+
+.stage .DatePicke_tool_shortcut a.disable,
+.stage .DatePicke_tools_datetype a.disable {
+    cursor: default;
+    background: none;
+    color: #777
+}
+
+.stage .DatePicke_tool_shortcut {
+    float: right;
+}
+
+.stage .DatePicke_tool_shortcut[data-type="DatePicke_shortcut"] {
+    float: inherit;
+}
+
+.stage .DatePicke_tool_bar label,
+.stage .DatePicke_contarst label {
+    width: 55px;
+    text-align: left;
+    display: inline-block;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.stage .calen_con_rank {
+    position: relative;
+}
+
+.stage .DatePicke_contarst a {
+    color: #fff;
+}
+
+.stage .DatePicke_wrappper_content {
+    border: #ccc solid 1px;
+    margin: 10px
+}
+
+.stage .DatePicke_contrast_one,
+.stage .DatePicke_contrast_tow {
+    width: 50%;
+    float: left;
+}
+
+.stage .DatePicke_contrast_one .TD_Calendar,
+.stage .DatePicke_contrast_tow .TD_Calendar {
+    border: 1px solid #ccc;
+    margin: 10px 10px 10px 10px;
+    width: auto;
+    border-radius: 5px;
+}
+
+.stage .DatePicke_contrast_one .TD_Calendar_header {
+    background: #e14441;
+    color: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.stage .DatePicke_contrast_tow .TD_Calendar_header {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background: #707787;
+    color: #fff;
+}
+
+.stage .DatePicke_contrast_one .TD_Calendar_day_choose {
+    background: #c9ceda;
+    color: #000;
+}
+
+.stage .DatePicke_contrast_tow .TD_Calendar_day_choose {
+    background: #c9ceda;
+}
+
+.stage .DatePicke_contrast_one .TD_Calendar_next,
+.stage .DatePicke_contrast_tow .TD_Calendar_next {
+    border-left-color: #fff;
+}
+
+.stage .DatePicke_contrast_one .TD_Calendar_pre,
+.stage .DatePicke_contrast_tow .TD_Calendar_pre {
+    border-right-color: #fff;
+}
+
+
+/*rank 月排行*/
+
+.stage .DatePicke_contarst {
+    margin-top: 5px;
+}
+
+.stage .TD_Calendar_day_list:after {
+    clear: both;
+    display: block;
+    height: 0;
+    content: '';
+}
+
+.stage .TD_Calendar_day_list i {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.stage .TD_Calendar .TD_Calendar_day_disable {
+    color: #ccc;
+    cursor: auto
+}
+
+.stage .TD_Calendar_day_list .TD_Calendar_day_preM,
+.stage .TD_Calendar_day_list .TD_Calendar_day_nextM {
+    color: #C2C0C0;
+}
+
+.stage .TD_Calendar_header {
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    position: relative;
+    background: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: solid 1px rgba(28,36,56,0.10);
+}
+
+.stage .TD_Calendar_header b{
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: rgba(28,36,56,0.94);
+    font-weight: normal;
+}
+
+.stage .TD_Calendar {
+    float: left;
+    width: 50%;
+    font-size: 12px;
+    border-radius: 5px;
+    font-family: PingFangSC-Regular;
+    color: rgba(28,36,56,0.80);
+}
+
+/*.TD_Calendar_pre,*/
+/*.TD_Calendar_next {*/
+/*width: 0;*/
+/*height: 0;*/
+/*overflow: hidden;*/
+/*display: block;*/
+/*text-indent: 9999em;*/
+/*position: absolute;*/
+/*top: 10px;*/
+/*cursor: pointer;*/
+/*border: transparent 5px solid;*/
+/*}*/
+
+/*.TD_Calendar_pre {*/
+/*left: 10px;*/
+/*border-right: #515767 solid 6px;*/
+/*}*/
+
+.stage .TD_Calendar_pre,
+.stage .TD_Calendar_next {
+    width: 10px;
+    height: 10px;
+    overflow: hidden;
+    display: inline-block;
+    position: absolute;
+    left:14px;
+    top: 10px;
+}
+
+.stage .TD_Calendar_pre:after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    right: -4px;
+    width: 6px;
+    height: 10px;
+    display: block;
+    border: 1px solid rgba(28,36,56,0.56);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.stage .TD_Calendar_pre:hover:after,
+.stage .TD_Calendar_next:hover:after{
+    border-color: #2D8CF0;
+}
+
+.stage .TD_Calendar_next{
+    right: 20px;
+    left: auto;
+}
+
+.stage .TD_Calendar_next:after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    right: 8px;
+    width: 6px;
+    height: 10px;
+    display: block;
+    border: 1px solid rgba(28,36,56,0.56);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.stage .TD_Calendar_week {
+    height: 30px;
+    padding: 0 10px;
+    line-height: 30px;
+}
+
+.stage .TD_Calendar_day_list {
+    padding: 0 8px;
+}
+
+.stage .TD_Calendar_day_list span.TD_Calendar_day_choose {
+    background: #eaf4ff;
+    border-radius: 2px;
+    margin-left: -1px;
+    color: rgba(28,36,56,0.80)!important;
+}
+
+.stage .TD_Calendar_week em,
+.stage .TD_Calendar_day_list span {
+    display: inline-block;
+    float: left;
+    text-align: center;
+    /*height: 26px;*/
+    position: relative;
+    line-height: 26px;
+    width: 13.7%;
+    cursor: pointer;
+    margin: 4px 0;
+    font-family: HelveticaNeue;
+}
+
+.stage .TD_Calendar_day_list span em {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 100%;
+    right: 3px;
+    top: 3px;
+    background: #679fef;
+    text-indent: 999em;
+    overflow: hidden;
+}
+
+.stage .TD_MonthPicke {
+    float: left;
+    width: 50%;
+    font-size: 12px;
+}
+
+.stage .TD_MonthPicke_Frame {
+    border: 0 none;
+    background: #fff;
+    box-shadow: 0 0 0 transparent!important;
+}
+
+.stage .TD_MonthPicke_header {
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    position: relative;
+    background: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: solid 1px rgba(28,36,56,0.10);
+    box-shadow: 0 0 0 transparent!important;
+    font-weight: normal;
+}
+
+
+.stage .TD_MonthPicke_pre,
+.stage .TD_MonthPicke_next {
+    width: 10px;
+    height: 10px;
+    overflow: hidden;
+    display: inline-block;
+    position: absolute;
+    left:14px;
+    top: 10px;
+}
+
+.stage .TD_MonthPicke_pre:after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    right: -4px;
+    width: 6px;
+    height: 10px;
+    display: block;
+    border: 1px solid rgba(28,36,56,0.56);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.stage .TD_MonthPicke_pre:hover:after,
+.stage .TD_MonthPicke_next:hover:after{
+    border-color: #2D8CF0;
+}
+
+.stage .TD_MonthPicke_next{
+    right: 20px;
+    left: auto;
+}
+
+.stage .TD_MonthPicke_next:after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    right: 8px;
+    width: 6px;
+    height: 10px;
+    display: block;
+    border: 1px solid rgba(28,36,56,0.56);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.stage .TD_MonthPicke_MonthList {
+    padding: 0 25px 25px 25px;
+    float: left;
+    width: 100%;
+}
+
+.stage .TD_MonthPicke_MonthList li {
+    float: left;
+    width: 33%;
+    height: 28px;
+    cursor: pointer;
+    line-height: 28px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.stage .TD_MonthPicke_MonthList .TD_MonthPicke_month {
+    width: 100%;
+    /*width: 40px;*/
+    margin: 10px auto;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    display: block;
+    border-radius: 2px;
+    position: relative;
+    font-family: HelveticaNeue;
+    color: rgba(28,36,56,0.80);
+    -webkit-transition: all linear .3s;
+    -moz-transition: all linear .3s;
+    transition: all linear .3s;
+}
+
+.stage .TD_MonthPicke_MonthList .TD_MonthPicke_month:hover{
+    color: #43A3FB;
+}
+
+.stage .TD_MonthPicke_MonthList .TD_MonthPicke_month.chooes {
+    background: rgba(51, 153, 255, 0.10);
+    color: rgba(28,36,56,0.80);
+}
+
+
+/*.TD_MonthPicke_MonthList .TD_MonthPicke_month.chooes:nth-of-type() {
+    background: #679fef !important;
+    color: #fff;
+}
+
+.TD_MonthPicke_MonthList .TD_MonthPicke_month.chooes:last-child {
+    background: #679fef !important;
+    color: #fff;
+}*/
+
+.stage .TD_MonthPicke_MonthList .disable {
+    color: #BBBDC6;
+    background: 0 0;
+    cursor: default
+}
+
+.stage .TD_MonthPicke_Frame_Operation {
+    height: 28px;
+    background: #F5F6F8;
+    padding: 10px;
+    box-sizing: initial;
+    text-align: right
+}
+
+.stage .TD_MonthPicke_Frame_Operation a {
+    display: inline-block;
+    width: 58px;
+    margin: 0 5px;
+    font-size: 12px;
+    text-decoration: none;
+    height: 26px;
+    line-height: 26px;
+    text-align: center
+}
+
+.stage .TD_MonthPicke_Frame_Operation .TD_MonthPicke_confirm {
+    border: 1px solid #5685cc;
+    box-shadow: 0 1px 0 #72a7f7 inset;
+    background: #5f93e1;
+    color: #fff
+}
+
+.stage .TD_MonthPicke_Frame_Operation .TD_MonthPicke_cancle {
+    border: 1px solid #c7ccd3;
+    box-shadow: 0 1px 0 #fff inset;
+    color: #333
+}
+
+.stage .TD_WeekPicke {
+    width: 50%;
+    font-size: 12px;
+    background: #fff;
+    /*border: 1px solid #ccc;*/
+    z-index: 899;
+    /*box-shadow: 0 1px 3px rgba(0, 0, 0, .1);*/
+    float: left
+}
+
+.stage .TD_WeekPicke_header {
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    position: relative;
+    background: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: solid 1px rgba(28,36,56,0.10);
+}
+
+
+.stage .TD_WeekPicke_pre,
+.stage .TD_WeekPicke_next {
+    width: 10px;
+    height: 10px;
+    overflow: hidden;
+    display: inline-block;
+    position: absolute;
+    left:14px;
+    top: 10px;
+}
+
+.stage .TD_WeekPicke_pre:after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    right: -4px;
+    width: 6px;
+    height: 10px;
+    display: block;
+    border: 1px solid rgba(28,36,56,0.56);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.stage .TD_WeekPicke_pre:hover:after,
+.stage .TD_WeekPicke_next:hover:after{
+    border-color: #2D8CF0;
+}
+
+.stage .TD_WeekPicke_next{
+    right: 20px;
+    left: auto;
+}
+
+.stage .TD_WeekPicke_next:after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    right: 8px;
+    width: 6px;
+    height: 10px;
+    display: block;
+    border: 1px solid rgba(28,36,56,0.56);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.stage .TD_WeekPicke_content {
+    width: 100%;
+    padding: 10px 0;
+}
+
+.stage .TD_WeekPicke_content:after {
+    display: block;
+    clear: both;
+    height: 0;
+    content: ""
+}
+
+.stage .TD_WeekPicke_content li {
+    float: left;
+    width: 50%;
+    text-align: center;
+    height: 30px;
+    cursor: pointer;
+    line-height: 24px;
+    margin: 14px 0;
+    height:24px;
+}
+
+.stage .TD_WeekPicke_content li em,
+.stage .TD_WeekPicke_content li span {
+    display: inline-block;
+}
+
+.stage .TD_WeekPicke_content li span{
+    width: 24px;
+    background: #F2F2F4;
+    border-radius: 4px;
+}
+
+.stage .TD_WeekPicke_content li.choose span {
+    background: #43A3FB;
+    color: #fff;
+    border-radius: 4px;
+    width: 24px;
+}
+
+.stage .TD_WeekPicke_content li.choose em {
+    background: rgba(51, 153, 255, 0.10);
+    border-radius: 4px;
+    color: rgba(37,49,72,0.80);
+}
+
+.stage .TD_WeekPicke_content li em {
+    font-family: HelveticaNeue;
+    font-size: 12px;
+    padding: 0 10px;
+}
+
+/*.TD_WeekPicke_content li:hover {*/
+/*background: #eee*/
+/*}*/
+
+.stage .TD_WeekPicke_content li.choose {
+    color: #6193DE
+}
+
+.stage .TD_WeekPicke_content li.disable {
+    color: #ddd;
+    cursor: default
+}
+
+.stage .TD_WeekPicke_content li.disable:hover {
+    background: no-repeat
+}
+
+.stage .TD_WeekPicke_operation {
+    height: 28px;
+    background: #F5F6F8;
+    padding: 10px;
+    box-sizing: initial;
+    text-align: right
+}
+
+.stage .TD_WeekPicke_operation a {
+    display: inline-block;
+    width: 58px;
+    margin: 0 5px;
+    font-size: 12px;
+    text-decoration: none;
+    height: 26px;
+    line-height: 26px;
+    text-align: center
+}
+
+.stage .TD_WeekPicke_operation .TD_WeekPicke_Confirm {
+    border: 1px solid #5685cc;
+    box-shadow: 0 1px 0 #72a7f7 inset;
+    background: #5f93e1;
+    color: #fff
+}
+
+.stage .TD_WeekPicke_operation .TD_WeekPicke_cancle {
+    border: 1px solid #c7ccd3;
+    box-shadow: 0 1px 0 #fff inset;
+}
+
+.stage .DatePicke_contarst a[data-name="custom"],
+.stage .DatePicke_contarst a[data-name="preYear"],
+.stage .DatePicke_tool_bar a[data-name="day"],
+.stage .DatePicke_tool_bar a[data-name="month"] {
+    display: none;
+}
+
+.stage .TD_Calendar_day_list span.TD_Calendar_day_choose.start_end {
+    background: #43A3FB !important;
+    border-radius: 3px;
+    color: #fff!important;
+    position: relative;
+    z-index: 6;
+}
+
+.stage .form-actions {
+    clear: both;
+}
+
+.stage .form-actions span {
+    display: block;
+    zoom: 1;
+    overflow: hidden;
+}
+
+.stage .form-actions span b {
+    display: block;
+    zoom: 1;
+    overflow: hidden;
+    background: #F7F9FB;
+    padding: 0;
+    text-align: right;
+}
+
+.stage .form-actions span b a.confirm {
+    background: #5f93e1;
+    color: #fff;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    width: 60px;
+    margin: 0 5px;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.stage .form-actions span b a:hover.confirm {
+    background: #4777c0;
+}
+
+.stage .form-actions span b a.cancelFilter {
+    background: #fff;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    width: 60px;
+    margin: 0 5px;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.stage .form-actions span b a:hover.cancelFilter {
+    background: #c7ccd3;
+}
+
+.stage .calendarFormwidth>div.TD_Calendar {
+    width: 50%;
+}
+
+.stage .calendarFormwidth>div.TD_Calendar:nth-child(1) {
+    border-right: 0;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.stage .calendarFormwidth>div.TD_Calendar:nth-child(1) div.TD_Calendar_header {
+    border-top-right-radius: 0;
+}
+
+.stage .calendarFormwidth>div.TD_Calendar:nth-child(2) {
+    border-left: 0;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.stage .calendarFormwidth>div.TD_Calendar:nth-child(2) div.TD_Calendar_header {
+    border-top-left-radius: 0;
+}
+
+.stage .date-picke-label .glyphicon{
+    display: none!important;
+}
+
+.stage .TD_MonthPicke_MonthList .special-choice {
+    background: transparent !important;
+    color: #fff !important;
+}
+
+.stage .TD_MonthPicke_MonthList .special-choice:after{
+    content: '';
+    width: 40px;
+    height: 28px;
+    background: #43A3FB;
+    border-radius: 4px;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    margin-left: -20px;
+    z-index: -1;
+}
+
+/* zhaoxue add */
+.stage .dayCalendarFilter .DatePicke_tool,
+.stage .monthCalendarFilter .DatePicke_tool{
+    display: none;
+}
+
+.stage .monthCalendar_button{
+    background: #FFFFFF;
+    border: 1px solid #43A3FB;
+    border-radius: 4px;
+    width: 94px;
+    height: 24px;
+    line-height: 24px;
+    font-family: PingFangSC-Medium;
+    font-size: 12px;
+    color: #43A3FB;
+    display: inline-block;
+    text-align: center;
+    float: right;
+}
+
+.stage .monthCalendar_button.monthCalendar_none{
+    cursor: not-allowed ;
+    border-color: #DEDFE3;
+    color: #404560;
+    background: #DEDFE3;
+}
+
+.stage ul.monthCalendar_list li{
+    width: 90px;
+    height: 24px;
+    border: 1px solid #DEDFE3;
+    border-radius: 4px;
+    display: inline-block;
+    margin-right: 8px;
+    line-height: 24px;
+    font-family: HelveticaNeue-Medium;
+    font-size: 12px;
+    color: #404560;
+    padding: 0 10px;
+    float: right;
+}
+
+.stage ul.monthCalendar_list li span{
+    float: right;
+    position: relative;
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    overflow: hidden;
+    top: 5px;
+    cursor: pointer;
+}
+
+.stage ul.monthCalendar_list li:hover span::before,
+.stage ul.monthCalendar_list li:hover span::after{
+    background: #43A3FB;
+}
+
+.stage ul.monthCalendar_list li span::before{
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    margin-top: -1px;
+    background: #818596;
+    transform: rotate(45deg);
+}
+.stage ul.monthCalendar_list li span::after {
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    margin-top: -1px;
+    background: #818596;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.stage .poinent_none{
+    pointer-events: none!important;
+}
+
+.stage .TD_Calendar_pre, .TD_Calendar_next, .TD_MonthPicke_pre,.TD_MonthPicke_next{
+    border-right:  0 none!important;
+    border: 0 none!important;
+}
+
+/*=========日历组件filtercss==end==========*/

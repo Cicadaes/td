@@ -1,0 +1,112 @@
+<div class="modal" id="targetManagementDialog" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-target" role="document">
+        <div class="modal-content">
+            <div class="modal-header" ng-drag-dialog="true">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">{{title}}{{constants.label_space}}{{constants.table_target}}</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal clrfix">
+                    <div class="control-group">
+                        <label class="control-label"><span class="required">*</span>{{constants.field_target_targetName}}：</label>
+                        <div class="controls">
+                            <input id="t_target_form_targetName" autocomplete="off" class="form-control" type="text" ng-model="targetManagement.targetName" name="targetName" required placeholder="{{constants.label_input_content}}">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label"><span class="required">*</span>{{constants.field_target_publisher}}：</label>
+                        <div class="controls">
+                            <input id="t_target_form_publisher" autocomplete="off" class="form-control" type="text" ng-model="targetManagement.publisher" name="publisher" required placeholder="{{constants.label_input_content}}">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label"><span class="required">*</span>{{constants.field_target_targetId}}：</label>
+                        <div class="controls">
+                            <input id="t_target_form_targetId" autocomplete="off" class="form-control" type="text" name="targetId" required ng-click="chooseTargetType(targetManagement)" placeholder="{{constants.label_please_choose}}" readonly="readonly">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label"><span class="required">*</span>{{constants.field_target_duration}}：</label>
+                        <div class="controls" style="line-height: 21px;">
+                            <label class="radio radio-inline">
+                                <input type="radio" ng-click="changeDuration(0, targetManagement);" name="targetManagement_duration" required id="duration_1" value="0" checked>
+                                {{constants.mapper_target_any_day}}
+                            </label>
+                            <label class="radio radio-inline">
+                                <input type="radio" ng-click="changeDuration(7, targetManagement);" name="targetManagement_duration" required id="duration_2" value="7">
+                                {{constants.mapper_target_7_day}}
+                            </label>
+                            <label class="radio radio-inline">
+                                <input type="radio" ng-click="changeDuration(30, targetManagement);" name="targetManagement_duration" required id="duration_3" value="30">
+                                {{constants.mapper_target_30_day}}
+                            </label>
+                            <label class="radio radio-inline">
+                                <input type="radio" ng-click="changeDuration(90, targetManagement);" name="targetManagement_duration" required id="duration_4" value="90">
+                                {{constants.mapper_target_90_day}}
+                            </label>
+                            <label class="radio radio-inline">
+                                <input type="radio" ng-click="changeDuration(360, targetManagement);" name="targetManagement_duration" required id="duration_5" value="360">
+                                {{constants.mapper_target_360_day}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label"><span class="required">*</span>{{constants.field_target_chooseDate}}：</label>
+                        <div class="controls">
+                            <div id="t_target_form_date" fast-select-days="fastSelectDays" day-operation-status="dayOperationStatus" style=" height: 30px; width:200px; position:relative;" start-date="dateInForm.tagDataTimeStart" end-date="dateInForm.tagDataTimeEnd" td-change="changeTagDataTime" td-date-condition
+                                 date-range="dateRange" class="form-control date-condition" no-last-date="true"></div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label"><span class="required">*</span>{{constants.field_target_chooseValue}}：</label>
+                        <div class="controls">
+                            <input id="t_target_form_targetValue" autocomplete="off" class="form-control" type="text" ng-model="targetManagement.targetValueEdit" name="targetValueEdit" required
+                                   style="width: 200px; float: left;" placeholder="{{constants.label_input_content}}">
+                            <span style="margin-left: 10px;">{{targetValueTypeNameMap[targetValueType]}}</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label"></label>
+                        <div class="controls" style="line-height: 21px;">
+                            <label class="checkbox checkbox-inline">
+                                <input id="t_target_form_pageIndex" type="checkbox" ng-model="targetManagement.pageIndex" name="pageIndex" value="">
+                                {{constants.field_target_pageIndex}}
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveTargetManagement(targetManagement)">{{constants.label_save}}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{constants.label_cancel}}</button>
+            </div>
+        </div>
+
+
+        <div ng-show="choosePanelShow" class="chooseTargetPanel">
+            <div class="chooseTargetColumn">
+                <div class="title_1">{{constants.mapper_target_market_perception}}</div>
+                <div ng-repeat="target in targetList_1" style="color:#a09996;"><input type="radio" disabled="disabled" value="{{target.id}}" name="targetManagement_targetId" style="cursor: text;" title=""> {{target.name}}</div>
+            </div>
+            <div class="chooseTargetColumn">
+                <div class="title_1">{{constants.mapper_target_customer_acquire}}</div>
+                <div ng-repeat="target in targetList_2"><input type="radio" value="{{target.id}}" name="targetManagement_targetId" title=""> {{target.name}}</div>
+            </div>
+            <div class="chooseTargetColumn">
+                <div class="title_1">{{constants.mapper_target_customer_active}}</div>
+                <div ng-repeat="target in targetList_3"><input type="radio" value="{{target.id}}" name="targetManagement_targetId" title=""> {{target.name}}</div>
+            </div>
+            <div class="chooseTargetColumn " style="border-right: 0;overflow-x: hidden;overflow-y: auto;">
+                <div class="title_1">{{constants.mapper_target_customer_marketing}}</div>
+                <div ng-repeat="target in targetList_4" style="color:#a09996;"><input type="radio" disabled="disabled" value="{{target.id}}" name="targetManagement_targetId" style="cursor: text;" title=""> {{target.name}}</div>
+            </div>
+            <div style="height: 50px; width: 600px; padding: 20px 10px 0; float: left;">
+                <button style="background-color: #c1c1c1; padding: 5px 20px; margin-right: 10px; color: #464C5B; float: right;" ng-click="cancelTargetType()">{{constants.label_cancel}}</button>
+                <button style="background-color: #4F93E7; padding: 5px 20px; margin-right: 10px; color: #FFFFFF; float: right;" ng-click="selectTargetType(targetManagement)">{{constants.label_confirm}}</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>

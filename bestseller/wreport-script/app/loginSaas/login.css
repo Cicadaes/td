@@ -1,0 +1,443 @@
+.report_login,.dmp_login {
+	background: #eef0f3 url(images/login.jpg) no-repeat top center;
+    background-size: cover;
+}
+
+@media screen and (max-width: 1366px) {
+.login-panel{ 
+	position: fixed;
+    left: 50%;
+    margin-left: -190px;
+    top: 50%;
+    margin-top: -230px;
+}
+.login-form {
+    margin: 0 auto;
+    width: 380px;
+    height: 420px;
+    background: rgba(255,255,255,1);
+    box-shadow: #666 0px 0px 1px;
+}
+.login-text{width: 310px;padding: 0 35px;}
+.copy-right{width: 380px;}
+.talkingdata_png {
+    /* height:35px; */
+    width: 320px;
+    margin-left: 30px;
+}
+.top_img_td{height: 80px;}
+.errorInfo{
+    padding-left: 30px;
+}
+.errorInfo .info{
+    background: #fff1f0;
+    color: #ee7063;
+    font-size: 12px;
+    padding: 2px;
+    width: 314px;
+    line-height: 20px;
+    height: 20px;
+    border: solid 1px #ffa79e;
+    border-radius: 2px;
+    text-align: center;
+    float: left;
+    margin-bottom: 8px;
+}
+.form-user,.form-pass{
+	height: 42px;
+    width: 300px;
+	margin-left: 30px;
+	padding-left: 18px;
+	overflow: hidden;
+	font-size: 16px;
+	border: none;
+	border-left: solid 2px;
+	border-color:#FFF;
+	background: #f9f9f9;
+    color: #5c636c;
+    font-family: "Microsoft YaHei", tahoma, arial, sans-serif !important;
+}
+.form-pass {margin-top: 20px;}
+.mid_username{height: 44px;}
+.mid_password{height: 44px;}
+.radiochecked.active {
+    cursor: pointer;
+    text-align: center;
+    background-image: url(images/choose.png);
+    background-repeat: no-repeat;
+    background-position: 0px 0px !important;
+    height: 16px;
+    background-size: 28%;
+    margin-left: 30px;
+    font-size: 14px;
+    color: #5b636c;
+    float: left;
+}
+.radiochecked {
+    cursor: pointer;
+    text-align: center;
+    background-image: url(images/choose.png);
+    background-repeat: no-repeat;
+    background-position: 0px -18px !important;
+    height: 16px;
+    background-size: 28%;
+    margin-left: 30px;
+    font-size: 14px;
+    color: #5b636c;
+    float: left;
+}
+.remeberme{height: 64px;}
+.remeberme font{margin-top: -2px;float: left;}
+.login-form a{margin-right: 30px;font-size: 12px;}
+.submit {
+	height: 44px;
+    width: 320px;
+	font-size: 17px;
+	color: #FFFFFF;
+	border: none;
+	margin-left:30px;
+	background: #13b4ff;
+    font-family: "Microsoft YaHei", tahoma, arial, sans-serif !important;
+}
+.base_submit{height: 44px;padding-bottom: 44px;}
+.nickx {
+    background: url(images/no.png) no-repeat;
+    display: none;
+    height: 15px;
+    width: 15px;
+    background-position: 0px 0px;
+    background-size: 15px 15px;
+    position: absolute;
+    top: 39%;
+    right: 10%;
+}
+.nick_error{top: 39%;}	
+.top_td{height: 42px;}
+.error{height: 44px;}
+}
+@media screen and (min-width: 1367px) and (max-width: 1744px) {
+.login-panel{ 
+	position: fixed;
+    left: 50%;
+    margin-left: -209px;
+    top: 50%;
+    margin-top: -257px;
+}
+.login-form {
+    margin: 0 auto;
+    width: 418px;
+    height: 462px;
+    background: rgba(255,255,255,1);
+    box-shadow: #666 0px 0px 1px;
+}
+.copy-right{width: 418px;}
+.login-text{width: 352px;padding: 0 33px;}
+.talkingdata_png {
+    /* height:38px; */
+    width : 352px;
+    margin-left: 33px;
+}
+.top_img_td{height: 88px;}
+.errorInfo{
+    padding-left: 33px;
+}
+.errorInfo .info{
+    background: #fff1f0;
+    color: #ee7063;
+    font-size: 12px;
+    padding: 2px;
+    width: 346px;
+    line-height: 20px;
+    height: 20px;
+    border: solid 1px #ffa79e;
+    border-radius: 2px;
+    text-align: center;
+    float: left;
+    margin-bottom: 8px;
+}
+.form-user,.form-pass{
+	height: 46px;
+    width: 332px;
+	margin-left: 33px;
+	padding-left: 18px;
+	overflow: hidden;
+	font-size: 16px;
+	border: none;
+	border-left: solid 2px;
+	border-color:#FFF;
+	background: #f9f9f9;
+    color: #5c636c;
+    font-family: "Microsoft YaHei", tahoma, arial, sans-serif !important;
+}
+.form-pass {margin-top: 22px;}
+.mid_username{height: 48px;}
+.mid_password{height: 48px;}
+.radiochecked.active {
+    cursor: pointer;
+    text-align: center;
+    background-image: url(images/choose.png);
+    background-repeat: no-repeat;
+    background-position: 0px 0px !important;
+    height: 16px;
+    background-size: 28%;
+    margin-left: 33px;
+    color: #5b636c;
+    float: left;
+}
+.radiochecked {
+    cursor: pointer;
+    text-align: center;
+    background-image: url(images/choose.png);
+    background-repeat: no-repeat;
+    background-position: 0px -18px !important;
+    height: 16px;
+    background-size: 28%;
+    margin-left: 33px;
+    color: #5b636c;
+    float: left;
+}
+.remeberme{height: 71px;}
+.remeberme font{margin-top: -2px;float: left;font-size: 14px;}
+.login-form a{margin-right: 33px;font-size: 13px;}
+.submit {
+	height: 44px;
+    width: 352px;
+	font-size: 17px;
+	color: #FFFFFF;
+	border: none;
+	margin-left:33px;
+	background: #13b4ff;
+    font-family: "Microsoft YaHei", tahoma, arial, sans-serif !important;
+}
+.base_submit{height: 44px;padding-bottom: 44px;}
+.nickx {
+    background: url(images/no.png) no-repeat;
+    display: none;
+    height: 15px;
+    width: 15px;
+    background-position: 0px 0px;
+    background-size: 15px 15px;
+    position: absolute;
+    top: 39%;
+    right: 10%;
+}
+.nick_error{top: 39%;}	
+.top_td{height: 46px;}
+.error{height: 48px;}
+}
+
+@media screen and (min-width: 1745px){
+.login-panel{ 
+	position: fixed;
+    left: 50%;
+    margin-left: -228px;
+    top: 50%;
+    margin-top: -278px;
+}
+.login-form {
+    margin: 0 auto;
+    width: 456px;
+    height: 504px;
+    background: rgba(255,255,255,1);
+    box-shadow: #666 0px 0px 1px;
+}
+.copy-right{width: 456px;}
+.login-text{width: 384px;padding: 0 36px;}
+.talkingdata_png {
+    /* height:42px; */
+    width : 384px;
+    margin-left: 36px;
+}
+.top_img_td{height: 96px;}
+.errorInfo{
+    padding-left: 36px;
+}
+.errorInfo .info{
+    background: #fff1f0;
+    color: #ee7063;
+    font-size: 12px;
+    padding: 2px;
+    width: 378px;
+    line-height: 20px;
+    height: 20px;
+    border: solid 1px #ffa79e;
+    border-radius: 2px;
+    text-align: center;
+    float: left;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+.form-user,.form-pass{
+	height: 50px;
+    width: 364px;
+	margin-left: 36px;
+	padding-left: 18px;
+	overflow: hidden;
+	font-size: 18px;
+	border: none;
+	border-left: solid 2px;
+	border-color:#FFF;
+	background: #f9f9f9;
+    color: #5c636c;
+    font-family: "Microsoft YaHei", tahoma, arial, sans-serif !important;
+}
+.form-pass {margin-top: 24px;}
+.mid_username{height: 53px;}
+.mid_password{height: 53px;}
+.radiochecked.active {
+    cursor: pointer;
+    text-align: center;
+    background-image: url(images/choose.png);
+    background-repeat: no-repeat;
+    background-position: 0px 1px !important;
+    height: 18px;
+    background-size: 29%;
+    margin-left: 36px;
+    color: #5b636c;
+    float: left;
+}
+.radiochecked {
+    cursor: pointer;
+    text-align: center;
+    background-image: url(images/choose.png);
+    background-repeat: no-repeat;
+    background-position: 0px -20px !important;
+    height: 18px;
+    background-size: 29%;
+    margin-left: 36px;
+    color: #5b636c;
+    float: left;
+}
+.remeberme{height: 76px;}
+.remeberme font{margin-top: -2px;float: left;font-size: 16px;}
+.login-form a{margin-right: 36px;font-size: 14px;}
+.submit {
+	height: 44px;
+    width: 384px;
+	font-size: 17px;
+	color: #FFFFFF;
+	border: none;
+	margin-left:36px;
+	background: #13b4ff;
+    font-family: "Microsoft YaHei", tahoma, arial, sans-serif !important;
+}
+.base_submit{height: 53px;padding-bottom: 48px;}
+.nickx {
+    background: url(images/no.png) no-repeat;
+    display: none;
+    height: 15px;
+    width: 15px;
+    background-position: 0px 0px;
+    background-size: 15px 15px;
+    position: absolute;
+    top: 39%;
+    right: 10%;
+}
+.nick_error{top: 39%;}	
+.top_td{height: 50px;}
+.error{height: 53px;font-size: 18px;}
+}
+
+.logining{border-left: #1684ef solid 62px;background: #2392fe;padding-right: 62px;}
+.logining:hover,.logining:focus{background: #2392fe !important;}
+
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill{background-color:#fff !important;}
+
+.copy-right{text-align:center;margin-top:34px;color:#fff;font-size: 12px;    white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
+.login-text{white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
+
+input:focus {
+	outline:none;
+}
+input.submit:hover,input.submit:focus{
+	background: #327eeb;
+}
+
+.form-pass:focus,.form-user:focus{
+	border-color:#13b4ff;
+}
+
+.radioclass {
+	float:left;
+	opacity: 0;
+	cursor: pointer;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity = 0);
+}
+
+.login-form a {color:#13b4ff; float:right;}
+
+A:hover {
+	color:#3b7cb3;
+}
+
+.form-error {  
+	background: url(images/login_fail.png) no-repeat ;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width:310px;
+    height:220px;
+    background-size: 100% 100%;
+	background-position: bottom right;
+ 
+ }
+#pop {
+    filter:alpha(opacity=50);  
+    -moz-opacity:0.5;  
+   	-khtml-opacity: 0.5;  
+   	opacity: 0.5;  
+    width: 400px;
+    font-size: 12px;
+    border:3px solid #1192da;
+    border-radius: 5px;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    height:50%;
+}
+
+#popHead {
+	line-height: 32px;
+    border-bottom: 1px solid #1192da;
+    font-size: 12px;
+    padding: 0 0 0 10px;
+}
+#popHead #popClose {
+	position: absolute;
+    right: 10px;
+    top: 0;
+    color: #fff;
+}
+
+.poptips {
+    color: #fff;
+    font-size: 14px;
+    line-height: 28px;
+    padding: 5px 10px 0 10px;
+    text-indent: 2em;margin:0;
+}
+#popHead h2 {
+    font-size: 14px;
+    font-weight:bold;
+    color: #fff;
+    line-height: 32px;
+    height: 32px;    padding: 0;
+    margin: 0;    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 88%;
+    white-space: nowrap;
+}
+#popContent{
+	max-height: 90%;
+    overflow: auto;
+    position: absolute;
+    top: 32px;
+    left: 0;
+    width: 100%;
+}
+
+#popHead a {
+   cursor: pointer;
+}
+.fz16{font-size: 16px;}

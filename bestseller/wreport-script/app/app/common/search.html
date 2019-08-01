@@ -1,0 +1,7 @@
+<div class="clrfix">
+    <div class="fast-search-box" ng-show="!isShowMoreSearch">
+        <input id="t_search_input" ng-keydown="keydownSearchValue();" ng-focus="focusSearchValue();" ng-blur="blurSearchValue();" maxlength="256" type="text" class="form-control" placeholder="{{placeholder}}" ng-model="searchValue">
+        <button id="t_search_btn" type="submit" class="btn btn-primary ml-10" ng-click="search();" id="btn-search" style="display: block;">{{constants.label_search}}</button>
+        <i class="icon-clear" title="{{constants.label_clear}}" ng-if="searchValue" ng-click="clearSearchValue();"></i>
+    </div>
+</div>

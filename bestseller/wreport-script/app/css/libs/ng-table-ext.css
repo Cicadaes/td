@@ -1,0 +1,476 @@
+
+.ng-table-pager {
+    height: 27px;
+}
+
+.ng-table-pager button {
+    font-size: 12px;
+    padding: 4px 8px;
+}
+
+.ng-table-pager .pagination {
+    padding: 0;
+    float: left;
+    margin: 0;
+}
+
+.ng-table-pager .pagination > li > a, .ng-table-pager .pagination > li > span {
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+/**
+ng-table-change.css
+ */
+
+.ng-table-head {
+    height: 44px;
+    background: #fff;
+    padding: 0 20px;
+    border-left: 1px solid #e7ebef;
+    border-right: 1px solid #e7ebef;
+    border-top: 1px solid #e7ebef;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.ng-table-head .text {
+    float: left;
+    font-size: 14px;
+    line-height: 44px;
+    color: #464c5b;
+}
+
+.ng-table-head .text select {
+    height: 25px;
+    padding: 0 10px;
+    margin: 10px 0 0 0;
+    border: none;
+    box-shadow: none;
+}
+
+.ng-table-head-operator {
+    float: right;
+    margin-top: 10px;
+}
+
+.ng-table-head-operator .operator-button {
+    display: inline-block;
+    padding: 2px 10px;
+    border: 1px solid #eee;
+    background: #f8f8f8;
+    cursor: pointer;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.ng-table-head .search {
+    float: right;
+    margin-top: 10px;
+}
+
+.ng-table-head .search .fast-search-box {
+    position: relative;
+    height: 24px;
+}
+
+.ng-table-head .search .fast-search-box .form-control {
+    border: 1px solid #c7ccd3;
+    box-shadow: none;
+    font-size: 12px;
+    float: left;
+    height: 100%;
+    width: 160px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    padding: 0  15px 0 10px;
+}
+
+.ng-table-head .search .fast-search-box .icon-clear {
+    top: 7px;
+    right: 52px;
+    position: absolute;
+}
+
+.ng-table-head .search .fast-search-box .btn {
+    font-size: 12px;
+    width: 46px;
+    text-align: Center;
+    height: 24px;
+    padding: 0;
+    margin-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background: #679fef;
+    border: 1px solid #679fef;
+}
+
+.ng-table-head .search .fast-search-box .btn:hover {
+    background: #5c8fd7;
+    border: 1px solid #5c8fd7;
+}
+
+.ng-table {
+    border: 1px solid #e7ebef;
+    border-top: 1px solid #dce1e7;
+    background: #fff;
+    margin: 0;
+}
+
+.ng-table > thead > tr > th {
+    text-align: left;
+    padding: 0 8px;
+    background: #f7f8f9;
+    height: 36px;
+    vertical-align: middle;
+    font-weight: normal;
+    border-bottom: 1px solid #e7ebef;
+}
+
+.ng-table > thead > tr > th:first-child {
+    padding: 0 21px;
+}
+
+.ng-table > tbody > tr:nth-child(1) td {
+    border-top: none;
+}
+
+/* .ng-table > tbody > tr:nth-child(even){background: #f7f8f9;} */
+
+.ng-table-container {
+    position: relative;
+    padding: 0 20px;
+}
+
+.ng-table > tbody + tbody {
+    border-top: 1px solid #ddd;
+}
+
+.ng-table > tbody > tr > td {
+    vertical-align: middle;
+    padding: 8px;
+}
+
+.ng-table > tbody > tr > td:first-child {
+    padding-left: 21px;
+}
+
+.ng-table > tbody > tr:hover {
+    background: none;
+}
+
+.ng-table > tbody > tr > td > div {
+    word-break: break-all;
+    min-width: 70px;
+}
+
+.ng-table-loading {
+    background: url(../../images/loading02.gif) no-repeat center;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    height: 200px;
+    line-height: 200px;
+    margin-top: -60px;
+    z-index: 2;
+}
+
+.ng-table-empty {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.ng-table > tbody > tr.active-more-tr {
+    background: #5f93e1;
+    color: #fff;
+}
+
+.ng-table > tbody > tr.active-more-tr a {
+    color: #fff;
+}
+
+.ng-table > tbody > tr.more-tr {
+    background: #e7ebef;
+}
+
+.ng-table > tbody > tr.more-tr > td {
+    padding: 15px;
+}
+
+.ng-table > tbody > tr.more-tr > td > .td-ul {
+    padding: 15px 10px 5px 10px;
+    background: #fff;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.ng-table > tbody > tr.more-tr > td > .td-ul > li {
+    float: left;
+    margin-right: 100px;
+    margin-bottom: 10px;
+}
+
+.ng-table > tbody > tr.more-tr > td > .td-ul > li:last-child {
+    margin-right: 0;
+}
+
+.ng-table > tbody > tr.more-tr > td > .td-ul > li strong {
+    font-weight: normal;
+    color: #333;
+}
+
+.ng-table-pager {
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-left: 1px solid #e7ebef;
+    border-right: 1px solid #e7ebef;
+    background: #fff;
+    height: 48px;
+    border-bottom: 1px solid #ced3d9;
+    padding: 0 21px 0 21px;
+}
+
+.ng-table-body {
+    overflow: auto;
+    overflow-x: hidden;
+    width: 100%;
+    border-bottom: 1px solid #e7ebef;
+}
+
+.ng-table-body-empty {
+    border-bottom: none;
+}
+
+.ng-table-body .ng-table-pager {
+    border-bottom: none;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.ng-table-pager .page-count-box {
+    float: left !important;
+    line-height: 48px;
+}
+
+.ng-table-pager .page-count-box span {
+    float: left;
+}
+
+.ng-table-pager .page-count-box select {
+    cursor: pointer;
+    border: none;
+    float: left;
+    margin-top: 14px;
+    color: #679fef;
+    min-width: 45px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    line-height: 20px;
+    width: 45px;
+    background: url(../../images/arrow-bottom.png) no-repeat right;
+    background-size: 11px 5px;
+    margin-right: 10px;
+}
+
+.ng-table-pager .page-count-box select {
+    width: 60px;
+    background: url(../../images/arrow.png) no-repeat scroll right center, -webkit-linear-gradient(#ffffff, #ffffff) transparent !important;
+}
+
+.ng-table-pager .page-count-box .tb-refresh {
+    display: inline-block;
+    vertical-align: top;
+    width: 20px;
+    height: 20px;
+    background: url(../../images/i-refresh3.png) no-repeat center;
+    background-size: 16px 16px;
+    cursor: pointer;
+    margin: 15px 0 0 0;
+}
+
+.ng-table-pager .page-count-box select::-ms-expand {
+    display: none;
+}
+
+.ng-table-pager .page-count-box i {
+    float: left;
+    width: 11px;
+    height: 5px;
+}
+
+.ng-table-pager .pagination {
+    float: right;
+    margin-top: 16px;
+}
+
+.ng-table-pager .pagination > li > a, .ng-table-pager .pagination > li > span {
+    padding: 0 5px;
+    border: none;
+}
+
+.ng-table-pager .pagination > li > a {
+    margin-left: 5px;
+    color: #666;
+}
+
+.pagination > .active > a,
+.pagination > .active > a:focus,
+.pagination > .active > a:hover,
+.pagination > .active > span,
+.pagination > .active > span:focus,
+.pagination > .active > span:hover {
+    background: #679fef;
+    border-radius: 3px;
+}
+
+.ng-table-pager .pagination > li.active > a {
+    color: #fff;
+}
+
+.ng-table-pager .pagination > li.active > .first,
+.ng-table-pager .pagination > li.active > .last,
+.ng-table-pager .pagination > li.active > a.first:hover,
+.ng-table-pager .pagination > li.active a.last:hover,
+.ng-table-pager .pagination > li.active > a.first:focus,
+.ng-table-pager .pagination > li.active a.last:focus {
+    background: none !important;
+    color: #666;
+}
+
+.ng-table-operator {
+    position: relative;
+    min-width: 135px !important;
+}
+
+.ng-table-operator a {
+    color: #666;
+    text-decoration: none;
+}
+
+.ng-table-operator > a {
+    margin-right: 5px;
+}
+
+.ng-table-operator > a:hover,
+.ng-table-operator > a.active {
+    color: #679ef0;
+}
+
+.ng-table-operator > a:hover .icons-more,
+.ng-table-operator > a.active .icons-more {
+    background-position: -94px -692px;
+}
+
+.ng-table-operator .more-ul {
+    margin-bottom: 20px;
+    padding: 8px 0;
+    position: absolute;
+    top: 20px;
+    background: #fff;
+    box-shadow: 1px 2px 5px 1px #ccc;
+    border-radius: 3px;
+    min-width: 110px;
+    z-index: 3;
+}
+
+.ng-table-operator .more-ul li {
+    cursor: pointer;
+}
+
+.ng-table-operator .more-ul li a {
+    display: block;
+    height: 25px;
+    line-height: 25px;
+}
+
+.ng-table-operator .more-ul li a:hover {
+    background: #679ef0;
+    color: #fff;
+}
+
+.ng-table-operator .more-ul li a:hover .icons-more-export {
+    width: 22px;
+    height: 23px;
+    background-position: -228px -282px;
+    cursor: pointer;
+}
+
+.ng-table-operator .more-ul li a:hover .icons-more-launch {
+    width: 22px;
+    height: 23px;
+    background-position: -228px -372px;
+    cursor: pointer;
+}
+
+.ng-table-operator .more-ul li a:hover .icons-more-refresh {
+    width: 22px;
+    height: 23px;
+    background-position: -228px -327px;
+    cursor: pointer;
+}
+
+.ng-table-operator .more-ul li a:hover .icons-more-delete {
+    width: 22px;
+    height: 23px;
+    background-position: -228px -236px;
+    cursor: pointer;
+}
+
+.ng-table-operator .more-ul li a:hover .icons-more-relation {
+    width: 22px;
+    height: 23px;
+    background-position: -228px -146px;
+    cursor: pointer;
+}
+
+.ng-table-operator .more-ul li a:hover .icons-more-records {
+    width: 22px;
+    height: 23px;
+    background-position: -228px -194px;
+    cursor: pointer;
+}
+
+.empty-box-small {
+    background: url(../../images/loading.gif) no-repeat center;
+    background-size: auto 60%;
+}
+
+.empty-box-table-panel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 3;
+}
+
+.empty-box-table-panel .empty-box-table-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: #000;
+    opacity: 0.05;
+}
+
+.empty-box-table {
+    background: url(../../images/loading.gif) no-repeat center;
+    background-size: auto 100%;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    left: 50%;
+    margin-left: -15px;
+    top: 50%;
+    margin-top: 30px;
+}
+
+.empty-box-div {
+    background: url(../../images/loading.gif) no-repeat center;
+    background-size: auto 100%;
+}
+

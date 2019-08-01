@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <appender name="stormfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <File>../logs/dmp</File>
+    <Append>true</Append>
+    <encoder>
+      <pattern>%m%n</pattern>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>../logs/dmp.%d{yyyy-MM-dd}.log</fileNamePattern>
+    </rollingPolicy>
+  </appender>
+  <appender name="failfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <Append>true</Append>
+    <File>../logs/fail</File>
+    <encoder>
+      <pattern>%m%n</pattern>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>../logs/fail.%d{yyyy-MM-dd}.log</fileNamePattern>
+    </rollingPolicy>
+  </appender>
+  <appender name="discardfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <File>../logs/discard</File>
+    <Append>true</Append>
+    <encoder>
+      <pattern>%m%n</pattern>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>../logs/discard.%d{yyyy-MM-dd}.log</fileNamePattern>
+    </rollingPolicy>
+  </appender>
+  <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+    <Target>System.out</Target>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} %5p %c{1}:%L - %m%n</pattern>
+    </encoder>
+  </appender>
+  <appender name="logfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <File>../logs/storm.log</File>
+    <Append>true</Append>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} %5p %c{1}:%L - %m%n</pattern>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      <maxIndex>10</maxIndex>
+      <FileNamePattern>../logs/storm.log.%i</FileNamePattern>
+    </rollingPolicy>
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      <MaxFileSize>100MB</MaxFileSize>
+    </triggeringPolicy>
+  </appender>
+  <logger name="org.apache" level="INFO"/>
+  <logger name="td.enterprise.wanalytics.processor.utils.SuccessLogger" level="INFO">
+    <appender-ref ref="stormfile"/>
+  </logger>
+  <logger name="td.enterprise.wanalytics.processor.utils.FailLogger" additivity="false" level="INFO">
+    <appender-ref ref="failfile"/>
+  </logger>
+  <logger name="com.mchange.v2" level="error"/>
+  <logger name="td.enterprise.wanalytics.processor.utils.DiscardLogger" additivity="false" level="INFO">
+    <appender-ref ref="discardfile"/>
+  </logger>
+  <logger name="org.apache.solr" level="INFO"/>
+  <logger name="org.apache.hadoop" level="INFO"/>
+  <logger name="org.springframework" level="INFO"/>
+  <logger name="org.apache.http" level="INFO"/>
+  <root level="INFO">
+    <appender-ref ref="stdout"/>
+    <appender-ref ref="logfile"/>
+    <appender-ref ref="stormfile"/>
+  </root>
+</configuration>

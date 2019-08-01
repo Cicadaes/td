@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.PoiBrandWifipixDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.PoiBrandWifipix">
+        <result column="id" property="id"/>
+        <result column="name_cn" property="nameCn"/>
+        <result column="name_en" property="nameEn"/>
+        <result column="brand_type" property="brandType"/>
+        <result column="brand_position" property="brandPosition"/>
+        <result column="brand_origin" property="brandOrigin"/>
+        <result column="first_brand" property="firstBrand"/>
+        <result column="second_brand" property="secondBrand"/>
+        <result column="brand_class" property="brandClass"/>
+        <result column="brand_tag" property="brandTag"/>
+        <result column="ssid" property="ssid"/>
+        <result column="match" property="match"/>
+    </resultMap>
+
+    <!-- TD_POI_BRAND_WIFIPIX table all fields -->
+    <sql id="Base_Column_List">
+        id,name_cn,name_en,brand_type,brand_position,brand_origin,first_brand,second_brand,brand_class,brand_tag,ssid,match
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="nameCn != null and nameCn != ''">
+                and name_cn = #{nameCn}
+            </if>
+            <if test="nameEn != null and nameEn != ''">
+                and name_en = #{nameEn}
+            </if>
+            <if test="brandType != null and brandType != ''">
+                and brand_type = #{brandType}
+            </if>
+            <if test="brandPosition != null and brandPosition != ''">
+                and brand_position = #{brandPosition}
+            </if>
+            <if test="brandOrigin != null and brandOrigin != ''">
+                and brand_origin = #{brandOrigin}
+            </if>
+            <if test="firstBrand != null and firstBrand != ''">
+                and first_brand = #{firstBrand}
+            </if>
+            <if test="secondBrand != null and secondBrand != ''">
+                and second_brand = #{secondBrand}
+            </if>
+            <if test="brandClass != null and brandClass != ''">
+                and brand_class = #{brandClass}
+            </if>
+            <if test="brandTag != null and brandTag != ''">
+                and brand_tag = #{brandTag}
+            </if>
+            <if test="ssid != null and ssid != ''">
+                and ssid = #{ssid}
+            </if>
+            <if test="match != null and match != ''">
+                and match = #{match}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_POI_BRAND_WIFIPIX(id,name_cn,name_en,brand_type,brand_position,brand_origin,first_brand,second_brand,brand_class,brand_tag,ssid,match)
+        values(#{id},#{nameCn},#{nameEn},#{brandType},#{brandPosition},#{brandOrigin},#{firstBrand},#{secondBrand},#{brandClass},#{brandTag},#{ssid},#{match})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_POI_BRAND_WIFIPIX set
+        name_cn=#{nameCn},name_en=#{nameEn},brand_type=#{brandType},brand_position=#{brandPosition},brand_origin=#{brandOrigin},first_brand=#{firstBrand},second_brand=#{secondBrand},brand_class=#{brandClass},brand_tag=#{brandTag},ssid=#{ssid},match=#{match}
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_POI_BRAND_WIFIPIX set
+        <trim suffixOverrides=",">
+            <if test="nameCn != null  ">
+                name_cn=#{nameCn},
+            </if>
+            <if test="nameEn != null  ">
+                name_en=#{nameEn},
+            </if>
+            <if test="brandType != null  ">
+                brand_type=#{brandType},
+            </if>
+            <if test="brandPosition != null  ">
+                brand_position=#{brandPosition},
+            </if>
+            <if test="brandOrigin != null  ">
+                brand_origin=#{brandOrigin},
+            </if>
+            <if test="firstBrand != null  ">
+                first_brand=#{firstBrand},
+            </if>
+            <if test="secondBrand != null  ">
+                second_brand=#{secondBrand},
+            </if>
+            <if test="brandClass != null  ">
+                brand_class=#{brandClass},
+            </if>
+            <if test="brandTag != null  ">
+                brand_tag=#{brandTag},
+            </if>
+            <if test="ssid != null  ">
+                ssid=#{ssid},
+            </if>
+            <if test="match != null  ">
+                match=#{match},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 品牌信息 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_POI_BRAND_WIFIPIX where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_POI_BRAND_WIFIPIX where id = #{id}
+    </delete>
+
+    <!-- 品牌信息 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_POI_BRAND_WIFIPIX
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询品牌信息列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_POI_BRAND_WIFIPIX
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+</mapper>

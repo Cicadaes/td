@@ -1,0 +1,29 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="youyu.dong" id="1505788200586-1">
+        <createTable tableName="OrganizationDim">
+            <column autoIncrement="true" name="id" type="BIGINT" remarks="主键">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="shop_code" remarks="店铺代码" type="varchar(60)"/>
+
+            <column name="shop" remarks="店铺" type="varchar(100)"/>
+
+            <column name="brand" remarks="品牌" type="varchar(100)"/>
+            <column name="region" remarks="大区" type="varchar(100)"/>
+            <column name="city" remarks="城市" type="varchar(100)"/>
+            <column name="province" remarks="省" type="varchar(100)"/>
+            <column name="channel" remarks="渠道" type="varchar(100)"/>
+            <column name="mall" remarks="商场" type="varchar(127)"/>
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,33 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	<changeSet author="ran.li" id="1490700822000-1">
+        	<createTable tableName="TD_PROJECT_INDEX" remarks="项目指标">
+        	        <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+               			<constraints primaryKey="true"/>
+            		</column>
+            		<column name="project_id" remarks="项目ID" type="int" />
+            		<column name="project_name" remarks="项目名称" type="varchar(128)" />
+            		<column name="project_type" remarks="项目类型" type="int" />
+            		<column name="project_num" remarks="店组ID" type="varchar(64)" />
+            		<column name="status" remarks="状态 1：生效，-1：失效" type="int" />
+					
+            		<column name="today_flow" remarks="今日客流" type="int" />
+            		<column name="seven_days_flow" remarks="7天客流" type="int" />
+            		<column name="thirty_days_flow" remarks="30天客流" type="int" />
+            		<column name="seven_chain" remarks="7天客流环比" type="int" />
+            		<column name="thirty_chain" remarks="30天客流环比" type="int" />
+					
+					<column name="create_by" remarks="创建者账号" type="varchar(32)" />
+            		<column name="creator" remarks="创建人" type="varchar(32)" />
+            		<column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                		<constraints nullable="false"/>
+					</column>
+            		<column name="update_by" remarks="修改者账号" type="varchar(50)" />
+					<column name="updater" remarks="修改人" type="varchar(50)" />
+            		<column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+					    <constraints nullable="false"/>
+            		</column>
+            </createTable>
+    </changeSet>
+   
+</databaseChangeLog>

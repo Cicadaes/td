@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.TenantSurroundingAreaCountDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.TenantSurroundingAreaCount">
+        <result column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="project_id" property="projectId"/>
+        <result column="crowd_id" property="crowdId"/>
+        <result column="longitude" property="longitude"/>
+        <result column="latitude" property="latitude"/>
+        <result column="poi_wid" property="poiWid"/>
+        <result column="run_date" property="runDate"/>
+        <result column="day_type" property="dayType"/>
+        <result column="metric_value" property="metricValue"/>
+        <result column="cycle_statistics" property="cycleStatistics"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+        <result column="area_name" property="areaName"/>
+        <result column="poi_type" property="poiType"/>
+    </resultMap>
+
+    <!-- TD_TENANT_SURROUNDING_AREA_COUNT table all fields -->
+    <sql id="Base_Column_List">
+        id,tenant_id,project_id,crowd_id,longitude,latitude,poi_wid,run_date,day_type,metric_value,cycle_statistics,start_date,end_date,area_name,poi_type
+    </sql>
+
+    <sql id="Base_Column_List_Alias">
+        sac.id,sac.tenant_id,sac.project_id,sac.crowd_id,sac.longitude,sac.latitude,sac.poi_wid,sac.run_date,sac.day_type,sac.metric_value,sac.cycle_statistics,sac.start_date,sac.end_date,sac.area_name,sac.poi_type
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="crowdId != null">
+                and crowd_id = #{crowdId}
+            </if>
+            <if test="longitude != null and longitude != ''">
+                and longitude = #{longitude}
+            </if>
+            <if test="latitude != null and latitude != ''">
+                and latitude = #{latitude}
+            </if>
+            <if test="poiWid != null and poiWid != ''">
+                and poi_wid = #{poiWid}
+            </if>
+            <if test="runDate != null and runDate != ''">
+                and run_date = #{runDate}
+            </if>
+            <if test="dayType != null and dayType != ''">
+                and day_type = #{dayType}
+            </if>
+            <if test="metricValue != null and metricValue != ''">
+                and metric_value = #{metricValue}
+            </if>
+            <if test="cycleStatistics != null and cycleStatistics != ''">
+                and cycle_statistics = #{cycleStatistics}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and start_date = #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and end_date = #{endDate}
+            </if>
+            <if test="areaName != null and areaName != ''">
+                and area_name = #{areaName}
+            </if>
+            <if test="poiType != null and poiType != ''">
+                and poi_type = #{poiType}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause_Alias">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and sac.id = #{id}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and sac.tenant_id = #{tenantId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and sac.project_id = #{projectId}
+            </if>
+            <if test="crowdId != null">
+                and sac.crowd_id = #{crowdId}
+            </if>
+            <if test="longitude != null and longitude != ''">
+                and sac.longitude = #{longitude}
+            </if>
+            <if test="latitude != null and latitude != ''">
+                and sac.latitude = #{latitude}
+            </if>
+            <if test="poiWid != null and poiWid != ''">
+                and sac.poi_wid = #{poiWid}
+            </if>
+            <if test="runDate != null and runDate != ''">
+                and sac.run_date = #{runDate}
+            </if>
+            <if test="dayType != null and dayType != ''">
+                and sac.day_type = #{dayType}
+            </if>
+            <if test="metricValue != null and metricValue != ''">
+                and sac.metric_value = #{metricValue}
+            </if>
+            <if test="cycleStatistics != null and cycleStatistics != ''">
+                and sac.cycle_statistics = #{cycleStatistics}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and sac.start_date = #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and sac.end_date = #{endDate}
+            </if>
+            <if test="areaName != null and areaName != ''">
+                and sac.area_name = #{areaName}
+            </if>
+            <if test="poiType != null and poiType != ''">
+                and sac.poi_type = #{poiType}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_TENANT_SURROUNDING_AREA_COUNT(id,tenant_id,project_id,crowd_id,longitude,latitude,poi_wid,run_date,day_type,metric_value,cycle_statistics,start_date,end_date,area_name,poi_type)
+        values(#{id},#{tenantId},#{projectId},#{crowdId},#{longitude},#{latitude},#{poiWid},#{runDate},#{dayType},#{metricValue},#{cycleStatistics},#{startDate},#{endDate},#{areaName},#{poiType})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_TENANT_SURROUNDING_AREA_COUNT set
+        tenant_id=#{tenantId},project_id=#{projectId},crowd_id=#{crowdId},longitude=#{longitude},latitude=#{latitude},poi_wid=#{poiWid},run_date=#{runDate},day_type=#{dayType},metric_value=#{metricValue},cycle_statistics=#{cycleStatistics},start_date=#{startDate},end_date=#{endDate},area_name=#{areaName},poi_type=#{poiType}
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_TENANT_SURROUNDING_AREA_COUNT set
+        <trim suffixOverrides=",">
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="crowdId != null  ">
+                crowd_id=#{crowdId},
+            </if>
+            <if test="longitude != null  ">
+                longitude=#{longitude},
+            </if>
+            <if test="latitude != null  ">
+                latitude=#{latitude},
+            </if>
+            <if test="poiWid != null  ">
+                poi_wid=#{poiWid},
+            </if>
+            <if test="runDate != null  ">
+                run_date=#{runDate},
+            </if>
+            <if test="dayType != null  ">
+                day_type=#{dayType},
+            </if>
+            <if test="metricValue != null  ">
+                metric_value=#{metricValue},
+            </if>
+            <if test="cycleStatistics != null  ">
+                cycle_statistics=#{cycleStatistics},
+            </if>
+            <if test="startDate != null  ">
+                start_date=#{startDate},
+            </if>
+            <if test="endDate != null  ">
+                end_date=#{endDate},
+            </if>
+            <if test="areaName != null  ">
+                area_name=#{areaName},
+            </if>
+            <if test="poiType != null  ">
+                poi_type=#{poiType},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 职住来源 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_TENANT_SURROUNDING_AREA_COUNT where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_TENANT_SURROUNDING_AREA_COUNT where id = #{id}
+    </delete>
+
+    <!-- 职住来源 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_TENANT_SURROUNDING_AREA_COUNT
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询职住来源列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_TENANT_SURROUNDING_AREA_COUNT
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        order by metric_value desc
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- 排除黑名单的职住来源 列表总数-->
+    <select id="queryByCountExcludeBlack" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_TENANT_SURROUNDING_AREA_COUNT sac
+        <include refid="Base_Where_Clause_Alias"/>
+        AND NOT EXISTS (SELECT sbl.store_name FROM TD_STORE_BLACK_LIST sbl WHERE sbl.tenant_id = sac.tenant_id AND
+        sbl.project_id = sac.project_id AND sbl.store_type = sac.poi_type AND sbl.status = '1' AND sbl.store_name =
+        sac.area_name)
+    </select>
+
+    <!-- 查询排除黑名单的职住来源列表 -->
+    <select id="queryByListExcludeBlack" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List_Alias"/>
+        from TD_TENANT_SURROUNDING_AREA_COUNT sac
+        <include refid="Base_Where_Clause_Alias"/>
+        AND NOT EXISTS (SELECT sbl.store_name FROM TD_STORE_BLACK_LIST sbl WHERE sbl.tenant_id = sac.tenant_id AND
+        sbl.project_id = sac.project_id AND sbl.store_type = sac.poi_type AND sbl.status = '1' AND sbl.store_name =
+        sac.area_name)
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        order by sac.metric_value desc
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- queryLatestRow -->
+    <select id="queryLatestRow" resultMap="BaseResultMap" parameterType="Object">
+        select * from TD_TENANT_SURROUNDING_AREA_COUNT t
+        <where>
+            1=1
+            <if test="poiType != null and poiType != ''">
+                and poi_type = #{poiType}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="crowdId != null">
+                and crowd_id = #{crowdId}
+            </if>
+            <if test=" cycleStatistics != null and cycleStatistics != '' ">
+                AND t.cycle_statistics = #{cycleStatistics}
+            </if>
+            <if test=" runDate != null and runDate != '' ">
+                <![CDATA[ AND t.run_date <= #{runDate}]]>
+            </if>
+        </where>
+        order by run_date desc limit 1;
+    </select>
+</mapper>

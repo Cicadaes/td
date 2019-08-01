@@ -1,0 +1,188 @@
+@charset "utf-8";
+
+/*快速搜索框*/
+
+.icons-search {
+    background: url(../../images/icons-search.png) no-repeat;
+    display: inline-block;
+}
+
+.icon-search-arrow-down {
+    width: 10px;
+    height: 5px;
+    background-position: 0 0;
+    cursor: pointer;
+}
+
+.icon-search-arrow-up {
+    width: 10px;
+    height: 5px;
+    background-position: 0 -16px;
+    cursor: pointer;
+}
+
+.fast-search-box {
+    position: relative;
+    float: left;
+}
+
+.fast-search-box .form-control {
+    padding-right: 27px;
+    float: left;
+    width: 400px;
+}
+
+.fast-search-box .icon-clear {
+    position: absolute;
+    right: 75px;
+    top: 13px;
+}
+
+.switch-more-search {
+    margin: 5px 0 0 10px;
+    float: left;
+}
+
+.switch-more-search a {
+    color: #5f93e1;
+}
+
+.switch-more-search .icons-search {
+    margin-left: 5px;
+}
+
+/*高级搜索框*/
+.more-search-box {
+    background: #fff;
+    border: 1px solid #e7ebef;
+    border-bottom: 1px solid #fff;
+    padding: 10px 10px 10px 10px;
+    position: relative;
+}
+
+.more-search-box > ul {
+    margin: 0;
+    padding-right: 160px;
+}
+
+.more-search-box .btns-box {
+    position: absolute;
+    right: 0;
+    top: 10%;
+    margin: 0;
+    width: 250px;
+    height: 80%;
+    border-left: 1px dashed #ccc;
+    text-align: center;
+}
+
+.more-search-box .btns {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -13px;
+    width: 210px;
+    margin-left: -55px;
+}
+
+.more-search-box .btns button {
+    height: 25px;
+    line-height: 25px;
+    padding: 0 10px;
+    margin: 0 2px;
+}
+
+.more-search-box > ul > li {
+    float: left;
+    width: 290px;
+    margin: 0 0 10px 0;
+}
+
+.more-search-box .label {
+    color: #666;
+    float: left;
+    margin: 0;
+    padding: 0 10px;
+    line-height: 25px;
+    font-weight: normal;
+    font-size: 12px;
+    width: 92px;
+    text-align: right;
+}
+
+.more-search-box .form-control {
+    height: 25px;
+    padding: 0 5px;
+}
+
+.date-condition {
+    position: relative;
+    min-width: 190px !important;
+    padding: 0 4px;
+}
+
+.date-condition .popover {
+    left: 0 !important;
+}
+
+.date-condition-right .popover {
+    left: auto !important;
+    right: 0 !important;
+    margin-bottom: 20px;
+}
+
+.date-condition .time {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    padding: 5px 0 0 0;
+}
+
+.date-condition .time i {
+    vertical-align: top;
+    margin-top: 5px !important;
+}
+
+.date-condition .time .glyphicon-chevron-down {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.date-condition .time span {
+    margin-top: 3px;
+    margin-right: 3px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.date-condition .form-actions span b {
+    padding: 5px;
+}
+
+.more-search-box .date-condition .time {
+    padding-top: 0;
+}
+
+.more-search-box .form-date {
+    width: 80px !important;
+    max-width: 80px !important;
+    min-width: 80px !important;
+}
+
+.more-search-box .control {
+    float: left;
+    width: 190px;
+}
+
+.more-search-box .control > span {
+    line-height: 25px;
+}
+
+/*ng-table*/
+.icon-clear {
+    background: url(../../images/icon-clear.png) no-repeat;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+}

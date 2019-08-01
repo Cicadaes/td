@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.BatchRecordDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.BatchRecord">
+        <result column="id" property="id"/>
+        <result column="batch_id" property="batchId"/>
+        <result column="project_id" property="projectId"/>
+        <result column="room_id" property="roomId"/>
+        <result column="batch_name" property="batchName"/>
+        <result column="batch_flow_name" property="batchFlowName"/>
+        <result column="batch_start_time" property="batchStartTime"/>
+        <result column="batch_end_time" property="batchEndTime"/>
+        <result column="status" property="status"/>
+        <result column="calculate_date" property="calculateDate"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- TD_BATCH_RECORD table all fields -->
+    <sql id="Base_Column_List">
+        id,batch_id,project_id,room_id,batch_name,batch_flow_name,batch_start_time,batch_end_time,status,calculate_date,create_time,update_time
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="batchId != null and batchId != ''">
+                and batch_id = #{batchId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="roomId != null and roomId != ''">
+                and room_id = #{roomId}
+            </if>
+            <if test="batchName != null and batchName != ''">
+                and batch_name = #{batchName}
+            </if>
+            <if test="batchFlowName != null and batchFlowName != ''">
+                and batch_flow_name = #{batchFlowName}
+            </if>
+            <if test="batchStartTime != null and batchStartTime != ''">
+                and batch_start_time = #{batchStartTime}
+            </if>
+            <if test="batchEndTime != null and batchEndTime != ''">
+                and batch_end_time = #{batchEndTime}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="calculateDate != null and calculateDate != ''">
+                and calculate_date = #{calculateDate}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_BATCH_RECORD(id,batch_id,project_id,room_id,batch_name,batch_flow_name,batch_start_time,batch_end_time,status,calculate_date,create_time,update_time)
+        values(#{id},#{batchId},#{projectId},#{roomId},#{batchName},#{batchFlowName},#{batchStartTime},#{batchEndTime},#{status},#{calculateDate},now(),now())
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_BATCH_RECORD set
+        batch_id=#{batchId},project_id=#{projectId},room_id=#{roomId},batch_name=#{batchName},batch_flow_name=#{batchFlowName},batch_start_time=#{batchStartTime},batch_end_time=#{batchEndTime},status=#{status},calculate_date=#{calculateDate},create_time=now(),update_time=now()
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_BATCH_RECORD set
+        <trim suffixOverrides=",">
+            <if test="batchId != null  ">
+                batch_id=#{batchId},
+            </if>
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="roomId != null  ">
+                room_id=#{roomId},
+            </if>
+            <if test="batchName != null  ">
+                batch_name=#{batchName},
+            </if>
+            <if test="batchFlowName != null  ">
+                batch_flow_name=#{batchFlowName},
+            </if>
+            <if test="batchStartTime != null  ">
+                batch_start_time=#{batchStartTime},
+            </if>
+            <if test="batchEndTime != null  ">
+                batch_end_time=#{batchEndTime},
+            </if>
+            <if test="status != null  ">
+                status=#{status},
+            </if>
+            <if test="calculateDate != null  ">
+                calculate_date=#{calculateDate},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updateTime != null  ">
+                update_time=#{updateTime},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 调用批处理任务记录表 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_BATCH_RECORD where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_BATCH_RECORD where id = #{id}
+    </delete>
+
+    <!-- 调用批处理任务记录表 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_BATCH_RECORD
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询调用批处理任务记录表列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_BATCH_RECORD
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+
+    <select id="findAll" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_BATCH_RECORD
+        <include refid="Base_Where_Clause"/>
+    </select>
+</mapper>

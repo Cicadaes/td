@@ -1,0 +1,64 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1491968855000-1" author="ran.li">
+        <update tableName="TD_PROJECT">
+            <column name="project_type" type="int(2)" remarks="项目归属大类，如店组1、店铺2、竞品-1"/>
+        </update>
+    </changeSet>
+
+    <changeSet id="1491968855000-2" author="ran.li">
+        <dropColumn tableName="TD_PROJECT" columnName="type_flag"/>
+    </changeSet>
+
+    <changeSet id="1491968855000-3" author="ran.li">
+        <addColumn tableName="TD_PROJECT">
+            <column name="category" type="varchar(255)" remarks="项目类别细分"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="1491968855000-4" author="ran.li">
+        <addColumn tableName="TD_PROJECT">
+            <column name="brand" type="varchar(255)" remarks="品牌"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet author="ran.li" id="1492049605000-1">
+        <createTable tableName="TD_PROJECT_USER_RELATION" remarks="用户项目关系表">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="project_id" remarks="项目id" type="varchar(127)" />
+            <column name="login" remarks="登录用户" type="varchar(255)" />
+            <column name="status" remarks="状态" type="int" />
+            <column name="type" remarks="1.最爱 2.置顶等" type="int" />
+            <column name="order_index" remarks="序号" type="int(31)" />
+
+            <column name="create_by" remarks="创建者账号" type="varchar(128)" />
+            <column name="creator" remarks="创建人" type="varchar(128)" />
+            <column name="create_time" remarks="创建时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改者账号" type="varchar(128)" />
+            <column name="updater" remarks="修改人" type="varchar(128)" />
+            <column name="update_time" remarks="修改时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="ran.li" id="1491848606000-1">
+        <addUniqueConstraint
+                columnNames="sensor_mac, status"
+                constraintName="sensor_unique_name"
+                tableName="TD_SENSOR"/>
+    </changeSet>
+
+    <changeSet author="ran.li" id="1491848606000-2">
+        <addUniqueConstraint
+                columnNames="sensor_mac, status"
+                constraintName="sensor_unique_name"
+                tableName="TD_SENSOR_INSTALL_INFO"/>
+    </changeSet>
+
+</databaseChangeLog>

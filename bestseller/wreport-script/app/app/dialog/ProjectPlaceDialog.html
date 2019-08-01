@@ -1,0 +1,52 @@
+<div class="modal" id="projectPlaceDialog" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-target" role="document" style="width:790px">
+        <div class="modal-content">
+            <div class="modal-header" ng-drag-dialog="true">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">{{title}}{{constants.label_space}}{{constants.table_place}}</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal clrfix">
+                    <div style="width:420px;float:left;">
+                        <div class="control-group">
+                            <label class="control-label">{{constants.field_projectPlace_placeName}}</label>
+                            <div class="controls">
+                                <input class="form-control" type="text" placeholder="{{constants.prompt_placeDialog_name}}" required ng-model="projectPlace.placeName" style="width: 245px;text-align: left;">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">{{constants.field_projectPlace_description}}</label>
+                            <div class="controls">
+								<textarea name="" cols="" rows="" class="form-control textarea_style" style="text-align: left;font-size: 12px;"
+                                          placeholder="{{constants.prompt_placeDialog_description}}" ng-model="projectPlace.description"></textarea>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">{{constants.field_projectPlace_picture}}</label>
+                            <div class="controls">
+                                <div style="margin-left: -5px;width: 250px;box-shadow: 0 !important;-webkit-box-shadow: 0 !important;" class="choose_pic_1 tcc_upload"
+                                     ngf-select ngf-change="import_file_pic($files,projectPlace)" accept="image/png,image/jpeg" ngf-multiple="true" ngf-max-size="'5MB'" ng-model="projectPlace.file">
+                                    <p><span class="zy_icon"></span>{{constants.btn_choose_picture}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="float:right" class="tcc_con_r">
+                        <div class="tcc_pic">
+                            <!-- 默认图片 -->
+                            <img ng-if="projectPlace.picUrl==null" class="tcc_picture" src="" ng-src="images/small_picture.png">
+                            <!-- 已有图片 -->
+                            <img ng-if="projectPlace.picUrl!=null" class="tcc_picture" src="" ng-src="pic/{{projectPlace.picUrl}}">
+                        </div>
+                        <p><strong>{{constants.explain_upload_pictit}}</strong></p>
+                        <p>{{constants.explain_upload_pic}}</p>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary"  ng-click="saveProjectPlace(projectPlace)">{{constants.label_save}}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{constants.label_cancel}}</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="ran.li" id="1494483415000-1">
+        <createTable tableName="TD_INSTALL_INFO" remarks="安装归属表">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="tenant_id" remarks="租户id" type="varchar(31)"/>
+            <column name="project_id" remarks="归属项目id" type="BIGINT" />
+            <column name="project_place_id" remarks="归属场地id" type="BIGINT" />
+            <column name="related_id" remarks="关联id" type="BIGINT" />
+            <column name="related_type" remarks="关联类型" type="int(11)" />
+            <column name="related_attribute" remarks="关联属性" type="varchar(127)"/>
+
+            <column name="longitude" remarks="经度" type="varchar(127)" />
+            <column name="latitude" remarks="维度" type="varchar(127)" />
+            <column name="description" remarks="位置描述" type="varchar(255)" />
+
+            <column name="status" type="int(2)" remarks="状态:1 安装/-1 拆除" />
+            <column name="create_by" remarks="创建者账号" type="varchar(127)" />
+            <column name="creator" remarks="创建人" type="varchar(127)" />
+            <column name="create_time" remarks="创建时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改者账号" type="varchar(127)" />
+            <column name="updater" remarks="修改人" type="varchar(127)" />
+            <column name="update_time" remarks="修改时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- TODO 从TD_Sensor_Install_Info导入数据后删除该表-->
+
+</databaseChangeLog>

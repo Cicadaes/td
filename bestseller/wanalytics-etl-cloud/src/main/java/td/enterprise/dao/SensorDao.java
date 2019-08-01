@@ -1,0 +1,1 @@
+package td.enterprise.dao;import td.enterprise.entity.Sensor;public interface SensorDao extends BaseDao<Sensor> {}

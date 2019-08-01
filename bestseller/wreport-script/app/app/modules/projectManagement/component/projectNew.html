@@ -1,0 +1,162 @@
+<!-- 导航条 -->
+<div class="nav_bar_top" >
+    <span class = "nav_bar_normal nav_bar_btn" ng-click="goProjectManagement()">项目管理</span>
+    <span class = "nav_bar_normal"> > </span>
+    <span>添加项目</span>
+</div>
+
+<!-- 模块划分 -->
+<div style="padding: 0 20px 20px; margin-top: 20px;" id="smallscreen_wap">
+    <div id="smallscreen" style="overflow-y:auto; overflow-x: hidden;margin-right: -20px; padding-right: 16px;">
+        <form class="form-horizontal clrfix" >
+            <!-- 负责人设置 -->
+            <div class="form-horizontal-panel model_panel" style="overflow: hidden;width: 100%;">
+                <div class="shopGroupTit">项目信息</div>
+                <!-- 店铺名称 -->
+                <div class="control-group">
+                    <label class="customProjectLabel">项目名称</label>
+                    <div class="controls shopGinform_wap" style="width:250px;">
+                        <input ng-change="name_()" class="customProjectInput" type="text" placeholder="{{constants.label_input_content}}" maxlength='12' required ng-model="project.projectName" ><br>
+                        <span style="right: 10px;"><input disabled="disabled" style="background:#fff;border: 0;width: 24px;text-align: right;height: 30px;margin-top:-3px; " ng-model="projectNameLength" title=""/>/12</span>
+                    </div>
+                </div>
+                <!-- 店铺ID -->
+                <div class="control-group" style="position: relative;">
+                    <label class="customProjectLabel">Shop Code</label>
+                    <div class="controls shopGinform_wap" style="width:250px;">
+                        <input ng-change="id_()" class="customProjectInput" type="text" placeholder="{{constants.label_input_content}}" maxlength='12' required ng-model="project.projectNum" ><br>
+                        <span style="right: 10px;"><input disabled="disabled" style="background:#fff;border:none;width: 30px;text-align: right;height: 29px; margin-top:-4px; " ng-model="projectNumLength" title=""/>/12</span>
+                    </div>
+                </div>
+                <!-- 门址信息 -->
+                <div class="control-group" style="position: relative;">
+                    <label class = "customProjectLabel">门址信息</label>
+                    <div class="controls shopGinform_wap" style="width:450px;">
+                        <input ng-change="address_()" class="customProjectInput" style = "width: 450px" type="text" placeholder="{{constants.label_input_content}}" maxlength='30' required ng-model="project.projectPosition" ><br>
+                        <span style="right: 10px;"><input disabled="disabled" style="background:#fff;border:none;width: 30px;text-align: right;height: 29px; margin-top:-4px; " ng-model="projectPositionLength" title=""/>/30</span>
+                    </div>
+                </div>
+                <!-- 上游 -->
+                <div class="control-group" style="osition: relative;">
+                    <label class="customProjectLabel">上游</label>
+                    <div class="controls shopGinform_wap">N/A</div>
+                </div>
+
+                <!-- 下游 -->
+                <div class="control-group" style="position: relative;">
+                    <label class="customProjectLabel">下游</label>
+                    <!-- 店组分配 -->
+                    <div class="form-horizontal-panel model_panel" style="overflow: hidden;height: 345px;border: none;">
+                        <!-- 分配 -->
+                        <div style="overflow: hidden;margin-left: -16px;margin-top: -4px;" >
+                            <!-- 左边 -->
+                            <div class="distribu_shop" style="float: left; margin-left:18px;">
+                                <!-- 分配操作框 -->
+                                <div class="shop_data_wap">
+                                    <!-- title -->
+                                    <div class="shop_data_tit">
+                                        <!-- 全选按钮 -->
+                                        <!--<div class="checkall">
+                                            <span id="checkall1" class="checkall_" ng-click="check_all1($event)"></span>
+                                            {{constants.btn_project_chooseall}}
+                                        </div>-->
+                                        <!--  搜索框  -->
+                                        <div class="projectNewSearch" style="float: left;width: 50%;">
+                                            <input placeholder="键入检索词" ng-model = "byprojectName" ng-change="setKeyUp($event)">
+                                        </div>
+                                        <!-- 总计 -->
+                                        <div class="data_all">
+                                            {{constants.label_total}}：
+                                            <span ng-bind="leftGLength">304</span>
+                                        </div>
+                                    </div>
+                                    <!-- 数据 -->
+                                    <div class="shop_data">
+                                        <!-- 数据列表 -->
+                                        <div class="shop_data_list" style="height: 278px;">
+                                            <h3 class="shop_data_list_tit">
+                                                <!-- 全选按钮 -->
+                                                <span id="checkall1" class="checkall_ checkallSpan" ng-click="check_all1($event)"></span>
+                                                <div class="checkall shop_data_list_tit_one" >
+                                                    {{constants.btn_project_chooseall}}
+                                                </div>
+                                                <div class = "shop_data_list_tit_one" >Shop Code</div>
+                                                <div class = "shop_data_list_tit_one" >所属</div>
+                                            </h3>
+                                            <ul class="shopdatalist" style="overflow-y:auto; overflow-x: hidden;width: 100%; height: 230px;">
+                                                <li ng-repeat="one in list">
+                                                    <span class="check_one " ng-click="check_one1(one,$event)"></span>
+                                                    <span class = "shopdatalistone" ng-bind="one.projectName" ></span>
+                                                    <span class = "shopdatalistone" ng-bind="one.projectNum" ></span>
+                                                    <span class = "shopdatalistone" ng-bind="one.projectParentName"></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 中间 -->
+                            <div class="middle_content">
+                                <span class="go_right" ng-click="moveRight()">&gt;</span>
+                                <span class="go_left" ng-click="moveLeft()">&lt;</span>
+                            </div>
+                            <!-- 右边  -->
+                            <div class="below_shop_wap">
+                                <!-- 分配操作框 -->
+                                <div class="shop_data_wap" style="float: right;">
+                                    <!-- title -->
+                                    <div class="shop_data_tit">
+                                        <!-- 全选按钮 -->
+                                        <!--<div class="checkall">
+                                            <span id="checkall2" class="checkall_" ng-click="check_all2($event)"></span>
+                                            {{constants.btn_project_chooseall}}
+                                        </div>-->
+                                        <!--  搜索框  -->
+                                        <div class="projectNewSearch" style="float: left;width: 50%;">
+                                            <input placeholder="键入检索词" ng-model = "name">
+                                        </div>
+                                        <!-- 总计 -->
+                                        <div class="data_all">
+                                            {{constants.label_total}}：
+                                            <span ng-bind="rightGright">304</span>
+                                        </div>
+                                    </div>
+                                    <!-- 数据 -->
+                                    <div class="shop_data">
+                                        <!-- 数据列表 -->
+                                        <div class="shop_data_list" style="height: 278px;">
+                                            <h3 class="shop_data_list_tit">
+                                                <!-- 全选按钮 -->
+                                                <span id="checkall2" class="checkallSpan checkall_" ng-click="check_all2($event)"></span>
+                                                <div class="checkall shop_data_list_tit_one" >
+                                                    已选下游
+                                                </div>
+                                                <div class = "shop_data_list_tit_one" >Shop Code</div>
+                                                <div class = "shop_data_list_tit_one" >所属</div>
+                                            </h3>
+                                            <ul id="sonAll" class="shopdatalist" style="overflow-y:auto; overflow-x: hidden;width: 100%; height: 230px;">
+                                                <li ng-repeat="one in listR | filter:{projectName:name}" data-id="{{one.id}}">
+                                                    <span class="check_one " ng-click="check_one2(one,$event)"></span>
+                                                    <span class = "shopdatalistone" ng-bind="one.projectName" ></span>
+                                                    <span class = "shopdatalistone" ng-bind="one.projectNum" ></span>
+                                                    <span class = "shopdatalistone" ng-bind="one.projectParentName"></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="form-horizontal-btns clrfix">
+            <button type="button" class="form-btn btn-blue-hg35 btn-blue-hg36" ng-click="saveProject(project)">{{constants.btn_project_createsave}}</button>
+            <a ng-click="goProjectManagement()" class="bform-btn btn-white-hg35" style="width: 135px;">{{constants.btn_project_createcancle}}</a>
+        </div>
+    </div>
+
+</div>
+

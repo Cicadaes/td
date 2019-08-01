@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>WIFI COLLECTOR SWITCH</title>
+    <script type="text/javascript" src="libs/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+        var switch_ = function (id) {//0-off,1-on
+            if (id == 0) {
+                if (!confirm("确认暂停?")) {
+                    return;
+                }
+            } else {
+                if (!confirm("确认开启?")) {
+                    return;
+                }
+            }
+            $.get('kafka/switch?action=1&switch=' + id, function (data) {
+                if(data == 'succ'){
+                    alert("操作完成");
+                }else{
+                    alert("操作失败!");
+                }
+                onload();
+            });
+        };
+
+        var mac_switch_ = function (id) {//0-off,1-on
+            if (id == 0) {
+                if (!confirm("确认暂停?")) {
+                    return;
+                }
+            } else {
+                if (!confirm("确认开启?")) {
+                    return;
+                }
+            }
+            $.get('macfilter/switch?action=1&switch=' + id, function (data) {
+                if(data == 'succ'){
+                    alert("操作完成");
+                }else{
+                    alert("操作失败!");
+                }
+                onload();
+            });
+        };
+
+        var onload = function () {
+            $.get('kafka/switch?action=0', function (data) {
+                if (data == 'true') {
+                    $("#open_status").show();
+                    $("#close_status").hide();
+                    $("#close_button").show();
+                    $("#open_button").hide();
+                } else {
+                    $("#open_status").hide();
+                    $("#close_status").show();
+                    $("#close_button").hide();
+                    $("#open_button").show();
+                }
+            });
+
+            $.get('macfilter/switch?action=0', function (data) {
+                if (data == 'true') {
+                    $("#mac_open_status").show();
+                    $("#mac_close_status").hide();
+                    $("#mac_close_button").show();
+                    $("#mac_open_button").hide();
+                } else {
+                    $("#mac_open_status").hide();
+                    $("#mac_close_status").show();
+                    $("#mac_close_button").hide();
+                    $("#mac_open_button").show();
+                }
+            });
+        };
+    </script>
+</head>
+<body>
+<div onload="onload()">
+    <h3 style="display: none" id="open_status">Queue Reader 当前状态: Open</h3>
+    <h3 style="display: none" id="close_status">Queue Reader 当前状态: Close</h3>
+    <a id="close_button" style="display: none;" href="javascript:void(0)" onclick="switch_(0)">暂停</a>
+    <a id="open_button" style="display: none;" href="javascript:void(0)" onclick="switch_(1)">开启</a>
+    <br/>
+    <h3 style="display: none" id="mac_open_status">Mac白名单过滤: Open</h3>
+    <h3 style="display: none" id="mac_close_status">Mac白名单过滤: Close</h3>
+    <a id="mac_close_button" style="display: none;" href="javascript:void(0)" onclick="mac_switch_(0)">暂停</a>
+    <a id="mac_open_button" style="display: none;" href="javascript:void(0)" onclick="mac_switch_(1)">开启</a>
+</div>
+</body>
+</html>

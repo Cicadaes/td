@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.MacCompanyDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.MacCompany" >
+        <result column="mac" property="mac"/>
+        <result column="company" property="company"/>
+        <result column="is_mobile" property="isMobile"/>
+    </resultMap>
+
+    <!-- TD_PROJECT table all fields -->
+    <sql id="Base_Column_List" >
+        mac,company,is_mobile
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="mac != null and mac != ''">
+                and mac = #{mac}
+            </if>
+            <if test="isMobile != null and isMobile != ''" >
+                and is_mobile =  #{isMobile}
+            </if>
+            <if test="company != null and company != ''" >
+                and company =  #{company}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 查询项目列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_MAC_COMPANY
+        <include refid="Base_Where_Clause"/>
+    </select>
+    <!-- 查询map
+
+    <select id="queryByList" resultType="java.util.Map" parameterType="Object">
+        select
+        mac || '_' || company,is_mobile
+        from TD_MAC_COMPANY
+        <include refid="Base_Where_Clause"/>
+    </select>
+     -->
+
+    <insert id="insert" parameterType="Object">
+        insert into TD_MAC_COMPANY(mac,company,is_mobile ) values (#{mac},#{company},#{isMobile})
+    </insert>
+
+</mapper>

@@ -1,0 +1,3 @@
+#CopyFileToHDFSJob.job
+type=command
+command=bash -x /home/hadoop/wanalytics/etl/bin/CopyFileToHDFSJob.sh  -schedulerTaskLogId "${schedule.task.log.id}" -runDate "${azkaban.flow.start.year}-${azkaban.flow.start.month}-${azkaban.flow.start.day}" -hour "${azkaban.flow.start.hour}" -reRun "false"

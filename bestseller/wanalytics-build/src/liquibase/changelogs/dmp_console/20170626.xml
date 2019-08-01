@@ -1,0 +1,36 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="ran.li" id="1498460075000-1">
+        <createTable tableName="TD_AUDIT_LOG" remarks="审计日志表">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="system_code" remarks="所属子系统" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" remarks="创建时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="actor_umId" remarks="执行人umid" type="varchar(64)" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="actor_name" remarks="执行人姓名" type="varchar(64)" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="operation_type" remarks="操作类型，业务系统自己定义" type="varchar(10)" />
+            <column name="target_type" remarks="目标类型，业务系统自己定义" type="varchar(32)" />
+            <column name="target_id" remarks="目标的Id" type="varchar(64)" />
+            <column name="result" remarks="操作结果，业务系统自己定义" type="varchar(10)"/>
+            <column name="description" remarks="描述" type="text"/>
+            <column name="tenant_id" remarks="租户Id" type="varchar(32)"/>
+            <column name="project_id" remarks="项目Id" type="varchar(32)"/>
+            <column name="before_value" remarks="执行前参数json值" type="varchar(2048)"/>
+            <column name="after_value" remarks="执行后参数json值" type="varchar(2048)"/>
+            <column name="exception" remarks="异常信息" type="varchar(2048)"/>
+            <column name="return_value" remarks="返回值" type="varchar(2048)"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

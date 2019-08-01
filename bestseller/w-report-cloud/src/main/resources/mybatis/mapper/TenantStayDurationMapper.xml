@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.TenantStayDurationDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.TenantStayDuration">
+        <result column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="project_id" property="projectId"/>
+        <result column="date" property="date"/>
+        <result column="stay_users" property="stayUsers"/>
+        <result column="new_users" property="newUsers"/>
+        <result column="old_users" property="oldUsers"/>
+        <result column="stay_duration" property="stayDuration"/>
+        <result column="new_duration" property="newDuration"/>
+        <result column="old_duration" property="oldDuration"/>
+        <result column="average_stay_duration" property="averageStayDuration"/>
+        <result column="average_new_duration" property="averageNewDuration"/>
+        <result column="average_old_duration" property="averageOldDuration"/>
+    </resultMap>
+
+    <!-- TD_TENANT_STAY_DURATION table all fields -->
+    <sql id="Base_Column_List">
+        id,tenant_id,project_id,date,stay_users,new_users,old_users,stay_duration,new_duration,old_duration,average_stay_duration,average_new_duration,average_old_duration
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="date != null and date != ''">
+                and date = #{date}
+            </if>
+            <if test="stayUsers != null and stayUsers != ''">
+                and stay_users = #{stayUsers}
+            </if>
+            <if test="newUsers != null and newUsers != ''">
+                and new_users = #{newUsers}
+            </if>
+            <if test="oldUsers != null and oldUsers != ''">
+                and old_users = #{oldUsers}
+            </if>
+            <if test="stayDuration != null and stayDuration != ''">
+                and stay_duration = #{stayDuration}
+            </if>
+            <if test="newDuration != null and newDuration != ''">
+                and new_duration = #{newDuration}
+            </if>
+            <if test="oldDuration != null and oldDuration != ''">
+                and old_duration = #{oldDuration}
+            </if>
+            <if test="averageStayDuration != null and averageStayDuration != ''">
+                and average_stay_duration = #{averageStayDuration}
+            </if>
+            <if test="averageNewDuration != null and averageNewDuration != ''">
+                and average_new_duration = #{averageNewDuration}
+            </if>
+            <if test="averageOldDuration != null and averageOldDuration != ''">
+                and average_old_duration = #{averageOldDuration}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_TENANT_STAY_DURATION(id,tenant_id,project_id,date,stay_users,new_users,old_users,stay_duration,new_duration,old_duration,average_stay_duration,average_new_duration,average_old_duration)
+        values(#{id},#{tenantId},#{projectId},#{date},#{stayUsers},#{newUsers},#{oldUsers},#{stayDuration},#{newDuration},#{oldDuration},#{averageStayDuration},#{averageNewDuration},#{averageOldDuration})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_TENANT_STAY_DURATION set
+        tenant_id=#{tenantId},project_id=#{projectId},date=#{date},stay_users=#{stayUsers},new_users=#{newUsers},old_users=#{oldUsers},stay_duration=#{stayDuration},new_duration=#{newDuration},old_duration=#{oldDuration},average_stay_duration=#{averageStayDuration},average_new_duration=#{averageNewDuration},average_old_duration=#{averageOldDuration}
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_TENANT_STAY_DURATION set
+        <trim suffixOverrides=",">
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="date != null  ">
+                date=#{date},
+            </if>
+            <if test="stayUsers != null  ">
+                stay_users=#{stayUsers},
+            </if>
+            <if test="newUsers != null  ">
+                new_users=#{newUsers},
+            </if>
+            <if test="oldUsers != null  ">
+                old_users=#{oldUsers},
+            </if>
+            <if test="stayDuration != null  ">
+                stay_duration=#{stayDuration},
+            </if>
+            <if test="newDuration != null  ">
+                new_duration=#{newDuration},
+            </if>
+            <if test="oldDuration != null  ">
+                old_duration=#{oldDuration},
+            </if>
+            <if test="averageStayDuration != null  ">
+                average_stay_duration=#{averageStayDuration},
+            </if>
+            <if test="averageNewDuration != null  ">
+                average_new_duration=#{averageNewDuration},
+            </if>
+            <if test="averageOldDuration != null  ">
+                average_old_duration=#{averageOldDuration},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 项目新老客停留时长 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_TENANT_STAY_DURATION where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_TENANT_STAY_DURATION where id = #{id}
+    </delete>
+
+    <!-- 项目新老客停留时长 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_TENANT_STAY_DURATION
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询项目新老客停留时长列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_TENANT_STAY_DURATION
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- 查询项目新老客停留时长列表 -->
+    <select id="queryList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_TENANT_STAY_DURATION
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="start != null and start != ''">
+                and date >= #{start}
+            </if>
+            <if test="end != null and end != ''">
+                and date <![CDATA[ <= ]]> #{end}
+            </if>
+        </trim>
+    </select>
+
+    <delete id="batchDeleteByProjectAndDate" parameterType="Object">
+        delete from TD_TENANT_STAY_DURATION where project_id = #{projectId} and date = #{date}
+    </delete>
+
+    <insert id="batchSelectAndInsert" useGeneratedKeys="true" parameterType="java.util.List">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO TD_TENANT_STAY_DURATION(tenant_id, project_id, date, stay_users, new_users, old_users,
+        stay_duration, new_duration, old_duration, average_stay_duration, average_new_duration, average_old_duration)
+        SELECT t.tenant_id, d.project_id, t.date, t.stay_users, t.new_users, t.old_users, t.stay_duration,
+        t.new_duration, t.old_duration, t.average_stay_duration, t.average_new_duration, t.average_old_duration
+        FROM
+        (SELECT s.tenant_id, s.date, SUM(IFNULL(s.stay_users,0)) AS stay_users, SUM(IFNULL(s.new_users,0)) AS new_users,
+        SUM(IFNULL(s.old_users,0)) AS old_users, SUM(IFNULL(s.stay_duration,0)) AS stay_duration,
+        SUM(IFNULL(s.new_duration,0)) AS new_duration, SUM(IFNULL(s.old_duration,0)) AS old_duration,
+        AVG(IFNULL(s.average_stay_duration,0)) AS average_stay_duration, AVG(IFNULL(s.average_new_duration,0)) AS
+        average_new_duration, AVG(IFNULL(s.average_old_duration,0)) AS average_old_duration
+        FROM TD_TENANT_STAY_DURATION s
+        WHERE s.project_id IN (
+        SELECT r.project_id FROM TD_PROJECT_RELATION r
+        WHERE r.project_parent_id = #{projectId})
+        AND s.date = #{date}
+        GROUP BY s.tenant_id, s.date
+        )t,
+        (SELECT DISTINCT project_parent_id AS project_id FROM TD_PROJECT_RELATION WHERE project_parent_id = #{projectId}
+        )d
+    </insert>
+
+</mapper>

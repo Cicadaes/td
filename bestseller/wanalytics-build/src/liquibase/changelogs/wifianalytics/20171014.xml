@@ -1,0 +1,254 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="yinglei.li" id="1507990199236-1">
+        <createTable tableName="TD_BS_SHOP" remarks="绫致店铺">
+            <column autoIncrement="true" name="id" type="BIGINT UNSIGNED" remarks="主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="shop_id" remarks="店铺ID" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="shop_code" remarks="绫致店铺四位编码" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="shop_name" remarks="绫致店铺名称" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="provice" remarks="省" type="varchar(100)"/>
+            <column name="city" remarks="市" type="varchar(100)"/>
+            <column name="area" remarks="区" type="varchar(100)"/>
+            <column name="address" remarks="街道等其他详细地址信息" type="varchar(200)"/>
+            <column name="phone" remarks="电话" type="varchar(20)"/>
+            <column name="scenario_name" remarks="场景名称" type="varchar(100)"/>
+            <column name="brand" remarks="品牌" type="varchar(20)"/>
+            <column name="shop_status" remarks="店铺状态" type="int(2)"/>
+            <column name="create_time" remarks="创建时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_time" remarks="修改时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="yinglei.li" id="1507990199236-2">
+        <createTable tableName="TD_BS_DEVICE_RLT" remarks="绫致店铺与设备关系(AP、小贝))">
+            <column autoIncrement="true" name="id" type="BIGINT UNSIGNED" remarks="主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="dev_sn" remarks="设备序列号" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="dev_model" remarks="设备型号" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="shop_id" remarks="店铺ID" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="dev_type" remarks="设备类型" type="varchar(20)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="aliasname" remarks="设备别名" type="varchar(100)"/>
+            <column name="create_time" remarks="创建时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_time" remarks="修改时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="yinglei.li" id="1507990199236-3">
+        <createTable tableName="TD_BS_DEVICE" remarks="绫致店铺设备（AC、小贝）">
+            <column autoIncrement="true" name="id" type="BIGINT UNSIGNED" remarks="主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="dev_sn" remarks="设备序列号" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="dev_name" remarks="设备名称" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="dev_hard_version" remarks="设备当前硬件版本信息" type="varchar(100)"/>
+            <column name="dev_soft_version" remarks="设备当前软件版本信息" type="varchar(100)"/>
+            <column name="dev_mode" remarks="设备型号" type="varchar(100)"/>
+            <column name="dev_type" remarks="设备类型" type="varchar(20)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="dev_online_time" remarks="设备运行时长" type="int(11)"/>
+            <column name="dev_location_provice" remarks="设备位置-省" type="varchar(20)"/>
+            <column name="dev_location_city" remarks="设备位置-市" type="varchar(20)"/>
+            <column name="dev_location_area" remarks="设备位置-区" type="varchar(20)"/>
+            <column name="dev_address" remarks="设备出口IP" type="varchar(100)"/>
+            <column name="dev_mac" remarks="小贝设备MAC" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="memory_total_size" remarks="设备内存" type="int(11)"/>
+            <column name="disk_total_size" remarks="设备FLASH大小" type="int(11)"/>
+            <column name="dev_status" remarks="设备状态ONLINE/ OFFLINE" type="varchar(20)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="create_time" remarks="创建时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_time" remarks="修改时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="yinglei.li" id="1507990199236-4">
+        <createTable tableName="TD_BS_DEV_AP" remarks="绫致店铺AP设备">
+            <column autoIncrement="true" name="id" type="BIGINT UNSIGNED" remarks="主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ap_sn" remarks="AP序列号" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="ap_id" remarks="AP IP" type="varchar(100)"/>
+            <column name="ap_name" remarks="AP名称" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="ap_model" remarks="AP型号" type="varchar(100)"/>
+            <column name="ap_version" remarks="AP软件版本号" type="varchar(100)"/>
+            <column name="ap_status" remarks="AP 状态：1-在线，2-不在线，3-版本下载" type="int(2)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="ap_online_time" remarks="AP 在线时长(单位秒)" type="int(11)"/>
+            <column name="ap_mac" remarks="AP MAC" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="ac_sn" remarks="AC序列号" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="create_time" remarks="创建时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_time" remarks="修改时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="yinglei.li" id="1507990199236-5">
+        <createTable tableName="TD_BS_DEVICE_SSID" remarks="绫致店铺设备SSID">
+            <column autoIncrement="true" name="id" type="BIGINT UNSIGNED" remarks="主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="dev_sn" remarks="设备序列号" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="ssid_name" remarks="SSID名称" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="sp_name" remarks="服务策略模板名称" type="varchar(100)"/>
+            <column name="status" remarks="SSID 状态 1-使能，2-去使能" type="int(2)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="hide_ssid" remarks="是否隐藏 SSID, 0-不隐藏，1-隐藏" type="varchar(100)"/>
+            <column name="max_client" remarks="最大终端数，1-2007" type="int(11)"/>
+            <column name="max_send_ratio" remarks="最大发送速率" type="int(11)"/>
+            <column name="max_recieve_ratio" remarks="最大接收速率" type="int(11)"/>
+            <column name="create_time" remarks="创建时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_time" remarks="修改时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="yinglei.li" id="1507990199236-6">
+        <createTable tableName="TD_BS_REALTIME_MAC" remarks="绫致店铺实时终端MAC">
+            <column autoIncrement="true" name="id" type="BIGINT UNSIGNED" remarks="主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="shop_id" remarks="店铺ID" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="dev_sn" remarks="设备序列号" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="ssid" remarks="SSID名称" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="client_mac" remarks="终端MAC" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="create_time" remarks="创建时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_time" remarks="修改时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="yinglei.li" id="1507990199236-7">
+        <createTable tableName="TD_BS_AUTH_HISTORY" remarks="绫致店铺历史认证信息">
+            <column autoIncrement="true" name="id" type="BIGINT UNSIGNED" remarks="主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ap_group_id" remarks="AP 分组 ID" type="varchar(100)"/>
+            <column name="ap_mac" remarks="AP MAC 地址" type="varchar(100)"/>
+            <column name="upstream" remarks="上行流量" type="int(11)"/>
+            <column name="downstream" remarks="下行流量" type="int(11)"/>
+            <column name="user_group" remarks="用户组" type="varchar(20)"/>
+            <column name="shop_id" remarks="场所 ID，绿洲场所的 ID" type="varchar(20)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="user_type" remarks="认证类型，枚举值：1.一键认证 2.短信认 证 6.微信公众号认证 7.微信连 wifi 认证 8.app 认证 9.腾讯安全 wifi 认证 10.固定 账号认证" type="int(2)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="access_start_time" remarks="接入开始时间" type="varchar(20)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="access_duration" remarks="接入时长" type="int(11)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="access_ac_ip" remarks="接入 AC 的 IP，已转化为整数" type="int(11)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="user_mac" remarks="用户的 MAC 地址" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="user_ip" remarks="用户的 IP，已转化为整数" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="vendor" remarks="手机厂商" type="varchar(50)"/>
+            <column name="terminal_model" remarks="手机型号" type="varchar(50)"/>
+            <column name="access_duration_sum" remarks="累计接入时长" type="int(11)"/>
+            <column name="login_freq_sum" remarks="累计登录次数" type="int(11)"/>
+            <column name="upstream_sum" remarks="累计上行流量" type="int(11)"/>
+            <column name="downstream_sum" remarks="累计下行流量" type="int(11)"/>
+            <column name="offline_type" remarks="下线类型，先预留" type="varchar(20)"/>
+            <column name="mobile_no" remarks="手机号" type="varchar(20)"/>
+            <column name="user_name" remarks="用户名" type="varchar(100)"/>
+            <column name="app_auth_id" remarks="app 认证 id" type="varchar(100)"/>
+            <column name="app_account" remarks="app 认证用户名" type="varchar(100)"/>
+            <column name="preliminary" remarks="权限" type="varchar(100)"/>
+            <column name="open_id" remarks="微信用户的 openid" type="varchar(100)"/>
+            <column name="nickname" remarks="微信用户的昵称" type="varchar(100)"/>
+            <column name="sex" remarks="微信用户的性别，枚举值：0.未知 1.男 2.女" type="int(2)"/>
+            <column name="province" remarks="微信用户所在省" type="varchar(20)"/>
+            <column name="city" remarks="微信用户所在城市" type="varchar(20)"/>
+            <column name="country" remarks="微信用户所在国家" type="varchar(20)"/>
+            <column name="headimgurl" remarks="微信用户头像" type="varchar(100)"/>
+            <column name="unionid" remarks="微信用户的唯一标识" type="varchar(100)"/>
+            <column name="tid" remarks="微信用户加密后的手机号" type="varchar(200)"/>
+            <column name="app_id" remarks="公众号的 appid" type="varchar(100)"/>
+            <column name="mobile_decode" remarks="解密手机号" type="varchar(20)"/>
+            <column name="create_time" remarks="创建时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_time" remarks="修改时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+</databaseChangeLog>

@@ -1,0 +1,407 @@
+var states = [{
+    state: 'crowdBlackLists_old',
+    url: '/admin/crowdBlackLists',//兼容菜单配置的旧数据
+    templateUrl: 'app/modules/dataMgr/CrowdBlackListList.html',
+    controller: 'CrowdBlackListListController'
+}, {
+    state: 'crowdBlackLists',
+    url: '/project/crowdBlackLists',
+    templateUrl: 'app/modules/dataMgr/CrowdBlackListList.html',
+    controller: 'CrowdBlackListListController'
+}, {
+    state: 'customCrowds',
+    url: '/project/customCrowds',
+    templateUrl: 'app/modules/customCrowd/CustomCrowdList.html',
+    controller: 'CustomCrowdListController'
+}, {
+    state: 'customCrowds_new',
+    url: '/project/customCrowds/new',
+    templateUrl: 'app/modules/customCrowd/CustomCrowdForm.html',
+    controller: 'CustomCrowdFormController'
+}, {
+    state: 'downloadDatas',
+    url: '/project/downloadDatas',
+    templateUrl: 'app/modules/toolBox/DownloadDataList.html',
+    controller: 'DownloadDataListController'
+}, {
+    state: 'projectPlaces',
+    url: '/project/projectPlaces',
+    templateUrl: 'app/modules/dataMgr/ProjectPlaceList.html',
+    controller: 'ProjectPlaceListController'
+}, {  // 批量设置 -- 设置页面
+    state: 'batchSetting',
+    url: '/project/batchSetting',
+    templateUrl: 'app/modules/projectList/batchSetting.html',
+    controller: 'batchSettingController'
+}, {
+    state: 'targetManagements',
+    url: '/project/targetManagement',
+    templateUrl: 'app/modules/toolBox/TargetManagementList.html',
+    controller: 'TargetManagementListController'
+}, {
+    state: 'admins_ep',
+    url: '/admin/tenant/ep',
+    templateUrl: 'app/common/externPages.html',
+    controller: 'ExternPagesController',
+    ncyBreadcrumb: {
+        label: '权限管理',
+        parent: 'admin'
+    }
+}, {
+    // 客群概览
+    state: 'passengerOverview',
+    url: '/project/passengerOverview',
+    templateUrl: 'app/modules/passengerOverview/PassengerOverview.html',
+    controller: 'PassengerOverviewController'
+}, {
+    // 客流分布
+    state: 'passengerDistribution',
+    url: '/project/passengerDistribution',
+    templateUrl: 'app/modules/passengerDistribution/PassengerDistribution.html',
+    controller: 'PassengerDistributionController'
+}, {
+    // 客流趋势
+    state: 'passengerTrend',
+    url: '/project/passengerTrend',
+    templateUrl: 'app/modules/passengerTrend/PassengerTrend.html',
+    controller: 'PassengerTrendController'
+}, {
+    // 到访深度
+    state: 'visitDepth',
+    url: '/project/visitDepth',
+    templateUrl: 'app/modules/visitDepth/VisitDepth.html',
+    controller: 'VisitDepthController'
+}, {
+    // 路径分析
+    state: 'correlationAnalysis',
+    url: '/project/correlationAnalysis',
+    templateUrl: 'app/modules/correlationAnalysis/CorrelationAnalysis.html',
+    controller: 'CorrelationAnalysisController'
+}, {
+    // 新建路径分析
+    state: 'correlationAnalysisNew',
+    url: '/project/correlationAnalysis/new',
+    templateUrl: 'app/modules/correlationAnalysis/CorrelationAnalysisNew.html',
+    controller: 'CorrelationAnalysisNewController'
+}, {
+    // 查看某个路径分析详情
+    state: 'correlationAnalysisDetail',
+    url: '/project/correlationAnalysis/oneDetail',
+    templateUrl: 'app/modules/correlationAnalysis/CorrelationAnalysisDetail.html',
+    controller: 'CorrelationAnalysisDetailController'
+}, {
+    // 房店指标
+    state: 'roomDistribution',
+    url: '/project/roomDistribution',
+    templateUrl: 'app/modules/roomDistribution/RoomDistribution.html',
+    controller: 'RoomDistributionController'
+}, {
+    // 客群画像-兼容
+    state: 'passengerPeople',
+    url: '/project/passengerPeople',
+    templateUrl: 'app/modules/passengerPortrait/PassengerPortrait.html',
+    controller: 'PassengerPortraitController'
+}, {
+    // 客群画像
+    state: 'passengerPortrait',
+    url: '/project/passengerPortrait',
+    templateUrl: 'app/modules/passengerPortrait/PassengerPortrait.html',
+    controller: 'PassengerPortraitController'
+}, {
+    // 职住来源
+    state: 'passengerJobsCome',
+    url: '/project/passengerJobsCome',
+    templateUrl: 'app/modules/passengerJobs/PassengerJobsCome.html',
+    controller: 'PassengerJobsComeController'
+}, {
+    // 区域来源
+    state: 'passengerRegion',
+    url: '/project/passengerRegion',
+    templateUrl: 'app/modules/passengerJobs/PassengerRegion.html',
+    controller: 'PassengerRegionController'
+}, {
+    // 行为详情
+    state: 'customCrowdsBehaviorShow',
+    url: '/project/customCrowdsBehaviorShow/:execId',
+    templateUrl: 'app/modules/customCrowdDetail/BehaviorCrowdDetail.html',
+    controller: 'BehaviorCrowdDetailController'
+}, {
+    // 聚类详情
+    state: 'customCrowdsKmeansShow',
+    url: '/project/customCrowdsKmeansShow/:customCrowdId',
+    templateUrl: 'app/modules/customCrowdDetail/KmeansCrowdDetail.html',
+    controller: 'KmeansCrowdDetailController'
+}, {
+    // 潜客详情
+    state: 'customCrowdsPotentialShow',
+    url: '/project/customCrowdsPotentialShow/:customCrowdId',
+    templateUrl: 'app/modules/customCrowdBuild/BuildLookalikeCrowd.html',
+    controller: 'BuildLookalikeCrowdController'
+}, {
+    // 潜客挖掘
+    state: 'buildLookalikeCrowd',
+    url: '/project/buildLookalikeCrowd',
+    templateUrl: 'app/modules/customCrowdBuild/BuildLookalikeCrowd.html',
+    controller: 'BuildLookalikeCrowdController'
+}, {
+    // 规则筛选
+    state: 'buildBehaviorCrowd',
+    url: '/project/buildBehaviorCrowd',
+    templateUrl: 'app/modules/customCrowdBuild/BuildBehaviorCrowd.html',
+    controller: 'BuildBehaviorCrowdController'
+}, {
+    // 新建聚类
+    state: 'buildKmeansCrowd',
+    url: '/project/buildKmeansCrowd',
+    templateUrl: 'app/modules/customCrowdBuild/BuildKmeansCrowd.html',
+    controller: 'BuildKmeansCrowdController'
+}, {
+    // 竞品概览
+    state: 'competeOverview',
+    url: '/project/competeOverview',
+    templateUrl: 'app/modules/competeOverview/CompeteOverview.html',
+    controller: 'CompeteOverviewController'
+}, {
+    // 市场洞察-画像指标-兼容
+    state: 'insightIndex',
+    url: '/project/insightIndex',
+    templateUrl: 'app/modules/marketPortrait/MarketPortrait.html',
+    controller: 'MarketPortraitController'
+}, {
+    // 市场洞察-画像指标
+    state: 'marketPortrait',
+    url: '/project/marketPortrait',
+    templateUrl: 'app/modules/marketPortrait/MarketPortrait.html',
+    controller: 'MarketPortraitController'
+}, {
+    //竞品管理
+    state: 'competeProjects',
+    url: '/project/competeProjects',
+    templateUrl: 'app/modules/dataMgr/CompeteProjectList.html',
+    controller: 'CompeteProjectListController'
+}, {
+    //房间对比-兼容
+    state: 'roomCompare',
+    url: '/project/roomCompare',
+    templateUrl: 'app/modules/passengerAnalysis/PassengerAnalysis.html',
+    controller: 'PassengerAnalysisController'
+}, {
+    //房间对比
+    state: 'passengerAnalysis',
+    url: '/project/passengerAnalysis',
+    templateUrl: 'app/modules/passengerAnalysis/PassengerAnalysis.html',
+    controller: 'PassengerAnalysisController'
+}, {
+    //房间对比 -- 交叉分析 -- 新建分析
+    state: 'NewComSalesChart',
+    url: '/project/NewComSalesChart',
+    templateUrl: 'app/modules/passengerAnalysis/NewComSalesChart.html',
+    controller: 'NewComSalesChartController'
+}, {
+    //房间对比 -- 交叉分析 -- 查看分析
+    state: 'SeeOneAnalysis',
+    url: '/project/SeeOneAnalysis',
+    templateUrl: 'app/modules/passengerAnalysis/SeeOneAnalysis.html',
+    controller: 'SeeOneAnalysisController'
+}, {
+    //探针勘测界面
+    state: 'SensorSurvey',
+    url: '/project/sensorSurvey',
+    templateUrl: 'app/modules/SensorSurvey/SensorSurvey.html',
+    controller: 'SensorSurveyController'
+}, {
+    state: 'CompeteDataSource',
+    url: '/project/competeDataSource',
+    templateUrl: 'app/modules/dataMgr/CompeteDataSource.html',
+    controller: 'CompeteDataSourceController'
+}, {
+    state: 'create_poi',
+    url: '/project/create_poi',
+    templateUrl: 'app/modules/customCrowd/component/comCreatePoi.html',
+    controller: 'ComCreatePoiController'
+}, {  // 项目管理(BS)
+    state: 'projectManagement',
+    url: '/project/projectManagement',
+    templateUrl: 'app/modules/projectManagement/projectManagement.html',
+    controller: 'projectManagementController'
+}, {  // 新增项目(BS)
+    state: 'projectNew',
+    url: '/project/projectNew',
+    templateUrl: 'app/modules/projectManagement/component/projectNew.html',
+    controller: 'projectNewController'
+}, {  // 查看某个项目(BS)
+    state: 'projectDetail',
+    url: '/project/projectDetail',
+    templateUrl: 'app/modules/projectManagement/component/projectDetail.html',
+    controller: 'projectDetailController'
+}, {  // 阈值设置(BS)
+    state: 'thresholdSet',
+    url: '/project/thresholdManagement',
+    templateUrl: 'app/modules/thresholdSet/thresholdSet.html',
+    controller: 'thresholdSetController'
+}, {  // 阈值设置详情页(BS)
+    state: 'StoreThresholdSetting',
+    url: '/project/storeThresholdSetting',
+    templateUrl: 'app/modules/thresholdSet/component/storeThresholdSetting.html',
+    controller: 'storeThresholdSettingController'
+}, {  // 阈值设置查看页(BS)
+    state: 'StoreThresholdSetDetail',
+    url: '/project/StoreThresholdSetDetail',
+    templateUrl: 'app/modules/thresholdSet/component/storeThresholdSetDetail.html',
+    controller: 'storeThresholdSetDetailController'
+}, {  // 图纸管理(BS)
+    state: 'BlueprintManagement',
+    url: '/project/drawingManagement',
+    templateUrl: 'app/modules/blueprintManagement/BlueprintList.html',
+    controller: 'BlueprintListController'
+}, {  // 运维管理(BS)
+    state: 'MaintenanceManagement',
+    url: '/project/maintenanceManagement',
+    templateUrl: 'app/modules/maintenanceManagement/MaintenanceManagement.html',
+    controller: 'MaintenanceManagementController'
+}, {
+    state: 'projects_store_detial',  // 店铺探针详情页
+    url: '/project/sensors/detail',
+    templateUrl: 'app/modules/maintenanceManagement/component/ProjectSeeForm.html',
+    controller: 'ProjectSeeFormController'
+}, {
+    state: 'sensor_detial',  // 探针详情页
+    url: '/project/projects/see',
+    templateUrl: 'app/modules/maintenanceManagement/component/SensorDetail.html',
+    controller: 'SensorDetailController'
+}, {
+    state: 'sensor_strength_set',  // 探针强度设置页
+    url: '/project/projects/sensorset',
+    templateUrl: 'app/modules/maintenanceManagement/component/SensorStrengthSet.html',
+    controller: 'SensorStrengthSetController'
+}, {  // 排行榜(BS)
+    state: 'ProjectRankingList',
+    url: '/report/rankingList',
+    templateUrl: 'app/modules/projectRankingList/ProjectRankingList.html',
+    controller: 'ProjectRankingListController'
+}, {
+    // 报表--集团概览
+    state: 'groupOverview',
+    url: '/report/groupOverview',
+    templateUrl: 'app/modules/reportMain/ReportMain.html',
+    controller: 'ReportMainController'
+}, {
+    // 报表--城市概览
+    state: 'cityOverview_1',
+    url: '/report/cityOverview_1',
+    templateUrl: 'app/modules/reportMain/ReportMain.html',
+    controller: 'ReportMainController'
+}, {
+    // 报表--合作商概览
+    state: 'partnersOverview_1',
+    url: '/report/partnersOverview_1',
+    templateUrl: 'app/modules/reportMain/ReportMain.html',
+    controller: 'ReportMainController'
+}, {
+    // 报表--运营概览_store  // 店铺  1
+    state: 'operationOverview_store',
+    url: '/report/operationOverview_store',
+    templateUrl: 'app/modules/reportMain/ReportMain.html',
+    controller: 'ReportMainController'
+}, {
+    // 报表--运营概览_city // 城市  4
+    state: 'operationOverview_city',
+    url: '/report/operationOverview_city',
+    templateUrl: 'app/modules/reportMain/ReportMain.html',
+    controller: 'ReportMainController'
+}, {
+    // 报表--运营概览_region   // 大区 5
+    state: 'operationOverview_region',
+    url: '/report/operationOverview_region',
+    templateUrl: 'app/modules/reportMain/ReportMain.html',
+    controller: 'ReportMainController'
+}, {
+    // 报表--运营概览_brand   // 品牌 6
+    state: 'operationOverview_brand',
+    url: '/report/operationOverview_brand',
+    templateUrl: 'app/modules/reportMain/ReportMain.html',
+    controller: 'ReportMainController'
+}, {
+    // 报表--客流动态-小时动态
+    state: 'hourlyDynamics',
+    url: '/report/hourlyDynamics',
+    templateUrl: 'app/modules/reportMain/ReportMain.html',
+    controller: 'ReportMainController'
+}, {
+    // 新页面--空间动态
+    state: 'spatialDynamics',
+    url: '/report/spatialDynamics',
+    templateUrl: 'app/modules/reportMain/ReportMain.html',
+    controller: 'ReportMainController'
+}, {
+    // 新页面--店铺热力图
+    state: 'thermodynamicChart',
+    url: '/report/thermodynamicChart',
+    templateUrl: 'app/modules/reportMain/ReportMain.html',
+    controller: 'ReportMainController'
+}, {
+    // 报表--趋势指标
+    state: 'trendIndex',
+    url: '/report/trendIndex',
+    templateUrl: 'app/modules/reportMain/ReportMain.html',
+    controller: 'ReportMainController'
+}, {
+    // 报表--活跃指标
+    state: 'activeIndex',
+    url: '/report/activeIndex',
+    templateUrl: 'app/modules/reportMain/ReportMain.html',
+    controller: 'ReportMainController'
+}, {
+    // 报表--转化指标
+    state: 'transformIndex',
+    url: '/report/transformIndex',
+    templateUrl: 'app/modules/reportMain/ReportMain.html',
+    controller: 'ReportMainController'
+}, {
+    // 报表--订单分析
+    state: 'orderAnalysis',
+    url: '/report/orderAnalysis',
+    templateUrl: 'app/modules/reportMain/ReportMain.html',
+    controller: 'ReportMainController'
+}, {
+    // 报表--来源分析
+    state: 'sourceAnalysis',
+    url: '/report/sourceAnalysis',
+    templateUrl: 'app/modules/reportMain/ReportMain.html',
+    controller: 'ReportMainController'
+}, {
+    // loading页面
+    state: 'loading',
+    url: '/report/loading',
+    templateUrl: 'app/modules/reportMain/Loading.html',
+    controller: 'LoadingController'
+}, {
+    state: 'changeTenant_a',
+    url: '/api/changeTenant_a',
+    templateUrl: 'app/modules/reportMain/Loading.html',
+    controller: 'LoadingController'
+}, {
+    state: 'changeTenant_b',
+    url: '/api/changeTenant_b',
+    templateUrl: 'app/modules/reportMain/Loading.html',
+    controller: 'LoadingController'
+}, {
+    state: 'changeTenant_c',
+    url: '/api/changeTenant_c',
+    templateUrl: 'app/modules/reportMain/Loading.html',
+    controller: 'LoadingController'
+}, {
+    state: 'changeTenant_d',
+    url: '/api/changeTenant_d',
+    templateUrl: 'app/modules/reportMain/Loading.html',
+    controller: 'LoadingController'
+}, {
+    state: 'changeTenant_e',
+    url: '/api/changeTenant_e',
+    templateUrl: 'app/modules/reportMain/Loading.html',
+    controller: 'LoadingController'
+}
+
+//thermodynamicChart
+//spatialDynamics
+];

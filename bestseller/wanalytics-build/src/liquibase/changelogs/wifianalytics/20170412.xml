@@ -1,0 +1,27 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	<changeSet author="junmin.li" id="1491967964416-1">
+        	<createTable tableName="TD_PROJECT_GROUP_COMPUTE" remarks="需要计算不重复用户指标店组">
+        	        <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+               			<constraints primaryKey="true"/>
+            		</column>
+            		<column name="project_id" remarks="项目ID" type="int" >
+						<constraints nullable="false"/>
+					</column>
+            		<column name="group_id" remarks="店组ID" type="int" >
+						<constraints nullable="false"/>
+			       </column>
+					<column name="create_by" remarks="创建者账号" type="varchar(32)" />
+            		<column name="creator" remarks="创建人" type="varchar(32)" />
+            		<column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                		<constraints nullable="false"/>
+					</column>
+            		<column name="update_by" remarks="修改者账号" type="varchar(50)" />
+					<column name="updater" remarks="修改人" type="varchar(50)" />
+            		<column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+					    <constraints nullable="false"/>
+            		</column>
+            </createTable>
+    </changeSet>
+   
+</databaseChangeLog>

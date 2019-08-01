@@ -1,0 +1,33 @@
+<div class="margin_bottom_panel" style="background: #FFF;">
+    <!-- 描述：客群对比选择 -->
+    <div compare-button data-title1="{{constants.title_flow_compare}}"></div>
+
+    <div class="compare" style="display: none; padding-bottom: 10px;">
+        <div style="width: 100%; height: 60px; padding: 0 20px; ">
+            <select class="form-control" ng-model="crowd_id_1" title="" ng-change="changeParam(1)"
+                    style="width: 80px; float: left; margin-left: 20px;">
+                <option ng-repeat="x in crowdList" value="{{x.id}}" ng-selected="x.id==compare_obj_1.id">
+                    {{x.name}}
+                </option>
+            </select>
+            <select class="form-control" ng-model="comp_time_1" title="" ng-change="changeParam(1)"
+                    style="width: 80px; float: left; margin-left: 20px;">
+                <option ng-repeat="x in dateList" value="{{x}}" ng-selected="x==comp_time_1">
+                    {{x}}
+                </option>
+            </select>
+            <select class="form-control" ng-model="crowd_id_2" title="" ng-change="changeParam(2)"
+                    style="width: 80px; float: left; margin-left: 20px;">
+                <option ng-repeat="x in crowdList" value="{{x.id}}" ng-selected="x.id==compare_obj_2.id">
+                    {{x.name}}
+                </option>
+            </select>
+            <select class="form-control" ng-model="comp_time_2" title="" ng-change="changeParam(2)"
+                    style="width: 80px; float: left; margin-left: 20px;">
+                <option ng-repeat="x in dateList" value="{{x}}" ng-selected="x==comp_time_2">
+                    {{x}}
+                </option>
+            </select>
+        </div>
+    </div>
+</div>

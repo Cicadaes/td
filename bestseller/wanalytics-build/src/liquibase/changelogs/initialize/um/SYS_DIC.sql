@@ -1,0 +1,7 @@
+--liquibase formatted sql
+
+--changeset yunlong.wang:1482894556120-3
+INSERT INTO `SYS_DIC` VALUES (1,'UserType','用户类别',0,'UM','2014-09-03 10:27:22','2014-09-03 10:27:22');
+INSERT INTO `SYS_DIC` VALUES (2,'Status','状态',0,'UM','2014-10-28 06:01:23','2014-09-03 10:28:54');
+INSERT INTO `SYS_DIC` VALUES (3,'Type','APP类型',0,'UM','2016-05-10 06:49:31','2016-05-10 06:49:31');
+INSERT INTO `SYS_DIC` VALUES (4,'RoleType','角色类型',0,'UM','2016-05-12 11:27:26','2016-05-12 11:27:26');

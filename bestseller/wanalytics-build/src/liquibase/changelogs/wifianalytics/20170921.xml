@@ -1,0 +1,15 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="youyu.dong" id="1505975400586-1">
+        <addColumn tableName="TD_PROJECT">
+            <column name="region" type="varchar(128)" remarks="大区"/>
+            <column name="province" type="varchar(128)" remarks="省"/>
+            <column name="channel" type="varchar(128)" remarks="渠道"/>
+            <column name="mall" type="varchar(128)" remarks="商场"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

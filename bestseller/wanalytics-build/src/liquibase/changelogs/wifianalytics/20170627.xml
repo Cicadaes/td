@@ -1,0 +1,28 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="junmin.li" id="1498542411267-1">
+        <createTable tableName="TD_DMK_LOG" remarks="DMK接口调用日志">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="mac" remarks="mac地址" type="varchar(20)"/>
+            <column name="tdid" remarks="tdid" type="varchar(100)" />
+            <column name="type" remarks="服务类型:I010202:人口属性，I010203：应用兴趣，I010209：设备属性，I010305：月聚集区域" type="varchar(10)" />
+            <column name="month" remarks="月份：地理位置接口需要" type="varchar(10)" />
+            <column name="http_status" remarks="dmk http请求状态(200成功，其它状态表示异常，需要咨询DMK人员)" type="int" />
+            <column name="data" remarks="dmk返回结果" type="text" />
+            <column name="create_time" remarks="创建时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="junmin.li" id="1498542411267-2">
+        <createIndex indexName="IDX_QUERY" tableName="TD_DMK_LOG">
+            <column name="tdid"/>
+            <column name="type"/>
+            <column name="month"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

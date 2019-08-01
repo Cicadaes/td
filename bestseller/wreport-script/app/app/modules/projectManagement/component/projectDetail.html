@@ -1,0 +1,59 @@
+<!-- 导航条 -->
+<div class="nav_bar_top" >
+    <span class = "nav_bar_normal nav_bar_btn" ng-click="goProjectManagement()">项目管理</span>
+    <span class = "nav_bar_normal"> > </span>
+    <span>查看</span>
+</div>
+
+<!-- 模块划分 -->
+<div style="padding: 0 20px 20px; margin-top: 20px;" id="smallscreen_wap">
+    <div id="smallscreen" style="overflow-y:auto; overflow-x: hidden;margin-right: -20px; padding-right: 16px;">
+        <form class="form-horizontal clrfix" >
+            <!-- 负责人设置 -->
+            <div class="form-horizontal-panel model_panel" style="overflow: hidden;width: 100%;">
+                <div class="shopGroupTit">项目信息</div>
+                <!-- 店铺名称 -->
+                <div class="control-group projectDetailList">
+                    <label class="control-label text-left-label">名称</label>
+                    <div class ="projectDetailOne">
+                        <b>{{projectOneData.projectName}}</b>
+                    </div>
+                </div>
+                <!-- 店铺ID -->
+                <div class="control-group projectDetailList">
+                    <label class="control-label text-left-label">Shop Code</label>
+                    <div class ="projectDetailOne">
+                        <b>{{projectOneData.projectNum}}</b>
+                    </div>
+                </div>
+                <!-- 门址信息 -->
+                <div class="control-group projectDetailList">
+                    <label class="control-label text-left-label">门址信息</label>
+                    <div class ="projectDetailOne">
+                        <b>{{projectOneData.projectPosition}}</b>
+                    </div>
+                </div>
+                <!-- 上游 -->
+                <div class="control-group projectDetailList">
+                    <label class="control-label text-left-label">上游</label>
+                    <div class ="projectDetailOne">
+                        <b ng-if="projectOneData.projectParentName !=null">{{projectOneData.projectParentName}}</b>
+                        <b ng-if="projectOneData.projectParentName ==null">N/A</b>
+                    </div>
+                </div>
+                <!-- 下游 -->
+                <div class="control-group projectDetailList">
+                    <label class="control-label text-left-label">下游</label>
+                    <div class ="projectDetailOne" style="overflow: hidden;">
+                        <div class = "project-detail-child-list" ng-if="projectOneData.projectChildrenNames !=null" style="float: left;">
+                            <i ng-repeat='aaa in childList track by $index'>{{aaa}}</i>
+                        </div>
+                        <b ng-if="projectOneData.projectChildrenNames ==null">N/A</b>
+                    </div>
+                </div>
+
+
+            </div>
+        </form>
+    </div>
+</div>

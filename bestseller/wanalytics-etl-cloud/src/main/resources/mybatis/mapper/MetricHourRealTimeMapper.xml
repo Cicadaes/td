@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--suppress ALL -->
+<mapper namespace="td.enterprise.dao.MetricHourRealTimeDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.MetricHourRealTime">
+        <result column="id" property="id"/>
+        <result column="project_name" property="projectName"/>
+        <result column="project_type" property="projectType"/>
+        <result column="project_id" property="projectId"/>
+        <result column="date" property="date"/>
+        <result column="hour" property="hour"/>
+        <result column="active_hour_users" property="activeHourUsers"/>
+        <result column="front_hour_users" property="frontHourUsers"/>
+        <result column="stay_hour_users" property="stayHourUsers"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="city_level" property="cityLevel"/>
+        <result column="project_num" property="projectNum"/>
+        <result column="logical_city" property="logicalCity"/>
+        <result column="tenant_id" property="tenantId"/>
+    </resultMap>
+
+    <!-- TD_METRIC_HOUR_REAL_TIME table all fields -->
+    <sql id="Base_Column_List">
+	 id,project_name,project_type,project_id,date,hour,active_hour_users,front_hour_users,stay_hour_users,update_time,city_level,project_num,logical_city,tenant_id
+  </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="projectName != null and projectName != ''">
+                and project_name = #{projectName}
+            </if>
+            <if test="projectType != null and projectType != ''">
+                and project_type = #{projectType}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="date != null and date != ''">
+                and date = #{date}
+            </if>
+            <if test="hour != null and hour != ''">
+                and hour = #{hour}
+            </if>
+            <if test="activeHourUsers != null and activeHourUsers != ''">
+                and active_hour_users = #{activeHourUsers}
+            </if>
+            <if test="frontHourUsers != null and frontHourUsers != ''">
+                and front_hour_users = #{frontHourUsers}
+            </if>
+            <if test="stayHourUsers != null and stayHourUsers != ''">
+                and stay_hour_users = #{stayHourUsers}
+            </if>
+            <if test="updateTime != null and updateTime != ''">
+                and update_time = #{updateTime}
+            </if>
+            <if test="cityLevel != null and cityLevel != ''">
+                and city_level = #{cityLevel}
+            </if>
+            <if test="projectNum != null and projectNum != ''">
+                and project_num = #{projectNum}
+            </if>
+            <if test="logicalCity != null and logicalCity != ''">
+                and logical_city = #{logicalCity}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_METRIC_HOUR_REAL_TIME
+        (id,project_name,project_type,project_id,
+        date,hour,active_hour_users,front_hour_users,stay_hour_users,update_time,city_level,
+        project_num,logical_city,tenant_id)
+        values(#{id},#{projectName},#{projectType},#{projectId},
+        #{date},#{hour},#{activeHourUsers},#{frontHourUsers},#{stayHourUsers},now(),#{cityLevel},
+        #{projectNum},#{logicalCity},#{tenantId})
+        ON DUPLICATE KEY UPDATE active_hour_users = #{activeHourUsers}, 
+        front_hour_users = #{frontHourUsers},
+        stay_hour_users = #{stayHourUsers}
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+      update TD_METRIC_HOUR_REAL_TIME set project_name=#{projectName},project_type=#{projectType},project_id=#{projectId},date=#{date},hour=#{hour},active_hour_users=#{activeHourUsers},front_hour_users=#{frontHourUsers},stay_hour_users=#{stayHourUsers},update_time=now(),city_level=#{cityLevel},project_num=#{projectNum},logical_city=#{logicalCity},tenant_id=#{tenantId} where id=#{id}
+  </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_METRIC_HOUR_REAL_TIME set
+        <if test="projectName != null  ">
+            project_name=#{projectName},
+        </if>
+        <if test="projectType != null  ">
+            project_type=#{projectType},
+        </if>
+        <if test="projectId != null  ">
+            project_id=#{projectId},
+        </if>
+        <if test="date != null  ">
+            date=#{date},
+        </if>
+        <if test="hour != null  ">
+            hour=#{hour},
+        </if>
+        <if test="activeHourUsers != null  ">
+            active_hour_users=#{activeHourUsers},
+        </if>
+        <if test="frontHourUsers != null  ">
+            front_hour_users=#{frontHourUsers},
+        </if>
+        <if test="stayHourUsers != null  ">
+            stay_hour_users=#{stayHourUsers},
+        </if>
+        <if test="updateTime != null  ">
+            update_time=#{updateTime},
+        </if>
+        <if test="cityLevel != null  ">
+            city_level=#{cityLevel},
+        </if>
+        <if test="projectNum != null  ">
+            project_num=#{projectNum},
+        </if>
+        <if test="logicalCity != null  ">
+            logical_city=#{logicalCity},
+        </if>
+        <if test="tenantId != null  ">
+            tenant_id=#{tenantId},
+        </if>
+        update_time = now()
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 metric hour real time -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_METRIC_HOUR_REAL_TIME where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+      delete from TD_METRIC_HOUR_REAL_TIME where id = #{id}
+  </delete>
+
+    <!-- metric hour real time 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_METRIC_HOUR_REAL_TIME
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询metric hour real time列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_METRIC_HOUR_REAL_TIME
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- 根据project_id列表，date，hour 查询metric列表 -->
+    <select id="queryByProjectIdList" resultMap="BaseResultMap" parameterType="Object">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM TD_METRIC_HOUR_REAL_TIME
+        <include refid="Base_Where_Clause"/>
+        <if test="projectIdList != null and projectIdList.size() != 0">
+            AND project_id IN
+            <foreach item="item" index="index" collection="projectIdList" open="(" separator=","
+                     close=")">
+                #{item}
+            </foreach>
+        </if>
+    </select>
+</mapper>   

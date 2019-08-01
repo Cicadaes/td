@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+  <!-- 建表语句 -->
+  <!--<include file="../initialize/dmp_console.xml" relativeToChangelogFile="true"/> -->
+
+  <!--&lt;!&ndash; 初始化数据 &ndash;&gt;-->
+  <!--<include file="../initialize/dmp_console/TD_DIC.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="../initialize/dmp_console/TD_PARAM.sql" relativeToChangelogFile="true"/>-->
+  <!---->
+  <!--<include file="./20170112.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20170116.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20170111.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20170122.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20170214.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20170228.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20170412.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20170420.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20170422.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20170424.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20170426.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20170518.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20170601.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20170613.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20170626.xml" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20170718.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20170720.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20170801.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20170816.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20170821.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20170926.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20170927.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20170929.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20170930.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20171012.sql" relativeToChangelogFile="true"/>-->
+  <!--<include file="./20171026.sql" relativeToChangelogFile="true"/>-->
+</databaseChangeLog>

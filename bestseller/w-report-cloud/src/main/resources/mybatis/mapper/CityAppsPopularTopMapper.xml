@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.CityAppsPopularTopDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.CityAppsPopularTop">
+        <result column="id" property="id"/>
+        <result column="city" property="city"/>
+        <result column="platform" property="platform"/>
+        <result column="app_hash" property="appHash"/>
+        <result column="active_hour" property="activeHour"/>
+        <result column="active_hour_number" property="activeHourNumber"/>
+        <result column="active_all_number" property="activeAllNumber"/>
+        <result column="active_proportion" property="activeProportion"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+    </resultMap>
+
+    <!-- TD_CITY_APPS_POPULAR_TOP table all fields -->
+    <sql id="Base_Column_List">
+        id,city,platform,app_hash,active_hour,active_hour_number,active_all_number,active_proportion,start_date,end_date
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="city != null and city != ''">
+                and city = #{city}
+            </if>
+            <if test="platform != null and platform != ''">
+                and platform = #{platform}
+            </if>
+            <if test="appHash != null and appHash != ''">
+                and app_hash = #{appHash}
+            </if>
+            <if test="activeHour != null and activeHour != ''">
+                and active_hour = #{activeHour}
+            </if>
+            <if test="activeHourNumber != null and activeHourNumber != ''">
+                and active_hour_number = #{activeHourNumber}
+            </if>
+            <if test="activeAllNumber != null and activeAllNumber != ''">
+                and active_all_number = #{activeAllNumber}
+            </if>
+            <if test="activeProportion != null and activeProportion != ''">
+                and active_proportion = #{activeProportion}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and start_date = #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and end_date = #{endDate}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_CITY_APPS_POPULAR_TOP(id,city,platform,app_hash,active_hour,active_hour_number,active_all_number,active_proportion,start_date,end_date)
+        values(#{id},#{city},#{platform},#{appHash},#{activeHour},#{activeHourNumber},#{activeAllNumber},#{activeProportion},#{startDate},#{endDate})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_CITY_APPS_POPULAR_TOP set
+        city=#{city},platform=#{platform},app_hash=#{appHash},active_hour=#{activeHour},active_hour_number=#{activeHourNumber},active_all_number=#{activeAllNumber},active_proportion=#{activeProportion},start_date=#{startDate},end_date=#{endDate}
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_CITY_APPS_POPULAR_TOP set
+        <trim suffixOverrides=",">
+            <if test="city != null  ">
+                city=#{city},
+            </if>
+            <if test="platform != null  ">
+                platform=#{platform},
+            </if>
+            <if test="appHash != null  ">
+                app_hash=#{appHash},
+            </if>
+            <if test="activeHour != null  ">
+                active_hour=#{activeHour},
+            </if>
+            <if test="activeHourNumber != null  ">
+                active_hour_number=#{activeHourNumber},
+            </if>
+            <if test="activeAllNumber != null  ">
+                active_all_number=#{activeAllNumber},
+            </if>
+            <if test="activeProportion != null  ">
+                active_proportion=#{activeProportion},
+            </if>
+            <if test="startDate != null  ">
+                start_date=#{startDate},
+            </if>
+            <if test="endDate != null  ">
+                end_date=#{endDate},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 App去流行表 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_CITY_APPS_POPULAR_TOP where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_CITY_APPS_POPULAR_TOP where id = #{id}
+    </delete>
+
+    <!-- App去流行表 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_CITY_APPS_POPULAR_TOP
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询App去流行表列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_CITY_APPS_POPULAR_TOP
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- 查询App去流行表列表 -->
+    <select id="getCityAppProportion" resultType="java.util.Map" parameterType="Object">
+        select active_hour_number * 1000 / active_all_number as active_proportion
+        from TD_CITY_APPS_POPULAR_TOP
+        where app_hash = #{appHash} and platform =#{platform} and active_hour =#{activeHour}
+        order by id desc limit 1
+    </select>
+
+    <!-- 使用缓存，获取最新的所有app 数据 -->
+    <select id="getAllLatestCityAppProportion" resultMap="BaseResultMap" parameterType="Object">
+        select t2.*
+        from
+        (
+        select t.active_hour,t.platform,t.app_hash,max(t.id) as tid
+        from TD_CITY_APPS_POPULAR_TOP t
+        where city=#{city}#
+        GROUP BY t.active_hour,t.platform,t.app_hash
+        ) tmp,
+        TD_CITY_APPS_POPULAR_TOP t2
+        where tmp.tid = t2.id
+    </select>
+
+</mapper>

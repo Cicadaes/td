@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.ProjectBatchConfigDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.ProjectBatchConfig">
+        <result column="id" property="id"/>
+        <result column="project_id" property="projectId"/>
+        <result column="project_name" property="projectName"/>
+        <result column="project_num" property="projectNum"/>
+        <result column="city" property="city"/>
+        <result column="custom_label" property="customLabel"/>
+        <result column="black_list" property="blackList"/>
+        <result column="threshold_value" property="thresholdValue"/>
+        <result column="theme" property="theme"/>
+        <result column="status" property="status"/>
+        <result column="create_by" property="createBy"/>
+        <result column="creator" property="creator"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="updater" property="updater"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- TD_PROJECT_BATCH_CONFIG table all fields -->
+    <sql id="Base_Column_List">
+        id,project_id,project_name,project_num,city,custom_label,black_list,threshold_value,theme,status,create_by,creator,create_time,update_by,updater,update_time
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="projectName != null and projectName != ''">
+                and project_name = #{projectName}
+            </if>
+            <if test="projectNum != null and projectNum != ''">
+                and project_num = #{projectNum}
+            </if>
+            <if test="city != null and city != ''">
+                and city = #{city}
+            </if>
+            <if test="customLabel != null and customLabel != ''">
+                and custom_label = #{customLabel}
+            </if>
+            <if test="blackList != null and blackList != ''">
+                and black_list = #{blackList}
+            </if>
+            <if test="thresholdValue != null and thresholdValue != ''">
+                and threshold_value = #{thresholdValue}
+            </if>
+            <if test="theme != null and theme != ''">
+                and theme = #{theme}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="createBy != null and createBy != ''">
+                and create_by = #{createBy}
+            </if>
+            <if test="creator != null and creator != ''">
+                and creator = #{creator}
+            </if>
+            <if test="createTime != null and createTime != ''">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                and update_by = #{updateBy}
+            </if>
+            <if test="updater != null and updater != ''">
+                and updater = #{updater}
+            </if>
+            <if test="updateTime != null and updateTime != ''">
+                and update_time = #{updateTime}
+            </if>
+            <if test="q != null and q != ''">
+                and project_name like CONCAT('%','${q}','%' )
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_PROJECT_BATCH_CONFIG(id,project_id,project_name,project_num,city,custom_label,black_list,threshold_value,theme,status,create_by,creator,create_time,update_by,updater,update_time)
+        values(#{id},#{projectId},#{projectName},#{projectNum},#{city},#{customLabel},#{blackList},#{thresholdValue},#{theme},#{status},#{createBy},#{creator},now(),#{updateBy},#{updater},now())
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_PROJECT_BATCH_CONFIG set
+        project_id=#{projectId},project_name=#{projectName},project_num=#{projectNum},city=#{city},custom_label=#{customLabel},black_list=#{blackList},threshold_value=#{thresholdValue},theme=#{theme},status=#{status},create_by=#{createBy},creator=#{creator},create_time=now(),update_by=#{updateBy},updater=#{updater},update_time=now()
+        where id=#{id}
+    </update>
+
+    <!-- 根据项目id，修改记录-->
+    <update id="updateByProjectId" parameterType="Object">
+        update TD_PROJECT_BATCH_CONFIG set
+            <if test="projectName != null  ">
+                project_name=#{projectName},
+            </if>
+            <if test="projectNum != null  ">
+                project_num=#{projectNum},
+            </if>
+            <if test="city != null  ">
+                city=#{city},
+            </if>
+            <if test="customLabel != null  ">
+                custom_label=#{customLabel},
+            </if>
+            <if test="blackList != null  ">
+                black_list=#{blackList},
+            </if>
+            <if test="thresholdValue != null  ">
+                threshold_value=#{thresholdValue},
+            </if>
+            <if test="theme != null  ">
+                theme=#{theme},
+            </if>
+            <if test="status != null  ">
+                status=#{status},
+            </if>
+            <if test="updateBy != null  ">
+                update_by=#{updateBy},
+            </if>
+            <if test="updater != null  ">
+                updater=#{updater},
+            </if>
+        update_time = now()
+        where project_id=#{projectId}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_PROJECT_BATCH_CONFIG set
+        <trim suffixOverrides=",">
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="projectName != null  ">
+                project_name=#{projectName},
+            </if>
+            <if test="projectNum != null  ">
+                project_num=#{projectNum},
+            </if>
+            <if test="city != null  ">
+                city=#{city},
+            </if>
+            <if test="customLabel != null  ">
+                custom_label=#{customLabel},
+            </if>
+            <if test="blackList != null  ">
+                black_list=#{blackList},
+            </if>
+            <if test="thresholdValue != null  ">
+                threshold_value=#{thresholdValue},
+            </if>
+            <if test="theme != null  ">
+                theme=#{theme},
+            </if>
+            <if test="status != null  ">
+                status=#{status},
+            </if>
+            <if test="createBy != null  ">
+                create_by=#{createBy},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updateBy != null  ">
+                update_by=#{updateBy},
+            </if>
+            <if test="updater != null  ">
+                updater=#{updater},
+            </if>
+            <if test="updateTime != null  ">
+                update_time=#{updateTime},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 批量设置 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_PROJECT_BATCH_CONFIG where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_PROJECT_BATCH_CONFIG where id = #{id}
+    </delete>
+
+    <!-- 批量设置 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_PROJECT_BATCH_CONFIG
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 批量设置 权限项目列表总数-->
+    <select id="queryByListWithProjectIdsCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_PROJECT_BATCH_CONFIG
+        <include refid="Base_Where_Clause"/>
+        <if test="null !=projectIds and projectIds.size > 0">
+            AND project_id IN
+            <foreach collection="projectIds" open="(" separator="," close=")" item="item">
+                #{item}
+            </foreach>
+        </if>
+        <if test="null ==projectIds or projectIds.size == 0">
+            AND 1=0
+        </if>
+    </select>
+
+    <!-- 查询批量设置列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_PROJECT_BATCH_CONFIG
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- 查询权限项目批量设置列表 -->
+    <select id="queryByListWithProjectIds" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_PROJECT_BATCH_CONFIG
+        <include refid="Base_Where_Clause"/>
+        <if test="null !=projectIds and projectIds.size > 0">
+            AND project_id IN
+            <foreach collection="projectIds" open="(" separator="," close=")" item="item">
+                #{item}
+            </foreach>
+        </if>
+        <if test="null ==projectIds or projectIds.size == 0">
+            AND 1=0
+        </if>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+</mapper>

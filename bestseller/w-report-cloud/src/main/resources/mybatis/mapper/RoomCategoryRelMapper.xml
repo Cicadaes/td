@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.RoomCategoryRelDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.RoomCategoryRel">
+        <result column="id" property="id"/>
+        <result column="roomid" property="roomid"/>
+        <result column="categoryid" property="categoryid"/>
+        <result column="code" property="code"/>
+        <result column="name" property="name"/>
+    </resultMap>
+
+    <!-- TD_ROOM_CATEGORY_REL table all fields -->
+    <sql id="Base_Column_List">
+        rel.id,rel.roomid,rel.categoryid,rel.code,rel.name
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and rel.id = #{id}
+            </if>
+            <if test="roomid != null and roomid != ''">
+                and rel.roomid = #{roomid}
+            </if>
+            <if test="categoryid != null and categoryid != ''">
+                and rel.categoryid = #{categoryid}
+            </if>
+            <if test="code != null and code != ''">
+                and rel.code = #{code}
+            </if>
+            <if test="name != null and name != ''">
+                and rel.name = #{name}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into TD_ROOM_CATEGORY_REL(id,roomid,categoryid,code,name)
+        values(#{id},#{roomid},#{categoryid},#{code},#{name})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_ROOM_CATEGORY_REL set roomid=#{roomid},categoryid=#{categoryid},code=#{code},name=#{name} where
+        id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_ROOM_CATEGORY_REL set
+        <trim suffixOverrides=",">
+            <if test="roomid != null  ">
+                roomid=#{roomid},
+            </if>
+            <if test="categoryid != null  ">
+                categoryid=#{categoryid},
+            </if>
+            <if test="code != null  ">
+                code=#{code},
+            </if>
+            <if test="name != null  ">
+                name=#{name},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 房间、分类关系表 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_ROOM_CATEGORY_REL rel where rel.id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_ROOM_CATEGORY_REL where id = #{id}
+    </delete>
+
+    <!-- 房间、分类关系表 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_ROOM_CATEGORY_REL rel
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询房间、分类关系表列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_ROOM_CATEGORY_REL rel
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- 根据类型ID，查询相关房间数据 -->
+    <select id="queryByCategoryIds" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_ROOM_CATEGORY_REL rel inner join TD_ROOM room ON (rel.roomid=room.id and room.project_id=#{projectId})
+        where rel.categoryid in
+        <foreach collection="list" open="(" separator="," close=")" item="list">
+            #{list}
+        </foreach>
+        group by rel.roomid
+        order by rel.roomid asc
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+
+    <!-- 根据类型ID，查询相关房间数据 总数 -->
+    <select id="getCountByCagetoryIds" resultType="java.lang.Integer" parameterType="Object">
+        select count(DISTINCT(rel.roomid))
+        from TD_ROOM_CATEGORY_REL rel
+        inner join TD_ROOM room ON (rel.roomid=room.id and room.project_id=#{projectId})
+        where rel.categoryid in
+        <foreach collection="list" open="(" separator="," close=")" item="list">
+            #{list}
+        </foreach>
+        order by rel.roomid asc
+    </select>
+</mapper>

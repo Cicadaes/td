@@ -1,0 +1,52 @@
+collector.url: ${collector.url}
+app:
+  name: adapter application
+  description: adapter
+server:
+  port: ${server.port}
+  contextPath: /api/
+spring:
+  profiles:
+    #active: dev
+  redis:
+    expire: 3600
+    pool:
+      max-total: 50
+      max-idle: 5
+      min-idle: 5
+      timeout: 500
+      ftp-lock-key: ${ftp.lock.key}
+      ftp-directory-lock-key: ${ftp.directory.lock.key}
+  sentinel:
+    host: ${redis.host}
+    master: ${redis.master}
+ftp:
+  host: ${ftp.host}
+  port: 21
+  username: ${ftp.username}
+  password: ${ftp.password}
+  passiveMode: true
+  encoding: UTF-8
+  timeout: 10000
+  #localPath: /attachment/wifianalytics/bestseller/
+  localPath: ${ftp.localPath}
+  remotePath: /bestseller/
+  downFileNum: ${ftp.downFileNum}
+  fixedDelay: ${ftp.fixedDelay}
+  fixMinute: ${ftp.fixMinute}
+executors:
+  corePoolSize: 5
+  maxPoolSize: 50
+  queueCapacity: 10000
+alarm:
+  cron: ${cron}
+mail:
+  recipients: ${mail.recipients}
+  address: ${mail.address}
+  password: ${mail.password}
+  host: ${mail.host}
+  port: ${mail.port}
+  auth: ${mail.auth}
+  starttls: ${mail.starttls}
+  name: ${mail.name}
+  transType: ${mail.transType}

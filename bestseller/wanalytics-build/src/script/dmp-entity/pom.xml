@@ -1,0 +1,64 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<!-- 定义公共变量 -->
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>td.enterprise</groupId>
+	<artifactId>dmp-entity</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<!-- 待聚合模块 -->
+	<modules>
+		<module>../../../../dmp-common</module>
+		<module>../../../../dmp-core</module>
+		<module>../../../../dmp-queryservice</module>
+	</modules>
+
+	<!-- 配置部署的远程仓库 -->
+	<distributionManagement>
+		<repository>
+			<id>TD_Releases</id>
+			<url>http://repo.sh.td:8081/nexus/content/repositories/TD_Releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>TD_Snapshots</id>
+			<url>http://repo.sh.td:8081/nexus/content/repositories/TD_Snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.5.3</version>
+				<configuration>
+					<!-- not append assembly id in release file name -->
+					<appendAssemblyId>false</appendAssemblyId>
+					<descriptor>assembly/dep.xml</descriptor>
+					<finalName>dmp-entity</finalName>
+				</configuration>
+				<executions>
+					<execution>
+						<id>create-archive</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>jdk.tools</groupId>
+				<artifactId>jdk.tools</artifactId>
+				<version>1.7</version>
+				<scope>system</scope>
+				<systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+</project>

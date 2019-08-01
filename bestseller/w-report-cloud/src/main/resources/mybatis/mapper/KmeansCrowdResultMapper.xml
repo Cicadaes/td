@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.KmeansCrowdResultDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.KmeansCrowdResult">
+        <result column="id" property="id"/>
+        <result column="kmeans_crowd_id" property="kmeansCrowdId"/>
+        <result column="classification_name" property="classificationName"/>
+        <result column="classification_description" property="classificationDescription"/>
+        <result column="classification_value" property="classificationValue"/>
+        <result column="data_name" property="dataName"/>
+        <result column="project_id" property="projectId"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="creator" property="creator"/>
+        <result column="create_time" property="createTime"/>
+        <result column="updator" property="updator"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="exec_id" property="execId"/>
+    </resultMap>
+
+    <!-- TD_KMEANS_CROWD_RESULT table all fields -->
+    <sql id="Base_Column_List">
+        id,kmeans_crowd_id,classification_name,classification_description,classification_value,project_id,tenant_id,creator,create_time,updator,update_time,exec_id,data_name
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="kmeansCrowdId != null and kmeansCrowdId != ''">
+                and kmeans_crowd_id = #{kmeansCrowdId}
+            </if>
+            <if test="classificationName != null and classificationName != ''">
+                and classification_name = #{classificationName}
+            </if>
+            <if test="classificationDescription != null and classificationDescription != ''">
+                and classification_description = #{classificationDescription}
+            </if>
+            <if test="classificationValue != null and classificationValue != ''">
+                and classification_value = #{classificationValue}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="execId != null and execId != ''">
+                and exec_id = #{execId}
+            </if>
+            <if test="dataName != null and dataName != ''">
+                and data_name = #{dataName}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_KMEANS_CROWD_RESULT(id,kmeans_crowd_id,classification_name,classification_description,classification_value,project_id,tenant_id,creator,create_time,updator,update_time,exec_id,data_name)
+        values(#{id},#{kmeansCrowdId},#{classificationName},#{classificationDescription},#{classificationValue},#{projectId},#{tenantId},#{creator},now(),#{updator},now(),#{execId},#{dataName})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_KMEANS_CROWD_RESULT set
+        kmeans_crowd_id=#{kmeansCrowdId},classification_name=#{classificationName},classification_description=#{classificationDescription},classification_value=#{classificationValue},project_id=#{projectId},tenant_id=#{tenantId},creator=#{creator},create_time=now(),updator=#{updator},update_time=now(),exec_id=#{execId},data_name=#{dataName}
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_KMEANS_CROWD_RESULT set
+        <trim suffixOverrides=",">
+            <if test="kmeansCrowdId != null  ">
+                kmeans_crowd_id=#{kmeansCrowdId},
+            </if>
+            <if test="classificationName != null  ">
+                classification_name=#{classificationName},
+            </if>
+            <if test="classificationDescription != null  ">
+                classification_description=#{classificationDescription},
+            </if>
+            <if test="classificationValue != null  ">
+                classification_value=#{classificationValue},
+            </if>
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updator != null  ">
+                updator=#{updator},
+            </if>
+            <if test="updateTime != null  ">
+                update_time=#{updateTime},
+            </if>
+            <if test="execId != null  ">
+                exec_id=#{execId},
+            </if>
+            <if test="dataName != null  ">
+                data_name=#{dataName},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 聚类客群任务计算结果 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_KMEANS_CROWD_RESULT where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_KMEANS_CROWD_RESULT where id = #{id}
+    </delete>
+
+    <!-- 删除聚类客群结果记录 -->
+    <delete id="deleteByKmeansCrowdId" parameterType="Object">
+        delete from TD_KMEANS_CROWD_RESULT where kmeans_crowd_id = #{kmeansCrowdId}
+    </delete>
+
+    <!-- 聚类客群任务计算结果 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_KMEANS_CROWD_RESULT
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询聚类客群任务计算结果列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_KMEANS_CROWD_RESULT
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- 查询聚类客群任务计算结果列表 -->
+    <select id="queryListByParam" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_KMEANS_CROWD_RESULT
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <resultMap id="AssociationMap" type="td.enterprise.entity.KmeansCrowdResult" extends="BaseResultMap">
+        <result column="percent" property="percent"/>
+    </resultMap>
+
+    <!-- query classification-->
+    <select id="queryClassificationByParam" resultMap="AssociationMap" parameterType="Object">
+        SELECT kmeans_crowd_id,sum(classification_value) as percent ,classification_name,classification_description
+        FROM TD_KMEANS_CROWD_RESULT
+        <include refid="Base_Where_Clause"/>
+        group by classification_name
+        order by id asc
+    </select>
+
+    <!-- query classification-->
+    <select id="queryDataNameByParam" resultMap="BaseResultMap" parameterType="Object">
+        SELECT *
+        FROM TD_KMEANS_CROWD_RESULT
+        <include refid="Base_Where_Clause"/>
+        group by data_name
+        order by id asc
+    </select>
+
+    <!-- query classification-->
+    <select id="queryListByDataName" resultMap="BaseResultMap" parameterType="Object">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM TD_KMEANS_CROWD_RESULT
+        <include refid="Base_Where_Clause"/>
+        order by id asc
+    </select>
+    <!-- 修改 分类信息-->
+    <update id="updateClassification" parameterType="Object">
+        update TD_KMEANS_CROWD_RESULT
+        set
+        <if test="classificationName != null  ">
+            classification_name=#{classificationName},
+        </if>
+        <if test="classificationDescription != null  ">
+            classification_description=#{classificationDescription},
+        </if>
+        update_time=now()
+        where kmeans_crowd_id=#{kmeansCrowdId}
+        <if test="oldClassificationName != null  ">
+            and classification_name=#{oldClassificationName}
+        </if>
+        <!-- <if test="oldClassificationDescription != null  ">
+            and classification_description=#{oldClassificationDescription}
+        </if> -->
+    </update>
+</mapper>

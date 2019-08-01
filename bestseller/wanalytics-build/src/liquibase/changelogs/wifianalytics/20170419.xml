@@ -1,0 +1,34 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="ran.li" id="1492591169000-1">
+        <createTable tableName="TD_PROJECT_BATCH_CONFIG" remarks="项目批量设置表">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="project_id" remarks="项目id" type="varchar(63)" />
+            <column name="project_name" remarks="项目名称" type="varchar(127)" />
+            <column name="project_num" remarks="项目编号" type="varchar(63)" />
+            <column name="city" remarks="城市" type="varchar(127)" />
+
+            <column name="custom_label" remarks="文案" type="varchar(15)" />
+            <column name="black_list" remarks="黑名单" type="varchar(15)" />
+            <column name="threshold_value" remarks="阈值" type="varchar(15)" />
+            <column name="theme" remarks="UI模板" type="varchar(15)" />
+
+            <column name="status" type="int(2)" remarks="状态:-1 失效/1 有效" />
+            <column name="create_by" remarks="创建者账号" type="varchar(128)" />
+            <column name="creator" remarks="创建人" type="varchar(128)" />
+            <column name="create_time" remarks="创建时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改者账号" type="varchar(128)" />
+            <column name="updater" remarks="修改人" type="varchar(128)" />
+            <column name="update_time" remarks="修改时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

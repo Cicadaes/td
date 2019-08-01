@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ehcache name="datafilter-ehcache" updateCheck="false">
+
+	<cache name="ProjectCache" maxElementsInMemory="50000" eternal="false" memoryStoreEvictionPolicy="LRU"
+		timeToIdleSeconds="86400" timeToLiveSeconds="50400" overflowToDisk="false">
+	</cache>
+
+	<cache name="SensorCache" maxElementsInMemory="50000" eternal="false" memoryStoreEvictionPolicy="LRU"
+		timeToIdleSeconds="86400" timeToLiveSeconds="50400" overflowToDisk="false">
+	</cache>
+
+	<cache name="TenantUserCache" maxElementsInMemory="1000000" eternal="false" memoryStoreEvictionPolicy="LRU"
+		timeToIdleSeconds="86400" timeToLiveSeconds="86400" overflowToDisk="false">
+	</cache>
+	
+	<cache name="ProjectUserCache" maxElementsInMemory="100000" eternal="false" memoryStoreEvictionPolicy="LRU"
+		timeToIdleSeconds="86400" timeToLiveSeconds="86400" overflowToDisk="false">
+	</cache> 
+	 
+	 <cache name="CubeCache" maxElementsInMemory="2000000" eternal="false" memoryStoreEvictionPolicy="LRU"
+		 timeToLiveSeconds="86400" overflowToDisk="false">
+	</cache>
+	
+	<cache name="SessionCache" maxElementsInMemory="500000" eternal="false" memoryStoreEvictionPolicy="LRU"
+		 timeToLiveSeconds="7200" overflowToDisk="false">
+		  <cacheEventListenerFactory class="td.enterprise.wanalytics.processor.cache.EhCacheEventListenerFactory"/>  
+	</cache>
+	
+	<cache name="BlackListMacCache" maxElementsInMemory="50000" eternal="false" memoryStoreEvictionPolicy="LRU"
+		 timeToLiveSeconds="7200" overflowToDisk="false">
+	</cache>
+	
+	<cache name="AllSensorCache" maxElementsInMemory="500000" eternal="false" memoryStoreEvictionPolicy="LRU"
+		 timeToLiveSeconds="86400" overflowToDisk="false">
+	</cache>
+	
+	<cache name="SensorCheckCache" maxElementsInMemory="500000" eternal="false" memoryStoreEvictionPolicy="LRU"
+		 timeToLiveSeconds="86400" overflowToDisk="false">
+	</cache>
+	
+	<cache name="MacCompanyCache" maxElementsInMemory="500000" eternal="false" memoryStoreEvictionPolicy="LRU"
+         timeToLiveSeconds="86400" overflowToDisk="false">
+    </cache>
+	
+	<cache name="ProjectMacDateCache" maxElementsInMemory="500000"
+		   eternal="false" memoryStoreEvictionPolicy="LRU" timeToIdleSeconds="3600"
+		   timeToLiveSeconds="86400" overflowToDisk="false">
+	</cache>
+
+	<!-- 探针每日用户去重总计缓存 -->
+	<cache name="SensorAllMacCache" maxEntriesLocalHeap="500000" eternal="true" overflowToDisk="false"
+		   memoryStoreEvictionPolicy="LFU">
+		<cacheWriter writeMode="write-behind"
+					 notifyListenersOnException="true" maxWriteDelay="30"
+					 rateLimitPerSecond="5000" writeCoalescing="true" writeBatching="true"
+					 writeBatchSize="2000" retryAttempts="20" retryAttemptDelaySeconds="60">
+			<cacheWriterFactory
+					class="td.enterprise.wanalytics.processor.cache.AllMacCacheWriterFactory"/>
+		</cacheWriter>
+	</cache>
+	
+	<cache name="NonBlackListMacCache" maxElementsInMemory="500000" eternal="false" memoryStoreEvictionPolicy="LRU"
+		 timeToLiveSeconds="86400" overflowToDisk="false">
+	</cache>
+	
+	<cache name="MetaCache" maxElementsInMemory="500000" eternal="false" memoryStoreEvictionPolicy="LRU"
+		 timeToLiveSeconds="86400" overflowToDisk="false">
+	</cache>
+	
+	<cache name="FrontUserCache" maxElementsInMemory="2000000" eternal="false" memoryStoreEvictionPolicy="LRU"
+		timeToIdleSeconds="86400" timeToLiveSeconds="86400" overflowToDisk="false">
+	</cache>
+
+</ehcache>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true">
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    
+	<property name="LOG_HOME" value="logs" /> 
+	<!-- <property name="LOG_HOME_HISTORY" value="logs/history" /> --> 
+	<property name="LOG_HOME_HISTORY" value="/data/wifianalytics-adapter-7000/logs/history" /> 
+  	<property name="queueSize" value="512" />
+  	<property name="maxHistory" value="90" />
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_HOME}/adapter.log</File>
+    	<Append>true</Append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME_HISTORY}/adapter.%d{yyyy-MM-dd_HH}.log</fileNamePattern>
+            <maxHistory>48</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf-8</charset>
+            <Pattern>%d|%-5level|[%thread]|%logger{0}: %msg%n</Pattern>
+        </encoder>
+    </appender>
+    <appender name="FTP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    	<File>${LOG_HOME}/ftp.log</File>
+    	<Append>true</Append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME_HISTORY}/ftp.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf-8</charset>
+            <Pattern>%d|%-5level|[%thread]|%logger{0}: %msg%n</Pattern>
+        </encoder>
+    </appender>
+    <appender name="HTTP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    	<File>${LOG_HOME}/http.log</File>
+    	<Append>true</Append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME_HISTORY}/http.%d{yyyy-MM-dd_HH}.log</fileNamePattern>
+            <maxHistory>48</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf-8</charset>
+            <Pattern>%d|%-5level|[%thread]|%logger{0}: %msg%n</Pattern>
+        </encoder>
+    </appender>
+    <appender name="REDIS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    	<File>${LOG_HOME}/redis.log</File>
+    	<Append>true</Append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME_HISTORY}/redis.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf-8</charset>
+            <Pattern>%d|%-5level|[%thread]|%logger{0}: %msg%n</Pattern>
+        </encoder>
+    </appender>
+    <appender name="TASK" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    	<File>${LOG_HOME}/task.log</File>
+    	<Append>true</Append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME_HISTORY}/task.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf-8</charset>
+            <Pattern>%d|%-5level|[%thread]|%logger{0}: %msg%n</Pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="FILEDATA" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    	<File>${LOG_HOME}/filedata.log</File>
+    	<Append>true</Append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME_HISTORY}/filedata.%d{yyyy-MM-dd_HH}.log</fileNamePattern>
+            <maxHistory>168</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf-8</charset>
+            <Pattern>%d|%-5level|[%thread]|%logger{0}: %msg%n</Pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="FQUEUE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    	<File>${LOG_HOME}/fqueue.log</File>
+    	<Append>true</Append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME_HISTORY}/fqueue.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf-8</charset>
+            <Pattern>%d|%-5level|[%thread]|%logger{0}: %msg%n</Pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="KAFKA" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    	<File>${LOG_HOME}/kafka.log</File>
+    	<Append>true</Append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME_HISTORY}/kafka.%d{yyyy-MM-dd_HH}.log</fileNamePattern>
+            <maxHistory>48</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf-8</charset>
+            <Pattern>%d|%-5level|[%thread]|%logger{0}: %msg%n</Pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="MYSQL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    	<File>${LOG_HOME}/mysql.log</File>
+    	<Append>true</Append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME_HISTORY}/mysql.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf-8</charset>
+            <Pattern>%d|%-5level|[%thread]|%logger{0}: %msg%n</Pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    	<File>${LOG_HOME}/error.log</File>
+    	<Append>true</Append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME_HISTORY}/error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>90</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf-8</charset>
+            <Pattern>%d|%-5level|[%thread]|%logger{0}: %msg%n</Pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+	      <level>ERROR</level>
+	    </filter>
+    </appender>
+    
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>${queueSize}</queueSize>
+        <appender-ref ref="FILE"/>
+    </appender>
+    
+	<appender name="ASYNC_FTP" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>${queueSize}</queueSize>
+        <appender-ref ref="FTP"/>
+    </appender>
+	<logger name="FTP" level="INFO">
+    	<appender-ref ref="ASYNC_FTP"/>
+  	</logger>
+  	<appender name="ASYNC_HTTP" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>${queueSize}</queueSize>
+        <appender-ref ref="HTTP"/>
+    </appender>
+	<logger name="HTTP" level="INFO">
+    	<appender-ref ref="ASYNC_HTTP"/>
+  	</logger>
+  	<appender name="ASYNC_FILEDATA" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>${queueSize}</queueSize>
+        <appender-ref ref="FILEDATA"/>
+    </appender>
+	<logger name="FILEDATA" level="INFO">
+    	<appender-ref ref="ASYNC_FILEDATA"/>
+  	</logger>
+  	<appender name="ASYNC_REDIS" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>${queueSize}</queueSize>
+        <appender-ref ref="REDIS"/>
+    </appender>
+	<logger name="REDIS" level="INFO">
+    	<appender-ref ref="ASYNC_REDIS"/>
+  	</logger>
+  	<appender name="ASYNC_TASK" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>${queueSize}</queueSize>
+        <appender-ref ref="TASK"/>
+    </appender>
+	<logger name="TASK" level="INFO">
+    	<appender-ref ref="ASYNC_TASK"/>
+  	</logger>
+  	<appender name="ASYNC_FQUEUE" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>${queueSize}</queueSize>
+        <appender-ref ref="FQUEUE"/>
+    </appender>
+	<logger name="FQUEUE" level="INFO">
+    	<appender-ref ref="ASYNC_FQUEUE"/>
+  	</logger>
+  	<appender name="ASYNC_KAFKA" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>${queueSize}</queueSize>
+        <appender-ref ref="KAFKA"/>
+    </appender>
+	<logger name="KAFKA" level="INFO">
+    	<appender-ref ref="ASYNC_KAFKA"/>
+  	</logger>
+  	<appender name="ASYNC_MYSQL" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>${queueSize}</queueSize>
+        <appender-ref ref="MYSQL"/>
+    </appender>
+	<logger name="MYSQL" level="INFO">
+    	<appender-ref ref="ASYNC_MYSQL"/>
+  	</logger>
+
+
+    <logger name="td.enterprise" level="#logback.loglevel#"/>
+
+    <logger name="com.sun" level="WARN"/>
+    <logger name="com.zaxxer" level="WARN"/>
+    <logger name="io.undertow" level="WARN"/>
+    <logger name="org.ehcache" level="WARN"/>
+    <logger name="org.apache" level="WARN"/>
+    <logger name="org.apache.catalina.startup.DigesterFactory" level="OFF"/>
+    <logger name="org.bson" level="WARN"/>
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.springframework.web" level="WARN"/>
+    <logger name="org.springframework.security" level="WARN"/>
+    <logger name="org.springframework.cache" level="WARN"/>
+    <logger name="org.springframework.security.cas" level="WARN"/>
+    <logger name="springfox" level="WARN"/>
+    <logger name="javax.activation" level="WARN"/>
+
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <root level="#logback.loglevel#">
+        <appender-ref ref="FILE"/>
+    	<appender-ref ref="ERROR"/>
+    </root>
+
+</configuration>

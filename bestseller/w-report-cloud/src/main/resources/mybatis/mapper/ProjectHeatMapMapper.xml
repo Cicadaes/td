@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.ProjectHeatMapDao" >
+	<!-- Result Map-->
+	<resultMap id="BaseResultMap" type="td.enterprise.entity.ProjectHeatMap" >
+		<result column="id" property="id"/>
+		<result column="project_id" property="projectId"/>
+		<result column="timestamp" property="timestamp"/>
+		<result column="date" property="date"/>
+		<result column="hour" property="hour"/>
+		<result column="mac" property="mac"/>
+		<result column="in_room" property="inRoom"/>
+		<result column="x" property="x"/>
+		<result column="y" property="y"/>
+	</resultMap>
+
+	<!-- TD_PROJECT_HEAT_MAP table all fields -->
+	<sql id="Base_Column_List" >
+		id,project_id,timestamp,date,hour,mac,in_room,x,y
+	</sql>
+
+	<!-- 查询条件 -->
+	<sql id="Base_Where_Clause">
+		where 1=1
+		<trim suffixOverrides="," >
+			<if test="id != null and id != ''" >
+				and id =  #{id}
+			</if>
+			<if test="projectId != null and projectId != ''" >
+				and project_id =  #{projectId}
+			</if>
+			<if test="timestamp != null and timestamp != ''" >
+				and timestamp =  #{timestamp}
+			</if>
+			<if test="date != null and date != ''" >
+				and date =  #{date}
+			</if>
+			<if test="hour != null and hour != ''" >
+				and hour =  #{hour}
+			</if>
+			<if test="mac != null and mac != ''" >
+				and mac =  #{mac}
+			</if>
+			<if test="inRoom != null and inRoom != ''" >
+				and in_room =  #{inRoom}
+			</if>
+			<if test="x != null and x != ''" >
+				and x =  #{x}
+			</if>
+			<if test="y != null and y != ''" >
+				and y =  #{y}
+			</if>
+		</trim>
+	</sql>
+
+	<!-- 插入记录 -->
+	<insert id="insert" parameterType="Object" >
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into
+		TD_PROJECT_HEAT_MAP(id,project_id,timestamp,date,hour,mac,in_room,x,y)
+		values(#{id},#{projectId},#{timestamp},#{date},#{hour},#{mac},#{inRoom},#{x},#{y})
+	</insert>
+
+	<!-- 根据id，修改记录-->
+	<update id="updateByPrimaryKey" parameterType="Object" >
+		update TD_PROJECT_HEAT_MAP set project_id=#{projectId},timestamp=#{timestamp},date=#{date},hour=#{hour},mac=#{mac},in_room=#{inRoom},x=#{x},y=#{y} where id=#{id}
+	</update>
+
+	<!-- 修改记录，只修改只不为空的字段 -->
+	<update id="updateByPrimaryKeySelective" parameterType="Object" >
+		update TD_PROJECT_HEAT_MAP set
+		<if test="projectId != null  ">
+			project_id=#{projectId},
+		</if>
+		<if test="timestamp != null  ">
+			timestamp=#{timestamp},
+		</if>
+		<if test="date != null  ">
+			date=#{date},
+		</if>
+		<if test="hour != null  ">
+			hour=#{hour},
+		</if>
+		<if test="mac != null  ">
+			mac=#{mac},
+		</if>
+		<if test="inRoom != null  ">
+			in_room=#{inRoom},
+		</if>
+		<if test="x != null  ">
+			x=#{x},
+		</if>
+		<if test="y != null  ">
+			y=#{y},
+		</if>
+		update_time = now()
+		where id=#{id}
+	</update>
+
+	<!-- 根据id查询 人群热力图 -->
+	<select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+		select <include refid="Base_Column_List" />
+		from TD_PROJECT_HEAT_MAP where id = #{id}
+	</select>
+
+	<!-- 删除记录 -->
+	<delete id="deleteByPrimaryKey" parameterType="Object">
+		delete from TD_PROJECT_HEAT_MAP where id = #{id}
+	</delete>
+
+	<!-- 人群热力图 列表总数-->
+	<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+		select count(1) from TD_PROJECT_HEAT_MAP
+		<include refid="Base_Where_Clause"/>
+	</select>
+
+	<!-- 查询人群热力图列表 -->
+	<select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+		select
+		<include refid="Base_Column_List"/>
+		from TD_PROJECT_HEAT_MAP
+		<include refid="Base_Where_Clause"/>
+		<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			${pager.orderCondition}
+		</if>
+		<if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+			${pager.mysqlQueryCondition}
+		</if>
+	</select>
+</mapper>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.OfflineCrossOldUserMonthDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.OfflineCrossOldUserMonth">
+        <result column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="project_id" property="projectId"/>
+        <result column="month" property="month"/>
+        <result column="cross_users" property="crossUsers"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- TD_OFFLINE_CROSS_OLD_USER_MONTH table all fields -->
+    <sql id="Base_Column_List">
+        id,tenant_id,project_id,month,cross_users,update_time
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="month != null and month != ''">
+                and month = #{month}
+            </if>
+            <if test="crossUsers != null and crossUsers != ''">
+                and cross_users = #{crossUsers}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into TD_OFFLINE_CROSS_OLD_USER_MONTH(id,tenant_id,project_id,month,cross_users,update_time)
+        values(#{id},#{tenantId},#{projectId},#{month},#{crossUsers},now())
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_OFFLINE_CROSS_OLD_USER_MONTH set
+        tenant_id=#{tenantId},project_id=#{projectId},month=#{month},cross_users=#{crossUsers},update_time=now() where
+        id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_OFFLINE_CROSS_OLD_USER_MONTH set
+        <trim suffixOverrides=",">
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="month != null  ">
+                month=#{month},
+            </if>
+            <if test="crossUsers != null  ">
+                cross_users=#{crossUsers},
+            </if>
+            <if test="updateTime != null  ">
+                update_time=#{updateTime},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 项目月度跨店老客 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_OFFLINE_CROSS_OLD_USER_MONTH where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_OFFLINE_CROSS_OLD_USER_MONTH where id = #{id}
+    </delete>
+
+    <!-- 项目月度跨店老客 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_OFFLINE_CROSS_OLD_USER_MONTH
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询项目月度跨店老客列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_OFFLINE_CROSS_OLD_USER_MONTH
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- 根据项目删除-->
+    <delete id="deleteByProject" parameterType="Object">
+        delete from TD_OFFLINE_CROSS_OLD_USER_MONTH where project_id = #{projectId} and month =#{month}
+    </delete>
+
+    <delete id="batchDeleteByProjectAndDate" parameterType="Object">
+        delete from TD_OFFLINE_CROSS_OLD_USER_MONTH where project_id = #{projectId} and month = #{month}
+    </delete>
+
+    <insert id="batchSelectAndInsert" useGeneratedKeys="true" parameterType="java.util.List">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO TD_OFFLINE_CROSS_OLD_USER_MONTH(tenant_id, project_id, month, cross_users)
+        SELECT t.tenant_id, d.project_id, t.month, t.cross_users
+        FROM
+        (SELECT s.tenant_id, s.month, SUM(IFNULL(s.cross_users,0)) AS cross_users
+        FROM TD_OFFLINE_CROSS_OLD_USER_MONTH s
+        WHERE s.project_id IN (
+        SELECT r.project_id FROM TD_PROJECT_RELATION r
+        WHERE r.project_parent_id = #{projectId})
+        AND s.month = #{month}
+        GROUP BY s.tenant_id, s.month
+        )t,
+        (SELECT DISTINCT project_parent_id AS project_id FROM TD_PROJECT_RELATION WHERE project_parent_id = #{projectId}
+        )d
+    </insert>
+</mapper>

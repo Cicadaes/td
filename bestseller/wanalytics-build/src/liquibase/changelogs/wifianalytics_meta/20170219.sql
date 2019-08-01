@@ -1,0 +1,17 @@
+--liquibase formatted sql
+
+--changeset ran.li:1487511679000-1
+INSERT INTO `wifianalytics_meta`.`TD_METRIC` (`id`, `cube_id`, `name`, `type`, `column_id`, `compute_by`, `data_app_id`, `tenant_id`, `creator`, `create_by`, `update_by`, `create_time`, `update_time`) VALUES('84','85','offline_enter_new_user_day_counter','1','426','counter',NULL,NULL,'tools','tools','tools','2017-02-19 21:40:26','2017-02-19 21:40:26');
+
+INSERT INTO `wifianalytics_meta`.`TD_FACT_TABLE` (`id`, `name`, `version`, `domain_id`, `data_app_id`, `tenant_id`, `creator`, `create_by`, `update_by`, `create_time`, `update_time`) VALUES('84','offline_enter_new_user_day_counter','1','2',NULL,NULL,'tools','tools','tools','2017-02-19 21:40:25','2017-02-19 21:40:25');
+
+INSERT INTO `wifianalytics_meta`.`TD_DIMENSION` (`id`, `cube_id`, `name`, `default_value`, `display_name`, `column_id`, `type`, `data_app_id`, `tenant_id`, `creator`, `create_by`, `update_by`, `create_time`, `update_time`) VALUES('366','85','tenant_id','tenant_id',NULL,'423','0',NULL,NULL,'tools','tools','tools','2017-02-19 21:40:25','2017-02-19 21:40:25');
+INSERT INTO `wifianalytics_meta`.`TD_DIMENSION` (`id`, `cube_id`, `name`, `default_value`, `display_name`, `column_id`, `type`, `data_app_id`, `tenant_id`, `creator`, `create_by`, `update_by`, `create_time`, `update_time`) VALUES('367','85','project_id','project_id',NULL,'424','0',NULL,NULL,'tools','tools','tools','2017-02-19 21:40:25','2017-02-19 21:40:25');
+INSERT INTO `wifianalytics_meta`.`TD_DIMENSION` (`id`, `cube_id`, `name`, `default_value`, `display_name`, `column_id`, `type`, `data_app_id`, `tenant_id`, `creator`, `create_by`, `update_by`, `create_time`, `update_time`) VALUES('368','85','date','date',NULL,'425','0',NULL,NULL,'tools','tools','tools','2017-02-19 21:40:26','2017-02-19 21:40:26');
+
+INSERT INTO `wifianalytics_meta`.`TD_CUBE` (`id`, `name`, `owner`, `description`, `fact_table_id`, `domain_id`, `data_app_id`, `tenant_id`, `creator`, `create_by`, `update_by`, `create_time`, `update_time`) VALUES('85','offline_enter_new_user_day_counter',NULL,'offline_enter_new_user_day_counter','84','2',NULL,NULL,'tools','tools','tools','2017-02-19 21:40:25','2017-02-19 21:40:25');
+
+INSERT INTO `wifianalytics_meta`.`TD_COLUMN` (`id`, `name`, `type`, `fact_id`, `not_null`, `length`, `another_name`, `data_app_id`, `tenant_id`, `creator`, `create_by`, `update_by`, `create_time`, `update_time`) VALUES('423','tenant_id','varchar','84',0,'64',NULL,NULL,NULL,'tools','tools','tools','2017-02-19 21:40:25','2017-02-19 21:40:25');
+INSERT INTO `wifianalytics_meta`.`TD_COLUMN` (`id`, `name`, `type`, `fact_id`, `not_null`, `length`, `another_name`, `data_app_id`, `tenant_id`, `creator`, `create_by`, `update_by`, `create_time`, `update_time`) VALUES('424','project_id','int','84',0,'10',NULL,NULL,NULL,'tools','tools','tools','2017-02-19 21:40:25','2017-02-19 21:40:25');
+INSERT INTO `wifianalytics_meta`.`TD_COLUMN` (`id`, `name`, `type`, `fact_id`, `not_null`, `length`, `another_name`, `data_app_id`, `tenant_id`, `creator`, `create_by`, `update_by`, `create_time`, `update_time`) VALUES('425','date','varchar','84',0,'10',NULL,NULL,NULL,'tools','tools','tools','2017-02-19 21:40:25','2017-02-19 21:40:25');
+INSERT INTO `wifianalytics_meta`.`TD_COLUMN` (`id`, `name`, `type`, `fact_id`, `not_null`, `length`, `another_name`, `data_app_id`, `tenant_id`, `creator`, `create_by`, `update_by`, `create_time`, `update_time`) VALUES('426','offset','int','84',0,'10',NULL,NULL,NULL,'tools','tools','tools','2017-02-19 21:40:26','2017-02-19 21:40:26');

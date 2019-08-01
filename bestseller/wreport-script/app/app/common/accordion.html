@@ -1,0 +1,37 @@
+<div style="height: 100%;">
+    <div id="logo_div"  style="height: 60px; padding: 5px 10px; cursor: pointer;" ng-if="!isMutilApp" ng-click="toggleDirectBar($event)" title="主菜单">
+        <img src="images/logo_td.png" width="160" height="50">
+    </div>
+    <div class="search" ng-if="isMutilApp" style="height: 60px; padding: 5px 10px; cursor: pointer;" ><input type="text" placeholder="搜索" ng-model="searchMenuKeyword" ng-keyup="searchMenuList();"/></div>
+
+
+    <div class="menu-left" style="overflow-y:auto">
+        <div ng-repeat="dl in menuList">
+            <hr ng-if="$index != 0 && dl.menu_show != 'hide'" style="border-top-color: #47507D;  margin: 0 14px;">
+            <!-- 一级菜单 -->
+            <div ng-show="dl.menu_show != 'hide'" ng-click="mentItemClick(dl)" class="menu-item" ng-class="{'active': dl.active, 'item-link': dl.childrens.length == 0}">
+                <i class="icons-menu icon-menu-{{dl.extAttr2}}" style="margin: 0 6px 0 0"></i>
+                <span class="menu-front-level">{{dl.resourceLabel}}</span>
+            </div>
+            <!-- 二级菜单 -->
+            <div ng-repeat="dd in dl.childrens" ng-show="dd.menu_show != 'hide'" ng-click="mentItemClick(dd)" class="menu-item item-link item-fix" ng-class="{'active': curMenuUri.indexOf(dd.resourceUri) != -1}" style="padding-left: 40px;">
+                <span>{{dd.resourceLabel}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="logout clrfix" id="logout" ng-if="!isMutilApp" ng-mouseleave="mouseoutLogout();">
+        <a class="account" href="javascript:" ng-mouseenter="mouseoverLogout();" ng-class="{'active':userMgrActive}" style="width: 100%;">
+            <span></span>{{constants.label_user}} {{currentTenantName}}
+        </a>
+
+        <ul class="dropdown-ul" ng-if="userMgrActive" style="width: 160px;">
+            <li class="li01 clrfix">
+                <a href="javascript:" class="account-name" title="{{user.name}}">{{user.name}}</a>
+                <i class="icon-out" ng-click="logout()" title="退出"></i>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div change-password-dialog></div>

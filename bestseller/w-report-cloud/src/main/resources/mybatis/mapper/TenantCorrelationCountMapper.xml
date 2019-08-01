@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.TenantCorrelationCountDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.TenantCorrelationCount">
+        <result column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="project_id" property="projectId"/>
+        <result column="crowd_id" property="crowdId"/>
+        <result column="active_count" property="activeCount"/>
+        <result column="compare_project_id" property="compareProjectId"/>
+        <result column="compare_crowd_id" property="compareCrowdId"/>
+        <result column="compare_active_count" property="compareActiveCount"/>
+        <result column="common_count" property="commonCount"/>
+        <result column="cycle_statistics" property="cycleStatistics"/>
+        <result column="run_date" property="runDate"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+    </resultMap>
+
+    <!-- TD_TENANT_CORRELATION_COUNT table all fields -->
+    <sql id="Base_Column_List">
+        id,tenant_id,project_id,crowd_id,active_count,compare_project_id,compare_crowd_id,compare_active_count,common_count,cycle_statistics,run_date,start_date,end_date
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="crowdId != null and crowdId != ''">
+                and crowd_id = #{crowdId}
+            </if>
+            <if test="activeCount != null and activeCount != ''">
+                and active_count = #{activeCount}
+            </if>
+            <if test="compareProjectId != null and compareProjectId != ''">
+                and compare_project_id = #{compareProjectId}
+            </if>
+            <if test="compareCrowdId != null and compareCrowdId != ''">
+                and compare_crowd_id = #{compareCrowdId}
+            </if>
+            <if test="compareActiveCount != null and compareActiveCount != ''">
+                and compare_active_count = #{compareActiveCount}
+            </if>
+            <if test="commonCount != null and commonCount != ''">
+                and common_count = #{commonCount}
+            </if>
+            <if test="cycleStatistics != null and cycleStatistics != ''">
+                and cycle_statistics = #{cycleStatistics}
+            </if>
+            <if test="runDate != null and runDate != ''">
+                and run_date = #{runDate}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and start_date = #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and end_date = #{endDate}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_TENANT_CORRELATION_COUNT(id,tenant_id,project_id,crowd_id,active_count,compare_project_id,compare_crowd_id,compare_active_count,common_count,cycle_statistics,run_date,start_date,end_date)
+        values(#{id},#{tenantId},#{projectId},#{crowdId},#{activeCount},#{compareProjectId},#{compareCrowdId},#{compareActiveCount},#{commonCount},#{cycleStatistics},#{runDate},#{startDate},#{endDate})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_TENANT_CORRELATION_COUNT set
+        tenant_id=#{tenantId},project_id=#{projectId},crowd_id=#{crowdId},active_count=#{activeCount},compare_project_id=#{compareProjectId},compare_crowd_id=#{compareCrowdId},compare_active_count=#{compareActiveCount},common_count=#{commonCount},cycle_statistics=#{cycleStatistics},run_date=#{runDate},start_date=#{startDate},end_date=#{endDate}
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_TENANT_CORRELATION_COUNT set
+        <trim suffixOverrides=",">
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="crowdId != null  ">
+                crowd_id=#{crowdId},
+            </if>
+            <if test="activeCount != null  ">
+                active_count=#{activeCount},
+            </if>
+            <if test="compareProjectId != null  ">
+                compare_project_id=#{compareProjectId},
+            </if>
+            <if test="compareCrowdId != null  ">
+                compare_crowd_id=#{compareCrowdId},
+            </if>
+            <if test="compareActiveCount != null  ">
+                compare_active_count=#{compareActiveCount},
+            </if>
+            <if test="commonCount != null  ">
+                common_count=#{commonCount},
+            </if>
+            <if test="cycleStatistics != null  ">
+                cycle_statistics=#{cycleStatistics},
+            </if>
+            <if test="runDate != null  ">
+                run_date=#{runDate},
+            </if>
+            <if test="startDate != null  ">
+                start_date=#{startDate},
+            </if>
+            <if test="endDate != null  ">
+                end_date=#{endDate},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 竞品关联度指标 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_TENANT_CORRELATION_COUNT where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_TENANT_CORRELATION_COUNT where id = #{id}
+    </delete>
+
+    <!-- 竞品关联度指标 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_TENANT_CORRELATION_COUNT
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询竞品关联度指标列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_TENANT_CORRELATION_COUNT
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <select id="queryRelevancyIndex" resultMap="BaseResultMap" parameterType="Object">
+        select distinct
+        h.compare_project_id,h.active_count,h.compare_active_count,h.common_count
+        from
+        TD_TENANT_CORRELATION_COUNT h
+        where
+        h.project_id = #{projectId}
+        and h.compare_project_id = #{compareProjectId}
+        and h.run_date = (
+        select max(hd.run_date) from TD_TENANT_CORRELATION_COUNT hd
+        where hd.project_id = #{projectId} AND hd.compare_project_id = #{compareProjectId})
+    </select>
+</mapper>

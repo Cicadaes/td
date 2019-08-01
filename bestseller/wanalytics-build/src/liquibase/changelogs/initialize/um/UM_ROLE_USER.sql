@@ -1,0 +1,9 @@
+--liquibase formatted sql
+
+--changeset yunlong.wang:1482894556120-15
+INSERT INTO `UM_ROLE_USER` VALUES (1,2,'system',0,'system','2016-05-17 11:37:00');
+INSERT INTO `UM_ROLE_USER` VALUES (2,2,'UMAdmin',0,'system','2016-05-17 11:37:00');
+INSERT INTO `UM_ROLE_USER` VALUES (23,2,'report',0,'system','2016-05-17 13:37:20');
+INSERT INTO `UM_ROLE_USER` VALUES (27,2,'dmpadmin',0,'system','2016-05-17 13:38:06');
+INSERT INTO `UM_ROLE_USER` VALUES (12485,3,'UMAdmin',0,'UMAdmin','2016-12-13 10:11:51');
+INSERT INTO `UM_ROLE_USER` VALUES (12486,4,'UMAdmin',0,'UMAdmin','2016-12-13 10:13:21');

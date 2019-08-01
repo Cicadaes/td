@@ -1,0 +1,91 @@
+<div class="modal" id="warningSettingDialog" tabindex="-1" role="dialog" style="margin-top: 100px;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" ng-drag-dialog="true">
+                <button type="button" class="close"  aria-label="Close" ng-click="closeModel()"><span aria-hidden="true" >&times;</span></button>
+                <h4 class="modal-title">{{constants.field_warning_setting}}</h4><!--{{constants.field_warning_setting}}-->
+            </div>
+            <div class="modal-body" style="height: 120px;">
+
+                <div style="padding: 15px 0;">
+                    <label class = "warningSettingLabel" >{{constants.field_warning_setting_recipient}}</label>
+                    <ul class="warningSettingUl">
+                        <li>
+                            <span ng-class="{'simulationCheck':true,'simulationCheck_check': administratorsFlag == 'administrators'}"  ng-click="checkChannel($event,'administrators')"></span>
+                            <span >{{constants.field_warning_setting_recipient_administrators}}</span>
+                        </li>
+
+                        <li>
+                            <span ng-class="{'simulationCheck':true,'simulationCheck_check': storePersonFlag == 'storePerson'}" ng-click="checkChannel($event,'storePerson')"></span>
+                            <span >{{constants.field_warning_setting_recipient_storePerson}}</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="padding: 15px 0;">
+                    <label class = "warningSettingLabel" >{{constants.field_warning_setting_channel}}</label>
+                    <ul class="warningSettingUl">
+                        <li>
+                            <span ng-class="{'simulationCheck':true,'simulationCheck_check': emailFlag == 'email'}" ng-click="checkChannel($event,'email')"></span>
+                            <span >{{constants.field_warning_setting_channel_email}}</span>
+                        </li>
+
+                        <li>
+                            <span class="simulationCheck" style="background: #ccc;cursor: text;"></span>
+                            <span >{{constants.field_warning_setting_channel_message}}</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="padding: 15px 0;">
+                    <label class = "warningSettingLabel" >{{constants.field_warning_setting_threshold}}</label>
+                    <ul class = "warningSettingThreshold">
+                        <li>
+                            <p class = "warningSettingThresholdCheck">
+                                <span ng-class="{'simulationCheck':true,'simulationCheck_check': healthyFlag == 'healthy'}"  ng-click="checkThreshold($event,'healthy')"></span>
+                                <span >{{constants.field_warning_setting_threshold_healthy}}</span>
+                            </p>
+
+                            <p class = "warningSettingThresholdInput"  ng-show = "healthyFlag == 'healthy'">
+                                {{constants.compare_size_lessThan}}
+                                <input  ng-model="healthy"/>
+                                %
+                            </p>
+                        </li>
+
+                        <li>
+                            <p class = "warningSettingThresholdCheck">
+                                <span ng-class="{'simulationCheck':true,'simulationCheck_check': nologsFlag == 'nologs'}"  ng-click="checkThreshold($event,'nologs')"></span>
+                                <span >{{constants.field_warning_setting_threshold_nologes}}</span>
+                            </p>
+
+                            <p class = "warningSettingThresholdInput" ng-show = "nologsFlag == 'nologs'">
+                                {{constants.compare_size_greaterThan}}
+                                <input ng-model="nologs"/>
+                                {{constants.field_batchset_time_company_hour}}
+                            </p>
+
+                        </li>
+
+                        <li>
+                            <p class = "warningSettingThresholdCheck">
+                                <span ng-class="{'simulationCheck':true,'simulationCheck_check': onenologsFlag == 'onenologs'}"  ng-click="checkThreshold($event,'onenologs')"></span>
+                                <span >{{constants.field_warning_setting_threshold_onenologes}}</span>
+                            </p>
+
+                            <p class = "warningSettingThresholdInput" ng-show = "onenologsFlag == 'onenologs'">
+                                {{constants.compare_size_greaterThan}}
+                                <input ng-model="onenologs"/>
+                                {{constants.field_batchset_time_company_hour}}
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer" style="margin-top: 94px;">
+                <button type="button" class="btn btn-primary" ng-click="saveWarningSettingResult()">{{constants.label_save}}</button>
+                <button type="button" class="btn btn-default" ng-click="closeModel()">{{constants.label_cancel}}</button>
+            </div>
+        </div>
+    </div>
+</div>

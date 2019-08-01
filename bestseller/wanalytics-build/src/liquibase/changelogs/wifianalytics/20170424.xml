@@ -1,0 +1,15 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	<changeSet author="yunlong.wang" id="1493005922717-1">
+        	<createTable tableName="TD_MAC_COMPANY" remarks="TD_MAC_COMPANY">
+					<column defaultValue="" name="mac" type="VARCHAR(64)">
+						<constraints nullable="false"/>
+					</column>
+					<column defaultValue="" name="company" type="VARCHAR(500)">
+						<constraints nullable="false"/>
+					</column>
+					<column defaultValueNumeric="0" name="is_mobile" type="INT"/>
+					<column defaultValue="" name="compnay_cn" type="VARCHAR(500)"/>
+            </createTable>
+    </changeSet> 
+</databaseChangeLog>

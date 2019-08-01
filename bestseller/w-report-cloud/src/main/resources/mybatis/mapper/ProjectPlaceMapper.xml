@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.ProjectPlaceDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.ProjectPlace">
+        <result column="id" property="id"/>
+        <result column="place_name" property="placeName"/>
+        <result column="order_number" property="orderNumber"/>
+        <result column="project_id" property="projectId"/>
+        <result column="diagram_id" property="diagramId"/>
+        <result column="diagram_name" property="diagramName"/>
+        <result column="description" property="description"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="creator" property="creator"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="updater" property="updater"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="status" property="status"/>
+        <result column="pic_url" property="picUrl"/>
+    </resultMap>
+
+    <!-- TD_PROJECT_PLACE table all fields -->
+    <sql id="Base_Column_List">
+        id,place_name,order_number,project_id,diagram_id,diagram_name,description,tenant_id,creator,create_by,create_time,updater,update_by,update_time,status,pic_url
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="placeName != null and placeName != ''">
+                and place_name = #{placeName}
+            </if>
+            <if test="orderNumber != null and orderNumber != ''">
+                and order_number = #{orderNumber}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="diagramId != null and diagramId != ''">
+                and diagram_id = #{diagramId}
+            </if>
+            <if test="diagramName != null and diagramName != ''">
+                and diagram_name = #{diagramName}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="picUrl != null and picUrl != ''">
+                and pic_url = #{picUrl}
+            </if>
+        </trim>
+        order by order_number asc
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_PROJECT_PLACE(id,place_name,order_number,project_id,diagram_id,diagram_name,description,tenant_id,creator,create_by,create_time,updater,update_by,update_time,status,pic_url)
+        values(#{id},#{placeName},#{orderNumber},#{projectId},#{diagramId},#{diagramName},#{description},#{tenantId},#{creator},#{createBy},now(),#{updater},#{updateBy},now(),#{status},#{picUrl})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_PROJECT_PLACE set
+        place_name=#{placeName},order_number=#{orderNumber},project_id=#{projectId},diagram_id=#{diagramId},diagram_name=#{diagramName},description=#{description},tenant_id=#{tenantId},creator=#{creator},create_by=#{createBy},create_time=now(),updater=#{updater},update_by=#{updateBy},update_time=now(),status=#{status},pic_url=#{picUrl}
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_PROJECT_PLACE set
+        <trim suffixOverrides=",">
+            <if test="placeName != null  ">
+                place_name=#{placeName},
+            </if>
+            <if test="orderNumber != null  ">
+                order_number=#{orderNumber},
+            </if>
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="diagramId != null  ">
+                diagram_id=#{diagramId},
+            </if>
+            <if test="diagramName != null  ">
+                diagram_name=#{diagramName},
+            </if>
+            <if test="description != null  ">
+                description=#{description},
+            </if>
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="createBy != null  ">
+                create_by=#{createBy},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updater != null  ">
+                updater=#{updater},
+            </if>
+            <if test="updateBy != null  ">
+                update_by=#{updateBy},
+            </if>
+            <if test="updateTime != null  ">
+                update_time=#{updateTime},
+            </if>
+            <if test="status != null  ">
+                status=#{status},
+            </if>
+            <if test="picUrl != null  ">
+                pic_url=#{picUrl},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 项目区域 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_PROJECT_PLACE where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_PROJECT_PLACE where id = #{id}
+    </delete>
+
+    <!-- 项目区域 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_PROJECT_PLACE
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询项目区域列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_PROJECT_PLACE
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- 查询项目区域列表 -->
+    <select id="queryByName" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_PROJECT_PLACE
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- 快速搜索-支持对场地名称，图片名称的模糊查询 -->
+    <select id="quickSearchByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_PROJECT_PLACE
+        where 1=1
+        <if test="projectId != null and projectId != ''">
+            and project_id = #{projectId}
+        </if>
+        <if test="tenantId != null and tenantId != ''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="status != null and status != ''">
+            and status = #{status}
+        </if>
+        <if test="q != null and q != ''">
+            and (diagram_name like CONCAT('%','${q}','%' ) or place_name like CONCAT('%','${q}','%' ) )
+        </if>
+        order by order_number asc
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- quickSearchGetCount 快速搜索-支持对场地名称，图片名称的模糊查询 -->
+    <select id="quickSearchGetCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(id)
+        from TD_PROJECT_PLACE
+        where 1=1
+        <if test="projectId != null and projectId != ''">
+            and project_id = #{projectId}
+        </if>
+        <if test="tenantId != null and tenantId != ''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="status != null and status != ''">
+            and status = #{status}
+        </if>
+        <if test="q != null and q != ''">
+            and (diagram_name like CONCAT('%','${q}','%' ) or place_name like CONCAT('%','${q}','%' ) )
+        </if>
+        order by order_number asc
+    </select>
+
+    <!-- 查询项目区域列表 -->
+    <select id="selectByProjectId" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_PROJECT_PLACE
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+</mapper>

@@ -1,0 +1,160 @@
+    <div class="clrfix operator-panel">
+    <!--
+        <span class="btn-add" ng-click="newClick()" data-toggle="modal" data-target="#sensorDialog">
+            <i class="icons icons-add"></i>{{constants.btn_create_sensor}}
+        </span>
+        <div class="btn-add">
+            <div style="border: 0;box-shadow: 0 !important;-webkit-box-shadow: 0 !important;"
+                 ngf-select="import_file_sensors($files)" accept="application/vnd.ms-excel" ngf-multiple="true" ngf-max-size="'800KB'" ng-model="uploadFile">
+                <div style="padding:0;" class="tcc_upload">
+                    <p>
+                        <span class="icon_cloud" style="margin-top: -5px;background-position:0 !important;"></span>
+                        {{constants.label_batch_import}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <a href="data/wifi_import_template.xls" target="_blank" class="downloadTab">
+            <i class="icons icons-more-export"></i>{{constants.label_download_sample}}
+        </a>
+            -->
+    </div>
+
+<div class="ng-table-container">
+    <div class="row_highlight" style="position:relative;">
+        <h3 class="ng-table-head">
+            {{constants.field_sensormanage_sensorcount}}<span style="margin-left:8px;">{{sensorTotal}}</span>
+            <!-- 按条件搜索  -->
+            <div class="search_project2" style="float:right;position: absolute;top:10px;right:50px;margin-right:10px;width: 180px;">
+                <input id="searchSensor" placeholder="ID/{{constants.field_sensor_sensorName}}/{{constants.field_sensormanage_mac}}" ng-keyup="myKeyupsensor($event)" ng-model = "sensorsearchvalue"/>
+            </div>
+            <!-- 下载按钮 -->
+            <div class="helpOpened_download" ng-click="exportReport_Sensor();"  style="float:right;position: absolute;top:7px;right:30px;"></div>
+        </h3>
+        <table ng-table="tableParams" class="table table-special spanspecialTable" style="display: block;">
+            <thead>
+                <th >
+                    <span>{{constants.field_storemanage_name}}</span>
+                </th >
+                <th >
+                    <span>{{constants.field_storemanage_code}}</span>
+                </th >
+                <th >
+                    <span>{{constants.field_sensor_sensorCode}}</span>
+                </th >
+                <th >
+                    <span>{{constants.field_sensor_sensorName}}</span><!--field_sensor_sensorName-->
+                </th >
+                <th >
+                    <span>{{constants.field_sensor_sensorMac}}</span>
+                </th>
+                <!-- 探针类型 -->
+                <th id="sensorstrength" style="position:relative;" tabindex="1">
+                    <span class="setTabTit">{{constants.field_sensor_type}}</span>
+                    <div class="css3Triangle"></div>
+                    <ul id="sensorstrength_" class="downList downList_">
+                        <li ng-repeat="set in sensorType" ng-click="sensorstrengthSelect(set.key)">{{set.key}}</li>
+                    </ul>
+                </th>
+                <!-- 探针 -->
+                <th id="sensortype" style="position:relative;" tabindex="1">
+                    <span class="setTabTit">{{constants.field_sensormanage_type}}</span>
+                    <div class="css3Triangle"></div>
+                    <ul id="sensortype_" class="downList downList_">
+                        <li ng-repeat="set in sensorStatus" ng-click="sensortypeSelect(set.value)">{{set.key}}</li>
+                    </ul>
+                </th>
+                <!-- 开通时间 -->
+                <th>
+                    <span>{{constants.field_sensormanage_creattime}}</span>
+                </th>
+                <!-- 探针状态 -->
+                <th>
+                    <span>{{constants.field_sensor_strength}}</span>
+                </th>
+
+                <th  ng-class="sensortype == 'hours'?'sensorSelectWap':'sensorNotSelect'" ng-click = "hours_sort('hours')">
+						<span style="position: relative;">
+							{{constants.field_sensormanage_threelogs}}
+							<b ng-class="sensorselect == 'hoursup'?'sensorselect':(sensorselect == 'hoursdown'?'sensor_sort_1':'sensor_sort1')"></b>
+							<b ng-class="sensorselect == 'hoursdown'?'sensorselect':(sensorselect == 'hoursup'?'sensor_sort_2':'sensor_sort2')"></b>
+						</span>
+                </th>
+                <th ng-class="sensortype == 'logs'?'sensorSelectWap':'sensorNotSelect'" ng-click = "nolog_sort(logs)" style="width: 150px">
+						<span style="position: relative;">
+							{{constants.field_sensormanage_nglogs}}
+							<b ng-class="sensorselect == 'logsup'?'sensorselect':(sensorselect == 'logsdown'?'sensor_sort_1':'sensor_sort1')"></b>
+							<b ng-class="sensorselect == 'logsdown'?'sensorselect':(sensorselect == 'logsup'?'sensor_sort_2':'sensor_sort2')"></b>
+						</span>
+                </th>
+                <th>
+                    <span>{{constants.label_operation}}</span>
+                </th>
+            </thead>
+            <tbody ng-style="table_max_height">
+                <tr ng-repeat="sensor in $data track by $index">
+                    <td>
+                        <div>{{sensor.projectName}}</div>
+                    </td>
+                    <td>
+                        <div>{{sensor.projectNum}}</div>
+                    </td>
+                    <td>
+                        <div>{{sensor.sensorCode}}</div>
+                    </td>
+                    <td>
+                        <div>{{sensor.sensorName}}</div>
+                    </td>
+                    <td>
+                        <div>{{sensor.sensorMac}}</div>
+                    </td>
+                    <!-- 探针类型 -->
+                    <td>
+                       <div>{{sensor.sensorType}}</div>
+                    </td>
+                    <!-- 探针信号强度 -->
+                    <td>
+                        <div ng-if="sensor.normal == 1">{{constants.mapper_batch_sensor_manage_normal}}</div>
+                        <div ng-if="sensor.normal == 0">{{constants.mapper_batch_sensor_manage_notnormal}}</div>
+                        <div ng-if="sensor.normal == 2">{{constants.mapper_batch_sensor_manage_stop}}</div>
+                    </td>
+                    <!-- 开通时间 -->
+                    <td>
+                        <div>{{sensor.createTime | date:'yyyy-MM-dd'}}</div>  <!--| date:'yyyy-MM-dd'-->
+                    </td>
+                    <td>
+                        <div>{{sensor.minRssi}}</div>
+                    </td>
+                    <td>
+                        <div>
+                            <i class = "indicatorLight redLight" ng-show="sensor.logHours == '0'"></i>
+                            <i class = "indicatorLight orangeLight" ng-show="sensor.logHours >= '1' && sensor.logHours <= '100'"></i>
+                            <i class = "indicatorLight greenLight" ng-show="sensor.logHours >'100'"></i>
+                            {{sensor.logHours}}
+                        </div>
+                    </td>
+                    <td style="width: 150px">
+                        <div>
+                            <i class = "indicatorLight redLight" ng-show="sensor.noLogDuration > '3'"></i>
+                            <i class = "indicatorLight orangeLight" ng-show="sensor.noLogDuration > '0' && sensor.noLogDuration <= '3'"></i>
+                            <i class = "indicatorLight greenLight" ng-show="sensor.noLogDuration == '0'"></i>
+                            {{sensor.noLogDuration}}
+                        </div>
+                    </td>
+                    <td >
+                        <div>
+                            <span data-toggle="modal" data-target="#sensorDialog" class="font_color" style="margin-right: 8px;" ng-click="modifyClick(sensor)">{{constants.label_edit}}</span>
+                            <span class="font_color" ng-click="sensorStrengthSet(sensor)">{{constants.field_sensor_StrengthSet}}</span><!--{{constants.label_delete}}-->
+                            <span class="font_color" ng-click="seeSensorDetail(sensor)">{{constants.label_view}}</span><!--{{constants.label_delete}}-->
+                            <a href="javascript:" class="font_color" ng-click="removeSensor(sensor);" title="">{{constants.label_delete}}</a>
+
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+<div sensor-dialog></div>

@@ -1,0 +1,126 @@
+<div class="picturecon mediacon" >
+    <div class="properties clearfix" style="background-color: #FFFFFF">
+        <!--
+                            描述：APP使用作息
+                        -->
+        <div class="media_app">
+            <div class="media_app_tit">APP使用作息</div>
+            <div class="media_app_chart media_app_chart_01">作息图</div>
+        </div>
+        <!--
+                            描述：拖拽区域
+                        -->
+        <div class="media_gray">
+            <div style="margin-top: 50px; display: flex; justify-content: space-between; width: 73%;">
+                <p>07:00</p>
+                <p>09:00</p>
+                <p>11:00</p>
+                <p>13:00</p>
+                <p>15:00</p>
+                <p>17:00</p>
+                <p>19:00</p>
+                <p>21:00</p>
+                <p>23:00</p>
+            </div>
+            <div class="media_drag">
+                <div class="media_drag_top" style="margin-top: 50px; width: 50%;">
+                    <div id="timeAreaLeft" class="drag_left" style="left: -5px;">
+                        <span class="zy_icon"></span>
+                    </div>
+                    <div class="drag_slider"></div>
+                    <div id="timeAreaRight" name="drag_right" class="drag_right" style="left: 86%;">
+                        <span class="zy_icon"></span>
+                    </div>
+                </div>
+                <div class="media_drag_time">7:00~9:00</div>
+            </div>
+        </div>
+        <!--
+                            描述：时段内最多app
+                        -->
+        <div class="more_app white clearfix" style="box-shadow: 0 0 0 0 #FFFFFF;">
+            <div class="media_app_tit" style="position: relative; height: 30px;">
+                <div style="float: left; margin-top: 24px; position: relative; width: 300px; margin-bottom: 20px;">
+                    此时段App触点 <select class="form-control" style="width: 60px;" ng-model="appTouchType" ng-change="appTouchTypeChange(appTouchType)" title="">
+                    <option ng-repeat="type in datas" value="{{type.value}}" ng-selected="type.value==appTouchType">{{type.label}}</option>
+                </select> 高的应用
+                </div>
+                <div style="float: left; margin-top: 24px; position: relative;">
+                    <ul style="position: relative; height: 30px; left: 0">
+                        <li class="media_choose alltypeClick" ng-click="appTypeClick()">全部应用</li>
+                        <li ng-repeat="type in appTypes" class="appType_{{type.id}}" ng-click="appTypeClick(type)">{{type.typeName}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="media_app_con" style="position: relative; padding: 10px 30px 30px;">
+            <dl ng-repeat="obj in applist">
+                <dt style="background: url({{obj.sta_value}});background-size:100% 100%;"></dt>
+                <dd>{{obj.tag_name}}</dd>
+            </dl>
+        </div>
+    </div>
+
+
+    <div class="properties clearfix" style="background-color: #FFFFFF" ng-if="status == 'compare_double'">
+        <!--
+                            描述：APP使用作息
+                        -->
+        <div class="media_app">
+            <div class="media_app_tit">APP使用作息</div>
+            <div class="media_app_chart media_app_chart_01">作息图</div>
+        </div>
+        <!--
+                            描述：拖拽区域
+                        -->
+        <div class="media_gray">
+            <div style="margin-top: 50px; display: flex; justify-content: space-between; width: 73%;">
+                <p>07:00</p>
+                <p>09:00</p>
+                <p>11:00</p>
+                <p>13:00</p>
+                <p>15:00</p>
+                <p>17:00</p>
+                <p>19:00</p>
+                <p>21:00</p>
+                <p>23:00</p>
+            </div>
+            <div class="media_drag">
+                <div class="media_drag_top" style="margin-top: 50px; width: 50%;">
+                    <div id="timeAreaLeft" class="drag_left" style="left: -5px;">
+                        <span class="zy_icon"></span>
+                    </div>
+                    <div class="drag_slider"></div>
+                    <div id="timeAreaRight" name="drag_right" class="drag_right" style="left: 86%;">
+                        <span class="zy_icon"></span>
+                    </div>
+                </div>
+                <div class="media_drag_time">7:00~9:00</div>
+            </div>
+        </div>
+        <!--
+                            描述：时段内最多app
+                        -->
+        <div class="more_app white clearfix" style="box-shadow: 0 0 0 0 #FFFFFF;">
+            <div class="media_app_tit" style="position: relative; height: 30px;">
+                <div style="float: left; margin-top: 24px; position: relative; width: 300px; margin-bottom: 20px;">
+                    此时段App触点 <select class="form-control" style="width: 60px;" ng-model="appTouchType" ng-change="appTouchTypeChange(appTouchType)" title="">
+                    <option ng-repeat="type in datas" value="{{type.value}}" ng-selected="type.value==appTouchType">{{type.label}}</option>
+                </select> 高的应用
+                </div>
+                <div style="float: left; margin-top: 24px; position: relative;">
+                    <ul style="position: relative; height: 30px; left: 0">
+                        <li class="media_choose alltypeClick" ng-click="appTypeClick()">全部应用</li>
+                        <li ng-repeat="type in appTypes" class="appType_{{type.id}}" ng-click="appTypeClick(type)">{{type.typeName}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="media_app_con" style="position: relative; padding: 10px 30px 30px;">
+            <dl ng-repeat="obj in applist_2">
+                <dt style="background: url({{obj.sta_value}});background-size:100% 100%;"></dt>
+                <dd>{{obj.tag_name}}</dd>
+            </dl>
+        </div>
+    </div>
+</div>

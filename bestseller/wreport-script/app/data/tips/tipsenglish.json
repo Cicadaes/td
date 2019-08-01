@@ -1,0 +1,251 @@
+{
+  "passengerDistribution": [
+    {
+      "key": "",
+      "name": "Total customers during the time period",
+      "value": "The total number of effective customers who enter the store or group during a selected time period."
+    },
+    {
+      "key": "",
+      "name": "Average Daily Customer Flow/Visit",
+      "value": "During a selected time period (default time period is 7 days), the average number of daily entering customers."
+    },
+    {
+      "key": "",
+      "name": "Average daily new customers",
+      "value": "The average number of daily new customers who enter the store or group during a selected time period."
+    },
+    {
+      "key": "",
+      "name": "Average daily return customers",
+      "value": "The average number of daily return customers who enter the store or group during a selected time period"
+    }
+  ],
+  "passengerExpanding": [
+    {
+      "key": "",
+      "name": "种子客群",
+      "value": "用于进行客群特征机器学习、lookalike放大的样本客群数据。"
+    }
+  ],
+  "passengerOverview_1": [
+    {
+      "key": "",
+      "name": "Customer Flow Today",
+      "value": "The number of effective customers who enter the store or group on that day; repeat visits are not counted."
+    },
+    {
+      "key": "",
+      "name": "Customer Flow in Last 7 Days",
+      "value": "The number of effective customers who entered the store or group during the last 7 days (excluding the current day); repeat visits within a day are not counted."
+    },
+    {
+      "key": "",
+      "name": "Customer flow in last 30 days",
+      "value": "The number of effective customers who entered the store or group during the last 30 days (excluding the current day); repeat visits within a day are not counted."
+    },
+    {
+      "key": "",
+      "name": "Total Customers",
+      "value": "The total number of effective customers who entered the store or group from the launch date to current date; repeat visits within a day are not counted."
+    }
+  ],
+  "passengerOverview_2": [
+    {
+      "key": "",
+      "name": "Customer Flow Today",
+      "value": "The number of effective customers who enter the store or group on that day; repeat visits are not counted. "
+    },
+    {
+      "key": "",
+      "name": "Customer Flow in Last 7 Days",
+      "value": "The number of effective customers who entered the store or group during the last 7 days (excluding the current day); repeat visits within a day are not counted。"
+    },
+    {
+      "key": "",
+      "name": "Customer flow in last 30 days",
+      "value": "The number of effective customers who entered the store or group during the last 30 days (excluding the current day); repeat visits within a day are not counted."
+    },
+    {
+      "key": "",
+      "name": "New Customers in Last 30 Days",
+      "value": "The number of effective new customers who entered the store or group during the last 30 days (excluding the current day); repeat visits within a day are not counted."
+    },
+    {
+      "key": "",
+      "name": "Average Length of Stay/Visit in Last 30 Days",
+      "value": "The average time of effective customers who entered and stayed in the store or group during the last 30 days (excluding the current day)."
+    },
+    {
+      "key": "tab_active_passenger_flow",
+      "name": "Effective customer",
+      "value": "The number of customers who enter the store or group on that day; repeat visits are not counted. "
+    },
+    {
+      "key": "",
+      "name": "Staying customer",
+      "value": "The number of effective customers who enter and stay in the store or group and reach the effective staying customer threshold in single visit on that day, repeat visits within a day are not counted"
+    },
+    {
+      "key": "",
+      "name": "New customer",
+      "value": "Effective customers who enter the store or group for the first time."
+    },
+    {
+      "key": "",
+      "name": "Return customer",
+      "value": "Effective customers who entered the store or group before."
+    },
+    {
+      "key": "",
+      "name": "Average daily customer flow",
+      "value": "The average number of daily effective customers who enter the store or group during a selected time period.。"
+    }
+  ],
+  "passengerOverview_3": [
+    {
+      "name": "Effective customer",
+      "key": "tab_active_passenger_flow",
+      "value": "The number of customers who enter the store or group on that day; repeat visits are not counted. "
+    },
+    {
+      "key": "",
+      "name": "New customer",
+      "value": "Effective customers who enter the store or group for the first time."
+    },
+    {
+      "key": "",
+      "name": "Return customer",
+      "value": "Effective customers who entered the store or group before."
+    },
+    {
+      "key": "",
+      "name": "Staying customer",
+      "value": "The number of effective customers who enter and stay in the store or group and reach the effective staying customer threshold in single visit, repeat visits within a day are not counted"
+    },
+    {
+      "key": "",
+      "name": "Stay Rate",
+      "value": "The ratio of staying customers who enter the store or group to effective customers who enter the store or group."
+    },
+    {
+      "key": "",
+      "name": "Average Length of Stay/Visit",
+      "value": "The average time of effective customers who enter and stay in the store or group."
+    }
+  ],
+  "passengerOverview_4": [
+    {
+      "key": "",
+      "name": "Customer Density",
+      "value": "The ratio of average number of daily effective customers in a store to the size of the store during a selected time period."
+    },
+    {
+      "key": "",
+      "name": "Stay Customer Density",
+      "value": "During a selected time period, the ratio of average number of daily staying customer in a store to the size of the store. "
+    }
+  ],
+  "passengerPeople": [
+    {
+      "key": "",
+      "name": "App preference",
+      "value": "The proportion of selected customers who have preference for certain apps. "
+    },
+    {
+      "name": "App Preference Level",
+      "value": "The degree by which the selected customers who show an increased preference for certain apps compared with people in the city where the store or group is located. "
+    }
+  ],
+  "passengerTrend_1": [
+    {
+      "key": "",
+      "name": "Total customers during the time period",
+      "value": "The total number of effective customers who enter the store or group during a selected time period."
+    },
+    {
+      "key": "",
+      "name": "New customer ratio",
+      "value": "He ratio of new customers to the total number of effective customers who enter the store or group during a selected time period."
+    },
+    {
+      "key": "",
+      "name": "Peak hour",
+      "value": "During a selected time period, a full hour during the day with the highest total number of effective customers who enter the store or group."
+    },
+    {
+      "key": "",
+      "name": "Customer Flow% in peak hours",
+      "value": "The ratio of peak hour effective customers to daily effective customers during a selected time period. "
+    },
+    {
+      "key": "",
+      "name": "Visiting hour ratio",
+      "value": "The ratio of effective customers who enter the store or group in each hour to the total number of daily effective customers during a selected time period. "
+    }
+  ],
+  "passengerTrend_2": [
+    {
+      "key": "tab_active_passenger_flow",
+      "name": "Effective customer",
+      "value": "The number of customers who enter the store or group on that day; repeat visits are not counted. "
+    },
+    {
+      "key": "",
+      "name": "Staying customer",
+      "value": "The number of effective customers who enter and stay in the store or group and reach the effective staying customer threshold in single visit, repeat visits within a day are not counted"
+    },
+    {
+      "key": "",
+      "name": "Stay Rate",
+      "value": "The ratio of staying customers who enter the store or group to effective customers who enter the store or group."
+    },
+    {
+      "key": "",
+      "name": "New customer",
+      "value": "Effective customers who enter the store or group for the first time."
+    },
+    {
+      "key": "",
+      "name": "Return customer",
+      "value": "Effective customers who entered the store or group before."
+    },
+    {
+      "key": "",
+      "name": "Average Daily Customer Flow",
+      "value": "The average number of daily effective customers who enter the store or group during a selected time period."
+    }
+  ],
+  "visitDepth_1": [
+    {
+      "key": "",
+      "name": "Average daily customer flow",
+      "value": "The average number of daily effective customers who enter the store or group during a selected time period."
+    },
+    {
+      "key": "",
+      "name": "Average Length of Stay/Visit",
+      "value": "The average time of effective customers who enter and stay in the store or group."
+    },
+    {
+      "key": "",
+      "name": "Average Visit Days/Month",
+      "value": "The average visiting days of effective return customers who enter the store or group within last 30 days during a selected time period."
+    },
+    {
+      "key": "",
+      "name": "Average visit days/month",
+      "value": "The average visiting days of effective customers who enter the store or group within last 30 days during a selected time period."
+    },
+    {
+      "key": "",
+      "name": "Average number of store visited",
+      "value": "During a selected time period, the average number of stores that the customer visited each time (s)he comes to the shopping mall (excluding current day)."
+    },
+    {
+      "key": "",
+      "name": "Average Length of Stay",
+      "value": "During a selected time period, the average time of staying customers who enter the store (excluding current day)."
+    }
+  ]
+}

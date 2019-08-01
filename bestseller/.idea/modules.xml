@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/wanalytics-etl-cloud/w-etl-cloud.iml" filepath="$PROJECT_DIR$/wanalytics-etl-cloud/w-etl-cloud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/w-offline-compute-cloud/w-offline-compute-cloud.iml" filepath="$PROJECT_DIR$/w-offline-compute-cloud/w-offline-compute-cloud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/w-queryservice-cloud/w-queryservice-cloud.iml" filepath="$PROJECT_DIR$/w-queryservice-cloud/w-queryservice-cloud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/w-report-cloud/w-report-cloud.iml" filepath="$PROJECT_DIR$/w-report-cloud/w-report-cloud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wanalytics.iml" filepath="$PROJECT_DIR$/wanalytics.iml" />
+    </modules>
+  </component>
+</project>

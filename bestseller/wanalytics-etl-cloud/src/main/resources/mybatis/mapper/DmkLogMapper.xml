@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.DmkLogDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="td.enterprise.entity.DmkLog" >
+	<result column="id" property="id"/>
+	<result column="mac" property="mac"/>
+	<result column="tdid" property="tdid"/>
+	<result column="type" property="type"/>
+	<result column="month" property="month"/>
+	<result column="http_status" property="httpStatus"/>
+	<result column="data" property="data"/>
+	<result column="create_time" property="createTime"/>
+  </resultMap>
+       
+  <!-- TD_DMK_LOG table all fields -->
+  <sql id="Base_Column_List" >
+	 id,mac,tdid,type,month,http_status,data,create_time
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="mac != null and mac != ''" >
+        and mac =  #{mac}
+	  </if>
+	      <if test="tdid != null and tdid != ''" >
+        and tdid =  #{tdid}
+	  </if>
+	      <if test="type != null and type != ''" >
+        and type =  #{type}
+	  </if>
+	      <if test="month != null and month != ''" >
+        and month =  #{month}
+	  </if>
+	      <if test="httpStatus != null and httpStatus != ''" >
+        and http_status =  #{httpStatus}
+	  </if>
+	      <if test="data != null and data != ''" >
+        and data =  #{data}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_DMK_LOG(id,mac,tdid,type,month,http_status,data,create_time)
+ values(#{id},#{mac},#{tdid},#{type},#{month},#{httpStatus},#{data},now())
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+    update TD_DMK_LOG set mac=#{mac},tdid=#{tdid},type=#{type},month=#{month},http_status=#{httpStatus},data=#{data},create_time=now() where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+    update TD_DMK_LOG set 
+	<trim  suffixOverrides="," >
+	<if test="mac != null  ">
+		mac=#{mac},
+	</if>
+	<if test="tdid != null  ">
+		tdid=#{tdid},
+	</if>
+	<if test="type != null  ">
+		type=#{type},
+	</if>
+	<if test="month != null  ">
+		month=#{month},
+	</if>
+	<if test="httpStatus != null  ">
+		http_status=#{httpStatus},
+	</if>
+	<if test="data != null  ">
+		data=#{data},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	</trim> where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 调用dmk日志 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" /> 
+	 from TD_DMK_LOG where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+    delete 	 from TD_DMK_LOG where id = #{id}
+  </delete>
+
+  <!-- 调用dmk日志 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_DMK_LOG 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询调用dmk日志列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_DMK_LOG 
+	<include refid="Base_Where_Clause"/>
+  </select>
+
+	<!-- 批量位置查询 -->
+	<select id="batchPositionQuery" resultMap="BaseResultMap"  parameterType="Object">
+		select
+		<include refid="Base_Column_List"/>
+		from TD_DMK_LOG
+		where 1=1
+			<if test="mac != null and mac != ''" >
+				and mac =  #{mac}
+			</if>
+			<if test="tdid != null and tdid != ''" >
+				and tdid =  #{tdid}
+			</if>
+			<if test="null !=macList and macList.size > 0">
+				and mac in
+				<foreach collection="macList" open="(" separator="," close=")" item="item">
+					#{item}
+				</foreach>
+			</if>
+			<if test="null !=tdidList and tdidList.size > 0">
+				and tdid in
+				<foreach collection="tdidList" open="(" separator="," close=")" item="item">
+					#{item}
+				</foreach>
+			</if>
+			<if test="type != null and type != ''" >
+				and type =  #{type}
+			</if>
+			<if test="month != null and month != ''" >
+				and month =  #{month}
+			</if>
+			<if test="httpStatus != null and httpStatus != ''" >
+				and http_status =  #{httpStatus}
+			</if>
+	</select>
+
+	<insert id="batchInsert" parameterType="java.util.List" >
+		insert into TD_DMK_LOG(id,mac,tdid,type,month,http_status,data,create_time)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(null,#{item.mac},#{item.tdid},#{item.type},#{item.month},#{item.httpStatus},#{item.data},now())
+		</foreach>
+	</insert>
+</mapper>   

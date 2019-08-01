@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+    <listener>
+        <description>Do something on system startup</description>
+        <listener-class>com.talkingdata.analytics.wifi.collector.servlet.SystemInit</listener-class>
+    </listener>
+
+    <!--wifi collector servlet-->
+    <servlet>
+        <servlet-name>WiFiCollector</servlet-name>
+        <servlet-class>com.talkingdata.analytics.wifi.collector.servlet.WiFiCollector</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>WiFiCollector</servlet-name>
+        <url-pattern>/g/w</url-pattern>
+    </servlet-mapping>
+
+
+    <!--offline collector servlet-->
+    <servlet>
+        <servlet-name>NewWiFiCollector</servlet-name>
+        <servlet-class>com.talkingdata.analytics.wifi.collector.servlet.NewWiFiCollector</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>NewWiFiCollector</servlet-name>
+        <url-pattern>/g/o</url-pattern>
+    </servlet-mapping>
+
+    <!--offline wifi collector servlet-->
+    <servlet>
+        <servlet-name>OfflineWiFiCollector</servlet-name>
+        <servlet-class>com.talkingdata.analytics.wifi.collector.servlet.OfflineWiFiCollector</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OfflineWiFiCollector</servlet-name>
+        <url-pattern>/g/ow</url-pattern>
+    </servlet-mapping>
+
+    <!--kafka writter controller servlet-->
+    <servlet>
+        <servlet-name>KafkaWritterController</servlet-name>
+        <servlet-class>com.talkingdata.analytics.wifi.collector.servlet.KafkaWritterController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>KafkaWritterController</servlet-name>
+        <url-pattern>/kafka/switch</url-pattern>
+    </servlet-mapping>
+
+    <!--mac filter controller servlet-->
+    <servlet>
+        <servlet-name>FilterMacController</servlet-name>
+        <servlet-class>com.talkingdata.analytics.wifi.collector.servlet.FilterMacController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FilterMacController</servlet-name>
+        <url-pattern>/macfilter/switch</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Stats</servlet-name>
+        <servlet-class>com.talkingdata.analytics.wifi.collector.servlet.Stats</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Stats</servlet-name>
+        <url-pattern>/stats</url-pattern>
+    </servlet-mapping>
+</web-app>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.WarningConfigDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="td.enterprise.entity.WarningConfig" >
+	<result column="id" property="id"/>
+	<result column="tenant_id" property="tenantId"/>
+	<result column="send_tenant_admin" property="sendTenantAdmin"/>
+	<result column="send_principal" property="sendPrincipal"/>
+	<result column="send_mail" property="sendMail"/>
+	<result column="send_sms" property="sendSms"/>
+	<result column="health_rate" property="healthRate"/>
+	<result column="sensors_nolog" property="sensorsNolog"/>
+	<result column="sensor_nolog" property="sensorNolog"/>
+	<result column="type" property="type"/>
+	<result column="status" property="status"/>
+	<result column="create_by" property="createBy"/>
+	<result column="creator" property="creator"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="updater" property="updater"/>
+	<result column="update_time" property="updateTime"/>
+  </resultMap>
+       
+  <!-- TD_WARNING_CONFIG table all fields -->
+  <sql id="Base_Column_List" >
+	 id,tenant_id,send_tenant_admin,send_principal,send_mail,send_sms,health_rate,sensors_nolog,sensor_nolog,type,status,create_by,creator,create_time,update_by,updater,update_time
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="tenantId != null and tenantId != ''" >
+        and tenant_id =  #{tenantId}
+	  </if>
+	      <if test="sendTenantAdmin != null and sendTenantAdmin != ''" >
+        and send_tenant_admin =  #{sendTenantAdmin}
+	  </if>
+	      <if test="sendPrincipal != null and sendPrincipal != ''" >
+        and send_principal =  #{sendPrincipal}
+	  </if>
+	      <if test="sendMail != null and sendMail != ''" >
+        and send_mail =  #{sendMail}
+	  </if>
+	      <if test="sendSms != null and sendSms != ''" >
+        and send_sms =  #{sendSms}
+	  </if>
+	      <if test="healthRate != null and healthRate != ''" >
+        and health_rate =  #{healthRate}
+	  </if>
+	      <if test="sensorsNolog != null and sensorsNolog != ''" >
+        and sensors_nolog =  #{sensorsNolog}
+	  </if>
+	      <if test="sensorNolog != null and sensorNolog != ''" >
+        and sensor_nolog =  #{sensorNolog}
+	  </if>
+	      <if test="type != null and type != ''" >
+        and type =  #{type}
+	  </if>
+	      <if test="status != null and status != ''" >
+        and status =  #{status}
+	  </if>
+	      <if test="createBy != null and createBy != ''" >
+        and create_by =  #{createBy}
+	  </if>
+	      <if test="creator != null and creator != ''" >
+        and creator =  #{creator}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	      <if test="updateBy != null and updateBy != ''" >
+        and update_by =  #{updateBy}
+	  </if>
+	      <if test="updater != null and updater != ''" >
+        and updater =  #{updater}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+      insert into 
+TD_WARNING_CONFIG(id,tenant_id,send_tenant_admin,send_principal,send_mail,send_sms,health_rate,sensors_nolog,sensor_nolog,type,status,create_by,creator,create_time,update_by,updater,update_time)
+ values(#{id},#{tenantId},#{sendTenantAdmin},#{sendPrincipal},#{sendMail},#{sendSms},#{healthRate},#{sensorsNolog},#{sensorNolog},#{type},#{status},#{createBy},#{creator},now(),#{updateBy},#{updater},now())
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+      update TD_WARNING_CONFIG set tenant_id=#{tenantId},send_tenant_admin=#{sendTenantAdmin},send_principal=#{sendPrincipal},send_mail=#{sendMail},send_sms=#{sendSms},health_rate=#{healthRate},sensors_nolog=#{sensorsNolog},sensor_nolog=#{sensorNolog},type=#{type},status=#{status},create_by=#{createBy},creator=#{creator},update_by=#{updateBy},updater=#{updater},update_time=now() where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+      update TD_WARNING_CONFIG set 
+		<if test="tenantId != null  ">
+		tenant_id=#{tenantId},
+	</if>
+	<if test="sendTenantAdmin != null  ">
+		send_tenant_admin=#{sendTenantAdmin},
+	</if>
+	<if test="sendPrincipal != null  ">
+		send_principal=#{sendPrincipal},
+	</if>
+	<if test="sendMail != null  ">
+		send_mail=#{sendMail},
+	</if>
+	<if test="sendSms != null  ">
+		send_sms=#{sendSms},
+	</if>
+	<if test="healthRate != null  ">
+		health_rate=#{healthRate},
+	</if>
+	<if test="sensorsNolog != null  ">
+		sensors_nolog=#{sensorsNolog},
+	</if>
+	<if test="sensorNolog != null  ">
+		sensor_nolog=#{sensorNolog},
+	</if>
+	<if test="type != null  ">
+		type=#{type},
+	</if>
+	<if test="status != null  ">
+		status=#{status},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="creator != null  ">
+		creator=#{creator},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="updater != null  ">
+		updater=#{updater},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	update_time = now() 
+	where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 预警通知接收设置表 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+      select <include refid="Base_Column_List" /> 
+	 from TD_WARNING_CONFIG where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+      delete from TD_WARNING_CONFIG where id = #{id}
+  </delete>
+
+  <!-- 预警通知接收设置表 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_WARNING_CONFIG 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询预警通知接收设置表列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_WARNING_CONFIG 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+</mapper>   

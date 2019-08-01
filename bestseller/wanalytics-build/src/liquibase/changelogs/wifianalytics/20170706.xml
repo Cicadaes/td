@@ -1,0 +1,39 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="ran.li" id="1499324440000-1">
+        <createTable tableName="TD_WARNING_CONFIG" remarks="预警通知接收设置表">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="tenant_id" remarks="租户ID" type="varchar(15)"/>
+            <column name="send_tenant_admin" remarks="发送租户管理员(0不发，1发)" type="int(2)"/>
+            <column name="send_principal" remarks="发送店铺负责人(0不发，1发)" type="int(2)"/>
+            <column name="send_mail" remarks="发送邮件(0不发，1发)" type="int(2)"/>
+            <column name="send_sms" remarks="发送短信(0不发，1发)" type="int(2)"/>
+
+            <column name="health_rate" remarks="健康度阀值" type="varchar(11)"/>
+            <column name="sensors_nolog" remarks="平均无日志时长" type="varchar(31)"/>
+            <column name="sensor_nolog" remarks="单探针无日志时长" type="varchar(31)"/>
+
+            <column name="type" type="int(2)" remarks="类型"/>
+            <column name="status" type="int(2)" remarks="状态:1 有效/-1 无效"/>
+            <column name="create_by" remarks="创建者账号" type="varchar(127)"/>
+            <column name="creator" remarks="创建人" type="varchar(127)"/>
+            <column name="create_time" remarks="创建时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改者账号" type="varchar(127)"/>
+            <column name="updater" remarks="修改人" type="varchar(127)"/>
+            <column name="update_time" remarks="修改时间" type="TIMESTAMP"
+                    defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

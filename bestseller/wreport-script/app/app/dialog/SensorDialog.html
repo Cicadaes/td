@@ -1,0 +1,139 @@
+<div class="modal" id="sensorDialog" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-target" role="document" style="width:890px">
+        <div class="modal-content">
+            <div class="modal-header" ng-drag-dialog="true">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">{{title}}{{constants.label_space}}{{constants.table_sensor}}</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal clrfix" style="/* width:558px */">
+                    <div style="width:520px;float:left;">
+                        <!-- 探针id -->
+                        <div class="control-group">
+                            <div class="explain">
+                                <label class="control-label">{{constants.field_sensor_sensorCode}}</label>
+                                <span class="describe"><b></b>{{constants.explain_sensor_id}}</span>
+                            </div>
+                            <div class="controls">
+                                <input class="form-control" type="text" placeholder="{{constants.prompt_sensorDialog_id}}" required ng-model="sensor.sensorCode" style="width:304px;text-align: left;">
+                            </div>
+                        </div>
+
+                        <!-- 探针型号 -->
+                        <div class="control-group">
+                            <div class="explain">
+                                <label class="control-label">{{constants.field_sensor_sensorModel}}</label><!--{{constants.field_sensor_sensorModel}}-->
+
+                            </div>
+                            <div class="controls">
+                                <select class="form-control" ng-model="sensor.sensorVersion" style="width:303px; padding: 0 3%"
+                                        ng-options="post.key as post.key for post in sensorModel"  ng-selected="post.value==sensor.sensorVersion"  selected="selected"></select>
+                            </div>
+                        </div>
+                        <!-- 探针别名 -->
+                        <div class="control-group">
+                            <div class="explain">
+                                <label class="control-label">{{constants.field_sensor_sensorName}}</label>
+                                <span class="describe"><b></b>{{constants.explain_sensor_name}}</span>
+                            </div>
+                            <div class="controls">
+                                <input class="form-control" type="text" placeholder="{{constants.prompt_sensorDialog_name}}" required ng-model="sensor.sensorName" style="width:304px;text-align: left;">
+                            </div>
+                        </div>
+                        <!-- 探针类型 -->
+                        <div class="control-group">
+                            <div class="explain">
+                                <label class="control-label">{{constants.field_sensor_sensorType}}</label><!--{{constants.field_sensor_sensorType}}-->
+
+                            </div>
+                            <div class="controls">
+                                <select class="form-control" ng-model="sensor.sensorType" style="width:303px; padding: 0 3%"
+                                        ng-options="post.key as post.key for post in sensorTypes" ng-selected="post.key==sensor.sensorType" selected="selected"></select>
+                            </div>
+                        </div>
+
+                        <!-- 店铺下拉框 -->
+                        <div class="control-group">
+                            <div class="explain">
+                                <label class="control-label">选择门店</label><!--{{constants.field_sensor_sensorType}}-->
+
+                            </div>
+                            <div class="controls">
+                                <select class="form-control" ng-model="sensor.projectId" style="width:303px; padding: 0 3%"
+                                        ng-options="post.id as post.projectName for post in projectShopList" ng-selected="post.id==sensor.projectId" selected="selected"></select>
+                            </div>
+                        </div>
+
+
+                        <!-- mac地址 -->
+                        <div class="control-group">
+                            <label class="control-label">{{constants.field_sensor_sensorMac}}</label>
+                            <div class="controls" style="width: 65%;">
+                                <input id="wifipix_mac_0" maxlength='2' autocomplete="off" type="text" class="input-macID" style="width: 36px;" ng-model="sensor.mac1" title="" ng-change="filterMac(sensor)"> :
+                                <input id="wifipix_mac_1" maxlength='2' autocomplete="off" type="text" class="input-macID" style="width: 36px;" ng-model="sensor.mac2" title="" ng-change="filterMac(sensor)"> :
+                                <input id="wifipix_mac_2" maxlength='2' autocomplete="off" type="text" class="input-macID" style="width: 36px;" ng-model="sensor.mac3" title="" ng-change="filterMac(sensor)"> :
+                                <input id="wifipix_mac_3" maxlength='2' autocomplete="off" type="text" class="input-macID" style="width: 36px;" ng-model="sensor.mac4" title="" ng-change="filterMac(sensor)"> :
+                                <input id="wifipix_mac_4" maxlength='2' autocomplete="off" type="text" class="input-macID" style="width: 36px;" ng-model="sensor.mac5" title="" ng-change="filterMac(sensor)"> :
+                                <input id="wifipix_mac_5" maxlength='2' autocomplete="off" type="text" class="input-macID" style="width: 36px;margin-right: 0;" ng-model="sensor.mac6" title="" ng-change="filterMac(sensor)">
+                                <span></span>
+                            </div>
+                            <b class = "macListBtn" ng-click = "getMacList($event)" ng-if = "new_old_flag"></b>
+                            <div class = "userMacList" ng-show="userMacListFlag"  tabindex="1" >
+                                <li ng-repeat = "one in userMacList" ng-click = "checkOne(one,sensor)">{{one}}</li>
+                            </div>
+                        </div>
+                        <!--暂时屏蔽掉探针位置-->
+                        <!--<div class="control-group" >-->
+                        <!--<label class="control-label">探针位置</label>-->
+                        <!--<div class="controls">-->
+                        <!--<select class="form-control" ng-model="sensor.isOutside" style="width:303px; padding: 0 3%">-->
+                        <!--<option ng-repeat="type in isOutside" value="{{type.value}}" ng-selected="sensor.isOutside==type.value">-->
+                        <!--{{type.name}}-->
+                        <!--</option>-->
+                        <!--</select>-->
+                        <!--</div>-->
+                        <!--</div> -->
+
+                        <!-- 信号强度  暂时屏蔽掉-->
+                        <!--<div class="control-group">
+                            <div class="explain">
+                                <label class="control-label">{{constants.field_sensor_minRssi}}</label>
+                                <span class="describe"><b></b>{{constants.explain_sensor_minRssi}}</span>
+                            </div>
+                            <div class="controls">
+                                <input type="text" class="form-control" placeholder="{{constants.prompt_sensorDialog_signal}}" required ng-model="sensor.minRssi" style="width:304px;text-align: left;">
+                            </div>
+                        </div>-->
+                        <!-- 位置描述 -->
+                        <div class="control-group">
+                            <label class="control-label">{{constants.field_sensor_positionDescription}}</label>
+                            <div class="controls">
+								 <textarea id="position_name" name="" cols="" rows="" class="form-control textarea_style" style="text-align: left;font-size: 12px;"
+                                           placeholder="{{constants.prompt_sensorDialog_description}}" ng-model="sensor.positionDescription"></textarea>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="float:right" class="tcc_con_r">
+                        <div class="probe-tips" style="margin-left:-80px;height:330px;">
+                            <strong></strong><span></span>
+                            <h3>{{constants.prompt_sensor_tips}}</h3>
+                            <ul>
+                                <li><b></b><em>1、{{constants.explain_sensor_required}}：</em>{{constants.field_sensor_sensorCode}}、{{constants.field_sensor_sensorName}}、{{constants.field_sensor_sensorMac}}</li>
+                                <li><b></b><em>2、{{constants.field_sensor_positionDescription}}，{{constants.explain_sensor_optional}}：</em>{{constants.explain_sensor_positionDescription}}</li>
+                                <!-- 信号强度说明 -->
+                                <!--<li><b></b><em>3、{{constants.field_sensor_minRssi}}：</em>{{constants.explain_sensor_minRssi}}</li>-->
+                                <!-- mac地址 -->
+                                <li ng-if="new_old_flag"><b></b><em>3、{{constants.field_sensor_sensorMac}}：</em>{{constants.explain_sensor_mac_filter}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveSensor(sensor)">{{constants.label_save}}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{constants.label_cancel}}</button>
+            </div>
+        </div>
+    </div>
+</div>

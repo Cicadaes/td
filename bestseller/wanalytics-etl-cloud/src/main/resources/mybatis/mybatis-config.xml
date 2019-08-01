@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <!-- changes from the defaults for testing -->
+        <setting name="cacheEnabled" value="false" />
+        <setting name="useGeneratedKeys" value="true" />
+        <setting name="defaultExecutorType" value="REUSE" />
+    </settings>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="jdbc"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${wifianalyticsdb.connection.driver_class}"/>
+                <property name="url" value="${wifianalyticsdb.connection.url}"/>
+                <property name="username" value="${wifianalyticsdb.connection.username}"/>
+                <property name="password" value="${wifianalyticsdb.connection.password}"/>
+                <property name="poolMaximumActiveConnections" value="200" />
+                <property name="poolMaximumIdleConnections" value="0" />
+                <property name="poolMaximumCheckoutTime" value="200"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="mybatis/mapper/ProjectRelationMapper.xml"/>
+        <mapper resource="mybatis/mapper/TenantStayDurationMapper.xml"/>
+        <mapper resource="mybatis/mapper/TenantDeviceCountMapper.xml"/>
+        <mapper resource="mybatis/mapper/TenantJobHousingCountMapper.xml"/>
+        <mapper resource="mybatis/mapper/TenantRegionCountMapper.xml"/>
+        <mapper resource="mybatis/mapper/TenantStayDurationMapper.xml"/>
+        <mapper resource="mybatis/mapper/TenantTagsCountMapper.xml"/>
+        <mapper resource="mybatis/mapper/TenantTopAreaCountMapper.xml"/>
+        <mapper resource="mybatis/mapper/TenantHousingCoverageCountMapper.xml"/>
+        <mapper resource="mybatis/mapper/OfflineCrossOldUserMonthMapper.xml"/>
+        <mapper resource="mybatis/mapper/OfflineOlderUserMonthMapper.xml"/>
+        <mapper resource="mybatis/mapper/TenantAppPromotionMapper.xml"/>
+        <mapper resource="mybatis/mapper/TenantAppSignificanceMapper.xml"/>
+        <mapper resource="mybatis/mapper/TenantUseAppRoutineMapper.xml"/>
+        <mapper resource="mybatis/mapper/WifiPixTagCountMapper.xml"/>
+        <mapper resource="mybatis/mapper/TargetManagementMapper.xml"/>
+        <mapper resource="mybatis/mapper/TargetMapper.xml"/>
+        <mapper resource="mybatis/mapper/CrowdBlackListMapper.xml"/>
+        <mapper resource="mybatis/mapper/LookalikeCrowdMapper.xml"/>
+        <mapper resource="mybatis/mapper/ProjectMapper.xml"/>
+        <mapper resource="mybatis/mapper/ProjectParamMapper.xml"/>
+        <mapper resource="mybatis/mapper/DownloadDataMapper.xml"/>
+        <mapper resource="mybatis/mapper/AzkabanJobConfigMapper.xml"/>
+        <mapper resource="mybatis/mapper/CustomizedMatchDataMapper.xml"/>
+        <mapper resource="mybatis/mapper/ReceiveConfigMapper.xml"/>
+        <mapper resource="mybatis/mapper/MacCompanyMapper.xml"/>
+        <mapper resource="mybatis/mapper/DmkEntityMapper.xml"/>
+        <mapper resource="mybatis/mapper/DmkLogMapper.xml"/>
+        <mapper resource="mybatis/mapper/DmkIdmappingMapper.xml"/>
+        <mapper resource="mybatis/mapper/WarningConfigMapper.xml"/>
+        <mapper resource="mybatis/mapper/ProjectAttributeMapper.xml"/>
+        <mapper resource="mybatis/mapper/BsShopMapper.xml"/>
+        <mapper resource="mybatis/mapper/BsExecLogMapper.xml"/>
+        <mapper resource="mybatis/mapper/BsDeviceRltMapper.xml"/>
+        <mapper resource="mybatis/mapper/BsDeviceMapper.xml"/>
+        <mapper resource="mybatis/mapper/BsDevApMapper.xml"/>
+        <mapper resource="mybatis/mapper/BsAuthHistoryMapper.xml"/>
+        <mapper resource="mybatis/mapper/MetricDayMapper.xml"/>
+        <mapper resource="mybatis/mapper/MetricDayPartyMapper.xml"/>
+        <mapper resource="mybatis/mapper/MetricFactMapper.xml"/>
+        <mapper resource="mybatis/mapper/MetricHourRealTimeMapper.xml"/>
+        <mapper resource="mybatis/mapper/ThresholdMapper.xml"/>
+        <mapper resource="mybatis/mapper/MetricMonthMapper.xml"/>
+        <mapper resource="mybatis/mapper/MetricWeekMapper.xml"/>
+        <mapper resource="mybatis/mapper/BsShopSalesMapper.xml"/>
+        <mapper resource="mybatis/mapper/SensorMapper.xml"/>
+        <mapper resource="mybatis/mapper/SensorInfoMapper.xml"/>
+        <mapper resource="mybatis/mapper/ProjectIndexMapper.xml"/>
+    </mappers>
+</configuration>

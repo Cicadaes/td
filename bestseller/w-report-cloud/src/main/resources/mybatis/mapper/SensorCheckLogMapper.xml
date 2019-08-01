@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.SensorCheckLogDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="td.enterprise.entity.SensorCheckLog" >
+	<result column="id" property="id"/>
+	<result column="mac" property="mac"/>
+	<result column="ap_mac" property="apMac"/>
+	<result column="time" property="time"/>
+	<result column="signal" property="signal"/>
+  </resultMap>
+       
+  <!-- TD_SENSOR_CHECK_LOG table all fields -->
+  <sql id="Base_Column_List" >
+	 id,mac,ap_mac,time,`signal`
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="mac != null and mac != ''" >
+        and mac =  #{mac}
+	  </if>
+	      <if test="apMac != null and apMac != ''" >
+        and ap_mac =  #{apMac}
+	  </if>
+	      <if test="time != null and time != ''" >
+        and time =  #{time}
+	  </if>
+	      <if test="signal != null and signal != ''" >
+        and `signal` =  #{signal}
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_SENSOR_CHECK_LOG(id,mac,ap_mac,time,`signal`)
+ values(#{id},#{mac},#{apMac},#{time},#{signal})
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+    update TD_SENSOR_CHECK_LOG set mac=#{mac},ap_mac=#{apMac},time=#{time},`signal`=#{signal} where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+    update TD_SENSOR_CHECK_LOG set 
+	<trim  suffixOverrides="," >
+	<if test="mac != null  ">
+		mac=#{mac},
+	</if>
+	<if test="apMac != null  ">
+		ap_mac=#{apMac},
+	</if>
+	<if test="time != null  ">
+		time=#{time},
+	</if>
+	<if test="signal != null  ">
+		`signal`=#{signal},
+	</if>
+	</trim> where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 探针检测配置 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" /> 
+	 from TD_SENSOR_CHECK_LOG where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+    delete 	 from TD_SENSOR_CHECK_LOG where id = #{id}
+  </delete>
+
+  <!-- 探针检测配置 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_SENSOR_CHECK_LOG 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询探针检测配置列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_SENSOR_CHECK_LOG 
+	<include refid="Base_Where_Clause"/>
+	order by time desc 
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+</mapper>   

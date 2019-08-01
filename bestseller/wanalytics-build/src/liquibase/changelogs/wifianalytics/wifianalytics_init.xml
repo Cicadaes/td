@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+  <!-- 建表语句 -->
+  <include file="../initialize/wifianalytics.xml" relativeToChangelogFile="true"/>
+
+  <!-- 初始化数据 -->
+  <include file="../initialize/wifianalytics/TD_APP_WHITE_LIST.sql" relativeToChangelogFile="true"/>
+  <include file="../initialize/wifianalytics/TD_IEEE_REGAUTH_MAC.sql" relativeToChangelogFile="true"/>
+  <include file="../initialize/wifianalytics/TD_MALL_WHITE_LIST.sql" relativeToChangelogFile="true"/>
+  <include file="../initialize/wifianalytics/TD_POI_BRAND_WIFIPIX.sql" relativeToChangelogFile="true"/>
+  <include file="../initialize/wifianalytics/TD_SERVICE_CONF.sql" relativeToChangelogFile="true"/>
+  <include file="../initialize/wifianalytics/TD_TAGS_INFO.sql" relativeToChangelogFile="true"/>
+  <include file="../initialize/wifianalytics/TD_WIFIPIX_TAG_POI.sql" relativeToChangelogFile="true"/>
+
+
+  <include file="./20170321.sql" relativeToChangelogFile="true"/>
+  <include file="./20170322.sql" relativeToChangelogFile="true"/>
+  <include file="./20170322.xml" relativeToChangelogFile="true"/>
+  <include file="./20170327.xml" relativeToChangelogFile="true"/>
+  <include file="./20170328.xml" relativeToChangelogFile="true"/>
+
+  <include file="./20170330.xml" relativeToChangelogFile="true"/>
+  <include file="./20170401.xml" relativeToChangelogFile="true"/>
+  <include file="./20170410.xml" relativeToChangelogFile="true"/>
+  <include file="./20170411.xml" relativeToChangelogFile="true"/>
+  <include file="./20170412.xml" relativeToChangelogFile="true"/>
+  <include file="./20170413.xml" relativeToChangelogFile="true"/>
+  <include file="./20170414.xml" relativeToChangelogFile="true"/>
+  <include file="./20170418.xml" relativeToChangelogFile="true"/>
+  <include file="./20170419.xml" relativeToChangelogFile="true"/>
+  <include file="./20170420.sql" relativeToChangelogFile="true"/>
+  <include file="./20170424.xml" relativeToChangelogFile="true"/>
+  <include file="./20170424.sql" relativeToChangelogFile="true"/>
+  <include file="./20170427.sql" relativeToChangelogFile="true"/>
+  <include file="./20170427.xml" relativeToChangelogFile="true"/>
+  <include file="./20170502.sql" relativeToChangelogFile="true"/>
+  <include file="./20170506.sql" relativeToChangelogFile="true"/>
+  <include file="./20170511.xml" relativeToChangelogFile="true"/>
+  <include file="./20170512.sql" relativeToChangelogFile="true"/>
+  <include file="./20170526.sql" relativeToChangelogFile="true"/>
+  <include file="./20170531.xml" relativeToChangelogFile="true"/>
+  <include file="./20170601.sql" relativeToChangelogFile="true"/>
+  <include file="./20170601.xml" relativeToChangelogFile="true"/>
+  <include file="./20170605.sql" relativeToChangelogFile="true"/>
+  <include file="./20170612.sql" relativeToChangelogFile="true"/>
+  <include file="./20170612.xml" relativeToChangelogFile="true"/>
+  <include file="./20170613.xml" relativeToChangelogFile="true"/>
+  <include file="./20170613.sql" relativeToChangelogFile="true"/>
+  <include file="./20170615.sql" relativeToChangelogFile="true"/>
+  <include file="./20170619.sql" relativeToChangelogFile="true"/>
+  <include file="./20170622.sql" relativeToChangelogFile="true"/>
+  <include file="./20170627.sql" relativeToChangelogFile="true"/>
+  <include file="./20170627.xml" relativeToChangelogFile="true"/>
+  <include file="./20170706.xml" relativeToChangelogFile="true"/>
+  <include file="./20170710.xml" relativeToChangelogFile="true"/>
+  <include file="./20170710.sql" relativeToChangelogFile="true"/>
+  <include file="./20170717.sql" relativeToChangelogFile="true"/>
+  <include file="./20170718.xml" relativeToChangelogFile="true"/>
+  <include file="./20170724.xml" relativeToChangelogFile="true"/>
+  <include file="./20170725.xml" relativeToChangelogFile="true"/>
+  <include file="./20170726.xml" relativeToChangelogFile="true"/>
+  <include file="./20170727.sql" relativeToChangelogFile="true"/>
+  <include file="./20170801.sql" relativeToChangelogFile="true"/>
+  <include file="./20170803.xml" relativeToChangelogFile="true"/>
+  <include file="./20170804.xml" relativeToChangelogFile="true"/>
+  <include file="./20170811.sql" relativeToChangelogFile="true"/>
+  <include file="./20170912.xml" relativeToChangelogFile="true"/>
+  <include file="./20170914.xml" relativeToChangelogFile="true"/>
+
+  <include file="./20170919.xml" relativeToChangelogFile="true"/>
+  <include file="./20170920.xml" relativeToChangelogFile="true"/>
+  <include file="./20170921.xml" relativeToChangelogFile="true"/>
+  <include file="./20170922.sql" relativeToChangelogFile="true"/>
+  <include file="./20170922.xml" relativeToChangelogFile="true"/>
+  <include file="./20170925.sql" relativeToChangelogFile="true"/>
+  <include file="./20170928.xml" relativeToChangelogFile="true"/>
+  <include file="./20170929.xml" relativeToChangelogFile="true"/>
+  <include file="./20171009.sql" relativeToChangelogFile="true"/>
+  <include file="./20171010.xml" relativeToChangelogFile="true"/>
+  <include file="./20171010.sql" relativeToChangelogFile="true"/>
+  <include file="./20171011.sql" relativeToChangelogFile="true"/>
+  <include file="./20171011.xml" relativeToChangelogFile="true"/>
+  <include file="./20171012.sql" relativeToChangelogFile="true"/>
+  <include file="./20171013.xml" relativeToChangelogFile="true"/>
+  <include file="./20171013.sql" relativeToChangelogFile="true"/>
+  <include file="./20171014.sql" relativeToChangelogFile="true"/>
+  <include file="./20171014.xml" relativeToChangelogFile="true"/>
+  <include file="./20171015.xml" relativeToChangelogFile="true"/>
+  <include file="./20171016.sql" relativeToChangelogFile="true"/>
+  <include file="./20171017.sql" relativeToChangelogFile="true"/>
+  <include file="./20171018.sql" relativeToChangelogFile="true"/>
+  <include file="./20171019.sql" relativeToChangelogFile="true"/>
+  <include file="./20171020.sql" relativeToChangelogFile="true"/>
+  <include file="./20171026.sql" relativeToChangelogFile="true"/>
+  <include file="./20171031.sql" relativeToChangelogFile="true"/>
+  <!--<include file="./20171101.sql" relativeToChangelogFile="true"/>-->
+  <include file="./20171101.xml" relativeToChangelogFile="true"/>
+  <include file="./20171102.sql" relativeToChangelogFile="true"/>
+  <include file="./20171106_MetricDay.xml" relativeToChangelogFile="true"/>
+  <include file="./20171108.sql" relativeToChangelogFile="true"/>
+  <include file="./20171109.sql" relativeToChangelogFile="true"/>
+  <include file="./20171109_comment.sql" relativeToChangelogFile="true"/>
+  <include file="./20171109_metric_day.sql" relativeToChangelogFile="true"/>
+  <include file="./20171110.sql" relativeToChangelogFile="true"/>
+  <include file="./20171115.sql" relativeToChangelogFile="true"/>
+  <include file="./20171116.sql" relativeToChangelogFile="true"/>
+  <include file="./20171117.sql" relativeToChangelogFile="true"/>
+  <include file="./20171123.sql" relativeToChangelogFile="true"/>
+  <include file="./20171206.sql" relativeToChangelogFile="true"/>
+  <include file="./20171207.sql" relativeToChangelogFile="true"/>
+  <include file="./20171213.xml" relativeToChangelogFile="true"/>
+  <include file="./20171220.sql" relativeToChangelogFile="true"/>
+  <include file="./20171221.sql" relativeToChangelogFile="true"/>
+  <include file="./20171228.sql" relativeToChangelogFile="true"/>
+  <include file="./20180102.sql" relativeToChangelogFile="true"/>
+  <include file="./20180103.sql" relativeToChangelogFile="true"/>
+  <include file="./20180108.sql" relativeToChangelogFile="true"/>
+  <include file="./20180110.sql" relativeToChangelogFile="true"/>
+  <include file="./20180115.sql" relativeToChangelogFile="true"/>
+  <include file="./20180118_metric_day_active.sql" relativeToChangelogFile="true"/>
+  <include file="./20180119.sql" relativeToChangelogFile="true"/>
+  <include file="./20180131.sql" relativeToChangelogFile="true"/>
+</databaseChangeLog>

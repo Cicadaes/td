@@ -1,0 +1,91 @@
+<!-- 导航条 -->
+<div class="nav_bar_top" >
+    <span>{{constants.table_targetManage}}</span>
+</div>
+
+<div class="clrfix operator-panel">
+    <span id="t_target_create_new" class="btn-add" ng-click="createClick();" data-toggle="modal" data-target="#targetManagementDialog">
+        <i class="icons icons-add"></i>
+        {{constants.btn_create_target}}
+    </span>
+</div>
+<div class="ng-table-container">
+    <div class="ng-table-head clrfix" style="padding-left: 8px;">
+        <div class="btn-group" style="margin-top: 8px;">
+            <span class="btn btn-sref-sm" ng-class="{'active': listType == 1}" ng-click="changeRadio(1)">
+                {{constants.table_target_list}}
+            </span>
+            <span class="btn btn-sref-sm" ng-class="{'active': listType == 2}" ng-click="changeRadio(2)">
+                {{constants.table_history_data}}
+            </span>
+        </div>
+        <div class="helpOpened_download" ng-click="exportReport_TargetManagement();" style=" margin: 12px 0 0 10px; float: right;"></div>
+        <div class="search" data-search role="search"></div>
+    </div>
+    <div class="row_highlight">
+        <table ng-table="tableParams" class="table table-special">
+            <thead>
+            <tr>
+                <th ng-style="table_width_1">{{constants.field_target_targetName}}</th>
+                <th ng-style="table_width_2">{{constants.field_target_targetId}}</th>
+                <th ng-style="table_width_3">{{constants.field_target_startEndDate}}</th>
+                <th ng-style="table_width_4">{{constants.field_target_targetValue}}</th>
+                <th ng-style="table_width_5" ng-show="listTypeDefer == 1">{{constants.field_target_currentPercent}}</th>
+                <th ng-style="table_width_5" ng-show="listTypeDefer == 2">{{constants.field_target_currentValue}}</th>
+                <th ng-style="table_width_6" ng-show="listTypeDefer == 1">{{constants.field_target_operationState}}</th>
+                <th ng-style="table_width_6" ng-show="listTypeDefer == 2">{{constants.field_target_finishState}}</th>
+                <th ng-style="table_width_7">{{constants.field_target_createTime}}</th>
+                <th ng-style="table_width_8">{{constants.label_operation}}</th>
+            </tr>
+            </thead>
+            <tbody ng-style="table_max_height">
+            <tr ng-repeat="targetManagement in $data" style="overflow-y:auto;">
+                <td ng-style="table_width_1">
+                    <div>{{targetManagement.targetName}}</div>
+                </td>
+                <td ng-style="table_width_2">
+                    <div>{{targetMap ? targetMap[targetManagement.targetId] : targetManagement.targetId}}</div>
+                </td>
+                <td ng-style="table_width_3">
+                    <div>{{targetManagement.startDate}} ~ {{targetManagement.endDate}}</div>
+                </td>
+                <td ng-style="table_width_4">
+                    <div>&nbsp;&nbsp;{{targetManagement.targetValueChange}} {{targetManagement.targetSuffix}}</div><!--{{targetManagement.targetSuffix}}-->
+                </td>
+
+                <td ng-style="table_width_5" ng-show="listTypeDefer == 1">
+                    <div>&nbsp;&nbsp;{{(targetManagement.currentValue / targetManagement.targetValue * 100).toFixed(0)}} %</div>
+                </td>
+                <td ng-style="table_width_5" ng-show="listTypeDefer == 2">
+                    <div>&nbsp;&nbsp;{{targetManagement.currentValueChange}} {{targetManagement.currentSuffix}}</div>
+                </td>
+
+                <td ng-style="table_width_6" ng-show="listTypeDefer == 1">
+                    <div>&nbsp;&nbsp;<img src="" ng-src="images/target_state_{{targetManagement.operationState}}.png" width="30" height="30"></div>
+                </td>
+                <td ng-style="table_width_6" ng-show="listTypeDefer == 2">
+                    <!--    <div>{{targetManagement.currentValue / targetManagement.targetValue >= 1 ? '执行完成' : '未完成'}}</div>-->
+                    <div ng-if="targetManagement.currentValue / targetManagement.targetValue >= 1">&nbsp;&nbsp;{{constants.prompt_targetManagement_completed}}</div>
+                    <div ng-if="targetManagement.currentValue / targetManagement.targetValue < 1">&nbsp;&nbsp;{{constants.prompt_targetManagement_incomplete}}</div>
+
+                </td>
+
+                <td ng-style="table_width_7">
+                    <div>&nbsp;&nbsp;{{formatTimeColumn(targetManagement.createTime)}}</div>
+                </td>
+                <td ng-style="table_width_8">
+                    <div class="ng-table-operator">
+                        <span ng-show="listTypeDefer == 1" data-toggle="modal" data-target="#targetManagementDialog" ng-click="editClick(targetManagement);">&nbsp;&nbsp;{{constants.label_edit}}</span>
+                        <a ng-show="listTypeDefer == 1" href="javascript:" ng-click="stopTargetManagement(targetManagement);" class="" title="">{{constants.label_stop}}</a>
+                        <a ng-show="listTypeDefer == 2" href="javascript:" ng-click="removeTargetManagement(targetManagement);" class="" title="">&nbsp;&nbsp;{{constants.label_delete}}</a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+
+
+        </table>
+    </div>
+</div>
+
+<div target-management-dialog></div>

@@ -1,0 +1,49 @@
+<!-- 导航条 -->
+<!--<div class="nav_bar_top nav_bar_top_border">-->
+<!--<span>排行榜</span>-->
+<!--</div>-->
+
+<!-- 二级导航 -->
+<div class = "nav_bar_second_wap">
+    <ul class = "nav_bar_second" style="width: 30%">
+        <li ng-class="{'now_tab': tabType == 'mechanism'}" ng-click = "changTab('mechanism');">机构排名</li>
+        <li ng-class="{'now_tab': tabType == 'province'}" ng-click = "changTab('province');" ng-if="group_sign != 'N'">省市排名</li>
+        <li ng-class="{'now_tab': tabType == 'operative'}" ng-click = "changTab('operative');" ng-if="group_sign != 'N'">合作商排名</li>
+    </ul>
+    <div class="stage" style="height: 40px; z-index: 99; overflow: initial; float: left; width:70%; background-color: #fff"></div>
+
+
+    <!-- 日历插件 月和周 -->
+    <!--
+    <div ng-if="!filterDateDay" fast-select-days="fastSelectDays1" day-operation-status="dayOperationStatus" style="margin:6px 20px 0 0; height: 28px; width:196px; position:relative; float: right" start-date="dateInForm.tagDataTimeStart" end-date="dateInForm.tagDataTimeEnd" td-change1="changeTagDataWeekMonth"
+         td-week-month-picke date-range="dateRange" class="form-control date-condition" fast-day-end="-1" date-type="aaa">
+    </div>
+     -->
+    <!-- 日历插件 天 -->
+    <!--
+    <div ng-if="filterDateDay" fast-select-days="fastSelectDays" day-operation-status="dayOperationStatus" style="margin:6px 23px 0 0; height: 28px; width:190px; position: relative; float: right" start-date="dateInTop.tagDataTimeStart" end-date="dateInTop.tagDataTimeEnd" td-change="changeTagDataTime"
+         td-date-condition date-range="dateRange" class="form-control date-condition"></div>
+     -->
+    <!-- 日历转化filter -->
+    <!--
+    <div class="drop-down-wap customLeft" tabindex=1  style="margin-right: 8px;float: right;margin-top: 4px;"  ng-click="filterDateShow($event)">
+        <span style="top: -3px;">{{filterDateText}}</span>
+        <b class = "customTriangle"></b>
+        <div class = "drop-down-wap-ul"  ng-show="filterDateFlage" style="height: 108px;">
+            <ul style="height: 108px;top: 6px;">
+                <li ng-repeat = "one in dateList" ng-click="filterDate($event,one)">{{one.name}}</li>
+            </ul>
+        </div>
+    </div>
+ -->
+
+</div>
+
+<!-- 机构排名 -->
+<div mechanism-ranking-list ng-if="tabType == 'mechanism'"></div>
+
+<!-- 省市排名 -->
+<div province-ranking-list ng-if="tabType == 'province'"></div>
+
+<!-- 合作商排名 -->
+<div operative-ranking-list ng-if="tabType == 'operative'"></div>

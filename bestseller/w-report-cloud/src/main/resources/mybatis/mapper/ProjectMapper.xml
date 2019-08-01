@@ -1,0 +1,1311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.ProjectDao">
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="td.enterprise.entity.Project">
+    <result column="id" property="id"/>
+    <result column="project_name" property="projectName"/>
+    <result column="status" property="status"/>
+    <result column="project_type" property="projectType"/>
+    <result column="project_position" property="projectPosition"/>
+    <result column="opening_time" property="openingTime"/>
+    <result column="closing_time" property="closingTime"/>
+    <result column="tenant_id" property="tenantId"/>
+    <result column="creator" property="creator"/>
+    <result column="create_by" property="createBy"/>
+    <result column="create_time" property="createTime"/>
+    <result column="updater" property="updater"/>
+    <result column="update_by" property="updateBy"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="longitude" property="longitude"/>
+    <result column="latitude" property="latitude"/>
+    <result column="city" property="city"/>
+    <result column="related_id" property="relatedId"/>
+    <result column="affiliation" property="affiliation"/>
+    <result column="description" property="description"/>
+    <result column="project_num" property="projectNum"/>
+    <result column="project_remark" property="projectRemark"/>
+    <result column="area" property="area"/>
+    <result column="orderline" property="orderline"/>
+    <result column="pic_url" property="picUrl"/>
+    <result column="default_crowd" property="defaultCrowd"/>
+    <result column="category" property="category"/>
+    <result column="brand" property="brand"/>
+    <result column="type_id" property="typeId"/>
+    <!--下面两个字段项目中不采用-->
+    <result column="ssid_count" property="ssidCount"/>
+    <result column="room_count" property="roomCount"/>
+
+    <!--下面几个字段是后加的-->
+    <result column="region" property="region"/>
+    <result column="province" property="province"/>
+    <result column="channel" property="channel"/>
+    <result column="mall" property="mall"/>
+    <result column="down_nums" property="downNums"/>
+
+    <result column="logical_city" property="logicalCity"/>
+    <result column="county" property="county"/>
+    <result column="city_type" property="cityType"/>
+    <result column="city_level" property="cityLevel"/>
+    <result column="projectParentName" property="projectParentName"/>
+    <result column="shop_size" property="shopSize"/>
+
+  </resultMap>
+
+  <resultMap id="ProjectListResultMap" type="td.enterprise.web.vm.ProjectListVM"
+    extends="BaseResultMap">
+    <result column="crowd_come" property="crowdCome"/>
+    <result column="strength_crowd_before" property="strengthCrowdBefore"/>
+    <result column="frequency_interval_time" property="frequencyIntervalTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="sales_consecutive_day" property="salesConsecutiveDay"/>
+    <result column="sales_come_day" property="salesComeDay"/>
+    <result column="black_consecutive_day" property="blackConsecutiveDay"/>
+    <result column="black_come_day" property="blackComeDay"/>
+    <result column="strength_crowd_come" property="strengthCrowdCome"/>
+  </resultMap>
+
+  <resultMap id="ProjectUserRelationVM" type="td.enterprise.web.vm.ProjectUserRelationVM"
+    extends="BaseResultMap">
+    <result property="favorite" column="favorite"/>
+  </resultMap>
+
+  <!-- TD_PROJECT table all fields -->
+  <sql id="Base_Column_List">
+	  id,project_name,status,project_type,project_position,opening_time,closing_time,tenant_id,creator,create_by,
+	  create_time,updater,update_by,update_time,longitude,latitude,city,related_id,affiliation,description,project_num,
+	  project_remark,area,orderline,pic_url,default_crowd,category,brand,type_id,region,province,channel,mall,down_nums,
+	  logical_city,county,city_type,city_level,shop_size
+    </sql>
+
+  <!-- TD_PROJECT table all fields alias of prjs-->
+  <sql id="Base_Column_List_PRJS">
+	  prjs.id,prjs.project_name,prjs.status,prjs.project_type,prjs.project_position,prjs.opening_time,prjs.closing_time,
+	  prjs.tenant_id,prjs.creator,prjs.create_by,prjs.create_time,prjs.updater,prjs.update_by,prjs.update_time,prjs.longitude,
+	  prjs.latitude,prjs.city,prjs.related_id,prjs.affiliation,prjs.description,prjs.project_num,prjs.project_remark,
+	  prjs.area,prjs.orderline,prjs.pic_url,prjs.default_crowd,prjs.category,prjs.brand,prjs.type_id,
+        prjs.region,prjs.province,prjs.channel,prjs.mall,prjs.down_nums
+    </sql>
+
+  <!-- TD_PROJECT table all fields alias of pj-->
+  <sql id="Base_Column_List_PJ">
+	  pj.id,pj.project_name,pj.status,pj.project_type,pj.project_position,pj.opening_time,pj.closing_time,
+	  pj.tenant_id,pj.creator,pj.create_by,pj.create_time,pj.updater,pj.update_by,pj.update_time,pj.longitude,
+	  pj.latitude,pj.city,pj.related_id,pj.affiliation,pj.description,pj.project_num,pj.project_remark,
+	  pj.area,pj.orderline,pj.pic_url,pj.default_crowd,pj.category,pj.brand,pj.type_id,
+        pj.region,pj.province,pj.channel,pj.mall,pj.down_nums
+    </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides=",">
+      <if test="id != null and id != ''">
+        and id = #{id}
+      </if>
+      <if test="projectName != null and projectName != ''">
+        and project_name = #{projectName}
+      </if>
+      <if test="status != null and status != ''">
+        and status = #{status}
+      </if>
+      <if test="projectType != null">
+        and project_type = #{projectType}
+      </if>
+      <if test="projectType == null ">
+        and project_type in(1,5,6,11)
+      </if>
+      <if test="projectPosition != null and projectPosition != ''">
+        and project_position = #{projectPosition}
+      </if>
+      <if test="openingTime != null and openingTime != ''">
+        and opening_time = #{openingTime}
+      </if>
+      <if test="closingTime != null and closingTime != ''">
+        and closing_time = #{closingTime}
+      </if>
+      <if test="tenantId != null and tenantId != ''">
+        and tenant_id = #{tenantId}
+      </if>
+      <if test="creator != null and creator != ''">
+        and creator = #{creator}
+      </if>
+      <if test="createBy != null and createBy != ''">
+        and create_by = #{createBy}
+      </if>
+      <if test="createTime != null and createTime != ''">
+        and create_time = #{createTime}
+      </if>
+      <if test="updater != null and updater != ''">
+        and updater = #{updater}
+      </if>
+      <if test="updateBy != null and updateBy != ''">
+        and update_by = #{updateBy}
+      </if>
+      <if test="updateTime != null and updateTime != ''">
+        and update_time = #{updateTime}
+      </if>
+      <if test="longitude != null and longitude != ''">
+        and longitude = #{longitude}
+      </if>
+      <if test="latitude != null and latitude != ''">
+        and latitude = #{latitude}
+      </if>
+      <if test="city != null and city != ''">
+        and city = #{city}
+      </if>
+      <if test="relatedId != null and relatedId != ''">
+        and related_id = #{relatedId}
+      </if>
+      <if test="affiliation != null and affiliation != ''">
+        and affiliation = #{affiliation}
+      </if>
+      <if test="description != null and description != ''">
+        and description = #{description}
+      </if>
+      <if test="projectNum != null and projectNum != ''">
+        and project_num = #{projectNum}
+      </if>
+      <if test="projectRemark != null and projectRemark != ''">
+        and project_remark = #{projectRemark}
+      </if>
+      <if test="area != null and area != ''">
+        and area = #{area}
+      </if>
+      <if test="orderline != null and orderline != ''">
+        and orderline = #{orderline}
+      </if>
+      <if test="picUrl != null and picUrl != ''">
+        and pic_url = #{picUrl}
+      </if>
+      <if test="defaultCrowd != null and defaultCrowd != ''">
+        and default_crowd = #{defaultCrowd}
+      </if>
+      <if test="category != null and category != ''">
+        and category = #{category}
+      </if>
+      <if test="brand != null and brand != ''">
+        and brand = #{brand}
+      </if>
+      <if test="typeId != null and typeId != ''">
+        and type_id = #{typeId}
+      </if>
+
+      <if test="region != null and region != ''">
+        and region = #{region}
+      </if>
+      <if test="province != null and province != ''">
+        and province = #{province}
+      </if>
+      <if test="channel != null and channel != ''">
+        and channel = #{channel}
+      </if>
+      <if test="mall != null and mall != ''">
+        and mall = #{mall}
+      </if>
+
+      <if test="logicalCity != null and logicalCity != ''">
+        and logical_city = #{logicalCity}
+      </if>
+      <if test="county != null and county != ''">
+        and county = #{county}
+      </if>
+      <if test="cityType != null and cityType != ''">
+        and city_type = #{cityType}
+      </if>
+      <if test="cityLevel != null and cityLevel != ''">
+        and city_level = #{cityLevel}
+      </if>
+
+
+      <if test="q != null and q != ''">
+        and (project_name like CONCAT('%','${q}','%' ) or project_num like CONCAT('%','${q}','%' ))
+      </if>
+      <if test="null !=projectNameList and projectNameList.size > 0">
+        and project_name in
+        <foreach collection="projectNameList" open="(" separator="," close=")" item="item">
+          #{item}
+        </foreach>
+      </if>
+
+      <if test="cCityCnNameList != null and cCityCnNameList.size()>0">
+        and c_city_cn_name in
+        <foreach item="item" index="index" collection="cCityCnNameList" open="(" separator=","
+          close=")">
+          #{item}
+        </foreach>
+      </if>
+
+      <if test="null !=projectNameList and projectNameList.size > 0">
+        and project_name in
+        <foreach collection="projectNameList" open="(" separator="," close=")" item="item">
+          #{item}
+        </foreach>
+      </if>
+
+      <if test="shopCodeList != null and shopCodeList.size()>0">
+        and project_num in
+        <foreach item="item" index="index" collection="shopCodeList" open="(" separator="," close=")">
+          #{item}
+        </foreach>
+      </if>
+
+    </trim>
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause_PJ">
+    where 1=1
+    <trim suffixOverrides=",">
+      <if test="id != null and id != ''">
+        and pj.id = #{id}
+      </if>
+      <if test="projectName != null and projectName != ''">
+        and pj.project_name = #{projectName}
+      </if>
+      <if test="status != null and status != ''">
+        and pj.status = #{status}
+      </if>
+      <if test="projectType != null and projectType != ''">
+        and pj.project_type = #{projectType}
+      </if>
+      <if test="projectPosition != null and projectPosition != ''">
+        and pj.project_position = #{projectPosition}
+      </if>
+      <if test="openingTime != null and openingTime != ''">
+        and pj.opening_time = #{openingTime}
+      </if>
+      <if test="closingTime != null and closingTime != ''">
+        and pj.closing_time = #{closingTime}
+      </if>
+      <if test="tenantId != null and tenantId != ''">
+        and pj.tenant_id = #{tenantId}
+      </if>
+      <if test="creator != null and creator != ''">
+        and pj.creator = #{creator}
+      </if>
+      <if test="createBy != null and createBy != ''">
+        and pj.create_by = #{createBy}
+      </if>
+      <if test="createTime != null and createTime != ''">
+        and pj.create_time = #{createTime}
+      </if>
+      <if test="updater != null and updater != ''">
+        and pj.updater = #{updater}
+      </if>
+      <if test="updateBy != null and updateBy != ''">
+        and pj.update_by = #{updateBy}
+      </if>
+      <if test="updateTime != null and updateTime != ''">
+        and pj.update_time = #{updateTime}
+      </if>
+      <if test="longitude != null and longitude != ''">
+        and pj.longitude = #{longitude}
+      </if>
+      <if test="latitude != null and latitude != ''">
+        and pj.latitude = #{latitude}
+      </if>
+      <if test="city != null and city != ''">
+        and pj.city = #{city}
+      </if>
+      <if test="relatedId != null and relatedId != ''">
+        and pj.related_id = #{relatedId}
+      </if>
+      <if test="affiliation != null and affiliation != ''">
+        and pj.affiliation = #{affiliation}
+      </if>
+      <if test="description != null and description != ''">
+        and pj.description = #{description}
+      </if>
+      <if test="projectNum != null and projectNum != ''">
+        and pj.project_num = #{projectNum}
+      </if>
+      <if test="projectRemark != null and projectRemark != ''">
+        and pj.project_remark = #{projectRemark}
+      </if>
+      <if test="area != null and area != ''">
+        and pj.area = #{area}
+      </if>
+      <if test="orderline != null and orderline != ''">
+        and pj.orderline = #{orderline}
+      </if>
+      <if test="picUrl != null and picUrl != ''">
+        and pj.pic_url = #{picUrl}
+      </if>
+      <if test="defaultCrowd != null and defaultCrowd != ''">
+        and pj.default_crowd = #{defaultCrowd}
+      </if>
+      <if test="category != null and category != ''">
+        and pj.category = #{category}
+      </if>
+      <if test="brand != null and brand != ''">
+        and pj.brand = #{brand}
+      </if>
+      <if test="typeId != null and typeId != ''">
+        and pj.type_id = #{typeId}
+      </if>
+      <if test="q != null and q != ''">
+        and (pj.project_name like CONCAT('%','${q}','%' ) or pj.project_num like
+        CONCAT('%','${q}','%' ))
+      </if>
+    </trim>
+  </sql>
+
+  <sql id="Base_Where_Clause_NO_ID">
+    where 1=1
+    <trim suffixOverrides=",">
+      <if test="projectName != null and projectName != ''">
+        and project_name = #{projectName}
+      </if>
+      <if test="status != null and status != ''">
+        and status = #{status}
+      </if>
+      <if test="projectType != null and projectType != ''">
+        and project_type = #{projectType}
+      </if>
+      <if test="projectPosition != null and projectPosition != ''">
+        and project_position = #{projectPosition}
+      </if>
+      <if test="openingTime != null and openingTime != ''">
+        and opening_time = #{openingTime}
+      </if>
+      <if test="closingTime != null and closingTime != ''">
+        and closing_time = #{closingTime}
+      </if>
+      <if test="tenantId != null and tenantId != ''">
+        and tenant_id = #{tenantId}
+      </if>
+      <if test="creator != null and creator != ''">
+        and creator = #{creator}
+      </if>
+      <if test="createBy != null and createBy != ''">
+        and create_by = #{createBy}
+      </if>
+      <if test="createTime != null and createTime != ''">
+        and create_time = #{createTime}
+      </if>
+      <if test="updater != null and updater != ''">
+        and updater = #{updater}
+      </if>
+      <if test="updateBy != null and updateBy != ''">
+        and update_by = #{updateBy}
+      </if>
+      <if test="updateTime != null and updateTime != ''">
+        and update_time = #{updateTime}
+      </if>
+      <if test="longitude != null and longitude != ''">
+        and longitude = #{longitude}
+      </if>
+      <if test="latitude != null and latitude != ''">
+        and latitude = #{latitude}
+      </if>
+      <if test="city != null and city != ''">
+        and city = #{city}
+      </if>
+      <if test="relatedId != null and relatedId != ''">
+        and related_id = #{relatedId}
+      </if>
+      <if test="affiliation != null and affiliation != ''">
+        and affiliation = #{affiliation}
+      </if>
+      <if test="description != null and description != ''">
+        and description = #{description}
+      </if>
+      <if test="projectNum != null and projectNum != ''">
+        and project_num = #{projectNum}
+      </if>
+      <if test="projectRemark != null and projectRemark != ''">
+        and project_remark = #{projectRemark}
+      </if>
+      <if test="area != null and area != ''">
+        and area = #{area}
+      </if>
+      <if test="orderline != null and orderline != ''">
+        and orderline = #{orderline}
+      </if>
+      <if test="picUrl != null and picUrl != ''">
+        and pic_url = #{picUrl}
+      </if>
+      <if test="defaultCrowd != null and defaultCrowd != ''">
+        and default_crowd = #{defaultCrowd}
+      </if>
+      <if test="category != null and category != ''">
+        and category = #{category}
+      </if>
+      <if test="brand != null and brand != ''">
+        and brand = #{brand}
+      </if>
+      <if test="typeId != null and typeId != ''">
+        and type_id = #{typeId}
+      </if>
+      <if test="q != null and q != ''">
+        and (project_name like CONCAT('%','${q}','%' ) or project_num like CONCAT('%','${q}','%' ))
+      </if>
+    </trim>
+  </sql>
+
+  <sql id="Base_Where_Clause_NO_ID_T">
+    where 1=1
+    <trim suffixOverrides=",">
+      <if test="projectName != null and projectName != ''">
+        and t.project_name = #{projectName}
+      </if>
+      <if test="status != null and status != ''">
+        and t.status = #{status}
+      </if>
+      <if test="projectType != null and projectType != ''">
+        and t.project_type = #{projectType}
+      </if>
+      <if test="projectPosition != null and projectPosition != ''">
+        and t.project_position = #{projectPosition}
+      </if>
+      <if test="openingTime != null and openingTime != ''">
+        and t.opening_time = #{openingTime}
+      </if>
+      <if test="closingTime != null and closingTime != ''">
+        and t.closing_time = #{closingTime}
+      </if>
+      <if test="tenantId != null and tenantId != ''">
+        and t.tenant_id = #{tenantId}
+      </if>
+      <if test="creator != null and creator != ''">
+        and t.creator = #{creator}
+      </if>
+      <if test="createBy != null and createBy != ''">
+        and t.create_by = #{createBy}
+      </if>
+      <if test="createTime != null and createTime != ''">
+        and t.create_time = #{createTime}
+      </if>
+      <if test="updater != null and updater != ''">
+        and t.updater = #{updater}
+      </if>
+      <if test="updateBy != null and updateBy != ''">
+        and t.update_by = #{updateBy}
+      </if>
+      <if test="updateTime != null and updateTime != ''">
+        and t.update_time = #{updateTime}
+      </if>
+      <if test="longitude != null and longitude != ''">
+        and t.longitude = #{longitude}
+      </if>
+      <if test="latitude != null and latitude != ''">
+        and t.latitude = #{latitude}
+      </if>
+      <if test="city != null and city != ''">
+        and t.city = #{city}
+      </if>
+      <if test="relatedId != null and relatedId != ''">
+        and t.related_id = #{relatedId}
+      </if>
+      <if test="affiliation != null and affiliation != ''">
+        and t.affiliation = #{affiliation}
+      </if>
+      <if test="description != null and description != ''">
+        and t.description = #{description}
+      </if>
+      <if test="projectNum != null and projectNum != ''">
+        and t.project_num = #{projectNum}
+      </if>
+      <if test="projectRemark != null and projectRemark != ''">
+        and t.project_remark = #{projectRemark}
+      </if>
+      <if test="area != null and area != ''">
+        and t.area = #{area}
+      </if>
+      <if test="orderline != null and orderline != ''">
+        and t.orderline = #{orderline}
+      </if>
+      <if test="picUrl != null and picUrl != ''">
+        and t.pic_url = #{picUrl}
+      </if>
+      <if test="defaultCrowd != null and defaultCrowd != ''">
+        and t.default_crowd = #{defaultCrowd}
+      </if>
+      <if test="category != null and category != ''">
+        and t.category = #{category}
+      </if>
+      <if test="brand != null and brand != ''">
+        and t.brand = #{brand}
+      </if>
+      <if test="typeId != null and typeId != ''">
+        and t.type_id = #{typeId}
+      </if>
+      <if test="q != null and q != ''">
+        and (t.project_name like CONCAT('%','${q}','%' ) or t.project_num like CONCAT('%','${q}','%'
+        ))
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause_4Shop">
+    where 1=1
+    <trim suffixOverrides=",">
+      <if test="status != null and status != ''">
+        and status = #{status}
+      </if>
+      <if test="projectType != null">
+        and project_type = #{projectType}
+      </if>
+      <if test="tenantId != null and tenantId != ''">
+        and tenant_id = #{tenantId}
+      </if>
+      <if test="projectName != null and projectName != ''">
+        and project_name like CONCAT('%',#{projectName},'%' )
+      </if>
+      <if test="city != null and city != ''">
+        and city like CONCAT('%',#{city},'%' )
+      </if>
+      <if test="brand != null and brand != ''">
+        and brand like CONCAT('%',#{brand},'%' )
+      </if>
+      <if test="region != null and region != ''">
+        and region like CONCAT('%',#{region},'%' )
+      </if>
+      <if test="province != null and province != ''">
+        and province like CONCAT('%',#{province},'%' )
+      </if>
+      <if test="channel != null and channel != ''">
+        and channel like CONCAT('%',#{channel},'%' )
+      </if>
+      <if test="mall != null and mall != ''">
+        and mall like CONCAT('%',#{mall},'%' )
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 查询 数量 -->
+  <select id="queryCount4Shop" resultType="java.lang.Integer" parameterType="Object">
+    SELECT count(t.id)
+    FROM TD_PROJECT t LEFT JOIN TD_THRESHOLD d
+    ON t.id = d.project_id
+    where t.status = 1
+    <if test="projectType != null and projectType != ''">
+      and t.project_type = #{projectType}
+    </if>
+    <if test="tenantId != null and tenantId != ''">
+      and t.tenant_id = #{tenantId}
+    </if>
+    <if test="projectName != null and projectName != ''">
+      and t.project_name like CONCAT('%',#{projectName},'%' )
+    </if>
+    <if test="city != null and city != ''">
+      and t.city like CONCAT('%',#{city},'%' )
+    </if>
+    <if test="brand != null and brand != ''">
+      and t.brand like CONCAT('%',#{brand},'%' )
+    </if>
+    <if test="region != null and region != ''">
+      and t.region like CONCAT('%',#{region},'%' )
+    </if>
+    <if test="province != null and province != ''">
+      and t.province like CONCAT('%',#{province},'%' )
+    </if>
+    <if test="channel != null and channel != ''">
+      and t.channel like CONCAT('%',#{channel},'%' )
+    </if>
+    <if test="mall != null and mall != ''">
+      and t.mall like CONCAT('%',#{mall},'%' )
+    </if>
+    <if test="q != null and q != ''">
+      and (project_name like CONCAT('%','${q}','%' ) or project_num like CONCAT('%','${q}','%' ))
+    </if>
+  </select>
+
+  <!-- 查询全部店铺信息 -->
+  <select id="queryList4Shop" resultMap="ProjectListResultMap" parameterType="Object">
+    SELECT t.*,
+    d.crowd_come,
+    d.strength_crowd_come,
+    d.strength_crowd_before,
+    d.frequency_interval_time,
+    d.sales_consecutive_day,d.sales_come_day,
+    d.black_consecutive_day,d.black_come_day
+    FROM TD_PROJECT t LEFT JOIN TD_THRESHOLD d
+    ON t.id = d.project_id
+    where t.status = 1
+    <if test="projectType != null and projectType != ''">
+      and t.project_type = #{projectType}
+    </if>
+    <if test="tenantId != null and tenantId != ''">
+      and t.tenant_id = #{tenantId}
+    </if>
+    <if test="projectName != null and projectName != ''">
+      and t.project_name like CONCAT('%',#{projectName},'%' )
+    </if>
+    <if test="city != null and city != ''">
+      and t.city like CONCAT('%',#{city},'%' )
+    </if>
+    <if test="brand != null and brand != ''">
+      and t.brand like CONCAT('%',#{brand},'%' )
+    </if>
+    <if test="region != null and region != ''">
+      and t.region like CONCAT('%',#{region},'%' )
+    </if>
+    <if test="province != null and province != ''">
+      and t.province like CONCAT('%',#{province},'%' )
+    </if>
+    <if test="channel != null and channel != ''">
+      and t.channel like CONCAT('%',#{channel},'%' )
+    </if>
+    <if test="mall != null and mall != ''">
+      and t.mall like CONCAT('%',#{mall},'%' )
+    </if>
+    <if test="logicalCity != null and logicalCity != ''">
+      and t.logical_city = #{logicalCity}
+    </if>
+    <if test="county != null and county != ''">
+      and t.county = #{county}
+    </if>
+    <if test="cityType != null and cityType != ''">
+      and t.city_type = #{cityType}
+    </if>
+    <if test="cityLevel != null and cityLevel != ''">
+      and t.city_level = #{cityLevel}
+    </if>
+    <if test="q != null and q != ''">
+      and (project_name like CONCAT('%','${q}','%' ) or project_num like CONCAT('%','${q}','%' ))
+    </if>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''">
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+      ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+  <update id="updatePicUrlById" parameterType="Object">
+        update TD_PROJECT set pic_url=#{picUrl} where id=#{id}
+    </update>
+
+  <update id="updatePicUrlByProId" parameterType="Object">
+        update TD_PROJECT_PLACE set pic_url=#{picUrl} where project_id=#{id}
+    </update>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object">
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into
+    TD_PROJECT(id,project_name,status,project_type,project_position,opening_time,closing_time,tenant_id,creator,create_by,create_time,updater,update_by,update_time,longitude,latitude,city,related_id,affiliation,description,project_num,project_remark,area,orderline,pic_url,default_crowd,category,brand,type_id,region,province,channel,mall,down_nums)
+    values(#{id},#{projectName},#{status},#{projectType},#{projectPosition},#{openingTime},#{closingTime},#{tenantId},#{creator},#{createBy},now(),#{updater},#{updateBy},now(),#{longitude},#{latitude},#{city},#{relatedId},#{affiliation},#{description},#{projectNum},#{projectRemark},#{area},#{orderline},#{picUrl},#{defaultCrowd},#{category},#{brand},#{typeId},#{region},#{province},#{channel},#{mall},#{downNums})
+  </insert>
+
+  <!-- 根据id，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_PROJECT set project_name=#{projectName},status=#{status},project_type=#{projectType},project_position=#{projectPosition},opening_time=#{openingTime},closing_time=#{closingTime},tenant_id=#{tenantId},creator=#{creator},create_by=#{createBy},create_time=now(),updater=#{updater},update_by=#{updateBy},update_time=now(),longitude=#{longitude},latitude=#{latitude},city=#{city},related_id=#{relatedId},affiliation=#{affiliation},description=#{description},project_num=#{projectNum},project_remark=#{projectRemark},area=#{area},orderline=#{orderline},pic_url=#{picUrl},default_crowd=#{defaultCrowd},category=#{category},brand=#{brand},type_id=#{typeId},region=#{region},province=#{province},channel=#{channel},mall=#{mall},down_nums=#{downNums}) where id=#{id}
+    </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object">
+    update TD_PROJECT set
+    <trim suffixOverrides=",">
+      <if test="projectName != null  ">
+        project_name=#{projectName},
+      </if>
+      <if test="status != null  ">
+        status=#{status},
+      </if>
+      <if test="projectType != null  ">
+        project_type=#{projectType},
+      </if>
+      <if test="projectPosition != null  ">
+        project_position=#{projectPosition},
+      </if>
+      <if test="openingTime != null  ">
+        opening_time=#{openingTime},
+      </if>
+      <if test="closingTime != null  ">
+        closing_time=#{closingTime},
+      </if>
+      <if test="tenantId != null  ">
+        tenant_id=#{tenantId},
+      </if>
+      <if test="creator != null  ">
+        creator=#{creator},
+      </if>
+      <if test="createBy != null  ">
+        create_by=#{createBy},
+      </if>
+      <if test="createTime != null  ">
+        create_time=#{createTime},
+      </if>
+      <if test="updater != null  ">
+        updater=#{updater},
+      </if>
+      <if test="updateBy != null  ">
+        update_by=#{updateBy},
+      </if>
+      <if test="updateTime != null  ">
+        update_time=#{updateTime},
+      </if>
+      <if test="longitude != null  ">
+        longitude=#{longitude},
+      </if>
+      <if test="latitude != null  ">
+        latitude=#{latitude},
+      </if>
+      <if test="city != null  ">
+        city=#{city},
+      </if>
+      <if test="relatedId != null  ">
+        related_id=#{relatedId},
+      </if>
+      <if test="affiliation != null  ">
+        affiliation=#{affiliation},
+      </if>
+      <if test="description != null  ">
+        description=#{description},
+      </if>
+      <if test="projectNum != null  ">
+        project_num=#{projectNum},
+      </if>
+      <if test="projectRemark != null  ">
+        project_remark=#{projectRemark},
+      </if>
+      <if test="area != null  ">
+        area=#{area},
+      </if>
+      <if test="orderline != null  ">
+        orderline=#{orderline},
+      </if>
+      <if test="picUrl != null  ">
+        pic_url=#{picUrl},
+      </if>
+      <if test="defaultCrowd != null  ">
+        default_crowd=#{defaultCrowd},
+      </if>
+      <if test="category != null  ">
+        category=#{category},
+      </if>
+      <if test="brand != null  ">
+        brand=#{brand},
+      </if>
+      <if test="typeId != null  ">
+        type_id=#{typeId},
+      </if>
+      <if test="region != null  ">
+        region=#{region},
+      </if>
+      <if test="province != null  ">
+        province=#{province},
+      </if>
+      <if test="channel != null  ">
+        channel=#{channel},
+      </if>
+      <if test="mall != null  ">
+        mall=#{mall},
+      </if>
+      <if test="downNums != null  ">
+        down_nums=#{downNums},
+      </if>
+
+    </trim>
+    where id=#{id}
+  </update>
+
+  <!-- 根据id查询 项目 -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+    select
+    <include refid="Base_Column_List"/>
+    from TD_PROJECT where id = #{id}
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_PROJECT where id = #{id}
+    </delete>
+
+  <!-- 项目 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+    select count(1) from TD_PROJECT
+    <include refid="Base_Where_Clause"/>
+    <if test="null !=childProjectIdList and childProjectIdList.size > 0">
+      and id in
+      <foreach collection="childProjectIdList" open="(" separator="," close=")" item="item">
+        #{item}
+      </foreach>
+    </if>
+    <if test="null !=projectNameList and projectNameList.size > 0">
+      and project_name in
+      <foreach collection="projectNameList" open="(" separator="," close=")" item="item">
+        #{item}
+      </foreach>
+    </if>
+  </select>
+
+  <!-- 查询项目列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+    select
+    <include refid="Base_Column_List"/>
+    from TD_PROJECT
+    <include refid="Base_Where_Clause"/>
+    <if test="null !=childProjectIdList and childProjectIdList.size > 0">
+      and id in
+      <foreach collection="childProjectIdList" open="(" separator="," close=")" item="item">
+        #{item}
+      </foreach>
+    </if>
+    group by id
+    order by orderline asc, id asc
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+      ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+  <!-- 关联用户表查询项目列表 -->
+  <select id="queryByListWithUserRelation" resultMap="ProjectUserRelationVM" parameterType="Object">
+    SELECT
+    <include refid="Base_Column_List_PRJS"/>
+    <if test="umid != null and umid != ''">
+      ,IFNULL(faved.id, -1) AS favorite
+    </if>
+    FROM (SELECT
+    <include refid="Base_Column_List_PJ"/>
+    FROM TD_PROJECT pj
+    <include refid="Base_Where_Clause_PJ"/>
+    <if test="null !=projectIds and projectIds.size > 0">
+      AND pj.id IN
+      <foreach collection="projectIds" open="(" separator="," close=")" item="item">
+        #{item}
+      </foreach>
+    </if>
+    <if test="null ==projectIds or projectIds.size == 0">
+      AND 1=0
+    </if>
+    ) prjs
+    <if test="umid != null and umid != ''">
+      LEFT JOIN (SELECT top.project_id, top.order_index
+      FROM TD_PROJECT_USER_RELATION top
+      WHERE top.type = 2
+      AND top.status = 1
+      AND top.login = #{umid}
+      ) upped ON prjs.id = upped.project_id
+      <choose>
+        <when test="userRelationType != null and userRelationType == 2">
+          JOIN
+        </when>
+        <otherwise>
+          LEFT JOIN
+        </otherwise>
+      </choose>
+      (SELECT fav.project_id, fav.id
+      FROM TD_PROJECT_USER_RELATION fav
+      WHERE fav.type = 1
+      AND fav.status = 1
+      AND fav.login = #{umid}
+      ) faved ON prjs.id = faved.project_id
+
+      GROUP BY prjs.id
+      ORDER BY upped.order_index DESC, prjs.orderline ASC, prjs.id ASC
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+      ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+  <!-- 关联用户表查询项目列表总数 -->
+  <select id="queryByListWithUserRelationCount" resultType="java.lang.Integer"
+    parameterType="Object">
+    SELECT COUNT(1)
+    FROM (SELECT
+    <include refid="Base_Column_List_PJ"/>
+    FROM TD_PROJECT pj
+    <include refid="Base_Where_Clause_PJ"/>
+    <if test="null !=projectIds and projectIds.size > 0">
+      AND pj.id IN
+      <foreach collection="projectIds" open="(" separator="," close=")" item="item">
+        #{item}
+      </foreach>
+    </if>
+    <if test="null ==projectIds or projectIds.size == 0">
+      AND 1=0
+    </if>
+    ) prjs
+    <if test="umid != null and umid != ''">
+      LEFT JOIN (SELECT top.project_id, top.order_index
+      FROM TD_PROJECT_USER_RELATION top
+      WHERE top.type = 2
+      AND top.status = 1
+      AND top.login = #{umid}
+      ) upped ON prjs.id = upped.project_id
+      <choose>
+        <when test="userRelationType != null and userRelationType == 2">
+          JOIN
+        </when>
+        <otherwise>
+          LEFT JOIN
+        </otherwise>
+      </choose>
+      (SELECT fav.project_id, fav.id
+      FROM TD_PROJECT_USER_RELATION fav
+      WHERE fav.type = 1
+      AND fav.status = 1
+      AND fav.login = #{umid}
+      ) faved ON prjs.id = faved.project_id
+    </if>
+  </select>
+
+  <select id="findAll" resultMap="BaseResultMap" parameterType="Object">
+    select
+    <include refid="Base_Column_List"/>
+    from TD_PROJECT
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <select id="queryByListIds" resultMap="BaseResultMap" parameterType="Object">
+    select
+    <include refid="Base_Column_List"/>
+    from TD_PROJECT
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <select id="getNotDirectChildrenByParam" resultMap="BaseResultMap" parameterType="Object">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM TD_PROJECT
+    <include refid="Base_Where_Clause_NO_ID"/>
+    AND (category != '-1' or category is NULL)
+    AND id NOT IN (SELECT project_id FROM TD_PROJECT_RELATION WHERE project_parent_id = #{id})
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+      ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+  <select id="getDirectChildrenByParam" resultMap="BaseResultMap" parameterType="Object">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM TD_PROJECT
+    <include refid="Base_Where_Clause_NO_ID"/>
+    AND id IN (SELECT project_id FROM TD_PROJECT_RELATION WHERE project_parent_id = #{id})
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+      ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+  <select id="getDirectChildrenByParamCount" resultType="java.lang.Integer" parameterType="Object">
+    SELECT
+    count(*)
+    FROM TD_PROJECT
+    <include refid="Base_Where_Clause_NO_ID"/>
+    AND id IN (SELECT project_id FROM TD_PROJECT_RELATION WHERE project_parent_id = #{id})
+  </select>
+
+  <select id="getChildrenByParam" resultMap="BaseResultMap" parameterType="Object">
+    SELECT
+    t.*,ssid_count,room_count
+    FROM TD_PROJECT t
+    LEFT JOIN TD_PROJECT_INDEX i ON i.project_id = t.id
+
+    <include refid="Base_Where_Clause_NO_ID_T"/>
+    AND t.id IN (SELECT project_id FROM TD_PROJECT_RELATION WHERE project_parent_id = #{id})
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+      ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+  <select id="getChildrenByParamCount" resultType="java.lang.Integer" parameterType="Object">
+    SELECT
+    count(*)
+    FROM TD_PROJECT
+    <include refid="Base_Where_Clause_NO_ID"/>
+    AND id IN (SELECT project_id FROM TD_PROJECT_RELATION WHERE project_parent_id = #{id})
+  </select>
+
+  <select id="getParentProjectByParam" resultMap="BaseResultMap" parameterType="Object">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM TD_PROJECT
+    <include refid="Base_Where_Clause_NO_ID"/>
+    AND id IN (SELECT project_parent_id FROM TD_PROJECT_RELATION WHERE project_id = #{id})
+  </select>
+
+  <select id="querySumAreaByProjectIds" resultType="java.lang.Integer"
+    parameterType="java.util.List">
+    SELECT IFNULL(SUM(IFNULL(area,0)),0)
+    FROM TD_PROJECT
+    WHERE id IN
+    <foreach collection="list" open="(" separator="," close=")" item="item">
+      #{item}
+    </foreach>
+  </select>
+
+  <resultMap id="ProjectDetailResultMap" type="td.enterprise.web.vm.ProjectDetailVM">
+    <result column="project_id" property="projectId"/>
+    <result column="project_name" property="projectName"/>
+    <result column="project_type" property="projectType"/>
+    <result column="principal" property="principal"/>
+    <result column="sensor_num" property="sensorNum"/>
+    <result column="health_rate" property="healthRate"/>
+    <result column="no_log_duration" property="noLogDuration"/>
+    <result column="thirty_no_log_duration" property="thirtyNoLogDuration"/>
+  </resultMap>
+
+  <!-- 查询项目以及店铺信息  add yanghao 2017/06/19-->
+  <!-- 查询项目以及店铺信息  update dyy 2017/11/26-->
+  <select id="queryProjectPrincipalList" resultMap="ProjectDetailResultMap" parameterType="Object">
+    SELECT
+    project_id,project_name,project_type,principal,sensor_num,health_rate,no_log_duration,thirty_no_log_duration
+    FROM TD_PROJECT_INDEX WHERE 1 = 1
+    <if test="id != null and id != ''">
+      and project_id = #{id}
+    </if>
+    <if test="status != null and status != ''">
+      and status = #{status}
+    </if>
+    <if test="projectType != null">
+      and project_type = #{projectType}
+    </if>
+    <if test="tenantId != null and tenantId != ''">
+      and tenant_id = #{tenantId}
+    </if>
+    <if test="q != null and q != ''">
+      and project_name like CONCAT('%','${q}','%' )
+    </if>
+    <if test="null != projectIds and projectIds.size > 0">
+      and project_id in
+      <foreach collection="projectIds" open="(" separator="," close=")" item="item">
+        #{item}
+      </foreach>
+    </if>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''">
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+      ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+  <!-- 查询项目以及店铺信息总数  add yanghao 2017/06/26-->
+  <select id="getProjectPrincipalCount" resultType="java.lang.Integer" parameterType="Object">
+    select count(t1.id) from TD_PROJECT t1
+    where 1=1
+    <if test="id != null and id != ''">
+      and t1.id = #{id}
+    </if>
+    <if test="status != null and status != ''">
+      and t1.status = #{status}
+    </if>
+    <if test="projectType != null">
+      and t1.project_type = #{projectType}
+    </if>
+    <if test="tenantId != null and tenantId != ''">
+      and t1.tenant_id = #{tenantId}
+    </if>
+    <if test="q != null and q != ''">
+      and t1.project_name like CONCAT('%','${q}','%' )
+    </if>
+    <if test="null != projectIds and projectIds.size > 0">
+      and t1.id in
+      <foreach collection="projectIds" open="(" separator="," close=")" item="item">
+        #{item}
+      </foreach>
+    </if>
+  </select>
+
+
+  <resultMap id="ProjectLatLngResultMap" type="td.enterprise.web.vm.ProjectLatLngVM">
+    <result column="id" property="projectId"/>
+    <result column="project_name" property="projectName"/>
+    <result column="latitude" property="latitude"/>
+    <result column="longitude" property="longitude"/>
+    <!--  <result column="city" property="city"/>
+     <result column="position" property="position"/>
+     <result column="project_type" property="projectType"/> -->
+  </resultMap>
+
+  <!-- 查询城市下项目的坐标点  add sxk 2017/10/09-->
+  <select id="queryProjectLatLngList" resultMap="ProjectLatLngResultMap" parameterType="Object">
+    SELECT
+    id,project_name,status,project_type,longitude,latitude,city
+    FROM TD_PROJECT
+    where 1=1
+    <if test="id != null and id != ''">
+      and id = #{id}
+    </if>
+    <if test="status != null and status != ''">
+      and status = #{status}
+    </if>
+    <if test="projectType != null and projectType != ''">
+      and project_type = #{projectType}
+    </if>
+    <if test="brand != null and brand != ''">
+      and brand = #{brand}
+    </if>
+    <if test="region != null and region != ''">
+      and region = #{region}
+    </if>
+    <if test="logicalCity != null and logicalCity != ''">
+      and logical_city = #{logicalCity}
+    </if>
+  </select>
+
+  <sql id="Base_Column_List_o">
+        o.id,o.project_name,o.status,o.project_type,o.project_position,o.opening_time,o.closing_time,
+        o.tenant_id,o.creator,o.create_by,o.create_time,o.updater,o.update_by,o.update_time,o.longitude,
+        o.latitude,o.city,o.related_id,o.affiliation,o.description,o.project_num,o.project_remark,
+        o.area,o.orderline,o.pic_url,o.default_crowd,o.category,o.brand,o.type_id,
+        o.region,o.province,o.channel,o.mall,o.down_nums,T3.PROJECT_TYPE as parent_PROJECT_TYPE,T3.project_name as projectParentName,
+        o.logical_city,o.county,o.city_type,o.city_level
+    </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause_o">
+    where 1=1
+    <trim suffixOverrides=",">
+      <if test="id != null and id != ''">
+        and o.id = #{id}
+      </if>
+      <if test="projectName != null and projectName != ''">
+        and o.project_name = #{projectName}
+      </if>
+      <if test="status != null and status != ''">
+        and o.status = #{status}
+      </if>
+      <if test="projectType != null">
+        and o.project_type = #{projectType}
+      </if>
+      <if test="projectType == null ">
+        and o.project_type in(1,5,6,11)
+      </if>
+      <if test="projectPosition != null and projectPosition != ''">
+        and o.project_position = #{projectPosition}
+      </if>
+      <if test="openingTime != null and openingTime != ''">
+        and o.opening_time = #{openingTime}
+      </if>
+      <if test="closingTime != null and closingTime != ''">
+        and o.closing_time = #{closingTime}
+      </if>
+      <if test="tenantId != null and tenantId != ''">
+        and o.tenant_id = #{tenantId}
+      </if>
+      <if test="creator != null and creator != ''">
+        and o.creator = #{creator}
+      </if>
+      <if test="createBy != null and createBy != ''">
+        and o.create_by = #{createBy}
+      </if>
+      <if test="createTime != null and createTime != ''">
+        and o.create_time = #{createTime}
+      </if>
+      <if test="updater != null and updater != ''">
+        and o.updater = #{updater}
+      </if>
+      <if test="updateBy != null and updateBy != ''">
+        and o.update_by = #{updateBy}
+      </if>
+      <if test="updateTime != null and updateTime != ''">
+        and o.update_time = #{updateTime}
+      </if>
+      <if test="longitude != null and longitude != ''">
+        and o.longitude = #{longitude}
+      </if>
+      <if test="latitude != null and latitude != ''">
+        and o.latitude = #{latitude}
+      </if>
+      <if test="city != null and city != ''">
+        and o.city = #{city}
+      </if>
+      <if test="relatedId != null and relatedId != ''">
+        and o.related_id = #{relatedId}
+      </if>
+      <if test="affiliation != null and affiliation != ''">
+        and o.affiliation = #{affiliation}
+      </if>
+      <if test="description != null and description != ''">
+        and o.description = #{description}
+      </if>
+      <if test="projectNum != null and projectNum != ''">
+        and o.project_num = #{projectNum}
+      </if>
+      <if test="projectRemark != null and projectRemark != ''">
+        and o.project_remark = #{projectRemark}
+      </if>
+      <if test="area != null and area != ''">
+        and o.area = #{area}
+      </if>
+      <if test="orderline != null and orderline != ''">
+        and o.orderline = #{orderline}
+      </if>
+      <if test="picUrl != null and picUrl != ''">
+        and o.pic_url = #{picUrl}
+      </if>
+      <if test="defaultCrowd != null and defaultCrowd != ''">
+        and o.default_crowd = #{defaultCrowd}
+      </if>
+      <if test="category != null and category != ''">
+        and o.category = #{category}
+      </if>
+      <if test="brand != null and brand != ''">
+        and o.brand = #{brand}
+      </if>
+      <if test="typeId != null and typeId != ''">
+        and o.type_id = #{typeId}
+      </if>
+
+      <if test="region != null and region != ''">
+        and o.region = #{region}
+      </if>
+      <if test="province != null and province != ''">
+        and o.province = #{province}
+      </if>
+      <if test="channel != null and channel != ''">
+        and o.channel = #{channel}
+      </if>
+      <if test="mall != null and mall != ''">
+        and o.mall = #{mall}
+      </if>
+
+      <if test="q != null and q != ''">
+        and (o.project_name like CONCAT('%','${q}','%' ) or o.project_num like CONCAT('%','${q}','%'
+        ))
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 项目 列表总数-->
+  <select id="queryByCountWithSingleParentName" resultType="java.lang.Integer"
+    parameterType="Object">
+    select count(1) from TD_PROJECT o
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询项目列表 -->
+  <select id="queryByListWithSingleParentName" resultMap="BaseResultMap" parameterType="Object">
+    select
+    <include refid="Base_Column_List_o"/>
+    from ( select * from TD_PROJECT
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+      ${pager.mysqlQueryCondition}
+    </if>
+    ) o
+    LEFT JOIN (SELECT T1.PROJECT_ID,T1.PROJECT_PARENT_ID,T2.PROJECT_NAME,T2.PROJECT_TYPE
+    FROM TD_PROJECT_RELATION T1
+    INNER JOIN
+    ( SELECT * FROM TD_PROJECT WHERE PROJECT_TYPE in(1,5,6,11) ) T2 ON T1.project_parent_id = T2.ID)
+    T3
+    ON o.ID = T3.project_id
+
+  </select>
+
+  <!-- 根据id查询 项目 -->
+  <select id="selectWithParentNameByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+    select
+    <include refid="Base_Column_List_o"/>
+    from TD_PROJECT o
+    LEFT JOIN
+    (SELECT T1.PROJECT_ID,T1.PROJECT_PARENT_ID,T2.PROJECT_NAME,T2.PROJECT_TYPE
+    FROM TD_PROJECT_RELATION T1
+    INNER JOIN
+    ( SELECT * FROM TD_PROJECT WHERE PROJECT_TYPE in(1,5,6,11) ) T2 ON T1.project_parent_id = T2.ID)
+    T3
+    ON o.ID = T3.project_id
+    where o.id = #{id}
+  </select>
+
+</mapper>

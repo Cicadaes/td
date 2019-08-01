@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.TargetDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.Target">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="type" property="type"/>
+        <result column="value_type" property="valueType"/>
+        <result column="start_value" property="startValue"/>
+        <result column="end_value" property="endValue"/>
+        <result column="status" property="status"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="project_id" property="projectId"/>
+        <result column="create_by" property="createBy"/>
+        <result column="creator" property="creator"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="updater" property="updater"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- TD_TARGET table all fields -->
+    <sql id="Base_Column_List">
+        id,name,code,type,value_type,start_value,end_value,status,tenant_id,project_id,create_by,creator,create_time,update_by,updater,update_time
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="code != null and code != ''">
+                and code = #{code}
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="valueType != null and valueType != ''">
+                and value_type = #{valueType}
+            </if>
+            <if test="startValue != null and startValue != ''">
+                and start_value = #{startValue}
+            </if>
+            <if test="endValue != null and endValue != ''">
+                and end_value = #{endValue}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_TARGET(id,name,code,type,value_type,start_value,end_value,status,tenant_id,project_id,create_by,creator,create_time,update_by,updater,update_time)
+        values(#{id},#{name},#{code},#{type},#{valueType},#{startValue},#{endValue},#{status},#{tenantId},#{projectId},#{createBy},#{creator},now(),#{updateBy},#{updater},now())
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_TARGET set
+        name=#{name},code=#{code},type=#{type},value_type=#{valueType},start_value=#{startValue},end_value=#{endValue},status=#{status},tenant_id=#{tenantId},project_id=#{projectId},create_by=#{createBy},creator=#{creator},create_time=now(),update_by=#{updateBy},updater=#{updater},update_time=now()
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_TARGET set
+        <trim suffixOverrides=",">
+            <if test="name != null  ">
+                name=#{name},
+            </if>
+            <if test="code != null  ">
+                code=#{code},
+            </if>
+            <if test="type != null  ">
+                type=#{type},
+            </if>
+            <if test="valueType != null  ">
+                value_type=#{valueType},
+            </if>
+            <if test="startValue != null  ">
+                start_value=#{startValue},
+            </if>
+            <if test="endValue != null  ">
+                end_value=#{endValue},
+            </if>
+            <if test="status != null  ">
+                status=#{status},
+            </if>
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="createBy != null  ">
+                create_by=#{createBy},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updateBy != null  ">
+                update_by=#{updateBy},
+            </if>
+            <if test="updater != null  ">
+                updater=#{updater},
+            </if>
+            <if test="updateTime != null  ">
+                update_time=#{updateTime},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 目标管理标签类 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_TARGET where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_TARGET where id = #{id}
+    </delete>
+
+    <!-- 目标管理标签类 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_TARGET
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询目标管理标签类列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_TARGET
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+</mapper>

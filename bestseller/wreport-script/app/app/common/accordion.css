@@ -1,0 +1,206 @@
+/*left-menu*/
+.menu-left-root {
+    position: relative;
+    /*background: #333c6a;*/
+    background: #333B69;
+    height: 100%;
+    width: 180px;
+    float: left;
+}
+
+.logout {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 0 10px;
+    border-top: 1px solid #48517d;
+    background: #333B69;
+}
+
+.logout > a {
+    color: #AEB8E6;
+    text-decoration: none;
+    height: 54px;
+    line-height: 54px;
+}
+
+.logout > a:active, .logout > a.active {
+    color: #fff;
+}
+
+.logout .account {
+    float: left;
+}
+
+.logout .rule {
+    float: right;
+    border-left: 1px solid #48517d;
+    width: 50%;
+    padding-left: 10px;
+}
+
+.logout .account span {
+    float: left;
+    margin: 19px 5px 0 0;
+    background: url(../../images/icon_account.png) no-repeat;
+    background-size: 16px 16px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+}
+
+.logout .rule span {
+    float: left;
+    margin: 19px 5px 0 0;
+    background: url(../../images/icon_admin.png) no-repeat;
+    background-size: 14px 14px;
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+}
+
+.logout .dropdown-ul {
+    position: absolute;
+    background: #1d2238;
+    background: rgba(29, 34, 56, 0.95);
+    filter: Alpha(opacity=95);
+    left: 10px;
+    bottom: 50px;
+    width: 233px;
+    padding: 16px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    z-index: 2;
+}
+
+.logout .dropdown-ul:before {
+    border: solid transparent;
+    content: ' ';
+    height: 0;
+    left: 22px;
+    position: absolute;
+    width: 0;
+}
+
+.logout .dropdown-ul:before {
+    border-width: 10px;
+    border-top-color: #1d2238;
+    opacity: 0.95;
+    filter: Alpha(opacity=95);
+    bottom: -20px;
+}
+
+.logout .dropdown-ul li a {
+    color: #7e8ac8;
+    text-decoration: none;
+}
+
+.logout .dropdown-ul li a,
+.logout .dropdown-ul li a:hover,
+.logout .dropdown-ul li a:active {
+    color: #e4e8ff;
+    float: left;
+    font-size: 14px;
+}
+
+.logout .dropdown-ul li .account-name {
+    margin-right: 10px;
+    cursor: default;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 142px;
+    display: inline-block;
+}
+
+.logout .dropdown-ul .icon-out {
+    background: url(../../images/icon_logout.png) no-repeat;
+    background-size: 13px 14px;
+    width: 13px;
+    height: 14px;
+    display: inline-block;
+    float: right;
+    margin: 1px 0 0 0;
+    cursor: pointer;
+}
+
+.menu-left {
+    float: left;
+    width: 180px;
+    /*color: #A7B6BD;*/
+    color: #AEB8E6;
+    overflow: hidden;
+    position: relative;
+
+    height: calc(100% - 115px);
+    height: -webkit-calc(100% - 115px);
+    height: -moz-calc(100% - 115px);
+}
+
+
+.menu-item {
+    font-family: "PingFangSC-Regular", sans-serif;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    overflow: hidden;
+    font-size: 12px;
+}
+
+.menu-front-level{
+    font-family: PingFangSC-Semibold, sans-serif;
+    color: #6972A5;
+}
+
+.menu-item.item-link {
+    cursor: pointer;
+}
+
+.menu-item.item-fix.active, .menu-item.item-fix:hover {
+    padding-left: 36px !important;
+}
+
+.menu-item.active, .menu-item.item-link:hover {
+    background: #242d56;
+    color: #FFFFFF !important;
+    border-left: 4px solid #13b4ff;
+    padding-left: 6px;
+}
+
+.menu-item.active a, .menu-item.item-link:hover a {
+    color: #fff;
+}
+
+.logout {
+    padding: 0;
+}
+
+.logout a.active {
+    background: #242d56;
+    border-left: 4px solid #13b4ff;
+}
+
+.logout .rule {
+    float: right;
+    border-left: 4px solid #333B69;
+    padding-left: 4px;
+    width: 50%;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.logout .account {
+    float: left;
+    border-left: 4px solid #333B69;
+    padding-left: 4px;
+    width: 50%;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+

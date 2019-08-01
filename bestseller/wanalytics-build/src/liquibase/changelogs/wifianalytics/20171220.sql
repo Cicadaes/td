@@ -1,0 +1,17 @@
+--liquibase formatted sql
+
+--changeset yinglei.li:1513761772570-1
+
+ALTER TABLE TD_METRIC_FACT DROP INDEX `idx_date_hour_pid`; -- 删除唯一约束
+ALTER TABLE TD_METRIC_FACT DROP COLUMN `id`; -- 删除主键ID
+ALTER TABLE TD_METRIC_FACT ADD PRIMARY KEY(`date`,`hour`,`project_id`); -- 增加联合主键
+ALTER TABLE TD_METRIC_FACT ADD COLUMN `id` bigint(20) NOT NULL, ADD KEY(`id`); -- 增加ID KEY
+ALTER TABLE TD_METRIC_FACT CHANGE `id` `id` bigint(20) NOT NULL AUTO_INCREMENT FIRST; -- 设置ID KEY 自增 调整id为第一列
+
+--changeset youyu.dong:1513761772570-2
+
+ALTER TABLE TD_METRIC_HOUR_REAL_TIME DROP INDEX `idx_date_hour_pid`; -- 删除唯一约束
+ALTER TABLE TD_METRIC_HOUR_REAL_TIME DROP COLUMN `id`; -- 删除主键ID
+ALTER TABLE TD_METRIC_HOUR_REAL_TIME ADD PRIMARY KEY(`date`,`hour`,`project_id`); -- 增加联合主键
+ALTER TABLE TD_METRIC_HOUR_REAL_TIME ADD COLUMN `id` bigint(20) NOT NULL, ADD KEY(`id`); -- 增加ID KEY
+ALTER TABLE TD_METRIC_HOUR_REAL_TIME CHANGE `id` `id` bigint(20) NOT NULL AUTO_INCREMENT FIRST; -- 设置ID KEY 自增 调整id为第一列

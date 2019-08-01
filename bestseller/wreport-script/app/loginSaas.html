@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>登录平台</title>
+<style type="text/css">
+<!--
+body {
+	font-size: 12px;
+	margin: 0;
+	padding: 0;
+	color: #5b626b;
+	font-family: "Microsoft YaHei", tahoma, arial, sans-serif !important;
+}
+-->
+</style>
+<link rel="shortcut icon" type="image/x-icon" href="http://172.23.5.108/sso/css/images/corner-maik.png" media="screen">
+<link type="text/css" rel="stylesheet" href="./loginSaas/login.css">
+	<script type="text/javascript" src="./loginSaas/jquery.js"></script>
+
+	<script type="text/javascript" src="./loginSaas/common.js"></script>
+
+</head>
+<body class="report_login" onkeydown="keyLogin();" style="">
+
+	<div class="login-panel" id="login">
+		<form id="fm1" class="login-form" action="api/authentication" method="post">
+
+
+			<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+				<tbody><tr>
+					<td align="left" valign="bottom" class="top_img_td">
+						<img src="loginSaas/images/TalkingData.png" class="talkingdata_png">
+					</td>
+				</tr>
+				<tr>
+					<td align="center" valign="bottom" class="fz16 top_td">
+						<div class="login-text" title="开启你的大数据营销时代">开启你的大数据营销时代</div>
+					</td>
+				</tr>
+
+
+				<tr>
+					<td align="left" valign="bottom" class="error">
+						<div class="errorInfo" style="display: none;">
+							<div id="msg" class="info"></div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td align="left" valign="bottom" class="mid_username">
+
+
+						<input class="form-user" id="username" name="username" placeholder="用户名" type="text" accesskey="" htmlescape="true" autocomplete="false" onkeyup="setStyle();GetPwdAndChk();" onfocus="setStyle();GetPwdAndChk();">
+						<span class="nickx" onclick="clearUserPwd();" style="display: inline;"></span>
+					</td>
+				</tr>
+				<tr>
+					<td align="left" valign="bottom" class="mid_password">
+						<input class="form-pass" id="password_show" placeholder="密码" type="text" autocomplete="off" accesskey="" onkeyup="changePassWord();">
+						<input class="form-pass" id="password" name="password" placeholder="密码" type="text" autocomplete="off" style="display:none;">
+
+					</td>
+				</tr>
+
+				<tr>
+					<td class="remeberme">
+						<span class="radiochecked active" onclick="changeRememberStatus();">
+							<input type="checkbox" name="rememberStatus" value="1" class="radioclass">
+							<font>记住我</font>
+						</span>
+
+						<a href="http://um.td.com:9290/um/updatePwd.html" style="display: none;">忘记密码？</a>
+					</td>
+				</tr>
+				<tr>
+					<input type="hidden" id="timecc" name="timecc" value="0.3677664606394382">
+					<input type="hidden" name="lt" value="LT-3379-juZio0vW0oLnV5aI9ZHzluTwMgXzL0">
+					<input type="hidden" name="execution" value="e4s1">
+					<input type="hidden" name="_eventId" value="submit">
+					<td align="left">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tbody><tr>
+
+								<td align="left" valign="bottom" class="base_submit">
+									<input name="button" type="button" class="submit" id="button" value="登录" onclick="formSubmit();">
+								</td>
+							</tr>
+						</tbody></table>
+					</td>
+				</tr>
+			</tbody></table>
+		</form>
+		<div class="copy-right" title="TalkingData@2011-2016">TalkingData@2011-2016</div>
+	</div>
+
+
+
+
+	<script type="text/javascript" src="./loginSaas/cas.js"></script>
+	<script type="text/javascript">
+		//radio 切换
+		function changeRememberStatus(){
+			$(".radiochecked").hasClass("active")? $(".radiochecked").removeClass("active"):$(".radiochecked").addClass("active");
+			$(".radioclass").val() == 0?$(".radioclass").val(1):$(".radioclass").val(0);
+		}
+		// 修改密码
+		function changePassWord(){
+			var password_show = $("#password_show").val();
+			var len = password_show.length;
+			var password = $("#password").val();
+			if(password_show.trim().replace(/●/g, "").length == len){
+				password = password_show.trim();
+			}else if(password.length>len){
+				password = password.substring(0,password_show.trim().length);
+			}else{
+				password += password_show.replace(/●/g, "");
+			}
+			$("#password").val(password);
+			var _passwordShow = "";
+			for (var int = 0; int < len; int++) {
+				_passwordShow+= "●";
+			}
+			$("#password_show").val(_passwordShow);
+		}
+		//切换清除样式
+		function setStyle(){
+			if (((navigator.userAgent.indexOf('MSIE') >= 0)
+				    && (navigator.userAgent.indexOf('Opera') < 0)) ||navigator.userAgent.indexOf('Trident') >=0){
+				    return;
+			}
+			var username = $("#username").val()
+			if(''!=username.trim()){
+				$(".nickx").show();
+			}else{
+				$(".nickx").hide();
+			}
+		}
+		//清除功能
+		function clearUserPwd(){
+			$("#username").val("");
+			$("#password").val("");
+			$("#password_show").val("");
+			$(".nickx").hide();
+		}
+		//登录前检查
+		function checkUsernameAndPassword(){
+			var username = $("#username").val();
+			if('' == username.trim()){
+				$("#username").val('');
+				$(".info").html("用户名为空，请输入用户名");
+				return false;
+			}
+
+			var password = $("#password").val();
+			if('' == password.trim()){
+				$("#password").val('');
+				$("#password_show").val('');
+				$(".info").html("密码为空，请输入密码");
+				return false;
+			}
+
+
+			$("#password_show").val($("#password_show").val().trim());
+			return true;
+		};
+		//登录
+		function formSubmit(){
+			if(!checkUsernameAndPassword()){
+				$(".errorInfo").show();
+				return false;
+			}else{
+				$(".errorInfo").hide();
+			}
+			$("#button").val("正在登录...");
+			$("#button").addClass("logining");
+			SetPwdAndChk();
+			//$(".login-form").submit();
+
+			$.ajax({
+			    url:'api/authentication',
+				data:{
+                    username: encode($("#username").val()),
+                    password: hex2b64(rsa.encrypt($("#password").val()))
+				},
+				type:'post',
+				success: function(response){
+			        window.location.href = 'index.html';
+				},
+                error: function(response){
+				    if(response.status == 401){
+                        var res_data = JSON.parse(response.responseText);
+                        alert(res_data.message);
+
+                        $("#button").val("登录");
+                        $("#button").removeClass("logining");
+                    }
+                }
+			})
+		}
+		function keyLogin(){
+			if (event.keyCode==13)  //回车键的键值为13
+				formSubmit();
+		}
+		window.onload=function onLoginLoaded() { GetLastUser();}
+		//获取最后一次登录的
+		function GetLastUser() {
+			var id = "49BAC005-7D5B-4231-8CEA-16939BEACD67";//GUID标识符
+			var usr = GetCookie(id);
+			if (usr != null) {
+				$("#username").val(usr);
+				setStyle();
+			}
+			GetPwdAndChk();
+		}
+		//插入登录人
+		function SetLastUser(usr) {
+			var id = "49BAC005-7D5B-4231-8CEA-16939BEACD67";
+			var expdate = new Date();
+			//当前时间加上两周的时间
+			expdate.setTime(expdate.getTime() + 14 * (24 * 60 * 60 * 1000));
+			SetCookie(id, usr, expdate);
+		}
+		//用户名失去焦点时调用该方法
+		function GetPwdAndChk() {
+			if($(".info").html()==''){
+				var usr = $("#username").val();
+				usr = window.btoa(unescape(encodeURIComponent(usr)))
+				var pwd = GetCookie(usr);
+				if (pwd != null) {
+					$("#password").val(pwd);
+					var passwordShow = "";
+					for (var int = 0; int < pwd.length; int++) {
+						passwordShow+= "●";
+					}
+					$("#password_show").val(passwordShow);
+					$(".radiochecked").addClass("active");
+					$(".radioclass").val(1);
+				} else {
+					$("#password").val('');
+					$("#password_show").val('');
+					$(".radiochecked").removeClass("active");
+					$(".radioclass").val(0);
+				}
+			}
+		}
+		//取Cookie的值
+		function GetCookie(name) {
+			var arg = name+"=";
+			var alen = arg.length;
+			var clen = document.cookie.length;
+			var i = 0;
+			while (i < clen) {
+				var j = i + alen;
+				if (document.cookie.substring(i, j) == arg){
+					var val = getCookieVal(j);
+					return decodeURIComponent(escape(window.atob(val)))
+				}
+				i = document.cookie.indexOf(" ", i) + 1;
+				if (i == 0) break;
+			}
+			return null;
+		}
+		//插入Cookie的值
+		function SetCookie(name, value, expires) {
+			var argv = SetCookie.arguments;
+			var argc = SetCookie.arguments.length;
+			var expires = (argc > 2) ? argv[2] : null;
+			var path = (argc > 3) ? argv[3] : null;
+			var domain = (argc > 4) ? argv[4] : null;
+			var secure = (argc > 5) ? argv[5] : false;
+			document.cookie = name + "=" + escape(value) + ((expires == null) ? "" : ("; expires=" + expires.toGMTString())) + ((path == null) ? "" : ("; path=" + path)) + ((domain == null) ? "" : ("; domain=" + domain)) + ((secure == true) ? "; secure" : "");
+		}
+		function ResetCookie(usr) {
+			var expdate = new Date();
+			SetCookie(usr, null, expdate);
+		}
+		function getCookieVal(offset) {
+			var endstr = document.cookie.indexOf(";", offset);
+			if (endstr == -1) endstr = document.cookie.length;
+			return unescape(document.cookie.substring(offset, endstr));
+		}
+		//点击登录时触发客户端事件
+		function SetPwdAndChk() {
+			//取用户名
+			var usr = $("#username").val();
+			usr = window.btoa(unescape(encodeURIComponent(usr)));
+			//将最后一个用户信息写入到Cookie
+			SetLastUser(usr);
+			//如果记住密码选项被选中
+			if($(".radioclass").val() == 1) {
+				//取密码值
+				var pwd = $("#password").val();
+				pwd = window.btoa(unescape(encodeURIComponent(pwd)));
+				if(pwd.trim()!=''){
+					var expdate = new Date();
+					expdate.setTime(expdate.getTime() + 14 * (24 * 60 * 60 * 1000));
+					//将用户名和密码写入到Cookie
+					SetCookie(usr, pwd, expdate);
+				}
+			}else {
+				//如果没有选中记住密码,则立即过期
+				ResetCookie(usr);
+			}
+		}
+
+		var keyStr = "ABCDEFGHIJKLMNOP" + "QRSTUVWXYZabcdef" + "ghijklmnopqrstuv"
+        + "wxyz0123456789+/" + "=";
+
+		function encode64(input) {
+
+		    var output = "";
+		    var chr1, chr2, chr3 = "";
+		    var enc1, enc2, enc3, enc4 = "";
+		    var i = 0;
+		    do {
+		        chr1 = input.charCodeAt(i++);
+		        chr2 = input.charCodeAt(i++);
+		        chr3 = input.charCodeAt(i++);
+		        enc1 = chr1 >> 2;
+		        enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+		        enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+		        enc4 = chr3 & 63;
+		        if (isNaN(chr2)) {
+		            enc3 = enc4 = 64;
+		        } else if (isNaN(chr3)) {
+		            enc4 = 64;
+		        }
+		        output = output + keyStr.charAt(enc1) + keyStr.charAt(enc2)
+		                + keyStr.charAt(enc3) + keyStr.charAt(enc4);
+		        chr1 = chr2 = chr3 = "";
+		        enc1 = enc2 = enc3 = enc4 = "";
+		    } while (i < input.length);
+
+		    return output;
+		}
+	</script>
+	<script type="text/javascript">
+		var mrd=Math.random();
+		var doc = document.getElementById("timecc");
+		doc.value=mrd;
+		var errormsg = $(".info").html();
+		if(errormsg && errormsg.split("<br>").length>1){
+			errormsg.split("<br>")[0].indexOf("用户")>0?$(".info").html(errormsg.split("<br>")[0]):$(".info").html(errormsg.split("<br>")[1]);
+		}
+		if(errormsg!=''){
+			$(".errorInfo").show();
+		}
+	</script>
+
+
+
+</body></html>

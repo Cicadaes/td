@@ -1,0 +1,959 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="hadoop (generated)" id="1482806295900-1">
+        <createTable tableName="TD_ALGORITHM">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" remarks="名称" type="VARCHAR(256)"/>
+            <column name="code" remarks="模型编码，不允许重复" type="VARCHAR(14)"/>
+            <column name="pre_handle_script_id" remarks="模型数据准备" type="BIGINT"/>
+            <column name="handle_script_id" remarks="模型调用" type="BIGINT"/>
+            <column name="post_handle_script_id" remarks="模型结果处理" type="BIGINT"/>
+            <column name="handle_type" remarks="模型类型：sh java" type="VARCHAR(4)"/>
+            <column name="type" remarks="类型 1,训练 2、预测" type="VARCHAR(64)"/>
+            <column name="description" remarks="描述" type="VARCHAR(512)"/>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tenant_id" remarks="租户id" type="VARCHAR(32)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-2">
+        <createTable tableName="TD_ATTACHMENT">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="calc_code" remarks="计算对象编号" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="calc_type" remarks="计算对象类型" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="calc_id" remarks="计算对象id" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="100" name="type" remarks="1、用户导出 2、用户导入 3、人群导出 4、人群导入 5、etl单表导入 6、第三方标签导入" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" remarks="附件名称" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="path" remarks="附件存放的路径" type="VARCHAR(1024)"/>
+            <column name="description" remarks="对附件的说明" type="VARCHAR(1024)"/>
+            <column name="attr1" remarks="扩展属性1" type="VARCHAR(128)"/>
+            <column name="attr2" remarks="扩展属性2" type="VARCHAR(128)"/>
+            <column name="attr3" remarks="扩展属性3" type="VARCHAR(128)"/>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tenant_id" remarks="租户id" type="VARCHAR(32)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-3">
+        <createTable tableName="TD_CACHEINFO">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="cache_name" remarks="缓存名，英文，只读" type="VARCHAR(128)"/>
+            <column name="max_entity" remarks="缓存中能存放对象的最大数量，只读" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="max_live_time" remarks="缓存对象的过期时间，单位毫秒，只读" type="BIGINT"/>
+            <column name="description" remarks="缓存描述，只读" type="VARCHAR(200)"/>
+            <column name="system_code" remarks="所属子系统" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-4">
+        <createTable tableName="TD_CALC_OBJECT">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" remarks="名称" type="VARCHAR(256)"/>
+            <column name="code" remarks="代码" type="VARCHAR(256)"/>
+            <column name="type" remarks="类型" type="VARCHAR(256)"/>
+            <column name="param" remarks="对象参数" type="TEXT"/>
+            <column name="attr1" remarks="扩展属性1" type="VARCHAR(256)"/>
+            <column name="attr2" remarks="扩展属性2" type="VARCHAR(256)"/>
+            <column name="attr3" remarks="扩展属性3" type="VARCHAR(256)"/>
+            <column name="attr4" remarks="扩展属性4" type="VARCHAR(256)"/>
+            <column name="attr5" remarks="扩展属性5" type="VARCHAR(256)"/>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" remarks="状态: 1，未生效 2，已生效" type="INT"/>
+            <column name="calc_status" remarks="状态: 0，未计算 1，计算中 2,计算完成  4, 被终止 5,无需执行 -1,计算异常 -2，计算超时 -3，待计算 -4，重新计算" type="INT"/>
+            <column name="data_app_id" remarks="数据应用id" type="VARCHAR(64)"/>
+            <column name="tenant_id" remarks="租户id" type="VARCHAR(32)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-5">
+        <createTable tableName="TD_CALC_OBJECT_LOG">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="object_id" remarks="id" type="BIGINT"/>
+            <column name="object_name" remarks="名称" type="VARCHAR(256)"/>
+            <column name="object_code" remarks="调度任务计算对象code" type="VARCHAR(256)"/>
+            <column name="object_type" remarks="类型" type="VARCHAR(256)"/>
+            <column name="scheduler_task_log_id" remarks="调度任务id" type="BIGINT"/>
+            <column name="azkaban_executor_id" remarks="azkaban执行id" type="BIGINT"/>
+            <column name="execption_info" remarks="异常信息" type="TEXT"/>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_time" remarks="开始时间" type="TIMESTAMP"/>
+            <column name="end_time" remarks="结束时间" type="TIMESTAMP"/>
+            <column name="status" remarks="状态: 0，未计算 1，计算中 2,计算完成  4, 被终止 5,无需执行 -1,计算异常 -2，计算超时 -3，待计算 -4，重新计算" type="INT"/>
+            <column name="data_app_id" remarks="数据应用id" type="VARCHAR(64)"/>
+            <column name="tenant_id" remarks="租户id" type="VARCHAR(32)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-6">
+        <createTable tableName="TD_DIC">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" remarks="字典英文名" type="VARCHAR(128)"/>
+            <column name="description" remarks="字典中文描述" type="VARCHAR(200)"/>
+            <column name="dic_key" remarks="字典编码" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="system_code" remarks="所属子系统" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-7">
+        <createTable tableName="TD_DIC_ITEM">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="dic_id" remarks="数据字典表中字典的Id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dic_item_key" remarks="字典编码" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dic_item_value" remarks="值" type="VARCHAR(256)"/>
+            <column defaultValueNumeric="0" name="parent_id" remarks="父项ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-8">
+        <createTable tableName="TD_EMAIL_SEND_JOB_INPUT">
+            <column autoIncrement="true" name="id" remarks="编号" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="email_server_code" remarks="发件邮箱配置code" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="to" remarks="收件人" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" remarks="标题" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="content" remarks="内容" type="VARCHAR(2048)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cc" remarks="抄送人" type="VARCHAR(128)"/>
+            <column name="bcc" remarks="密送人" type="VARCHAR(128)"/>
+            <column name="retry" remarks="重试次数" type="INT"/>
+            <column name="max_retry" remarks="最大重试次数" type="INT"/>
+            <column name="attachment_path" remarks="附件名称" type="VARCHAR(128)"/>
+            <column name="attachment_display_name" remarks="附件显示名称" type="VARCHAR(128)"/>
+            <column name="status" remarks="状态 1:未发送 2:重试 3:已发送 -1:发送失败" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-9">
+        <createTable tableName="TD_EMAIL_SERVER_CONFIG">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="CODE" remarks="服务器代码" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" remarks="服务器名" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mail_host" remarks="主机" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="smtp_port" remarks="smtp端口" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="use_ssl" remarks="是否使用Ssl，1是，0否" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER" remarks="用户" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PASSWORD" remarks="密码" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="system_code" remarks="所属子系统" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-10">
+        <createTable tableName="TD_EMAIL_TEMPLATE">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="code" remarks="模板代码" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" remarks="标题" type="VARCHAR(1024)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="content" remarks="说明" type="VARCHAR(2048)"/>
+            <column name="system_code" remarks="所属系统" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-11">
+        <createTable tableName="TD_ETL_ERROR_DETAIL">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="target_date" remarks="数据日期" type="VARCHAR(40)"/>
+            <column name="class_name" remarks="类名" type="VARCHAR(256)"/>
+            <column name="category_code" remarks="类别编码" type="VARCHAR(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="record_id" remarks="etl_error_record唯一标识" type="BIGINT"/>
+            <column name="job_id" remarks="任务ID" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data" remarks="上下文数据" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="error_info" remarks="错误信息" type="TEXT"/>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-12">
+        <createTable tableName="TD_ETL_ERROR_RECORD">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="job_id" remarks="Hadoop Job Id" type="VARCHAR(256)"/>
+            <column name="target_date" remarks="数据日期" type="VARCHAR(40)"/>
+            <column name="class_name" remarks="类名" type="VARCHAR(256)"/>
+            <column name="table_name" remarks="表名" type="VARCHAR(256)"/>
+            <column name="category_code" remarks="类别编码" type="VARCHAR(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="error_count" remarks="错误条数" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="run_date" remarks="运行日期" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tenant_id" remarks="租户id" type="VARCHAR(32)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-13">
+        <createTable tableName="TD_ETL_RULE">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="rule_def_id" remarks="规则定义的唯一标识" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code" remarks="规则编码" type="VARCHAR(40)"/>
+            <column name="name" remarks="规则名称" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" remarks="规则说明" type="VARCHAR(256)"/>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tenant_id" remarks="租户id" type="VARCHAR(32)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-14">
+        <createTable tableName="TD_ETL_RULE_ATTRIBUTE">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="rule_id" remarks="规则定义的唯一标识" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code" remarks="规则属性编码" type="VARCHAR(40)"/>
+            <column name="name" remarks="规则属性名称" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" remarks="规则属性值" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" remarks="规则属性说明" type="VARCHAR(256)"/>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tenant_id" remarks="租户id" type="VARCHAR(32)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-15">
+        <createTable tableName="TD_ETL_RULE_ATTRIBUTE_DEFINITION">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="rule_def_id" remarks="规则定义的唯一标识" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code" remarks="规则属性定义编码" type="VARCHAR(40)"/>
+            <column name="name" remarks="规则属性定义名称" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value_type" remarks="规则属性值类型, 1, String, 2, Number, 3, Dictionary" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dictionary" remarks="数据字典" type="VARCHAR(256)"/>
+            <column name="description" remarks="规则说明" type="VARCHAR(256)"/>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tenant_id" remarks="租户id" type="VARCHAR(32)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-16">
+        <createTable tableName="TD_ETL_RULE_DEFINITION">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="code" remarks="规则定义编码" type="VARCHAR(40)"/>
+            <column name="name" remarks="规则定义名称" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rule_class_name" remarks="规则实现类的名称" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="business_type" remarks="规则的业务类型 1, 事实表导入,2,ES表导入 9, 其它" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" remarks="规则说明" type="VARCHAR(256)"/>
+            <column name="status" remarks="状态，0，未启用 1，启用 -1，禁用]" type="INT"/>
+            <column name="attr1" remarks="扩展属性1" type="VARCHAR(256)"/>
+            <column name="attr2" remarks="扩展属性2" type="VARCHAR(256)"/>
+            <column name="attr3" remarks="扩展属性3" type="VARCHAR(256)"/>
+            <column name="attr4" remarks="扩展属性4" type="VARCHAR(2048)"/>
+            <column name="attr5" remarks="扩展属性5" type="VARCHAR(256)"/>
+            <column name="attr6" remarks="扩展属性6" type="TEXT"/>
+            <column name="attr7" remarks="扩展属性7" type="TEXT"/>
+            <column name="attr8" remarks="扩展属性8" type="TEXT"/>
+            <column name="attr9" remarks="扩展属性9" type="TEXT"/>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tenant_id" remarks="租户id" type="VARCHAR(32)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-17">
+        <createTable tableName="TD_FTP_CLIENT_CONFIG">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="client_name" remarks="客户端名字[value:此客户端的名字，任意取值]" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="root_path" remarks="客户端根目录[value:客户端存放文件的根目录]" type="VARCHAR(1024)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code" remarks="客户端英文代码[value:此客户端的英文代码]" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-18">
+        <createTable tableName="TD_FTP_SERVER_CONFIG">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="server_name" remarks="服务器名" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="protocol" remarks="协议[value:协议，可选值：ftp，sftp]" type="VARCHAR(8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER" remarks="用户名" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" remarks="密码" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="root_path" remarks="ftp服务器根目录" type="VARCHAR(1024)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="charset" remarks="字符集" type="VARCHAR(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="host" remarks="服务器ip" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="port" remarks="服务器port" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code" remarks="服务器代码" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="system_code" remarks="所属子系统" type="VARCHAR(20)"/>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-19">
+        <createTable tableName="TD_JOB_CONFIG">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" remarks="任务名称" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="class_name" remarks="任务的实现类" type="VARCHAR(1024)"/>
+            <column name="intervall" type="VARCHAR(20)"/>
+            <column name="start_time" remarks="任务的起始时间，为null则立刻开始" type="TIMESTAMP"/>
+            <column name="end_time" remarks="任务的终止时间，为null则永不终止" type="TIMESTAMP"/>
+            <column name="repeat_time" remarks="任务的最大重复次数，非0则生效" type="INT"/>
+            <column name="execute_time" remarks="任务的执行次数" type="INT"/>
+            <column name="status" remarks="状态，1，有效，0，无效" type="INT"/>
+            <column name="jkey" remarks="任务的唯一英文代码" type="VARCHAR(36)"/>
+            <column name="system_code" remarks="所属子系统" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="trigger_type" remarks="定时任务触发类型，S:simpleTrigger，C：cronTrigger" type="VARCHAR(2)"/>
+            <column name="cron_expression" remarks="cron表达式" type="VARCHAR(60)"/>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-20">
+        <createTable tableName="TD_META_BACKUP">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="backup_file" remarks="备份文件路径" type="VARCHAR(255)"/>
+            <column name="file_version" remarks="备份文件版本号" type="VARCHAR(255)"/>
+            <column defaultValueNumeric="0" name="status" remarks="0未开始，1备份中，2备份完成，3备份失败" type="INT"/>
+            <column defaultValue="0000-00-00 00:00:00" name="start_time" remarks="备份开始时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="finish_time" remarks="备份结束时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="update_time" remarks="数据更新时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-21">
+        <createTable tableName="TD_PARAM">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="param_key" remarks="参数英文名" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="param_value" remarks="参数值" type="LONGTEXT"/>
+            <column name="description" remarks="参数的说明" type="TEXT"/>
+            <column name="system_code" remarks="所属系统编码" type="VARCHAR(20)"/>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="is_password" remarks="标示参数是否为密码" type="tinyint"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-22">
+        <createTable tableName="TD_PARAM_bk">
+            <column defaultValueNumeric="0" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="param_key" remarks="参数英文名" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="param_value" remarks="参数值" type="LONGTEXT"/>
+            <column name="description" remarks="参数的说明" type="TEXT"/>
+            <column name="system_code" remarks="所属系统编码" type="VARCHAR(20)"/>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="is_password" remarks="标示参数是否为密码" type="BIT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-23">
+        <createTable tableName="TD_PARAM_copy">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="param_key" remarks="参数英文名" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="param_value" remarks="参数值" type="LONGTEXT"/>
+            <column name="description" remarks="参数的说明" type="TEXT"/>
+            <column name="system_code" remarks="所属系统编码" type="VARCHAR(20)"/>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="is_password" remarks="标示参数是否为密码" type="BIT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-24">
+        <createTable tableName="TD_SCHEDULER_TASK">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" remarks="名称" type="VARCHAR(256)"/>
+            <column name="code" remarks="编码" type="VARCHAR(256)"/>
+            <column name="azkaban_project_name" remarks="azkaban工程名称" type="VARCHAR(256)"/>
+            <column name="azkaban_project_id" remarks="azkaban工程id" type="BIGINT"/>
+            <column name="azkaban_project_version" remarks="azkaban工程版本" type="BIGINT"/>
+            <column name="azkaban_job_flow_id" remarks="azkaban job flow id" type="VARCHAR(256)"/>
+            <column name="azkaban_job_flow_version" remarks="job flow类型 0,单个任务 1总任务" type="BIGINT"/>
+            <column name="status" remarks="状态,0 禁用 1 正常" type="INT"/>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_app_id" remarks="数据应用id" type="VARCHAR(64)"/>
+            <column name="tenant_id" remarks="租户id:系统任务(system),跨租户任务(all),租户任务(tenantId)" type="VARCHAR(32)"/>
+            <column name="system_code" remarks="所属系统编码" type="VARCHAR(20)"/>
+            <column name="description" remarks="描述" type="TEXT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-25">
+        <createTable tableName="TD_SCHEDULER_TASK_LOG">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="task_id" remarks="任务id" type="BIGINT"/>
+            <column name="task_code" remarks="任务编码" type="VARCHAR(256)"/>
+            <column name="azkaban_executor_id" remarks="azkaban执行id" type="BIGINT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="start_time" remarks="开始时间" type="TIMESTAMP"/>
+            <column name="end_time" remarks="结束时间" type="TIMESTAMP"/>
+            <column name="status" remarks="状态: 0，未计算 1，计算中 2,计算完成  4, 被终止 5,无需执行 -1,计算异常 -2，计算超时 -3，待计算 -4，重新计算" type="INT"/>
+            <column name="input_param" remarks="初始参数" type="TEXT"/>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_app_id" remarks="数据应用id" type="VARCHAR(64)"/>
+            <column name="tenant_id" remarks="租户id" type="VARCHAR(32)"/>
+            <column name="ref_scheduler_task_log_id" remarks="关联的调度任务ID，管理员重试发起的调度任务，用来保存原始的调度任务ID" type="BIGINT"/>
+            <column name="execption_info" remarks="异常信息" type="TEXT"/>
+            <column defaultValueNumeric="0" name="retry_num" remarks="调度任务日志重试次数" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-26">
+        <createTable tableName="TD_SCRIPT_INFO">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="script_name" remarks="脚本名称" type="VARCHAR(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="script_code" remarks="脚本代码" type="VARCHAR(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="script_path" remarks="脚本路径" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" remarks="脚本类型 1标签导入 2 标签导出 3人群导入 4 人群导出 5 计算脚本" type="CHAR(4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" remarks="脚本说明" type="TEXT"/>
+            <column name="script_info_interval" remarks="脚本运行周期 0,按需 1,天 2,周 3,月" type="VARCHAR(40)"/>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-27">
+        <createTable tableName="TD_SEQUENCE">
+            <column name="seq_name" remarks="SEQUENCE名称" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="current_value" remarks="当前值" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="current_day" remarks="当前日期，格式20130917" type="VARCHAR(10)"/>
+            <column defaultValueNumeric="1" name="increment" remarks="增量" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="remark" remarks="备注" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-28">
+        <createTable tableName="TD_SEQUENCE_SUB">
+            <column name="seq_sub_name" remarks="SEQUENCE名称" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="current_value" remarks="当前值" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1" name="increment" remarks="增量" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="remark" remarks="备注" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-29">
+        <createTable tableName="TD_SUB_CALC_OBJECT_LOG">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="calc_object_log_id" remarks="计算对象日志id" type="BIGINT"/>
+            <column name="object_id" remarks="子计算对象业务id" type="BIGINT"/>
+            <column name="object_name" remarks="子计算对象名称" type="VARCHAR(256)"/>
+            <column name="object_code" remarks="子计算对象代码" type="VARCHAR(256)"/>
+            <column name="object_type" remarks="子计算对象类型" type="VARCHAR(256)"/>
+            <column name="scheduler_task_log_id" remarks="调度任务id" type="BIGINT"/>
+            <column name="azkaban_executor_id" remarks="azkaban执行id" type="BIGINT"/>
+            <column name="content" remarks="内容" type="TEXT"/>
+            <column name="execption_info" remarks="异常信息" type="TEXT"/>
+            <column name="create_by" remarks="创建人账号" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" remarks="创建人" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改人账号" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_time" remarks="开始时间" type="TIMESTAMP"/>
+            <column name="end_time" remarks="结束时间" type="TIMESTAMP"/>
+            <column name="status" remarks="状态: 0，未计算 1，计算中 2,计算完成  4, 被终止 5,无需执行 -1,计算异常 -2，计算超时 -3，待计算 -4，重新计算" type="INT"/>
+            <column name="data_app_id" remarks="数据应用id" type="VARCHAR(64)"/>
+            <column name="tenant_id" remarks="租户id" type="VARCHAR(32)"/>
+            <column name="verification_result" remarks="校验结果" type="TEXT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-30">
+        <createTable tableName="TD_SYS_AUDIT_LOG">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="systemCode" remarks="所属子系统" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tenantId" remarks="租户Id" type="VARCHAR(32)"/>
+            <column name="projectId" remarks="项目Id" type="VARCHAR(32)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="createTime" remarks="创建时间" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="actorUmId" remarks="执行人umid" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="actorName" remarks="执行人姓名" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="operationType" remarks="操作类型，业务系统自己定义" type="VARCHAR(10)"/>
+            <column name="targetType" remarks="目标类型，业务系统自己定义" type="VARCHAR(100)"/>
+            <column name="targetId" remarks="目标的Id" type="VARCHAR(500)"/>
+            <column name="result" remarks="操作结果，业务系统自己定义" type="VARCHAR(10)"/>
+            <column name="description" remarks="描述" type="VARCHAR(1024)"/>
+            <column name="beforeValue" remarks="执行前参数json值" type="VARCHAR(2048)"/>
+            <column name="afterValue" remarks="执行后参数json值" type="VARCHAR(2048)"/>
+            <column name="exception" remarks="异常信息" type="VARCHAR(2048)"/>
+            <column name="returnValue" remarks="返回值" type="VARCHAR(2048)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-31">
+        <addPrimaryKey columnNames="seq_name" constraintName="PRIMARY" tableName="TD_SEQUENCE"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-32">
+        <addPrimaryKey columnNames="seq_sub_name" constraintName="PRIMARY" tableName="TD_SEQUENCE_SUB"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482806295900-33">
+        <createView fullDefinition="false" viewName="TD_DIC_VIEW">select `d`.`id` AS `id`,`d`.`name` AS `name`,`d`.`description` AS `description`,`d`.`dic_key` AS `dicKey`,`d`.`system_code` AS `systemCode`,`i`.`id` AS `itemId`,`i`.`dic_item_key` AS `dicItemKey`,`i`.`dic_item_value` AS `dicItemValue`,`i`.`parent_id` AS `parentId` from (`dmp_console`.`TD_DIC` `d` left join `dmp_console`.`TD_DIC_ITEM` `i` on((`d`.`id` = `i`.`dic_id`)))</createView>
+    </changeSet>
+</databaseChangeLog>

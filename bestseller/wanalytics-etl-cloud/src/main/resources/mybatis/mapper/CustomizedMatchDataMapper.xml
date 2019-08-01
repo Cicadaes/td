@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.CustomizedMatchDataDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="td.enterprise.entity.CustomizedMatchData" >
+	<result column="id" property="id"/>
+	<result column="business_id" property="businessId"/>
+	<result column="_source" property="source"/>
+	<result column="valid_start_time" property="validStartTime"/>
+	<result column="valid_end_time" property="validEndTime"/>
+	<result column="customized_info" property="customizedInfo"/>
+	<result column="status" property="status"/>
+	<result column="creator" property="creator"/>
+	<result column="create_by" property="createBy"/>
+	<result column="create_time" property="createTime"/>
+	<result column="updater" property="updater"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="update_time" property="updateTime"/>
+  </resultMap>
+       
+  <!-- TD_CUSTOMIZED_MATCH_DATA table all fields -->
+  <sql id="Base_Column_List" >
+	 id,business_id,_source,valid_start_time,valid_end_time,customized_info,status,creator,create_by,create_time,updater,update_by,update_time
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="businessId != null and businessId != ''" >
+        and business_id =  #{businessId}
+	  </if>
+	      <if test="source != null and source != ''" >
+        and _source =  #{source}
+	  </if>
+	      <if test="validStartTime != null and validStartTime != ''" >
+        and valid_start_time =  #{validStartTime}
+	  </if>
+	      <if test="validEndTime != null and validEndTime != ''" >
+        and valid_end_time =  #{validEndTime}
+	  </if>
+	      <if test="customizedInfo != null and customizedInfo != ''" >
+        and customized_info =  #{customizedInfo}
+	  </if>
+	      <if test="status != null and status != ''" >
+        and status =  #{status}
+	  </if>
+	      <if test="creator != null and creator != ''" >
+        and creator =  #{creator}
+	  </if>
+	      <if test="createBy != null and createBy != ''" >
+        and create_by =  #{createBy}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	      <if test="updater != null and updater != ''" >
+        and updater =  #{updater}
+	  </if>
+	      <if test="updateBy != null and updateBy != ''" >
+        and update_by =  #{updateBy}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_CUSTOMIZED_MATCH_DATA(id,business_id,_source,valid_start_time,valid_end_time,customized_info,status,creator,create_by,create_time,updater,update_by,update_time)
+ values(#{id},#{businessId},#{source},#{validStartTime},#{validEndTime},#{customizedInfo},#{status},#{creator},#{createBy},now(),#{updater},#{updateBy},now())
+  </insert>
+  
+  <!-- 批量插入记录 -->
+  <insert id="batchInsert" parameterType="java.util.List">  
+     insert into TD_CUSTOMIZED_MATCH_DATA (business_id,_source,valid_start_time,valid_end_time,customized_info,status,creator,create_by,create_time,updater,update_by,update_time)   
+     values  
+     <foreach collection="list" item="item" index="index" separator="," >  
+         (#{item.businessId},#{item.source},#{item.validStartTime},#{item.validEndTime},#{item.customizedInfo},#{item.status},#{item.creator},#{item.createBy},now(),#{item.updater},#{item.updateBy},now())  
+     </foreach>  
+   </insert>  
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+    update TD_CUSTOMIZED_MATCH_DATA set business_id=#{businessId},_source=#{source},valid_start_time=#{validStartTime},valid_end_time=#{validEndTime},customized_info=#{customizedInfo},status=#{status},creator=#{creator},create_by=#{createBy},create_time=now(),updater=#{updater},update_by=#{updateBy},update_time=now() where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+    update TD_CUSTOMIZED_MATCH_DATA set 
+	<trim  suffixOverrides="," >
+	<if test="businessId != null  ">
+		business_id=#{businessId},
+	</if>
+	<if test="source != null  ">
+		_source=#{source},
+	</if>
+	<if test="validStartTime != null  ">
+		valid_start_time=#{validStartTime},
+	</if>
+	<if test="validEndTime != null  ">
+		valid_end_time=#{validEndTime},
+	</if>
+	<if test="customizedInfo != null  ">
+		customized_info=#{customizedInfo},
+	</if>
+	<if test="status != null  ">
+		status=#{status},
+	</if>
+	<if test="creator != null  ">
+		creator=#{creator},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updater != null  ">
+		updater=#{updater},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	</trim> where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 用户日志扩展标签数据表 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" /> 
+	 from TD_CUSTOMIZED_MATCH_DATA where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+    delete 	 from TD_CUSTOMIZED_MATCH_DATA where id = #{id}
+  </delete>
+
+  <!-- 用户日志扩展标签数据表 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_CUSTOMIZED_MATCH_DATA 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询用户日志扩展标签数据表列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_CUSTOMIZED_MATCH_DATA 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <!-- 批量删除记录 -->
+  <delete id="batchDeleteByBusinessId" parameterType="Object">
+    delete from TD_CUSTOMIZED_MATCH_DATA where business_id = #{businessId} and update_time &lt;= #{updateTime}
+  </delete>
+  
+</mapper>   

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.AppBlackListDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.AppBlackList">
+        <result column="id" property="id"/>
+        <result column="app_hash" property="appHash"/>
+        <result column="app_name" property="appName"/>
+        <result column="app_version" property="appVersion"/>
+        <result column="platform" property="platform"/>
+        <result column="source" property="source"/>
+        <result column="status" property="status"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="creator" property="creator"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="updater" property="updater"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- TD_APP_BLACK_LIST table all fields -->
+    <sql id="Base_Column_List">
+        id,app_hash,app_name,app_version,platform,source,status,tenant_id,creator,create_by,create_time,updater,update_by,update_time
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="appHash != null and appHash != ''">
+                and app_hash = #{appHash}
+            </if>
+            <if test="appName != null and appName != ''">
+                and app_name = #{appName}
+            </if>
+            <if test="appVersion != null and appVersion != ''">
+                and app_version = #{appVersion}
+            </if>
+            <if test="platform != null and platform != ''">
+                and platform = #{platform}
+            </if>
+            <if test="source != null and source != ''">
+                and source = #{source}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_APP_BLACK_LIST(id,app_hash,app_name,app_version,platform,source,status,tenant_id,creator,create_by,create_time,updater,update_by,update_time)
+        values(#{id},#{appHash},#{appName},#{appVersion},#{platform},#{source},#{status},#{tenantId},#{creator},#{createBy},now(),#{updater},#{updateBy},now())
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_APP_BLACK_LIST set
+        app_hash=#{appHash},app_name=#{appName},app_version=#{appVersion},platform=#{platform},source=#{source},status=#{status},tenant_id=#{tenantId},creator=#{creator},create_by=#{createBy},create_time=now(),updater=#{updater},update_by=#{updateBy},update_time=now()
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_APP_BLACK_LIST set
+        <trim suffixOverrides=",">
+            <if test="appHash != null  ">
+                app_hash=#{appHash},
+            </if>
+            <if test="appName != null  ">
+                app_name=#{appName},
+            </if>
+            <if test="appVersion != null  ">
+                app_version=#{appVersion},
+            </if>
+            <if test="platform != null  ">
+                platform=#{platform},
+            </if>
+            <if test="source != null  ">
+                source=#{source},
+            </if>
+            <if test="status != null  ">
+                status=#{status},
+            </if>
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="createBy != null  ">
+                create_by=#{createBy},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updater != null  ">
+                updater=#{updater},
+            </if>
+            <if test="updateBy != null  ">
+                update_by=#{updateBy},
+            </if>
+            <if test="updateTime != null  ">
+                update_time=#{updateTime},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 App黑名单 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_APP_BLACK_LIST where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_APP_BLACK_LIST where id = #{id}
+    </delete>
+
+    <!-- App黑名单 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_APP_BLACK_LIST
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询App黑名单列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_APP_BLACK_LIST
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+</mapper>

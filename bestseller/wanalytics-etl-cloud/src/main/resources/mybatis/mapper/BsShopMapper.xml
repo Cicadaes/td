@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.BsShopDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="td.enterprise.entity.BsShop" >
+	<result column="id" property="id"/>
+	<result column="shop_id" property="shopId"/>
+	<result column="shop_code" property="shopCode"/>
+	<result column="shop_name" property="shopName"/>
+	<result column="province" property="province"/>
+	<result column="city" property="city"/>
+	<result column="area" property="area"/>
+	<result column="address" property="address"/>
+	<result column="phone" property="phone"/>
+	<result column="scenario_name" property="scenarioName"/>
+	<result column="brand" property="brand"/>
+	<result column="shop_status" property="shopStatus"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_time" property="updateTime"/>
+	<result column="run_date" property="runDate"/>
+  </resultMap>
+       
+  <!-- TD_BS_SHOP table all fields -->
+  <sql id="Base_Column_List" >
+	 id,shop_id,shop_code,shop_name,province,city,area,address,phone,scenario_name,brand,shop_status,create_time,update_time,run_date
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="shopId != null and shopId != ''" >
+        and shop_id =  #{shopId}
+	  </if>
+	      <if test="shopCode != null and shopCode != ''" >
+        and shop_code =  #{shopCode}
+	  </if>
+	      <if test="shopName != null and shopName != ''" >
+        and shop_name =  #{shopName}
+	  </if>
+	      <if test="province != null and province != ''" >
+        and province =  #{province}
+	  </if>
+	      <if test="city != null and city != ''" >
+        and city =  #{city}
+	  </if>
+	      <if test="area != null and area != ''" >
+        and area =  #{area}
+	  </if>
+	      <if test="address != null and address != ''" >
+        and address =  #{address}
+	  </if>
+	      <if test="phone != null and phone != ''" >
+        and phone =  #{phone}
+	  </if>
+	      <if test="scenarioName != null and scenarioName != ''" >
+        and scenario_name =  #{scenarioName}
+	  </if>
+	      <if test="brand != null and brand != ''" >
+        and brand =  #{brand}
+	  </if>
+	      <if test="shopStatus != null and shopStatus != ''" >
+        and shop_status =  #{shopStatus}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+	      <if test="runDate != null and runDate != ''" >
+        and run_date =  #{runDate}
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+      insert into 
+TD_BS_SHOP(id,shop_id,shop_code,shop_name,province,city,area,address,phone,scenario_name,brand,shop_status,create_time,update_time,run_date)
+ values(#{id},#{shopId},#{shopCode},#{shopName},#{province},#{city},#{area},#{address},#{phone},#{scenarioName},#{brand},#{shopStatus},now(),now(),#{runDate})
+  </insert>
+  
+  <!-- 批量插入记录 -->
+  <insert id="batchInsert" parameterType="java.util.List">  
+     insert into 
+TD_BS_SHOP(shop_id,shop_code,shop_name,province,city,area,address,phone,scenario_name,brand,shop_status,create_time,update_time,run_date,shop_size)
+     values  
+     <foreach collection="list" item="item" index="index" separator="," >  
+         (#{item.shopId},#{item.shopCode},#{item.shopName},#{item.province},#{item.city},#{item.area},#{item.address},#{item.phone},#{item.scenarioName},#{item.brand},#{item.shopStatus},now(),now(),#{item.runDate},#{item.shopSize})  
+     </foreach>  
+   </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+      update TD_BS_SHOP set shop_id=#{shopId},shop_code=#{shopCode},shop_name=#{shopName},province=#{province},city=#{city},area=#{area},address=#{address},phone=#{phone},scenario_name=#{scenarioName},brand=#{brand},shop_status=#{shopStatus},update_time=now(),run_date=#{runDate} where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+      update TD_BS_SHOP set 
+		<if test="shopId != null  ">
+		shop_id=#{shopId},
+	</if>
+	<if test="shopCode != null  ">
+		shop_code=#{shopCode},
+	</if>
+	<if test="shopName != null  ">
+		shop_name=#{shopName},
+	</if>
+	<if test="province != null  ">
+		province=#{province},
+	</if>
+	<if test="city != null  ">
+		city=#{city},
+	</if>
+	<if test="area != null  ">
+		area=#{area},
+	</if>
+	<if test="address != null  ">
+		address=#{address},
+	</if>
+	<if test="phone != null  ">
+		phone=#{phone},
+	</if>
+	<if test="scenarioName != null  ">
+		scenario_name=#{scenarioName},
+	</if>
+	<if test="brand != null  ">
+		brand=#{brand},
+	</if>
+	<if test="shopStatus != null  ">
+		shop_status=#{shopStatus},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	<if test="runDate != null  ">
+		run_date=#{runDate},
+	</if>
+	update_time = now() 
+	where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 绫致店铺 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+      select <include refid="Base_Column_List" /> 
+	 from TD_BS_SHOP where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+      delete from TD_BS_SHOP where id = #{id}
+  </delete>
+
+  <!-- 绫致店铺 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_BS_SHOP 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询绫致店铺列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_BS_SHOP 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <!-- 查询绫致店铺列表  add by liyinglei 2017-10-16 -->
+  <select id="queryListByRunDate" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_BS_SHOP t
+	<include refid="Base_Where_Clause"/>
+	<if test="runDate != null and runDate != ''" >
+		and t.run_date = #{runDate}
+	</if>
+  </select>
+  
+  <!-- 查询最近的绫致店铺列表  add by liyinglei 2017-10-19 -->
+  <select id="queryListByRecent" resultMap="BaseResultMap"  parameterType="Object">
+	SELECT t.* FROM TD_BS_SHOP t WHERE 
+		t.run_date = (SELECT MAX(t1.run_date) FROM TD_BS_SHOP t1)
+  </select>
+  
+  <!-- 按周期删除数据 add by liyinglei 2017-11-24 -->
+  <delete id="deleteByRunDate" parameterType="Object">
+      delete from TD_BS_SHOP where run_date = #{runDate}
+  </delete>
+  
+</mapper>   

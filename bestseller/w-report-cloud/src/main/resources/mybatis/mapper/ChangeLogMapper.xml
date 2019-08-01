@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.ChangeLogDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="td.enterprise.entity.ChangeLog" >
+	<result column="id" property="id"/>
+	<result column="table_name" property="tableName"/>
+	<result column="module_id" property="moduleId"/>
+	<result column="before_value" property="beforeValue"/>
+	<result column="after_value" property="afterValue"/>
+	<result column="status" property="status"/>
+	<result column="create_by" property="createBy"/>
+	<result column="creator" property="creator"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="updater" property="updater"/>
+	<result column="update_time" property="updateTime"/>
+  </resultMap>
+       
+  <!-- TD_CHANGE_LOG table all fields -->
+  <sql id="Base_Column_List" >
+	 id,table_name,module_id,before_value,after_value,status,create_by,creator,create_time,update_by,updater,update_time
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="tableName != null and tableName != ''" >
+        and table_name =  #{tableName}
+	  </if>
+	      <if test="moduleId != null and moduleId != ''" >
+        and module_id =  #{moduleId}
+	  </if>
+	      <if test="beforeValue != null and beforeValue != ''" >
+        and before_value =  #{beforeValue}
+	  </if>
+	      <if test="afterValue != null and afterValue != ''" >
+        and after_value =  #{afterValue}
+	  </if>
+	      <if test="status != null and status != ''" >
+        and status =  #{status}
+	  </if>
+	      <if test="createBy != null and createBy != ''" >
+        and create_by =  #{createBy}
+	  </if>
+	      <if test="creator != null and creator != ''" >
+        and creator =  #{creator}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	      <if test="updateBy != null and updateBy != ''" >
+        and update_by =  #{updateBy}
+	  </if>
+	      <if test="updater != null and updater != ''" >
+        and updater =  #{updater}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+      insert into 
+TD_CHANGE_LOG(id,table_name,module_id,before_value,after_value,status,create_by,creator,create_time,update_by,updater,update_time)
+ values(#{id},#{tableName},#{moduleId},#{beforeValue},#{afterValue},#{status},#{createBy},#{creator},now(),#{updateBy},#{updater},now())
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+      update TD_CHANGE_LOG set table_name=#{tableName},module_id=#{moduleId},before_value=#{beforeValue},after_value=#{afterValue},status=#{status},create_by=#{createBy},creator=#{creator},update_by=#{updateBy},updater=#{updater},update_time=now() where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+      update TD_CHANGE_LOG set 
+	<if test="tableName != null  ">
+		table_name=#{tableName},
+	</if>
+	<if test="moduleId != null  ">
+		module_id=#{moduleId},
+	</if>
+	<if test="beforeValue != null  ">
+		before_value=#{beforeValue},
+	</if>
+	<if test="afterValue != null  ">
+		after_value=#{afterValue},
+	</if>
+	<if test="status != null  ">
+		status=#{status},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="creator != null  ">
+		creator=#{creator},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="updater != null  ">
+		updater=#{updater},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	  update_time=now()
+ 
+	where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 变更历史表 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+      select <include refid="Base_Column_List" /> 
+	 from TD_CHANGE_LOG where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+      delete from TD_CHANGE_LOG where id = #{id}
+  </delete>
+
+  <!-- 变更历史表 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_CHANGE_LOG 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询变更历史表列表 -->
+	<select id="queryByUpdateDescList" resultMap="BaseResultMap" parameterType="Object">
+		select
+		<include refid="Base_Column_List"/>
+		from TD_CHANGE_LOG
+		<include refid="Base_Where_Clause"/>
+		order by update_time desc ,id desc
+		<if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+			${pager.mysqlQueryCondition}
+		</if>
+
+	</select>
+
+	<!-- 按照更新时间倒序查询变更历史表列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select
+	<include refid="Base_Column_List"/>
+	from TD_CHANGE_LOG
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+</mapper>   

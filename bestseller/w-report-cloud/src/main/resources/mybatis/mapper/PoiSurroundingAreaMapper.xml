@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.PoiSurroundingAreaDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.PoiSurroundingArea">
+        <result column="wid" property="wid"/>
+        <result column="loc" property="loc"/>
+        <result column="brand_id" property="brandId"/>
+        <result column="project_id" property="projectId"/>
+        <result column="name" property="name"/>
+        <result column="address_province" property="addressProvince"/>
+        <result column="address_city" property="addressCity"/>
+        <result column="address_detail" property="addressDetail"/>
+        <result column="address_district" property="addressDistrict"/>
+        <result column="wgs84_lng" property="wgs84Lng"/>
+        <result column="wgs84_lat" property="wgs84Lat"/>
+        <result column="bd09_lng" property="bd09Lng"/>
+        <result column="bd09_lat" property="bd09Lat"/>
+        <result column="type" property="type"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="creator" property="creator"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="updater" property="updater"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- TD_POI_SURROUNDING_AREA table all fields -->
+    <sql id="Base_Column_List">
+        wid,loc,brand_id,project_id,name,address_province,address_city,address_detail,address_district,wgs84_lng,wgs84_lat,bd09_lng,bd09_lat,type,tenant_id,creator,create_by,create_time,updater,update_by,update_time
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="wid != null and wid != ''">
+                and wid = #{wid}
+            </if>
+            <if test="loc != null and loc != ''">
+                and loc = #{loc}
+            </if>
+            <if test="brandId != null and brandId != ''">
+                and brand_id = #{brandId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="addressProvince != null and addressProvince != ''">
+                and address_province = #{addressProvince}
+            </if>
+            <if test="addressCity != null and addressCity != ''">
+                and address_city = #{addressCity}
+            </if>
+            <if test="addressDetail != null and addressDetail != ''">
+                and address_detail = #{addressDetail}
+            </if>
+            <if test="addressDistrict != null and addressDistrict != ''">
+                and address_district = #{addressDistrict}
+            </if>
+            <if test="wgs84Lng != null and wgs84Lng != ''">
+                and wgs84_lng = #{wgs84Lng}
+            </if>
+            <if test="wgs84Lat != null and wgs84Lat != ''">
+                and wgs84_lat = #{wgs84Lat}
+            </if>
+            <if test="bd09Lng != null and bd09Lng != ''">
+                and bd09_lng = #{bd09Lng}
+            </if>
+            <if test="bd09Lat != null and bd09Lat != ''">
+                and bd09_lat = #{bd09Lat}
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_POI_SURROUNDING_AREA(wid,loc,brand_id,project_id,name,address_province,address_city,address_detail,address_district,wgs84_lng,wgs84_lat,bd09_lng,bd09_lat,type,tenant_id,creator,create_by,create_time,updater,update_by,update_time)
+        values(#{wid},#{loc},#{brandId},#{projectId},#{name},#{addressProvince},#{addressCity},#{addressDetail},#{addressDistrict},#{wgs84Lng},#{wgs84Lat},#{bd09Lng},#{bd09Lat},#{type},#{tenantId},#{creator},#{createBy},now(),#{updater},#{updateBy},now())
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_POI_SURROUNDING_AREA set
+        loc=#{loc},brand_id=#{brandId},project_id=#{projectId},name=#{name},address_province=#{addressProvince},address_city=#{addressCity},address_detail=#{addressDetail},address_district=#{addressDistrict},wgs84_lng=#{wgs84Lng},wgs84_lat=#{wgs84Lat},bd09_lng=#{bd09Lng},bd09_lat=#{bd09Lat},type=#{type},tenant_id=#{tenantId},creator=#{creator},create_by=#{createBy},create_time=now(),updater=#{updater},update_by=#{updateBy},update_time=now()
+        where wid=#{wid}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_POI_SURROUNDING_AREA set
+        <trim suffixOverrides=",">
+            <if test="loc != null  ">
+                loc=#{loc},
+            </if>
+            <if test="brandId != null  ">
+                brand_id=#{brandId},
+            </if>
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="name != null  ">
+                name=#{name},
+            </if>
+            <if test="addressProvince != null  ">
+                address_province=#{addressProvince},
+            </if>
+            <if test="addressCity != null  ">
+                address_city=#{addressCity},
+            </if>
+            <if test="addressDetail != null  ">
+                address_detail=#{addressDetail},
+            </if>
+            <if test="addressDistrict != null  ">
+                address_district=#{addressDistrict},
+            </if>
+            <if test="wgs84Lng != null  ">
+                wgs84_lng=#{wgs84Lng},
+            </if>
+            <if test="wgs84Lat != null  ">
+                wgs84_lat=#{wgs84Lat},
+            </if>
+            <if test="bd09Lng != null  ">
+                bd09_lng=#{bd09Lng},
+            </if>
+            <if test="bd09Lat != null  ">
+                bd09_lat=#{bd09Lat},
+            </if>
+            <if test="type != null  ">
+                type=#{type},
+            </if>
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="createBy != null  ">
+                create_by=#{createBy},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updater != null  ">
+                updater=#{updater},
+            </if>
+            <if test="updateBy != null  ">
+                update_by=#{updateBy},
+            </if>
+            <if test="updateTime != null  ">
+                update_time=#{updateTime},
+            </if>
+        </trim>
+        where wid=#{wid}
+    </update>
+
+    <!-- 根据id查询 区域来源 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_POI_SURROUNDING_AREA where wid = #{wid}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_POI_SURROUNDING_AREA where wid = #{wid}
+    </delete>
+
+    <!-- 区域来源 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_POI_SURROUNDING_AREA
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询区域来源列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_POI_SURROUNDING_AREA
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- 所有商场
+    //如果个数超过1000个，随机获取前1000个，解决计算过慢问题
+    -->
+    <select id="queryForList" resultMap="BaseResultMap" parameterType="Object">
+        select wid, wgs84_lng, wgs84_lat,name,type,bd09_lng,bd09_lat
+        from TD_POI_SURROUNDING_AREA where bd09_lng is not null and bd09_lat is not null and project_id = #{projectId}
+        limit 1,1000
+    </select>
+</mapper>

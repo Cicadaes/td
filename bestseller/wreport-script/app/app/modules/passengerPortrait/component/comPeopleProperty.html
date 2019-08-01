@@ -1,0 +1,237 @@
+<div class="picturecon">
+    <div class="properties clearfix">
+        <div class="adaption parpadng">
+            <div class="gender_tit">{{constants.caption_gender_ratio}}</div>
+            <div class="gender_con probor">
+                <div class="proportion">
+                    <div class="proportion_top clearfix">
+                        <dl>
+                            <dt class="zy_icon boy_icon"></dt>
+                            <dd class="color_boy">{{constants.company_sex_male}}</dd>
+                            <dd class="color_boy">
+                                <strong>0%</strong>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt class="zy_icon girl_icon"></dt>
+                            <dd class="color_girl">{{constants.company_sex_female}}</dd>
+                            <dd class="color_girl">
+                                <strong>0%</strong>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt class="zy_icon unknown_icon"></dt>
+                            <dd class="color_unknown">未知</dd>
+                            <dd class="color_unknown">
+                                <strong>0%</strong>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="proportion_compare">
+                        <div class="compare_boy" style="width: 0;"></div>
+                        <div class="compare_girl" style="width: 0;"></div>
+                        <div class="compare_unknown" style="width: 0;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="proline"></div>
+        <div class="adaption parpadng agepad">
+            <div class="gender_tit">{{constants.caption_age_distribution}}</div>
+            <div class="gender_con probor">
+                <div class="agecon">
+                    <b>line</b><b>line</b><b>line</b>
+                    <ul>
+                        <li>
+                            <i>3%</i>
+                            <span><em style="height: 3%;"></em></span>
+                            <b><em><q class="zy_icon age_icon_one"></q></em></b>
+                            <strong>&lt;12岁</strong>
+                        </li>
+                        <li>
+                            <i>23%</i>
+                            <span><em style="height: 23%;"></em></span>
+                            <b><em><q class="zy_icon age_icon_two"></q></em></b>
+                            <strong>12-20岁</strong>
+                        </li>
+                        <li>
+                            <i>20%</i>
+                            <span><em style="height: 20%;"></em></span>
+                            <b><em><q class="zy_icon age_icon_three"></q></em></b>
+                            <strong>20-40岁</strong></li>
+                        <li>
+                            <i>20%</i>
+                            <span><em style="height: 20%;"></em></span>
+                            <b><em><q class="zy_icon age_icon_four"></q></em></b>
+                            <strong>20-40岁</strong></li>
+                        <li>
+                            <i>20%</i>
+                            <span><em style="height: 20%;"></em></span>
+                            <b><em><q class="zy_icon age_icon_five"></q></em></b>
+                            <strong>20-40岁</strong></li>
+                        <li class="age_red">
+                            <i>40%</i>
+                            <span><em style="height: 40%;"></em></span>
+                            <b><em><q class="zy_icon age_icon_six"></q></em></b>
+                            <strong>&gt;40岁</strong></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="whether parpadng">
+            <div class="gender_tit">{{constants.caption_has_marry}}</div>
+            <div class="gender_con">
+                <div class="gender_tip_tit">{{constants.label_unknown}}</div>
+                <div class="whether_con">
+                    <div class="whether_con_font">
+                        <em></em><strong></strong><span class="zy_icon icon_marry"></span>
+                    </div>
+                    <div class="whether_con_chart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="whether parpadng">
+            <div class="gender_tit">{{constants.caption_has_child}}</div>
+            <div class="gender_con">
+                <div class="gender_tip_tit">{{constants.label_unknown}}</div>
+                <div class="whether_con">
+                    <div class="whether_con_font">
+                        <em></em><strong></strong><span class="zy_icon icon_child"></span>
+                    </div>
+                    <div class="whether_con_chart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="whether parpadng">
+            <div class="gender_tit">{{constants.caption_has_car}}</div>
+            <div class="gender_con">
+                <div class="gender_tip_tit">{{constants.label_unknown}}</div>
+                <div class="whether_con">
+                    <div class="whether_con_font">
+                        <em></em><strong></strong><span class="zy_icon icon_car"></span>
+                    </div>
+                    <div class="whether_con_chart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="properties clearfix" ng-if="status == 'compare_double'">
+        <div class="adaption parpadng">
+            <div class="gender_tit">{{constants.caption_gender_ratio}}</div>
+            <div class="gender_con probor">
+                <div class="proportion">
+                    <div class="proportion_top clearfix">
+                        <dl>
+                            <dt class="zy_icon boy_icon"></dt>
+                            <dd class="color_boy">{{constants.company_sex_male}}</dd>
+                            <dd class="color_boy">
+                                <strong>0%</strong>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt class="zy_icon girl_icon"></dt>
+                            <dd class="color_girl">{{constants.company_sex_female}}</dd>
+                            <dd class="color_girl">
+                                <strong>0%</strong>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt class="zy_icon unknown_icon"></dt>
+                            <dd class="color_unknown">未知</dd>
+                            <dd class="color_unknown">
+                                <strong>0%</strong>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="proportion_compare">
+                        <div class="compare_boy" style="width: 0;"></div>
+                        <div class="compare_girl" style="width: 0;"></div>
+                        <div class="compare_unknown" style="width: 0;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="proline"></div>
+        <div class="adaption parpadng agepad">
+            <div class="gender_tit">{{constants.caption_age_distribution}}</div>
+            <div class="gender_con probor">
+                <div class="agecon">
+                    <b>line</b><b>line</b><b>line</b>
+                    <ul>
+                        <li>
+                            <i>3%</i>
+                            <span><em style="height: 3%;"></em></span>
+                            <b><em><q class="zy_icon age_icon_one"></q></em></b>
+                            <strong>&lt;12岁</strong>
+                        </li>
+                        <li>
+                            <i>23%</i>
+                            <span><em style="height: 23%;"></em></span>
+                            <b><em><q class="zy_icon age_icon_two"></q></em></b>
+                            <strong>12-20岁</strong>
+                        </li>
+                        <li>
+                            <i>20%</i>
+                            <span><em style="height: 20%;"></em></span>
+                            <b><em><q class="zy_icon age_icon_three"></q></em></b>
+                            <strong>20-40岁</strong></li>
+                        <li>
+                            <i>20%</i>
+                            <span><em style="height: 20%;"></em></span>
+                            <b><em><q class="zy_icon age_icon_four"></q></em></b>
+                            <strong>20-40岁</strong></li>
+                        <li>
+                            <i>20%</i>
+                            <span><em style="height: 20%;"></em></span>
+                            <b><em><q class="zy_icon age_icon_five"></q></em></b>
+                            <strong>20-40岁</strong></li>
+                        <li class="age_red">
+                            <i>40%</i>
+                            <span><em style="height: 40%;"></em></span>
+                            <b><em><q class="zy_icon age_icon_six"></q></em></b>
+                            <strong>&gt;40岁</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="whether parpadng">
+            <div class="gender_tit">{{constants.caption_has_marry}}</div>
+            <div class="gender_con">
+                <div class="gender_tip_tit">{{constants.label_unknown}}</div>
+                <div class="whether_con">
+                    <div class="whether_con_font">
+                        <em></em><strong></strong><span class="zy_icon icon_marry"></span>
+                    </div>
+                    <div class="whether_con_chart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="whether parpadng">
+            <div class="gender_tit">{{constants.caption_has_child}}</div>
+            <div class="gender_con">
+                <div class="gender_tip_tit">{{constants.label_unknown}}</div>
+                <div class="whether_con">
+                    <div class="whether_con_font">
+                        <em></em><strong></strong><span class="zy_icon icon_child"></span>
+                    </div>
+                    <div class="whether_con_chart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="whether parpadng">
+            <div class="gender_tit">{{constants.caption_has_car}}</div>
+            <div class="gender_con">
+                <div class="gender_tip_tit">{{constants.label_unknown}}</div>
+                <div class="whether_con">
+                    <div class="whether_con_font">
+                        <em></em><strong></strong><span class="zy_icon icon_car"></span>
+                    </div>
+                    <div class="whether_con_chart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,756 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.SensorDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.Sensor">
+        <result column="id" property="id"/>
+        <result column="sensor_code" property="sensorCode"/>
+        <result column="sensor_name" property="sensorName"/>
+        <result column="sensor_mac" property="sensorMac"/>
+        <result column="status" property="status"/>
+        <result column="description" property="description"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="creator" property="creator"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="updater" property="updater"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="project_id" property="projectId"/>
+        <result column="min_rssi" property="minRssi"/>
+        <result column="is_outside" property="isOutside"/>
+        <result column="room_id" property="roomId"/>
+        <result column="room_name" property="roomName"/>
+        <result column="position_description" property="positionDescription"/>
+        <result column="distance" property="distance"/>
+        <result column="position_description" property="positionDescription"/>
+        <result column="is_outside" property="isOutside"/>
+        <result column="distance" property="distance"/>
+        <result column="sum_hours" property="sumHours"/>
+        <result column="raw_data_quantity" property="rawDataQuantity"/>
+        <result column="processed_data" property="processedData"/>
+        <result column="compared" property="compared"/>
+        <result column="project_name" property="projectName"/>
+        <result column="project_num" property="projectNum"/>
+        <result column="log_hours" property="logHours"/>
+        <result column="normal" property="normal"/>
+        <result column="no_log_duration" property="noLogDuration"/>
+        <result column="sensor_version" property="sensorVersion"/>
+        <result column="sensor_type" property="sensorType"/>
+    </resultMap>
+
+    <!-- TD_SENSOR table all fields -->
+    <sql id="Base_Column_List">
+        id,sensor_code,sensor_name,sensor_mac,status,description,tenant_id,creator,create_by,
+        create_time,updater,update_by,update_time,project_id,min_rssi,is_outside,room_id,room_name,
+        position_description,distance,sum_hours,raw_data_quantity,processed_data,compared,sensor_version,sensor_type
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="sensorCode != null and sensorCode != ''">
+                and sensor_code = #{sensorCode}
+            </if>
+            <if test="sensorName != null and sensorName != ''">
+                and sensor_name = #{sensorName}
+            </if>
+            <if test="sensorMac != null and sensorMac != ''">
+                and sensor_mac = #{sensorMac}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="projectId != null">
+                and project_id = #{projectId}
+            </if>
+            <if test="minRssi != null and minRssi != ''">
+                and min_rssi = #{minRssi}
+            </if>
+            <if test="isOutside != null and isOutside != ''">
+                and is_outside = #{isOutside}
+            </if>
+            <if test="roomId != null and roomId != ''">
+                and room_id = #{roomId}
+            </if>
+            <if test="roomName != null and roomName != ''">
+                and room_name = #{roomName}
+            </if>
+            <if test="positionDescription != null and positionDescription != ''">
+                and position_description = #{positionDescription}
+            </if>
+            <if test="distance != null and distance != ''">
+                and distance = #{distance}
+            </if>
+            <if test="sumHours != null and sumHours != ''" >
+                and sum_hours =  #{sumHours}
+            </if>
+            <if test="rawDataQuantity != null and rawDataQuantity != ''" >
+                and raw_data_quantity =  #{rawDataQuantity}
+            </if>
+            <if test="processedData != null and processedData != ''" >
+                and processed_data =  #{processedData}
+            </if>
+            <if test="compared != null and compared != ''" >
+                and compared =  #{compared}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_SENSOR(id,sensor_code,sensor_name,sensor_mac,status,description,tenant_id,creator,create_by,create_time,updater,update_by,update_time,room_id,room_name,project_id,position_description,min_rssi,is_outside,distance,sum_hours,raw_data_quantity,processed_data,compared,sensor_version,sensor_type)
+        values(#{id},#{sensorCode},#{sensorName},#{sensorMac},#{status},#{description},#{tenantId},#{creator},#{createBy},now(),#{updater},#{updateBy},now(),#{roomId},#{roomName},#{projectId},#{positionDescription},#{minRssi},#{isOutside},#{distance},#{sumHours},#{rawDataQuantity},#{processedData},#{compared}
+        ,#{sensorVersion},#{sensorType})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_SENSOR set
+        sensor_code=#{sensorCode},sensor_name=#{sensorName},sensor_mac=#{sensorMac},status=#{status},description=#{description},tenant_id=#{tenantId},creator=#{creator},create_by=#{createBy},create_time=now(),updater=#{updater},update_by=#{updateBy},update_time=now(),room_id=#{roomId},room_name=#{roomName},
+        project_id=#{projectId},position_description=#{positionDescription},min_rssi=#{minRssi},is_outside=#{isOutside},distance=#{distance},sum_hours=#{sumHours},raw_data_quantity=#{rawDataQuantity},processed_data=#{processedData},compared=#{compared}
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_SENSOR set
+            <if test="sensorCode != null  ">
+                sensor_code=#{sensorCode},
+            </if>
+            <if test="sensorName != null  ">
+                sensor_name=#{sensorName},
+            </if>
+            <if test="sensorMac != null  ">
+                sensor_mac=#{sensorMac},
+            </if>
+            <if test="status != null  ">
+                status=#{status},
+            </if>
+            <if test="description != null  ">
+                description=#{description},
+            </if>
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="createBy != null  ">
+                create_by=#{createBy},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updater != null  ">
+                updater=#{updater},
+            </if>
+            <if test="updateBy != null  ">
+                update_by=#{updateBy},
+            </if>
+            <if test="roomId != null  ">
+                room_id=#{roomId},
+            </if>
+            <if test="roomName != null  ">
+                room_name=#{roomName},
+            </if>
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="positionDescription != null  ">
+                position_description=#{positionDescription},
+            </if>
+            <if test="minRssi != null and minRssi != ''">
+                min_rssi = #{minRssi},
+            </if>
+            <if test="isOutside != null and isOutside != ''">
+                is_outside = #{isOutside},
+            </if>
+            <if test="distance != null and distance != ''">
+                distance = #{distance},
+            </if>
+            <if test="sumHours != null  ">
+                sum_hours=#{sumHours},
+            </if>
+            <if test="rawDataQuantity != null  ">
+                raw_data_quantity=#{rawDataQuantity},
+            </if>
+            <if test="processedData != null  ">
+                processed_data=#{processedData},
+            </if>
+            <if test="compared != null  ">
+                compared=#{compared},
+            </if>
+            <if test="sensorVersion != null  ">
+                sensor_version=#{sensorVersion},
+            </if>
+            <if test="sensorType != null  ">
+                sensor_type=#{sensorType},
+            </if>
+        update_time=now()
+        where id=#{id}
+    </update>
+
+    <!-- 通过mac修改记录，只修改只不为空的字段 -->
+    <update id="updateByMac" parameterType="Object">
+        update TD_SENSOR set
+            <if test="sensorCode != null  ">
+                sensor_code=#{sensorCode},
+            </if>
+            <if test="sensorName != null  ">
+                sensor_name=#{sensorName},
+            </if>
+            <if test="sensorMac != null  ">
+                sensor_mac=#{sensorMac},
+            </if>
+            <if test="status != null  ">
+                status=#{status},
+            </if>
+            <if test="description != null  ">
+                description=#{description},
+            </if>
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="createBy != null  ">
+                create_by=#{createBy},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updater != null  ">
+                updater=#{updater},
+            </if>
+            <if test="updateBy != null  ">
+                update_by=#{updateBy},
+            </if>
+            <if test="roomId != null  ">
+                room_id=#{roomId},
+            </if>
+            <if test="roomName != null  ">
+                room_name=#{roomName},
+            </if>
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="positionDescription != null  ">
+                position_description=#{positionDescription},
+            </if>
+            <if test="minRssi != null and minRssi != ''">
+                min_rssi = #{minRssi},
+            </if>
+            <if test="isOutside != null and isOutside != ''">
+                is_outside = #{isOutside},
+            </if>
+            <if test="distance != null and distance != ''">
+                distance = #{distance},
+            </if>
+            <if test="sumHours != null  ">
+                sum_hours=#{sumHours},
+            </if>
+            <if test="rawDataQuantity != null  ">
+                raw_data_quantity=#{rawDataQuantity},
+            </if>
+            <if test="processedData != null  ">
+                processed_data=#{processedData},
+            </if>
+            <if test="compared != null  ">
+                compared=#{compared},
+            </if>
+            <if test="sensorVersion != null  ">
+                sensor_version=#{sensorVersion},
+            </if>
+            <if test="sensorType != null  ">
+                sensor_type=#{sensorType},
+            </if>
+        update_time=now()
+        where sensor_mac=#{sensorMac}
+    </update>
+
+    <!-- 根据id查询 探针 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_SENSOR where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_SENSOR where id = #{id}
+    </delete>
+
+    <!-- 探针 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_SENSOR
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询探针列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_SENSOR
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <resultMap id="AssociationMap" type="td.enterprise.dao.DO.SensorDO" extends="BaseResultMap">
+        <!-- <result column="project_id" property="projectId"/>
+        <result column="project_name" property="projectNam"/>-->
+        <result column="project_place_id" property="projectPlaceId"/>
+        <result column="project_place_name" property="projectPlaceName"/>
+        <!-- <result column="room_id" property="roomId"/>
+        <result column="room_name" property="roomName"/> -->
+        <result column="diargam_id" property="diargamId"/>
+        <result column="longitude" property="longitude"/>
+        <result column="latitude" property="latitude"/>
+        <!-- <result column="position_description" property="positionDescription"/> -->
+    </resultMap>
+
+
+    <!--   <resultMap id="AssociationMap" type="td.enterprise.entity.Sensor" extends="BaseResultMap">
+       <result column="project_id" property="projectId"/>
+       <result column="project_name" property="projectName"/>
+       <result column="project_place_id" property="projectPlaceId"/>
+       <result column="project_place_name" property="projectPlaceName"/>
+       <result column="room_id" property="roomId"/>
+       <result column="room_name" property="roomName"/>
+       <result column="diargam_id" property="diargamId"/>
+       <result column="longitude" property="longitude"/>
+       <result column="latitude" property="latitude"/>
+       <result column="position_description" property="positionDescription"/>
+    </resultMap> -->
+
+    <!-- 多表联查 查询探针列表  add yanghao 2017/06/20  -->
+    <select id="querySensorProjectList" resultMap="BaseResultMap" parameterType="Object">
+        select DISTINCT t1.id,t1.sensor_code,t1.sensor_name,t1.sensor_mac,t1.status,t1.description,t1.tenant_id,t1.creator,t1.create_by,t1.create_time,
+        t1.updater,t1.update_by,t1.update_time,t1.project_id,t1.min_rssi,t1.is_outside,t1.room_id,t1.room_name,t1.position_description,
+        t1.distance,CONVERT(t1.sum_hours , SIGNED) as sum_hours,t1.normal, t1.no_log_duration,t1.log_hours,t1.sensor_version,t1.sensor_type,
+        t4.project_name,t4.project_num
+        from TD_SENSOR t1
+        INNER JOIN TD_PROJECT t4
+        ON
+        t1.project_id=t4.id and t4.status=1
+        where 1=1 and t1.status = 1
+        <if test="id != null and id != ''" >
+            and t1.id =  #{id}
+        </if>
+        <if test="sensorCode != null and sensorCode != ''" >
+            and t1.sensor_code =  #{sensorCode}
+        </if>
+        <if test="sensorName != null and sensorName != ''" >
+            and t1.sensor_name =  #{sensorName}
+        </if>
+        <if test="sensorMac != null and sensorMac != ''" >
+            and t1.sensor_mac =  #{sensorMac}
+        </if>
+        <if test="tenantId != null and tenantId != ''" >
+            and t1.tenant_id =  #{tenantId}
+        </if>
+        <if test="projectId != null and projectId != ''" >
+            and t1.project_id =  #{projectId}
+        </if>
+        <if test="roomId!=null and roomId != ''" >
+            and t1.room_id =  #{roomId}
+        </if>
+        <if test="roomName != null and roomName != ''" >
+            and t1.room_name =  #{roomName}
+        </if>
+        <if test="normal != null " >
+            and t1.normal =  #{normal}
+        </if>
+        <if test="q != null and q != ''" >
+            and (t1.sensor_code like CONCAT('%','${q}','%' ) or t1.sensor_mac like CONCAT('%','${q}','%' ) or t4.project_name like CONCAT('%','${q}','%' ) )
+        </if>
+        <if test="null != projectIds and projectIds.size > 0">
+            and t1.project_id in
+            <foreach collection="projectIds" open="(" separator="," close=")" item="item">
+                #{item}
+            </foreach>
+        </if>
+        <if test="null != sensorVersions and sensorVersions.size > 0">
+            and t1.sensor_version in
+            <foreach collection="sensorVersions" open="(" separator="," close=")" item="item">
+                #{item}
+            </foreach>
+        </if>
+        <if test="null != sensorTypes and sensorTypes.size > 0">
+            and t1.sensor_type in
+            <foreach collection="sensorTypes" open="(" separator="," close=")" item="item">
+                #{item}
+            </foreach>
+        </if>
+        <if test="null != statuses and statuses.size > 0">
+            and t1.status in
+            <foreach collection="statuses" open="(" separator="," close=")" item="item">
+                #{item}
+            </foreach>
+        </if>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <select id="getInfoByListCount" resultType="java.lang.Integer"  parameterType="Object">
+        select count(DISTINCT t1.id)
+        from TD_SENSOR t1
+        LEFT JOIN TD_PROJECT t4
+        ON
+        t1.project_id=t4.id and t4.status=1
+        where 1=1 and t1.status = 1
+        <if test="id != null and id != ''" >
+            and t1.id =  #{id}
+        </if>
+        <if test="sensorCode != null and sensorCode != ''" >
+            and t1.sensor_code =  #{sensorCode}
+        </if>
+        <if test="sensorName != null and sensorName != ''" >
+            and t1.sensor_name =  #{sensorName}
+        </if>
+        <if test="sensorMac != null and sensorMac != ''" >
+            and t1.sensor_mac =  #{sensorMac}
+        </if>
+        <if test="tenantId != null and tenantId != ''" >
+            and t1.tenant_id =  #{tenantId}
+        </if>
+        <if test="projectId != null and projectId != ''" >
+            and t1.project_id =  #{projectId}
+        </if>
+        <if test="roomId!=null and roomId != ''" >
+            and t1.room_id =  #{roomId}
+        </if>
+        <if test="roomName != null and roomName != ''" >
+            and t1.room_name =  #{roomName}
+        </if>
+        <if test="normal != null " >
+            and t1.normal =  #{normal}
+        </if>
+        <if test="null != projectIds and projectIds.size > 0">
+            and t1.project_id in
+            <foreach collection="projectIds" open="(" separator="," close=")" item="item">
+                #{item}
+            </foreach>
+        </if>
+        <if test="null != sensorVersions and sensorVersions.size > 0">
+            and t1.sensor_version in
+            <foreach collection="sensorVersions" open="(" separator="," close=")" item="item">
+                #{item}
+            </foreach>
+        </if>
+        <if test="null != sensorTypes and sensorTypes.size > 0">
+            and t1.sensor_type in
+            <foreach collection="sensorTypes" open="(" separator="," close=")" item="item">
+                #{item}
+            </foreach>
+        </if>
+        <if test="null != statuses and statuses.size > 0">
+            and t1.status in
+            <foreach collection="statuses" open="(" separator="," close=")" item="item">
+                #{item}
+            </foreach>
+        </if>
+        <if test="q != null and q != ''" >
+            and (t1.sensor_code like CONCAT('%','${q}','%' ) or t1.sensor_mac like CONCAT('%','${q}','%' ) or t4.project_name like CONCAT('%','${q}','%' ) )
+        </if>
+    </select>
+
+    <!-- 未录入mac查询 -->
+    <select id="querNoTypeInSensors" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_SENSOR
+        where 1=1  and status = -1 and project_id is null
+        <if test="q != null and q != ''" >
+            and (sensor_mac like CONCAT('${q}','%' ) )
+        </if>
+    </select>
+
+    <!-- 多表联查 查询探针列表 -->
+    <select id="queryInfoByList" resultMap="AssociationMap" parameterType="Object">
+        select t1.*,
+        t2.project_place_id as projectPlaceId,
+        t2.longitude as longitude,
+        t2.latitude as latitude,
+        t2.description as positionDescription,
+        t3.place_name as project_place_name
+        from TD_SENSOR t1
+        LEFT JOIN TD_INSTALL_INFO t2
+        ON
+        t1.id=t2.related_id and t1.project_id=t2.project_id and t2.status=1
+        left join TD_PROJECT_PLACE t3
+        on
+        t2.project_place_id = t3.id
+        where 1=1 and t1.status = 1
+        <if test="id != null and id != ''">
+            and t1.id = #{id}
+        </if>
+        <if test="sensorCode != null and sensorCode != ''">
+            and t1.sensor_code = #{sensorCode}
+        </if>
+        <if test="sensorName != null and sensorName != ''">
+            and t1.sensor_name = #{sensorName}
+        </if>
+        <if test="sensorMac != null and sensorMac != ''">
+            and t1.sensor_mac = #{sensorMac}
+        </if>
+        <if test="tenantId != null and tenantId != ''">
+            and t1.tenant_id = #{tenantId}
+        </if>
+        <if test="projectId != null and projectId != ''">
+            and t1.project_id = #{projectId}
+        </if>
+        <if test="roomId!=null and roomId != ''">
+            and t1.room_id = #{roomId}
+        </if>
+        <if test="roomName != null and roomName != ''">
+            and t1.room_name = #{roomName}
+        </if>
+        <if test="projectPlaceId != null and projectPlaceId != ''">
+            and t2.project_place_id = #{projectPlaceId}
+        </if>
+        <if test="normal != null " >
+            and t1.normal =  #{normal}
+        </if>
+        <if test="null != sensorVersions and sensorVersions.size > 0">
+            and t1.sensor_version in
+            <foreach collection="sensorVersions" open="(" separator="," close=")" item="item">
+                #{item}
+            </foreach>
+        </if>
+        <if test="null != sensorTypes and sensorTypes.size > 0">
+            and t1.sensor_type in
+            <foreach collection="sensorTypes" open="(" separator="," close=")" item="item">
+                #{item}
+            </foreach>
+        </if>
+        <if test="null != statuses and statuses.size > 0">
+            and t1.status in
+            <foreach collection="statuses" open="(" separator="," close=")" item="item">
+                #{item}
+            </foreach>
+        </if>
+        <if test="q != null and q != ''">
+            and (t1.sensor_code like CONCAT('%','${q}','%' ) or t1.sensor_name like CONCAT('%','${q}','%' ) or
+            t1.sensor_mac like CONCAT('%','${q}','%' ) )
+        </if>
+        <if test="sort != null and sort != ''">
+            order by t1.${sort}
+            <if test="order != null and order != ''">
+                ${order}
+            </if>
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!-- 多表联查 查询探针列表 -->
+    <select id="queryInfoByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1)
+        from TD_SENSOR t1
+        LEFT JOIN TD_INSTALL_INFO t2
+        ON
+        t1.id=t2.related_id and t1.project_id=t2.project_id and t2.status=1
+        left join TD_PROJECT_PLACE t3
+        on
+        t2.project_place_id = t3.id
+        where 1=1 and t1.status = 1
+        <if test="id != null and id != ''">
+            and t1.id = #{id}
+        </if>
+        <if test="sensorCode != null and sensorCode != ''">
+            and t1.sensor_code = #{sensorCode}
+        </if>
+        <if test="sensorName != null and sensorName != ''">
+            and t1.sensor_name = #{sensorName}
+        </if>
+        <if test="sensorMac != null and sensorMac != ''">
+            and t1.sensor_mac = #{sensorMac}
+        </if>
+        <if test="tenantId != null and tenantId != ''">
+            and t1.tenant_id = #{tenantId}
+        </if>
+        <if test="projectId != null and projectId != ''">
+            and t1.project_id = #{projectId}
+        </if>
+        <if test="roomId!=null and roomId != ''">
+            and t1.room_id = #{roomId}
+        </if>
+        <if test="roomName != null and roomName != ''">
+            and t1.room_name = #{roomName}
+        </if>
+        <if test="projectPlaceId != null and projectPlaceId != ''">
+            and t2.project_place_id = #{projectPlaceId}
+        </if>
+        <if test="normal != null " >
+            and t1.normal =  #{normal}
+        </if>
+        <if test="null != sensorVersions and sensorVersions.size > 0">
+            and t1.sensor_version in
+            <foreach collection="sensorVersions" open="(" separator="," close=")" item="item">
+                #{item}
+            </foreach>
+        </if>
+        <if test="null != sensorTypes and sensorTypes.size > 0">
+            and t1.sensor_type in
+            <foreach collection="sensorTypes" open="(" separator="," close=")" item="item">
+                #{item}
+            </foreach>
+        </if>
+        <if test="null != statuses and statuses.size > 0">
+            and t1.status in
+            <foreach collection="statuses" open="(" separator="," close=")" item="item">
+                #{item}
+            </foreach>
+        </if>
+        <if test="q != null and q != ''">
+            and (t1.sensor_code like CONCAT('%','${q}','%' ) or t1.sensor_name like CONCAT('%','${q}','%' ) or
+            t1.sensor_mac like CONCAT('%','${q}','%' ) )
+        </if>
+    </select>
+
+
+    <select id="queryByUnion" resultMap="AssociationMap" parameterType="Object">
+        SELECT
+        t1.*,
+        t2.status,t2.related_id,
+        t2.project_place_id AS projectPlaceId,
+        t2.longitude AS longitude,
+        t2.latitude AS latitude,
+        t2.description AS positionDescription
+        FROM
+        TD_SENSOR t1
+        left JOIN
+        TD_INSTALL_INFO t2
+        ON
+        t1.id=t2.related_id and (t2.status = 1 or t2.status is null)
+        WHERE
+        1=1
+        AND t1.status = 1
+        <if test="tenantId != null and tenantId != ''">
+            and t1.tenant_id = #{tenantId}
+        </if>
+        <if test="projectId != null and projectId != ''">
+            and t1.project_id = #{projectId}
+        </if>
+        <if test="projectPlaceId != null and projectPlaceId != ''">
+            and (t2.project_place_id = #{projectPlaceId} or t2.project_place_id is null)
+        </if>
+    </select>
+
+    <select id="queryProjectByUnion" resultMap="AssociationMap" parameterType="Object">
+        SELECT
+        t2.status,t2.related_id,
+        t1.id,
+        t1.id as sensor_code,
+        t1.project_name as sensor_name,
+        t2.project_place_id AS projectPlaceId,
+        t2.longitude AS longitude,
+        t2.latitude AS latitude,
+        t2.description AS positionDescription
+        FROM
+        TD_PROJECT t1
+        left JOIN
+        TD_INSTALL_INFO t2
+        ON
+        t1.id=t2.related_id and (t2.status = 1 or t2.status is null)
+        WHERE
+        1=1
+        AND t1.status = 1
+        <if test="tenantId != null and tenantId != ''">
+            and t1.tenant_id = #{tenantId}
+        </if>
+        <if test="projectId != null and projectId != ''">
+            AND t1.id IN
+            (
+            SELECT
+            project_id
+            FROM
+            TD_PROJECT_RELATION
+            WHERE
+            project_parent_id = #{projectId}
+            )
+        </if>
+        <if test="projectPlaceId != null and projectPlaceId != ''">
+            and (t2.project_place_id = #{projectPlaceId} or t2.project_place_id is null)
+        </if>
+    </select>
+
+    <select id="getSensorCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(t1.id)
+        from TD_SENSOR t1 LEFT JOIN TD_INSTALL_INFO t2
+        ON
+        t1.id=t2.related_id and t1.project_id=t2.project_id and t2.status=1
+        where 1=1 and t1.status = 1
+        <if test="id != null and id != ''">
+            and t1.id = #{id}
+        </if>
+        <if test="sensorCode != null and sensorCode != ''">
+            and t1.sensor_code = #{sensorCode}
+        </if>
+        <if test="sensorName != null and sensorName != ''">
+            and t1.sensor_name = #{sensorName}
+        </if>
+        <if test="sensorMac != null and sensorMac != ''">
+            and t1.sensor_mac = #{sensorMac}
+        </if>
+        <if test="status != null and status != ''">
+            and t1.status = #{status}
+        </if>
+        <if test="tenantId != null and tenantId != ''">
+            and t1.tenant_id = #{tenantId}
+        </if>
+        <if test="projectId != null and projectId != ''">
+            and t1.project_id = #{projectId}
+        </if>
+        <if test="q != null and q != ''">
+            and (t1.sensor_code like CONCAT('%','${q}','%' ) or t1.sensor_name like CONCAT('%','${q}','%' ) )
+        </if>
+    </select>
+
+    <!-- 查询没有安装到房间里的探针列表 -->
+    <select id="querySensorNoRoomByList" parameterType="Object" resultMap="BaseResultMap">
+        select t1.*
+        from TD_SENSOR t1
+        where 1=1 and t1.status = 1
+        and t1.room_id is null
+        <if test="tenantId != null and tenantId != ''">
+            and t1.tenant_id = #{tenantId}
+        </if>
+        <if test="projectId != null and projectId != ''">
+            and t1.project_id = #{projectId}
+        </if>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+</mapper>

@@ -1,0 +1,87 @@
+/*modal*/
+.modal-title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: normal;
+    background: #f5f6f8;
+    height: 39px;
+    line-height: 39px;
+    color: #63666d;
+    padding: 0 10px;
+    text-align: left;
+}
+
+.modal-header {
+    background: #f8f8f8;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    padding: 0;
+    overflow: hidden;
+    border-bottom: 1px solid #e5e5e5;
+    height: 40px;
+    position: relative;
+}
+
+.modal-header .close {
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    opacity: 1;
+    background: url(../../images/icon-close.png) no-repeat;
+    background-size: 18px 18px;
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+}
+
+.modal-header .close span {
+    display: none;
+}
+
+.modal-footer {
+    background: #5f92e1;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    padding: 0 10px;
+    text-align: center;
+    height: 45px;
+    line-height: 45px;
+}
+
+.modal-footer button, .modal-footer .button {
+    margin: 0 10px 0 0;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    height: 25px;
+    line-height: 18px;
+    vertical-align: middle;
+}
+
+.modal-footer .btn-primary,
+.modal-footer .btn-primary:hover {
+    padding: 3px 0 3px 20px;
+    width: 92px;
+    background: url(../../images/icon-check.png) no-repeat 8px 5px;
+    border: 1px solid #fcfff8;
+    border-radius: 25px;
+    background-size: 17px 14px;
+    text-align: center;
+    color: #fff;
+}
+
+.modal-footer .btn-default,
+.modal-footer .btn-default:hover,
+.modal-footer .btn-default:active,
+.modal-footer .btn-default:focus {
+    background: none;
+    border: none;
+    color: #d2e2fb;
+    padding: 3px 5px;
+}
+
+.modal-dialog .form-horizontal .controls {
+    width: 62%;
+}

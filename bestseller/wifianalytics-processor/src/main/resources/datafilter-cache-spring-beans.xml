@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+	<bean id="mappingCache" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="ProjectCache" value-ref="ProjectCache" />
+				<entry key="SensorCache" value-ref="SensorCache" />
+				<entry key="TenantUserCache" value-ref="TenantUserCache" />
+				<entry key="ProjectUserCache" value-ref="ProjectUserCache" />
+				<entry key="SessionCache" value-ref="SessionCache" />
+				<entry key="CubeCache" value-ref="CubeCache" />
+				<entry key="BlackListMacCache" value-ref="BlackListMacCache" />
+				<entry key="AllSensorCache" value-ref="AllSensorCache" />
+				<entry key="SensorCheckCache" value-ref="SensorCheckCache" />
+				<entry key="MacCompanyCache" value-ref="MacCompanyCache" />
+				<entry key="ProjectGroupComputeCache" value-ref="ProjectGroupComputeCache" />
+				<entry key="TagSourceCache" value-ref="TagSourceCache"/>
+				<entry key="SensorAllMacCache" value-ref="SensorAllMacCache"/>
+				<entry key="ProjectMacDateCache" value-ref="ProjectMacDateCache"/>
+				<entry key="NonBlackListMacCache" value-ref="NonBlackListMacCache" />
+				<entry key="MetaCache" value-ref="MetaCache" />
+				<entry key="FrontUserCache" value-ref="FrontUserCache" />
+			</map>
+		</constructor-arg>
+	</bean>
+
+	<bean id="businessCacheManager" class="td.enterprise.wanalytics.processor.cache.CacheManager">
+	</bean>
+
+	<bean id="cacheFactory" class="td.enterprise.wanalytics.processor.cache.CacheFactory">
+		<property name="mappingCache" ref="mappingCache"></property>
+	</bean>
+
+	<bean id="SensorCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager" ref="businessCacheManager" />
+		<property name="cacheName">
+			<value>SensorCache</value>
+		</property>
+	</bean>
+
+	<bean id="ProjectCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager" ref="businessCacheManager" />
+		<property name="cacheName">
+			<value>ProjectCache</value>
+		</property>
+	</bean>
+
+	<bean id="TenantUserCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager" ref="businessCacheManager" />
+		<property name="cacheName">
+			<value>TenantUserCache</value>
+		</property>
+	</bean>
+	
+	<bean id="ProjectUserCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager" ref="businessCacheManager" />
+		<property name="cacheName">
+			<value>ProjectUserCache</value>
+		</property>
+	</bean>
+	
+	<bean id="SessionCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager" ref="businessCacheManager" />
+		<property name="cacheName">
+			<value>SessionCache</value>
+		</property>
+	</bean>
+	
+	<bean id="CubeCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager" ref="businessCacheManager" />
+		<property name="cacheName">
+			<value>CubeCache</value>
+		</property>
+	</bean>
+	<bean id="BlackListMacCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager" ref="businessCacheManager" />
+		<property name="cacheName">
+			<value>BlackListMacCache</value>
+		</property>
+	</bean>
+	<bean id="AllSensorCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager" ref="businessCacheManager" />
+		<property name="cacheName">
+			<value>AllSensorCache</value>
+		</property>
+	</bean>
+	<bean id="SensorCheckCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager" ref="businessCacheManager" />
+		<property name="cacheName">
+			<value>SensorCheckCache</value>
+		</property>
+	</bean>
+	<bean id="MacCompanyCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+        <property name="cacheManager" ref="businessCacheManager" />
+        <property name="cacheName">
+            <value>MacCompanyCache</value>
+        </property>
+    </bean>
+	<bean id="ProjectGroupComputeCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager" ref="businessCacheManager" />
+		<property name="cacheName">
+			<value>ProjectGroupComputeCache</value>
+		</property>
+	</bean>
+	<bean id="TagSourceCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager" ref="businessCacheManager"/>
+		<property name="cacheName">
+			<value>TagSourceCache</value>
+		</property>
+	</bean>
+	<bean id="SensorAllMacCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager" ref="businessCacheManager"/>
+		<property name="cacheName">
+			<value>SensorAllMacCache</value>
+		</property>
+	</bean>
+	<bean id="ProjectMacDateCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager" ref="businessCacheManager"/>
+		<property name="cacheName">
+			<value>ProjectMacDateCache</value>
+		</property>
+	</bean>
+	<bean id="NonBlackListMacCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager" ref="businessCacheManager" />
+		<property name="cacheName">
+			<value>NonBlackListMacCache</value>
+		</property>
+	</bean>
+	<bean id="MetaCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager" ref="businessCacheManager" />
+		<property name="cacheName">
+			<value>MetaCache</value>
+		</property>
+	</bean>
+	<bean id="FrontUserCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager" ref="businessCacheManager" />
+		<property name="cacheName">
+			<value>FrontUserCache</value>
+		</property>
+	</bean>
+
+</beans>

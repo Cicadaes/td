@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.SensorInfoDao">
+
+    <resultMap id="BaseResultMap" type="td.enterprise.wanalytics.etl.bean.Sensor">
+        <result column="project_id" property="projectId" jdbcType="INTEGER"/>
+        <result column="tenant_id" property="tenantId" jdbcType="VARCHAR"/>
+        <result column="sensor_id" property="id" jdbcType="INTEGER"/>
+        <result column="sensor_mac" property="sensorMac" jdbcType="VARCHAR"/>
+        <result column="opening_time" property="openingTime" jdbcType="VARCHAR"/>
+        <result column="closing_time" property="closingTime" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <update id="updateSensor" parameterType="java.util.Map">
+		UPDATE
+			TD_SENSOR
+		SET
+			normal = #{normal} ,
+			no_log_duration = #{noLogDuration} ,
+			log_hours = #{logHours}
+		WHERE
+			id = #{id}
+	</update>
+
+
+    <select id="selectAllSensorByTenantId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+        t1.id AS project_id,
+        t1.tenant_id,
+        t2.id AS sensor_id,
+        t2.sensor_mac,
+        t1.opening_time,
+        t1.closing_time
+        FROM
+        TD_PROJECT t1
+        INNER JOIN
+        TD_SENSOR t2
+        ON
+        t1.id = t2.project_id
+        WHERE
+        t1.status = 1
+        AND
+        t2.status = 1
+        AND
+        t1.tenant_id = #{tenantId}
+
+    </select>
+
+    <select id="selectAllSensorByProjectId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+        sensor_mac
+        FROM
+        TD_SENSOR
+        WHERE
+        status = 1
+        AND
+        project_id = #{projectId}
+    </select>
+
+    <select id="selectAllSensor" resultMap="BaseResultMap">
+        SELECT
+        t1.id AS project_id,
+        t1.tenant_id,
+        t2.id AS sensor_id,
+        t2.sensor_mac,
+        t1.opening_time,
+        t1.closing_time
+        FROM
+        TD_PROJECT t1
+        INNER JOIN
+        TD_SENSOR t2
+        ON
+        t1.id = t2.project_id
+        WHERE
+        t1.status = 1
+        AND
+        t2.status = 1
+
+    </select>
+
+    <update id="batchUpdate" parameterType="java.util.List">
+
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            UPDATE
+            TD_SENSOR
+            SET
+            normal = #{item.normal} ,
+            no_log_duration = #{item.noLogDuration} ,
+            log_hours = #{item.logHours}
+            WHERE
+            id = #{item.id}
+        </foreach>
+
+    </update>
+
+</mapper>

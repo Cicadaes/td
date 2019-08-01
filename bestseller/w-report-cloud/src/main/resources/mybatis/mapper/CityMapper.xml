@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.CityDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="td.enterprise.entity.City" >
+	<result column="id" property="id"/>
+	<result column="code" property="code"/>
+	<result column="city" property="city"/>
+	<result column="level" property="level"/>
+	<result column="pcode" property="pcode"/>
+	<result column="province" property="province"/>
+	<result column="update_time" property="updateTime"/>
+  </resultMap>
+       
+  <!-- TD_CITY table all fields -->
+  <sql id="Base_Column_List" >
+	 id,code,city,level,pcode,province,update_time
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="code != null and code != ''" >
+        and code =  #{code}
+	  </if>
+	      <if test="city != null and city != ''" >
+        and city =  #{city}
+	  </if>
+	      <if test="level != null and level != ''" >
+        and level =  #{level}
+	  </if>
+	      <if test="pcode != null and pcode != ''" >
+        and pcode =  #{pcode}
+	  </if>
+	      <if test="province != null and province != ''" >
+        and province =  #{province}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+      insert into 
+TD_CITY(id,code,city,level,pcode,province,update_time)
+ values(#{id},#{code},#{city},#{level},#{pcode},#{province},now())
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+      update TD_CITY set code=#{code},city=#{city},level=#{level},pcode=#{pcode},province=#{province},update_time=now() where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+      update TD_CITY set 
+		<if test="code != null  ">
+		code=#{code},
+	</if>
+	<if test="city != null  ">
+		city=#{city},
+	</if>
+	<if test="level != null  ">
+		level=#{level},
+	</if>
+	<if test="pcode != null  ">
+		pcode=#{pcode},
+	</if>
+	<if test="province != null  ">
+		province=#{province},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	update_time = now() 
+	where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 排行榜表 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+      select <include refid="Base_Column_List" /> 
+	 from TD_CITY where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+      delete from TD_CITY where id = #{id}
+  </delete>
+
+  <!-- 排行榜表 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_CITY 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询排行榜表列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_CITY 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+	<!-- 根据id查询 排行榜表 -->
+	<!--select province ,group_concat(`level` Separator ';') from (select distinct province,`level` from TD_CITY)T group by province-->
+	<select id="selectSonLevel"  resultType="String" parameterType="Object">
+		select group_concat(level Separator ',') from (select distinct province,`level` from TD_CITY  WHERE province=#{province} order by `level`,province)T;
+	</select>
+
+
+</mapper>   

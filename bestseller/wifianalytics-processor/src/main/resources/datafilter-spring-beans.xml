@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath:processor.properties</value>
+				<value>file:///nfs/config/wifianalytics/processor.properties</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="username" value="${appdb.connection.username}"></property>
+		<property name="password" value="${appdb.connection.password}"></property>
+		<property name="url" value="${appdb.connection.url}"></property>
+		<property name="driverClassName" value="${appdb.connection.driver_class}"></property>
+		<property name="initialSize" value="${appdb.connection.initialSize}"></property>
+		<property name="maxTotal" value="${appdb.connection.maxTotal}"></property>
+		<property name="maxIdle" value="${connection.maxIdle}"></property>
+		<property name="minIdle" value="${connection.minIdle}"></property>
+		<property name="maxWaitMillis" value="${connection.maxWaitMillis}"></property>
+		<property name="removeAbandonedOnMaintenance" value="${connection.removeAbandonedOnMaintenance}"></property>
+		<property name="removeAbandonedOnBorrow" value="${connection.removeAbandonedOnBorrow}"></property>
+		<property name="removeAbandonedTimeout" value="${connection.removeAbandonedTimeout}"></property>
+		<property name="logAbandoned" value="${connection.logAbandoned}"></property>
+		<property name="poolPreparedStatements" value="${connection.poolPreparedStatements}" />
+		<property name="maxOpenPreparedStatements" value="${connection.maxOpenPreparedStatements}" />
+		<property name="testOnBorrow" value="${connection.testOnBorrow}" />
+		<property name="testOnReturn" value="${connection.testOnReturn}" />
+		<property name="testWhileIdle" value="${connection.testWhileIdle}" />
+		<property name="validationQuery" value="${connection.validationQuery}" />
+		<property name="minEvictableIdleTimeMillis" value="${connection.minEvictableIdleTimeMillis}" />
+		<property name="timeBetweenEvictionRunsMillis" value="${connection.timeBetweenEvictionRunsMillis}" />
+	</bean>
+
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+	<bean id="dbCache" class="td.enterprise.wanalytics.processor.cache.impl.DBEhcache">
+	</bean>
+
+	<bean id="dao" class="td.enterprise.framework.plugin.changer.atomic.impl.CacheDaoImpl">
+		<property name="dbCache" ref="dbCache"></property>
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+	<bean id="dictDao" class="td.enterprise.framework.plugin.changer.atomic.impl.CacheDaoImpl">
+		<property name="dbCache" ref="dbCache"></property>
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+</beans>

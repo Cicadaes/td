@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.ReceiveConfigDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.ReceiveConfig">
+        <result column="id" property="id"/>
+        <result column="unique_id" property="uniqueId"/>
+        <result column="urls" property="urls"/>
+        <result column="receive_mode" property="receiveMode"/>
+        <result column="receive_interval" property="receiveInterval"/>
+        <result column="retry_times" property="retryTimes"/>
+        <result column="retry_interval" property="retryInterval"/>
+        <result column="time_unit" property="timeUnit"/>
+        <result column="filter_mac" property="filterMac"/>
+        <result column="filter_signal" property="filterSignal"/>
+        <result column="status" property="status"/>
+        <result column="alarm_threshold" property="alarmThreshold"/>
+        <result column="local_threshold" property="localThreshold"/>
+        <result column="message_number" property="messageNumber"/>
+        <result column="kafka_topic" property="kafkaTopic"/>
+        <result column="sftp_pwd" property="sftpPwd"/>
+        <result column="is_tenant" property="isTenant"/>
+        <result column="create_by" property="createBy"/>
+        <result column="creator" property="creator"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="updater" property="updater"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- TD_RECEIVE_CONFIG table all fields -->
+    <sql id="Base_Column_List">
+        id,unique_id,urls,receive_mode,receive_interval,retry_times,retry_interval,time_unit,filter_mac,filter_signal,status,alarm_threshold,local_threshold,message_number,kafka_topic,sftp_pwd,is_tenant,create_by,creator,create_time,update_by,updater,update_time
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="uniqueId != null and uniqueId != ''">
+                and unique_id = #{uniqueId}
+            </if>
+            <if test="urls != null and urls != ''">
+                and urls = #{urls}
+            </if>
+            <if test="receiveMode != null and receiveMode != ''">
+                and receive_mode = #{receiveMode}
+            </if>
+            <if test="receiveInterval != null and receiveInterval != ''">
+                and receive_interval = #{receiveInterval}
+            </if>
+            <if test="retryTimes != null and retryTimes != ''">
+                and retry_times = #{retryTimes}
+            </if>
+            <if test="retryInterval != null and retryInterval != ''">
+                and retry_interval = #{retryInterval}
+            </if>
+            <if test="timeUnit != null and timeUnit != ''">
+                and time_unit = #{timeUnit}
+            </if>
+            <if test="filterMac != null and filterMac != ''">
+                and filter_mac = #{filterMac}
+            </if>
+            <if test="filterSignal != null and filterSignal != ''">
+                and filter_signal = #{filterSignal}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="alarmThreshold != null and alarmThreshold != ''">
+                and alarm_threshold = #{alarmThreshold}
+            </if>
+            <if test="localThreshold != null and localThreshold != ''">
+                and local_threshold = #{localThreshold}
+            </if>
+            <if test="messageNumber != null and messageNumber != ''">
+                and message_number = #{messageNumber}
+            </if>
+            <if test="kafkaTopic != null and kafkaTopic != ''">
+                and kafka_topic = #{kafkaTopic}
+            </if>
+            <if test="sftpPwd != null and sftpPwd != ''">
+                and sftp_pwd = #{sftpPwd}
+            </if>
+            <if test="isTenant != null and isTenant != ''">
+                and is_tenant = #{isTenant}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_RECEIVE_CONFIG(id,unique_id,urls,receive_mode,receive_interval,retry_times,retry_interval,time_unit,filter_mac,filter_signal,status,alarm_threshold,local_threshold,message_number,kafka_topic,sftp_pwd,is_tenant,create_by,creator,create_time,update_by,updater,update_time)
+        values(#{id},#{uniqueId},#{urls},#{receiveMode},#{receiveInterval},#{retryTimes},#{retryInterval},#{timeUnit},#{filterMac},#{filterSignal},#{status},#{alarmThreshold},#{localThreshold},#{messageNumber},#{kafkaTopic},#{sftpPwd},#{isTenant},#{createBy},#{creator},now(),#{updateBy},#{updater},now())
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_RECEIVE_CONFIG set
+        unique_id=#{uniqueId},urls=#{urls},receive_mode=#{receiveMode},receive_interval=#{receiveInterval},retry_times=#{retryTimes},retry_interval=#{retryInterval},time_unit=#{timeUnit},filter_mac=#{filterMac},filter_signal=#{filterSignal},status=#{status},alarm_threshold=#{alarmThreshold},local_threshold=#{localThreshold},message_number=#{messageNumber},kafka_topic=#{kafkaTopic},sftp_pwd=#{sftpPwd},is_tenant=#{isTenant},create_by=#{createBy},creator=#{creator},create_time=now(),update_by=#{updateBy},updater=#{updater},update_time=now()
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_RECEIVE_CONFIG set
+        <trim suffixOverrides=",">
+            <if test="uniqueId != null  ">
+                unique_id=#{uniqueId},
+            </if>
+            <if test="urls != null  ">
+                urls=#{urls},
+            </if>
+            <if test="receiveMode != null  ">
+                receive_mode=#{receiveMode},
+            </if>
+            <if test="receiveInterval != null  ">
+                receive_interval=#{receiveInterval},
+            </if>
+            <if test="retryTimes != null  ">
+                retry_times=#{retryTimes},
+            </if>
+            <if test="retryInterval != null  ">
+                retry_interval=#{retryInterval},
+            </if>
+            <if test="timeUnit != null  ">
+                time_unit=#{timeUnit},
+            </if>
+            <if test="filterMac != null  ">
+                filter_mac=#{filterMac},
+            </if>
+            <if test="filterSignal != null  ">
+                filter_signal=#{filterSignal},
+            </if>
+            <if test="status != null  ">
+                status=#{status},
+            </if>
+            <if test="alarmThreshold != null  ">
+                alarm_threshold=#{alarmThreshold},
+            </if>
+            <if test="localThreshold != null  ">
+                local_threshold=#{localThreshold},
+            </if>
+            <if test="messageNumber != null  ">
+                message_number=#{messageNumber},
+            </if>
+            <if test="kafkaTopic != null  ">
+                kafka_topic=#{kafkaTopic},
+            </if>
+            <if test="sftpPwd != null  ">
+                sftp_pwd=#{sftpPwd},
+            </if>
+            <if test="isTenant != null  ">
+                is_tenant=#{isTenant},
+            </if>
+            <if test="createBy != null  ">
+                create_by=#{createBy},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+            <if test="updateBy != null  ">
+                update_by=#{updateBy},
+            </if>
+            <if test="updater != null  ">
+                updater=#{updater},
+            </if>
+            <if test="updateTime != null  ">
+                update_time=#{updateTime},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 接受配置 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_RECEIVE_CONFIG where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_RECEIVE_CONFIG where id = #{id}
+    </delete>
+
+    <!-- 接受配置 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_RECEIVE_CONFIG
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询接受配置列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_RECEIVE_CONFIG
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <select id="queryByAllList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_RECEIVE_CONFIG
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <select id="queryByTenantList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_RECEIVE_CONFIG
+        <include refid="Base_Where_Clause"/>
+        and unique_id is not null and unique_id != ''
+        and sftp_pwd is not null and sftp_pwd != ''
+        and is_tenant = 1
+    </select>
+
+    <select id="checkPwd" resultType="java.lang.String" parameterType="Object">
+        SELECT
+        distinct sftp_pwd
+        FROM TD_RECEIVE_CONFIG
+        <where>
+            <choose>
+                <when
+                        test="uniqueId !=null and uniqueId !=''">
+                    unique_id = #{uniqueId}
+                </when>
+                <otherwise>
+                    1 = 0
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+</mapper>   

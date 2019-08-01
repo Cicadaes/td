@@ -1,0 +1,53 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="youyu.dong" id="1506599701586-1">
+        <addColumn tableName="TD_METRIC_DAY">
+            <column name="singular_price" type="decimal(10,2)" remarks="件单价"/>
+            <column name="customer_price" type="decimal(10,2)" remarks="客单价"/>
+            <column name="rpc" type="decimal(10,2)" remarks="rpc"/>
+            <column name="vpc" type="decimal(10,2)" remarks="vpc"/>
+
+            <column name="member_amount" type="decimal(10,2)" remarks="会员成交金额"/>
+            <column name=" member_single_price" type="decimal(10,2)" remarks="会员成交单价"/>
+            <column name="non_member_amount" type="decimal(10,2)" remarks="非会员成交金额"/>
+            <column name="non_member_single_price" type="decimal(10,2)" remarks="非会员成交单价"/>
+            <column name="average_order_nums" type="decimal(10,2)" remarks="平均订单件数"/>
+        </addColumn>
+
+    </changeSet>
+
+    
+    <changeSet  author="youyu.dong" id="1506599701586-2">
+
+        <addColumn tableName="TD_METRIC_WEEK">
+            <column name="singular_price" type="decimal(10,2)" remarks="件单价"/>
+            <column name="customer_price" type="decimal(10,2)" remarks="客单价"/>
+            <column name="rpc" type="decimal(10,2)" remarks="rpc"/>
+            <column name="vpc" type="decimal(10,2)" remarks="vpc"/>
+
+            <column name="member_amount" type="decimal(10,2)" remarks="会员成交金额"/>
+            <column name=" member_single_price" type="decimal(10,2)" remarks="会员成交单价"/>
+            <column name="non_member_amount" type="decimal(10,2)" remarks="非会员成交金额"/>
+            <column name="non_member_single_price" type="decimal(10,2)" remarks="非会员成交单价"/>
+            <column name="average_order_nums" type="decimal(10,2)" remarks="平均订单件数"/>
+        </addColumn>
+
+        <addColumn tableName="TD_METRIC_MONTH">
+            <column name="singular_price" type="decimal(10,2)" remarks="件单价"/>
+            <column name="customer_price" type="decimal(10,2)" remarks="客单价"/>
+            <column name="rpc" type="decimal(10,2)" remarks="rpc"/>
+            <column name="vpc" type="decimal(10,2)" remarks="vpc"/>
+
+            <column name="member_amount" type="decimal(10,2)" remarks="会员成交金额"/>
+            <column name=" member_single_price" type="decimal(10,2)" remarks="会员成交单价"/>
+            <column name="non_member_amount" type="decimal(10,2)" remarks="非会员成交金额"/>
+            <column name="non_member_single_price" type="decimal(10,2)" remarks="非会员成交单价"/>
+            <column name="average_order_nums" type="decimal(10,2)" remarks="平均订单件数"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>
+

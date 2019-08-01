@@ -1,0 +1,14 @@
+<div class="addIndexCheckedDiv">
+	<!-- 指标div -->
+	<div class = "addIndexCheckedList">
+		<!-- 客流趋势指标 -->
+		<ul class = "addIndexCheckedListOne" ng-repeat="one in checkedList.datalist">
+			<h3 class = "index-all"><span ng-class="{'customChecked': true, 'customLeft':true, 'marginTop':true, 'customCheckedTrue':one.checked}" ng-click="checkedAll(one)"></span>{{one.name}}</h3>
+			<li ng-repeat="obj in one.list"><span ng-class="{'customChecked': true, 'customLeft':true, 'marginTop':true, 'customCheckedTrue':obj.checked}" ng-click="checkedOne(obj,one)"></span><b class = "customCheckedText customLeft">{{obj.value}}</b></li>
+		</ul>
+	</div>
+	<div class="submitButtonDiv" style="margin-top: 11px;">
+		<div class="submitButton submitButtonConfirm" ng-click="confirmSelect()">确定</div>
+		<div class="submitButton submitButtonCancel" ng-click="cancelSelect()">取消</div>
+	</div>
+</div>

@@ -1,0 +1,148 @@
+<div class="picturecon" >
+    <div class="properties clearfix">
+        <!--
+                            描述：所用手机品牌
+                        -->
+        <div class="adaption parpadng">
+            <div class="gender_tit">{{constants.caption_phone_brand}}</div>
+            <div class="gender_con probor">
+                <div class="use_chart use_chart_01"></div>
+            </div>
+        </div>
+        <div class="proline"></div>
+        <!--
+                            描述：所用手机价格
+                        -->
+        <div class="adaption parpadng agepad">
+            <div class="gender_tit">{{constants.caption_phone_price}}</div>
+            <div class="gender_con probor">
+                <div class="use_chart use_chart_02"></div>
+            </div>
+        </div>
+        <!--
+                            描述：Shoppingmall足迹
+                        -->
+        <div class="whether parpadng" ng-show="false">
+            <div class="gender_tit">{{constants.caption_shoppingmall_footprint}}</div>
+            <div class="gender_con">
+                <div class="ranking">
+                    <ul>
+                        <li ng-repeat="obj in shopcenter" ng-class="{'rank_num_one': $index == 0, 'rank_num_two': $index == 1, 'rank_num_three': $index == 2, 'rank_num_four': $index >= 3}">
+                            <b>{{$index + 1}}、</b>
+                            <strong><a href="javascript:void(0)" title="{{obj.tag_name}}">{{obj.tag_name}}</a></strong>
+                            <a href="javascript:void(0)" title="{{pct(obj.sta_value,2)}}"><span><em style="width: {{obj.sta_value+'%'}};"></em></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--
+                            描述：品牌足迹（非餐饮）
+                        -->
+        <div class="whether parpadng" ng-show="false">
+            <div class="gender_tit">{{constants.caption_brand_footprint}}</div>
+            <div class="gender_con">
+                <div class="ranking">
+                    <ul>
+                        <li ng-repeat="obj in shopbrand" ng-class="{'rank_num_one': $index == 0, 'rank_num_two': $index == 1, 'rank_num_three': $index == 2, 'rank_num_four': $index >= 3}">
+                            <b>{{$index + 1}}、</b>
+                            <strong><a href="javascript:void(0)" title="{{obj.tag_name}}">{{obj.tag_name}}</a></strong>
+                            <a href="javascript:void(0)" title="{{pct(obj.sta_value,2)}}"><span><em style="width: {{obj.sta_value+'%'}};"></em></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--
+                            描述：品牌足迹（餐饮）
+                        -->
+        <div class="whether parpadng" ng-show="false">
+            <div class="gender_tit">{{constants.caption_restaurant_footprint}}</div>
+            <div class="gender_con">
+                <div class="ranking">
+                    <ul>
+                        <li ng-repeat="obj in restaurantbrand" ng-class="{'rank_num_one': $index == 0, 'rank_num_two': $index == 1, 'rank_num_three': $index == 2, 'rank_num_four': $index >= 3}">
+                            <b>{{$index + 1}}、</b>
+                            <strong><a href="javascript:void(0)" title="{{obj.tag_name}}">{{obj.tag_name}}</a></strong>
+                            <a href="javascript:void(0)" title="{{pct(obj.sta_value,2)}}"><span><em style="width: {{obj.sta_value+'%'}};"></em></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="properties clearfix" ng-if="status == 'compare_double'">
+        <!--
+                            描述：所用手机品牌
+                        -->
+        <div class="adaption parpadng">
+            <div class="gender_tit">{{constants.caption_phone_brand}}</div>
+            <div class="gender_con probor">
+                <div class="use_chart use_chart_01"></div>
+            </div>
+        </div>
+        <div class="proline"></div>
+        <!--
+                            描述：所用手机价格
+                        -->
+        <div class="adaption parpadng agepad">
+            <div class="gender_tit">{{constants.caption_phone_price}}</div>
+            <div class="gender_con probor">
+                <div class="use_chart use_chart_02"></div>
+            </div>
+        </div>
+        <!--
+                            描述：Shoppingmall足迹
+                        -->
+        <div class="whether parpadng" ng-show="false">
+            <div class="gender_tit">{{constants.caption_shoppingmall_footprint}}</div>
+            <div class="gender_con">
+                <div class="ranking">
+                    <ul>
+                        <li ng-repeat="obj in shopcenter_2" ng-class="{'rank_num_one': $index == 0, 'rank_num_two': $index == 1, 'rank_num_three': $index == 2, 'rank_num_four': $index >= 3}">
+                            <b>{{$index + 1}}、</b>
+                            <strong><a href="javascript:void(0)" title="{{obj.tag_name}}">{{obj.tag_name}}</a></strong>
+                            <a href="javascript:void(0)" title="{{pct(obj.sta_value,2)}}"><span><em style="width: {{obj.sta_value+'%'}};"></em></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--
+                            描述：品牌足迹（非餐饮）
+                        -->
+        <div class="whether parpadng" ng-show="false">
+            <div class="gender_tit">{{constants.caption_brand_footprint}}</div>
+            <div class="gender_con">
+                <div class="ranking">
+                    <ul>
+                        <li ng-repeat="obj in shopbrand_2" ng-class="{'rank_num_one': $index == 0, 'rank_num_two': $index == 1, 'rank_num_three': $index == 2, 'rank_num_four': $index >= 3}">
+                            <b>{{$index + 1}}、</b>
+                            <strong><a href="javascript:void(0)" title="{{obj.tag_name}}">{{obj.tag_name}}</a></strong>
+                            <a href="javascript:void(0)" title="{{pct(obj.sta_value,2)}}"><span><em style="width: {{obj.sta_value+'%'}};"></em></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--
+                            描述：品牌足迹（餐饮）
+                        -->
+        <div class="whether parpadng" ng-show="false">
+            <div class="gender_tit">{{constants.caption_restaurant_footprint}}</div>
+            <div class="gender_con">
+                <div class="ranking">
+                    <ul>
+                        <li ng-repeat="obj in restaurantbrand_2" ng-class="{'rank_num_one': $index == 0, 'rank_num_two': $index == 1, 'rank_num_three': $index == 2, 'rank_num_four': $index >= 3}">
+                            <b>{{$index + 1}}、</b>
+                            <strong><a href="javascript:void(0)" title="{{obj.tag_name}}">{{obj.tag_name}}</a></strong>
+                            <a href="javascript:void(0)" title="{{pct(obj.sta_value,2)}}"><span><em style="width: {{obj.sta_value+'%'}};"></em></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

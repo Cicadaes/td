@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="w-report-cloud:war">
+    <output-path>$PROJECT_DIR$/w-report-cloud/target</output-path>
+    <root id="archive" name="w-report-cloud-3.0.war">
+      <element id="artifact" artifact-name="w-report-cloud:war exploded" />
+    </root>
+  </artifact>
+</component>

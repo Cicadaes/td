@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.CompeteSourceDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="td.enterprise.entity.CompeteSource" >
+	<result column="id" property="id"/>
+	<result column="tenant_id" property="tenantId"/>
+	<result column="project_id" property="projectId"/>
+	<result column="data_source" property="dataSource"/>
+	<result column="remark" property="remark"/>
+	<result column="status" property="status"/>
+	<result column="attachment_id" property="attachmentId"/>
+	<result column="attachment_source" property="attachmentSource"/>
+	<result column="creator" property="creator"/>
+	<result column="create_by" property="createBy"/>
+	<result column="create_time" property="createTime"/>
+	<result column="updater" property="updater"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="update_time" property="updateTime"/>
+  </resultMap>
+       
+  <!-- TD_COMPETE_SOURCE table all fields -->
+  <sql id="Base_Column_List" >
+	 id,tenant_id,project_id,data_source,remark,status,attachment_id,attachment_source,creator,create_by,create_time,updater,update_by,update_time
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="tenantId != null and tenantId != ''" >
+        and tenant_id =  #{tenantId}
+	  </if>
+	      <if test="projectId != null and projectId != ''" >
+        and project_id =  #{projectId}
+	  </if>
+	      <if test="dataSource != null and dataSource != ''" >
+        and data_source =  #{dataSource}
+	  </if>
+	      <if test="remark != null and remark != ''" >
+        and remark =  #{remark}
+	  </if>
+	      <if test="status != null and status != ''" >
+        and status =  #{status}
+	  </if>
+	      <if test="attachmentId != null and attachmentId != ''" >
+        and attachment_id =  #{attachmentId}
+	  </if>
+	      <if test="attachmentSource != null and attachmentSource != ''" >
+        and attachment_source =  #{attachmentSource}
+	  </if>
+	      <if test="creator != null and creator != ''" >
+        and creator =  #{creator}
+	  </if>
+	      <if test="createBy != null and createBy != ''" >
+        and create_by =  #{createBy}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	      <if test="updater != null and updater != ''" >
+        and updater =  #{updater}
+	  </if>
+	      <if test="updateBy != null and updateBy != ''" >
+        and update_by =  #{updateBy}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+		<if test="q != null and q != ''">
+			and remark like CONCAT('%','${q}','%' )
+		</if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+      insert into 
+TD_COMPETE_SOURCE(id,tenant_id,project_id,data_source,remark,status,attachment_id,attachment_source,creator,create_by,create_time,updater,update_by,update_time)
+ values(#{id},#{tenantId},#{projectId},#{dataSource},#{remark},#{status},#{attachmentId},#{attachmentSource},#{creator},#{createBy},now(),#{updater},#{updateBy},now())
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+      update TD_COMPETE_SOURCE set tenant_id=#{tenantId},project_id=#{projectId},data_source=#{dataSource},remark=#{remark},status=#{status},attachment_id=#{attachmentId},attachment_source=#{attachmentSource},creator=#{creator},create_by=#{createBy},updater=#{updater},update_by=#{updateBy},update_time=now() where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+      update TD_COMPETE_SOURCE set 
+		<if test="tenantId != null  ">
+		tenant_id=#{tenantId},
+	</if>
+	<if test="projectId != null  ">
+		project_id=#{projectId},
+	</if>
+	<if test="dataSource != null  ">
+		data_source=#{dataSource},
+	</if>
+	<if test="remark != null  ">
+		remark=#{remark},
+	</if>
+	<if test="status != null  ">
+		status=#{status},
+	</if>
+	<if test="attachmentId != null  ">
+		attachment_id=#{attachmentId},
+	</if>
+	<if test="attachmentSource != null  ">
+		attachment_source=#{attachmentSource},
+	</if>
+	<if test="creator != null  ">
+		creator=#{creator},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updater != null  ">
+		updater=#{updater},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	update_time = now() 
+	where id=#{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateById" parameterType="Object" >
+      update TD_COMPETE_SOURCE set
+		<if test="tenantId != null  ">
+		tenant_id=#{tenantId},
+	</if>
+	<if test="dataSource != null  ">
+		data_source=#{dataSource},
+	</if>
+	<if test="remark != null  ">
+		remark=#{remark},
+	</if>
+	<if test="status != null  ">
+		status=#{status},
+	</if>
+	<if test="attachmentId != null  ">
+		attachment_id=#{attachmentId},
+	</if>
+	<if test="attachmentSource != null  ">
+		attachment_source=#{attachmentSource},
+	</if>
+	<if test="creator != null  ">
+		creator=#{creator},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updater != null  ">
+		updater=#{updater},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	update_time = now()
+	where project_id=#{projectId}
+  </update>
+
+  <!-- 根据id查询 竞品数据源 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+      select <include refid="Base_Column_List" /> 
+	 from TD_COMPETE_SOURCE where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+      delete from TD_COMPETE_SOURCE where id = #{id}
+  </delete>
+
+  <!-- 竞品数据源 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_COMPETE_SOURCE 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询竞品数据源列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_COMPETE_SOURCE 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  <!-- add hao.yang 2017/07/25  -->
+  <select id="queryDataSources" resultType="java.lang.String"  parameterType="Object">
+	  SELECT  GROUP_CONCAT(DISTINCT data_source  separator  ';') AS data_sources  FROM TD_COMPETE_SOURCE GROUP BY project_id HAVING project_id = #{projectId}
+  </select>
+</mapper>

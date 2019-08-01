@@ -1,0 +1,2 @@
+type=command
+command=bash -x /home/hadoop/wanalytics/etl/bin/FilterBlackMacTask.sh -schedulerTaskLogId '${schedule.task.log.id}' -projectId '${projectId}' -days '${days}' -endDate '${azkaban.flow.start.year}-${azkaban.flow.start.month}-${azkaban.flow.start.day}' -totalDays '${totalDays}'

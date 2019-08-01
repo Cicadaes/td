@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="multipleResultSetsEnabled" value="true"/>
+        <setting name="useColumnLabel" value="true"/>
+        <setting name="useGeneratedKeys" value="false"/>
+        <setting name="autoMappingBehavior" value="PARTIAL"/>
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <setting name="defaultStatementTimeout" value="25"/>
+        <setting name="safeRowBoundsEnabled" value="false"/>
+        <setting name="mapUnderscoreToCamelCase" value="false"/>
+        <setting name="localCacheScope" value="SESSION"/>
+        <setting name="jdbcTypeForNull" value="OTHER"/>
+        <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>
+    </settings>
+    <environments default="development">
+        <!--<environment id="development">-->
+            <!--<transactionManager type="JDBC"/>-->
+            <!--<dataSource type="POOLED">-->
+                <!--<property name="driver" value="com.mysql.jdbc.Driver"/>-->
+                <!--<property name="poolMaximumActiveConnections" value="100"/>-->
+                <!--<property name="url"-->
+                          <!--value="jdbc:mysql://${mysql.ip}:${mysql.port}/${mysql.name}?useUnicode=true&amp;characterEncoding=UTF-8"/>-->
+                <!--<property name="username" value="${mysql.user}"/>-->
+                <!--<property name="password" value="${mysql.pwd}"/>-->
+            <!--</dataSource>-->
+        <!--</environment>-->
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+               <!--  <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="poolMaximumActiveConnections" value="100"/>
+                <property name="url" value="jdbc:mysql://54.222.233.245:3306/wifianalytics_bitmap?useUnicode=true&amp;characterEncoding=UTF-8"/>
+                <property name="username" value="wifianalytics"/>
+                <property name="password" value="wifianalytics"/> -->
+                <property name="driver" value="${offlinecomputer.driver}"/>
+                <property name="poolMaximumActiveConnections" value="${offlinecomputer.poolMaximumActiveConnections}"/>
+                <property name="url" value="${offlinecomputer.url}"/>
+                <property name="username" value="${offlinecomputer.username}"/>
+                <property name="password" value="${offlinecomputer.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="sqlMapper/ActiveUserDayCubeMapper.xml"/>
+        <mapper resource="sqlMapper/ActiveUserHourCubeMapper.xml"/>
+        <mapper resource="sqlMapper/NewUserDayCubeMapper.xml"/>
+        <mapper resource="sqlMapper/NewUserSensorDayCubeMapper.xml"/>
+        <mapper resource="sqlMapper/OldUserDayCubeMapper.xml"/>
+        <mapper resource="sqlMapper/OldUserSensorDayCubeMapper.xml"/>
+        <mapper resource="sqlMapper/OffLineActiveUserDayCubeMapper.xml"/>
+        <mapper resource="sqlMapper/OffLineNewUserDayCubeMapper.xml"/>
+        <mapper resource="sqlMapper/OffLineOldUserDayCubeMapper.xml"/>
+        <mapper resource="sqlMapper/TenantImportUserCubeMapper.xml"/>
+        <mapper resource="sqlMapper/StayUserDayCubeMapper.xml"/>
+
+
+        <mapper resource="sqlMapper/OffLineActiveUserHourCounterMapper.xml"/>
+        <mapper resource="sqlMapper/OffLineStayUserDayCounterMapper.xml"/>
+        <mapper resource="sqlMapper/OffLineActiveUserDayCounterMapper.xml"/>
+         <mapper resource="sqlMapper/OffLineNewUserDayCounterMapper.xml"/>
+         <mapper resource="sqlMapper/OffLineOldUserDayCounterMapper.xml"/>
+         <mapper resource="sqlMapper/OffLineActiveUserHourCounterMapper.xml"/>
+         <mapper resource="sqlMapper/OffLineOldUserSensorDayCounterMapper.xml"/>
+         <mapper resource="sqlMapper/OffLineNewUserSensorDayCounterMapper.xml"/>
+        <mapper resource="sqlMapper/ActiveUserSensorHourCubeMapper.xml"/>
+        <mapper resource="sqlMapper/OfflineActiveUserSensorHourCounterMapper.xml"/>
+        <mapper resource="sqlMapper/StayOldUserDayCubeMapper.xml"/>
+        <mapper resource="sqlMapper/StayNewUserDayCubeMapper.xml"/>
+        <mapper resource="sqlMapper/OffLineStayOldUserDayCounterMapper.xml"/>
+        <mapper resource="sqlMapper/OffLineStayNewUserDayCounterMapper.xml"/>
+    </mappers>
+</configuration>

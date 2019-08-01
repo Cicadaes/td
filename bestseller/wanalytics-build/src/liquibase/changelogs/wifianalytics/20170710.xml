@@ -1,0 +1,23 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="ran.li" id="1499655228000-1">
+        <addColumn tableName="TD_PROJECT_INDEX">
+            <column name="sensor_num" type="int(4)" remarks="探针数"/>
+            <column name="health_rate" type="double(4,0)" remarks="健康度"/>
+            <column name="no_log_duration" type="double(4,0)" remarks="无日志时长"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet author="ran.li" id="1499655228000-2">
+        <addColumn tableName="TD_SENSOR">
+            <column name="normal" type="int(4)" remarks="是否健康"/>
+            <column name="no_log_duration" type="double(4,0)" remarks="无日志时长"/>
+            <column name="log_hours" type="varchar(15)" remarks="3小时日志数"/>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

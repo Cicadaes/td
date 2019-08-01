@@ -1,0 +1,24 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	<changeSet author="junmin.li" id="1492754764717-1">
+        	<createTable tableName="offline_front_user_day_counter" remarks="项目店前客流">
+					<column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+						<constraints nullable="false"/>
+					</column>
+					<column defaultValueNumeric="0" name="project_id" type="INT">
+						<constraints nullable="false"/>
+					</column>
+					<column defaultValue="" name="date" type="VARCHAR(10)">
+						<constraints nullable="false"/>
+					</column>
+					<column defaultValueNumeric="0" name="metric_value" type="INT"/>
+					<column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+            </createTable>
+    </changeSet>
+	<changeSet author="junmin.li" id="1492754764717-2">
+		<addPrimaryKey
+				columnNames="tenant_id,project_id,date"
+				tableName="offline_front_user_day_counter" />
+	</changeSet>
+   
+</databaseChangeLog>

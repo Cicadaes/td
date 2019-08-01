@@ -1,0 +1,167 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="xiongkun.sun" id="1509465600666-1">
+        <createTable tableName="TD_METRIC_DAY_REAL_TIME">
+            <column autoIncrement="true" name="id" type="BIGINT UNSIGNED" remarks="主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="brand" remarks="品牌" type="varchar(100)"/>
+            <column name="region" remarks="大区" type="varchar(100)"/>
+            <column name="city" remarks="城市" type="varchar(100)"/>
+            <column name="province" remarks="省" type="varchar(100)"/>
+            <column name="channel" remarks="渠道" type="varchar(100)"/>
+            <column name="mall" remarks="商场" type="varchar(127)"/>
+            <column name="project_name" remarks="项目名称" type="varchar(100)"/>
+            <column name="project_type" remarks="项目类型(1：店铺 2：自定义 3：物理城市 4：品牌城市 5：品牌大区 6：品牌 7: 商场 8：渠道 9：物理省份 10：品牌省份)" type="tinyint unsigned"/>
+            <column name="project_id" remarks="项目id(TD_PROJECT)" type="int"/>
+            
+            <column name="date" remarks="日期" type="varchar(10)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="week_of_year" remarks="周" type="varchar(10)">
+            	<constraints nullable="false"/>
+            </column>
+            
+            <column name="month" remarks="月份" type="varchar(2)">
+            	<constraints nullable="false"/>
+            </column>
+            
+            <column name="active_new_users" remarks="进店新客" type="int unsigned" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active_old_users" remarks="进店老客" type="int unsigned" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active_users" remarks="进店人数" type="int unsigned" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="stay_new_users" remarks="停留新客" type="int unsigned" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="stay_old_users" remarks="停留老客" type="int unsigned" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="stay_users" remarks="停留人数" type="int unsigned" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="front_users" remarks="周边人数" type="int unsigned" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jump_users" remarks="跳出人数" type="int unsigned" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="high_active_users" remarks="高活跃人数" type="int unsigned" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="middle_active_users" remarks="中活跃人数" type="int unsigned" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="low_active_users" remarks="低活跃人数" type="int unsigned" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sleep_active_users" remarks="沉睡人数" type="int unsigned" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="high_stay_users" remarks="高活跃停留人数" type="int unsigned" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="middle_stay_users" remarks="中活跃停留人数" type="int unsigned" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="low_stay_users" remarks="低活跃停留人数" type="int unsigned" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sleep_stay_users" remarks="沉睡停留人数" type="int unsigned" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP"  computed="true"
+                    defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="xiongkun.sun" id="1509465600666-2">
+        <createTable tableName="TD_METRIC_DAY_PARTY">
+            <column autoIncrement="true" name="id" type="BIGINT UNSIGNED" remarks="主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="brand" remarks="品牌" type="varchar(100)"/>
+            <column name="region" remarks="大区" type="varchar(100)"/>
+            <column name="city" remarks="城市" type="varchar(100)"/>
+            <column name="province" remarks="省" type="varchar(100)"/>
+            <column name="channel" remarks="渠道" type="varchar(100)"/>
+            <column name="mall" remarks="商场" type="varchar(127)"/>
+            <column name="project_name" remarks="项目名称" type="varchar(100)"/>
+            <column name="project_type" remarks="项目类型(1：店铺 2：自定义 3：物理城市 4：品牌城市 5：品牌大区 6：品牌 7: 商场 8：渠道 9：物理省份 10：品牌省份)" type="tinyint unsigned"/>
+            <column name="project_id" remarks="项目id(TD_PROJECT)" type="int"/>
+            
+            <column name="date" remarks="日期" type="varchar(10)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="week_of_year" remarks="周" type="varchar(10)">
+            	<constraints nullable="false"/>
+            </column>
+            
+            <column name="month" remarks="月份" type="varchar(2)">
+            	<constraints nullable="false"/>
+            </column>
+            
+            <column name="sales_amount" remarks="销售金额" type="decimal(15,2)" defaultValue="0.00">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_count" remarks="订单数" type="int unsigned" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_average_price" remarks="订单均价" type="decimal(10,2)" defaultValue="0.00">
+                <constraints nullable="false"/>
+            </column>
+           
+            <column name="singular_count" remarks="件单数" type="int unsigned" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="receipt_count" remarks="转化数，小票数" type="int unsigned" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="member_count" remarks="会员数" type="int unsigned" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="potential_count" remarks="潜客数" type="int unsigned" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="update_time" remarks="更新时间" type="TIMESTAMP" computed="true"
+                    defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="xiongkun.sun" id="1509465600666-3">
+        <createIndex indexName="IDX_PID_DATE" unique="true" tableName="TD_METRIC_DAY_REAL_TIME">
+            <column name="project_id"/>
+            <column name="date"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="xiongkun.sun" id="1509465600666-4">
+        <createIndex indexName="IDX_PID_DATE" unique="true" tableName="TD_METRIC_DAY_PARTY">
+            <column name="project_id"/>
+            <column name="date"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="xiongkun.sun" id="1509465600666-5">
+        <createIndex indexName="IDX_PID_DATE" unique="true" tableName="TD_METRIC_DAY">
+            <column name="project_id"/>
+            <column name="date"/>
+        </createIndex>
+    </changeSet>
+    
+   
+    
+</databaseChangeLog>

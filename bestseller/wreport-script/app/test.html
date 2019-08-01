@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .button {
+            padding: 5px;
+            background: #43A3FB;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        window.isPageApi = true;
+        function go_menu(module) {
+            document.getElementById('aaa').src = 'http://localhost/wreport_new/index.html' + module + '?projectId=1';
+        }
+    </script>
+</head>
+<body>
+<div style="height: 40px;">
+    <span class="button" onclick="go_menu('#/project/projects')">#/project/projects</span>
+    <span class="button" onclick="go_menu('#/project/passengerOverview')">#/project/passengerOverview</span>
+</div>
+
+<iframe id="aaa" src="http://localhost/wreport_new/index.html" width="1200" height="600"></iframe>
+</body>
+</html>

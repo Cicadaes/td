@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.TenantAppSignificanceDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.TenantAppSignificance">
+        <result column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="project_id" property="projectId"/>
+        <result column="crowd_id" property="crowdId"/>
+        <result column="run_date" property="runDate"/>
+        <result column="platform" property="platform"/>
+        <result column="app_hash" property="appHash"/>
+        <result column="app_proportion" property="appProportion"/>
+        <result column="city_app_proportion" property="cityAppProportion"/>
+        <result column="significance_value" property="significanceValue"/>
+        <result column="app_type" property="appType"/>
+        <result column="hour" property="hour"/>
+        <result column="cycle_statistics" property="cycleStatistics"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+        <result column="type_id" property="typeId"/>
+        <result column="type_name" property="typeName"/>
+    </resultMap>
+
+    <!-- TD_TENANT_APP_SIGNIFICANCE table all fields -->
+    <sql id="Base_Column_List">
+        id,tenant_id,project_id,crowd_id,run_date,platform,app_hash,app_proportion,city_app_proportion,significance_value,app_type,hour,cycle_statistics,start_date,end_date,type_id,type_name
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="crowdId != null">
+                and crowd_id = #{crowdId}
+            </if>
+            <if test="runDate != null and runDate != ''">
+                and run_date = #{runDate}
+            </if>
+            <if test="platform != null and platform != ''">
+                and platform = #{platform}
+            </if>
+            <if test="appHash != null and appHash != ''">
+                and app_hash = #{appHash}
+            </if>
+            <if test="appProportion != null and appProportion != ''">
+                and app_proportion = #{appProportion}
+            </if>
+            <if test="cityAppProportion != null and cityAppProportion != ''">
+                and city_app_proportion = #{cityAppProportion}
+            </if>
+            <if test="significanceValue != null and significanceValue != ''">
+                and significance_value = #{significanceValue}
+            </if>
+            <if test="appType != null and appType != ''">
+                and app_type = #{appType}
+            </if>
+            <if test="hour != null and hour != ''">
+                and hour = #{hour}
+            </if>
+            <if test="cycleStatistics != null and cycleStatistics != ''">
+                and cycle_statistics = #{cycleStatistics}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and start_date = #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and end_date = #{endDate}
+            </if>
+            <if test="typeId != null and typeId != ''">
+                and type_id = #{typeId}
+            </if>
+            <if test="typeName != null and typeName != ''">
+                and type_name = #{typeName}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_TENANT_APP_SIGNIFICANCE(id,tenant_id,project_id,crowd_id,run_date,platform,app_hash,app_proportion,city_app_proportion,significance_value,app_type,hour,cycle_statistics,start_date,end_date,type_id,type_name)
+        values(#{id},#{tenantId},#{projectId},#{crowdId},#{runDate},#{platform},#{appHash},#{appProportion},#{cityAppProportion},#{significanceValue},#{appType},#{hour},#{cycleStatistics},#{startDate},#{endDate},#{typeId},#{typeName})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_TENANT_APP_SIGNIFICANCE set
+        tenant_id=#{tenantId},project_id=#{projectId},crowd_id=#{crowdId},run_date=#{runDate},platform=#{platform},app_hash=#{appHash},app_proportion=#{appProportion},city_app_proportion=#{cityAppProportion},significance_value=#{significanceValue},app_type=#{appType},hour=#{hour},cycle_statistics=#{cycleStatistics},start_date=#{startDate},end_date=#{endDate},type_id=#{typeId},type_name=#{typeName}
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_TENANT_APP_SIGNIFICANCE set
+        <trim suffixOverrides=",">
+            <if test="tenantId != null  ">
+                tenant_id=#{tenantId},
+            </if>
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="crowdId != null  ">
+                crowd_id=#{crowdId},
+            </if>
+            <if test="runDate != null  ">
+                run_date=#{runDate},
+            </if>
+            <if test="platform != null  ">
+                platform=#{platform},
+            </if>
+            <if test="appHash != null  ">
+                app_hash=#{appHash},
+            </if>
+            <if test="appProportion != null  ">
+                app_proportion=#{appProportion},
+            </if>
+            <if test="cityAppProportion != null  ">
+                city_app_proportion=#{cityAppProportion},
+            </if>
+            <if test="significanceValue != null  ">
+                significance_value=#{significanceValue},
+            </if>
+            <if test="appType != null  ">
+                app_type=#{appType},
+            </if>
+            <if test="hour != null  ">
+                hour=#{hour},
+            </if>
+            <if test="cycleStatistics != null  ">
+                cycle_statistics=#{cycleStatistics},
+            </if>
+            <if test="startDate != null  ">
+                start_date=#{startDate},
+            </if>
+            <if test="endDate != null  ">
+                end_date=#{endDate},
+            </if>
+            <if test="typeId != null  ">
+                type_id=#{typeId},
+            </if>
+            <if test="typeName != null  ">
+                type_name=#{typeName},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 App显著性计算 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_TENANT_APP_SIGNIFICANCE where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_TENANT_APP_SIGNIFICANCE where id = #{id}
+    </delete>
+
+    <!-- App显著性计算 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_TENANT_APP_SIGNIFICANCE
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询App显著性计算列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_TENANT_APP_SIGNIFICANCE
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+
+    <!--  <select id="findAppList" resultType="map" parameterType="map">
+       select
+       app_id tag_name ,
+       SUM(marked_ratio) sta_value
+       from ( select * from app_attr p
+       <where>
+           <if test=" usetime != null and usetime != '' ">
+               AND p.timeable_time in
+               <foreach item="item" index="index" collection="usetime"
+                        open="(" separator="," close=")">
+                   #{item}
+               </foreach>
+           </if>
+           <if test=" thanguest1 != null and thanguest1 != '' ">
+               AND p.crowd_id = #{thanguest1}
+           </if>
+           <if test=" starttime != null and starttime != '' ">
+               AND p.starttime = #{starttime}
+           </if>
+           <if test=" endtime != null and endtime != '' ">
+               AND p.endtime = #{endtime}
+           </if>
+           <if test=" stype != null and stype != '' ">
+               AND p.stype = #{stype}
+           </if>
+       </where>
+       ) g group by tag_name order by sta_value desc
+       <if test=" applistlimit != null and applistlimit != 0 ">
+           limit #{applistlimit}
+       </if>
+   </select>
+    -->
+
+    <resultMap id="AssociationMap" type="td.enterprise.entity.TenantAppSignificance" extends="BaseResultMap">
+        <result column="appIcon" property="appIcon"/>
+        <result column="appName" property="appName"/>
+    </resultMap>
+
+    <!-- queryAppByList -->
+    <select id="queryAppByList" resultMap="AssociationMap" parameterType="map">
+        select
+        t.*,t1.app_name as appName,t1.app_icon as appIcon
+        from TD_TENANT_APP_SIGNIFICANCE t
+        inner join TD_APP_INFO t1
+        ON t1.app_hash=t.app_hash and t1.platform = t.platform
+        <where>
+            1=1
+            and t1.app_icon is not NULL
+            and t1.app_name is not null
+            <if test="projectId !=null ">
+                and t.project_id=#{projectId}
+            </if>
+            <if test="tenantId !=null ">
+                and t.tenant_id=#{tenantId}
+            </if>
+            <if test="crowdId !=null ">
+                and t.crowd_id=#{crowdId}
+            </if>
+            <if test=" startDate != null and startDate != '' ">
+                AND t.start_date = #{startDate}
+            </if>
+            <if test=" endDate != null and endDate != '' ">
+                AND t.end_date = #{endDate}
+            </if>
+            <if test="appType !=null ">
+                AND t.type_id IN
+                <foreach collection="appType" open="(" separator="," close=")" item="item">
+                    #{item}
+                </foreach>
+            </if>
+            <!--
+             <if test="appType ==null  or  appType=='null'"> 全部应用类型
+                 AND t.type_id is not null
+             </if>
+             -->
+            <if test=" cycleStatistics != null and cycleStatistics != '' ">
+                AND t.cycle_statistics = #{cycleStatistics}
+            </if>
+            <if test=" hour != null and hour != '' ">
+                and t.hour IN
+                <foreach collection="hour" open="(" separator="," close=")" item="item">
+                    #{item}
+                </foreach>
+            </if>
+            group by t.app_hash
+            order by t.significance_value desc
+        </where>
+        <if test="appListLimit !=null and appListLimit!=0">
+            limit #{appListLimit}
+        </if>
+    </select>
+
+    <select id="queryAppByList2" resultMap="AssociationMap" parameterType="map">
+        select
+        t.*,t1.app_name as appName,t1.app_icon as appIcon
+        from TD_TENANT_APP_PROMOTION t
+        inner join TD_APP_INFO t1
+        ON t1.app_hash=t.app_hash and t1.platform = t.platform
+        <where>
+            1=1
+            and t1.app_icon is not NULL
+            and t1.app_name is not null
+            <if test="projectId !=null ">
+                and t.project_id=#{projectId}
+            </if>
+            <if test="crowdId !=null ">
+                and t.crowd_id=#{crowdId}
+            </if>
+            <if test=" startDate != null and startDate != '' ">
+                AND t.start_date = #{startDate}
+            </if>
+            <if test=" endDate != null and endDate != '' ">
+                AND t.end_date = #{endDate}
+            </if>
+            <if test="appType !=null ">
+                AND t.type_id IN
+                <foreach collection="appType" open="(" separator="," close=")" item="item">
+                    #{item}
+                </foreach>
+            </if>
+            <!--
+            <if test="appType ==null  or  appType=='null'"> 全部应用类型
+                AND t.type_id is not null
+            </if>
+            -->
+            <if test=" cycleStatistics != null and cycleStatistics != '' ">
+                AND t.cycle_statistics = #{cycleStatistics}
+            </if>
+            <if test=" hour != null and hour != '' ">
+                and t.hour IN
+                <foreach collection="hour" open="(" separator="," close=")" item="item">
+                    #{item}
+                </foreach>
+            </if>
+            group by t.app_hash
+            order by t.significance_value desc
+        </where>
+        <if test="appListLimit !=null and appListLimit!=0">
+            limit #{appListLimit}
+        </if>
+    </select>
+
+    <!-- queryAppUseByList -->
+    <select id="queryAppUseByList" resultType="java.util.HashMap" parameterType="map">
+        select
+        hour,count(*) as sumNum
+        from TD_TENANT_APP_SIGNIFICANCE t
+        <where>
+            1=1
+            <if test="crowdId !=null and crowdId !=''">
+                and t.crowd_id=#{crowdId}
+            </if>
+            <if test=" startDate != null and startDate != '' ">
+                AND t.start_date = #{startDate}
+            </if>
+            <if test=" endDate != null and endDate != '' ">
+                AND t.end_date = #{endDate}
+            </if>
+            <if test=" appType != null and appType != '' ">
+                AND t.type_id IN
+                <foreach collection="appType" open="(" separator="," close=")" item="item">
+                    #{item}
+                </foreach>
+            </if>
+            <if test=" cycleStatistics != null and cycleStatistics != '' ">
+                AND t.cycle_statistics = #{cycleStatistics}
+            </if>
+            <if test=" hour != null and hour != '' ">
+                and t.hour IN
+                <foreach collection="hour" open="(" separator="," close=")" item="item">
+                    #{item}
+                </foreach>
+            </if>
+            GROUP BY hour;
+        </where>
+    </select>
+
+    <!-- queryLatestRow -->
+    <select id="queryLatestRow" resultMap="BaseResultMap" parameterType="map">
+        select * from TD_TENANT_APP_SIGNIFICANCE t
+        <where>
+            1=1
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="crowdId != null">
+                and crowd_id = #{crowdId}
+            </if>
+            <if test=" appType != null and appType != '' and appType!='null'">
+                AND t.type_id IN
+                <foreach collection="appType" open="(" separator="," close=")" item="item">
+                    #{item}
+                </foreach>
+            </if>
+            <if test=" cycleStatistics != null and cycleStatistics != '' ">
+                AND t.cycle_statistics = #{cycleStatistics}
+            </if>
+            <if test=" runDate != null and runDate != '' ">
+                <![CDATA[ AND t.run_date <= #{runDate}]]>
+            </if>
+        </where>
+        order by run_date desc limit 1;
+    </select>
+
+    <!-- 查询App清单数据列表 -->
+    <select id="queryToSyncAppInfo" resultMap="BaseResultMap" parameterType="Object">
+        SELECT temp1.app_hash,temp1.platform
+        FROM
+        (
+        SELECT DISTINCT
+        t.app_hash,
+        t.platform
+        FROM
+        TD_TENANT_APP_SIGNIFICANCE t
+        ) temp1
+        WHERE
+        (
+        temp1.app_hash,
+        temp1.platform
+        ) not IN (
+        SELECT
+        app_hash,
+        platform
+        FROM
+        TD_APP_INFO
+        )
+    </select>
+
+    <select id="queryChildrenSum" resultMap="BaseResultMap" parameterType="Object">
+        SELECT s.tenant_id, s.crowd_id, s.platform, s.app_hash, s.app_type, s.hour, s.cycle_statistics, s.start_date,
+        s.end_date, s.type_id, s.type_name, AVG(IFNULL(s.app_proportion,0)) AS app_proportion,
+        AVG(IFNULL(s.city_app_proportion,0)) AS city_app_proportion, AVG(IFNULL(s.significance_value,0)) AS
+        significance_value
+        FROM TD_TENANT_APP_SIGNIFICANCE s WHERE s.project_id IN (
+        SELECT r.project_id FROM TD_PROJECT_RELATION r
+        WHERE r.project_parent_id = #{projectId})
+        AND s.run_date = #{runDate}
+        GROUP BY s.tenant_id, s.crowd_id, s.platform, s.app_hash, s.app_type, s.hour, s.cycle_statistics, s.start_date,
+        s.end_date, s.type_id, s.type_name
+    </select>
+
+    <delete id="batchDeleteByProjectAndDate" parameterType="Object">
+        delete from TD_TENANT_APP_SIGNIFICANCE where project_id = #{projectId} and run_date = #{runDate}
+    </delete>
+
+    <insert id="batchInsert" useGeneratedKeys="true" parameterType="java.util.List">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO
+        TD_TENANT_APP_SIGNIFICANCE(tenant_id,project_id,crowd_id,run_date,platform,app_hash,app_proportion,city_app_proportion,significance_value,app_type,hour,cycle_statistics,start_date,end_date,type_id,type_name)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.tenantId},#{item.projectId},#{item.crowdId},#{item.runDate},#{item.platform},#{item.appHash},#{item.appProportion},#{item.cityAppProportion},#{item.significanceValue},#{item.appType},#{item.hour},#{item.cycleStatistics},#{item.startDate},#{item.endDate},#{item.typeId},#{item.typeName})
+        </foreach>
+    </insert>
+
+    <insert id="batchSelectAndInsert" useGeneratedKeys="true" parameterType="java.util.List">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO TD_TENANT_APP_SIGNIFICANCE(tenant_id, project_id, crowd_id, run_date, platform, app_hash,
+        app_proportion, city_app_proportion, significance_value, app_type, hour, cycle_statistics, start_date, end_date,
+        type_id, type_name)
+        SELECT t.tenant_id, d.project_id, c.crowd_id, t.run_date, t.platform, t.app_hash, t.app_proportion,
+        t.city_app_proportion, t.significance_value, t.app_type, t.hour, t.cycle_statistics, t.start_date, t.end_date,
+        t.type_id, t.type_name
+        FROM
+        (SELECT s.tenant_id, s.type, s.run_date, s.platform, s.app_hash, s.app_type, s.hour, s.cycle_statistics,
+        s.start_date, s.end_date, s.type_id, s.type_name, AVG(IFNULL(s.app_proportion,0)) AS app_proportion,
+        AVG(IFNULL(s.city_app_proportion,0)) AS city_app_proportion, AVG(IFNULL(s.significance_value,0)) AS
+        significance_value
+        FROM
+        (SELECT DISTINCT tb.tenant_id, cd.type, tb.run_date, tb.platform, tb.app_hash, tb.app_type, tb.hour,
+        tb.cycle_statistics, tb.start_date, tb.end_date, tb.type_id, tb.type_name, tb.app_proportion,
+        tb.city_app_proportion, tb.significance_value, tb.project_id
+        FROM TD_TENANT_APP_SIGNIFICANCE tb
+        JOIN TD_CROWD cd
+        ON tb.project_id = cd.attr1
+        AND tb.crowd_id = cd.id
+        WHERE tb.project_id IN (
+        SELECT r.project_id FROM TD_PROJECT_RELATION r
+        WHERE r.project_parent_id = #{projectId})
+        AND tb.run_date = #{runDate}
+        )s
+        GROUP BY s.tenant_id, s.type, s.run_date, s.platform, s.app_hash, s.app_type, s.hour, s.cycle_statistics,
+        s.start_date, s.end_date, s.type_id, s.type_name
+        )t,
+        (SELECT DISTINCT project_parent_id AS project_id FROM TD_PROJECT_RELATION WHERE project_parent_id = #{projectId}
+        )d,
+        (SELECT DISTINCT id AS crowd_id, type, attr1 FROM TD_CROWD
+        )c
+        WHERE c.attr1 = d.project_id
+        AND c.type = t.type
+    </insert>
+</mapper>

@@ -1,0 +1,236 @@
+<!-- 导航条 -->
+<div class="nav_bar_top" >
+    <span  class = "nav_bar_normal nav_bar_btn" ng-click="goThresholdSet()">阈值设置</span>
+    <span> > </span>
+    <span>查看</span>
+</div>
+
+<!-- 作头部锁定-->
+<div id="batchSet" style="overflow: hidden;width:100%;padding:20px;">
+    <div id="batchSet_" style="overflow: hidden;width:100%;">
+        <div id="batchSet_1" style="overflow-y:auto; overflow-x: hidden;width:102%;">
+                <!--客流阈值-->
+                <div class="settingBox">
+                    <label class="settingTit">客流阈值</label>
+                    <div class="settingList settingLetters">
+                        <ul>
+                            <li style="position:relative;margin-top: -4px;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term">入店客流</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                        <b class = "thresholdValue_edit_list" ng-show="data.crowdCome == null">未设置</b>
+                                        <b class = "thresholdValue_edit_list" ng-show="data.crowdCome!= null">停留超过 {{data.crowdCome}} 分钟</b>
+                                    </p>
+                                </div>
+                            </li>
+                            <li style="position:relative;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term">跳出客流</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                        <b class = "thresholdValue_edit_list" ng-show="data.crowdBounce == null">未设置</b>
+                                        <b class = "thresholdValue_edit_list" ng-show="data.crowdBounce!= null">停留小于 {{data.crowdBounce}} 分钟</b>
+                                    </p>
+
+                                </div>
+                            </li>
+                            <li style="position:relative;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term">停留客流</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                        <b class = "thresholdValue_edit_list" ng-show="data.crowdStay == null">未设置</b>
+                                        <b class = "thresholdValue_edit_list" ng-show="data.crowdStay!= null">停留超过 {{data.crowdStay}} 分钟</b>
+                                    </p>
+
+                                </div>
+                            </li>
+                            <li style="position:relative;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term">高活跃客流</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                        <b class = "thresholdValue_edit_list" ng-show="data.crowdActiveHighBegin == null">未设置</b>
+                                        <b class = "thresholdValue_edit_list" ng-show="data.crowdActiveHighBegin!= null">距上次到访 {{data.crowdActiveHighBegin}} - {{data.crowdActiveHighEnd}} 天</b>
+                                    </p>
+
+                                </div>
+                            </li>
+                            <li style="position:relative;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term">中活跃客流</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                        <b class = "thresholdValue_edit_list" ng-show="data.crowdActiveMediumBegin == null">未设置</b>
+                                        <b class = "thresholdValue_edit_list" ng-show="data.crowdActiveMediumBegin!= null">距上次到访 {{data.crowdActiveMediumBegin}} - {{data.crowdActiveMediumEnd}} 天</b>
+                                    </p>
+
+                                </div>
+                            </li>
+                            <li style="position:relative;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term" >低活跃客流</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                        <b class = "thresholdValue_edit_list" ng-show="data.crowdActiveLowBegin == null">未设置</b>
+                                        <b class = "thresholdValue_edit_list" ng-show="data.crowdActiveLowBegin!= null">距上次到访 {{data.crowdActiveLowBegin}} - {{data.crowdActiveLowEnd}} 天</b>
+                                    </p>
+
+                                </div>
+                            </li>
+                            <li style="position:relative;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term">沉睡客流</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                        <b class = "thresholdValue_edit_list" ng-show="data.crowdSleep == null">未设置</b>
+                                        <b class = "thresholdValue_edit_list" ng-show="data.crowdSleep!= null">距上次到访大于 {{data.crowdSleep}} 天</b>
+                                    </p>
+
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 强度阈值 -->
+                <div class="settingBox">
+                    <label class="settingTit">强度阈值</label>
+                    <div class="settingList settingLetters">
+                        <ul>
+                            <li style="position:relative;margin-top: -4px;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term">周边客流</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                        <b class = "thresholdValue_edit_list" ng-show="data.strengthCrowdBefore == null">未设置</b>
+                                        <b class = "thresholdValue_edit_list" ng-show="data.strengthCrowdBefore != null">强度大于 {{data.strengthCrowdBefore}}</b>
+                                    </p>
+
+                                </div>
+                            </li>
+                            <li style="position:relative;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term">入店客流</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                        <b class = "thresholdValue_edit_list" ng-show="data.strengthCrowdCome == null">未设置</b>
+                                        <b class = "thresholdValue_edit_list" ng-show="data.strengthCrowdCome != null">强度大于 {{data.strengthCrowdCome }}</b>
+                                    </p>
+
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 次数阈值 -->
+                <div class="settingBox">
+                    <label class="settingTit">次数阈值</label>
+                    <div class="settingList settingLetters">
+                        <ul>
+                            <li style="position:relative;margin-top: -4px;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term">次数间隔时间</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                        <b class = "thresholdValue_edit_list" ng-show="data.frequencyIntervalTime != null">间隔时间大于 {{data.frequencyIntervalTime }} 分钟</b>
+                                        <b class = "thresholdValue_edit_list" ng-show="data.frequencyIntervalTime == null">未设置</b>
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+
+                <!-- 店员阈值 -->
+                <!--<div class="settingBox">-->
+                    <!--<label class="settingTit">店员阈值</label>-->
+                    <!--<div class="settingList settingLetters">-->
+                        <!--<ul>-->
+                            <!--<li style="position:relative;margin-top: -4px;">-->
+                                <!--<div class = "settingListLeft">-->
+                                    <!--<label class = "thresholdValue_edit_term">店员</label>-->
+                                    <!--<p class="thresholdValue_edit_list_wap">-->
+                                        <!--<b class = "thresholdValue_edit_list" ng-show="data.salesComeDay == null">未设置</b>-->
+                                        <!--<b class = "thresholdValue_edit_list" ng-show="data.salesComeDay != null">连续 {{data.salesComeDay}} 天，入店 {{data.salesStayTime}} 天</b>-->
+                                    <!--</p>-->
+                                <!--</div>-->
+                            <!--</li>-->
+                            <!--<li style="position:relative;">-->
+                                <!--<div class = "settingListLeft">-->
+                                    <!--<label class = "thresholdValue_edit_term"></label>-->
+                                    <!--<p class="thresholdValue_edit_list_wap" style="width: 60%;">-->
+                                        <!--<b class = "thresholdValue_edit_list" ng-show="data.salesStayTime == null">未设置</b>-->
+                                        <!--<b class = "thresholdValue_edit_list" ng-show="data.salesStayTime != null">一天内入店停留时间累积超过 {{data.salesStayTime}} 小时</b>-->
+                                    <!--</p>-->
+                                <!--</div>-->
+                            <!--</li>-->
+                            <!--<li style="position:relative;">-->
+                                <!--<div class = "settingListLeft">-->
+                                    <!--<label class = "thresholdValue_edit_term"></label>-->
+                                    <!--<p class="thresholdValue_edit_list_wap">-->
+                                        <!--<b class = "thresholdValue_edit_list" ng-show="data.salesFileName == null">未设置</b>-->
+                                        <!--<b class = "thresholdValue_edit_list" ng-show="data.salesFileName != null">-->
+                                            <!--<a href="{{data.salesFilePath}}" target="_blank" class="downloadTab">{{data.salesFileName}}</a>-->
+                                        <!--</b>-->
+                                    <!--</p>-->
+                                <!--</div>-->
+                            <!--</li>-->
+                            <!--<i style="display: block; margin-top: 20px;margin-bottom: 20px;color: #43A3FB ;">注： 店员阈值优先级高于黑名单阈值，即 某设备被判断为“店员”后，即使触发黑名单阈值，也不会被标记进入黑名单</i>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--黑名单-->
+                <div class="settingBox">
+                    <label class="settingTit">黑名单阈值</label>
+                    <span class="settingList settingLetters settingBlackList">
+                         <ul>
+                            <li style="position:relative;margin-top: -4px;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term">黑名单</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                        <b class = "thresholdValue_edit_list" ng-show="data.blackConsecutiveDay == null">未设置</b>
+                                        <b class = "thresholdValue_edit_list" ng-show="data.blackConsecutiveDay != null">连续 {{data.blackConsecutiveDay}} 天，入店 {{data.blackComeDay}} 天</b>
+                                    </p>
+                                </div>
+                            </li>
+                            <li style="position:relative;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term"></label>
+                                    <p class="thresholdValue_edit_list_wap" style="width: 60%;">
+                                        <b class = "thresholdValue_edit_list" ng-show="data.blackStayTime == null">未设置</b>
+                                        <b class = "thresholdValue_edit_list" ng-show="data.blackStayTime != null">一天内入店停留时间累积超过 {{data.blackStayTime}} 分钟</b>
+                                    </p>
+                                </div>
+                            </li>
+                            <li style="position:relative;">
+                                <div class = "settingListLeft" style="width:90%;">
+                                    <label class = "thresholdValue_edit_term"></label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                        <b class = "thresholdValue_edit_list" ng-show="data.blackFileName == null">未设置</b>
+                                         <b class = "thresholdValue_edit_list" ng-show="data.blackFileName != null" ng-click="downLoadBlackText(data.blackFilePath);" style="cursor: pointer;">
+                                            {{data.blackFileName}}
+                                         </b>
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    </span>
+                </div>
+
+                <!-- 营业时间阈值 -->
+                <div class="settingBox">
+                    <label class="settingTit">营业时间阈值</label>
+                    <span class="settingList settingLetters settingBlackList">
+                         <ul>
+                            <li style="position:relative;margin-top: -4px;">
+                                <div class = "settingListLeft">
+                                    <label class = "thresholdValue_edit_term">营业时间</label>
+                                    <p class="thresholdValue_edit_list_wap">
+                                        <b class = "thresholdValue_edit_list" ng-show="data.openingTime == null"> 未设置</b>
+                                        <b class = "thresholdValue_edit_list" ng-show="data.openingTime != null">{{data.openingTime}}</b> <i ng-show="data.openingTime != null">--</i>
+                                        <b class = "thresholdValue_edit_list" ng-show="data.closingTime != null">{{data.closingTime}}</b>
+                                    </p>
+
+                                </div>
+                            </li>
+                        </ul>
+                    </span>
+                </div>
+        </div>
+    </div>
+</div>

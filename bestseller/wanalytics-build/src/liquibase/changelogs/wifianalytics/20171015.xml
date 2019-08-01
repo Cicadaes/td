@@ -1,0 +1,37 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="yinglei.li" id="1508079539168-1">
+        <createTable tableName="TD_BS_EXEC_LOG" remarks="绫致店铺接口执行日志表">
+            <column autoIncrement="true" name="id" type="BIGINT UNSIGNED" remarks="主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="url" remarks="接口URL" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="name" remarks="接口名称" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="code" remarks="接口编码" type="varchar(100)"/>
+            <column name="term" remarks="接口执行周期(如2017-10-15)" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="is_rerun" remarks="是否重跑 1-是 2-否" type="int(2)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="exec_result" remarks="执行结果 1-成功  2-失败 3-没数据" type="int(2)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="create_time" remarks="创建时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_time" remarks="修改时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+</databaseChangeLog>

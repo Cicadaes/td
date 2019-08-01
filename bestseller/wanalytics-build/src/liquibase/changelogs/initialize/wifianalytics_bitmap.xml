@@ -1,0 +1,637 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="hadoop (generated)" id="1482803881797-1">
+        <createTable tableName="active_user_day_cube">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-2">
+        <createTable tableName="active_user_hour_cube">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="hour" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-3">
+        <createTable tableName="active_user_room_day_cube">
+            <column name="tenant_id" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="room_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-4">
+        <createTable tableName="active_user_sensor_hour_cube">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="sensor_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="hour" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-5">
+        <createTable tableName="enter_user_day_cube">
+            <column name="tenant_id" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-6">
+        <createTable tableName="enter_user_room_day_cube">
+            <column name="tenant_id" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="room_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-7">
+        <createTable tableName="group_user_cube">
+            <column defaultValueNumeric="0" name="offset" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="start_date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="end_date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="crowd_type" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-8">
+        <createTable tableName="new_user_day_cube">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-9">
+        <createTable tableName="new_user_sensor_day_cube">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="sensor_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-10">
+        <createTable tableName="offline_active_user_cube">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="data_type" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-11">
+        <createTable tableName="offline_active_user_hour_cube">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="data_type" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="hour" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-12">
+        <createTable tableName="offline_active_user_room_day_cube">
+            <column name="tenant_id" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="room_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_type" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-13">
+        <createTable tableName="offline_enter_user_cube">
+            <column name="tenant_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_type" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-14">
+        <createTable tableName="offline_enter_user_room_day_cube">
+            <column name="tenant_id" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="room_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_type" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-15">
+        <createTable tableName="offline_group_user_cube">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="start_date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="end_date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="crowd_type" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-16">
+        <createTable tableName="offline_new_user_cube">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="data_type" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-17">
+        <createTable tableName="offline_new_user_sensor_cube">
+            <column defaultValueNumeric="0" name="tenant_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="sensor_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="data_type" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-18">
+        <createTable tableName="offline_old_user_cube">
+            <column defaultValueNumeric="0" name="tenant_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="data_type" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-19">
+        <createTable tableName="offline_old_user_sensor_cube">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="sensor_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="data_type" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-20">
+        <createTable tableName="offline_room_tracks_cube">
+            <column defaultValueNumeric="0" name="tenant_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="room_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="track_type" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-21">
+        <createTable tableName="offline_stay_user_cube">
+            <column name="tenant_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_type" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-22">
+        <createTable tableName="offline_stay_user_room_day_cube">
+            <column name="tenant_id" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="room_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_type" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-23">
+        <createTable tableName="old_user_day_cube">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-24">
+        <createTable tableName="old_user_sensor_day_cube">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="sensor_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-25">
+        <createTable tableName="stay_user_day_cube">
+            <column name="tenant_id" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-26">
+        <createTable tableName="stay_user_room_day_cube">
+            <column name="tenant_id" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="place_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="room_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-27">
+        <createTable tableName="tenant_import_user_cube">
+            <column defaultValue="" name="tenant_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="date" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="crowd_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-28">
+        <createTable tableName="tenant_project_tag_cube">
+            <column defaultValueNumeric="0" name="tenant_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="project_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="tag_code" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bitmap" type="MEDIUMBLOB"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-29">
+        <addPrimaryKey columnNames="tenant_id, project_id, date" constraintName="PRIMARY" tableName="active_user_day_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-30">
+        <addPrimaryKey columnNames="tenant_id, project_id, date, hour" constraintName="PRIMARY" tableName="active_user_hour_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-31">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, room_id, date" constraintName="PRIMARY" tableName="active_user_room_day_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-32">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, sensor_id, date, hour" constraintName="PRIMARY" tableName="active_user_sensor_hour_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-33">
+        <addPrimaryKey columnNames="tenant_id, project_id, date" constraintName="PRIMARY" tableName="enter_user_day_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-34">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, room_id, date" constraintName="PRIMARY" tableName="enter_user_room_day_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-35">
+        <addPrimaryKey columnNames="offset, project_id, start_date, end_date, crowd_type" constraintName="PRIMARY" tableName="group_user_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-36">
+        <addPrimaryKey columnNames="tenant_id, project_id, date" constraintName="PRIMARY" tableName="new_user_day_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-37">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, sensor_id, date" constraintName="PRIMARY" tableName="new_user_sensor_day_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-38">
+        <addPrimaryKey columnNames="tenant_id, project_id, date, data_type" constraintName="PRIMARY" tableName="offline_active_user_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-39">
+        <addPrimaryKey columnNames="tenant_id, project_id, date, data_type, hour" constraintName="PRIMARY" tableName="offline_active_user_hour_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-40">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, room_id, date, data_type" constraintName="PRIMARY" tableName="offline_active_user_room_day_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-41">
+        <addPrimaryKey columnNames="tenant_id, project_id, date, data_type" constraintName="PRIMARY" tableName="offline_enter_user_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-42">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, room_id, date, data_type" constraintName="PRIMARY" tableName="offline_enter_user_room_day_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-43">
+        <addPrimaryKey columnNames="tenant_id, project_id, start_date, end_date, crowd_type" constraintName="PRIMARY" tableName="offline_group_user_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-44">
+        <addPrimaryKey columnNames="tenant_id, project_id, date, data_type" constraintName="PRIMARY" tableName="offline_new_user_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-45">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, sensor_id, date, data_type" constraintName="PRIMARY" tableName="offline_new_user_sensor_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-46">
+        <addPrimaryKey columnNames="tenant_id, project_id, date, data_type" constraintName="PRIMARY" tableName="offline_old_user_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-47">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, sensor_id, date, data_type" constraintName="PRIMARY" tableName="offline_old_user_sensor_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-48">
+        <addPrimaryKey columnNames="tenant_id, project_id, project_place_id, room_id, track_type, date" constraintName="PRIMARY" tableName="offline_room_tracks_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-49">
+        <addPrimaryKey columnNames="tenant_id, project_id, date, date_type" constraintName="PRIMARY" tableName="offline_stay_user_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-50">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, room_id, date, data_type" constraintName="PRIMARY" tableName="offline_stay_user_room_day_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-51">
+        <addPrimaryKey columnNames="tenant_id, project_id, date" constraintName="PRIMARY" tableName="old_user_day_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-52">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, sensor_id, date" constraintName="PRIMARY" tableName="old_user_sensor_day_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-53">
+        <addPrimaryKey columnNames="tenant_id, project_id, date" constraintName="PRIMARY" tableName="stay_user_day_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-54">
+        <addPrimaryKey columnNames="tenant_id, project_id, place_id, room_id, date" constraintName="PRIMARY" tableName="stay_user_room_day_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-55">
+        <addPrimaryKey columnNames="tenant_id, project_id, date, crowd_id" constraintName="PRIMARY" tableName="tenant_import_user_cube"/>
+    </changeSet>
+    <changeSet author="hadoop (generated)" id="1482803881797-56">
+        <addPrimaryKey columnNames="tenant_id, project_id, tag_code" constraintName="PRIMARY" tableName="tenant_project_tag_cube"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.DmkDeviceDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.DmkDevice">
+        <result column="id" property="id"/>
+        <result column="mac" property="mac"/>
+        <result column="tdid" property="tdid"/>
+        <result column="originModel" property="originModel"/>
+        <result column="standardModel" property="standardModel"/>
+        <result column="standardBrand" property="standardBrand"/>
+        <result column="deviceType" property="deviceType"/>
+        <result column="screen" property="screen"/>
+        <result column="price" property="price"/>
+        <result column="functionType" property="functionType"/>
+        <result column="hardwareType" property="hardwareType"/>
+        <result column="sync_date" property="syncDate"/>
+        <result column="dmk_code" property="dmkCode"/>
+        <result column="dmk_msg" property="dmkMsg"/>
+        <result column="dmk_seq" property="dmkSeq"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!-- TD_DMK_DEVICE table all fields -->
+    <sql id="Base_Column_List">
+        id,mac,tdid,originModel,standardModel,standardBrand,deviceType,screen,price,functionType,hardwareType,sync_date,dmk_code,dmk_msg,dmk_seq,create_time
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="mac != null and mac != ''">
+                and mac = #{mac}
+            </if>
+            <if test="tdid != null and tdid != ''">
+                and tdid = #{tdid}
+            </if>
+            <if test="originModel != null and originModel != ''">
+                and originModel = #{originModel}
+            </if>
+            <if test="standardModel != null and standardModel != ''">
+                and standardModel = #{standardModel}
+            </if>
+            <if test="standardBrand != null and standardBrand != ''">
+                and standardBrand = #{standardBrand}
+            </if>
+            <if test="deviceType != null and deviceType != ''">
+                and deviceType = #{deviceType}
+            </if>
+            <if test="screen != null and screen != ''">
+                and screen = #{screen}
+            </if>
+            <if test="price != null and price != ''">
+                and price = #{price}
+            </if>
+            <if test="functionType != null and functionType != ''">
+                and functionType = #{functionType}
+            </if>
+            <if test="hardwareType != null and hardwareType != ''">
+                and hardwareType = #{hardwareType}
+            </if>
+            <if test="syncDate != null and syncDate != ''">
+                and sync_date = #{syncDate}
+            </if>
+            <if test="dmkCode != null and dmkCode != ''">
+                and dmk_code = #{dmkCode}
+            </if>
+            <if test="dmkMsg != null and dmkMsg != ''">
+                and dmk_msg = #{dmkMsg}
+            </if>
+            <if test="dmkSeq != null and dmkSeq != ''">
+                and dmk_seq = #{dmkSeq}
+            </if>
+            <if test="createTime != null and createTime != ''">
+                and create_time = #{createTime}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_DMK_DEVICE(id,mac,tdid,originModel,standardModel,standardBrand,deviceType,screen,price,functionType,hardwareType,sync_date,dmk_code,dmk_msg,dmk_seq,create_time)
+        values(#{id},#{mac},#{tdid},#{originModel},#{standardModel},#{standardBrand},#{deviceType},#{screen},#{price},#{functionType},#{hardwareType},#{syncDate},#{dmkCode},#{dmkMsg},#{dmkSeq},now())
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_DMK_DEVICE set
+        mac=#{mac},tdid=#{tdid},originModel=#{originModel},standardModel=#{standardModel},standardBrand=#{standardBrand},deviceType=#{deviceType},screen=#{screen},price=#{price},functionType=#{functionType},hardwareType=#{hardwareType},sync_date=#{syncDate},dmk_code=#{dmkCode},dmk_msg=#{dmkMsg},dmk_seq=#{dmkSeq},create_time=now()
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_DMK_DEVICE set
+        <trim suffixOverrides=",">
+            <if test="mac != null  ">
+                mac=#{mac},
+            </if>
+            <if test="tdid != null  ">
+                tdid=#{tdid},
+            </if>
+            <if test="originModel != null  ">
+                originModel=#{originModel},
+            </if>
+            <if test="standardModel != null  ">
+                standardModel=#{standardModel},
+            </if>
+            <if test="standardBrand != null  ">
+                standardBrand=#{standardBrand},
+            </if>
+            <if test="deviceType != null  ">
+                deviceType=#{deviceType},
+            </if>
+            <if test="screen != null  ">
+                screen=#{screen},
+            </if>
+            <if test="price != null  ">
+                price=#{price},
+            </if>
+            <if test="functionType != null  ">
+                functionType=#{functionType},
+            </if>
+            <if test="hardwareType != null  ">
+                hardwareType=#{hardwareType},
+            </if>
+            <if test="syncDate != null  ">
+                sync_date=#{syncDate},
+            </if>
+            <if test="dmkCode != null  ">
+                dmk_code=#{dmkCode},
+            </if>
+            <if test="dmkMsg != null  ">
+                dmk_msg=#{dmkMsg},
+            </if>
+            <if test="dmkSeq != null  ">
+                dmk_seq=#{dmkSeq},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 DMK设备同步记录 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_DMK_DEVICE where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_DMK_DEVICE where id = #{id}
+    </delete>
+
+    <!-- DMK设备同步记录 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_DMK_DEVICE
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询DMK设备同步记录列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_DMK_DEVICE
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+</mapper>

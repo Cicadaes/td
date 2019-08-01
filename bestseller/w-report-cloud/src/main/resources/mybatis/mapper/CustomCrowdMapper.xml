@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="td.enterprise.dao.CustomCrowdDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="td.enterprise.entity.CustomCrowd">
+        <result column="id" property="id"/>
+        <result column="project_id" property="projectId"/>
+        <result column="crowd_name" property="crowdName"/>
+        <result column="record_type" property="recordType"/>
+        <result column="calc_status" property="calcStatus"/>
+        <result column="exec_id" property="execId"/>
+        <result column="crowd_record_id" property="crowdRecordId"/>
+        <result column="creator" property="creator"/>
+        <result column="create_time" property="createTime"/>
+        <result column="status" property="status"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+
+    </resultMap>
+
+    <!-- TD_CUSTOM_CROWD table all fields -->
+    <sql id="Base_Column_List">
+        id,project_id,crowd_name,record_type,calc_status,exec_id,crowd_record_id,creator,create_time,status,start_date,end_date
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="crowdName != null and crowdName != ''">
+                and crowd_name = #{crowdName}
+            </if>
+            <if test="recordType != null and recordType != ''">
+                and record_type = #{recordType}
+            </if>
+            <if test="calcStatus != null and calcStatus != ''">
+                and calc_status = #{calcStatus}
+            </if>
+            <if test="execId != null and execId != ''">
+                and exec_id = #{execId}
+            </if>
+            <if test="crowdRecordId != null and crowdRecordId != ''">
+                and crowd_record_id = #{crowdRecordId}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="q != null and q != ''">
+                and (crowd_name like CONCAT('%',#{q},'%') )
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="Object">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+        TD_CUSTOM_CROWD(id,project_id,crowd_name,record_type,calc_status,exec_id,crowd_record_id,creator,create_time,status)
+        values(#{id},#{projectId},#{crowdName},#{recordType},#{calcStatus},#{execId},#{crowdRecordId},#{creator},now(),#{status})
+    </insert>
+
+    <!-- 根据id，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="Object">
+        update TD_CUSTOM_CROWD set
+        project_id=#{projectId},crowd_name=#{crowdName},record_type=#{recordType},calc_status=#{calcStatus},exec_id=#{execId},crowd_record_id=#{crowdRecordId},creator=#{creator},create_time=now(),status=#{status}
+        where id=#{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="Object">
+        update TD_CUSTOM_CROWD set
+        <trim suffixOverrides=",">
+            <if test="projectId != null  ">
+                project_id=#{projectId},
+            </if>
+            <if test="crowdName != null  ">
+                crowd_name=#{crowdName},
+            </if>
+            <if test="recordType != null  ">
+                record_type=#{recordType},
+            </if>
+            <if test="calcStatus != null  ">
+                calc_status=#{calcStatus},
+            </if>
+            <if test="execId != null  ">
+                exec_id=#{execId},
+            </if>
+            <if test="crowdRecordId != null  ">
+                crowd_record_id=#{crowdRecordId},
+            </if>
+            <if test="creator != null  ">
+                creator=#{creator},
+            </if>
+            <if test="status != null  ">
+                status=#{status},
+            </if>
+            <if test="createTime != null  ">
+                create_time=#{createTime},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!-- 根据id查询 客户围群表 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_CUSTOM_CROWD where id = #{id}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="Object">
+        delete from TD_CUSTOM_CROWD where id = #{id}
+    </delete>
+
+    <!-- 客户围群表 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+        select count(1) from TD_CUSTOM_CROWD
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询客户围群表列表 -->
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from TD_CUSTOM_CROWD
+        <include refid="Base_Where_Clause"/>
+        order by id desc
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+            ${pager.mysqlQueryCondition}
+        </if>
+    </select>
+</mapper>

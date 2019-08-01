@@ -1,0 +1,2 @@
+type=command
+command=bash -x /home/hadoop/wanalytics/etl/bin/blackListSync.sh -a '${a}' --schedulerTaskLogId "${schedule.task.log.id}"

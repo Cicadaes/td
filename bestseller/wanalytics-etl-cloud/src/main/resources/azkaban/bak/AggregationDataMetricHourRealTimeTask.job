@@ -1,0 +1,2 @@
+type=command
+command=bash -x /home/hadoop/wanalytics/etl/bin/AggregationMetricHourRealTimeTask.sh  --runDate "${azkaban.flow.start.year}-${azkaban.flow.start.month}-${azkaban.flow.start.day}" --hour "${azkaban.flow.start.hour}" --limit "5" --reRun "false" --parentProjectId "-1" --schedulerTaskLogId "${schedule.task.log.id}"

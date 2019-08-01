@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="NewUserSensorDayCubeMapper">
+
+    <select id="query" parameterType="map"
+            resultType="com.talkingdata.wifianalytics.offline.compute.bean.BitmapSensorCube">
+        SELECT * FROM new_user_sensor_day_cube WHERE
+        <if test="tenant_id != null">
+            tenant_id = #{tenant_id} AND
+        </if>
+        <if test="project_id != null">
+            project_id = #{project_id} AND
+        </if>
+        <if test="place_id != null">
+            place_id = #{place_id} AND
+            <if test="sensor_id != null">
+                sensor_id = #{sensor_id} AND
+            </if>
+        </if>
+        date BETWEEN #{start} AND #{end}
+    </select>
+
+</mapper>

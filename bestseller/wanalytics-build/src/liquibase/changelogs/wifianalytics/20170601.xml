@@ -1,0 +1,64 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="ran.li" id="1496284152000-1">
+        <createTable tableName="TD_CUSTOMIZED_MATCH_DATA" remarks="用户日志扩展标签数据表">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="business_id" remarks="业务场景ID，用于将多条规则归类" type="varchar(31)"/>
+            <column name="_source" remarks="自定义需要发送的数据" type="varchar(5119)" />
+            <column name="valid_start_time" remarks="有效开始时间" type="varchar(63)" />
+            <column name="valid_end_time" remarks="有效结束时间" type="varchar(63)" />
+            <column name="customized_info" remarks="自定义关联信息JSON" type="JSON" />
+
+            <column name="status" type="int(2)" remarks="状态:1 有效/-1 无效" />
+            <column name="create_by" remarks="创建者账号" type="varchar(127)" />
+            <column name="creator" remarks="创建人" type="varchar(127)" />
+            <column name="create_time" remarks="创建时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改者账号" type="varchar(127)" />
+            <column name="updater" remarks="修改人" type="varchar(127)" />
+            <column name="update_time" remarks="修改时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="ran.li" id="1496284152000-2">
+        <createTable tableName="TD_CUSTOMIZED_RULE_CONFIG" remarks="用户日志扩展标签配置表">
+            <column autoIncrement="true" name="id" remarks="唯一标识" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="business_id" remarks="业务场景ID，用于将多条规则归类" type="varchar(31)"/>
+            <column name="tenant_id" remarks="租户ID" type="varchar(63)" />
+            <column name="project_id" remarks="项目ID" type="varchar(63)" />
+            <column name="action" remarks="==, 大于=, 小于=, !=, 大于, 小于(liquibase不支持符号，故写成中文)" type="varchar(15)" />
+            <column name="table_name" remarks="匹配的表名" type="varchar(63)" />
+            <column name="column_name" remarks="匹配的列名" type="varchar(63)" />
+            <column name="match_desc" remarks="匹配字段说明JSON串" type="varchar(511)" />
+
+            <column name="status" type="int(2)" remarks="状态:1 有效/-1 无效" />
+            <column name="create_by" remarks="创建者账号" type="varchar(127)" />
+            <column name="creator" remarks="创建人" type="varchar(127)" />
+            <column name="create_time" remarks="创建时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" remarks="修改者账号" type="varchar(127)" />
+            <column name="updater" remarks="修改人" type="varchar(127)" />
+            <column name="update_time" remarks="修改时间" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="ran.li" id="1496284152000-3">
+        <addColumn tableName="TD_INSTALL_INFO">
+            <column name="customized_info" type="json" remarks="自定义关联信息JSON"/>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>
