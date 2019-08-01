@@ -1,0 +1,56 @@
+{
+  "name": "catalogAdapter",
+  "type":3,
+  "dataSourceView": {
+    "iconPath": null,
+    "iconData": null,
+    "toolTip": "缺少提示信息字段",
+    "fieldTabs": [
+      {
+        "name": "连接器",
+        "fieldGroups": [
+          {
+            "name": "连接信息",
+            "scripts": [],
+            "fields": [
+              {
+                "code": "url",
+                "name": "rest地址",
+                "description": "",
+                "valueType": 1,
+                "value": "",
+                "defaultValue": "",
+                "minValue": "",
+                "maxValue": "",
+                "optionValues": "",
+                "requried": 1,
+                "helpInfo": "",
+                "viewType": 1,
+                "viewMetaData": null,
+                "verifyRule": "",
+                "childrenFields": []
+              },
+              {
+                "code": "path",
+                "name": "数据集路径",
+                "description": "",
+                "valueType": 1,
+                "value": "",
+                "defaultValue": null,
+                "minValue": "",
+                "maxValue": "",
+                "optionValues": "",
+                "requried": 0,
+                "helpInfo": "",
+                "viewType": 1,
+                "viewMetaData": null,
+                "verifyRule": "",
+                "childrenFields": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

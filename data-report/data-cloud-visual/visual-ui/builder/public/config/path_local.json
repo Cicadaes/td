@@ -1,0 +1,14 @@
+{
+  "developer": {
+    "main": "http://localhost/wreport_datareport",
+    "datareport": "http://172.23.6.2:3006"
+  },
+  "production": {
+    "main": "http://172.23.6.2:9095/datareport",
+    "datareport": "http://172.23.6.2:3006"
+  },
+  "test": {
+    "main": "http://172.23.6.2:9095/datareport",
+    "datareport": "http://172.23.6.4:3006"
+  }
+}

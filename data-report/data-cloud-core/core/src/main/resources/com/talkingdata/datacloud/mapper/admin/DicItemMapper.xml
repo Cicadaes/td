@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.admin.DicItemDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.admin.DicItem" >
+	<result column="id" property="id"/>
+	<result column="dic_id" property="dicId"/>
+	<result column="dic_item_key" property="dicItemKey"/>
+	<result column="dic_item_value" property="dicItemValue"/>
+	<result column="parent_id" property="parentId"/>
+	<result column="create_by" property="createBy"/>
+	<result column="creator" property="creator"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_time" property="updateTime"/>
+  </resultMap>
+       
+  <!-- TD_DIC_ITEM table all fields -->
+  <sql id="Base_Column_List" >
+	 id,dic_id,dic_item_key,dic_item_value,parent_id,create_by,creator,update_by,create_time,update_time
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="dicId != null and dicId != ''" >
+        and dic_id =  #{dicId}
+	  </if>
+	      <if test="dicItemKey != null and dicItemKey != ''" >
+        and dic_item_key =  #{dicItemKey}
+	  </if>
+	      <if test="dicItemValue != null and dicItemValue != ''" >
+        and dic_item_value =  #{dicItemValue}
+	  </if>
+	      <if test="parentId == 0 or parentId != null and parentId != ''" >
+        and parent_id =  #{parentId}
+	  </if>
+	      <if test="createBy != null and createBy != ''" >
+        and create_by =  #{createBy}
+	  </if>
+	      <if test="creator != null and creator != ''" >
+        and creator =  #{creator}
+	  </if>
+	      <if test="updateBy != null and updateBy != ''" >
+        and update_by =  #{updateBy}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_DIC_ITEM(id,dic_id,dic_item_key,dic_item_value,parent_id,create_by,creator,update_by,create_time,update_time)
+ values(#{id},#{dicId},#{dicItemKey},#{dicItemValue},#{parentId},#{createBy},#{creator},#{updateBy},now(),now())
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+    update TD_DIC_ITEM set dic_id=#{dicId},dic_item_key=#{dicItemKey},dic_item_value=#{dicItemValue},parent_id=#{parentId},create_by=#{createBy},creator=#{creator},update_by=#{updateBy},create_time=now(),update_time=now() where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+    update TD_DIC_ITEM set 
+	<trim  suffixOverrides="," >
+	<if test="dicId != null  ">
+		dic_id=#{dicId},
+	</if>
+	<if test="dicItemKey != null  ">
+		dic_item_key=#{dicItemKey},
+	</if>
+	<if test="dicItemValue != null  ">
+		dic_item_value=#{dicItemValue},
+	</if>
+	<if test="parentId != null">
+		parent_id=#{parentId},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="creator != null  ">
+		creator=#{creator},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	</trim> where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 数据字典子项目 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" /> 
+	 from TD_DIC_ITEM where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+    delete 	 from TD_DIC_ITEM where id = #{id}
+  </delete>
+
+  <!-- 数据字典子项目 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_DIC_ITEM 
+	<include refid="Base_Where_Clause"/>
+	<if test="q != null and q != ''" >
+	    and (dic_item_key like '%${q}%' or dic_item_value like '%${q}%')
+	  </if>
+  </select>
+  	
+  <!-- 查询数据字典子项目列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_DIC_ITEM 
+	<include refid="Base_Where_Clause"/>
+	<if test="q != null and q != ''" >
+	    and (dic_item_key like '%${q}%' or dic_item_value like '%${q}%')
+	  </if>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <!-- 基于父节点Key查询数据字典子项目列表 -->
+  <select id="queryByParentItemKey" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_DIC_ITEM 
+	where parent_id in (
+	  select id from TD_DIC_ITEM where dic_item_key = #{key}
+	)
+  </select>
+  
+  <!-- 基于父节点Key查询数据字典子项目列表 -->
+  <select id="getDicItemByKeyAndParentKey" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_DIC_ITEM 
+	where parent_id = (
+	  select id from TD_DIC_ITEM where dic_item_key = '${parentItemKey}'
+	)
+	and dic_item_key = '${itemKey}'
+  </select>
+  
+  <!-- 基于父节点Key查询数据字典子项目列表 -->
+  <select id="getCorpRootDicItem" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_DIC_ITEM 
+	where dic_id = (
+	  select id from TD_DIC where name = '${dicName}'
+	)
+	and dic_item_key = '${corpId}'
+  </select>
+  
+  <select id="getDicItemByItemValueAndDicItemKey" resultMap="BaseResultMap"  parameterType="Object">
+  	select 
+	<include refid="Base_Column_List"/>
+	from TD_DIC_ITEM t  where t.id = (select itemId from TD_DIC_VIEW v WHERE v.name = 'ATTRIBUTE_DICT' and v.parentId = (
+	select t.id from TD_DIC_ITEM t where t.dic_item_value = '${optionValue}'
+	) and v.dicItemKey = '${nodeValue}')
+  </select>
+  
+  <select id="getNoExistValueList" resultType="String"  parameterType="map">
+	SELECT t.val, COUNT(val) AS cou FROM (
+		${sql} UNION ALL SELECT t2.dic_item_value AS val FROM TD_DIC_ITEM t2 WHERE t2.dic_id = #{dicId} AND t2.parent_id = #{parentId}
+	) t GROUP BY t.val HAVING COUNT(val) = 1
+  </select>
+  
+  <select id="getMaxKeybyDicIdParentId" resultType="integer"  parameterType="map">
+ 	SELECT MAX(dic_item_key+0) FROM TD_DIC_ITEM WHERE dic_id =  #{dicId}  AND parent_id = #{parentId}
+  </select>
+  
+  <select id="queryByDicItem"  resultMap="BaseResultMap" parameterType="Object">
+  	select <include refid="Base_Column_List" />  
+  	from TD_DIC_ITEM 
+  	<include refid="Base_Where_Clause"/>
+  </select>
+  
+</mapper>   

@@ -1,0 +1,43 @@
+diff a/data-cloud-visual/visual-ui/builder/src/app/smart-reports/reports/charts-builder/charts-builder.component.ts b/data-cloud-visual/visual-ui/builder/src/app/smart-reports/reports/charts-builder/charts-builder.component.ts	(rejected hunks)
+@@ -149,24 +149,23 @@
+ 	}
+ 
+ 	//点击组获取图表
+-	getChartGroup(d:any){
+-		// console.log(d)
+-		let smartChart = document.querySelector("#smartLeft");
+-		smartChart.className = "smart-left smartwidth";
+-		d.chartHover = true;
+-		this.stageResourceService.builderCate(d.id).then((data)=>{
+-
+-			if(data.data.length>0){
+-				this.stageService.StyleViewMetadata = data.data;
+-				this.chartGroupTitle = data.title;
+-				this.chartGroupList = data.data;
+-				this.smartTips = false;
+-			}else{
+-				this.smartTips = true;
+-				this.chartGroupList = [];
+-				this.chartGroupTitle = "暂无"
+-			}
+-		}).catch(err => {console.log(err)})
++	getChartGroup(d:any){	
++		 console.log(d)
++			let smartChart = document.querySelector("#smartLeft");
++				smartChart.className = "smart-left smartwidth";
++				d.chartHover = true;
++				this.stageResourceService.builderCate(d.id).then((data)=>{
++					if(data.data.length>0){
++						this.stageService.StyleViewMetadata = data.data;
++						this.chartGroupTitle = data.title;
++						this.chartGroupList = data.data;
++						this.smartTips = false;
++					}else{
++						this.smartTips = true;
++						this.chartGroupList = [];
++						this.chartGroupTitle = "暂无"
++					}
++				}).catch(err => {console.log(err)})
+ 	}
+ 
+ 	delChartGroup(d:any){

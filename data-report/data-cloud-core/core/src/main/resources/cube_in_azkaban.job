@@ -1,0 +1,3 @@
+# cube in azkaban for kylin
+type=command
+command=curl -X PUT -H "Authorization: %s" -H "Content-Type: application/json" -d '{"buildType":"BUILD","startTime":%s,"endTime":%s}' "%s/kylin/api/cubes/%s/rebuild"

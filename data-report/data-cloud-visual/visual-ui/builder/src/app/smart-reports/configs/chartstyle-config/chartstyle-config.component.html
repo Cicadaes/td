@@ -1,0 +1,37 @@
+<div *ngIf="dataStyleView.length>0" class="explore_graph_style">
+
+    <dl *ngFor="let group of dataStyleView">
+        <dt>{{group.name}}</dt>
+        <dd>
+            <div *ngFor="let field of group.fields" class="tc-inline">
+                <tconfig-input (onRender)="onRender($event)" *ngIf="field.viewType === 1" [tconfig]="field"></tconfig-input>
+                <tconfig-select (onRender)="onRender($event)" *ngIf="field.viewType === 2" [tconfig]="field"></tconfig-select>
+                <tconfig-textarea (onRender)="onRender($event)" *ngIf="field.viewType === 3" [tconfig]="field"></tconfig-textarea>
+                <tconfig-datasource-select (onRender)="onRender($event)" *ngIf="field.viewType === 11" [tconfig]="field.childrenFields[0]"></tconfig-datasource-select>
+                <tconfig-checkbox (onRender)="onRender($event)" *ngIf="field.viewType === 14" [tconfig]="field"></tconfig-checkbox>
+                <tconfig-color-picker (onRender)="onRender($event)" *ngIf="field.viewType === 15" [tconfig]="field"></tconfig-color-picker>
+                <tconfig-color-block (onRender)="onRender($event)" *ngIf="field.viewType === 16" [tconfig]="field"></tconfig-color-block>
+                <tconfig-drag-range (onRender)="onRender($event)" *ngIf="field.viewType === 17" [tconfig]="field"></tconfig-drag-range>
+                <tconfig-radio-list (onRender)="onRender($event)" *ngIf="field.viewType === 18" [tconfig]="field"></tconfig-radio-list>
+                <tconfig-checkbox-list (onRender)="onRender($event)" *ngIf="field.viewType === 19" [tconfig]="field"></tconfig-checkbox-list>
+                <tconfig-select-list (onRender)="onRender($event)" *ngIf="field.viewType === 20" [tconfig]="field"></tconfig-select-list>
+                <tconfig-autocomplete (onRender)="onRender($event)" *ngIf="field.viewType === 24" [tconfig]="field"></tconfig-autocomplete>
+                <tconfig-checkbox-input (onRender)="onRender($event)" *ngIf="field.viewType === 26" [tconfig]="field"></tconfig-checkbox-input>
+                <tconfig-textarea-select (onRender)="onRender($event)" *ngIf="field.viewType === 25" [tconfig]="field"></tconfig-textarea-select>
+
+                <div *ngFor="let child of field.childrenFields" class="tc-inline-child">
+                    <div *ngIf="field.value">
+                        <tconfig-checkbox-input (onRender)="onRender($event)" *ngIf="child.viewType === 26" [tconfig]="child"></tconfig-checkbox-input>
+                        <tconfig-checkbox (onRender)="onRender($event)" *ngIf="child.viewType === 14" [tconfig]="child"></tconfig-checkbox>
+                    </div>
+                </div>
+
+                <!--<tconfig-radio-list (onRender)="onRender($event)" *ngIf="field.viewType === 26" [tconfig]="field"></tconfig-radio-list>-->
+            </div>
+
+        </dd>
+    </dl>
+</div>
+<div *ngIf="dataStyleView.length === 0" class="explore_graph_empty text-center">
+    <!--暂无配置信息...-->
+</div>

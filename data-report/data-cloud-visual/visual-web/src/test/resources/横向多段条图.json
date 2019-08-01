@@ -1,0 +1,135 @@
+{
+    "name": "横向多段条图",
+    "description": "横向多段条图",
+    "iconPath": null,
+    "iconData": null,
+    "type": 15,
+    "groupId":2,
+    "orderNum":15,
+    "view": {
+        "id": null,
+        "toolTip": null,
+        "fieldTabs": [
+            {
+                "name":"data",
+                "fieldGroups":[
+                    {
+                        "name":"基本信息",
+                        "scripts":null,
+                        "fields":[
+                            {
+                                "code":"da taSource",
+                                "name":"数据源",
+                                "description":null,
+                                "valueType":6,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":24,
+                                "viewMetaData":{"postChange":{"action":"callBack","postEvent":{"actionValue":"report/dataSources/id/metaData","action":"callBack","actionParams":["datasource_id"],"postEvent":"datasource-reload | metadata-render"}}},
+                                "multipleMaxNumber":1,
+                                "verifyRule":"this.dimension_1.multipleMaxNumber = 1;this.metric.multipleMaxNumber = 100",
+                                "iconClass":null,
+                                "childrenFields":[]
+                            }
+                        ]
+                    },
+                    {
+                        "name":"参数信息",
+                        "scripts":null,
+                        "fields":[
+                            {
+                                "code":"dimension_name",
+                                "name":"Y轴",
+                                "fieldAliasName": "date",
+                                "description":null,
+                                "valueType":6,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":24,
+                                "viewMetaData":null,
+                                "multipleMaxNumber":1,
+                                "verifyRule":null,
+                                "iconClass":null,
+                                "childrenFields":[]
+                            },
+                            {
+                                "code":"dimension_subdivision",
+                                "name":"细分维度",
+                                "fieldAliasName": "name",
+                                "description":null,
+                                "valueType":6,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":24,
+                                "viewMetaData":null,
+                                "multipleMaxNumber":1,
+                                "verifyRule":null,
+                                "iconClass":null,
+                                "childrenFields":[]
+                            },
+                            {
+                                "code":"metric_value",
+                                "name":"指标输入框",
+                                "fieldAliasName": "value",
+                                "description":null,
+                                "valueType":6,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":25,
+                                "viewMetaData":null,
+                                "multipleMaxNumber":null,
+                                "verifyRule":null,
+                                "iconClass":null,
+                                "childrenFields":[]
+                            }
+                        ]
+                    },
+                    {
+                        "name":"默认日期范围",
+                        "scripts":null,
+                        "fields":[
+                            {
+                                "code":"date",
+                                "name":"日期",
+                                "description":null,
+                                "valueType":8,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":22,
+                                "viewMetaData":{"onChange":true},
+                                "verifyRule":null,
+                                "iconClass":null,
+                                "childrenFields":[]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

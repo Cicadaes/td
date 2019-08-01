@@ -1,0 +1,29 @@
+<div class="popover" tabindex="-1" ng-show="content" style="width: 250px;max-width: 250px;">
+	<div>
+		<div class="explore_graph_style">
+			<dl>
+				<dt>背景颜色和背景图片</dt>
+				<dd>
+					<ul class="allw">
+						<li>
+							<label>背景颜色：</label>
+							<div class="regular-color" font-color selected-font-color="background_color"  td-change="changeBackgroundColor"></div>
+						</li>
+						<li>
+							<label>背景图片： </label>
+							<div class="imgc"><div class="img fl"></div><div class="uploadImgBtn fr" ng-click="initImport();" data-template="html/common/fileUploadDialog.html" bs-modal="modal" data-backdrop="false">上传图片</div></div>
+						</li>
+					</ul>
+				</dd>
+			</dl>
+    	</div>
+		<div class="form-actions">
+			<span>
+				<font>
+		       		<a href="" ng-click="$hide();" class="cancelFilter Sievecolse r">取消</a> 
+		            <a href="" ng-click="changeDateRange();$hide();" class="confirm Sievecolse r">确定</a>
+	           	</font>
+			</span>
+		</div>
+	</div>
+</div>

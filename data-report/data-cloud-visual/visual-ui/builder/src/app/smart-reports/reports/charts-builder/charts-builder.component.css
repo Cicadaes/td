@@ -1,0 +1,32 @@
+.smart-reports-list .smart-reports-item  em  img{
+    width: 25px;
+}
+
+.smart-reports-list .smart-reports-item{
+    position: relative
+}
+
+.smart-reports-list .smart-reports-item  span{
+    position: absolute;
+    left: calc(50% - 34px);
+    bottom: -24px;
+    background: #707070;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 12px;
+    z-index: 2;
+    padding: 4px 5px;
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    transform: scale(0);
+    -webkit-transition: all ease 0.2s;
+    -moz-transition: all ease 0.2s;
+    transition: all ease 0.2s;
+    font-family: "宋体";
+}
+
+.smart-reports-list .smart-reports-item:hover span{
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    transform: scale(1);
+}

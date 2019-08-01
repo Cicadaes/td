@@ -1,0 +1,105 @@
+{
+  "name": "kylinAdapter",
+  "type": 3,
+  "dataSourceView": {
+    "toolTip": "缺少提示信息字段",
+    "fieldTabs": [
+      {
+        "name": "连接器",
+        "fieldGroups": [
+          {
+            "name": "连接信息",
+            "scripts": [],
+            "fields": [
+              {
+                "code": "host",
+                "name": "IP地址",
+                "description": "",
+                "valueType": 1,
+                "value": "",
+                "defaultValue": "",
+                "minValue": "",
+                "maxValue": "",
+                "optionValues": "",
+                "requried": 1,
+                "helpInfo": "",
+                "viewType": 1,
+                "viewMetaData": null,
+                "verifyRule": "",
+                "childrenFields": []
+              },
+              {
+                "code": "port",
+                "name": "端口号",
+                "description": "",
+                "valueType": 1,
+                "value": "",
+                "defaultValue": null,
+                "minValue": "",
+                "maxValue": "",
+                "optionValues": "",
+                "requried": 1,
+                "helpInfo": "",
+                "viewType": 1,
+                "viewMetaData": null,
+                "verifyRule": "",
+                "childrenFields": []
+              },
+              {
+                "code": "user",
+                "name": "用户名",
+                "description": "",
+                "valueType": 1,
+                "value": "",
+                "defaultValue": null,
+                "minValue": "",
+                "maxValue": "",
+                "optionValues": "",
+                "requried": 1,
+                "helpInfo": "",
+                "viewType": 1,
+                "viewMetaData": null,
+                "verifyRule": "",
+                "childrenFields": []
+              },
+              {
+                "code": "password",
+                "name": "密码",
+                "description": "",
+                "valueType": 1,
+                "value": "",
+                "defaultValue": null,
+                "minValue": "",
+                "maxValue": "",
+                "optionValues": "",
+                "requried": 1,
+                "helpInfo": "",
+                "viewType": 9,
+                "viewMetaData": null,
+                "verifyRule": "",
+                "childrenFields": []
+              },
+              {
+                "code": "database",
+                "name": "工程名称",
+                "description": "",
+                "valueType": 1,
+                "value": "",
+                "defaultValue": null,
+                "minValue": "",
+                "maxValue": "",
+                "optionValues": "",
+                "requried": 1,
+                "helpInfo": "",
+                "viewType": 1,
+                "viewMetaData": null,
+                "verifyRule": "",
+                "childrenFields": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

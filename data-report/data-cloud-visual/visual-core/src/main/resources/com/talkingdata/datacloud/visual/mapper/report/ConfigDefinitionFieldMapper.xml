@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.visual.dao.report.ConfigDefinitionFieldDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.visual.entity.report.ConfigDefinitionField" >
+    <id column="id" property="id" />
+    <result column="config_definition_id" property="configDefinitionId" />
+    <result column="parent_id" property="parentId" />
+    <result column="field_group_name" property="fieldGroupName" />
+    <result column="field_group_enable" property="fieldGroupEnable" />
+    <result column="field_tab_lock" property="fieldTabLock" />
+    <result column="field_tab_name" property="fieldTabName" />
+    <result column="name" property="name" />
+    <result column="code" property="code" />
+    <result column="field_alias_name" property="fieldAliasName" />
+    <result column="value_type" property="valueType" />
+    <result column="multiple_max_number" property="multipleMaxNumber" />
+    <result column="default_value" property="defaultValue" />
+    <result column="option_values" property="optionValues" />
+    <result column="requried" property="requried" />
+    <result column="min_value" property="minValue" />
+    <result column="max_value" property="maxValue" />
+    <result column="verify_rule" property="verifyRule" />
+    <result column="verify_group_name" property="verifyGroupName" />
+    <result column="verify_group_rule" property="verifyGroupRule" />
+    <result column="help_info" property="helpInfo" />
+    <result column="view_type" property="viewType" />
+    <result column="icon_class" property="iconClass" />
+    <result column="description" property="description" />
+    <result column="tenant_id" property="tenantId" />
+    <result column="creator" property="creator" />
+    <result column="create_by" property="createBy" />
+    <result column="create_time" property="createTime" />
+    <result column="updater" property="updater" />
+    <result column="update_by" property="updateBy" />
+    <result column="update_time" property="updateTime" />
+    <result column="view_meta_data" property="viewMetaData" />
+  </resultMap>
+
+  <!-- TD_DC_CONFIG_DEFINITION_FIELD table all fields -->
+  <sql id="Base_Column_List" >
+     `id`, `config_definition_id`, `parent_id`, `field_group_name`, `field_group_enable`, `field_tab_lock`, `field_tab_name`, `name`, `code`, `field_alias_name`, `value_type`, `multiple_max_number`, `default_value`, `option_values`, `requried`, `min_value`, `max_value`, `verify_rule`, `verify_group_name`, `verify_group_rule`, `help_info`, `view_type`, `icon_class`, `description`, `tenant_id`, `creator`, `create_by`, `create_time`, `updater`, `update_by`, `update_time`, `view_meta_data`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and `id` ${idOperator} #{id}
+      </if>
+      <if test="configDefinitionId != null" >
+        and `config_definition_id` ${configDefinitionIdOperator} #{configDefinitionId}
+      </if>
+      <if test="parentId != null" >
+        and `parent_id` ${parentIdOperator} #{parentId}
+      </if>
+      <if test="fieldGroupName != null" >
+        and `field_group_name` ${fieldGroupNameOperator} #{fieldGroupName}
+      </if>
+      <if test="fieldGroupEnable != null" >
+        and `field_group_enable` ${fieldGroupEnableOperator} #{fieldGroupEnable}
+      </if>
+      <if test="fieldTabLock != null" >
+        and `field_tab_lock` ${fieldTabLockOperator} #{fieldTabLock}
+      </if>
+      <if test="fieldTabName != null" >
+        and `field_tab_name` ${fieldTabNameOperator} #{fieldTabName}
+      </if>
+      <if test="name != null" >
+        and `name` ${nameOperator} #{name}
+      </if>
+      <if test="code != null" >
+        and `code` ${codeOperator} #{code}
+      </if>
+      <if test="fieldAliasName != null" >
+        and `field_alias_name` ${fieldAliasNameOperator} #{fieldAliasName}
+      </if>
+      <if test="valueType != null" >
+        and `value_type` ${valueTypeOperator} #{valueType}
+      </if>
+      <if test="multipleMaxNumber != null" >
+        and `multiple_max_number` ${multipleMaxNumberOperator} #{multipleMaxNumber}
+      </if>
+      <if test="defaultValue != null" >
+        and `default_value` ${defaultValueOperator} #{defaultValue}
+      </if>
+      <if test="optionValues != null" >
+        and `option_values` ${optionValuesOperator} #{optionValues}
+      </if>
+      <if test="requried != null" >
+        and `requried` ${requriedOperator} #{requried}
+      </if>
+      <if test="minValue != null" >
+        and `min_value` ${minValueOperator} #{minValue}
+      </if>
+      <if test="maxValue != null" >
+        and `max_value` ${maxValueOperator} #{maxValue}
+      </if>
+      <if test="verifyRule != null" >
+        and `verify_rule` ${verifyRuleOperator} #{verifyRule}
+      </if>
+      <if test="verifyGroupName != null" >
+        and `verify_group_name` ${verifyGroupNameOperator} #{verifyGroupName}
+      </if>
+      <if test="verifyGroupRule != null" >
+        and `verify_group_rule` ${verifyGroupRuleOperator} #{verifyGroupRule}
+      </if>
+      <if test="helpInfo != null" >
+        and `help_info` ${helpInfoOperator} #{helpInfo}
+      </if>
+      <if test="viewType != null" >
+        and `view_type` ${viewTypeOperator} #{viewType}
+      </if>
+      <if test="iconClass != null" >
+        and `icon_class` ${iconClassOperator} #{iconClass}
+      </if>
+      <if test="description != null" >
+        and `description` ${descriptionOperator} #{description}
+      </if>
+      <if test="tenantId != null" >
+        and `tenant_id` ${tenantIdOperator} #{tenantId}
+      </if>
+      <if test="creator != null" >
+        and `creator` ${creatorOperator} #{creator}
+      </if>
+      <if test="createBy != null" >
+        and `create_by` ${createByOperator} #{createBy}
+      </if>
+      <if test="createTime != null" >
+        and `create_time` ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and `create_time` &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and `create_time` &lt;= #{createTime2}
+      </if>
+      <if test="updater != null" >
+        and `updater` ${updaterOperator} #{updater}
+      </if>
+      <if test="updateBy != null" >
+        and `update_by` ${updateByOperator} #{updateBy}
+      </if>
+      <if test="updateTime != null" >
+        and `update_time` ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and `update_time` &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and `update_time` &lt;= #{updateTime2}
+      </if>
+      <if test="viewMetaData != null" >
+        and `view_meta_data` ${viewMetaDataOperator} #{viewMetaData}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.datacloud.visual.entity.report.ConfigDefinitionField" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_DC_CONFIG_DEFINITION_FIELD(<include refid="Base_Column_List" />)
+    values (#{id}, #{configDefinitionId}, #{parentId}, #{fieldGroupName}, #{fieldGroupEnable}, #{fieldTabLock}, #{fieldTabName}, #{name}, #{code}, #{fieldAliasName}, #{valueType}, #{multipleMaxNumber}, #{defaultValue}, #{optionValues}, #{requried}, #{minValue}, #{maxValue}, #{verifyRule}, #{verifyGroupName}, #{verifyGroupRule}, #{helpInfo}, #{viewType}, #{iconClass}, #{description}, #{tenantId}, #{creator}, #{createBy}, #{createTime}, #{updater}, #{updateBy}, #{updateTime}, #{viewMetaData})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.datacloud.visual.entity.report.ConfigDefinitionField" >
+    update TD_DC_CONFIG_DEFINITION_FIELD
+       set `config_definition_id` = #{configDefinitionId},
+           `parent_id` = #{parentId},
+           `field_group_name` = #{fieldGroupName},
+           `field_group_enable` = #{fieldGroupEnable},
+           `field_tab_lock` = #{fieldTabLock},
+           `field_tab_name` = #{fieldTabName},
+           `name` = #{name},
+           `code` = #{code},
+           `field_alias_name` = #{fieldAliasName},
+           `value_type` = #{valueType},
+           `multiple_max_number` = #{multipleMaxNumber},
+           `default_value` = #{defaultValue},
+           `option_values` = #{optionValues},
+           `requried` = #{requried},
+           `min_value` = #{minValue},
+           `max_value` = #{maxValue},
+           `verify_rule` = #{verifyRule},
+           `verify_group_name` = #{verifyGroupName},
+           `verify_group_rule` = #{verifyGroupRule},
+           `help_info` = #{helpInfo},
+           `view_type` = #{viewType},
+           `icon_class` = #{iconClass},
+           `description` = #{description},
+           `tenant_id` = #{tenantId},
+           `creator` = #{creator},
+           `create_by` = #{createBy},
+           `create_time` = #{createTime},
+           `updater` = #{updater},
+           `update_by` = #{updateBy},
+           `update_time` = #{updateTime},
+           `view_meta_data` = #{viewMetaData}
+     where `id` = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.datacloud.visual.entity.report.ConfigDefinitionField" >
+    update TD_DC_CONFIG_DEFINITION_FIELD
+    <set >
+      <if test="configDefinitionId != null" >
+        `config_definition_id` = #{configDefinitionId},
+      </if>
+      <if test="parentId != null" >
+        `parent_id` = #{parentId},
+      </if>
+      <if test="fieldGroupName != null" >
+        `field_group_name` = #{fieldGroupName},
+      </if>
+      <if test="fieldGroupEnable != null" >
+        `field_group_enable` = #{fieldGroupEnable},
+      </if>
+      <if test="fieldTabLock != null" >
+        `field_tab_lock` = #{fieldTabLock},
+      </if>
+      <if test="fieldTabName != null" >
+        `field_tab_name` = #{fieldTabName},
+      </if>
+      <if test="name != null" >
+        `name` = #{name},
+      </if>
+      <if test="code != null" >
+        `code` = #{code},
+      </if>
+      <if test="fieldAliasName != null" >
+        `field_alias_name` = #{fieldAliasName},
+      </if>
+      <if test="valueType != null" >
+        `value_type` = #{valueType},
+      </if>
+      <if test="multipleMaxNumber != null" >
+        `multiple_max_number` = #{multipleMaxNumber},
+      </if>
+      <if test="defaultValue != null" >
+        `default_value` = #{defaultValue},
+      </if>
+      <if test="optionValues != null" >
+        `option_values` = #{optionValues},
+      </if>
+      <if test="requried != null" >
+        `requried` = #{requried},
+      </if>
+      <if test="minValue != null" >
+        `min_value` = #{minValue},
+      </if>
+      <if test="maxValue != null" >
+        `max_value` = #{maxValue},
+      </if>
+      <if test="verifyRule != null" >
+        `verify_rule` = #{verifyRule},
+      </if>
+      <if test="verifyGroupName != null" >
+        `verify_group_name` = #{verifyGroupName},
+      </if>
+      <if test="verifyGroupRule != null" >
+        `verify_group_rule` = #{verifyGroupRule},
+      </if>
+      <if test="helpInfo != null" >
+        `help_info` = #{helpInfo},
+      </if>
+      <if test="viewType != null" >
+        `view_type` = #{viewType},
+      </if>
+      <if test="iconClass != null" >
+        `icon_class` = #{iconClass},
+      </if>
+      <if test="description != null" >
+        `description` = #{description},
+      </if>
+      <if test="tenantId != null" >
+        `tenant_id` = #{tenantId},
+      </if>
+      <if test="creator != null" >
+        `creator` = #{creator},
+      </if>
+      <if test="createBy != null" >
+        `create_by` = #{createBy},
+      </if>
+      <if test="createTime != null" >
+        `create_time` = #{createTime},
+      </if>
+      <if test="updater != null" >
+        `updater` = #{updater},
+      </if>
+      <if test="updateBy != null" >
+        `update_by` = #{updateBy},
+      </if>
+      <if test="updateTime != null" >
+        `update_time` = #{updateTime},
+      </if>
+      <if test="viewMetaData != null" >
+        `view_meta_data` = #{viewMetaData},
+      </if>
+    </set>
+     where `id` = #{id}
+  </update>
+
+  <!-- 根据id查询 TD_DC_CONFIG_DEFINITION_FIELD -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from TD_DC_CONFIG_DEFINITION_FIELD
+     where `id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TD_DC_CONFIG_DEFINITION_FIELD
+     where `id` = #{value}
+
+  </delete>
+
+  <!-- TD_DC_CONFIG_DEFINITION_FIELD 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select count(1) from TD_DC_CONFIG_DEFINITION_FIELD
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TD_DC_CONFIG_DEFINITION_FIELD列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from TD_DC_CONFIG_DEFINITION_FIELD
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+  <!-- 通过ConfigDefinitionName删除记录 -->
+  <delete id="deleteByConfigDefinitionName" parameterType="java.lang.String">
+    DELETE FROM TD_DC_CONFIG_DEFINITION_FIELD WHERE  config_definition_id IN
+    (SELECT id FROM TD_DC_CONFIG_DEFINITION WHERE `name` =#{value})
+  </delete>
+
+  <!-- 通过ConfigDefinitionId查询TD_DC_CONFIG_DEFINITION_FIELD的根Field -->
+  <select id="queryRootFieldByConfigDefinitionId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    SELECT <include refid="Base_Column_List"/>
+    FROM TD_DC_CONFIG_DEFINITION_FIELD WHERE  `config_definition_id` = #{value} AND `parent_id` IS NULL
+
+  </select>
+  <!-- 通过ConfigDefinitionName删除记录 -->
+  <delete id="deleteByConfigDefinitionId" parameterType="java.lang.Integer">
+    DELETE FROM TD_DC_CONFIG_DEFINITION_FIELD WHERE  `config_definition_id` =#{value}
+  </delete>
+</mapper>

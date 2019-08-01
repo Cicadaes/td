@@ -1,0 +1,34 @@
+<div *ngIf="dataSourceView.length>0" class="explore_graph_style">
+    <dl>
+        <dt>静态信息</dt>
+        <dd>
+            scopeID: {{currentScopeID}}<br>
+            viewName: {{viewName}}<br>
+            viewType: {{viewType}}<br>
+        </dd>
+    </dl>
+
+    <dl *ngFor="let group of dataSourceView">
+        <dt>{{group.name}}</dt>
+        <dd>
+            <div *ngFor="let field of group.fields" class="tc-inline">
+                <tconfig-input (onRender)="onRender($event)" *ngIf="field.viewType === 1" [tconfig]="field"></tconfig-input>
+                <div class="tc-inline-innerbox" *ngIf="field.viewType === 24">
+                    <tconfig-datalist-select [tconfig]="field" (onRender)="onRender($event)"></tconfig-datalist-select>
+                </div>
+                <div class="tc-inline-innerbox" *ngIf="field.viewType === 2">
+                    <tconfig-datasource-select [tconfig]="field" (onRender)="onDataSourceRender($event)"></tconfig-datasource-select>
+                    <div *ngIf="field.childrenFields.length">
+                        <tconfig-datasource-select class="tc-inline-inner" *ngFor="let _field of field.childrenFields" [tconfig]="_field" (onRender)="onRender($event)"></tconfig-datasource-select>
+                    </div>
+                </div>
+                <tconfig-textarea-select (onRender)="onRender($event)" *ngIf="field.viewType === 25" [tconfig]="field"></tconfig-textarea-select>
+                <tfilter-date-picker (onRender)="onRender($event)" *ngIf="field.viewType === 22" [tconfig]="field"></tfilter-date-picker>
+            </div>
+        </dd>
+    </dl>
+</div>
+
+<div *ngIf="dataSourceView.length === 0 || dataSourceView == undefined" class="explore_graph_empty text-center">
+    <!--暂无配置信息...-->
+</div>

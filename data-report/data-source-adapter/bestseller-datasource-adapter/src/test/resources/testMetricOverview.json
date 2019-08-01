@@ -1,0 +1,11 @@
+{
+  "datasource_id": 18,
+  "filters": [
+    {
+      "field": "project_id",
+      "operator": "in",
+      "value": "88259"
+    }
+  ],
+  "showSql": true
+}

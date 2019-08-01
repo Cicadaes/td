@@ -1,0 +1,34 @@
+{
+  "datasource_id": 53,
+  "dimensions": [
+    {
+      "field": "class_label"
+    },
+    {
+      "field": "member_count"
+    }
+  ],
+  "filters": [
+    {
+      "field": "year_month",
+      "operator": "=",
+      "value": "2017-10"
+    },
+    {
+      "field": "brand_name",
+      "operator": "=",
+      "value": "ONLY"
+    },
+    {
+      "field": "channel_name",
+      "operator": "=",
+      "value": "OMH5"
+    }
+  ],
+  "orderBy": [
+    {
+      "field": "class_label",
+      "function": "ASC"
+    }
+  ]
+}

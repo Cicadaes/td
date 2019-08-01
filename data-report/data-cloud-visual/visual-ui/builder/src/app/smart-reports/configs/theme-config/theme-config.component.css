@@ -1,0 +1,133 @@
+	   /*.double li {
+	       width: 80px;
+	       height: 54px;
+	       margin: 0 10px;
+	       float: left;
+	   }
+	   
+	   .double li span {
+	       display: block;
+	       padding: 20px 0 0 0;
+	       font-family: PingFangSC-Regular;
+	       font-size: 12px;
+	       color: #657180;
+	       letter-spacing: 0;
+	       line-height: 12px;
+	   }
+	   
+	   .double li input {
+	       width: 100%;
+	       padding: 10px 0 0 0;
+	       border-bottom: 1px solid #DEE0E3;
+	       font-family: PingFangSC-Regular;
+	       font-size: 14px;
+	       color: #464C5B;
+	       letter-spacing: 0;
+	   }
+	   
+	   .clear {
+	       clear: both;
+	   }
+	   
+	   .regular-radio {
+	       margin-top: -5px;
+	   }
+	   
+	   .indent {
+	       width: 260px;
+	       border-bottom: none;
+	   }
+	   
+	   .smart-ctab .explore_graph_style dl:not(:last-child) {
+	       border-bottom: 0 !important;
+	   }
+	   
+	   .indent dd,
+	   .indent dt {
+	       margin-left: 10px;
+	       width: 100%;
+	   }
+	   
+	   .indent dd li {
+	       width: 30%;
+	       box-sizing: border-box;
+	       height: auto;
+	       float: left;
+	   }
+	   
+	   .indent dt {
+	       font-family: PingFangSC-Semibold;
+	       font-size: 12px;
+	       color: #657180;
+	       letter-spacing: 0;
+	       line-height: 12px;
+	       padding: 10px 0;
+	   }
+	   
+	   .indent dd label {
+	       font-family: PingFangSC-Regular;
+	       font-size: 12px;
+	       color: #657180;
+	       letter-spacing: 0;
+	       line-height: 12px;
+	   }
+	   
+	   h6 {
+	       margin: 10px 0 20px -5px;
+	       font-family: PingFangSC-Regular;
+	       font-size: 12px;
+	       color: #657180;
+	       letter-spacing: 0;
+	       line-height: 12px;
+	       font-weight: normal;
+	   }
+	   
+	   .drop-down dt {
+	       font-family: PingFangSC-Regular;
+	       font-size: 12px;
+	       color: #657180;
+	       letter-spacing: 0;
+	       line-height: 12px;
+	       font-weight: normal !important;
+	   }
+	   
+	   .ui-dropdown.ui-widget.ui-state-default.ui-corner-all {
+	       width: 200px !important;
+	       border: none !important;
+	       border-bottom: 1px solid #ccc !important;
+	   }
+	   
+	   .ui-dropdown-label {
+	       font-size: 14px !important;
+	   }
+	   
+	   .all,
+	   .all-small {
+	       width: 100%;
+	       margin-top: 29px;
+	   }
+	   
+	   .all span,
+	   .all-small span {
+	       width: 20%;
+	       margin-right: 8px;
+	   }
+	   
+	   .all-small .ui-dropdown.ui-widget.ui-state-default.ui-corner-all {
+	       width: 88px !important;
+	   }
+	   
+	   .all .ui-dropdown.ui-widget.ui-state-default.ui-corner-all {
+	       width: 60% !important;
+	       margin-right: 8px;
+	   }
+	   
+	    :host /deep/.ui-dropdown .fontStyle {
+	       width: 168px !important;
+	   }
+	   
+	    :host /deep/.ui-dropdown {
+	       width: 200px !important;
+	       border: none !important;
+	       border-bottom: 1px solid #ccc !important;
+	   }*/

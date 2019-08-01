@@ -1,0 +1,21 @@
+<div class="clearfix report_layer" *ngIf="datasourceBoolean">
+    <div class="sql_sqlSyntax">
+        <p-tree [value]="fileFiltered" selectionMode="single" [(selection)]="selectedFiles" emptyMessage="暂无内容">
+            <template let-node pTemplate="default">
+                <div [class.dataset_name]="node.children == null" (click)="nodeSelect(node)" >
+                    <a title="{{node.label}}" class="sql_selected">
+                        {{node.label}}
+                    </a>
+                </div>
+            </template>
+        </p-tree>
+    </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <div *ngIf='nodeLabelShow' class="errTip">请选择表或视图</div>
+            <button type="button" pButton (click)="cancel()" label="No">取消</button>
+            <button type="button" pButton (click)="previewDatasource(1)" label="Yes" [class.confirm_report]="nodeLabelShow">预览</button>
+            <button type="button" pButton (click)="confirm(0)" label="Yes">确定</button>
+        </div>
+    </footer>
+</div>

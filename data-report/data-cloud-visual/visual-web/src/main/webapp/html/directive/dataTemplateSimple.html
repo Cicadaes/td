@@ -1,0 +1,38 @@
+<div class="popover" tabindex="-1" ng-show="content" style="width: 570px;max-width: 570px;">
+	<div>
+    	<div class="popoverFormTitle popoverFormTitleMax">
+    		<span class="fl" style="height: 28px;padding: 5px; color: #FFF">时期：</span>
+    		<span style="float: left; background: #F8F8F8;height: 28px;padding: 5px;border-radius: 5px;"> 
+				<i class="glyphicon glyphicon-calendar mt--3"> </i>
+				<input class="displayTime" readonly="readonly" type="text" ng-model="start_end" style="border: 0;margin-top: -2px;background: #F8F8F8;line-height: 15px;width:140px;"/>
+			</span>
+    		<div class="fl">
+				<a href="" ng-click="changeDate(0);$hide()">今日</a>
+    		</div>
+    		<div class="fl">
+				<a href="" ng-click="changeDate(-1);$hide()">昨日</a>
+    		</div>
+    		<div class="fl">
+				<a href="" ng-click="changeDate(-6);$hide()">近7日</a>
+    		</div>
+			<div class="fl">
+				<a href="" ng-click="changeDate(0,-1);$hide()">近30日</a>
+			</div>	      	
+	      	<div class="fl" style="padding: 2px 5px;background: #686E7E;">
+		      	<select ng-model="currentMonth" style="height:24px;width: 78px;" ng-options="sele.value for sele in selectMonthData" ng-change="monthChange(currentMonth);$hide()" class="fz12"></select>
+	      	</div>
+	      	<div class="fl">
+		      	<a href="" ng-click="changeDate(0,0,-1);$hide()">近一年</a>
+	      	</div>
+    	</div>
+		<div id="calendar" class="calendarForm calendarFormwidth"></div>
+		<div class="form-actions fr">
+			<span>
+				<font>
+		       		<a href="" ng-click="$hide();" class="cancelFilter Sievecolse r">取消</a> 
+		            <a href="" ng-click="changeDateRange();$hide();" class="confirm Sievecolse r">确定</a>
+	           	</font>
+			</span>
+		</div>
+	</div>
+</div>

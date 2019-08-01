@@ -1,0 +1,11 @@
+:host /deep/ .tconfig-date-picker .datePicker {
+   
+}
+:host /deep/ .tconfig-date-picker .datePicker #pinput-box {
+
+}
+:host /deep/ .tconfig-date-picker .datePicker #pinput-box .pinput {
+    right:0!important;
+    left:auto;
+    width:36.1em
+}

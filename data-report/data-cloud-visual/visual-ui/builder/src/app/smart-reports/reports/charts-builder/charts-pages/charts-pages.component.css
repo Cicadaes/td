@@ -1,0 +1,38 @@
+.smart-page-list {
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+    background: #fff;
+    border: 1px solid #CFD3D7;
+    margin-top: -1px;
+    display: none
+}
+
+.smart-page-list ul li{
+    text-align: left;
+    padding: 0 20px;
+    line-height: 40px;
+    cursor: pointer;
+}
+
+.smart-page-list ul li.active {
+    color:#0283f1
+}
+
+.smart-page-list ul li span{
+    padding-right: 10px;
+}
+
+.smart-page-list ul li:hover{
+    background: #e7ebef;
+}
+
+.smart-page-button{
+    border-top: 1px solid #CFD3D7;
+    line-height: 50px;
+    cursor: pointer;
+}
+
+.smart-pages-box:hover .smart-page-list {
+    display: block
+}

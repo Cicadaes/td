@@ -1,0 +1,64 @@
+{
+    "id":782,
+    "name": "矩形",
+    "description": "矩形",
+    "iconPath": null,
+    "iconData": null,
+    "type": 12,
+    "groupId":11,
+    "orderNum":12,
+    "view": {
+        "id": null,
+        "toolTip": null,
+        "fieldTabs": [
+            {
+                "name": "style",
+                "fieldGroups": [
+                    {
+                        "name": "背景和边框",
+                        "scripts": null,
+                        "fields": [
+                            {
+                                "code": "backgroundBorder",
+                                "name": "背景颜色",
+                                "description": null,
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 20,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "childrenFields": [
+                                    {
+                                        "code": "backgroundColor",
+                                        "name": "背景颜色",
+                                        "description": null,
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": "#5697F1",
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 15,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "iconClass":"icons_svg chartbg_format",
+                                        "childrenFields": []
+                                    }
+                                ]
+                            }
+
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

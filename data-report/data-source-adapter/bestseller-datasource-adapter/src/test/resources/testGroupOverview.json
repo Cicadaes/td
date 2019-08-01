@@ -1,0 +1,11 @@
+{
+  "datasource_id": 14,
+  "filters": [
+    {
+      "field": "project_type",
+      "operator": "=",
+      "value": "9"
+    }
+  ],
+  "showSql": true
+}

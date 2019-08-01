@@ -1,0 +1,41 @@
+<div class="popover timetxt" style="width: 480px;max-width: 480px; right: -5px; display: block; background: #FFF;" ng-click="clearQuickData()">
+	<div class="pd-20">
+		<div style="border: 1px solid #ccd4e6;">
+			<div class="brdediv">
+				<font class="l">最多可选<font>5</font>个活动</font>
+				<font ng-show="validation" style="color: red" class="ng-hide">最多可选5个渠道</font>
+				<div class="clear"></div>
+			</div>
+			<div class="pd-20" style="display: block; padding-top: 0px;">
+				<div class="search-operate">
+					<span>
+						<input type="text" ng-model="quickCampaignSearchVal" placeholder="活动" onfocus="placeholder=''" onblur="placeholder='活动'"  class="input-search ng-pristine ng-untouched ng-valid" ng-keyup="quickSearch(quickCampaignSearchVal);">
+						<img class="searchimg" src="css/images/icon-search.png">
+						<ul ng-show="campaignSearching">
+							<li ng-repeat="campaign in campaignQuick" ng-click="seletedItem(campaigns,'key',campaign.key);">
+								<div class="queryFliter">
+									<font>{{campaign.value}}</font>
+								</div>
+							</li>
+						</ul>
+					</span>
+					<a href="" ng-click="clearAll();" class="r">不对比</a> 
+					<div class="clear"></div>
+				</div>
+				<div class="Sievexx">
+					<a href=""  ng-repeat="campaign in campaigns" ng-click="seletedItem(campaigns,'key',campaign.key)" ng-class="{border:campaign.selected}">
+						<span title="{{campaign.value}}">{{campaign.value}}</span>
+					</a>		
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-actions">
+		<span>
+			<font>
+	       		<a href="" ng-click="cancel();$hide();" class="cancelFilter Sievecolse r">取消</a> 
+	            <a href="" ng-click="saveFilterBox($hide);" class="confirm Sievecolse r">确定</a>
+           	</font>
+		</span>
+	</div>
+</div>

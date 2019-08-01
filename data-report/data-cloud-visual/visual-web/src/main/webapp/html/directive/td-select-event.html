@@ -1,0 +1,13 @@
+<div class="td-select bs1 br-4" style="height: 27px;background: #FFF;"onclick="formatHeight();">
+   	<input type="text" readonly="readonly" style="height: 24px;border: 0;padding: 0;padding-left: 5px;" ng-model="val" class="tdSelect input-search br-4" ng-click="showSearching();" placeholder="请选择事件">
+   	<i class="glyphicon glyphicon-chevron-down mr-10" ng-click="showSearching();"></i>
+	<div style="display:none;background: #fff;border: 1px solid #dedede;padding-bottom: 5px;" align="center" class="p-rel">
+		<input type="text" ng-model="sercheventname" placeholder="输入事件名" style="height: 24px;border-radius: 20px;width: 157px;padding-right: 20px;background-color: white !important;margin-top: 5px;" ng-change="onChange(sercheventname);" class="bs1 br-4">
+		<i class="glyphicon glyphicon-search p-abs" style="right: 14px;top: 11px;background: #FFF;" ng-click="onChange(sercheventname);"></i>
+	</div>
+	<ul class="searchPane mt-imp-34" style="display:none;">
+		<li ng-repeat="opt in options" title="{{opt.value}}" ng-click="seletedItem(opt.key,opt.value,opt);">
+			{{opt.value}}
+		</li>
+	</ul>
+</div>

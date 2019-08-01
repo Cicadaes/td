@@ -1,0 +1,15 @@
+<div class="smart-hedit fl">
+    <a class="datareport_title" (click)="returnReport()">数据报表</a>
+    <span class="dataicon">&gt;</span>
+    <strong class="datareport_name">{{stageService.reportName}}</strong>
+</div>
+<ul class="smart-hconf fr">
+    <li>
+        <a (click)="saveReports()" href="javascript:void(0)" class="save_btn_icon"></a>
+    </li>
+    <li class="preview_btn">预览</li>
+    <li>
+        <div (click)="changeStatus()" [class.on]="stageService.chartMode" [class.off]="!stageService.chartMode" style="margin: 5px 8px">
+        </div>
+    </li>
+</ul>

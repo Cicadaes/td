@@ -1,0 +1,43 @@
+{
+  "datasource_id": 51,
+  "dimensions": [
+    {
+      "field": "R"
+    },
+    {
+      "field": "F"
+    }
+  ],
+  "metrics": [
+    {
+      "field": "monetary"
+    }
+  ],
+  "filters": [
+    {
+      "field": "year_month",
+      "operator": "=",
+      "value": "201710"
+    },
+    {
+      "field": "brand_name",
+      "operator": "=",
+      "value": "J.LINDEBERG"
+    },
+    {
+      "field": "channel_name",
+      "operator": "=",
+      "value": "all"
+    }
+  ],
+  "orderBy": [
+    {
+      "field": "R",
+      "function": "DESC"
+    },
+    {
+      "field": "F",
+      "function": "ASC"
+    }
+  ]
+}

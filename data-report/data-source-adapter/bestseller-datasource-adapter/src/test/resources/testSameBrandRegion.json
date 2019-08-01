@@ -1,0 +1,47 @@
+{
+  "datasource_id": 42,
+  "dimensions": [
+    {
+      "field": "brand"
+    },
+    {
+      "field": "project_name"
+    }
+  ],
+  "metrics": [
+    {
+      "field": "ROUND(SUM(active_new_users)/SUM(active_users)*100,1)"
+    },
+    {
+      "field": "sales_amount"
+    }
+  ],
+  "filters": [
+    {
+      "field": "project_type",
+      "operator": "=",
+      "value": 5
+    },
+    {
+      "field": "project_id",
+      "operator": "in",
+      "value": "87145"
+    }
+  ],
+  "dateFilters": [
+    {
+      "field": "date",
+      "operator": ">=",
+      "value": "2017-10-29"
+    },
+    {
+      "field": "date",
+      "operator": "<=",
+      "value": "2017-11-27"
+    }
+  ],
+  "limit": [
+    -1
+  ],
+  "dateGranularity": 0
+}

@@ -1,0 +1,32 @@
+{
+  "datasource_id": 24,
+  "filters": [
+    {
+      "field": "project_type",
+      "operator": "=",
+      "value": "3"
+    },
+    {
+      "field": "brand",
+      "operator": "=",
+      "value": "%%"
+    }
+  ],
+  "dateFilters": [
+    {
+      "field": "date",
+      "operator": ">=",
+      "value": "2017-11-01"
+    },
+    {
+      "field": "date",
+      "operator": "<=",
+      "value": "2017-11-30"
+    }
+  ],
+  "limit": [
+    1,
+    10
+  ],
+  "dateGranularity": 0
+}

@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.admin.CalcObjectDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.admin.CalcObject" >
+	<result column="id" property="id"/>
+	<result column="name" property="name"/>
+	<result column="code" property="code"/>
+	<result column="type" property="type"/>
+	<result column="param" property="param"/>
+	<result column="attr1" property="attr1"/>
+	<result column="attr2" property="attr2"/>
+	<result column="attr3" property="attr3"/>
+	<result column="attr4" property="attr4"/>
+	<result column="attr5" property="attr5"/>
+	<result column="create_by" property="createBy"/>
+	<result column="creator" property="creator"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_time" property="updateTime"/>
+	<result column="status" property="status"/>
+	<result column="calc_status" property="calcStatus"/>
+	<result column="data_app_id" property="dataAppId"/>
+	<result column="tenant_id" property="tenantId"/>
+  </resultMap>
+       
+  <!-- TD_CALC_OBJECT table all fields -->
+  <sql id="Base_Column_List" >
+	 id,name,code,type,param,attr1,attr2,attr3,attr4,attr5,create_by,creator,update_by,create_time,update_time,status,calc_status,data_app_id,tenant_id
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="name != null and name != ''" >
+        and name =  #{name}
+	  </if>
+	      <if test="code != null and code != ''" >
+        and code =  #{code}
+	  </if>
+	      <if test="type != null and type != ''" >
+        and type =  #{type}
+	  </if>
+	      <if test="param != null and param != ''" >
+        and param =  #{param}
+	  </if>
+	      <if test="attr1 != null and attr1 != ''" >
+        and attr1 =  #{attr1}
+	  </if>
+	      <if test="attr2 != null and attr2 != ''" >
+        and attr2 =  #{attr2}
+	  </if>
+	      <if test="attr3 != null and attr3 != ''" >
+        and attr3 =  #{attr3}
+	  </if>
+	      <if test="attr4 != null and attr4 != ''" >
+        and attr4 =  #{attr4}
+	  </if>
+	      <if test="attr5 != null and attr5 != ''" >
+        and attr5 =  #{attr5}
+	  </if>
+	      <if test="createBy != null and createBy != ''" >
+        and create_by =  #{createBy}
+	  </if>
+	      <if test="creator != null and creator != ''" >
+        and creator =  #{creator}
+	  </if>
+	      <if test="updateBy != null and updateBy != ''" >
+        and update_by =  #{updateBy}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+	      <if test="status != null and status != ''" >
+        and status =  #{status}
+	  </if>
+	      <if test="calcStatus != null and calcStatus != ''" >
+        and calc_status =  #{calcStatus}
+	  </if>
+	      <if test="dataAppId != null and dataAppId != ''" >
+        and data_app_id =  #{dataAppId}
+	  </if>
+	      <if test="tenantId != null and tenantId != ''" >
+        and tenant_id =  #{tenantId}
+	  </if>
+    </trim>
+  </sql>
+   
+   <sql id="Base_Where_Clause_Search">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="name != null and name != ''" >
+        and name like CONCAT('%',#{name},'%')
+	  </if>
+	      <if test="code != null and code != ''" >
+        and code like CONCAT('%',#{code},'%')
+	  </if>
+	      <if test="type != null and type != ''" >
+        and type =  #{type}
+	  </if>
+	      <if test="param != null and param != ''" >
+        and param =  #{param}
+	  </if>
+	      <if test="attr1 != null and attr1 != ''" >
+        and attr1 =  #{attr1}
+	  </if>
+	      <if test="attr2 != null and attr2 != ''" >
+        and attr2 =  #{attr2}
+	  </if>
+	      <if test="attr3 != null and attr3 != ''" >
+        and attr3 =  #{attr3}
+	  </if>
+	      <if test="attr4 != null and attr4 != ''" >
+        and attr4 =  #{attr4}
+	  </if>
+	      <if test="attr5 != null and attr5 != ''" >
+        and attr5 =  #{attr5}
+	  </if>
+	      <if test="createBy != null and createBy != ''" >
+        and create_by like CONCAT('%',#{createBy},'%')
+	  </if>
+	      <if test="creator != null and creator != ''" >
+        and creator like CONCAT('%',#{creator},'%')
+	  </if>
+	      <if test="updateBy != null and updateBy != ''" >
+        and update_by =  #{updateBy}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+	      <if test="status != null and status != ''" >
+        and status =  #{status}
+	  </if>
+	      <if test="calcStatus != null" >
+        and calc_status =  #{calcStatus}
+	  </if>
+	      <if test="dataAppId != null and dataAppId != ''" >
+        and data_app_id =  #{dataAppId}
+	  </if>
+	      <if test="tenantId != null and tenantId != ''" >
+        and tenant_id =  #{tenantId}
+	  </if>
+	  <if test="createTimeStart != null and createTimeStart != ''" >
+        and create_time &gt;=  #{createTimeStart}
+	  </if>
+	  <if test="createTimeEnd != null and createTimeEnd != ''" >
+        and create_time &lt;=  #{createTimeEnd}
+	  </if>
+	  <if test="q != null and q != ''" >
+        and (name like CONCAT('%',#{q},'%') or code like CONCAT('%',#{q},'%'))
+	  </if>
+    </trim>
+  </sql>
+  
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_CALC_OBJECT(id,name,code,type,param,attr1,attr2,attr3,attr4,attr5,create_by,creator,update_by,create_time,update_time,status,calc_status,data_app_id,tenant_id)
+ values(#{id},#{name},#{code},#{type},#{param},#{attr1},#{attr2},#{attr3},#{attr4},#{attr5},#{createBy},#{creator},#{updateBy},now(),now(),#{status},#{calcStatus},#{dataAppId},#{tenantId})
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+    update TD_CALC_OBJECT set name=#{name},code=#{code},type=#{type},param=#{param},attr1=#{attr1},attr2=#{attr2},attr3=#{attr3},attr4=#{attr4},attr5=#{attr5},create_by=#{createBy},creator=#{creator},update_by=#{updateBy},create_time=now(),update_time=now(),status=#{status},calc_status=#{calcStatus},data_app_id=#{dataAppId},tenant_id=#{tenantId} where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+    update TD_CALC_OBJECT set 
+	<trim  suffixOverrides="," >
+	<if test="name != null  ">
+		name=#{name},
+	</if>
+	<if test="code != null  ">
+		code=#{code},
+	</if>
+	<if test="type != null  ">
+		type=#{type},
+	</if>
+	<if test="param != null  ">
+		param=#{param},
+	</if>
+	<if test="attr1 != null  ">
+		attr1=#{attr1},
+	</if>
+	<if test="attr2 != null  ">
+		attr2=#{attr2},
+	</if>
+	<if test="attr3 != null  ">
+		attr3=#{attr3},
+	</if>
+	<if test="attr4 != null  ">
+		attr4=#{attr4},
+	</if>
+	<if test="attr5 != null  ">
+		attr5=#{attr5},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="creator != null  ">
+		creator=#{creator},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	<if test="status != null  ">
+		status=#{status},
+	</if>
+	<if test="calcStatus != null  ">
+		calc_status=#{calcStatus},
+	</if>
+	<if test="dataAppId != null  ">
+		data_app_id=#{dataAppId},
+	</if>
+	<if test="tenantId != null  ">
+		tenant_id=#{tenantId},
+	</if>
+	</trim> where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 计算对象 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" /> 
+	 from TD_CALC_OBJECT where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+    delete 	 from TD_CALC_OBJECT where id = #{id}
+  </delete>
+
+  <!-- 计算对象 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_CALC_OBJECT 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询计算对象列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_CALC_OBJECT 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <select id="queryExportCalcRecordByCount" resultType="java.lang.Integer"  parameterType="Object">
+		select count(1)
+		from TD_CALC_OBJECT
+		<include refid="Base_Where_Clause"/>
+		<if test="codes != null and codes.length > 0">
+			and code in
+			<foreach collection="codes" open="(" separator="," close=")" item="item">
+				#{item}
+			</foreach>
+		</if>
+   </select>
+	
+	<select id="queryExportCalcRecordByList" resultMap="BaseResultMap"  parameterType="Object">
+		select
+		<include refid="Base_Column_List" />
+		from TD_CALC_OBJECT
+		<include refid="Base_Where_Clause"/>
+		<if test="codes != null and codes.length > 0">
+			and code in
+			<foreach collection="codes" open="(" separator="," close=")" item="item">
+				#{item}
+			</foreach>
+		</if>
+		<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+	       ${pager.orderCondition}
+	    </if>
+	    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+	       ${pager.mysqlQueryCondition}
+	    </if>
+	</select>
+	
+	<select id="queryByCalcObject"  resultMap="BaseResultMap" parameterType="Object">
+	  	select <include refid="Base_Column_List" />  
+	  	from TD_CALC_OBJECT 
+	  	<include refid="Base_Where_Clause"/>
+	</select>
+	
+  <select id="queryWithSearchByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_CALC_OBJECT 
+	<include refid="Base_Where_Clause_Search"/>
+	<if test="codes != null and codes.length > 0">
+		and code in
+		<foreach collection="codes" open="(" separator="," close=")" item="item">
+			#{item}
+		</foreach>
+	</if>
+  </select>
+  	
+  <select id="queryWithSearchByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_CALC_OBJECT 
+	<include refid="Base_Where_Clause_Search"/>
+	<if test="codes != null and codes.length > 0">
+		and code in
+		<foreach collection="codes" open="(" separator="," close=")" item="item">
+			#{item}
+		</foreach>
+	</if>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <select id="queryMaxByCode" resultMap="BaseResultMap"  parameterType="Object">
+  SELECT t1.id,t1.name,t1.code,t1.type,t1.param,t1.attr1,t1.attr2,t1.attr3,t1.attr4,t1.attr5,t1.create_by,t1.creator,t1.update_by,t1.create_time,t1.update_time,t1.status,t1.calc_status,t1.data_app_id,t1.tenant_id
+   FROM TD_CALC_OBJECT t1,
+	(SELECT CODE, MAX(create_time) max_day FROM TD_CALC_OBJECT GROUP BY CODE) t2
+	WHERE t1.code = t2.code AND t1.create_time = t2.max_day AND t1.code = #{code}
+  		<if test="tenantId != null and tenantId != ''" >
+        and t1.tenant_id =  #{tenantId}
+	  </if>
+  </select>
+  
+  <!-- @Deprecated -->
+  <delete id="deleteByExcludesTenantIds" parameterType="Object">
+    delete from TD_CALC_OBJECT where tenant_id not in
+	<foreach collection="tenantIds" open="(" separator="," close=")" item="item">
+		#{item}
+	</foreach>
+  </delete>
+  
+  <delete id="deleteByExcludesCreaters" parameterType="Object">
+    delete from TD_CALC_OBJECT where create_by not in
+	<foreach collection="creaters" open="(" separator="," close=")" item="item">
+		#{item}
+	</foreach>
+	and code = 'crowdExport'
+  </delete>
+</mapper>

@@ -1,0 +1,16 @@
+.tfilter-date-picker .tfilter-date-box {
+    float:left;
+    margin-right:20px
+}
+.tfilter-date-picker .tfilter-date-con {
+    margin-top:10px
+
+}
+.tfilter-date-picker .tfilter-date-sel {
+    color:#ccc
+}
+
+:host /deep/ .tfilter-date-picker .tfilter-date-con .tconfig-date-picker .tkey {
+    display: none
+}
+

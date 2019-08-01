@@ -1,0 +1,6 @@
+{
+  "name": "kylinTest",
+  "configDefinitionId": 739,
+  "adapterId": 11,
+  "params": "{\"url\": \"http://172.23.6.3:7070\", \"username\": \"ADMIN\", \"password\": \"KYLIN\", \"project\": \"kylinProjectTest\"}"
+}

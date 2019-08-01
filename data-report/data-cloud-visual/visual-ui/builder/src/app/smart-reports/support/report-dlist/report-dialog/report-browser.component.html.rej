@@ -1,0 +1,62 @@
+diff a/data-cloud-visual/visual-ui/builder/src/app/smart-reports/support/report-dlist/report-dialog/report-browser.component.html b/data-cloud-visual/visual-ui/builder/src/app/smart-reports/support/report-dlist/report-dialog/report-browser.component.html	(rejected hunks)
+@@ -1,27 +0,31 @@
+-<section class="add_project">
+-
+-    <aside>
+-        <ul>
+-            <li (click)="clickCon($event)">å…ƒæ•°æ®</li>
+-            <li (click)="clickCon($event)">æ•°æ®</li>
+-        </ul>
+-    </aside>
+-
+-    <div>
+-        <p-dataTable *ngFor="let item of arr" ngIf='tabDisplay'>
+-            <p-column header="{{item}}">
+-            </p-column>
+-        </p-dataTable>
+-        <p-dataTable *ngFor="let item of arr" ngIf='!tabDisplay'>
+-            <p-column header="{{item}}">
+-            </p-column>
+-        </p-dataTable>
+-    </div>
+-
+-
+-
+-
+-
+-
+-
+-</section>
+\ No newline at end of file
++<div class="clearfix dataprview">
++    <section class="add_project" *ngIf="DataPrview">
++        <aside>
++            <ul>
++                <li (click)="clickCon($event)" id="1">æ•°æ®</li>
++                <li (click)="clickCon($event)" id="2">å…ƒæ•°æ®</li>
++            </ul>
++        </aside>
++        <!--æ•°æ®-->
++        <div *ngIf="prviewTab">
++            <p-dataTable [value]="newDatas">
++                <p-column *ngFor="let col of cols" [header]="col.value">
++                    <template let-project="rowData" pTemplate="body">
++                      {{project[col.value]}}
++                    </template>
++                </p-column>
++            </p-dataTable>
++            <x-paginator [value]="value" (onPagesChange)="paginate($event)"></x-paginator>
++        </div>
++        <!--å…ƒæ•°æ®-->
++        <div *ngIf="prviewMetaTab">
++            <p-dataTable [value]="newDatas">
++                <p-column *ngFor="let col of colmeta" [header]="col.value">
++                    <template let-project="rowData" pTemplate="body">
++                    {{project[col.value]}} 
++               </template>
++                </p-column>
++            </p-dataTable>
++        </div>
++    </section>
++</div>
+\ No newline at end of file

@@ -1,0 +1,122 @@
+diff a/data-cloud-visual/visual-ui/core/src/public/scripts/utils.ts b/data-cloud-visual/visual-ui/core/src/public/scripts/utils.ts	(rejected hunks)
+@@ -273,64 +273,64 @@
+         }
+     }
+ 
+-  public static changeTitleFont(style:any,container:any):any{
++//   public static changeTitleFont(style:any,container:any):any{
+         
+-        for(let key in style){
+-            switch(key){
+-              case "font_textDecoration":
+-                  if(style.font_textDecoration==true){
+-                      container.textDecoration="underline";
+-                  }
+-              break;
+-              case "font_fontWeight":
+-                if(style.font_fontWeight==true){
+-                    container.fontWeight="bold"
+-                } 
+-              break;
+-              case "font_fontStyle":
+-                if(style.font_fontStyle==true){
+-                    container.fontStyle="italic";
+-                } 
+-              break;
+-              case "font_textThrough":
+-                if(style.font_textThrough==true){
+-                    container.textDecoration="line-through";
+-                } 
+-              break;
+-
+-            }
+-        }
+-    }
+- public static changeValueFont(style:any,container:any):any{
++//         for(let key in style){
++//             switch(key){
++//               case "font_textDecoration":
++//                   if(style.font_textDecoration==true){
++//                       container.textDecoration="underline";
++//                   }
++//               break;
++//               case "font_fontWeight":
++//                 if(style.font_fontWeight==true){
++//                     container.fontWeight="bold"
++//                 } 
++//               break;
++//               case "font_fontStyle":
++//                 if(style.font_fontStyle==true){
++//                     container.fontStyle="italic";
++//                 } 
++//               break;
++//               case "font_textThrough":
++//                 if(style.font_textThrough==true){
++//                     container.textDecoration="line-through";
++//                 } 
++//               break;
++
++//             }
++//         }
++//     }
++//  public static changeValueFont(style:any,container:any):any{
+         
+-        for(let key in style){
+-            switch(key){
+-              case "value_textDecoration":
+-                  if(style.value_textDecoration==true){
+-                      container.textDecoration="underline";
+-                      style.value_textThrough=false;
+-                  }
+-              break;
+-              case "value_fontWeight":
+-                if(style.value_fontWeight==true){
+-                    container.fontWeight="bold"
+-                } 
+-              break;
+-              case "value_fontStyle":
+-                if(style.value_fontStyle==true){
+-                    container.fontStyle="italic";
+-                } 
+-              break;
+-              case "value_textThrough":
+-                if(style.value_textThrough==true){
+-                    style.value_textDecoration=false;
+-                    container.textDecoration="line-through";
+-                } 
+-              break;
+-
+-            }
+-        }
+-    }
++//         for(let key in style){
++//             switch(key){
++//               case "value_textDecoration":
++//                   if(style.value_textDecoration==true){
++//                       container.textDecoration="underline";
++//                       style.value_textThrough=false;
++//                   }
++//               break;
++//               case "value_fontWeight":
++//                 if(style.value_fontWeight==true){
++//                     container.fontWeight="bold"
++//                 } 
++//               break;
++//               case "value_fontStyle":
++//                 if(style.value_fontStyle==true){
++//                     container.fontStyle="italic";
++//                 } 
++//               break;
++//               case "value_textThrough":
++//                 if(style.value_textThrough==true){
++//                     style.value_textDecoration=false;
++//                     container.textDecoration="line-through";
++//                 } 
++//               break;
++
++//             }
++//         }
++//     }
+ 
+     public static addStyle(sourceStyle: any): any {
+        

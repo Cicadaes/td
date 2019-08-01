@@ -1,0 +1,105 @@
+<main>
+    <p-dialog [header]="powerTitle" [(visible)]="display" modal="modal" [width]="dialogWidth" responsive="true" [closable]="true">
+        <aside *ngIf="powerBoolean">
+            <section class="add_power clearfix">
+                <div class="buttons button-add">
+                    <button (click)="addPower()">
+                        <span class="iconfont icon-addincreased"></span> 添加权限
+                    </button>
+                </div>
+                <div class="add_power_list">
+                    <ol>
+                        <li>角色名称</li>
+                        <li>只读
+                            <span class="iconfont icon-wenhao">
+                                <div class="power_tips">被授权的角色：可以查看当前报表的信息。</div>
+                            </span>
+                        </li>
+                    </ol>
+
+                    <ul>
+                        <dl *ngFor="let item of authorizedArray">
+                            <dt>{{item.roleName}}</dt>
+                            <dt>
+                                <span class="blue-check" *ngIf="item.read == 1"></span>
+                                <button type="button" class="r">
+                                    <span class="iconfont icon-tubiao01"></span>
+                                    <ul>
+                                        <li (click)="editProjectPower(item);"><span class="iconfont icon-edit"></span>编辑</li>
+                                        <li (click)="deleteProjectPower(item);"><span class="iconfont icon-delete"></span>删除</li>
+                                    </ul>
+                                </button>
+                            </dt>
+                        </dl>
+                        <dl *ngIf="authorizedArray.length == 0" class="peoplePowerEmpty">暂无内容</dl>
+                    </ul>
+                </div>
+            </section>
+            <footer>
+                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                    <!--<button type="button" pButton (click)="cancel()" label="No">取消</button>-->
+                    <button type="button" pButton (click)="cancel()" label="Yes">关闭</button>
+                </div>
+            </footer>
+        </aside>
+
+        <aside *ngIf="!powerBoolean">
+            <section class="add_power clearfix">
+                <div class="add_power_list">
+                    <ol>
+                        <li>角色名称</li>
+                        <li>只读</li>
+                    </ol>
+
+                    <ul *ngIf="!AddPermissionsRoles">
+                        <dl>
+                            <dt>
+                                {{editRoleName}}
+                            </dt>
+                            <dt>
+                                <span>
+                                    <p-checkbox [(ngModel)]="editRead" binary="editRead == 1" (onChange)="onChange(editRead)"></p-checkbox>
+                                </span>
+                            </dt>
+                        </dl>
+                    </ul>
+
+                    <ul *ngIf="AddPermissionsRoles">
+                        <dl *ngFor="let item of peoplePowerListArray">
+                            <dt>
+                                {{item.roleName}}
+                            </dt>
+                            <dt>
+                                <span>
+                                    <p-checkbox [(ngModel)]="item.read" binary="true"></p-checkbox>
+                                </span>
+                                <button type="button" class="r">
+                                    <span class="iconfont icon-tubiao01"></span>
+                                    <ul>
+                                        <li (click)="deletePeoplePower(item);"><span class="iconfont icon-delete"></span>删除</li>
+                                    </ul>
+                                </button>
+                            </dt>
+                        </dl>
+                        <dl *ngIf="peoplePowerListArray.length == 0" class="peoplePowerEmpty">暂无内容</dl>
+                    </ul>
+                </div>
+            </section>
+            <div class="add_power_select" *ngIf="AddPermissionsRoles">
+                <div class="add_power_select_top" (click)="addPeoplePower()">{{peoplePowerName}}<span class="select-dropdown-trigger"></span></div>
+                <div class="add_power_select_list" *ngIf="peoplePower">
+                    <ul>
+                        <li (click)="choosePeoplePower(item)" *ngFor="let item of peoplePowerArray" [class.add_select_choose]="item.roleName == peoplePowerName">{{item.roleName}}</li>
+                    </ul>
+                </div>
+            </div>
+            <footer>
+                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                    <button type="button" pButton (click)="remove()" label="No">取消</button>
+                    <button type="button" pButton (click)="confirm()" label="Yes">确定</button>
+                </div>
+            </footer>
+        </aside>
+
+    </p-dialog>
+</main>

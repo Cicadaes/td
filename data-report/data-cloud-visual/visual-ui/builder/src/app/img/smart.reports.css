@@ -1,0 +1,779 @@
+.smart-container {
+    width: 100%;
+    height: 100%;
+    color: #464C5B;
+    background: #E7EBEF
+}
+
+.smart-container .smart-left {
+    height: calc(100% - 61px);
+    background: #E7EBEF;
+    overflow: hidden
+}
+
+.smart-container .smart-right {
+    float: right;
+    width: 300px;
+    height: calc(100% - 61px);
+    background: #F7F7F7;
+    border-left: 1px solid #CFD3D7;
+}
+
+.smart-header {
+    position: relative;
+    z-index: 10;
+    padding: 0 15px;
+    height: 60px;
+    line-height: 60px;
+    background: #FFFFFF;
+    border-top: 1px solid #E7EBEF;
+    font-size: 16px;
+    box-shadow: 0px 3px 5px 0px rgba(139, 150, 168, 0.33);
+}
+
+.smart-header .smart-hedit input:read-only {
+    border: none
+}
+
+.smart-header .smart-hedit input:read-only+em {
+    margin-left: -100px
+}
+
+.smart-header .smart-hconf li {
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 10px;
+    padding: 0 15px;
+}
+
+.smart-header .smart-hconf li:not(:last-child) {
+    border-right: 1px solid #E7EBEF;
+}
+
+.smart-header .smart-hconf li a {
+    color: #464C5B
+}
+
+.smart-header .smart-hconf li a:hover {
+    color: royalblue
+}
+
+.smart-reports {
+    width: 100%;
+    min-width: 826px;
+    height: 50px;
+    line-height: 50px;
+    background: #FDFDFD;
+    border-bottom: 1px solid #CFD3D7
+}
+
+.smart-stage-box {
+    height: 100%;
+    min-height: 200px;
+    padding: 20px 50px;
+}
+
+.smart-stage-box .smart-stage {
+    position: relative;
+    height: calc(100% - 110px);
+    background: #FFFFFF;
+    box-shadow: 0px 2px 2px 0px #D7DDE4;
+}
+
+.smart-pages,
+.smart-slider,
+.smart-slider-control {
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.smart-pages {
+    width: 120px;
+    text-align: center;
+    position: relative;
+}
+
+.smart-pages .smart-pages-d {
+    margin-left: 5px;
+}
+
+.smart-pages-n {
+   /* padding: 0 15px */
+}
+
+.smart-slider {
+    margin-top: 14px;
+    width: calc( 100% - 210px);
+    min-width: 624px;
+    line-height: normal;
+    border-left: 1px solid #E7EBEF;
+    border-right: 1px solid #E7EBEF;
+    -webkit-user-select: none;
+    user-select: none;
+    padding-left: 10px;
+}
+
+.smart-slider-control {
+    width: 60px
+}
+
+.smart-reports-list .smart-reports-item {
+    float: left;
+    display: table;
+    box-sizing: border-box
+}
+
+.smart-reports-list .smart-reports-item a {
+    display: table-cell;
+    position: relative;
+    vertical-align: middle;
+    cursor: move;
+    text-align: center;
+    font-size: 12px;
+    color: #5D6578
+}
+
+.smart-reports-list .smart-reports-item a em {
+    display: block;
+    margin: 0 auto 2px;
+    width: 45px;
+    height: 35px;
+    /*background: #eee*/
+}
+
+.smart-reports-list .smart-reports-item a span {
+    width: 60px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.smart-reports-list .smart-reports-item a.active::after,
+.smart-reports-list .smart-reports-item a:hover em::after {
+    content: '';
+    width: 100%;
+    margin: auto;
+    height: 2px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #339DFF
+}
+
+.smart-reports-list .smart-reports-item a.clonex {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100
+}
+
+.smart-reports-more {
+    position: relative
+}
+
+.smart-reports-more a.smart-reports-more-txt {
+    padding: 20px 0
+}
+
+.smart-reports-more-list {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    z-index: 100;
+    background: #fff;
+    padding-bottom: 2px;
+    display: none
+}
+
+.smart-reports-more-list li:not(:last-child) {
+    margin-bottom: 10px
+}
+
+.smart-reports-more:hover .smart-reports-more-list {
+    display: block
+}
+
+.smart-square {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent transparent #959DB1;
+    vertical-align: text-bottom
+}
+
+.smart-square.bottom {
+    transform: rotate(90deg);
+    vertical-align: -webkit-baseline-middle;
+}
+
+
+/*configs start*/
+
+.smart-configs {
+    height: 100%;
+    background: #F7F7F7;
+}
+
+.smart-ctab .ui-tabview {
+    height: 100%
+}
+
+.smart-ctab .ui-tabview-nav {
+    padding: 10px 10px 7px !important;
+    text-align: center
+}
+
+.smart-ctab .ui-tabview-nav li.ui-state-default {
+    display: inline-block;
+    border-radius: 0 !important;
+    padding: 2px 44px;
+    margin: 0 !important;
+    float: none;
+    background: #FFFFFF;
+    border: 1px solid #DDDFE3 !important;
+}
+
+.smart-ctab .ui-tabview-nav li:not(:last-child) {
+    margin-right: -5px !important
+}
+
+.smart-ctab .ui-tabview-panels {
+    height: calc(100% - 70px)!important;
+    overflow-x: hidden;
+    overflow-y: scroll
+}
+
+.smart-ctab .ui-tabview-panel {
+    height: calc(100% - 15px)!important;
+}
+
+.smart-ctab .ui-tabview-nav li.ui-state-active {
+    background: #5D6577 !important;
+}
+
+.smart-ctab .ui-tabview-nav li a {
+    padding: 20px 0
+}
+
+
+/*new add*/
+
+
+/*right content right style*/
+
+.smart-ctab .explore_graph_style {
+    padding: 0 20px;
+}
+
+.smart-ctab .explore_graph_style dl {
+    padding-top: 20px;
+    color: #464c5b;
+}
+
+.smart-ctab .explore_graph_style dl:not(:last-child) {
+    border-bottom: 1px solid #dedede
+}
+
+.smart-ctab .explore_graph_style dl dt {
+    font-weight: bold;
+}
+
+.smart-ctab .explore_graph_style dl dd {
+    padding: 12px 0 18px 0
+}
+
+.smart-ctab .explore_graph_style dl dd:after {
+    content: "";
+    display: block;
+    clear: both;
+    height: 0;
+    visibility: hidden;
+}
+
+.smart-ctab .explore_graph_style dl dd ul:not(.ui-dropdown-items) li {
+    width: 50%;
+    float: left;
+    line-height: 30px;
+}
+
+.smart-ctab .explore_graph_style dl dd ul:not(.ui-dropdown-items) li span {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.smart-ctab .explore_graph_style dl dd ul li span[class$="-line"] {
+    width: 35px;
+    background: #959eb2;
+}
+
+.smart-ctab .broken-line {
+    height: 1px;
+}
+
+.smart-ctab .herein-line {
+    height: 2px;
+}
+
+.smart-ctab .crude-line {
+    height: 3px;
+}
+
+.smart-ctab .curve-line {
+    width: 30px;
+    height: 6px;
+}
+
+
+/*实心*/
+
+.smart-ctab .solid-circle {
+    width: 7px;
+    height: 7px;
+    background: #959eb2;
+    border-radius: 50%;
+}
+
+
+/*空心*/
+
+.smart-ctab .hollow-circle {
+    width: 4px;
+    height: 4px;
+    border: 2px solid #959eb2;
+    border-radius: 50%;
+    box-sizing: content-box;
+}
+
+.smart-ctab .explore_graph_style dl dd ul li.aided {
+    width: 100%;
+}
+
+.smart-ctab .qualitative_tit {
+    width: calc(100% - 12px);
+    background: #fff;
+    border: 1px solid #c9c9c9;
+    height: 54px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.smart-ctab .qualitative_tit span[class^="icon-"] {
+    width: 35px;
+    height: 32px;
+    display: block;
+    margin: 13px auto 0 auto;
+}
+
+.smart-ctab .qualitative_tit:hover,
+.smart-ctab .qualitative_choose {
+    border-color: #349eff;
+}
+
+.smart-ctab .qualitative_con {
+    width: calc(100% - 12px);
+    text-align: center;
+    line-height: 30px;
+}
+
+.smart-ctab .qualitative_choose {
+    position: relative;
+}
+
+.smart-ctab .qualitative_choose:after {
+    content: '\2714';
+    width: 16px;
+    height: 16px;
+    color: #fff;
+    position: absolute;
+    left: calc(50% - 7px);
+    bottom: -8px;
+    background: #349eff;
+    text-align: center;
+    border-radius: 50%;
+    line-height: 16px;
+}
+
+
+/*radio*/
+
+.regular-radio {
+    float: left;
+    background: #fff;
+    border: 1px solid #c0c7d0;
+    border-radius: 50%;
+    position: relative;
+    top: 6px;
+    padding: 7px;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-transition: background .5s linear;
+    -moz-transition: background .5s linear;
+    transition: background .5s linear;
+    -webkit-transition: border-color .5s linear;
+    -moz-transition: border-color .5s linear;
+    transition: border-color .5s linear;
+}
+
+.regular-radio:checked:after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    background: #5f93e1;
+}
+
+.regular-radio:checked {
+    border-color: #5f93e1;
+}
+
+.regular-radio+label {
+    float: left;
+    margin-left: 5px;
+    margin-right: 8px;
+}
+
+
+/*checkbox*/
+
+.regular-check {
+    float: left;
+    background: #fff;
+    border: 1px solid #c0c7d0;
+    border-radius: 3px;
+    position: relative;
+    top: 6px;
+    padding: 7px;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-transition: background .5s linear;
+    -moz-transition: background .5s linear;
+    transition: background .5s linear;
+    -webkit-transition: border-color .5s linear;
+    -moz-transition: border-color .5s linear;
+    transition: border-color .5s linear;
+}
+
+.regular-check:checked:after {
+    content: '\2714';
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    position: absolute;
+    left: -1px;
+    top: 0;
+    background: #349eff;
+    text-align: center;
+    border-radius: 3px;
+    vertical-align: text-top;
+    padding: 0 1px;
+}
+
+.regular-check:checked {
+    border-color: #349eff;
+}
+
+.regular-check+label {
+    float: left;
+    margin-left: 5px;
+    margin-right: 8px;
+}
+
+
+/*check 02*/
+
+.choose-check {
+    width: 20px;
+    height: 1px;
+    background: #959eb2;
+    display: block;
+    position: relative;
+    top: 7px;
+}
+
+.choose-check:before {
+    content: '';
+    width: 11px;
+    height: 11px;
+    display: block;
+    background: #fff;
+    border: 1px solid #959eb2;
+    border-radius: 50%;
+    position: absolute;
+    left: -5px;
+    top: -6px;
+    cursor: pointer;
+}
+
+.choose-check:after {
+    content: '';
+    width: 5px;
+    height: 1px;
+    display: block;
+    background: #959eb2;
+    border-radius: 50%;
+    position: absolute;
+    left: -1px;
+    top: 0px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.choose-check:before,
+.choose-check:after {
+    -webkit-transition: left ease-in .3s;
+    -moz-transition: left ease-in .3s;
+    transition: left ease-in .3s;
+}
+
+.choose-check:checked {
+    background: #00cc99;
+}
+
+.choose-check:checked:before {
+    border-color: #00cc99;
+    left: 15px;
+}
+
+.choose-check:checked:after {
+    content: '\2714';
+    width: 100%;
+    background: transparent;
+    left: 15px;
+    color: #00cc99;
+    top: -6px;
+    -webkit-transform: scale(.7);
+    -moz-transform: scale(.7);
+    transform: scale(.7);
+}
+
+.smart-ctab .explore_graph_style .tc-inline:not(:last-child) {
+    margin-bottom: 15px
+}
+
+.smart-ctab .explore_graph_style .tc-inline-inner {
+    display: block;
+    margin: 15px 0
+}
+
+.tc-select-list .tc-select-item:last-child input{
+    margin-right: 0!important;
+}
+
+.smart-ctab .explore_graph_style .tc-inline label.tkey {
+    display: block;
+    /*width: 50px;*/
+    height: 20px;
+    line-height: 20px;
+    color: rgba(0,0,0,0.54)!important
+}
+
+.smart-ctab .explore_graph_style .tc-inline input{
+    min-width: 110px!important;
+    max-width: 110px!important;
+    margin-right: 10px;
+}
+    
+
+.smart-ctab .explore_graph_style .tc-inline .ui-dropdown {
+    /*margin-left: -2px;*/
+}
+
+.smart-ctab .explore_graph_style .tc-inline input,
+.smart-ctab .explore_graph_style .tc-inline textarea,
+.smart-ctab .explore_graph_style .tc-inline .ui-dropdown {
+    min-width: 120px;
+    max-width: 120px
+}
+
+
+/**/
+
+.icon_svg {
+    background: no-repeat url(../../images/datacloud_sprite.svg);
+    background-position: -346px -923px;
+    height: 18px;
+    width: 18px;
+    display: inline-block;
+    opacity: .54;
+}
+
+.icons_svg {
+    background: no-repeat url(../../images/datacloud_sprite1.svg);
+    background-position: 0 -24px;
+    height: 24px;
+    width: 24px;
+    display: inline-block;    
+    opacity: .54;
+}
+
+
+/*configs end*/
+
+.text-elic {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fl {
+    float: left
+}
+
+.fr {
+    float: right
+}
+
+.clearfix {
+    zoom: 1
+}
+
+.clearfix:after {
+    content: '.';
+    display: block;
+    height: 0;
+    visibility: hidden;
+    clear: both
+}
+
+.hide {
+    display: none
+}
+
+.text-center {
+    text-align: center
+}
+
+.text-left {
+    text-align: left
+}
+
+.text-right {
+    text-align: right
+}
+
+.tc-inline::after {
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+    visibility: hidden;
+}
+
+/*图标*/
+.color_format{
+    opacity: .54;
+    height: 20px;
+    width: 24px;
+    transform: translateY(-2px);
+}
+
+.line_format{    
+    height: 18px;
+    width: 18px;
+    background-position: -330px -448px;
+    position: relative;
+    top: -3px;
+}
+
+.axis_format{
+    height: 20px;
+    width: 24px;
+    background-position: -373px -400px;
+}
+
+.grid_format{
+    height: 20px;
+    width: 24px;
+    background-position: -441px -96px;
+}
+
+.font_format{
+    position: relative;
+    top: -5px;
+}
+
+.chartbg_format{
+    height: 20px;
+    width: 24px;
+    background-position: -553px -48px;
+}
+
+.label_format{    
+    height: 18px;
+    width: 18px;
+    background-position: -466px -546px;
+    position: relative;
+    top: -4px;
+}
+
+.range_small_hole{    
+    height: 18px;
+    width: 18px;
+    background-position: -553px -72px;
+    float: left;
+    margin-right: 10px;
+}
+
+.range_large_hole{    
+    height: 18px;
+    width: 18px;
+    background-position: -439px -48px;
+    float: left;
+    margin-left: 10px;
+}
+
+.theadbg_format{
+    height: 20px;
+    width: 24px;
+    background-position: -90px 0;
+}
+
+.cellborder_format{
+    height: 20px;
+    width: 24px;
+    background-position: -510px -354px;
+}
+.oddline_format{
+    height: 20px;
+    width: 24px;
+    background-position: -545px -115px
+}
+.evenline_format{
+    height: 20px;
+    width: 24px;
+    background-position: 0 -486px
+}
+
+.tc-select-item{
+    float: left;
+}
+
+.smart-ctab .explore_graph_style .tc-inline .ui-dropdown{
+    min-width: 90px;
+}
+
+.tc-select-item .ui-chkbox-label{
+    margin-right: 15px
+}
+
+
+.tc-select-item .ui-inputtext.ui-state-focus{
+    border: 0 none;
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+
+tconfig-checkbox{
+    position: relative;
+    top: 5px;
+    left: 10px;
+}
+

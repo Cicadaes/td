@@ -1,0 +1,13 @@
+<p-checkbox
+        name="{{'groupname-'+tconfig.code}}"
+        value="{{tconfig.value.titleValue}}"
+        label="{{tconfig.name}}"
+        binary="true"
+        [(ngModel)]="tconfig.value.titleValue"
+        (onChange)="onChange($event)">
+</p-checkbox>
+<textarea pInputText #input
+       [(ngModel)]="tconfig.value.textValue"
+       (input)="onInput(input.value)"
+        *ngIf="tconfig.value.titleValue">
+</textarea>

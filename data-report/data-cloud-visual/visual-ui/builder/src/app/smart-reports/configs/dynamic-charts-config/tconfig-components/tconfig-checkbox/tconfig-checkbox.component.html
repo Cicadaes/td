@@ -1,0 +1,2 @@
+<p-checkbox *ngIf="tconfig.viewType == 14"  label="{{tconfig.name}}" [(ngModel)]="tconfig.value" binary="true" (onChange)="onChange($event)"></p-checkbox>
+<p-checkbox *ngIf="tconfig.viewType == 23" name="{{'groupname-'+tconfig.code}}" value="{{tconfig.value}}" label="{{tconfig.name}}" [(ngModel)]="tconfig.value" (onChange)="onChange($event)"></p-checkbox>

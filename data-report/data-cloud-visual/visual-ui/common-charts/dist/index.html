@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DatWill-SDK-Charts</title>
+    <link href="../public/styles/datwill_style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div style="position: absolute;width: 100%;height: 100%;top: 0px;left: 0px">
+        <div style="position: relative;width: 100%;height: 100%;">
+            <div class="stage" style="height: 400px;"></div>
+            <div class="controller">
+                <div class="btn-container">
+                    <div class="btn-index" relative-stage>相对舞台</div>
+                </div>
+                <div class="btn-container">
+                    <div class="btn-index" left-align>左对齐</div>
+                </div>
+                <div class="btn-container">
+                    <div class="btn-index" right-align>右对齐</div>
+                </div>
+                <div class="btn-container">
+                    <div class="btn-index" top-align>上对齐</div>
+                </div>
+                <div class="btn-container">
+                    <div class="btn-index" bottom-align>下对齐</div>
+                </div>
+                <div class="btn-container">
+                    <div class="btn-index" vertical-center-align>垂直居中</div>
+                </div>
+                <div class="btn-container">
+                    <div class="btn-index" horiz-center-align>水平居中</div>
+                </div>
+
+                <div class="btn-container" isedit="true" data-button-edit>
+                    <div class="btn-index">编辑</div>
+                </div>
+                <div class="btn-container" data-button-data>
+                    <div class="btn-index">数据</div>
+                </div>
+                <div class="btn-container">
+                    <div class="btn-index" data-button-align>点击</div>
+                </div>
+            </div>
+            <div class="controller">
+                <div class="btn-container" draggable="true" button-Cityfilter>
+                    <div class="btn-index">同城过滤器</div>
+                </div>
+
+                <div class="btn-container" draggable="true" button-Provincefilter>
+                    <div class="btn-index">省份过滤器</div>
+                </div>
+
+
+                <div class="btn-container" draggable="true" button-Area>
+                    <div class="btn-index">Area面积图</div>
+                </div>
+                <div class="btn-container" draggable="true" button-Banner>
+                    <div class="btn-index">Banner</div>
+                </div>
+                <div class="btn-container" draggable="true" button-Bar>
+                    <div class="btn-index">Bar柱图</div>
+                </div>
+                 <div class="btn-container" draggable="true" button-BarXY>
+                    <div class="btn-index">Bar柱图XY</div>
+                </div>
+                <div class="btn-container" draggable="true" button-ChinaMap>
+                    <div class="btn-index">ChinaMap</div>
+                </div>
+                <div class="btn-container" draggable="true" button-Circle>
+                    <div class="btn-index">Circle</div>
+                </div>
+                <div class="btn-container" draggable="true" button-Dateformat>
+                    <div class="btn-index">Dateformat</div>
+                </div>
+
+                <div class="btn-container" draggable="true" button-Font>
+                    <div class="btn-index">Font</div>
+                </div>
+                <div class="btn-container" draggable="true" button-Funnel>
+                    <div class="btn-index">Funnel</div>
+                </div>
+                <div class="btn-container" draggable="true" button-RectFunnel>
+                    <div class="btn-index">RectFunnel</div>
+                </div>
+                <div class="btn-container" draggable="true" button-Pie>
+                    <div class="btn-index">Pie</div>
+                </div>
+                <div class="btn-container" draggable="true" button-Priview>
+                    <div class="btn-index">Priview概览</div>
+                </div>
+
+                <div class="btn-container" draggable="true" button-Radar>
+                    <div class="btn-index">Radar</div>
+                </div>
+
+                <div class="btn-container" draggable="true" button-Radar2>
+                    <div class="btn-index">Radar2</div>
+                </div>
+                <div class="btn-container" draggable="true" button-Strip>
+                    <div class="btn-index">Strip条图</div>
+                </div>
+                <div class="btn-container" draggable="true" button-Table>
+                    <div class="btn-index">Table表格</div>
+                </div>
+                <div class="btn-container" draggable="true" button-Test>
+                    <div class="btn-index">Test</div>
+                </div>
+                <div class="btn-container" draggable="true" button-Upload>
+                    <div class="btn-index">Upload</div>
+                </div>
+                <div class="btn-container" draggable="true" button-StackedBar>
+                    <div class="btn-index">StackedBar</div>
+                </div>
+
+                <div class="btn-container" draggable="true" data-button-dragpart>
+                    <div class="btn-index">运营概览</div>
+                </div>
+                <div class="btn-container" draggable="true" data-button-dragtargetTable>
+                    <div class="btn-index">目标考核</div>
+                </div>
+                <div class="btn-container" draggable="true" data-button-scatter>
+                    <div class="btn-index">四象限图</div>
+                </div>
+
+                <div class="btn-container" draggable="true" data-button-dragindexPriview>
+                    <div class="btn-index">指标概览</div>
+                </div>
+
+                <div class="btn-container" draggable="true" data-button-dragpassengerFlowPriview>
+                    <div class="btn-index">概览</div>
+                </div>
+
+                 <div class="btn-container" draggable="true" data-button-dragmanyFilterBar>
+                    <div class="btn-index">Filter柱形图</div>
+                </div>
+
+                <div class="btn-container" draggable="true" data-button-dragmanyCityHorizontalBar>
+                    <div class="btn-index">四个横向条图</div>
+                </div>
+
+
+                <div class="btn-container" draggable="true" dataSource-button style="background: #679fef">
+                    <div class="btn-index">改变数据源</div>
+                </div>
+                <div class="btn-container" draggable="true" button-Line style="background: #679fef">
+                    <div class="btn-index">SelectLine</div>
+                </div>
+                <div class="btn-container" draggable="true" data-button-changeSelect style="background: #679fef">
+                    <div class="btn-index">关闭指标</div>
+                </div>
+                <div class="btn-container" draggable="true" data-button-openSelect style="background: #679fef">
+                    <div class="btn-index">打开指标</div>
+                </div>
+                <div class="btn-container" draggable="true" data-button-changeTitle style="background: #679fef">
+                    <div class="btn-index">控制title按钮</div>
+                </div>
+                <div class="btn-container" draggable="true" data-button-changeTitleHide style="background: #679fef">
+                    <div class="btn-index">隐藏title按钮</div>
+                </div>
+                <div id="changeTitle" style="display:none; position: fixed; width:300px; text-align: left; padding: 10px; border-radius: 5px; border: 1px solid #000; background: #eee; right: 30px; top: 400px; z-index: 5">
+                    <input changeTitleTrue type="radio" name="title" value="显示title" /> 显示title<br />
+                    <input changeTitleShow type="text" value="东直门银座VM" style="display: none; margin:5px 0 10px 12px; height: 30px; padding: 5px 10px " /><br />
+                    <input changeTitleFalse type="radio" name="title" value="隐藏title" checked/> 隐藏title<br />
+
+                </div>
+                <div id="textarea" style="display:none; position: fixed; right: 30px; top: 30px; z-index: 5">
+                    <textarea id="textarea-value" style="width:300px; height: 350px; border-radius: 3px; padding: 10px; border: 1px solid #000; background: #eee; z-index: 5; font-size: 15px; font-family: 'sans-serif'">
+
+[
+    {
+        "name":"客流趋势指标",
+        "list": [
+            {
+                "code": "front_users",
+                "val": "周边客流量"
+            },
+            {
+                "code": "active_user",
+                "val": "入店客流"
+            },
+            {
+                "code": "stay_users",
+                "val": "停留客流"
+            },
+            {
+                "code": "member_count",
+                "val": "会员到访数"
+            },
+            {
+                "code": "potential_count",
+                "val": "潜客数"
+            },
+            {
+                "code": "visit_cycle",
+                "val": "到访周期"
+            }
+        ]
+    },{
+        "name":"客流构成指标",
+        "list": [
+            {
+                "code": "sum(active_new_users)/sum(active_users)",
+                "val": "新客占比"
+            },
+            {
+                "code": "sum(active_old_users)/sum(active_users)",
+                "val": "老客占比"
+            },
+            {
+                "code": "sum(high_active_users)/sum(active_users)",
+                "val": "高活跃客占比"
+            },
+            {
+                "code": "sum(mcodedle_active_users)/sum(active_users)",
+                "val": "中活跃客占比"
+            },
+            {
+                "code": "sum(low_active_users)/sum(active_users)",
+                "val": "低活跃客占比"
+            },
+            {
+                "code": "sum(sleep_active_users)/sum(active_users)",
+                "val": "沉睡客占比"
+            }
+        ]
+    },{
+        "name":"客流转化指标",
+        "list": [
+            {
+                "code": "stay_duration",
+                "val": "停留时长"
+            },
+            {
+                "code": "sum(active_user)/sum(front_users)",
+                "val": "入店率"
+            },
+            {
+                "code": "sum(stay_users)/sum(active_user)",
+                "val": "停留率"
+            },
+            {
+                "code": "sum(jump_users)/sum(active_user)",
+                "val": "跳出率"
+            }
+        ]
+    },{
+        "name":"消费指标",
+        "list": [
+            {
+                "code": "sales_amount",
+                "val": "销售金额"
+            },
+            {
+                "code": "order_count",
+                "val": "订单数"
+            },
+            {
+                "code": "order_average_price",
+                "val": "订单均价"
+            },
+            {
+                "code": "singular_count",
+                "val": "件单数"
+            }
+        ]
+    }
+]
+
+</textarea>
+                    <button textarea-button class="btn-index" style="position: absolute; right: 20px; bottom: 20px;z-index: 7; border-color: #4797ed; background: #4797ed;color: #fff">确定</button>
+
+                </div>
+                <div class="btn-container" draggable="true" button-filter>
+                    <div class="btn-index">过滤器</div>
+                </div>
+            </div>
+        </div>
+<script type="text/javascript" src="/dist/main.js"></script></body>
+
+</html>

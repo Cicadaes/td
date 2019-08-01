@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.admin.FtpClientConfigDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.admin.FtpClientConfig" >
+	<result column="id" property="id"/>
+	<result column="client_name" property="clientName"/>
+	<result column="root_path" property="rootPath"/>
+	<result column="code" property="code"/>
+	<result column="create_by" property="createBy"/>
+	<result column="creator" property="creator"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_time" property="updateTime"/>
+  </resultMap>
+       
+  <!-- TD_FTP_CLIENT_CONFIG table all fields -->
+  <sql id="Base_Column_List" >
+	 id,client_name,root_path,code,create_by,creator,update_by,create_time,update_time
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="clientName != null and clientName != ''" >
+        and client_name =  #{clientName}
+	  </if>
+	      <if test="rootPath != null and rootPath != ''" >
+        and root_path =  #{rootPath}
+	  </if>
+	      <if test="code != null and code != ''" >
+        and code =  #{code}
+	  </if>
+	      <if test="createBy != null and createBy != ''" >
+        and create_by =  #{createBy}
+	  </if>
+	      <if test="creator != null and creator != ''" >
+        and creator =  #{creator}
+	  </if>
+	      <if test="updateBy != null and updateBy != ''" >
+        and update_by =  #{updateBy}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_FTP_CLIENT_CONFIG(id,client_name,root_path,code,create_by,creator,update_by,create_time,update_time)
+ values(#{id},#{clientName},#{rootPath},#{code},#{createBy},#{creator},#{updateBy},now(),now())
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+    update TD_FTP_CLIENT_CONFIG set client_name=#{clientName},root_path=#{rootPath},code=#{code},create_by=#{createBy},creator=#{creator},update_by=#{updateBy},create_time=now(),update_time=now() where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+    update TD_FTP_CLIENT_CONFIG set 
+	<trim  suffixOverrides="," >
+	<if test="clientName != null  ">
+		client_name=#{clientName},
+	</if>
+	<if test="rootPath != null  ">
+		root_path=#{rootPath},
+	</if>
+	<if test="code != null  ">
+		code=#{code},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="creator != null  ">
+		creator=#{creator},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	</trim> where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 客户端配置 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" /> 
+	 from TD_FTP_CLIENT_CONFIG where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+    delete 	 from TD_FTP_CLIENT_CONFIG where id = #{id}
+  </delete>
+
+  <!-- 客户端配置 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_FTP_CLIENT_CONFIG 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询客户端配置列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_FTP_CLIENT_CONFIG 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <!-- 根据id查询 客户端配置 -->
+  <select id="selectByCode"  resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" /> 
+	 from TD_FTP_CLIENT_CONFIG where code = #{code}
+  </select>
+</mapper>   

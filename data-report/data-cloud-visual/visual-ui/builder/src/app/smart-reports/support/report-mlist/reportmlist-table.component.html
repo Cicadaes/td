@@ -1,0 +1,49 @@
+<main>
+    <div class="computing_detail_bottom">
+        <!--项目列表渲染-->
+        <p-dataTable [value]="dispatDatas" *ngIf="dispatDatas" emptyMessage="暂无内容">
+            <p-column field="name" header="报表名称" [style]="{'width':'calc(40%)'}">
+                <template let-project="rowData" pTemplate="body" let-index="rowIndex">
+	                <p>
+	                    <a href="javascript:void(0)"
+	                       (click)="detailTaskProjectDet(dispatDatas[index])"
+	                       style="color: #5697f1;">
+	                       <!--{{project.name}}-->
+                            {{dispatDatas[index].name}}
+	                    </a>
+	                </p>
+	            </template>
+            </p-column>
+
+            <p-column field="status" header="状态" [style]="{'width': '100px'}">
+                <template let-report="rowData" pTemplate="body" let-index="rowIndex">
+                  <span *ngIf="dispatDatas[index].status == 0"><i class="orange-color">●</i>未发布</span>
+                  <span *ngIf="dispatDatas[index].status == 1"><i class="blue-color">●</i>已发布</span>
+                  <span *ngIf="dispatDatas[index].status == 2"><i class="orange-color">●</i>已下线</span>
+                </template>
+            </p-column>
+            <p-column field="description" header="描述" [style]="{'width': 'calc(60%)'}"> </p-column>
+            <p-column field="creator" header="创建人" [style]="{'width': '120px'}"></p-column>
+            <p-column field="createTime" header="创建时间" [style]="{'width': '160px'}"> </p-column>
+            <!--<p-column field="updater" header="更新人" [style]="{'width': '100px'}"></p-column>-->
+            <p-column field="updateTime" header="更新时间" [style]="{'width': '160px'}"> </p-column>
+            <p-column field="publishTime" header="发布时间" [style]="{'width': '160px'}"> </p-column>
+            <p-column [style]="{'width': '50px'}" id="btn">
+                <template let-project="rowData" let-index="rowIndex" pTemplate="body">
+                  <button type="button">
+                     <span class="iconfont icon-tubiao01"></span>
+                     <span class="icon-down"></span>
+                     <ul>
+                         <li (click)="detailTaskProject(dispatDatas[index]);"><span class="iconfont icon-edit"></span>修改信息</li>
+                         <li (click)="releaseDatasourceProject(dispatDatas[index]);" [class.disabled]="dispatDatas[index].status == 1"><span class="iconfont icon-cf-c70-copy"></span>发布</li>
+                         <li (click)="outlineDatasourceProject(dispatDatas[index]);" [class.disabled]="dispatDatas[index].status == 0 || dispatDatas[index].status == 2"><span class="iconfont icon-cf-c70-copy"></span>下线</li>
+                         <li (click)="deleteDatasourceProject(dispatDatas[index]);"><span class="iconfont icon-delete"></span>删除</li>
+                     </ul>
+                  </button>
+               </template>
+            </p-column>
+
+        </p-dataTable>
+        <x-paginator *ngIf="dispatDatas!=''" [value]="value" (onPagesChange)="paginate($event)"></x-paginator>
+    </div>
+</main>

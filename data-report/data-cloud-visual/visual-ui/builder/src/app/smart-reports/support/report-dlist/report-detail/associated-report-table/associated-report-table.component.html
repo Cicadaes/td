@@ -1,0 +1,13 @@
+<main>
+   <div class="computing_detail_table">
+      <!--项目列表渲染-->
+      <p-dataTable [value]="newDatas" *ngIf="dispatDatas" emptyMessage="暂无内容">
+            <p-column field="name" header="名称"></p-column>
+            <p-column field="createTime" header="创建时间"></p-column>
+            <p-column field="creator" header="创建人"></p-column>
+            <p-column field="updateTime" header="更新时间"></p-column>
+            <p-column field="updater" header="更新人"></p-column>
+      </p-dataTable>
+      <x-paginator *ngIf="reportPaginator" [value]="value" (onPagesChange)="paginate($event)"></x-paginator>
+   </div>
+</main>

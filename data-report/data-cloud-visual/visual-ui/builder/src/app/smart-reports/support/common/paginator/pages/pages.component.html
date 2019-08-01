@@ -1,0 +1,21 @@
+<div class="x-pages">
+    <div class="x-pages-info">
+        {{'总计'+configs.totalRecords+'条，'+'每页'}}
+        <div class="x-pages-select"></div>
+        {{'条'}}
+        <!--<select [(ngModel)]="numberPage" (change)="onChange($event)">-->
+            <!--<option *ngFor="let item of configs.rowsPerPageOptions" [value]='item'>{{item}}</option>-->
+        <!--</select>-->
+    </div>
+    <a class="x-pages-in x-pages-prev" (click)="changePrev($event,papi)">
+        <span class="iconfont icon-fanhui"></span>
+    </a>
+    <p-paginator #papi styleClass="x-pages-pign" rows="{{configs.rows}}" totalRecords="{{configs.totalRecords}}" pageLinkSize="{{configs.pageLinkSize}}"
+        [rowsPerPageOptions]="configs.rowsPerPageOptions" (onPageChange)="paginate($event)"></p-paginator>
+    <a class="x-pages-in x-pages-next" (click)="changeNext($event,papi)">
+        <span class="iconfont icon-gengduo"></span>
+    </a>
+    <div class="x-pages-oprs">
+        <span>前往</span><input class="ui-inputtext" (keydown)="changeToPage($event, papi)" (keyup)="onKeyup($event)" type="text"><span>页</span>
+    </div>
+</div>

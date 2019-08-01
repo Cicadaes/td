@@ -1,0 +1,14 @@
+<auth>
+    <!--不受鉴权控制的接口-->
+    <excludeRests>
+        <!--<excludeRest urlPattern="/workspace/###/job/*/status" method="POST" />-->
+        <excludeRest urlPattern="/test/datasource/*" method="GET"/>
+
+    </excludeRests>
+    <!--不受鉴权控制的Host-->
+    <excludeHosts>
+        <!--<excludeHost host="172.22.121.76"/>-->
+        <!--<excludeHost host="172.22.121.186"/>-->
+        <!--<excludeHost host="172.22.121.186"/>-->
+    </excludeHosts>
+</auth>

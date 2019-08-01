@@ -1,0 +1,64 @@
+{
+    "name": "报表名称",
+    "stages": [
+        {
+            "backgroundColor": "43b393",
+            "backgroundImage": "1.img",
+
+            "size": {
+                "height": 100,
+                "width": 80
+            },
+            "components": [
+                {
+                    "chart": {
+                        "uuid": "dadfdf",
+                        "type": 1,
+                        "dataSourceId": 1,
+                        "styleConfigDefinitionId": 687,
+                        "dataSourceConfigDefinitionId": 0,
+                        "style": {
+                            "parameters": [
+                                {
+                                    "code": "线形",
+                                    "value": null
+                                },
+                                {
+                                    "code": "面积透明度",
+                                    "value": null
+                                },
+                                {
+                                    "code": "线条和标记",
+                                    "value": null
+                                }
+                            ],
+                            "box": {
+                                "size": {
+                                    "height": 100,
+                                    "width": 80
+                                },
+                                "point": {
+                                    "x": 1,
+                                    "y": 2
+                                },
+                                "layer": 2
+                            }
+                        },
+                        "dataSource": {
+                            "parameters": [
+                                {
+                                    "code": "dataSource",
+                                    "value": "analytics"
+                                },
+                                {
+                                    "code": "produce",
+                                    "value": "MoneyBox"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

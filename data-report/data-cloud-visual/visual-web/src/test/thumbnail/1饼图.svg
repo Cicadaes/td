@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="84px" height="64px" viewBox="0 0 84 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>1饼图</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="缩略图" transform="translate(-75.000000, -565.000000)">
+            <g id="饼图" transform="translate(75.000000, 565.000000)">
+                <g>
+                    <g id="Group-2">
+                        <ellipse id="Oval" fill="#3399FF" cx="32.2424242" cy="32" rx="32.2424242" ry="32"></ellipse>
+                        <path d="M0.634952931,25.6491523 C0.21851971,27.7018131 0,29.8255794 0,32 C0,49.673112 14.435425,64 32.2424242,64 C35.8625101,64 39.3432517,63.4078822 42.5916902,62.3159065 L32.1414272,31.9638152 L0.634952931,25.6491523 Z" id="Combined-Shape" fill="#5AC99E"></path>
+                        <path d="M0.472360254,26.5118596 C3.09465821,11.4536256 16.3208393,0 32.2424242,0 C32.3192361,0 32.3959852,0.000266579444 32.4726707,0.000798856998 L32.3940782,32.0330354 L0.472360254,26.5118596 Z" id="Combined-Shape" fill="#EB8E4A"></path>
+                    </g>
+                    <rect id="Rectangle-16" fill="#3399FF" x="79.7575758" y="21.8947368" width="4.24242424" height="4.21052632"></rect>
+                    <rect id="Rectangle-16-Copy" fill="#5AC99E" x="79.7575758" y="30.3157895" width="4.24242424" height="4.21052632"></rect>
+                    <rect id="Rectangle-16-Copy-2" fill="#EB8E4A" x="79.7575758" y="38.7368421" width="4.24242424" height="4.21052632"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

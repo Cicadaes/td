@@ -1,0 +1,757 @@
+/*table样式start*/
+
+.stage i {
+    font-style: normal
+}
+
+.stage ul,
+.stage li,
+.stage input {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.stage a {
+    text-decoration: none;
+    list-style: none;
+    color: #000;
+}
+
+.stage .fl {
+    float: left
+}
+
+.stage .fr {
+    float: right;
+}
+
+.stage .clrfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+.stage .clrfix {
+    zoom: 1;
+}
+
+.stage .tableComponent .nodata {
+    padding: 200px 10px 10px 10px;
+    line-height: 30px;
+    text-align: center;
+    background: #fff;
+}
+
+.stage .tableComponent .nodata::before {
+    content: '';
+    width: 296px;
+    height: 169px;
+    background: url('./nodata.png') no-repeat;
+    position: absolute;
+    left: 50%;
+    margin-left: -148px;
+    top: 70px;
+}
+
+.stage .tableComponent::selection {
+    background: transparent!important;
+}
+
+.stage .tableComponent .table-selectline {
+    position: relative;
+    line-height: 45px;
+    padding-right: 60px;
+    cursor: pointer;
+}
+
+.stage .tableComponent .table-selectline-title {
+    color: #666f7b;
+    position: relative;
+    font-family: PingFangSC-Semibold;
+    font-size: 14px;
+    color: #1F2544;
+}
+
+.stage .tableComponent .table-selectline-title:after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #8a8f9d;
+    position: absolute;
+    right: -18px;
+    top: 19px;
+}
+
+.stage .tableComponent .table-selectline-list {
+    position: absolute;
+    left: -5px;
+    top: 32px;
+    z-index: 2;
+    display: none;
+    background: #FFFFFF;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    margin-top: 4px;
+    padding: 6px 10px;
+    background: #fff;
+    cursor: pointer;
+}
+
+.stage .tableComponent .table-selectline-list ul li {
+    line-height: 16px;
+    cursor: pointer;
+    -webkit-transition: all linear .3s;
+    -moz-transition: all linear .3s;
+    transition: all linear .3s;
+    font-size: 12px;
+    padding: 4px 0;
+}
+
+.stage .tableComponent .table-selectline-list ul li:hover {
+    color: #4797ed;
+}
+
+.stage .tableComponent .table_pagination ul,
+.stage li {
+    margin: 0;
+    padding: 0
+}
+
+.stage .tableComponent .table_pagination li {
+    list-style: none
+}
+
+.stage .tableComponent .saveCrowdBtn {
+    background: #43A3FB;
+    width: 80px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    border-radius: 27px;
+    margin-top: 6px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.stage *,
+.stage :after,
+.stage :before {
+    box-sizing: border-box;
+}
+
+.stage .tableComponent .table {
+    padding: 15px;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background: #fff;
+    font-size: 12px;
+     margin-bottom: 0;
+}
+
+.stage .tableComponent .table th {
+    background-color: #f7f8f9;
+    height: 40px!important;
+}
+
+.stage .tableComponent .table td,
+.stage .tableComponent .table th {
+    padding: 0 6px;
+    text-align: left;
+    white-space: nowrap;
+    height: 49px;
+    vertical-align: middle;
+    font-weight: normal;
+    border-bottom: 1px solid #e7ebef;
+    position: relative;
+    font-family: HelveticaNeue;
+    color: #404560;
+}
+
+.stage .tableComponent .table tr>td:first-child,
+.stage .tableComponent .table th:first-child {
+    padding-left: 15px;
+}
+
+.stage .tableComponent table .sortable {
+    position: relative;
+    width: 10px;
+    height: 15px;
+    display: inline-block;
+    margin: 0 8px;
+}
+
+.stage .tableComponent table .sortable .triangleUp {
+    border-bottom: 5px solid #aaa;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 4px;
+    opacity: 0.3;
+}
+
+.stage .tableComponent table .sortable .triangleDown {
+    border-top: 5px solid #aaa;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 10px;
+    opacity: 1;
+}
+
+
+/*降序*/
+.stage .tableComponent table .sortableDown .triangleUp {
+    border-bottom: 5px solid #aaa;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 7px;
+    opacity: 0;
+}
+
+.stage .tableComponent table .sortableDown .triangleDown {
+    border-top: 5px solid #aaa;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 7px;
+    opacity: 1;
+}
+
+/*升序*/
+.stage .tableComponent table .sortableUp .triangleUp {
+    border-bottom: 5px solid #aaa;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 7px;
+    opacity: 1;
+}
+
+.stage .tableComponent table .sortableUp .triangleDown {
+    border-top: 5px solid #aaa;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 10px;
+    opacity: 0;
+}
+
+
+
+
+.stage .tableComponent .table .UP {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    background: url('./icon-up.svg') no-repeat center center;
+    margin-left: 5px;
+}
+
+.stage .tableComponent .table .DOWN {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    background: url('./icon-down.svg') no-repeat center center;
+    margin-left: 5px;
+}
+
+.stage .tableComponent .table .success {
+    background: url('./icon-success.svg') no-repeat left center;
+    font-size: 0;
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+}
+
+.stage .tableComponent .table .failed {
+    background: url('./icon-fail.svg') no-repeat left center;
+    font-size: 0;
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+}
+
+.stage .tableComponent .table_foot {
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    /*border-left: 1px solid #e7ebef;*/
+    /*border-right: 1px solid #e7ebef;*/
+    background: #fff;
+    height: 49px;
+    border-bottom: 1px solid #ced3d9;
+    padding: 16px 15px;
+    font-size: 14px;
+}
+
+.stage .tableComponent .table_foot .table_currentPage {
+    background-color: #679fef;
+    color: #fff;
+    border-radius: 2px;
+}
+
+.stage .tableComponent .table_pageSizeBox {
+    margin-left: 10px;
+    position: relative;
+    width: 56px;
+}
+
+.stage .tableComponent .table_pageSizeBox .table_pageSize {
+    width: 100%;
+}
+
+.stage .tableComponent .table_pageSizeBox .table_pageSize_title {
+    color: #679fef;
+}
+
+.stage .tableComponent .table_pageSizeBox .table_sizeList {
+    border: 1px solid #679fef;
+    display: none;
+    position: absolute;
+    top: 36px;
+    z-index: 1;
+    width: 100%;
+    background: #fff;
+}
+
+.stage .tableComponent .table_pageSizeBox .table_sizeList li {
+    line-height: 20px;
+    height: 20px;
+    color: #000;
+    background: #fff;
+}
+
+.stage .tableComponent .table_pageSizeBox .table_sizeList li:hover {
+    background: #679fef;
+    color: #fff;
+}
+
+.stage .tableComponent .table_pageSizeBox .triangle_icon {
+    border-top: 5px solid #aaa;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+    right: 0;
+    top: 7px;
+}
+
+.stage .tableComponent .table_page {
+    height: 16px;
+    line-height: 16px;
+}
+
+.stage .tableComponent .table_page a,
+.stage .tableComponent .table_page span {
+    padding: 0 5px;
+    float: left;
+    margin-left: 6px;
+    cursor: pointer;
+}
+
+.stage .tableComponent .table_foot .hide {
+    display: none!important;
+}
+
+.stage .tableComponent .table_foot .open {
+    display: inline-block!important;
+}
+
+.stage .tableComponent .table_foot .loadmoreBtn {
+    width: 70px;
+    position: relative;
+    font-size: 12px;
+}
+
+.stage .tableComponent .table_foot i {
+    border-top: 5px solid #aaa;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 9px;
+    right: 0;
+}
+
+.stage .tableComponent .opacity1 {
+    background: rgba(45,140,240,1);
+    color: #fff!important;
+
+}
+
+.stage .tableComponent .opacity2 {
+    background: rgba(45,140,240,0.97);
+    color: #fff!important;
+}
+
+.stage .tableComponent .opacity3 {
+    background: rgba(45,140,240,0.95);
+    color: #fff!important;
+}
+
+.stage .tableComponent .opacity4 {
+    background: rgba(45,140,240,0.93);
+    color: #fff!important;
+}
+
+.stage .tableComponent .opacity5 {
+    background: rgba(45,140,240,0.91);
+    color: #fff!important;
+}
+
+.stage .tableComponent .opacity6 {
+    background: rgba(45,140,240,0.88);
+    color: #fff!important;
+}
+
+.stage .tableComponent .opacity7 {
+    background: rgba(45,140,240,0.86);
+    color: #fff!important;
+}
+
+.stage .tableComponent .opacity8 {
+    background: rgba(45,140,240,0.84);
+    color: #fff!important;
+}
+
+.stage .tableComponent .opacity9 {
+    background: rgba(45,140,240,0.82);
+    color: #fff!important;
+}
+
+.stage .tableComponent .opacity10 {
+    background: rgba(45,140,240,0.8);
+    color: #fff!important;
+}
+
+.stage .tableComponent .opacity11 {
+    background: rgba(45,140,240,0.78);
+    color: #fff!important;
+}
+
+.stage .tableComponent .opacity12 {
+    background: rgba(45,140,240,0.76);
+    color: #fff!important;
+}
+
+.stage .tableComponent .opacity13 {
+    background: rgba(45,140,240,0.74);
+    color: #fff!important;
+}
+
+.stage .tableComponent .opacity14 {
+    background: rgba(45,140,240,0.72);
+    color: #fff!important;
+}
+
+.stage .tableComponent .opacity15 {
+    background: rgba(45,140,240,0.7);
+}
+
+.stage .tableComponent .opacity16 {
+    background: rgba(45,140,240,0.68);
+}
+
+.stage .tableComponent .opacity17 {
+    background: rgba(45,140,240,0.66);
+}
+
+.stage .tableComponent .opacity18 {
+    background: rgba(45,140,240,0.64);
+}
+.stage .tableComponent .opacity19 {
+    background: rgba(45,140,240,0.62);
+}
+.stage .tableComponent .opacity20 {
+    background: rgba(45,140,240,0.6);
+}
+.stage .tableComponent .opacity21 {
+    background: rgba(45,140,240,0.58);
+}
+.stage .tableComponent .opacity22 {
+    background: rgba(45,140,240,0.56);
+}
+.stage .tableComponent .opacity23 {
+    background: rgba(45,140,240,0.54);
+}
+.stage .tableComponent .opacity24 {
+    background: rgba(45,140,240,0.52);
+}
+.stage .tableComponent .opacity25 {
+    background: rgba(45,140,240,0.5);
+}
+.stage .tableComponent .opacity26 {
+    background: rgba(45,140,240,0.48);
+    color: #fff;
+}
+.stage .tableComponent .opacity27 {
+    background: rgba(45,140,240,0.46);
+}
+.stage .tableComponent .opacity28 {
+    background: rgba(45,140,240,0.44);
+}
+.stage .tableComponent .opacity29 {
+    background: rgba(45,140,240,0.42);
+}
+.stage .tableComponent .opacity30 {
+    background: rgba(45,140,240,0.4);
+}
+
+.stage .tableComponent .opacity31 {
+    background: rgba(45,140,240,0.38);
+}
+.stage .tableComponent .opacity32 {
+    background: rgba(45,140,240,0.36);
+}
+.stage .tableComponent .opacity33 {
+    background: rgba(45,140,240,0.34);
+}
+.stage .tableComponent .opacity34 {
+    background: rgba(45,140,240,0.32);
+}
+.stage .tableComponent .opacity35 {
+    background: rgba(45,140,240,0.3);
+}
+.stage .tableComponent .opacity36 {
+    background: rgba(45,140,240,0.28);
+}
+
+.stage .tableComponent.table-bordered table td {
+    border: 1px solid #E1E8F0;
+}
+
+.stage .modal-backdrop-report-form {
+    height: 100%;
+    width: 100%;
+    background: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: .5;
+    z-index: 99998;
+}
+
+.stage .tableModal {
+    display: none;
+    z-index: 99999;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top:0;
+    left: 0
+
+}
+
+.stage .tableModal .tableModalContent{
+    position: absolute;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #999;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 4px;
+    outline: 0;
+    width: 504px;
+    height: auto;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+
+.stage .tableModal .tableModalBody {
+    padding: 15px 24px;
+    border-top: 1px solid #E3E7ED;;
+    border-bottom: 1px solid #E3E7ED;
+    max-height: 400px;
+    overflow: auto;
+}
+
+.stage .tableModal .tableModalBody > div{
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+}
+
+.stage .tableModal .tableModalBody  label {
+    padding-left: 20px;
+    cursor: pointer;
+    background: url(checkbox-unchecked.svg) center left no-repeat;
+}
+
+.stage .tableModal .tableModalBody input[type=checkbox] {
+    margin: 3px 5px 0 0;
+    display: none;
+}
+
+.stage .tableModal .tableModalBody input[type=checkbox]:checked~label {
+    background: url(checkbox-checked.svg) center left no-repeat;
+}
+
+.stage .tableModal .tableModalHeader {
+    padding: 0 24px;
+}
+
+.stage .tableModal .tableModalHeader span:first-child {
+    height: 56px;
+    line-height: 56px;
+    font-family: PingFangSC-Semibold;
+    font-size: 16px;
+    color: #1F2544;
+    letter-spacing: 0;
+    display: inline-block;
+}
+
+.stage .tableModal .tableModalHeader .closeModal {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    color: #818596;
+    font-size: 24px;
+    margin-top: 18px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.stage .tableModal .w-30 {
+    width:30%;
+}
+
+.stage .tableModal .w-50 {
+    width:50%;
+}
+
+.stage .tableModal .w-70 {
+    width:70%;
+}
+
+.stage .tableModal .tableModalFooter {
+    padding: 12px 24px;
+}
+
+.stage .tableModal .tableModalFooter button {
+    width: 72px;
+    height: 32px;
+    line-height: 32px;
+    cursor: pointer;
+    border: none!important;
+    padding: 0!important;
+}
+
+.stage .tableModal .cancel {
+    background: #FFF;
+    border-radius: 4px;
+}
+
+.stage .tableModal .confirm {
+    background: #43A3FB;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.stage .tableBarModalContent{
+    width: 400px!important;
+    border: 0 none!important;
+}
+
+.stage .tableBar-30{
+    width: 75px;
+    font-family: PingFangSC-Semibold;
+    font-size: 12px;
+    color: #404560;
+    letter-spacing: 0;
+    font-weight: bold;
+}
+
+.stage .tableBar-70{
+    width: 270px;
+    color: #404560;
+    font-family: HelveticaNeue;
+}
+
+.stage .tableBarInput{
+    background: #FFFFFF;
+    border: 1px solid #DEDFE3;
+    border-radius: 4px;
+    height: 32px;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.stage .tableBar-list-data {
+    padding: 16px 0;
+}
+
+.stage .tableBar-list-data ul li{
+    width: 112px;
+    height: 24px;
+    margin: 8px 16px 8px 0;
+    border-radius: 2px;
+    color: #404560;
+    text-align: center;
+    float: left;
+    line-height: 24px;
+    background: #E8E9EC;
+    cursor: pointer;
+    -webkit-transition: all linear .3s;
+    -moz-transition: all linear .3s;
+    transition: all linear .3s;
+}
+
+.stage .tableBar-list-data ul li:hover{
+    color: #43A3FB;
+}
+
+.stage .tableBar-list-data ul li.tableBarChoose{
+    background: #43A3FB;
+    color: #fff;
+}
+
+.stage .tableModal.tableBarModal .tableModalBody > div{
+    height: 40px!important;
+    line-height: 40px!important;
+}
+
+.stage .tableBarErrorTips{
+    font-size: 12px;
+    color: #f00;
+    font-family: PingFangSC-Semibold;
+    line-height: 24px;
+}
+
+.stage input.tableBarErrorBorder{
+    border-color: #f00;
+}
+
+.stage .tableBar-70 label{
+    font-family: PingFangSC-Semibold;
+}
+
+.stage .tableModalBody .tablefilterRF {
+    color: #43A3FB;
+    display: block;
+    cursor: pointer;
+}
+
+/*table样式end*/
+

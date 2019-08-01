@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="110px" height="64px" viewBox="0 0 110 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>2线图</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="缩略图-copy" transform="translate(-79.000000, -77.000000)">
+            <g id="2线图" transform="translate(79.000000, 77.000000)">
+                <g id="Group-Copy-2" transform="translate(4.000000, 13.000000)" stroke="#59C99F" stroke-width="2">
+                    <path d="M0.352385193,14.0564662 C0.352385193,14.0564662 15.2669706,-9.20877363 28.7866439,4.31152403 C42.3063173,17.8318217 48.7300376,-2.81156926 66.5092395,1.75087927 C84.2884414,6.31332779 84.7291779,18.101603 104.918537,10.0251467" id="Path-2"></path>
+                </g>
+                <g id="Group-Copy" transform="translate(4.000000, 29.000000)" stroke="#3399FF" stroke-width="2">
+                    <path d="M0.352385193,17.0564662 C0.352385193,17.0564662 17.3945008,-11.375927 32.0789946,7.19220887 C46.7634884,25.7603448 47.8363723,2.90490346 65.6155742,7.46735198 C83.3947761,12.0298005 83.1580632,25.5846032 103.903191,17.0564662" id="Path-2"></path>
+                </g>
+                <circle id="Oval" stroke="#3399FF" stroke-width="2" fill="#FFFFFF" cx="64" cy="36" r="3"></circle>
+                <circle id="Oval-Copy" stroke="#59C99F" stroke-width="2" fill="#FFFFFF" cx="64" cy="13" r="3"></circle>
+                <path d="M4,62 L110,62 L110,64 L0,64 L0,62 L2,62 L2,0 L4,0 L4,62 Z M0,6.85714286 L2,6.85714286 L2,8.85714286 L0,8.85714286 L0,6.85714286 Z M0,12.8571429 L2,12.8571429 L2,14.8571429 L0,14.8571429 L0,12.8571429 Z M0,19.8571429 L2,19.8571429 L2,21.8571429 L0,21.8571429 L0,19.8571429 Z M0,26.8571429 L2,26.8571429 L2,28.8571429 L0,28.8571429 L0,26.8571429 Z M0,33.8571429 L2,33.8571429 L2,35.8571429 L0,35.8571429 L0,33.8571429 Z M0,40.5714286 L2,40.5714286 L2,42.5714286 L0,42.5714286 L0,40.5714286 Z M0,47.2857143 L2,47.2857143 L2,49.2857143 L0,49.2857143 L0,47.2857143 Z M0,54 L2,54 L2,56 L0,56 L0,54 Z" id="Combined-Shape" fill="#464C5B"></path>
+            </g>
+        </g>
+    </g>
+</svg>

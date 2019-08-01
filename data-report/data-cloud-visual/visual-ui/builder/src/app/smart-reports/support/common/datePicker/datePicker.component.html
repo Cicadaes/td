@@ -1,0 +1,14 @@
+<div class="datePicker">
+    <div class="date-box" (click)="showPicker($event)">
+        <span class="ui-inputtext" [class.disable] = "value.disable">
+            <label *ngIf="!value.data.start">
+                {{value.placeholder||'选择时间'}}
+            </label>
+            {{value.data.start|date:"yyyy-MM-dd"}}{{value.data.end?" ~ ":""}}{{value.data.end|date:"yyyy-MM-dd"}}
+        </span>
+        <span *ngIf="value.showIcon" class="ui-button-icon-right ui-c fa fa-fw fa-calendar"></span>
+    </div>
+    <div id="pinput-box" #container (click)="stopDatePropagation($event)">
+        <pinput class="pinput" (onConfirm)="onConfirm($event)" (onClose)="onClose($event)" [config]="value" *ngIf="show"></pinput>
+    </div>
+</div>

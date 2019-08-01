@@ -1,0 +1,123 @@
+/*top user*/
+
+.user {
+    margin-right: 20px;
+    margin-left: 15px;
+    cursor: pointer;
+    position: relative;
+    height: 40px;
+}
+
+.top .icon-person, .top .username {
+    line-height: 48px;
+}
+
+.icon-person {
+    color: #fff;
+    line-height: 48px;
+}
+
+.down {
+    width: 20px;
+    height: 10px;
+    overflow: hidden;
+    display: inline-block;
+    position: relative;
+    margin-top: 22px;
+}
+
+.down:before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    right: 5px;
+    width: 8px;
+    height: 8px;
+    display: block;
+    border: 1px solid #fff;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.username {
+    width: auto;
+    font-size: 13px;
+    color: #fff;
+    padding-left: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    line-height: 48px;
+    padding-right: 10px;
+}
+
+.userlayer {
+    color: #acb0ba;
+    -webkit-transition: all linear .3s;
+}
+
+.user:hover .userlayer {
+    display: block;
+}
+
+.userlayer {
+    width: 100px;
+    padding: 7px 0;
+    background: rgba(70, 76, 91, .9);
+    border-radius: 5px;
+    position: absolute;
+    z-index: 2005;
+    top: 60px;
+    right: 0;
+    line-height: 26px;
+    display: none;
+}
+
+.userlayer ul li {
+    font-size: 13px;
+    border-bottom: 1px solid rgba(70, 76, 91, .95);
+    line-height: 36px;
+    padding: 0 20px;
+    cursor: pointer;
+    -webkit-transition: all linear .3s;
+    -moz-transition: all linear .3s;
+    transition: all linear .3s;
+}
+
+.userlayer ul li:hover {
+    color: #fff;
+}
+
+.userlayer ul li:last-child {
+    border-bottom: 0 none;
+}
+
+.userlayer:before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-bottom: 8px solid #464c5b;
+    border-top: 8px solid transparent;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    position: absolute;
+    right: 25px;
+    top: -15px;
+}
+
+.user_password {
+    line-height: 40px;
+    text-align: center;
+    color: #FF0000;
+    font-size: 14px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-content {
+    padding-bottom: 0;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-content{
+    overflow: inherit;
+}

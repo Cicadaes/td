@@ -1,0 +1,290 @@
+
+/*四象限图样式start*/
+::selection{
+    background: transparent;
+}
+.scatterComponent .containerHead {
+    border-bottom: 1px solid #E8E9EC;
+    padding: 0 20px;
+}
+
+.scatterComponent .containerHead  .filterButton {
+    width: 56px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;  
+    background: #FFFFFF;
+    border: 1px solid #DEDFE3;   
+    font-size: 12px;   
+    margin-top: 8px;
+}
+
+.scatterComponent .containerHead .region {
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+}
+
+.scatterComponent .containerHead .custom {
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+}
+
+.scatterComponent .containerHead  .filterButton.currentFilter{
+    background: #43A3FB;  
+    border:none;
+    color: #fff; 
+}
+
+.scatterComponent .containerXY > span {
+    height: 32px;
+    line-height: 32px;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: "PingFangSC-Semibold";
+}
+
+.scatterComponent .indicator {
+    margin: 0 15px;
+    width: 112px;
+    height: 32px;
+    line-height: 32px;
+    float: left;
+    position: relative;
+    z-index: 1;
+}
+
+.scatterComponent .indicatorBox {
+    border: 1px solid #D7DDE4;
+    border-radius: 4px;
+    text-indent: 5px;
+    background: #FFFFFF;
+    width: 100%;
+    height: 32px;
+    line-height: 32px;
+    font-size: 12px;
+    position: relative;
+}
+
+.scatterComponent .indicatorItems li {
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.scatterComponent .triangle_icon {
+    border-top: 5px solid #aaa;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+    right: 8px;
+    top: 13px;
+}
+
+.scatterComponent .indicatorItems {
+    width: 470px;
+    /*height: 370px;*/
+    background: #FFFFFF;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    margin-top: 4px;
+    padding: 6px 24px;
+    display: none;
+    position: absolute;
+    top: 32px;
+}
+
+.scatterComponent .indicatorItems .itemBox {
+    border-bottom: 1px solid #E8E9EC;
+    padding: 10px;
+}
+
+.scatterComponent .indicatorItems .itemBox:last-child {
+    border-bottom: none;
+}
+
+.scatterComponent .indicatorItems .itemBox>span {
+    height: 32px;
+    line-height: 32px;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: "PingFangSC-Semibold";
+}
+
+.scatterComponent .indicatorItems .itemBox input {
+    margin: 3px 5px 0 0;
+}
+
+.scatterComponent .contentBox {
+    width: 100%;
+    height: 100%;
+    overflow: auto!important;
+}
+
+.scatterComponent .tableBox {
+    width: 100%;
+    margin-top: 10px;
+    position: relative;
+}
+
+.scatterComponent .tableBox:first-child {
+    margin-top: 0;
+}
+
+.scatterComponent .tableBox table {
+    padding: 0 10px;
+    background: #FFFFFF;
+    border: 1px solid #E8E9EC;
+    width: calc(100% - 24px);
+    border-collapse: collapse;
+    border-spacing: 0;
+    float: right;
+    font-size: 12px;
+    height: auto;
+}
+
+.scatterComponent .tableBox .currentTable {
+    height: auto;
+}
+
+.scatterComponent .tableBox thead {
+    background: #F8F8F9;
+}
+
+.scatterComponent .tableBox td,
+.scatterComponent .tableBox th {
+    padding: 0 6px;
+    text-align: left;
+    white-space: nowrap;
+    height: 36px;
+    vertical-align: middle;
+    min-width: 100px;      
+    text-overflow: ellipsis;
+    max-width:  120px;
+    overflow: hidden;
+}
+
+.scatterComponent .tableBox th>div {
+    width: 100%;
+    height: 36px;
+    line-height: 36px;
+}
+
+.scatterComponent .tableBox table .sortable {
+    position: relative;
+    width: 10px;
+    height: 36px;
+    display: inline-table;
+    margin: 0 5px;
+    float: right;
+}
+
+.scatterComponent .tableBox table .triangleUp {
+    border-bottom: 5px solid #aaa;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 13px;
+    opacity: 0.2;
+}
+
+.scatterComponent .tableBox table .triangleDown {
+    border-top: 5px solid #aaa;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 20px;
+    opacity: 0.2
+}
+
+.scatterComponent .tableBox table .currentSort {
+    opacity: 1;
+}
+
+.scatterComponent .tableBox tbody span {
+    font-family: HelveticaNeue-Medium;
+    font-size: 12px;
+    color: #BBBDC6;
+}
+
+.scatterComponent .tableBox .operator {
+    position: absolute;
+    top: 0;
+    left: 1px;
+    width: 24px;
+    height: 56px;
+    background: #818596;
+    border-radius: 4px 0 0 4px;
+    display: none;
+    color: #fff;
+    padding-top: 2px;
+}
+
+.scatterComponent .tableBox .operator .toggleOpen {
+    display: block;
+    width: 24px;
+    height: 24px;
+}
+
+.scatterComponent .tableBox .operator .open {
+    background: url('icon－open.svg') no-repeat center center /12px 12px;
+}
+
+.scatterComponent .tableBox .operator .close {
+    background: url('icon－close.svg') no-repeat center center /12px 12px;
+}
+
+.scatterComponent .tableBox .operator .download {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background: url('icon－download.svg') no-repeat center center /14px 14px;
+}
+
+/*滚动条样式start*/
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-track {  
+    -webkit-border-radius: 4px; 	
+    border-radius: 4px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 4px;
+    border-radius: 4px;  
+    background: rgba(28,36,56,0.30);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(28,36,56,0.30); 
+}
+::scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+::scrollbar-track {   	
+    border-radius: 4px;
+}
+ 
+::scrollbar-thumb {
+    border-radius: 4px;  
+    background: rgba(28,36,56,0.30);
+}
+::scrollbar-thumb:window-inactive {
+	background: rgba(28,36,56,0.30); 
+}
+
+/*滚动条样式end*/
+
+/*四象限图样式end*/
+
+
+/*========================================================*/

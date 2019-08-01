@@ -1,0 +1,24 @@
+{
+  "name": "datwill-sdk-charts",
+  "version": "1.0.15",
+  "description": "data at will",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "datwill-charts"
+  ],
+  "author": "datwill team",
+  "license": "ISC",
+  "dependencies": {
+    "echarts": "3.7.0",
+    "@types/echarts": "0.0.6",
+    "datwill-sdk": "1.1.47"
+  },
+  "devDependencies": {
+    "echarts": "3.7.0",
+    "@types/echarts": "0.0.6"
+
+  }
+}

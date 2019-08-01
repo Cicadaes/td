@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.catalog.DatasetDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.catalog.Dataset" >
+    <id column="id" property="id" />
+    <result column="name" property="name" />
+    <result column="schema" property="schema" />
+    <result column="schema_type" property="schemaType" />
+    <result column="properties" property="properties" />
+    <result column="fields" property="fields" />
+    <result column="urn" property="urn" />
+    <result column="source" property="source" />
+    <result column="location_prefix" property="locationPrefix" />
+    <result column="parent_name" property="parentName" />
+    <result column="storage_type" property="storageType" />
+    <result column="ref_dataset_id" property="refDatasetId" />
+    <result column="status_id" property="statusId" />
+    <result column="dataset_type" property="datasetType" />
+    <result column="encoding" property="encoding" />
+    <result column="hive_serdes_class" property="hiveSerdesClass" />
+    <result column="is_partitioned" property="isPartitioned" />
+    <result column="partition_layout_pattern_id" property="partitionLayoutPatternId" />
+    <result column="sample_partition_full_path" property="samplePartitionFullPath" />
+    <result column="source_created_time" property="sourceCreatedTime" />
+    <result column="source_modified_time" property="sourceModifiedTime" />
+    <result column="created_time" property="createdTime" />
+    <result column="modified_time" property="modifiedTime" />
+    <result column="wh_etl_exec_id" property="whEtlExecId" />
+  </resultMap>
+
+  <!-- dict_dataset table all fields -->
+  <sql id="Base_Column_List" >
+     `id`, `name`, `schema`, `schema_type`, `properties`, `fields`, `urn`, `source`, `location_prefix`, `parent_name`, `storage_type`, `ref_dataset_id`, `status_id`, `dataset_type`, `encoding`, `hive_serdes_class`, `is_partitioned`, `partition_layout_pattern_id`, `sample_partition_full_path`, `source_created_time`, `source_modified_time`, `created_time`, `modified_time`, `wh_etl_exec_id`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and `id` ${idOperator} #{id}
+      </if>
+      <if test="name != null" >
+        and `name` ${nameOperator} #{name}
+      </if>
+      <if test="schema != null" >
+        and `schema` ${schemaOperator} #{schema}
+      </if>
+      <if test="schemaType != null" >
+        and `schema_type` ${schemaTypeOperator} #{schemaType}
+      </if>
+      <if test="properties != null" >
+        and `properties` ${propertiesOperator} #{properties}
+      </if>
+      <if test="fields != null" >
+        and `fields` ${fieldsOperator} #{fields}
+      </if>
+      <if test="urn != null" >
+        and `urn` ${urnOperator} #{urn}
+      </if>
+      <if test="source != null" >
+        and `source` ${sourceOperator} #{source}
+      </if>
+      <if test="locationPrefix != null" >
+        and `location_prefix` ${locationPrefixOperator} #{locationPrefix}
+      </if>
+      <if test="parentName != null" >
+        and `parent_name` ${parentNameOperator} #{parentName}
+      </if>
+      <if test="storageType != null" >
+        and `storage_type` ${storageTypeOperator} #{storageType}
+      </if>
+      <if test="refDatasetId != null" >
+        and `ref_dataset_id` ${refDatasetIdOperator} #{refDatasetId}
+      </if>
+      <if test="statusId != null" >
+        and `status_id` ${statusIdOperator} #{statusId}
+      </if>
+      <if test="datasetType != null" >
+        and `dataset_type` ${datasetTypeOperator} #{datasetType}
+      </if>
+      <if test="encoding != null" >
+        and `encoding` ${encodingOperator} #{encoding}
+      </if>
+      <if test="hiveSerdesClass != null" >
+        and `hive_serdes_class` ${hiveSerdesClassOperator} #{hiveSerdesClass}
+      </if>
+      <if test="isPartitioned != null" >
+        and `is_partitioned` ${isPartitionedOperator} #{isPartitioned}
+      </if>
+      <if test="partitionLayoutPatternId != null" >
+        and `partition_layout_pattern_id` ${partitionLayoutPatternIdOperator} #{partitionLayoutPatternId}
+      </if>
+      <if test="samplePartitionFullPath != null" >
+        and `sample_partition_full_path` ${samplePartitionFullPathOperator} #{samplePartitionFullPath}
+      </if>
+      <if test="sourceCreatedTime != null" >
+        and `source_created_time` ${sourceCreatedTimeOperator} #{sourceCreatedTime}
+      </if>
+      <if test="sourceModifiedTime != null" >
+        and `source_modified_time` ${sourceModifiedTimeOperator} #{sourceModifiedTime}
+      </if>
+      <if test="createdTime != null" >
+        and `created_time` ${createdTimeOperator} #{createdTime}
+      </if>
+      <if test="modifiedTime != null" >
+        and `modified_time` ${modifiedTimeOperator} #{modifiedTime}
+      </if>
+      <if test="whEtlExecId != null" >
+        and `wh_etl_exec_id` ${whEtlExecIdOperator} #{whEtlExecId}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.datacloud.entity.catalog.Dataset" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dict_dataset(<include refid="Base_Column_List" />)
+    values (#{id}, #{name}, #{schema}, #{schemaType}, #{properties}, #{fields}, #{urn}, #{source}, #{locationPrefix}, #{parentName}, #{storageType}, #{refDatasetId}, #{statusId}, #{datasetType}, #{encoding}, #{hiveSerdesClass}, #{isPartitioned}, #{partitionLayoutPatternId}, #{samplePartitionFullPath}, #{sourceCreatedTime}, #{sourceModifiedTime}, #{createdTime}, #{modifiedTime}, #{whEtlExecId})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.datacloud.entity.catalog.Dataset" >
+    update dict_dataset
+       set `name` = #{name},
+           `schema` = #{schema},
+           `schema_type` = #{schemaType},
+           `properties` = #{properties},
+           `fields` = #{fields},
+           `urn` = #{urn},
+           `source` = #{source},
+           `location_prefix` = #{locationPrefix},
+           `parent_name` = #{parentName},
+           `storage_type` = #{storageType},
+           `ref_dataset_id` = #{refDatasetId},
+           `status_id` = #{statusId},
+           `dataset_type` = #{datasetType},
+           `encoding` = #{encoding},
+           `hive_serdes_class` = #{hiveSerdesClass},
+           `is_partitioned` = #{isPartitioned},
+           `partition_layout_pattern_id` = #{partitionLayoutPatternId},
+           `sample_partition_full_path` = #{samplePartitionFullPath},
+           `source_created_time` = #{sourceCreatedTime},
+           `source_modified_time` = #{sourceModifiedTime},
+           `created_time` = #{createdTime},
+           `modified_time` = #{modifiedTime},
+           `wh_etl_exec_id` = #{whEtlExecId}
+     where `id` = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.datacloud.entity.catalog.Dataset" >
+    update dict_dataset
+    <set >
+      <if test="name != null" >
+        `name` = #{name},
+      </if>
+      <if test="schema != null" >
+        `schema` = #{schema},
+      </if>
+      <if test="schemaType != null" >
+        `schema_type` = #{schemaType},
+      </if>
+      <if test="properties != null" >
+        `properties` = #{properties},
+      </if>
+      <if test="fields != null" >
+        `fields` = #{fields},
+      </if>
+      <if test="urn != null" >
+        `urn` = #{urn},
+      </if>
+      <if test="source != null" >
+        `source` = #{source},
+      </if>
+      <if test="locationPrefix != null" >
+        `location_prefix` = #{locationPrefix},
+      </if>
+      <if test="parentName != null" >
+        `parent_name` = #{parentName},
+      </if>
+      <if test="storageType != null" >
+        `storage_type` = #{storageType},
+      </if>
+      <if test="refDatasetId != null" >
+        `ref_dataset_id` = #{refDatasetId},
+      </if>
+      <if test="statusId != null" >
+        `status_id` = #{statusId},
+      </if>
+      <if test="datasetType != null" >
+        `dataset_type` = #{datasetType},
+      </if>
+      <if test="encoding != null" >
+        `encoding` = #{encoding},
+      </if>
+      <if test="hiveSerdesClass != null" >
+        `hive_serdes_class` = #{hiveSerdesClass},
+      </if>
+      <if test="isPartitioned != null" >
+        `is_partitioned` = #{isPartitioned},
+      </if>
+      <if test="partitionLayoutPatternId != null" >
+        `partition_layout_pattern_id` = #{partitionLayoutPatternId},
+      </if>
+      <if test="samplePartitionFullPath != null" >
+        `sample_partition_full_path` = #{samplePartitionFullPath},
+      </if>
+      <if test="sourceCreatedTime != null" >
+        `source_created_time` = #{sourceCreatedTime},
+      </if>
+      <if test="sourceModifiedTime != null" >
+        `source_modified_time` = #{sourceModifiedTime},
+      </if>
+      <if test="createdTime != null" >
+        `created_time` = #{createdTime},
+      </if>
+      <if test="modifiedTime != null" >
+        `modified_time` = #{modifiedTime},
+      </if>
+      <if test="whEtlExecId != null" >
+        `wh_etl_exec_id` = #{whEtlExecId},
+      </if>
+    </set>
+     where `id` = #{id}
+  </update>
+
+  <!-- 根据id查询 dict_dataset -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from dict_dataset
+     where `id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dict_dataset
+     where `id` = #{value}
+
+  </delete>
+
+  <!-- dict_dataset 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select count(1) from dict_dataset
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询dict_dataset列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from dict_dataset
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+  <update id="updateUrn" parameterType="java.util.Map" >
+    update dict_dataset
+       set `urn` = #{newPath}
+     where `urn` = #{path}
+  </update>
+
+</mapper>

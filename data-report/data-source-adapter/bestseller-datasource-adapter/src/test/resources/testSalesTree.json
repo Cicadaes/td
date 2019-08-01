@@ -1,0 +1,15 @@
+{
+  "datasource_id": 19,
+  "filters": [
+    {
+      "field": "project_type",
+      "operator": "=",
+      "value": "6"
+    },
+    {
+      "field": "project_id",
+      "operator": "=",
+      "value": "8263"
+    }
+  ]
+}

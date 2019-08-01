@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.visual.dao.report.ConfigDefinitionDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.visual.entity.report.ConfigDefinition" >
+    <id column="id" property="id" />
+    <result column="group_id" property="groupId" />
+    <result column="order_num" property="orderNum" />
+    <result column="name" property="name" />
+    <result column="code" property="code" />
+    <result column="version" property="version" />
+    <result column="type" property="type" />
+    <result column="status" property="status" />
+    <result column="diagram_name" property="diagramName" />
+    <result column="developer" property="developer" />
+    <result column="impl_class" property="implClass" />
+    <result column="description" property="description" />
+    <result column="tenant_id" property="tenantId" />
+    <result column="creator" property="creator" />
+    <result column="create_by" property="createBy" />
+    <result column="create_time" property="createTime" />
+    <result column="updater" property="updater" />
+    <result column="update_by" property="updateBy" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+
+  <!-- TD_DC_CONFIG_DEFINITION table all fields -->
+  <sql id="Base_Column_List" >
+     `id`, `group_id`, `order_num`, `name`, `code`, `version`, `type`, `status`, `diagram_name`, `developer`, `impl_class`, `description`, `tenant_id`, `creator`, `create_by`, `create_time`, `updater`, `update_by`, `update_time`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and `id` ${idOperator} #{id}
+      </if>
+      <if test="groupId != null" >
+        and `group_id` ${groupIdOperator} #{groupId}
+      </if>
+      <if test="orderNum != null" >
+        and `order_num` ${orderNumOperator} #{orderNum}
+      </if>
+      <if test="name != null" >
+        and `name` ${nameOperator} #{name}
+      </if>
+      <if test="code != null" >
+        and `code` ${codeOperator} #{code}
+      </if>
+      <if test="version != null" >
+        and `version` ${versionOperator} #{version}
+      </if>
+      <if test="type != null" >
+        and `type` ${typeOperator} #{type}
+      </if>
+      <if test="status != null" >
+        and `status` ${statusOperator} #{status}
+      </if>
+      <if test="diagramName != null" >
+        and `diagram_name` ${diagramNameOperator} #{diagramName}
+      </if>
+      <if test="developer != null" >
+        and `developer` ${developerOperator} #{developer}
+      </if>
+      <if test="implClass != null" >
+        and `impl_class` ${implClassOperator} #{implClass}
+      </if>
+      <if test="description != null" >
+        and `description` ${descriptionOperator} #{description}
+      </if>
+      <if test="tenantId != null" >
+        and `tenant_id` ${tenantIdOperator} #{tenantId}
+      </if>
+      <if test="creator != null" >
+        and `creator` ${creatorOperator} #{creator}
+      </if>
+      <if test="createBy != null" >
+        and `create_by` ${createByOperator} #{createBy}
+      </if>
+      <if test="createTime != null" >
+        and `create_time` ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and `create_time` &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and `create_time` &lt;= #{createTime2}
+      </if>
+      <if test="updater != null" >
+        and `updater` ${updaterOperator} #{updater}
+      </if>
+      <if test="updateBy != null" >
+        and `update_by` ${updateByOperator} #{updateBy}
+      </if>
+      <if test="updateTime != null" >
+        and `update_time` ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and `update_time` &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and `update_time` &lt;= #{updateTime2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.datacloud.visual.entity.report.ConfigDefinition" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_DC_CONFIG_DEFINITION(<include refid="Base_Column_List" />)
+    values (#{id}, #{groupId}, #{orderNum}, #{name}, #{code}, #{version}, #{type}, #{status}, #{diagramName}, #{developer}, #{implClass}, #{description}, #{tenantId}, #{creator}, #{createBy}, #{createTime}, #{updater}, #{updateBy}, #{updateTime})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.datacloud.visual.entity.report.ConfigDefinition" >
+    update TD_DC_CONFIG_DEFINITION
+       set `group_id` = #{groupId},
+           `order_num` = #{orderNum},
+           `name` = #{name},
+           `code` = #{code},
+           `version` = #{version},
+           `type` = #{type},
+           `status` = #{status},
+           `diagram_name` = #{diagramName},
+           `developer` = #{developer},
+           `impl_class` = #{implClass},
+           `description` = #{description},
+           `tenant_id` = #{tenantId},
+           `creator` = #{creator},
+           `create_by` = #{createBy},
+           `create_time` = #{createTime},
+           `updater` = #{updater},
+           `update_by` = #{updateBy},
+           `update_time` = #{updateTime}
+     where `id` = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.datacloud.visual.entity.report.ConfigDefinition" >
+    update TD_DC_CONFIG_DEFINITION
+    <set >
+      <if test="groupId != null" >
+        `group_id` = #{groupId},
+      </if>
+      <if test="orderNum != null" >
+        `order_num` = #{orderNum},
+      </if>
+      <if test="name != null" >
+        `name` = #{name},
+      </if>
+      <if test="code != null" >
+        `code` = #{code},
+      </if>
+      <if test="version != null" >
+        `version` = #{version},
+      </if>
+      <if test="type != null" >
+        `type` = #{type},
+      </if>
+      <if test="status != null" >
+        `status` = #{status},
+      </if>
+      <if test="diagramName != null" >
+        `diagram_name` = #{diagramName},
+      </if>
+      <if test="developer != null" >
+        `developer` = #{developer},
+      </if>
+      <if test="implClass != null" >
+        `impl_class` = #{implClass},
+      </if>
+      <if test="description != null" >
+        `description` = #{description},
+      </if>
+      <if test="tenantId != null" >
+        `tenant_id` = #{tenantId},
+      </if>
+      <if test="creator != null" >
+        `creator` = #{creator},
+      </if>
+      <if test="createBy != null" >
+        `create_by` = #{createBy},
+      </if>
+      <if test="createTime != null" >
+        `create_time` = #{createTime},
+      </if>
+      <if test="updater != null" >
+        `updater` = #{updater},
+      </if>
+      <if test="updateBy != null" >
+        `update_by` = #{updateBy},
+      </if>
+      <if test="updateTime != null" >
+        `update_time` = #{updateTime},
+      </if>
+    </set>
+     where `id` = #{id}
+  </update>
+
+  <!-- 根据id查询 TD_DC_CONFIG_DEFINITION -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from TD_DC_CONFIG_DEFINITION
+     where `id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TD_DC_CONFIG_DEFINITION
+     where `id` = #{value}
+
+  </delete>
+
+  <!-- TD_DC_CONFIG_DEFINITION 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select count(1) from TD_DC_CONFIG_DEFINITION
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TD_DC_CONFIG_DEFINITION列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from TD_DC_CONFIG_DEFINITION
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+  <!-- 通过AdapterId查询TD_DC_CONFIG_DEFINITION -->
+  <select id="queryByAdapterId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    SELECT <include refid="Base_Column_List"/>
+    FROM TD_DC_CONFIG_DEFINITION WHERE ID = (select config_definition_id from TD_DC_VISUAL_ADAPTER where id=#{value})
+
+  </select>
+
+  <!-- 通过ConfigDefinitionName删除记录 -->
+  <delete id="deleteByConfigDefinitionName" parameterType="java.lang.String">
+    DELETE FROM  TD_DC_CONFIG_DEFINITION where `name` = #{value}
+  </delete>
+
+  <!-- 通过DataSourceID查询TD_DC_CONFIG_DEFINITION -->
+  <select id="selectByConfigDefinitionName" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT <include refid="Base_Column_List"/>
+    FROM TD_DC_CONFIG_DEFINITION WHERE `name` = #{value} limit 1;
+  </select>
+</mapper>

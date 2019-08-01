@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.admin.AuditLogDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.admin.AuditLog" >
+	<result column="id" property="id"/>
+	<result column="system_code" property="systemCode"/>
+	<result column="create_time" property="createTime"/>
+	<result column="actor_umId" property="actorUmId"/>
+	<result column="actor_name" property="actorName"/>
+	<result column="operation_type" property="operationType"/>
+	<result column="target_type" property="targetType"/>
+	<result column="target_id" property="targetId"/>
+	<result column="result" property="result"/>
+	<result column="description" property="description"/>
+  </resultMap>
+       
+  <!-- TD_AUDIT_LOG table all fields -->
+  <sql id="Base_Column_List" >
+	 id,system_code,create_time,actor_umId,actor_name,operation_type,target_type,target_id,result,description
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="systemCode != null and systemCode != ''" >
+        and system_code =  #{systemCode}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	      <if test="actorUmId != null and actorUmId != ''" >
+        and actor_umId =  #{actorUmId}
+	  </if>
+	      <if test="actorName != null and actorName != ''" >
+        and actor_name =  #{actorName}
+	  </if>
+	      <if test="operationType != null and operationType != ''" >
+        and operation_type =  #{operationType}
+	  </if>
+	      <if test="targetType != null and targetType != ''" >
+        and target_type =  #{targetType}
+	  </if>
+	      <if test="targetId != null and targetId != ''" >
+        and target_id =  #{targetId}
+	  </if>
+	      <if test="result != null and result != ''" >
+        and result =  #{result}
+	  </if>
+	      <if test="description != null and description != ''" >
+        and description =  #{description}
+	  </if>
+    </trim>
+  </sql>
+   
+   <sql id="Base_Where_Clause_Search">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="systemCode != null and systemCode != ''" >
+        and system_code =  #{systemCode}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	      <if test="actorUmId != null and actorUmId != ''" >
+        and actor_umId =  #{actorUmId}
+	  </if>
+	      <if test="actorName != null and actorName != ''" >
+        and actor_name like CONCAT('%',#{actorName},'%')
+	  </if>
+	      <if test="operationType != null and operationType != ''" >
+        and operation_type =  #{operationType}
+	  </if>
+	      <if test="targetType != null and targetType != ''" >
+        and target_type =  #{targetType}
+	  </if>
+	      <if test="targetId != null and targetId != ''" >
+        and target_id =  #{targetId}
+	  </if>
+	      <if test="result != null and result != ''" >
+        and result =  #{result}
+	  </if>
+	      <if test="description != null and description != ''" >
+        and description =  #{description}
+	  </if>
+	  <if test="createTimeStart != null and createTimeStart != ''" >
+        and create_time &gt;=  #{createTimeStart}
+	  </if>
+	  <if test="createTimeEnd != null and createTimeEnd != ''" >
+        and create_time &lt;=  #{createTimeEnd}
+	  </if>
+	  <if test="q != null and q != ''" >
+        and (actor_name like CONCAT('%',#{q},'%') or description like CONCAT('%',#{q},'%'))
+	  </if>
+    </trim>
+  </sql>
+  
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_AUDIT_LOG(id,system_code,create_time,actor_umId,actor_name,operation_type,target_type,target_id,result,description)
+ values(#{id},#{systemCode},now(),#{actorUmId},#{actorName},#{operationType},#{targetType},#{targetId},#{result},#{description})
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+    update TD_AUDIT_LOG set system_code=#{systemCode},actor_umId=#{actorUmId},actor_name=#{actorName},operation_type=#{operationType},target_type=#{targetType},target_id=#{targetId},result=#{result},description=#{description} where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+    update TD_AUDIT_LOG set 
+	<trim  suffixOverrides="," >
+	<if test="systemCode != null  ">
+		system_code=#{systemCode},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="actorUmId != null  ">
+		actor_umId=#{actorUmId},
+	</if>
+	<if test="actorName != null  ">
+		actor_name=#{actorName},
+	</if>
+	<if test="operationType != null  ">
+		operation_type=#{operationType},
+	</if>
+	<if test="targetType != null  ">
+		target_type=#{targetType},
+	</if>
+	<if test="targetId != null  ">
+		target_id=#{targetId},
+	</if>
+	<if test="result != null  ">
+		result=#{result},
+	</if>
+	<if test="description != null  ">
+		description=#{description},
+	</if>
+	</trim> where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 审计日志表 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" /> 
+	 from TD_AUDIT_LOG where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+    delete 	 from TD_AUDIT_LOG where id = #{id}
+  </delete>
+
+  <!-- 审计日志表 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_AUDIT_LOG 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询审计日志表列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_AUDIT_LOG 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <select id="queryWithSearchByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_AUDIT_LOG 
+	<include refid="Base_Where_Clause_Search"/>
+  </select>
+  	
+  <select id="queryWithSearchByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_AUDIT_LOG 
+	<include refid="Base_Where_Clause_Search"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+</mapper>   

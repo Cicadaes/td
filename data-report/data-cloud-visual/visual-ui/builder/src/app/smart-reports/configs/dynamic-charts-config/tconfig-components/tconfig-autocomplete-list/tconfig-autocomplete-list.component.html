@@ -1,0 +1,26 @@
+<div class="autocomplete_con">
+    <label *ngIf="!tconfig.iconClass"
+           class="tkey"
+           title="{{tconfig.name}}">
+        <em>{{tconfig.name}}</em>
+    </label>
+    <label class="tc-select-icon"><span [attr.class]="tconfig.iconClass"></span></label>
+
+    <p-autoComplete
+            [(ngModel)]="metricValue"
+            [suggestions]="results"
+            (completeMethod)="click($event)"
+            (onSelect)="select($event)"
+            (onUnselect)="unselect($event)"
+            [dropdown]="true"
+            (onDropdownClick)="click($event)"
+            [minLength]="1"
+            placeholder="{{dataType}}"
+            [multiple]="true"
+            [class.autodisabled]="tconfig.requried == 2"
+
+   >
+    </p-autoComplete>
+
+    <!--[class.autoprohibit]="tconfig.requried == 0"-->
+</div>

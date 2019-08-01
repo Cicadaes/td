@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.catalog.DatasetSchemaHistoryDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.catalog.DatasetSchemaHistory" >
+    <id column="id" property="id" />
+    <result column="dataset_id" property="datasetId" />
+    <result column="urn" property="urn" />
+    <result column="modified_date" property="modifiedDate" />
+    <result column="schema" property="schema" />
+  </resultMap>
+
+  <!-- dict_dataset_schema_history table all fields -->
+  <sql id="Base_Column_List" >
+     `id`, `dataset_id`, `urn`, `modified_date`, `schema`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and `id` ${idOperator} #{id}
+      </if>
+      <if test="datasetId != null" >
+        and `dataset_id` ${datasetIdOperator} #{datasetId}
+      </if>
+      <if test="urn != null" >
+        and `urn` ${urnOperator} #{urn}
+      </if>
+      <if test="modifiedDate != null" >
+        and `modified_date` ${modifiedDateOperator} #{modifiedDate}
+      </if>
+      <if test="modifiedDate1 != null" >
+        and `modified_date` &gt;= #{modifiedDate1}
+      </if>
+      <if test="modifiedDate2 != null" >
+        and `modified_date` &lt;= #{modifiedDate2}
+      </if>
+      <if test="schema != null" >
+        and `schema` ${schemaOperator} #{schema}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.datacloud.entity.catalog.DatasetSchemaHistory" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dict_dataset_schema_history(<include refid="Base_Column_List" />)
+    values (#{id}, #{datasetId}, #{urn}, #{modifiedDate}, #{schema})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.datacloud.entity.catalog.DatasetSchemaHistory" >
+    update dict_dataset_schema_history
+       set `dataset_id` = #{datasetId},
+           `urn` = #{urn},
+           `modified_date` = #{modifiedDate},
+           `schema` = #{schema}
+     where `id` = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.datacloud.entity.catalog.DatasetSchemaHistory" >
+    update dict_dataset_schema_history
+    <set >
+      <if test="datasetId != null" >
+        `dataset_id` = #{datasetId},
+      </if>
+      <if test="urn != null" >
+        `urn` = #{urn},
+      </if>
+      <if test="modifiedDate != null" >
+        `modified_date` = #{modifiedDate},
+      </if>
+      <if test="schema != null" >
+        `schema` = #{schema},
+      </if>
+    </set>
+     where `id` = #{id}
+  </update>
+
+  <!-- 根据id查询 dict_dataset_schema_history -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from dict_dataset_schema_history
+     where `id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dict_dataset_schema_history
+     where `id` = #{value}
+
+  </delete>
+
+  <!-- dict_dataset_schema_history 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select count(1) from dict_dataset_schema_history
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询dict_dataset_schema_history列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from dict_dataset_schema_history
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+</mapper>

@@ -1,0 +1,26 @@
+<main>
+    <div class="datacloud_title"><b>数据源</b></div>
+    <div class="tools border-top" style="border-top: 0 none">
+        <div class="buttons padding-none l" style="border-top: 0 none">
+            <button class="ui-button-icon-left ui-c fa fa-fw" (click)="addDataSourceDialog({})">
+                <span class="iconfont icon-addincreased"></span>
+                新建数据源
+            </button>
+        </div>
+
+        <div class="search buttons r">
+            <div *ngIf="!filterShow" style="display: inline-block">
+                <input type="text" placeholder="关键词..." class="search-data" [(ngModel)]="searchText" (keyup)="search()" style="float: none">
+                <button class="iconfont icon-search button-search" style="cursor: auto;left: 34px;margin-top: 0"></button>
+            </div>
+
+            <button (click)="searchText='';filterShow=!filterShow" class="search_task">
+                高级搜索
+                <span class="downsearch" [class.upicon]="filterShow"></span>
+            </button>
+        </div>
+    </div>
+    <reportdlist-filter *ngIf="filterShow"></reportdlist-filter>
+    <reportdlist-table [config]="config"></reportdlist-table>
+    <dialog-data></dialog-data>
+</main>

@@ -1,0 +1,44 @@
+{
+  "datasource_id": 52,
+  "dimensions": [
+    {
+      "field": "score"
+    },
+    {
+      "field": "ROUND(count/total*100,2)",
+      "alias":"percent"
+    },
+    {
+      "field": "average_R"
+    },
+    {
+      "field": "average_F"
+    },
+    {
+      "field": "average_M"
+    }
+  ],
+  "filters": [
+    {
+      "field": "year_month",
+      "operator": "=",
+      "value": "201710"
+    },
+    {
+      "field": "brand_name",
+      "operator": "=",
+      "value": "SELECTED"
+    },
+    {
+      "field": "channel_name",
+      "operator": "=",
+      "value": "ALL"
+    }
+  ],
+  "orderBy": [
+    {
+      "field": "score",
+      "function": "ASC"
+    }
+  ]
+}

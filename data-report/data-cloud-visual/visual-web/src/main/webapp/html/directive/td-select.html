@@ -1,0 +1,11 @@
+<span class="td-select">
+   	<input type="text" readonly="readonly" ng-model="val" class="tdSelect input-search" ng-blur="onBlur();" ng-click="showSearching();" ng-change="onChange(val);">
+  	<i ng-click="showSearching();" class="glyphicon glyphicon-chevron-down" style="right: 5px;"></i>
+	<div style="display:none;" align="center" class="td-search p-abs">
+		<input type="text" ng-model="sercheventname" placeholder="{{searchName}}" ng-change="initOptions(sercheventname);">
+		<i class="glyphicon glyphicon-search p-abs" style="right: 12px;" ng-click="onChange(sercheventname);"></i>
+	</div>
+	<ul style="display:none;"class="searchPane">
+		<li ng-repeat="opt in options" title="{{opt.value}}" ng-click="seletedItem(opt);">{{opt.value | dataStrSubstring : 14}}</li>
+	</ul>
+</span>

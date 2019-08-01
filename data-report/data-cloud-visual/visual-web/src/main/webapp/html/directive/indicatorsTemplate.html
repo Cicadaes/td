@@ -1,0 +1,17 @@
+<div class="server">
+	<div class="ser_title">
+		<b class="l">数据指标说明</b>
+		<i class="glyphicon glyphicon-remove-circle fr glyphicon-font mt-10 mr-10" ng-click="$hide();" style="color: #C2CBDB;"></i>
+	</div>
+	<div style="color: white; border: 0; position: absolute; right: 5px; top: -14px;">
+		<img ng-src="css/images/triangle.png"/>
+	</div>
+	<div class="ser_txt">
+		<dl>
+			<dt ng-repeat="indicator in indicators" class="clrfix">
+				<font>{{indicator.key}}：</font><small>{{indicator.value}}</small>
+			</dt>
+		</dl>
+	</div>
+</div>
+

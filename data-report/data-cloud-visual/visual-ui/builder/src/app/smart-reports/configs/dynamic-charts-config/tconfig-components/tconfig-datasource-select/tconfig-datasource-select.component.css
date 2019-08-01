@@ -1,0 +1,20 @@
+:host /deep/ .ui-dropdown{
+    border: 0 none;
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+
+.tc-select-icon .icon_svg{
+    position: relative;
+    top: -5px;
+}
+
+:host /deep/ .ui-dropdown.ui-state-hover .ui-dropdown-label,
+:host /deep/ .ui-dropdown .ui-dropdown-trigger.ui-state-hover{
+    background: transparent
+}
+
+:host /deep/ .ui-dropdown.ui-state-focus{
+    border: 0 none;
+    box-shadow: 0 0 0;
+}
+

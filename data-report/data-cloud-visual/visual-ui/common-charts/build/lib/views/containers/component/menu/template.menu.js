@@ -1,0 +1,16 @@
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var template_base_1 = require("../../../base/template.base");
+var ComponentRightMenuTemplate = (function (_super) {
+    __extends(ComponentRightMenuTemplate, _super);
+    function ComponentRightMenuTemplate() {
+        return _super.call(this, "<div class=\"rightMenu\">\n                    <div style=\"position: relative;width: 100%;height: 100%\">\n                        <div menu=\"delete\" class=\"rightMenu-list\" level=\"1\">\n                            \u5220\u9664\n                        </div>\n                        <div class=\"rightMenu-list\" level=\"1\">\n                            \u56FE\u5C42\n                            <div class=\"rightMenu-list-li\">\n                                <div style=\"position: relative;width: 100%;height: 100%;background-color: white\">\n                                    <div menu=\"up_layer\" class=\"rightMenu-list\" level=\"2\">\u4E0A\u79FB\u4E00\u5C42</div>\n                                    <div menu=\"down_layer\" class=\"rightMenu-list\" level=\"2\">\u4E0B\u79FB\u4E00\u5C42</div>\n                                    <div menu=\"top_layer\" class=\"rightMenu-list\" level=\"2\">\u7F6E\u9876</div>\n                                    <div menu=\"bottom_layer\" class=\"rightMenu-list\" level=\"2\">\u7F6E\u5E95</div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"rightMenu-list\" level=\"1\">\n                            \u5BF9\u9F50\n                            <div class=\"rightMenu-list-li\">\n                                <div style=\"position: relative;width: 100%;height: 100%;background-color: white\">\n                                    <div menu=\"align_left\" class=\"rightMenu-list\" level=\"2\">\u5DE6\u5BF9\u9F50</div>\n                                    <div menu=\"align_right\" class=\"rightMenu-list\" level=\"2\">\u53F3\u5BF9\u9F50</div>\n                                    <div menu=\"align_top\" class=\"rightMenu-list\" level=\"2\">\u4E0A\u5BF9\u9F50</div>\n                                    <div menu=\"align_bottom\" class=\"rightMenu-list\" level=\"2\">\u4E0B\u5BF9\u9F50</div>\n                                    <div menu=\"align_center\" class=\"rightMenu-list\" level=\"2\">\u6C34\u5E73\u5C45\u4E2D</div>\n                                    <div menu=\"align_vertical\" class=\"rightMenu-list\" level=\"2\">\u5782\u76F4\u5C45\u4E2D</div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n               </div>") || this;
+    }
+    return ComponentRightMenuTemplate;
+}(template_base_1.BaseTemplate));
+exports.ComponentRightMenuTemplate = ComponentRightMenuTemplate;
+//# sourceMappingURL=template.menu.js.map

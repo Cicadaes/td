@@ -1,0 +1,45 @@
+{
+  "datasource_id": 22,
+  "dateDimensions": [
+    {
+      "field": "date",
+      "alias": "时间"
+    }
+  ],
+  "metrics": [
+    {
+      "field": "visit_cycle",
+      "alias": "入店老客"
+    }
+  ],
+  "filters": [
+    {
+      "field": "project_id",
+      "operator": "=",
+      "value": "7194"
+    }
+  ],
+  "dateFilters": [
+    {
+      "field": "date",
+      "operator": ">=",
+      "value": "2017-10-01"
+    },
+    {
+      "field": "date",
+      "operator": "<=",
+      "value": "2017-10-31"
+    }
+  ],
+  "orderBy": [
+    {
+      "field": "date",
+      "function": "desc"
+    }
+  ],
+  "limit": [
+    1,
+    10
+  ],
+  "dateGranularity": 0
+}

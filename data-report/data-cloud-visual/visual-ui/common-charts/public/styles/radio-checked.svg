@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46 (44423) - http://www.bohemiancoding.com/sketch -->
+    <title>单选框 radio-选中12</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M6,12 C9.3137085,12 12,9.3137085 12,6 C12,2.6862915 9.3137085,0 6,0 C2.6862915,0 0,2.6862915 0,6 C0,9.3137085 2.6862915,12 6,12 Z" id="path-1"></path>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="单选框-radio-选中12">
+            <g id="Group-11">
+                <g id="Oval-Copy-6">
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    <path stroke="#3399FF" stroke-width="1" d="M6,11.5 C9.03756612,11.5 11.5,9.03756612 11.5,6 C11.5,2.96243388 9.03756612,0.5 6,0.5 C2.96243388,0.5 0.5,2.96243388 0.5,6 C0.5,9.03756612 2.96243388,11.5 6,11.5 Z"></path>
+                </g>
+                <circle id="Oval-2-Copy" fill="#2D8CF0" cx="6" cy="6" r="3"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

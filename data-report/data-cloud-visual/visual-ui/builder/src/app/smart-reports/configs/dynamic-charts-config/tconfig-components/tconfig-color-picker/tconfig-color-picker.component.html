@@ -1,0 +1,16 @@
+<div class="color_icon">
+    <label *ngIf="tconfig.iconClass" class="ui-radiobutton-label" title="{{tconfig.name}}">{{tconfig.name}}</label>
+    <div  [attr.class]="tconfig.iconClass"></div>
+    <div class="color-preview">
+        <input #ignoredInput
+            [(cpToggle)]="toggle"
+            [(colorPicker)]="tconfig.value" 
+            [style.background]="tconfig.value"
+            [cpPresetColors]="['rgba(255,255,255,0)','#fff', '#000', '#2889e9', '#e920e9', '#fff500', 'rgb(236,64,64)']"
+            [cpCancelButton]="true"
+            [cpOKButton]="true"
+            (colorPickerChange)="onChangeColor($event)"
+            [cpIgnoredElements]="[ignoredButton, ignoredInput]"/>
+        <button (click)="toggle=!toggle;lastColor=color" #ignoredButton class="color-button"></button>  
+    </div>
+</div>

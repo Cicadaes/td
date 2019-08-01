@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="87px" height="66px" viewBox="0 0 87 66" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>2饼图</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="缩略图-copy" transform="translate(-89.000000, -612.000000)">
+            <g id="2饼图" transform="translate(89.000000, 612.000000)">
+                <g id="Page-1">
+                    <path d="M35.4043486,30.5715361 L65.972474,30.4306959 C65.4211511,19.2868715 59.0508439,8.75154859 48.3686621,3.38658307 C44.1518846,1.26856426 39.6899411,0.171335423 35.2633078,0 L35.4043486,30.5715361 Z" id="Fill-1" fill="#EB8E4A"></path>
+                    <path d="M30.5991223,33.3480426 L30.4546708,2.01633103 C19.3108464,2.56765392 8.77552351,8.93816176 3.41055799,19.6201429 C-2.38394984,31.1571962 -0.543197492,44.5291837 7.02565517,53.9911524 L30.5991223,33.3480426 Z" id="Fill-3" fill="#3399FF"></path>
+                    <path d="M32.5372589,35.384326 L8.87571661,56.1044765 C11.339215,58.6805266 14.276795,60.8870219 17.6441179,62.5783072 C33.4372715,70.5102947 52.6703749,64.1377806 60.6023624,48.344627 C62.7201806,44.1278495 63.81761,39.665906 63.9887448,35.2392727 L32.5372589,35.384326 Z" id="Fill-5" fill="#59C99F"></path>
+                </g>
+                <g id="Group" transform="translate(82.000000, 21.000000)">
+                    <rect id="Rectangle-16" fill="#3399FF" x="0" y="0" width="5" height="5"></rect>
+                    <rect id="Rectangle-16-Copy" fill="#5AC99E" x="0" y="10" width="5" height="5"></rect>
+                    <rect id="Rectangle-16-Copy-2" fill="#EB8E4A" x="0" y="20" width="5" height="5"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

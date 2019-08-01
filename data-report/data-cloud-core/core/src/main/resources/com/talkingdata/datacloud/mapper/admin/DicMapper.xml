@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.admin.DicDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.admin.Dic" >
+	<result column="id" property="id"/>
+	<result column="name" property="name"/>
+	<result column="description" property="description"/>
+	<result column="dic_key" property="dicKey"/>
+	<result column="system_code" property="systemCode"/>
+	<result column="create_by" property="createBy"/>
+	<result column="creator" property="creator"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_time" property="updateTime"/>
+  </resultMap>
+       
+  <!-- TD_DIC table all fields -->
+  <sql id="Base_Column_List" >
+	 id,name,description,dic_key,system_code,create_by,creator,update_by,create_time,update_time
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="name != null and name != ''" >
+        and name =  #{name}
+	  </if>
+	      <if test="description != null and description != ''" >
+        and description =  #{description}
+	  </if>
+	      <if test="dicKey != null and dicKey != ''" >
+        and dic_key =  #{dicKey}
+	  </if>
+	      <if test="systemCode != null and systemCode != ''" >
+        and system_code =  #{systemCode}
+	  </if>
+	      <if test="createBy != null and createBy != ''" >
+        and create_by =  #{createBy}
+	  </if>
+	      <if test="creator != null and creator != ''" >
+        and creator =  #{creator}
+	  </if>
+	      <if test="updateBy != null and updateBy != ''" >
+        and update_by =  #{updateBy}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+    </trim>
+  </sql>
+  
+  <!-- 高级搜索查询条件 -->
+  <sql id="Base_Where_Clause_Search">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="name != null and name != ''" >
+        and name like  CONCAT('%',#{name},'%')
+	  </if>
+	      <if test="description != null and description != ''" >
+        and description like CONCAT('%',#{description},'%')
+	  </if>
+	      <if test="dicKey != null and dicKey != ''" >
+        and dic_key like CONCAT('%',#{dicKey},'%')
+	  </if>
+	      <if test="systemCode != null and systemCode != ''" >
+        and system_code like CONCAT('%',#{systemCode},'%')
+	  </if>
+	      <if test="createBy != null and createBy != ''" >
+        and create_by =  #{createBy}
+	  </if>
+	      <if test="creator != null and creator != ''" >
+        and creator like CONCAT('%',#{creator},'%')
+	  </if>
+	      <if test="updateBy != null and updateBy != ''" >
+        and update_by =  #{updateBy}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	  <if test="createTimeStart != null and createTimeStart != ''" >
+        and create_time &gt;=  #{createTimeStart}
+	  </if>
+	  <if test="createTimeEnd != null and createTimeEnd != ''" >
+        and create_time &lt;=  #{createTimeEnd}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+	  <if test="q != null and q != ''" >
+	    and (name like CONCAT('%',#{q},'%') or dic_key like CONCAT('%',#{q},'%') or description like CONCAT('%',#{q},'%'))
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_DIC(id,name,description,dic_key,system_code,create_by,creator,update_by,create_time,update_time)
+ values(#{id},#{name},#{description},#{dicKey},#{systemCode},#{createBy},#{creator},#{updateBy},now(),now())
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+    update TD_DIC set name=#{name},description=#{description},dic_key=#{dicKey},system_code=#{systemCode},create_by=#{createBy},creator=#{creator},update_by=#{updateBy},create_time=now(),update_time=now() where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+    update TD_DIC set 
+	<trim  suffixOverrides="," >
+	<if test="name != null  ">
+		name=#{name},
+	</if>
+	<if test="description != null  ">
+		description=#{description},
+	</if>
+	<if test="dicKey != null  ">
+		dic_key=#{dicKey},
+	</if>
+	<if test="systemCode != null  ">
+		system_code=#{systemCode},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="creator != null  ">
+		creator=#{creator},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	</trim> where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 数据字典 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" /> 
+	 from TD_DIC where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+    delete 	 from TD_DIC where id = #{id}
+  </delete>
+
+  <!-- 数据字典 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_DIC 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询数据字典列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_DIC 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <!-- 高级搜索 数据字典 列表总数-->
+  <select id="queryWithSearchByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_DIC 
+	<include refid="Base_Where_Clause_Search"/>
+  </select>
+  	
+  <!-- 高级搜索 查询数据字典列表 -->
+  <select id="queryWithSearchByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_DIC 
+	<include refid="Base_Where_Clause_Search"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <resultMap id="DicItemColl" type="com.talkingdata.datacloud.entity.admin.DicItemColl" >
+	<result column="dic_item_key" property="dicItemKey"/>
+	<result column="dic_item_value" property="dicItemValue"/>
+	<result column="parent_id" property="parentId"/>
+  </resultMap>
+  
+  <select id="queryDicItemCollByDicName" resultMap="DicItemColl"  parameterType="Object">
+	SELECT 
+		di.dic_item_key, 
+		di.dic_item_value, 
+		di.parent_id
+	FROM 
+		TD_DIC_ITEM di JOIN TD_DIC d ON di.dic_id = d.id 
+	WHERE d.name = #{name}
+
+  </select>
+  
+  <select id="findByDicName" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_DIC 
+	WHERE name = #{name}
+  </select>
+  
+</mapper>   

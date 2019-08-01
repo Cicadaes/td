@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.catalog.FieldDetailDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.catalog.FieldDetail" >
+    <id column="field_id" property="fieldId" />
+    <result column="dataset_id" property="datasetId" />
+    <result column="fields_layout_id" property="fieldsLayoutId" />
+    <result column="sort_id" property="sortId" />
+    <result column="parent_sort_id" property="parentSortId" />
+    <result column="parent_path" property="parentPath" />
+    <result column="field_name" property="fieldName" />
+    <result column="field_label" property="fieldLabel" />
+    <result column="data_type" property="dataType" />
+    <result column="data_size" property="dataSize" />
+    <result column="data_precision" property="dataPrecision" />
+    <result column="data_fraction" property="dataFraction" />
+    <result column="default_comment_id" property="defaultCommentId" />
+    <result column="comment_ids" property="commentIds" />
+    <result column="is_nullable" property="isNullable" />
+    <result column="is_indexed" property="isIndexed" />
+    <result column="is_partitioned" property="isPartitioned" />
+    <result column="is_distributed" property="isDistributed" />
+    <result column="is_recursive" property="isRecursive" />
+    <result column="confidential_flags" property="confidentialFlags" />
+    <result column="default_value" property="defaultValue" />
+    <result column="namespace" property="namespace" />
+    <result column="java_data_type" property="javaDataType" />
+    <result column="jdbc_data_type" property="jdbcDataType" />
+    <result column="pig_data_type" property="pigDataType" />
+    <result column="hcatalog_data_type" property="hcatalogDataType" />
+    <result column="modified" property="modified" />
+  </resultMap>
+
+  <!-- dict_field_detail table all fields -->
+  <sql id="Base_Column_List" >
+     `field_id`, `dataset_id`, `fields_layout_id`, `sort_id`, `parent_sort_id`, `parent_path`, `field_name`, `field_label`, `data_type`, `data_size`, `data_precision`, `data_fraction`, `default_comment_id`, `comment_ids`, `is_nullable`, `is_indexed`, `is_partitioned`, `is_distributed`, `is_recursive`, `confidential_flags`, `default_value`, `namespace`, `java_data_type`, `jdbc_data_type`, `pig_data_type`, `hcatalog_data_type`, `modified`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="fieldId != null" >
+        and `field_id` ${fieldIdOperator} #{fieldId}
+      </if>
+      <if test="datasetId != null" >
+        and `dataset_id` ${datasetIdOperator} #{datasetId}
+      </if>
+      <if test="fieldsLayoutId != null" >
+        and `fields_layout_id` ${fieldsLayoutIdOperator} #{fieldsLayoutId}
+      </if>
+      <if test="sortId != null" >
+        and `sort_id` ${sortIdOperator} #{sortId}
+      </if>
+      <if test="parentSortId != null" >
+        and `parent_sort_id` ${parentSortIdOperator} #{parentSortId}
+      </if>
+      <if test="parentPath != null" >
+        and `parent_path` ${parentPathOperator} #{parentPath}
+      </if>
+      <if test="fieldName != null" >
+        and `field_name` ${fieldNameOperator} #{fieldName}
+      </if>
+      <if test="fieldLabel != null" >
+        and `field_label` ${fieldLabelOperator} #{fieldLabel}
+      </if>
+      <if test="dataType != null" >
+        and `data_type` ${dataTypeOperator} #{dataType}
+      </if>
+      <if test="dataSize != null" >
+        and `data_size` ${dataSizeOperator} #{dataSize}
+      </if>
+      <if test="dataPrecision != null" >
+        and `data_precision` ${dataPrecisionOperator} #{dataPrecision}
+      </if>
+      <if test="dataFraction != null" >
+        and `data_fraction` ${dataFractionOperator} #{dataFraction}
+      </if>
+      <if test="defaultCommentId != null" >
+        and `default_comment_id` ${defaultCommentIdOperator} #{defaultCommentId}
+      </if>
+      <if test="commentIds != null" >
+        and `comment_ids` ${commentIdsOperator} #{commentIds}
+      </if>
+      <if test="isNullable != null" >
+        and `is_nullable` ${isNullableOperator} #{isNullable}
+      </if>
+      <if test="isIndexed != null" >
+        and `is_indexed` ${isIndexedOperator} #{isIndexed}
+      </if>
+      <if test="isPartitioned != null" >
+        and `is_partitioned` ${isPartitionedOperator} #{isPartitioned}
+      </if>
+      <if test="isDistributed != null" >
+        and `is_distributed` ${isDistributedOperator} #{isDistributed}
+      </if>
+      <if test="isRecursive != null" >
+        and `is_recursive` ${isRecursiveOperator} #{isRecursive}
+      </if>
+      <if test="confidentialFlags != null" >
+        and `confidential_flags` ${confidentialFlagsOperator} #{confidentialFlags}
+      </if>
+      <if test="defaultValue != null" >
+        and `default_value` ${defaultValueOperator} #{defaultValue}
+      </if>
+      <if test="namespace != null" >
+        and `namespace` ${namespaceOperator} #{namespace}
+      </if>
+      <if test="javaDataType != null" >
+        and `java_data_type` ${javaDataTypeOperator} #{javaDataType}
+      </if>
+      <if test="jdbcDataType != null" >
+        and `jdbc_data_type` ${jdbcDataTypeOperator} #{jdbcDataType}
+      </if>
+      <if test="pigDataType != null" >
+        and `pig_data_type` ${pigDataTypeOperator} #{pigDataType}
+      </if>
+      <if test="hcatalogDataType != null" >
+        and `hcatalog_data_type` ${hcatalogDataTypeOperator} #{hcatalogDataType}
+      </if>
+      <if test="modified != null" >
+        and `modified` ${modifiedOperator} #{modified}
+      </if>
+      <if test="modified1 != null" >
+        and `modified` &gt;= #{modified1}
+      </if>
+      <if test="modified2 != null" >
+        and `modified` &lt;= #{modified2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.datacloud.entity.catalog.FieldDetail" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="fieldId">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dict_field_detail(<include refid="Base_Column_List" />)
+    values (#{fieldId}, #{datasetId}, #{fieldsLayoutId}, #{sortId}, #{parentSortId}, #{parentPath}, #{fieldName}, #{fieldLabel}, #{dataType}, #{dataSize}, #{dataPrecision}, #{dataFraction}, #{defaultCommentId}, #{commentIds}, #{isNullable}, #{isIndexed}, #{isPartitioned}, #{isDistributed}, #{isRecursive}, #{confidentialFlags}, #{defaultValue}, #{namespace}, #{javaDataType}, #{jdbcDataType}, #{pigDataType}, #{hcatalogDataType}, #{modified})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.datacloud.entity.catalog.FieldDetail" >
+    update dict_field_detail
+       set `dataset_id` = #{datasetId},
+           `fields_layout_id` = #{fieldsLayoutId},
+           `sort_id` = #{sortId},
+           `parent_sort_id` = #{parentSortId},
+           `parent_path` = #{parentPath},
+           `field_name` = #{fieldName},
+           `field_label` = #{fieldLabel},
+           `data_type` = #{dataType},
+           `data_size` = #{dataSize},
+           `data_precision` = #{dataPrecision},
+           `data_fraction` = #{dataFraction},
+           `default_comment_id` = #{defaultCommentId},
+           `comment_ids` = #{commentIds},
+           `is_nullable` = #{isNullable},
+           `is_indexed` = #{isIndexed},
+           `is_partitioned` = #{isPartitioned},
+           `is_distributed` = #{isDistributed},
+           `is_recursive` = #{isRecursive},
+           `confidential_flags` = #{confidentialFlags},
+           `default_value` = #{defaultValue},
+           `namespace` = #{namespace},
+           `java_data_type` = #{javaDataType},
+           `jdbc_data_type` = #{jdbcDataType},
+           `pig_data_type` = #{pigDataType},
+           `hcatalog_data_type` = #{hcatalogDataType},
+           `modified` = #{modified}
+     where `field_id` = #{fieldId}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.datacloud.entity.catalog.FieldDetail" >
+    update dict_field_detail
+    <set >
+      <if test="datasetId != null" >
+        `dataset_id` = #{datasetId},
+      </if>
+      <if test="fieldsLayoutId != null" >
+        `fields_layout_id` = #{fieldsLayoutId},
+      </if>
+      <if test="sortId != null" >
+        `sort_id` = #{sortId},
+      </if>
+      <if test="parentSortId != null" >
+        `parent_sort_id` = #{parentSortId},
+      </if>
+      <if test="parentPath != null" >
+        `parent_path` = #{parentPath},
+      </if>
+      <if test="fieldName != null" >
+        `field_name` = #{fieldName},
+      </if>
+      <if test="fieldLabel != null" >
+        `field_label` = #{fieldLabel},
+      </if>
+      <if test="dataType != null" >
+        `data_type` = #{dataType},
+      </if>
+      <if test="dataSize != null" >
+        `data_size` = #{dataSize},
+      </if>
+      <if test="dataPrecision != null" >
+        `data_precision` = #{dataPrecision},
+      </if>
+      <if test="dataFraction != null" >
+        `data_fraction` = #{dataFraction},
+      </if>
+      <if test="defaultCommentId != null" >
+        `default_comment_id` = #{defaultCommentId},
+      </if>
+      <if test="commentIds != null" >
+        `comment_ids` = #{commentIds},
+      </if>
+      <if test="isNullable != null" >
+        `is_nullable` = #{isNullable},
+      </if>
+      <if test="isIndexed != null" >
+        `is_indexed` = #{isIndexed},
+      </if>
+      <if test="isPartitioned != null" >
+        `is_partitioned` = #{isPartitioned},
+      </if>
+      <if test="isDistributed != null" >
+        `is_distributed` = #{isDistributed},
+      </if>
+      <if test="isRecursive != null" >
+        `is_recursive` = #{isRecursive},
+      </if>
+      <if test="confidentialFlags != null" >
+        `confidential_flags` = #{confidentialFlags},
+      </if>
+      <if test="defaultValue != null" >
+        `default_value` = #{defaultValue},
+      </if>
+      <if test="namespace != null" >
+        `namespace` = #{namespace},
+      </if>
+      <if test="javaDataType != null" >
+        `java_data_type` = #{javaDataType},
+      </if>
+      <if test="jdbcDataType != null" >
+        `jdbc_data_type` = #{jdbcDataType},
+      </if>
+      <if test="pigDataType != null" >
+        `pig_data_type` = #{pigDataType},
+      </if>
+      <if test="hcatalogDataType != null" >
+        `hcatalog_data_type` = #{hcatalogDataType},
+      </if>
+      <if test="modified != null" >
+        `modified` = #{modified},
+      </if>
+    </set>
+     where `field_id` = #{fieldId}
+  </update>
+
+  <!-- 根据id查询 dict_field_detail -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from dict_field_detail
+     where `field_id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dict_field_detail
+     where `field_id` = #{value}
+
+  </delete>
+
+  <!-- 删除记录BY dataset_id -->
+  <delete id="deleteByDatasetId" parameterType="java.lang.Integer">
+    delete from dict_field_detail
+    where `dataset_id` = #{value}
+
+  </delete>
+
+  <!-- dict_field_detail 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select count(1) from dict_field_detail
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询dict_field_detail列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from dict_field_detail
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+</mapper>

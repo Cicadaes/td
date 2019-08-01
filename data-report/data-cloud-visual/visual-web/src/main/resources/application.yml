@@ -1,0 +1,21 @@
+
+management:
+  context-path: /web
+  health:
+    mail:
+      enabled: false # When using the MailService, configure an SMTP server and set this to true
+spring:
+  application:
+    name: datareport
+  jackson:
+    serialization.write_dates_as_timestamps: false
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT-5
+  mvc:
+    view:
+      suffix: .jsp
+
+security:
+  filter-order: 5   # menufiler order是10， munufiler需要在spring security filer chain 之后
+
+

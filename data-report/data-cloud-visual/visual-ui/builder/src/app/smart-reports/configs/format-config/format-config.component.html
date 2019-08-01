@@ -1,0 +1,31 @@
+<div *ngIf="dataStyleView.length === 0" class="explore_graph_style">
+    <h6>画布尺寸</h6>
+    <!--<p-dropdown [options]="size" [(ngModel)]="selectedsize"></p-dropdown>-->
+    <div class="dropdown_title" (click)="canvasChange()">
+        <span class="fa fa-fw fa-caret-down ui-c"></span>
+        {{canvasSize}}
+    </div>
+    <div class="dropdown_con" *ngIf="canvalBool">
+        <ul>
+            <li *ngFor="let item of canvasSizeList"  (click)="onChange(item)" [class.dropdown_selected]="canvasSize == item.label">{{item.label}}</li>
+        </ul>
+    </div>
+    <ul class="double">
+        <li><span>宽度px</span>
+            <input type="number" pInputText [(ngModel)]="selectedWidth" style="padding: 6px 0" (keyup)="getSelectedSize($event,'width')" />
+        </li>
+        <li><span>高度px</span>
+            <input type="number" pInputText [(ngModel)]="selectedHeight" style="padding: 6px 0" (keyup)="getSelectedSize($event,'height')"/>
+        </li>
+    </ul>
+
+
+    <label class="tkey" title="配置">配置</label>
+    <br>
+    <textarea pInputTextarea [(ngModel)]="dataConfig" style="width: 200px; height: 100px;"></textarea>
+    <br>
+    <p-radioButton name="{{marginValue.code}}" value="false" label="确定" (onClick)="dataConfigChange()"></p-radioButton>
+
+    <!--<h6>报告级组件位置</h6>
+    <p-dropdown [options]="side" [(ngModel)]="selectedside" (onChange)="onChange($event)" id="side"></p-dropdown>-->
+</div>

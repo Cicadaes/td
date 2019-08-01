@@ -1,0 +1,133 @@
+{
+    "name": "组合概览",
+    "description": "组合概览",
+    "iconPath": null,
+    "iconData": null,
+    "type": 30,
+    "groupId":6,
+    "orderNum":30,
+    "view": {
+        "id": null,
+        "toolTip": null,
+        "fieldTabs": [
+            {
+                "name": "style",
+                "fieldGroups": [
+                    {
+                        "name": "标题配置",
+                        "scripts": null,
+                        "fields": [
+                            {
+                                "code": "title_font",
+                                "name": "是否显示表头",
+                                "description": null,
+                                "valueType": 9,
+                                "value":null,
+                                "defaultValue": false,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 14,
+                                "viewMetaData": null,
+                                "verifyRule":null,
+                                "iconClass":"icons_svg color_format",
+                                "childrenFields": [
+                                    {
+                                        "code": "title_name",
+                                        "name": "标题名称",
+                                        "description": null,
+                                        "valueType": 8,
+                                        "value": null,
+                                        "defaultValue":{
+                                            "titleValue":false,
+                                            "textValue":null
+                                        },
+                                        "minValue":null,
+                                        "maxValue":null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 26,
+                                        "viewMetaData": null,
+                                        "verifyRule":null,
+                                        "iconClass":null,
+                                        "childrenFields": []
+                                    },{
+                                        "code": "chart_download",
+                                        "name": "下载设置",
+                                        "description": null,
+                                        "valueType": 9,
+                                        "value": null,
+                                        "defaultValue": false,
+                                        "minValue":null,
+                                        "maxValue":null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 14,
+                                        "viewMetaData": null,
+                                        "verifyRule":null,
+                                        "iconClass":null,
+                                        "childrenFields": []
+                                    },{
+                                        "code": "chart_help",
+                                        "name": "帮助设置",
+                                        "description": null,
+                                        "valueType": 8,
+                                        "value": null,
+                                        "defaultValue":{
+                                            "titleValue":false,
+                                            "textValue":null
+                                        },
+                                        "minValue":null,
+                                        "maxValue":null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 26,
+                                        "viewMetaData": null,
+                                        "verifyRule":null,
+                                        "iconClass":null,
+                                        "childrenFields": []
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name":"data",
+                "fieldGroups":[
+                    {
+                        "name":"基本信息",
+                        "scripts":null,
+                        "fields":[
+                            {
+                                "code":"dataSource",
+                                "name":"数据源",
+                                "description":null,
+                                "valueType":6,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":24,
+                                "viewMetaData":{"onChange":true},
+                                "multipleMaxNumber":1,
+                                "verifyRule":null,
+                                "iconClass":null,
+                                "childrenFields":[]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

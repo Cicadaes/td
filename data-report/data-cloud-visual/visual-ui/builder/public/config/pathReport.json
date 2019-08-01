@@ -1,0 +1,14 @@
+{
+  "developer": {
+    "main": "http://localhost/visual-web",
+    "datareport": "http://172.23.6.2:3006"
+  },
+  "production": {
+    "main": "http://172.23.6.2:9095/visual-web",
+    "datareport": "http://172.23.6.2:3006"
+  },
+  "test": {
+    "main": "http://172.23.5.179/visual-web",
+    "datareport": "http://172.23.6.4:3006"
+  }
+}

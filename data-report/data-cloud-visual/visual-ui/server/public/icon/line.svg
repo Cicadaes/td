@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="2px" height="32px" viewBox="0 0 2 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>line</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.5">
+        <g id="数据依赖关系－放大-copy" transform="translate(-64.000000, -17.000000)">
+            <g id="top">
+                <g id="Group" transform="translate(20.000000, 17.000000)">
+                    <g id="logo">
+                        <g id="line" transform="translate(44.000000, 0.000000)">
+                            <path d="M1,0 L1,10" id="Line" stroke="#FFFFFF" stroke-width="2"></path>
+                            <path d="M1,22 L1,32" id="Line-Copy" stroke="#FFFFFF" stroke-width="2"></path>
+                            <circle id="Oval" fill="#FFFFFF" cx="1" cy="16" r="1"></circle>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

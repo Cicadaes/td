@@ -1,0 +1,4 @@
+<label *ngIf="!tconfig.iconClass" class="tkey" title="{{tconfig.name}}">{{tconfig.name}}</label>
+<label class="tc-select-icon"><span [attr.class]="tconfig.iconClass"></span></label>
+<p-dropdown  [options]="options" [(ngModel)]="selectedKey" (onChange)="onSelect($event)"></p-dropdown>
+

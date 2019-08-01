@@ -1,0 +1,107 @@
+{
+    "id":786,
+    "name": "时间",
+    "description": "时间",
+    "iconPath": null,
+    "iconData": null,
+    "type": 8,
+    "groupId":12,
+    "orderNum":8,
+    "styleView": {
+        "id": null,
+        "toolTip": null,
+        "fieldTabs": [
+            {
+                "id": null,
+                "name": null,
+                "fieldGroups": [
+                    {
+                        "name": "日期范围选择器",
+                        "scripts": null,
+                        "fields": [
+                            {
+                                "code": "font_fontColor",
+                                "name": "字体颜色",
+                                "description": "字体颜色",
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 15,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "iconClass":"icon_svg text_format",
+                                "childrenFields": []
+                            },
+                            {
+                                "code": "font_fontSize",
+                                "name": "字体大小",
+                                "description": "字体大小",
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 2,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "iconClass":"icon_svg fontsize_format",
+                                "childrenFields": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "背景和边框",
+                        "scripts": null,
+                        "fields": [
+                            {
+                                "code": "backgroundBorder",
+                                "name": "背景颜色",
+                                "description": null,
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 20,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "childrenFields": [
+                                    {
+                                        "code": "backgroundColor",
+                                        "name": "背景颜色",
+                                        "description": null,
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": null,
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 15,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "iconClass":"icons_svg chartbg_format",
+                                        "childrenFields": []
+                                    }
+                                ]
+                            }
+
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

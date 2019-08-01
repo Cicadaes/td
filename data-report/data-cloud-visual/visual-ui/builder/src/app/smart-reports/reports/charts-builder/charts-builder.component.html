@@ -1,0 +1,39 @@
+<!--spages-->
+<div class="smart-pages fl">
+
+</div>
+<!--slider-->
+
+<div class="smart-slider fl" id="charts-builder">
+
+    <ul class="smart-reports-list">
+        <li class="smart-reports-item" *ngFor="let type of chartTypeList">
+            <a (mouseover)="getChartGroup(type)" [class.charthover]="type.chartHover" (mouseout)="delChartGroup(type)">
+                <em class="smart-report-type iconfont icon-strip2">
+                    <strong><img [src]="baseUrl+'/report/chartIcons/'+type.id + '?type=1'" draggable="false"></strong>
+                    <b><img [src]="baseUrl+'/report/chartIcons/'+type.id + '?type=2'" draggable="false"></b>
+                </em>
+                <!--<span>{{type.groupName}}</span>-->
+            </a>
+        </li>
+    </ul>
+    <dl class="smart-reports-chart" (mouseout)="mouseoutChartGroup()" (mouseover)="mouseoverChartGroup()">
+        <dt><span class="close" (click)="closeChartGroup()"></span>{{chartGroupTitle}}</dt>
+        <dd *ngFor="let type of chartGroupList">
+            <a [ngClass]="{'chartDrag':type.type == 3 || type.type == 8}"
+                    draggable="true" (dragstart)="dragstart($event, type)" (dragend)="dragend($event, type)">
+                <em>
+                    <img [src]="baseUrl+'/report/chartIcons/'+type.id + '?type=3'">
+                </em>
+                <div class="showName">{{type.name}}</div>
+            </a>
+            <div class="smartTips" *ngIf="type.type == 3 || type.type == 8">敬请期待</div>
+
+        </dd>
+
+        <dd>
+            <div class="smartTips" *ngIf="smartTips">敬请期待</div>
+        </dd>
+    </dl>
+</div>
+

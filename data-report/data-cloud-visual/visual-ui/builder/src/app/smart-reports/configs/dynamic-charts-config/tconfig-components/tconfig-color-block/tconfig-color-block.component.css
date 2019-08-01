@@ -1,0 +1,14 @@
+.color_block{
+    
+}
+
+.color_group{
+    border: 1px solid #bdbdbd;
+    cursor: pointer;
+    display: inline-block;
+    height: 18px;
+    margin-right: 4px;
+    width: 18px;
+    background: #f5f5f5;
+    border-radius: 2px;
+}

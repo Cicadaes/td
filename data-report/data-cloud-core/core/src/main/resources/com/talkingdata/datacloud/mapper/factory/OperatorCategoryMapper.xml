@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.factory.OperatorCategoryDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.factory.OperatorCategory" >
+    <id column="id" property="id" />
+    <result column="name" property="name" />
+    <result column="code" property="code" />
+    <result column="type" property="type" />
+    <result column="io_type" property="ioType" />
+    <result column="parent_id" property="parentId" />
+    <result column="default_operator_id" property="defaultOperatorId" />
+    <result column="description" property="description" />
+    <result column="level" property="level" />
+    <result column="tenant_id" property="tenantId" />
+    <result column="creator" property="creator" />
+    <result column="create_by" property="createBy" />
+    <result column="create_time" property="createTime" />
+    <result column="updater" property="updater" />
+    <result column="update_by" property="updateBy" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+
+  <!-- TD_DC_OPERATOR_CATEGORY table all fields -->
+  <sql id="Base_Column_List" >
+     `id`, `name`, `code`,`type`,`io_type`, `parent_id`, `default_operator_id`, `description`, `level`,  `tenant_id`, `creator`, `create_by`, `create_time`, `updater`, `update_by`, `update_time`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and `id` ${idOperator} #{id}
+      </if>
+      <if test="name != null" >
+        and `name` ${nameOperator} #{name}
+      </if>
+      <if test="code != null" >
+        and `code` ${codeOperator} #{code}
+      </if>
+      <if test="parentId != null" >
+        and `parent_id` ${parentIdOperator} #{parentId}
+      </if>
+      <if test="defaultOperatorId != null" >
+        and `default_operator_id` ${defaultOperatorIdOperator} #{defaultOperatorId}
+      </if>
+      <if test="description != null" >
+        and `description` ${descriptionOperator} #{description}
+      </if>
+      <if test="level != null" >
+        and `level` ${levelOperator} #{level}
+      </if>
+      <if test="ioType != null" >
+        and `io_type` ${ioTypeOperator} #{ioType}
+      </if>
+      <if test="type != null" >
+        and `type` ${typeOperator} #{type}
+      </if>
+      <if test="tenantId != null" >
+        and `tenant_id` ${tenantIdOperator} #{tenantId}
+      </if>
+      <if test="creator != null" >
+        and `creator` ${creatorOperator} #{creator}
+      </if>
+      <if test="createBy != null" >
+        and `create_by` ${createByOperator} #{createBy}
+      </if>
+      <if test="createTime != null" >
+        and `create_time` ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and `create_time` &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and `create_time` &lt;= #{createTime2}
+      </if>
+      <if test="updater != null" >
+        and `updater` ${updaterOperator} #{updater}
+      </if>
+      <if test="updateBy != null" >
+        and `update_by` ${updateByOperator} #{updateBy}
+      </if>
+      <if test="updateTime != null" >
+        and `update_time` ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and `update_time` &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and `update_time` &lt;= #{updateTime2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.datacloud.entity.factory.OperatorCategory" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_DC_OPERATOR_CATEGORY(<include refid="Base_Column_List" />)
+    values (#{id}, #{name}, #{code}, #{type}, #{ioType}, #{parentId}, #{defaultOperatorId}, #{description}, #{level}, #{tenantId}, #{creator}, #{createBy}, #{createTime}, #{updater}, #{updateBy}, #{updateTime})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.datacloud.entity.factory.OperatorCategory" >
+    update TD_DC_OPERATOR_CATEGORY
+       set `name` = #{name},
+           `code` = #{code},
+           `io_type` = #{ioType},
+           `parent_id` = #{parentId},
+           `default_operator_id` = #{defaultOperatorId},
+           `description` = #{description},
+           `level` = #{level},
+           `tenant_id` = #{tenantId},
+           `creator` = #{creator},
+           `create_by` = #{createBy},
+           `create_time` = #{createTime},
+           `updater` = #{updater},
+           `update_by` = #{updateBy},
+           `update_time` = #{updateTime}
+     where `id` = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.datacloud.entity.factory.OperatorCategory" >
+    update TD_DC_OPERATOR_CATEGORY
+    <set >
+      <if test="name != null" >
+        `name` = #{name},
+      </if>
+      <if test="code != null" >
+        `code` = #{code},
+      </if>
+      <if test="parentId != null" >
+        `parent_id` = #{parentId},
+      </if>
+      <if test="defaultOperatorId != null" >
+        `default_operator_id` = #{defaultOperatorId},
+      </if>
+      <if test="description != null" >
+        `description` = #{description},
+      </if>
+      <if test="level != null" >
+        `level` = #{level},
+      </if>
+      <if test="ioType != null" >
+        `io_type` = #{ioType},
+      </if>
+      <if test="type != null" >
+        `type` = #{type},
+      </if>
+      <if test="tenantId != null" >
+        `tenant_id` = #{tenantId},
+      </if>
+      <if test="creator != null" >
+        `creator` = #{creator},
+      </if>
+      <if test="createBy != null" >
+        `create_by` = #{createBy},
+      </if>
+      <if test="createTime != null" >
+        `create_time` = #{createTime},
+      </if>
+      <if test="updater != null" >
+        `updater` = #{updater},
+      </if>
+      <if test="updateBy != null" >
+        `update_by` = #{updateBy},
+      </if>
+      <if test="updateTime != null" >
+        `update_time` = #{updateTime},
+      </if>
+    </set>
+     where `id` = #{id}
+  </update>
+
+  <!-- 根据id查询 TD_DC_OPERATOR_CATEGORY -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from TD_DC_OPERATOR_CATEGORY
+     where `id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TD_DC_OPERATOR_CATEGORY
+     where `id` = #{value}
+
+  </delete>
+
+  <!-- TD_DC_OPERATOR_CATEGORY 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select count(1) from TD_DC_OPERATOR_CATEGORY
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TD_DC_OPERATOR_CATEGORY列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from TD_DC_OPERATOR_CATEGORY
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+  <select id="findOperatorCategoryByCode" resultMap="BaseResultMap" parameterType="com.talkingdata.datacloud.entity.factory.OperatorCategory">
+    select <include refid="Base_Column_List" />
+    from TD_DC_OPERATOR_CATEGORY
+    where `code` = #{code}
+  </select>
+
+</mapper>

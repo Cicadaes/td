@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.catalog.CatalogDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.catalog.Catalog" >
+    <id column="id" property="id" />
+    <result column="title" property="title" />
+    <result column="path" property="path" />
+    <result column="level" property="level" />
+    <result column="parent_id" property="parentId" />
+    <result column="is_folder" property="isFolder" />
+    <result column="dataset_id" property="datasetId" />
+    <result column="storage_type" property="storageType" />
+    <result column="created_time" property="createdTime" />
+    <result column="modified_time" property="modifiedTime" />
+    <result column="updater" property="updater" />
+    <result column="wh_etl_exec_id" property="whEtlExecId" />
+  </resultMap>
+
+  <!-- dict_catalog table all fields -->
+  <sql id="Base_Column_List" >
+     `id`, `title`, `path`, `level`, `parent_id`, `is_folder`, `dataset_id`, `storage_type`, `created_time`, `modified_time`, `updater`, `wh_etl_exec_id`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        <if test="idOperator == 'in'" >
+          and `id` in (${id})
+        </if>
+        <if test="idOperator != 'in'" >
+          and `id` ${idOperator} #{id}
+        </if>
+      </if>
+      <if test="title != null" >
+        and `title` ${titleOperator} #{title}
+      </if>
+      <if test="path != null" >
+        and `path` ${pathOperator} #{path}
+      </if>
+      <if test="level != null" >
+        and `level` ${levelOperator} #{level}
+      </if>
+      <if test="parentId != null" >
+        and `parent_id` ${parentIdOperator} #{parentId}
+      </if>
+      <if test="isFolder != null" >
+        and `is_folder` ${isFolderOperator} #{isFolder}
+      </if>
+      <if test="datasetId != null" >
+        and `dataset_id` ${datasetIdOperator} #{datasetId}
+      </if>
+      <if test="storageType != null" >
+        and `storage_type` ${storageTypeOperator} #{storageType}
+      </if>
+      <if test="createdTime != null" >
+        and `created_time` ${createdTimeOperator} #{createdTime}
+      </if>
+      <if test="modifiedTime != null" >
+        and `modified_time` ${modifiedTimeOperator} #{modifiedTime}
+      </if>
+      <if test="updater != null" >
+        and `updater` ${updaterOperator} #{updater}
+      </if>
+      <if test="whEtlExecId != null" >
+        and `wh_etl_exec_id` ${whEtlExecIdOperator} #{whEtlExecId}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.datacloud.entity.catalog.Catalog" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dict_catalog(<include refid="Base_Column_List" />)
+    values (#{id}, #{title}, #{path}, #{level}, #{parentId}, #{isFolder}, #{datasetId}, #{storageType}, #{createdTime}, #{modifiedTime}, #{updater}, #{whEtlExecId})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.datacloud.entity.catalog.Catalog" >
+    update dict_catalog
+       set `title` = #{title},
+           `path` = #{path},
+           `level` = #{level},
+           `parent_id` = #{parentId},
+           `is_folder` = #{isFolder},
+           `dataset_id` = #{datasetId},
+           `storage_type` = #{storageType},
+           `created_time` = #{createdTime},
+           `modified_time` = #{modifiedTime},
+           `updater` = #{updater},
+           `wh_etl_exec_id` = #{whEtlExecId}
+     where `id` = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.datacloud.entity.catalog.Catalog" >
+    update dict_catalog
+    <set >
+      <if test="title != null" >
+        `title` = #{title},
+      </if>
+      <if test="path != null" >
+        `path` = #{path},
+      </if>
+      <if test="level != null" >
+        `level` = #{level},
+      </if>
+      <if test="parentId != null" >
+        `parent_id` = #{parentId},
+      </if>
+      <if test="isFolder != null" >
+        `is_folder` = #{isFolder},
+      </if>
+      <if test="datasetId != null" >
+        `dataset_id` = #{datasetId},
+      </if>
+      <if test="storageType != null" >
+        `storage_type` = #{storageType},
+      </if>
+      <if test="createdTime != null" >
+        `created_time` = #{createdTime},
+      </if>
+      <if test="modifiedTime != null" >
+        `modified_time` = #{modifiedTime},
+      </if>
+      <if test="updater != null" >
+        `updater` = #{updater},
+      </if>
+      <if test="whEtlExecId != null" >
+        `wh_etl_exec_id` = #{whEtlExecId},
+      </if>
+    </set>
+     where `id` = #{id}
+  </update>
+
+  <!-- 根据id查询 dict_catalog -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from dict_catalog
+     where `id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dict_catalog
+     where `id` = #{value}
+
+  </delete>
+
+  <!-- dict_catalog 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select count(1) from dict_catalog
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询dict_catalog列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from dict_catalog
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+  <select id="queryByListWithPrivilege" resultMap="BaseResultMap" parameterType="com.talkingdata.datacloud.page.catalog.CatalogPage">
+    select <include refid="Base_Column_List"/>
+    from dict_catalog
+    where `parent_id` = #{parentId}
+    and (`path` like #{path} or `id` in (${id}))
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+  </select>
+
+  <select id="queryUserDirs" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select <include refid="Base_Column_List"/>
+    from dict_catalog
+    where `path` = concat('hdfs:///', #{userDir})
+    <if test="searchEscaped == null" >
+      or `path` like concat('hdfs:///', #{userDirEscaped}, '/%')
+    </if>
+    <if test="searchEscaped != null" >
+      or `path` like concat('hdfs:///', #{userDirEscaped}, '/%', #{searchEscaped}, '%')
+    </if>
+    order by `is_folder` desc, `path` asc
+  </select>
+
+  <select id="queryPermissionDirs" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select <include refid="Base_Column_List"/>
+    from dict_catalog
+    where `id` in (${ids})
+    and `path` like concat('hdfs:///',
+    <if test="rootEscaped != null" >
+      #{rootEscaped},
+    </if>
+    <if test="searchEscaped != null" >
+      '%', #{searchEscaped},
+    </if>
+    '%')
+    order by `is_folder` desc, `path` asc
+  </select>
+</mapper>

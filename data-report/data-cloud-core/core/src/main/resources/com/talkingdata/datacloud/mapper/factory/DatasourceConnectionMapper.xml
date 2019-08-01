@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.factory.DatasourceConnectionDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.factory.DatasourceConnection" >
+    <id column="id" property="id" />
+    <result column="connectioninfo" property="connectioninfo" />
+    <result column="input_category_code" property="inputCategoryCode" />
+    <result column="input_operator_version" property="inputOperatorVersion" />
+    <result column="input_operator_exeversion" property="inputOperatorExeversion" />
+    <result column="input_operator_code" property="inputOperatorCode" />
+    <result column="output_category_code" property="outputCategoryCode" />
+    <result column="output_operator_version" property="outputOperatorVersion" />
+    <result column="output_operator_exeversion" property="outputOperatorExeversion" />
+    <result column="output_operator_code" property="outputOperatorCode" />
+    <result column="icon_path" property="iconPath" />
+    <result column="viewstring" property="viewstring" />
+    <result column="creator" property="creator" />
+    <result column="create_by" property="createBy" />
+    <result column="create_time" property="createTime" />
+    <result column="updater" property="updater" />
+    <result column="update_by" property="updateBy" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+
+  <!-- TD_DC_DATASOURCE_CONNECTION table all fields -->
+  <sql id="Base_Column_List" >
+     `id`, `connectioninfo`, `input_category_code`, `input_operator_version`, `input_operator_exeversion`, `input_operator_code`, `output_category_code`, `output_operator_version`, `output_operator_exeversion`, `output_operator_code`, `icon_path`, `viewstring`, `creator`, `create_by`, `create_time`, `updater`, `update_by`, `update_time`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and `id` ${idOperator} #{id}
+      </if>
+      <if test="connectioninfo != null" >
+        and `connectioninfo` ${connectioninfoOperator} #{connectioninfo}
+      </if>
+      <if test="inputCategoryCode != null" >
+        and `input_category_code` ${inputCategoryCodeOperator} #{inputCategoryCode}
+      </if>
+      <if test="inputOperatorVersion != null" >
+        and `input_operator_version` ${inputOperatorVersionOperator} #{inputOperatorVersion}
+      </if>
+      <if test="inputOperatorExeversion != null" >
+        and `input_operator_exeversion` ${inputOperatorExeversionOperator} #{inputOperatorExeversion}
+      </if>
+      <if test="inputOperatorCode != null" >
+        and `input_operator_code` ${inputOperatorCodeOperator} #{inputOperatorCode}
+      </if>
+      <if test="outputCategoryCode != null" >
+        and `output_category_code` ${outputCategoryCodeOperator} #{outputCategoryCode}
+      </if>
+      <if test="outputOperatorVersion != null" >
+        and `output_operator_version` ${outputOperatorVersionOperator} #{outputOperatorVersion}
+      </if>
+      <if test="outputOperatorExeversion != null" >
+        and `output_operator_exeversion` ${outputOperatorExeversionOperator} #{outputOperatorExeversion}
+      </if>
+      <if test="outputOperatorCode != null" >
+        and `output_operator_code` ${outputOperatorCodeOperator} #{outputOperatorCode}
+      </if>
+      <if test="iconPath != null" >
+        and `icon_path` ${iconPathOperator} #{iconPath}
+      </if>
+      <if test="viewstring != null" >
+        and `viewstring` ${viewstringOperator} #{viewstring}
+      </if>
+      <if test="creator != null" >
+        and `creator` ${creatorOperator} #{creator}
+      </if>
+      <if test="createBy != null" >
+        and `create_by` ${createByOperator} #{createBy}
+      </if>
+      <if test="createTime != null" >
+        and `create_time` ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and `create_time` &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and `create_time` &lt;= #{createTime2}
+      </if>
+      <if test="updater != null" >
+        and `updater` ${updaterOperator} #{updater}
+      </if>
+      <if test="updateBy != null" >
+        and `update_by` ${updateByOperator} #{updateBy}
+      </if>
+      <if test="updateTime != null" >
+        and `update_time` ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and `update_time` &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and `update_time` &lt;= #{updateTime2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.datacloud.entity.factory.DatasourceConnection" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_DC_DATASOURCE_CONNECTION(<include refid="Base_Column_List" />)
+    values (#{id}, #{connectioninfo}, #{inputCategoryCode}, #{inputOperatorVersion}, #{inputOperatorExeversion}, #{inputOperatorCode}, #{outputCategoryCode}, #{outputOperatorVersion}, #{outputOperatorExeversion}, #{outputOperatorCode}, #{iconPath}, #{viewstring}, #{creator}, #{createBy}, #{createTime}, #{updater}, #{updateBy}, #{updateTime})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.datacloud.entity.factory.DatasourceConnection" >
+    update TD_DC_DATASOURCE_CONNECTION
+       set `connectioninfo` = #{connectioninfo},
+           `input_category_code` = #{inputCategoryCode},
+           `input_operator_version` = #{inputOperatorVersion},
+           `input_operator_exeversion` = #{inputOperatorExeversion},
+           `input_operator_code` = #{inputOperatorCode},
+           `output_category_code` = #{outputCategoryCode},
+           `output_operator_version` = #{outputOperatorVersion},
+           `output_operator_exeversion` = #{outputOperatorExeversion},
+           `output_operator_code` = #{outputOperatorCode},
+           `icon_path` = #{iconPath},
+           `viewstring` = #{viewstring},
+           `creator` = #{creator},
+           `create_by` = #{createBy},
+           `create_time` = #{createTime},
+           `updater` = #{updater},
+           `update_by` = #{updateBy},
+           `update_time` = #{updateTime}
+     where `id` = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.datacloud.entity.factory.DatasourceConnection" >
+    update TD_DC_DATASOURCE_CONNECTION
+    <set >
+      <if test="connectioninfo != null" >
+        `connectioninfo` = #{connectioninfo},
+      </if>
+      <if test="inputCategoryCode != null" >
+        `input_category_code` = #{inputCategoryCode},
+      </if>
+      <if test="inputOperatorVersion != null" >
+        `input_operator_version` = #{inputOperatorVersion},
+      </if>
+      <if test="inputOperatorExeversion != null" >
+        `input_operator_exeversion` = #{inputOperatorExeversion},
+      </if>
+      <if test="inputOperatorCode != null" >
+        `input_operator_code` = #{inputOperatorCode},
+      </if>
+      <if test="outputCategoryCode != null" >
+        `output_category_code` = #{outputCategoryCode},
+      </if>
+      <if test="outputOperatorVersion != null" >
+        `output_operator_version` = #{outputOperatorVersion},
+      </if>
+      <if test="outputOperatorExeversion != null" >
+        `output_operator_exeversion` = #{outputOperatorExeversion},
+      </if>
+      <if test="outputOperatorCode != null" >
+        `output_operator_code` = #{outputOperatorCode},
+      </if>
+      <if test="iconPath != null" >
+        `icon_path` = #{iconPath},
+      </if>
+      <if test="viewstring != null" >
+        `viewstring` = #{viewstring},
+      </if>
+      <if test="creator != null" >
+        `creator` = #{creator},
+      </if>
+      <if test="createBy != null" >
+        `create_by` = #{createBy},
+      </if>
+      <if test="createTime != null" >
+        `create_time` = #{createTime},
+      </if>
+      <if test="updater != null" >
+        `updater` = #{updater},
+      </if>
+      <if test="updateBy != null" >
+        `update_by` = #{updateBy},
+      </if>
+      <if test="updateTime != null" >
+        `update_time` = #{updateTime},
+      </if>
+    </set>
+     where `id` = #{id}
+  </update>
+
+  <!-- 根据id查询 TD_DC_DATASOURCE_CONNECTION -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from TD_DC_DATASOURCE_CONNECTION
+     where `id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TD_DC_DATASOURCE_CONNECTION
+     where `id` = #{value}
+
+  </delete>
+
+  <!-- TD_DC_DATASOURCE_CONNECTION 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select count(1) from TD_DC_DATASOURCE_CONNECTION
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TD_DC_DATASOURCE_CONNECTION列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from TD_DC_DATASOURCE_CONNECTION
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+</mapper>

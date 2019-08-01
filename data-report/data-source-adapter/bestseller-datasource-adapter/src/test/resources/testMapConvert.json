@@ -1,0 +1,40 @@
+{
+  "datasource_id": 15,
+  "dimensions": [
+    {
+      "field": "crowd_name",
+      "alias": "date"
+    },
+    {
+      "field": "distance",
+      "alias": "name",
+      "convertFunction":{"ruleType":"MapConvertFunction","rule":{"1":"<1km","3":"1-3km","5":"3-5km","10":">5km"}}
+    }
+  ],
+  "metrics": [
+    {
+      "field": "metric_value",
+      "alias": "value"
+    }
+  ],
+  "filters": [
+    {
+      "field": "hour_type",
+      "operator": "=",
+      "value": "2"
+    },
+    {
+      "field": "project_id",
+      "operator": "=",
+      "value": "3"
+    }
+  ],
+  "dateFilters": [
+    {
+      "field": "end_date",
+      "operator": "=",
+      "value": "2017-10"
+    }
+  ],
+  "dateGranularity": 1
+}

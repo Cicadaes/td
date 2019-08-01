@@ -1,0 +1,32 @@
+{
+  "datasource_id": 43,
+  "dimensions": [
+    {
+      "field": "id"
+    },
+    {
+      "field": "project_name"
+    }
+  ],
+  "filters": [
+    {
+      "field": "project_type",
+      "operator": "=",
+      "value": "1"
+    },
+    {
+      "field": "project_id",
+      "operator": "in",
+      "value": "33439"
+    },
+    {
+      "field": "brand",
+      "operator": "=",
+      "value": "ONLY"
+    }
+  ],
+  "limit": [
+    -1
+  ],
+  "dateGranularity": 0
+}

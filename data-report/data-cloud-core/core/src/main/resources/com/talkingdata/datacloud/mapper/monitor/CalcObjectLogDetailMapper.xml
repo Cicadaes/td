@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.monitor.CalcObjectLogDetailDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.monitor.CalcObjectLogDetail" >
+	<result column="id" property="id"/>
+	<result column="calc_object_log_id" property="calcObjectLogId"/>
+	<result column="content" property="content"/>
+	<result column="log_time" property="logTime"/>
+	<result column="code" property="code"/>
+	<result column="name" property="name"/>
+	<result column="status" property="status"/>
+	<result column="scheduler_task_log_id" property="schedulerTaskLogId"/>
+  </resultMap>
+       
+  <!-- TD_CALC_OBJECT_LOG_DETAIL table all fields -->
+  <sql id="Base_Column_List" >
+	 id,calc_object_log_id,content,log_time,code,name,status,scheduler_task_log_id
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="calcObjectLogId != null and calcObjectLogId != ''" >
+        and calc_object_log_id =  #{calcObjectLogId}
+	  </if>
+	      <if test="content != null and content != ''" >
+        and content =  #{content}
+	  </if>
+	      <if test="logTime != null and logTime != ''" >
+        and log_time =  #{logTime}
+	  </if>
+
+	      <if test="code != null and code != ''" >
+        and code =  #{code}
+	  </if>
+
+	      <if test="name != null and name != ''" >
+        and name =  #{name}
+	  </if>
+
+	      <if test="status != null and status != ''" >
+        and status =  #{status}
+	  </if>
+	  <if test="schedulerTaskLogId != null and schedulerTaskLogId != ''" >
+        and scheduler_task_log_id =  #{schedulerTaskLogId}
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_CALC_OBJECT_LOG_DETAIL(id,calc_object_log_id,content,log_time,code,name,status,scheduler_task_log_id)
+ values(#{id},#{calcObjectLogId},#{content},#{logTime},#{code},#{name},#{status},#{schedulerTaskLogId})
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+    update TD_CALC_OBJECT_LOG_DETAIL set calc_object_log_id=#{calcObjectLogId},content=#{content},log_time=#{logTime},code=#{code},name=#{name},status=#{status},scheduler_task_log_id=#{schedulerTaskLogId} where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+    update TD_CALC_OBJECT_LOG_DETAIL set 
+	<trim  suffixOverrides="," >
+	<if test="calcObjectLogId != null  ">
+		calc_object_log_id=#{calcObjectLogId},
+	</if>
+	<if test="content != null  ">
+		content=#{content},
+	</if>
+	<if test="logTime != null  ">
+		log_time=#{logTime},
+	</if>
+	<if test="code != null  ">
+		code=#{code},
+	</if>
+	<if test="name != null  ">
+		name=#{name},
+	</if>
+	<if test="status != null  ">
+		status=#{status},
+	</if>
+	<if test="schedulerTaskLogId != null  ">
+		scheduler_task_log_id=#{schedulerTaskLogId},
+	</if>
+	</trim> where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 调度任务计算日志详情 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" /> 
+	 from TD_CALC_OBJECT_LOG_DETAIL where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+    delete 	 from TD_CALC_OBJECT_LOG_DETAIL where id = #{id}
+  </delete>
+
+  <!-- 调度任务计算日志详情 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_CALC_OBJECT_LOG_DETAIL 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询调度任务计算日志详情列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_CALC_OBJECT_LOG_DETAIL 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <select id="selectBySchedulerLogIdAndNameAndCode"  resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" /> 
+	 from TD_CALC_OBJECT_LOG_DETAIL where scheduler_task_log_id=#{schedulerTaskLogId}  and code=#{code}
+  </select>
+</mapper>   

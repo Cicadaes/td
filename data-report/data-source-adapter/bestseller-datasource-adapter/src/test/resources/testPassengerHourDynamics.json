@@ -1,0 +1,30 @@
+{
+  "datasource_id": 33,
+  "dimensions": [
+    {
+      "field": "date"
+    },
+    {
+      "field": "name"
+    }
+  ],
+  "metrics": [
+    {
+      "field": "active_hour_users",
+      "alias": "value"
+    }
+  ],
+  "filters": [
+    {
+      "field": "project_id",
+      "operator": "in",
+      "value": "36873"
+    },
+    {
+      "field": "date",
+      "operator": "=",
+      "value": "2017-11-17"
+    }
+  ],
+  "settingZero":true
+}

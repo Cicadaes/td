@@ -1,0 +1,11 @@
+<div class="panel" ng-class="{'panel-info panel-inner':inner == 'yes','panel-primary':inner != 'yes'}">
+	<div class="panel-heading" ng-show="!titleHidden || titleHidden != 'true'">
+	  	<span ng-if="titleHref">
+	  	 	<h3 class="panel-title"><a href="" ui-sref="{{titleHref}}" style="color:#464c5b">{{title}}</a></h3>
+	  	</span>
+	    <h3 class="panel-title" title="{{title}}" ng-show="!titleHref">{{subtitle}}</h3>
+  </div>
+  <div class="panel-body">
+   	<div ng-transclude></div>
+  </div>
+</div>

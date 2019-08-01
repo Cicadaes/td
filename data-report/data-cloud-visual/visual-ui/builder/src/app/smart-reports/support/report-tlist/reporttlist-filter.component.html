@@ -1,0 +1,20 @@
+<main class="filter clearfix">
+    <ul class="filter-left">
+        <li>
+            <span class="filterKey ">名称</span>
+            <div class="selectwrap">
+                <input  type="search" pInputText [(ngModel)]="name"/>
+            </div>
+        </li>
+        <li class="time">
+            <span class="filterKey">发布时间</span>
+            <div class="selectwrap" >
+                <datePicker [value]="updateTimePicker"></datePicker>
+            </div>
+        </li>
+    </ul>
+    <div class="r filterBtnWrap">
+        <button type="text" (click)="search()">搜索</button>
+        <button type="text" (click)="reset()">重置</button>
+    </div>
+</main>

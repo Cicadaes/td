@@ -1,0 +1,20 @@
+<div class="smart-configs">
+    <p-tabView class="smart-ctab"  (onChange)="onTabChange($event)">
+        <p-tabPanel header="数据" [disabled]="tabId>2" [selected]="tabId==1">
+            <datasource-config [class.smart-tab-hide]="tabId!=1"></datasource-config>
+        </p-tabPanel>
+
+        <p-tabPanel header="样式" [disabled]="tabId>2" [selected]="tabId==2">
+            <chartstyle-config [class.smart-tab-hide]="tabId!=2"></chartstyle-config>
+        </p-tabPanel>
+
+        <p-tabPanel header="版式" [disabled]="tabId<3" [selected]="tabId==3">
+            <format-config [class.smart-tab-hide]="tabId!=3"></format-config>
+
+        </p-tabPanel>
+        <!--<p-tabPanel header="主题" [disabled]="tabId<3"  [selected]="tabId==4">-->
+            <!--<theme-config  [class.smart-tab-hide]="tabId!=4"></theme-config>-->
+        <!--</p-tabPanel>-->
+    </p-tabView>
+
+</div>

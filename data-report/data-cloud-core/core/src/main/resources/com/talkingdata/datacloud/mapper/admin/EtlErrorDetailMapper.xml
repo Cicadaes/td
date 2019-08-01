@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.admin.EtlErrorDetailDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.admin.EtlErrorDetail" >
+	<result column="id" property="id"/>
+	<result column="target_date" property="targetDate"/>
+	<result column="class_name" property="className"/>
+	<result column="category_code" property="categoryCode"/>
+	<result column="job_id" property="jobId"/>
+	<result column="data" property="data"/>
+	<result column="error_info" property="errorInfo"/>
+	<result column="create_by" property="createBy"/>
+	<result column="creator" property="creator"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_time" property="updateTime"/>
+	<result column="record_id" property="recordId"/>
+  </resultMap>
+       
+  <!-- TD_ETL_ERROR_DETAIL table all fields -->
+  <sql id="Base_Column_List" >
+	 id,target_date,class_name,category_code,job_id,data,error_info,create_by,creator,update_by,create_time,update_time,record_id
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="targetDate != null and targetDate != ''" >
+        and target_date =  #{targetDate}
+	  </if>
+	      <if test="className != null and className != ''" >
+        and class_name =  #{className}
+	  </if>
+	      <if test="categoryCode != null and categoryCode != ''" >
+        and category_code =  #{categoryCode}
+	  </if>
+	      <if test="jobId != null and jobId != ''" >
+        and job_id =  #{jobId}
+	  </if>
+	      <if test="data != null and data != ''" >
+        and data =  #{data}
+	  </if>
+	      <if test="errorInfo != null and errorInfo != ''" >
+        and error_info =  #{errorInfo}
+	  </if>
+	      <if test="createBy != null and createBy != ''" >
+        and create_by =  #{createBy}
+	  </if>
+	      <if test="creator != null and creator != ''" >
+        and creator =  #{creator}
+	  </if>
+	      <if test="updateBy != null and updateBy != ''" >
+        and update_by =  #{updateBy}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+	  <if test="recordId != null and recordId != ''" >
+        and record_id =  #{recordId}
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_ETL_ERROR_DETAIL(id,target_date,class_name,category_code,job_id,data,error_info,create_by,creator,update_by,create_time,update_time,record_id)
+ values(#{id},#{targetDate},#{className},#{categoryCode},#{jobId},#{data},#{errorInfo},#{createBy},#{creator},#{updateBy},now(),now(),#{recordId})
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+    update TD_ETL_ERROR_DETAIL set target_date=#{targetDate},class_name=#{className},category_code=#{categoryCode},job_id=#{jobId},data=#{data},error_info=#{errorInfo},create_by=#{createBy},creator=#{creator},update_by=#{updateBy},create_time=now(),update_time=now(),record_id=#{recordId} where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+    update TD_ETL_ERROR_DETAIL set 
+	<trim  suffixOverrides="," >
+	<if test="targetDate != null  ">
+		target_date=#{targetDate},
+	</if>
+	<if test="className != null  ">
+		class_name=#{className},
+	</if>
+	<if test="categoryCode != null  ">
+		category_code=#{categoryCode},
+	</if>
+	<if test="jobId != null  ">
+		job_id=#{jobId},
+	</if>
+	<if test="data != null  ">
+		data=#{data},
+	</if>
+	<if test="errorInfo != null  ">
+		error_info=#{errorInfo},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="creator != null  ">
+		creator=#{creator},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	<if test="recordId != null  ">
+		record_id=#{recordId},
+	</if>
+	</trim> where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 ETL错误明细 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" /> 
+	 from TD_ETL_ERROR_DETAIL where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+    delete 	 from TD_ETL_ERROR_DETAIL where id = #{id}
+  </delete>
+
+  <!-- ETL错误明细 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_ETL_ERROR_DETAIL 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询ETL错误明细列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_ETL_ERROR_DETAIL 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <!-- 根据JobId查询 ETL错误明细 -->
+  <select id="getByEtlErrorRecordId"  resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+	 from TD_ETL_ERROR_DETAIL where record_id = #{etlErrorRecordId}
+  </select>
+</mapper>   

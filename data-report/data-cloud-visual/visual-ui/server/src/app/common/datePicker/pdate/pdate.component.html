@@ -1,0 +1,4 @@
+<div class="cal-box">
+    <p-calendar [(ngModel)]="ranges.start" [locale]="datePickerCn" [inline]="true" [minDate]="minDate" [maxDate]="maxDate"></p-calendar>
+    <p-calendar [(ngModel)]="ranges.end" [locale]="datePickerCn" [inline]="true" [minDate]="ranges.start" [maxDate]="maxDate" [disabled]="!ranges.start"></p-calendar>
+</div>

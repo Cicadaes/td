@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.factory.DatasetDatapipelineRelDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.factory.DatasetDatapipelineRel" >
+    <id column="id" property="id" />
+    <result column="datapipeline_id" property="datapipelineId" />
+    <result column="project_id" property="projectId" />
+    <result column="operator_id" property="operatorId" />
+    <result column="operator_param" property="operatorParam" />
+    <result column="operator_type" property="operatorType" />
+    <result column="dataset_id" property="datasetId" />
+  </resultMap>
+
+  <!-- TD_DC_DATASET_DATAPIPELINE_REL table all fields -->
+  <sql id="Base_Column_List" >
+     `id`, `datapipeline_id`, `project_id`, `operator_id`, `operator_param`, `operator_type`, `dataset_id`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and `id` ${idOperator} #{id}
+      </if>
+      <if test="datapipelineId != null" >
+        and `datapipeline_id` ${datapipelineIdOperator} #{datapipelineId}
+      </if>
+      <if test="projectId != null" >
+        and `project_id` ${projectIdOperator} #{projectId}
+      </if>
+      <if test="operatorId != null" >
+        and `operator_id` ${operatorIdOperator} #{operatorId}
+      </if>
+      <if test="operatorParam != null" >
+        and `operator_param` ${operatorParamOperator} #{operatorParam}
+      </if>
+      <if test="operatorType != null" >
+        and `operator_type` ${operatorTypeOperator} #{operatorType}
+      </if>
+      <if test="datasetId != null" >
+        and `dataset_id` ${datasetIdOperator} #{datasetId}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.datacloud.entity.factory.DatasetDatapipelineRel" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_DC_DATASET_DATAPIPELINE_REL(<include refid="Base_Column_List" />)
+    values (#{id}, #{datapipelineId}, #{projectId}, #{operatorId}, #{operatorParam}, #{operatorType}, #{datasetId})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.datacloud.entity.factory.DatasetDatapipelineRel" >
+    update TD_DC_DATASET_DATAPIPELINE_REL
+       set `datapipeline_id` = #{datapipelineId},
+           `project_id` = #{projectId},
+           `operator_id` = #{operatorId},
+           `operator_param` = #{operatorParam},
+           `operator_type` = #{operatorType},
+           `dataset_id` = #{datasetId}
+     where `id` = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.datacloud.entity.factory.DatasetDatapipelineRel" >
+    update TD_DC_DATASET_DATAPIPELINE_REL
+    <set >
+      <if test="datapipelineId != null" >
+        `datapipeline_id` = #{datapipelineId},
+      </if>
+      <if test="projectId != null" >
+        `project_id` = #{projectId},
+      </if>
+      <if test="operatorId != null" >
+        `operator_id` = #{operatorId},
+      </if>
+      <if test="operatorParam != null" >
+        `operator_param` = #{operatorParam},
+      </if>
+      <if test="operatorType != null" >
+        `operator_type` = #{operatorType},
+      </if>
+      <if test="datasetId != null" >
+        `dataset_id` = #{datasetId},
+      </if>
+    </set>
+     where `id` = #{id}
+  </update>
+
+  <!-- 根据id查询 TD_DC_DATASET_DATAPIPELINE_REL -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from TD_DC_DATASET_DATAPIPELINE_REL
+     where `id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TD_DC_DATASET_DATAPIPELINE_REL
+     where `id` = #{value}
+
+  </delete>
+
+  <!-- TD_DC_DATASET_DATAPIPELINE_REL 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select count(1) from TD_DC_DATASET_DATAPIPELINE_REL
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TD_DC_DATASET_DATAPIPELINE_REL列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from TD_DC_DATASET_DATAPIPELINE_REL
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+  <!-- 某pipeline使用过的数据集 -->
+  <select id="currentDataset" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" />
+    from TD_DC_DATASET_DATAPIPELINE_REL
+    where `datapipeline_id` = #{value}
+  </select>
+
+  <!-- 某datsetid使用过的数据集 -->
+  <select id="currentDatasetByDatasetId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" />
+    from TD_DC_DATASET_DATAPIPELINE_REL
+    where `dataset_id` = #{value}
+  </select>
+
+</mapper>

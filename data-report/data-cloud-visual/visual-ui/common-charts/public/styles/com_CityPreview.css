@@ -1,0 +1,52 @@
+
+/*地图样式，start*/
+
+.cityPreview .region_top {
+    padding: 0 10px 10px;
+    background-color: #fff;
+}
+
+.cityPreview .region_top ul li {
+    display: inline-block;
+    margin-right: 10px;
+    color: #868e9a;
+}
+
+.cityPreview .region_top ul li span {
+    float: left;
+    margin-right: 5px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.cityPreview .icon_probe {
+    width: 13px;
+    height: 20px;
+    background-position: -293px -36px!important;
+}
+
+.cityPreview .icon_flow,
+.cityPreview .icon_mom {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.cityPreview .icon_flow {
+    background: #f7e7e9;
+    border: 1px solid #ff8886;
+}
+
+.cityPreview .icon_mom {
+    background: #eaf3fa;
+    border: 1px solid #c1cde7;
+}
+
+.cityPreview #draw_div{
+    display: none;
+}
+
+
+/*地图样式，end*/

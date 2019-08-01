@@ -1,0 +1,219 @@
+/*漏斗图start*/
+
+.rectFunnelComponent .nodata {
+    text-align: center;
+    background: #fff;
+    padding-top: 100px;
+}
+
+.rectFunnelComponent .containerHead {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 24px;
+    border-bottom: 1px solid #E8E9EC;
+}
+
+.rectFunnelComponent .containerHead>span {
+    font-family: PingFangSC-Semibold;
+    font-size: 14px;
+    color: #1F2544;
+    font-weight: bold;
+}
+
+.rectFunnelComponent .containerHead .compareBox {
+    height: 100%;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #404560;
+    font-weight: normal;
+}
+
+.rectFunnelComponent .containerHead .compareButton {
+    width: 40px;
+    height: 20px;
+    border-radius: 12px;
+    margin: 10px 10px 0 10px;
+    padding: 2px;
+    cursor: pointer;
+}
+
+.rectFunnelComponent .containerHead .compareButton.open {
+    background: #43A3FB;
+}
+
+.rectFunnelComponent .containerHead .compareButton.close {
+    background: #DEDFE3;
+}
+
+.rectFunnelComponent .containerHead .compareButton>span {
+    float: left;
+    width: 16px;
+    height: 16px;
+    background: #FFFFFF;
+    border-radius: 8px;
+}
+
+.rectFunnelComponent .funnelHelp {
+    background: url('./icon－info.svg') no-repeat center center /16px 16px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    margin-top: 12px;
+}
+
+.rectFunnelComponent .selectBox {
+    margin: 0 auto;
+    display: inline-block;
+    transform: translateX(-50%);
+}
+
+.rectFunnelComponent .selectBox .chart-selectline {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    line-height: 42px;
+    cursor: pointer;
+}
+
+.rectFunnelComponent .selectBox .chart-selectline-title {
+    color: #666f7b;
+    font-size: 13px;
+    position: relative;
+    background: #FFFFFF;
+    border: 1px solid #D7DDE4;
+    border-radius: 4px;
+    /*width: 126px;*/
+    padding-left: 12px;
+    padding-right: 32px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.rectFunnelComponent .chart-selectline-title:after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #8a8f9d;
+    position: absolute;
+    right: 12px;
+    top: 13px;
+}
+
+.rectFunnelComponent .selectBox {
+    visibility: hidden;
+    display: inline-block;
+}
+
+.rectFunnelComponent .selectBox .chart-selectline-list {
+    position: absolute;
+    left: 0;
+    top: 28px;
+    z-index: 2;
+    display: none;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    margin-top: 4px;
+    padding: 0;
+    background: #fff;
+    cursor: pointer;
+    width: 100%;
+}
+
+.rectFunnelComponent .selectBox .chart-selectline-list li {
+    padding: 0 12px;
+    /*height: 30px;*/
+    line-height: 30px;
+    word-wrap:break-word; 
+}
+
+.rectFunnelComponent .selectBox .chart-selectline-list li:hover {
+    background: rgba(28, 36, 56, 0.03);
+    color: #43A3FB;
+}
+
+.rectFunnelComponent .rectFunnelBox {
+    color: #fff;
+    text-align: center;
+}
+
+.rectFunnelComponent .rectFunnelBox li {
+    height: 72px;
+    width: 100%;
+}
+
+.rectFunnelComponent .rectFunnelBox li span {
+    height: 72px;
+    line-height: 72px;
+    text-align: center;
+    min-width: 21% !important;
+    margin: 0 auto;
+    display: inline-block;
+}
+
+.rectFunnelComponent .rectFunnelLegend {
+    position: absolute;
+    right: -90px;
+    bottom: 0;
+    width: 70px;
+}
+
+.rectFunnelComponent .rectFunnelLegend .legend {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    background: #34508C;
+    border-radius: 2px;
+    margin-right: 6px;
+}
+
+.rectFunnelComponent .rectFunnelLegend span {
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #495060;
+    line-height: 12px;
+}
+
+.rectFunnelComponent .rectFunnelLegend li {
+    margin-top: 10px;
+}
+
+.rectFunnelComponent .compareFunnel ul {
+    width: calc(50% - 1px);
+    position: relative;
+}
+
+.rectFunnelComponent .compareFunnel ul:nth-child(1) {
+    float: left;
+}
+
+.rectFunnelComponent .compareFunnel ul:nth-child(1) li span {
+    float: right;
+    text-align: right;
+    padding: 0 10px;
+}
+
+.rectFunnelComponent .compareFunnel ul:nth-child(2) {
+    float: right;
+}
+
+.rectFunnelComponent .compareFunnel ul:nth-child(2) li span {
+    float: left;
+    text-align: left;
+    padding: 0 10px;
+}
+
+.rectFunnelComponent .hide {
+    display: none!important;
+}
+
+.rectFunnelComponent .open {
+    display: block!important;
+}
+
+
+/*漏斗图end*/
+

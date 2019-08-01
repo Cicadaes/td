@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.report.SnipeReportDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.report.SnipeReport" >
+    <id column="id" property="id" />
+    <result column="report_uuid" property="reportUuid" />
+    <result column="title" property="title" />
+    <result column="publish_flag" property="publishFlag" />
+    <result column="lock_flag" property="lockFlag" />
+    <result column="tenant_id" property="tenantId" />
+    <result column="creator" property="creator" />
+    <result column="create_by" property="createBy" />
+    <result column="create_time" property="createTime" />
+    <result column="updater" property="updater" />
+    <result column="update_by" property="updateBy" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+
+  <!-- TD_DC_SNIPE_REPORT table all fields -->
+  <sql id="Base_Column_List" >
+     `id`, `report_uuid`, `title`, `publish_flag`, `lock_flag`, `tenant_id`, `creator`, `create_by`, `create_time`, `updater`, `update_by`, `update_time`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and `id` ${idOperator} #{id}
+      </if>
+      <if test="reportUuid != null" >
+        and `report_uuid` ${reportUuidOperator} #{reportUuid}
+      </if>
+      <if test="title != null" >
+        and `title` ${titleOperator} #{title}
+      </if>
+      <if test="publishFlag != null" >
+        and `publish_flag` ${publishFlagOperator} #{publishFlag}
+      </if>
+      <if test="lockFlag != null" >
+        and `lock_flag` ${lockFlagOperator} #{lockFlag}
+      </if>
+      <if test="tenantId != null" >
+        and `tenant_id` ${tenantIdOperator} #{tenantId}
+      </if>
+      <if test="creator != null" >
+        and `creator` ${creatorOperator} #{creator}
+      </if>
+      <if test="createBy != null" >
+        and `create_by` ${createByOperator} #{createBy}
+      </if>
+      <if test="createTime != null" >
+        and `create_time` ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and `create_time` &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and `create_time` &lt;= #{createTime2}
+      </if>
+      <if test="updater != null" >
+        and `updater` ${updaterOperator} #{updater}
+      </if>
+      <if test="updateBy != null" >
+        and `update_by` ${updateByOperator} #{updateBy}
+      </if>
+      <if test="updateTime != null" >
+        and `update_time` ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and `update_time` &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and `update_time` &lt;= #{updateTime2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.datacloud.entity.report.SnipeReport" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_DC_SNIPE_REPORT(<include refid="Base_Column_List" />)
+    values (#{id}, #{reportUuid}, #{title}, #{publishFlag}, #{lockFlag}, #{tenantId}, #{creator}, #{createBy}, #{createTime}, #{updater}, #{updateBy}, #{updateTime})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.datacloud.entity.report.SnipeReport" >
+    update TD_DC_SNIPE_REPORT
+       set `report_uuid` = #{reportUuid},
+           `title` = #{title},
+           `publish_flag` = #{publishFlag},
+           `lock_flag` = #{lockFlag},
+           `tenant_id` = #{tenantId},
+           `creator` = #{creator},
+           `create_by` = #{createBy},
+           `create_time` = #{createTime},
+           `updater` = #{updater},
+           `update_by` = #{updateBy},
+           `update_time` = #{updateTime}
+     where `id` = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.datacloud.entity.report.SnipeReport" >
+    update TD_DC_SNIPE_REPORT
+    <set >
+      <if test="reportUuid != null" >
+        `report_uuid` = #{reportUuid},
+      </if>
+      <if test="title != null" >
+        `title` = #{title},
+      </if>
+      <if test="publishFlag != null" >
+        `publish_flag` = #{publishFlag},
+      </if>
+      <if test="lockFlag != null" >
+        `lock_flag` = #{lockFlag},
+      </if>
+      <if test="tenantId != null" >
+        `tenant_id` = #{tenantId},
+      </if>
+      <if test="creator != null" >
+        `creator` = #{creator},
+      </if>
+      <if test="createBy != null" >
+        `create_by` = #{createBy},
+      </if>
+      <if test="createTime != null" >
+        `create_time` = #{createTime},
+      </if>
+      <if test="updater != null" >
+        `updater` = #{updater},
+      </if>
+      <if test="updateBy != null" >
+        `update_by` = #{updateBy},
+      </if>
+      <if test="updateTime != null" >
+        `update_time` = #{updateTime},
+      </if>
+    </set>
+     where `id` = #{id}
+  </update>
+
+  <!-- 根据id查询 TD_DC_SNIPE_REPORT -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from TD_DC_SNIPE_REPORT
+     where `id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TD_DC_SNIPE_REPORT
+     where `id` = #{value}
+
+  </delete>
+
+  <!-- TD_DC_SNIPE_REPORT 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select count(1) from TD_DC_SNIPE_REPORT
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TD_DC_SNIPE_REPORT列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from TD_DC_SNIPE_REPORT
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+</mapper>

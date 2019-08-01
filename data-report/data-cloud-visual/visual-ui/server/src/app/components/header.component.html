@@ -1,0 +1,20 @@
+<main>
+  <div class="header">
+    <div class="logo l">
+      <a routerLink="/datareport"><img src="../../../public/images/logo.png"></a>
+    </div>
+    <div class="top">
+      <my-user></my-user>
+    </div>
+    <div class="nav">
+      <ul>
+        <li class="item" [routerLink]="routerUrl + '/datareport/reportAlist'" routerLinkActive="nav_choose">
+          <span class="icon-dataml"></span> 我的报表
+        </li>
+        <li class="item" [routerLink]="routerUrl + '/datareport/reportTlist'" routerLinkActive="nav_choose">
+          <span class="icon-factory"></span> 授权的报表
+        </li>
+      </ul>
+    </div>
+  </div>
+  </main>

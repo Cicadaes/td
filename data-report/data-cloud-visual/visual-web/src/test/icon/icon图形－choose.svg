@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="24px" height="25px" viewBox="0 0 24 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>icon图形－choose</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon图形－choose">
+            <g id="图形" transform="translate(0.000000, 0.502618)">
+                <path d="M5.25403031,0.60495618 C5.99089138,-0.135762797 7.18731357,-0.134019355 7.92244028,0.60495618 L12.5746652,5.28153832 C13.3115263,6.0222573 13.3097919,7.22494349 12.5746652,7.96391902 L7.92244028,12.6405012 C7.18557921,13.3812201 5.98915701,13.3794767 5.25403031,12.6405012 L0.601805367,7.96391902 C-0.135055699,7.22320005 -0.133321337,6.02051386 0.601805367,5.28153832 L5.25403031,0.60495618" id="Rectangle-5" fill="#59C99F"></path>
+                <rect id="Rectangle-5-Copy" fill="#3399FF" x="13.6470588" y="1.41915614" width="10.3529412" height="10.4071451" rx="2"></rect>
+                <rect id="Rectangle-5-Copy-2" fill="#3399FF" x="13.6470588" y="13.7185094" width="10.3529412" height="10.4071451" rx="2"></rect>
+                <rect id="Rectangle-5-Copy-3" fill="#3399FF" x="1.41176471" y="13.7185094" width="10.3529412" height="10.4071451" rx="2"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+  xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+  xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.2.xsd
+    http://mybatis.org/schema/mybatis-spring
+    http://mybatis.org/schema/mybatis-spring.xsd">
+
+  <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+    <property name="locations">
+      <list>
+        <value>classpath:jdbc.properties</value>
+      </list>
+    </property>
+  </bean>
+
+  <bean id="dataSource_visual" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+    <!-- 基本属性 url、user、password -->
+    <property name="url" value="${jdbc_url_visual_report}" />
+    <property name="username" value="${jdbc_username_visual_report}" />
+    <property name="password" value="${jdbc_password_visual_report}" />
+    <!-- 配置初始化大小、最小、最大 -->
+
+    <property name="minIdle" value="10" />
+    <property name="maxActive" value="100" />
+    <!-- 配置获取连接等待超时的时间 -->
+    <property name="maxWait" value="60000" />
+    <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+    <property name="timeBetweenEvictionRunsMillis" value="3000" />
+    <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+    <property name="minEvictableIdleTimeMillis" value="300000" />
+    <property name="validationQuery" value="SELECT 'x'" />
+    <property name="testWhileIdle" value="true" />
+    <property name="testOnBorrow" value="true" />
+    <property name="testOnReturn" value="true" />
+    <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+    <property name="poolPreparedStatements" value="true" />
+    <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+    <!-- 配置监控统计拦截的filters -->
+    <property name="filters" value="stat,log4j" />
+  </bean>
+
+
+  <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+    <property name="dataSource" ref="dataSource_visual"></property>
+  </bean>
+
+  <bean id="sqlSessionFactory_visual" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource_visual" />
+    <property name="mapperLocations" value="classpath*:com/talkingdata/datacloud/visual/mapper/report/*Mapper.xml" />
+  </bean>
+
+
+  <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <property name="basePackage" value="com.talkingdata.datacloud.visual.dao.report" />
+    <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory_visual" />
+  </bean>
+
+  <!-- 配置spring的PlatformTransactionManager，名字为默认值 -->
+  <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource_visual" />
+  </bean>
+
+  <!-- 开启事务控制的注解支持 -->
+  <tx:annotation-driven transaction-manager="transactionManager"/>
+
+</beans>

@@ -1,0 +1,89 @@
+{
+  "datasource_id": 26,
+  "dimensions": [
+    {
+      "field": "area_name",
+      "alias": "地区"
+    },
+    {
+      "field": "crowd_type"
+    }
+  ],
+  "metrics": [
+    {
+      "field": "metric_value"
+    }
+  ],
+  "filters": [
+    {
+      "field": "area_type",
+      "operator": "=",
+      "value": "2"
+    },
+    {
+      "field": "project_id",
+      "operator": "=",
+      "value": "1545"
+    }
+  ],
+  "orderBy": [
+    {
+      "field": "入店客流",
+      "function": "DESC"
+    }
+  ],
+  "limit": [
+    1,
+    10
+  ],
+  "dateFilters": [
+    {
+      "field": "end_date",
+      "operator": "=",
+      "value": "2017-10"
+    }
+  ],
+  "dateGranularity": 1,
+  "dimensionToMetric": {
+    "dimensionField": "crowd_type",
+    "metricFiled": "metric_value",
+    "convertMeric": [
+      {
+        "field": "AU",
+        "alias": "入店客流"
+      },
+      {
+        "field": "NU",
+        "alias": "入店新客"
+      },
+      {
+        "field": "OU",
+        "alias": "入店老客"
+      },
+      {
+        "field": "SU",
+        "alias": "停留客流"
+      },
+      {
+        "field": "JU",
+        "alias": "跳出客流"
+      },
+      {
+        "field": "HU",
+        "alias": "高活跃客流"
+      },
+      {
+        "field": "MU",
+        "alias": "中活跃客流"
+      },
+      {
+        "field": "LU",
+        "alias": "低活跃客流"
+      },
+      {
+        "field": "SLU",
+        "alias": "沉睡客流"
+      }
+    ]
+  }
+}

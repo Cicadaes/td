@@ -1,0 +1,22 @@
+<main>
+
+    <p-growl [value]="msgs" [life]="3000"></p-growl>
+
+    <p-dialog [visible]="dialogDisplay" [header]="dialogData.title" modal="modal" responsive="true" [closable]="false">
+        <div class="dialog-layer">
+            <div class="dialog-icon l">
+                <span class="iconfont icon-{{dialogData.icon}}"></span>
+            </div>
+            <div class="dialog-line l" *ngIf="dialogData.content">
+                {{dialogData.content}}
+            </div>
+        </div>
+        <footer>
+            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                <button type="button" pButton (click)="dialogCancel()" label="No">{{dialogData.cancelLabel}}</button>
+                <button *ngFor="let confirm of dialogData.confirms" type="button" pButton (click)="dialogConfirm(confirm)" label="Yes">{{confirm.confirmLabel}}</button>
+            </div>
+        </footer>
+    </p-dialog>
+
+</main>

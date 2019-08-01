@@ -1,0 +1,70 @@
+<div *ngIf="dataStyleView.length === 0" class="explore_graph_style  theme">
+    <h6>主题背景</h6>
+    <p-dropdown [options]="style" [(ngModel)]="selectedstyle" (onChange)="onChange($event)" id="theme-one"></p-dropdown>
+    <div class="clear"></div>
+
+    <dl class="indent">
+        <h6>主要</h6>
+        <!--<dt>大小</dt>-->
+        <dd>
+            <ul>
+                <li>
+                    <label>主要</label>
+                </li>
+                <li>
+                    <label>文字</label>
+                </li>
+            </ul>
+            <div class="all">
+                <span class=''>字体</span>
+                <p-dropdown [options]="fontstyle" [(ngModel)]="selectedfontstyle" class="font" (onChange)="onChange($event)"></p-dropdown>
+            </div>
+        </dd>
+        <h6>次要</h6>
+        <!--<dt>大小</dt>-->
+        <dd>
+            <ul>
+                <li>
+                    <label>次要</label>
+                </li>
+                <li>
+
+                    <label>文字</label>
+                </li>
+            </ul>
+            <div class="all">
+                <span class=''>字体</span>
+                <p-dropdown [options]="fontstyle" [(ngModel)]="selectedfontstyle1" class="font" (onChange)="onChange($event)"></p-dropdown>
+            </div>
+        </dd>
+        <h6>图表色板</h6>
+        <!--<dt>大小</dt>-->
+
+        <h6>背景和边框</h6>
+        <dd>
+            <ul>
+                <li>
+                    <label>背景</label>
+                </li>
+                <li>
+
+                    <label>边框</label>
+                </li>
+            </ul>
+            <div class="all-small">
+                <span class=''>圆角半径</span>
+                <p-dropdown [options]="num" [(ngModel)]="selectednum" (onChange)="onChange($event)" class="fontStyle"></p-dropdown>
+            </div>
+            <div class="all-small">
+                <span class=''>不透明度</span>
+                <p-dropdown [options]="opacity" [(ngModel)]="selectedopacity" (onChange)="onChange($event)" class="fontStyle"></p-dropdown>
+            </div>
+            <div class="all-small">
+                <span class=''>边框粗细</span>
+                <p-dropdown [options]="linestyle" [(ngModel)]="selectedlinestyle" (onChange)="onChange($event)" class="fontStyle"></p-dropdown>
+            </div>
+            <div class="all-small">
+                <span class=''>边框样式</span>
+                <p-dropdown [options]="borderstyle" [(ngModel)]="selectedborderstylestyle" (onChange)="onChange($event)" class="fontStyle"></p-dropdown>
+            </div>
+        </dd>

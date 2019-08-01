@@ -1,0 +1,63 @@
+{
+  "datasource_id": 29,
+  "metrics": [
+    {
+      "field": "duration_new_5"
+    },
+    {
+      "field": "duration_new_15"
+    },
+    {
+      "field": "duration_new_30"
+    },
+    {
+      "field": "duration_new_60"
+    },
+    {
+      "field": "duration_old_5"
+    },
+    {
+      "field": "duration_old_15"
+    },
+    {
+      "field": "duration_old_30"
+    },
+    {
+      "field": "duration_old_60"
+    }
+  ],
+  "filters": [
+    {
+      "field": "project_id",
+      "operator": "=",
+      "value": "7194"
+    }
+  ],
+  "dateFilters": [
+    {
+      "field": "date",
+      "operator": ">=",
+      "value": "2017-11-01"
+    },
+    {
+      "field": "date",
+      "operator": "<=",
+      "value": "2017-11-30"
+    }
+  ],
+  "orderBy": [
+    {
+      "field": "date",
+      "function": "asc"
+    }
+  ],
+  "dateGranularity": 0,
+  "metricToDimension":[{"field":"duration_new_5","convertName":{"date":"0-5min","name":"新客"},"convertValue":{"value":0}},
+    {"field":"duration_new_15","convertName":{"date":"5-15min","name":"新客"},"convertValue":{"value":0}},
+    {"field":"duration_new_30","convertName":{"date":"15-30min","name":"新客"},"convertValue":{"value":0}},
+    {"field":"duration_new_60","convertName":{"date":">30min","name":"新客"},"convertValue":{"value":0}},
+    {"field":"duration_old_5","convertName":{"date":"0-5min","name":"老客"},"convertValue":{"value":0}},
+    {"field":"duration_old_15","convertName":{"date":"5-15min","name":"老客"},"convertValue":{"value":0}},
+    {"field":"duration_old_30","convertName":{"date":"15-30min","name":"老客"},"convertValue":{"value":0}},
+    {"field":"duration_old_60","convertName":{"date":">30min","name":"老客"},"convertValue":{"value":0}}]
+}

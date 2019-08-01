@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/cache
+        http://www.springframework.org/schema/cache/spring-cache.xsd">
+    <cache:annotation-driven />
+    <!--你的环境中既有ehcache，又有redis，还有ConcurrentMapCache，可以用CompositeCacheManager完成-->
+    <bean id="cacheManager" class="org.springframework.cache.support.CompositeCacheManager">
+        <property name="cacheManagers">
+            <list>
+                <ref bean="redisCacheManager"/>
+            </list>
+        </property>
+        <!--fallbackToNoOpCache参数决定了在没有Cachhe的情况下会出现什么现象。如果为true，则会直接忽略掉缓存，可能进入db查询；如果为false（默认为false），则在无缓存时会抛出异常：
+Cannot find cache named [userCache] for CacheableOperation，测试不好用-->
+        <property name="fallbackToNoOpCache" value="true"/>
+    </bean>
+
+    <bean id="redisCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
+        <constructor-arg ref="redisTemplate" />
+        <!-- 是否使用前缀 -->
+        <property name="usePrefix" value="true"/>
+        <!-- 前缀命名，仅当usePrefix为true时才生效 -->
+        <property name="cachePrefix">
+            <bean class="org.springframework.data.redis.cache.DefaultRedisCachePrefix">
+                <constructor-arg name="delimiter" value=":"></constructor-arg>
+            </bean>
+        </property>
+        <!-- 默认有效期1天 -->
+        <property name="defaultExpiration" value="${redis.defaultExpiration}"/>
+        <property name="expires">
+            <map>
+                <entry key="datareport_data" value="${redis.dataExpiration}"/>
+            </map>
+        </property>
+    </bean>
+    <!-- jedis 配置 -->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig" >
+        <property name="maxIdle" value="${redis.maxIdle}" />
+        <property name="maxWaitMillis" value="${redis.maxWait}" />
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+    </bean >
+    <!--配置文件加载-->
+    <bean id="resourcePropertySource" class="org.springframework.core.io.support.ResourcePropertySource">
+        <constructor-arg name="name" value="redis.properties"/>
+        <constructor-arg name="resource" value="classpath:redis.properties"/>
+    </bean>
+    <bean id="redisSentinelConfiguration"
+          class="org.springframework.data.redis.connection.RedisSentinelConfiguration">
+        <constructor-arg name="propertySource" ref="resourcePropertySource"></constructor-arg>
+    </bean>
+    <!-- redis服务器中心 -->
+    <bean id="connectionFactory"  class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" >
+        <constructor-arg name="sentinelConfig" ref="redisSentinelConfiguration"></constructor-arg>
+        <property name="poolConfig" ref="poolConfig" />
+        <property name="timeout" value="${redis.timeout}" ></property>
+    </bean >
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" >
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="keySerializer" ref="jackson2JsonRedisSerializer"></property>
+         <property name="valueSerializer" ref="jackson2JsonRedisSerializer">
+         </property>
+     </bean >
+    <bean id="jackson2JsonRedisSerializer" class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer"/>
+    <!--<bean id="jackson2JsonRedisSerializer" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>-->
+ </beans>

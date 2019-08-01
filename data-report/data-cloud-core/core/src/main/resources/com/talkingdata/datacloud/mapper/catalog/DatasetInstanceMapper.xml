@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.catalog.DatasetInstanceDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.catalog.DatasetInstance" >
+    <id column="dataset_id" property="datasetId" />
+    <id column="db_id" property="dbId" />
+    <id column="version_sort_id" property="versionSortId" />
+    <result column="deployment_tier" property="deploymentTier" />
+    <result column="data_center" property="dataCenter" />
+    <result column="server_cluster" property="serverCluster" />
+    <result column="slice" property="slice" />
+    <result column="status_id" property="statusId" />
+    <result column="native_name" property="nativeName" />
+    <result column="logical_name" property="logicalName" />
+    <result column="version" property="version" />
+    <result column="schema_text" property="schemaText" />
+    <result column="ddl_text" property="ddlText" />
+    <result column="instance_created_time" property="instanceCreatedTime" />
+    <result column="created_time" property="createdTime" />
+    <result column="modified_time" property="modifiedTime" />
+    <result column="wh_etl_exec_id" property="whEtlExecId" />
+  </resultMap>
+
+  <!-- dict_dataset_instance table all fields -->
+  <sql id="Base_Column_List" >
+     `dataset_id`, `db_id`, `deployment_tier`, `data_center`, `server_cluster`, `slice`, `status_id`, `native_name`, `logical_name`, `version`, `version_sort_id`, `schema_text`, `ddl_text`, `instance_created_time`, `created_time`, `modified_time`, `wh_etl_exec_id`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="datasetId != null" >
+        and `dataset_id` ${datasetIdOperator} #{datasetId}
+      </if>
+      <if test="dbId != null" >
+        and `db_id` ${dbIdOperator} #{dbId}
+      </if>
+      <if test="deploymentTier != null" >
+        and `deployment_tier` ${deploymentTierOperator} #{deploymentTier}
+      </if>
+      <if test="dataCenter != null" >
+        and `data_center` ${dataCenterOperator} #{dataCenter}
+      </if>
+      <if test="serverCluster != null" >
+        and `server_cluster` ${serverClusterOperator} #{serverCluster}
+      </if>
+      <if test="slice != null" >
+        and `slice` ${sliceOperator} #{slice}
+      </if>
+      <if test="statusId != null" >
+        and `status_id` ${statusIdOperator} #{statusId}
+      </if>
+      <if test="nativeName != null" >
+        and `native_name` ${nativeNameOperator} #{nativeName}
+      </if>
+      <if test="logicalName != null" >
+        and `logical_name` ${logicalNameOperator} #{logicalName}
+      </if>
+      <if test="version != null" >
+        and `version` ${versionOperator} #{version}
+      </if>
+      <if test="versionSortId != null" >
+        and `version_sort_id` ${versionSortIdOperator} #{versionSortId}
+      </if>
+      <if test="schemaText != null" >
+        and `schema_text` ${schemaTextOperator} #{schemaText}
+      </if>
+      <if test="ddlText != null" >
+        and `ddl_text` ${ddlTextOperator} #{ddlText}
+      </if>
+      <if test="instanceCreatedTime != null" >
+        and `instance_created_time` ${instanceCreatedTimeOperator} #{instanceCreatedTime}
+      </if>
+      <if test="createdTime != null" >
+        and `created_time` ${createdTimeOperator} #{createdTime}
+      </if>
+      <if test="modifiedTime != null" >
+        and `modified_time` ${modifiedTimeOperator} #{modifiedTime}
+      </if>
+      <if test="whEtlExecId != null" >
+        and `wh_etl_exec_id` ${whEtlExecIdOperator} #{whEtlExecId}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.datacloud.entity.catalog.DatasetInstance" >
+    insert into dict_dataset_instance(<include refid="Base_Column_List" />)
+    values (#{datasetId}, #{dbId}, #{deploymentTier}, #{dataCenter}, #{serverCluster}, #{slice}, #{statusId}, #{nativeName}, #{logicalName}, #{version}, #{versionSortId}, #{schemaText}, #{ddlText}, #{instanceCreatedTime}, #{createdTime}, #{modifiedTime}, #{whEtlExecId})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.datacloud.entity.catalog.DatasetInstance" >
+    update dict_dataset_instance
+       set `deployment_tier` = #{deploymentTier},
+           `data_center` = #{dataCenter},
+           `server_cluster` = #{serverCluster},
+           `slice` = #{slice},
+           `status_id` = #{statusId},
+           `native_name` = #{nativeName},
+           `logical_name` = #{logicalName},
+           `version` = #{version},
+           `schema_text` = #{schemaText},
+           `ddl_text` = #{ddlText},
+           `instance_created_time` = #{instanceCreatedTime},
+           `created_time` = #{createdTime},
+           `modified_time` = #{modifiedTime},
+           `wh_etl_exec_id` = #{whEtlExecId}
+     where `dataset_id` = #{datasetId},
+       and `db_id` = #{dbId},
+       and `version_sort_id` = #{versionSortId}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.datacloud.entity.catalog.DatasetInstance" >
+    update dict_dataset_instance
+    <set >
+      <if test="deploymentTier != null" >
+        `deployment_tier` = #{deploymentTier},
+      </if>
+      <if test="dataCenter != null" >
+        `data_center` = #{dataCenter},
+      </if>
+      <if test="serverCluster != null" >
+        `server_cluster` = #{serverCluster},
+      </if>
+      <if test="slice != null" >
+        `slice` = #{slice},
+      </if>
+      <if test="statusId != null" >
+        `status_id` = #{statusId},
+      </if>
+      <if test="nativeName != null" >
+        `native_name` = #{nativeName},
+      </if>
+      <if test="logicalName != null" >
+        `logical_name` = #{logicalName},
+      </if>
+      <if test="version != null" >
+        `version` = #{version},
+      </if>
+      <if test="schemaText != null" >
+        `schema_text` = #{schemaText},
+      </if>
+      <if test="ddlText != null" >
+        `ddl_text` = #{ddlText},
+      </if>
+      <if test="instanceCreatedTime != null" >
+        `instance_created_time` = #{instanceCreatedTime},
+      </if>
+      <if test="createdTime != null" >
+        `created_time` = #{createdTime},
+      </if>
+      <if test="modifiedTime != null" >
+        `modified_time` = #{modifiedTime},
+      </if>
+      <if test="whEtlExecId != null" >
+        `wh_etl_exec_id` = #{whEtlExecId},
+      </if>
+    </set>
+     where `dataset_id` = #{datasetId},
+       and `db_id` = #{dbId},
+       and `version_sort_id` = #{versionSortId}
+  </update>
+
+  <!-- 根据id查询 dict_dataset_instance -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.talkingdata.datacloud.entity.catalog.DatasetInstanceKey">
+    select <include refid="Base_Column_List" /> 
+      from dict_dataset_instance
+     where `dataset_id` = #{datasetId},
+       and `db_id` = #{dbId},
+       and `version_sort_id` = #{versionSortId}
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="com.talkingdata.datacloud.entity.catalog.DatasetInstanceKey">
+    delete from dict_dataset_instance
+     where `dataset_id` = #{datasetId},
+       and `db_id` = #{dbId},
+       and `version_sort_id` = #{versionSortId}
+  </delete>
+
+  <!-- dict_dataset_instance 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select count(1) from dict_dataset_instance
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询dict_dataset_instance列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from dict_dataset_instance
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+</mapper>

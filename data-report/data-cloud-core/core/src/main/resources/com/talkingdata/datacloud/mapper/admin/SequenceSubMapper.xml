@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.admin.SequenceSubDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.admin.SequenceSub" >
+	<result column="seq_sub_name" property="seqSubName"/>
+	<result column="current_value" property="currentValue"/>
+	<result column="increment" property="increment"/>
+	<result column="remark" property="remark"/>
+  </resultMap>
+       
+  <!-- TD_SEQUENCE_SUB table all fields -->
+  <sql id="Base_Column_List" >
+	 seq_sub_name,current_value,increment,remark
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="seqSubName != null and seqSubName != ''" >
+        and seq_sub_name =  #{seqSubName}
+	  </if>
+	      <if test="currentValue != null and currentValue != ''" >
+        and current_value =  #{currentValue}
+	  </if>
+	      <if test="increment != null and increment != ''" >
+        and increment =  #{increment}
+	  </if>
+	      <if test="remark != null and remark != ''" >
+        and remark =  #{remark}
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_SEQUENCE_SUB(seq_sub_name,current_value,increment,remark)
+ values(#{seqSubName},#{currentValue},#{increment},#{remark})
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+    update TD_SEQUENCE_SUB set current_value=#{currentValue},increment=#{increment},remark=#{remark} where seq_sub_name=#{seqSubName}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+    update TD_SEQUENCE_SUB set 
+	<trim  suffixOverrides="," >
+	<if test="currentValue != null  ">
+		current_value=#{currentValue},
+	</if>
+	<if test="increment != null  ">
+		increment=#{increment},
+	</if>
+	<if test="remark != null  ">
+		remark=#{remark},
+	</if>
+	</trim> where seq_sub_name=#{seqSubName}
+  </update>
+ 
+  <!-- 根据id查询 序列 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" /> 
+	 from TD_SEQUENCE_SUB where seq_sub_name = #{seqSubName}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+    delete 	 from TD_SEQUENCE_SUB where seq_sub_name = #{seqSubName}
+  </delete>
+
+  <!-- 序列 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_SEQUENCE_SUB 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询序列列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_SEQUENCE_SUB 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  <select id="selectSeqSubCurrNum" resultType="java.lang.Integer" parameterType="com.talkingdata.datacloud.entity.admin.SequenceSub" >
+    select 
+   		fun_seq_sub_currnum(#{seqSubName,jdbcType=VARCHAR})
+  </select>
+  
+  <select id="selectSeqSubNextNum" resultType="java.lang.Integer" parameterType="com.talkingdata.datacloud.entity.admin.SequenceSub" >
+    select 
+   		fun_seq_sub_nextnum(#{seqSubName,jdbcType=VARCHAR})
+  </select>
+  
+  <select id="selectSeqSubCurrVal" resultType="java.lang.String" parameterType="com.talkingdata.datacloud.entity.admin.SequenceSub" >
+    select 
+   		fun_seq_sub_currval(#{seqSubName,jdbcType=VARCHAR}, #{connectSign,jdbcType=VARCHAR})
+  </select>
+  
+  <select id="selectSeqSubNextVal" resultType="java.lang.String" parameterType="com.talkingdata.datacloud.entity.admin.SequenceSub" >
+    select 
+   		fun_seq_sub_nextval(#{seqSubName,jdbcType=VARCHAR}, #{connectSign,jdbcType=VARCHAR})
+  </select>
+  
+  <select id="selectSeqSubSetVal" resultType="java.lang.String" parameterType="com.talkingdata.datacloud.entity.admin.SequenceSub" >
+    select 
+   		fun_seq_sub_setval(#{seqSubName,jdbcType=VARCHAR},  #{curValue,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{connectSign,jdbcType=VARCHAR})
+  </select>
+</mapper>   

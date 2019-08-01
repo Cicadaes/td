@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.monitor.SubCalcObjectLogDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.monitor.SubCalcObjectLog" >
+	<result column="id" property="id"/>
+	<result column="calc_object_log_id" property="calcObjectLogId"/>
+	<result column="object_id" property="objectId"/>
+	<result column="object_name" property="objectName"/>
+	<result column="object_code" property="objectCode"/>
+	<result column="object_type" property="objectType"/>
+	<result column="scheduler_task_log_id" property="schedulerTaskLogId"/>
+	<result column="azkaban_executor_id" property="azkabanExecutorId"/>
+	<result column="content" property="content"/>
+	<result column="execption_info" property="execptionInfo"/>
+	<result column="create_by" property="createBy"/>
+	<result column="creator" property="creator"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_time" property="updateTime"/>
+	<result column="start_time" property="startTime"/>
+	<result column="end_time" property="endTime"/>
+	<result column="status" property="status"/>
+	<result column="data_app_id" property="dataAppId"/>
+	<result column="tenant_id" property="tenantId"/>
+	<result column="verification_result" property="verificationResult"/>
+  </resultMap>
+       
+  <!-- TD_SUB_CALC_OBJECT_LOG table all fields -->
+  <sql id="Base_Column_List" >
+	 id,calc_object_log_id,object_id,object_name,object_code,object_type,scheduler_task_log_id,azkaban_executor_id,content,execption_info,create_by,creator,update_by,create_time,update_time,start_time,end_time,status,data_app_id,tenant_id,verification_result
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="calcObjectLogId != null and calcObjectLogId != ''" >
+        and calc_object_log_id =  #{calcObjectLogId}
+	  </if>
+	      <if test="objectId != null and objectId != ''" >
+        and object_id =  #{objectId}
+	  </if>
+	      <if test="objectName != null and objectName != ''" >
+        and object_name =  #{objectName}
+	  </if>
+	      <if test="objectCode != null and objectCode != ''" >
+        and object_code =  #{objectCode}
+	  </if>
+	      <if test="objectType != null and objectType != ''" >
+        and object_type =  #{objectType}
+	  </if>
+	      <if test="schedulerTaskLogId != null and schedulerTaskLogId != ''" >
+        and scheduler_task_log_id =  #{schedulerTaskLogId}
+	  </if>
+	      <if test="azkabanExecutorId != null and azkabanExecutorId != ''" >
+        and azkaban_executor_id =  #{azkabanExecutorId}
+	  </if>
+	  <if test="content != null and content != ''" >
+        and content =  #{content}
+	  </if>
+	      <if test="execptionInfo != null and execptionInfo != ''" >
+        and execption_info =  #{execptionInfo}
+	  </if>
+	      <if test="createBy != null and createBy != ''" >
+        and create_by =  #{createBy}
+	  </if>
+	      <if test="creator != null and creator != ''" >
+        and creator =  #{creator}
+	  </if>
+	      <if test="updateBy != null and updateBy != ''" >
+        and update_by =  #{updateBy}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+	      <if test="startTime != null and startTime != ''" >
+        and start_time =  #{startTime}
+	  </if>
+	      <if test="endTime != null and endTime != ''" >
+        and end_time =  #{endTime}
+	  </if>
+	      <if test="status != null and status != ''" >
+        and status =  #{status}
+	  </if>
+	      <if test="dataAppId != null and dataAppId != ''" >
+        and data_app_id =  #{dataAppId}
+	  </if>
+	      <if test="tenantId != null and tenantId != ''" >
+        and tenant_id =  #{tenantId}
+	  </if>
+	  <if test="verificationResult != null and verificationResult != ''" >
+        and verification_result =  #{verificationResult}
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_SUB_CALC_OBJECT_LOG(id,calc_object_log_id,object_id,object_name,object_code,object_type,scheduler_task_log_id,azkaban_executor_id,content,execption_info,create_by,creator,update_by,create_time,update_time,start_time,end_time,status,data_app_id,tenant_id,verification_result)
+ values(#{id},#{calcObjectLogId},#{objectId},#{objectName},#{objectCode},#{objectType},#{schedulerTaskLogId},#{azkabanExecutorId},#{content},#{execptionInfo},#{createBy},#{creator},#{updateBy},now(),now(),#{startTime},#{endTime},#{status},#{dataAppId},#{tenantId},#{verificationResult})
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+    update TD_SUB_CALC_OBJECT_LOG set calc_object_log_id=#{calcObjectLogId},object_id=#{objectId},object_name=#{objectName},object_code=#{objectCode},object_type=#{objectType},scheduler_task_log_id=#{schedulerTaskLogId},azkaban_executor_id=#{azkabanExecutorId}},content=#{content},execption_info=#{execptionInfo},create_by=#{createBy},creator=#{creator},update_by=#{updateBy},create_time=now(),update_time=now(),start_time=#{startTime},end_time=#{endTime},status=#{status},data_app_id=#{dataAppId},tenant_id=#{tenantId},verification_result=#{verificationResult} where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+    update TD_SUB_CALC_OBJECT_LOG set 
+	<trim  suffixOverrides="," >
+	<if test="calcObjectLogId != null  ">
+		calc_object_log_id=#{calcObjectLogId},
+	</if>
+	<if test="objectId != null  ">
+		object_id=#{objectId},
+	</if>
+	<if test="objectName != null  ">
+		object_name=#{objectName},
+	</if>
+	<if test="objectCode != null  ">
+		object_code=#{objectCode},
+	</if>
+	<if test="objectType != null  ">
+		object_type=#{objectType},
+	</if>
+	<if test="schedulerTaskLogId != null  ">
+		scheduler_task_log_id=#{schedulerTaskLogId},
+	</if>
+	<if test="azkabanExecutorId != null  ">
+		azkaban_executor_id=#{azkabanExecutorId},
+	</if>
+	<if test="content != null  ">
+		content=#{content},
+	</if>
+	<if test="execptionInfo != null  ">
+		execption_info=#{execptionInfo},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="creator != null  ">
+		creator=#{creator},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	<if test="startTime != null  ">
+		start_time=#{startTime},
+	</if>
+	<if test="endTime != null  ">
+		end_time=#{endTime},
+	</if>
+	<if test="status != null  ">
+		status=#{status},
+	</if>
+	<if test="dataAppId != null  ">
+		data_app_id=#{dataAppId},
+	</if>
+	<if test="tenantId != null  ">
+		tenant_id=#{tenantId},
+	</if>
+	<if test="verificationResult != null  ">
+		verification_result=#{verificationResult},
+	</if>
+	</trim> where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 子计算对象日志 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" /> 
+	 from TD_SUB_CALC_OBJECT_LOG where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+    delete 	 from TD_SUB_CALC_OBJECT_LOG where id = #{id}
+  </delete>
+
+  <!-- 子计算对象日志 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_SUB_CALC_OBJECT_LOG 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询子计算对象日志列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_SUB_CALC_OBJECT_LOG 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <!-- 查询指定计算对象历史执行记录总数-->
+  <select id="queryWithCalcObjectLogIdByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(*) from TD_SUB_CALC_OBJECT_LOG t4 join
+(
+SELECT
+    max(start_time) as start_time
+FROM
+    TD_SUB_CALC_OBJECT_LOG
+WHERE
+    calc_object_log_id IN (
+        SELECT
+            t1.id
+        FROM
+            TD_CALC_OBJECT_LOG t1
+        JOIN TD_CALC_OBJECT_LOG t2 ON t2.scheduler_task_log_id = t1.scheduler_task_log_id
+        AND t2.object_code = t1.object_code
+        WHERE
+            t2.id = #{calcObjectLogId} and t1.id != #{calcObjectLogId}
+    )
+AND object_code = #{objectCode} 
+ )t5   on t4.start_time = t5.start_time where t4.scheduler_task_log_id = #{schedulerTaskLogId}
+and t4.object_code = #{objectCode} and t4.calc_object_log_id IN (
+        SELECT
+            t1.id
+        FROM
+            TD_CALC_OBJECT_LOG t1
+        JOIN TD_CALC_OBJECT_LOG t2 ON t2.scheduler_task_log_id = t1.scheduler_task_log_id
+        AND t2.object_code = t1.object_code
+        WHERE
+            t2.id = #{calcObjectLogId} and t1.id != #{calcObjectLogId} 
+    ) and (t4.status = 2 or t4.status = 5)
+  </select>
+  
+  <update id="updateStatus" parameterType="Object">
+    update TD_SUB_CALC_OBJECT_LOG set status = #{targetStatus}, end_time = #{endTime}
+    where scheduler_task_log_id = #{schedulerTaskLogId} and azkaban_executor_id = #{azkabanExecutorId} and status = #{status} 
+  </update>
+  
+  <update id="updateStatusAndException" parameterType="Object">
+    update TD_SUB_CALC_OBJECT_LOG set status = #{targetStatus}, execption_info = #{exception}, end_time = #{endTime}
+    where scheduler_task_log_id = #{schedulerTaskLogId} and azkaban_executor_id = #{azkabanExecutorId} and status = #{status} 
+  </update>
+  
+  <delete id="deleteByExcludesTenantIds" parameterType="Object">
+    delete from TD_SUB_CALC_OBJECT_LOG where tenant_id not in
+	<foreach collection="tenantIds" open="(" separator="," close=")" item="item">
+		#{item}
+	</foreach>
+	AND tenant_id IS NOT NULL AND tenant_id != 'null'
+  </delete>
+</mapper>   

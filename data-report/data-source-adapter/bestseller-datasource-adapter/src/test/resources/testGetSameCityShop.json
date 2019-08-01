@@ -1,0 +1,49 @@
+{
+  "datasource_id": 36,
+  "dimensions": [
+    {
+      "field": "brand"
+    },
+    {
+      "field": "project_name"
+    }
+  ],
+  "metrics": [
+    {
+      "field": "front_users",
+      "alias": "xValue"
+    },
+    {
+      "field": "active_users",
+      "alias": "yValue"
+    }
+  ],
+  "filters": [
+    {
+      "field": "project_type",
+      "operator": "=",
+      "value": "1"
+    },
+    {
+      "field": "project_id",
+      "operator": "=",
+      "value": "7200"
+    }
+  ],
+  "dateFilters": [
+    {
+      "field": "date",
+      "operator": ">=",
+      "value": "2017-11-01"
+    },
+    {
+      "field": "date",
+      "operator": "<=",
+      "value": "2017-11-30"
+    }
+  ],
+  "limit": [
+    -1
+  ],
+  "dateGranularity": 0
+}

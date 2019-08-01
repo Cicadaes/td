@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.factory.DatapipelineDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.factory.Datapipeline" >
+    <id column="id" property="id" />
+    <result column="project_id" property="projectId" />
+    <result column="name" property="name" />
+    <result column="code" property="code" />
+    <result column="type" property="type" />
+    <result column="version" property="version" />
+    <result column="status" property="status" />
+    <result column="description" property="description" />
+    <result column="diagram" property="diagram" />
+    <result column="script" property="script" />
+    <result column="cron" property="cron" />
+    <result column="tenant_id" property="tenantId" />
+    <result column="creator" property="creator" />
+    <result column="create_by" property="createBy" />
+    <result column="create_time" property="createTime" />
+    <result column="updater" property="updater" />
+    <result column="update_by" property="updateBy" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+
+  <!-- TD_DC_DATAPIPELINE table all fields -->
+  <sql id="Base_Column_List" >
+     `id`, `project_id`, `name`, `code`,`type`, `version`, `status`, `description`, `diagram`, `script`, `cron`, `tenant_id`, `creator`, `create_by`, `create_time`, `updater`, `update_by`, `update_time`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and `id` ${idOperator} #{id}
+      </if>
+      <if test="projectId != null" >
+        and `project_id` ${projectIdOperator} #{projectId}
+      </if>
+      <if test="name != null" >
+        and `name` ${nameOperator} #{name}
+      </if>
+      <if test="code != null" >
+        and `code` ${codeOperator} #{code}
+      </if>
+      <if test="type != null" >
+        and `type` ${typeOperator} #{type}
+      </if>
+      <if test="version != null" >
+        and `version` ${versionOperator} #{version}
+      </if>
+      <if test="status != null" >
+        and `status` ${statusOperator} #{status}
+      </if>
+      <if test="description != null" >
+        and `description` ${descriptionOperator} #{description}
+      </if>
+      <if test="diagram != null" >
+        and `diagram` ${diagramOperator} #{diagram}
+      </if>
+      <if test="script != null" >
+        and `script` ${scriptOperator} #{script}
+      </if>
+      <if test="cron != null" >
+        and `cron` ${cronOperator} #{cron}
+      </if>
+      <if test="tenantId != null" >
+        and `tenant_id` ${tenantIdOperator} #{tenantId}
+      </if>
+      <if test="creator != null" >
+        and `creator` ${creatorOperator} #{creator}
+      </if>
+      <if test="createBy != null" >
+        and `create_by` ${createByOperator} #{createBy}
+      </if>
+      <if test="createTime != null" >
+        and `create_time` ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and `create_time` &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and `create_time` &lt;= #{createTime2}
+      </if>
+      <if test="updater != null" >
+        and `updater` ${updaterOperator} #{updater}
+      </if>
+      <if test="updateBy != null" >
+        and `update_by` ${updateByOperator} #{updateBy}
+      </if>
+      <if test="updateTime != null" >
+        and `update_time` ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and `update_time` &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and `update_time` &lt;= #{updateTime2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.datacloud.entity.factory.Datapipeline" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_DC_DATAPIPELINE(<include refid="Base_Column_List" />)
+    values (#{id}, #{projectId}, #{name}, #{code}, #{type},#{version}, #{status}, #{description}, #{diagram}, #{script}, #{cron}, #{tenantId}, #{creator}, #{createBy}, #{createTime}, #{updater}, #{updateBy}, #{updateTime})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.datacloud.entity.factory.Datapipeline" >
+    update TD_DC_DATAPIPELINE
+       set `project_id` = #{projectId},
+           `name` = #{name},
+           `code` = #{code},
+           `version` = #{version},
+           `status` = #{status},
+           `description` = #{description},
+           `diagram` = #{diagram},
+           `script` = #{script},
+           `cron` = #{cron},
+           `tenant_id` = #{tenantId},
+           `creator` = #{creator},
+           `create_by` = #{createBy},
+           `create_time` = #{createTime},
+           `updater` = #{updater},
+           `update_by` = #{updateBy},
+           `update_time` = #{updateTime}
+     where `id` = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.datacloud.entity.factory.Datapipeline" >
+    update TD_DC_DATAPIPELINE
+    <set >
+      <if test="projectId != null" >
+        `project_id` = #{projectId},
+      </if>
+      <if test="name != null" >
+        `name` = #{name},
+      </if>
+      <if test="code != null" >
+        `code` = #{code},
+      </if>
+      <if test="version != null" >
+        `version` = #{version},
+      </if>
+      <if test="status != null" >
+        `status` = #{status},
+      </if>
+      <if test="description != null" >
+        `description` = #{description},
+      </if>
+      <if test="diagram != null" >
+        `diagram` = #{diagram},
+      </if>
+      <if test="script != null" >
+        `script` = #{script},
+      </if>
+      <if test="cron != null" >
+        `cron` = #{cron},
+      </if>
+      <if test="tenantId != null" >
+        `tenant_id` = #{tenantId},
+      </if>
+      <if test="creator != null" >
+        `creator` = #{creator},
+      </if>
+      <if test="createBy != null" >
+        `create_by` = #{createBy},
+      </if>
+      <if test="createTime != null" >
+        `create_time` = #{createTime},
+      </if>
+      <if test="updater != null" >
+        `updater` = #{updater},
+      </if>
+      <if test="updateBy != null" >
+        `update_by` = #{updateBy},
+      </if>
+      <if test="updateTime != null" >
+        `update_time` = #{updateTime},
+      </if>
+    </set>
+     where `id` = #{id}
+  </update>
+
+  <!-- 根据id查询 TD_DC_DATAPIPELINE -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from TD_DC_DATAPIPELINE
+     where `id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TD_DC_DATAPIPELINE
+     where `id` = #{value}
+
+  </delete>
+
+  <!-- TD_DC_DATAPIPELINE 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select count(1) from TD_DC_DATAPIPELINE
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TD_DC_DATAPIPELINE列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from TD_DC_DATAPIPELINE
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+  <!-- 根据project_id查询 TD_DC_DATAPIPELINE -->
+  <select id="selectByProject" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" />
+    from TD_DC_DATAPIPELINE
+    where `project_id` = #{value}
+  </select>
+
+  <!-- 根据project_id查询 TD_DC_DATAPIPELINE -->
+  <select id="selectByProjectIdAndStatus" resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" />
+    from TD_DC_DATAPIPELINE
+    where `project_id` = #{projectId} AND `status`= #{status}
+  </select>
+
+  <!-- 根据code and version 查询 TD_DC_DATAPIPELINE -->
+  <select id="selectByCodeAndVersion" resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" />
+    from TD_DC_DATAPIPELINE
+    where `code` = #{code} AND `version`= #{version}
+  </select>
+
+  <!-- 根据project_id查询 TD_DC_DATAPIPELINE -->
+  <delete id="deleteByProjectId" parameterType="java.lang.Integer">
+    delete from TD_DC_DATAPIPELINE
+    where `project_id` = #{value}
+  </delete>
+
+  <select id="duplicateName" resultMap="BaseResultMap" parameterType="com.talkingdata.datacloud.entity.factory.Datapipeline">
+    select <include refid="Base_Column_List"/>
+    from TD_DC_DATAPIPELINE
+    where `name` = #{name} and `project_id`= #{projectId}
+    <if test="version != null" >
+      and `version`= #{version}
+    </if>
+    <if test="id != null" >
+      and id != #{id}
+    </if>
+  </select>
+
+  <select id="duplicateCode" resultMap="BaseResultMap" parameterType="com.talkingdata.datacloud.entity.factory.Datapipeline">
+    select <include refid="Base_Column_List"/>
+    from TD_DC_DATAPIPELINE
+    where `code` = #{code} and `project_id`= #{projectId}
+    <if test="id != null" >
+      and id != #{id}
+    </if>
+  </select>
+</mapper>

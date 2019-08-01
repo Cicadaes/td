@@ -1,0 +1,9 @@
+/**/
+.stage .component_tabOptions ul li{
+    font-size: 14px!important;
+    padding: 10px 20px!important;
+}
+
+.stage .component_tabfilter.component_tabOptions ul li.tabFilter_choose{
+    color: #1F2544!important;
+}

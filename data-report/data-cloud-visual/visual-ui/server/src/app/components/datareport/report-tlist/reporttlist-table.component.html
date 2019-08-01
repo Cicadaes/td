@@ -1,0 +1,23 @@
+<main>
+    <div class="computing_detail_bottom">
+        <!--项目列表渲染-->
+        <p-dataTable [value]="dispatDatas" *ngIf="dispatDatas" emptyMessage="暂无内容">
+            <p-column field="name" header="报表名称" [style]="{'width': '260px'}">
+                <template let-project="rowData" pTemplate="body" let-index="rowIndex">
+                    <p>
+                        <a href="javascript:void(0)"
+                           (click)="detailTaskProject(dispatDatas[index])"
+                           style="color: #657180;">
+                            <!--{{project.name}}-->
+                            {{dispatDatas[index].name}}
+                        </a>
+                    </p>
+                </template>
+            </p-column>
+            <p-column field="description" header="描述" [style]="{'width': '220px'}"> </p-column>
+            <p-column field="createTime" header="授权人" [style]="{'width': '180px'}"> </p-column>
+            <p-column field="" header="" [style]="{'width': '20px'}"> </p-column>
+        </p-dataTable>
+        <x-paginator *ngIf="dispatDatas" [value]="value" (onPagesChange)="paginate($event)"></x-paginator>
+    </div>
+</main>

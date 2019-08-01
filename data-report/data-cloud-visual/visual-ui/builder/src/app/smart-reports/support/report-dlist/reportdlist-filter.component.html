@@ -1,0 +1,45 @@
+<main class="filter clearfix">
+    <ul class="filter-left">
+        <li>
+            <span class="filterKey ">名称</span>
+            <div class="selectwrap">
+                <input  type="search" pInputText [(ngModel)]="name"/>
+            </div>
+        </li>
+        <!--<li>-->
+            <!--<span class="filterKey">类型</span>-->
+            <!--<div class="selectwrap">-->
+                <!--<p-dropdown [options]="statusList" [(ngModel)]="status"></p-dropdown>-->
+                <!---->
+            <!--</div>-->
+        <!--</li>                -->
+        <li>
+            <span class="filterKey">创建人</span>
+            <div class="selectwrap">
+                <input type="search" pInputText [(ngModel)]="creator"/>
+            </div>
+        </li>
+        <li>
+            <span class="filterKey">更新人</span>
+            <div class="selectwrap">
+                <input  type="search" pInputText [(ngModel)]="updater"/>
+            </div>
+        </li>
+        <li class="time">
+            <span class="filterKey">创建时间</span>
+            <div class="selectwrap" >
+                <datePicker [value]="createTimePicker"></datePicker>
+            </div>
+        </li>
+        <li class="time">
+            <span class="filterKey">更新时间</span>
+            <div class="selectwrap" >
+                <datePicker [value]="updateTimePicker"></datePicker>
+            </div>
+        </li>
+    </ul>
+    <div class="r filterBtnWrap">
+        <button type="text" (click)="search()">搜索</button>
+        <button type="text" (click)="reset()">重置</button>
+    </div>
+</main>

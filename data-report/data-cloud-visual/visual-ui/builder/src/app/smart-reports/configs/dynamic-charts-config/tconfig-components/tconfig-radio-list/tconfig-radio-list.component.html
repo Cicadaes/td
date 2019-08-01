@@ -1,0 +1,5 @@
+<div class="tc-radio-list">
+    <div class="tc-radio-list-box" *ngFor="let radio of tconfig.childrenFields;let index = i" (click)="onSelect(radio)">
+       <p-radioButton name="{{'group-'+tconfig.code}}" value="{{radio.value}}" label="{{radio.name}}" [(ngModel)]="tconfig.value"></p-radioButton>
+    </div>
+</div>

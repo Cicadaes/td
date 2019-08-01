@@ -1,0 +1,130 @@
+{
+    "name": "简单表格",
+    "description": "简单表格",
+    "iconPath": null,
+    "iconData": null,
+    "type": 19,
+    "groupId":4,
+    "orderNum":19,
+    "styleView": {
+        "id": null,
+        "toolTip": null,
+        "fieldTabs": [
+            {
+                "name":"data",
+                "fieldGroups":[
+                    {
+                        "name":"基本信息",
+                        "scripts":null,
+                        "fields":[
+                            {
+                                "code":"dataSource",
+                                "name":"数据源",
+                                "description":null,
+                                "valueType":6,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":24,
+                                "viewMetaData":{"postChange":{"action":"callBack","postEvent":{"actionValue":"report/dataSources/id/metaData","action":"callBack","actionParams":["datasource_id"],"postEvent":"datasource-reload | metadata-render"}}},
+                                "multipleMaxNumber":1,
+                                "verifyRule":null,
+                                "iconClass":null,
+                                "childrenFields":[]
+                            }
+                        ]
+                    },
+                    {
+                        "name":"参数信息",
+                        "scripts":null,
+                        "fields":[
+                            {
+                                "code":"dimension",
+                                "name":"维度",
+                                "description":null,
+                                "valueType":6,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":24,
+                                "viewMetaData":{"onChange":true},
+                                "multipleMaxNumber":1,
+                                "verifyRule":null,
+                                "iconClass":null,
+                                "childrenFields":[]
+                            },
+                            {
+                                "code":"metric",
+                                "name":"指标",
+                                "description":null,
+                                "valueType":6,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":24,
+                                "viewMetaData":{"onChange":true},
+                                "multipleMaxNumber":100,
+                                "verifyRule":null,
+                                "iconClass":null,
+                                "childrenFields":[]
+                            }
+                        ]
+                    },
+                    {
+                        "name":"默认日期范围",
+                        "scripts":null,
+                        "fields":[
+                            {
+                                "code":"dateDimension",
+                                "name":"日期范围维度",
+                                "description":null,
+                                "valueType":1,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":2,
+                                "viewMetaData":{"onChange":true},
+                                "verifyRule":null,
+                                "iconClass":null,
+                                "childrenFields":[]
+                            },{
+                                "code":"dateDimensionValue",
+                                "name":"日期",
+                                "description":null,
+                                "valueType":8,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":22,
+                                "viewMetaData":{"onChange":true},
+                                "verifyRule":null,
+                                "iconClass":null,
+                                "childrenFields":[]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

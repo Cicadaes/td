@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.monitor.SchedulerTaskLogDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.monitor.SchedulerTaskLog" >
+	<result column="id" property="id"/>
+	<result column="task_id" property="taskId"/>
+	<result column="task_code" property="taskCode"/>
+	<result column="azkaban_project_name" property="azkabanProjectName"/>
+	<result column="azkaban_executor_id" property="azkabanExecutorId"/>
+	<result column="start_time" property="startTime"/>
+	<result column="end_time" property="endTime"/>
+	<result column="status" property="status"/>
+	<result column="input_param" property="inputParam"/>
+	<result column="create_by" property="createBy"/>
+	<result column="creator" property="creator"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_time" property="updateTime"/>
+	<result column="data_app_id" property="dataAppId"/>
+	<result column="tenant_id" property="tenantId"/>
+	<result column="execption_info" property="execptionInfo"/>
+	<result column="retry_num" property="retryNum"/>
+	<result column="task_summary" property="taskSummary"/>
+	<result column="description" property="description"/>   
+
+  </resultMap>
+       
+  <!-- TD_SCHEDULER_TASK_LOG table all fields -->
+  <sql id="Base_Column_List" >
+	 id,task_id,task_code,azkaban_project_name,azkaban_executor_id,start_time,end_time,status,input_param,create_by,creator,update_by,create_time,update_time,data_app_id,tenant_id,execption_info,retry_num,task_summary
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="taskId != null and taskId != ''" >
+        and task_id =  #{taskId}
+	  </if>
+	      <if test="taskCode != null and taskCode != ''" >
+        and task_code =  #{taskCode}
+	  </if>
+	  <if test="azkabanProjectName != null and azkabanProjectName != ''" >
+        and azkaban_project_name =  #{azkabanProjectName}
+	  </if>
+	      <if test="azkabanExecutorId != null and azkabanExecutorId != ''" >
+        and azkaban_executor_id =  #{azkabanExecutorId}
+	  </if>
+	      <if test="startTime != null and startTime != ''" >
+        and start_time =  #{startTime}
+	  </if>
+	      <if test="endTime != null and endTime != ''" >
+        and end_time =  #{endTime}
+	  </if>
+	      <if test="status != null" >
+        and status =  #{status}
+	  </if>
+	      <if test="inputParam != null and inputParam != ''" >
+        and input_param =  #{inputParam}
+	  </if>
+	      <if test="createBy != null and createBy != ''" >
+        and create_by = #{createBy}
+	  </if>
+	      <if test="creator != null and creator != ''" >
+        and creator = #{creator}
+	  </if>
+	      <if test="updateBy != null and updateBy != ''" >
+        and update_by =  #{updateBy}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+	  <if test="tenantId != null and tenantId != ''" >
+        and tenant_id =  #{tenantId}
+	  </if>
+	  <if test="execptionInfo != null and execptionInfo != ''" >
+        and execption_info =  #{execptionInfo}
+	  </if>
+	  <if test="retryNum != null and retryNum != ''" >
+        and retry_num =  #{retryNum}
+	  </if>
+	  <if test="taskSummary != null and taskSummary != ''" >
+        and task_summary =  #{taskSummary}
+	  </if>
+    </trim>
+  </sql>
+  
+  <!-- 高级搜索查询条件 -->
+  <sql id="Base_Where_Clause_Search">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and l.id = #{id}
+	  </if>
+	      <if test="taskId != null and taskId != ''" >
+        and l.task_id = #{taskId}
+	  </if>
+	      <if test="taskCode != null and taskCode != ''" >
+        and l.task_code like CONCAT('%',#{taskCode},'%')
+	  </if>
+	  <if test="azkabanProjectName != null and azkabanProjectName != ''" >
+        and azkaban_project_name =  #{azkabanProjectName}
+	  </if>
+	      <if test="azkabanExecutorId != null and azkabanExecutorId != ''" >
+        and l.azkaban_executor_id =  #{azkabanExecutorId}
+	  </if>
+	      <if test="startTime != null and startTime != ''" >
+        and l.start_time =  #{startTime}
+	  </if>
+	  <if test="startTimeStart != null and startTimeStart != ''" >
+        and l.start_time &gt;=  #{startTimeStart}
+	  </if>
+	  <if test="startTimeEnd != null and startTimeEnd != ''" >
+        and l.start_time &lt;=  #{startTimeEnd}
+	  </if>
+	      <if test="endTime != null and endTime != ''" >
+        and l.end_time =  #{endTime}
+	  </if>
+	  <if test="endTimeStart != null and endTimeStart != ''" >
+        and l.end_time &gt;=  #{endTimeStart}
+	  </if>
+	  <if test="endTimeEnd != null and endTimeEnd != ''" >
+        and l.end_time &lt;=  #{endTimeEnd}
+	  </if>
+	      <if test="status != null" >
+        and l.status =  #{status}
+	  </if>
+	      <if test="inputParam != null and inputParam != ''" >
+        and l.input_param like CONCAT('%',#{inputParam},'%')
+	  </if>
+	      <if test="createBy != null and createBy != ''" >
+        and l.create_by = #{createBy}
+	  </if>
+	      <if test="creator != null and creator != ''" >
+        and l.creator =  #{creator}
+	  </if>
+	      <if test="updateBy != null and updateBy != ''" >
+        and l.update_by =  #{updateBy}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and l.create_time =  #{createTime}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and l.update_time =  #{updateTime}
+	  </if>
+	  <if test="dataAppId != null and dataAppId != ''" >
+        and l.data_app_id =  #{dataAppId}
+	  </if>
+	  <if test="tenantId != null and tenantId != ''" >
+        and l.tenant_id =  #{tenantId}
+	  </if>
+	  <if test="execptionInfo != null and execptionInfo != ''" >
+        and l.execption_info =  #{execptionInfo}
+	  </if>
+	  <if test="retryNum != null and retryNum != ''" >
+        and l.retry_num =  #{retryNum}
+	  </if>
+	  <if test="taskName != null and taskName != ''" >
+	    and l.taskName = #{taskName}
+	  </if>
+	  <if test="q != null and q != ''" >
+		and (l.task_code like CONCAT('%',#{q},'%') or l.taskName like CONCAT('%',#{q},'%') or l.task_summary like CONCAT('%',#{q},'%'))
+	  </if>
+	  <if test="taskSummary != null and taskSummary != ''" >
+        and l.task_summary like CONCAT('%',#{taskSummary},'%')
+	  </if>
+      <!-- 新增字段 -->
+      <if test="taskNameLike != null and taskNameLike != ''" >
+        and l.taskName like concat('%', #{taskNameLike}, '%')
+      </if>
+      <if test="taskSummaryLike != null and taskSummaryLike != ''" >
+        and l.task_summary like concat('%', #{taskSummaryLike}, '%')
+      </if>
+      <if test="inputParamLike != null and inputParamLike != ''" >
+        and l.input_param like concat('%', #{inputParamLike}, '%')
+      </if>
+      <if test="startTime1 != null and startTime1 != ''" >
+        and l.start_time &gt;=  #{startTime1}
+      </if>
+      <if test="startTime2 != null and startTime2 != ''" >
+        and l.start_time &lt;=  #{startTime2}
+      </if>
+      <if test="endTime1 != null and endTime1 != ''" >
+        and l.end_time &gt;=  #{endTime1}
+      </if>
+      <if test="endTime2 != null and endTime2 != ''" >
+        and l.end_time &lt;=  #{endTime2}
+      </if>
+    </trim>
+  </sql>
+  
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_SCHEDULER_TASK_LOG(id,task_id,task_code,azkaban_project_name,azkaban_executor_id,start_time,end_time,status,input_param,create_by,creator,update_by,create_time,update_time,data_app_id,tenant_id,execption_info,retry_num,task_summary)
+ values(#{id},#{taskId},#{taskCode},#{azkabanProjectName},#{azkabanExecutorId},#{startTime},#{endTime},#{status},#{inputParam},#{createBy},#{creator},#{updateBy},now(),now(),#{dataAppId},#{tenantId},#{execptionInfo},#{retryNum},#{taskSummary})
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+    update TD_SCHEDULER_TASK_LOG set task_id=#{taskId},task_code=#{taskCode},azkaban_project_name=#{azkabanProjectName},azkaban_executor_id=#{azkabanExecutorId},start_time=#{startTime},end_time=#{endTime},status=#{status},input_param=#{inputParam},create_by=#{createBy},creator=#{creator},update_by=#{updateBy},create_time=now(),update_time=now(),data_app_id=#{dataAppId},tenant_id=#{tenantId},execption_info=#{execptionInfo},retry_num=#{retryNum},task_summary=#{taskSummary} where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+    update TD_SCHEDULER_TASK_LOG set 
+	<trim  suffixOverrides="," >
+	<if test="taskId != null  ">
+		task_id=#{taskId},
+	</if>
+	<if test="taskCode != null  ">
+		task_code=#{taskCode},
+	</if>
+	<if test="azkabanProjectName != null  ">
+		azkaban_project_name=#{azkabanProjectName},
+	</if>
+	<if test="azkabanExecutorId != null  ">
+		azkaban_executor_id=#{azkabanExecutorId},
+	</if>
+	<if test="startTime != null  ">
+		start_time=#{startTime},
+	</if>
+	<if test="endTime != null  ">
+		end_time=#{endTime},
+	</if>
+	<if test="status != null  ">
+		status=#{status},
+	</if>
+	<if test="inputParam != null  ">
+		input_param=#{inputParam},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="creator != null  ">
+		creator=#{creator},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	<if test="dataAppId != null  ">
+		data_app_id=#{dataAppId},
+	</if>
+	<if test="tenantId != null  ">
+		tenant_id=#{tenantId},
+	</if>
+	<if test="execptionInfo != null  ">
+		execption_info=#{execptionInfo},
+	</if>
+	<if test="retryNum != null  ">
+		retry_num=#{retryNum},
+	</if>
+	<if test="taskSummary != null and taskSummary != ''" >
+        task_summary =  #{taskSummary},
+	  </if>
+	</trim> where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 调度任务日志 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" /> 
+	 from TD_SCHEDULER_TASK_LOG where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+    delete 	 from TD_SCHEDULER_TASK_LOG where id = #{id}
+  </delete>
+
+  <!-- 调度任务日志 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_SCHEDULER_TASK_LOG 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询调度任务日志列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_SCHEDULER_TASK_LOG 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <!-- 高级搜索 调度任务日志 列表总数-->
+  <select id="queryWithSearchByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from (
+		select l.id,l.task_id,l.task_code,l.azkaban_executor_id,l.start_time,l.end_time,l.status,l.input_param,l.create_by,l.creator,l.update_by,l.create_time,l.update_time,l.data_app_id,l.tenant_id,l.execption_info,l.retry_num,l.task_summary,l.azkaban_project_name,t.name taskName 
+		FROM TD_SCHEDULER_TASK_LOG l
+		LEFT JOIN (select * from TD_SCHEDULER_TASK where id in (select max(id) from TD_SCHEDULER_TASK group by code, azkaban_project_name)) t ON (t.`code` = l.task_code AND t.azkaban_project_name = l.azkaban_project_name)
+	) l
+	<include refid="Base_Where_Clause_Search"/>
+  </select>
+  	
+  <!-- 高级搜索 查询调度任务日志列表 -->
+  <select id="queryWithSearchByList" resultMap="BaseResultMap"  parameterType="Object">
+	select * from (
+		select l.id,l.task_id,l.task_code,l.azkaban_executor_id,l.start_time,l.end_time,l.status,l.input_param,l.create_by,l.creator,l.update_by,l.create_time,l.update_time,l.data_app_id,l.tenant_id,l.execption_info,l.retry_num,t.name taskName,l.task_summary,l.azkaban_project_name,t.description
+		FROM TD_SCHEDULER_TASK_LOG l
+		LEFT JOIN (select * from TD_SCHEDULER_TASK where id in (select max(id) from TD_SCHEDULER_TASK group by code, azkaban_project_name)) t ON (t.`code` = l.task_code AND t.azkaban_project_name = l.azkaban_project_name)
+	) l
+	<include refid="Base_Where_Clause_Search"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <!-- 根据指定ID和租户查询 调度任务日志 -->
+  <select id="findWithTenantId" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	l.id,task_id,l.task_code,l.azkaban_executor_id,l.start_time,l.end_time,l.status,l.input_param,l.create_by,l.creator,l.update_by,l.create_time,l.update_time,l.data_app_id,l.tenant_id,l.execption_info,l.retry_num,t.name taskName,l.task_summary,l.azkaban_project_name 
+	FROM TD_SCHEDULER_TASK_LOG l
+	LEFT JOIN TD_SCHEDULER_TASK t on t.id = l.task_id
+	where l.id = #{schedulerTaskLogId}
+	<if test="tenantId != null and tenantId != ''" >
+        and l.tenant_id =  #{tenantId}
+	</if>
+  </select>
+  
+  <select id="queryByStatus"  resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" /> 
+	 from TD_SCHEDULER_TASK_LOG where status = #{status}
+  </select>
+  
+  <select id="queryBySchedulerTaskLog"  resultMap="BaseResultMap" parameterType="Object">
+  	select <include refid="Base_Column_List" />  
+  	from TD_SCHEDULER_TASK_LOG 
+  	<include refid="Base_Where_Clause"/>
+  </select>
+  
+  <delete id="deleteByExcludesTenantIds" parameterType="Object">
+    delete from TD_SCHEDULER_TASK_LOG where tenant_id not in
+	<foreach collection="tenantIds" open="(" separator="," close=")" item="item">
+		#{item}
+	</foreach>
+	AND tenant_id IS NOT NULL AND tenant_id != 'null'
+  </delete>
+</mapper>   

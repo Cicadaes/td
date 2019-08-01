@@ -1,0 +1,26 @@
+<div id="main" style="border: solid red 1px;height: 800px;width: 60%;float: left;curssor: default;"></div> 
+<div data-td-panel style="width: 39%;float: right;">
+	<label>选择数据源</label>
+	<div class="toolbar">
+		<div class="btn-group btn-group-sm" ng-model="radio.dataSourceRadio" bs-radio-group>
+			<label class="btn btn-sref-sm"><input type="radio" class="btn btn-default" value="1" ng-click="changeHighChart(1)">分析系统</label>
+			<label class="btn btn-sref-sm"><input type="radio" class="btn btn-default" value="2" ng-click="changeHighChart(2)">交易人数</label>
+		</div>
+	</div>
+	<label>请选择图形</label>
+	<div class="btn-group btn-group-sm" ng-model="radio.chartTypeRadio" bs-radio-group>
+		<label class="btn btn-sref-sm"><input type="radio" class="btn btn-default" value="line" ng-click="changeHighChart(1)">线图</label>
+		<label class="btn btn-sref-sm"><input type="radio" class="btn btn-default" value="column" ng-click="changeHighChart(2)">柱状图</label>
+		<label class="btn btn-sref-sm"><input type="radio" class="btn btn-default" value="pie" ng-click="changeHighChart(2)">饼图</label>
+		<label class="btn btn-sref-sm"><input type="radio" class="btn btn-default" value="bar" ng-click="changeHighChart(2)">横向柱状图</label>
+		<label class="btn btn-sref-sm"><input type="radio" class="btn btn-default" value="Spiderweb" ng-click="changeHighChart(2)">蜘蛛图</label>
+	</div>
+	<label><a ng-click="initHighChartData();">确认生成图表</a></label>
+</div>
+<div class="fl">
+<input type="button" value="开始绘画" ng-click="startDraw();"/>
+<input type="button" value="停止绘画" ng-click="stopDraw();"/>
+</div>
+ <div id="test">dgdg
+ 	<span id="test1" class="gs-resize-handle gs-resize-handle-both" style="display: none;"></span>
+ </div>

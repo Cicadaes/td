@@ -1,0 +1,6 @@
+{
+  "name": "queryEngineTest",
+  "configDefinitionId": 741,
+  "adapterId": 12,
+  "params": "{\"url\": \"http://172.23.6.2:9096/query-engine/api\", \"index\": \"test\"}"
+}

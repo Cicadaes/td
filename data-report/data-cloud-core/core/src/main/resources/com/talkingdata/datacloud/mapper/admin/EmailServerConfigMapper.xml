@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.admin.EmailServerConfigDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.admin.EmailServerConfig" >
+	<result column="id" property="id"/>
+	<result column="code" property="code"/>
+	<result column="name" property="name"/>
+	<result column="mail_host" property="mailHost"/>
+	<result column="smtp_port" property="smtpPort"/>
+	<result column="use_ssl" property="useSsl"/>
+	<result column="user" property="user"/>
+	<result column="password" property="password"/>
+	<result column="system_code" property="systemCode"/>
+	<result column="create_by" property="createBy"/>
+	<result column="creator" property="creator"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_time" property="updateTime"/>
+  </resultMap>
+       
+  <!-- TD_EMAIL_SERVER_CONFIG table all fields -->
+  <sql id="Base_Column_List" >
+	 id,code,name,mail_host,smtp_port,use_ssl,user,password,system_code,create_by,creator,update_by,create_time,update_time
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="code != null and code != ''" >
+        and code =  #{code}
+	  </if>
+	      <if test="name != null and name != ''" >
+        and name =  #{name}
+	  </if>
+	      <if test="mailHost != null and mailHost != ''" >
+        and mail_host =  #{mailHost}
+	  </if>
+	      <if test="smtpPort != null and smtpPort != ''" >
+        and smtp_port =  #{smtpPort}
+	  </if>
+	      <if test="useSsl != null and useSsl != ''" >
+        and use_ssl =  #{useSsl}
+	  </if>
+	      <if test="user != null and user != ''" >
+        and user =  #{user}
+	  </if>
+	      <if test="password != null and password != ''" >
+        and password =  #{password}
+	  </if>
+	      <if test="systemCode != null and systemCode != ''" >
+        and system_code =  #{systemCode}
+	  </if>
+	      <if test="createBy != null and createBy != ''" >
+        and create_by =  #{createBy}
+	  </if>
+	      <if test="creator != null and creator != ''" >
+        and creator =  #{creator}
+	  </if>
+	      <if test="updateBy != null and updateBy != ''" >
+        and update_by =  #{updateBy}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+    </trim>
+  </sql>
+  
+  <!-- 高级查询条件 -->
+  <sql id="Base_Where_Clause_Search">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="code != null and code != ''" >
+        and code =  #{code}
+	  </if>
+	      <if test="name != null and name != ''" >
+        and name like CONCAT('%',#{name},'%')
+	  </if>
+	      <if test="mailHost != null and mailHost != ''" >
+        and mail_host like CONCAT('%',#{mailHost},'%')
+	  </if>
+	      <if test="smtpPort != null and smtpPort != ''" >
+        and smtp_port like CONCAT('%',#{smtpPort},'%')
+	  </if>
+	      <if test="useSsl != null" >
+        and use_ssl =  #{useSsl}
+	  </if>
+	      <if test="user != null and user != ''" >
+        and user like CONCAT('%',#{user},'%')
+	  </if>
+	      <if test="password != null and password != ''" >
+        and password =  #{password}
+	  </if>
+	      <if test="systemCode != null and systemCode != ''" >
+        and system_code =  #{systemCode}
+	  </if>
+	      <if test="createBy != null and createBy != ''" >
+        and create_by =  #{createBy}
+	  </if>
+	      <if test="creator != null and creator != ''" >
+        and creator like CONCAT('%',#{creator},'%')
+	  </if>
+	      <if test="updateBy != null and updateBy != ''" >
+        and update_by =  #{updateBy}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	  <if test="createTimeStart != null and createTimeStart != ''" >
+        and create_time &gt;=  #{createTimeStart}
+	  </if>
+	  <if test="createTimeEnd != null and createTimeEnd != ''" >
+        and create_time &lt;=  #{createTimeEnd}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+	  <if test="q != null and q != ''" >
+        and (name like CONCAT('%',#{q},'%') or mail_host like CONCAT('%',#{q},'%') or user like CONCAT('%',#{user},'%'))
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_EMAIL_SERVER_CONFIG(id,code,name,mail_host,smtp_port,use_ssl,user,password,system_code,create_by,creator,update_by,create_time,update_time)
+ values(#{id},#{code},#{name},#{mailHost},#{smtpPort},#{useSsl},#{user},#{password},#{systemCode},#{createBy},#{creator},#{updateBy},now(),now())
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+    update TD_EMAIL_SERVER_CONFIG set code=#{code},name=#{name},mail_host=#{mailHost},smtp_port=#{smtpPort},use_ssl=#{useSsl},user=#{user},password=#{password},system_code=#{systemCode},create_by=#{createBy},creator=#{creator},update_by=#{updateBy},create_time=now(),update_time=now() where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+    update TD_EMAIL_SERVER_CONFIG set 
+	<trim  suffixOverrides="," >
+	<if test="code != null  ">
+		code=#{code},
+	</if>
+	<if test="name != null  ">
+		name=#{name},
+	</if>
+	<if test="mailHost != null  ">
+		mail_host=#{mailHost},
+	</if>
+	<if test="smtpPort != null  ">
+		smtp_port=#{smtpPort},
+	</if>
+	<if test="useSsl != null  ">
+		use_ssl=#{useSsl},
+	</if>
+	<if test="user != null  ">
+		user=#{user},
+	</if>
+	<if test="password != null  ">
+		password=#{password},
+	</if>
+	<if test="systemCode != null  ">
+		system_code=#{systemCode},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="creator != null  ">
+		creator=#{creator},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	</trim> where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 邮件服务配置表 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" /> 
+	 from TD_EMAIL_SERVER_CONFIG where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+    delete 	 from TD_EMAIL_SERVER_CONFIG where id = #{id}
+  </delete>
+
+  <!-- 邮件服务配置表 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_EMAIL_SERVER_CONFIG 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询邮件服务配置表列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_EMAIL_SERVER_CONFIG 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <!-- 高级搜索 邮件服务配置表 列表总数-->
+  <select id="queryWithSearchByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_EMAIL_SERVER_CONFIG 
+	<include refid="Base_Where_Clause_Search"/>
+  </select>
+  	
+  <!-- 高级搜索 查询邮件服务配置表列表 -->
+  <select id="queryWithSearchByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_EMAIL_SERVER_CONFIG 
+	<include refid="Base_Where_Clause_Search"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <!-- 根据id查询 邮件服务配置表 -->
+  <select id="find"  resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" /> 
+	 from TD_EMAIL_SERVER_CONFIG where code = #{emailservercode}
+  </select>
+  
+  <select id="queryByEmailServerConfig" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_EMAIL_SERVER_CONFIG 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  
+</mapper>   

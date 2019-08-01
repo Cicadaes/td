@@ -1,0 +1,34 @@
+<div class="popover" tabindex="-1" ng-show="content" style="padding: 10px 0">
+	<div class="pageTemplate clearfix">
+		<ul>
+			<li class="page-li" ng-repeat="li_page in custom.pages">
+				<label ng-click="selectPage($index);$hide();">{{$index + 1}}</label>
+				<span ng-click="selectPage($index);$hide();">{{li_page.name}}</span>
+				<span class="fr" ng-click="showCustomPageEdit($event);" ng-show="li_page.selected">...</span>
+			</li>
+			<li class="page-li">
+				<label>+</label>
+				<span ng-click="editPageFlag = !editPageFlag">添加新页</span>
+			</li>
+			<li ng-show="editPageFlag" class="clearfix">
+				<label>&nbsp;</label>
+				<input ng-model="newPage.name"/>
+			</li>
+			<li ng-show="editPageFlag" class="clearfix">
+				<div class="form-actions ml-30">
+					<span>
+						<font>
+				            <a href="" ng-click="editPage(newPage.name);$hide();" class="confirm Sievecolse r">确定</a>
+				       		<a href="" ng-click="$hide();" class="cancelFilter Sievecolse r">取消</a> 
+			           	</font>
+					</span>
+				</div>
+			</li>
+		</ul>
+		<div class="custom-page-edit ng-hide" ng-show="custom.customPageEditFlag">
+			<span>重命名</span>
+			<span>复制</span>
+			<span ng-click="deletePage(custom.currentPageIndex);$hide();">删除</span>
+		</div>
+	</div>
+</div>

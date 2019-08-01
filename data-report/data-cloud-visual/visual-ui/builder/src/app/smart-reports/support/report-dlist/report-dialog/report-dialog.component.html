@@ -1,0 +1,61 @@
+<section class="add_project">
+    <aside class="leftContainer">
+        <ul>
+            <li (click)="clickCon($event)">基本设置</li>
+            <li (click)="clickCon($event)">高级设置</li>
+        </ul>
+    </aside>
+    <div class="rightContainer" *ngIf="display">
+        <div class="topContent">
+            <p>连接名称</p>
+            <div><span class="color_red">*</span><input type="text" placeholder="添加连接名称..." maxlength="255"></div>
+        </div>
+        <div class="leftContent">
+            <dl>
+                <dt>数据源类型选择</dt>
+                <dd>
+                    <ul *ngFor="let item of dataCauseList">
+                        <li (click)="clickType(item)">{{item.name}}</li>
+                    </ul>
+                </dd>
+            </dl>
+        </div>
+        <div class="rightContent">
+            <p>设置</p>
+            <dl *ngFor="let item of adaptersData">
+                <div *ngIf="item.viewType == 1">
+                    <dt><span class="color_red">*</span>{{item.name}}</dt>
+                    <dd>
+                        <input type="search" [(ngModel)]="item.value" maxlength="30" (keyup)="checkFromData()" [ngClass]="{report_errborder:reportErrTips}">
+                    </dd>
+
+                </div>
+                <div *ngIf="item.viewType == 2">
+                    <dt><span class="color_red">*</span>{{item.name}}</dt>
+                    <dd>
+                        <input type="password" [(ngModel)]="item.value" maxlength="30" (keyup)="checkFromData()" [ngClass]="{report_errborder:reportErrTips}">
+                    </dd>
+
+                </div>
+                <div *ngIf="item.viewType == 9">
+                    <dt><span class="color_red">*</span>{{item.name}}</dt>
+                    <dd>
+                        <input type="password" [(ngModel)]="item.value" maxlength="30" (keyup)="checkFromData()" [ngClass]="{report_errborder:reportErrTips}">
+                    </dd>
+
+                </div>
+
+            </dl>
+            <div class="report_errTips">{{reportErrorTips}}</div>
+
+        </div>
+    </div>
+    <p-dataTable *ngIf="!display" class="tab">
+        <p-column header="命名参数">
+        </p-column>
+        <p-column header="值">
+        </p-column>
+
+    </p-dataTable>
+
+</section>

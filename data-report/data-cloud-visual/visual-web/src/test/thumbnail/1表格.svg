@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="118px" height="64px" viewBox="0 0 118 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>1表格</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="118" height="64"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="缩略图" transform="translate(-341.000000, -92.000000)">
+            <g id="表格" transform="translate(341.000000, 92.000000)">
+                <g stroke-width="1" fill-rule="evenodd">
+                    <g id="Rectangle-18">
+                        <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        <rect stroke="#EBEEF2" stroke-width="1" x="0.5" y="0.5" width="117" height="63"></rect>
+                    </g>
+                    <rect id="Rectangle-2" fill="#EBEEF2" x="0" y="22.7368421" width="118" height="10.1052632"></rect>
+                    <rect id="Rectangle-2-Copy" fill="#EBEEF2" x="0" y="42.9473684" width="118" height="10.1052632"></rect>
+                    <rect id="Rectangle-17" fill="#3399FF" x="0" y="0" width="118" height="12.6315789"></rect>
+                </g>
+                <text id="标题一" font-family="PingFangSC-Regular, PingFang SC" font-size="6" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="18.4428571" y="9.36842105">标题</tspan>
+                    <tspan x="21.4428571" y="17.3684211">一</tspan>
+                </text>
+                <text id="标题一-copy" font-family="PingFangSC-Regular, PingFang SC" font-size="6" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="72.3857143" y="9.36842105">标题</tspan>
+                    <tspan x="75.3857143" y="17.3684211">一</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

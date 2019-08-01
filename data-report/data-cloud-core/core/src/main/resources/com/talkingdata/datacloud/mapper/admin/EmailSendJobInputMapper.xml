@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.admin.EmailSendJobInputDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.admin.EmailSendJobInput" >
+	<result column="id" property="id"/>
+	<result column="email_server_code" property="emailServerCode"/>
+	<result column="to" property="to"/>
+	<result column="title" property="title"/>
+	<result column="content" property="content"/>
+	<result column="cc" property="cc"/>
+	<result column="bcc" property="bcc"/>
+	<result column="retry" property="retry"/>
+	<result column="max_retry" property="maxRetry"/>
+	<result column="attachment_path" property="attachmentPath"/>
+	<result column="attachment_display_name" property="attachmentDisplayName"/>
+	<result column="status" property="status"/>
+	<result column="create_time" property="createTime"/>
+  </resultMap>
+       
+  <!-- TD_EMAIL_SEND_JOB_INPUT table all fields -->
+  <sql id="Base_Column_List" >
+	 id,email_server_code,`to`,title,content,cc,bcc,retry,max_retry,attachment_path,attachment_display_name,status,create_time
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="emailServerCode != null and emailServerCode != ''" >
+        and email_server_code =  #{emailServerCode}
+	  </if>
+	      <if test="to != null and to != ''" >
+        and to =  #{to}
+	  </if>
+	      <if test="title != null and title != ''" >
+        and title =  #{title}
+	  </if>
+	      <if test="content != null and content != ''" >
+        and content =  #{content}
+	  </if>
+	      <if test="cc != null and cc != ''" >
+        and cc =  #{cc}
+	  </if>
+	      <if test="bcc != null and bcc != ''" >
+        and bcc =  #{bcc}
+	  </if>
+	      <if test="retry != null and retry != ''" >
+        and retry =  #{retry}
+	  </if>
+	      <if test="maxRetry != null and maxRetry != ''" >
+        and max_retry =  #{maxRetry}
+	  </if>
+	      <if test="attachmentPath != null and attachmentPath != ''" >
+        and attachment_path =  #{attachmentPath}
+	  </if>
+	      <if test="attachmentDisplayName != null and attachmentDisplayName != ''" >
+        and attachment_display_name =  #{attachmentDisplayName}
+	  </if>
+	      <if test="status != null and status != ''" >
+        and status =  #{status}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    insert into TD_EMAIL_SEND_JOB_INPUT(id,email_server_code,`to`,title,content,cc,bcc,retry,max_retry,attachment_path,attachment_display_name,status,create_time)
+ values(#{id},#{emailServerCode},#{to},#{title},#{content},#{cc},#{bcc},#{retry},#{maxRetry},#{attachmentPath},#{attachmentDisplayName},#{status},now())
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+    update TD_EMAIL_SEND_JOB_INPUT set email_server_code=#{emailServerCode},to=#{to},title=#{title},content=#{content},cc=#{cc},bcc=#{bcc},retry=#{retry},max_retry=#{maxRetry},attachment_path=#{attachmentPath},attachment_display_name=#{attachmentDisplayName},status=#{status},create_time=now() where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+    update TD_EMAIL_SEND_JOB_INPUT set 
+	<trim  suffixOverrides="," >
+	<if test="emailServerCode != null  ">
+		email_server_code=#{emailServerCode},
+	</if>
+	<if test="to != null  ">
+		to=#{to},
+	</if>
+	<if test="title != null  ">
+		title=#{title},
+	</if>
+	<if test="content != null  ">
+		content=#{content},
+	</if>
+	<if test="cc != null  ">
+		cc=#{cc},
+	</if>
+	<if test="bcc != null  ">
+		bcc=#{bcc},
+	</if>
+	<if test="retry != null  ">
+		retry=#{retry},
+	</if>
+	<if test="maxRetry != null  ">
+		max_retry=#{maxRetry},
+	</if>
+	<if test="attachmentPath != null  ">
+		attachment_path=#{attachmentPath},
+	</if>
+	<if test="attachmentDisplayName != null  ">
+		attachment_display_name=#{attachmentDisplayName},
+	</if>
+	<if test="status != null  ">
+		status=#{status},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	</trim> where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 邮件发送记录' -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" /> 
+	 from TD_EMAIL_SEND_JOB_INPUT where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+    delete 	 from TD_EMAIL_SEND_JOB_INPUT where id = #{id}
+  </delete>
+
+  <!-- 邮件发送记录' 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_EMAIL_SEND_JOB_INPUT 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询邮件发送记录'列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_EMAIL_SEND_JOB_INPUT 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <select id="findValid" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_EMAIL_SEND_JOB_INPUT 
+	where status=1
+  </select>
+</mapper>   

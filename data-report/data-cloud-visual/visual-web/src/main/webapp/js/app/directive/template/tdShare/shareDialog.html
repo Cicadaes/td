@@ -1,0 +1,106 @@
+<div class="modal in" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" style="display: block;">
+	<div class="modal-dialog " role="document" style="top:80px;width: 800px;">
+		<div class="modal-content clearfix">
+			<div class="td-modal-header">
+				<button type="button" class="close" ng-click="hideAll($hide);">×</button>
+				<h4 class="td-modal-title">创建报表</h4>
+			</div>
+			<div class="modal-body clearfix">
+				<div class="custom-share clrfix">
+					<div class="share share-link clrfix">
+						<div class="share-target clrfix">
+							<div>生成共享链接</div>
+							<div>?</div>
+							<div class="td-btn-switch td-l"
+								ng-class="{'td-checked-box' : checkedbox.shareLink}"
+								ng-click="checkedChange('shareLink')">
+								<div class="td-open-check">
+									<font>开</font>
+								</div>
+								<span></span> <font>关</font>
+							</div>
+						</div>
+						<div class="link clrfix" ng-show="checkedbox.shareLink">
+							<div>{{shareLink.url}}</div>
+							<button type="button" class="btn btn-default fr">复制链接</button>
+						</div>
+					</div>
+					<div class="share share-pool clrfix">
+						<div class="share-target clrfix">
+							<div>分享到共享池</div>
+							<div>?</div>
+							<div class="td-btn-switch td-l"
+								ng-class="{'td-checked-box' : checkedbox.sharePool}"
+								ng-click="checkedChange('sharePool')">
+								<div class="td-open-check">
+									<font>开</font>
+								</div>
+								<span></span> <font>关</font>
+							</div>
+						</div>
+						<div ng-show="checkedbox.sharePool" class="clrfix">
+							<div class="share-user clrfix">
+								<div class="clrfix">
+									<div class="user-search">
+										<input class="input" ng-model="search" />
+										<a href="" ng-click="reset();" class="r">重置</a> 
+		                            	<a href="" ng-click="selectAll();" class="r">全选</a>
+		                            	<a href="" class="pd-0 r" ng-click="selectedAll = !selectedAll;selectAll(selectedAll);"><i class="icons icon-select fl mt-11" ng-class="{'icon-selected' : selectedAll}" ></i></a>
+									</div>
+									<div class="user-title">
+										<div>姓名</div><div>账号</div><div>部门</div></li>
+									</div>
+									<div>
+										<ul>
+											<li ng-repeat="user in users" ng-show="!search || (search && (user.userName.indexOf(search) >= 0 || user.umid.indexOf(search) >= 0))">
+												<div>
+													<i class="icons icon-select fl mt-6" ng-click="user.selected = !user.selected;" ng-class="{'icon-selected' : user.selected}" ></i>
+													<div class="pl-20">{{user.userName}}</div>
+												</div>
+												<div>{{user.umid}}</div>
+												<div>{{user.umid}}</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div>
+									<div class="pl-10">已选择</div>
+									<div class="sievexx">
+		                        		<a ng-repeat="user in users" ng-show="user.selected"  class="border">
+			                        		{{user.userName}}
+			                        		<i class="glyphicon glyphicon-remove" ng-click="user.selected = !user.selected"></i>
+		                        		</a>		
+		   							</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="share dashboard clrfix">
+						<div class="share-target clrfix">
+							<div>分享到仪表盘</div>
+							<div>?</div>
+							<div class="td-btn-switch td-l"
+								ng-class="{'td-checked-box' : checkedbox.dashboard}"
+								ng-click="checkedChange('dashboard')">
+								<div class="td-open-check">
+									<font>开</font>
+								</div>
+								<span></span> <font>关</font>
+							</div>
+						</div>
+						<div ng-show="checkedbox.dashboard">
+							<label>主题名称：</label>
+							<input class="input" ng-model="dashboard.name" placeholder="请输入主题名称" maxlength="50" required />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="td-modal-footer">
+				<button type="button" class="btn btn-default" ng-click="$hide()">关闭</button>
+				<button type="button" class="btn btn-primary" ng-click="shareCustom($hide)">分享</button>
+			</div>
+		</div>
+	</div>
+</div>
+

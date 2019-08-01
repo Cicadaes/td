@@ -1,0 +1,7 @@
+<div class="td-select-simple">
+   	<input type="text" ng-model="val" class="td-select-simple input-search" readonly="readonly" ng-click="showSearching($event);">
+   	<i class="glyphicon glyphicon-chevron-down mr-5 mt--5" ng-click="showSearching();"></i>
+	<ul style="display:none; "class="searchPane">
+		<li style='white-space:nowrap;text-overflow:ellipsis;overflow:hidden;' ng-repeat="opt in options" title="{{opt.value}}" ng-click="seletedItem(opt.key,opt.value,opt);" ng-class="{'td-select-selected':(opt.value==val)}">{{opt.value}}</li>
+	</ul>
+</div>

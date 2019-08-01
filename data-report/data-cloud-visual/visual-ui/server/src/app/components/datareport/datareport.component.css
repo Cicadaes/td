@@ -1,0 +1,149 @@
+main {
+    height: 100%;
+    width: 100%;
+}
+
+.content {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+:host /deep/ .report-header {
+    padding:0 15px;
+    height:50px;
+    line-height: 50px;
+}
+:host /deep/ .report-header li {
+    float:left;
+    font-size: 16px;
+}
+
+:host /deep/ .report-header li:not(:last-child) {
+    margin-right:20px;
+}
+
+/*面板样式*/
+:host /deep/ .stepWrap{
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+:host /deep/ .form-group{
+    margin: 20px 0;
+}
+:host /deep/  .infoview .form-group{
+    overflow: hidden;
+}
+:host /deep/ .form-key{
+    float: left;
+    width: 130px;
+    line-height: 30px;
+}
+:host /deep/ .form-input{
+    display: inline-block;
+    border: 1px solid #ccc;
+    height: 35px;
+    width: 500px;
+    border-radius: 3px;
+    padding-left: 10px;
+}
+:host /deep/ .form-textarea{
+    border: 1px solid #ccc;
+    height: 70px;
+    width: 490px;
+    border-radius: 3px;
+    padding: 5px 10px;
+    color: #000;
+}
+:host /deep/ .ui-autocomplete-token {
+    padding: .125em 2em .125em .5em;
+    color: #fff;
+}
+
+/*多选下拉组件*/
+:host /deep/  .ui-autocomplete{
+    width:100%;
+    position: relative;
+}
+:host /deep/ .ui-autocomplete .ui-autocomplete-dropdown{
+    position: absolute;
+    right:0;
+    top: 0px;
+    background: #eee!important;
+}
+
+:host /deep/ .cube_list {
+  padding: 0 30px;
+}
+:host /deep/ .cube_list dl {
+  margin: 15px 0;
+  padding-left: 170px;
+  line-height: 32px;
+}
+:host /deep/ .cube_list dl dt {
+  width: 160px;
+  float: left;
+  margin-left: -170px;
+  font-size: 14px;
+  color: #464c5b;
+  padding-left: 10px;
+}
+:host /deep/ .cube_list dl dd {
+  width: 100%;
+}
+:host /deep/ .cube_list dl dd .ui-dropdown {
+  width: 100%!important;
+}
+:host /deep/ .cube_list dl dd ul.cube_con_list {
+  padding: 5px 10px;
+  height: 22px;
+}
+:host /deep/ .cube_list dl dd ul.cube_con_list li {
+  line-height: 21px;
+  float: left;
+  cursor: pointer;
+  margin-right: 6px;
+  width: 100%;
+}
+:host /deep/ .cube_list dl dd ul.cube_con_list li input {
+  height: 22px;
+  line-height: 21px;
+}
+:host /deep/ .cube_list .ui-autocomplete .ui-autocomplete-dropdown {
+  background: transparent!important;
+}
+
+:host /deep/ .ui-dropdown-filter-container {
+	width: 100%;
+}
+:host /deep/ .ui-dropdown-filter-container input,
+:host /deep/ .ui-multiselect-header .ui-multiselect-filter-container input {
+    padding: 0.25em 0 0.25em 20px;
+}
+:host /deep/ .ui-dropdown-filter-container .fa,
+:host /deep/ .ui-multiselect-header .ui-multiselect-filter-container .fa {
+	width: 12px;
+	cursor: auto;
+    position: absolute;
+    color: #b8bfc8;
+}
+:host /deep/ .ui-dialog .ui-dropdown-filter-container .fa {
+    top: 10px!important;
+	left: 15px;
+}
+:host /deep/ .ui-dropdown-filter-container .fa {
+    top: 14px!important;
+	left: 15px;
+}
+:host /deep/ .ui-multiselect-header .ui-multiselect-filter-container .fa {
+    top: 7px;
+    left: 5px;
+}
+:host /deep/ .ui-multiselect .ui-multiselect-trigger .fa{
+    color: #9ba7b4;
+}
+:host /deep/ .ui-dropdown .ui-dropdown-trigger .fa{
+    color: #9ba7b4;
+    margin-top: 8px;
+    position: absolute;
+}

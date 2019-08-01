@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46 (44423) - http://www.bohemiancoding.com/sketch -->
+    <title>icon－open</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="运营概览" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1运营概览" transform="translate(-1064.000000, -1257.000000)" fill="#FFFFFF">
+            <g id="四象限分布图" transform="translate(280.000000, 1179.000000)">
+                <g id="展开－下载" transform="translate(778.000000, 69.000000)">
+                    <path d="M14.3379521,11.0292457 L11.7904315,13.7005759 L13.3151042,15.298653 L15.8626379,12.6280869 L17.9979482,14.8668176 L18,9.02766181 L12.4030686,9 L14.3379521,11.0292457 Z M8.18322132,17.4827409 L6.00041821,15.1942995 L6,16.4310087 L6,21 L11.5599199,20.9900662 L9.70784175,19.0808597 L12.524676,16.1275347 L11.0000425,14.5287629 L8.18322132,17.4827409 Z" id="icon－open"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

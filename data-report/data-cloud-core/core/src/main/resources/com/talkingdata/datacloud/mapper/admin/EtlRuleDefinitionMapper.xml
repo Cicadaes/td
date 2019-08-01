@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.admin.EtlRuleDefinitionDao">
+	<!-- Result Map -->
+	<resultMap id="BaseResultMap"
+		type="com.talkingdata.datacloud.entity.admin.EtlRuleDefinition">
+		<result column="id" property="id" />
+		<result column="code" property="code" />
+		<result column="name" property="name" />
+		<result column="rule_class_name" property="ruleClassName" />
+		<result column="business_type" property="businessType" />
+		<result column="description" property="description" />
+		<result column="status" property="status" />
+		<result column="attr1" property="attr1" />
+		<result column="attr2" property="attr2" />
+		<result column="attr3" property="attr3" />
+		<result column="attr4" property="attr4" />
+		<result column="attr5" property="attr5" />
+		<result column="attr6" property="attr6" />
+		<result column="attr7" property="attr7" />
+		<result column="attr8" property="attr8" />
+		<result column="attr9" property="attr9" />
+		<result column="create_by" property="createBy" />
+		<result column="creator" property="creator" />
+		<result column="update_by" property="updateBy" />
+		<result column="create_time" property="createTime" />
+		<result column="update_time" property="updateTime" />
+		<result column="tenant_id" property="tenantId"/>
+	</resultMap>
+
+	<!-- TD_ETL_RULE_DEFINITION table all fields -->
+	<sql id="Base_Column_List">
+		id,code,name,rule_class_name,business_type,description,status,attr1,attr2,attr3,attr4,attr5,attr6,attr7,attr8,attr9,create_by,creator,update_by,create_time,update_time,tenant_id
+	</sql>
+
+	<!-- 查询条件 -->
+	<sql id="Base_Where_Clause">
+		where 1=1
+		<trim suffixOverrides=",">
+			<if test="id != null and id != ''">
+				and id = #{id}
+			</if>
+			<if test="code != null and code != ''">
+				and code = #{code}
+			</if>
+			<if test="name != null and name != ''">
+				and name = #{name}
+			</if>
+			<if test="ruleClassName != null and ruleClassName != ''">
+				and rule_class_name = #{ruleClassName}
+			</if>
+			<if test="businessType != null and businessType != ''">
+				and business_type = #{businessType}
+			</if>
+			<if test="description != null and description != ''">
+				and description = #{description}
+			</if>
+			<if test="status != null and status != ''">
+				and status = #{status}
+			</if>
+			<if test="attr1 != null and attr1 != ''">
+				and attr1 = #{attr1}
+			</if>
+			<if test="attr2 != null and attr2 != ''">
+				and attr2 = #{attr2}
+			</if>
+			<if test="attr3 != null and attr3 != ''">
+				and attr3 = #{attr3}
+			</if>
+			<if test="attr4 != null and attr4 != ''">
+				and attr4 = #{attr4}
+			</if>
+			<if test="attr5 != null and attr5 != ''">
+				and attr5 = #{attr5}
+			</if>
+			<if test="attr6 != null and attr6 != ''">
+				and attr6 = #{attr6}
+			</if>
+			<if test="attr7 != null and attr7 != ''">
+				and attr7 = #{attr7}
+			</if>
+			<if test="attr8 != null and attr8 != ''">
+				and attr8 = #{attr8}
+			</if>
+			<if test="attr9 != null and attr9 != ''">
+				and attr9 = #{attr9}
+			</if>
+			<if test="createBy != null and createBy != ''">
+				and create_by = #{createBy}
+			</if>
+			<if test="creator != null and creator != ''">
+				and creator = #{creator}
+			</if>
+			<if test="updateBy != null and updateBy != ''">
+				and update_by = #{updateBy}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				and create_time = #{createTime}
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				and update_time = #{updateTime}
+			</if>
+			<if test="tenantId != null and tenantId != ''" >
+        and tenant_id =  #{tenantId}
+	  </if>
+		</trim>
+	</sql>
+
+	<!-- 插入记录 -->
+	<insert id="insert" parameterType="Object">
+		<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into
+		TD_ETL_RULE_DEFINITION(id,code,name,rule_class_name,business_type,description,status,attr1,attr2,attr3,attr4,attr5,attr6,attr7,attr8,attr9,create_by,creator,update_by,create_time,update_time,tenant_id)
+		values(#{id},#{code},#{name},#{ruleClassName},#{businessType},#{description},#{status},#{attr1},#{attr2},#{attr3},#{attr4},#{attr5},#{attr6},#{attr7},#{attr8},#{attr9},#{createBy},#{creator},#{updateBy},now(),now(),#{tenantId})
+	</insert>
+
+	<!-- 根据id，修改记录 -->
+	<update id="updateByPrimaryKey" parameterType="Object">
+		update TD_ETL_RULE_DEFINITION set
+		code=#{code},name=#{name},rule_class_name=#{ruleClassName},business_type=#{businessType},description=#{description},status=#{status},attr1=#{attr1},attr2=#{attr2},attr3=#{attr3},attr4=#{attr4},attr5=#{attr5},attr6=#{attr6},attr7=#{attr7},attr8=#{attr8},attr9=#{attr9},create_by=#{createBy},creator=#{creator},update_by=#{updateBy},create_time=now(),update_time=now(),tenant_id=#{tenantId}
+		where id=#{id}
+	</update>
+
+	<!-- 修改记录，只修改只不为空的字段 -->
+	<update id="updateByPrimaryKeySelective" parameterType="Object">
+		update TD_ETL_RULE_DEFINITION set
+		<trim suffixOverrides=",">
+			<if test="code != null  ">
+				code=#{code},
+			</if>
+			<if test="name != null  ">
+				name=#{name},
+			</if>
+			<if test="ruleClassName != null  ">
+				rule_class_name=#{ruleClassName},
+			</if>
+			<if test="businessType != null  ">
+				business_type=#{businessType},
+			</if>
+			<if test="description != null  ">
+				description=#{description},
+			</if>
+			<if test="status != null  ">
+				status=#{status},
+			</if>
+			<if test="attr1 != null  ">
+				attr1=#{attr1},
+			</if>
+			<if test="attr2 != null  ">
+				attr2=#{attr2},
+			</if>
+			<if test="attr3 != null  ">
+				attr3=#{attr3},
+			</if>
+			<if test="attr4 != null  ">
+				attr4=#{attr4},
+			</if>
+			<if test="attr5 != null  ">
+				attr5=#{attr5},
+			</if>
+			<if test="attr6 != null  ">
+				attr6=#{attr6},
+			</if>
+			<if test="attr7 != null  ">
+				attr7=#{attr7},
+			</if>
+			<if test="attr8 != null  ">
+				attr8=#{attr8},
+			</if>
+			<if test="attr9 != null  ">
+				attr9=#{attr9},
+			</if>
+			<if test="createBy != null  ">
+				create_by=#{createBy},
+			</if>
+			<if test="creator != null  ">
+				creator=#{creator},
+			</if>
+			<if test="updateBy != null  ">
+				update_by=#{updateBy},
+			</if>
+			<if test="createTime != null  ">
+				create_time=#{createTime},
+			</if>
+			<if test="updateTime != null  ">
+				update_time=#{updateTime},
+			</if>
+			<if test="tenantId != null  ">
+				tenant_id=#{tenantId},
+			</if>
+		</trim>
+		where id=#{id}
+	</update>
+
+	<!-- 根据id查询 ETL规则定义 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="Object">
+		select
+		<include refid="Base_Column_List" />
+		from TD_ETL_RULE_DEFINITION where id = #{id}
+	</select>
+
+	<!-- 删除记录 -->
+	<delete id="deleteByPrimaryKey" parameterType="Object">
+		delete from TD_ETL_RULE_DEFINITION where id = #{id}
+	</delete>
+
+	<!-- ETL规则定义 列表总数 -->
+	<select id="queryByCount" resultType="java.lang.Integer"
+		parameterType="Object">
+		select count(1) from TD_ETL_RULE_DEFINITION
+		<include refid="Base_Where_Clause" />
+	</select>
+
+	<!-- 查询ETL规则定义列表 -->
+	<select id="queryByList" resultMap="BaseResultMap"
+		parameterType="Object">
+		select
+		<include refid="Base_Column_List" />
+		from TD_ETL_RULE_DEFINITION
+		<include refid="Base_Where_Clause" />
+		<if test="pager.orderCondition != null and pager.orderCondition != ''">
+			${pager.orderCondition}
+		</if>
+		<if
+			test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+			${pager.mysqlQueryCondition}
+		</if>
+	</select>
+
+	<select id="queryByBusinessType" resultMap="BaseResultMap"
+		parameterType="Object">
+		select
+		<include refid="Base_Column_List" />
+		from TD_ETL_RULE_DEFINITION
+		where business_type=#{businessType} and status = 1
+	</select>
+</mapper>   

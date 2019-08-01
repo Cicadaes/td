@@ -1,0 +1,89 @@
+{
+    "name": "下拉框过滤器",
+    "description": "下拉框过滤器",
+    "iconPath": null,
+    "iconData": null,
+    "type": 14,
+    "groupId":13,
+    "orderNum":14,
+    "view": {
+        "id": null,
+        "toolTip": null,
+        "fieldTabs": [
+            {
+                "name":"data",
+                "fieldGroups":[
+                    {
+                        "name":"基本信息",
+                        "scripts":null,
+                        "fields":[
+                            {
+                                "code":"DataSource",
+                                "name":"数据源",
+                                "description":null,
+                                "valueType":6,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":24,
+                                "viewMetaData":{"postChange":{"action":"callBack","postEvent":{"actionValue":"report/dataSources/id/metaData","action":"callBack","actionParams":["datasource_id"],"postEvent":"datasource-reload | metadata-render"}}},
+                                "multipleMaxNumber":1,
+                                "verifyRule":null,
+                                "iconClass":null,
+                                "childrenFields":[]
+                            }
+                        ]
+                    },
+                    {
+                        "name":"参数信息",
+                        "scripts":null,
+                        "fields":[
+                            {
+                                "code":"Filter_Field",
+                                "name":"过滤字段",
+                                "description":null,
+                                "valueType":6,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":24,
+                                "viewMetaData":{"onChange":true},
+                                "multipleMaxNumber":1,
+                                "verifyRule":null,
+                                "iconClass":null,
+                                "childrenFields":[]
+                            },
+                            {
+                                "code":"Filter_Value",
+                                "name":"过滤字段值",
+                                "description":null,
+                                "valueType":6,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":24,
+                                "viewMetaData":{"onChange":true},
+                                "multipleMaxNumber":1,
+                                "verifyRule":null,
+                                "iconClass":null,
+                                "childrenFields":[]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

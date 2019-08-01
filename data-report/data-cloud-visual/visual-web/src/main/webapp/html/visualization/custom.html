@@ -1,0 +1,172 @@
+<div class="toolbarH">
+	<div class="btn-group fl btn-sref" ng-model="radio.pageRadio" bs-radio-group>
+		<label class="btn  btn-sref"> <input type="radio" class="btn btn-default" value="1"><a data-ui-sref="dashboard" href="javascript:;">仪表盘</a></label>
+		<label class="btn  btn-sref"> <input type="radio" class="btn btn-default" value="2" ><a data-ui-sref="custom-list">报表配置</a></label>
+	</div>
+</div>
+<div class="td-content clearfix">
+	<div class="td-content-header clearfix">
+		<div class="fl fz14">
+			<input type="text" placeholder="图表名称" ng-model="custom.name" readonly ="true">
+		</div>
+		<div class="fl ml-10"><a data-ui-sref="custom-list"><i class="icons icons-arrow-left"></i></a></div>
+		<div class="fr" ng-show="type == 1">
+			<div class="td-btn-switch td-l" ng-class="{'td-checked-box' : editFlag}" ng-click="editFlag = !editFlag;switchEdit();">
+	            <div class="td-open-check">
+	                <font>开</font>
+	            </div>
+	            <span></span>
+	            <font>关</font>
+        	</div>
+		</div>
+	</div>
+	<div class ="clearfix">
+		<div class="explore_graph_left_tit">
+			<div class="clearfix">
+				<div class ="clearfix td-content-type" ng-show="editFlag">
+					<div class="custom-page">
+						<a href="javascript:void(0)" ng-click="changePages(-1);"> < </a>
+						<div style="cursor: pointer;" ng-click="custom.customPageEditFlag = false;" data-content="1" data-template="html/visualization/pageTemplate.html" placement="bottom-left" data-animation="am-flip-x" data-auto-close="1" bs-popover>
+							<div>{{custom.currentPageIndex + 1}}/{{custom.pages.length || 1}}页</div>
+							<i class="glyphicon glyphicon-chevron-down" ></i>
+						</div>
+						<a href="javascript:void(0)" ng-click="changePages(1);"> > </a>
+					</div>
+					<div class="explore_graph_tit_list clearfix" style="overflow: auto;overflow-y: hidden;">
+						<ul class="clearfix" style="width:{{charts.length * 70}}px;">
+							<li ng-repeat="chart in charts" ng-click="changeHighData(chart.type);" ng-class="{explore_list_choose : chart.selected}">
+								<span class="{{chart.icon}} icon-bg"></span><b>{{chart.name}}</b>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="explore_graph_left_pd">
+					<div class="explore_graph_left_parent clearfix">
+						<div ng-show="!editFlag && custom.currentPageIndex != 0" style="position: absolute;top: 50%;z-index: 1" ng-click="changePages(-1);"> < </div>
+						<div ng-show="!editFlag && custom.currentPageIndex != ((custom.pages.length || 1) -1)" style="position: absolute;top: 50%;right:20px; z-index: 1" ng-click="changePages(1);"> > </div>
+						<div class="explore_graph_left l" id="main" ng-class="{'cursor-crosshair' : editFlag && radio.chartTypeRadio !== 'none'}">
+							<div style="display: none;width: 100px;position : absolute;z-index: 999;" id="ul">
+								<ul class="moveul">
+									<li ng-click="changeIndex('max');">置于顶层</li>
+									<li ng-click="changeIndex('min');">置于底层</li>
+									<li ng-click="changeIndex('next');">上移一层</li>
+									<li ng-click="changeIndex('pre');">下移一层</li>
+								</ul>
+							</div>
+							<div class="line_x line_up" style="display: none;"></div>
+							<div class="line_x line_down" style="display: none;"></div>
+							<div class="line_y line_left" style="display: none;"></div>
+							<div class="line_y line_right" style="display: none;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+		<div class="explore_graph_right fr" style="overflow: auto;display: none;">
+			<div class="explore_graph_right_tit">
+				<ul>
+					<li ng-click="clickDataConfige();" ng-class="{ explore_graph_choose : showDataConfige, explore_graph_display : radio.chartTypeRadio === 'none' }">数据</li>
+					<li ng-click="showDataConfige = false;" ng-class="{ explore_graph_choose : !showDataConfige }">样式</li>
+				</ul>
+			</div>
+			<div class="explore_graph_right_con">
+				<div td-data-condition data-report="report" syndata="changeDataSource" ng-show="showDataConfige"></div>
+				<div class="explore_graph_style" ng-show="!showDataConfige">
+					<div ng-if="radio.chartTypeRadio !== 'reportGroup' && radio.chartTypeRadio !== 'none'" ng-include="'html/visualization/type/' + radio.chartTypeRadio + '.html'"></div>
+					<dl ng-if="radio.chartTypeRadio !== 'none' && radio.chartTypeRadio !== 'reportGroup'">
+						<dt>顺序</dt>
+						<dd>
+							<ul class="td-btn-default">
+								<li>
+									<label class="btn btn-default" ng-click="changeIndex('max');">置于顶层</label>
+								</li>
+								<li>
+									<label class="btn btn-default" ng-click="changeIndex('min');">置于底层 </label>
+								</li>
+								<li>
+									<label class="btn btn-default" ng-click="changeIndex('next');">上移一层</label>
+								</li>
+								<li>
+									<label class="btn btn-default" ng-click="changeIndex('pre');">下移一层</label>
+								</li>
+							</ul>							
+						</dd>
+					</dl>
+					<dl ng-if="radio.chartTypeRadio === 'reportGroup' || radio.chartTypeRadio === 'none'">
+						<dt>背景颜色</dt>
+						<dd>
+							<ul class="allw">
+								<li>
+									<label>背景颜色：</label>
+									<div class="regular-color" font-color selected-font-color="page.bgColor" td-change="changeBackgroundColor"></div>
+								</li>
+							</ul>
+						</dd>
+					</dl>
+					<dl ng-if="radio.chartTypeRadio === 'reportGroup' || radio.chartTypeRadio === 'none'">
+						<dt>背景图片</dt>
+						<dd>
+							<ul class="allw">
+								<li>
+									<label>背景图片： </label>
+									<div ng-click="initImport();" data-template="html/common/fileUploadDialog.html" bs-modal="modal" data-backdrop="false">上传图片 </div>
+								</li>
+							</ul>
+						</dd>
+					</dl>
+					<dl ng-if="radio.chartTypeRadio === 'reportGroup' || radio.chartTypeRadio === 'none'">
+						<dt>自定义画布</dt>
+						<dd>
+							<ul class="allw">
+								<li>
+									<input type="checkbox" ng-model="page.customWH" value="true" name="checkbox" class="regular-check">
+									<label>自定义画布长宽</label>
+								</li>
+								<li ng-show="page.customWH">
+									<label class="fl">高度： </label>
+									<input ng-model="page.height" class="wd130">
+								</li>
+								<li ng-show="page.customWH">
+									<label class="fl">宽度： </label>
+									<input ng-model="page.width" class="wd130"> <button ng-click="changeCustomWH();">确定</button>
+								</li>
+							</ul>
+						</dd>
+					</dl>
+					<dl ng-if="radio.chartTypeRadio === 'reportGroup'">
+						<dt>对齐</dt>
+						<dd>
+							<ul class="td-btn-default">
+								<li>
+									<label class="btn btn-default" ng-click="reportGroupAlign('left')">向左对齐</label>
+								</li>
+								<li>
+									<label class="btn btn-default" ng-click="reportGroupAlign('right')">向右对齐</label>
+								</li>
+								<li>
+									<label class="btn btn-default" ng-click="reportGroupAlign('upper')">向上对齐</label>
+								</li>
+								<li>
+									<label class="btn btn-default" ng-click="reportGroupAlign('down')">向下对齐</label>
+								</li>
+							</ul>							
+						</dd>
+					</dl>
+					<dl ng-if="radio.chartTypeRadio === 'reportGroup'">
+						<dt>组合</dt>
+						<dd>
+							<ul class="td-btn-default">
+								<li>
+									<label class="btn btn-default" ng-click="editReportGroup(1)">组合</label>
+								</li>
+								<li>
+									<label class="btn btn-default" ng-click="editReportGroup(-1)">取消组合</label>
+								</li>
+							</ul>							
+						</dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,26 @@
+<div class="preview-info">
+
+    <div class="smart-hedit fl">
+        <a class="datareport_title" (click)="returnReport()" >数据报表</a>
+        <span class="dataicon">&gt;</span>
+        <strong class="datareport_name">{{stageService.reportName}}</strong>
+    </div>
+
+    <div class="smart-pages-box" style="margin-top: -12px;height: 50px;" (mouseover)="smartPages(e)">
+        <span class="smart-pages-n">{{(pages.currentIndex+1)+' / '+pages.total+'页'}}<em class="smart-pages-d smart-square bottom"></em></span>
+
+        <div class="smart-page-list" style="margin-top: -2px;" *ngIf="pageList">
+            <ul>
+                <li [ngClass]="{'active':pages.current === index}"
+                    *ngFor="let page of this.stageService.StageBaseData.stages; let index = index">
+
+                    <a class="smart-page-change" (click)="changePage(index)">
+                        <em>{{index+1}}</em>
+                        <strong>{{page.name}}</strong>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>

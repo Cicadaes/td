@@ -1,0 +1,175 @@
+@charset "utf-8";
+
+/*icons*/
+.icons{background:url(../../images/common/icons.png) no-repeat; display:inline-block; vertical-align:middle;background-size:300px 898px;}
+/*添加按钮*/
+.icons-add{width: 14px;height: 14px;background-position: -98px -466px;}
+
+/*返回图标*/
+.icons-arrow-left{width:22px;height:23px;background-position:-49px -553px;}
+/*返回图标位置*/
+.go-back-list i{margin-top:0px;float:left;}
+
+/*operator-panel*/
+.operator-panel{margin-bottom: 15px;margin-top: 8px;}
+.operator-panel .btn-add{float:left;border:none;margin-right:20px;background:#679fef;color:#fff;height: 38px;line-height: 38px;padding: 0 20px;display: inline-block;border-radius: 20px;font-size: 14px;  text-decoration: none;}
+.operator-panel .btn-add:hover{background:#5c8fd7;}
+.operator-panel .btn-add .icons-add{float:left;margin:12px 10px 0 0;}
+
+
+.gs-resize-handle {
+    position: absolute;
+    z-index: 1
+}
+
+.gs-resize-handle-both {
+    width: 20px;
+    height: 20px;
+    bottom: -8px;
+    right: -8px;
+    background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pg08IS0tIEdlbmVyYXRvcjogQWRvYmUgRmlyZXdvcmtzIENTNiwgRXhwb3J0IFNWRyBFeHRlbnNpb24gYnkgQWFyb24gQmVhbGwgKGh0dHA6Ly9maXJld29ya3MuYWJlYWxsLmNvbSkgLiBWZXJzaW9uOiAwLjYuMSAgLS0+DTwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DTxzdmcgaWQ9IlVudGl0bGVkLVBhZ2UlMjAxIiB2aWV3Qm94PSIwIDAgNiA2IiBzdHlsZT0iYmFja2dyb3VuZC1jb2xvcjojZmZmZmZmMDAiIHZlcnNpb249IjEuMSINCXhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbDpzcGFjZT0icHJlc2VydmUiDQl4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjZweCIgaGVpZ2h0PSI2cHgiDT4NCTxnIG9wYWNpdHk9IjAuMzAyIj4NCQk8cGF0aCBkPSJNIDYgNiBMIDAgNiBMIDAgNC4yIEwgNCA0LjIgTCA0LjIgNC4yIEwgNC4yIDAgTCA2IDAgTCA2IDYgTCA2IDYgWiIgZmlsbD0iIzAwMDAwMCIvPg0JPC9nPg08L3N2Zz4=');
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    cursor: nw-resize;
+    z-index: 20
+}
+
+.icon-delete {
+   	width: 16px;
+    height: 16px;
+    background-position: -232px -241px;
+}
+.icon-delete:hover{
+    background-position: -187px -241px;
+}
+.icon-edit {
+   	width: 16px;
+    height: 16px;
+    background-position: -232px -216px;
+}
+.icon-edit:hover{
+    background-position: -187px -216px;
+}
+.icon-share {
+   	width: 16px;
+    height: 16px;
+    background-position: -232px -81px;
+}
+.icon-share:hover{
+    background-position: -187px -82px;
+}
+.icon-shareed {
+   	width: 16px;
+    height: 16px;
+    background-position: -232px -56px;
+}
+.icon-shareed:hover{
+    background-position: -187px -56px;
+}
+
+.icon-select {
+   	width: 18px;
+    height: 18px;
+    background-position: -231px -128px;
+}
+.icon-selected {
+    background-position: -186px -128px;
+}
+.icon-iconxxx {
+   	width: 16px;
+    height: 16px;
+    background-position: -188px -241px;
+}
+.icon-iconxxx:hover{
+    /* background-position: -232px -241px; */
+}
+
+/*开关切换设置*/
+.td-btn-switch {
+    float: right;
+    background: #f5f6f8;
+    border: 1px solid #d8dee3;
+    width: 60px;
+    height: 23px;
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.td-btn-switch .td-open-check {
+    display: block;
+    color: #57a7ff;
+    text-align: left;
+    width: 60px;
+    height: 23px;
+    position: absolute;
+    right: 60px;
+    background: #4cd964;
+    border-radius: 20px;
+    z-index: 2;
+}
+
+.td-btn-switch .td-open-check font {
+    color: #fff;
+    position: absolute;
+    left: 0;
+    z-index: 5;
+}
+
+.td-btn-switch font {
+    color: #c6cdd2;
+    font-size: 12px;
+    line-height: 23px;
+    padding: 0 10px;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+}
+
+.td-btn-switch span {
+    width: 20px;
+    height: 20px;
+    background: #c4cbd1;
+    border-radius: 50%;
+    content: '';
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    -webkit-transition: ease-in-out .3s;
+    z-index: 2;
+}
+
+.td-checked-box {
+    border: 1px solid #4cd964;
+}
+.td-checked-box .td-open-check{
+	right: 0px;
+}
+
+.td-checked-box span {
+    background: #ffffff;
+    left: 38px;
+    -webkit-transition: ease-in-out .3s;
+    z-index: 3;
+}
+
+.td-colose{
+	background: url(../../images/common/close.png) no-repeat;
+    background-size: 18px 18px;
+    width: 18px;
+    height: 18px;
+}
+.td-colose:hover{
+	background: url(../../images/common/close_hover.png) no-repeat;
+    background-size: 18px 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.cursor-defalut{
+	cursor : default;
+}
+.cursor-crosshair{
+	cursor : crosshair;
+}

@@ -1,0 +1,45 @@
+{
+  "datasource_id": 37,
+  "dimensions": [
+    {
+      "field": "project_name"
+    },
+    {
+      "field": "longitude"
+    },
+    {
+      "field": "latitude"
+    }
+  ],
+  "metrics": [
+    {
+      "field": "active_users"
+    }
+  ],
+  "filters": [
+    {
+      "field": "project_id",
+      "operator": "=",
+      "value": "33439"
+    },
+    {
+      "field": "project_type",
+      "operator": "=",
+      "value": "6"
+    }
+  ],
+  "dateFilters": [
+    {
+      "field": "date",
+      "operator": ">=",
+      "value": "2017-11-01"
+    },
+    {
+      "field": "date",
+      "operator": "<=",
+      "value": "2017-11-30"
+    }
+  ],
+  "limit":[-1],
+  "dateGranularity": 0
+}

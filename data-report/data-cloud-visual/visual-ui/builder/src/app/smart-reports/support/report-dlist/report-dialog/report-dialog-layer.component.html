@@ -1,0 +1,61 @@
+<div class="clearfix report_layer" *ngIf="datasourceBoolean">
+    <section class="add_project clearfix">
+        <aside class="leftContainer">
+            <ul>
+                <li class="datasource_active">基本设置</li>
+            </ul>
+        </aside>
+        <div class="rightContainer">
+            <div class="topContent">
+                <p>连接名称</p>
+                <div>
+                 
+                    <input type="text" [(ngModel)]="dataName.value" placeholder="添加连接名称..." maxlength="255" [class.invaliderr]="dataName.errorTips" (onBlur)="checkFormData(dataName)" (keyup)="checkFormData(dataName)">
+                    <div *ngIf="dataName.errorTips" class="validation_error">
+                        {{dataName.errmsgTips}}
+                    </div>
+                </div>
+            </div>
+            <div class="leftContent">
+                <ul *ngFor="let item of dataCauseList">
+                    <li (click)="clickType(item)" [ngClass]="{'datasource_active':item.value == adapterId}" [class.disabled_none]="dlistType==2">{{item.name}}</li>
+                </ul>
+            </div>
+            <div class="rightContent">
+
+                <dl *ngFor="let item of adaptersData">
+                    <div *ngIf="item.viewType == 1 || item.viewType == 2">
+                        <dt><span class="color_red">*</span>{{item.name}}</dt>
+                        <dd>
+                            <input type="text" [(ngModel)]="item.value" maxlength="30" [class.invaliderr]="item.errorTips" (onBlur)="checkFormData(item)" (keyup)="checkFormData(item)">
+                            <div *ngIf="item.errorTips" class="validation_error">
+                                {{item.errmsgTips}}
+                            </div>
+                        </dd>
+
+                    </div>
+                    <div *ngIf="item.viewType == 9">
+                        <dt><span class="color_red">*</span>{{item.name}}</dt>
+                        <dd>
+                            <input type="password" [(ngModel)]="item.value" maxlength="30" [class.invaliderr]="item.errorTips" (onBlur)="checkFormData(item)" (keyup)="checkFormData(item)">
+                            <div *ngIf="item.errorTips" class="validation_error">
+                                {{item.errmsgTips}}
+                            </div>
+                        </dd>
+
+                    </div>
+                </dl>
+                <div class="report_errTips">{{reportErrorTips}}</div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton (click)="cancel()" label="No">取消</button>
+            <button type="button" pButton (click)="testDatasource()" label="Yes" [class.confirm_report]="showConfirm">测试</button>
+            <button type="button" pButton (click)="confirm()" label="Yes">确定</button>
+        </div>
+    </footer>
+</div>

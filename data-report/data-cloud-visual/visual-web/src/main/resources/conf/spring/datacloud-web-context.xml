@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-lazy-init="false"
+  xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+        http://www.springframework.org/schema/task
+	    http://www.springframework.org/schema/task/spring-task-4.2.xsd
+	    http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd"
+  xmlns:aop="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:task="http://www.springframework.org/schema/task" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns="http://www.springframework.org/schema/beans">
+
+  <!-- 扫描controller（controller层注入） -->
+  <aop:aspectj-autoproxy />
+
+  <context:component-scan base-package="com.talkingdata.datacloud.visual.controller.*" />
+
+  <bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper">
+    <property name="serializationInclusion" value="NON_NULL" /> <!-- bean中为null的属性不序列化到json中 -->
+  </bean>
+
+  <!--<mvc:default-servlet-handler default-servlet-name="appServlet"/>-->
+  <!--<mvc:resources mapping="/images/**" location="/WEB-INF/images/"/>-->
+
+  <mvc:default-servlet-handler/>
+
+  <!--默认的mvc注解映射的支持 -->
+  <mvc:annotation-driven>
+    <mvc:message-converters register-defaults="true">
+      <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="objectMapper">
+          <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+            <property name="dateFormat">
+              <bean class="java.text.SimpleDateFormat">
+                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />
+              </bean>
+            </property>
+          </bean>
+        </property>
+        <property name="supportedMediaTypes">
+          <list>
+            <value>application/json;charset=UTF-8</value>
+            <value>text/html;charset=UTF-8</value>
+          </list>
+        </property>
+      </bean>
+      <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+        <constructor-arg value="UTF-8" index="0"></constructor-arg><!-- 避免出现乱码 -->
+        <property name="supportedMediaTypes">
+          <list>
+            <value>text/plain;charset=UTF-8</value>
+          </list>
+        </property>
+      </bean>
+    </mvc:message-converters>
+  </mvc:annotation-driven>
+
+  <!-- 上传文件需要设置的解析器 -->
+  <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <!-- 文件上传的最大值,单位为byte -->
+    <property name="maxUploadSize" value="5120000000"></property>
+  </bean>
+
+</beans>

@@ -1,0 +1,566 @@
+{
+    "name": "柱图",
+    "description": "柱图",
+    "iconPath": null,
+    "iconData": null,
+    "type": 5,
+    "groupId":4,
+    "view": {
+        "id": null,
+        "toolTip": null,
+        "fieldTabs": [
+            {
+                "name": "style",
+                "fieldGroups": [
+                    {
+                        "name": "柱图",
+                        "scripts": null,
+                        "fields": [
+                            {
+                                "code": "echart_color",
+                                "name": "echart_color",
+                                "description": null,
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 16,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "childrenFields": []
+                            },
+                            {
+                                "code": "series_0_label_normal_show",
+                                "name": "显示数据标签",
+                                "description": "显示数据标签",
+                                "valueType": 9,
+                                "value": null,
+                                "defaultValue": false,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": [true,false],
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 14,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "childrenFields": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "图例",
+                        "scripts": null,
+                        "fields": [
+                            {
+                                "code": "legend",
+                                "name": "legend",
+                                "description": null,
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 18,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "childrenFields": [
+                                    {
+                                        "code": "legend_show",
+                                        "name": "无",
+                                        "description": null,
+                                        "valueType": 9,
+                                        "value": null,
+                                        "defaultValue": false,
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 14,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "childrenFields": []
+                                    },
+                                    {
+                                        "code": "legend_left",
+                                        "name": "右对齐",
+                                        "description": null,
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": "right",
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 13,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "childrenFields": []
+                                    },
+                                    {
+                                        "code": "legend_top",
+                                        "name": "底端对齐",
+                                        "description": null,
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": "bottom",
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 13,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "childrenFields": []
+                                    },
+                                    {
+                                        "code": "legend_top",
+                                        "name": "顶端对齐",
+                                        "description": null,
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": "top",
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 13,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "childrenFields": []
+                                    }
+                                ]
+                            },
+                            {
+                                "code": "fontStyle",
+                                "name": null,
+                                "description": null,
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 20,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "childrenFields": [
+                                    {
+                                        "code": "legend_textStyle_color",
+                                        "name": "图例文本颜色",
+                                        "description": null,
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": null,
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 15,
+                                        "iconClass":"icon_svg text_format",
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "childrenFields": []
+                                    },
+                                    {
+                                        "code": "legend_textStyle_fontFamily",
+                                        "name": "图例字体",
+                                        "description": null,
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": "微软雅黑",
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": ["微软雅黑","宋体","黑体","微软简综艺","楷体","隶书","华文行楷","华文隶书"],
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 2,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "iconClass":"icon_svg front_format",
+                                        "childrenFields": []
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {"name":"坐标轴",
+                        "fields":[
+                            {
+                                "code": "yAxis_name",
+                                "name": "显示坐标Y轴标题",
+                                "description": "显示坐标轴标题",
+                                "valueType": 9,
+                                "value": null,
+                                "defaultValue": false,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 14,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "childrenFields": []
+                            },
+                            {
+                                "code": "yAxis_value",
+                                "name": "Y轴值",
+                                "description": "Y轴值",
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 20,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "childrenFields": [
+                                    {
+                                        "code": "yAxis_min",
+                                        "name": "Y轴最小值",
+                                        "description": "轴最小值",
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": null,
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 1,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "childrenFields": []
+                                    },
+                                    {
+                                        "code": "yAxis_max",
+                                        "name": "Y轴最大值",
+                                        "description": "轴最大值",
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": null,
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 1,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "childrenFields": []
+                                    }
+                                ]
+                            },
+                            {
+                                "code": "xAxis_name",
+                                "name": "显示坐标X轴标题",
+                                "description": "显示坐标轴标题",
+                                "valueType": 9,
+                                "value": null,
+                                "defaultValue": false,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 14,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "childrenFields": []
+                            }
+                        ]},
+                    {
+                        "name": "网格",
+                        "scripts": null,
+                        "fields": [
+                            {
+                                "code": "grid",
+                                "name": "网格",
+                                "description": "网格",
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 20,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "childrenFields": [
+                                    {
+                                        "code": "xAxis_axisLine_lineStyle_color",
+                                        "name": "坐标轴颜色",
+                                        "description": "坐标轴颜色",
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": null,
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 15,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "iconClass":"icons_svg axis_format",
+                                        "childrenFields": []
+                                    },
+                                    {
+                                        "code": "xAxis_splitLine_lineStyle_color",
+                                        "name": "网格颜色",
+                                        "description": "网格颜色",
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": null,
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 15,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "iconClass":"icons_svg grid_format",
+                                        "childrenFields": []
+                                    },
+                                    {
+                                        "code": "textStyle_fontFamily",
+                                        "name": "字体系列",
+                                        "description": "字体系列",
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": "微软雅黑",
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": ["微软雅黑","宋体","黑体","微软简综艺","楷体","隶书","华文行楷","华文隶书"],
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 2,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "iconClass":"icon_svg front_format",
+                                        "childrenFields": []
+                                    },
+                                    {
+                                        "code": "grid_backgroundColor",
+                                        "name": "图表背景",
+                                        "description": "图表背景",
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": null,
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 15,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "iconClass":"icons_svg chartbg_format",
+                                        "childrenFields": []
+                                    },
+                                    {
+                                        "code": "grid_borderColor",
+                                        "name": "图表边框颜色",
+                                        "description": "图表边框颜色",
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": null,
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 15,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "iconClass":"icons_svg color_format",
+                                        "childrenFields": []
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "背景和边框",
+                        "scripts": null,
+                        "fields": [
+                            {
+                                "code": "backgroundBorder",
+                                "name": "背景颜色",
+                                "description": null,
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 20,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "childrenFields": [
+                                    {
+                                        "code": "backgroundColor",
+                                        "name": "背景颜色",
+                                        "description": null,
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": null,
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 15,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "iconClass":"icons_svg chartbg_format",
+                                        "childrenFields": []
+                                    }
+                                ]
+                            }
+
+                        ]
+                    }
+                ]
+            },
+            {
+                "name":"data",
+                "fieldGroups":[
+                    {
+                        "name":"基本信息",
+                        "scripts":null,
+                        "fields":[
+                            {
+                                "code":"dataSource",
+                                "name":"数据源",
+                                "description":null,
+                                "valueType":8,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":2,
+                                "viewMetaData":{"postChange":{"action":"callBack","postEvent":{"actionValue":"report/dataSources/id/metaData","action":"callBack","actionParams":["datasource_id"],"postEvent":"datasource-reload | metadata-render"}}},
+                                "verifyRule":null,
+                                "iconClass":null,
+                                "childrenFields":[]
+                            }
+                        ]
+                    },
+                    {
+                        "name":"参数信息",
+                        "scripts":null,
+                        "fields":[
+                            {
+                                "code":"dimension_0",
+                                "name":"维度",
+                                "description":null,
+                                "valueType":1,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":2,
+                                "viewMetaData":{"onChange":true},
+                                "verifyRule":null,
+                                "iconClass":null,
+                                "childrenFields":[]
+                            },
+                            {
+                                "code":"dimension_1",
+                                "name":"细分维度",
+                                "description":null,
+                                "valueType":1,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":1,
+                                "helpInfo":null,
+                                "viewType":11,
+                                "viewMetaData":{"onChange":true},
+                                "multipleMaxNumber":1,
+                                "verifyRule":"var dimension_1_length = this.dimension_1.value==''?0:this.dimension_1.value.split(',').length;var metric_length = this.metric.value==''?0:this.metric.value.split(',').length;this.metric.multipleMaxNumber = dimension_1_length>=1?1:100;this.dimension_1.requried = dimension_1_length>=1?2:1;this.metric.requried = (dimension_1_length>=1&&metric_length>=1)?2:0",
+                                "iconClass":null,
+                                "childrenFields":[]
+                            },
+                            {
+                                "code":"metric",
+                                "name":"指标",
+                                "description":null,
+                                "valueType":1,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":11,
+                                "viewMetaData":{"onChange":true},
+                                "multipleMaxNumber":100,
+                                "verifyRule":"var dimension_1_length = this.dimension_1.value==''?0:this.dimension_1.value.split(',').length;var metric_length = this.metric.value==''?0:this.metric.value.split(',').length;this.dimension_1.multipleMaxNumber = metric_length>=2?0:1;this.dimension_1.requried = (dimension_1_length>=1||metric_length>=2)?2:1;this.metric.requried = (dimension_1_length>=1&&metric_length>=1)?2:0",
+                                "iconClass":null,
+                                "childrenFields":[]
+                            }
+                        ]
+                    },
+                    {
+                        "name":"默认日期范围",
+                        "scripts":null,
+                        "fields":[
+                            {
+                                "code":"date",
+                                "name":"日期",
+                                "description":null,
+                                "valueType":8,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":22,
+                                "viewMetaData":{"onChange":true},
+                                "verifyRule":null,
+                                "iconClass":null,
+                                "childrenFields":[]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

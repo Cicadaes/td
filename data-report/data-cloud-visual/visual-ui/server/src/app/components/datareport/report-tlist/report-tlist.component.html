@@ -1,0 +1,21 @@
+<main>
+    <div class="datacloud_title"><b>授权的报表</b></div>
+    <div class="pphead">
+        授权给我的
+        <div class="search buttons r" style="padding: 0;">
+            <div *ngIf="!filterShow" style="display: inline-block">
+                <input type="text" placeholder="关键词..." class="search-data" [(ngModel)]="searchText" (keyup)="search()" style="margin-top: 0;    position: relative;
+    top: 8px;">
+                <button class="iconfont icon-search button-search" style="cursor: auto; left: 10px; top: 16px;"></button>
+            </div>
+
+            <button (click)="searchText='';filterShow=!filterShow" class="search_task">
+                高级搜索
+                <span class="downsearch" [class.upicon]="filterShow"></span>
+            </button>
+        </div>
+    </div>
+    <reporttlist-filter *ngIf="filterShow"></reporttlist-filter>
+    <reporttlist-table [config]="config"></reporttlist-table>
+    <dialog-data></dialog-data>
+</main>

@@ -1,0 +1,42 @@
+<main>
+    <div class="computing_detail_bottom">
+        <!--项目列表渲染-->
+        <p-dataTable [value]="dispatDatas" *ngIf="dispatDatas" emptyMessage="暂无内容">
+            <p-column field="name" header="名称" [style]="{'width': 'calc(40%)'}">
+                <template let-project="rowData" pTemplate="body" let-index="rowIndex">
+	                <p>
+	                    <a href="javascript:void(0)"
+	                       (click)="detailTaskProject(dispatDatas[index])"
+	                       style="color: #5697f1;">
+	                       <!--{{project.name}}-->
+                            {{dispatDatas[index].name}}
+	                    </a>
+	                </p>
+	            </template>
+            </p-column>
+            <p-column field="adapterName" header="类型" [style]="{'width': '150px'}"></p-column>
+            <p-column field="description" header="描述" [style]="{'width': 'calc(60%)'}"></p-column>
+            <!-- p-column field="systemCode" header="应用系统"></p-column -->
+            <p-column field="creator" header="创建人" [style]="{'width': '120px'}"></p-column>
+            <p-column field="createTime" header="创建时间" [style]="{'width': '160px'}"> </p-column>
+            <p-column field="updater" header="更新人" [style]="{'width': '120px'}"></p-column>
+            <p-column field="updateTime" header="更新时间" [style]="{'width': '160px'}"> </p-column>
+            <p-column [style]="{'width': '50px'}">
+                <template let-project="rowData" let-index="rowIndex" pTemplate="body">
+                  <button type="button" id="btn">
+                     <span class="iconfont icon-tubiao01"></span>
+                     <span class="icon-down"></span>
+                     <ul>
+                        <li (click)="editDatasourceProject(dispatDatas[index]);"><span class="iconfont icon-edit"></span>编辑</li>
+                        <li (click)="deleteDatasourceProject(dispatDatas[index]);"><span class="iconfont icon-delete"></span>删除</li>
+                     </ul>
+                  </button>
+               </template>
+            </p-column>
+
+        </p-dataTable>
+        <x-paginator *ngIf="dispatDatas!=''" [value]="value" (onPagesChange)="paginate($event)"></x-paginator>
+    </div>
+    <!--编辑-->
+    <reportdlist-dialog></reportdlist-dialog>
+</main>

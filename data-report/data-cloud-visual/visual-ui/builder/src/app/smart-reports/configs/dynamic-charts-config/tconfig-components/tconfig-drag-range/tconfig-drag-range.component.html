@@ -1,0 +1,6 @@
+<div class="tc-range-box">
+    <span class="icons_svg range_small_hole"></span>
+    <label class="tc-range-icon"><span class="{{tconfig.iconClass}}"></span></label>
+    <p-slider [(ngModel)]="tconfig.value" [min]="0" [max]="72" (onChange)="handleChange($event)" class="range_hole" orientation="horizontal"></p-slider>
+    <span class="icons_svg range_large_hole"></span>
+</div>

@@ -1,0 +1,30 @@
+diff a/data-cloud-visual/visual-ui/builder/src/app/smart-reports/reports/charts-builder/charts-builder.component.html b/data-cloud-visual/visual-ui/builder/src/app/smart-reports/reports/charts-builder/charts-builder.component.html	(rejected hunks)
+@@ -17,24 +17,19 @@
+             </a>
+         </li>
+     </ul>
+-    <dl class="smart-reports-chart"  (mouseover)="mouseoverChartGroup()">
++    <dl class="smart-reports-chart" (mouseover)="mouseoverChartGroup()">
+         <dt><span class="close" (click)="closeChartGroup()"></span>{{chartGroupTitle}}</dt>
+         <dd *ngFor="let type of chartGroupList">
+-            <a
+-                    [ngClass]="{'chartDrag':type.type == 2 || type.type == 3 || type.type == 8}"
+-                    draggable="true" (dragstart)="dragstart($event, type)" (dragend)="dragend($event, type)">
++            <a [ngClass]="{'chartDrag':type.type == 2 || type.type == 3 || type.type == 8}" draggable="true" (dragstart)="dragstart($event, type)" (dragend)="dragend($event, type)">
+                 <em>
+                     <img [src]="baseUrl+'/report/chartIcons/'+type.id + '?type=3'">
+                 </em>
+                 <div class="showName">{{type.name}}</div>
+             </a>
+             <div class="smartTips" *ngIf="type.type == 2 || type.type == 3 || type.type == 8">敬请期待</div>
+-
+         </dd>
+-
+         <dd>
+             <div class="smartTips" *ngIf="smartTips">敬请期待</div>
+         </dd>
+     </dl>
+-</div>
+-
++</div>
+\ No newline at end of file

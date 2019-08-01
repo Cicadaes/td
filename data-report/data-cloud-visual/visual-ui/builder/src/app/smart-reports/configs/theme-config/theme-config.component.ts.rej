@@ -1,0 +1,14 @@
+diff a/data-cloud-visual/visual-ui/builder/src/app/smart-reports/configs/theme-config/theme-config.component.ts b/data-cloud-visual/visual-ui/builder/src/app/smart-reports/configs/theme-config/theme-config.component.ts	(rejected hunks)
+@@ -114,11 +114,7 @@
+ 	  .all-small span {
+ 	       width: 20%;
+ 	       margin-right: 8px;
+-	   }
+-	   
+-	    :host /deep/  .all-small .ui-dropdown.ui-widget.ui-state-default.ui-corner-all {      
+-	   }
+-	   
++	   }	   
+ 	  :host /deep/  .ui-dropdown.ui-widget.ui-state-default.ui-corner-all {
+ 	       width:auto !important;
+ 	       margin-right: 8px;

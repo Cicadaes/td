@@ -1,0 +1,23 @@
+.td-multiSelect .multiSelect > button {
+    padding: 0;
+    font-size: 12px;
+    min-height: 18px !important;
+}
+.td-multiSelect .multiSelect .buttonLabel {
+	padding: 0;
+}
+.td-multiSelect .multiSelect .checkboxLayer {
+	min-width : 170px;
+	max-width: 225px;
+}
+.td-multiSelect .multiSelect .helperButton {
+	font-size: 12px;
+}
+
+.td-multiSelect .multiSelect .helperButton:not( .reset ) {
+    margin-right: 3px;
+}
+
+.td-multiSelect .multiSelect .multiSelectItem {
+    min-width: 206px;
+}

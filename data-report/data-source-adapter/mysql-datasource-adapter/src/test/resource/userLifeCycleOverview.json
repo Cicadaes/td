@@ -1,0 +1,61 @@
+{
+  "datasource_id": 57,
+  "dateDimensions": [
+    {
+      "field": "calculated_date",
+      "alias": "date",
+      "convertFunction": {
+        "ruleType": "DateConvertFunction",
+        "rule": {
+          "yyyyMMdd": "yyyy-MM"
+        }
+      }
+    }
+  ],
+  "dimensions": [
+    {
+      "field": "cycle",
+      "alias": "客户分类",
+      "convertFunction": {
+        "ruleType": "MapConvertFunction",
+        "rule": {
+          "1": "注册期",
+          "2": "新客户期",
+          "3": "成长期",
+          "4": "稳定期",
+          "5": "休眠期",
+          "6": "流失期",
+          "7": "召回期"
+        }
+      }
+    }
+  ],
+  "metrics": [
+    {
+      "field": "crowd_count",
+      "alias": "value"
+    }
+  ],
+  "dateFilters": [
+    {
+      "field": "calculated_date",
+      "operator": "in",
+      "value": "20171120,20110915"
+    }
+  ],
+  "orderBy": [
+    {
+      "field": "calculated_date",
+      "function": "asc"
+    },
+    {
+      "field": "cycle",
+      "function": "asc"
+    }
+  ],
+  "dateGranularity": 0,
+  "proportion": [
+    "date"
+  ],
+  "pageCount": true
+}

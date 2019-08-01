@@ -1,0 +1,50 @@
+<div class="toolbarH">
+	<div class="btn-group fl btn-sref" ng-model="radio.pageRadio" bs-radio-group>
+		<label class="btn  btn-sref"> <input type="radio" class="btn btn-default" value="1"><a data-ui-sref="dashboard" href="javascript:;">仪表盘</a></label>
+		<label class="btn  btn-sref"> <input type="radio" class="btn btn-default" value="2" ><a data-ui-sref="custom-list" href="javascript:;">报表配置</a></label>
+	</div>
+</div>
+
+
+<div class="panel-body">
+	<div class="toolbar">
+		<div class="btn-group btn-group-sm" ng-model="radio.reportRadio" bs-radio-group>
+			<label class="btn btn-sref-sm"><input type="radio" class="btn btn-default" value="1" data-ui-sref="custom-list">我的报表</label>
+			<label class="btn btn-sref-sm"><input type="radio" class="btn btn-default" value="2" data-ui-sref="sharePool">共享池</label>
+		</div>
+	</div>
+</div>
+
+<div class="custom-list clrfix">
+	<div class="custom-list-content">
+		<div class="custom_content clrfix">
+			<dl ng-show="radio.reportRadio == 1">
+				<div class="list_add_button" ng-click="initCustom()" data-template="html/visualization/dialog.html" bs-modal="modal"  data-backdrop="false">
+				</div>
+				<div class="list_add_font">创建报表</div>
+			</dl>
+			<dl ng-repeat="custom in customs">
+				<dt ng-click="goToCustom(custom,$event)" style="background: #{{custom.bgColor}}">
+					<div td-share class="fr" data-custom="custom"></div>
+					<h3>{{custom.name}}</h3>
+					<div>最后更新：{{custom.updateTime |DateFormatDefault}}</div>
+				</dt>
+				<dd class="custom_page">
+			         <span style="color: #{{custom.bgColor}}">{{custom.num || 1}}</span>
+			    </dd>
+				<dd >
+					<span>创建时间：{{custom.createTime |DateFormatDefault}}</span>
+					<div class="r" ng-show="radio.reportRadio == 1">
+						<i class="icons icon-edit" ng-click="updateCustom(custom)" data-template="html/visualization/dialog.html" bs-modal="modal"  data-backdrop="false"></i>
+						<i class="icons icon-delete" ng-click="deleteCustom(custom)"></i>
+					</div>
+				</dd>
+			</dl>
+		</div>
+	</div>
+	<div class="custom-list-page">
+	    <div class="pager">
+	      <pager page-count="pageCount" current-page="currentPage" on-page-change="onPageChange(currentPage);" first-text="首页" next-text="下一页" prev-text="上一页" last-text="尾页"></pager>
+	    </div>
+	</div>
+</div>

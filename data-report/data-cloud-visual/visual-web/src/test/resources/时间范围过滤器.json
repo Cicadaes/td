@@ -1,0 +1,70 @@
+{
+    "name": "时间范围过滤器",
+    "description": "时间范围过滤器",
+    "iconPath": null,
+    "iconData": null,
+    "type": 15,
+    "groupId":13,
+    "orderNum":15,
+    "view": {
+        "id": null,
+        "toolTip": null,
+        "fieldTabs": [
+            {
+                "name":"data",
+                "fieldGroups":[
+                    {
+                        "name":"基本信息",
+                        "scripts":null,
+                        "fields":[
+                            {
+                                "code":"dataSource",
+                                "name":"数据源",
+                                "description":null,
+                                "valueType":6,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":24,
+                                "viewMetaData":{"postChange":{"action":"callBack","postEvent":{"actionValue":"report/dataSources/id/metaData","action":"callBack","actionParams":["datasource_id"],"postEvent":"datasource-reload | metadata-render"}}},
+                                "multipleMaxNumber":1,
+                                "verifyRule":null,
+                                "iconClass":null,
+                                "childrenFields":[]
+                            }
+                        ]
+                    },
+                    {
+                        "name":"参数信息",
+                        "scripts":null,
+                        "fields":[
+                            {
+                                "code":"filterDate",
+                                "name":"查询时间字段",
+                                "description":null,
+                                "valueType":6,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":24,
+                                "viewMetaData":"{\"trigger\":2,\"method\":\"report_dataSources_id_data\",\"sendValue\":{\"datasource_id\":\"this.dataSource.id\",\"dimensions\":[\"this.dimension\"],\"metrics\":[\"this.metric\"],\"filters\":[\"this.dateDimension\"],\"limit\":[],\"orderBy\":[],\"groupBy\":[]},\"result\":[]}",
+                                "multipleMaxNumber":1,
+                                "verifyRule":null,
+                                "iconClass":null,
+                                "childrenFields":[]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

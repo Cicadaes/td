@@ -1,0 +1,142 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    background-color: antiquewhite;
+}
+
+.stage {
+    width: 100%;
+    height: calc(100% - 180px);
+    position: relative;
+    overflow: auto;
+}
+
+.controller {
+    width: 100%;
+    height: 80px;
+    border-top: 1px solid gray;
+    position: relative;
+    text-align: center;
+    padding: 20px;
+}
+
+.btn-container {
+    text-align: center;
+    float: left;
+    margin-right: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    cursor: pointer;
+    user-select: none;
+}
+
+.btn-select {
+    background-color: #cc0033;
+    color: #ffffff;
+}
+
+.upload_layer {
+    width: 500px;
+    background: #000;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 3;
+    display: none;
+}
+
+
+/*.smallCircle{
+   width:10px;
+   height:10px;
+   border-radius:100%;
+   position:absolute;
+   z-index:1;
+   background:#5f93e1;
+   border: 2px solid #FFFFFF;
+   pointer-events: auto;
+}
+
+.ct{
+ top:-6px;
+ right:49%;
+}
+.lt{
+    top:-5px;
+    left:-5px;
+}
+.rt{
+   top:-5px;
+   right:-5px;
+}
+.rb{
+   bottom:-5px;
+   right:-5px;
+}
+.cb{
+ bottom:-6px;
+ left:49%;
+}
+.lb{ 
+    bottom:-5px;
+    left:-5px;
+}
+.lc{
+    top:49%;
+    left:-6px;
+}
+.rc{
+    top:49%;
+    right:-6px;
+}*/
+
+
+/*.inACtive{
+    display:none;
+}*/
+
+
+/*part*/
+
+.tree {
+    width: 100%;
+    padding: 50px 0;
+}
+
+.child {
+    display: block;
+    padding: 20px 50px;
+}
+
+.child:nth-child(2) {
+    padding: 20px 80px;
+}
+
+.child:nth-child(1) {
+    text-align: center;
+}
+
+.child span {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: red;
+}
+
+.child .child_list {
+    display: inline-block;
+}
+
+.child .child_list .child_list:last-child {
+    padding-left: 40px;
+}
+
+.child .child_list:last-child {
+    float: right
+}

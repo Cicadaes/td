@@ -1,0 +1,49 @@
+:host /deep/ .ui-dropdown{
+    border: 0 none;
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+
+.tc-select-icon .icon_svg{
+    position: relative;
+    top: -5px;
+}
+
+:host /deep/ .ui-dropdown.ui-state-hover .ui-dropdown-label,
+:host /deep/ .ui-dropdown .ui-dropdown-trigger.ui-state-hover{
+    background: transparent
+}
+
+:host /deep/ .ui-dropdown.ui-state-focus{
+    border: 0 none;
+    box-shadow: 0 0 0;
+}
+
+.ui-radiobutton-label {
+    position: absolute;
+    left: calc(50% - 25px);
+    bottom: -24px;
+    background: #707070;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 12px;
+    z-index: 2;
+    padding: 4px 5px;
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    transform: scale(0);
+    -webkit-transition: all ease 0.2s;
+    -moz-transition: all ease 0.2s;
+    transition: all ease 0.2s;
+    font-family: "宋体";
+}
+
+.ui-selected{
+    position: relative;
+    float: left;
+}
+
+.ui-selected:hover .ui-radiobutton-label{
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    transform: scale(1);
+}

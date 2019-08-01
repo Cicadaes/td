@@ -1,0 +1,84 @@
+
+
+/*2017.04.20*/
+.color_icon{        
+    width: 60px;
+    height: 20px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+.color_icon > .text_format {
+    display: inline-block;
+    opacity: .54;
+    height: 18px;
+    width: 24px;
+    background-position: -320px -120px;
+}
+
+.color-preview{
+    height: 4px;
+}
+.color-preview input{
+    min-width: 24px!important;
+    max-width: 24px!important;
+    height: 5px;
+    float: left;
+    margin-left: 1px;
+    border: 1px solid #bdbdbd;
+}
+
+.color_icon:after {
+    font: 400 13px Roboto;
+    display: block;
+    content: '\0025bc';
+    position: absolute;
+    top: 4px;
+    speak: none;
+    -webkit-transform: scaleY(.6) scaleX(1);
+    transform: scaleY(0.6) scaleX(1);
+    left: 34px;
+}
+
+.color-button{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 55px;
+    height: 30px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.ui-radiobutton-label {
+    position: absolute;
+    left: -20px;
+    bottom: -34px;
+    background: #707070;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 12px;
+    z-index: 2;
+    padding: 6px 3px;
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    transform: scale(0);
+    -webkit-transition: all ease 0.2s;
+    -moz-transition: all ease 0.2s;
+    transition: all ease 0.2s;
+    font-family: "宋体";
+    width: calc(100% + 30px);
+    text-align: center;
+}
+
+.color_icon:hover .ui-radiobutton-label{
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    transform: scale(1);
+}
+
+.color-picker {
+    margin-left: -35px;
+    margin-top: 10px;
+}

@@ -1,0 +1,36 @@
+<div class="clearfix dataprview" *ngIf="DataPrview">
+    <section class="add_project">
+        <aside>
+            <ul class="project_list">
+                <li (click)="clickCon($event)" id="1" [class.active]="prviewTab">数据</li>
+                <li (click)="clickCon($event)" id="2" [class.active]="!prviewTab">元数据</li>
+            </ul>
+        </aside>
+        <!--数据-->
+        <div *ngIf="prviewTab">
+            <p-dataTable [value]="prviewData" emptyMessage="暂无内容">
+                <p-column *ngFor="let col of cols" [header]="col.value" [style]="{'width': '150px'}">
+                    <template let-project="rowData" pTemplate="body">
+                      {{project[col.value]}}
+                    </template>
+                </p-column>
+            </p-dataTable>
+            <x-paginator [value]="value" (onPagesChange)="paginate($event)" *ngIf="pageDisplay"></x-paginator>
+        </div>
+        <!--元数据-->
+        <div *ngIf="!prviewTab">
+            <p-dataTable [value]="previewMetaData" emptyMessage="暂无内容">
+                <p-column *ngFor="let col of colmeta" [header]="col.value" [style]="{'width': '150px'}">
+                    <template let-project="rowData" pTemplate="body">
+                    {{project[col.value]}} 
+               </template>
+                </p-column>
+            </p-dataTable>
+        </div>
+    </section>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton (click)="cancel()" label="Yes">返回</button>
+        </div>
+    </footer>
+</div>

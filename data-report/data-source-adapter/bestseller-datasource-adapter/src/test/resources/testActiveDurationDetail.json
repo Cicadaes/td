@@ -1,0 +1,53 @@
+{
+  "datasource_id": 31,
+  "dateDimensions": [
+    {
+      "field": "date",
+      "alias": "时间"
+    }
+  ],
+  "metrics": [
+    {
+      "field": "ROUND(sum(active_duration)/sum(active_times)*100,0)",
+      "alias": "入店客流"
+    },
+    {
+      "field": "ROUND(sum(new_active_duration)/sum(new_active_time)*100,0)",
+      "alias": "入店新客"
+    },
+    {
+      "field": "ROUND(sum(old_active_duration)/sum(old_active_time)*100,0)",
+      "alias": "入店老客"
+    }
+  ],
+  "filters": [
+    {
+      "field": "project_id",
+      "operator": "=",
+      "value": "1545"
+    }
+  ],
+  "dateFilters": [
+    {
+      "field": "date",
+      "operator": ">=",
+      "value": "2017-11-01"
+    },
+    {
+      "field": "date",
+      "operator": "<=",
+      "value": "2017-11-30"
+    }
+  ],
+  "orderBy": [
+    {
+      "field": "date",
+      "function": "DESC"
+    }
+  ],
+  "limit": [
+    1,
+    10
+  ],
+  "dateGranularity": 0
+}

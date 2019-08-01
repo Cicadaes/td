@@ -1,0 +1,8 @@
+<div class="tc-select-list">
+    <div class="tc-select-item" *ngFor="let select of tconfig.childrenFields">
+        <tconfig-input (onRender)="onRenderFa($event)" *ngIf="select.viewType == 1" [tconfig]="select"></tconfig-input>
+        <tconfig-select (onRender)="onRenderFa($event)" *ngIf="select.viewType == 2" [tconfig]="select"></tconfig-select>
+        <tconfig-checkbox (onRender)="onRenderFa($event)" *ngIf="select.viewType == 14" [tconfig]="select"></tconfig-checkbox>
+        <tconfig-color-picker (onRender)="onRenderFa($event)" *ngIf="select.viewType == 15" [tconfig]="select"></tconfig-color-picker>
+    </div>
+</div>

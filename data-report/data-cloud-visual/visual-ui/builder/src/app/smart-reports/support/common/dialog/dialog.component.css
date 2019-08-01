@@ -1,0 +1,57 @@
+:host /deep/ .dialog-layer{
+	padding: 20px;
+	overflow: hidden;
+}
+
+:host /deep/ .dialog-layer .dialog-icon{
+	display: inline-block;
+}
+
+:host /deep/ .dialog-layer .dialog-icon span{
+	font-size: 26px;
+}
+
+:host /deep/ .dialog-layer .dialog-line{
+	line-height: 20px;
+	padding-top: 5px;
+	color: #657180;
+	padding-left: 15px;
+	width: 354px;
+	font-size: 13px;
+	text-align: left;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-content {
+	padding: 0!important;
+}
+
+:host /deep/ .ui-dialog{
+	width: 420px!important;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-titlebar {
+	border-bottom: 0 none!important;
+	text-align: left!important;
+	padding-top: 20px!important;
+	padding-left: 20px!important;
+	color: #464c5b;
+	line-height: inherit!important;
+	height: inherit!important;
+	padding-bottom: 5px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-titlebar .ui-dialog-title {
+	line-height: 20px!important;
+	height:  20px!important;
+	text-align: left;
+	font-weight: bold;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane{
+	border-top: 0 none;
+	padding-top: 20px;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-buttonpane button {
+	width: 60px!important;
+}

@@ -1,0 +1,99 @@
+<div class="toolbarH">
+	<div class="btn-group fl btn-sref" ng-model="radio.pageRadio" bs-radio-group>
+		<label class="btn  btn-sref"> <input type="radio" class="btn btn-default" value="1"><a data-ui-sref="custom-list" href="javascript:;">仪表盘</a></label>
+		<label class="btn  btn-sref"> <input type="radio" class="btn btn-default" value="2" ><a data-ui-sref="custom-list" href="javascript:;">报表配置</a></label>
+		<label class="btn  btn-sref"> <input type="radio" class="btn btn-default" value="3" ><a data-ui-sref="demo">demo</a></label>
+	</div>
+</div>
+
+<div id="menu" class="menu">
+	<img src="images/common/images/1.png" alt="" />
+	<img src="images/common/images/2.png" alt="" />
+	<img src="images/common/images/3.png" alt="" />
+	<img src="images/common/images/4.png" alt="" />
+	<img src="images/common/images/5.png" alt="" />
+	<img src="images/common/images/6.png" alt="" />
+	<img src="images/common/images/7.png" alt="" />
+	<img src="images/common/images/8.png" alt="" />
+	<img src="images/common/images/9.png" alt="" />
+	<img src="images/common/images/10.png" alt="" />
+	<img src="images/common/images/11.png" alt="" />
+</div>
+
+<div style="height: 400px;">
+	<div style="position: absolute; width: 40%; height: 40%;left: 20%;top: 10%;border: solid 1px #ccc;" id="onmousedown">
+	</div>
+	<div style="display: none;width: 100px;position : absolute;" id="ul">
+		<ul class="moveul">
+			<li>置顶</li>
+			<li>上移一位</li>
+			<li>下移一位</li>
+			<li>置低</li>
+		</ul>
+	</div>
+</div>
+
+<div data-td-panel title="echarts">
+	<select ng-model="ccondition" ng-options="condition for condition in conditions"></select>
+</div>
+<div data-td-panel title="echarts">
+	<h2>Example 1</h2>
+	Color: <input class="jscolor" value="ab2567">
+	<font-color></font-color>
+</div>
+<div class="ng-table-container">
+	<div class="ng-table-body ng-table-body-empty">
+		<table ng-table="tableParams" class="table ng-table-responsive table-hover" freeze="true" id="tableParams">
+		    <tr ng-repeat="user in $data">
+		       <td data-title="'日期'"  align="center" sortable="'count'">
+	           		{{user[0]}}
+	            </td>
+	            <td data-title="'注册数'"  align="center">
+	                {{user[1]}}
+	            </td>
+		    </tr>
+		</table>
+	</div>
+</div>
+
+<div id="main" style="width: 600px;height:400px;"></div>
+
+<button ng-click="createDiv();">生成点击事件</button>
+<div class="test" style="height: 500px; border: solid #ccc 1px;">
+</div>
+
+
+<!-- <div data-td-panel panel-title="明细数据">
+	<div loading-container="tableParams.settings().$loading">
+		<div class="empty-box-table-panel" ng-show="tableloading">
+			<div class="empty-box-table-bg"></div>
+			<div class="empty-box-table"></div>
+		</div>
+	    <table ng-table="tableParams" class="table ng-table-responsive table-hover">
+	        <tr align="center" ng-repeat="user in $data">
+	            <td data-title="'日期'"  align="center" sortable="'count'">
+	           		{{user[0]}}
+	            </td>
+	            <td data-title="'注册数'"  align="center">
+	                {{user[1]}}
+	            </td>
+	            <td data-title="'D'" align="center">
+	                {{user[2]}}%
+	            </td>
+	        </tr>
+	    </table>
+	    <table ng-table="tableParams1" class="table ng-table-responsive table-hover">
+	        <tr align="center" ng-repeat="user in $data">
+	            <td data-title="'日期'"  align="center" sortable="'count'">
+	           		{{user[0]}}
+	            </td>
+	            <td data-title="'注册数'"  align="center">
+	                {{user[1]}}
+	            </td>
+	            <td data-title="'D'" align="center">
+	                {{user[2]}}%
+	            </td>
+	        </tr>
+	    </table>
+	</div>
+</div> -->

@@ -1,0 +1,70 @@
+<dl>
+	<dt>值</dt>
+	<dd>
+		<ul>
+			<li>
+				<input type="checkbox" ng-click="initReportChartData();" ng-model="reportProperty.property.plotLabel" name="checkbox" class="regular-check">
+				<label>显示“值” </label>
+			</li>
+			<li></li>
+		</ul>
+	</dd>
+</dl>
+<dl>
+	<dt>颜色</dt>
+	<dd>
+		<ul>
+			<li>
+				<div class="regular-color" font-color selected-font-color="reportProperty.property.bgColor" index="'bgColor'" td-change="changeColor"></div>
+				<label>背景色</label>
+			</li>
+			<li style="width: 100%">
+				<label class="fl">颜色组：</label>
+				<div color-group select-color="reportProperty.property.colorGroup" td-change="changeChartColorGroup" ></div>
+			</li>
+		</ul>
+	</dd>
+</dl>
+<dl>
+	<dt>透明度</dt>
+	<dd>
+		<ul class="allw">
+			<li>
+				<label>透明度： </label>
+				<select class="bs1 ml-5 mt--4" ng-model="reportProperty.property.opacity" ng-options="opacity for opacity in opacitys" ng-change="initReportChartData();" ></select>
+			</li>
+		</ul>
+	</dd>
+</dl>					
+<dl>
+	<dt>图列</dt>
+	<dd>
+		<ul>
+			<li>
+				<input type="checkbox" ng-click="initReportChartData();" ng-model="reportProperty.property.legendShow" value="true" name="checkbox" class="regular-check">
+				<label>显示图列</label>
+			</li>
+		</ul>
+	</dd>
+</dl>
+<dl>
+	<dt>图形</dt>
+	<dd>
+		<ul>
+			<li><input type="radio" value="true" ng-click="initReportChartData();" ng-model="reportProperty.property.radius" class="regular-radio">
+				<label>空心饼图</label>
+			</li>
+			<li><input type="radio" value="false" ng-click="initReportChartData();" ng-model="reportProperty.property.radius" class="regular-radio">
+				<label>实心饼图</label>
+			</li>
+		</ul>
+	</dd>
+</dl>
+<dl>
+	<dt class="fl">图列显示位置</dt>
+	<dd class="btn-group" ng-model="reportProperty.property.location" bs-radio-group style="margin: 10px 0;" ng-click="initReportChartData();">
+	  	<label class="btn btn-default"><input type="radio" class="btn btn-default" value="left" >左边</label>
+	  	<label class="btn btn-default"><input type="radio" class="btn btn-default" value="center" >中间</label>
+	  	<label class="btn btn-default"><input type="radio" class="btn btn-default" value="right" >右边</label>
+	</dd>
+</dl>

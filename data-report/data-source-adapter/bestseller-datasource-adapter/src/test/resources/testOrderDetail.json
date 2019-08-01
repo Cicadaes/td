@@ -1,0 +1,46 @@
+{
+  "datasource_id": 23,
+  "dateDimensions": [
+    {
+      "field": "date"
+    }
+  ],
+  "metrics": [
+    {
+      "field": "sales_amount",
+      "alias": "销售金额"
+    },
+    {
+      "field": "vip_sales_amount",
+      "alias": "会员成交金额"
+    },
+    {
+      "field": "non_vip_sales_amount",
+      "alias": "非会员成交金额"
+    }
+  ],
+  "filters": [
+    {
+      "field": "project_id",
+      "operator": "=",
+      "value": "1545"
+    }
+  ],
+  "dateFilters": [
+    {
+      "field": "date",
+      "operator": ">=",
+      "value": "2017-11-01"
+    },
+    {
+      "field": "date",
+      "operator": "<=",
+      "value": "2017-11-30"
+    }
+  ],
+  "limit": [
+    1,
+    10
+  ],
+  "dateGranularity": 0
+}

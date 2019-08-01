@@ -1,0 +1,1536 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+[stage-container] {
+    height: inherit;
+}
+
+.stage {
+    width: 100%;
+    height: calc(100% - 180px);
+    position: relative;
+    overflow: auto;
+}
+
+.controller {
+    width: 100%;
+    height: 53px;
+    border-top: 1px solid gray;
+    position: relative;
+    text-align: center;
+    padding: 10px;
+}
+
+.btn-container {
+    text-align: center;
+    float: left;
+    margin-right: 10px;
+}
+
+.btn {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    cursor: pointer;
+    user-select: none;
+}
+
+.btn-select {
+    background-color: #cc0033;
+    color: #ffffff;
+}
+
+.upload_layer {
+    width: 500px;
+    background: #000;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 3;
+    display: none;
+}
+
+
+/*.smallCircle{
+   width:10px;
+   height:10px;
+   border-radius:100%;
+   position:absolute;
+   z-index:1;
+   background:#5f93e1;
+   border: 2px solid #FFFFFF;
+   pointer-events: auto;
+}
+
+.ct{
+ top:-6px;
+ right:49%;
+}
+.lt{
+    top:-5px;
+    left:-5px;
+}
+.rt{
+   top:-5px;
+   right:-5px;
+}
+.rb{
+   bottom:-5px;
+   right:-5px;
+}
+.cb{
+ bottom:-6px;
+ left:49%;
+}
+.lb{ 
+    bottom:-5px;
+    left:-5px;
+}
+.lc{
+    top:49%;
+    left:-6px;
+}
+.rc{
+    top:49%;
+    right:-6px;
+}*/
+
+
+/*.inACtive{
+    display:none;
+}*/
+
+
+/*table样式start*/
+
+i {
+    font-style: normal
+}
+
+ul,
+li,
+input {
+    margin: 0;
+    padding: 0;
+    list-style: none
+}
+
+.fl {
+    float: left
+}
+
+.fr {
+    float: right;
+}
+
+.clrfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+.clrfix {
+    zoom: 1;
+}
+
+.table_pagination ul,
+li {
+    margin: 0;
+    padding: 0
+}
+
+.table_pagination li {
+    list-style: none
+}
+
+*,
+ :after,
+ :before {
+    box-sizing: border-box;
+}
+
+.table {
+    padding: 15px;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background: #fff;
+}
+
+.table th {
+    background-color: #f7f8f9;
+}
+
+.table td,
+.table th {
+    padding: 0 6px;
+    text-align: left;
+    white-space: nowrap;
+    height: 36px;
+    vertical-align: middle;
+    font-weight: normal;
+    border-bottom: 1px solid #e7ebef;
+}
+
+.table_pagination {
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-left: 1px solid #e7ebef;
+    border-right: 1px solid #e7ebef;
+    background: #fff;
+    height: 48px;
+    line-height: 48px;
+    border-bottom: 1px solid #ced3d9;
+    padding: 0 5px;
+}
+
+.table_pagination .table_currentPage {
+    background-color: #679fef;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.table_pageSizeBox {
+    margin-left: 10px;
+    position: relative;
+    width: 55px;
+}
+
+.table_pageSizeBox table_pageSize {
+    color: #679fef;
+}
+
+.table_pageSizeBox .table_sizeList {
+    border: 1px solid #679fef;
+    display: none;
+    position: absolute;
+    top: 36px;
+    width: 100%;
+}
+
+.table_pageSizeBox .table_sizeList li {
+    line-height: 20px;
+    height: 20px;
+}
+
+.table_pageSizeBox .triangle_icon {
+    border-top: 5px solid #aaa;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+    right: 0;
+    top: 22px;
+}
+
+.table_page li {
+    padding: 0 5px;
+}
+
+
+/*table样式end*/
+
+
+/*四象限图样式start*/
+
+::selection {
+    background: transparent;
+}
+
+.scatterComponent .containerHead {
+    border-bottom: 1px solid #E8E9EC;
+    padding: 0 20px;
+}
+
+.scatterComponent .containerHead .filterButton {
+    width: 56px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    background: #FFFFFF;
+    border: 1px solid #DEDFE3;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.scatterComponent .containerHead .region {
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+}
+
+.scatterComponent .containerHead .custom {
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+}
+
+.scatterComponent .containerHead .filterButton.currentFilter {
+    background: #43A3FB;
+    border: none;
+    color: #fff;
+}
+
+.scatterComponent .containerXY>span {
+    height: 32px;
+    line-height: 32px;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: "PingFangSC-Semibold";
+}
+
+.scatterComponent .indicator {
+    margin: 0 15px;
+    width: 112px;
+    height: 32px;
+    line-height: 32px;
+    float: left;
+    position: relative;
+    z-index: 1;
+}
+
+.scatterComponent .indicatorBox {
+    border: 1px solid #D7DDE4;
+    border-radius: 4px;
+    text-indent: 5px;
+    background: #FFFFFF;
+    width: 100%;
+    height: 32px;
+    line-height: 32px;
+    font-size: 12px;
+    position: relative;
+}
+
+.scatterComponent .indicatorItems li {
+    margin-right: 10px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.scatterComponent .triangle_icon {
+    border-top: 5px solid #aaa;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+    right: 8px;
+    top: 13px;
+}
+
+.scatterComponent .indicatorItems {
+    width: 470px;
+    /*height: 370px;*/
+    background: #FFFFFF;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    margin-top: 4px;
+    padding: 6px 24px;
+    display: none;
+    position: absolute;
+    top: 32px;
+}
+
+.scatterComponent .indicatorItems .itemBox {
+    border-bottom: 1px solid #E8E9EC;
+    padding: 10px;
+}
+
+.scatterComponent .indicatorItems .itemBox:last-child {
+    border-bottom: none;
+}
+
+.scatterComponent .indicatorItems .itemBox>span {
+    height: 32px;
+    line-height: 32px;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: "PingFangSC-Semibold";
+}
+
+.scatterComponent .indicatorItems .itemBox input[type="radio"] {
+    margin: 3px 5px 0 0;
+    display: none;
+}
+
+.scatterComponent .indicatorItems .itemBox label {
+    padding-left: 20px;
+    cursor: pointer;
+    background: url('../img/radio-unchecked.svg') no-repeat center left;
+}
+
+.scatterComponent .indicatorItems .itemBox input[type="radio"]:checked~label {
+    background: url('../img/radio-checked.svg') no-repeat center left;
+}
+
+.scatterComponent .contentBox {
+    width: 100%;
+    height: 100%;
+    overflow: auto!important;
+}
+
+.scatterComponent .tableBox {
+    width: 100%;
+    margin-top: 10px;
+    position: relative;
+}
+
+.scatterComponent .tableBox:first-child {
+    margin-top: 0;
+}
+
+.scatterComponent .tableBox table {
+    padding: 0 10px;
+    background: #FFFFFF;
+    border: 1px solid #E8E9EC;
+    width: calc(100% - 24px);
+    border-collapse: collapse;
+    border-spacing: 0;
+    float: right;
+    font-size: 12px;
+    height: auto;
+}
+
+.scatterComponent .tableBox .currentTable {
+    height: auto;
+}
+
+.scatterComponent .tableBox thead {
+    background: #F8F8F9;
+}
+
+.scatterComponent .tableBox td,
+.scatterComponent .tableBox th {
+    padding: 0 6px;
+    text-align: left;
+    white-space: nowrap;
+    height: 36px;
+    vertical-align: middle;
+    min-width: 100px;
+    text-overflow: ellipsis;
+    max-width: 120px;
+    overflow: hidden;
+}
+
+.scatterComponent .tableBox th>div {
+    width: 100%;
+    height: 36px;
+    line-height: 36px;
+}
+
+.scatterComponent .tableBox table .sortable {
+    position: relative;
+    width: 10px;
+    height: 36px;
+    display: inline-table;
+    margin: 0 5px;
+    float: right;
+}
+
+.scatterComponent .tableBox table .triangleUp {
+    border-bottom: 5px solid #aaa;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 13px;
+    opacity: 0.2;
+}
+
+.scatterComponent .tableBox table .triangleDown {
+    border-top: 5px solid #aaa;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 20px;
+    opacity: 0.2
+}
+
+.scatterComponent .tableBox table .currentSort {
+    opacity: 1;
+}
+
+.scatterComponent .tableBox tbody span {
+    font-family: HelveticaNeue-Medium;
+    font-size: 12px;
+    color: #BBBDC6;
+}
+
+.scatterComponent .tableBox .operator {
+    position: absolute;
+    top: 0;
+    left: 1px;
+    width: 24px;
+    height: 56px;
+    background: #818596;
+    border-radius: 4px 0 0 4px;
+    display: none;
+    color: #fff;
+    padding-top: 2px;
+}
+
+.scatterComponent .tableBox .operator .toggleOpen {
+    display: block;
+    width: 24px;
+    height: 24px;
+}
+
+.scatterComponent .tableBox .operator .open {
+    background: url('../img/icon－open.svg') no-repeat center center /12px 12px;
+}
+
+.scatterComponent .tableBox .operator .close {
+    background: url('../img/icon－close.svg') no-repeat center center /12px 12px;
+}
+
+.scatterComponent .tableBox .operator .download {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background: url('../img/icon－download.svg') no-repeat center center /14px 14px;
+}
+
+
+/*滚动条样式start*/
+
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    background: rgba(28, 36, 56, 0.30);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(28, 36, 56, 0.30);
+}
+
+::scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+::scrollbar-track {
+    border-radius: 4px;
+}
+
+::scrollbar-thumb {
+    border-radius: 4px;
+    background: rgba(28, 36, 56, 0.30);
+}
+
+::scrollbar-thumb:window-inactive {
+    background: rgba(28, 36, 56, 0.30);
+}
+
+
+/*四象限图样式end*/
+
+
+/*part图表样式*/
+
+.tree {
+    width: 100%;
+}
+
+.tree .child {
+    padding: 10px 0;
+    text-align: center;
+}
+
+.tree .child:nth-child(1) {
+    text-align: center;
+}
+
+.tree .child .child_list {
+    height: 62px;
+}
+
+.tree .child:first-child .child_list span:first-child {
+    width: 88px !important;
+}
+
+.tree .child .child_list span:first-child {
+    width: 70px;
+    text-align: center;
+    display: inline-block;
+    background: #43A3FB;
+    font-size: 16px;
+    color: #fff;
+}
+
+.tree .child .child_list span:first-child a {
+    display: inline-block;
+    line-height: 62px;
+    height: 62px;
+    border-radius: 4px;
+}
+
+.tree .child .child_list span:last-child {
+    height: 62px;
+    background: #F2F2F4;
+    border-radius: 4px 0 0 4px;
+    font-size: 12px;
+    float: right;
+}
+
+.tree .child:nth-child(2) .child_list {
+    padding: 0 12%;
+}
+
+.tree .child:nth-child(3) .child_list {
+    padding: 0 2%;
+}
+
+.tree .child b {
+    padding-right: 20px;
+    padding-left: 10px;
+    font-size: 20px;
+    font-weight: normal;
+    height: 30px;
+    line-height: 30px;
+}
+
+.tree .child em {
+    padding: 0px 10px 0px 10px;
+    font-size: 12px;
+    height: 30px;
+    font-style: normal;
+    line-height: 30px;
+}
+
+.tree .child .child_list {
+    display: inline-block;
+}
+
+.child_list {
+    margin: 0 2%;
+}
+
+.up {
+    background: url(../img/icon-up.svg) center right no-repeat;
+}
+
+.down {
+    background: url(../img/icon-down.svg) center right no-repeat;
+}
+
+
+/*indexPriview样式*/
+
+.indexPriview {
+    padding: 0px 0px 20px 30px;
+    float: left;
+    border-right: 1px solid #ccc;
+    margin: 20px 0;
+    min-width: 264px;
+}
+
+.indexPriview:last-child {
+    border: none;
+}
+
+.indexPriview p {
+    margin-bottom: 24px;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #818596;
+    line-height: 12px;
+}
+
+.indexPriview ul li {
+    list-style: none;
+    color: #666;
+    font-weight: normal;
+}
+
+.indexPriview span {
+    margin: 0 30px;
+}
+
+.indexPriview b {
+    display: inline-block;
+    color: #333;
+    font-weight: normal;
+}
+
+.indexPriview strong {
+    font-weight: normal;
+    color: #666;
+}
+
+.indexPriview .data li {
+    margin-bottom: 16px;
+}
+
+.indexPriview .data b {
+    width: 45%;
+    font-family: HelveticaNeue;
+    font-size: 24px;
+    color: #1F2544;
+    line-height: 24px;
+}
+
+.indexPriview .data b:last-child {
+    color: #818596;
+}
+
+.indexPriview .data span {
+    font-family: HelveticaNeue;
+    font-size: 12px;
+    color: #404560;
+    line-height: 12px;
+}
+
+.indexPriview .type li b {
+    width: 45%;
+    font-family: HelveticaNeue;
+    font-size: 12px;
+    color: #404560;
+    letter-spacing: 0;
+    line-height: 12px;
+}
+
+.indexPriview .data li:nth-child(2),
+.indexPriview .data li:nth-child(2) b {
+    color: #818596;
+}
+
+.indexPriview .type li span,
+.indexPriview .type li strong {
+    font-family: HelveticaNeue-Bold;
+    font-size: 12px;
+    color: #404560;
+    letter-spacing: 0;
+    line-height: 12px;
+}
+
+
+/*=================================================*/
+
+.component_title {
+    height: 44px;
+    line-height: 43px;
+    padding: 0 15px;
+    font-size: 14px;
+    color: #434c61;
+    border-bottom: 1px solid #dce1e7;
+}
+
+
+/*chart-select-line*/
+
+.chart-selectline {
+    position: relative;
+    margin-left: 12px;
+    line-height: 42px;
+    padding-right: 25px;
+    cursor: pointer;
+}
+
+.chart-selectline-title {
+    color: #666f7b;
+    font-size: 13px;
+    position: relative;
+}
+
+.chart-selectline-title:after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #8a8f9d;
+    position: absolute;
+    right: -18px;
+    top: 19px;
+}
+
+.chart-selectline-list {
+    position: absolute;
+    left: -5px;
+    top: 32px;
+    z-index: 2;
+    display: none;
+    background: #FFFFFF;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    margin-top: 4px;
+    padding: 6px 10px;
+    background: #fff;
+    cursor: pointer;
+}
+
+.chart-selectline-list ul li {
+    line-height: 24px;
+    cursor: pointer;
+    -webkit-transition: all linear .3s;
+    -moz-transition: all linear .3s;
+    transition: all linear .3s;
+    font-size: 12px;
+}
+
+.chart-selectline-list ul li:hover {
+    color: #4797ed;
+}
+
+
+/*=========日历组件filtercss==start==========*/
+
+.filter-choice {
+    border: 1px solid #D7DDE4;
+    border-radius: 4px;
+    text-indent: 5px;
+    background: #FFFFFF;
+    width: 112px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 12px;
+    position: relative;
+    margin-right: 15px;
+}
+
+.filter-choice .triangle_icon,
+.date-btn .triangle_icon {
+    border-top: 5px solid #aaa;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+    right: 8px;
+    top: 13px;
+}
+
+.filter-choice-list {
+    display: none;
+    position: absolute;
+    top: 32px;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #D7DDE4;
+    border-radius: 4px;
+    text-align: center
+}
+
+.filter-choice-list li:hover {
+    background: #ccc;
+}
+
+.filter-calendar {
+    width: 220px;
+    height: 32px;
+    position: relative;
+}
+
+.date-calendar {
+    position: absolute;
+    width: 220px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 12px;
+    border: 1px solid #D7DDE4;
+    border-radius: 4px;
+    left: 0;
+    top: 0;
+    padding-left: 5px;
+}
+
+.date-btn {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    border: 1px solid #D7DDE4;
+    border-radius: 4px;
+    right: -31px;
+    top: 0;
+}
+
+
+/**
+* GRI主题
+*/
+
+.gri_contrast {
+    float: left;
+    margin: 4px 8px 0 8px;
+    line-height: 20px;
+    color: #666;
+    cursor: pointer;
+    font: 12px/1.5 Tahoma, Helvetica, 'SimSun', sans-serif;
+}
+
+.gri_date {
+    /*    margin: 4px 4px;*/
+    padding: 0 26px 0 6px;
+    width: 195px;
+    height: 20px;
+    line-height: 20px;
+    border: 1px solid #D6D6D6;
+    background: #FFF url('../img/icon_date.png') no-repeat 100% 50%;
+    cursor: pointer;
+    color: #666;
+}
+
+.gri_date_month {
+    width: 180px
+}
+
+.gri_dateRangeCalendar {
+    position: absolute;
+    display: none;
+    background: #FFF;
+    border: 1px solid #6FB1DF;
+    padding: 10px;
+    -moz-box-shadow: 0px 1px 3px #6FB1DF;
+    filter: progid: DXImageTransform.Microsoft.Shadow(Strength=5, Direction=135, Color="#CCCCCC");
+    font: 12px/1.5 Tahoma, Helvetica, 'SimSun', sans-serif;
+}
+
+.gri_dateRangeCalendar a {
+    color: #369;
+}
+
+.gri_dateRangePicker {
+    float: left;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.gri_dateRangeOptions {
+    float: left;
+}
+
+.gri_dateRangeOptions input.gri_dateRangeInput {
+    width: 80px;
+    text-align: center;
+    border: 1px solid #DDD;
+}
+
+.gri_dateRangeOptions div.gri_dateRangeInput {
+    margin-bottom: 5px;
+}
+
+.gri_dateRangePreMonth {
+    float: left;
+    width: 15px;
+    height: 17px;
+    background: url('../img/page.png') no-repeat 0 0;
+    overflow: hidden;
+}
+
+.gri_dateRangeNextMonth {
+    float: right;
+    width: 15px;
+    height: 17px;
+    background: url('../img/page.png') no-repeat -15px 0;
+    overflow: hidden;
+}
+
+.gri_dateRangePreMonth span,
+.gri_dateRangeNextMonth span {
+    display: none;
+}
+
+.gri_dateRangeDateTable {
+    margin: 0 10px 0 0px;
+    padding: 0px;
+    float: left;
+    empty-cells: show;
+    border-collapse: collapse;
+    display: inline;
+    font-size: 12px;
+}
+
+.gri_dateRangeDateTable td {
+    border: 1px solid #EEE;
+    text-align: right;
+    cursor: pointer;
+    padding: 1px 2px;
+}
+
+.gri_dateRangeDateTable th {
+    border-top: 1px solid #DEE6F6;
+    border-left: 1px solid #DEE6F6;
+    background: #E0E8F7;
+    font-weight: 400;
+    border-left: 1px solid #DDD;
+}
+
+.gri_dateRangeDateTable td.gri_dateRangeGray {
+    color: #BBB;
+    cursor: default;
+}
+
+.gri_dateRangeDateTable td.gri_dateRangeToday {
+    color: #F90;
+    font-weight: bold;
+}
+
+.gri_dateRangeSelected {
+    background-color: #007CD9;
+    color: #FFF;
+}
+
+.gri_dateRangeCompare {
+    background-color: #B9E078;
+    color: #FFF;
+}
+
+.gri_dateRangeCoincide {
+    background-color: #FFFFC4;
+}
+
+.gri_pn {
+    /*background: url("../img/pn.png") repeat-x scroll 0 -48px #E5E5E5;*/
+    color: #fff;
+}
+
+.gri_pnc {
+    /*background: url("../img/pn.png") repeat-x scroll 0 0 #E5E5E5;*/
+}
+
+.gri_co {
+    border: 1px solid #999999;
+    box-shadow: 0 1px 0 #E5E5E5;
+    cursor: pointer;
+    font-family: Tahoma, 'Microsoft Yahei', 'Simsun';
+    font-size: 12px;
+    height: 21px;
+    overflow: hidden;
+    vertical-align: middle
+}
+
+
+/**
+ * =================================================
+ * TA主题
+ * =================================================
+ */
+
+.ta_date {
+    border: 1px solid #d8d8d8;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #fefefe;
+    background-image: -ms-linear-gradient(top, #fafafa, #f5f5f5);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#f5f5f5));
+    background-image: -moz-linear-gradient(top, #fafafa, #f5f5f5);
+    background-image: -o-linear-gradient(top, #fafafa, #f5f5f5);
+    background-image: linear-gradient(top, #fafafa, #f5f5f5);
+    background-repeat: repeat-x;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: 0px 1px 1px rgba(218, 218, 218, 0.8);
+    float: left;
+}
+
+.ta_date .date_title {
+    font-family: Arial;
+    font-size: 14px;
+    color: #666666;
+    padding: 6px 10px;
+    *padding: 0px 10px;
+    border-right: 1px solid #d8d8d8;
+    vertical-align: middle;
+    cursor: pointer;
+    *zoom: 1;
+}
+
+.ta_date:hover {
+    background-image: none;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+.ta_date .to {
+    padding: 0 5px;
+}
+
+.ta_date .opt_sel {
+    /*====*/
+    width: 30px;
+    height: 28px;
+    line-height: 28px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    margin-left: -4px;
+}
+
+.ta_date a.opt_sel:link,
+.ta_date a.opt_sel:visited {}
+
+.ta_date a.opt_sel:active,
+.ta_date a.opt_sel:hover {}
+
+.ta_date .i_orderd {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    vertical-align: middle;
+    border-top: 5px solid #727272;
+    border-right: 5px dashed transparent;
+    border-left: 5px dashed transparent;
+    font-size: 0;
+    content: "";
+    overflow: hidden;
+    *margin-top: 10px;
+}
+
+.ta_calendar2 {
+    *width: 536px;
+}
+
+.ta_calendar1 {
+    *width: 268px;
+}
+
+.ta_calendar {
+    border: 1px solid #e1e1e1;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    font-size: 12px;
+    text-align: left;
+    position: absolute;
+    z-index: 100;
+}
+
+.i_pre,
+.i_next,
+.ta_calendar td.ta_dateRangeSelected,
+.ta_calendar td.first,
+.ta_calendar td.last,
+.ta_calendar td.today {
+    /*background:url(http://imgcache.qq.com/bossweb/mta/images/calendar_all.png) no-repeat;*/
+    /*background: url(../img/calendar_all.png) no-repeat;*/
+    cursor: pointer;
+}
+
+.i_pre,
+.i_next {
+    background: url(../img/calendar_all.png) no-repeat;
+}
+
+.i_pre,
+.i_next {
+    width: 23px;
+    height: 23px;
+    display: inline-block;
+}
+
+.i_pre {
+    background-position: 0 0;
+}
+
+.i_pre:hover {
+    background-position: -46px 0px;
+}
+
+.i_next {
+    background-position: -23px 0;
+}
+
+.i_next:hover {
+    background-position: -69px 0px;
+}
+
+.ta_calendar td.ta_dateRangeSelected {
+    background-position: -164px 2px;
+    /*color: #fff;*/
+    color: #6590c1;
+}
+
+.ta_calendar td.ta_dateRangeGray {
+    color: #BBB;
+    cursor: default;
+}
+
+.ta_calendar td.first {
+    color: #6590c1;
+    background-position: -128px 2px;
+}
+
+.ta_calendar td.last {
+    color: #6590c1;
+    background-position: -200px 2px;
+}
+
+.ta_calendar td.today {
+    color: #6590c1;
+    background-position: -92px 2px;
+}
+
+.ta_calendar .dis {
+    color: #9e9e9e;
+}
+
+.ta_calendar table {
+    font-size: 12px;
+    float: left;
+    margin: 0 8px;
+    _display: inline;
+    border-spacing: 0 7px;
+    border-collapse: collapse;
+}
+
+.ta_calendar table caption {
+    text-align: center;
+    height: 35px;
+    line-height: 35px;
+    font-size: 14px;
+}
+
+.ta_calendar table thead tr {
+    border: 1px solid #e1e1e1;
+    background: #f7f8fa;
+    -webkit-box-shadow: inset 0px 1px 0 rgba(255, 255, 255, 1.0);
+    -moz-box-shadow: inset 0px 1px 0 rgba(255, 255, 255, 1.0);
+    box-shadow: inset 0px 1px 0 rgba(255, 255, 255, 1.0);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.ta_calendar table thead th {
+    line-height: 20px;
+    padding: 4px 10px;
+    color: #444;
+    cursor: pointer;
+    text-align: left;
+    border-top: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.ta_calendar table.calendar-month {
+    font-size: 12px;
+    float: left;
+    margin: 0 8px;
+    _display: inline;
+    border-spacing: 7px;
+    border-collapse: separate;
+    margin-bottom: 10px;
+}
+
+.calendar-month caption {
+    border-bottom: 1px solid #E1E1E1;
+    *padding-bottom: 0px;
+}
+
+.calendar-month tbody td {
+    line-height: 30px;
+    padding: 4px 11px;
+    text-align: center;
+    white-space: nowrap;
+    font-family: "΢���ź�";
+    cursor: pointer;
+}
+
+.calendar-month td.hover,
+.calendar-month td:hover,
+.calendar-month caption span:hover {
+    color: #6590c1;
+    border: 1px solid #6590c1;
+    padding: 3px 10px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.calendar .dis:hover {
+    color: #9e9e9e;
+    border: 1px solid #d3d5d6;
+    padding: 3px 10px;
+}
+
+.calendar-month td.current {
+    background: #6590c1;
+    color: #fff;
+    border-radius: 2px;
+}
+
+.ta_calendar table thead th.sun {
+    border-left: 1px solid #e1e1e1;
+}
+
+.ta_calendar table thead th.sat {
+    border-right: 1px solid #e1e1e1;
+}
+
+.ta_calendar table tbody td {
+    line-height: 20px;
+    padding: 4px 11px;
+    text-align: center;
+    white-space: nowrap;
+    font-family: "Tahoma";
+}
+
+.ta_calendar_cont {
+    position: relative;
+}
+
+.ta_calendar_cont .i_pre,
+.ta_calendar_cont .i_next {
+    position: absolute;
+    top: 7px;
+}
+
+.ta_calendar_cont .i_pre {
+    left: 10px;
+}
+
+.ta_calendar_cont .i_next {
+    right: 10px;
+}
+
+.ta_calendar_top {
+    background: #ccc;
+    padding: 7px 0;
+}
+
+.ta_calendar_top .frm_msg {
+    display: inline-block;
+    margin-left: 8px;
+}
+
+.ta_calendar_top .date-choice {
+    display: inline-block;
+}
+
+.ta_calendar_top .date-choice p {
+    display: inline-block;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.ta_calendar_footer {
+    border-top: 1px solid #e5e5e5;
+    background: #fafafa;
+    padding-top: 6px;
+    height: 34px;
+}
+
+.ta_calendar_footer .frm_btn {
+    float: right;
+    padding-right: 10px;
+    padding-bottom: 7px;
+}
+
+.ta_calendar_footer .frm_btn input {
+    margin-left: 3px;
+}
+
+.ta_calendar_footer .frm_msg {
+    float: left;
+    padding-left: 10px;
+    vertical-align: middle;
+    opacity: 0;
+}
+
+.ta_calendar_footer .ipt_text_s {
+    padding: 4px 4px;
+}
+
+.ta_ipt_text,
+.ta_ipt_textarea,
+.ta_ipt_text_s {
+    border: 1px solid #CCCCCC;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #555555;
+    font-size: 12px;
+    height: 16px;
+    line-height: 16px;
+    padding: 6px 4px;
+    position: relative;
+    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+    vertical-align: middle;
+    width: 180px;
+    z-index: 2;
+}
+
+.ta_ipt_text_s {
+    width: 80px;
+}
+
+.ta_btn {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #F5F5F5;
+    background-image: -moz-linear-gradient(center top, #FEFEFE, #F5F5F5);
+    background-repeat: repeat-x;
+    border-color: #CACACA #CACACA #B3B3B3;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+    color: #333333;
+    cursor: pointer;
+    display: inline-block;
+    /*font-family: "΢���ź�", "����";*/
+    font-size: 12px;
+    line-height: 20px;
+    margin-bottom: 0;
+    outline: 0 none;
+    padding: 3px 12px;
+    text-align: center;
+}
+
+.ta_btn:hover,
+.ta_btn:active,
+.ta_btn.active,
+.ta_btn.disabled,
+.ta_btn[disabled] {
+    color: #333333;
+}
+
+.ta_btn:hover {
+    background-color: #FEFEFE;
+    background-image: none;
+    color: #333333;
+    text-decoration: none;
+    transition: background-position 0.1s linear 0s;
+}
+
+.ta_btn:focus {
+    outline: thin dotted #333333;
+    outline-offset: -2px;
+}
+
+.ta_btn.active,
+.ta_btn:active {
+    background-color: #E6E6E6;
+    background-image: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    outline: 0 none;
+}
+
+.ta_btn.disabled,
+.ta_btn[disabled] {
+    background-color: #E6E6E6;
+    background-image: none;
+    box-shadow: none;
+    cursor: default;
+    opacity: 0.65;
+}
+
+.ta_btn {
+    margin: 2px 5px 0 0;
+    vertical-align: top;
+}
+
+.ta_btn:hover {
+    background-position: 0 -16px;
+}
+
+.ta_btn_primary {
+    background-color: #B4D66F;
+    background-image: -moz-linear-gradient(center top, #C7E184, #A2CC59);
+    border: 1px solid #88AB4A;
+    color: #56740F;
+}
+
+.ta_btn_primary:hover {
+    background-color: #5C96DB;
+    background-image: -moz-linear-gradient(center top, #74A5ED, #4789CD);
+    border: 1px solid #286AB1;
+    color: #FFFFFF;
+}
+
+.cf:after {
+    clear: both;
+}
+
+.cf:before,
+.cf:after {
+    content: "";
+    display: table;
+}
+
+.cf:before,
+.cf:after {
+    content: "";
+    display: table;
+}
+
+
+/*=========日历组件filtercss==end==========*/
+
+
+/*targetTable*/
+
+.targetTable tr td:last-child {
+    background: url(../img/icon-success.svg) 30px center no-repeat;
+}
+
+.targetTable tr {
+    height: 48px;
+    line-height: 48px;
+}
+
+.targetTable th,
+.targetTable td {
+    text-align: left;
+    font-family: PingFangSC-Semibold;
+    font-size: 12px;
+    color: #404560;
+    line-height: 12px;
+    padding-left: 24px;
+}
+
+.targetTable td {
+    font-family: PingFangSC-Regular;
+}
+
+.targetTable thead {
+    background: #F5F7F9;
+}
+
+.loadMore {
+    padding: 0 24px;
+    font-family: PingFangSC-Semibold;
+    font-size: 12px;
+    color: #818596;
+    line-height: 48px;
+    height: 48px;
+    background: url(../img/arrow.svg) 80px center no-repeat;
+}

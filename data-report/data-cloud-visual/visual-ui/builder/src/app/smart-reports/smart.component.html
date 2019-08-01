@@ -1,0 +1,18 @@
+<div class="smart-container" [ngClass]="{'smart-chartMode':stageService.chartMode}">
+    <div class="smart-header clearfix">
+        <smart-header></smart-header>
+    </div>
+
+    <!--config panel-->
+    <div class="smart-right">
+        <smart-configs></smart-configs>
+    </div>
+
+    <!--stage & reports-->
+    <div class="smart-left" [ngClass]="{'smart-preview': stageService.chartMode}" id="smartLeft">
+        <smart-reports></smart-reports>
+    </div>
+
+    <dialog-data></dialog-data>
+
+</div>

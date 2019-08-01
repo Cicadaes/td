@@ -1,0 +1,12 @@
+.idea
+.zip
+.DS_Store
+.idea/
+.vscode/
+node/
+node_modules/
+dist/
+*.tar.gz
+smart-reports-npm/
+common-npm/
+npm-debug.log

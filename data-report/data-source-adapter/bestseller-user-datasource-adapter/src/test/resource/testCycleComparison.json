@@ -1,0 +1,61 @@
+{
+  "datasource_id": 57,
+  "dateDimensions": [
+    {
+      "field": "calculated_date",
+      "alias": "date",
+      "convertFunction": {
+        "ruleType": "DateConvertFunction",
+        "rule": {
+          "yyyyMMdd": "yyyy-MM"
+        }
+      }
+    }
+  ],
+  "dimensions": [
+    {
+      "field": "cycle",
+      "alias": "客户分类"
+    }
+  ],
+  "metrics": [
+    {
+      "field": "crowd_count",
+      "alias": "value"
+    }
+  ],
+  "dateFilters": [
+    {
+      "field": "calculated_date",
+      "operator": "in",
+      "value": "20170930,20171031,20171130"
+    }
+  ],
+  "filters": [
+    {
+      "field": "brand",
+      "operator": "=",
+      "value": "ONLY"
+    },
+    {
+      "field": "channel",
+      "operator": "=",
+      "value": "ALL"
+    }
+  ],
+  "orderBy": [
+    {
+      "field": "calculated_date",
+      "function": "asc"
+    },
+    {
+      "field": "cycle",
+      "function": "asc"
+    }
+  ],
+  "dateGranularity": 0,
+  "proportion": [
+    "date"
+  ],
+  "pageCount": true
+}

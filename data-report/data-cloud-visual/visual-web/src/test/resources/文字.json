@@ -1,0 +1,326 @@
+{
+    "id":785,
+    "name": "文字",
+    "description": "文字",
+    "iconPath": null,
+    "iconData": null,
+    "type": 1,
+    "groupId":9,
+    "orderNum":1,
+    "view": {
+        "id": null,
+        "toolTip": null,
+        "fieldTabs": [
+            {
+                "name": "style",
+                "fieldGroups": [
+                    {
+                        "name": "字体和段落",
+                        "scripts": null,
+                        "fields": [
+                            {
+                                "code": "font_fontColor",
+                                "name": "字体颜色",
+                                "description": "字体颜色",
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 15,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "iconClass":"icon_svg text_format",
+                                "childrenFields": []
+                            },
+                            {
+                                "code": "font_fontSize",
+                                "name": "字体大小",
+                                "description": "字体大小",
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 2,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "iconClass":"icon_svg fontsize_format",
+                                "childrenFields": []
+                            },
+                            {
+                                "code": "font_fontFamily",
+                                "name": "字体",
+                                "description": "字体",
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": "微软雅黑",
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": ["微软雅黑","宋体","黑体","微软简综艺","楷体","隶书","华文行楷","华文隶书"],
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 2,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "iconClass":"icon_svg fontsize_format",
+                                "childrenFields": []
+                            },
+                            {
+                                "code": "font",
+                                "name": "font",
+                                "description": null,
+                                "valueType": 4,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 19,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "childrenFields": [
+                                    {
+                                        "code": "font_fontWeight",
+                                        "name": "粗体",
+                                        "description": "粗体",
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": null,
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 14,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "childrenFields": []
+                                    },
+                                    {
+                                        "code": "font_fontStyle",
+                                        "name": "斜体",
+                                        "description": "斜体",
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": null,
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 14,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "childrenFields": []
+                                    },
+                                    {
+                                        "code": "font_textDecoration",
+                                        "name": "下划线",
+                                        "description": "下划线",
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": null,
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 14,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "childrenFields": []
+                                    },
+                                    {
+                                        "code": "font_textThrough",
+                                        "name": "删除线",
+                                        "description": "删除线",
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": null,
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 14,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "childrenFields": []
+                                    }
+
+                                ]
+                            },
+                            {
+                                "code": "font_textAlign",
+                                "name": "font_textAlign",
+                                "description": null,
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 19,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "childrenFields": [
+                                    {
+                                        "code": "left",
+                                        "name": "左对齐",
+                                        "description": "左对齐",
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": null,
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 14,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "childrenFields": []
+                                    },
+                                    {
+                                        "code": "center",
+                                        "name": "居中",
+                                        "description": "居中",
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": null,
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 14,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "childrenFields": []
+                                    },
+                                    {
+                                        "code": "right",
+                                        "name": "右对齐",
+                                        "description": "右对齐",
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": null,
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 14,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "childrenFields": []
+                                    },
+                                    {
+                                        "code": "justify",
+                                        "name": "两端对齐",
+                                        "description": "两端对齐",
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": null,
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 14,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "childrenFields": []
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "背景和边框",
+                        "scripts": null,
+                        "fields": [
+                            {
+                                "code": "backgroundBorder",
+                                "name": "背景颜色",
+                                "description": null,
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 20,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "childrenFields": [
+                                    {
+                                        "code": "backgroundColor",
+                                        "name": "背景颜色",
+                                        "description": null,
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": null,
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 15,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "iconClass":"icons_svg chartbg_format",
+                                        "childrenFields": []
+                                    }
+                                ]
+                            }
+
+                        ]
+                    }
+                ]
+            },
+            {
+                "name":"data",
+                "fieldGroups":[
+                    {
+                        "name": "文本信息",
+                        "scripts": null,
+                        "fields": [
+                            {
+                                "code": "font_value",
+                                "name": "文本内容",
+                                "description": "文本内容",
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 1,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "iconClass":null,
+                                "childrenFields": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.factory.HiveTableStoreInfoDao" >
+
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.factory.vo.HiveTableStoreInfo" >
+    <id column="tbl_id" property="tblId" />
+    <result column="tbl_name" property="tblName" />
+    <result column="sd_id" property="sdId" />
+    <result column="db_id" property="dbId" />
+    <result column="input_format" property="inputFormat" />
+    <result column="location" property="location" />
+    <result column="output_format" property="outputFormat" />
+</resultMap>
+
+<select id="findtableStoreInfo" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select a.tbl_id,a.tbl_name,a.sd_id ,a.db_id,s.input_format,s.location,s.output_format
+    from
+    (select  tbl_id,tbl_name,db_id,sd_id from hive.tbls where tbl_name=#{value})) a,
+    (select s.input_format,s.location,s.output_format,s.sd_id from hive.sds s) s
+    where a.sd_id=s.sd_id
+</select>
+</mapper>

@@ -1,0 +1,33 @@
+/*factory*/
+
+:host /deep/ .ui-dialog .ui-dialog-content dl dd .ui-dropdown{
+    width: 344px!important;
+}
+
+:host /deep/ .ui-dialog .ui-dialog-content dl dd .ui-dropdown .ui-inputtext{
+    padding: 8px;
+}
+
+
+
+.report_button button{
+    cursor: not-allowed;
+    float: right;
+    pointer-events: none;
+}
+
+.report_button button.surface_color{
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+}
+
+.confirm_report{
+    cursor: not-allowed!important;
+    background: #657180!important;
+    pointer-events: none!important;
+}
+
+.invaliderr{
+    border-color: #f00!important;
+}

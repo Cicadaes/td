@@ -1,0 +1,43 @@
+<main>
+    <p-growl [value]="msgs" [life]="3000"></p-growl>
+    <div class="user l" id="userPerson">
+        <div class="iconfont icon-person l"></div>
+        <div class="username l">{{userName}}</div>
+        <div class="down l"></div>
+        <div class="userlayer">
+            <ul>
+                <li (click)="revisePassword()">修改密码</li>
+                <li (click)="layoutUser()">退出</li>
+            </ul>
+        </div>
+    </div>
+
+    <p-dialog header="修改密码" [(visible)]="display" modal="modal" width="420" responsive="true" [closable]="true">
+        <section class="datacloud_list">
+            <ul>
+                <li>
+                    <label>登录邮箱：</label> {{userName}}
+                </li>
+                <li>
+                    <label>原始密码：</label>
+                    <input type="password" placeholder="输入原始密码(6-32位)" [(ngModel)]="passwordData" (focus)="iptHidden()">
+                </li>
+                <li>
+                    <label>新密码：</label>
+                    <input type="password" placeholder="输入新密码(6-32位)" [(ngModel)]="userpassword" (focus)="iptHidden()">
+                </li>
+                <li>
+                    <label>确认密码：</label>
+                    <input type="password" placeholder="再次输入新密码(6-32位)" [(ngModel)]="userpasswordTrue" (focus)="iptHidden()">
+                </li>
+            </ul>
+        </section>
+        <section class="clearfix user_password">{{userTips}}</section>
+        <footer>
+            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                <button type="button" pButton (click)="display=false" label="No">取消</button>
+                <button type="button" pButton (click)="confirm()" label="Yes">确定</button>
+            </div>
+        </footer>
+    </p-dialog>
+</main>

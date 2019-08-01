@@ -1,0 +1,32 @@
+<main>
+    <div class="datacloud_title">
+        <div class="buttons padding-none r" style="border-top: 0 none">
+            <button class="ui-button-icon-left ui-c fa fa-fw" (click)="addDataSourceDialog(project)">
+                <span class="iconfont icon-addincreased"></span>
+                新建报表
+            </button>
+        </div>
+        <em (click)="reportListRouter()">数据源</em> &gt; <strong>{{dataSourceName}}</strong>
+    </div>
+    <div class="pphead">数据源详情</div>
+    <div class="datasource_detail clearfix">
+        {{datareportName}}
+    </div>
+
+    <div class="computing_detail_bottom">
+        <p-tabView>
+            <p-tabPanel header="元数据">
+                <metadata-report-table></metadata-report-table>
+            </p-tabPanel>
+
+            <p-tabPanel header="样例数据">
+                <sample-report-table></sample-report-table>
+            </p-tabPanel>
+
+            <p-tabPanel header="关联报表">
+                <associated-report-table></associated-report-table>
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+    <reportddetail-dialog [config]="config"></reportddetail-dialog>
+</main>

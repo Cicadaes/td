@@ -1,0 +1,2 @@
+导出：/Users/yangruobin/myapp/mysql-5.7.13-osx10.11-x86_64/bin/mysqldump -h 172.23.4.54 -P 3306 -udatacloud -pdatacloud@talkingdata --databases visual > visual.sql
+导入：

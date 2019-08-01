@@ -1,0 +1,72 @@
+/*indexPriview样式*/
+
+.indexPriview {
+    padding: 0px 0px 20px 30px;
+    float: left;
+    border-right: 1px solid #ccc;
+    margin: 20px 0;
+    min-width: 264px;
+}
+
+.indexPriview:last-child {
+    border: none;
+}
+
+.indexPriview p {
+    font-size: 14px;
+    color: #999;
+    margin: 20px 0;
+}
+
+.indexPriview ul li {
+    list-style: none;
+    color: #666;
+    font-weight: normal;
+}
+
+.indexPriview span {
+    margin: 0 30px;
+}
+
+.indexPriview b {
+    display: inline-block;
+    color: #333;
+    font-weight: normal;
+}
+
+.indexPriview strong {
+    font-weight: normal;
+    color: #666;
+}
+
+.indexPriview .data b {
+    font-size: 20px;
+    width: 45%;
+}
+
+.indexPriview .data span {
+    font-size: 12px;
+}
+
+.indexPriview .data li {
+    height: 32px;
+    line-height: 32px;
+}
+
+.indexPriview .type li b {
+    width: 45%;
+}
+
+.indexPriview .type li:first-child b {
+    font-weight: bold !important;
+}
+
+.indexPriview .data li:nth-child(2),
+.indexPriview .data li:nth-child(2) b {
+    color: #999;
+}
+
+.indexPriview .data li:nth-child(1),
+.indexPriview .data li:nth-child(1) b {
+    color: #000;
+}

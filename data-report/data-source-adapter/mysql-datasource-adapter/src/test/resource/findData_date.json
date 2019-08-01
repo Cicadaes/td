@@ -1,0 +1,39 @@
+{
+  "datasource_id": 13,
+  "dimensions": [
+    {
+      "field": "brand"
+    },
+    {
+      "field": "project_name"
+    }
+  ],
+  "metrics": [
+    {
+      "field": "front_users"
+    },
+    {
+      "field": "ROUND(SUM(sleep_active_users)/SUM(active_users)*100,1)"
+    }
+  ],
+  "filters": [
+    {
+      "field": "project_type",
+      "operator": "=",
+      "value": "6"
+    }
+  ],
+  "dateFilters": [
+    {
+      "field": "date",
+      "operator": ">=",
+      "value": "2017-10"
+    },
+    {
+      "field": "date",
+      "operator": "<=",
+      "value": "2017-11"
+    }
+  ],
+  "dateGranularity":1
+}

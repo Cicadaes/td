@@ -1,0 +1,46 @@
+<main>
+    <div class="computing_detail_table">
+        <p-dataTable [value]="newDatas" emptyMessage="暂无内容">
+            <p-column *ngFor="let col of cols" [header]="col.value">
+                <template let-project="rowData" pTemplate="body">
+                    {{project[col.value]}}
+
+                    <span class="iconfont icon-tubiao01" (click)="setParameters(project)"></span>
+                </template>
+            </p-column>
+        </p-dataTable>
+        <x-paginator *ngIf="reportPaginator" [value]="value" (onPagesChange)="paginate($event)"></x-paginator>
+    </div>
+
+    <p-dialog [header]="taskTitle" [(visible)]="display" modal="modal" [width]="dialogWidth" responsive="true" [closable]="true">
+        <section class="add_project">
+            <dl>
+                <dt>字段</dt>
+                <dd>
+                    <input type="search" [(ngModel)]="dataName" disabled>
+                </dd>
+            </dl>
+            <dl>
+                <dt>关联参数</dt>
+                <dd style="margin-top: 5px">
+                    <div class="parameter_mar">
+                        <p-radioButton [(ngModel)]="relationParameters" [name]="relationParameters" label="无" [value]="true" (onClick)="changeParameters()"></p-radioButton>　
+                    </div>
+                    <div class="parameter_mar">
+                        <p-radioButton [(ngModel)]="relationParameters" [name]="relationParameters" label="有" [value]="false" (onClick)="changeParameters()"></p-radioButton>
+                        <input type="search" [(ngModel)]="parametersName" *ngIf="!relationParameters" [class.invaliderr]="errorTips" placeholder="请输入关联参数" style="width: 290px;
+    margin-left: 15px;">
+                        <div class="validation_error" *ngIf="errorTips">关联参数不能为空</div>
+                    </div>
+                </dd>
+            </dl>
+
+        </section>
+        <footer>
+            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                <button type="button" pButton (click)="cancel()" label="No">取消</button>
+                <button type="button" pButton (click)="confirm()" label="Yes">确定</button>
+            </div>
+        </footer>
+    </p-dialog>
+</main>

@@ -1,0 +1,21 @@
+<div class="tfilter-date-picker">
+    <!--<div class="tfilter-date-box" (click)="onSelect(showField)">
+        <p-radioButton name="groupname-date-picker" value="0" label="自动" [(ngModel)]="showField"></p-radioButton>
+    </div>
+    <div class="tfilter-date-box" (click)="onSelect(showField)">
+        <p-radioButton name="groupname-date-picker" value="1" label="自定义" [(ngModel)]="showField"></p-radioButton>
+    </div>
+    <div class="clearfix"></div>
+    <div class="tfilter-date-con">
+        <p class="tfilter-date-sel" *ngIf="showField == 0">今天</p>
+        <p *ngIf="showField == 1">
+          <tconfig-date-picker (onRender)="onRenderFa($event)" [tconfig]="tconfig"></tconfig-date-picker> 
+        </p>
+    </div>-->
+
+    <div class="tfilter-date-con">
+        <p>
+          <tconfig-date-picker (onRender)="onRenderFa($event)" [tconfig]="tconfig"></tconfig-date-picker> 
+        </p>
+    </div>
+</div>

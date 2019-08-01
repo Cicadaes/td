@@ -1,0 +1,43 @@
+.datePicker {
+   position:relative;
+   display: inline-block;
+   width: 100%;
+}
+
+.datePicker .pinput {
+    padding:10px;
+    position:absolute;
+    top:28px;
+    left:0;
+    background:#fefefe;
+    border: 1px solid #dfe7f2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    width: 34.6em;
+    z-index: 100;
+}
+
+.datePicker .date-box {
+    position:relative
+}
+.datePicker .date-box .ui-inputtext {
+    display: inline-block;
+    min-width: calc(100% - 32px);
+    margin-left: 10px;
+    line-height: 1.5;
+    border: 1px solid #dfe7f2;
+    cursor: pointer;
+    padding: 6px 10px;
+}
+.datePicker .date-box .ui-inputtext.disable {
+    background: #f8f8f8;
+    cursor: not-allowed
+}
+.datePicker .date-box .ui-inputtext label {
+    color:#dfe7f2
+}
+.datePicker .date-box .ui-button-icon-right {
+    position:absolute;
+    right:8px;
+    top:9px;
+    cursor: pointer
+}

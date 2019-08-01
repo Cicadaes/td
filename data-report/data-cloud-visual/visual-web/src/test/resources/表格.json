@@ -1,0 +1,261 @@
+{
+    "id":791,
+    "name": "表格",
+    "description": "表格",
+    "iconPath": null,
+    "iconData": null,
+    "type": 2,
+    "groupId":4,
+    "orderNum":2,
+    "styleView": {
+        "id": null,
+        "toolTip": null,
+        "fieldTabs": [
+            {
+                "id": null,
+                "name": null,
+                "fieldGroups": [
+                    {
+                        "name": "表格标题",
+                        "scripts": null,
+                        "fields": [
+                            {
+                                "code": "table_thead_fontColor",
+                                "name": "标题字体颜色",
+                                "description": "标题字体颜色",
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 15,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "iconClass":"icon_svg text_format",
+                                "childrenFields": []
+                            },
+                            {
+                                "code": "table_thead_fontSize",
+                                "name": "标题字体大小",
+                                "description": "标题字体大小",
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 2,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "iconClass":"icon_svg fontsize_format",
+                                "childrenFields": []
+                            },
+                            {
+                                "code": "table_thead_fontFamily",
+                                "name": "标题字体",
+                                "description": "标题字体",
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": "微软雅黑",
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": ["微软雅黑","宋体","黑体","微软简综艺","楷体","隶书","华文行楷","华文隶书"],
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 2,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "iconClass":"icon_svg fontsize_format",
+                                "childrenFields": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "表格标签",
+                        "scripts": null,
+                        "fields": [
+                            {
+                                "code": "table_tbody_fontColor",
+                                "name": "标签字体颜色",
+                                "description": "标签字体颜色",
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 15,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "iconClass":"icon_svg text_format",
+                                "childrenFields": []
+                            },
+                            {
+                                "code": "table_tbody_fontSize",
+                                "name": "标签字体大小",
+                                "description": "标签字体大小",
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 2,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "iconClass":"icon_svg fontsize_format",
+                                "childrenFields": []
+                            },
+                            {
+                                "code": "table_tbody_fontFamily",
+                                "name": "标签字体",
+                                "description": "标签字体",
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": "微软雅黑",
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": ["微软雅黑","宋体","黑体","微软简综艺","楷体","隶书","华文行楷","华文隶书"],
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 2,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "iconClass":"icon_svg fontsize_format",
+                                "childrenFields": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "表格颜色",
+                        "scripts": null,
+                        "fields": [
+                            {
+                                "code": "table_thead_background_color",
+                                "name": "标题背景颜色",
+                                "description": "字体颜色",
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 15,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "iconClass":"icons_svg theadbg_format",
+                                "childrenFields": []
+                            },
+                            {
+                                "code": "table_cell_border_color",
+                                "name": "单元格边框颜色",
+                                "description": "字体颜色",
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 15,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "iconClass":"icons_svg cellborder_format",
+                                "childrenFields": []
+                            },
+                            {
+                                "code": "table_odd_line_color",
+                                "name": "奇数行颜色",
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 15,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "iconClass":"icons_svg oddline_format",
+                                "childrenFields": []
+                            },
+                            {
+                                "code": "table_even_line_color",
+                                "name": "偶数行颜色",
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 15,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "iconClass":"icons_svg evenline_format",
+                                "childrenFields": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "背景和边框",
+                        "scripts": null,
+                        "fields": [
+                            {
+                                "code": "backgroundBorder",
+                                "name": "背景颜色",
+                                "description": null,
+                                "valueType": 1,
+                                "value": null,
+                                "defaultValue": null,
+                                "minValue": null,
+                                "maxValue": null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 20,
+                                "viewMetaData": null,
+                                "verifyRule": null,
+                                "childrenFields": [
+                                    {
+                                        "code": "backgroundColor",
+                                        "name": "背景颜色",
+                                        "description": null,
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": null,
+                                        "minValue": null,
+                                        "maxValue": null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 15,
+                                        "viewMetaData": null,
+                                        "verifyRule": null,
+                                        "iconClass":"icons_svg chartbg_format",
+                                        "childrenFields": []
+                                    }
+                                ]
+                            }
+
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

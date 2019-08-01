@@ -1,0 +1,27 @@
+<main>
+    <p-dialog [header]="taskTitle" [(visible)]="display" modal="modal" [width]="dialogWidth" responsive="true" [closable]="true">
+        <section class="add_project">
+            <dl>
+                <dt><span class="color_red">*</span>名称</dt>
+                <dd>
+                    <input type="search" [(ngModel)]="dataName" placeholder="请输入报表名称..." maxlength="255" [class.invaliderr]="showerrTip" (keyup)="changeFromName()" (onBlur)="changeFromName()">
+                    <div *ngIf="showerrTip" class="validation_error">
+                        <!--<span class="iconfont icon-warning"></span>-->
+                        {{errorTip}}
+                    </div>
+                </dd>
+            </dl>
+            <dl>
+                <dt><span class="color_red">&nbsp;</span>描述</dt>
+                <dd><textarea class="desc" [(ngModel)]="dataDesc" placeholder="添加报表描述..."></textarea></dd>
+            </dl>
+
+        </section>
+        <footer>
+            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                <button type="button" pButton (click)="cancel()" label="No">取消</button>
+                <button type="button" pButton (click)="confirm()" label="Yes" [class.confirm_report]="showConfirm">确定</button>
+            </div>
+        </footer>
+    </p-dialog>
+</main>

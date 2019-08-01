@@ -1,0 +1,217 @@
+{
+    "name": "带下拉框时序图",
+    "description": "带下拉框时序图",
+    "iconPath": null,
+    "iconData": null,
+    "type": 17,
+    "groupId":1,
+    "orderNum":17,
+    "view": {
+        "id": null,
+        "toolTip": null,
+        "fieldTabs": [
+            {
+                "name": "style",
+                "fieldGroups": [
+                    {
+                        "name": "标题配置",
+                        "scripts": null,
+                        "fields": [
+                            {
+                                "code": "title_font",
+                                "name": "是否显示表头",
+                                "description": null,
+                                "valueType": 1,
+                                "value":null,
+                                "defaultValue": null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues": null,
+                                "requried": 0,
+                                "helpInfo": null,
+                                "viewType": 14,
+                                "viewMetaData": null,
+                                "verifyRule":null,
+                                "iconClass":"icons_svg color_format",
+                                "childrenFields": [
+                                    {
+                                        "code": "title_name",
+                                        "name": "标题名称",
+                                        "description": null,
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": null,
+                                        "minValue":null,
+                                        "maxValue":null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 26,
+                                        "viewMetaData": null,
+                                        "verifyRule":null,
+                                        "iconClass":null,
+                                        "childrenFields": []
+                                    },{
+                                        "code": "chart_download",
+                                        "name": "下载设置",
+                                        "description": null,
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": "1",
+                                        "minValue":null,
+                                        "maxValue":null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 14,
+                                        "viewMetaData": null,
+                                        "verifyRule":null,
+                                        "iconClass":null,
+                                        "childrenFields": []
+                                    },{
+                                        "code": "chart_help",
+                                        "name": "帮助设置",
+                                        "description": null,
+                                        "valueType": 1,
+                                        "value": null,
+                                        "defaultValue": "1",
+                                        "minValue":null,
+                                        "maxValue":null,
+                                        "optionValues": null,
+                                        "requried": 0,
+                                        "helpInfo": null,
+                                        "viewType": 26,
+                                        "viewMetaData": null,
+                                        "verifyRule":null,
+                                        "iconClass":null,
+                                        "childrenFields": []
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name":"data",
+                "fieldGroups":[
+                    {
+                        "name":"基本信息",
+                        "scripts":null,
+                        "fields":[
+                            {
+                                "code":"dataSource",
+                                "name":"数据源",
+                                "description":null,
+                                "valueType":6,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":24,
+                                "viewMetaData":{"postChange":{"action":"callBack","postEvent":{"actionValue":"report/dataSources/id/metaData","action":"callBack","actionParams":["datasource_id"],"postEvent":"datasource-reload | metadata-render"}}},
+                                "multipleMaxNumber":1,
+                                "verifyRule":null,
+                                "iconClass":null,
+                                "childrenFields":[]
+                            }
+                        ]
+                    },
+                    {
+                        "name":"参数信息",
+                        "scripts":null,
+                        "fields":[
+                            {
+                                "code":"dimension_name",
+                                "name":"X轴",
+                                "fieldAliasName": "date",
+                                "description":null,
+                                "valueType":6,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":24,
+                                "viewMetaData":null,
+                                "multipleMaxNumber":1,
+                                "verifyRule":null,
+                                "iconClass":null,
+                                "childrenFields":[]
+                            },
+                            {
+                                "code":"dimension_subdivision",
+                                "name":"细分维度",
+                                "fieldAliasName": "name",
+                                "description":null,
+                                "valueType":6,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":24,
+                                "viewMetaData":null,
+                                "multipleMaxNumber":1,
+                                "verifyRule":null,
+                                "iconClass":null,
+                                "childrenFields":[]
+                            },
+                            {
+                                "code":"metric_value",
+                                "name":"指标输入框",
+                                "fieldAliasName": "value",
+                                "description":null,
+                                "valueType":6,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":25,
+                                "viewMetaData":{"onChange":true},
+                                "multipleMaxNumber":null,
+                                "verifyRule":null,
+                                "iconClass":null,
+                                "childrenFields":[]
+                            }
+                        ]
+                    },
+                    {
+                        "name":"默认日期范围",
+                        "scripts":null,
+                        "fields":[
+                            {
+                                "code":"date",
+                                "name":"日期",
+                                "description":null,
+                                "valueType":8,
+                                "value":null,
+                                "defaultValue":null,
+                                "minValue":null,
+                                "maxValue":null,
+                                "optionValues":null,
+                                "requried":0,
+                                "helpInfo":null,
+                                "viewType":22,
+                                "viewMetaData":null,
+                                "verifyRule":null,
+                                "iconClass":null,
+                                "childrenFields":[]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

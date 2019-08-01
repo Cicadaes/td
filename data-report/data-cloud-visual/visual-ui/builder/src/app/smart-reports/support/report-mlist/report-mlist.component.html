@@ -1,0 +1,40 @@
+<div class="header">
+    <!-- <div class="logo l">
+        <a routerLink="/catalog">
+            < img src="../../public/images/logo.png"></ a>
+    </div> -->
+    <div class="nav">
+        <ul>
+            <li class="item">
+                <span class="icon-dataml"></span> 我的报表
+            </li>
+        </ul>
+    </div>
+</div>
+<main>
+    <!-- <div class="datacloud_title"><b>我的报表</b></div> -->
+    <div class="tools border-top" style="width:100%; float: left">
+        <div class="buttons padding-none l" style="border-top: 0 none">
+            <button class="ui-button-icon-left ui-c fa fa-fw" (click)="addDataSourceDialog()">
+                <span class="iconfont icon-addincreased"></span>
+                新建报表
+            </button>
+        </div>
+
+        <div class="search buttons r">
+            <div *ngIf="!filterShow" style="display: inline-block">
+                <input type="text" placeholder="关键词..." class="search-data" [(ngModel)]="searchText" (keyup)="search()" style="float: none">
+                <button class="iconfont icon-search button-search" style="cursor: auto;left: 34px;margin-top: 0"></button>
+            </div>
+
+            <button (click)="searchText='';filterShow=!filterShow" class="search_task">
+                高级搜索
+                <span class="downsearch" [class.upicon]="filterShow"></span>
+            </button>
+        </div>
+    </div>
+    <reportmlist-filter *ngIf="filterShow"></reportmlist-filter>
+    <reportmlist-table [config]="config"></reportmlist-table>
+    <dialog-data></dialog-data>
+    <reportmlist-dialog [config]="config"></reportmlist-dialog>
+</main>

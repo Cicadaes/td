@@ -1,0 +1,85 @@
+
+spring:
+  profiles:
+    include: swagger
+
+  datasource:
+    report:
+      name: reportDataSource
+      url: jdbc:mysql://172.23.4.54:3306/visual?characterEncoding=utf-8&&zeroDateTimeBehavior=convertToNull&&autoReconnect=true
+      username: root
+      password: root
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      filters: stat
+      maxActive: 20
+      initialSize: 1
+      maxWait: 60000
+      minIdle: 1
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxOpenPreparedStatements: 20
+      driverClassName: com.mysql.jdbc.Driver
+  redis:
+    sentinel:
+      master: mymaster
+      nodes: 172.23.4.138:26379,172.23.4.139:26379
+    pool:
+      max-idle: 8
+      min-idle: 0
+      max-wait: 1000
+      max-active: 50
+      testOnBorrow: true
+    expiration:
+      defaultExpiration: 10
+      dataExpiration: 10
+server:
+  context-path: /wreport_datareport
+  port: ${server.port}
+
+#mybatis:
+#   config-locations: classpath:com/talkingdata/datacloud/visual/mybatis-config.xml
+#   mapper-locations: classpath:com/talkingdata/datacloud/visual/mapper/report/*.xml
+
+# =======================Wreport Properties==========================
+
+app:
+  service:
+    security: http://localhost/wreport_datareport/j_spring_cas_security_check
+    home: http://localhost/wreport_datareport
+cas:
+  service:
+    login: http://172.23.4.137/sso/login
+    logout: http://172.23.4.137/sso/logout
+  url:
+    prefix: http://172.23.4.137/sso
+
+#JOB
+systemcode: datareport
+#--------
+
+appcode: datareport
+apptaken: 14e1b600b1fd579f47433b88e8d85291
+menu: MENU
+button: BUTTON
+typeList: report
+deleteMaxFileSize: 1073741824
+adminRoleCode: visual-web_ADMIN
+
+img_file_path: images/
+
+
+email_host: smtp.office365.com
+email_port: 587
+email_username: ruobin.yang@tendcloud.com
+email_password: tymm_Yang_13
+mail_smtp_auth: true
+mail_smtp_timeout: 2500
+mail_smtp_starttls_enable: true
+#=====================================datareport yml properites===============================
+

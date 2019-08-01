@@ -1,0 +1,78 @@
+<main class="dialog">
+    <p-dialog [header]="taskTitle" [(visible)]="display" [resizable]="false" modal="modal" [width]="dialogWidth" responsive="true" [closable]="true">
+        <div class="clearfix" *ngIf='cutover'>
+            <section class="add_project clearfix">
+                <dl>
+                    <dt><span class="color_red">*</span>名称</dt>
+                    <dd>
+                        <input type="search" [(ngModel)]="dataName" placeholder="添加数据源..." maxlength="255" [class.invaliderr]="showerrTip" (onBlur)="checkFormName()" (keyup)="checkFormName()">
+                        <div *ngIf="showerrTip" class="validation_error">
+                            {{errorTip}}
+                        </div>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt><span class="color_red">&nbsp;</span>描述</dt>
+                    <dd><textarea class="desc" [(ngModel)]="dataDesc" placeholder="添加数据源描述..." [(ngModel)]="textAreaData"></textarea></dd>
+                </dl>
+                <aside *ngIf="editBool">
+                    <dl>
+                        <dt><span class="color_red">*</span>数据源连接</dt>
+                        <dd>
+                            <p-dropdown [options]="dataCauseList" [(ngModel)]="selectedDatasource" (onChange)='changeDatasource(selectedDatasource)'></p-dropdown>
+
+                            <div class="rightBtn ">
+                                <button type="button" pButton (click)='editDataSource()' [class.confirm_report]="showEdit">编辑</button>
+                                <button type="button" pButton (click)='addDataSource()'> 新建</button>
+                                <button type="button" pButton (click)=testConnect(testData) [class.confirm_report]="showEdit">测试连接</button>
+                            </div>
+                        </dd>
+                        <div *ngIf="showerrTip1" class="validation_error">
+                            {{errorTip}}
+                        </div>
+                    </dl>
+                    <div *ngIf="(dataType==20||dataType==21) && dataList!='' ">
+                        <dl>
+                            <dt><span class="color_red">*</span>选择cube</dt>
+                            <dd>
+                                <p-dropdown [options]="dataList" [(ngModel)]="selectedCube" filter="filter" (onChange)='changeCube()'></p-dropdown>
+                            </dd>
+                        </dl>
+                        <div *ngIf="showerrTip2" class="validation_error">
+                            {{errorTip}}
+                        </div>
+                    </div>
+                    <div *ngIf="dataType==19">
+                        <dl>
+                            <dt><span class="color_red">*</span>SQL</dt>
+                            <dd>
+                                <button type="button" pButton [class.confirm_report]="SyntaxCheck" (click)="sqlSyntaxCheck()">语法校验</button>
+                                <button type="button" pButton (click)="getSqlSyntax()">获取SQL查询语句</button>
+                            </dd>
+                            <textarea name="" id="" cols="54" rows="10" [(ngModel)]="SyntaxName" [class.invaliderr]="showerrTipSyntax" (onBlur)="checkSyntax()" (keyup)="checkSyntax()" style="border:1px solid #ccc;margin:10px 0px 0 10px;outline:none;resize:none;"></textarea>
+                            <div *ngIf="showerrTipSyntax" class="validation_error errorTip">
+                                {{errorTipSyntax}}
+                            </div>
+                        </dl>
+                    </div>
+                </aside>
+
+            </section>
+
+            <footer>
+                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                    <button type="button" pButton (click)="cancel()" label="No">取消</button>
+                    <button type="button" pButton (click)="clickpriview(2)" label="Yes" *ngIf="editBool">预览</button>
+                    <button type="button" pButton (click)="confirm()" label="Yes">确定</button>
+                </div>
+            </footer>
+        </div>
+
+        <report-browser></report-browser>
+
+        <report-dialog-layer></report-dialog-layer>
+
+        <report-dialog-sql></report-dialog-sql>
+
+    </p-dialog>
+</main>

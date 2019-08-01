@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="110px" height="64px" viewBox="0 0 110 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>2条形图</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="缩略图-copy" transform="translate(-79.000000, -479.000000)">
+            <g id="2条形图" transform="translate(79.000000, 479.000000)">
+                <path d="M4,62 L110,62 L110,64 L0,64 L0,62 L2,62 L2,0 L4,0 L4,62 Z M0,7 L2,7 L2,9 L0,9 L0,7 Z M0,13.7142857 L2,13.7142857 L2,15.7142857 L0,15.7142857 L0,13.7142857 Z M0,20.4285714 L2,20.4285714 L2,22.4285714 L0,22.4285714 L0,20.4285714 Z M0,27.1428571 L2,27.1428571 L2,29.1428571 L0,29.1428571 L0,27.1428571 Z M0,33.8571429 L2,33.8571429 L2,35.8571429 L0,35.8571429 L0,33.8571429 Z M0,40.5714286 L2,40.5714286 L2,42.5714286 L0,42.5714286 L0,40.5714286 Z M0,47.2857143 L2,47.2857143 L2,49.2857143 L0,49.2857143 L0,47.2857143 Z M0,54 L2,54 L2,56 L0,56 L0,54 Z" id="Combined-Shape-Copy" fill="#464C5B"></path>
+                <rect id="Rectangle-17" fill="#3399FF" x="4" y="52" width="96.8178348" height="5"></rect>
+                <rect id="Rectangle-17-Copy-10" fill="#3399FF" x="4" y="33" width="96.8178348" height="5"></rect>
+                <rect id="Rectangle-17-Copy-12" fill="#3399FF" x="4" y="14" width="64.194434" height="5"></rect>
+                <rect id="Rectangle-17-Copy" fill="#59C99F" x="4" y="45" width="78.9275827" height="5"></rect>
+                <rect id="Rectangle-17-Copy-11" fill="#59C99F" x="4" y="26" width="69.4562728" height="5"></rect>
+                <rect id="Rectangle-17-Copy-13" fill="#59C99F" x="4" y="7" width="96.8178348" height="5"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

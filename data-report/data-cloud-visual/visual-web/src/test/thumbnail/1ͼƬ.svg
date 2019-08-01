@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="108px" height="64px" viewBox="0 0 108 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>1图片</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="缩略图" transform="translate(-581.000000, -90.000000)">
+            <g id="图片" transform="translate(581.000000, 90.000000)">
+                <rect id="Rectangle-14" fill="#DCEEFE" x="0" y="0" width="107.351824" height="64"></rect>
+                <polygon id="Path" fill-opacity="0.8" fill="#FFFFFF" points="107.351824 64 0 64 0 44.5916433 24.1266908 32 62.3311928 52.9847368 84.8409454 40.3923556 107.351824 52.9847368"></polygon>
+                <path d="M69.4073912,26.9473684 C65.7526607,26.9473684 62.7906977,23.9315072 62.7906977,20.2107802 C62.7906977,16.4886992 65.7526607,13.4736842 69.4073912,13.4736842 C73.0617892,13.4736842 76.0240847,16.4886992 76.0240847,20.2107802 C76.0241678,23.9315918 73.0617892,26.9473684 69.4073912,26.9473684 L69.4073912,26.9473684 Z" id="Path" fill="#3399FF"></path>
+            </g>
+        </g>
+    </g>
+</svg>

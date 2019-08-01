@@ -1,0 +1,66 @@
+.pinput-sel {
+    line-height:30px
+}
+.pinput-sel .ui-inputtext {
+  float: left;
+  border:none !important;
+  padding-left:0
+
+}
+.pinput-sel .input-range {
+    float:right;
+}
+
+.pinput-sel .input-range li {
+    float: left
+}
+
+.pinput-sel .input-range li a {
+    cursor: pointer;
+    color:#5697f1
+}
+
+.pinput-sel .input-range li:not(:last-child) {
+    margin-right:10px
+}
+.pcl {
+    zoom:1
+}
+.pcl:after {
+   content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.input-button {
+    margin: 10px 0 0;
+    text-align: right
+}
+
+.input-button .dbtn:not(:last-child) {
+    margin-right:15px
+}
+
+.dbtn {
+    display: inline-block;
+    padding:6px 20px;
+    color:#fff;
+    cursor:pointer
+}
+
+.dbtn.dbtn-blue {
+    background:#5697f1
+}
+.dbtn.dbtn-blue:hover {
+    background:#427ed6
+}
+
+.dbtn.dbtn-gray {
+    background:#eee;
+    color:#333
+}
+.dbtn.dbtn-gray:hover {
+    background:#f6f6f6
+}

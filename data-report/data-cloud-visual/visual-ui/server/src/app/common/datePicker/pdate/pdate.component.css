@@ -1,0 +1,7 @@
+.cal-box .ui-widget-header{
+ 
+}
+
+:host /deep/ .cal-box .ui-state-active {
+    color:#fff!important
+}

@@ -1,0 +1,736 @@
+@import "com_BarXy.css";
+@import "com_CellsFilter.css";
+@import "com_ChinaMap.css";
+@import "com_CityFilter.css";
+@import "com_CityPreview.css";
+@import "com_Filter.css";
+@import "com_IndexPriview.css";
+@import "com_LinkCommon.css";
+@import "com_ManyFilterBar.css";
+@import "com_OverallFilter.css";
+@import "com_Part.css";
+@import "com_PassengerFlowPriview.css";
+@import "com_Radar2.css";
+@import "com_RectFunnel.css";
+@import "com_Scatter.css";
+@import "com_SelectedLine.css";
+@import "com_StackedBar.css";
+@import "com_StoreHeatmap.css";
+@import "com_Strip.css";
+@import "com_TabFilter.css";
+@import "com_Table.css";
+@import "com_RFMFilter.css";
+@import "com_Lifecycle.css";
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.stage .left {
+    float: left;
+}
+
+.stage .right {
+    float: right;
+}
+
+.stage [stage-container] {
+    height: inherit;
+}
+
+.stage {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: auto;
+}
+
+.stage .controller {
+    width: 100%;
+    height: 53px;
+    border-top: 1px solid gray;
+    position: relative;
+    text-align: center;
+    padding: 10px;
+}
+
+.stage .btn-container {
+    text-align: center;
+    float: left;
+    margin-right: 10px;
+}
+
+.stage .btn-index {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    cursor: pointer;
+    user-select: none;
+}
+
+.stage .btn-select {
+    background-color: #cc0033;
+    color: #ffffff;
+}
+
+.stage .upload_layer {
+    width: 500px;
+    background: #000;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 3;
+    display: none;
+}
+
+/*.smallCircle{
+   width:10px;
+   height:10px;
+   border-radius:100%;
+   position:absolute;
+   z-index:1;
+   background:#5f93e1;
+   border: 2px solid #FFFFFF;
+   pointer-events: auto;
+}
+
+.ct{
+ top:-6px;
+ right:49%;
+}
+.lt{
+    top:-5px;
+    left:-5px;
+}
+.rt{
+   top:-5px;
+   right:-5px;
+}
+.rb{
+   bottom:-5px;
+   right:-5px;
+}
+.cb{
+ bottom:-6px;
+ left:49%;
+}
+.lb{
+    bottom:-5px;
+    left:-5px;
+}
+.lc{
+    top:49%;
+    left:-6px;
+}
+.rc{
+    top:49%;
+    right:-6px;
+}*/
+
+/*.inACtive{
+    display:none;
+}*/
+
+/*=================================================*/
+
+.stage .component_title {
+    height: 44px;
+    line-height: 43px;
+    padding: 0 24px;
+    font-size: 14px;
+    color: #434c61;
+    border-bottom: 1px solid #E8E9EC;
+    display: none;
+}
+
+.stage .component_title .overallSelected {
+    display: inline-block;
+    line-height: 14px;
+}
+
+.stage .component_title .overallSelected span {
+    border-right: 1px solid #D7DDE4;
+    display: inline-block;
+    padding-right: 10px;
+    line-height: 14px;
+    font-family: PingFangSC-Semibold;
+    font-size: 14px;
+    color: #1F2544;
+    letter-spacing: 0;
+    margin-right: 10px;
+}
+
+.stage div[component] .component_title {
+    display: block;
+}
+
+/*四象限图样式end*/
+
+/*=================================================*/
+
+.stage .component_title {
+    height: 44px;
+    line-height: 43px;
+    padding: 0 24px;
+    font-size: 14px;
+    color: #434c61;
+    border-bottom: 1px solid #E8E9EC;
+    display: none;
+}
+
+.stage .component_title .overallSelected {
+    display: inline-block;
+    line-height: 14px;
+}
+
+.stage .component_title .overallSelected span {
+    border-right: 1px solid #D7DDE4;
+    display: inline-block;
+    padding-right: 10px;
+    line-height: 14px;
+    font-family: PingFangSC-Semibold;
+    font-size: 14px;
+    color: #1F2544;
+    letter-spacing: 0;
+}
+
+.stage div[component] .component_title {
+    display: block;
+}
+
+.stage .component_download {
+    cursor: pointer;
+    background: url('./icon－download.svg') no-repeat center center /14px 14px;
+}
+
+.stage .component_help span.icon_help_button {
+    background: url('./icon－info.svg') no-repeat center center /14px 14px;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    position: relative;
+    top: -2px;
+}
+
+.stage .component_title_text {
+    width: 50%;
+    float: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-weight: bold;
+}
+
+.stage .component_icon {
+    margin: 0 2px;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    position: relative;
+    top: 9px;
+    display: none;
+}
+
+.stage .component_help:hover p {
+    display: block;
+}
+
+.stage .component_help p {
+    width: 240px;
+    padding: 8px 15px;
+    background: rgba(28, 36, 56, 0.8);
+    color: #ffffff;
+    font-size: 12px;
+    position: absolute;
+    left: 28px;
+    top: -5px;
+    line-height: 20px;
+    display: none;
+    z-index: 20;
+    white-space: initial;
+}
+
+.stage .component_help p:before {
+    content: '';
+    border-right: 5px solid rgba(28, 36, 56, 0.8);
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    position: absolute;
+    left: -5px;
+    top: 12px;
+    display: block;
+}
+
+.stage .chart-textarea-style textarea {
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    -moz-border-radius: 0.25em;
+    -webkit-border-radius: 0.25em;
+    border-radius: 0.25em;
+    font-size: 1em;
+    color: #55595c;
+    line-height: 1.25;
+    height: 100px;
+    resize: none;
+    margin: 10px 0;
+    padding: 8px 10px;
+}
+
+.stage .chart-post-button {
+    width: 90px;
+    height: 28px;
+    z-index: 7;
+    border-color: #4797ed;
+    background: #4797ed;
+    color: #fff;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 28px;
+    cursor: pointer;
+}
+
+.stage .smart-preview div[component-container] {
+    cursor: default !important;
+}
+
+.stage .none:after {
+    display: none !important;
+}
+
+.stage .component_tabfilter {
+    width: 100%;
+}
+
+.stage .component_tabfilter ul {
+    padding: 0 24px;
+}
+
+.stage .component_tabfilter ul li {
+    display: inline-block;
+    font-size: 12px;
+    color: #404560;
+    padding: 10px 0;
+    margin-right: 20px;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    -webkit-transition: all linear .3s;
+    -moz-transition: all linear .3s;
+    transition: all linear .3s;
+}
+
+.stage .component_tabfilter ul li:hover {
+    color: #43A3FB;
+}
+
+.stage .component_tabfilter ul li.tabFilter_choose {
+    color: #43A3FB;
+    border-color: #43A3FB;
+}
+
+/* 小时动态指标概览 */
+
+.stage .indexPriviewWap {
+    background: #FFFFFF;
+    margin-bottom: 10px;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.stage .passengerFlowPriview {
+    padding: 0px 20px 0px 20px;
+    float: left;
+    border-right: 1px solid #E8E9EC;
+    margin: 20px 0;
+    min-width: 211.2px;
+}
+
+.stage .passengerFlowPriview .data span {
+    font-family: HelveticaNeue;
+    font-size: 12px;
+    color: #404560;
+    height: 32px;
+    line-height: 32px;
+}
+
+.stage .funnelHelp,
+.stage .downloadBtn {
+    background: url('./icon－info.svg') no-repeat center center /16px 16px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+    float: right;
+}
+
+.stage .downloadBtn {
+    background: url('./icon－download.svg') no-repeat center center /16px 16px;
+    margin-right: 15px;
+}
+
+.stage .projectTitName {
+    margin-left: 20px;
+}
+
+/* 小时动态多店柱图 */
+
+.stage .namyFilterBarButton {
+    width: 56px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    background: #FFFFFF;
+    border: 1px solid #DEDFE3;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.stage .namyFilterBarButton.namyCurrentFilter {
+    background: #43A3FB;
+    border: none;
+    color: #fff;
+    border-radius: 4px 0 0 4px;
+}
+
+.stage .namyFilterBarButton.defaultFilter {
+    border-radius: 0 4px 4px 0;
+    border-left: none;
+}
+
+/* 城市概览中国地图 */
+
+.stage .chainMapContentBox {
+    background: #FFFFFF;
+    border: 1px solid #E8E9EC;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 2px;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.stage .chainMapContentBox h3 {
+    height: 40px;
+    line-height: 40px;
+    margin: 0px;
+    text-indent: 15px;
+    font-size: 12px;
+    color: #404560;
+    border-bottom: 1px solid #E8E9EC;
+}
+
+.stage .chainMapContentList {
+    padding: 0px 15px;
+}
+
+.stage .chainMapContentList ul li {
+    width: 100%;
+    height: 36px;
+    line-height: 36px;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.stage .chainMapContentList ul li b {
+    font-weight: normal;
+    float: left;
+    width: 55px;
+    height: 36px;
+    overflow: hidden;
+}
+
+.stage .chainMapContentListPercentage {
+    display: inline-block;
+    float: left;
+    width: 45%;
+    height: 7px;
+    margin: 14px 6px 0px 6px;
+}
+
+.stage .chainMapContentListPercentage span {
+    float: left;
+    display: inline-block;
+    height: 7px;
+    background: #ccc;
+}
+
+.stage .containerLeftTit {
+    height: 17px;
+    line-height: 17px;
+    font-size: 12px;
+    margin-top: -7px;
+}
+
+.stage .containerLeftTit span {
+    float: left;
+    width: 4px;
+    height: 17px;
+    margin-right: 6px;
+    background: #BBBDC6;
+}
+
+/*linkCommon*/
+
+.stage a.component_linkCommon {
+    text-align: left;
+    line-height: 44px;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #404560;
+    letter-spacing: 0;
+    display: block;
+}
+
+.stage .componentTitleClass .component_title {
+    border: 0 none;
+    background: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(31, 37, 68, 0.06);
+    height: 56px;
+    line-height: 56px;
+}
+
+.stage .componentTitleClass .component_title_text {
+    font-family: PingFangSC-Semibold;
+    font-size: 14px;
+    color: #1F2544;
+    letter-spacing: 0;
+}
+
+/*loadding*/
+.stage .before_loading {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: rgba(238, 240, 243, .5);
+    z-index: 99;
+}
+
+/*第一版loading start*/
+.stage .before_loading_spinner {
+    margin: -45px auto 0 -45px;
+    width: 90px;
+    height: 90px;
+    position: absolute;
+    text-align: center;
+    -webkit-animation: rotate 2.0s infinite linear;
+    animation: rotate 2.0s infinite linear;
+    top: 50%;
+    left: 50%;
+}
+
+.stage .loading_one, .loading_two {
+    width: 60%;
+    height: 60%;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    background-color: #43A3FB;
+    border-radius: 100%;
+
+    -webkit-animation: bounce 2.0s infinite ease-in-out;
+    animation: bounce 2.0s infinite ease-in-out;
+}
+
+.stage .loading_two {
+    top: auto;
+    bottom: 0px;
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
+
+@-webkit-keyframes rotate {
+    100% {
+        -webkit-transform: rotate(360deg)
+    }
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg)
+    }
+}
+
+@-webkit-keyframes bounce {
+    0%, 100% {
+        -webkit-transform: scale(0.0)
+    }
+    50% {
+        -webkit-transform: scale(1.0)
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+    }
+    50% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+    }
+}
+
+/*第一版loading end*/
+
+/*第二版loading start*/
+.stage .loadEffect {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    margin: 0 auto;
+    margin-top: -40px;
+    top: 50%;
+}
+
+.stage .loadEffect span {
+    display: inline-block;
+    width: 12px;
+    height: 2px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    background: #43A3FB;
+    position: absolute;
+    -webkit-animation: load 1.04s ease infinite;
+}
+
+@-webkit-keyframes load {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.2;
+    }
+}
+
+.stage .loadEffect span:nth-child(1) {
+    left: 0;
+    top: 50%;
+    margin-top: -1px;
+    -webkit-animation-delay: 0.13s;
+}
+
+.stage .loadEffect span:nth-child(2) {
+    left: 4px;
+    top: 9px;
+    -webkit-transform: rotate(45deg);
+    -webkit-animation-delay: 0.26s;
+}
+
+.stage .loadEffect span:nth-child(3) {
+    left: 50%;
+    top: 6px;
+    margin-left: -6px;
+    -webkit-transform: rotate(90deg);
+    -webkit-animation-delay: 0.39s;
+}
+
+.stage .loadEffect span:nth-child(4) {
+    top: 9px;
+    right: 4px;
+    -webkit-transform: rotate(135deg);
+    -webkit-animation-delay: 0.52s;
+}
+
+.stage .loadEffect span:nth-child(5) {
+    right: 0;
+    top: 50%;
+    margin-top: -1px;
+    -webkit-transform: rotate(180deg);
+    -webkit-animation-delay: 0.65s;
+}
+
+.stage .loadEffect span:nth-child(6) {
+    right: 4px;
+    bottom: 9px;
+    -webkit-transform: rotate(225deg);
+    -webkit-animation-delay: 0.78s;
+}
+
+.stage .loadEffect span:nth-child(7) {
+    bottom: 6px;
+    left: 50%;
+    margin-left: -6px;
+    -webkit-transform: rotate(270deg);
+    -webkit-animation-delay: 0.91s;
+}
+
+.stage .loadEffect span:nth-child(8) {
+    bottom: 9px;
+    left: 4px;
+    -webkit-transform: rotate(315deg);
+    -webkit-animation-delay: 1.04s;
+}
+
+/*第二版loading end*/
+
+/*城市概览城市级别条图start*/
+.stage .cityHorizontalChartWap {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-top: 10px;
+    width: 100%;
+    height: calc(100% - 60px);
+    padding: 0px 24px;
+}
+
+.stage .cityHorizontalBarWap {
+    padding: 0px 0px 15px 0px;
+    width: 22.5%;
+    height: calc(100% - 20px);
+    background: #FFFFFF;
+    border: 1px solid #E8E9EC;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 2px;
+}
+
+.stage .containercityHorizontalTit {
+    height: 50px;
+    line-height: 35px;
+    border-top: 1px solid #CED3D9;
+    padding: 14px 24px 0px 24px;
+}
+
+.stage .containercityHorizontalTit span {
+    float: left;
+    width: 4px;
+    height: 17px;
+    margin-right: 6px;
+    margin-top: 8px;
+    background: #BBBDC6;
+}
+
+.stage .cityHorizontalBarWap h3 {
+    height: 40px;
+    line-height: 40px;
+    font-size: 12px;
+    color: #404560;
+    border-bottom: 1px solid rgba(28, 36, 56, 0.12);
+    text-indent: 15px;
+    font-weight: bold;
+}
+
+.stage .cityHorizontalBarWap h3 b {
+    float: right;
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+.stage .cityHorizontalBarWap h3 i {
+    font-weight: bold;
+}
+
+.stage .alteration .stage div[component-container]{
+    cursor: default!important;
+}
+
+.stage .component_download{
+    float: right;
+}
+/*城市概览城市级别条图end*/

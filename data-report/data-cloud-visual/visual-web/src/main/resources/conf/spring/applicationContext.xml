@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-lazy-init="false"
+  xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+        http://www.springframework.org/schema/task
+	    http://www.springframework.org/schema/task/spring-task-4.2.xsd
+	    http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd"
+  xmlns:aop="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:task="http://www.springframework.org/schema/task" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns="http://www.springframework.org/schema/beans">
+
+  <context:property-placeholder location="classpath*:*.properties" />
+  <bean id="sysConfig" class="com.enterprise.properties.ExtendPropertiesFactoryBean">
+    <property name="appCode" value="tenant"/>
+    <property name="ignoreResourceNotFound" value="true" />
+    <property name="locations">
+      <list>
+        <value>classpath:sysConfig.properties</value>
+        <value>file:/home/hadoop/datacloud/config/sysConfig.properties</value>
+      </list>
+    </property>
+  </bean>
+  <aop:aspectj-autoproxy />
+
+  <context:component-scan base-package="com.talkingdata.datacloud.visual.service.*" annotation-config="false" />
+  <context:component-scan base-package="com.talkingdata.datacloud.visual.dao.*" annotation-config="false" />
+  <context:component-scan base-package="com.talkingdata.datacloud.visual.util" />
+
+  <import resource="classpath*:spring-mybatis.xml" />
+  <import resource="classpath*:spring-redis.xml" />
+
+  <task:executor id="executor" pool-size="5" />
+  <task:scheduler id="scheduler" pool-size="10" />
+  <task:annotation-driven executor="executor" scheduler="scheduler" />
+
+
+
+</beans>

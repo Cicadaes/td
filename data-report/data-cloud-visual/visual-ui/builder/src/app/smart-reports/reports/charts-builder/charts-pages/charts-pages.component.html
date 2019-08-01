@@ -1,0 +1,38 @@
+<div class="smart-pages-box" (mouseover)="smartPages(e)" >
+    <!--<em class="smart-pages-l">left</em>-->
+    <span class="smart-pages-n">{{(pages.currentIndex+1)+' / '+pages.total+'页'}}<em class="smart-pages-d smart-square bottom"></em></span>
+    <!--<em class="smart-pages-l">right</em>-->
+
+
+    <div class="smart-page-list" *ngIf="pageList">
+        <ul id="smart-page-list">
+            <li [ngClass]="{'active':pages.current === index}"
+                *ngFor="let page of this.stageService.StageBaseData.stages; let index = index"
+                (mouseover)="setPageMoreTop($event,index)">
+
+                <a class="smart-page-change" (click)="changePage(index)">
+                    <em>{{index+1}}</em>
+                    <strong *ngIf="!page.editbool">{{page.name}}</strong>
+                    <strong class="edit-name" *ngIf="page.editbool">
+                        <input type="text" maxlength="30" [(ngModel)]="page.name" (blur)="confirmEditName(page)">
+                    </strong>
+                </a>
+
+                <a class="smart-page-more" *ngIf="!stageService.chartMode" id="smart-page-{{index}}-more" [ngStyle]="{top: (index * 40 + 6) + 'px'}">
+                   <span class="icons_svg edit-icon">
+                        <ol>
+                            <!--<li (click)="editPage(page)">重命名</li>-->
+                            <li (click)="deletePage(index)" *ngIf="pages.total!=1">移除</li>
+                        </ol>
+                  </span>
+                </a>
+            </li>
+
+
+        </ul>
+
+        <div class="smart-page-button" (click)="createPage()" *ngIf="!stageService.chartMode">+ 添加新页</div>
+    </div>
+</div>
+
+<!--<p-confirmDialog header="分页删除确认" icon="fa fa-question-circle" width="425" acceptLabel="确定" rejectLabel="取消"></p-confirmDialog>-->

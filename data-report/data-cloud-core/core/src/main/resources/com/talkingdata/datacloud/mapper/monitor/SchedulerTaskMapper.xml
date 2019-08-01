@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.monitor.SchedulerTaskDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.monitor.SchedulerTask" >
+	<result column="id" property="id"/>
+	<result column="name" property="name"/>
+	<result column="code" property="code"/>
+	<result column="azkaban_project_name" property="azkabanProjectName"/>
+	<result column="azkaban_project_id" property="azkabanProjectId"/>
+	<result column="azkaban_project_version" property="azkabanProjectVersion"/>
+	<result column="azkaban_job_flow_id" property="azkabanJobFlowId"/>
+	<result column="azkaban_job_flow_version" property="azkabanJobFlowVersion"/>
+	<result column="status" property="status"/>
+	<result column="create_by" property="createBy"/>
+	<result column="creator" property="creator"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_time" property="updateTime"/>
+	<result column="data_app_id" property="dataAppId"/>
+	<result column="tenant_id" property="tenantId"/>
+	<result column="system_code" property="systemCode"/>
+	<result column="description" property="description"/>
+  </resultMap>
+       
+  <!-- TD_SCHEDULER_TASK table all fields -->
+  <sql id="Base_Column_List" >
+	 id,name,code,azkaban_project_name,azkaban_project_id,azkaban_project_version,azkaban_job_flow_id,azkaban_job_flow_version,status,create_by,creator,update_by,create_time,update_time,data_app_id,tenant_id,system_code,description
+  </sql>
+   
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+      <if test="name != null and name != ''" >
+        and name =  #{name}
+	  </if>
+      <if test="code != null and code != ''" >
+        and code =  #{code}
+	  </if>
+      <if test="azkabanProjectName != null and azkabanProjectName != ''" >
+        and azkaban_project_name =  #{azkabanProjectName}
+	  </if>
+      <if test="azkabanProjectId != null and azkabanProjectId != ''" >
+        and azkaban_project_id =  #{azkabanProjectId}
+	  </if>
+      <if test="azkabanProjectVersion != null and azkabanProjectVersion != ''" >
+        and azkaban_project_version =  #{azkabanProjectVersion}
+	  </if>
+      <if test="azkabanJobFlowId != null and azkabanJobFlowId != ''" >
+        and azkaban_job_flow_id =  #{azkabanJobFlowId}
+	  </if>
+      <if test="azkabanJobFlowVersion != null and azkabanJobFlowVersion != ''" >
+        and azkaban_job_flow_version =  #{azkabanJobFlowVersion}
+	  </if>
+      <if test="status != null" >
+        and status =  #{status}
+	  </if>
+      <if test="createBy != null and createBy != ''" >
+        and create_by =  #{createBy}
+	  </if>
+      <if test="creator != null and creator != ''" >
+        and creator =  #{creator}
+	  </if>
+      <if test="updateBy != null and updateBy != ''" >
+        and update_by =  #{updateBy}
+	  </if>
+      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+	  <if test="tenantId != null and tenantId != ''" >
+        and tenant_id =  #{tenantId}
+	  </if>
+	  <if test="systemCode != null and systemCode != ''" >
+        and system_code =  #{systemCode}
+	  </if>
+	  <if test="description != null and description != ''" >
+        and description =  #{description}
+	  </if>
+    </trim>
+  </sql>
+  
+  <!-- 高级搜索 查询条件 -->
+  <sql id="Base_Where_Clause_Search">
+    where 1=1
+    <trim suffixOverrides="," >
+	      <if test="id != null and id != ''" >
+        and id =  #{id}
+	  </if>
+	      <if test="name != null and name != ''" >
+        and name = #{name}
+	  </if>
+	      <if test="code != null and code != ''" >
+        and code like '%${code}%'
+	  </if>
+	      <if test="azkabanProjectName != null and azkabanProjectName != ''" >
+        and azkaban_project_name like '%${azkabanProjectName}%'
+	  </if>
+	      <if test="azkabanProjectId != null and azkabanProjectId != ''" >
+        and azkaban_project_id =  #{azkabanProjectId}
+	  </if>
+	      <if test="azkabanProjectVersion != null and azkabanProjectVersion != ''" >
+        and azkaban_project_version =  #{azkabanProjectVersion}
+	  </if>
+	      <if test="azkabanJobFlowId != null and azkabanJobFlowId != ''" >
+        and azkaban_job_flow_id =  #{azkabanJobFlowId}
+	  </if>
+	      <if test="azkabanJobFlowVersion != null and azkabanJobFlowVersion != ''" >
+        and azkaban_job_flow_version =  #{azkabanJobFlowVersion}
+	  </if>
+	      <if test="status != null" >
+        and status =  #{status}
+	  </if>
+	      <if test="createBy != null and createBy != ''" >
+        and create_by like '%${createBy}%'
+	  </if>
+	      <if test="creator != null and creator != ''" >
+        and creator like '%${creator}%'
+	  </if>
+	      <if test="updateBy != null and updateBy != ''" >
+        and update_by =  #{updateBy}
+	  </if>
+	      <if test="createTime != null and createTime != ''" >
+        and create_time =  #{createTime}
+	  </if>
+	  <if test="createTimeStart != null and createTimeStart != ''" >
+        and create_time &gt;=  #{createTimeStart}
+	  </if>
+	  <if test="createTimeEnd != null and createTimeEnd != ''" >
+        and create_time &lt;=  #{createTimeEnd}
+	  </if>
+	      <if test="updateTime != null and updateTime != ''" >
+        and update_time =  #{updateTime}
+	  </if>
+	  <if test="dataAppId != null and dataAppId != ''" >
+        and data_app_id =  #{dataAppId}
+	  </if>
+	  <!-- <if test="tenantId != null and tenantId != ''" >
+        and tenant_id =  #{tenantId}
+	  </if> -->
+	  <if test="systemCode != null and systemCode != ''" >
+        and system_code =  #{systemCode}
+	  </if>
+	  <if test="description != null and description != ''" >
+        and description like CONCAT('%',#{description},'%')
+	  </if>
+	  <if test="q != null and q != ''" >
+	   and (name like CONCAT('%',#{q},'%') or code like CONCAT('%',#{q},'%'))
+	  </if>
+      <!-- 新增查询条件 -->
+      <if test="nameLike != null and nameLike != ''" >
+        and name like concat('%', #{nameLike}, '%')
+      </if>
+      <if test="azkabanProjectNameLike != null and azkabanProjectNameLike != ''" >
+        and azkaban_project_name like concat('%', #{azkabanProjectNameLike}, '%')
+      </if>
+      <if test="systemCodeLike != null and systemCodeLike != ''" >
+        and system_code like concat('%', #{systemCodeLike}, '%')
+      </if>
+      <if test="creatorLike != null and creatorLike != ''" >
+        and creator like concat('%', #{creatorLike}, '%')
+      </if>
+      <if test="createTime1 != null and createTime1 != ''" >
+        and create_time &gt;=  #{createTime1}
+      </if>
+      <if test="createTime2 != null and createTime2 != ''" >
+        and create_time &lt;=  #{createTime2}
+      </if>
+    </trim>
+  </sql>
+   
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="Object" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	  SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_SCHEDULER_TASK(id,name,code,azkaban_project_name,azkaban_project_id,azkaban_project_version,azkaban_job_flow_id,azkaban_job_flow_version,status,create_by,creator,update_by,create_time,update_time,data_app_id,tenant_id,system_code,description)
+ values(#{id},#{name},#{code},#{azkabanProjectName},#{azkabanProjectId},#{azkabanProjectVersion},#{azkabanJobFlowId},#{azkabanJobFlowVersion},#{status},#{createBy},#{creator},#{updateBy},now(),now(),#{dataAppId},#{tenantId},#{systemCode},#{description})
+  </insert>
+
+  <!-- 根据id，修改记录-->  
+  <update id="updateByPrimaryKey" parameterType="Object" >
+    update TD_SCHEDULER_TASK set name=#{name},code=#{code},azkaban_project_name=#{azkabanProjectName},azkaban_project_id=#{azkabanProjectId},azkaban_project_version=#{azkabanProjectVersion},azkaban_job_flow_id=#{azkabanJobFlowId},azkaban_job_flow_version=#{azkabanJobFlowVersion},status=#{status},create_by=#{createBy},creator=#{creator},update_by=#{updateBy},create_time=#{createTime},update_time=now(),data_app_id=#{dataAppId},tenant_id=#{tenantId},system_code=#{systemCode},description=#{description} where id=#{id}
+  </update>
+ 
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="Object" >
+    update TD_SCHEDULER_TASK set 
+	<trim  suffixOverrides="," >
+	<if test="name != null  ">
+		name=#{name},
+	</if>
+	<if test="code != null  ">
+		code=#{code},
+	</if>
+	<if test="azkabanProjectName != null  ">
+		azkaban_project_name=#{azkabanProjectName},
+	</if>
+	<if test="azkabanProjectId != null  ">
+		azkaban_project_id=#{azkabanProjectId},
+	</if>
+	<if test="azkabanProjectVersion != null  ">
+		azkaban_project_version=#{azkabanProjectVersion},
+	</if>
+	<if test="azkabanJobFlowId != null  ">
+		azkaban_job_flow_id=#{azkabanJobFlowId},
+	</if>
+	<if test="azkabanJobFlowVersion != null  ">
+		azkaban_job_flow_version=#{azkabanJobFlowVersion},
+	</if>
+	<if test="status != null  ">
+		status=#{status},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="creator != null  ">
+		creator=#{creator},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	<if test="tenantId != null  ">
+		tenant_id=#{tenantId},
+	</if>
+	<if test="dataAppId != null  ">
+		data_app_id=#{dataAppId},
+	</if>
+	<if test="systemCode != null  ">
+		system_code=#{systemCode},
+	</if>
+	<if test="description != null  ">
+		description=#{description},
+	</if>
+	</trim> where id=#{id}
+  </update>
+ 
+  <!-- 根据id查询 调度任务 -->
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" /> 
+	 from TD_SCHEDULER_TASK where id = #{id}
+  </select>
+  
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="Object">
+    delete 	 from TD_SCHEDULER_TASK where id = #{id}
+  </delete>
+
+  <!-- 调度任务 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_SCHEDULER_TASK 
+	<include refid="Base_Where_Clause"/>
+  </select>
+  	
+  <!-- 查询调度任务列表 -->
+  <select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_SCHEDULER_TASK 
+	<include refid="Base_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <!-- 调度任务 列表总数-->
+  <select id="queryByCountWithMaxVersion" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_SCHEDULER_TASK 
+	<include refid="Base_Where_Clause_Search"/>
+	 AND id IN(SELECT
+                MAX(id)
+              FROM TD_SCHEDULER_TASK
+              GROUP BY CODE, azkaban_project_name)
+    AND azkaban_project_version IN(SELECT
+                MAX(azkaban_project_version)
+              FROM TD_SCHEDULER_TASK
+              GROUP BY azkaban_project_name)
+	<if test="tenants != null and tenants.size > 0">
+		and tenant_id in
+		<foreach collection="tenants" open="(" separator="," close=")" item="item">
+			#{item}
+		</foreach>
+	</if>
+  </select>
+  
+  <!-- 查询调度任务列表 -->
+  <select id="queryByListWithMaxVersion" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_SCHEDULER_TASK 
+	<include refid="Base_Where_Clause_Search"/>
+	 AND id IN(SELECT
+                MAX(id)
+              FROM TD_SCHEDULER_TASK
+              GROUP BY CODE, azkaban_project_name)
+    AND azkaban_project_version IN(SELECT
+                MAX(azkaban_project_version)
+              FROM TD_SCHEDULER_TASK
+              GROUP BY azkaban_project_name)
+	<if test="tenants != null and tenants.size > 0">
+		and tenant_id in
+		<foreach collection="tenants" open="(" separator="," close=")" item="item">
+			#{item}
+		</foreach>
+	</if>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <!-- 调度任务 列表总数-->
+  <select id="querySystemTaskByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from TD_SCHEDULER_TASK 
+	where id in (select max(id) from TD_SCHEDULER_TASK group by code, azkaban_project_name)
+	and (tenant_id is null or tenant_id = '') 
+  </select>
+  
+  <!-- 查询调度任务列表 -->
+  <select id="querySystemTaskByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from TD_SCHEDULER_TASK 
+	where id in (select max(id) from TD_SCHEDULER_TASK group by code, azkaban_project_name)
+	and (tenant_id is null or tenant_id = '') 
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+  
+  <select id="queryBySchedulerTaskWithMaxVersion"  resultMap="BaseResultMap" parameterType="Object">
+  	select <include refid="Base_Column_List" />  
+  	from TD_SCHEDULER_TASK 
+  	<include refid="Base_Where_Clause"/>
+  	and id in (select max(id) from TD_SCHEDULER_TASK 
+  	<where>
+  		<if test="code != null and code != ''" >
+        	and code =  #{code}
+	  	</if>
+	    <if test="azkabanProjectName != null and azkabanProjectName != ''" >
+        	and azkaban_project_name =  #{azkabanProjectName}
+	  	</if>
+  	</where>  	
+  	group by code)
+  </select>
+  
+  <select id="findByCodeWithMaxVersion"  resultMap="BaseResultMap" parameterType="Object">
+  	select <include refid="Base_Column_List" />  
+  	from TD_SCHEDULER_TASK where id = (select max(id) from TD_SCHEDULER_TASK where code = #{code} and azkaban_project_name =  #{azkabanProjectName})
+  </select>
+  
+  <select id="dropDownSchedulerTasks"  resultType="java.util.HashMap" parameterType="Map">
+  	SELECT DISTINCT NAME, CODE FROM (
+		SELECT
+  			id,NAME as name, CODE as code
+		FROM TD_SCHEDULER_TASK
+		WHERE id IN(SELECT MAX(id) FROM TD_SCHEDULER_TASK GROUP BY CODE, azkaban_project_name)
+    	    AND azkaban_project_version IN(SELECT MAX(azkaban_project_version) FROM TD_SCHEDULER_TASK GROUP BY CODE, azkaban_project_name)
+    	    <if test="tenants != null and tenants.size > 0">
+				and tenant_id in
+				<foreach collection="tenants" open="(" separator="," close=")" item="item">
+					#{item}
+				</foreach>
+			</if>
+		ORDER BY CONVERT(NAME USING GBK), CODE) t
+  </select>
+  
+</mapper>   

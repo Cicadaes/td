@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.visual.dao.report.ChartDataConfigDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.visual.entity.report.ChartDataConfig" >
+    <id column="id" property="id" />
+    <result column="chart_id" property="chartId" />
+    <result column="config_definition_id" property="configDefinitionId" />
+    <result column="value" property="value" />
+    <result column="tenant_id" property="tenantId" />
+    <result column="creator" property="creator" />
+    <result column="create_by" property="createBy" />
+    <result column="create_time" property="createTime" />
+    <result column="updater" property="updater" />
+    <result column="update_by" property="updateBy" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+
+  <!-- TD_DC_VISUAL_CHART_DATA_CONFIG table all fields -->
+  <sql id="Base_Column_List" >
+     `id`, `chart_id`, `config_definition_id`, `value`, `tenant_id`, `creator`, `create_by`, `create_time`, `updater`, `update_by`, `update_time`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and `id` ${idOperator} #{id}
+      </if>
+      <if test="chartId != null" >
+        and `chart_id` ${chartIdOperator} #{chartId}
+      </if>
+      <if test="configDefinitionId != null" >
+        and `config_definition_id` ${configDefinitionIdOperator} #{configDefinitionId}
+      </if>
+      <if test="value != null" >
+        and `value` ${valueOperator} #{value}
+      </if>
+      <if test="tenantId != null" >
+        and `tenant_id` ${tenantIdOperator} #{tenantId}
+      </if>
+      <if test="creator != null" >
+        and `creator` ${creatorOperator} #{creator}
+      </if>
+      <if test="createBy != null" >
+        and `create_by` ${createByOperator} #{createBy}
+      </if>
+      <if test="createTime != null" >
+        and `create_time` ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and `create_time` &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and `create_time` &lt;= #{createTime2}
+      </if>
+      <if test="updater != null" >
+        and `updater` ${updaterOperator} #{updater}
+      </if>
+      <if test="updateBy != null" >
+        and `update_by` ${updateByOperator} #{updateBy}
+      </if>
+      <if test="updateTime != null" >
+        and `update_time` ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and `update_time` &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and `update_time` &lt;= #{updateTime2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.datacloud.visual.entity.report.ChartDataConfig" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_DC_VISUAL_CHART_DATA_CONFIG(<include refid="Base_Column_List" />)
+    values (#{id}, #{chartId}, #{configDefinitionId}, #{value}, #{tenantId}, #{creator}, #{createBy}, #{createTime}, #{updater}, #{updateBy}, #{updateTime})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.datacloud.visual.entity.report.ChartDataConfig" >
+    update TD_DC_VISUAL_CHART_DATA_CONFIG
+       set `chart_id` = #{chartId},
+           `config_definition_id` = #{configDefinitionId},
+           `value` = #{value},
+           `tenant_id` = #{tenantId},
+           `creator` = #{creator},
+           `create_by` = #{createBy},
+           `create_time` = #{createTime},
+           `updater` = #{updater},
+           `update_by` = #{updateBy},
+           `update_time` = #{updateTime}
+     where `id` = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.datacloud.visual.entity.report.ChartDataConfig" >
+    update TD_DC_VISUAL_CHART_DATA_CONFIG
+    <set >
+      <if test="chartId != null" >
+        `chart_id` = #{chartId},
+      </if>
+      <if test="configDefinitionId != null" >
+        `config_definition_id` = #{configDefinitionId},
+      </if>
+      <if test="value != null" >
+        `value` = #{value},
+      </if>
+      <if test="tenantId != null" >
+        `tenant_id` = #{tenantId},
+      </if>
+      <if test="creator != null" >
+        `creator` = #{creator},
+      </if>
+      <if test="createBy != null" >
+        `create_by` = #{createBy},
+      </if>
+      <if test="createTime != null" >
+        `create_time` = #{createTime},
+      </if>
+      <if test="updater != null" >
+        `updater` = #{updater},
+      </if>
+      <if test="updateBy != null" >
+        `update_by` = #{updateBy},
+      </if>
+      <if test="updateTime != null" >
+        `update_time` = #{updateTime},
+      </if>
+    </set>
+     where `id` = #{id}
+  </update>
+
+  <!-- 根据id查询 TD_DC_VISUAL_CHART_DATA_CONFIG -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from TD_DC_VISUAL_CHART_DATA_CONFIG
+     where `id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TD_DC_VISUAL_CHART_DATA_CONFIG
+     where `id` = #{value}
+
+  </delete>
+
+  <!-- TD_DC_VISUAL_CHART_DATA_CONFIG 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select count(1) from TD_DC_VISUAL_CHART_DATA_CONFIG
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TD_DC_VISUAL_CHART_DATA_CONFIG列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from TD_DC_VISUAL_CHART_DATA_CONFIG
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByChartId" parameterType="java.lang.Integer">
+    delete from TD_DC_VISUAL_CHART_DATA_CONFIG
+    where `chart_id` = #{value}
+
+  </delete>
+
+  <!-- 获取最近一次正确渲染图表的数据面板参数 -->
+  <select id="queryByLastSingle" resultMap="BaseResultMap" parameterType="com.talkingdata.datacloud.visual.entity.report.ChartDataConfig">
+  select a.`value`
+  from TD_DC_VISUAL_CHART_DATA_CONFIG a,TD_DC_VISUAL_CHART_STYLE_CONFIG b,TD_DC_VISUAL_CHART c
+  where a.`chart_id`=b.`chart_id` and a.`chart_id`=c.`id`
+  and b.`type`=#{type} and c.`data_source_id`=#{dataSourceId}
+  order by a.`update_time` desc limit 1
+  </select>
+</mapper>

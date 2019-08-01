@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.visual.dao.report.DataSourceSnapshotDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.visual.entity.report.DataSourceSnapshot" >
+    <id column="report_id" property="reportId" />
+    <id column="data_source_id" property="dataSourceId" />
+    <result column="name" property="name" />
+    <result column="mapped_data_source" property="mappedDataSource" />
+    <result column="adapter_Id" property="adapterId" />
+    <result column="params" property="params" />
+    <result column="description" property="description" />
+    <result column="tenant_id" property="tenantId" />
+    <result column="creator" property="creator" />
+    <result column="create_by" property="createBy" />
+    <result column="create_time" property="createTime" />
+    <result column="updater" property="updater" />
+    <result column="update_by" property="updateBy" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+
+  <!-- TD_DC_VISUAL_DATA_SOURCE_SNAPSHOT table all fields -->
+  <sql id="Base_Column_List" >
+     `report_id`, `data_source_id`, `name`, `mapped_data_source`, `adapter_Id`, `params`, `description`, `tenant_id`, `creator`, `create_by`, `create_time`, `updater`, `update_by`, `update_time`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="reportId != null" >
+        and `report_id` ${reportIdOperator} #{reportId}
+      </if>
+      <if test="dataSourceId != null" >
+        and `data_source_id` ${dataSourceIdOperator} #{dataSourceId}
+      </if>
+      <if test="name != null" >
+        and `name` ${nameOperator} #{name}
+      </if>
+      <if test="mappedDataSource != null" >
+        and `mapped_data_source` ${mappedDataSourceOperator} #{mappedDataSource}
+      </if>
+      <if test="adapterId != null" >
+        and `adapter_Id` ${adapterIdOperator} #{adapterId}
+      </if>
+      <if test="params != null" >
+        and `params` ${paramsOperator} #{params}
+      </if>
+      <if test="description != null" >
+        and `description` ${descriptionOperator} #{description}
+      </if>
+      <if test="tenantId != null" >
+        and `tenant_id` ${tenantIdOperator} #{tenantId}
+      </if>
+      <if test="creator != null" >
+        and `creator` ${creatorOperator} #{creator}
+      </if>
+      <if test="createBy != null" >
+        and `create_by` ${createByOperator} #{createBy}
+      </if>
+      <if test="createTime != null" >
+        and `create_time` ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and `create_time` &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and `create_time` &lt;= #{createTime2}
+      </if>
+      <if test="updater != null" >
+        and `updater` ${updaterOperator} #{updater}
+      </if>
+      <if test="updateBy != null" >
+        and `update_by` ${updateByOperator} #{updateBy}
+      </if>
+      <if test="updateTime != null" >
+        and `update_time` ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and `update_time` &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and `update_time` &lt;= #{updateTime2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.datacloud.visual.entity.report.DataSourceSnapshot" >
+    insert into TD_DC_VISUAL_DATA_SOURCE_SNAPSHOT(<include refid="Base_Column_List" />)
+    values (#{reportId}, #{dataSourceId}, #{name}, #{mappedDataSource}, #{adapterId}, #{params}, #{description}, #{tenantId}, #{creator}, #{createBy}, #{createTime}, #{updater}, #{updateBy}, #{updateTime})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.datacloud.visual.entity.report.DataSourceSnapshot" >
+    update TD_DC_VISUAL_DATA_SOURCE_SNAPSHOT
+       set `name` = #{name},
+           `mapped_data_source` = #{mappedDataSource},
+           `adapter_Id` = #{adapterId},
+           `params` = #{params},
+           `description` = #{description},
+           `tenant_id` = #{tenantId},
+           `creator` = #{creator},
+           `create_by` = #{createBy},
+           `create_time` = #{createTime},
+           `updater` = #{updater},
+           `update_by` = #{updateBy},
+           `update_time` = #{updateTime}
+     where `report_id` = #{reportId}
+       and `data_source_id` = #{dataSourceId}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.datacloud.visual.entity.report.DataSourceSnapshot" >
+    update TD_DC_VISUAL_DATA_SOURCE_SNAPSHOT
+    <set >
+      <if test="name != null" >
+        `name` = #{name},
+      </if>
+      <if test="mappedDataSource != null" >
+        `mapped_data_source` = #{mappedDataSource},
+      </if>
+      <if test="adapterId != null" >
+        `adapter_Id` = #{adapterId},
+      </if>
+      <if test="params != null" >
+        `params` = #{params},
+      </if>
+      <if test="description != null" >
+        `description` = #{description},
+      </if>
+      <if test="tenantId != null" >
+        `tenant_id` = #{tenantId},
+      </if>
+      <if test="creator != null" >
+        `creator` = #{creator},
+      </if>
+      <if test="createBy != null" >
+        `create_by` = #{createBy},
+      </if>
+      <if test="createTime != null" >
+        `create_time` = #{createTime},
+      </if>
+      <if test="updater != null" >
+        `updater` = #{updater},
+      </if>
+      <if test="updateBy != null" >
+        `update_by` = #{updateBy},
+      </if>
+      <if test="updateTime != null" >
+        `update_time` = #{updateTime},
+      </if>
+    </set>
+     where `report_id` = #{reportId}
+       and `data_source_id` = #{dataSourceId}
+  </update>
+
+  <!-- 根据id查询 TD_DC_VISUAL_DATA_SOURCE_SNAPSHOT -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.talkingdata.datacloud.visual.entity.report.DataSourceSnapshotKey">
+    select <include refid="Base_Column_List" /> 
+      from TD_DC_VISUAL_DATA_SOURCE_SNAPSHOT
+     where `report_id` = #{reportId}
+       and `data_source_id` = #{dataSourceId}
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="com.talkingdata.datacloud.visual.entity.report.DataSourceSnapshotKey">
+    delete from TD_DC_VISUAL_DATA_SOURCE_SNAPSHOT
+     where `report_id` = #{reportId}
+       and `data_source_id` = #{dataSourceId}
+  </delete>
+
+  <!-- TD_DC_VISUAL_DATA_SOURCE_SNAPSHOT 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select count(1) from TD_DC_VISUAL_DATA_SOURCE_SNAPSHOT
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TD_DC_VISUAL_DATA_SOURCE_SNAPSHOT列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from TD_DC_VISUAL_DATA_SOURCE_SNAPSHOT
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+  <!-- 插入记录 -->
+  <insert id="insertByReportId" parameterType="java.lang.Integer" >
+    insert TD_DC_VISUAL_DATA_SOURCE_SNAPSHOT(`report_id`,`data_source_id`,`name`,`mapped_data_source`,`adapter_Id`,`params`,`description`)
+    select #{reportId} as report_id,DS.`id` as data_source_id,DS.`name`,DS.`mapped_data_source`,DSC.`adapter_id`,DSC.`params`,DS.`description`
+    from TD_DC_VISUAL_DATA_SOURCE DS,TD_DC_VISUAL_DATA_SOURCE_CONNECTION DSC where DS.`data_source_connection_id`=DSC.`id` and  DS.`id` in (
+    select distinct C.`data_source_id` from `TD_DC_VISUAL_CHART` C,`TD_DC_VISUAL_REPORT_PAGE_CHART_REL` CR where C.`id`=CR.`chart_id` AND CR.`report_id`=#{reportId})
+  </insert>
+
+  <!-- 删除记录 -->
+  <delete id="deleteDataSourceSnapshotByreportId" parameterType="java.lang.Integer">
+    delete from TD_DC_VISUAL_DATA_SOURCE_SNAPSHOT
+    where `report_id` = #{reportId}
+  </delete>
+
+</mapper>

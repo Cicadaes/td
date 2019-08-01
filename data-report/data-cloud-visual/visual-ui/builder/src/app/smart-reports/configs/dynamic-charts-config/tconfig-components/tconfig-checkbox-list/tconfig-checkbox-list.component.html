@@ -1,0 +1,7 @@
+<div class="tc-checkbox-list" *ngFor="let checkbox of tconfig.childrenFields">
+    <!--<p-checkbox *ngIf="checkbox.viewType === 14" name="{{'group-'+tconfig.code}}" value="{{checkbox.name}}" label="{{checkbox.name}}"
+        [(ngModel)]="tconfig.value" (onChange)="onChange($event)"></p-checkbox>-->
+    <tconfig-checkbox (onRender)="onRenderFa($event)" *ngIf="checkbox.viewType === 14" [tconfig]="checkbox"></tconfig-checkbox>     
+    <tconfig-input (onRender)="onRenderFa($event)" *ngIf="checkbox.viewType === 1" [tconfig]="checkbox"></tconfig-input>
+    <tconfig-select (onRender)="onRenderFa($event)" *ngIf="checkbox.viewType === 2" [tconfig]="checkbox"></tconfig-select>
+</div>

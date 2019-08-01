@@ -1,0 +1,20 @@
+/*合作商过滤器*/
+
+.stage ul.partnerFilter_channel{
+    width: 50%!important;
+}
+
+.stage ul.partnerFilter_channel li label,
+.stage ul.partnerFilter_channel li label,
+.stage ul.partnerFilter_list li label{
+    overflow: initial!important;
+}
+
+.stage ul.partnerFilter_mall{
+    width: 33.33%!important;
+}
+
+.stage ul.partnerFilter_list{
+    width: calc(100% - 20px)!important;
+    border-right: 0 none;
+}

@@ -1,0 +1,282 @@
+/*用户生命周期模型 css*/
+.stage .componentTitleHeight .component_title{
+    height: 56px;
+}
+
+.stage .lifecycle_top_list{
+    background: #FFFFFF;
+    height: 54px;
+    margin: 0 20px;
+    float: left;
+    min-width: 120px;
+    position: relative;
+}
+
+.stage .lifecycle_top_list_title {
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #1F2544;
+    letter-spacing: 0;
+    line-height: 54px;
+    cursor: pointer;
+}
+
+.stage .lifecycle_top_list_title span{
+    width: 20px;
+    height: 10px;
+    overflow: hidden;
+    display: inline-block;
+    float: right;
+    position: relative;
+    margin-top: 24px;
+}
+
+.stage .lifecycle_top_list_title span:after {
+    content: "";
+    position: absolute;
+    top: -6px;
+    right: 5px;
+    width: 12px;
+    height: 8px;
+    display: block;
+    border: 1px solid #373D5D;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.stage .lifecycle_top_list_title em{
+    pointer-events: none;
+}
+
+.stage .lifecycle_top_list_layer{
+    left: -5px;
+    top: 44px;
+    width: calc(100% + 30px);
+}
+
+.stage .lifecycle_top_list_layer ul li{
+    font-size: 14px;
+}
+
+.stage .lifecycle_top_list_layer p{
+    padding: 10px 16px;
+}
+
+/*面积图*/
+.stage .component_tabArea_title{
+    width: 100%;
+    height: 88px;
+}
+
+.stage .component_tabArea_title dl{
+    width: calc(100%/7);
+    height: 85px;
+    float: left;
+    background: rgba(28,36,56,0.02);
+    box-shadow: 0 1px 0 0 #E8E9EC, 1px 0 0 0 #E8E9EC;
+    padding: 20px;
+    border-top: 3px solid rgba(28,36,56,0.02);
+    cursor: pointer;
+}
+
+.stage .component_tabArea_title dl dt{
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #404560;
+    line-height: 14px;
+    padding-bottom: 15px;
+}
+
+.stage .component_tabArea_title dl dd{
+    font-family: HelveticaNeue-Medium;
+    font-size: 18px;
+    color: #404560;
+    line-height: 18px;
+}
+
+
+.stage .component_tabArea_title dl.tabArea_title_choose{
+    border-top-color: #43A3FB;
+    background: #fff;
+    box-shadow: 0 1px 0 0 #fff, 1px 0 0 0 #fff;
+}
+
+.stage .component_tabArea_title dl.tabArea_title_choose dt,
+.stage .component_tabArea_title dl:hover dt{
+    font-family: PingFangSC-Semibold;
+}
+
+/*人群流转*/
+.stage .component_lifeCycleList{
+    width: 100%;
+    height: 100%;
+}
+
+.stage .component_lifeCycleList dl{
+    width: calc(100%/7 - 10px);
+    height: 100%;
+    background: #FFFFFF;
+    box-shadow: 0 1px 1px 0 #CED3D9;
+    border-radius: 4px;
+    margin-right: 10px;
+    float: left;
+}
+
+.stage .component_lifeCycleList dl:last-child{
+    width: calc(100%/7);
+    margin-right: 0;
+}
+
+.stage .component_lifeCycleList dl dt{
+    width: 100%;
+    height: 126px;
+    color: #fff;
+    padding: 20px 10px;
+    background-image: linear-gradient(-182deg, #43A3FB 0%, #2D8CF0 99%);
+    border-radius: 4px 4px 0 0;
+}
+
+.stage .component_lifeCycleList dl dt h3{
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.stage .component_lifeCycleList dl dt p{
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    padding-top: 16px;
+    padding-bottom: 8px;
+}
+
+.stage .component_lifeCycleList dl dt p span{
+    float: right;
+    font-family: HelveticaNeue-Medium;
+    font-size: 14px;
+}
+
+.stage .component_lifeCycleList dl dt h4{
+    font-family: HelveticaNeue-Bold;
+    font-size: 22px;
+    font-weight: normal;
+}
+
+.stage .component_lifeCycleList dl dd{
+    padding-left: 4px;
+    background: linear-gradient(-182deg, #2D8CF0 0%, #7CC5FE 99%);
+    position: relative;
+}
+
+.stage .component_lifeCycleList dl.lifeCycleList_xmq dd{
+    background: linear-gradient(-182deg, #2D8CF0 0%, #C3E5FF 99%);
+}
+
+.stage .component_lifeCycleList dl.lifeCycleList_lsq dd{
+    background: linear-gradient(-182deg, #2D8CF0 0%, #A0D5FF 99%);
+
+}
+
+.stage .component_lifeCycleList dl dd:after{
+    content: '';
+    width: 4px;
+    height: 25px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: #fff;
+}
+
+.stage .component_lifeCycleList dl dd ul{
+    padding: 2px 20px 0 25px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.stage .component_lifeCycleList dl dd ul li{
+    padding: 10px 0;
+    border-bottom: 1px dashed #DEDFE3;
+    position: relative;
+}
+
+.stage .component_lifeCycleList dl dd ul li:last-child{
+    border-bottom: 0 none;
+}
+
+.stage .component_lifeCycleList dl dd ul li h4{
+    font-weight: normal;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #818596;
+    padding-bottom: 8px;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 13px;
+}
+
+.stage .component_lifeCycleList dl dd ul li p{
+    font-family: HelveticaNeue-Bold;
+    font-size: 12px;
+    color: #404560;
+}
+
+.stage .component_lifeCycleList dl dd ul li p span{
+    float: right;
+}
+
+.stage .component_lifeCycleList dl dd ul li.lifeCycleList_one:before,
+.stage .component_lifeCycleList dl dd ul li.lifeCycleList_two:before,
+.stage .component_lifeCycleList dl dd ul li.lifeCycleList_three:before,
+.stage .component_lifeCycleList dl dd ul li.lifeCycleList_four:before,
+.stage .component_lifeCycleList dl dd ul li.lifeCycleList_five:before{
+    content: '';
+    width: 8px;
+    height: 10px;
+    position: absolute;
+    left: -25px;
+    top: 23px;
+    background: #2D8CF0;
+}
+
+.stage .component_lifeCycleList dl dd ul li.lifeCycleList_one:after,
+.stage .component_lifeCycleList dl dd ul li.lifeCycleList_two:after,
+.stage .component_lifeCycleList dl dd ul li.lifeCycleList_three:after,
+.stage .component_lifeCycleList dl dd ul li.lifeCycleList_four:after,
+.stage .component_lifeCycleList dl dd ul li.lifeCycleList_five:after{
+    content: '';
+    border-left: 10px solid #2D8CF0;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: -17px;
+    top: 15px;
+}
+
+.stage .component_lifeCycleList dl dd ul li.lifeCycleList_two:before{
+    background: #43A3FB;
+}
+.stage .component_lifeCycleList dl dd ul li.lifeCycleList_two:after{
+    border-left-color: #43A3FB;
+}
+.stage .component_lifeCycleList dl dd ul li.lifeCycleList_three:before{
+    background: #7CC5FE;
+}
+.stage .component_lifeCycleList dl dd ul li.lifeCycleList_three:after{
+    border-left-color: #7CC5FE;
+}
+
+.stage .component_lifeCycleList dl dd ul li.lifeCycleList_four:before{
+    background: #A0D5FF;
+}
+.stage .component_lifeCycleList dl dd ul li.lifeCycleList_four:after{
+    border-left-color: #A0D5FF;
+}
+.stage .component_lifeCycleList dl dd ul li.lifeCycleList_five:before{
+    background: #C3E5FF;
+}
+.stage .component_lifeCycleList dl dd ul li.lifeCycleList_five:after{
+    border-left-color: #C3E5FF;
+}

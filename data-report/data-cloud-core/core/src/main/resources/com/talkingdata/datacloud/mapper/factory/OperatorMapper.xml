@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkingdata.datacloud.dao.factory.OperatorDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.talkingdata.datacloud.entity.factory.Operator" >
+    <id column="id" property="id" />
+    <result column="name" property="name" />
+    <result column="code" property="code" />
+    <result column="type" property="type" />
+    <result column="execute_engine_version" property="executeEngineVersion" />
+    <result column="version" property="version" />
+    <result column="status" property="status" />
+    <result column="diagram_name" property="diagramName" />
+    <result column="developer" property="developer" />
+    <result column="impl_class" property="implClass" />
+    <result column="dependencies" property="dependencies" />
+    <result column="runtime_language" property="runtimeLanguage" />
+    <result column="runtime_engine" property="runtimeEngine" />
+    <result column="runtime_lib_version" property="runtimeLibVersion" />
+    <result column="category_id" property="categoryId" />
+    <result column="category_code" property="categoryCode" />
+    <result column="description" property="description" />
+    <result column="tenant_id" property="tenantId" />
+    <result column="creator" property="creator" />
+    <result column="create_by" property="createBy" />
+    <result column="create_time" property="createTime" />
+    <result column="updater" property="updater" />
+    <result column="update_by" property="updateBy" />
+    <result column="update_time" property="updateTime" />
+    <result column="execute_engine_company" property="executeEngineCompany" />
+    <result column="execute_engine_name" property="executeEngineName" />
+  </resultMap>
+
+  <!-- TD_DC_OPERATOR table all fields -->
+  <sql id="Base_Column_List" >
+     `id`, `name`, `code`, `type`, `execute_engine_version`, `version`, `status`, `diagram_name`, `developer`, `impl_class`, `dependencies`, `runtime_language`, `runtime_engine`, `runtime_lib_version`, `category_id`, `category_code`, `description`, `tenant_id`, `creator`, `create_by`, `create_time`, `updater`, `update_by`, `update_time`, `execute_engine_company`, `execute_engine_name`
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and `id` ${idOperator} #{id}
+      </if>
+      <if test="name != null" >
+        and `name` ${nameOperator} #{name}
+      </if>
+      <if test="code != null" >
+        and `code` ${codeOperator} #{code}
+      </if>
+      <if test="type != null" >
+        and `type` ${typeOperator} #{type}
+      </if>
+      <if test="executeEngineVersion != null" >
+        and `execute_engine_version` ${executeEngineVersionOperator} #{executeEngineVersion}
+      </if>
+      <if test="version != null" >
+        and `version` ${versionOperator} #{version}
+      </if>
+      <if test="status != null" >
+        and `status` ${statusOperator} #{status}
+      </if>
+      <if test="diagramName != null" >
+        and `diagram_name` ${diagramNameOperator} #{diagramName}
+      </if>
+      <if test="developer != null" >
+        and `developer` ${developerOperator} #{developer}
+      </if>
+      <if test="implClass != null" >
+        and `impl_class` ${implClassOperator} #{implClass}
+      </if>
+      <if test="dependencies != null" >
+        and `dependencies` ${dependenciesOperator} #{dependencies}
+      </if>
+      <if test="runtimeLanguage != null" >
+        and `runtime_language` ${runtimeLanguageOperator} #{runtimeLanguage}
+      </if>
+      <if test="runtimeEngine != null" >
+        and `runtime_engine` ${runtimeEngineOperator} #{runtimeEngine}
+      </if>
+      <if test="runtimeLibVersion != null" >
+        and `runtime_lib_version` ${runtimeLibVersionOperator} #{runtimeLibVersion}
+      </if>
+      <if test="categoryId != null" >
+        and `category_id` ${categoryIdOperator} #{categoryId}
+      </if>
+      <if test="categoryCode != null" >
+        and `category_code` ${categoryCodeOperator} #{categoryCode}
+      </if>
+      <if test="description != null" >
+        and `description` ${descriptionOperator} #{description}
+      </if>
+      <if test="tenantId != null" >
+        and `tenant_id` ${tenantIdOperator} #{tenantId}
+      </if>
+      <if test="creator != null" >
+        and `creator` ${creatorOperator} #{creator}
+      </if>
+      <if test="createBy != null" >
+        and `create_by` ${createByOperator} #{createBy}
+      </if>
+      <if test="createTime != null" >
+        and `create_time` ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and `create_time` &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and `create_time` &lt;= #{createTime2}
+      </if>
+      <if test="updater != null" >
+        and `updater` ${updaterOperator} #{updater}
+      </if>
+      <if test="updateBy != null" >
+        and `update_by` ${updateByOperator} #{updateBy}
+      </if>
+      <if test="updateTime != null" >
+        and `update_time` ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and `update_time` &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and `update_time` &lt;= #{updateTime2}
+      </if>
+      <if test="executeEngineCompany != null" >
+        and `execute_engine_company` = #{executeEngineCompany}
+      </if>
+      <if test="executeEngineName != null" >
+        and `execute_engine_name` = #{executeEngineName}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.talkingdata.datacloud.entity.factory.Operator" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into TD_DC_OPERATOR(<include refid="Base_Column_List" />)
+    values (#{id}, #{name}, #{code}, #{type}, #{executeEngineVersion}, #{version}, #{status}, #{diagramName},
+    #{developer}, #{implClass}, #{dependencies}, #{runtimeLanguage}, #{runtimeEngine}, #{runtimeLibVersion},
+    #{categoryId}, #{categoryCode}, #{description}, #{tenantId}, #{creator}, #{createBy}, #{createTime}, #{updater},
+    #{updateBy}, #{updateTime}, #{executeEngineCompany}, #{executeEngineName})
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.talkingdata.datacloud.entity.factory.Operator" >
+    update TD_DC_OPERATOR
+       set `name` = #{name},
+           `code` = #{code},
+           `type` = #{type},
+           `execute_engine_version` = #{executeEngineVersion},
+           `version` = #{version},
+           `status` = #{status},
+           `diagram_name` = #{diagramName},
+           `developer` = #{developer},
+           `impl_class` = #{implClass},
+           `dependencies` = #{dependencies},
+           `runtime_language` = #{runtimeLanguage},
+           `runtime_engine` = #{runtimeEngine},
+           `runtime_lib_version` = #{runtimeLibVersion},
+           `category_id` = #{categoryId},
+           `category_code` = #{categoryCode},
+           `description` = #{description},
+           `tenant_id` = #{tenantId},
+           `creator` = #{creator},
+           `create_by` = #{createBy},
+           `create_time` = #{createTime},
+           `updater` = #{updater},
+           `update_by` = #{updateBy},
+           `update_time` = #{updateTime},
+           `execute_engine_company` = #{executeEngineCompany},
+           `execute_engine_name` = #{executeEngineName}
+     where `id` = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.talkingdata.datacloud.entity.factory.Operator" >
+    update TD_DC_OPERATOR
+    <set >
+      <if test="name != null" >
+        `name` = #{name},
+      </if>
+      <if test="code != null" >
+        `code` = #{code},
+      </if>
+      <if test="type != null" >
+        `type` = #{type},
+      </if>
+      <if test="executeEngineVersion != null" >
+        `execute_engine_version` = #{executeEngineVersion},
+      </if>
+      <if test="version != null" >
+        `version` = #{version},
+      </if>
+      <if test="status != null" >
+        `status` = #{status},
+      </if>
+      <if test="diagramName != null" >
+        `diagram_name` = #{diagramName},
+      </if>
+      <if test="developer != null" >
+        `developer` = #{developer},
+      </if>
+      <if test="implClass != null" >
+        `impl_class` = #{implClass},
+      </if>
+      <if test="dependencies != null" >
+        `dependencies` = #{dependencies},
+      </if>
+      <if test="runtimeLanguage != null" >
+        `runtime_language` = #{runtimeLanguage},
+      </if>
+      <if test="runtimeEngine != null" >
+        `runtime_engine` = #{runtimeEngine},
+      </if>
+      <if test="runtimeLibVersion != null" >
+        `runtime_lib_version` = #{runtimeLibVersion},
+      </if>
+      <if test="categoryId != null" >
+        `category_id` = #{categoryId},
+      </if>
+      <if test="categoryCode != null" >
+        `category_code` = #{categoryCode},
+      </if>
+      <if test="description != null" >
+        `description` = #{description},
+      </if>
+      <if test="tenantId != null" >
+        `tenant_id` = #{tenantId},
+      </if>
+      <if test="creator != null" >
+        `creator` = #{creator},
+      </if>
+      <if test="createBy != null" >
+        `create_by` = #{createBy},
+      </if>
+      <if test="createTime != null" >
+        `create_time` = #{createTime},
+      </if>
+      <if test="updater != null" >
+        `updater` = #{updater},
+      </if>
+      <if test="updateBy != null" >
+        `update_by` = #{updateBy},
+      </if>
+      <if test="updateTime != null" >
+        `update_time` = #{updateTime},
+      </if>
+      <if test="executeEngineCompany != null" >
+        `execute_engine_company` = #{executeEngineCompany},
+      </if>
+      <if test="executeEngineName != null" >
+        `execute_engine_name` = #{executeEngineName},
+      </if>
+    </set>
+     where `id` = #{id}
+  </update>
+
+  <!-- 根据id查询 TD_DC_OPERATOR -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List" /> 
+      from TD_DC_OPERATOR
+     where `id` = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TD_DC_OPERATOR
+     where `id` = #{value}
+
+  </delete>
+
+  <!-- TD_DC_OPERATOR 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select count(1) from TD_DC_OPERATOR
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TD_DC_OPERATOR列表 -->
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.talkingdata.datacloud.base.page.BasePage">
+    select <include refid="Base_Column_List"/>
+      from TD_DC_OPERATOR
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+  </select>
+
+  <select id="findAllOprator" resultMap="BaseResultMap" parameterType="Object">
+    select o.*
+    from TD_DC_OPERATOR o
+    inner join TD_DC_OPERATOR_CATEGORY c on c.id = o.category_id
+    where  (o.tenant_id is null or o.tenant_id =#{tenantId})
+    <if test="status != null" >
+      and o.status =  #{status}
+    </if>
+    <if test="type != null" >
+      and o.type =  #{type}
+    </if>
+  </select>
+
+  <select id="findOperatoryByCodeAndVersion" resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" />
+    from TD_DC_OPERATOR
+    where `code` = #{code} and `version`=#{version}
+  </select>
+
+  <select id="findOperatoryByCategoryCode" resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" />
+    from TD_DC_OPERATOR
+    where `category_code` = #{categoryCode}
+  </select>
+
+  <select id="findOperator" resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" />
+    from TD_DC_OPERATOR
+    where `code` = #{code} and `execute_engine_version`=#{executeengineversion}
+  </select>
+
+  <select id="findOperatorByCode" resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" />
+    from TD_DC_OPERATOR
+    where `code` = #{code}
+  </select>
+
+  <select id="findOperatorByCategoryId" resultMap="BaseResultMap" parameterType="Object">
+    select <include refid="Base_Column_List" />
+    from TD_DC_OPERATOR
+    where `category_id` = #{categoryId}
+  </select>
+</mapper>

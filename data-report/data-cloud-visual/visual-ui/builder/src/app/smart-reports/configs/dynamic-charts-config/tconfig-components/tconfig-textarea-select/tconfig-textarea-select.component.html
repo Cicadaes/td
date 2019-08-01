@@ -1,0 +1,6 @@
+
+<div *ngFor="let item of tconfig.value">
+    <label class="tkey" title="{{item.code}}">{{item.code}}</label>
+    <textarea pInputTextarea [(ngModel)]="item.name"></textarea>
+    <button (click)="onConfirm(item.name)">确定</button>
+</div>

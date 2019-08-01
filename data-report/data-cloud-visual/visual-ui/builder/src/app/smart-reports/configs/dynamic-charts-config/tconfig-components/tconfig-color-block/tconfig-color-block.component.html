@@ -1,0 +1,28 @@
+<div class="color_block">
+    <span #ignoredInput 
+            [(colorPicker)]="arrayColors[selectedColor]" 
+            [style.background]="arrayColors[selectedColor]"
+            [cpCancelButtonClass]= "'btn btn-primary btn-xs'"
+            [cpCancelButton]="true"
+            [cpOKButton]="true"
+            [(cpToggle)]="toggle"
+            [cpPresetColors]="['#fff', '#000', '#2889e9', '#e920e9', '#fff500', 'rgb(236,64,64)']"
+            (colorPickerChange)="onChangeColor($event)"
+            [cpIgnoredElements]="[ignoredButton, ignoredInput]"
+            [cpPosition]="bottom">
+    </span>
+
+  
+    <div class="clearfix">
+        <div class="color_group" 
+            [style.background]="arrayColors['color']"
+            (click)="selectedColor='color';toggle=!toggle" #ignoredButton>
+        </div>
+        
+        <div class="color_group" 
+            [style.background]="arrayColors['color2']"
+            (click)="selectedColor='color2';toggle=!toggle;lastColor=color" #ignoredButton>
+        </div>
+
+    </div>    
+</div>

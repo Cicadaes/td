@@ -1,0 +1,5 @@
+{
+  "name": "mysqltest1",
+  "adapterConfigId": 1,
+  "params": "{\"host\": \"172.23.5.178\", \"port\": \"3306\", \"user\": \"datacloud\", \"password\": \"datacloud@talkingdata\", \"database\": \"visual\", \"connectParameter\": \"useUnicode=true&characterEncoding=utf-8\"}"
+}

@@ -1,0 +1,38 @@
+<div class="modal in" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" style="display: block;">
+	<div class="modal-dialog " role="document" style="top:120px;">
+		<div class="modal-content clearfix">
+			<div class="td-modal-header">
+				<button type="button" class="close" ng-click="$hide()">×</button>
+				<h4 class="td-modal-title">创建报表</h4>
+			</div>
+			<div class="modal-body clearfix">
+				<div class= "clearfix fl wd-p-60 custom-edit">
+					<div>
+						<label>报表名称：</label>
+						<input class="input" ng-model="custom.name" maxlength="50" required />
+					</div>
+					<div>
+						<label>背景色：</label>
+						<div class="btn-group" ng-model="custom.bgColor" bs-radio-group>
+							<label ng-repeat ="color in colors" class="btn btn-default" style="background: #{{color}}"><input type="radio" value="{{color}}"></label>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix fl wd-p-40">
+					<dl>
+						<dt style="background: #{{custom.bgColor}}">
+							<h3 ng-show="custom.name" >{{custom.name}}</h3>
+							<h3 ng-show="!custom.name" >报表名称：</h3>
+						</dt>
+					</dl>
+				</div>
+			</div>
+			<div class="td-modal-footer">
+				<button type="button" class="btn btn-default" ng-click="$hide()">取消</button>
+				<button type="button" class="btn btn-primary" ng-click="editCustom($hide)">确认</button>
+			</div>
+		</div>
+	</div>
+</div>
+

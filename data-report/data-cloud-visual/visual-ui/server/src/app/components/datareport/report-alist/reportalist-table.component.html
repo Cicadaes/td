@@ -1,0 +1,37 @@
+<main>
+    <div class="computing_detail_bottom">
+        <!--项目列表渲染-->
+        <p-dataTable [value]="dispatDatas" *ngIf="dispatDatas" emptyMessage="暂无内容">
+            <p-column field="name" header="报表名称" [style]="{'width': '260px'}">
+                <template let-project="rowData" pTemplate="body" let-index="rowIndex">
+                    <p>
+                        <a href="javascript:void(0)"
+                           (click)="detailTaskProject(dispatDatas[index])"
+                           style="color: #657180;">
+                            <!--{{project.name}}-->
+                            {{dispatDatas[index].name}}
+                        </a>
+                    </p>
+                </template>
+            </p-column>
+            <p-column field="description" header="描述" [style]="{'width': '220px'}"> </p-column>
+            <p-column field="createTime" header="创建时间" [style]="{'width': '180px'}"> </p-column>
+            <p-column field="publishTime" header="发布时间" [style]="{'width': '180px'}"> </p-column>
+            <p-column [style]="{'width': '50px'}">
+                <template let-project="rowData"  let-index="rowIndex" pTemplate="body">
+                    <button type="button">
+                        <span class="iconfont icon-quanxian"  (click)="toWarrantProject(dispatDatas[index]);"></span>
+                        <!--<span class="iconfont icon-tubiao01"></span>-->
+                        <!--<span class="icon-down"></span>-->
+                        <!--<ul>-->
+                            <!--<li (click)="toWarrantProject(dispatDatas[index]);"><span class="iconfont icon-quanxian"></span>授权</li>-->
+                            <!--<li><span class="iconfont icon-download"></span>下载</li>-->
+                        <!--</ul>-->
+                    </button>
+                </template>
+            </p-column>
+        </p-dataTable>
+        <x-paginator *ngIf="dispatDatas!=''" [value]="value" (onPagesChange)="paginate($event)"></x-paginator>
+    </div>
+    <reportalist-dialog></reportalist-dialog>
+</main>

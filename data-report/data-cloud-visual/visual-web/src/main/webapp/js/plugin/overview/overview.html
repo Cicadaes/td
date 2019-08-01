@@ -1,0 +1,30 @@
+<dl>
+	<dt>标题大小和颜色</dt>
+	<dd>
+		<ul class="allw">
+			<li>
+				<label>标题颜色：</label>
+				<div class="regular-color" font-color selected-font-color="reportProperty.property.titleFontColor" index="'titleFontColor'" td-change="changeColor"></div>
+			</li>
+			<li>
+				<label>标题大小： </label>
+				<select class="bs1 ml-5 mt--4" ng-model="reportProperty.property.titleFontSize" ng-options="fontSize for fontSize in fontSizes" ng-change="initReportChartData();"></select>
+			</li>
+		</ul>
+	</dd>
+</dl>
+<dl>
+	<dt>值大小和颜色</dt>
+	<dd>
+		<ul class="allw">
+			<li>
+				<label>Value颜色：</label>
+				<div class="regular-color" font-color selected-font-color="reportProperty.property.valueFontColor" index="'valueFontColor'" td-change="changeColor"></div>
+			</li>
+			<li>
+				<label>Value大小： </label>
+				<select class="bs1 ml-5 mt--4" ng-model="reportProperty.property.valueFontSize" ng-options="fontSize for fontSize in fontSizes" ng-change="initReportChartData();"></select>
+			</li>
+		</ul>							
+	</dd>
+</dl>

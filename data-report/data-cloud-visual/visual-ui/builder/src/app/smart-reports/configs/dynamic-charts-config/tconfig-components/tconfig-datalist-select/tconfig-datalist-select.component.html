@@ -1,0 +1,35 @@
+<div class="autocomplete_con">
+    <label class="tkey" title="{{tconfig.name}}">{{tconfig.name}}</label>
+
+    <div class="datasource_list">
+        <ul>
+            <li *ngFor="let item of chooseArr">
+                <span class="ui-autocomplete-token-icon fa fa-fw fa-close"
+                      (click)="unselect(item)"
+                      [class.datasource_disabled]="tconfig.requried == 0 && chooseArr.length == 1"></span>
+                <em (click)="getResultData(item)">{{item.name}}</em>
+            </li>
+
+            <!--{{chooseArr.length}} {{tconfig.multipleMaxNumber}}-->
+
+            <li class="datasource_list_button"
+                (click)="getResultData('')"
+                *ngIf="chooseArr.length < tconfig.multipleMaxNumber">
+                {{dataType}}
+            </li>
+        </ul>
+        <div class="datasource_list_layer" *ngIf="getResultBool">
+            <div class="datasource_list_title">
+                <span class="icons_svg backIcon" (click)="datasourceBack()"></span>
+                <em>{{tconfig.name}}</em>
+            </div>
+            <ol>
+                <li *ngFor="let j of results"
+                    (click)="chooseData(j)"
+                    [class.choose_value]="j.selected">
+                    {{j.name}}
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>

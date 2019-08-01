@@ -1,0 +1,376 @@
+/*同城过滤器start*/
+.cityFilterComponent .filterButton {
+    width: 50%;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    background: #FFFFFF;
+    border: 1px solid #DEDFE3;
+    font-size: 12px;
+    color: #000;
+    cursor: pointer;
+}
+
+.cityFilterComponent .defaultFilter {
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+}
+
+.cityFilterComponent .currentFilter {
+    background: #43A3FB;
+    color: #fff;
+}
+
+.cityFilterComponent .custom {
+    border-radius: 0 4px 4px 0;
+}
+
+.cityFilterComponent .sameMall {
+    border-right: none;
+}
+
+.cityFilterComponent .sameCounty {
+    border-right: none;
+}
+
+.cityFilterComponent .component_top_select_box {
+    width: 110px;
+    height: 28px;
+    position: relative;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #404560;
+    margin-right: 8px;
+    display: inline-block;
+}
+
+.cityFilterComponent .component_top_select_title {
+    width: 100%;
+    height: 100%;
+    background: #FFFFFF;
+    border: 1px solid #D7DDE4;
+    border-radius: 4px;
+}
+
+.cityFilterComponent .component_top_select_list {
+    position: absolute;
+    left: 0;
+    top: 24px;
+    z-index: 2;
+    display: none;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    padding: 6px 10px;
+    background: #fff;
+    cursor: pointer;
+    width: 100%;
+    max-height: 240px;
+    overflow: auto;
+}
+
+.cityFilterComponent .component_city {
+    background: #FFFFFF;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 24px;
+    width: 420px;
+    height: 317px;
+}
+
+.cityFilterComponent .component_city .city_right_search {
+    width: 142px;
+    height: 24px;
+    background: #FFFFFF;
+    border: 1px solid #C7CCD3;
+    border-radius: 15px;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #BABFC6;
+    letter-spacing: 0;
+    line-height: 12px;
+    padding: 6px 16px;
+}
+
+.cityFilterComponent .component_city_list {
+    height: 200px;
+    overflow-y: auto;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: rgba(28, 36, 56, 0.80);
+    letter-spacing: 0;
+}
+
+.cityFilterComponent .component_city_list .brandListBox,
+.cityFilterComponent .component_city_list .selectList {
+    width: 50%;
+    height: 100%;
+    overflow: auto;
+}
+
+.cityFilterComponent .component_city_list ul {
+    width: 100%;
+    height: 100%;
+    border-right: 1px solid #EBEEF2;
+    padding: 12px 0;
+}
+
+.cityFilterComponent .component_city_list .brandListBox li {
+    cursor: pointer;
+}
+
+.cityFilterComponent .component_city_list ul li {
+    width: 100%;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 24px;
+}
+
+.cityFilterComponent .component_city_list ul li input[type="checkbox"] {
+    margin: 3px 5px 0 0;
+    display: none;
+}
+
+.cityFilterComponent .component_city_list ul li label {
+    padding-left: 20px;
+    cursor: pointer;
+    background: url('checkbox-unchecked.svg') no-repeat center left;
+    width: 120px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cityFilterComponent .component_city_list ul li .listBtn {
+    width: 10px;
+    height: 30px;
+    display: inline-block;
+    line-height: 30px;
+    vertical-align: top;
+    margin-left: 25px;
+    cursor: pointer;
+}
+
+.cityFilterComponent .component_city_list ul li .brandList {
+    padding-left: 10px;
+    /*cursor: pointer;*/
+    width: 120px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cityFilterComponent .component_city_list ul li input[type="checkbox"]:checked ~ label {
+    background: url('checkbox-checked.svg') no-repeat center left;
+}
+
+/*同城过滤器end*/
+
+/*省份过滤器start*/
+.provinceFilterComponent .component_city_province {
+    width: 600px;
+}
+
+.provinceFilterComponent .component_city_list .provinceList,
+.provinceFilterComponent .component_city_list .cityList,
+.provinceFilterComponent .component_city_list .storeList {
+    width: calc(100% / 3);
+    height: 100%;
+    overflow: auto;
+}
+
+.provinceFilterComponent .component_city_list ul li .listBtn {
+    margin-left: 0px;
+    float: right;
+}
+
+.provinceFilterComponent .component_city_list ul li {
+    cursor: pointer;
+}
+
+.provinceFilterComponent .component_city_list .selectList .provinceOne {
+    display: inline-block;
+    width: 135px;
+}
+
+/*省份过滤器end*/
+
+/*一线城市过滤器start*/
+
+.firstCityFilterComponent .filterButton {
+    width: 50%;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    background: #FFFFFF;
+    border: 1px solid #DEDFE3 !important;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.firstCityFilterComponent .currentFilter {
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    background: #43A3FB;
+    border: none;
+    color: #fff;
+}
+
+.firstCityFilterComponent .custom {
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+}
+
+.firstCityFilterComponent .component_top_select_box {
+    width: 110px;
+    height: 28px;
+    position: relative;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #404560;
+    margin-right: 8px;
+    display: inline-block;
+}
+
+.firstCityFilterComponent .component_top_select_title {
+    width: 100%;
+    height: 100%;
+    background: #FFFFFF;
+    border: 1px solid #D7DDE4;
+    border-radius: 4px;
+}
+
+.firstCityFilterComponent .component_top_select_list {
+    position: absolute;
+    left: 0;
+    top: 24px;
+    z-index: 2;
+    display: none;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    padding: 6px 10px;
+    background: #fff;
+    cursor: pointer;
+    width: 100%;
+    max-height: 240px;
+    overflow: auto;
+}
+
+.firstCityFilterComponent .component_city {
+    background: #FFFFFF;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 24px;
+    width: 518px;
+    height: 317px;
+}
+
+.firstCityFilterComponent .component_city .city_right_search {
+    width: 142px;
+    height: 24px;
+    background: #FFFFFF;
+    border: 1px solid #C7CCD3;
+    border-radius: 15px;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #BABFC6;
+    letter-spacing: 0;
+    line-height: 12px;
+    padding: 6px 16px;
+}
+
+.firstCityFilterComponent .component_city_list {
+    height: 200px;
+    overflow-y: auto;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: rgba(28, 36, 56, 0.80);
+    letter-spacing: 0;
+}
+
+.firstCityFilterComponent .component_city_list .brandListBox,
+.firstCityFilterComponent .component_city_list .selectList {
+    width: 33%;
+    height: 100%;
+    overflow: auto;
+}
+
+.firstCityFilterComponent .component_city_list > div {
+    border-right: 1px solid #eee;
+}
+
+.firstCityFilterComponent .component_city_list > div:last-child {
+    width: 34% !important;
+    border-right: none !important;
+}
+
+.firstCityFilterComponent .component_city_list ul {
+    width: 100%;
+    height: 100%;
+    /*border-right: 1px solid #EBEEF2;*/
+    padding: 12px 0;
+}
+
+.firstCityFilterComponent .component_city_list .brandListBox li {
+    cursor: pointer;
+}
+
+.firstCityFilterComponent .component_city_list ul li {
+    width: 100%;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 24px;
+}
+
+.firstCityFilterComponent .component_city_list ul li input[type="checkbox"] {
+    margin: 3px 5px 0 0;
+    display: none;
+}
+
+.firstCityFilterComponent .component_city_list ul li label {
+    padding-left: 20px;
+    cursor: pointer;
+    background: url('checkbox-unchecked.svg') no-repeat center left;
+    width: 120px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.firstCityFilterComponent .component_city_list ul li .listBtn {
+    width: 10px;
+    height: 30px;
+    display: inline-block;
+    line-height: 30px;
+    vertical-align: top;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.firstCityFilterComponent .component_city_list ul li .brandList {
+    padding-left: 10px;
+    /*cursor: pointer;*/
+    width: 96px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.firstCityFilterComponent .component_city_list ul li input[type="checkbox"]:checked ~ label {
+    background: url('checkbox-checked.svg') no-repeat center left;
+}
+
+/*同城过滤器end*/
+
+
