@@ -1,0 +1,19 @@
+<div class="piestyle">
+    <ul class="center">
+        <div class="piecenter">
+            <p>高度</p>
+            <div class="section">
+                <div>
+                    <li>
+                        <cm-checkbox>
+                            <label nz-checkbox [(ngModel)]="heightStyle.adapt" (ngModelChange)="OptionChange($event)">
+                                        <span>自适应</span>
+                                    </label>
+                        </cm-checkbox>
+                    </li>
+                </div>
+                <div style="width:100%;clear:both"></div>
+            </div>
+        </div>
+    </ul>
+</div>

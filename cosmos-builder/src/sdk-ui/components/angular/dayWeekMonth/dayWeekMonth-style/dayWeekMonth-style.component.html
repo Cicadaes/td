@@ -1,0 +1,11 @@
+<div>
+    <layout [layoutData]="_layoutLayout" (provinceOut)="setLayoutData($event)" [cmHeightAuto]="true" [cmAlign]="'level'" [cmDircLevel]="true" [cmDircVertical]="true"></layout>
+    <div class="dayWeekMonthstyle">
+        <span>配置选项</span>
+        <div class="checkbox">
+            <cm-checkbox>
+                <nz-checkbox-group [(ngModel)]="checkOptions" (ngModelChange)="changeCheck(checkOptions)"></nz-checkbox-group>
+            </cm-checkbox>
+        </div>
+    </div>
+</div>

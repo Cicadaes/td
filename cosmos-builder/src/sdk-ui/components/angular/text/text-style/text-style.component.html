@@ -1,0 +1,147 @@
+<div class="piestyle">
+    <layout [layoutData]="_layoutLayout" (provinceOut)="setLayoutData($event)" [cmHeight]="'46px'" [cmAlign]="'level'" [cmDircLevel]="true"
+        [cmDircVertical]="true"></layout>
+    <ul class="center">
+        <div class="piecenter">
+            <p>字体和段落</p>
+            <div class="section">
+                <li class="csf">
+                    <div class="type-size">
+                        <div>
+                            <p>文字颜色</p>
+                            <span style="line-height: 40px;padding-top:10px;display: block;height: 33px;width: 100%;">
+                                <color-picker-style [height]="16" width="70" [colors]="_cmPresetColors" [cmcolor]="labelStyle.color" [cmType]="'hex'" (provinceOut)="labelStyle.color = $event;OptionChange()"></color-picker-style>
+                                <!-- <cm-color-picker [cmType]="'board'" [cmcolor]="labelStyle.color" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition" (cmcolorchange)="labelStyle.color = $event;OptionChange();"
+                                    [cmPositionOffset]="_cmPositionOffset"></cm-color-picker> -->
+                            </span>
+                        </div>
+                    </div>
+                    <div class="type-face type-face-map">
+                        <p>文字大小</p>
+                        <cm-select style="width:100%">
+                            <nz-select [(ngModel)]="labelStyle.fontSize" [nzPlaceHolder]="'请选择字号'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                                <nz-option *ngFor="let option of fontSizeOptions" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled"></nz-option>
+                            </nz-select>
+                        </cm-select>
+                    </div>
+                </li>
+                <!-- <li class="percentage" style="position: relative;text-align: right;">
+                    <i style="position: absolute;top:43%;left:0" class="icon iconfont icon-ziti4"></i>
+                    <cm-select>
+                        <nz-select [(ngModel)]="labelStyle.fontFamily" [nzPlaceHolder]="'请选择字体'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                            <nz-option *ngFor="let option of typefaces" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                            </nz-option>
+                        </nz-select>
+                    </cm-select>
+                </li> -->
+                <li class="textstyle">
+                    <ul>
+                        <!-- italic	浏览器会显示一个斜体的字体样式。oblique	浏览器会显示一个倾斜的字体样式。 -->
+                        <li [ngClass]="{'success':styles.FontWigth}" (click)="onclick(styles,'FontWigth')">
+                            <i class="icon iconfont icon-format_bold"></i>
+                        </li>
+                        <!-- font-weight -->
+                        <li [ngClass]="{'success':styles.FontStyle}" (click)="onclick(styles,'FontStyle')">
+                            <i class="icon iconfont icon-format_italic"></i>
+                        </li>
+                        <!-- font-style  -->
+                        <li [ngClass]="{'success':styles.textDecoration}" (click)="onclick(styles,'textDecoration')">
+                            <i class="icon iconfont icon-format_underlined"></i>
+                        </li>
+                        <!-- text-decoration:underline -->
+                        <li [ngClass]="{'success':styles.decoration}" (click)="onclick(styles,'decoration')">
+                            <i class="icon iconfont icon-format_strikethrough"></i>
+                        </li>
+                        <!-- text-decoration:line-through -->
+                    </ul>
+                </li>
+                <!-- <li class="layout">
+                    <cm-radio>
+
+                        <nz-radio-group [(ngModel)]="labelStyle.layout" [nzSize]="'large'" (ngModelChange)="OptionChange($event)">
+                            <label nz-radio-button [nzValue]="'left'">
+                                <span>
+                                    <i class="icon iconfont icon-normal"></i>
+                                </span>
+                            </label>
+                            <label nz-radio-button [nzValue]="'center'">
+                                <span>
+                                    <i class="icon iconfont icon-normal"></i>
+                                </span>
+                            </label>
+                            <label nz-radio-button [nzValue]="'right'">
+                                <span>
+                                    <i class="icon iconfont icon-normal1"></i>
+                                </span>
+                            </label>
+                            <label nz-radio-button [nzValue]="'justify'">
+                                <span>
+                                    <i class="icon iconfont icon-liangduanduiqi2"></i>
+                                </span>
+                            </label>
+                        </nz-radio-group>
+                    </cm-radio>
+                </li> -->
+                <li class="style">
+                    <ul>
+                        <!-- <li (click)="onClick(styles,'link')">链接</li> -->
+                        <li (click)="link(styles)">
+                            <i class="icon iconfont icon-format_clear"></i>
+                        </li>
+                    </ul>
+                </li>
+            </div>
+        </div>
+    </ul>
+    <!-- <ul class="center">
+        <div class="piecenter">
+            <p>内边距</p>
+            <div class="section" style="margin-top:10px">
+                <ul class="margin">
+                    <li>
+                        <div>
+                            <p>行高</p>
+                            <cm-select>
+                                <nz-select [(ngModel)]="marginStyle.height" [nzPlaceHolder]="'请选择行高'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                                    <nz-option *ngFor="let option of heights" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                                    </nz-option>
+                                </nz-select>
+                            </cm-select>
+                        </div>
+                        <div>
+                            <p>左对齐</p>
+                            <cm-select>
+                                <nz-select [(ngModel)]="marginStyle.left" [nzPlaceHolder]="'请选择左填充'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                                    <nz-option *ngFor="let option of lefts" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                                    </nz-option>
+                                </nz-select>
+                            </cm-select>
+                        </div>
+                    </li>
+                    <li style="float: right;">
+                        <div>
+                            <p>顶端对齐</p>
+                            <cm-select>
+                                <nz-select [(ngModel)]="marginStyle.top" [nzPlaceHolder]="'请选择上填充'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                                    <nz-option *ngFor="let option of tops" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                                    </nz-option>
+                                </nz-select>
+                            </cm-select>
+                        </div>
+                        <div>
+                            <p>右对齐</p>
+                            <cm-select>
+                                <nz-select [(ngModel)]="marginStyle.right" [nzPlaceHolder]="'请选择右填充'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                                    <nz-option *ngFor="let option of rights" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                                    </nz-option>
+                                </nz-select>
+                            </cm-select>
+                        </div>
+                    </li>
+                    <div style="clear: both;width:100%"></div>
+                </ul>
+            </div>
+        </div>
+
+    </ul> -->
+</div>

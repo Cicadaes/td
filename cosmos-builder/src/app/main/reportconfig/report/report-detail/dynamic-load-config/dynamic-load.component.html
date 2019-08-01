@@ -1,0 +1,43 @@
+<main>
+    <div [style.display]="!isNoLoad ? 'block' : 'none'" class="dynamic">
+        <div class="dynamic-header">
+            <nz-radio-group [(ngModel)]="showType">
+                <label nz-radio-button [nzValue]="'data'" [nzDisabled]="disableDataConfig">
+                    <span>数据</span>
+                </label>
+                <label nz-radio-button [nzValue]="'style'" [nzDisabled]="disableStyleConfig">
+                    <span>样式</span>
+                </label>
+            </nz-radio-group>
+        </div>
+        <div class="dynamic-body">
+            <div [style.display]="showType=='data' ? 'block' : 'none'">
+                <ng-template data-host></ng-template>
+            </div>
+            <div [style.display]="showType=='style' ? 'block' : 'none'">
+                <ng-template style-host></ng-template>
+            </div>
+        </div>
+    </div>
+
+    <div [style.display]="isNoLoad ? 'block' : 'none'" class="dynamic">
+        <div class="dynamic-header">
+            <nz-radio-group [(ngModel)]="pannelType">
+                <label nz-radio-button [nzValue]="'data'" [nzDisabled]="false">
+                    <span>数据</span>
+                </label>
+                <label nz-radio-button [nzValue]="'style'" [nzDisabled]="true">
+                    <span>样式</span>
+                </label>
+            </nz-radio-group>
+        </div>
+        <div class="dynamic-body">
+            <div [style.display]="pannelType=='data' ? 'block' : 'none'">
+                <url-filter-data></url-filter-data>
+            </div>
+            <div [style.display]="pannelType=='style' ? 'block' : 'none'">
+                这个应该是全局样式面板
+            </div>
+        </div>
+    </div>
+</main>

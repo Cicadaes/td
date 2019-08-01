@@ -1,0 +1,33 @@
+.clrfix {
+  overflow: hidden;
+  
+}
+.clrfix {
+    zoom: 1;
+    .filters-box{
+      button{
+        border:none;
+        color: #2D8CF0;
+        background: transparent;
+        font-family: HelveticaNeue,'Microsoft YaHei',PingFangSC;
+      }
+    }
+  }
+  .clrfix:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    overflow: hidden;
+  }
+:host ::ng-deep .clrfix{
+  cm-button{
+    .ant-btn{
+      height: auto !important;
+      padding: 0 !important;
+    }
+  }
+
+
+}

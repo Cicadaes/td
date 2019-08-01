@@ -1,0 +1,217 @@
+@bg_color: #F8F8F9;
+
+.hide,.dadd {
+    display: none !important;
+}
+
+#bottom_line {
+    border: 0;
+    outline: none;
+    border-bottom: 1px solid #DEDFE3;
+    background: @bg_color;
+}
+
+#font_base {
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #818596;
+}
+
+.colororder {
+    display: flex;
+
+    .coloritem {
+        flex-grow: 1;
+        background: #E8E9EC;
+        width: 16px;
+        height: 16px;
+        // border: 1px solid #BBBDC6;
+        margin-right: 2px;
+
+        ::ng-deep .color-input {
+            width: 16px !important;
+            height: 16px !important;
+        }
+    }
+
+    .selected {
+        background: #2D8CF0;
+    }
+    .rimed {
+        background: #FFFFFF;
+        border: 1px solid #BBBDC6;
+    }
+    .dashed {
+        background: #FFFFFF;
+        border: 1px dashed #BBBDC6;
+    }
+}
+
+.flexbox {
+    display: flex;
+}
+
+.flexitem {
+    flex-grow: 1;
+}
+
+.linestyle {
+    width: 100%;
+    height: 100%;
+    background: @bg_color;
+
+    dl {
+        margin: 20px;
+        box-sizing: border-box;
+
+        dt {
+            margin-bottom: 15px;
+            font-family: PingFangSC-Medium;
+            font-size: 14px;
+            color: #17233D;
+            line-height: 22px;
+        }
+
+        dd {
+            display: flex;
+            margin-left: 16px;
+            margin-bottom: 15px;
+            line-height: 20px;
+            #font_base;
+
+            .item-label {
+                width: 50%;
+            }
+            .item-option {
+                width: 50%;
+            }
+        }
+    }
+}
+
+.graphtab {
+    height: 26px;
+
+    .graphtabitem {
+        background: #DEDFE3;
+    }
+    .selected {
+        background-color: #BBBDC6 !important;
+    }
+    .left {
+        border-radius: 2px 0 0 2px;
+        background: #DEDFE3;
+         text-align: center;
+        i{
+            color: #ffffff;
+            font-size: 25px;
+            margin: auto;
+            text-align: center;
+            position: relative;
+            top: 5px;
+        }
+    }
+    .right {
+        border-radius: 0 2px 2px 0;
+        background: #DEDFE3;
+        text-align: center;
+        i{
+            color: #ffffff;
+            font-size: 25px;
+            margin: auto;
+            text-align: center;
+            position: relative;
+            top: 5px;
+        }
+    }
+}
+
+.linenumber {
+    input {
+        margin-right: 3px;
+        #bottom_line;
+    }
+
+    .lineitem {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .linecolor {
+            margin-top: 0px;
+            height: 26px;
+            width: 97%;
+            line-height: 30px;
+            border-bottom: 1px solid #ddd;
+
+            ::ng-deep .color-input {
+                height: 14px;
+                width: 40%;
+            }
+        }
+    }
+    .numberitem {
+        display: flex;
+        width: 50%;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .linecolor {
+            margin-top: 0px;
+            height: 26px;
+            width: 97%;
+            line-height: 30px;
+            border-bottom: 1px solid #ddd;
+
+            cm-color-picker {
+                ::ng-deep .color-input {
+                    height: 14px;
+                    width: 70%;
+                }
+            }
+        }
+    }
+
+    .numberitem:last-child {
+        margin-left: 3px;
+    }
+}
+
+.checkgroup {
+    flex-wrap: wrap;
+
+    .checkgitem {
+        flex-grow: 1;
+        width: 50%;
+    }
+}
+
+:host ::ng-deep .linestyle {
+    .ant-select {
+        width: 100%;
+        line-height: 22px;
+        #font_base;
+    }
+
+    .ant-select-selection {
+        #bottom_line;
+    }
+    .colororder{
+        span{
+            cm-color-picker{
+                span{
+                    border:none;
+                }
+            } 
+        }
+    }
+    .shadow{
+        cm-color-picker{
+            .color-input{
+                width: 70px;
+                height: 15px;
+                }   
+        }
+    }
+}

@@ -1,0 +1,187 @@
+
+::ng-deep {
+    .theme-light header{
+        background-color: #fff;
+        padding: 16px 16px;
+        height: 56px;
+        .ant-breadcrumb{
+            font-family: PingFangSC-Medium;
+            font-size: 16px;
+            color: #17233D;
+            background-color: #fff;
+            line-height: 24px;
+        }
+        .ant-breadcrumb a{
+            font-size: 16px;
+            color: #17233D!important;
+        }
+    }
+    .publish-tab .tabs .ant-tabs-content{
+        display: none!important;
+    }
+    .publish-tab .tabs {
+        height: 48px;
+    }
+}
+.main-publish{
+    width: 100%;
+    height:100%;
+    overflow-y: scroll;
+    background: rgb(241, 242, 244);
+}
+.publish {
+    position: relative;
+    width: 100%;
+    background: #f0f2f5;
+    display: flex;
+    flex-direction: column;
+}
+
+.publish-til {
+    width: 100%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    height:40px;
+    span {
+        line-height: 24px;
+        font-size: 16px;
+        padding-left: 24px;
+    }
+}
+
+.content-box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.stage-box {
+    width: 100%;
+    overflow-y: hidden;
+    background: #f0f2f5;
+    // padding: 16px 16px 0 16px;
+}
+
+.stage {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #fff !important;
+}
+
+:host::ng-deep .publish-tab .tabs {
+    width: 100%;
+    background: #fff;
+    .ant-tabs-bar {
+        width: 100%;
+        background: #FFFFFF;
+        box-shadow: 0 1px 4px 0 rgba(23, 35, 61, 0.25);
+    }
+    .ant-tabs-nav-container {
+        line-height: 2.4 !important;
+    }
+    .ant-tabs:not(.ant-tabs-vertical) > .ant-tabs-content > .ant-tabs-tabpane {
+        background: #fff;
+        margin: 120px 24px 24px 24px;
+        box-shadow: 0 1px 4px 0 rgba(23, 35, 61, 0.25);
+        width: 100% !important;
+    }
+    .ant-tabs-bar {
+        margin-bottom: 0px;
+        padding: 0 0 0 20px;
+        border-bottom: 1px solid #e8e8e8;
+    }
+    .ant-tabs-nav .ant-tabs-tab {
+        text-align: center;
+        height: 46px;
+        line-height: 46px;
+        margin-right: 24px !important;
+        padding: 0;
+    }
+    .theme-light[_nghost-c9] .ant-tabs-ink-bar, .theme-light [_nghost-c9] .ant-tabs-ink-bar {
+        background-color: #2d8cf0;
+        width: 56px;
+    }
+}
+
+:host::ng-deep .publish {
+    /*滚动条*/
+    ::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        background: rgba(31, 37, 68, 0.30);
+    }
+    ::-webkit-scrollbar-thumb:window-inactive {
+        background: rgba(31, 37, 68, 0.30);
+    }
+    ::-moz-scrollbar {
+        width: 5px;
+        height: 5px;
+    }
+    ::-moz-scrollbar-track {
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        background: transparent;
+    }
+    ::-moz-scrollbar-thumb {
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        background: rgba(31, 37, 68, 0.30);
+    }
+    ::-moz-scrollbar-thumb:window-inactive {
+        background: rgba(31, 37, 68, 0.30);
+    }
+    ::scrollbar {
+        width: 5px;
+        height: 5px;
+    }
+    ::scrollbar-track {
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        background: transparent;
+    }
+    ::scrollbar-thumb {
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        background: rgba(31, 37, 68, 0.30);
+    }
+    ::scrollbar-thumb:window-inactive {
+        background: rgba(31, 37, 68, 0.30);
+    }
+    .preset-area {
+        line-height: 100%;
+        text-align: left;
+    }
+    cm-color-picker {
+        cursor: pointer;
+    }
+    .preset-label {
+        display: none;
+    }
+    .preset-area {
+        hr {
+            margin-bottom: 7px;
+        }
+    }
+}

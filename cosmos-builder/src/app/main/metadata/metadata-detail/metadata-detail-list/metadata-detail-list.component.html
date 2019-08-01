@@ -1,0 +1,115 @@
+<div class="metadata-detail-list">
+    <div class="title">
+        详情列表
+    </div>
+    <cm-table>
+        <nz-table #nzTable [nzBordered]="true" [nzShowTotal]="true" [nzDataSource]="attributeList" [nzTotal]="attributeList.length" [(nzPageIndex)]="queryParam.page" [(nzPageSize)]="queryParam.pageSize">
+            <thead nz-thead>
+                <tr>
+                    <th nz-th>
+                        <span>属性名称</span>
+                    </th>
+                    <th nz-th>
+                        <span>类型</span>
+                    </th>
+                    <th *ngIf="metaInfo.metaObjectType == 1" nz-th>
+                        <span>字段类型</span>
+                    </th>
+                    <th nz-th>
+                        <span>物理字段名称</span>
+                    </th>
+                    <th nz-th>
+                        <span>物理字段类型</span>
+                    </th>
+                    <th nz-th *ngIf="metaInfo.dataSourceType != 'RESTAPI'">
+                        <span>物理字段描述</span>
+                    </th>
+                    <th nz-th *ngIf="metaInfo.dataSourceType == 'RESTAPI'">
+                        <span>输入输出</span>
+                    </th>
+                    <th nz-th>
+                        <span>枚举</span>
+                    </th>
+                    <th nz-th>
+                        <span>数据字典</span>
+                    </th>
+                    <th nz-th>
+                        <span>级联属性</span>
+                    </th>
+                    <th nz-th>
+                        <span>描述</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let data of nzTable.data;let i=index">
+                    <td nz-td style="min-width:100px;max-width:50px">
+                        <p class="table-td" [title]="data.metaAttributeName" class="metadetail">
+                            {{data.metaAttributeName}}
+                        </p>
+                    </td>
+                    <td nz-td *ngIf="metaInfo.metaObjectType == 1" style="min-width:90px;max-width:90px">
+                        <span *ngIf="data.metaAttributeType == 1">唯一标识</span>
+                        <span *ngIf="data.metaAttributeType == 2">维度</span>
+                        <span *ngIf="data.metaAttributeType == 3">指标</span>
+                    </td>
+                    <td nz-td *ngIf="metaInfo.metaObjectType != 1" style="min-width:90px;max-width:90px">
+                        <!--后端研发说  非cube的先按照物理表字段显示-->
+                        <!-- {{data.metaAttributeType}} -->
+                        <span *ngIf="data.metaAttributeType == 1">string</span>
+                        <span *ngIf="data.metaAttributeType == 2">int</span>
+                        <span *ngIf="data.metaAttributeType == 3">date</span>
+                        <span *ngIf="data.metaAttributeType == 4">datetime</span>
+                        <span *ngIf="data.metaAttributeType == 5">double</span>
+                    </td>
+                    <td nz-td *ngIf="metaInfo.metaObjectType == 1" style="min-width:90px;max-width:90px">
+                        <span *ngIf="data.type == 1">string</span>
+                        <span *ngIf="data.type == 2">int</span>
+                        <span *ngIf="data.type == 3">date</span>
+                        <span *ngIf="data.type == 4">datetime</span>
+                        <span *ngIf="data.type == 5">double</span>
+                    </td>
+                    <td nz-td style="min-width:110px;max-width:60px">
+                        <p class="metadetail" [title]="data.physicalMetaAttributeName">
+                            {{data.physicalMetaAttributeName}}
+                        </p>
+                    </td>
+                    <td nz-td style="min-width:110px;max-width:60px">
+                        <p class="metadetail" [title]="data.physicalMetaAttributeType">
+                            {{data.physicalMetaAttributeType}}
+                        </p>
+                    </td>
+                    <td nz-td style="min-width:120px;max-width:70px" *ngIf="metaInfo.dataSourceType != 'RESTAPI'">
+                        <p [title]="data.physicalMetaAttributeDescripte" class="metadetail">
+                            {{data.physicalMetaAttributeDescripte}}
+                        </p>
+                    </td>
+                    <td nz-td *ngIf="metaInfo.dataSourceType == 'RESTAPI'" style="min-width:85px;max-width:85px">
+                        <span *ngIf="data.isInput">输入参数</span>
+                        <span *ngIf="!data.isInput">输出参数</span>
+                    </td>
+                    <td nz-td style="min-width:90px;max-width:90px">
+                        <span *ngIf="data.isEnum == 0">否</span>
+                        <span *ngIf="data.isEnum == 1">是</span>
+                    </td>
+                    <td nz-td style="min-width:90px;max-width:90px">
+                        <p class="table-td dictionary" [title]="dictionaryMap[data.dictionaryId]">
+                            {{dictionaryMap[data.dictionaryId]}}
+                        </p>
+                    </td>
+                    <td nz-td style="min-width:90px;max-width:40px">
+                        <p class="metadetail" [title]="data.parentName">
+                            {{data.parentName}}
+                        </p>
+
+                    </td>
+                    <td nz-td style="min-width:120px;max-width:70px">
+                        <p [title]="data.metaAttributeDescription" class="metadetail">
+                            {{data.metaAttributeDescription}}
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </cm-table>
+</div>

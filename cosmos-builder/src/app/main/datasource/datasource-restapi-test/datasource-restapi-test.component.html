@@ -1,0 +1,15 @@
+<div class="datasource-restapi-test">
+    <cm-modal>
+        <nz-modal [nzWrapClassName]="'vertical-center-modal'" [nzContent]="modalContent2" [nzVisible]="isVisibleMiddle" [nzTitle]="'测试连接'" (nzOnCancel)="handleCancelMiddle($event)" (nzOnOk)="handleOkMiddle($event)">
+            <ng-template #modalContent2>
+                <cm-form>
+                    <form nz-form>
+                        <div nz-form-item nz-row class="being">
+                            <nz-spin></nz-spin>正在测试~~~
+                        </div>
+                    </form>
+                </cm-form>
+            </ng-template>
+        </nz-modal>
+    </cm-modal>
+</div>

@@ -1,0 +1,130 @@
+<div class="metadata-step3-info">
+    <div class="metadata-step3-info-top">
+        <div class="metadataStep3InfoTitle">
+            已选择项
+        </div>
+        <cm-form>
+            <form class="metadataStep3FormText" nz-form [formGroup]="metadataStep3FormText">
+                <div nz-form-item>
+                    <div nz-form-label>
+                        <label>数据源名称</label>
+                    </div>
+                    <div nz-form-control>
+                        <span nz-form-text>{{ datasourceInfo['dataSourceName'] }}</span>
+                    </div>
+                </div>
+                <div nz-form-item>
+                    <div nz-form-label>
+                        <label>数据源类型</label>
+                    </div>
+                    <div nz-form-control>
+                        <span nz-form-text>{{ datasourceInfo['dataSourceType'] }}</span>
+                    </div>
+                </div>
+                <div *ngIf="isRestApi" nz-form-item>
+                    <div nz-form-label>
+                        <label>数据源URL</label>
+                    </div>
+                    <div nz-form-control>
+                        <span nz-form-text>{{ datasourceInfo.datasourceUrl }}</span>
+                    </div>
+                </div>
+                <div *ngIf="isRestApi" nz-form-item>
+                    <div nz-form-label>
+                        <label for="'restApiUrl'">Rest API URL</label>
+                    </div>
+                    <div nz-form-control>
+                        <span nz-form-text>{{datasourceInfo['physicalMetaObjectName']}}</span>
+                    </div>
+                </div>
+                <div *ngIf="isRestApi" nz-form-item>
+                    <div nz-form-label>
+                        <label>HTTP Method</label>
+                    </div>
+                    <div nz-form-control>
+                        <span nz-form-text>POST</span>
+                    </div>
+                </div>
+            </form>
+        </cm-form>
+    </div>
+
+    <div class="metadata-step3-info-top">
+        <div class="metadataStep3InfoTitle">
+            基本信息
+        </div>
+        <cm-form>
+            <form nz-form [formGroup]="metadataStep3Form" class="cm-advanced-search-form" (ngSubmit)="submitForm()">
+
+
+                <div nz-row [nzGutter]="40">
+                    <div nz-col [nzSpan]="20">
+                        <div nz-form-item nz-row>
+                            <div nz-form-label nz-col [nzSpan]="8">
+                                <label for="'metadataName'" nz-form-item-required>元数据对象名称</label>
+                            </div>
+                            <div nz-form-control nz-col [nzSpan]="16" nzHasFeedback>
+                                <cm-input>
+                                    <nz-input [nzSize]="'large'" [(ngModel)]="metadataName" [nzPlaceHolder]="'请输入内容'" [formControlName]="'metadataName'" [nzId]="'metadataName'"></nz-input>
+                                </cm-input>
+                                <div nz-form-explain *ngIf="getFormControl('metadataName').dirty && getFormControl('metadataName').hasError('required')">{{ errorInfo.required }}</div>
+                                <div nz-form-explain *ngIf="getFormControl('metadataName').dirty && getFormControl('metadataName').hasError('rightful')">{{ errorInfo.rightful }}</div>
+                                <div nz-form-explain *ngIf="getFormControl('metadataName').dirty && getFormControl('metadataName').hasError('minlength')">{{ errorInfo.minlength }}</div>
+                                <div nz-form-explain *ngIf="getFormControl('metadataName').dirty && getFormControl('metadataName').hasError('maxlength')">{{ errorInfo.maxlength }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div nz-row [nzGutter]="40">
+                    <div nz-col [nzSpan]="20">
+                        <div nz-form-item nz-row>
+                            <div nz-form-label nz-col [nzSpan]="8">
+                                <label nz-form-item-required>元数据对象类型</label>
+                            </div>
+                            <div nz-form-control nz-col [nzSpan]="16">
+                                <cm-select>
+                                    <nz-select [formControlName]="'metadataType'" [nzSize]="'large'" [nzPlaceHolder]="'请选择'" [(ngModel)]="metadataTypeValue" (ngModelChange)="metadataTypeChange(metadataTypeValue)" [nzDisabled]="metaObjectTypeDisabled">
+                                        <nz-option *ngFor="let option of metaObjectTypeList" [nzLabel]="option.name" [nzValue]="option.value"></nz-option>
+                                    </nz-select>
+                                </cm-select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div nz-row [nzGutter]="40">
+                    <div nz-col [nzSpan]="20">
+                        <div nz-form-item nz-row>
+                            <div nz-form-label nz-col [nzSpan]="8">
+                                <label>状态</label>
+                            </div>
+                            <div nz-form-control nz-col [nzSpan]="16">
+                                <nz-switch [formControlName]="'switch'" [(ngModel)]="status">
+                                    <span checked>正常</span>
+                                    <span unchecked>禁用</span>
+                                </nz-switch>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div nz-row [nzGutter]="40">
+                    <div nz-col [nzSpan]="20">
+                        <div nz-form-item nz-row>
+                            <div nz-form-label nz-col [nzSpan]="8">
+                                <label for="'metadataDescripe'">描述</label>
+                            </div>
+                            <div nz-form-control nz-col [nzSpan]="16">
+                                <cm-input>
+                                    <nz-input [nzRows]="'4'" [formControlName]="'metadataDescripe'" [(ngModel)]="metaObjectDescription" [nzType]="'textarea'" [nzPlaceHolder]="''"></nz-input>
+                                </cm-input>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </form>
+        </cm-form>
+    </div>
+</div>

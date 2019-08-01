@@ -1,0 +1,195 @@
+<div #root class="report-til">
+    <div class="ul-box list">
+        <ul [style.display]="switch ? 'none' : ''">
+            <li>
+                <cm-tooltip>
+                    <nz-tooltip [nzTitle]="'线图'" [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                        <i nz-tooltip cm-data="line" class="anticon anticon-line-chart"></i>
+                    </nz-tooltip>
+                </cm-tooltip>
+            </li>
+            <li>
+                <cm-tooltip>
+                    <nz-tooltip [nzTitle]="'饼图'" [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                        <i nz-tooltip cm-data="pie" class="anticon anticon-pie-chart"></i>
+                    </nz-tooltip>
+                </cm-tooltip>
+            </li>
+            <li>
+                <cm-tooltip>
+                    <nz-tooltip [nzTitle]="'柱图'" [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                        <i nz-tooltip cm-data="bar" class="anticon anticon-bar-chart"></i>
+                    </nz-tooltip>
+                </cm-tooltip>
+            </li>
+            <li>
+                <cm-tooltip>
+                    <nz-tooltip [nzTitle]="'漏斗'" [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                        <i nz-tooltip cm-data="funnel" class="anticon anticon-filter"></i>
+                    </nz-tooltip>
+                </cm-tooltip>
+            </li>
+            <li>
+                <!-- <cm-tooltip>
+                    <nz-tooltip [nzTitle]="'表格（业务)'" [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                        <i nz-tooltip cm-data="grid" class="anticon anticon-appstore-o"></i>
+                    </nz-tooltip>
+                </cm-tooltip> -->
+                <cm-tooltip>
+                    <nz-tooltip [nzTitle]="'表格（基础)'" [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                        <i nz-tooltip cm-data="table" class="anticon anticon-appstore-o"></i>
+                    </nz-tooltip>
+                </cm-tooltip>
+            </li>
+            <li>
+                <cm-tooltip>
+                    <nz-tooltip [nzTitle]="'留存'" [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                        <i nz-tooltip cm-data="retention" class="anticon anticon-appstore"></i>
+                    </nz-tooltip>
+                </cm-tooltip>
+            </li>
+            <li>
+                <cm-tooltip>
+                    <nz-tooltip [nzTitle]="'矩形'" [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                        <i nz-tooltip cm-data="rectangle" class="anticon anticon-laptop"></i>
+                    </nz-tooltip>
+                </cm-tooltip>
+            </li>
+            <li>
+                <cm-tooltip>
+                    <nz-tooltip [nzTitle]="'面积图'" [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                        <i nz-tooltip cm-data="area" class="anticon anticon-area-chart"></i>
+                    </nz-tooltip>
+                </cm-tooltip>
+            </li>
+        </ul>
+        <ul [style.display]="switch ? 'none' : ''">
+            <li>
+                <cm-tooltip>
+                    <nz-tooltip [nzTitle]="'下拉菜单'" [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                        <i nz-tooltip cm-data="select" class="anticon anticon-select"></i>
+                    </nz-tooltip>
+                </cm-tooltip>
+            </li>
+            <li>
+                <cm-tooltip>
+                    <nz-tooltip [nzTitle]="'tabs 标签页'" [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                        <i nz-tooltip cm-data="tab" class="anticon anticon-database"></i>
+                    </nz-tooltip>
+                </cm-tooltip>
+            </li>
+            <li>
+                <cm-tooltip>
+                    <nz-tooltip [nzTitle]="'日期范围'" [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                        <i nz-tooltip cm-data="date" class="anticon anticon-calendar"></i>
+                    </nz-tooltip>
+                </cm-tooltip>
+            </li>
+            <li>
+                <cm-tooltip>
+                    <nz-tooltip [nzTitle]="'标题'" [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                        <i nz-tooltip cm-data="title" class="anticon anticon-message"></i>
+                    </nz-tooltip>
+                </cm-tooltip>
+            </li>
+            <li>
+                <cm-tooltip>
+                    <nz-tooltip [nzTitle]="'文本'" [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                        <i nz-tooltip cm-data="text" class="anticon anticon-file-text"></i>
+                    </nz-tooltip>
+                </cm-tooltip>
+            </li>
+            <li>
+                <cm-tooltip>
+                    <nz-tooltip [nzTitle]="'统计摘要'" [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                        <i nz-tooltip cm-data="statistics" class="anticon anticon-folder-add"></i>
+                    </nz-tooltip>
+                </cm-tooltip>
+            </li>
+            <li>
+                <cm-tooltip>
+                    <nz-tooltip [nzTitle]="'地域分布'" [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                        <i nz-tooltip cm-data="map" class="anticon anticon-global"></i>
+                    </nz-tooltip>
+                </cm-tooltip>
+            </li>
+            <!-- <li>
+                <cm-tooltip>
+                    <nz-tooltip [nzTitle]="'条件筛选器'" [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                        <i nz-tooltip cm-data="filters" class="anticon anticon-filter"></i>
+                    </nz-tooltip>
+                </cm-tooltip>
+            </li> -->
+            <li>
+                <cm-tooltip>
+                    <nz-tooltip [nzTitle]="'日周月'" [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                        <i nz-tooltip cm-data="dayWeekMonth" class="anticon anticon-calendar"></i>
+                    </nz-tooltip>
+                </cm-tooltip>
+            </li>
+        </ul>
+    </div>
+    <div class="report-operation">
+        <div class="report-status">
+            <span *ngIf="data.status==1" style="height:6px;width:6px;background: rgb(43,133,229);display:inline-block;border-radius: 50%;"></span>
+            <span *ngIf="data.status==0" style="height:6px;width:6px;background: rgb(224,62,22);display:inline-block;border-radius: 50%;"></span>
+            <span *ngIf="data.status==2" style="height:6px;width:6px;background: #ddd;display:inline-block;border-radius: 50%;"></span>
+            <span *ngIf="data.status==1">已发布</span>
+            <span *ngIf="data.status==0">未发布</span>
+            <span *ngIf="data.status==2">下线</span>
+        </div>
+        <div class="report-page">
+            <span class="iconLeft" (click)="reduce()">
+                <i class="anticon anticon-left" [style.color]="leftDisabled ? '#ddd' : ''"></i>
+            </span>
+            <span class="active" style="margin-right: 0;">{{active}}</span>
+            <span class="slash"> / </span>
+            <span class="total">{{total}}</span>
+            <span>页</span>
+            <span class="iconDown" *ngIf="!isOpen" (click)="open()">
+                <i class="anticon anticon-down"></i>
+            </span>
+            <span class="iconUp" *ngIf="isOpen" (click)="no()">
+                <i class="anticon anticon-up"></i>
+            </span>
+            <span class="iconRight" (click)="add()">
+                <i class="anticon anticon-right" [style.color]="rightDisabled ? '#ddd' : ''"></i>
+            </span>
+            <ul class="ant-select-dropdown-menu ant-select-dropdown-menu-vertical ant-select-dropdown-menu-root" *ngIf="isOpen" (mouseleave)="isOpen = false">
+                <div>
+                    <li *ngFor="let active of positions" class="ant-select-dropdown-menu-item ng-tns-c23-38 ng-star-inserted" (click)="select(active)" (mouseenter)="active.showEllipsis = true;" (mouseleave)="active.showEllipsis = false;">
+                        <span>{{active.index}}</span>
+                        <input type="text" [(ngModel)]="active.value" id="input-{{active.index}}" (blur)="ChangeNameOK(active)" (keyup.enter)="ChangeNameOK(active)" [readonly]="!active.writeIN" class="readonly" [ngClass]=" active.writeIN? 'writeIn':''">
+                        <i class="anticon anticon-ellipsis" *ngIf="active.showEllipsis && !switch" (mouseenter)="showOpera($event,active)"></i>
+                        <ul *ngIf="active.showOpera" (blur)="active.showOpera = false;" (mouseleave)="active.showOpera = false;">
+                            <li (click)="ChangeName($event,active)">重命名</li>
+                            <li (click)="removePage($event,active.index)" *ngIf="positions.length>1">移除</li>
+                        </ul>
+                    </li>
+                    <li class="ant-select-dropdown-menu-item ng-tns-c23-38 ng-star-inserted" (click)="addTotal()" [style.display]="switch ? 'none' : ''">
+                        添加新页
+                    </li>
+                </div>
+            </ul>
+        </div>
+        <!-- <div class="report-revoke" [style.display]="switch ? 'none' : ''">
+            <span>
+                <i class="anticon anticon-rollback"></i>
+            </span>
+            <span>
+                <i class="anticon anticon-rollback last"></i>
+            </span>
+        </div> -->
+        <div class="report-save" [style.display]="switch ? 'none' : ''" (click)="updateData()">
+            <i class="anticon anticon-save"></i>
+        </div>
+        <div class="report-preview">
+            <span>预览</span>
+            <span>
+                <cm-switch>
+                    <nz-switch [nzSize]="'small'" [nzDisabled]="isDisabled" [(ngModel)]="switch" (ngModelChange)="switchChange()"></nz-switch>
+                </cm-switch>
+            </span>
+        </div>
+    </div>
+</div>

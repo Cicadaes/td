@@ -1,0 +1,54 @@
+<div class="report-create">
+    <cm-modal>
+        <nz-modal [nzWrapClassName]="'vertical-center-modal'" [nzContent]="modalContent" [nzVisible]="isVisibleMiddle" [nzTitle]="'维护帮助内容'" (nzOnCancel)="handleCancelMiddle($event)" (nzOnOk)="handleOkMiddle($event)" [nzFooter]="modalFooter">
+            <ng-template #modalContent>
+                <div class="title">
+                    <div>名称</div>
+                    <div>描述</div>
+                </div>
+                <div style="max-height:190px;overflow-y:auto;">
+                    <div class="now" *ngFor="let step of stepArray;let i = index">
+                        <div class="step">
+                            <div class="message">
+                                <cm-input>
+                                    <nz-input [nzSize]="'large'" [(ngModel)]="step.name"></nz-input>
+                                </cm-input>
+                                <cm-input>
+                                    <nz-input [nzSize]="'large'" [(ngModel)]="step.describe"></nz-input>
+                                </cm-input>
+                                <i class="anticon anticon-minus-circle-o dynamic-delete-button" (click)="removeFunnel(step)" *ngIf="stepArray.length==1?false:true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="height:24px;width:100%">
+                    <div *ngIf="decide" style="height: 24px;line-height: 24px;padding-left: 10px;color: red;font-family: PingFangSC-Regular;">
+                        *&nbsp;{{promptMessage}}.
+                    </div>
+                </div>
+                <div nz-form-item class="new" *ngIf="add">
+                    <div nz-form-control nz-col>
+                        <cm-button>
+                            <button nz-button [nzType]="'dashed'" [nzSize]="'large'" style="width:60%" (click)="addField($event)">
+                                        <i class="anticon anticon-plus"></i>
+                                        <span> 添加</span>
+                                    </button>
+                        </cm-button>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template #modalFooter>
+                <cm-button>
+                    <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancelMiddle(stepArray)">
+                                取消
+                            </button>
+                </cm-button>
+                <cm-button>
+                    <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="saveTheDataSource(stepArray)">
+                                确定
+                            </button>
+                </cm-button>
+            </ng-template>
+        </nz-modal>
+    </cm-modal>
+</div>

@@ -1,0 +1,48 @@
+<div class="report-detail-data">
+    <div class="item-config">
+        <label class="item-label">报表标题</label>
+        <div class="config-content">
+            <cm-input>
+                <nz-input style="width: 90%;" nzType="text" [(ngModel)]="title" [nzPlaceHolder]="'请输入'" (ngModelChange)="changeTitle(title)"></nz-input>
+            </cm-input>
+        </div>
+    </div>
+    <div class="item-config">
+        <label class="item-label">参数条件</label>
+        <div class="config-content">
+            <!-- <cm-select *ngFor="let paramInfo of selectedParamInfo;let i = index">
+                <nz-select nzAllowClear [nzSize]="'large'" name="paramKey" [(ngModel)]="paramInfo.field" (ngModelChange)="changeParam(paramInfo.field, i)"
+                    [nzPlaceHolder]="'请选择'" style="width:90%;margin-bottom:10px;">
+                    <nz-option *ngFor="let select of paramList" [nzLabel]="select.label" [nzValue]="select.value"></nz-option>
+                </nz-select>
+                <nz-select [nzSize]="'large'" name="operator" [(ngModel)]="paramInfo.operator" [nzPlaceHolder]="'请选择'" style="width:20%;margin:0 0 10px 12%;">
+                    <nz-option *ngFor="let select of operatorList" [nzLabel]="select.label" [nzValue]="select.value"></nz-option>
+                </nz-select>
+                <cm-input>
+                    <nz-input style="width: 53%;position: relative;top: 3px;margin-left: 10px;" nzType="text" [(ngModel)]="paramInfo.value" [nzPlaceHolder]="'请输入'"
+                        (ngModelChange)="changeValue(paramInfo.value)"></nz-input>
+                </cm-input>
+                <i class="anticon anticon-minus-circle-o dynamic-delete-button" *ngIf="i!=0" (click)="removeParam(selectedParamInfo,i)"></i>
+            </cm-select>
+            <cm-button>
+                <button class="add-button" *ngIf="paramList.length > selectedParamInfo.length" nz-button [nzType]="'dashed'" [nzSize]="'small'"
+                    (click)="addParamInfo()">
+                    <i class="anticon anticon-plus"></i>
+                    <span>添加条件</span>
+                </button>
+            </cm-button> -->
+            <cm-button>
+                <button class="add-button" nz-button [nzType]="'dashed'" [nzSize]="'small'" style="margin-top: 10px"
+                    (click)="setParam()">
+                    <i style="position: relative;top: 2px;" class="icon iconfont icon-shezhi2"></i>
+                    <span>参数配置</span>
+                </button>
+            </cm-button>
+            <ul>
+                <li *ngFor="let select of paramList;let i = index" class="course">
+                    <span title={{select.field}}>{{select.field}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

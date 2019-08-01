@@ -1,0 +1,75 @@
+<div class="reportfolder-detail-info">
+    <div class="detail-info clearfix">
+        <div class="info">
+            <span class="long">{{reportfoldereData.name}}</span>
+        </div>
+        <div class="info-btn">
+            <cm-button>
+                <button nz-button [nzType]="'default'" (click)="showConfirm()">
+                    <span>删除</span>
+                </button>
+            </cm-button>
+            <cm-button>
+                <button nz-button [nzType]="'default'" (click)="show()">
+                    <span>修改</span>
+                </button>
+            </cm-button>
+            <reportfolder-detail-modify></reportfolder-detail-modify>
+        </div>       
+    </div>
+    <cm-form>
+        <form nz-form class="cm-advanced-search-form">
+            <div class="from-info clearfix">
+                <div class="info-left">
+                    <div class="form-item">
+                        <div class="form-label">
+                            <span>创建人</span>
+                            <span>:</span>
+                        </div>
+                        <div class="form-control">
+                            <span nz-form-text>{{reportfoldereData.creator}}</span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <div class="form-label">
+                            <span>创建时间</span>
+                            <span>:</span>
+                        </div>
+                        <div class="form-control">
+                            <span nz-form-text>{{reportfoldereData.createTime}}</span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <div class="form-label">
+                            <span>描述</span>
+                            <span>:</span>
+                        </div>
+                        <div class="form-control">
+                            <span nz-form-text>{{reportfoldereData.description}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-right">
+                    <div class="form-item">
+                        <div class="form-label">
+                            <span>更新人</span>
+                            <span>:</span>
+                        </div>
+                        <div class="form-control">
+                            <span nz-form-text>{{reportfoldereData.updater}}</span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <div class="form-label">
+                            <span>更新时间</span>
+                            <span>:</span>
+                        </div>
+                        <div class="form-control">
+                            <span nz-form-text>{{reportfoldereData.updateTime}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </cm-form>
+</div>

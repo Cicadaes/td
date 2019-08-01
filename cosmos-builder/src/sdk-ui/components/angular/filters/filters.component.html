@@ -1,0 +1,42 @@
+<!-- <main #filters *ngIf="isVisibleMiddle"> -->
+<main #filters>
+
+    <div nz-menu class="filters-box">
+        <div class="text" *ngIf="name">
+            <span >{{name}}</span>
+        </div>
+        <div class="filters-item">
+            <cm-select>
+                <nz-select [nzSize]="'large'" name="cube" [nzPlaceHolder]="''" style="width:100%;" [(ngModel)]="dimension" nzShowSearch (ngModelChange)="changeDimension(dimension)">
+                    <nz-option *ngFor="let select of dimensionOptions" [nzLabel]="select.label" [nzValue]="select.value"></nz-option>
+                </nz-select>
+            </cm-select>
+        </div>
+        <div class="filters-item">
+            <cm-select>
+                <nz-select [nzSize]="'large'" name="cube" [nzPlaceHolder]="''" style="width:100%;" [(ngModel)]="condition" nzShowSearch (ngModelChange)="changeCondition(condition)">
+                    <nz-option *ngFor="let select of conditionoptions" [nzLabel]="select.label" [nzValue]="select.value"></nz-option>
+                </nz-select>
+            </cm-select>
+        </div>
+        <div class="filters-item" style="display:flex" *ngIf="condition == '在区间'">
+            <cm-input>
+                <nz-input [nzSize]="'large'" [(ngModel)]="dict[0]" style="flex: 1" [nzPlaceHolder]="''"></nz-input>
+            </cm-input>
+            <span style="border: 1px solid #ededed;height:32px;width:52px;line-height: 32px;text-align: center;background: #e5e9ec;border-radius: 4px;margin:0 10px;">到</span>
+            <cm-input>
+                <nz-input [nzSize]="'large'" [(ngModel)]="dict[1]" style="flex: 1" [nzPlaceHolder]="''"></nz-input>
+            </cm-input>
+        </div>
+        <div class="filters-item" *ngIf="condition !== '在区间'">
+            <cm-input>
+                <nz-input [nzSize]="'large'" [(ngModel)]="dict[0]" style="width: 100%" [nzPlaceHolder]="''"></nz-input>
+            </cm-input>
+        </div>
+        <cm-button style="float:right">
+            <button nz-button [nzType]="'primary'" (click)="query()" [nzSize]="'large'">
+                <span>查询</span>
+            </button>
+        </cm-button>
+    </div>
+</main>

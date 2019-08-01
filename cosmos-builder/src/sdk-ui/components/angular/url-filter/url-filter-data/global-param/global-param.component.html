@@ -1,0 +1,50 @@
+<main>
+	<cm-modal>
+		<nz-modal [nzWrapClassName]="'vertical-center-modal'" [nzMaskClosable]="false" [nzContent]="modalContent" [nzVisible]="isVisibleMiddle"
+		 [nzTitle]="'参数设置'" (nzOnCancel)="handleCancelMiddle($event)" [nzFooter]="modalFooter">
+			<ng-template #modalContent>
+				<div class="title">
+					<p style="width: 40%;">参数名称</p>
+					<p style="width: 55%">参数值样例</p>
+				</div>
+				<div style="max-height: 190px; overflow: scroll;" #scroll>
+					<div *ngFor="let paramInfo of selectedParamInfo;let i = index" style="padding: 10px;background: rgba(23,35,61,0.03); margin-bottom: 5px;">
+						<cm-select>
+							<nz-select nzAllowClear [nzSize]="'large'" name="paramKey" [(ngModel)]="paramInfo.field" (ngModelChange)="changeParam(paramInfo.field, i)"
+								[nzPlaceHolder]="'请选择'" style="width:25%;">
+								<nz-option *ngFor="let select of paramList" [nzLabel]="select.name" [nzValue]="select.name"></nz-option>
+							</nz-select>
+							<nz-select [nzSize]="'large'" name="operator" [(ngModel)]="paramInfo.operator" [nzPlaceHolder]="'请选择'" style="width:10%; margin: 0 5px;">
+								<nz-option *ngFor="let select of operatorList" [nzLabel]="select.label" [nzValue]="select.value"></nz-option>
+							</nz-select>
+							<cm-input>
+								<nz-input style="width: 55%;" nzType="text" [(ngModel)]="paramInfo.value" [nzPlaceHolder]="'请输入'" (ngModelChange)="changeValue(paramInfo.value)"></nz-input>
+							</cm-input>
+							<i class="anticon anticon-minus-circle-o dynamic-delete-button" style="margin-left: 5px;" (click)="removeParam(selectedParamInfo,i)"></i>
+						</cm-select>
+					</div>
+				</div>
+				<div *ngIf="showError" style="height:24px;width:100%">
+					<div style="height: 24px;line-height: 24px;padding-left: 10px;color: #f5222d;">
+						*&nbsp;{{errorMsg}}
+					</div>
+				</div>
+				<div class="add">
+					<span (click)="addParamInfo()"><i class="anticon anticon-plus"></i>添加条件</span>
+				</div>
+			</ng-template>
+			<ng-template #modalFooter>
+				<cm-button>
+					<button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancelMiddle($event)">
+						取消
+					</button>
+				</cm-button>
+				<cm-button>
+					<button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="saveParam(selectedParamInfo)">
+						确定
+					</button>
+				</cm-button>
+			</ng-template>
+		</nz-modal>
+	</cm-modal>
+</main>

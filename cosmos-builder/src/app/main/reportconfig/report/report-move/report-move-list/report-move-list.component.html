@@ -1,0 +1,51 @@
+<div class="report-move-list">
+    <div class="report-move-search clearfix">
+        <span>选择目标文件夹</span>
+        <nz-input [nzType]="'search'" [nzPlaceHolder]="'请输入文件夹名称搜索'" [(ngModel)]="_value" (nzOnSearch)="onSearch($event)"></nz-input>
+    </div>
+    <cm-table>
+        <nz-table #nzTable [nzBordered]="true" [nzDataSource]="_dataSet" [nzScroll]="{ y: 150 }" nzIsPagination="false">
+            <ng-template #nzFixedHeader>
+                <thead nz-thead>
+                    <tr>
+                        <th nz-th style="width:100px;max-width:100px">
+                            <div style="width:100%">选择</div>
+                        </th>
+                        <th nz-th style="width:140px;max-width:140px">
+                            <div style="width:100%">文件夹</div>
+                        </th>
+                        <th nz-th style="width:240px;max-width:240px">
+                            <div style="width:100%">描述</div>
+                        </th>
+                    </tr>
+                </thead>
+            </ng-template>
+            <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let data of nzTable.data;let i=index">
+                    <td nz-td style="max-width:100px;min-width:100px">
+                        <nz-radio-group [(ngModel)]="name" (click)="print(data)" style="width:100%">
+                            <div>
+                                <label nz-radio [nzValue]="data" (click)="checkRadio()"> </label>
+                            </div>
+                        </nz-radio-group>
+                    </td>
+                    <td nz-td style="max-width:140px;min-width:140px">
+                        <div style="width:100%" class="list" [title]="data.name">
+                            {{data.name}}
+                        </div>
+                    </td>
+                    <td nz-td style="max-width:240px;min-width:240px">
+                        <div style="width:100%" [title]="data.description" class="list">
+                            {{data.description}}
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </cm-table>
+    <cm-pagination style="text-align:right">
+        <ng-template>
+            <nz-pagination [(nzPageIndex)]="queryParam.page" [nzTotal]="_total" [nzSize]="'small'" nzShowTotal (nzPageIndexChange)="pageIndexChange($event)" [nzPageSize]="10"></nz-pagination>
+        </ng-template>
+    </cm-pagination>
+</div>

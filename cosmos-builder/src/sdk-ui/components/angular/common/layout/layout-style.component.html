@@ -1,0 +1,147 @@
+<div class="layout-style">
+    <div class="div">
+        <p>宽高</p>
+        <div class="block clearfix">
+            <p>宽高设置</p>
+            <div class="wh clearfix">
+                <div class="wide">
+                    <span>宽</span>
+                    <cm-checkbox>
+                        <label nz-checkbox [(ngModel)]="widthAuto" (ngModelChange)="whChange($event)">
+                                <span>自适应</span>
+                            </label>
+                    </cm-checkbox>
+                    <cm-input>
+                        <input nz-input placeholder="请输入宽度" *ngIf="!widthAuto" [(ngModel)]="width" (ngModelChange)="whChange($event)">
+                    </cm-input>
+                    <span *ngIf="widthAuto"></span>
+                </div>
+                <div class="high">
+                    <span>高</span>
+                    <cm-checkbox>
+                        <label nz-checkbox [(ngModel)]="highAuto" (ngModelChange)="whChange($event)">
+                            <span>自适应</span>
+                        </label>
+                    </cm-checkbox>
+                    <cm-input>
+                        <input nz-input placeholder="请输入高度" *ngIf="!highAuto" [(ngModel)]="height" (ngModelChange)="whChange($event)">
+                    </cm-input>
+                    <span *ngIf="highAuto"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="div" *ngIf="dircLevel || dircVertical">
+        <p>对齐方向</p>
+        <div class="block clearfix" *ngIf="dircLevel">
+            <span style="margin:10px;display: block;">水平方向</span>
+            <cm-radio>
+                <nz-radio-group [(ngModel)]="level" (ngModelChange)="OptionChange($event)">
+                    <label nz-radio [nzValue]="'leftFloat'">
+                            <span>左</span>
+                        </label>
+
+                    <label nz-radio [nzValue]="'centerFloat'">
+                            <span>中</span>
+                        </label>
+
+                    <label nz-radio [nzValue]="'rightFloat'">
+                            <span>右</span>
+                        </label>
+                </nz-radio-group>
+            </cm-radio>
+        </div>
+        <div class="block clearfix" *ngIf="dircVertical">
+            <span style="margin:10px;display: block;">垂直方向</span>
+            <cm-radio>
+                <nz-radio-group [(ngModel)]="vertical" (ngModelChange)="OptionChange($event)">
+
+                    <label nz-radio [nzValue]="'topFloat'">
+                            <span>上</span>
+                        </label>
+
+                    <label nz-radio [nzValue]="'middleFloat'">
+                            <span>中</span>
+                        </label>
+
+                    <label nz-radio [nzValue]="'bottomFloat'">
+                            <span>下</span>
+                        </label>
+                </nz-radio-group>
+            </cm-radio>
+        </div>
+    </div>
+    <div class="div">
+        <p>边距</p>
+        <div class="block clearfix">
+            <p>外边距（px）</p>
+            <div class="margin">
+                <span>上</span>
+                <cm-input style="position:relative;">
+                    <input type="number" nz-input placeholder="请输入" [(ngModel)]="marginTop" (ngModelChange)="marginChange($event)">
+                </cm-input>
+            </div>
+            <div class="margin">
+                <span>下</span>
+                <cm-input style="position:relative;">
+                    <input type="number" nz-input placeholder="请输入" [(ngModel)]="marginBottom" (ngModelChange)="marginChange($event)">
+                    <!-- <div class="text-explain" *ngIf="nummarginBottom">请输入数字</div>
+                    <div class="text-explain" *ngIf="requireMarginBottom">不能为空</div> -->
+                </cm-input>
+            </div>
+            <div class="margin">
+                <span>左</span>
+                <cm-input style="position:relative;">
+                    <input type="number" nz-input placeholder="请输入" [(ngModel)]="marginLeft" (ngModelChange)="marginChange($event)">
+                    <!-- <div class="text-explain" *ngIf="nummarginLeft">请输入数字</div>
+                    <div class="text-explain" *ngIf="requireMarginLeft">不能为空</div> -->
+                </cm-input>
+            </div>
+            <div class="margin">
+                <span>右</span>
+                <cm-input style="position:relative;">
+                    <input type="number" nz-input placeholder="请输入" [(ngModel)]="marginRight" (ngModelChange)="marginChange($event)">
+                    <!-- <div class="text-explain" *ngIf="nummarginRight">请输入数字</div>
+                    <div class="text-explain" *ngIf="requireMarginRight">不能为空</div> -->
+                </cm-input>
+            </div>
+        </div>
+        <div class="block clearfix">
+            <p>内边距（px）</p>
+            <div class="margin">
+                <span>上</span>
+                <cm-input style="position:relative;">
+                    <input type="number" nz-input placeholder="请输入" [(ngModel)]="paddingTop" (ngModelChange)="paddingChange($event)">
+                    <!-- <div class="text-explain" *ngIf="numpaddingTop">请输入数字</div>
+                    <div class="text-explain" *ngIf="requirePaddingTop">不能为空</div> -->
+                </cm-input>
+            </div>
+            <div class="margin">
+                <span>下</span>
+                <cm-input style="position:relative;">
+                    <input type="number" nz-input placeholder="请输入" [(ngModel)]="paddingBottom" (ngModelChange)="paddingChange($event)">
+                    <!-- <div class="text-explain" *ngIf="numpaddingBottom">请输入数字</div>
+                    <div class="text-explain" *ngIf="requirePaddingBottom">不能为空</div> -->
+                </cm-input>
+            </div>
+            <div class="margin">
+                <span>左</span>
+                <cm-input style="position:relative;">
+                    <input type="number" nz-input placeholder="请输入" [(ngModel)]="paddingLeft" (ngModelChange)="paddingChange($event)">
+                    <!-- <div class="text-explain" *ngIf="numpaddingLeft">请输入数字</div>
+                    <div class="text-explain" *ngIf="requirePaddingLeft">不能为空</div> -->
+                </cm-input>
+            </div>
+            <div class="margin">
+                <span>右</span>
+                <cm-input style="position:relative;">
+                    <input type="number" nz-input placeholder="请输入" [(ngModel)]="paddingRight" (ngModelChange)="paddingChange($event)">
+                    <!-- <div class="text-explain" *ngIf="numpaddingRight">请输入数字</div>
+                    <div class="text-explain" *ngIf="requirePaddingRight">不能为空</div> -->
+                </cm-input>
+            </div>
+        </div>
+    </div>
+
+    <background-border [layoutData]="_layoutBgbd" (provinceOut)="bgBdData($event)"></background-border>
+</div>

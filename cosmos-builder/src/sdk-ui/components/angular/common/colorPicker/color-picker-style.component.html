@@ -1,0 +1,14 @@
+<div class="color">
+    <cm-tooltip>
+        <nz-tooltip [nzTrigger]="'click'">
+            <div class="pick" #colorpick [style.width]="widths" [style.height]="heights" nz-tooltip [(colorPicker)]="color" (click)="toggle=!toggle"
+                [style.background]="color"></div>
+            <ng-template #nzTemplate>
+                <div style="width:230px !important;opacity: 1;height:360px;opacity: 1;display:block;margin:0;padding:1;overflow:hidden;">
+                    <span [cpAlphaChannel]="'always'" [cpPresetColors]="cpPresetColors" [cpDialogDisplay]="'inline'" [(cpToggle)]="toggle" [(colorPicker)]="color"
+                        [cpOutputFormat]="cpOutputFormat" (colorPickerChange)="colorChange($event)"></span>
+                </div>
+            </ng-template>
+        </nz-tooltip>
+    </cm-tooltip>
+</div>

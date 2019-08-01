@@ -1,0 +1,120 @@
+.clrfix {
+  zoom: 1;
+}
+.clrfix:after {
+  content: "";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+  overflow: hidden;
+}
+
+
+.metadata-step3-info{
+
+    .metadata-step3-info-top{
+        background: #fff;
+        line-height: 20px;
+        font-size: 12px;
+        margin-bottom: 24px;
+        box-shadow: 0 1px 4px 0 rgba(23,35,61,0.25);
+        border-radius: 2px;
+
+        .metadataStep3InfoTitle {
+          font-family: PingFangSC-Medium;
+          font-size: 14px;
+          color: #17233D;
+          line-height: 22px;
+          padding: 13px 24px;
+          text-align: left;
+          border-bottom: 1px solid rgba(23,35,61,0.10);
+        }
+        .metadataStep3FormText{
+            padding: 8px 24px 0 24px;
+            text-align: left !important;
+            [nz-form-item]{
+                display: inline-block;
+                width:33%;
+                margin-bottom: 12px;
+                // float: left;
+                // margin-bottom: 12px!important;
+                // margin-right: 56px;
+                &:last-child{
+                    // margin-right:31px!important;
+                }
+                [nz-form-label]{
+                    display: inline-block;
+                    text-align: left;
+                    width: 95px;
+                    label{
+                        font-family: PingFangSC-Medium;
+                        font-size: 12px;
+                        // color: #17233D!important;
+                        color: rgba(23,35,61,0.75);
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
+                }
+        
+                [nz-form-control]{
+                    text-align: left;
+                    width: 50%;
+                    display: inline-block;
+                    text-align: left;
+                    
+                    >span{
+                        margin:0px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
+                }
+                [nz-form-text]{
+                    display: inline-block;
+                    padding: 0;
+                    margin: 0 56px 0 8px;
+                    text-align: left;
+                    vertical-align: middle;
+                }
+      
+            }
+        }
+
+        .cm-advanced-search-form {
+            padding: 24px 24px 0 24px;
+            [nz-form-item]{
+                display: inline-block;
+                float: left;
+                margin-right: 56px;
+                &:last-child{
+                    margin-right:31px!important;
+                }
+                [nz-form-label]{
+                    display: inline-block;
+                    width: 120px;
+                    label{
+                        font-family: PingFangSC-Medium;
+                        font-size: 12px;
+                        color: #17233D!important;
+                    }
+                }
+        
+                [nz-form-control]{
+                    display: inline-block;
+                    width: 400px;
+                    text-align: left;
+                }
+                [nz-form-text]{
+                    display: inline-block;
+                    padding: 0;
+                    margin: 0 56px 0 8px;
+                    vertical-align: middle;
+                }
+      
+            }
+        }
+
+    }
+}

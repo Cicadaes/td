@@ -1,0 +1,44 @@
+<div class="report-modify">
+    <cm-modal>
+        <nz-modal [nzWrapClassName]="'vertical-center-modal'" [nzContent]="modalContent" [nzVisible]="isVisibleMiddle" [nzTitle]="'编辑报表'" (nzOnCancel)="handleCancelMiddle()" (nzOnOk)="handleOkMiddle()" [nzFooter]="modalFooter">
+            <cm-form>
+                <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)">
+                    <ng-template #modalContent>
+                        <div nz-form-item nz-row>
+                            <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                                <label for="'Name'" nz-form-item-required>报表名称</label>
+                            </div>
+                            <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                                <cm-input>
+                                    <nz-input [nzSize]="'large'" [nzType]="'Name'" [formControlName]="'Name'" [nzId]="'Name'"></nz-input>
+                                </cm-input>
+                                <div nz-form-explain *ngIf="getFormControl('Name').dirty&&getFormControl('Name').hasError('required')">{{regular.name.errorInfo.emptyInfofolderName}}</div>
+                                <div nz-form-explain *ngIf="getFormControl('Name').dirty&&getFormControl('Name').hasError('name')">{{regular.name.errorInfo.emptyInfofolderspecial}}</div>
+                                <div nz-form-explain *ngIf="getFormControl('Name').dirty&&getFormControl('Name').hasError('length')">{{regular.name.errorInfo.emptyInfofolderNameLength}}</div>
+                            </div>
+                        </div>
+                        <div nz-form-item nz-row>
+                            <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                                <label for="commit">描述</label>
+                            </div>
+                            <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                                <cm-input>
+                                    <nz-input [nzType]="'textarea'" [nzRows]="'4'" [nzPlaceHolder]="''" [formControlName]="'commit'"></nz-input>
+                                </cm-input>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <ng-template #modalFooter>
+                        <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancelMiddle()">
+                            取消
+                        </button>
+                        <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="saveTheDataSource(validateForm.value)" [nzLoading]="isConfirmLoading" [disabled]="!validateForm.valid">
+                            确定
+                        </button>
+                    </ng-template>
+                </form>
+            </cm-form>
+        </nz-modal>
+    </cm-modal>
+
+</div>

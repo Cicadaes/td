@@ -1,0 +1,47 @@
+<cm-table>
+    <nz-table #nzTable [nzShowTotal]="true" [nzAjaxData]="datasourceList" [nzTotal]="total" [(nzPageIndex)]="pageIndex" (nzPageIndexChange)="pageIndexChange($event)">
+
+        <thead nz-thead>
+            <tr>
+                <th nz-th style="width:65px">
+                    <span>选择</span>
+                </th>
+                <th nz-th>
+                    <span>ID</span>
+                </th>
+                <th nz-th>
+                    <span>数据源名称</span>
+                </th>
+                <th nz-th>
+                    <span>数据源类型</span>
+                </th>
+                <th nz-th>
+                    <span>描述</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody nz-tbody>
+            <tr [ngClass]="{'itemSelected': data.id == selectedDatasource ? true : false }" nz-tbody-tr *ngFor="let data of nzTable.data">
+                <td nz-td>
+                    <nz-radio-group [(ngModel)]="selectedDatasource">
+                        <label nz-radio [nzValue]="data.id" (click)="selectDatasource(data)"></label>
+                    </nz-radio-group>
+                </td>
+                <td nz-td>{{data.id}}</td>
+                <td nz-td>
+                    <p class="table-td" [title]="data.name">
+                        {{data.name}}
+                    </p>
+                </td>
+                <td nz-td>{{data.type}}</td>
+                <td nz-td>
+                    <p class="table-td" [title]="data.description">
+                        {{data.description}}
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</cm-table>
+
+<div *ngIf="step1IsFalse" class="errorInfo">请至少选择一个数据源</div>

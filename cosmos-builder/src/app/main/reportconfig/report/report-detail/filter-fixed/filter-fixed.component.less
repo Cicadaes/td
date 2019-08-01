@@ -1,0 +1,231 @@
+.wrap{
+    width:100%;
+    height:100%;
+    background: rgba(31, 37, 68, 0.3);
+    position: fixed;
+    overflow: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+}
+input::-webkit-input-placeholder{ 
+    color: #ddd;
+}
+input::-moz-input-placeholder{
+color: #ddd;
+}
+input::-ms-input-placeholder{
+color: #ddd;
+}
+.filter-create{
+    width:100%;
+    height:387px;
+    position: fixed;
+    background: #FFFFFF;
+    box-shadow: 0 1px 4px 0 rgba(23,35,61,0.25);
+    border-radius: 2px;
+    bottom: -387px;
+    left:0;
+    z-index: 101;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+
+}
+.create-title{
+    width:100%;
+    height:56px;
+    border-bottom:1px solid rgba(23,35,61,0.10);
+    line-height: 56px;
+}
+.create-title span:first-child{
+    width:168px;
+    height: 24px;
+    color: #17233D;
+    line-height: 24px;
+    margin:16px 0 0 24px;
+    display:inline-block;
+}
+.create-title span:last-child{
+    float: right;
+    margin-right: 27px;
+    cursor:pointer;
+}
+.create-save{
+    width:100%;
+    height:56px;
+    line-height: 56px;
+    border-top:1px solid rgba(23,35,61,0.10);
+}
+.create-save>span{
+    width:353px;
+    height:20px;
+    font-family: PingFangSC-Regular;
+    color: rgba(23,35,61,0.55);
+    line-height: 20px;
+    margin:18px 0 0 24px; 
+}
+.create-save button{
+    float: right;
+    margin:12px 24px 0 0;
+}
+.create-field{
+    flex:1;
+    overflow: auto;
+    padding:0 24px;
+}
+.field-title{
+    margin: 20px 0px;
+    display: flex;
+}
+.field-title-left,.field-title-right{
+    display: flex;
+    flex-direction: column;
+    width:346px;
+    margin-right: 23px;
+    justify-content: space-between;
+}
+.field-title .field-title-right{
+    margin-right: 0;
+}
+.input-text{
+    position: relative;
+}
+.text{
+    border:none;
+    border-bottom:1px solid #DEDFE3;
+    padding: 3px;
+    width: 100%;
+    color: #17233D;
+    line-height: 22px;
+    outline:none;
+    background: none;
+}
+.text:focus{
+    border-bottom:1px solid #DEDFE3 !important;    
+}
+.field-title div span{
+    font-family: PingFangSC-Regular;
+    color: rgba(23,35,61,0.55);
+    line-height: 20px;
+}
+.content-and p{
+    color: #2D8CF0;
+    width:12px;
+    height:20px;
+    cursor:pointer;
+}
+.content-and ul{
+    width:100%;
+    background: rgba(23,35,61,0.03);
+}
+.content-and ul li{
+    display: flex;
+    position: relative;
+    padding-top: 18px;
+}
+.content-and ul li:last-child{
+    padding-bottom: 18px;
+}
+.text-explain{
+    margin: 3px 8px;
+    font-size: 10px;
+    color: red;
+    position: absolute;
+    left: 0;
+    top: 28px;
+}
+.content-and ul li>div{
+    width:260px;
+    margin-left: 25px;
+    position: relative;
+}
+.content-and ul li>div .twoPos{
+    position: relative;
+}
+ul .text{
+    padding:0 5px;
+    border-bottom:1px solid #ddd;
+    height: 28px;
+    line-height: 28px;
+    color: rgba(0, 0, 0, 0.65);
+}
+.content-and p{ 
+    width:12px;
+    height:20px;
+    color:#2D8CF0;
+    margin-top: 12px;
+}
+.section{
+    width:300px;
+    display:flex;
+    justify-content: center;
+}
+.section>div{
+    width:120px;
+}
+.section .text{ 
+    width:100%;
+}
+.section span{ 
+    margin: 10px 16px 0 16px;
+}
+li .or{
+    position: absolute;
+    right: 50px;
+    top: 24px;
+    width: 12px;
+    height: 20px;
+    color: #2D8CF0;
+    cursor:pointer;
+    
+}
+li .icon{
+    position: absolute;
+    right: 16px;
+    top: 24px;
+    width: 12px;
+    height: 20px;
+    font-size: 14px;
+    cursor:pointer;
+    
+}
+.disabled{
+    color: rgba(23,35,61,0.75) !important;
+}
+:host ::ng-deep .filter-create{
+    .ant-select {
+        width: 100%;
+    }
+    .ant-select-selection,.ant-select-selection {
+        background: none !important;
+        border: none !important;
+        border-bottom: 1px solid #ddd !important;
+        width: 100% !important;
+      }
+      .ant-select-focused .ant-select-selection,.ant-select-selection:focus,.ant-select-selection:active {
+        box-shadow: none !important;
+      }
+      .ant-input {
+        background-color: transparent !important;
+        border: none !important;
+        border-bottom: 1px solid #d9d9d9 !important;
+    }
+    .ant-calendar-picker {
+        width: 100% !important;
+    }
+    .ant-input > .ant-calendar-range-picker-input {
+        border: none !important;
+        background-color: transparent  !important;
+    }
+    .ant-calendar-picker-clear {
+        background-color: transparent !important;
+    }
+    .ant-cascader-picker {
+        background-color: transparent !important;
+    }
+}

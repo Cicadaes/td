@@ -1,0 +1,20 @@
+<div class="page-wrapper">
+    <div class="report-detail">
+        <report-detail-title></report-detail-title>
+    </div>
+    <div class="content-box">
+        <div class="stage-box" [ngStyle]="widthStyles">
+            <div class="stage"></div>
+        </div>
+        <div class="setting-box" [ngStyle]="positionStyles">
+            <dynamic-load *ngIf="reportData"></dynamic-load>
+        </div>
+        <filter-fixed></filter-fixed>
+        <funnel-procedure></funnel-procedure>
+        <grid-content></grid-content>
+        <table-content></table-content>
+        <title-content></title-content>
+        <text-link></text-link>
+        <app-global-param></app-global-param>
+    </div>
+</div>

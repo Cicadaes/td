@@ -1,0 +1,65 @@
+<div class="piestyle">
+    <layout [layoutData]="_layoutLayout" (provinceOut)="setLayoutData($event)" [cmHeight]="'450px'" [cmPadding]="'16px 16px 16px 16px'"
+        [cmAlign]="'level'"></layout>
+
+    <ul class="center">
+        <div class="piecenter">
+            <p>颜色</p>
+            <div class="section">
+                <li>
+                    <div>
+                        <div class="clock">
+                            <color-picker-style [height]="15" width="70" [colors]="_cmPresetColors" [cmcolor]="mapStyle.labelColor" [cmType]="'rgba'"
+                                (provinceOut)="mapStyle.labelColor=$event;OptionChange(mapStyle.labelColor)"></color-picker-style>
+                            <!-- <cm-color-picker [cmType]="'board'" [cmcolor]="mapStyle.labelColor" (cmcolorchange)="mapStyle.labelColor=$event;OptionChange(mapStyle.labelColor)" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition" [cmPositionOffset]="_cmPositionOffset" [cmType]="_cmType"></cm-color-picker> -->
+                        </div>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </ul>
+    <ul class="center">
+        <div class="piecenter">
+            <p>图例</p>
+            <div class="section">
+                <cm-checkbox style="margin-left: 15px;">
+                    <label nz-checkbox [(ngModel)]="mapStyle.dataLabel" (ngModelChange)="OptionChange($event)">
+                        <span>显示</span>
+                    </label>
+                </cm-checkbox>
+                <li>
+                    <p class="title" style="margin-bottom:5px">图例文字</p>
+                    <div class="type-size map-size">
+                        <i style="float: left;height: 35px;overflow: hidden;line-height: 51px;margin-right: 10px;" class="icon iconfont icon-wenbenyanse"></i>
+                        <div style="float:right;float: right;width: 60%;height: 100%;overflow: hidden;text-align: center">
+                            <color-picker-style [height]="15" width="70" [colors]="_cmPresetColors" [cmcolor]="mapStyle.textColor" [cmType]="'hex'"
+                                (provinceOut)="mapStyle.textColor = $event;OptionChange(mapStyle.textColor)"></color-picker-style>
+                            <!-- <cm-color-picker [cmType]="'board'" [cmcolor]="mapStyle.textColor" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition"
+                                (cmcolorchange)="mapStyle.textColor = $event;OptionChange(mapStyle.textColor);" [cmPositionOffset]="_cmPositionOffset"
+                                [cmType]="_cmType"></cm-color-picker> -->
+                        </div>
+                    </div>
+                    <span class="type-face" style="position: relative;text-align: right;float: right;">
+                        <i style="position: absolute;top:35%;left:0%" class="icon iconfont icon-icon-test7"></i>
+                        <cm-select>
+                            <nz-select [(ngModel)]="mapStyle.fontSize" [nzPlaceHolder]="'请选择标签格式'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                                <nz-option *ngFor="let option of fontSizeOptions" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                                </nz-option>
+                            </nz-select>
+                        </cm-select>
+                    </span>
+                    <div style="clear:both"></div>
+                </li>
+                <!-- <li class="percentage" style="position: relative;text-align: right;">
+                    <i style="position: absolute;top:43%;left:7%" class="icon iconfont icon-ziti4"></i>
+                    <cm-select>
+                        <nz-select [(ngModel)]="mapStyle.fontFamily" [nzPlaceHolder]="'请选择字体'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                            <nz-option *ngFor="let typeface of typefaces" [nzLabel]="typeface.label" [nzValue]="typeface.value" [nzDisabled]="typeface.disabled">
+                            </nz-option>
+                        </nz-select>
+                    </cm-select>
+                </li> -->
+            </div>
+        </div>
+    </ul>
+</div>

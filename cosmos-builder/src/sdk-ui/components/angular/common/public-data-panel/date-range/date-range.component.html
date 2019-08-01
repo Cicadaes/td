@@ -1,0 +1,25 @@
+<main>
+	<div class="item-config">
+		<label class="item-label">日期范围</label>
+		<div class="config-content">
+			<cm-select>
+				<nz-select [nzSize]="'large'" name="date" [(ngModel)]="selectedDate" (ngModelChange)="changeDate(selectedDate)" [nzPlaceHolder]="'日期范围维度'" style="width:90%;margin-bottom:10px;" nzAllowClear>
+					<nz-option *ngFor="let select of dateDimensionsList" [nzLabel]="select.label" [nzValue]="select.value"></nz-option>
+				</nz-select>
+			</cm-select>
+			<nz-radio-group [(ngModel)]="dateType" style="display:block;" *ngIf="selectedDate" (ngModelChange)="changeDateType(dateType)">
+				<label nz-radio [nzValue]="'default'">
+					<span>默认（最近28天，不含今天）</span>
+				</label>
+				<label nz-radio [nzValue]="'custom'">
+					<span>自定义</span>
+				</label>
+			</nz-radio-group>
+			<cm-datepicker *ngIf="selectedDate && dateType=='custom'">
+				<ng-template>
+					<nz-rangepicker [(ngModel)]="dateRange" (ngModelChange)="changeDateRange(dateRange)" [nzSize]="'large'"></nz-rangepicker>
+				</ng-template>
+			</cm-datepicker>
+		</div>
+	</div>
+</main>

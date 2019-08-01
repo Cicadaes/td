@@ -1,0 +1,110 @@
+.page-wrapper {
+    background-blend-mode: multiply;
+    background-size: 100%;
+    -webkit-animation: pageEnter .45s cubic-bezier(.455, .03, .515, .955);
+    animation: pageEnter .45s cubic-bezier(.455, .03, .515, .955);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: #f0f2f5;
+}
+
+.main-wrapper {
+    padding: 0;
+    display: flex;
+    height: 100%;
+}
+
+div.main-container {
+    flex: 1;
+    height: 100%;
+    overflow-y: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+div.main-container .main-header {
+    width: 100%;
+    padding: 11px 24px;
+    position: fixed;
+    z-index: 100;
+    height: 56px;
+    background: #FFFFFF;
+box-shadow: 0 1px 4px 0 rgba(23,35,61,0.25);
+}
+
+div.main-container .main-header .title {
+    margin-left: 20px;
+    font-size: 18px;
+}
+
+
+.main-content{
+    background: rgba(240, 242, 245, 1);
+    height:100%;
+}
+
+.main-body {
+    position: relative;
+    width: 100%;
+    border-radius: 4px;
+    height:calc(~"100% - 57px");
+    top:57px;
+}
+.ant-breadcrumb {
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: rgba(28,36,56,0.56);
+    line-height: 34px;
+}
+.ant-breadcrumb a {
+    transition: color .3s;
+    font-family: PingFangSC-Medium;
+    font-size: 14px;
+    color: #17233D;
+    line-height: 22px;
+}
+.ant-breadcrumb-separator {
+    margin: 0 8px;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: rgba(28,36,56,0.56);
+    line-height: 14px;
+}
+
+.oprate {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+}
+::ng-deep{
+    .ant-table-bordered .ant-table-thead > tr > th, .ant-table-bordered .ant-table-tbody > tr > td{
+        border-right: none !important;
+    }
+    .ant-breadcrumb .ng-star-inserted:nth-child(3){
+        display: inline-flex;
+        width: 277px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        span{
+            a{
+                display: block;
+                width: 277px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}
+
+

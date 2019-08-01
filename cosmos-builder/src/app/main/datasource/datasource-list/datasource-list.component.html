@@ -1,0 +1,79 @@
+<div class="daeasourcelist">
+    <cm-table>
+        <nz-table #nzTable [nzBordered]="true" [nzAjaxData]="_dataSet" [nzTotal]="_total" [(nzPageIndex)]="queryParam.page" (nzPageIndexChange)="pageIndexChange($event)" nzShowTotal>
+            <thead nz-thead>
+                <tr>
+                    <th nz-th>
+                        <div>ID</div>
+                    </th>
+                    <th nz-th>
+                        <div>数据源名称</div>
+                    </th>
+                    <th nz-th>
+                        <div>类型</div>
+                    </th>
+                    <th nz-th>
+                        <div>状态</div>
+                    </th>
+                    <th nz-th>
+                        <div>描述</div>
+                    </th>
+                    <th nz-th>
+                        <div>创建人</div>
+                    </th>
+                    <th nz-th>
+                        <div>创建时间</div>
+                    </th>
+                    <th nz-th>
+                        <div>操作</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor=" let data of nzTable.data ">
+                    <td nz-td style="min-width:50px;max-width:80px">
+                        <div style="width:100%;" class="list">
+                            {{data.id}}
+                        </div>
+                    </td>
+                    <td nz-td style="min-width:200px;max-width:150px" [title]="data.name">
+                        <div style="width:100%;" class="list">
+                            {{data.name}}
+                        </div>
+                    </td>
+                    <td nz-td style="min-width:140px;max-width:140px">
+                        <div style="width:100%;" class="list">
+                            {{data.type}}
+                        </div>
+                    </td>
+                    <td nz-td style="min-width:80px;max-width:80px">
+                        <div style="width:100%;" class="list">
+                            <span *ngIf="data.status==1" style="height:8px;width:8px;background: rgb(43,133,229);;display:inline-block;border-radius: 50%;"></span>
+                            <span *ngIf="data.status==0" style="height:8px;width:8px;background: rgb(224,62,22);;display:inline-block;border-radius: 50%;"></span> {{data.status==1?'正常':'禁用'}}
+                        </div>
+                    </td>
+                    <td nz-td [title]="data.description" style="min-width:200px;max-width:150px">
+                        <div style="width:100%;" class="list">
+                            {{data.description}}
+                        </div>
+                    </td>
+                    <td nz-td [title]="data.creator" style="min-width:140px;max-width:100px">
+                        <div style="width:100%;" class="list">
+                            {{data.creator}}
+                        </div>
+                    </td>
+                    <td nz-td style="min-width:110px;max-width:110px">
+                        <div style="width:100%;" class="list">
+                            {{data.createTime | formatTime}}
+                        </div>
+                    </td>
+                    <td nz-td style="min-width:80px;max-width:80px;cursor: pointer;" [routerLink]="[ 'detail',data.id] ">
+                        <div style="width:100%;" class="list">
+                            <a style="height:100%;width:100%;color: #2D8CF0;">查看</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </cm-table>
+</div>

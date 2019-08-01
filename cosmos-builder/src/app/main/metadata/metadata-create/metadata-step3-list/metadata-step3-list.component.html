@@ -1,0 +1,188 @@
+<div class="metadata-step3-list">
+    <div class="metadata-step3-head clrfix">
+        <span class="fl">属性配置</span>
+        <button *ngIf="dataSourceType == 'ELASTICSEARCH' && metaObjectType == 1 && !metadataCreateService.metadataObjId" class="fr" nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="addAttribute()">
+                <i class="anticon anticon-plus"></i><span>属性</span>
+            </button>
+        <!-- <button class="fr" nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="addAttribute()">
+                    <i class="anticon anticon-plus"></i><span>属性</span>
+                </button> -->
+    </div>
+    <div style="max-width:100%;overflow:auto">
+        <div style="min-width:1440px">
+            <cm-table>
+                <nz-table #nzTable [nzIsPageIndexReset]="false" [(nzPageIndex)]="pageIndex" (nzPageIndexChange)="pageIndexChange($event)" [nzShowTotal]="true" [nzDataSource]="physicalMetaObjectAttributeTable" [(nzPageSize)]="pageSize">
+
+                    <thead nz-thead>
+                        <tr>
+                            <th nz-th [nzWidth]="'136px'">
+                                <span>属性名称</span>
+                            </th>
+                            <th nz-th [nzWidth]="'122px'">
+                                <span>类型</span>
+                            </th>
+                            <th *ngIf="metaObjectType == 1" nz-th [nzWidth]="'122px'">
+                                <span>字段类型</span>
+                            </th>
+                            <th nz-th [nzWidth]="'100px'">
+                                <span>
+                            <cm-checkbox>
+                                <label nz-checkbox [(ngModel)]="_checked" (ngModelChange)="logicAllChange(_checked)">
+                                    <span>映射</span>
+                                </label>
+                                </cm-checkbox>
+                                </span>
+                            </th>
+                            <th nz-th>
+                                <span>物理字段名称</span>
+                            </th>
+                            <th nz-th>
+                                <span>物理字段类型</span>
+                            </th>
+                            <th nz-th *ngIf="!isRestApi">
+                                <span>物理字段描述</span>
+                            </th>
+                            <th nz-th *ngIf="isRestApi">
+                                <span>输入输出</span>
+                            </th>
+                            <th nz-th [nzWidth]="'100px'">
+                                <cm-checkbox>
+                                    <label nz-checkbox [(ngModel)]="isEnumchecked" (ngModelChange)="isEnumAllChange(isEnumchecked)">
+                                        <span>枚举</span>
+                            </label>
+                                </cm-checkbox>
+                            </th>
+                            <th nz-th [nzWidth]="'260px'">
+                                <span>数据字典</span>
+                            </th>
+                            <th nz-th [nzWidth]="'136px'">
+                                <span>级联属性</span>
+                            </th>
+                            <th nz-th>
+                                <span>描述</span>
+                            </th>
+                            <th nz-th *ngIf="addAttr">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody nz-tbody>
+                        <tr nz-tbody-tr *ngFor="let data of nzTable.data;let i=index">
+                            <td nz-td>
+                                <cm-input *ngIf="data.isLogic">
+                                    <nz-input [nzSize]="'large'" class="input-text" [title]="data.metaAttributeName" style="min-width: 100px;" (nzBlur)="metaAttributeNameBlur(data)" [(ngModel)]="data.metaAttributeName" [nzPlaceHolder]="'请输入名称'" (nzFocus)="resetValidator()"></nz-input>
+                                </cm-input>
+                            </td>
+                            <td nz-td>
+                                <cm-select *ngIf="metaObjectType != 1 && data.isLogic">
+                                    <nz-select [nzSize]="'large'" style="width: 85px;" [(ngModel)]="data.metaAttributeType" (ngModelChange)="resetValidator()" [nzPlaceHolder]=" '请选择' ">
+                                        <nz-option *ngFor="let option of metaAttributeTypeNotCube " [nzLabel]="option.name " [nzValue]="option.value ">
+                                        </nz-option>
+                                    </nz-select>
+                                </cm-select>
+                                <cm-select *ngIf="metaObjectType == 1 && data.isLogic">
+                                    <nz-select [nzSize]="'large'" style="width: 85px;" [(ngModel)]="data.metaAttributeType" (ngModelChange)="resetValidator()" [nzPlaceHolder]=" '请选择' ">
+                                        <nz-option *ngFor="let option of metaAttributeTypeCube " [nzLabel]="option.name " [nzValue]="option.value ">
+                                        </nz-option>
+                                    </nz-select>
+                                </cm-select>
+                            </td>
+                            <td nz-td *ngIf="metaObjectType == 1">
+                                <cm-select *ngIf="data.isLogic">
+                                    <nz-select [nzSize]="'large'" style="width: 85px;" [(ngModel)]="data.type" [nzPlaceHolder]=" '请选择' ">
+                                        <nz-option *ngFor="let option of metaAttributeTypeNotCube " [nzLabel]="option.name " [nzValue]="option.value ">
+                                        </nz-option>
+                                    </nz-select>
+                                </cm-select>
+                            </td>
+                            <td nz-td>
+                                <cm-checkbox>
+                                    <label [nzDisabled]="data.isAdd" nz-checkbox [(ngModel)]="data.isLogic " (ngModelChange)="logicChange(data)">
+                            </label>
+                                </cm-checkbox>
+                            </td>
+                            <td nz-td>
+                                <p *ngIf="!data.isAdd" class="table-td" [title]="data.physicalMetaAttributeName">
+                                    {{data.physicalMetaAttributeName}}
+                                </p>
+                                <cm-input *ngIf="data.isAdd">
+                                    <nz-input [nzSize]="'large'" class="input-text" [title]="data.physicalMetaAttributeName" style="min-width: 100px;" (nzBlur)="physicalMetaAttributeNameBlur(data)" [(ngModel)]="data.physicalMetaAttributeName" [nzPlaceHolder]="'请输入名称'" (nzFocus)="resetValidator()"></nz-input>
+                                </cm-input>
+                            </td>
+                            <td nz-td>
+                                <p *ngIf="!data.isAdd" class="table-td" [title]="data.physicalMetaAttributeType">
+                                    {{data.physicalMetaAttributeType}}
+                                </p>
+                                <cm-select *ngIf="data.isAdd">
+                                    <nz-select [nzSize]="'large'" style="width: 85px;" [(ngModel)]="data.physicalMetaAttributeType" [nzPlaceHolder]=" '请选择' ">
+                                        <nz-option *ngFor="let option of physicalMetaAttributeType " [nzLabel]="option.name " [nzValue]="option.value ">
+                                        </nz-option>
+                                    </nz-select>
+                                </cm-select>
+                            </td>
+                            <td nz-td *ngIf="!isRestApi">
+                                <p class="table-td" [title]="data.physicalMetaAttributeDescripte">
+                                    {{data.physicalMetaAttributeDescripte}}
+                                </p>
+                            </td>
+                            <td nz-td *ngIf="isRestApi && data.isInput">输入参数</td>
+                            <td nz-td *ngIf="isRestApi && !data.isInput">输出参数</td>
+
+                            <td nz-td>
+                                <cm-checkbox *ngIf="data.isLogic">
+                                    <label nz-checkbox [(ngModel)]="data.isEnum" (ngModelChange)="isEnumChange(data)">
+                            </label>
+                                </cm-checkbox>
+                            </td>
+                            <td nz-td>
+                                <cm-select *ngIf="data.isLogic">
+                                    <nz-select [nzSize]="'large'" [nzDisabled]="!data.isEnum" nzShowSearch style="width: 220px;" (ngModelChange)="dictionaryIdChange(data, i)" [(ngModel)]="data.dictionaryId" [nzPlaceHolder]=" '请选择' ">
+                                        <nz-option [title]="option.name" *ngFor="let option of dataDic" [nzLabel]="option.name" [nzValue]="option.id">
+                                        </nz-option>
+                                    </nz-select>
+                                </cm-select>
+                            </td>
+                            <td nz-td>
+                                <cm-select *ngIf="data.isLogic">
+                                    <nz-select [nzSize]="'large'" [nzDisabled]="(!data.dictionaryId || !data.isEnum)" nzShowSearch style="width: 100px;" (ngModelChange)="parentNameChange(data, i)" [(ngModel)]="data.parentName " [nzPlaceHolder]=" '请选择' ">
+                                        <nz-option *ngFor="let option of parentListObj[i]" [nzLabel]="option.name" [nzValue]="option.name">
+                                        </nz-option>
+                                    </nz-select>
+                                </cm-select>
+                            </td>
+                            <td nz-td>
+                                <cm-input *ngIf="data.isLogic">
+                                    <nz-input [nzSize]="'large'" class="input-text" style="min-width: 100px;" [title]="data.metaAttributeDescription" [(ngModel)]="data.metaAttributeDescription " [nzPlaceHolder]=" '请输入' "></nz-input>
+                                </cm-input>
+                            </td>
+                            <td nz-td *ngIf="addAttr">
+                                <span *ngIf="data.isAdd" class="action" (click)="removeAttribute(i)">删除</span>
+                                <span *ngIf="!data.isAdd" class="action"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+            </cm-table>
+        </div>
+    </div>
+    <div class="table-foot clrfix">
+        <div *ngIf="metaObjectType == 1" class="cube-table-info fl">
+            <i style="font-size:18px" class="anticon anticon-info-circle-o"></i> <span class="text">&nbsp;&nbsp;date格式：YYYY-MM-DD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;datetime格式：YYYY-MM-DD HH:MM:SS</span>
+        </div>
+        <div class="cm-pagination fr clrfix" *ngIf="physicalMetaObjectAttributeTable && physicalMetaObjectAttributeTable.length > 0">
+            <nz-pagination [nzShowSizeChanger]="true" [nzPageSizeSelectorValues]="pageSizeSelectorValues" [(nzPageIndex)]="pageIndex" [nzTotal]="physicalMetaObjectAttributeTable.length" nzShowTotal [(nzPageSize)]="pageSize"></nz-pagination>
+        </div>
+    </div>
+
+
+    <div *ngIf="step3ListValidator.requiredError['show']" class="errorInfo">{{ step3ListValidator.requiredError['info'] }}</div>
+    <div *ngIf="step3ListValidator.attributeError['show']" class="errorInfo">{{ step3ListValidator.attributeError['info'] }}</div>
+    <div *ngIf="step3ListValidator.cubeError['show']" class="errorInfo">{{ step3ListValidator.cubeError['info'] }}</div>
+    <div *ngIf="step3ListValidator.eventError['show']" class="errorInfo">{{ step3ListValidator.eventError['info'] }}</div>
+    <div *ngIf="step3ListValidator.nameError['show']" class="errorInfo">{{ step3ListValidator.nameError['info'] }}</div>
+    <div *ngIf="step3ListValidator.dicError['show']" class="errorInfo">{{ step3ListValidator.dicError['info'] }}</div>
+    <div *ngIf="step3ListValidator.parentNameError['show']" class="errorInfo">{{ step3ListValidator.parentNameError['info'] }}</div>
+    <div *ngIf="step3ListValidator.topParentNameError['show']" class="errorInfo">{{ step3ListValidator.topParentNameError['info'] }}</div>
+    <div *ngIf="step3ListValidator.physicalNameError['show']" class="errorInfo">{{ step3ListValidator.physicalNameError['info'] }}</div>
+    <div *ngIf="step3ListValidator.physicalError['show']" class="errorInfo">{{ step3ListValidator.physicalError['info'] }}</div>
+
+</div>

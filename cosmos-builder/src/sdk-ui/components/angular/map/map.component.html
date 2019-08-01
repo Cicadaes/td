@@ -1,0 +1,20 @@
+<main class="maps">
+    <cm-chart class="chart" #cmchart [option]="option"></cm-chart>
+    <div *ngIf="show" class="provinces">
+        <div class="header">省份分布Top N</div>
+        <ul  class="content" #contentColor>
+            <li *ngFor="let option of provinces;let i=index">
+                <div>
+                    <cm-progress>
+                        <nz-progress [ngModel]="option.value" [nzStatus]="'active'"></nz-progress>
+                    </cm-progress>
+                </div>
+                <span title={{option.name}} class="ranking">
+                    <span style="width: 20px;display:inline-block;height: 100%;">{{i + 1}}.</span>{{option.name}}
+                </span>
+
+                <div style="width:100%;clear:both"></div>
+            </li>
+        </ul>
+    </div>
+</main>

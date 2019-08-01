@@ -1,0 +1,28 @@
+<div class="report-detail-data">
+    <div class="item-config">
+        <label class="item-label">标题名称</label>
+        <div style="margin-left:15px;">
+            <cm-input>
+                <nz-input  [(ngModel)]="name" [nzPlaceHolder]="'请输入名称'" (ngModelChange)="changeDateRange($event)"></nz-input>
+            </cm-input>
+        </div>
+    </div>
+    <div class="item-config">
+        <label class="item-label">日期范围默认值</label>
+        <div style="margin-left:15px;">
+            <cm-select>
+                <nz-select [(ngModel)]="date.days" [nzPlaceHolder]="'请选择'" (ngModelChange)="OptionChange($event)">
+                    <nz-option *ngFor="let option of typefaces" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                    </nz-option>
+                </nz-select>
+            </cm-select>
+            <div *ngIf="keys">
+                <cm-datepicker>
+                    <ng-template>
+                        <nz-rangepicker [nzDisabledDate]="_disabledDate" [(ngModel)]="date.date" (ngModelChange)="changeDateRange($event)" [nzSize]="'large'"></nz-rangepicker>
+                    </ng-template>
+                </cm-datepicker>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<main #select class="calendar">
+    <div style="display:inline-block;">
+        <div [ngStyle]="alignStyle" #selectFilter class="select-item">
+            <label class="item-label">{{option.data.name}}</label>
+            <div class="item-content" nz-row>
+                <cm-select>
+                    <nz-select [nzNotFoundContent]="'无匹配结果'"  [nzSize]="'large'" name="cube" [nzPlaceHolder]="'请选择'" style="width:100%;" [(ngModel)]="selectedCube" nzShowSearch (ngModelChange)="changeModel(selectedCube,true)">
+                        <nz-option *ngFor="let select of option.data.List" [nzLabel]="select.label" [nzValue]="select.value">
+                            <ng-template #nzOptionTemplate>
+                                <span title="{{select.label}}">{{select.label}}</span>
+                            </ng-template>
+                        </nz-option>
+                    </nz-select>
+                </cm-select>
+            </div>
+        </div>
+    </div>
+</main>

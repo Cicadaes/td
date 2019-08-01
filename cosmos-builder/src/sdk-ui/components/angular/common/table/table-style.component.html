@@ -1,0 +1,46 @@
+<div class="piestyle">
+    <ul class="center">
+        <div class="piecenter">
+            <p style="margin-bottom: 8px">网格</p>
+            <div class="section" style="margin-bottom:8px">
+                <div style="display:flex;margin-bottom: 15px;">
+                    <li>
+                        <cm-checkbox>
+                            <label nz-checkbox [(ngModel)]="gridStyle.horizontalGrid" (ngModelChange)="OptionChange($event)">
+                                <span>显示横网格</span>
+                            </label>
+                        </cm-checkbox>
+                    </li>
+                    <li>
+                        <cm-checkbox>
+                            <label nz-checkbox [(ngModel)]="gridStyle.verticalGrid" (ngModelChange)="OptionChange($event)">
+                                <span>显示纵网格</span>
+                            </label>
+                        </cm-checkbox>
+                    </li>
+                </div>
+                <li class="border-image-left">
+                    <div class="left">
+                        <p>颜色</p>
+                        <div>
+                            <color-picker-style [height]="15" width="70" [colors]="_cmPresetColors" [cmcolor]="cmcolor" [cmType]="'hex'" (provinceOut)="gridStyle.color = $event;OptionChange()"></color-picker-style>
+                            <!-- <cm-color-picker [cmType]="'board'" [cmcolor]="cmcolor" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition" (cmcolorchange)="gridStyle.color = $event;OptionChange();"
+                                [cmPositionOffset]="_cmPositionOffsetcolor"></cm-color-picker> -->
+                        </div>
+                    </div>
+                </li>
+                <li class="border-image-right">
+                    <div class="right">
+                        <p>背景</p>
+                        <div>
+                            <color-picker-style [height]="15" width="70" [colors]="_cmPresetColors" [cmcolor]="cmbackground" [cmType]="'hex'" (provinceOut)="gridStyle.background=$event;OptionChange($event)"></color-picker-style>
+                            <!-- <cm-color-picker [cmType]="'board'" [cmcolor]="cmbackground" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition"
+                                (cmcolorchange)="gridStyle.background=$event;OptionChange($event)" [cmPositionOffset]="_cmPositionOffsetbackground"></cm-color-picker> -->
+                        </div>
+                    </div>
+                </li>
+                <div style="width:100%;clear:both"></div>
+            </div>
+        </div>
+    </ul>
+</div>

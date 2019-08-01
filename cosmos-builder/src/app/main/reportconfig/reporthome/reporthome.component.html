@@ -1,0 +1,21 @@
+<div class="reporthome">
+    <cm-tabs >
+        <nz-tabset [nzSelectedIndex] = "tabIndex">
+            <nz-tab *ngFor="let tab of tabs">
+                <ng-template #nzTabHeading>
+                    <div>
+                        {{tab.name}}
+                    </div>
+                </ng-template>
+                <ng-container [ngSwitch]="tab.name">
+                    <ng-container *ngSwitchCase="'文件夹'">
+                        <reportfolder></reportfolder>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'报表'">
+                        <report></report>
+                    </ng-container>
+                </ng-container>
+            </nz-tab>
+        </nz-tabset>
+    </cm-tabs>
+</div>

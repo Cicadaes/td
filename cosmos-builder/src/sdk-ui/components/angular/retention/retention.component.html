@@ -1,0 +1,88 @@
+<main>
+    <div class="retention clearfix" #retentionFilter>
+        <div class="retention-filter-box" *ngIf="showFilter" [ngClass]="showFilter?'none':''">
+            <div class="retention-filter">
+                <div class="filter-object">
+                    <span>考察对象</span>
+                    <div class="object-item">
+                        <cm-datepicker>
+                            <ng-template>
+                                <nz-rangepicker [(ngModel)]="_dateRange" [nzFormat]="'YYYY/MM/DD'"></nz-rangepicker>
+                            </ng-template>
+                        </cm-datepicker>
+                    </div>
+                    <div class="retention-text">期间的</div>
+                    <div class="object-item">
+                        <cm-select>
+                            <nz-select [nzSize]="'large'" style="min-width: 100px;" name="visitor" [nzPlaceHolder]="'请选择'" [(ngModel)]="visitor" nzShowSearch>
+                                <nz-option *ngFor="let visitor of visitors" [nzLabel]="visitor.label" [nzValue]="visitor.value"></nz-option>
+                            </nz-select>
+                        </cm-select>
+                    </div>
+                </div>
+                <div class="filter-behavior">
+                    <span>留存行为</span>
+                    <div class="retention-text">在之后的使用中</div>
+                    <div class="behavior-item">
+                        <cm-select>
+                            <nz-select [nzSize]="'large'" style="min-width: 100px;" name="behavior" [nzPlaceHolder]="'请选择'" [(ngModel)]="behavior" nzShowSearch>
+                                <nz-option *ngFor="let behavior of behaviors" [nzLabel]="behavior.label" [nzValue]="behavior.value"></nz-option>
+                            </nz-select>
+                        </cm-select>
+                    </div>
+                    <div class="retention-text">记为留存访客</div>
+                </div>
+            </div>
+            <div class="filter-update">
+                <div class="update" (click)="updateData()">
+                    <i class="anticon anticon-retweet"></i>
+                    <span>刷新数据</span>
+                </div>
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th *ngFor="let head of option.Option.theadOption.left" rowspan="2" [ngStyle]="option.style">
+                        <div>
+                            <span>{{head.title}}</span>
+                        </div>
+                    </th>
+                    <th colspan="9" [ngStyle]="option.style">
+                        <div class="t-title">
+                            <span>第N{{option.dateFormat}}后,保留用户%</span>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th *ngFor="let head of option.Option.theadOption.right" [ngStyle]="option.style">
+                        <div>
+                            <span>{{head.title}}</span>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let content of option.Option.tbodyOption">
+                    <td [ngStyle]="option.style">
+                        <div>
+                            <span>{{content.date}}</span>
+                        </div>
+                    </td>
+                    <td [ngStyle]="option.style">
+                        <div>
+                            <span>{{content.new_user}}</span>
+                        </div>
+                    </td>
+                    <td *ngFor="let num of content.numArr" class="content-td" [ngStyle]="{'background-color':num.BgColor}">
+                        <div [ngStyle]="{'color':num.FontColor,'font-size':num.FontSize,'font-family':num.FontFamily}">
+                            {{num.num}}
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<!-- [ngStyle]="{'background-color':getBgColor(content.num)}" -->

@@ -1,0 +1,43 @@
+<cm-modal>
+    <nz-modal [nzVisible]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel($event)"
+        (nzOnOk)="handleOk($event)">
+        <ng-template #modalTitle>
+            <div class="modal-til">
+                <span>发布报表(</span>
+                <span class="til-text">{{title}}</span>
+                <span>)</span>
+            </div>
+        </ng-template>
+        <ng-template #modalContent>
+            <div class="publish">
+                <cm-form>
+                    <form nz-form class="cm-advanced-search-form" [formGroup]="validateForm" class="clearfix">
+                        <div class="publish-select">
+                            <label nz-form-item-required for="publish">选择要发布到的应用：</label>
+                            <nz-select [formControlName]="'publish'" [(ngModel)]="publish" [nzPlaceHolder]="'选择条件'" (ngModelChange)="selectChange(publish)" nzAllowClear style="width:200px;">
+                                <nz-option *ngFor="let option of publishOption" [nzLabel]="option.label" [nzValue]="option.value">
+                                </nz-option>
+                            </nz-select>
+                        </div>
+                    </form>
+                </cm-form>
+                <div class="publish-msg">
+                    <i class="anticon anticon-info-circle"></i>
+                    <span>发布成功后，您可以在所选应用的功能列表里查看。</span>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template #modalFooter>
+            <cm-button>
+                <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancel($event)" style="margin-right:16px;">
+                    取消
+                </button>
+            </cm-button>
+            <cm-button>
+                <button nz-button [nzType]="'primary'" [disabled]="!validateForm.valid" [nzSize]="'large'" (click)="handleOk($event)">
+                    确定
+                </button>
+            </cm-button>
+        </ng-template>
+    </nz-modal>
+</cm-modal>

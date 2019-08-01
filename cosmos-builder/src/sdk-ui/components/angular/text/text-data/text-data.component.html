@@ -1,0 +1,30 @@
+<div class="report-detail-data">
+    <div class="item-config">
+        <label class="item-label">文本内容</label>
+        <div class="config-content">
+            <cm-input>
+                <nz-input style="width: 200px;" [(ngModel)]="link.content" (ngModelChange)="OptionChange(link)" [nzType]=" 'textarea' " [nzRows]=" '4' " [nzPlaceHolder]=" '' "></nz-input>
+            </cm-input>
+        </div>
+        <label class="item-label">链接地址</label>
+        <div class="config-content ">
+            <cm-input class="contrnt">
+            </cm-input>
+            <cm-input class="contrnt">
+                <nz-input style="width:100%;" [(ngModel)]="link.site" (ngModelChange)="OptionChange(link)" title={{link.site}}>
+                    <ng-template #addOnBefore>
+                        <nz-select style="width:70px;" [(ngModel)]="link.protocol" (ngModelChange)="OptionChange(link)">
+                            <nz-option [nzLabel]="'http://'" [nzValue]="'http://'"></nz-option>
+                            <nz-option [nzLabel]="'https://'" [nzValue]="'https://'"></nz-option>
+                        </nz-select>
+                    </ng-template>
+                </nz-input>
+            </cm-input>
+        </div>
+        <cm-checkbox class="checkgitem">
+            <label nz-checkbox [(ngModel)]="link.dataLabel" (ngModelChange)="OptionChange(link)">
+                            <span>在新标签页中打开链接</span>
+                        </label>
+        </cm-checkbox>
+    </div>
+</div>

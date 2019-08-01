@@ -1,0 +1,70 @@
+<main #filters class="cus">
+    <div nz-menu class="filters-box">
+        <div class="text" *ngIf="name">
+            <span>{{name}}</span>
+        </div>
+        <div class="filters-item item1">
+            <cm-select>
+                <nz-select [nzSize]="'large'" name="cube" [nzPlaceHolder]="'请选择'" style="width:100%;" [(ngModel)]="dimension" nzShowSearch (ngModelChange)="changeDimension(dimension)" [nzNotFoundContent]="'无匹配结果'">
+                    <nz-option #option0 *ngFor="let select of dimensionOptions" [nzLabel]="select.label" [nzValue]="select.value">
+                        <ng-template #nzOptionTemplate>
+                            <span title="{{select.label}}">{{select.label}}</span>
+                        </ng-template>
+                    </nz-option>
+                </nz-select>
+            </cm-select>
+        </div>
+        <div class="filters-item item2">
+            <cm-select>
+                <nz-select [nzNotFoundContent]="'无匹配结果'"[nzSize]="'large'" name="cube" [nzPlaceHolder]="'请选择'" style="width:100%;" [(ngModel)]="condition" nzShowSearch (ngModelChange)="changeCondition2(condition)">
+                    <nz-option *ngFor="let select of conditionoptions" [nzLabel]="select.label" [nzValue]="select.value">
+                        <ng-template #nzOptionTemplate>
+                            <span title="{{select.label}}">{{select.label}}</span>
+                        </ng-template>
+                    </nz-option>
+                </nz-select>
+            </cm-select>
+        </div>
+        <div class="filters-item item3" *ngIf="custom">
+            <cm-select>
+                <!-- (nzSearchChange)="searchChange($event)" nzKeepUnListOptions [nzFilter]="true" -->
+                <nz-select [nzNotFoundContent]="'无匹配结果'" (nzOpenChange)="close()" (nzSearchChange)="searchChange($event)" nzKeepUnListOptions [nzFilter]="true" (nzScrollToBottom)="scrollToBottom()" [nzMode]="'multiple'" [nzSize]="'large'" name="cube" [nzPlaceHolder]="'请选择'" style="width:100%;" [(ngModel)]="customvalue"
+                    nzShowSearch (ngModelChange)="changeCondition(customvalue)">
+                    <span *ngIf="!seeking">
+                        <nz-option *ngFor="let select of customs" [nzLabel]="select.label" [nzValue]="select.value">
+                            <ng-template #nzOptionTemplate>
+                                <span title="{{select.label}}">{{select.label}}</span>
+                    </ng-template>
+                    </nz-option>
+                    <nz-option [nzLabel]="'disabled1'" [nzDisabled]="true" [nzValue]="'disabled1'" *ngIf="loading">
+                        <ng-template #nzOptionTemplate>
+                            <i class="anticon anticon-loading anticon-spin"></i> Loading...
+                        </ng-template>
+                    </nz-option>
+                    </span>
+                    <span *ngIf="seeking">
+                        <nz-option *ngFor="let select of seek" [nzLabel]="select.label" [nzValue]="select.value">
+                            <ng-template #nzOptionTemplate>
+                                <span title="{{select.label}}">{{select.label}}</span>
+                    </ng-template>
+                    </nz-option>
+                    </span>
+                </nz-select>
+            </cm-select>
+        </div>
+        <div class="filters-item" *ngIf="!custom">
+            <cm-input>
+                <nz-input [nzSize]="'large'" [(ngModel)]="customvalue" style="width: 100px" [nzPlaceHolder]="'请输入'"></nz-input>
+            </cm-input>
+            <cm-input *ngIf="section">
+                至
+                <nz-input [nzSize]="'large'" [(ngModel)]="customvalue1" style="width: 100px" [nzPlaceHolder]="'请输入'"></nz-input>
+            </cm-input>
+        </div>
+        <cm-button style="float:right">
+            <button nz-button [nzType]="'primary'" (click)="query()" [nzSize]="'large'">
+                <span style="font-size: 12px">查询</span>
+            </button>
+        </cm-button>
+    </div>
+</main>

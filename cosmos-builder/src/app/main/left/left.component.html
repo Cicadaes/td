@@ -1,0 +1,26 @@
+<div class="theLeft">
+    <ng-container>
+        <cm-menu>
+            <ul class="menu-box" nz-menu [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
+                <li>
+                    <span title class="menu-title clrfix " [ngClass]="{'menu-title-collapse': isCollapsed}">
+                        <i class="td-icon"></i>
+                        <span class="td-title" *ngIf="!isCollapsed">
+                            <span>报表构建系统</span>
+                    <span>Report build system</span>
+                    </span>
+                    </span>
+                </li>
+                <li nz-menu-item *ngFor="let menu of firstLevelMenu" routerLink="{{menu.owns}}" nzSelected="{{menu.partialSelected}}">
+                    <span title>
+                        <i ngClass="{{menu.icon}}"></i>
+                        <span>{{ menu.title }}</span>
+                    </span>
+                </li>
+            </ul>
+            <div class="left-btn" (click)="toggleCollapsed()">
+                <i class="anticon" [class.anticon-left]="!isCollapsed" [class.anticon-right]="isCollapsed" style="color:#ccc;"></i>
+            </div>
+        </cm-menu>
+    </ng-container>
+</div>

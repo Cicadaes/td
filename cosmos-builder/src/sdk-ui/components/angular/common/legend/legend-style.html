@@ -1,0 +1,102 @@
+<div class="piestyle">
+    <ul class="center">
+        <div class="piecenter">
+            <p style="margin-bottom:8px">图例</p>
+            <div class="section">
+                <li>
+                    <div class="type-size">
+                        <div>
+                            <p>标签颜色</p>
+                            <!-- <i style="float: left;height: 35px;overflow: hidden;line-height: 62px;"><img src="./assets/imgAssets/text.svg" alt=""></i> -->
+                            <span style="line-height: 40px;padding-top:10px;display: block;height: 33px;width: 100%;">
+                                <color-picker-style [height]="15" width="70" [colors]="_cmPresetColors" [cmcolor]="_cmcolor" [cmType]="'hex'" (provinceOut)="colorChange($event)"></color-picker-style>
+                                <!-- <cm-color-picker [cmType]="'board'" [cmcolor]="_cmcolor" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition" (cmcolorchange)="colorChange($event)"
+                                    [cmPositionOffset]="_cmPositionOffset"></cm-color-picker> -->
+                            </span>
+                        </div>
+                    </div>
+                    <div class="type-face type-face-map">
+                        <p>标签大小</p>
+                        <cm-select style="width:100%">
+                            <nz-select [(ngModel)]="legend.fontSize" [nzPlaceHolder]="'请选择字号'" nzAllowClear (ngModelChange)="optionChange($event)">
+                                <nz-option *ngFor="let option of fontSizeOptions" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled"></nz-option>
+                            </nz-select>
+                        </cm-select>
+                    </div>
+                </li>
+                <!-- <li class="percentage" style="position: relative;text-align: right;">
+                    <i style="position: absolute;top:32%;left:3px" class="icon iconfont icon-ziti4"></i>
+                    <cm-select>
+                        <nz-select [(ngModel)]="legend.fontFamily" [nzPlaceHolder]="'请选择字体'" nzAllowClear (ngModelChange)="optionChange($event)">
+                            <nz-option *ngFor="let option of typefaces" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                            </nz-option>
+                        </nz-select>
+                    </cm-select>
+                </li> -->
+                <li class="percentage character">
+                    <div class="length">
+                        字符长度
+                    </div>
+                    <div class="num">
+                        <input (keyup)="inputNumberChange()" type="number" [(ngModel)]="legend.character" (ngModelChange)="OptionChange($event)">
+                    </div>
+                </li>
+                <li class="layout">
+                    <cm-radio>
+                        <nz-radio-group [(ngModel)]="_layout" [nzSize]="'large'" (ngModelChange)="layoutChange($event)">
+                            <label nz-radio-button [nzValue]="'none'">
+                                <span>
+                                    <i class="icon iconfont icon-icon-test3"></i>
+                                </span>
+                            </label>
+                            <label nz-radio-button [nzValue]="'flushRight'">
+                                <span>
+                                    <i class="icon iconfont icon-icon-test2"></i>
+                                </span>
+                            </label>
+                            <label nz-radio-button [nzValue]="'flushBottom'">
+                                <span>
+                                    <i class="icon iconfont icon-icon-test4"></i>
+                                </span>
+                            </label>
+                            <label nz-radio-button [nzValue]="'flushTop'">
+                                <span>
+                                    <i class="icon iconfont icon-icon-test5"></i>
+                                </span>
+                            </label>
+                        </nz-radio-group>
+                    </cm-radio>
+                </li>
+                <li class="alignment">
+                    <cm-radio *ngIf="_layout == 'flushRight'">
+                        <nz-radio-group [(ngModel)]="alignmentValue" (ngModelChange)="optionChange($event)">
+                            <label nz-radio [nzValue]="'top'" style="margin-right:10px">
+                                <span>顶端对齐</span>
+                            </label>
+                            <label nz-radio [nzValue]="'middle'">
+                                <span>居中</span>
+                            </label>
+                            <label nz-radio [nzValue]="'bottom'" style="margin-top:4px;">
+                                <span>底端对齐</span>
+                            </label>
+                        </nz-radio-group>
+                    </cm-radio>
+
+                    <cm-radio *ngIf="_layout == 'flushTop' || _layout == 'flushBottom'">
+                        <nz-radio-group [(ngModel)]="alignmentValue" (ngModelChange)="optionChange($event)">
+                            <label nz-radio [nzValue]="'left'" style="margin-right:10px">
+                                <span>左对齐</span>
+                            </label>
+                            <label nz-radio [nzValue]="'center'">
+                                <span>居中</span>
+                            </label>
+                            <label nz-radio [nzValue]="'right'" style="margin-top:4px;">
+                                <span>右对齐</span>
+                            </label>
+                        </nz-radio-group>
+                    </cm-radio>
+                </li>
+            </div>
+        </div>
+    </ul>
+</div>

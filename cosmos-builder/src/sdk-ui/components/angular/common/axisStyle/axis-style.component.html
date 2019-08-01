@@ -1,0 +1,85 @@
+<div style="border-bottom: 1px solid rgba(31,37,68,0.15);">
+    <dl>
+        <dt>坐标轴</dt>
+        <!-- <dd class="checkgroup flexbox">
+            <cm-checkbox class="checkgitem">
+                <label nz-checkbox [(ngModel)]="axisStyle.showAxis" (ngModelChange)="OptionChange($event)"><span>显示坐标轴</span></label>
+            </cm-checkbox>
+        </dd> -->
+
+        <dd class="checkgroup flexbox">
+            <cm-checkbox class="checkgitem">
+                <label nz-checkbox [(ngModel)]="axisStyle.xAxisTitle" (ngModelChange)="OptionChange($event)">
+                    <span>显示X轴标题</span>
+                </label>
+            </cm-checkbox>
+        </dd>
+        <!-- <dd class="linenumber">
+            <div class="lineitem">
+                <span>X轴时间间隔</span>
+                <input type="number" [(ngModel)]="axisStyle.xAxisInterval" (ngModelChange)="OptionChange($event)">
+            </div>
+        </dd> -->
+        <dd class="checkgroup flexbox">
+            <cm-checkbox class="checkgitem">
+                <label nz-checkbox [(ngModel)]="axisStyle.yAxisTitle" (ngModelChange)="OptionChange($event)">
+                    <span>显示Y轴标题</span>
+                </label>
+            </cm-checkbox>
+        </dd>
+        <dd class="checkgroup flexbox">
+            <cm-checkbox class="checkgitem">
+                <label nz-checkbox [(ngModel)]="axisStyle.xAxisLabel" (ngModelChange)="OptionChange($event)">
+                    <span>显示X轴数据标签</span>
+                </label>
+            </cm-checkbox>
+        </dd>
+        <dd class="checkgroup flexbox">
+            <cm-checkbox class="checkgitem">
+                <label nz-checkbox [(ngModel)]="axisStyle.yAxisLabel" (ngModelChange)="OptionChange($event)">
+                    <span>显示Y轴数据标签</span>
+                </label>
+            </cm-checkbox>
+        </dd>
+        <dd class="linenumber">
+            <div class="lineitem">
+                <span>坐标轴颜色</span>
+                <div class="linecolor" style="padding-top: 10px;">
+                    <color-picker-style [height]="15" width="70" [colors]="_cmPresetColors" [cmcolor]="axisColor" [cmType]="'hex'" (provinceOut)="axisStyle.axisColor=$event;OptionChange($event)"></color-picker-style>
+                    <!-- <cm-color-picker [cmType]="'board'" [cmcolor]="axisColor" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition" (cmcolorchange)="axisStyle.axisColor=$event;OptionChange($event)"
+                        [cmPositionOffset]="_cmPositionOffset "></cm-color-picker> -->
+                </div>
+            </div>
+        </dd>
+        <dd class="checkgroup flexbox">
+            <cm-checkbox class="checkgitem">
+                <label nz-checkbox [(ngModel)]="axisStyle.xAxisLine" (ngModelChange)="OptionChange($event)">
+                    <span>显示X轴</span>
+                </label>
+            </cm-checkbox>
+        </dd>
+        <dd class="checkgroup flexbox">
+            <cm-checkbox class="checkgitem">
+                <label nz-checkbox [(ngModel)]="axisStyle.yAxisLine" (ngModelChange)="OptionChange($event)">
+                    <span>显示Y轴</span>
+                </label>
+            </cm-checkbox>
+        </dd>
+        <dd class="linenumber">
+            <div class="numberitem">
+                <span>Y轴最小值</span>
+                <input type="number" [(ngModel)]="axisStyle.yAxisMin" (ngModelChange)="OptionChange($event)" placeholder="0">
+            </div>
+            <div class="numberitem">
+                <span>Y轴最大值</span>
+                <input type="number" [(ngModel)]="axisStyle.yAxisMax" (ngModelChange)="OptionChange($event)" placeholder="自动">
+            </div>
+        </dd>
+        <dd class="linenumber">
+            <div class="lineitem">
+                <span>Y轴分割间隔</span>
+                <input type="number" [(ngModel)]="axisStyle.yAxisInterval" (ngModelChange)="OptionChange($event)" placeholder="自动">
+            </div>
+        </dd>
+    </dl>
+</div>

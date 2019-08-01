@@ -1,0 +1,87 @@
+
+.fl{
+    float: left;
+}
+
+.fr{
+    float: right;
+}
+
+.clrfix {
+    zoom: 1;
+  }
+  .clrfix:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    overflow: hidden;
+  }
+.errorInfo {
+    text-align: left;
+    color: #f04134;
+    padding: 0 24px 24px 24px;
+}
+:host-context(.theme-light) ::ng-deep{
+    .metadata-step3-list .ant-input{
+        text-overflow: ellipsis!important;
+    }
+}
+
+ ::ng-deep{
+    
+    .metadata-step3-list{
+        .table-td {
+            max-width: 80px;
+        }
+
+        background: #FFFFFF;
+        box-shadow: 0 1px 4px 0 rgba(23,35,61,0.25);
+        border-radius: 2px;
+        tr > th,tr > td{
+            word-break: keep-all;
+        }
+
+        .metadata-step3-head{
+            padding: 13px 20px;
+            text-align: left;
+            font-family: PingFangSC-Medium;
+            font-size: 14px;
+            color: #17233D;
+            line-height: 32px;
+        }
+        .ant-pagination.ant-table-pagination{
+            display: none!important;
+        }
+        
+        .action{
+            color: #2D8CF0;
+            cursor: pointer;
+        }
+
+        .table-foot {
+            .cube-table-info{
+                line-height: 18px;
+                padding: 28px 18px;
+                .text{
+                    font-size: 12px;
+                    height: 18px;
+                    vertical-align:top;
+                }
+            }
+            .cm-pagination{
+                padding: 24px 0;
+                .ant-pagination{
+                    
+                    float: right;
+                }
+               
+            }
+        }
+    }
+}
+
+::ng-deep .input-text input{
+    text-overflow: ellipsis!important;
+}

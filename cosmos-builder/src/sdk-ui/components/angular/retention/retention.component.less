@@ -1,0 +1,137 @@
+main {
+    width: 100%;
+    height: 100%;
+}
+.none{
+    display: none;
+}
+.clearfix::after {
+    content: ".";
+    clear: both;
+    display: block;
+    overflow: hidden;
+    font-size: 0;
+    height: 0;
+}
+.retention-filter-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.retention-filter{
+    width: 85%;
+    border-right: 1px solid #ddd;
+}
+.filter-update{
+    width:15%;
+    display: flex;
+    justify-content: center;
+}
+.filter-update .update{
+    padding: 10px;
+    background: #2d8cf0;
+    color: #fff;
+    border-radius: 18px;
+}
+.retention-til{
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+.filter-object,.filter-behavior{
+    display:flex;
+    width:100%;
+    align-items:center;
+    margin-bottom: 10px; 
+}
+.filter-object span ,.filter-behavior span{
+    margin-right: 16px;
+}
+.object-item,.behavior-item{
+    display:flex;
+    align-items: center; 
+}
+.object-item:hover,.behavior-item:hover{
+    cursor: pointer;
+}
+.update:hover{
+    cursor: pointer;
+}
+.retention-text{
+    padding: 6px;
+    background: #ddd;
+    margin:0 12px;
+    border-radius:4px;
+}
+.filter-behavior>div:nth-child(1){
+    margin-left: 0;
+}
+.retention {
+    width:100%;
+    // height:80%;
+    padding:20px;
+    table {
+        border-collapse: collapse;
+        width:100%;
+        height:100%;
+    }
+    thead tr {
+        border-top: 1px solid #ddd;
+    }
+    td, th {
+        text-align: center;
+        vertical-align: middle;
+    }
+    td, th {
+        border-bottom: 1px solid #ddd; 
+        height: 48px;
+        line-height: 48px;
+    }
+    td div,th div{
+        width:100%;
+        height:100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    thead td,th{
+        height: 48px;
+        line-height: 48px;
+    }
+    .table1, .table2 {
+        float: left;
+    }
+    .table1{
+        width:20%;
+    }
+    .table1 th, .table1 td {
+        border-right: 1px solid #ddd;
+    }
+    // .table1 thead th div {
+    //     height: 97px;
+    //     line-height: 97px;
+    // }
+    .table2 {
+        width:80%;
+        overflow-x: auto;
+    }
+    .t-title {
+        border-bottom: none !important;
+        width: 100% !important;
+    }
+    tbody td div {
+        border: 1px solid transparent;
+    }
+    tbody .content-td div:hover {
+        // border-color: #108ee9;
+    }
+    tbody tr:hover{
+        // background:#ecf6fd;
+    }
+    .colorBg{
+        width:20px;
+        height:20px;
+        margin:5px; 
+    }
+}

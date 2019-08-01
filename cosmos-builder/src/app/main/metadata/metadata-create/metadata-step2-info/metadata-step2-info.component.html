@@ -1,0 +1,40 @@
+<div class="metadataStep2Info">
+
+    <div class="metadataStep2InfoTitle">
+        已选择项
+    </div>
+
+    <cm-form>
+        <form nz-form [formGroup]="metadataStep2Form">
+            <div class="metadataStep2Text clrfix">
+
+                <div nz-form-item>
+                    <div nz-form-label nz-col>
+                        <label>数据源名称</label>
+                    </div>
+                    <div nz-form-control>
+                        <span nz-form-text>{{ datasourceObj['name'] }}</span>
+                    </div>
+                </div>
+                <div nz-form-item>
+                    <div nz-form-label>
+                        <label>数据源类型</label>
+                    </div>
+                    <div nz-form-control>
+                        <span nz-form-text>{{ datasourceObj['type'] }}</span>
+                    </div>
+                </div>
+                <div *ngIf="_isRestApi" nz-form-item>
+                    <div nz-form-label>
+                        <label>数据源URL</label>
+                    </div>
+                    <div nz-form-control>
+                        <span nz-form-text>{{ datasourceObj['url'] }}</span>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </cm-form>
+
+</div>

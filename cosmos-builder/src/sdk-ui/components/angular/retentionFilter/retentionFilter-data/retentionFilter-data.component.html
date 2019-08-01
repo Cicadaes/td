@@ -1,0 +1,36 @@
+<div class="report-detail-data">
+        <div class="item-config">
+            <label class="item-label">CUBE</label>
+            <div class="config-content">
+                <cm-select>
+                    <nz-select [nzSize]="'large'" name="cube" [nzPlaceHolder]="'请选择'" style="width:90%;" [(ngModel)]="selectedCube" nzShowSearch (ngModelChange)="changeCube(selectedCube)">
+                        <nz-option *ngFor="let select of cubeList" [nzLabel]="select.label" [nzValue]="select.value"></nz-option>
+                    </nz-select>
+                </cm-select>
+            </div>
+        </div>
+        <div class="item-config">
+            <label class="item-label">维度</label>
+            <div class="config-content">
+                <cm-select *ngFor="let dimension of selectedDimensions;let i = index;">
+                    <nz-select [nzSize]="'large'" name="dimensions" [(ngModel)]="dimension.value" (ngModelChange)="changeDimension(dimension.value, 'pie')" [nzPlaceHolder]="'请选择'" style="width:90%;margin-bottom:10px;" nzShowSearch>
+                        <nz-option *ngFor="let select of dimensionList" [nzLabel]="select.label" [nzValue]="select.value"></nz-option>
+                    </nz-select>
+                </cm-select>
+            </div>
+        </div>
+        <div class="item-config">
+            <label class="item-label">指标</label>
+            <div class="config-content">
+                <cm-select *ngFor="let metrics of selectedMetrics;let i = index;">
+                    <nz-select [nzSize]="'large'" name="metrics" [(ngModel)]="metrics.value" (ngModelChange)="changeMetrics(metrics.value)" [nzPlaceHolder]="'请选择'" style="width:90%;margin-bottom:10px;">
+                        <nz-option *ngFor="let select of metricsList" [nzLabel]="select.label" [nzValue]="select.value"></nz-option>
+                    </nz-select>
+                </cm-select>
+            </div>
+        </div>
+        <!-- 0.1隐藏  -->
+        <div class="item-config" *ngIf="selectedCube">
+            <cm-report-filter [cube]="selectedCube" (onFilterConfig)="changeFilter($event)"></cm-report-filter>
+        </div>
+    </div>

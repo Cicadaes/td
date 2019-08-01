@@ -1,0 +1,169 @@
+<div class="gridstyle">
+    <layout [layoutData]="_layoutLayout" (provinceOut)="setLayoutData($event)" [cmAlign]="'level'"></layout>
+    <ul class="center">
+        <div class="piecenter">
+            <p style="margin-bottom:8px">表格名称</p>
+            <div class="section">
+                <li style="margin:12px 0;border-bottom:1px solid #dddddd">
+                    <input text="text" class="content" placeholder="请输入标题内容" value="name" [(ngModel)]="gridName.name" (ngModelChange)="OptionChange($event)">
+                </li>
+                <li>
+                    <div class="type-size">
+                        <div>
+                            <p>标签颜色</p>
+                            <span style="line-height: 40px;display: block;height: 33px;width: 100%;">
+                                <color-picker-style [height]="15" width="70" [colors]="_cmPresetColors" [cmcolor]="gridName.color" [cmType]="'hex'" (provinceOut)="gridName.color = $event;OptionChange()"></color-picker-style>
+                                <!-- <cm-color-picker [cmType]="'board'" [cmcolor]="gridName.color" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition"
+                                    (cmcolorchange)="gridName.color = $event;OptionChange();" [cmPositionOffset]="_cmPositionOffset"></cm-color-picker> -->
+                            </span>
+                        </div>
+                    </div>
+                    <div class="type-face type-face-map">
+                        <p>标签大小</p>
+                        <cm-select style="width:100%">
+                            <nz-select [(ngModel)]="gridName.fontSize" [nzPlaceHolder]="'请选择字号'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                                <nz-option *ngFor="let option of fontSizeOptions" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled"></nz-option>
+                            </nz-select>
+                        </cm-select>
+                    </div>
+                </li>
+                <li class="percentage" style="position: relative;text-align: right;">
+                    <i style="position: absolute;top:43%;left:0">
+                        <img src="./assets/imgAssets/font.svg" alt="">
+                    </i>
+                    <cm-select>
+                        <nz-select [(ngModel)]="gridName.fontFamily" [nzPlaceHolder]="'请选择字体'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                            <nz-option *ngFor="let option of typefaces" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                            </nz-option>
+                        </nz-select>
+                    </cm-select>
+                </li>
+            </div>
+        </div>
+    </ul>
+    <ul class="center">
+        <div class="piecenter">
+            <p style="margin-bottom:8px">表格颜色</p>
+            <div class="section">
+                <li style="margin:12px 0 0 0">
+                    <div class="captioncontent">
+                        <div class="captiontop">标题背景</div>
+                        <div class="captionbottom">
+                            <color-picker-style [height]="15" width="70" [colors]="_cmPresetColors" [cmcolor]="gridColor.bg" [cmType]="'hex'" (provinceOut)="gridColor.bg = $event;OptionChange()"></color-picker-style>
+                            <!-- <cm-color-picker [cmType]="'board'" [cmcolor]="gridColor.bg" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition"
+                                (cmcolorchange)="gridColor.bg = $event;OptionChange();" [cmPositionOffset]="_cmPositionOffset"></cm-color-picker> -->
+                        </div>
+                        <div class="captiontop">奇数行</div>
+                        <div class="captionbottom">
+                            <color-picker-style [height]="15" width="70" [colors]="_cmPresetColors" [cmcolor]="gridColor.odd" [cmType]="'hex'" (provinceOut)="gridColor.odd = $event;OptionChange()"></color-picker-style>
+                            <!-- <cm-color-picker [cmType]="'board'" [cmcolor]="gridColor.odd" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition"
+                                (cmcolorchange)="gridColor.odd = $event;OptionChange();" [cmPositionOffset]="_cmPositionOffset"></cm-color-picker> -->
+                        </div>
+                    </div>
+                    <div class="captioncontent" style="margin-left:2%;">
+                        <div class="captiontop">单元格式框</div>
+                        <div class="captionbottom">
+                            <color-picker-style [height]="15" width="70" [colors]="_cmPresetColors" [cmcolor]="gridColor.style" [cmType]="'hex'" (provinceOut)="gridColor.style = $event;OptionChange()"></color-picker-style>
+                            <!-- <cm-color-picker [cmType]="'board'" [cmcolor]="gridColor.style" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition"
+                                (cmcolorchange)="gridColor.style = $event;OptionChange();" [cmPositionOffset]="_cmPositionOffset"></cm-color-picker> -->
+                        </div>
+                        <div class="captiontop">偶数框</div>
+                        <div class="captionbottom">
+                            <color-picker-style [height]="15" width="70" [colors]="_cmPresetColors" [cmcolor]="gridColor.even" [cmType]="'hex'" (provinceOut)="gridColor.even = $event;OptionChange()"></color-picker-style>
+                            <!-- <cm-color-picker [cmType]="'board'" [cmcolor]="gridColor.even" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition"
+                                (cmcolorchange)="gridColor.even = $event;OptionChange();" [cmPositionOffset]="_cmPositionOffset"></cm-color-picker> -->
+                        </div>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </ul>
+    <ul class="center">
+        <div class="piecenter">
+            <p style="margin-bottom:8px">值</p>
+            <div class="section">
+                <li>
+                    <div class="type-size">
+                        <div>
+                            <p>标签颜色</p>
+                            <span style="line-height: 40px;display: block;height: 33px;width: 100%;">
+                                <color-picker-style [height]="15" width="70" [colors]="_cmPresetColors" [cmcolor]="gridValue.color" [cmType]="'hex'" (provinceOut)="gridValue.color = $event;OptionChange()"></color-picker-style>
+                                <!-- <cm-color-picker [cmType]="'board'" [cmcolor]="gridValue.color" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition"
+                                    (cmcolorchange)="gridValue.color = $event;OptionChange();" [cmPositionOffset]="_cmPositionOffset"></cm-color-picker> -->
+                            </span>
+                        </div>
+                    </div>
+                    <div class="type-face type-face-map">
+                        <p>标签大小</p>
+                        <cm-select style="width:100%">
+                            <nz-select [(ngModel)]="gridValue.fontSize" [nzPlaceHolder]="'请选择字号'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                                <nz-option *ngFor="let option of fontSizeOptions" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled"></nz-option>
+                            </nz-select>
+                        </cm-select>
+                    </div>
+                </li>
+                <li class="percentage" style="position: relative;text-align: right;">
+                    <i style="position: absolute;top:43%;left:0">
+                        <img src="./assets/imgAssets/font.svg" alt="">
+                    </i>
+                    <cm-select>
+                        <nz-select [(ngModel)]="gridValue.fontFamily" [nzPlaceHolder]="'请选择字体'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                            <nz-option *ngFor="let option of typefaces" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                            </nz-option>
+                        </nz-select>
+                    </cm-select>
+                </li>
+                <li style="margin:12px 0" class="">
+                    <div style=" font-family: PingFangSC-Regular;font-size: 12px;color: rgba(23, 35, 61, 0.55);line-height: 20px;height: 20px;">
+                        小数精度
+                    </div>
+                    <cm-select>
+                        <nz-select [(ngModel)]="gridValue.decimals" [nzPlaceHolder]="'请选择字体'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                            <nz-option *ngFor="let option of decimalss" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                            </nz-option>
+                        </nz-select>
+                    </cm-select>
+                </li>
+            </div>
+        </div>
+    </ul>
+    <ul class="center">
+        <div class="piecenter">
+            <p style="margin-bottom:8px">下载</p>
+            <div class="section">
+                <li>
+                    <cm-checkbox style="display: inline-block;width:auto;">
+                        <label nz-checkbox [(ngModel)]="gridDownload.show" (ngModelChange)="OptionChange($event)">
+                            <span>
+                                显示下载icon,下载前#条记录.
+                            </span>
+                        </label>
+                    </cm-checkbox>
+                    <div class="download">
+                        <input class="content" text="number" value="number" [(ngModel)]="gridDownload.number" (ngModelChange)="OptionChange($event)"
+                            title={{gridDownload.number}}>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </ul>
+    <ul class="center">
+        <div class="piecenter">
+            <p style="margin-bottom:8px">帮助</p>
+            <div class="section">
+                <li style="margin-bottom: 15px;">
+                    <cm-checkbox>
+                        <label nz-checkbox [(ngModel)]="gridHelp.show" (ngModelChange)="OptionChange($event)">
+                            <span class="conic">
+                                显示帮助icon
+                            </span>
+                        </label>
+                    </cm-checkbox>
+                </li>
+                <li>
+                    <grid-style (ongridConfig)="changeGrid($event)"></grid-style>
+                </li>
+            </div>
+        </div>
+    </ul>
+</div>

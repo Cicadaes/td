@@ -1,0 +1,78 @@
+<main>
+    <div class="header">
+        <span (click)="closeDimensionValues()" class="asd">
+            <i class="anticon anticon-arrow-left"></i>
+        </span>
+        <span>维度值设置</span>
+        <cm-button>
+            <button nz-button [nzType]="'primary'" [disabled]="isDisabled" style="float: right;" (click)="saveValueSet()">
+                保存
+            </button>
+        </cm-button>
+    </div>
+    <div class="content">
+        <div style="margin-bottom: 10px;">
+            <cm-radio>
+                <nz-radio-group [(ngModel)]="type" (ngModelChange)="changeType(type)">
+                    <label nz-radio [nzValue]="'order'">
+                        <span>按顺序</span>
+                    </label>
+                    <label nz-radio [nzValue]="'auto'">
+                        <span>自定义</span>
+                    </label>
+                </nz-radio-group>
+            </cm-radio>
+        </div>
+        <div *ngIf="type == 'auto'" class="checkbox-list">
+            <cm-checkbox>
+                <div style="margin-bottom: 5px;border-bottom: 1px solid rgb(233, 233, 233);">
+                    <label nz-checkbox [(ngModel)]="allChecked" (ngModelChange)="updateAllChecked()" [nzIndeterminate]="indeterminate">
+                        <span>选择全部的维度值</span>
+                    </label>
+                </div>
+            </cm-checkbox>
+            <cm-checkbox>
+                <nz-checkbox-group [(ngModel)]="checkOptionsOne" (ngModelChange)="updateSingleChecked()"></nz-checkbox-group>
+            </cm-checkbox>
+        </div>
+        <div *ngIf="type == 'order'">
+            按
+            <cm-select>
+                <nz-select [nzSize]="'large'" name="orderBy" [(ngModel)]="selecedOrderBy" (ngModelChange)="changeOrderBy(selecedOrderBy)" [nzPlaceHolder]="'请选择'" style="width:55%;margin-bottom:10px;">
+                    <nz-option *ngFor="let select of valueOrderByList" [nzLabel]="select.label" [nzValue]="select.value"></nz-option>
+                </nz-select>
+                <nz-select [nzSize]="'large'" name="order" [(ngModel)]="selectOrder" (ngModelChange)="changeOrder(selectOrder)" [nzPlaceHolder]="'请选择'" style="width:30%;">
+                    <nz-option *ngFor="let select of orderList" [nzLabel]="select.label" [nzValue]="select.value"></nz-option>
+                </nz-select>
+            </cm-select>
+            显示前
+            <!-- <cm-input>
+                <nz-input style="width: 45%;" nzType="number" [(ngModel)]="count" (ngModelChange)="changeCount($event)"></nz-input>
+            </cm-input> -->
+            <!-- <input inputNumber (keyup)="inputNumberChange()" min="1" style="width: 45%;" type="number" [(ngModel)]="count" (ngModelChange)="changeCount($event)" /> 个维度值 -->
+            <input inputNumber min="1" style="width: 45%;" type="number" [(ngModel)]="count" (ngModelChange)="changeCount($event)" /> 个维度值
+
+            <div class="item-config" *ngIf="selecedOrderBy == 'metric'">
+                <label class="item-label">指标</label>
+                <div class="config-content">
+                    <cm-select>
+                        <nz-select [nzSize]="'large'" name="metrics" [(ngModel)]="selectMetrics" (ngModelChange)="changeMetrics(selectMetrics)" [nzPlaceHolder]="'请选择'" style="width:90%;">
+                            <nz-option *ngFor="let select of metricsList" [nzLabel]="select.label" [nzValue]="select.value">
+                                <ng-template #nzOptionTemplate>
+                                    <span title="{{select.label}}">{{select.label}}</span>
+                                </ng-template>
+                            </nz-option>
+                        </nz-select>
+                    </cm-select>
+                </div>
+            </div>
+            <div class="item-config">
+                <cm-checkbox>
+                    <label nz-checkbox [(ngModel)]="isShowOther" (ngModelChange)="changeShowOther($event)">
+                        <span>剩余维度值，用“其他”代表显示。</span>
+                    </label>
+                </cm-checkbox>
+            </div>
+        </div>
+    </div>
+</main>

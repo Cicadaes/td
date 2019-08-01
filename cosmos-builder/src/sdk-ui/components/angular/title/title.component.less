@@ -1,0 +1,178 @@
+.clearfix::after {
+    content: ".";
+    clear: both;
+    display: block;
+    overflow: hidden;
+    font-size: 0;
+    height: 0;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    .til {
+        display: flex;
+        flex: 4;
+    }
+    .center {
+        justify-content: center;
+    }
+    .til-icon {
+        margin: auto;
+        width: 100%;
+        display: block;
+        span i {
+            font-size: 15px !important;
+            color: #17233D8C;
+        }
+        span:hover {
+            cursor: pointer;
+        }
+        .tooltips{
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            text-align: center;
+            line-height: 16px;
+        }
+    }
+}
+
+.helpdowm {
+    border-radius: 4px;
+    padding: 16px;
+    opacity: 0.8;
+    color: rgba(255, 255, 255, 0.8);
+    background: #17233D;
+    .empty {
+        padding: 10px;
+        display: block;
+        color:#fff;
+    }
+    .help-til {
+        cursor: text;
+        height: 28px;
+        line-height: 28px;
+        width: 100%;
+        .intro {
+            font-family: PingFangSC-Medium;
+            font-size: 14px;
+            color: #FFFFFF;
+            letter-spacing: 0;
+            line-height: 22px;
+        }
+        .close {
+            color: #C2CBDB;
+            display: -webkit-inline-box;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        .close:hover {
+            cursor: pointer;
+        }
+    }
+    .help-contentul {
+        width: 100%;
+        margin: 0px;
+        max-height:500px;
+        overflow-y: scroll;
+        ul {
+            li {
+                line-height: 22px;
+                text-align: left;
+                font-size: 12px;
+                padding: 8px 0 ;
+                display: flex;
+                border-bottom: 1px solid #ffffff26;
+                .symbol {
+                    display: inline-block;
+                    float: left;
+                    margin-right: 20px;
+                    color: rgb(95, 147, 225);
+                }
+                .help-label {
+                    color: rgb(95, 147, 225);
+                    width: 110px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    font-weight: normal;
+                    display: inline-block;
+                    float: left;
+                    font-family: PingFangSC-Medium;
+                    font-size: 12px;
+                    color: #FFFFFF;
+                    letter-spacing: 0;
+                    line-height: 20px;
+                }
+                .help-text {
+                    font-size: 12px;
+                    color: rgb(95, 106, 119);
+                    white-space: normal;
+                    max-width: 376px;
+                    overflow-wrap: break-word;
+                    display: inline-block;
+                    float: left;
+                    font-family: PingFangSC-Regular;
+                    font-size: 12px;
+                    color: rgba(255, 255, 255, 0.80);
+                    letter-spacing: 0;
+                    line-height: 20px;
+                }
+            }
+            li:last-child{
+                border:none;
+            }
+        }
+    }
+}
+
+.down {
+    box-shadow: rgb(206, 211, 217) 0px 1px 1px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(204, 204, 204, 0.26);
+    border-image: initial;
+    width: 280px;
+    height: 144px;
+    background: #FFFFFF;
+    .help-til {
+        cursor: text;
+        height: 48px;
+        line-height: 48px;
+        width: 100%;
+        border-bottom: 1px solid rgb(200, 200, 202);
+        .intro {
+            font-family: PingFangSC-Medium;
+            font-size: 14px;
+            color: #17233D;
+            cursor: auto;
+            display: inline-block;
+            height: 48px;
+            padding-left: 10px;
+            font-weight: normal;
+        }
+        .close {
+            color: rgba(23, 35, 61, 0.55);
+            display: -webkit-inline-box;
+            font-size: 10px;
+            float: right;
+            margin-right: 10px;
+        }
+        .close:hover {
+            cursor: pointer;
+        }
+    }
+    .help-content {
+        padding: 10px;
+        div {
+            font-family: PingFangSC-Regular;
+            font-size: 14px;
+            color: rgba(23, 35, 61, 0.75);
+            line-height: 22px;
+        }
+    }
+}

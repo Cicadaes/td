@@ -1,0 +1,73 @@
+<div class="report-create">
+    <cm-modal>
+        <nz-modal [nzWrapClassName]="'vertical-center-modal'" [nzMaskClosable]="false" [nzContent]="modalContent" [nzVisible]="isVisibleMiddle"
+            [nzTitle]="'设置事件漏斗'" (nzOnCancel)="handleCancelMiddle($event)" (nzOnOk)="handleOkMiddle($event)" [nzFooter]="modalFooter">
+            <ng-template #modalContent>
+                <div class="referral">
+                    以用户逐步执行的事件为依据，构造最多8个步骤的转化漏斗，平台将逐步过滤，计算出用户在整个过程中的转化比例。
+                    <i class="anticon anticon-info-circle-o"></i>
+                </div>
+                <div class="title">
+                    步骤
+                    <span>事件名称</span>事件别名
+                </div>
+                <div style="max-height:190px;overflow-y:auto;" #scroll>
+                    <div class="now" *ngFor="let step of stepArray;let i = index">
+                        <div class="step">
+                            <div class="name">
+                                <label>step{{i + 1}} :</label>
+                            </div>
+                            <div class="message">
+                                <div class="xingxi">追踪依据</div>
+                                <cm-select>
+                                    <nz-select nzShowSearch [nzSize]="'large'" name="dimensions" [nzPlaceHolder]="'请选择'" [(ngModel)]="step.id" (ngModelChange)="funnelChanges(step,select,i)">
+                                        <nz-option *ngFor="let select of dimensionList;let i=index" [nzLabel]="select.label" [nzValue]="select.id">
+                                            <ng-template #nzOptionTemplate>
+                                                <span title="{{select.label}}">{{select.label}}</span>
+                                            </ng-template>
+                                        </nz-option>
+                                    </nz-select>
+                                </cm-select>
+                                <div class="xingxi">事件别名</div>
+                                <cm-input>
+                                    <nz-input [nzSize]="'large'" [(ngModel)]="step.name"></nz-input>
+                                </cm-input>
+                                <i class="anticon anticon-minus-circle-o dynamic-delete-button" (click)="removeFunnel(step)" *ngIf="stepArray.length==1?false:true"></i>
+                            </div>
+                        </div>
+                        <!-- <div *ngIf="decide" class="hint">
+                            * {{promptMessage}}.
+                        </div> -->
+                    </div>
+                </div>
+                <div style="height:24px;width:100%">
+                    <div *ngIf="decide" style="height: 24px;line-height: 24px;padding-left: 10px;color: red;font-family: PingFangSC-Regular;">
+                        *&nbsp;{{promptMessage}} .
+                    </div>
+                </div>
+                <div nz-form-item class="new" *ngIf="add">
+                    <div nz-form-control nz-col>
+                        <cm-button>
+                            <button nz-button style="border:none" [nzType]="'dashed'" [nzSize]="'large'" (click)="addField($event)">
+                                <i class="anticon anticon-plus"></i>
+                                <span> 添加步骤</span>
+                            </button>
+                        </cm-button>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template #modalFooter>
+                <cm-button>
+                    <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancelMiddle(stepArray)">
+                        取消
+                    </button>
+                </cm-button>
+                <cm-button>
+                    <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="saveTheDataSource(stepArray)">
+                        确定
+                    </button>
+                </cm-button>
+            </ng-template>
+        </nz-modal>
+    </cm-modal>
+</div>

@@ -1,0 +1,91 @@
+<cm-table style="clear:both" class="metadatalist">
+    <nz-table #nzTable [nzBordered]="true" [nzShowTotal]="true" [nzAjaxData]="metadataList" [nzTotal]="totalCount" [(nzPageIndex)]="queryParam.page" [(nzPageSize)]="queryParam.pageSize" (nzPageIndexChange)="changePage($event)" (nzPageSizeChange)="changePageSize($event)">
+        <thead nz-thead>
+            <tr>
+                <th nz-th>
+                    <p class="table-td" style="width:100%">ID</p>
+                </th>
+                <th nz-th>
+                    <p class="table-td" style="width:100%">元数据对象名称</p>
+                </th>
+                <th nz-th>
+                    <p class="table-td" style="width:100%">元数据对象类型</p>
+                </th>
+                <th nz-th>
+                    <p class="table-td" style="width:100%">状态</p>
+                </th>
+                <th nz-th>
+                    <p class="table-td" style="width:100%">数据源名称</p>
+                </th>
+                <th nz-th>
+                    <p class="table-td" style="width:100%">数据源类型</p>
+                </th>
+                <th nz-th>
+                    <p class="table-td" style="width:100%">描述</p>
+                </th>
+                <th nz-th>
+                    <p class="table-td" style="width:100%">创建人</p>
+                </th>
+                <th nz-th>
+                    <p class="table-td" style="width:100%">创建时间</p>
+                </th>
+                <th nz-th>
+                    <p class="table-td" style="width:100%">操作</p>
+                </th>
+            </tr>
+        </thead>
+        <tbody nz-tbody>
+            <tr nz-tbody-tr *ngFor="let data of nzTable.data;let i=index">
+                <td nz-td style="min-width:50px;max-width:80px">
+                    <p class="table-td" style="width:100%">
+                        {{data.id}}
+                    </p>
+                </td>
+                <td nz-td style="min-width:100px;max-width:50px">
+                    <p class="table-td" style="width:100%" [title]="data.name">
+                        {{data.name}}
+                    </p>
+                </td>
+                <td nz-td style="max-width:120px;min-width:120px">
+                    <p class="table-td" *ngIf="data.type == 1" style="width:100%">CUBE类</p>
+                    <p class="table-td" *ngIf="data.type == 2" style="width:100%">事件类</p>
+                    <p class="table-td" *ngIf="data.type == 3" style="width:100%">属性类</p>
+                </td>
+                <td nz-td style="max-width:50px;min-width:80px">
+                    <p class="table-td" *ngIf="data.status == 1" style="width:100%"> <span style="height:8px;width:8px;background: rgb(43,133,229);;display:inline-block;border-radius: 50%;"></span> 正常</p>
+                    <p class="table-td" *ngIf="data.status == 0" style="width:100%"> <span style="height:8px;width:8px;background: rgb(224,62,22);;display:inline-block;border-radius: 50%;"></span> 禁用</p>
+                </td>
+                <td nz-td style="max-width:50px;min-width:100px">
+                    <p class="table-td" style="width:100%" [title]="data.dataSourceName">
+                        {{data.dataSourceName}}
+                    </p>
+                </td>
+                <td nz-td style="max-width:60px;min-width:130px">
+                    <p class="table-td" style="width:100%">
+                        {{data.dataSourceType}}
+                    </p>
+                </td>
+                <td nz-td style="max-width:60px;min-width:110px">
+                    <p class="table-td" [title]="data.description" style="width:100%" [title]="data.description">
+                        {{data.description}}
+                    </p>
+                </td>
+                <td nz-td style="min-width:100px;max-width:50px">
+                    <p class="table-td" style="width:100%" [title]="data.creator">
+                        {{data.creator}}
+                    </p>
+                </td>
+                <td nz-td style="max-width:90px;min-width:90px">
+                    <p class="table-td" style="width:100%">
+                        {{data.createTime | formatTime}}
+                    </p>
+                </td>
+                <td nz-td style="max-width:60px;min-width:60px;cursor: pointer;" [routerLink]="[ 'detail',data.id] ">
+                    <p class="table-td" style="width:100%;">
+                        <a style="color: #2D8CF0;">查看</a>
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</cm-table>

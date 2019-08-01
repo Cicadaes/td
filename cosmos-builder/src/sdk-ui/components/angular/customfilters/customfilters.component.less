@@ -1,0 +1,79 @@
+.cus {
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+}
+.filters :hover{
+    cursor: pointer;
+}
+.filters-box{
+    height: 32px;
+    overflow: hidden;
+    width: 100%;
+    align-items: center;
+    background: #fff;
+    .filters-item{
+        margin-right: 10px;
+    }
+    .text{
+        margin-right: 10px;
+        border: 1px solid #ededed;
+        text-align: center;
+        width: 50px;
+        line-height: 30px;
+        background: #17233D0F;
+        border-radius: 4px;
+    }
+    div{
+        overflow: hidden;
+        float: left;
+        display: inline-block;
+        // width:200px;
+    }
+    .item1{
+        width:150px;
+    }
+    .item2{
+        width:100px;
+    }
+}
+:host ::ng-deep .cus{
+            height: auto !important;
+        .filters-box{ 
+            height: auto !important;   
+            .item3{
+                min-width: 15%;
+                max-width: 40%;
+                overflow: hidden;
+                height: auto;
+                cm-select{
+                    nz-select{
+                        .ant-select-selection{
+                            height: auto !important;
+                            overflow: hidden !important;
+                            .ng-star-inserted{
+                                height: auto !important;
+                                display: block !important;
+                                overflow: hidden !important;
+                                margin-bottom: 0px;
+                                .ng-trigger{
+                                    min-width: 80px;
+                                    height:25px !important;
+                                    border-radius: 3px  !important;
+                                    .ant-select-selection__choice__content{
+                                        text-overflow: clip !important;
+                                    }
+                                }
+                            }
+                        }
+                        .ant-select-selection__rendered:after{
+                            display: none !important;
+
+                        }
+                    }
+                 
+                }
+            }
+        }
+   
+}

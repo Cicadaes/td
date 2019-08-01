@@ -1,0 +1,85 @@
+<div class="piestyle">
+    <layout [layoutData]="_layoutLayout" (provinceOut)="setLayoutData($event)" [cmHeight]="'334px'" [cmPadding]="'16px 16px 16px 16px'"
+        [cmAlign]="'level'"></layout>
+
+    <ul class="center">
+        <div class="piecenter">
+            <p>面积图</p>
+            <div class="section">
+                <li style="margin-bottom:10px">
+                    <cm-checkbox>
+                        <label [nzDisabled]='lineStyle.dataLabel' nz-checkbox [(ngModel)]="lineStyle.displayPoint" (ngModelChange)="OptionChange($event)">
+                            <span>显示点</span>
+                        </label>
+                    </cm-checkbox>
+                </li>
+                <li>
+                    <cm-checkbox>
+                        <label nz-checkbox [(ngModel)]="lineStyle.dataLabel" (ngModelChange)="OptionChange($event)">
+                            <span>显示数据标签</span>
+                        </label>
+                    </cm-checkbox>
+                </li>
+
+                <!-- <li style="margin:12px 0">
+                    <div style=" font-family: PingFangSC-Regular;font-size: 12px;color: rgba(23, 35, 61, 0.55);line-height: 20px;height: 20px;">
+                        小数精度
+                    </div>
+                    <cm-select>
+                        <nz-select [(ngModel)]="lineStyle.decimals" [nzPlaceHolder]="'请选择小数精度'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                            <nz-option *ngFor="let option of decimals" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                            </nz-option>
+                        </nz-select>
+                    </cm-select>
+                </li> -->
+            </div>
+        </div>
+    </ul>
+    <ul class="center">
+        <div class="piecenter">
+            <p>缺少的数据</p>
+            <div class="section">
+                <cm-radio>
+                    <nz-radio-group [(ngModel)]="missingData" (ngModelChange)="OptionChange($event)">
+                        <li>
+                            <label nz-radio [nzValue]="'zeroValue'">
+                                <span>按零值对待-线条不间断</span>
+                            </label>
+                        </li>
+                        <li style="margin:4px 0 ">
+                            <label nz-radio [nzValue]="'breakValue'">
+                                <span>线条断开</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label nz-radio [nzValue]="'insertionValue'">
+                                <span>线性插值</span>
+                            </label>
+                        </li>
+                    </nz-radio-group>
+                </cm-radio>
+            </div>
+        </div>
+    </ul>
+    <ul class="center">
+        <div class="piecenter">
+            <p>区域缩放</p>
+            <div class="section">
+                <li>
+                    <cm-checkbox>
+                        <label nz-checkbox [(ngModel)]="lineStyle.scaling" (ngModelChange)="OptionChange($event)">
+                            <span>显示</span>
+                        </label>
+                    </cm-checkbox>
+                </li>
+            </div>
+        </div>
+    </ul>
+    <color-style [layoutData]="_layoutColor" colors (provinceOut)="colorData($event)"></color-style>
+    <legend-style [layoutData]="_layoutLegend" legendPosition (legendOut)="legendData($event)"></legend-style>
+
+    <grid [layoutData]="_layoutGrid" (dataChange)="gridData($event)"></grid>
+
+    <axis [layoutData]="_layoutAxis" (dataChange)="axisData($event)"> </axis>
+
+</div>

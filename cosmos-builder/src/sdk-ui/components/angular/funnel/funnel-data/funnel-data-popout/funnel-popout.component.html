@@ -1,0 +1,12 @@
+<div class="funnel-popout">
+    <div class="config-content">
+        <button class="procedure" (click)="show()" class="procedure">
+            <i class="icon iconfont icon-settings"></i>步骤
+            </button>
+        <ul>
+            <li *ngFor="let Funnel of Funnels;let i = index" class="course">
+                <span title={{Funnel.name?Funnel.name:Funnel.gist}}>{{Funnel.name==""?Funnel.gist:Funnel.name}}</span>
+            </li>
+        </ul>
+    </div>
+</div>

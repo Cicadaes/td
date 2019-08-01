@@ -1,0 +1,54 @@
+<cm-form>
+    <form nz-form [formGroup]="validateForm" class="cm-advanced-search-form clearfix">
+        <div class="form-box">
+            <div nz-row [nzGutter]="16">
+                <div nz-col [nzSpan]="8">
+                    <div nz-form-item nz-row>
+                        <div nz-form-label nz-col [nzSpan]="8">
+                            <label for="'folderName'">文件夹名称</label>
+                        </div>
+                        <div nz-form-control nz-col [nzSpan]="16">
+                            <cm-input>
+                                <nz-input [nzSize]="'large'" [nzPlaceHolder]="'请输入内容'" [formControlName]="'folderName'" [nzId]="'folderName'"></nz-input>
+                            </cm-input>
+                        </div>
+                    </div>
+                </div>
+                <div nz-col [nzSpan]="8">
+                    <div nz-form-item nz-row>
+                        <div nz-form-label nz-col [nzSpan]="6">
+                            <label for="'founder'">创建人</label>
+                        </div>
+                        <div nz-form-control nz-col [nzSpan]="18">
+                            <cm-input>
+                                <nz-input [nzSize]="'large'" [nzPlaceHolder]="'请输入内容'" [formControlName]="'founder'" [nzId]="'founder'"></nz-input>
+                            </cm-input>
+                        </div>
+                    </div>
+                </div>
+                <div nz-col [nzSpan]="8">
+                    <div nz-form-item nz-row>
+                        <div nz-form-label nz-col [nzSpan]="7">
+                            <label>创建时间</label>
+                        </div>
+                        <div nz-form-control nz-col [nzSpan]="17">
+                            <cm-datepicker>
+                                <ng-template>
+                                    <nz-rangepicker [formControlName]="'createTime'" [nzSize]="'large'"></nz-rangepicker>
+                                </ng-template>
+                            </cm-datepicker>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div nz-row [nzGutter]="16" style="float:left;padding-left:24px;">
+            <div nz-col [nzSpan]="24">
+                <cm-button>
+                    <button nz-button [nzType]="'primary'" (click)="searchHandler()">查询</button>
+                </cm-button>
+            </div>
+        </div>
+    </form>
+</cm-form>

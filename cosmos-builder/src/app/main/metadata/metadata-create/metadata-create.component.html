@@ -1,0 +1,62 @@
+<div class="steps-head" nz-row>
+    <cm-steps>
+        <nz-steps [nzOffset]="'4'" nz-col [nzSpan]="16" class="steps-head-content" [(nzCurrent)]="current">
+            <nz-step [nzTitle]="'选择数据源'"></nz-step>
+            <nz-step [nzTitle]="step2Title"></nz-step>
+            <nz-step [nzTitle]="'创建元数据对象'" *ngIf="!metadataCreateService.metadataObjId"></nz-step>
+            <nz-step [nzTitle]="'修改元数据对象'" *ngIf="metadataCreateService.metadataObjId"></nz-step>
+        </nz-steps>
+    </cm-steps>
+</div>
+
+<div class="steps-content">
+    <div class="step1" *ngIf="current === 0">
+        <div class="metadata-step1-info">
+            <metadata-step1-info></metadata-step1-info>
+        </div>
+        <div class="metadata-step1-list">
+            <metadata-step1-list (onDatasourceChange)="datasourceChange($event)" *ngIf="!metadataCreateService.metadataObjId"></metadata-step1-list>
+        </div>
+    </div>
+    <div class="step2" *ngIf="current === 1">
+        <div class="metadata-step2-info">
+            <metadata-step2-info *ngIf="!metadataCreateService.metadataObjId || (metadataCreateService.metadataObjId && metadataCreateService.metadataObj)" (onDatasource)="datasourceChange($event)"></metadata-step2-info>
+        </div>
+        <div class="metadata-step2-list">
+            <metadata-step2-list *ngIf="!metadataCreateService.metadataObjId || (metadataCreateService.metadataObjId && metadataCreateService.metadataObj)" (onRestapiBtnChange)="restapiBtnChange($event)"></metadata-step2-list>
+        </div>
+    </div>
+    <div class="step3" *ngIf="current === 2">
+        <div class="metadata-step3-info">
+            <metadata-step3-info></metadata-step3-info>
+        </div>
+        <div class="metadata-step3-list">
+            <metadata-step3-list></metadata-step3-list>
+        </div>
+    </div>
+</div>
+<div class="steps-action">
+    <div class="stepOperate">
+        <cm-button>
+            <button [nzSize]="'large'" nz-button [nzType]="'primary'" (click)="next()" *ngIf="current < 2">
+                <span>下一步</span>
+            </button>
+        </cm-button>
+        <cm-button>
+            <button [nzSize]="'large'" nz-button [nzType]="'primary'" (click)="done()" *ngIf="current === 2">
+                <span>确定</span>
+            </button>
+        </cm-button>
+        <cm-button>
+            <button [nzSize]="'large'" nz-button [nzType]="'default'" (click)="pre()" *ngIf="current > 0 && !(current == 1 && metadataCreateService.metadataObjId)">
+                <span>上一步</span>
+            </button>
+        </cm-button>
+        <cm-button>
+            <button [nzSize]="'large'" [disabled]="restapiTest" nz-button [nzType]="'primary'" (click)="showModal()" *ngIf="current == 1 && isRestApi">
+                <span>测试连接</span>
+            </button>
+        </cm-button>
+    </div>
+</div>
+<metadata-restapi-test></metadata-restapi-test>

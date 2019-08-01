@@ -1,0 +1,49 @@
+.report-detail-data {
+    min-height: 100%;
+    padding: 20px;
+}
+.item-config{
+    margin-bottom: 10px;
+}
+.item-label{
+    font-family: PingFangSC-Semibold;
+    font-size: 12px;
+    color: #464C5B;
+    line-height: 32px;
+}
+cm-datepicker{
+    margin-top:15px;
+    display: block;
+}
+:host ::ng-deep .report-detail-data{
+    .ant-select {
+        width: 100%;
+    }
+    .ant-select-selection, .ant-select-selection,.input-text .ant-input {
+        background: none !important;
+        border: none !important;
+        border-bottom: 1px solid #ddd !important;
+        width: 100% !important;
+      }
+      .ant-select-focused .ant-select-selection,.ant-select-selection:focus,.ant-select-selection:active {
+        box-shadow: none !important;
+      }
+      .item-config{
+        cm-datepicker-shortcut{
+            .dropdown-shortcut{
+                width:70% !important;
+                margin-bottom:24px !important;
+            }
+            nz-rangepicker{
+                .ant-calendar-picker{
+                    .ant-input{
+                        border-radius: 5px !important;
+                    }
+                }
+            }
+            .date-box{
+                padding-left: 16px !important;
+            }
+        }
+      }
+  }

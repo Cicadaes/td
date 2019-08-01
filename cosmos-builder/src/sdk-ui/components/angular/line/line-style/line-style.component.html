@@ -1,0 +1,77 @@
+<div class="piestyle">
+    <layout [layoutData]="_layoutLayout" (provinceOut)="setLayoutData($event)" [cmHeight]="'334px'" [cmPadding]="'16px 16px 16px 16px'"
+        [cmAlign]="'level'"></layout>
+    <ul class="center">
+        <div class="piecenter">
+            <p>线图</p>
+            <div class="section">
+                <li style="margin-bottom:10px">
+                    <cm-checkbox>
+                        <label nz-checkbox [nzDisabled]='lineStyle.dataLabel' [(ngModel)]="lineStyle.displayPoint" (ngModelChange)="OptionChange($event)">
+                            <span>显示点</span>
+                        </label>
+                    </cm-checkbox>
+                </li>
+                <li>
+                    <cm-checkbox>
+                        <label nz-checkbox [(ngModel)]="lineStyle.dataLabel" (ngModelChange)="OptionChange($event)">
+                            <span>显示数据标签</span>
+                        </label>
+                    </cm-checkbox>
+                </li>
+                <li class="sectortitle">线条粗细</li>
+                <cm-select>
+                    <nz-select [(ngModel)]="lineStyle.borderWidth" [nzPlaceHolder]="'请输入线条粗细'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                        <nz-option *ngFor="let option of borderWidths" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                        </nz-option>
+                    </nz-select>
+                </cm-select>
+            </div>
+        </div>
+    </ul>
+    <ul class="center">
+        <div class="piecenter">
+            <p>缺少的数据</p>
+            <div class="section">
+                <cm-radio>
+                    <nz-radio-group [(ngModel)]="missingData" (ngModelChange)="OptionChange($event)">
+                        <li>
+                            <label nz-radio [nzValue]="'zeroValue'">
+                                <span>按零值对待-线条不间断</span>
+                            </label>
+                        </li>
+                        <li style="margin:4px 0 ">
+                            <label nz-radio [nzValue]="'breakValue'">
+                                <span>线条断开</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label nz-radio [nzValue]="'insertionValue'">
+                                <span>线性插值</span>
+                            </label>
+                        </li>
+                    </nz-radio-group>
+                </cm-radio>
+            </div>
+        </div>
+    </ul>
+    <ul class="center">
+        <div class="piecenter">
+            <p>区域缩放</p>
+            <div class="section">
+                <li>
+                    <cm-checkbox>
+                        <label nz-checkbox [(ngModel)]="lineStyle.scaling" (ngModelChange)="OptionChange($event)">
+                            <span>显示</span>
+                        </label>
+                    </cm-checkbox>
+                </li>
+            </div>
+        </div>
+    </ul>
+    <legend-style legendPosition [layoutData]="_layoutLegend" (legendOut)="legendData($event)"></legend-style>
+
+    <grid [layoutData]="_layoutGrid" (dataChange)="gridData($event)"></grid>
+
+    <axis [layoutData]="_layoutAxis" (dataChange)="axisData($event)"> </axis>
+</div>

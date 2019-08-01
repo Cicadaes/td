@@ -1,0 +1,77 @@
+.layout-style {
+    .div{
+        margin: 20px 0 0 20px;
+    }
+    p{
+        font-family: PingFangSC-Medium;
+        font-size: 14px;
+        color: #17233D;
+        line-height: 22px;
+    } 
+    .block {
+        padding-left:20px;
+        .left,.right {
+            padding-left:10px;
+            cm-checkbox {
+                width: 49%;
+                display: inline-block;
+                margin-bottom: 12px;
+            }
+        }
+        p {
+            font-family: PingFangSC-Regular;
+            font-size: 12px;
+            color: rgba(23, 35, 61, 0.55);
+            line-height: 32px;
+        }
+        .setMargin{
+            padding-left:10px;
+        }
+    }
+}
+.margin{
+    margin-left: 10px;
+    width: 45%;
+    float: left;
+}
+li{
+    list-style: none;
+    margin-left: 10px;
+}
+.layout-style input{
+    width: 60%;
+    border: none !important;
+    background: none !important;
+    border-bottom: 1px solid #ccc !important;
+    margin: 10px 0;
+    padding: 0 10px;
+    display: inline-block;
+    margin-left: 10px;
+}
+.wide,.high{
+    margin-left: 10px;
+    input{
+        width: 70%;
+        margin-left: 25px;
+    }
+}
+.clearfix::after {
+    content: ".";
+    clear: both;
+    display: block;
+    overflow: hidden;
+    font-size: 0;
+    height: 0;
+}
+cm-checkbox{
+    margin-left: 10px;
+}
+.text-explain{
+    font-size: 10px;
+    color: red;
+    position: absolute;
+    left: 10px;
+    top:20px;
+    line-height: 20px;
+    width: 60px;
+}

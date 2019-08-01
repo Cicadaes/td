@@ -1,0 +1,99 @@
+<div class="report-detail-data">
+    <div class="item-config">
+        <label class="item-label">CUBE</label>
+        <div class="config-content">
+            <cm-select>
+                <nz-select [nzSize]="'large'" name="cube" [nzPlaceHolder]="'请选择'" style="width:90%;" [(ngModel)]="selectedCube" nzShowSearch (ngModelChange)="changeCube(selectedCube)">
+                    <nz-option *ngFor="let select of cubeList" [nzLabel]="select.label" [nzValue]="select.value">
+                        <ng-template #nzOptionTemplate>
+                            <span title="{{select.label}}">{{select.label}}</span>
+                        </ng-template>
+                    </nz-option>
+                </nz-select>
+            </cm-select>
+        </div>
+    </div>
+    <div class="item-config">
+        <label class="item-label">维度</label>
+        <div class="config-content">
+            <cm-select *ngFor="let dimension of selectedDimensions;let i = index;">
+                <nz-select *ngIf="i == 0" [nzSize]="'large'" name="dimensions" [(ngModel)]="dimension.value" (ngModelChange)="changeDimension(dimension.value, 'businessLine')" [nzPlaceHolder]="'请选择日期维度'" style="width:90%;margin-bottom:10px;" nzShowSearch>
+                    <nz-option *ngFor="let select of dateDimensionsList" [nzLabel]="select.label" [nzValue]="select.value">
+                        <ng-template #nzOptionTemplate>
+                            <span title="{{select.label}}">{{select.label}}</span>
+                        </ng-template>
+                    </nz-option>
+                </nz-select>
+                <nz-select *ngIf="i != 0" [nzSize]="'large'" name="dimensions" [(ngModel)]="dimension.value" (ngModelChange)="secondDimensionChange(dimension.value, 'businessLine')" [nzPlaceHolder]="'请选择'" style="width:90%;margin-bottom:10px;" nzShowSearch>
+                    <nz-option *ngFor="let select of dimensionList" [nzLabel]="select.label" [nzValue]="select.value">
+                        <ng-template #nzOptionTemplate>
+                            <span title="{{select.label}}">{{select.label}}</span>
+                        </ng-template>
+                    </nz-option>
+                </nz-select>
+                <i class="anticon anticon-minus-circle-o dynamic-delete-button" *ngIf="i!=0" (click)="removeDimension(selectedDimensions, i, 'line')"></i>
+                <!-- <cm-button *ngIf="i != 0 && selectedDimensions[1]['value']">
+                    <button class="add-button" nz-button [nzType]="'dashed'" [nzSize]="'small'" (click)="showDimensions('true')">
+                        <span>维度值设置</span>
+                    </button>
+                </cm-button> -->
+            </cm-select>
+            <cm-button>
+                <button class="add-button" nz-button *ngIf="selectedDimensions.length != 2 && selectedMetrics.length == 1" [nzType]="'dashed'" [nzSize]="'small'" (click)="addDimension()">
+                    <i class="anticon anticon-plus"></i><span>添加维度</span>
+                </button>
+            </cm-button>
+        </div>
+    </div>
+    <div class="item-config">
+        <label class="item-label">指标</label>
+        <div class="config-content">
+            <cm-select *ngFor="let metrics of selectedMetrics;let i = index;">
+                <nz-select [nzSize]="'large'" name="metrics" [(ngModel)]="metrics.value" (ngModelChange)="changeMetrics(metrics.value)" [nzPlaceHolder]="'请选择'" style="width:90%;margin-bottom:10px;">
+                    <nz-option *ngFor="let select of metricsList" [nzLabel]="select.label" [nzValue]="select.value">
+                        <ng-template #nzOptionTemplate>
+                            <span title="{{select.label}}">{{select.label}}</span>
+                        </ng-template>
+                    </nz-option>
+                </nz-select>
+                <i class="anticon anticon-minus-circle-o dynamic-delete-button" *ngIf="i!=0" (click)="removeMetrics(selectedMetrics, i, 'line')"></i>
+            </cm-select>
+            <cm-button>
+                <button class="add-button" nz-button [nzType]="'dashed'" *ngIf="selectedDimensions.length == 1 && selectedMetrics.length < 10" [nzSize]="'small'" (click)="addMetrics()">
+                    <i class="anticon anticon-plus"></i><span>添加指标</span>
+                </button>
+            </cm-button>
+        </div>
+    </div>
+    <div class="item-config">
+        <!-- <label class="item-label">日期范围</label>
+        <div class="config-content">
+            <cm-select>
+                <nz-select [nzSize]="'large'" name="date" [(ngModel)]="selectedDate" (ngModelChange)="changeDate(selectedDate)" [nzPlaceHolder]="'日期范围维度'" style="width:90%;margin-bottom:10px;" nzAllowClear>
+                    <nz-option *ngFor="let select of dateDimensionsList" [nzLabel]="select.label" [nzValue]="select.value"></nz-option>
+                </nz-select>
+            </cm-select>
+            <nz-radio-group [(ngModel)]="dateType" style="display:block;" *ngIf="selectedDate" (ngModelChange)="changeDateType(dateType)">
+                <label nz-radio [nzValue]="'default'">
+                    <span>默认（最近28天，不含今天）</span>
+                </label>
+                <label nz-radio [nzValue]="'custom'">
+                    <span>自定义</span>
+                </label>
+            </nz-radio-group>
+            <cm-datepicker *ngIf="selectedDate && dateType=='custom'">
+                <ng-template>
+                    <nz-rangepicker [(ngModel)]="dateRange" (ngModelChange)="changeDateRange(dateRange)" [nzSize]="'large'"></nz-rangepicker>
+                </ng-template>
+            </cm-datepicker>
+        </div> -->
+        <app-date-range [list]="dateDimensionsList" [dataConfig]="dataConfig" (change)="dateRangeChange($event)"></app-date-range>
+    </div>
+    <div class="item-config" *ngIf="selectedCube">
+        <cm-report-filter [cube]="selectedCube" (onFilterConfig)="changeFilter($event)"></cm-report-filter>
+    </div>
+
+    <div class="div-dialog" [ngStyle]="positionStyles" *ngIf="selectedDimensions && selectedDimensions[1]?.value">
+        <dimension-value-list [cube]="selectedCube " [dimension]="selectedDimensions[1].value " [showOther]="false" [showWhole]="false" [metrics]="metricsList " (changeDimensionValue)="changeDimensionValue($event) " (closeDimension)="showDimensions($event) "></dimension-value-list>
+    </div>
+</div>

@@ -1,0 +1,486 @@
+<div class="datesourceCreate">
+    <div class="dataSource"><span>数据源信息</span></div>
+    <cm-form *ngIf="singledom == 'JDBC'">
+        <form nz-form style="width:70%" [formGroup]="validateForm">
+            <div nz-form-item nz-row class="form-group">
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="'datasourceName'" nz-form-item-required>数据源名称</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
+                    <cm-input>
+                        <nz-input [nzPlaceHolder]="'请输入数据源名称'" [(ngModel)]="datasourceName" [formControlName]="'datasourceName'" [nzId]="'datasourceName'" [nzSize]="'large'"></nz-input>
+                    </cm-input>
+                    <div nz-form-explain *ngIf="getFormControl('datasourceName').dirty&&getFormControl('datasourceName').hasError('required')">{{regular.name.errorInfo.emptyInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl('datasourceName').dirty&&getFormControl('datasourceName').hasError('duplicated')">{{regular.name.errorInfo.errorInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl('datasourceName').dirty&&getFormControl('datasourceName').hasError('lengthInfo')">{{regular.name.errorInfo.lengthInfo}}</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="6">
+                    <label nz-form-item-required for="'datasourceType'">数据源类型</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="14">
+                    <cm-select>
+                        <nz-select [formControlName]="'datasourceType'" [nzSize]="'large'" [nzPlaceHolder]="'请输入数据源类型'" [(ngModel)]="single" (ngModelChange)="selectedChange(single)" [(nzDisabled)]="disabled">
+                            <nz-option *ngFor="let select of datasourceTypeList" [nzLabel]="select.name" [nzValue]="select.value"></nz-option>
+                        </nz-select>
+                    </cm-select>
+                    <div nz-form-explain *ngIf="getFormControl('datasourceType').dirty&&getFormControl('datasourceType').hasError('required')">请输入!</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="'dataIP'" nz-form-item-required>主机IP</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
+                    <cm-input>
+                        <nz-input [formControlName]="'dataIP'" [nzId]="'dataIP'" [nzPlaceHolder]="'请输入主机IP'" [nzSize]="'large'"></nz-input>
+                    </cm-input>
+                    <div nz-form-explain *ngIf="getFormControl('dataIP').dirty&&getFormControl('dataIP').hasError('required')">{{regular.ip.errorInfo.emptyInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl('dataIP').dirty&&getFormControl('dataIP').hasError('duplicated')">{{regular.ip.errorInfo.errorInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl('dataIP').dirty&&getFormControl('dataIP').hasError('lengthInfo')">{{regular.ip.errorInfo.lengthInfo}}</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="'databaseName'" nz-form-item-required>数据库名称</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
+                    <cm-input>
+                        <nz-input [formControlName]="'databaseName'" [nzId]="'databaseName'" [nzPlaceHolder]="'请输入数据库名称'" [nzSize]="'large'"></nz-input>
+                    </cm-input>
+                    <div nz-form-explain *ngIf="getFormControl('databaseName').dirty&&getFormControl('databaseName').hasError('required')">{{regular.name.errorInfo.emptyInfobaseName}}</div>
+                    <div nz-form-explain *ngIf="getFormControl('databaseName').dirty&&getFormControl('databaseName').hasError('duplicated')">{{regular.name.errorInfo.errorInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl('databaseName').dirty&&getFormControl('databaseName').hasError('lengthInfo')">{{regular.name.errorInfo.lengthInfo}}</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="port" nz-form-item-required>端口号</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
+                    <cm-input>
+                        <nz-input [formControlName]="'port'" [nzId]="'port'" [nzPlaceHolder]="'请输入端口号'" [nzSize]="'large'"></nz-input>
+                    </cm-input>
+                    <div nz-form-explain *ngIf="getFormControl('port').dirty&&getFormControl('port').hasError('required')">{{regular.port.errorInfo.emptyInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl('port').dirty&&getFormControl('port').hasError('duplicated')">{{regular.port.errorInfo.errorInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl('port').dirty&&getFormControl('port').hasError('lengthInfo')">{{regular.port.errorInfo.lengthInfo}}</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="userName" nz-form-item-required>用户名</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
+                    <cm-input>
+                        <nz-input [formControlName]="'userName'" [nzId]="'userName'" [nzPlaceHolder]="'请输入用户名'" [nzSize]="'large'"></nz-input>
+                    </cm-input>
+                    <div nz-form-explain *ngIf="getFormControl('userName').dirty&&getFormControl('userName').hasError('required')">{{regular.name.errorInfo.emptyInfoname}}</div>
+                    <div nz-form-explain *ngIf="getFormControl('userName').dirty&&getFormControl('userName').hasError('duplicated')">{{regular.name.errorInfo.errorInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl('userName').dirty&&getFormControl('userName').hasError('lengthInfo')">{{regular.name.errorInfo.lengthInfo}}</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="password" nz-form-item-required>密码</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
+                    <cm-input>
+                        <nz-input [nzType]="'password'" [formControlName]="'password'" [nzId]="'password'" [nzPlaceHolder]="'请输入密码'" [nzSize]="'large'"></nz-input>
+                    </cm-input>
+                    <div nz-form-explain *ngIf="getFormControl('password').dirty&&getFormControl('password').hasError('required')">{{regular.password.errorInfo.emptyInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl('password').dirty&&getFormControl('password').hasError('duplicated')">{{regular.password.errorInfo.errorInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl('password').dirty&&getFormControl('password').hasError('lengthInfo')">{{regular.password.errorInfo.lengthInfo}}</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="state">&nbsp;&nbsp;&nbsp;状态</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="14">
+                    <cm-switch>
+                        <nz-switch [formControlName]="'state'" [(ngModel)]="state">
+                            <span checked>正常</span>
+                            <span unchecked>禁用</span>
+                        </nz-switch>
+                    </cm-switch>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="'datasourceMatter'">&nbsp;&nbsp;&nbsp;描述</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                    <cm-input>
+                        <nz-input [nzType]="'textarea'" [nzSize]="'large'" [nzRows]="'4'" [formControlName]="'datasourceMatter'" [nzId]="'datasourceMatter'" style="width: 99.5%"></nz-input>
+                    </cm-input>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24"></div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+
+                    <cm-button>
+                        <button nz-button [nzType]="'primary'" [disabled]="!validateForm.valid" (click)="saveTheDataSource()" [nzSize]="'large'">确定</button>
+                    </cm-button>
+                    <div class="judge">
+                        <cm-button>
+                            <button nz-button [nzType]="'default'" (click)="backtrack ()" [nzSize]="'large'">取消</button>
+                        </cm-button>
+                    </div>
+                    <cm-button>
+                        <button nz-button [nzType]="'default'" (click)="testTheConnection()" [disabled]="!validateForm.valid" [nzSize]="'large'">测试连接</button>
+                    </cm-button>
+                </div>
+            </div>
+
+        </form>
+    </cm-form>
+
+    <cm-form *ngIf="singledom == 'RESTAPI' ">
+        <form nz-form style="width:70%" [formGroup]="validateForm1">
+            <div nz-form-item nz-row class="form-group">
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="'datasourceName'" nz-form-item-required>数据源名称</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
+                    <cm-input>
+                        <nz-input [nzPlaceHolder]="'请输入数据源名称'" [(ngModel)]="datasourceName" [formControlName]="'datasourceName'" [nzId]="'datasourceName'" [nzSize]="'large'"></nz-input>
+                    </cm-input>
+                    <div nz-form-explain *ngIf="getFormControl1('datasourceName').dirty&&getFormControl1('datasourceName').hasError('required')">{{regular.name.errorInfo.emptyInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl1('datasourceName').dirty&&getFormControl1('datasourceName').hasError('duplicated')">{{regular.name.errorInfo.errorInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl1('datasourceName').dirty&&getFormControl1('datasourceName').hasError('lengthInfo')">{{regular.name.errorInfo.lengthInfo}}</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="6">
+                    <label nz-form-item-required for="'datasourceType'">数据源类型</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="14">
+                    <cm-select>
+                        <nz-select [formControlName]="'datasourceType'" [nzPlaceHolder]="'请输入数据源类型'" [(ngModel)]="single" [nzSize]="'large'" (ngModelChange)="selectedChange(single)" [(nzDisabled)]="disabled">
+                            <nz-option *ngFor="let select of datasourceTypeList" [nzLabel]="select.name" [nzValue]="select.value"></nz-option>
+                        </nz-select>
+                    </cm-select>
+                    <div nz-form-explain *ngIf="getFormControl1('datasourceType').dirty&&getFormControl1('datasourceType').hasError('required')">请输入!</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="'dataURLres'" nz-form-item-required>URL</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback [nzValidateStatus]="validateForm1.controls['dataURLres']">
+                    <cm-select>
+                        <nz-input-group [nzSize]="'large'" nzCompact>
+                            <nz-select formControlName="dataURLprefix" style="width: 70px;">
+                                <nz-option [nzLabel]="'http://'" [nzValue]="'http://'"></nz-option>
+                                <nz-option [nzLabel]="'https://'" [nzValue]="'https://'"></nz-option>
+                            </nz-select>
+                            <cm-input>
+                                <nz-input [formControlName]="'dataURLres'" [nzId]="'dataURLres'" [nzPlaceHolder]="'请输入URL'" [nzSize]="'large'"></nz-input>
+                            </cm-input>
+                        </nz-input-group>
+                    </cm-select>
+                    <div nz-form-explain *ngIf="getFormControl1('dataURLres').dirty&&getFormControl1('dataURLres').hasError('required')">{{regular.url.errorInfo.emptyInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl1('dataURLres').dirty&&getFormControl1('dataURLres').hasError('duplicated')">{{regular.url.errorInfo.errorInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl1('dataURLres').dirty&&getFormControl1('dataURLres').hasError('lengthInfo')">{{regular.url.errorInfo.lengthInfo}}</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="'state'">&nbsp;&nbsp;&nbsp;状态</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="14">
+                    <cm-switch>
+                        <nz-switch [formControlName]="'state'" [(ngModel)]="state">
+                            <span checked>正常</span>
+                            <span unchecked>禁用</span>
+                        </nz-switch>
+                    </cm-switch>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="'datasourceMatter'">&nbsp;&nbsp;&nbsp;描述</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                    <cm-input>
+                        <nz-input [nzType]="'textarea'" [nzRows]="'4'" [formControlName]="'datasourceMatter'" [nzSize]="'large'" [nzId]="'datasourceMatter'" style="width: 99.5%"></nz-input>
+                    </cm-input>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24"></div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+
+                    <cm-button>
+                        <button nz-button [nzType]="'primary'" [nzSize]="'large'" [disabled]="!validateForm1.valid" (click)="saveTheDataSource()">确定</button>
+                    </cm-button>
+                    <div class="judge">
+                        <cm-button>
+                            <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="backtrack ()">取消</button>
+                        </cm-button>
+                    </div>
+                    <cm-button>
+                        <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="testTheConnection()" [disabled]="!validateForm1.valid">测试连接</button>
+                    </cm-button>
+                </div>
+            </div>
+        </form>
+    </cm-form>
+    <cm-form *ngIf="singledom == 'ELASTICSEARCH' ">
+        <form nz-form style="width:70%" [formGroup]="validateForm2">
+            <div nz-form-item nz-row class="form-group">
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="'datasourceName'" nz-form-item-required>数据源名称</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
+                    <cm-input>
+                        <nz-input [nzPlaceHolder]="'请输入数据源名称'" [(ngModel)]="datasourceName" [formControlName]="'datasourceName'" [nzId]="'datasourceName'" [nzSize]="'large'"></nz-input>
+                    </cm-input>
+                    <div nz-form-explain *ngIf="getFormControl2('datasourceName').dirty&&getFormControl2('datasourceName').hasError('required')">{{regular.name.errorInfo.emptyInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl2('datasourceName').dirty&&getFormControl2('datasourceName').hasError('duplicated')">{{regular.name.errorInfo.errorInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl2('datasourceName').dirty&&getFormControl2('datasourceName').hasError('lengthInfo')">{{regular.name.errorInfo.lengthInfo}}</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="6">
+                    <label nz-form-item-required for="'datasourceType'">数据源类型</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="14">
+                    <cm-select>
+                        <nz-select [formControlName]="'datasourceType'" [nzPlaceHolder]="'请输入数据源类型'" [nzSize]="'large'" [(ngModel)]="single" (ngModelChange)="selectedChange(single)" [(nzDisabled)]="disabled">
+                            <nz-option *ngFor="let select of datasourceTypeList" [nzLabel]="select.name" [nzValue]="select.value"></nz-option>
+                        </nz-select>
+                    </cm-select>
+                    <div nz-form-explain *ngIf="getFormControl2('datasourceType').dirty&&getFormControl2('datasourceType').hasError('required')">请输入!</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="6">
+                    <label nz-form-item-required for="'versionNumber'">版本号</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="14">
+                    <cm-select>
+                        <nz-select [formControlName]="'versionNumber'" [nzPlaceHolder]="'请输入版本号'" [(ngModel)]="versionNumber" [nzSize]="'large'">
+                            <nz-option *ngFor="let version of versions" [nzLabel]="version.name" [nzValue]="version.value"></nz-option>
+                        </nz-select>
+                    </cm-select>
+                    <div nz-form-explain *ngIf="getFormControl2('versionNumber').dirty&&getFormControl2('versionNumber').hasError('required')">请输入!</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="'dataURL'" nz-form-item-required>URL</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback [nzValidateStatus]="validateForm2.controls['dataURL']">
+                    <cm-select>
+                        <nz-input-group [nzSize]="'large'" nzCompact>
+                            <nz-select formControlName="dataURLprefix" style="width: 70px;">
+                                <nz-option [nzLabel]=" 'http://' " [nzValue]=" 'http://' "></nz-option>
+                                <nz-option [nzLabel]=" 'https://' " [nzValue]=" 'https://' "></nz-option>
+                            </nz-select>
+                            <cm-input style="urlinput">
+                                <nz-input [formControlName]=" 'dataURL' " [nzId]=" 'dataURL' " [nzPlaceHolder]=" '请输入URL' " [nzSize]=" 'large' ">
+                                </nz-input>
+                            </cm-input>
+                        </nz-input-group>
+                    </cm-select>
+                    <div nz-form-explain *ngIf="getFormControl2('dataURL').dirty&&getFormControl2('dataURL').hasError('required')">{{regular.url.errorInfo.emptyInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl2('dataURL').dirty&&getFormControl2('dataURL').hasError('duplicated')">{{regular.url.errorInfo.errorInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl2('dataURL').dirty&&getFormControl2('dataURL').hasError('lengthInfo')">{{regular.url.errorInfo.lengthInfo}}</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="state">&nbsp;&nbsp;&nbsp;状态</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="14">
+                    <cm-switch>
+                        <nz-switch [formControlName]="'state'" [(ngModel)]="state">
+                            <span checked>正常</span>
+                            <span unchecked>禁用</span>
+                        </nz-switch>
+                    </cm-switch>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="'datasourceMatter'">&nbsp;&nbsp;&nbsp;描述</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                    <cm-input>
+                        <nz-input [nzType]="'textarea'" [nzRows]="'4'" [formControlName]="'datasourceMatter'" [nzId]="'datasourceMatter'" [nzSize]="'large'" style="width: 99.5%;resize:none"></nz-input>
+                    </cm-input>
+                </div>
+            </div>
+
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24"></div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+
+                    <cm-button>
+                        <button nz-button [nzType]="'primary'" [nzSize]="'large'" [disabled]="!validateForm2.valid" (click)="saveTheDataSource()">确定</button>
+                    </cm-button>
+                    <div class="judge">
+                        <cm-button>
+                            <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="backtrack ()">取消</button>
+                        </cm-button>
+                    </div>
+                    <cm-button>
+                        <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="testTheConnection()" [disabled]="!validateForm2.valid">测试连接</button>
+                    </cm-button>
+                </div>
+            </div>
+        </form>
+    </cm-form>
+    <cm-form *ngIf="singledom == 'SPARK'">
+        <form nz-form style="width:70%" [formGroup]="validateForm3">
+            <div nz-form-item nz-row class="form-group">
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="'datasourceName'" nz-form-item-required>数据源名称</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
+                    <cm-input>
+                        <nz-input [nzPlaceHolder]="'请输入数据源名称'" [(ngModel)]="datasourceName" [formControlName]="'datasourceName'" [nzId]="'datasourceName'" [nzSize]="'large'"></nz-input>
+                    </cm-input>
+                    <div nz-form-explain *ngIf="getFormControl3('datasourceName').dirty&&getFormControl3('datasourceName').hasError('required')">{{regular.name.errorInfo.emptyInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl3('datasourceName').dirty&&getFormControl3('datasourceName').hasError('duplicated')">{{regular.name.errorInfo.errorInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl3('datasourceName').dirty&&getFormControl3('datasourceName').hasError('lengthInfo')">{{regular.name.errorInfo.lengthInfo}}</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="6">
+                    <label nz-form-item-required for="'datasourceType'">数据源类型</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="14">
+                    <cm-select>
+                        <nz-select [formControlName]="'datasourceType'" [nzSize]="'large'" [nzPlaceHolder]="'请输入数据源类型'" [(ngModel)]="single" (ngModelChange)="selectedChange(single)" [(nzDisabled)]="disabled">
+                            <nz-option *ngFor="let select of datasourceTypeList" [nzLabel]="select.name" [nzValue]="select.value"></nz-option>
+                        </nz-select>
+                    </cm-select>
+                    <div nz-form-explain *ngIf="getFormControl3('datasourceType').dirty&&getFormControl3('datasourceType').hasError('required')">请输入!</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="'dataIP'" nz-form-item-required>主机IP</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
+                    <cm-input>
+                        <nz-input [formControlName]="'dataIP'" [nzId]="'dataIP'" [nzPlaceHolder]="'请输入主机IP'" [nzSize]="'large'"></nz-input>
+                    </cm-input>
+                    <div nz-form-explain *ngIf="getFormControl3('dataIP').dirty&&getFormControl3('dataIP').hasError('required')">{{regular.ip.errorInfo.emptyInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl3('dataIP').dirty&&getFormControl3('dataIP').hasError('duplicated')">{{regular.ip.errorInfo.errorInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl3('dataIP').dirty&&getFormControl3('dataIP').hasError('lengthInfo')">{{regular.ip.errorInfo.lengthInfo}}</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="'databaseName'" nz-form-item-required>数据库名称</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
+                    <cm-input>
+                        <nz-input [formControlName]="'databaseName'" [nzId]="'databaseName'" [nzPlaceHolder]="'请输入数据库名称'" [nzSize]="'large'"></nz-input>
+                    </cm-input>
+                    <div nz-form-explain *ngIf="getFormControl3('databaseName').dirty&&getFormControl3('databaseName').hasError('required')">{{regular.name.errorInfo.emptyInfobaseName}}</div>
+                    <div nz-form-explain *ngIf="getFormControl3('databaseName').dirty&&getFormControl3('databaseName').hasError('duplicated')">{{regular.name.errorInfo.errorInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl3('databaseName').dirty&&getFormControl3('databaseName').hasError('lengthInfo')">{{regular.name.errorInfo.lengthInfo}}</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="'databasewarehouse'" nz-form-item-required>spark库</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
+                    <cm-input>
+                        <nz-input [formControlName]="'databasewarehouse'" [nzId]="'databasewarehouse'" [nzPlaceHolder]="'请输入spark库'" [nzSize]="'large'"></nz-input>
+                    </cm-input>
+                    <div nz-form-explain *ngIf="getFormControl3('databasewarehouse').dirty&&getFormControl3('databasewarehouse').hasError('required')">{{regular.name.errorInfo.emptyInfobasewarehouse}}</div>
+                    <div nz-form-explain *ngIf="getFormControl3('databasewarehouse').dirty&&getFormControl3('databasewarehouse').hasError('duplicated')">{{regular.name.errorInfo.errorInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl3('databasewarehouse').dirty&&getFormControl3('databasewarehouse').hasError('lengthInfo')">{{regular.name.errorInfo.lengthInfo}}</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="port" nz-form-item-required>端口号</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
+                    <cm-input>
+                        <nz-input [formControlName]="'port'" [nzId]="'port'" [nzPlaceHolder]="'请输入端口号'" [nzSize]="'large'"></nz-input>
+                    </cm-input>
+                    <div nz-form-explain *ngIf="getFormControl3('port').dirty&&getFormControl3('port').hasError('required')">{{regular.port.errorInfo.emptyInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl3('port').dirty&&getFormControl3('port').hasError('duplicated')">{{regular.port.errorInfo.errorInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl3('port').dirty&&getFormControl3('port').hasError('lengthInfo')">{{regular.port.errorInfo.lengthInfo}}</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="userName" nz-form-item-required>用户名</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
+                    <cm-input>
+                        <nz-input [formControlName]="'userName'" [nzId]="'userName'" [nzPlaceHolder]="'请输入用户名'" [nzSize]="'large'"></nz-input>
+                    </cm-input>
+                    <div nz-form-explain *ngIf="getFormControl3('userName').dirty&&getFormControl3('userName').hasError('required')">{{regular.name.errorInfo.emptyInfoname}}</div>
+                    <div nz-form-explain *ngIf="getFormControl3('userName').dirty&&getFormControl3('userName').hasError('duplicated')">{{regular.name.errorInfo.errorInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl3('userName').dirty&&getFormControl3('userName').hasError('lengthInfo')">{{regular.name.errorInfo.lengthInfo}}</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="password" nz-form-item-required>密码</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
+                    <cm-input>
+                        <nz-input [nzType]="'password'" [formControlName]="'password'" [nzId]="'password'" [nzPlaceHolder]="'请输入密码'" [nzSize]="'large'"></nz-input>
+                    </cm-input>
+                    <div nz-form-explain *ngIf="getFormControl3('password').dirty&&getFormControl3('password').hasError('required')">{{regular.password.errorInfo.emptyInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl3('password').dirty&&getFormControl3('password').hasError('duplicated')">{{regular.password.errorInfo.errorInfo}}</div>
+                    <div nz-form-explain *ngIf="getFormControl3('password').dirty&&getFormControl3('password').hasError('lengthInfo')">{{regular.password.errorInfo.lengthInfo}}</div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="state">&nbsp;&nbsp;&nbsp;状态</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="14">
+                    <cm-switch>
+                        <nz-switch [formControlName]="'state'" [(ngModel)]="state">
+                            <span checked>正常</span>
+                            <span unchecked>禁用</span>
+                        </nz-switch>
+                    </cm-switch>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="'datasourceMatter'">&nbsp;&nbsp;&nbsp;描述</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                    <cm-input>
+                        <nz-input [nzType]="'textarea'" [nzSize]="'large'" [nzRows]="'4'" [formControlName]="'datasourceMatter'" [nzId]="'datasourceMatter'" style="width: 99.5%"></nz-input>
+                    </cm-input>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24"></div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+
+                    <cm-button>
+                        <button nz-button [nzType]="'primary'" [disabled]="!validateForm3.valid" (click)="saveTheDataSource()" [nzSize]="'large'">确定</button>
+                    </cm-button>
+                    <div class="judge">
+                        <cm-button>
+                            <button nz-button [nzType]="'default'" (click)="backtrack ()" [nzSize]="'large'">取消</button>
+                        </cm-button>
+                    </div>
+                    <cm-button>
+                        <button nz-button [nzType]="'default'" (click)="testTheConnection()" [disabled]="!validateForm3.valid" [nzSize]="'large'">测试连接</button>
+                    </cm-button>
+                </div>
+            </div>
+
+        </form>
+    </cm-form>
+</div>

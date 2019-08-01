@@ -1,0 +1,151 @@
+
+
+.retentionstyle {
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid #cccccc;
+    dl {
+        margin: 20px;
+        box-sizing: border-box;
+        dt {
+            margin-bottom: 15px;
+            font-family: PingFangSC-Medium;
+            font-size: 14px;
+            color: #17233D;
+            line-height: 22px;
+        }
+        dd {
+            margin-left: 16px;
+            margin-bottom: 15px;
+            line-height: 20px;
+            .item-label {
+                width: 50%;
+            }
+            .item-option {
+                width: 50%;
+            }
+        }
+        .section{
+            // .type-size{
+            //     display:inline-block;
+            //     overflow: hidden;
+            //     float: left;
+            //     display: inline-block;
+            //     width: 45%;
+            //     overflow: hidden;
+            //     height: 53px;
+            //     margin-right: 9px;
+            //     border-bottom: 1px solid #ddd;
+            //     div{
+            //         height: 100%;
+            //         width: 100%;
+            //     }
+            //     p{
+            //         font-family: PingFangSC-Regular;
+            //         font-size: 12px;
+            //         color: rgba(23, 35, 61, 0.55);
+            //         line-height: 20px;
+            //         height: 20px;
+            //     }
+            // }
+            .type-face{
+                display: inline-block;
+                // width:50%;
+                width: 100%;
+
+                p{
+                    font-family: PingFangSC-Regular;
+                    font-size: 12px;
+                    color: rgba(23, 35, 61, 0.55);
+                    line-height: 20px;
+                    height: 20px;
+                }
+                i{
+                    width: 15px;
+                    height: 15px;
+                    overflow: hidden;
+                    text-align: center;
+                    display: inline-block;
+                    margin:0 8px 0 23px;
+                    img{
+                        height:14px;
+                        width: 14px;
+                    }
+                }
+                cm-select{
+                    display: inline-block;
+                }
+            }
+            .type-face-map{
+                widows: 50%;
+            }
+            .percentage{
+                i{
+                    width: 15px;
+                    line-height:1em;
+                    text-align: center;
+                    display:inline-block;
+                    margin-right: 7.5px;
+                    img{
+                        height:14px;
+                        width: 14px;
+                        color: rgba(23,35,61,0.55);
+                    }
+                }
+                cm-select{
+                    display: inline-block;
+                    width:87%;
+                }
+            }
+        }
+    }
+}
+
+
+:host ::ng-deep .retentionstyle {
+    cm-color-picker{
+        div{
+            .color-input{
+                width: 50px !important;
+                height:15px !important;
+            }
+        }
+    }
+}
+:host ::ng-deep .retentionstyle{
+    .ant-select {
+        width: 100%;
+        font-family: PingFangSC-Regular;
+        font-size: 14px;
+        color: #17233D;
+        line-height: 22px;
+        margin-top:5px;
+    }
+    .ant-select-selection, .ant-select-selection {
+        background: none !important;
+        border: none !important;
+        border-bottom: 1px solid #ddd !important;
+        width: 100% !important;
+      }
+      .ant-select-focused .ant-select-selection,.ant-select-selection:focus,.ant-select-selection:active {
+        box-shadow: none !important;
+      }
+      .ant-radio-button-wrapper, .theme-light .ant-radio-button-wrapper {
+        text-align: center;
+        width: 25% !important;
+    }
+    .type-face{
+        .ant-select{
+            margin-top: 5px;
+        }
+    }
+    .type-size{
+        cm-color-picker{
+          .color-input{
+            width: 75%;
+            height: 12.7px;
+            margin-bottom: 0;
+            }             
+        }
+    }
+  }

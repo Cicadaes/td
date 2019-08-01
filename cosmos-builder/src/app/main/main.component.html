@@ -1,0 +1,19 @@
+<div class="page-wrapper">
+    <div class="main-wrapper">
+        <left></left>
+        <div class="main-container">
+            <div class="main-header">
+                <nz-breadcrumb [nzSeparator]="'>'">
+                    <nz-breadcrumb-item *ngFor="let obj of title">
+                        <a (click)="signOut(obj)">{{obj.name}}</a>
+                    </nz-breadcrumb-item>
+                </nz-breadcrumb>
+            </div>
+            <div class="main-content">
+                <div class="main-body">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

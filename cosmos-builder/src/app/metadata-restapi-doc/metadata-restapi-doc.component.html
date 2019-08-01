@@ -1,0 +1,412 @@
+<div class="file_header locator active">
+    <div class="file_header_con">
+        <span id="link"><a href="javascript:void(0)">TalkingData Cube RestAPI 接口规范</a></span>
+    </div>
+</div>
+
+<div id="content" class="clearfix">
+    <div class="left_tree">
+        <div id="wrapper">
+            <div class="tree">
+            </div>
+        </div>
+    </div>
+
+    <div class="post active">
+        <h3 class="title" id="content_title">数据接口（RESTAPI）</h3>
+        <div class="post_content cnblogs-markdown" id="post_content">
+            <h2 id="content_introduction" name="content_introduction">RESTAPI接口简介</h2>
+            <h3 name="">1、用途</h3>
+            <p>为了实现RESTAPI自动化配置，RESTAPI需要实现两个接口方法的配置。获取元数据属性接口、获取查询结果数据接口。实现这两个接口的前提是有一个数据源URL。目前数据源假设是http://localhost:8080/serviceName</p>
+
+            <h2 id="method1_introduction" name="method1_introduction">获取元数据属性接口-调用方法说明</h2>
+            <p>此接口为POST接口，用来返回每个元数据对象中字段和字段属性，此接口在数据源URL后面增加固定后缀queryMetadata。接口URL：</p>
+            <pre><code>http://localhost:8080/serviceName/queryMetadata</code></pre>
+            <p>此接口返回格式如下:</p>
+            <pre><code>{{'{'}}
+    "parameter": [
+        {{'{'}}
+            "name": "country",
+            "type": "string",
+            "aggregators": [
+                "orderBy",
+                "groupBy"
+            ],
+            "isInput": true
+        {{'}'}},
+        {{'{'}}
+            "name": "province",
+            "type": "string",
+            "aggregators": [
+                "orderBy",
+                "groupBy"
+            ],
+            "isInput": true
+        {{'}'}},
+        {{'{'}}
+            "name": "population",
+            "type": "double",
+            "aggregators": [
+                "avg",
+                "sum"
+            ],
+            "isInput": false
+        {{'}'}},
+        {{'{'}}
+            "name": "date",
+            "type": "date",
+            "interval": [
+                "day",
+                "month",
+                "year"
+            ],
+            "isInput": true
+        {{'}'}}
+    ],
+    "supportsLimit": true
+{{'}'}}</code></pre>
+
+            <h2 id="params1_introduction" name="params1_introduction">获取元数据属性接口-参数说明</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>参数</th>
+                        <th>描述</th>
+                        <th>是否必填</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>parameter</td>
+                        <td>参数数组</td>
+                        <td>是</td>
+                    </tr>
+                    <tr>
+                        <td>parameter.name</td>
+                        <td>字段名称</td>
+                        <td>是</td>
+                    </tr>
+                    <tr>
+                        <td>parameter.type</td>
+                        <td>字段类型，包括string、int、long、double、date、dateTime</td>
+                        <td>是</td>
+                    </tr>
+                    <tr>
+                        <td>parameter.aggregators</td>
+                        <td>支持的聚合运算（avg、sum、max、min、count、orderBy、groupBy）</td>
+                        <td>否</td>
+                    </tr>
+                    <tr>
+                        <td>parameter.interval</td>
+                        <td>只有type为date或dateTime时才能填写，有year、month、day、hour、minute、second六个间隔粒度。返回格式如下：
+                            year: yyyy,month: yyyy-MM, day: yyyy-MM-dd, hour: yyyy-MM-dd hh, minute: yyyy-MM-dd hh:mm, second: yyyy-MM-dd hh:mm:ss
+                        </td>
+                        <td>否</td>
+                    </tr>
+                    <tr>
+                        <td>parameter.isInput</td>
+                        <td>boolean 类型，true表示是输入参数，false表示参数是输出参数。当配置报表时，当为true必须为维度，false必须为指标</td>
+                        <td>是</td>
+                    </tr>
+                    <tr>
+                        <td>supportsLimit</td>
+                        <td>boolean 类型，true代表支持分页查询， false代表不支持分页查询</td>
+                        <td>否</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h2 id="detail1_introduction" name="detail1_introduction">获取元数据属性接口-详细参数说明</h2>
+            <p>
+                1）数值类型（int、long、double）支持avg、sum、max、min、count，orderBy和groupBy聚合运算。<br>
+                2）非数值类型不支持avg、sum、max、min，支持count、orderBy、groupBy聚合运算。<br>
+                3）当parameter.aggregators不存在时，说明不支持任何聚合运算。
+            </p>
+            <h2 id="method2_introduction" name="method2_introduction">获取查询结果接口-调用方法说明</h2>
+            <p>此接口为POST接口，用来返回查询结果，此接口在数据源URL后面增加一个固定后缀query。接口URL：</p>
+            <pre><code>http://localhost:8080/serviceName/query</code></pre>
+            <p>adapter接口中的请求格式如下:</p>
+            <pre><code>{{'{'}}
+    "dimensions": [
+        {{'{'}}
+            "field": "project_name"
+        {{'}'}},
+        {{'{'}}
+            "field": "date"
+        {{'}'}}
+    ],
+    "metrics": [
+        {{'{'}}
+            "field": "sales_amount",
+            "aggregator": "sum",
+            "alias": "sum_sales_amount"
+        {{'}'}},
+        {{'{'}}
+            "field": "order_count",
+            "aggregator": "sum",
+            "alias": "sum_order_count"
+        },
+        {{'{'}}
+            "field": "order_count",
+            "aggregator": "avg",
+            "alias": "avg_order_count"
+        {{'}'}}
+    ],
+    "filters": [
+        {{'{'}}
+            "type": "and",
+            "condition": [
+                {{'{'}}
+                    "field": "sales_amount",
+                    "operator": ">=",
+                    "value": "100000"
+                {{'}'}},
+                {{'{'}}
+                    "field": "date",
+                    "operator": ">=",
+                    "value": "2017"
+                {{'}'}}
+            ]
+        {{'}'}},
+        {{'{'}}
+            "type": "or",
+            "condition": [
+                {{'{'}}
+                    "field": "sales_amount",
+                    "operator": ">=",
+                    "value": "100000"
+                }
+            ]
+        {{'}'}},
+        {{'{'}}
+            "type": "not",
+            "condition": [
+                {{'{'}}
+                    "field": "sales_amount",
+                    "operator": "=",
+                    "value": "200000"
+                {{'}'}}
+            ]
+        {{'}'}}
+    ],
+    "orderBy": [
+        {{'{'}}
+            "field": "project_name",
+            "order": "asc"
+        {{'}'}},
+        {{'{'}}
+            "field": "avg_order_count",
+            "order": "desc"
+        {{'}'}}
+    ],
+    "groupBy": [
+        {{'{'}}
+            "field": "project_name"
+        {{'}'}}
+    ],
+    "limit": {{'{'}}
+        "page": 2,
+        "pageSize": 4
+    {{'}'}},
+    "interval": {{'{'}}
+        "field": "date",
+        "granularity": "year"
+    {{'}'}}
+{{'}'}}</code></pre>
+            <h2 id="params2_introduction" name="params2_introduction">获取查询结果接口-参数说明</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>参数</th>
+                        <th>描述</th>
+                        <th>是否必填</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>dimensions</td>
+                        <td>维度数组</td>
+                        <td>否</td>
+                    </tr>
+                    <tr>
+                        <td>dimensions.field</td>
+                        <td>维度名称</td>
+                        <td>否，但是只要dimensions存在，该字段必须有</td>
+                    </tr>
+                    <tr>
+                        <td>metrics</td>
+                        <td>指标数组</td>
+                        <td>是</td>
+                    </tr>
+                    <tr>
+                        <td>metrics.field</td>
+                        <td>指标名称</td>
+                        <td>是</td>
+                    </tr>
+                    <tr>
+                        <td>metrics.aggregator</td>
+                        <td>指标聚合方式（avg、sum、max、min、count）</td>
+                        <td>是</td>
+                    </tr>
+                    <tr>
+                        <td>metrics.alias</td>
+                        <td>返回结果对应名称</td>
+                        <td>是</td>
+                    </tr>
+                    <tr>
+                        <td>filters</td>
+                        <td>过滤配置数组</td>
+                        <td>否</td>
+                    </tr>
+                    <tr>
+                        <td>filters.type</td>
+                        <td>过滤类型，包括and、or、not</td>
+                        <td>否, 但是只要filters存在，该字段必须有</td>
+                    </tr>
+                    <tr>
+                        <td>filters.condition</td>
+                        <td>过滤条件数组</td>
+                        <td>否, filters存在，该字段必须有</td>
+                    </tr>
+                    <tr>
+                        <td>filters.condition.field</td>
+                        <td>过滤字段名称</td>
+                        <td>否, 但是只要filters存在，该字段必须有</td>
+                    </tr>
+                    <tr>
+                        <td>filters.condition.operator</td>
+                        <td>过滤字段操作符(=,!=,>=,<=,<,>,like,in)</td>
+                        <td>否, 但是只要filters存在，该字段必须有</td>
+                    </tr>
+                    <tr>
+                        <td>filters.condition.value</td>
+                        <td>过滤值</td>
+                        <td>否, 但是只要filters存在，该字段必须有</td>
+                    </tr>
+                    <tr>
+                        <td>orderBy</td>
+                        <td>排序数组</td>
+                        <td>否</td>
+                    </tr>
+                    <tr>
+                        <td>orderBy.field</td>
+                        <td>排序字段</td>
+                        <td>否, 但是只要orderBy存在，该字段必须有</td>
+                    </tr>
+                    <tr>
+                        <td>orderBy.order</td>
+                        <td>排序顺序，倒序desc或者正序asc</td>
+                        <td>否, 但是只要orderBy存在，该字段必须有</td>
+                    </tr>
+                    <tr>
+                        <td>groupBy</td>
+                        <td>分组数组</td>
+                        <td>否</td>
+                    </tr>
+                    <tr>
+                        <td>groupBy.field</td>
+                        <td>分组字段</td>
+                        <td>否, 但是只要groupBy存在，该字段必须有</td>
+                    </tr>
+                    <tr>
+                        <td>limit</td>
+                        <td>记录页数和记录条数</td>
+                        <td>否</td>
+                    </tr>
+                    <tr>
+                        <td>limit.page</td>
+                        <td>第几页</td>
+                        <td>否, 但是只要limit存在，该字段必须有</td>
+                    </tr>
+                    <tr>
+                        <td>limit.pageSize</td>
+                        <td>当前页的结果记录条数</td>
+                        <td>否, 但是只要limit存在，该字段必须有</td>
+                    </tr>
+                    <tr>
+                        <td>interval</td>
+                        <td>日期间隔</td>
+                        <td>否</td>
+                    </tr>
+                    <tr>
+                        <td>interval.field</td>
+                        <td>日期字段</td>
+                        <td>否, 但是只要interval存在，该字段必须有</td>
+                    </tr>
+                    <tr>
+                        <td>interval.granularity</td>
+                        <td>日期间隔粒度</td>
+                        <td>否, 但是只要interval存在，该字段必须有</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h2 id="detail2_introduction" name="detail2_introduction">获取查询结果接口-详细参数说明</h2>
+            <p>
+                1）metrics.alias和dimensions.field不能存在重名，防止返回结果混乱。<br>
+                2）filters数组中各对象之间的关系是布尔逻辑关系。<br>
+                3）filters.type是filter.condition数组中各元素的关联条件。<br>
+                4）orderBy.field为指标时，需要配置metrics.alias，为了防止同时对metric进行sum和avg时，出现orderby.field混乱问题。
+            </p>
+            <h2 id="retval_introduction" name="retval_introduction">获取查询结果接口-返回值说明</h2>
+            <p>adapter接口返回结果格式都是根据维度值和指标对应一条记录，如下：</p>
+            <pre><code>[
+    {{'{'}}
+        "date": "2016",
+        "project_name ": "西单ONLY",
+        "sum_sales_amount": 1000000,
+        "sum_order_count": 2000,
+        "avg_order_count": 1000
+    {{'}'}},
+    {{'{'}}
+        "date": "2016",
+        "project_name ": "国贸ONLY",
+        "sum_sales_amount": 1000000,
+        "sum_order_count": 2000,
+        "avg_order_count": 1000
+    {{'}'}},
+    {{'{'}}
+        "date": "2017",
+        "project_name ": "西单ONLY",
+        "sum_sales_amount": 1000000,
+        "sum_order_count": 2000,
+        "avg_order_count": 1000
+    {{'}'}},
+    {{'{'}}
+        "date": "2017",
+        "project_name ": "国贸ONLY",
+        "sum_sales_amount": 1000000,
+        "sum_order_count": 2000,
+        "avg_order_count": 1000
+    {{'}'}}
+]           </code></pre>
+        </div>
+    </div>
+
+    <div class="right_tree active">
+        <ul>
+            <li>
+                <a onclick="javascript:document.getElementById('content_introduction').scrollIntoView()"> RESTAPI接口简介</a>
+            </li>
+            <li>
+                <a onclick="javascript:document.getElementById('method1_introduction').scrollIntoView()" >获取元数据属性接口-调用方法说明</a>
+            </li>
+            <li>
+                <a onclick="javascript:document.getElementById('params1_introduction').scrollIntoView()">获取元数据属性接口-参数说明</a>
+            </li>
+            <li>
+                <a onclick="javascript:document.getElementById('detail1_introduction').scrollIntoView()">获取元数据属性接口-详细参数说明</a>
+            </li>
+            <li>
+                <a onclick="javascript:document.getElementById('method2_introduction').scrollIntoView()">获取查询结果接口-调用方法说明</a>
+            </li>
+            <li>
+                <a onclick="javascript:document.getElementById('params2_introduction').scrollIntoView()">获取查询结果接口-参数说明</a>
+            </li>
+            <li>
+                <a onclick="javascript:document.getElementById('detail2_introduction').scrollIntoView()">获取查询结果接口-详细参数说明</a>
+            </li>
+            <li>
+                <a onclick="javascript:document.getElementById('retval_introduction').scrollIntoView()">获取查询结果接口-返回值说明</a>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+main{
+    background: #fff;
+    padding: 20px;
+    height: 100%;
+}
+
+.header{
+    border-bottom: 1px solid rgb(233, 233, 233);
+    padding-bottom: 10px;
+    .asd{
+        cursor:pointer;
+    }
+}
+
+.header span {
+    cursor:default;
+    font-family: PingFangSC-Medium;
+    font-size: 14px;
+    color: #17233D;
+    line-height: 22px;
+}
+
+.checkbox-list{
+    height: 500px;
+    overflow-y: scroll;
+}
+:host ::ng-deep .checkbox-list{
+    cm-checkbox{
+        nz-checkbox-group{
+            label{
+               span:last-child{
+                max-width: 90%;
+                overflow: hidden;
+                text-overflow:ellipsis;
+               }
+            }
+        }
+    }
+}
+
+.item-config{
+    margin-top: 10px;
+}
+.item-config .config-content{
+    padding-left: 16px;
+}
+.item-label{
+    font-family: PingFangSC-Semibold;
+    font-size: 12px;
+    color: #464C5B;
+    line-height: 32px;
+}
+.content{
+    padding: 10px 15px
+}
+
+:host ::ng-deep .ant-checkbox-wrapper{
+    display: block;
+    margin-left: 0px;
+}
+
+:host ::ng-deep input[inputNumber] {
+    background: none !important;
+    border: none !important;
+    border-bottom: 1px solid #ddd !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type="number"]{
+    -moz-appearance: textfield;
+}

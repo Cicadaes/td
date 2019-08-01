@@ -1,0 +1,13 @@
+<main #filters class="clrfix">
+    <div nz-menu class="filters-box" [ngStyle]="alignStyle">
+        <cm-button>
+            <button nz-button [nzType]="'default'" (click)="query($event)">
+
+                <span>
+                    <i class="icon iconfont icon-funnel1"></i>&nbsp;筛选
+                    <i class="icon iconfont icon-arrow_down1"></i>
+                </span>
+            </button>
+        </cm-button>
+    </div>
+</main>

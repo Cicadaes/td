@@ -1,0 +1,70 @@
+main {
+  min-width: 285px;
+  height: 32px;
+  overflow: hidden;
+}
+:host ::ng-deep .calendar{
+        .name{
+          display: inline-block;
+          // height: 32px;
+          // background: #ffffff;
+          position: relative;
+          top: -1px;
+          // padding: 0px 10px 0 10px;
+          // min-width: 45px;
+          font-family: PingFangSC-Medium;
+          font-size: 12px;
+          color: #17233D;
+          line-height: 32px;
+        }
+        zoom: 1;
+        cm-select{
+          nz-select{
+            .ant-select-selection--single{
+              min-width:115px !important;
+              width:100% !important;
+            }
+          }
+          .ant-select-selection{
+            border-radius: 4px 0 0 4px !important;
+            border-right: none !important;
+          }
+        }
+        cm-datepicker{
+          main{
+            nz-rangepicker{
+              .ant-calendar-picker-input,.ant-input{
+                height: 32px !important;
+                line-height: 32px;
+                padding: 0;
+                background:transparent !important;
+                &:hover{
+                  border-color:#57a3f3 
+                }
+                .ant-calendar-range-picker-separator{
+                    line-height: 32px !important;
+                }
+              }
+              .ant-calendar-picker{
+                .anticon-cross-circle:before{
+                  display: none !important;
+                }
+                .ant-calendar-picker-clear{
+                  display: none !important;
+                  right: 4px !important;
+                  top: 55% !important;
+                }
+                
+                .ant-calendar-picker-icon{
+                  right: 4px !important;
+                  top: 55% !important;
+                  &:hover{
+                    display:block!important;
+                    opacity:1  !important;
+                  }
+              }
+              }
+            }
+          }
+        }
+}

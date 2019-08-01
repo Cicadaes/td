@@ -1,0 +1,89 @@
+<main #title>
+    <div class="title clearfix">
+        <div class="til-icon">
+            <!-- <cm-dropdown>
+                <nz-dropdown [nzTrigger]="'click'" [nzPlacement]="'bottomRight'">
+                    <span class="ant-dropdown-link" nz-dropdown>
+                        <i (click)="download()" class="icon iconfont icon-move_to_inbox" *ngIf="option.option.gridDownload.show"></i>
+                    </span>
+                    <div class="down" nz-menu *ngIf="DownloadY">
+                        <div class="help-til">
+                            <span class="intro">下载消息</span>
+                            <span (click)="close()" class="close">
+                                <i class="icon iconfont icon-guanbi"></i>
+                            </span>
+                        </div>
+                        <div class="help-content">
+                            <div>
+                                <p>导出任务创建成功,请稍后到<a target="_blank" (click)="jump()" style="color:#2D8CF0">数据下载</a>页面下载您需要的附件</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="help" nz-menu *ngIf="DownloadN">
+                        <span class="empty">导出任务失败</span>
+                    </div>
+                </nz-dropdown>
+            </cm-dropdown> -->
+            <cm-tooltip class="tooltips" style="margin-right:3px">
+                <nz-tooltip [nzTrigger]="'click'" (click)="download()" [nzPlacement]="'leftTop'">
+                    <span class="ant-dropdown-link" nz-dropdown>
+                        <i nz-tooltip class="icon iconfont icon-move_to_inbox" *ngIf="option.option.gridDownload.show"></i>
+                    </span>
+                    <ng-template #nzTemplate>
+                        <div class="helpdowm" nz-menu *ngIf="!DownloadN">
+                            <div class="help-til">
+                                <span class="intro">下载消息</span>
+                                <span (click)="close()" class="close">
+                                    <i class="icon iconfont icon-guanbi"></i>
+                                </span>
+                            </div>
+                            <div class="help-content">
+                                <div>
+                                    <div style="width:250px">导出任务创建成功,请稍后到
+                                        <a target="_blank" (click)="jump()" style="color:#2D8CF0;margin:0 6px;">数据下载</a>页面下载您需要的附件。</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="helpdowm" nz-menu *ngIf="DownloadN">
+                            <span class="empty">导出任务失败。</span>
+                        </div>
+                    </ng-template>
+                </nz-tooltip>
+            </cm-tooltip>
+            <cm-tooltip class="tooltips">
+                <nz-tooltip [nzTrigger]="'click'" [nzPlacement]="'leftTop'">
+                    <span class="help-label">
+                        <i nz-tooltip class="icon iconfont icon-info1" *ngIf="option.option.gridHelp.show"></i>
+                    </span>
+                    <ng-template #nzTemplate>
+                        <div class="helpdowm" nz-menu *ngIf="option.option.gridHelp.content">
+                            <div class="help-til" *ngIf="helpTitle">
+                                <span class="intro">{{helpTitle}}</span>
+                            </div>
+                            <div class="help-contentul">
+                                <ul>
+                                    <li *ngFor="let help of option.option.gridHelp.content" class="clearfix" nz-menu-item>
+                                        <cm-tooltip>
+                                            <nz-tooltip>
+                                                <div style="width:127px;margin-right:3px;color:#fff;">
+                                                    <div>{{help.name}} :
+                                                    </div>
+                                                </div>
+                                            </nz-tooltip>
+                                        </cm-tooltip>
+                                        <div class="help-text" style="max-width: 356px !important;">
+                                            {{help.describe}}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="helpdowm" nz-menu *ngIf="!option.option.gridHelp.content">
+                            <span class="empty">暂无帮助说明。</span>
+                        </div>
+                    </ng-template>
+                </nz-tooltip>
+            </cm-tooltip>
+        </div>
+    </div>
+</main>

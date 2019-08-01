@@ -1,0 +1,94 @@
+<div class="piestyle">
+    <layout [layoutData]="_layoutLayout" (provinceOut)="setLayoutData($event)" [cmHeightAuto]="true" [cmAlign]="'level'" [cmDircLevel]="true"
+        [cmDircVertical]="true"></layout>
+    <ul class="center">
+        <div class="piecenter">
+            <p style="margin-bottom:8px">统计值</p>
+            <div class="section">
+                <li style="display:flex">
+                    <div class="type-size">
+                        <div>
+                            <p>标签颜色</p>
+                            <span style="padding-left:6px;padding-top:10px;line-height: 40px;display: block;height: 33px;width: 100%;">
+                                <color-picker-style [height]="16" width="70" [colors]="_cmPresetColors" [cmcolor]="statistics.color"
+                                    [cmType]="'hex'" (provinceOut)="statistics.color = $event;OptionChange()"></color-picker-style>
+                                <!-- <cm-color-picker [cmType]="'board'" [cmcolor]="statistics.color" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition" (cmcolorchange)="statistics.color = $event;OptionChange();"
+                                    [cmPositionOffset]="_cmPositionOffset"></cm-color-picker> -->
+                            </span>
+                        </div>
+                    </div>
+                    <div class="type-face type-face-map">
+                        <p>标签大小</p>
+                        <cm-select style="width:100%">
+                            <nz-select [(ngModel)]="statistics.fontSize" [nzPlaceHolder]="'请选择字号'" (ngModelChange)="OptionChange($event)">
+                                <nz-option *ngFor="let option of fontSizeOptions" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled"></nz-option>
+                            </nz-select>
+                        </cm-select>
+                    </div>
+                </li>
+                <!-- <li class="percentage" style="position: relative;text-align: right;">
+                    <i style="position: absolute;top:43%;left:0" class="icon iconfont icon-ziti4"></i>
+                    <cm-select>
+                        <nz-select [(ngModel)]="statistics.fontFamily" [nzPlaceHolder]="'请选择字体'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                            <nz-option *ngFor="let option of typefaces" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                            </nz-option>
+                        </nz-select>
+                    </cm-select>
+                </li> -->
+                <!-- <li class="layout">
+                    <cm-radio>
+                        <nz-radio-group [(ngModel)]="statistics.textAlign" [nzSize]="'large'" (ngModelChange)="OptionChange($event)">
+                            <label nz-radio-button [nzValue]="'left'">
+                                <span>
+                                    <i class="icon iconfont icon-normal"></i>
+                                </span>
+                            </label>
+                            <label nz-radio-button [nzValue]="'center'">
+                                <span>
+                                    <i class="icon iconfont icon-normal"></i>
+                                </span>
+                            </label>
+                            <label nz-radio-button [nzValue]="'right'">
+                                <span>
+                                    <i class="icon iconfont icon-normal1"></i>
+                                </span>
+                            </label>
+                        </nz-radio-group>
+                    </cm-radio>
+                </li> -->
+                <!-- <li style="margin:12px 0" >
+                    <div style=" font-family: PingFangSC-Regular;font-size: 12px;color: rgba(23, 35, 61, 0.55);line-height: 20px;height: 20px;">
+                        小数精度
+                    </div>
+                    <cm-select>
+                        <nz-select [(ngModel)]="statistics.decimals" [nzPlaceHolder]="'请选择小数精度'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                            <nz-option *ngFor="let option of decimalss" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                            </nz-option>
+                        </nz-select>
+                    </cm-select>
+                </li> -->
+            </div>
+        </div>
+    </ul>
+    <ul class="center">
+        <div class="piecenter">
+            <p>缺少的数据</p>
+            <div class="section">
+                <cm-radio>
+                    <nz-radio-group [(ngModel)]="missingData" (ngModelChange)="OptionChange($event)">
+                        <li>
+                            <label nz-radio [nzValue]="'noData'">
+                                <span>显示“无数据”</span>
+                            </label>
+                        </li>
+                        <li style="margin:4px 0 ">
+                            <label nz-radio [nzValue]="'zero'">
+                                <span>显示“0”</span>
+                            </label>
+                        </li>
+                    </nz-radio-group>
+                </cm-radio>
+            </div>
+        </div>
+    </ul>
+</div>

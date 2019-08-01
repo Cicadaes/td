@@ -1,0 +1,117 @@
+<div class="report-detail-data">
+    <div class="item-config">
+        <label class="item-label">CUBE</label>
+        <div class="config-content">
+            <cm-select>
+                <nz-select [nzSize]="'large'" name="cube" [nzPlaceHolder]="'请选择'" style="width:90%;" [(ngModel)]="selectedCube" nzShowSearch (ngModelChange)="changeCube(selectedCube)">
+                    <nz-option *ngFor="let select of cubeList" [nzLabel]="select.label" [nzValue]="select.value">
+                        <ng-template #nzOptionTemplate>
+                            <span title="{{select.label}}">{{select.label}}</span>
+                        </ng-template>
+                    </nz-option>
+                </nz-select>
+            </cm-select>
+        </div>
+    </div>
+    <div class="item-config">
+        <label class="item-label">维度</label>
+        <div class="config-content">
+            <cm-select *ngFor="let dimension of selectedDimensions;let i = index;">
+                <nz-select *ngIf="i == 0" [nzSize]="'large'" name="dimensions" [(ngModel)]="dimension.value" (ngModelChange)="changeDimension(dimension.value, 'businessLine')" [nzPlaceHolder]="'请选择省份维度'" style="width:90%;margin-bottom:10px;" nzShowSearch>
+                    <nz-option *ngFor="let select of cityDimensionsList" [nzLabel]="select.label" [nzValue]="select.value">
+                        <ng-template #nzOptionTemplate>
+                            <span title="{{select.label}}">{{select.label}}</span>
+                        </ng-template>
+                    </nz-option>
+                </nz-select>
+                <nz-select *ngIf="i != 0" [nzSize]="'large'" name="dimensions" [(ngModel)]="dimension.value" (ngModelChange)="changeDimension(dimension.value, 'businessLine')" [nzPlaceHolder]="'请选择'" style="width:90%;margin-bottom:10px;" nzShowSearch>
+                    <nz-option *ngFor="let select of dimensionList" [nzLabel]="select.label" [nzValue]="select.value">
+                        <ng-template #nzOptionTemplate>
+                            <span title="{{select.label}}">{{select.label}}</span>
+                        </ng-template>
+                    </nz-option>
+                </nz-select>
+                <i class="anticon anticon-minus-circle-o dynamic-delete-button" *ngIf="i!=0" (click)="removeDimension(selectedDimensions, i, 'line')"></i>
+                <!-- <cm-button *ngIf="i != 0 && selectedDimensions[1]['value']">
+                    <button class="add-button" nz-button [nzType]="'dashed'" [nzSize]="'small'" (click)="showDimensions('true')">
+                        <span>维度值设置</span>
+                    </button>
+                </cm-button> -->
+            </cm-select>
+            <!--<cm-button>
+                <button class="add-button" nz-button *ngIf="selectedDimensions.length != 2 && selectedMetrics.length == 1" [nzType]="'dashed'" [nzSize]="'small'" (click)="addDimension()">
+                    <i class="anticon anticon-plus"></i><span>添加维度</span>
+                </button>
+            </cm-button>-->
+        </div>
+    </div>
+    <div class="item-config">
+        <label class="item-label">指标</label>
+        <div class="config-content">
+            <cm-select *ngFor="let metrics of selectedMetrics;let i = index;">
+                <nz-select [nzSize]="'large'" name="metrics" [(ngModel)]="metrics.value" (ngModelChange)="changeMetrics(metrics.value)" [nzPlaceHolder]="'请选择'" style="width:90%;margin-bottom:10px;">
+                    <nz-option *ngFor="let select of metricsList" [nzLabel]="select.label" [nzValue]="select.value">
+                        <ng-template #nzOptionTemplate>
+                            <span title="{{select.label}}">{{select.label}}</span>
+                        </ng-template>
+                    </nz-option>
+                </nz-select>
+                <i class="anticon anticon-minus-circle-o dynamic-delete-button" *ngIf="i!=0" (click)="removeMetrics(selectedMetrics, i, 'line')"></i>
+            </cm-select>
+            <!--<cm-button>
+                <button class="add-button" nz-button [nzType]="'dashed'" *ngIf="selectedDimensions.length == 1 && selectedMetrics.length < 10" [nzSize]="'small'" (click)="addMetrics()">
+                    <i class="anticon anticon-plus"></i><span>添加指标</span>
+                </button>
+            </cm-button>-->
+        </div>
+    </div>
+    <div class="item-config">
+        <label class="item-label">省份分布Top N</label>
+        <div class="config-content" style="padding-top: 7px;">
+            <cm-checkbox>
+                <label nz-checkbox [(ngModel)]="province.show" (ngModelChange)="OptionChange(province.show)">
+                    <span>显示</span>
+                </label>
+            </cm-checkbox>
+            <!-- <cm-input-number>
+                <nz-input-number [(ngModel)]="province.value" [nzMin]="1" [nzStep]="1" (ngModelChange)="OptionChange(province.value)"></nz-input-number>
+            </cm-input-number> -->
+            <!-- <cm-input>
+                <nz-input nzType="number"  [nzPlaceHolder]="'请输入正整数'" [(ngModel)]="province.value"  (ngModelChange)="OptionChange(province.value)" ></nz-input>
+            </cm-input> -->
+            <input class="inputdown" (keyup)="inputNumberChange()" min="1" max="34" type="number" [(ngModel)]="province.value" (ngModelChange)="OptionChange($event)" />
+        </div>
+    </div>
+    <div class="item-config">
+        <!-- <label class="item-label">日期范围</label>
+        <div class="config-content">
+            <cm-select>
+                <nz-select [nzSize]="'large'" name="date" [(ngModel)]="selectedDate" (ngModelChange)="changeDate(selectedDate)" [nzPlaceHolder]="'日期范围维度'"
+                    style="width:90%;margin-bottom:10px;" nzAllowClear>
+                    <nz-option *ngFor="let select of dateDimensionsList" [nzLabel]="select.label" [nzValue]="select.value"></nz-option>
+                </nz-select>
+            </cm-select>
+            <nz-radio-group [(ngModel)]="dateType" style="display:block;" *ngIf="selectedDate" (ngModelChange)="changeDateType(dateType)">
+                <label nz-radio [nzValue]="'default'">
+                    <span>默认（最近28天，不含今天）</span>
+                </label>
+                <label nz-radio [nzValue]="'custom'">
+                    <span>自定义</span>
+                </label>
+            </nz-radio-group>
+            <cm-datepicker style="display: block;border-bottom: 1px solid #ddd;" class="dataset" *ngIf="selectedDate && dateType=='custom'">
+                <ng-template>
+                    <nz-rangepicker [(ngModel)]="dateRange" (ngModelChange)="changeDateRange(dateRange)" [nzSize]="'large'"></nz-rangepicker>
+                </ng-template>
+            </cm-datepicker>
+        </div> -->
+        <app-date-range [list]="dateDimensionsList" [dataConfig]="dataConfig" (change)="dateRangeChange($event)"></app-date-range>
+    </div>
+    <div class="item-config" *ngIf="selectedCube">
+        <cm-report-filter [cube]="selectedCube" (onFilterConfig)="changeFilter($event)"></cm-report-filter>
+    </div>
+
+    <div class="div-dialog" *ngIf="showDimensionValues">
+        <dimension-value-list [cube]="selectedCube" [dimension]="selectedDimensions[1].value" [metrics]="metricsList" (changeDimensionValue)="changeDimensionValue($event)" (closeDimension)="showDimensions($event)"></dimension-value-list>
+    </div>
+</div>

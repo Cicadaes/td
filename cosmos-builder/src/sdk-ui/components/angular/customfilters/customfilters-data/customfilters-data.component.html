@@ -1,0 +1,40 @@
+<div class="report-detail-data">
+    <div class="item-config">
+        <label class="item-label">CUBE</label>
+        <div class="config-content">
+            <cm-select>
+                <nz-select [nzSize]="'large'" name="cube" [nzPlaceHolder]="'请选择'" style="width:90%;" [(ngModel)]="selectedCube" nzShowSearch (ngModelChange)="changeCube(selectedCube)">
+                    <nz-option *ngFor="let select of cubeList" [nzLabel]="select.label" [nzValue]="select.value">
+                        <ng-template #nzOptionTemplate>
+                            <span title="{{select.label}}">{{select.label}}</span>
+                        </ng-template>
+                    </nz-option>
+                </nz-select>
+            </cm-select>
+        </div>
+    </div>
+    <div class="item-config">
+        <label class="item-label">文案</label>
+        <div class="config-content">
+            <cm-input>
+                <nz-input style="width: 90%;margin-top: 10px;" [(ngModel)]="name" [nzPlaceHolder]="'请输入名称'" (ngModelChange)="changeName($event)"></nz-input>
+            </cm-input>
+        </div>
+    </div>
+    <!-- <div class="item-config">
+        <label class="item-label">条件</label>
+        <div>
+            <cm-select *ngFor="let dimension of selectedDimensions;let i = index;">
+                <nz-select [nzSize]="'large'" name="dimensions" [(ngModel)]="dimension.value" (ngModelChange)="changeDimension(dimension)" [nzPlaceHolder]="'请选择'" style="width:90%;margin-bottom:10px;" nzShowSearch>
+                    <nz-option *ngFor="let select of DimensionList" [nzLabel]="select.label" [nzValue]="select.value"></nz-option>
+                </nz-select>
+                <i class="anticon anticon-minus-circle-o dynamic-delete-button" *ngIf="i!=0" (click)="removeDimension(selectedDimensions, i)"></i>
+            </cm-select>
+            <cm-button>
+                <button class="add-button" nz-button [nzType]="'dashed'" [nzSize]="'small'" (click)="addDimension()">
+                    <i class="anticon anticon-plus"></i><span>添加条件</span>
+                </button>
+            </cm-button>
+        </div>
+    </div> -->
+</div>

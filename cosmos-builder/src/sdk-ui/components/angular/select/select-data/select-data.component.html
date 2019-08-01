@@ -1,0 +1,69 @@
+<div class="report-detail-data">
+    <div class="item-config">
+        <label class="item-label">CUBE</label>
+        <div class="config-content">
+            <cm-select>
+                <nz-select [nzSize]="'large'" name="cube" [nzPlaceHolder]="'请选择'" style="width:90%;" [(ngModel)]="selectedCube" nzShowSearch (ngModelChange)="changeCube(selectedCube)">
+                    <nz-option *ngFor="let select of cubeList" [nzLabel]="select.label" [nzValue]="select.value">
+                        <ng-template #nzOptionTemplate>
+                            <span title="{{select.label}}">{{select.label}}</span>
+                        </ng-template>
+                    </nz-option>
+                </nz-select>
+            </cm-select>
+        </div>
+    </div>
+    <div class="item-config">
+        <label class="item-label">名称</label>
+        <div class="config-content">
+            <cm-checkbox>
+                <label nz-checkbox [(ngModel)]="isShowName" (ngModelChange)="changeShowName($event)">
+                    <span>显示名称</span>
+                </label>
+            </cm-checkbox>
+            <cm-input *ngIf="isShowName">
+                <nz-input style="width: 90%;margin-top: 10px;" [(ngModel)]="name" [nzPlaceHolder]="'请输入名称'" (ngModelChange)="changeName($event)"></nz-input>
+            </cm-input>
+        </div>
+    </div>
+    <div class="item-config">
+        <label class="item-label">维度</label>
+        <div class="config-content">
+            <cm-select>
+                <nz-select [nzSize]="'large'" name="dimensions" [(ngModel)]="selectDimension" (ngModelChange)="changeDimension(selectDimension)" [nzPlaceHolder]="'请选择'" style="width:90%;margin-bottom:10px;" nzShowSearch>
+                    <nz-option *ngFor="let select of dimensionList" [nzLabel]="select.label" [nzValue]="select.value">
+                        <ng-template #nzOptionTemplate>
+                            <span title="{{select.label}}">{{select.label}}</span>
+                        </ng-template>
+                    </nz-option>
+                </nz-select>
+            </cm-select>
+            <cm-button *ngIf="selectDimension">
+                <button class="add-button" nz-button [nzType]="'dashed'" [nzSize]="'small'" (click)="showDimensions(true)">
+                    <span>维度值设置</span>
+                </button>
+            </cm-button>
+        </div>
+    </div>
+    <div class="item-config" *ngIf="defaultList && defaultList.length > 0">
+        <label class="item-label">默认选中</label>
+        <div class="config-content">
+            <cm-select>
+                <nz-select [nzSize]="'large'" name="dimensionDefault" [(ngModel)]="dimensionDefault" (ngModelChange)="changeDefault(dimensionDefault)" [nzPlaceHolder]="'请选择'" style="width:90%;margin-bottom:10px;" nzShowSearch>
+                    <nz-option *ngFor="let select of defaultList" [nzLabel]="select.label" [nzValue]="select.value">
+                        <ng-template #nzOptionTemplate>
+                            <span title="{{select.label}}">{{select.label}}</span>
+                        </ng-template>
+                    </nz-option>
+                </nz-select>
+            </cm-select>
+        </div>
+    </div>
+
+    <div class="setting-box" *ngIf="selectDimension" [ngStyle]="positionStyles">
+        <dimension-value-list [cube]="selectedCube" [dimension]="selectDimension" [metrics]="metricsList" [showOther]="true" [showWhole]="true" (changeDimensionValue)="changeDimensionValue($event)" (closeDimension)="showDimensions($event)"></dimension-value-list>
+    </div>
+    <!-- <div class="item-config" *ngIf="selectedCube">
+        <cm-report-filter [cube]="selectedCube" (onFilterConfig)="changeFilter($event)"></cm-report-filter>
+    </div> -->
+</div>

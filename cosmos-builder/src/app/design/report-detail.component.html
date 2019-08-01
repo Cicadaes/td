@@ -1,0 +1,29 @@
+<div class="page-wrapper">
+    <header class="main-header" *ngIf="title?.length > 0">
+        <cm-breadcrumb>
+
+            <nz-breadcrumb [nzSeparator]=" '>' ">
+                <nz-breadcrumb-item *ngFor="let obj of title;let i=index ">
+                    <a (click)="routerChange(i, obj)">{{obj.name}}</a>
+                </nz-breadcrumb-item>
+            </nz-breadcrumb>
+        </cm-breadcrumb>
+    </header>
+    <div class="report-detail ">
+        <report-detail-title [reportId]='reportId'></report-detail-title>
+    </div>
+    <div class="content-box ">
+        <div class="stage-box " [ngStyle]="widthStyles ">
+            <div class="stage "></div>
+        </div>
+        <div class="setting-box " [ngStyle]="positionStyles ">
+            <dynamic-load *ngIf="reportData "></dynamic-load>
+        </div>
+        <filter-fixed></filter-fixed>
+        <funnel-procedure></funnel-procedure>
+        <grid-content></grid-content>
+        <table-content></table-content>
+        <title-content></title-content>
+        <text-link></text-link>
+    </div>
+</div>

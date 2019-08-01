@@ -1,0 +1,39 @@
+main {
+  height: 32px;
+  overflow: hidden;
+}
+
+.select-item {
+  display: flex;
+  align-items: center;
+}
+
+.item-label {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis !important;
+  text-align: center;
+  max-width: 80px;
+}
+
+.item-content {
+  display: inline-block;
+  max-width: 300px;
+  min-width: 150px;
+}
+:host ::ng-deep .calendar{
+  .item-content {
+    cm-select{
+      nz-select{
+        .ng-tns-c25-6,.ant-select-selection,.ant-select-selection--single{
+          box-shadow: 0 0 0 0px rgba(16, 142, 233,0) !important;
+        }
+        .ant-select-open .ant-select-selection{
+          box-shadow: 0 0 0 0px rgba(16, 142, 233,0) !important;
+        }
+      }
+    }
+
+  }
+}

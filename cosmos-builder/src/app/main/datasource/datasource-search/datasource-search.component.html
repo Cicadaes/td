@@ -1,0 +1,59 @@
+<div class="flexsearch">
+    <cm-form class="source">
+        <form nz-form [formGroup]="validateForm" class="cm-advanced-search-form" (ngSubmit)="submitForm($event,validateForm.value)">
+            <div nz-row [nzGutter]="20">
+                <div class="queryCondition">
+                    <div nz-col [nzSpan]="8" style="padding:0 0 0 0">
+                        <div nz-form-item nz-row>
+                            <div nz-form-label nz-col [nzSpan]="7">
+                                <label for="'datasourceName'">数据源名称</label>
+                            </div>
+                            <div nz-form-control nz-col [nzSpan]="16">
+                                <cm-input>
+                                    <nz-input [nzPlaceHolder]="'请输入数据源名称'" [formControlName]="'datasourceName'" [nzId]="'datasourceName'" [nzSize]="'large'"></nz-input>
+                                </cm-input>
+                            </div>
+                        </div>
+                    </div>
+                    <div nz-col [nzSpan]="8" style="padding:0">
+                        <div nz-form-item nz-row>
+                            <div nz-form-label nz-col [nzSpan]="7">
+                                <label>数据源类型</label>
+                            </div>
+                            <div nz-form-control nz-col [nzSpan]="16">
+                                <cm-select>
+                                    <nz-select [formControlName]="'datasourceType'" [nzSize]="'large'" [nzPlaceHolder]="'请选择数据源类型'" [(ngModel)]="datasourceType">
+                                        <nz-option *ngFor="let type of types" [nzLabel]="type.name" [nzValue]="type.value"></nz-option>
+                                    </nz-select>
+                                </cm-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div nz-col [nzSpan]="8" style="padding:0;margin-right:0">
+                        <div nz-form-item nz-row>
+                            <div nz-form-label nz-col [nzSpan]="7">
+                                <label>状态</label>
+                            </div>
+                            <div nz-form-control nz-col [nzSpan]="16">
+                                <cm-select>
+                                    <nz-select [formControlName]="'metadataStatus'" [nzSize]="'large'" [nzPlaceHolder]="'请选择状态'" [(ngModel)]="metadataStatus">
+                                        <nz-option *ngFor="let statu of status" [nzLabel]="statu.name" [nzValue]="statu.value"></nz-option>
+                                    </nz-select>
+                                </cm-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </cm-form>
+    <div nz-col class="lookUp">
+        <!-- <cm-button>
+                        <button nz-button (click)="resetForm()" [nzSize]="'large'">重置</button>
+                    </cm-button> -->
+        <cm-button>
+            <button nz-button [nzType]="'primary'" (click)="searchHandler()" [nzSize]="'large'">查询</button>
+        </cm-button>
+    </div>
+</div>

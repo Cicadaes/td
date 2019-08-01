@@ -1,0 +1,219 @@
+<div class="funnel">
+    <layout [layoutData]="_layoutLayout" (provinceOut)="setLayoutData($event)" [cmHeight]="'400px'" [cmPadding]="'16px 16px 16px 16px'"
+        [cmAlign]="'level'"></layout>
+    <color-style [layoutData]="_layoutColor" [colors]="color" (provinceOut)="colorData($event)"></color-style>
+    <ul class="center">
+        <div class="piecenter">
+            <p style="margin-bottom:8px">值</p>
+            <div class="section">
+                <li style="margin:12px 0">
+                    <cm-checkbox>
+                        <label nz-checkbox [(ngModel)]="value.boxShadow" (ngModelChange)="OptionChange($event)">
+                            <span>显示</span>
+                        </label>
+                    </cm-checkbox>
+                </li>
+                <li>
+                    <div class="type-size">
+                        <div>
+                            <p>标签颜色</p>
+                            <!-- <i style="float: left;height: 35px;overflow: hidden;line-height: 62px;"><img src="./assets/imgAssets/text.svg" alt=""></i> -->
+                            <span style="line-height: 40px;padding-top: 10px;display: block;height: 33px;width: 100%;">
+                                <color-picker-style [height]="15" width="70" [colors]="_cmPresetColors" [cmcolor]="valueColor" [cmType]="'hex'" (provinceOut)="value.color = $event;OptionChange()"></color-picker-style>
+                                <!-- <cm-color-picker [cmType]="'board'" [cmcolor]="valueColor" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition"
+                                    (cmcolorchange)="value.color = $event;OptionChange();" [cmPositionOffset]="_cmPositionOffset"></cm-color-picker> -->
+                            </span>
+                        </div>
+                    </div>
+                    <div class="type-face type-face-map">
+                        <p>标签大小</p>
+                        <cm-select style="width:100%">
+                            <nz-select [(ngModel)]="value.fontSize" [nzPlaceHolder]="'请选择字号'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                                <nz-option *ngFor="let option of fontSizeOptions" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled"></nz-option>
+                            </nz-select>
+                        </cm-select>
+                    </div>
+                </li>
+                <!-- <li class="percentage" style="position: relative;text-align: right;">
+                    <i style="position: absolute;top:43%;left:0" class="icon iconfont icon-ziti4"></i>
+                    <cm-select>
+                        <nz-select [(ngModel)]="value.fontFamily" [nzPlaceHolder]="'请选择字体'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                            <nz-option *ngFor="let option of typefaces" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                            </nz-option>
+                        </nz-select>
+                    </cm-select>
+                </li> -->
+            </div>
+        </div>
+        <div class="piecenter">
+            <p style="margin-bottom:8px">步骤间的转化率</p>
+            <div class="section">
+                <li style="margin:12px 0">
+                    <cm-checkbox>
+                        <label nz-checkbox [(ngModel)]="percent.boxShadow" (ngModelChange)="OptionChange($event)">
+                            <span>显示</span>
+                        </label>
+                    </cm-checkbox>
+                </li>
+                <li>
+                    <div class="type-size">
+                        <div>
+                            <p>标签颜色</p>
+                            <!-- <i style="float: left;height: 35px;overflow: hidden;line-height: 62px;"><img src="./assets/imgAssets/text.svg" alt=""></i> -->
+                            <span style="line-height: 40px;padding-top: 10px;display: block;height: 33px;width: 100%;">
+                                <color-picker-style [height]="15" width="70" [colors]="_cmPresetColors" [cmcolor]="percentColor" [cmType]="'hex'" (provinceOut)="percent.color = $event;OptionChange()"></color-picker-style>
+                                <!-- <cm-color-picker [cmType]="'board'" [cmcolor]="percentColor" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition"
+                                    (cmcolorchange)="percent.color = $event;OptionChange();" [cmPositionOffset]="_cmPositionOffset"></cm-color-picker> -->
+                            </span>
+                        </div>
+                    </div>
+                    <div class="type-face type-face-map">
+                        <p>标签大小</p>
+                        <cm-select style="width:100%">
+                            <nz-select [(ngModel)]="percent.fontSize" [nzPlaceHolder]="'请选择字号'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                                <nz-option *ngFor="let option of fontSizeOptions" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled"></nz-option>
+                            </nz-select>
+                        </cm-select>
+                    </div>
+                </li>
+                <!-- <li class="percentage" style="position: relative;text-align: right;">
+                    <i style="position: absolute;top:43%;left:0" class="icon iconfont icon-ziti4"></i>
+                    <cm-select>
+                        <nz-select [(ngModel)]="percent.fontFamily" [nzPlaceHolder]="'请选择字体'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                            <nz-option *ngFor="let option of typefaces" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                            </nz-option>
+                        </nz-select>
+                    </cm-select>
+                </li> -->
+            </div>
+        </div>
+        <div class="piecenter">
+            <p style="margin-bottom:8px">累计转化率</p>
+            <div class="section">
+                <li style="margin:12px 0">
+                    <cm-checkbox>
+                        <label nz-checkbox [(ngModel)]="accumulated.boxShadow" (ngModelChange)="OptionChange($event)">
+                            <span>显示</span>
+                        </label>
+                    </cm-checkbox>
+                </li>
+                <li>
+                    <div class="type-size">
+                        <div>
+                            <p>标签颜色</p>
+                            <!-- <i style="float: left;height: 35px;overflow: hidden;line-height: 62px;"><img src="./assets/imgAssets/text.svg" alt=""></i> -->
+                            <span style="line-height: 40px;padding-top: 10px;display: block;height: 33px;width: 100%;">
+                                <color-picker-style [height]="15" width="70" [colors]="_cmPresetColors" [cmcolor]="accumulatedColor" [cmType]="'hex'" (provinceOut)="accumulated.color = $event;OptionChange();"></color-picker-style>
+                                <!-- <cm-color-picker [cmType]="'board'" [cmcolor]="accumulatedColor" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition"
+                                    (cmcolorchange)="accumulated.color = $event;OptionChange();" [cmPositionOffset]="_cmPositionOffset"></cm-color-picker> -->
+                            </span>
+                        </div>
+                    </div>
+                    <div class="type-face type-face-map">
+                        <p>标签大小</p>
+                        <cm-select style="width:100%">
+                            <nz-select [(ngModel)]="accumulated.fontSize" [nzPlaceHolder]="'请选择字号'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                                <nz-option *ngFor="let option of fontSizeOptions" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled"></nz-option>
+                            </nz-select>
+                        </cm-select>
+                    </div>
+                </li>
+                <!-- <li class="percentage" style="position: relative;text-align: right;">
+                    <i style="position: absolute;top:43%;left:0" class="icon iconfont icon-ziti4"></i>
+                    <cm-select>
+                        <nz-select [(ngModel)]="accumulated.fontFamily" [nzPlaceHolder]="'请选择字体'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                            <nz-option *ngFor="let option of typefaces" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                            </nz-option>
+                        </nz-select>
+                    </cm-select>
+                </li> -->
+            </div>
+        </div>
+        <div class="piecenter">
+            <p style="margin-bottom:8px">总转化率</p>
+            <div class="section">
+                <li style="margin:12px 0">
+                    <cm-checkbox>
+                        <label nz-checkbox [(ngModel)]="total.boxShadow" (ngModelChange)="OptionChange($event)">
+                            <span>显示</span>
+                        </label>
+                    </cm-checkbox>
+                </li>
+                <li>
+                    <div class="type-size">
+                        <div>
+                            <p>标签颜色</p>
+                            <!-- <i style="float: left;height: 35px;overflow: hidden;line-height: 62px;"><img src="./assets/imgAssets/text.svg" alt=""></i> -->
+                            <span style="line-height: 40px;padding-top: 10px;display: block;height: 33px;width: 100%;">
+                                <color-picker-style [height]="15" width="70" [colors]="_cmPresetColors" [cmcolor]="totalColor" [cmType]="'hex'" (provinceOut)="total.color = $event;OptionChange()"></color-picker-style>
+                                <!-- <cm-color-picker [cmType]="'board'" [cmcolor]="totalColor" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition"
+                                    (cmcolorchange)="total.color = $event;OptionChange();" [cmPositionOffset]="_cmPositionOffset"></cm-color-picker> -->
+                            </span>
+                        </div>
+                    </div>
+                    <div class="type-face type-face-map">
+                        <p>标签大小</p>
+                        <cm-select style="width:100%">
+                            <nz-select [(ngModel)]="total.fontSize" [nzPlaceHolder]="'请选择字号'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                                <nz-option *ngFor="let option of fontSizeOptions" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled"></nz-option>
+                            </nz-select>
+                        </cm-select>
+                    </div>
+                </li>
+                <!-- <li class="percentage" style="position: relative;text-align: right;">
+                    <i style="position: absolute;top:43%;left:0" class="icon iconfont icon-ziti4"></i>
+                    <cm-select>
+                        <nz-select [(ngModel)]="total.fontFamily" [nzPlaceHolder]="'请选择字体'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                            <nz-option *ngFor="let option of typefaces" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                            </nz-option>
+                        </nz-select>
+                    </cm-select>
+                </li> -->
+            </div>
+        </div>
+        <div class="piecenter">
+            <p style="margin-bottom:8px">步骤</p>
+            <div class="section">
+                <li style="margin:12px 0">
+                    <cm-checkbox>
+                        <label nz-checkbox [(ngModel)]="procedure.boxShadow" (ngModelChange)="OptionChange($event)">
+                            <span>显示</span>
+                        </label>
+                    </cm-checkbox>
+                </li>
+                <li>
+                    <div class="type-size">
+                        <div>
+                            <p>标签颜色</p>
+                            <!-- <i style="float: left;height: 35px;overflow: hidden;line-height: 62px;"><img src="./assets/imgAssets/text.svg" alt=""></i> -->
+                            <span style="line-height: 40px;padding-top: 10px;display: block;height: 33px;width: 100%;">
+                                <color-picker-style [height]="15" width="70" [colors]="_cmPresetColors" [cmcolor]="procedureColor" [cmType]="'hex'" (provinceOut)="procedure.color = $event;OptionChange()"></color-picker-style>
+                                <!--<cm-color-picker [cmType]="'board'" [cmcolor]="procedureColor" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition"
+                                    (cmcolorchange)="procedure.color = $event;OptionChange();" [cmPositionOffset]="_cmPositionOffset"></cm-color-picker> -->
+                            </span>
+                        </div>
+                    </div>
+                    <div class="type-face type-face-map">
+                        <p>标签大小</p>
+                        <cm-select style="width:100%">
+                            <nz-select [(ngModel)]="procedure.fontSize" [nzPlaceHolder]="'请选择字号'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                                <nz-option *ngFor="let option of fontSizeOptions" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled"></nz-option>
+                            </nz-select>
+                        </cm-select>
+                    </div>
+                </li>
+                <!-- <li class="percentage" style="position: relative;text-align: right;">
+                    <i style="position: absolute;top:43%;left:0" class="icon iconfont icon-ziti4"></i>
+                    <cm-select>
+                        <nz-select [(ngModel)]="procedure.fontFamily" [nzPlaceHolder]="'请选择字体'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                            <nz-option *ngFor="let option of typefaces" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                            </nz-option>
+                        </nz-select>
+                    </cm-select>
+                </li> -->
+            </div>
+        </div>
+        <!-- 图例 -->
+        <legend-style [layoutData]="_layoutLegend" [legendPosition]="'none'" (legendOut)="legendData($event)"></legend-style>
+    </ul>
+</div>

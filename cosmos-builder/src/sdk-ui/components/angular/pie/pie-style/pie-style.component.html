@@ -1,0 +1,98 @@
+<div class="piestyle">
+    <layout [layoutData]="_layoutLayout" (provinceOut)="setLayoutData($event)" [cmHeight]="'334px'" [cmPadding]="'16px 16px 16px 16px'"
+        [cmAlign]="'level'"></layout>
+    <ul class="center">
+        <div class="piecenter">
+            <p>扇区</p>
+            <div class="section">
+                <li class="sectortitle" style="margin-bottom:4px">扇区颜色</li>
+                <cm-radio>
+                    <nz-radio-group [(ngModel)]="pieStyle.mode" (ngModelChange)="OptionChange($event)">
+
+                        <label nz-radio [nzValue]="'single'">
+                            <span>单一颜色</span>
+                        </label>
+                        <label nz-radio [nzValue]="'queue'">
+                            <span>按饼图中的顺序</span>
+                        </label>
+                    </nz-radio-group>
+                </cm-radio>
+                <div class="colororder">
+                    <span *ngFor="let color of colorsInit; let i = index;" [ngClass]="{'coloritem': true, 'rimed': false, 'dashed': i && sectorsNum && i >= sectorsNum}">
+                        <color-picker-style *ngIf="_colorPicker(i)" [height]="16" width="16" [colors]="_cmPresetColors" [cmcolor]="i >= corLen? '#ffffff' : color"
+                            [cmType]="'hex'" (provinceOut)="colorChange($event, i)"></color-picker-style>
+                        <!-- <cm-color-picker [cmType]="'board'" *ngIf="_colorPicker(i)" [cmcolor]="i >= corLen? '#ffffff' : color" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition" (cmcolorchange)="colorChange($event, i)" [cmPositionOffset]="_cmPositionOffset"></cm-color-picker> -->
+                    </span>
+                </div>
+                <li class="sectortitle">空/实心</li>
+                <div class="icon-wrapper test-class duration">
+                    <i class="anticon anticon-highlight">
+                        <i class="icon iconfont icon-icon-test6"></i>
+                    </i>
+                    <cm-slider>
+                        <nz-slider [nzMin]="0" [nzMax]="20" [(ngModel)]="pieStyle.fill" (ngModelChange)="pieStyle.fill = $event;OptionChange($event)"></nz-slider>
+                    </cm-slider>
+                    <i class="anticon">
+                        <i class="icon iconfont icon-icon-test12"></i>
+                    </i>
+                </div>
+            </div>
+        </div>
+    </ul>
+    <ul class="center">
+        <div class="piecenter">
+            <p>指标总计</p>
+            <div class="section" style="margin:10px 0 0 0">
+                <cm-checkbox>
+                    <label nz-checkbox [(ngModel)]="pieStyle.total" (ngModelChange)="totalChange()">
+                        <span>显示</span>
+                    </label>
+                </cm-checkbox>
+            </div>
+        </div>
+    </ul>
+    <ul class="center">
+        <div class="piecenter">
+            <p>标签</p>
+            <div class="section">
+                <li>
+                    <div class="type-size">
+                        <i style="float: left;height: 35px;overflow: hidden;line-height: 51px;margin-right: 10px;">
+                            <i class="icon iconfont icon-format_color_text"></i>
+                        </i>
+                        <div style="float:right;float: right;padding-top:18px;width: 60%;height: 100%;overflow: hidden;text-align: center;">
+                            <color-picker-style [height]="16" width="40" [colors]="_cmPresetColors" [cmcolor]="labelColor"
+                                [cmType]="'hex'" (provinceOut)="labelStyle.color = $event;OptionChange()"></color-picker-style>
+                            <!-- <cm-color-picker [cmType]="'board'" [cmcolor]="labelColor" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition"
+                                (cmcolorchange)="labelStyle.color = $event;OptionChange();" [cmPositionOffset]="_cmPositionOffset"></cm-color-picker> -->
+
+                        </div>
+                    </div>
+                    <!-- <span class="type-face" style="position: relative;text-align: right;float: right;">
+                        <i style="position: absolute;top:38%;left:0" class="icon iconfont icon-ziti"></i>
+                        <cm-select>
+                            <nz-select [(ngModel)]="labelStyle.fontFamily" [nzPlaceHolder]="'请选择字体'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                                <nz-option *ngFor="let typeface of typefaces" [nzLabel]="typeface.label" [nzValue]="typeface.value" [nzDisabled]="typeface.disabled">
+                                </nz-option>
+                            </nz-select>
+                        </cm-select>
+                   </span> -->
+                    <div style="clear:both"></div>
+                </li>
+                <li class="percentage" style="position: relative;text-align: right;">
+                    <i style="position: absolute;top:43%;left:0" class="icon iconfont icon-baifenbi"></i>
+                    <cm-select>
+                        <nz-select [(ngModel)]="labelStyle.type" [nzPlaceHolder]="'请选择标签格式'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                            <nz-option *ngFor="let option of tagFormats" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                            </nz-option>
+                        </nz-select>
+                    </cm-select>
+                </li>
+            </div>
+        </div>
+    </ul>
+
+    <!-- 图例 -->
+    <legend-style legendPosition [layoutData]="_layoutLegend" (legendOut)="legendData($event)"></legend-style>
+
+</div>

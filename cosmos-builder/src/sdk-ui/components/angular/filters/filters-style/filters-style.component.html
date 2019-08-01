@@ -1,0 +1,27 @@
+<layout [layoutData]="_layoutLayout" (provinceOut)="setLayoutData($event)" [cmDircLevel]="true" [cmDircVertical]="false" [cmAlign]="'level'"></layout>
+<div class="piestyle">
+    <ul class="center">
+        <div class="piecenter">
+            <p>显示方式</p>
+            <div class="section">
+                <div>
+                    <cm-radio>
+                        <nz-radio-group [(ngModel)]="way" (ngModelChange)="OptionChange($event)">
+                            <li>
+                                <label nz-radio [nzValue]="'show'">
+                                    <span>显示</span>
+                                </label>
+                            </li>
+                            <li style="margin-top:5px">
+                                <label nz-radio [nzValue]="'hide'">
+                                    <span>隐藏</span>
+                                </label>
+                            </li>
+                        </nz-radio-group>
+                    </cm-radio>
+                </div>
+                <div style="width:100%;clear:both"></div>
+            </div>
+        </div>
+    </ul>
+</div>

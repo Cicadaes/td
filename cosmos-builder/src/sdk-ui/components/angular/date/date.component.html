@@ -1,0 +1,21 @@
+<main #select class="calendar">
+    <div style="display:inline-block;width: 100%">
+        <cm-select style="opacity: 0;width:0;display: flex;height:0">
+            <nz-select [(ngModel)]="dadys" [nzPlaceHolder]="'请选择'" (ngModelChange)="OptionChange($event)">
+                <nz-option *ngFor="let option of typefaces" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                </nz-option>
+            </nz-select>
+        </cm-select>
+        <div [ngStyle]="alignStyle">
+            <div style="width:100%;display:block">
+                <div class="name" [ngStyle]="{'padding':name === '' ? '0' : '0 10px 0 0' }">{{name}}</div>
+                <cm-datepicker #cmchart style="display:inline-block;width: 240px;background: #ffffff;">
+                    <ng-template>
+                        <nz-rangepicker [nzDisabledDate]="_disabledDate" [(ngModel)]="option.data._dateRange" [nzFormat]="'YYYY-MM-DD'" (ngModelChange)="changeModel(option.data._dateRange,true)"></nz-rangepicker>
+                    </ng-template>
+                </cm-datepicker>
+            </div>
+
+        </div>
+    </div>
+</main>

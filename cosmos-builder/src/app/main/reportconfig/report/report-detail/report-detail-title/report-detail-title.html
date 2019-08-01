@@ -1,0 +1,228 @@
+<div #root class="report-til">
+    <div class="ul-box" (mousemove)="showTip($event, false)">
+        <div #list class="list" [style.display]="switch ? 'none' : ''" (mousemove)="showTip($event, true)" (mouseleave)="showTip($event, false)">
+            <span tips='水平' class="cm-dragdrop-handle cm-dragdrop" cm-data="horizontal_layout_container">
+                <i class=" icon iconfont icon-chuizhirongqi"></i>
+            </span>
+            <span tips='垂直' class="cm-dragdrop-handle cm-dragdrop" cm-data="vertical_layout_container">
+                <i class="icon iconfont icon-shuipingrongqi"></i>
+            </span>
+            <span class='divide-line'></span>
+            <span tips='折线图' class="cm-dragdrop-handle cm-dragdrop" cm-data="line">
+                <i class="icon iconfont icon-xiantu"></i>
+            </span>
+            <span tips='柱图' class="cm-dragdrop-handle cm-dragdrop" cm-data="bar">
+                <i class="icon iconfont icon-zhutu"></i>
+            </span>
+
+            <span tips='饼图' class="cm-dragdrop-handle cm-dragdrop" cm-data="pie">
+                <i class="icon iconfont icon-bingtu"></i>
+            </span>
+
+            <span tips='漏斗图' class="cm-dragdrop-handle cm-dragdrop" cm-data="funnel">
+                <i class="icon iconfont icon-loudou"></i>
+            </span>
+            <span tips='面积图' class="cm-dragdrop-handle cm-dragdrop" cm-data="area">
+                <i class="icon iconfont icon-mianji"></i>
+            </span>
+            <span tips='地图' class="cm-dragdrop-handle cm-dragdrop" cm-data="map">
+                <i class="icon iconfont icon-diyufenbu"></i>
+            </span>
+            <span tips='表格（基础)' class="cm-dragdrop-handle cm-dragdrop" cm-data="table">
+                <i class="icon iconfont icon-biaoge"></i>
+            </span>
+            <!-- <span tips='留存' class="cm-dragdrop-handle cm-dragdrop" cm-data="retention">
+                <i class="icon iconfont icon-liucun"></i>
+            </span> -->
+            <!-- <li class="cm-dragdrop-handle cm-dragdrop " cm-data="rectangle ">
+                <cm-tooltip>
+                    < [nzTitle]=" '矩形' " [nzPlacement]=" 'bottom' " [nzMouseEnterDelay]="0.01 ">
+                        <i  class="anticon anticon-laptop "></i>
+                    </>
+                </cm-tooltip>
+            </li> -->
+
+            <span class='divide-line'></span>
+            <span tips='指标Tab' class="cm-dragdrop-handle cm-dragdrop" cm-data="tab">
+                <i class="icon iconfont icon-zhibiao"></i>
+            </span>
+            <span tips='下载帮助' class="cm-dragdrop-handle cm-dragdrop" cm-data="title">
+                <i class="icon iconfont icon-xiazaibangzhu"></i>
+            </span>
+            <span tips='文本' class="cm-dragdrop-handle cm-dragdrop" cm-data="text">
+                <i class="icon iconfont icon-wenben"></i>
+            </span>
+            <span tips='统计摘要' class="cm-dragdrop-handle cm-dragdrop" cm-data="statistics">
+                <i class="icon iconfont icon-tongjizhaiyao"></i>
+            </span>
+            <span tips='日期范围' class="cm-dragdrop-handle cm-dragdrop" cm-data="date">
+                <i class="icon iconfont icon-riqifanwei"></i>
+            </span>
+            <span tips='日周月' class="cm-dragdrop-handle cm-dragdrop" cm-data="dayWeekMonth">
+                <i class="icon iconfont icon-rizhouyue"></i>
+            </span>
+            <span tips='筛选器' class="cm-dragdrop-handle cm-dragdrop" cm-data="select">
+                <i class="icon iconfont icon-xialacaidan"></i>
+            </span>
+            <!-- <li class="cm-dragdrop-handle cm-dragdrop " cm-data="filters ">
+                <cm-tooltip>
+                    < [nzTitle]=" '条件筛选器' " [nzPlacement]=" 'bottom' " [nzMouseEnterDelay]="0.01 ">
+                        <i  class="icon iconfont icon-tubiao-zhuzhuangtu "></i>
+                    </>
+                </cm-tooltip>
+            </li> -->
+
+            <span tips='更多筛选（需配合"条件筛选器"使用）' class="cm-dragdrop-handle cm-dragdrop" cm-data="eventImpact">
+                <i class="icon iconfont icon-gengduoshaixuan"></i>
+            </span>
+            <span tips='条件筛选器（需配合"更多筛选"使用）' class="cm-dragdrop-handle cm-dragdrop" cm-data="customfilters">
+                <i class="icon iconfont icon-dingzhishaixuan"></i>
+            </span>
+            <span class='divide-line'></span>
+            <span #tooltip class='tooltip' style="position:absolute;z-index:9999;">
+                <span></span>
+                <div class="tips-box">{{tips}}</div>
+            </span>
+        </div>
+        <!-- <cm-tooltip>
+            <nz-tooltip [nzTitle]="'拖动舞台上的组件到此进行删除操作'" [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                <div nz-tooltip class="trash icon iconfont icon-delete1" [style.display]="switch ? 'none' : '' ">
+                </div>
+            </nz-tooltip>
+        </cm-tooltip> -->
+        <cm-tooltip>
+            <nz-tooltip [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                <span class="ant-dropdown-link" nz-dropdown>
+                    <i nz-tooltip class="trash icon iconfont icon-delete1" [style.display]="switch ? 'none' : '' "></i>
+                </span>
+                <ng-template #nzTemplate>
+                    <div class="delete">
+                        拖动舞台上的组件到此进行删除操作
+                    </div>
+                </ng-template>
+            </nz-tooltip>
+        </cm-tooltip>
+    </div>
+    <div class="report-operation ">
+        <div class="report-status ">
+            <span *ngIf="data.status==1 " style="height:6px;width:6px;background: rgb(43,133,229);display:inline-block;border-radius: 50%; "></span>
+            <span *ngIf="data.status==0 " style="height:6px;width:6px;background: rgb(224,62,22);display:inline-block;border-radius: 50%; "></span>
+            <span *ngIf="data.status==2 " style="height:6px;width:6px;background: #ddd;display:inline-block;border-radius: 50%; "></span>
+            <span *ngIf="data.status==1 ">已发布</span>
+            <span *ngIf="data.status==0 ">未发布</span>
+            <span *ngIf="data.status==2 ">下线</span>
+        </div>
+        <div class="report-page ">
+            <span class="iconLeft " (click)="reduce() ">
+                <i class="anticon anticon-left " [style.color]="leftDisabled ? '#ddd' : '' "></i>
+            </span>
+            <span class="active " style="margin-right: 0; ">{{active}}</span>
+            <span class="slash "> / </span>
+            <span class="total ">{{total}}</span>
+            <span>页</span>
+            <span class="iconDown " *ngIf="!isOpen " (click)="open() ">
+                <i class="anticon anticon-down "></i>
+            </span>
+            <span class="iconUp " *ngIf="isOpen " (click)="no() ">
+                <i class="anticon anticon-up "></i>
+            </span>
+            <span class="iconRight " (click)="add() ">
+                <i class="anticon anticon-right " [style.color]="rightDisabled ? '#ddd' : '' "></i>
+            </span>
+            <ul class="ant-select-dropdown-menu ant-select-dropdown-menu-vertical ant-select-dropdown-menu-root " *ngIf="isOpen " (mouseleave)="isOpen=false ">
+                <div>
+                    <li *ngFor="let active of positions " class="ant-select-dropdown-menu-item ng-tns-c23-38 ng-star-inserted " (click)="select(active) "
+                        (mouseenter)="active.showEllipsis=true; " (mouseleave)="active.showEllipsis=false; ">
+                        <span>{{active.index}}</span>
+                        <input type="text" class="weight" [(ngModel)]="active.value" id="input-{{active.index}}" (blur)="ChangeNameOK(active)" (keyup.enter)="ChangeNameOK(active)"
+                            [readonly]="!active.writeIN" class="readonly" [ngClass]=" active.writeIN? 'writeIn':''">
+                        <i class="anticon anticon-ellipsis " *ngIf="active.showEllipsis && !switch " (mouseenter)="showOpera($event,active) "></i>
+                        <ul *ngIf="active.showOpera " (blur)="active.showOpera=false; " (mouseleave)="active.showOpera=false;">
+                            <li (click)="ChangeName($event,active) ">重命名</li>
+                            <li (click)="removePage($event,active.index) " *ngIf="positions.length>1">移除</li>
+                        </ul>
+                    </li>
+                    <li class="ant-select-dropdown-menu-item ng-tns-c23-38 ng-star-inserted" (click)="addTotal()" [style.display]="switch ? 'none' : ''">
+                        添加新页
+                    </li>
+                </div>
+            </ul>
+        </div>
+        <!-- <div class="report-revoke" [style.display]="switch ? 'none' : ''">
+            <span>
+                <i class="anticon anticon-rollback"></i>
+            </span>
+            <span>
+                <i class="anticon anticon-rollback last"></i>
+            </span>
+        </div> -->
+        <div class="report-save" [style.display]="switch ? 'none' : ''" (click)="updateData()">
+            <!-- <cm-tooltip>
+                <nz-tooltip [nzTitle]="'保存报表'" [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                    <i nz-tooltip class="icon iconfont icon-save"></i>
+                </nz-tooltip>
+            </cm-tooltip> -->
+            <cm-tooltip>
+                <nz-tooltip [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                    <span class="ant-dropdown-link" nz-dropdown>
+                        <i nz-tooltip class="icon iconfont icon-save"></i>
+                    </span>
+                    <ng-template #nzTemplate>
+                        <div class="delete">
+                            保存报表
+                        </div>
+                    </ng-template>
+                </nz-tooltip>
+            </cm-tooltip>
+        </div>
+        <div class="report-preview">
+            <span>预览</span>
+            <span>
+                <!-- <cm-tooltip>
+                    <nz-tooltip [nzTitle]="'预览当前页'" [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                        <cm-switch>
+                            <nz-switch nz-tooltip [nzSize]="'small'" [nzDisabled]="isDisabled" [(ngModel)]="switch" (ngModelChange)="switchChange()"></nz-switch>
+                        </cm-switch>
+                    </nz-tooltip>
+                </cm-tooltip> -->
+                <cm-tooltip>
+                    <nz-tooltip [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                        <span class="ant-dropdown-link" nz-dropdown>
+                            <cm-switch>
+                                <nz-switch nz-tooltip [nzSize]="'small'" [nzDisabled]="isDisabled" [(ngModel)]="switch" (ngModelChange)="switchChange()"></nz-switch>
+                            </cm-switch>
+                        </span>
+                        <ng-template #nzTemplate>
+                            <div class="delete">
+                                预览当前页
+                            </div>
+                        </ng-template>
+                    </nz-tooltip>
+                </cm-tooltip>
+            </span>
+
+            <!-- <cm-tooltip style="height:18px;">
+                <nz-tooltip [nzTitle]="'预览报表整体效果'" [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                    <a nz-tooltip class="publish-preview" target="_blank" [routerLink]="['/publish',id]">
+                        <i class="icon iconfont icon-visibility"></i>
+                    </a>
+                </nz-tooltip>
+            </cm-tooltip> -->
+            <cm-tooltip style="margin-top: 5px">
+                <nz-tooltip [nzPlacement]="'bottom'" [nzMouseEnterDelay]="0.01">
+                    <span class="ant-dropdown-link" nz-dropdown>
+                        <a nz-tooltip class="publish-preview" target="_blank" [routerLink]="['/publish',id]">
+                            <i class="icon iconfont icon-visibility"></i>
+                        </a>
+                    </span>
+                    <ng-template #nzTemplate>
+                        <div class="delete">
+                            预览报表整体效果
+                        </div>
+                    </ng-template>
+                </nz-tooltip>
+            </cm-tooltip>
+
+        </div>
+    </div>
+</div>

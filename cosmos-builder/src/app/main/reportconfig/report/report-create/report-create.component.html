@@ -1,0 +1,65 @@
+<div class="report-create">
+    <cm-modal>
+        <nz-modal [nzWrapClassName]="'vertical-center-modal'" [nzContent]="modalContent" [nzMaskClosable]="false" [nzVisible]="isVisibleMiddle" [nzTitle]="'新增报表'"
+            (nzOnCancel)="handleCancelMiddle($event)" (nzOnOk)="handleOkMiddle($event)" [nzFooter]="modalFooter">
+            <cm-form>
+                <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)">
+                    <ng-template #modalContent>
+                        <div nz-form-item nz-row>
+                            <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                                <label for="'Name'" nz-form-item-required>名称</label>
+                            </div>
+                            <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                                <cm-input>
+                                    <nz-input [nzSize]="'large'" [formControlName]="'Name'" [nzId]="'Name'"></nz-input>
+                                </cm-input>
+                                <div nz-form-explain *ngIf="getFormControl('Name').dirty&&getFormControl('Name').hasError('required')">{{regular.name.errorInfo.emptyInfofolderName}}</div>
+                                <div nz-form-explain *ngIf="getFormControl('Name').dirty&&getFormControl('Name').hasError('name')">{{regular.name.errorInfo.emptyInfofolderspecial}}</div>
+                                <div nz-form-explain *ngIf="getFormControl('Name').dirty&&getFormControl('Name').hasError('length')">{{regular.name.errorInfo.emptyInfofolderNameLength}}</div>
+                            </div>
+                        </div>
+                        <div nz-form-item nz-row>
+                            <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                                <label for="'folder'" nz-form-item-required>所属文件夹</label>
+                            </div>
+                            <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                                <nz-select [(ngModel)]="selectedOption" [formControlName]="'folder'" style="width:100%;" [nzPlaceHolder]="'请选择'" nzShowSearch>
+                                    <nz-option *ngFor="let option of selects" [nzLabel]="option" [nzValue]="option"></nz-option>
+                                    <nz-option [nzLabel]="'disabled'" [nzDisabled]="true" [nzValue]="'disabled'" *ngIf="loading">
+                                        <ng-template #nzOptionTemplate>
+                                            {{load}}
+                                        </ng-template>
+                                    </nz-option>
+                                </nz-select>
+                            </div>
+                        </div>
+                        <div nz-form-item nz-row>
+                            <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                                <label for="'commit'">描述</label>
+                            </div>
+                            <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                                <cm-input>
+                                    <nz-input [nzType]="'textarea'" [nzRows]="'4'" [nzPlaceHolder]="''" [formControlName]="'commit'"></nz-input>
+                                </cm-input>
+                            </div>
+                        </div>
+
+                    </ng-template>
+                    <ng-template #modalFooter>
+                        <cm-button>
+                            <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancelMiddle($event)">
+                                取消
+                            </button>
+                        </cm-button>
+                        <cm-button>
+                            <button nz-button [nzType]="'primary'" [nzSize]="'large'" [disabled]="!validateForm.valid" (click)="saveTheDataSource(validateForm.value)"
+                                [nzLoading]="isConfirmLoading">
+                                确定
+                            </button>
+                        </cm-button>
+                    </ng-template>
+                </form>
+            </cm-form>
+        </nz-modal>
+    </cm-modal>
+</div>

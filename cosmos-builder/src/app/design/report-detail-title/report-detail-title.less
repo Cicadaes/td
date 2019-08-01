@@ -1,0 +1,221 @@
+.report-til {
+  background: #FFFFFF;
+  box-shadow: 0 1px 4px 0 rgba(23, 35, 61, 0.25);
+  padding: 10px 24px 10px 24px;
+  display: flex;
+  box-sizing: content-box;
+  justify-content: space-between;
+  height: 36px;
+}
+
+.ul-box{
+  display:flex;
+}
+.ul-box>ul:nth-child(1){
+  padding-right: 8px;
+  border-right: 1px solid #ddd;
+  margin-right: 8px;
+}
+.ul-box>ul {
+  display: flex;
+  align-items: center;
+}
+
+.ul-box>ul  li {
+  display: inline-block;
+  margin-right: 16px;
+}
+
+.ul-box>ul  li :hover {
+  cursor: pointer;
+}
+
+.ul-box>ul  li i:hover {
+  color: rgb(45, 140, 240);
+}
+
+.ul-box>ul  li:last-child {
+  margin-right: 0px;
+}
+
+.ul-box>ul  li i::before {
+  font-size: 20px !important;
+}
+
+.report-icon {
+  display: inline-block;
+  margin-top: 10px;
+  position: relative;
+}
+
+.report-page span:hover {
+  cursor: pointer;
+}
+
+.report-page ul li:hover {
+  cursor: pointer;
+}
+
+.report-revoke span:hover {
+  cursor: pointer;
+}
+
+.report-save i:hover {
+  cursor: pointer;
+}
+
+.report-border {
+  width: 25px;
+  height: 2px;
+  background: #2a6cF0;
+  position: absolute;
+  top: 35px;
+  content: '';
+}
+
+.report-icon i {
+  width: 24px;
+  font-size: 18px;
+  margin-right: 16px;
+}
+
+.report-operation {
+  display: flex;
+  align-items: center;
+}
+
+.report-operation>div {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: 22px;
+  border-right: 1px solid #ddd;
+}
+
+.report-operation>div:last-child {
+  border-right: none;
+}
+
+.report-operation>div span {
+  margin-right: 5px;
+}
+
+.report-operation>div span:last-child {
+  margin-right: 0;
+}
+
+.report-operation i {
+  font-size: 20px;
+}
+
+.anticon.anticon-rollback.last {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  color: #ddd;
+}
+
+.report-operation .report-page {
+  padding: 0;
+  position: relative;
+}
+
+.slash {
+  margin: 5px;
+}
+
+.report-operation>div .total {
+  margin-right: 10px;
+}
+
+.report-operation>div .iconLeft,
+.report-operation>div .iconRight {
+  margin: 0 16px !important;
+}
+
+.iconLeft i,
+.iconRight i,
+.iconDown i,
+.iconUp i {
+  font-size: 12px;
+}
+
+.report-page>ul div {
+  position: absolute;
+  top: 26px;
+  left: 0px;
+  width: 160px;
+  background: #fff;
+  box-shadow: 0 0 10px #ddd;
+  z-index: 1000;
+}
+.report-page>ul>li {
+  position:relative;
+}
+.report-page>ul li span{
+  margin-right:12px;
+}
+
+.report-page>ul li input {
+  border: none;
+  width: 100px;
+  background: none;
+}
+.report-page>ul .readonly{
+  border:none;
+}
+.report-page>ul .writeIn{
+  border-bottom: 1px solid #000 !important;
+}
+.report-page>ul li ul{
+  position: absolute;
+  left: 130px;
+  top: 0;
+  background: #fff;
+  box-shadow: 0 0 10px #ddd;
+  width:100px;
+}
+.report-page>ul li>ul li {
+    height: 26px;
+    width:100%;
+    padding: 7px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
+.report-page>ul li>ul li:hover{
+  background: #ecf6fd;
+} 
+
+:host ::ng-deep .report-til .ant-select-focused .ant-select-selection,
+:host ::ng-deep .report-til .ant-select-selection:focus,
+:host ::ng-deep .report-til .ant-select-selection:active {
+  box-shadow: none !important;
+}
+
+:host ::ng-deep .report-til .ant-select {
+  width: 60px;
+  border: none;
+}
+
+:host ::ng-deep .report-til .ant-select-selection,
+:host ::ng-deep .report-til .ant-select-selection {
+  border: none !important;
+}
+
+:host ::ng-deep .report-til .ant-select-dropdown-menu-item {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height:38px;
+}
+
+:host ::ng-deep .report-til .ant-select-dropdown-menu-item :hover .ant-select-dropdown-menu-item {
+  background: #ecf6fd;
+}
+:host ::ng-deep .report-til .ant-select-dropdown-menu-item {
+  overflow: inherit;
+}

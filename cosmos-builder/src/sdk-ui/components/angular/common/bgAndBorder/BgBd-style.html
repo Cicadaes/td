@@ -1,0 +1,117 @@
+<div class="piestyle">
+    <ul class="center">
+        <div class="piecenter">
+            <p class="bg" style="margin-bottom: 8px">背景和边框</p>
+            <div class="section" style="margin-bottom:8px">
+                <li class="border-image-left">
+                    <div>
+                        <p>背景</p>
+                        <div style="margin-top: 0px;padding-top:5px;height: 26px;width: 97%;line-height: 30px;">
+                            <color-picker-style [height]="14" width="70" [colors]="_cmPresetColors" [cmcolor]="bgAndBorder.backgroundColor" [cmType]="'hex'"
+                                (provinceOut)="bgAndBorder.backgroundColor = $event;optionChange();"></color-picker-style>
+                            <!-- <cm-color-picker [cmType]="'board'" [cmcolor]="bgAndBorder.backgroundColor" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition "
+                                (provinceOut)="bgAndBorder.backgroundColor = $event;optionChange();" [cmPositionOffset]="_cmPositionOffsetbackground"></cm-color-picker> -->
+                        </div>
+                    </div>
+                    <div>
+                        <p>圆角半径</p>
+                        <cm-select>
+                            <nz-select [(ngModel)]="bgAndBorder.borderRadius" [nzPlaceHolder]="'请输入圆角半径'" (ngModelChange)="optionChange($event)">
+                                <nz-option *ngFor="let option of filletRadius" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                                </nz-option>
+                            </nz-select>
+                        </cm-select>
+                    </div>
+                    <div>
+                        <p>边框粗细</p>
+                        <!-- [(ngModel)]="bgAndBorder.borderWidth" -->
+                        <cm-select>
+                            <nz-select [(ngModel)]="bgAndBorder.borderWidth" [nzPlaceHolder]="'请输入边框宽度'" (ngModelChange)="OptionChange($event)">
+                                <nz-option *ngFor="let option of borderWidths" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                                </nz-option>
+                            </nz-select>
+                        </cm-select>
+                    </div>
+                </li>
+                <li class="border-image-right">
+                    <div>
+                        <p>边框颜色</p>
+                        <div style="margin-top: 0px;padding-top:5px;height: 26px;width: 97%;line-height: 30px;">
+                                <color-picker-style [height]="14" width="70" [colors]="_cmPresetColors" [cmcolor]="cmcolorBd" [cmType]="'hex'"
+                                (provinceOut)="bgAndBorder.borderColor = $event;optionChange();"></color-picker-style>
+                            <!-- <cm-color-picker [cmType]="'board'" [cmcolor]="cmcolorBd" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition "
+                                (cmcolorchange)="bgAndBorder.borderColor = $event;optionChange();" [cmPositionOffset]="_cmPositionOffsetcolor"></cm-color-picker> -->
+                        </div>
+                    </div>
+                    <div>
+                        <p>边框样式</p>
+                        <cm-select>
+                            <nz-select [(ngModel)]="bgAndBorder.borderStyle" [nzPlaceHolder]="'请选择边框样式'" (ngModelChange)="optionChange($event)">
+                                <nz-option *ngFor="let option of borderStyles" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                                </nz-option>
+                            </nz-select>
+                        </cm-select>
+                    </div>
+                </li>
+                <div class="border">
+                    <p>边框显示</p>
+                    <div>
+                        <cm-checkbox>
+                            <label nz-checkbox [(ngModel)]="borderTop" (ngModelChange)="optionChange($event)">
+                                <span>上边框</span>
+                            </label>
+                        </cm-checkbox>
+                        <cm-checkbox>
+                            <label nz-checkbox [(ngModel)]="borderBottom" (ngModelChange)="optionChange($event)">
+                                <span>下边框</span>
+                            </label>
+                        </cm-checkbox>
+                    </div>
+                    <div>
+                        <cm-checkbox>
+                            <label nz-checkbox [(ngModel)]="borderLeft" (ngModelChange)="optionChange($event)">
+                                <span>左边框</span>
+                            </label>
+                        </cm-checkbox>
+                        <cm-checkbox>
+                            <label nz-checkbox [(ngModel)]="borderRight" (ngModelChange)="optionChange($event)">
+                                <span>右边框</span>
+                            </label>
+                        </cm-checkbox>
+                    </div>
+                </div>
+                <!-- <div class="rim ">
+                    <cm-checkbox>
+                        <label nz-checkbox [(ngModel)]="boxShadow" (ngModelChange)="optionChange($event)">
+                            <span>添加边框阴影</span>
+                        </label>
+                    </cm-checkbox>
+                </div> -->
+                <!-- <ul class="center"> -->
+                <!-- <div class="piecenter"> -->
+                <div class="border">
+                    <p>边框阴影</p>
+                    <cm-radio>
+                        <nz-radio-group [(ngModel)]="boxShadow" (ngModelChange)="optionChange($event)">
+
+                            <label nz-radio [nzValue]="'rightBottom'">
+                                <span>右下</span>
+                            </label>
+
+                            <label nz-radio [nzValue]="'round'">
+                                <span>四周</span>
+                            </label>
+
+                            <label nz-radio [nzValue]="'none'">
+                                <span>无</span>
+                            </label>
+
+                        </nz-radio-group>
+                    </cm-radio>
+                </div>
+                <!-- </div> -->
+                <!-- </ul> -->
+            </div>
+        </div>
+    </ul>
+</div>

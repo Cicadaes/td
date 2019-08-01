@@ -1,0 +1,72 @@
+.report-detail-data {
+    min-height: 100%;
+    padding: 20px;
+}
+.item-config{
+    margin-bottom: 10px;
+}
+.item-config .config-content{
+    padding-left: 16px;
+    .procedure{
+        width: 90%;
+        cursor: pointer;
+        height: 25px;
+        line-height: 25px;
+        background: #ffffff;
+        border-radius: 5px;
+        border:1px dashed #dddddd;
+        text-align: left;
+        i{
+            height: 14px;
+            width: 14px;
+            display: inline-block;
+            background:#dddddd;
+            float: left;
+            margin: 5.2px 10px 0 36%;
+        }
+    }
+    .course{
+        margin-top: 12px;
+        height: 30px;
+        line-height: 30px;
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        width: 90%;
+        padding-left: 10px;
+        >input{
+            display: inline-block;
+            height: 70%;
+            width: 50%;
+            border: none;
+            background:none;
+        }
+    }
+}
+.item-label{
+    font-family: PingFangSC-Semibold;
+    font-size: 12px;
+    color: #464C5B;
+    line-height: 32px;
+}
+.ant-radio-wrapper {
+    margin-bottom: 10px;
+}
+.add-button{
+    width: 90%;
+    text-align: left;
+}
+:host ::ng-deep .report-detail-data{
+    .ant-select {
+        width: 100%;
+    }
+    .ant-select-selection, .ant-select-selection {
+        background: none !important;
+        border: none !important;
+        border-bottom: 1px solid #ddd !important;
+        width: 100% !important;
+      }
+      .ant-select-focused .ant-select-selection,.ant-select-selection:focus,.ant-select-selection:active {
+        box-shadow: none !important;
+      }
+
+}

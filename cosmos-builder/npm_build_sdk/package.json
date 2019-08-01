@@ -1,0 +1,19 @@
+{
+    "name": "cosmos-td-sdk",
+    "version": "0.1.68",
+    "description": "cosmos-sdk for report",
+    "main": "./index.js",
+    "typings": "./index.d.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "cosmos",
+        "angular"
+    ],
+    "author": "td cosmos team",
+    "license": "MIT",
+    "dependencies": {
+        "sortablejs": "^1.7.0"
+    }
+}

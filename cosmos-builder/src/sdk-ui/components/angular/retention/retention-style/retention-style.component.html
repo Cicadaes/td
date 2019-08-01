@@ -1,0 +1,51 @@
+<div class="retentionstyle">
+    <layout [layoutData]="_layoutLayout" (provinceOut)="setLayoutData($event)" [cmAlign]="'level'" [cmDircLevel]="true" [cmDircVertical]="true"></layout>
+
+    <dl>
+        <dt>热力图</dt>
+        <dd>
+            <cm-checkbox class="checkgitem">
+                <label nz-checkbox [(ngModel)]="heatmap.show" (ngModelChange)="OptionChange($event)">
+                    <span>显示</span>
+                </label>
+            </cm-checkbox>
+            <div style="height:20px;line-height:20px;margin:12px 0">颜色</div>
+            <div style="height:25px;line-height:25px">
+                <color-picker-style *ngIf="_colorPicker(i)" [height]="16" width="70" [colors]="_cmPresetColors" [cmcolor]="heatmap.color"
+                    [cmType]="'hex'" (provinceOut)="heatmap.color = $event;OptionChange($event)"></color-picker-style>
+                <!-- <cm-color-picker [cmType]="'board'" [cmType]="simple" [cmcolor]="heatmap.color" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition"
+                    (cmcolorchange)="heatmap.color = $event;OptionChange($event);" [cmPositionOffset]="_cmPositionOffset"></cm-color-picker> -->
+            </div>
+        </dd>
+        <dt>内容</dt>
+        <dd class="section">
+            <div>
+                <!-- <div class="type-size">
+                    <div>
+                        <p>标签颜色</p>
+                        <span style="line-height: 40px;display: block;height: 33px;width: 100%;">
+                                    <cm-color-picker [cmcolor]="_cmDisColor" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition" (cmcolorchange)="content.color = $event;OptionChange();" [cmPositionOffset]="_cmPositionOffset"></cm-color-picker>
+                                </span>
+                    </div>
+                </div> -->
+                <div class="type-face type-face-map">
+                    <p>标签大小</p>
+                    <cm-select style="width:100%">
+                        <nz-select [(ngModel)]="content.fontSize" [nzPlaceHolder]="'请选择字号'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                            <nz-option *ngFor="let option of fontSizeRetention" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled"></nz-option>
+                        </nz-select>
+                    </cm-select>
+                </div>
+            </div>
+            <!-- <div class="percentage" style="position: relative;text-align: right;">
+                <i style="position: absolute;top:43%;left:0" class="icon iconfont icon-ziti4"></i>
+                <cm-select>
+                    <nz-select [(ngModel)]="content.fontFamily" [nzPlaceHolder]="'请选择字体'" nzAllowClear (ngModelChange)="OptionChange($event)">
+                        <nz-option *ngFor="let option of typefaces" [nzLabel]="option.label" [nzValue]="option.value" [nzDisabled]="option.disabled">
+                        </nz-option>
+                    </nz-select>
+                </cm-select>
+            </div> -->
+        </dd>
+    </dl>
+</div>

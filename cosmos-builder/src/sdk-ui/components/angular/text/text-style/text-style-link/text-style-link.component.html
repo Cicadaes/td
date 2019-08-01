@@ -1,0 +1,48 @@
+<div class="report-create">
+    <cm-modal>
+        <nz-modal [nzWrapClassName]="'vertical-center-modal'" [nzContent]="modalContent" [nzVisible]="isVisibleMiddle" [nzTitle]="'
+        链接'" (nzOnCancel)="handleCancelMiddle($event)" (nzOnOk)="handleOkMiddle($event)" [nzFooter]="modalFooter">
+            <ng-template #modalContent>
+                <div style="max-height:190px;overflow-y:auto;" class="content">
+                    <div>
+                        <span>*</span>&nbsp;&nbsp;<span class="caption">链接标题 :</span>
+                        <cm-input class="contrnt">
+                            <nz-input style="display: inherit;" nzDisabled [nzSize]="'large'" [(ngModel)]="link.content"></nz-input>
+                        </cm-input>
+                    </div>
+                    <div>
+                        <span>*</span>&nbsp;&nbsp;<span class="link">链接地址 :</span>
+                        <cm-input class="contrnt">
+                            <nz-input style="display: inherit;" [nzSize]="'large'" [(ngModel)]="link.site"></nz-input>
+                        </cm-input>
+                    </div>
+                </div>
+                <div class="linjie">
+                    <cm-checkbox class="checkgitem">
+                        <label nz-checkbox [(ngModel)]="link.dataLabel" (ngModelChange)="OptionChange($event)">
+                                    <span>在新标签页中打开链接</span>
+                                </label>
+                    </cm-checkbox>
+                </div>
+                <div style="height:24px;width:100%">
+                    <div *ngIf="decide" style="height: 24px;line-height: 24px;padding-left: 10px;color: red;font-family: PingFangSC-Regular;">
+                        *&nbsp;{{promptMessage}} .
+                    </div>
+                </div>
+
+            </ng-template>
+            <ng-template #modalFooter>
+                <cm-button>
+                    <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancelMiddle(link)">
+                                取消
+                            </button>
+                </cm-button>
+                <cm-button>
+                    <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="saveTheDataSource(link)">
+                                确定
+                            </button>
+                </cm-button>
+            </ng-template>
+        </nz-modal>
+    </cm-modal>
+</div>

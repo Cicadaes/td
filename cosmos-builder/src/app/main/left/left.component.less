@@ -1,0 +1,180 @@
+::ng-deep {
+
+.fl {
+    float: left;
+  }
+.fr {
+    float: right;
+  }
+.clrfix {
+    zoom: 1;
+  }
+.clrfix:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+
+.ant-menu {
+    outline: none;
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style: none;
+    z-index: 1050;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    background: #1F3159 !important;
+    line-height: 46px;
+    transition: background .3s, width .2s;
+}
+.theme-light .ant-menu-root.ant-menu-inline, .theme-light .ant-menu-root.ant-menu-inline, .theme-ligh .ant-menu-sub.ant-menu-inline, .theme-light .ant-menu-sub.ant-menu-inline, .theme-ligh .ant-menu-vertical, .theme-light .ant-menu-vertical {
+    background-color: #1F3159 !important;
+}
+.theme-ligh .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected, .theme-light .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    color: #FFFFFF !important;
+    background-color: #2D8CF0 !important;
+}
+
+.ant-menu-item.ng-star-inserted{
+    background-color: #1F3159 !important;
+}
+.ant-menu-item.ng-star-inserted.active{
+    color: #FFFFFF !important;
+    background-color: #2D8CF0 !important;
+}
+
+a {
+    color: rgba(0, 0, 0, 0.65);
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+}
+
+.theLeft {
+    height: 100%;
+    background:#1F3159;
+    overflow: hidden;
+}
+
+.theLeft .cm-iconfont {
+    margin-right: 22px;
+}
+
+.theLeft .menu-box {
+    height: calc(~"100% - 30px");
+    overflow-x: hidden; 
+}
+
+.theLeft .ant-menu-inline .ant-menu-submenu-title {
+    padding: 0 0 16px 0;
+}
+:focus{
+    outline: none;
+}
+
+.theLeft .menu-box > li{
+    padding: 0 16px;   
+}
+
+.theLeft .menu-box > li span{
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    line-height: 20px;
+}
+.theme-light .ant-menu-item:hover, .theme-light .ant-menu-item:hover, .theme-light .ant-menu-item-active:hover, .theme-light .ant-menu-item-active:hover, .theme-light .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open:hover, .theme-light .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open:hover, .theme-ligh .ant-menu-submenu-active:hover, .theme-light .ant-menu-submenu-active:hover, .theme-ligh .ant-menu-submenu-title:hover, .theme-light .ant-menu-submenu-title:hover {
+    color: #fff !important;
+}
+.theme-light .ant-menu-item, .theme-light  .ant-menu-item, .theme-light .ant-menu-item-active, .theme-light  .ant-menu-item-active, .theme-light .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open, .theme-light  .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open, .theme-light .ant-menu-submenu-active, .theme-light  .ant-menu-submenu-active, .theme-light .ant-menu-submenu-title, .theme-light  .ant-menu-submenu-title {
+    color: #ccc !important;
+}
+.left-btn{
+    height:30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    padding-bottom:20px;
+}
+.theLeft .menu-title {
+    display: block;
+    line-height: 60px;
+    height: 62px;
+}
+
+
+.theLeft .menu-title-collapse {
+    margin-left: -2px!important;
+}
+
+.theLeft .td-icon {
+    float: left;
+    width: 32px;
+    height: 32px;
+    background: url("../../../assets/images/tdlogo2.png") no-repeat center center ;
+    margin-top: 16px;
+    background-size: 32px 32px;
+}
+
+.theLeft .td-title {
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    margin-left: 17px;
+}
+.ant-menu-inline, .ant-menu-vertical {
+    border-right: none !important;
+}
+.theLeft .menu-box .td-title{
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+.td-title:before{
+    content: '';
+    width: 1px;
+    height: 12px;
+    background: #ccc;
+    top: 16px;
+    left: -7px;
+    position: absolute;
+}
+.td-title:after{
+    content: '';
+    width: 1px;
+    height: 12px;
+    background: #ccc;
+    top: 38px;
+    left: -7px;
+    position: absolute;
+}
+.td-title span:first-child:after{
+    content: '';
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #ccc;
+    top: 32px;
+    left: -8px;
+    position: absolute;
+}
+.theLeft .menu-box .td-title span:first-child{
+    font-family: PingFangSC-Medium;
+    font-size: 16px;
+    color: #FFFFFF;
+    line-height: 14.4px;
+    margin: 16px 0px 8px 0px;
+}
+.theLeft .menu-box .td-title span:last-child{
+    font-family: HelveticaNeue-Light;
+    font-size: 11.2px;
+    color: #ccc;
+    line-height: 10.08px;
+}
+.ant-menu-inline-collapsed {
+    width: 56px !important;
+}
+}

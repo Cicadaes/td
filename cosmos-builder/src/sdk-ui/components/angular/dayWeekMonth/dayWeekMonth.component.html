@@ -1,0 +1,13 @@
+<main class="clrfix">
+    <div class="dayWeekMonth" #dayWeekMonth [ngStyle]="alignStyle">
+        <cm-button>
+            <cm-radio>
+                <nz-radio-group>
+                    <label (click)="changeButton(data.value)" nz-radio-button [nzValue]="data.value" *ngFor="let data of dataArr">
+                        <span>{{data.label}}</span>
+                    </label>
+                </nz-radio-group>
+            </cm-radio>
+        </cm-button>
+    </div>
+</main>

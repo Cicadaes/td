@@ -1,0 +1,155 @@
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+
+.clrfix {
+    zoom: 1;
+  }
+.clrfix:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    overflow: hidden;
+  }
+
+  .table-td{
+      max-width: 260px;
+  }
+.metadata-step2-content{
+    .itemSelected td{
+        background-color: #ebf7ff;
+    }
+    .metadata-step2-head{
+        padding: 13px 24px;
+        font-family: PingFangSC-Medium;
+        font-size: 14px;
+        color: #17233D;
+        .head-item{
+            height: 24px;
+            line-height: 24px;
+            &.refreshBtn{
+                font-family: PingFangSC-Regular;
+                font-size: 12px;
+                color: #2D8CF0;
+                height: 24px;
+                margin-left: 16px;
+                cursor: pointer;
+            }
+        }
+    }
+    background: #FFFFFF;
+    box-shadow: 0 1px 4px 0 rgba(23,35,61,0.25);
+    border-radius: 2px;
+    .table-box {
+        height: 100%;
+        .clrfix;
+        [nz-table]{
+            height: auto;
+        }
+
+        .table-left{
+            height: 500px;
+            overflow: hidden;
+            margin-right: 24px;
+            width: 40%;
+            float: left;
+            tr {
+                cursor: pointer;
+            }
+
+        }
+        .table-right{
+            width: calc(~'60% - 24px');
+            float: left;
+            height: 500px;
+            overflow: hidden;
+        }
+        
+    }
+
+    &.metadata-step2-restapi{
+        margin-bottom: 24px;;
+    }
+
+    .metadataStep2ListTitle {
+        font-family: PingFangSC-Medium;
+        font-size: 14px;
+        color: #17233D;
+        line-height: 22px;
+        padding: 13px 24px;
+        text-align: left;
+        border-bottom: 1px solid rgba(23,35,61,0.10);
+        .head{
+            display: inline-block;
+            margin-right: 14px;
+        }
+        i {
+            color: rgba(23,35,61,0.55);
+        }
+        .text{
+            font-family: PingFangSC-Regular;
+            font-size: 12px;
+            color: rgba(23,35,61,0.75);
+            line-height: 20px;
+            margin-left: 7px;
+            a{
+                font-family: PingFangSC-Medium;
+                font-size: 12px;
+                color: #2D8CF0;
+            }
+        }
+      }
+
+    .metadataStep2ListForm{
+        padding: 24px 24px 0 24px;
+        [nz-form-label]{
+            width: 110px;
+            float: left;
+            display: inline-block;
+            label{
+                font-family: PingFangSC-Medium;
+                font-size: 12px;
+                color: #17233D!important;
+            }
+        }
+    
+        [nz-form-control]{
+            float: left;
+            width: 400px;
+            text-align: left;
+            display: inline-block;
+        }
+    }
+
+    .restapi-table-box{
+        max-height:100%;
+        overflow: auto;
+        .paramAction{
+            cursor: pointer;
+        }
+    }
+
+    .restapiPage{
+        padding: 0 24px 24px 24px;
+        text-align: left;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .restapiDoc{
+        text-align: left;
+        margin-left: 20px;
+        margin-top: 30px;
+    }
+    .errorInfo {
+        text-align: left;
+        color: #f04134;
+        padding: 24px;
+    }
+}
+

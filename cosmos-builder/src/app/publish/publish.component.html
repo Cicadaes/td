@@ -1,0 +1,34 @@
+<div class="main-publish">
+    <header class="main-header" *ngIf="title?.length > 0">
+        <cm-breadcrumb>
+            <nz-breadcrumb [nzSeparator]="'>'">
+                <nz-breadcrumb-item *ngFor="let obj of title;let i = index">
+                    <a (click)="routerChange(i, obj)">{{obj.name}}</a>
+                </nz-breadcrumb-item>
+            </nz-breadcrumb>
+        </cm-breadcrumb>
+    </header>
+    <div class='publish-tab'>
+        <cm-tabs class="tabs" *ngIf="tabs.length>1">
+            <nz-tabset [nzTabBarExtraTemplate]="tabBarExtraContent">
+                <nz-tab *ngFor="let tab of tabs" (nzSelect)="ChangeTabs(tab.id)">
+                    <ng-template #nzTabHeading>
+                        {{tab.value}}
+                    </ng-template>
+                </nz-tab>
+            </nz-tabset>
+        </cm-tabs>
+    </div>
+
+    <div class="publish">
+        <div class="content-box">
+            <!-- <div class="publish-til">
+                        <span>报表配置</span>
+                    </div> -->
+
+            <div class="stage-box" [ngStyle]="heightStyles">
+                <div class="stage"></div>
+            </div>
+        </div>
+    </div>
+</div>

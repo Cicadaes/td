@@ -1,0 +1,103 @@
+<div class="linestyle">
+    <layout [layoutData]="_layoutLayout" (provinceOut)="setLayoutData($event)" [cmHeight]="'334px'" [cmPadding]="'16px 16px 16px 16px'"
+        [cmAlign]="'level'"></layout>
+    <dl>
+        <dt>条形图</dt>
+        <dd class="graphtab">
+            <span [ngClass]="{'graphtabitem': true, 'flexitem': true, 'selected': barStyle.category == 'xAxis', 'left': true}" (click)="barStyle.category = 'xAxis';OptionChange($event);">
+                <i class="icon iconfont icon-icon-test1"></i>
+            </span>
+            <span [ngClass]="{'graphtabitem': true, 'flexitem': true, 'selected': barStyle.category == 'yAxis', 'right': true}" (click)="barStyle.category = 'yAxis';OptionChange($event);">
+                <i class="icon iconfont icon-icon-test"></i>
+            </span>
+        </dd>
+        <dd class="checkgroup flexbox">
+            <cm-checkbox class="checkgitem">
+                <label nz-checkbox [(ngModel)]="barStyle.stacked" (ngModelChange)="OptionChange($event)">
+                    <span>堆叠条形</span>
+                </label>
+            </cm-checkbox>
+            <cm-checkbox [ngClass]="{'checkgitem': true, 'hide': !barStyle.stacked}">
+                <label nz-checkbox [(ngModel)]="barStyle.allStacked" (ngModelChange)="OptionChange($event)">
+                    <span>100%堆叠</span>
+                </label>
+            </cm-checkbox>
+        </dd>
+        <dd class="checkgroup flexbox">
+            <cm-checkbox class="checkgitem">
+                <label nz-checkbox [(ngModel)]="barStyle.dataLabel" (ngModelChange)="OptionChange($event)">
+                    <span>显示数据标签</span>
+                </label>
+            </cm-checkbox>
+        </dd>
+        <dd class="checkgroup flexbox" *ngIf="ratio">
+            <cm-checkbox class="checkgitem">
+                <label nz-checkbox [(ngModel)]="barStyle.date" (ngModelChange)="OptionChange($event)">
+                    <span>显示指标值占比</span>
+                </label>
+            </cm-checkbox>
+        </dd>
+    </dl>
+
+    <dl>
+        <dt>颜色</dt>
+        <dd>
+            <nz-radio-group [(ngModel)]="barStyle.mode" (ngModelChange)="OptionChange($event)">
+                <label nz-radio nzValue="single">
+                    <span>单一颜色</span>
+                </label>
+                <label nz-radio nzValue="queue">
+                    <span>按顺序</span>
+                </label>
+            </nz-radio-group>
+        </dd>
+        <dd style="line-height: 0px;">
+            <div class="colororder">
+                <span *ngFor="let color of colorsInit; let i = index;" [ngClass]="{'coloritem': true, 'selected': false, 'rimed': false, 'dashed': i && barNum && i >= barNum}">
+                    <color-picker-style [height]="16" width="16" [colors]="_cmPresetColors" [cmcolor]="i >= corLen? '#ffffff' : color" [cmType]="'hex'"
+                        (provinceOut)="colorChange($event,i)"></color-picker-style>
+                    <!-- <cm-color-picker [cmType]="'board'" *ngIf="_colorPicker(i)" [cmcolor]="i >= corLen? '#ffffff' : color" [cmPresetColors]="_cmPresetColors"
+                        [cmPosition]="_cmPosition" (cmcolorchange)="colorChange($event, i)" [cmPositionOffset]="_cmPositionOffset"></cm-color-picker> -->
+                </span>
+            </div>
+        </dd>
+    </dl>
+    <!-- <dl [ngStyle]="{'display':shadows ? 'block' : 'none' }"> -->
+    <dl>
+        <dt>背景阴影</dt>
+        <dd>
+            <cm-checkbox class="checkgitem">
+                <label nz-checkbox [(ngModel)]="barStyle.shadow" (ngModelChange)="OptionChange($event)">
+                    <span>显示阴影</span>
+                </label>
+            </cm-checkbox>
+        </dd>
+        <dd style="display:block;">
+            <div>阴影颜色</div>
+            <div style="margin:13px 0 0 0" class="shadow">
+                <color-picker-style [height]="15" width="70" [colors]="_cmPresetColors" [cmcolor]="barStyle.shadowcolor" [cmType]="'hex'"
+                    (provinceOut)="barStyle.shadowcolor = $event;OptionChange()"></color-picker-style>
+                <!-- <cm-color-picker [cmType]="'board'" [cmcolor]="barStyle.shadowcolor" [cmPresetColors]="_cmPresetColors" [cmPosition]="_cmPosition"
+                    (cmcolorchange)="barStyle.shadowcolor = $event;OptionChange();" [cmPositionOffset]="_cmPositionOffset"></cm-color-picker> -->
+            </div>
+        </dd>
+    </dl>
+    <dl *ngIf="barStyle.category == 'xAxis'">
+        <dt>区域缩放</dt>
+        <dd>
+            <cm-checkbox>
+                <label nz-checkbox [(ngModel)]="barStyle.scaling" (ngModelChange)="OptionChange($event)">
+                    <span>显示</span>
+                </label>
+            </cm-checkbox>
+        </dd>
+    </dl>
+    <!-- 图例 -->
+    <legend-style legendPosition [layoutData]="_layoutLegend" (legendOut)="legendData($event)"></legend-style>
+
+    <!-- 网格 -->
+    <grid [layoutData]="_layoutGrid" (dataChange)="gridData($event)"></grid>
+
+    <!-- 坐标轴 -->
+    <axis [layoutData]="_layoutAxis" (dataChange)="axisData($event)"></axis>
+</div>

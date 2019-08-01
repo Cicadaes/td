@@ -1,0 +1,43 @@
+.clrfix {
+  zoom: 1;
+}
+.clrfix:after {
+  content: "";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+  overflow: hidden;
+}
+
+.fl{
+  float: left;
+}
+
+.fr{
+  float: right;
+}
+
+main[cm-grid] {
+  width: 100%;
+  height: 100%;
+
+  [header]{
+    padding: 0 18px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    [title]{
+      font-weight: bold;
+    }
+
+    [operate]{
+      i{
+        margin-left: 5px;
+        cursor: pointer;
+      }
+    }
+
+  }
+
+}

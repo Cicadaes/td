@@ -1,0 +1,31 @@
+<div class="piestyle">
+    <ul class="center">
+        <div class="piecenter">
+            <p>对齐方式</p>
+            <div class="section">
+                <div>
+                    <cm-radio>
+                        <nz-radio-group [(ngModel)]="alignment" (ngModelChange)="OptionChange($event)">
+                            <li>
+                                <label nz-radio [nzValue]="'left'">
+                                    <span>左对齐</span>
+                                </label>
+                            </li>
+                            <li style="margin:5px 0 ">
+                                <label nz-radio [nzValue]="'center'">
+                                    <span>居中</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label nz-radio [nzValue]="'right'">
+                                    <span>右对齐</span>
+                                </label>
+                            </li>
+                        </nz-radio-group>
+                    </cm-radio>
+                </div>
+                <div style="width:100%;clear:both"></div>
+            </div>
+        </div>
+    </ul>
+</div>

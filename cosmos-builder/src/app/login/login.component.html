@@ -1,0 +1,48 @@
+<div class="login">
+    <div class="loginInfo">
+        <div class="loginTitle">
+            <div class="loginLogo">
+                <img src="../../assets/images/tdlogo2.png" alt="">
+            </div>
+            <p>登录报表构建系统</p>
+        </div>
+        <cm-form>
+            <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)">
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="7">
+                        <label>用户名</label>
+                    </div>
+                    <div nz-col [nzSpan]="15" nz-form-control nzHasFeedback>
+                        <cm-input>
+                            <nz-input formControlName="userName" [nzType]="'text'" [nzSize]="'large'">
+                            </nz-input>
+                        </cm-input>
+                        <div nz-form-explain *ngIf="getFormControl('userName').dirty&&getFormControl('userName').hasError('required')">请输入用户名</div>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="7">
+                        <label>密码</label>
+                    </div>
+                    <div nz-col [nzSpan]="15" nz-form-control nzHasFeedback>
+                        <cm-input>
+                            <nz-input formControlName="password" [nzType]="'password'" [nzSize]="'large'">
+                            </nz-input>
+                        </cm-input>
+                        <div nz-form-explain *ngIf="getFormControl('password').dirty&&getFormControl('password').hasError('required')">请输入密码</div>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-col [nzOffset]="7" [nzSpan]="12" nz-form-control>
+                        <cm-button>
+                            <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="push(validateForm.value)">登录</button>
+                        </cm-button>
+                        <cm-button>
+                            <button nz-button [nzSize]="'large'" (click)="resetForm($event)">重置</button>
+                        </cm-button>
+                    </div>
+                </div>
+            </form>
+        </cm-form>
+    </div>
+</div>

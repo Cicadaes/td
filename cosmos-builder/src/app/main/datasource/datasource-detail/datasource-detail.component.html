@@ -1,0 +1,266 @@
+<div class="particulars">
+    <div class="dataSource">
+        <span>数据源详情</span>
+        <div class="amend">
+            <cm-button>
+                <button nz-button [nzType]="'primary'" [nzSize]="'large'" [routerLink]="['/main/datasource/modify',datasourceDeta.id]" [disabled]="datasourceDeta.status==0?true:false">
+                    <span>修改</span>
+                </button>
+            </cm-button>
+        </div>
+    </div>
+    <cm-form>
+        <form nz-form [formGroup]="validateForm">
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="2">
+                    <label>ID</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="20">
+                    <span nz-form-text>{{datasourceDeta.id}}</span>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="2">
+                    <label>数据源名称</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="20">
+                    <span nz-form-text [title]="datasourceDeta.name">{{datasourceDeta.name}}</span>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="2">
+                    <label>数据源类型</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="20">
+                    <span nz-form-text>{{datasourceDeta.type}}</span>
+                </div>
+            </div>
+            <div *ngIf="datasourceDeta.type=='JDBC'">
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="2">
+                        <label>主机IP</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <span nz-form-text>{{datasourceDeta.host}}</span>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="2">
+                        <label>数据库名称</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <span nz-form-text [title]="datasourceDeta.database">{{datasourceDeta.database}}</span>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="2">
+                        <label>端口号</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <span nz-form-text>{{datasourceDeta.port}}</span>
+
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="2">
+                        <label>用户名</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <span nz-form-text [title]="datasourceDeta.userName">{{datasourceDeta.userName}}</span>
+
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="2">
+                        <label>密码</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <span nz-form-text>*********</span>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="2">
+                        <label>描述</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <span nz-form-text [title]="datasourceDeta.description">{{datasourceDeta.description}}</span>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="2">
+                        <label>状态</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <span *ngIf="datasourceDeta.status!=0?true:false">正常</span>
+                        <span *ngIf="datasourceDeta.status==0?true:false">禁用</span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="datasourceDeta.type=='RESTAPI'">
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="2">
+                        <label>URL</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <span nz-form-text>{{datasourceDeta.url}}</span>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="2">
+                        <label>描述</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <span nz-form-text [title]="datasourceDeta.description">{{datasourceDeta.description}}</span>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="2">
+                        <label>状态</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <span *ngIf="datasourceDeta.status!=0?true:false">正常</span>
+                        <span *ngIf="datasourceDeta.status==0?true:false">禁用</span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="datasourceDeta.type=='ELASTICSEARCH'">
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="2">
+                        <label>版本号</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <span nz-form-text>{{datasourceDeta.version}}</span>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="2">
+                        <label>URL</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <span nz-form-text>{{datasourceDeta.url}}</span>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="2">
+                        <label>描述</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <span nz-form-text [title]="datasourceDeta.description">{{datasourceDeta.description}}</span>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="2">
+                        <label>状态</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <span *ngIf="datasourceDeta.status!=0?true:false">正常</span>
+                        <span *ngIf="datasourceDeta.status==0?true:false">禁用</span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="datasourceDeta.type=='SPARK'">
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="2">
+                        <label>主机IP</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <span nz-form-text>{{datasourceDeta.host}}</span>
+
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="2">
+                        <label>数据库名称</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <span nz-form-text [title]="datasourceDeta.database">{{datasourceDeta.database}}</span>
+
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="2">
+                        <label>spark库</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <span nz-form-text [title]="datasourceDeta.database">{{datasourceDeta.database}}</span>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="2">
+                        <label>端口号</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <span nz-form-text>{{datasourceDeta.port}}</span>
+
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="2">
+                        <label>用户名</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <span nz-form-text [title]="datasourceDeta.userName">{{datasourceDeta.userName}}</span>
+
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="2">
+                        <label>密码</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <span nz-form-text>*********</span>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="2">
+                        <label>描述</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <span nz-form-text [title]="datasourceDeta.description">{{datasourceDeta.description}}</span>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSpan]="2">
+                        <label>状态</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <span *ngIf="datasourceDeta.status!=0?true:false">正常</span>
+                        <span *ngIf="datasourceDeta.status==0?true:false">禁用</span>
+                    </div>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="2">
+                    <label>创建人</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="20">
+                    <span>{{datasourceDeta.creator}}</span>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="2">
+                    <label>创建时间</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="20">
+                    <span>{{datasourceDeta.createTime}}</span>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="2">
+                    <label>更新人</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="20">
+                    <span>{{datasourceDeta.updater}}</span>
+                </div>
+            </div>
+            <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSpan]="2">
+                    <label>更新时间</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="20">
+                    <span>{{datasourceDeta.updateTime}}</span>
+                </div>
+            </div>
+        </form>
+    </cm-form>
+</div>

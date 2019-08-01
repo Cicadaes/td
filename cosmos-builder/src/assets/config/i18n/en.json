@@ -1,0 +1,16 @@
+{
+    "LANGUAGE": "English",
+    "THEME": "Theme",
+    "component": {
+        "button": {
+            "large": "large button",
+            "medium": "default button",
+            "small": "small button",
+            "mini": "mini button"
+        },
+        "datepicker":{
+            "enddate":  "End Date",
+            "startdate": "Start Date"
+        }
+    }
+}

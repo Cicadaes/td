@@ -1,0 +1,72 @@
+<div class="report-detail-data">
+    <div class="item-config">
+        <label class="item-label">CUBE</label>
+        <div class="config-content">
+            <cm-select>
+                <nz-select [nzSize]="'large'" name="cube" [nzPlaceHolder]="'请选择'" style="width:90%;" [(ngModel)]="selectedCube" nzShowSearch (ngModelChange)="changeCube(selectedCube)">
+                    <nz-option *ngFor="let select of cubeList" [nzLabel]="select.label" [nzValue]="select.value">
+                        <ng-template #nzOptionTemplate>
+                            <span title="{{select.label}}">{{select.label}}</span>
+                        </ng-template>
+                    </nz-option>
+                </nz-select>
+            </cm-select>
+        </div>
+    </div>
+    <div class="item-config">
+        <label class="item-label">定义留存访客</label>
+        <div class="config-content">
+            <cm-checkbox>
+                <label nz-checkbox [(ngModel)]="isShowFilter" (ngModelChange)="changeShowFilter($event)">
+                        <span>显示</span>
+                    </label>
+            </cm-checkbox>
+            <br>
+            <label class="item-label">考察对象</label>
+            <cm-select>
+                <!-- <cm-select *ngFor="let dimension of selectedDimensions;let i = index;"> -->
+                <!-- <nz-select [nzSize]="'large'" name="dimensions" [(ngModel)]="dimension.value" (ngModelChange)="changeDimension(dimension.value)" [nzPlaceHolder]="'请选择日期维度'" style="width:90%;margin-bottom:10px;" nzShowSearch>
+                        <nz-option *ngFor="let select of dateDimensionsList" [nzLabel]="select.label" [nzValue]="select.value"></nz-option>
+                    </nz-select> -->
+                <nz-select [nzSize]="'large'" name="date" [(ngModel)]="selectedDate" (ngModelChange)="changeDate(selectedDate)" [nzPlaceHolder]="'请选择日期范围维度'" style="width:90%;margin-bottom:10px;" nzShowSearch>
+                    <nz-option *ngFor="let select of dateDimensionsList" [nzLabel]="select.label" [nzValue]="select.value"></nz-option>
+                </nz-select>
+                <nz-select [nzSize]="'large'" name="time" [(ngModel)]="selectedTime" (ngModelChange)="changeTime(selectedTime)" [nzPlaceHolder]="'请选择时间范围'" style="width:90%;margin-bottom:10px;" nzShowSearch>
+                    <nz-option *ngFor="let select of times" [nzLabel]="select.label" [nzValue]="select.value"></nz-option>
+                </nz-select>
+                <nz-select [nzSize]="'large'" name="checkDimension" [(ngModel)]="checkDimension" (ngModelChange)="changeCheckDimension(checkDimension)" [nzPlaceHolder]="'请选择维度'" style="width:90%;margin-bottom:10px;" nzShowSearch>
+                    <nz-option *ngFor="let select of dimensionList" [nzLabel]="select.label" [nzValue]="select.value"></nz-option>
+                </nz-select>
+                <nz-select *ngIf="checkDimension" [nzSize]="'large'" name="checkDimensionValue" [(ngModel)]="selectedCheckDimensionValue" (ngModelChange)="changeCheckDimensionValue(selectedCheckDimensionValue)" [nzPlaceHolder]="'请选择默认维度值'" style="width:90%;margin-bottom:10px;"
+                    nzShowSearch>
+                    <nz-option *ngFor="let select of checkDimensionValueList" [nzLabel]="select.label" [nzValue]="select.value"></nz-option>
+                </nz-select>
+            </cm-select>
+            <br>
+            <label class="item-label">留存行为</label>
+            <cm-select>
+                <nz-select [nzSize]="'large'" name="reatainDimension" [(ngModel)]="retainDimension" (ngModelChange)="changeRetainDimension(retainDimension)" [nzPlaceHolder]="'请选择维度'" style="width:90%;margin-bottom:10px;" nzShowSearch>
+                    <nz-option *ngFor="let select of dimensionList" [nzLabel]="select.label" [nzValue]="select.value"></nz-option>
+                </nz-select>
+                <nz-select *ngIf="retainDimension" [nzSize]="'large'" name="reatainDimensionValue" [(ngModel)]="selectedRetainDimensionValue" (ngModelChange)="changeRetainDimensionValue(selectedRetainDimensionValue)" [nzPlaceHolder]="'请选择默认维度值'" style="width:90%;margin-bottom:10px;"
+                    nzShowSearch>
+                    <nz-option *ngFor="let select of retainDimensionValueList" [nzLabel]="select.label" [nzValue]="select.value"></nz-option>
+                </nz-select>
+            </cm-select>
+        </div>
+    </div>
+    <div class="item-config">
+        <label class="item-label">指标</label>
+        <div class="config-content">
+            <cm-select *ngFor="let metrics of selectedMetrics;let i = index;">
+                <nz-select [nzSize]="'large'" name="metrics" [(ngModel)]="metrics.value" (ngModelChange)="changeMetrics(metrics.value)" [nzPlaceHolder]="'请选择'" style="width:90%;margin-bottom:10px;">
+                    <nz-option *ngFor="let select of metricsList" [nzLabel]="select.label" [nzValue]="select.value"></nz-option>
+                </nz-select>
+            </cm-select>
+        </div>
+    </div>
+    <!-- 0.1隐藏  -->
+    <div class="item-config" *ngIf="selectedCube">
+        <cm-report-filter [cube]="selectedCube" (onFilterConfig)="changeFilter($event)"></cm-report-filter>
+    </div>
+</div>

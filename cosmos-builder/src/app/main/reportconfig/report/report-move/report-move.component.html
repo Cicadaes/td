@@ -1,0 +1,25 @@
+<div class="report-move">
+        <cm-modal>
+            <nz-modal [nzWrapClassName]="'vertical-center-modal'" [nzContent]="modalContent2" [nzFooter]="modalFooter" [nzVisible]="isVisibleMiddle" [nzTitle]="modalTitle"
+                (nzOnCancel)="handleCancelMiddle($event)" (nzOnOk)="handleOkMiddle($event)" [nzConfirmLoading]="isConfirmLoading">
+                <ng-template #modalTitle>
+                    <div class="modal-til">
+                        <span>移动报表(</span>
+                        <span class="til-text">{{title}}</span>
+                        <span>)</span>
+                    </div>
+                </ng-template>
+                <ng-template #modalContent2>
+                    <report-move-list></report-move-list>
+                </ng-template>
+                <ng-template #modalFooter>
+                    <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancelMiddle($event)">
+                      取消
+                    </button>
+                    <button nz-button [disabled]="!_check" [nzType]="'primary'" [nzSize]="'large'" (click)="handleOkMiddle($event)" [nzLoading]="isConfirmLoading" >
+                      确定
+                    </button>
+                  </ng-template>
+            </nz-modal>
+        </cm-modal>
+</div>

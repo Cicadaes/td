@@ -1,0 +1,149 @@
+<cm-form>
+    <form nz-form class="cm-advanced-search-form" [formGroup]="validateForm" class="clearfix">
+        <div class="form-box">
+            <div nz-row [nzGutter]="16">
+                <div nz-col [nzSpan]="8">
+                    <div nz-form-item nz-row>
+                        <div nz-form-label nz-col [nzSpan]="7">
+                            <label for="'Name'">名称</label>
+                        </div>
+                        <div nz-form-control nz-col [nzSpan]="17">
+                            <cm-input>
+                                <nz-input [nzSize]="'large'" [formControlName]="'Name'" [nzId]="'Name'" [nzPlaceHolder]="'请输入内容'"></nz-input>
+                            </cm-input>
+                        </div>
+                    </div>
+                </div>
+                <div nz-col [nzSpan]="8">
+                    <div nz-form-item nz-row>
+                        <div nz-form-label nz-col [nzSpan]="7">
+                            <label for="'status'">状态</label>
+                        </div>
+                        <div nz-form-control nz-col [nzSpan]="17">
+                            <cm-select>
+                                <nz-select [formControlName]="'reportStatus'" [nzSize]="'large'" [nzPlaceHolder]="'请选择'" [(ngModel)]="reportStatus">
+                                    <nz-option *ngFor="let statu of status" [nzLabel]="statu.name" [nzValue]="statu.value"></nz-option>
+                                </nz-select>
+                            </cm-select>
+                        </div>
+                    </div>
+                </div>
+                <div nz-col [nzSpan]="8">
+                    <div nz-form-item nz-row>
+                        <div nz-form-label nz-col [nzSpan]="8">
+                            <label for="'folder'">所属文件夹</label>
+                        </div>
+                        <div nz-form-control nz-col [nzSpan]="16">
+                            <cm-input>
+                                <nz-input [nzSize]="'large'" [formControlName]="'folder'" [nzId]="'folder'" [nzPlaceHolder]="'请输入内容'"></nz-input>
+                            </cm-input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div nz-row [nzGutter]="16" style="margin-top:16px;" *ngIf="isCollapse">
+                <div nz-col [nzSpan]="8">
+                    <div nz-form-item nz-row>
+                        <div nz-form-label nz-col [nzSpan]="7">
+                            <label for="'founder'">创建人</label>
+                        </div>
+                        <div nz-form-control nz-col [nzSpan]="17">
+                            <cm-input>
+                                <nz-input [nzSize]="'large'" [formControlName]="'founder'" [nzId]="'founder'" [nzPlaceHolder]="'请输入内容'"></nz-input>
+                            </cm-input>
+                        </div>
+                    </div>
+                </div>
+                <div nz-col [nzSpan]="8">
+                    <div nz-form-item nz-row>
+                        <div nz-form-label nz-col [nzSpan]="7">
+                            <label for="'createTime'">创建时间</label>
+                        </div>
+                        <div nz-form-control nz-col [nzSpan]="17">
+                            <cm-datepicker>
+                                <ng-template>
+                                    <nz-rangepicker [formControlName]="'createTime'" [nzSize]="'large'"></nz-rangepicker>
+                                </ng-template>
+                            </cm-datepicker>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div nz-row [nzGutter]="16" style="float:left;padding-left:24px;">
+            <div nz-col [nzSpan]="24">
+                <cm-button>
+                    <button nz-button [nzType]="'primary'" (click)="searchHandler()">查询</button>
+                </cm-button>
+                <a style="margin-left:8px;font-size:12px;" (click)="toggleCollapse()">
+
+                    <i class="anticon" [class.anticon-down]="!isCollapse" [class.anticon-up]="isCollapse"></i>
+                </a>
+            </div>
+        </div>
+    </form>
+</cm-form>
+<!-- <div class="fromBox">
+    <cm-from-layout>
+        <div left>
+            <div class="leftBox">
+                <div class="form-item">
+                    <div class="form-item-input">
+                        <div class="lable">
+                            <span>名称: </span>
+                        </div>
+                        <div class="input">
+                            <nz-input [nzSize]="'large'"></nz-input>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item">
+                    <div class="form-item-input">
+                        <div class="lable">
+                            <span>状态: </span>
+                        </div>
+                        <div class="input">
+                            <nz-input [nzSize]="'large'"></nz-input>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item">
+                    <div class="form-item-input">
+                        <div class="lable">
+                            <span>所属文件夹:</span>
+                        </div>
+                        <div class="input">
+                            <nz-input [nzSize]="'large'"></nz-input>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item">
+                    <div class="form-item-input">
+                        <div class="lable">
+                            <span>创建人: </span>
+                        </div>
+                        <div class="input">
+                            <nz-input [nzSize]="'large'"></nz-input>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item">
+                    <div class="form-item-input">
+                        <div class="lable">
+                            <span>创建时间:</span>
+                        </div>
+                        <div class="input">
+                            <nz-input [nzSize]="'large'"></nz-input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div right>
+            <cm-button>
+                <button nz-button [nzType]="'primary'">查询</button>
+            </cm-button>
+        </div>
+    </cm-from-layout>
+</div> -->

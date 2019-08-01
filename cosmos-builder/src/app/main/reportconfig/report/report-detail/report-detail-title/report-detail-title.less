@@ -1,0 +1,309 @@
+.report-til {
+  background: #FFFFFF;
+  box-shadow: 0 1px 4px 0 rgba(23, 35, 61, 0.25);
+  padding: 18px 24px 18px 24px;
+  display: flex;
+  box-sizing: content-box;
+  justify-content: space-between;
+  height: 20px;
+}
+
+.trash{
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  // border: 1px solid rgba(204, 204, 204, 0.658);
+  overflow: hidden;
+  position: relative;
+  &.iconfont{
+    font-size:20px!important;
+  }
+  &:hover{
+    color: rgb(45, 140, 240);
+  }
+}
+
+.list {
+  font-size: 20px !important;
+  & > div{
+    display: inline-block;
+  }
+  span{
+    height:24px;
+    width:24px;
+    line-height: 24px;
+    color:rgba(23,35,61,0.55);
+    i{
+      font-size: 24px;
+      height:24px;
+      width:24px;
+      color: #595959;
+     }
+  }
+  span.divide-line{
+    width: 0;
+    height: 22px!important;
+    line-height: 22px!important;
+    border-left: 1px solid #ddd;
+    margin-right: 10px!important;
+  }
+}
+
+.ul-box{
+  display:flex;
+  height: 20px;
+  margin: auto 0;
+}
+.ul-box>div {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.ul-box>div  span {
+  display: inline-block;
+  margin-right: 6px;
+  height: 20px;
+  line-height: 20px;
+}
+.ul-box>div span.tooltip{
+  display: none;
+  font-size: 12px!important;
+  width: auto!important;
+  
+  .tips-box{
+    padding: 16px;
+    opacity: 0.8;
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.8);
+    background: #17233D;
+    display:inline-block;
+    text-align: left;text-decoration: none;
+    border-radius: 4px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+    min-height: 26px;
+  }
+  span{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    opacity: 0.8;
+    border-bottom: 5px solid #17233D;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    position: absolute;
+    top: -4px;
+  }
+}
+.ul-box>div>span :hover {
+  cursor: pointer;
+}
+
+.ul-box>div>span i:hover {
+  color: rgb(45, 140, 240);
+}
+
+.ul-box>div>span:last-child {
+  margin-right: 0px;
+}
+
+.ul-box>div>span i::before {
+  font-size: 20px !important;
+}
+
+.report-icon {
+  display: inline-block;
+  margin-top: 10px;
+  position: relative;
+}
+
+.report-page span:hover {
+  cursor: pointer;
+}
+
+.report-page ul li:hover {
+  cursor: pointer;
+}
+
+.report-revoke span:hover {
+  cursor: pointer;
+}
+
+.report-save i:hover {
+  cursor: pointer;
+  color: rgb(45, 140, 240);
+}
+
+.report-border {
+  width: 25px;
+  height: 2px;
+  background: #2a6cF0;
+  position: absolute;
+  top: 35px;
+  content: '';
+}
+
+.report-icon i {
+  width: 24px;
+  font-size: 18px;
+  margin-right: 16px;
+}
+
+.report-operation {
+  display: flex;
+  align-items: center;
+}
+
+.report-operation>div {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: 22px;
+  border-right: 1px solid #ddd;
+}
+.report-operation .publish-preview{
+  height: 18px;
+  line-height: 22px;
+  margin-left: 10px;
+  text-decoration: none;
+}
+.report-operation>div:last-child {
+  border-right: none;
+}
+
+.report-operation>div span {
+  margin-right: 5px;
+}
+
+.report-operation>div span:last-child {
+  margin-right: 0;
+}
+
+.report-operation i {
+  font-size: 20px;
+}
+
+.anticon.anticon-rollback.last {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  color: #ddd;
+}
+
+.report-operation .report-page {
+  padding: 0;
+  position: relative;
+}
+
+.slash {
+  margin: 5px;
+}
+
+.report-operation>div .total {
+  margin-right: 10px;
+}
+
+.report-operation>div .iconLeft,
+.report-operation>div .iconRight {
+  margin: 0 16px !important;
+}
+
+.iconLeft i,
+.iconRight i,
+.iconDown i,
+.iconUp i {
+  font-size: 12px;
+}
+
+.report-page>ul div {
+  position: absolute;
+  top: 26px;
+  left: 0px;
+  width: 160px;
+  background: #fff;
+  box-shadow: 0 0 10px #ddd;
+  z-index: 1000;
+}
+.report-page>ul>li {
+  position:relative;
+}
+.report-page>ul li span{
+  margin-right:12px;
+}
+
+.report-page>ul li input {
+  border: none;
+  width: 100px;
+  background: none;
+}
+.report-page>ul .readonly{
+  border:none;
+}
+.report-page>ul .writeIn{
+  border-bottom: 1px solid #000 !important;
+}
+.report-page>ul li ul{
+  position: absolute;
+  left: 130px;
+  top: 0;
+  background: #fff;
+  box-shadow: 0 0 10px #ddd;
+  width:100px;
+}
+.report-page>ul li>ul li {
+    height: 26px;
+    width:100%;
+    padding: 7px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
+.report-page>ul li>ul li:hover{
+  background: #ecf6fd;
+} 
+
+:host ::ng-deep .report-til .ant-select-focused .ant-select-selection,
+:host ::ng-deep .report-til .ant-select-selection:focus,
+:host ::ng-deep .report-til .ant-select-selection:active {
+  box-shadow: none !important;
+}
+
+:host ::ng-deep .report-til .ant-select {
+  width: 60px;
+  border: none;
+}
+
+:host ::ng-deep .report-til .ant-select-selection,
+:host ::ng-deep .report-til .ant-select-selection {
+  border: none !important;
+}
+
+:host ::ng-deep .report-til .ant-select-dropdown-menu-item {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height:38px;
+}
+
+:host ::ng-deep .report-til .ant-select-dropdown-menu-item :hover .ant-select-dropdown-menu-item {
+  background: #ecf6fd;
+}
+:host ::ng-deep .report-til .ant-select-dropdown-menu-item {
+  overflow: inherit;
+}
+
+.weight{
+  font-family: "HelveticaNeue","PingFang SC","Microsoft YaHei","Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans GB", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-size: 16px;
+  font-weight:550;
+}
+.delete{
+  border-radius: 4px;
+  padding: 16px !important;
+  opacity: 0.8;
+  color: rgba(255, 255, 255, 0.8);
+  background: #17233D !important;
+}

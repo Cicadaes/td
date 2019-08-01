@@ -1,0 +1,107 @@
+<div class="piestyle">
+    <ul class="center">
+        <div class="piecenter">
+            <p>基础设置</p>
+            <div class="section">
+                <ul class="margin">
+                    <li *ngIf="cmSet !== 'width'">
+                        <div>
+                            <p>宽度(px)</p>
+                            <input class="inputdown" (keyup)="inputNumberChange('width')" type="number" [(ngModel)]="setStyle.width" (ngModelChange)="OptionChange($event,'width')"
+                            />
+                        </div>
+                    </li>
+                    <li *ngIf="cmSet !== 'height'">
+                        <div>
+                            <p>高度(px)</p>
+                            <input class="inputdown" (keyup)="inputNumberChange('height')" type="number" [(ngModel)]="setStyle.height" (ngModelChange)="OptionChange($event,'height')"
+                            />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </ul>
+</div>
+<!-- <div class="piestyle">
+    <ul class="center">
+        <div class="piecenter">
+            <p>基础设置</p>
+            <div class="section">
+                <ul class="margin">
+                    <li>
+                        <div class="height">
+                            <span>高度</span>
+                            <cm-checkbox>
+                                <label nz-checkbox [(ngModel)]="setStyle.adapt" (ngModelChange)="OptionChange($event)">
+                                    <span>自适应</span>
+                                </label>
+                            </cm-checkbox>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <p *ngIf="setStyle.adapt">最小高度</p>
+                            <p *ngIf="!setStyle.adapt">高度</p>
+                            <input class="inputdown" [(ngModel)]="setStyle.height" (ngModelChange)="OptionChange($event)" />
+                        </div>
+                    </li>
+                    <li>
+                        <div style="margin: 15px 0;">
+                            <p>宽度</p>
+                            <cm-input>
+                                <nz-input [nzPlaceHolder]="''" [(ngModel)]="setStyle.width" (ngModelChange)="OptionChange($event)"></nz-input>
+                            </cm-input>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="section" style="margin-top:10px">
+                <p style="margin-bottom: 10px;font-size: 12px;">外边距</p>
+                <ul class="margin margins">
+                    <li>
+                        <div>
+                            <p (click)="margin('left',orientation.left)" >左边
+                                <i *ngIf="orientation.left" style="margin-left:10px" class="anticon anticon-link"></i>
+                                <i *ngIf="!orientation.left" style="margin-left:10px" class="anticon anticon-close-circle-o"></i>
+                            </p>
+                            <cm-input>
+                                <nz-input [nzPlaceHolder]="''" [(ngModel)]="setStyle.left" (ngModelChange)="OptionChange($event)"></nz-input>
+                            </cm-input>
+                        </div>
+                        <div>
+                            <p (click)="margin('right',orientation.right)" style="margin-top: 10px;">右边
+                                <i *ngIf="orientation.right" style="margin-left:10px" class="anticon anticon-link"></i>
+                                <i *ngIf="!orientation.right" style="margin-left:10px" class="anticon anticon-close-circle-o"></i>
+                            </p>
+                            <cm-input>
+                                <nz-input [nzPlaceHolder]="''" [(ngModel)]="setStyle.right" (ngModelChange)="OptionChange($event)"></nz-input>
+                            </cm-input>
+                        </div>
+                    </li>
+                    <li style="float: right;">
+                        <div>
+                            <p (click)="margin('top',orientation.top)">上边
+                                <i *ngIf="orientation.top" style="margin-left:10px" class="anticon anticon-link"></i>
+                                <i *ngIf="!orientation.top" style="margin-left:10px" class="anticon anticon-close-circle-o"></i>
+                            </p>
+                            <cm-input>
+                                <nz-input [nzPlaceHolder]="''" [(ngModel)]="setStyle.top" (ngModelChange)="OptionChange($event)"></nz-input>
+                            </cm-input>
+                        </div>
+                        <div>
+                            <p (click)="margin('bottom',orientation.bottom)" style="margin-top: 10px;">下边
+                                <i *ngIf="orientation.bottom" style="margin-left:10px" class="anticon anticon-link"></i>
+                                <i *ngIf="!orientation.bottom" style="margin-left:10px" class="anticon anticon-close-circle-o"></i>
+                            </p>                            <cm-input>
+                                <nz-input [nzPlaceHolder]="''" [(ngModel)]="setStyle.bottom" (ngModelChange)="OptionChange($event)"></nz-input>
+                            </cm-input>
+                        </div>
+                    </li>
+                    <div style="clear: both;width: 100%"></div>
+                </ul>
+            </div>
+        </div>
+
+    </ul>
+</div> -->

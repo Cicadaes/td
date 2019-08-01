@@ -1,0 +1,20 @@
+.ant-row {
+  margin: 0;
+}
+.clearfix:after {
+  content: "";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+  overflow: hidden;
+}
+form {
+  padding: 24px 0  24px 24px ;
+}
+.form-box {
+  width: 90%;
+  padding-right: 24px;
+  border-right: 1px solid #DCDEE2;
+  float: left;
+}

@@ -1,0 +1,36 @@
+<main cm-grid>
+    <div header class='clrfix'>
+        <div title class='fl'>{{style.gridName.name}}</div>
+        <div operate class='fr'>
+            <i *ngIf="style.gridDownload.show" class="anticon anticon-download"></i>
+            <i *ngIf="style.gridHelp.show" class="anticon anticon-question-circle-o"></i>
+        </div>
+    </div>
+    <cm-table>
+        <nz-table #nzTable [nzDataSource]="data" [nzPageSize]="10" [nzBordered]="true" [nzSize]="'small'" [nzShowTotal]="true">
+            <!-- <span nz-table-title>Here is Title</span> -->
+            <thead nz-thead>
+                <tr>
+                    <th *ngFor="let th of thead"><span>{{th}}</span></th>
+                </tr>
+            </thead>
+            <tbody nz-tbody>
+                <ng-template ngFor let-data [ngForOf]="nzTable.data">
+                    <ng-template ngFor let-item [ngForOf]="expandDataCache[data.key]">
+                        <tr nz-tbody-tr *ngIf="(item.parent&&item.parent.expand)||!(item.parent)">
+                            <td nz-td>
+                                {{item.name}}
+                            </td>
+                            <td nz-td>{{item.age}}</td>
+                            <td nz-td>
+                                <nz-row-indent [nzIndentSize]="item.level"></nz-row-indent>
+                                <nz-row-expand-icon [(nzExpand)]="item.expand" (nzExpandChange)="collapse(expandDataCache[data.key],item,$event)" [nzShowExpand]="!!item.children"></nz-row-expand-icon>
+                                {{item.address}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                </ng-template>
+            </tbody>
+        </nz-table>
+    </cm-table>
+</main>

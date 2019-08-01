@@ -1,0 +1,81 @@
+.piestyle{
+    .center{
+        border-bottom: 1px solid rgba(31,37,68,0.15);
+        .piecenter{
+            padding:27px 20px;
+            p{
+                font-family: PingFangSC-Medium;
+                font-size: 14px;
+                color: #17233D;
+                line-height: 22px;
+            }
+            .section{
+                padding-left: 16px;
+                nz-radio-group {
+                    margin-bottom: 15px;
+                    span{
+                        font-family: PingFangSC-Regular;
+                        font-size: 12px;
+                        color: rgba(23,35,61,0.55);
+                        line-height: 20px;
+                    }
+                }
+                    .margin{
+                        width: 100%;
+                        li{
+                            width: 100%;
+                            p{
+                                margin-top:15px;
+                                font-family: PingFangSC-Regular;
+                                font-size: 12px;
+                                color: rgba(23,35,61,0.55);
+                                line-height: 20px;
+                            }
+                            .height{
+                                margin:15px 0;
+                                span{
+                                    display:inline-block;
+                                    margin-right: 15px;
+                                }
+                            }
+                            .inputdown{
+                                border: none;
+                                background: transparent;
+                                width: 100%;
+                                border-bottom: 1px solid #ccc;
+                                height: 32px;
+                                line-height: 28px;
+                            }
+                        }
+                    }
+                    .margins{
+                        li{
+                                width: 48%;
+                                float: left;
+                        }
+                    }
+                }
+            }
+        }
+}
+:host ::ng-deep .piestyle{
+    .ant-input {
+        border: none;
+        border-bottom: 1px solid #ccc;
+        background: transparent;
+        border-radius: 0;
+        height: 32px;
+        padding-left:0;
+        &:hover{
+            border:none;
+            border-bottom: 1px solid #ccc;
+        }
+        &:focus{
+            border:none;
+            border-bottom: 1px solid #ccc;
+            box-shadow:none;
+        }
+    }
+    
+}
+

@@ -1,0 +1,25 @@
+<div class="color">
+    <dl>
+        <dt>颜色</dt>
+        <dd>
+            <nz-radio-group [(ngModel)]="colorStyle.mode" (ngModelChange)="OptionChange($event)">
+                <label nz-radio nzValue="single">
+                    <span>单一颜色</span>
+                </label>
+                <label nz-radio nzValue="queue">
+                    <span>按顺序</span>
+                </label>
+            </nz-radio-group>
+        </dd>
+        <dd style="line-height: 0px;">
+            <div class="colororder">
+                <span *ngFor="let color of colorsInit; let i = index;" [ngClass]="{'coloritem': true, 'selected': false, 'rimed': false, 'dashed': i && i >= barNum}">
+                    <color-picker-style [height]="16" width="16" [colors]="_cmPresetColors" [cmcolor]="i >= corLen? '#ffffff' : color" [cmType]="'hex'"
+                        (provinceOut)="colorChange($event,i)"></color-picker-style>
+                    <!-- <cm-color-picker [cmType]="'board'" *ngIf="_colorPicker(i)" [cmcolor]="i >= corLen? '#ffffff' : color" [cmPresetColors]="_cmPresetColors"
+                        [cmPosition]="_cmPosition" (cmcolorchange)="colorChange($event, i)" [cmPositionOffset]="_cmPositionOffset"></cm-color-picker> -->
+                </span>
+            </div>
+        </dd>
+    </dl>
+</div>

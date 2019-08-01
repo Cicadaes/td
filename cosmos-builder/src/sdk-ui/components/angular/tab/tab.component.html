@@ -1,0 +1,13 @@
+<main>
+    <div class="tab-item" #tabFilter style="width:100%">
+        <cm-tabs>
+            <nz-tabset [(nzSelectedIndex)]="selectedIndex" [nzShowPagination]="true" [nzTabPosition]="'top'" [nzAnimated]="true">
+                <nz-tab *ngFor="let tab of option" (nzClick)="selectChange(tab)" id="{{tab.name}}">
+                    <ng-template #nzTabHeading>
+                        {{tab.name}}
+                    </ng-template>
+                </nz-tab>
+            </nz-tabset>
+        </cm-tabs>
+    </div>
+</main>
