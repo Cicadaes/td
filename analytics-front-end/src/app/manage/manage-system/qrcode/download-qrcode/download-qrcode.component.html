@@ -1,0 +1,18 @@
+<div class="content">
+  <div *ngIf="!completed">
+    <div class="download-progress">
+      <nz-progress [nzPercent]="percent" nzStatus="active"></nz-progress>
+    </div>
+
+    <div class="">
+      <p>{{ num }}个码正在下载中...</p>
+      <p>您可以关闭窗口，后台将自动下载</p>
+    </div>
+  </div>
+  <div *ngIf="completed" class="complete">
+    <i class="anticon anticon-check icon"></i>
+    <div class="">
+      <p>{{ num }}个二维码图片下载完成</p>
+    </div>
+  </div>
+</div>

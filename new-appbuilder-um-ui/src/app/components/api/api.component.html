@@ -1,0 +1,38 @@
+<div class="text-content">
+    <div class="text-content-wap">
+        <div class="com-right" style="width: calc(100% - 208px);" [ngClass]="{'bg-fff': !interfaceDetailFlag}">
+            <ul class="nav" *ngIf="!interfaceDetailFlag">
+                <li *ngFor="let item of tabs">
+                    <ng-container *ngIf="item.show">
+                        <a href="javascript:;" [ngClass]="{ 'a-click': item.id === index}" (click)="changeIndex(item);">{{item.name}}</a>
+                    </ng-container>
+                </li>
+            </ul>
+            <app-interface-list *ngIf="versionOinterface && !interfaceDetailFlag && index === 1" [nowData]='nowData'
+                (operationInterface)="operationInterface($event)"></app-interface-list>
+
+            <app-version-list *ngIf="versionOinterface && !interfaceDetailFlag && index === 2" [nowData]='nowData'></app-version-list>
+            <app-interface-info *ngIf="interfaceDetailFlag" [interfaceDetail]="interfaceDetail" (infoFlag)="infoFlag($event)"></app-interface-info>
+        </div>
+
+        <div class="left-wrapper">
+            <div class="center-content"></div>
+        </div>
+
+        <div class="com-left">
+            <app-api-tree (checkOne)="checkOne($event)" [productList]='productList' (operation)="operation($event)"
+                [catalogId]="catalogId"></app-api-tree>
+        </div>
+
+        <div class="com-left-module" *ngIf="moduleFlag === 'add' || moduleFlag === 'update'"></div>
+    </div>
+</div>
+
+<!-- 新建产品分类 -->
+<app-add-product [isVisible]="addProductFlag" [editFlag]="editProductFlag" [editData]='editProductData' (saveProductDate)="saveProductDate()"
+    (hideProductDialog)="hideProductDialog($event)"></app-add-product>
+
+<!-- 新建接口 -->
+<app-add-interface [isVisible]="addInterfaceFlag" [editFlag]="editInterfaceFlag" [editData]='editInterfaceData'
+    (saveInterfaceDate)="saveInterfaceDate($event)" (hideInterfaceDialog)="hideInterfaceDialog($event)" [productList]='productList'
+    [interfaceObj]='interfaceObj' (pushCataloagId)="pushCataloagId($event)"></app-add-interface>

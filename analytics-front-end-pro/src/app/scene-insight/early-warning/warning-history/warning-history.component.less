@@ -1,0 +1,184 @@
+:host ::ng-deep .operation:after {
+    content: "";
+    display: block;
+    clear: both;
+
+    .plus:before {
+        font-family: "anticon";
+        content: "\e627";
+    }
+}
+
+:host ::ng-deep  .content {
+
+    .filter .filter-condition:before {
+        font-family: "anticon";
+        content: "\e61d";
+    }
+
+    .filter .filter-condition.true:before {
+        font-family: "anticon";
+        content: "\e61e";
+    }
+
+    .anticon-search {
+        margin-right: 6px;
+        cursor: pointer;
+    }
+}
+
+
+:host ::ng-deep > .operation {
+    position: relative;
+
+    .operation {
+        float: left;
+        margin-right: 8px;
+    }
+
+    .plus {
+        font-size: 14px;
+        font-style: normal;
+    }
+
+}
+
+:host ::ng-deep > .content {
+    position: relative;
+    margin: 16px 0px;
+    border-radius: 3px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #edeef1 #e0e1e5 #cbced3 #e0e1e5;
+    background-color: #ffffff;
+
+    .header {
+        height: 47px;
+        padding-left: 16px;
+        padding-top: 16px;
+        line-height: 1em;
+
+        .\#2 {
+            color: #3d95f1;
+            margin: 0px 6px;
+        }
+    }
+
+    .filter {
+        position: absolute;
+        right: 16px;
+        top: 11px;
+        white-space: nowrap;
+
+        .filter {
+            width: 200px;
+        }
+
+        .filter-condition {
+            line-height: 24px;
+        }
+
+        .filter-condition:before {
+            position: relative;
+            left: -3px;
+        }
+    }
+
+    .filter-condition {
+        position: relative;
+        padding-left: 16px;
+        -moz-user-select: none; /*火狐*/
+        -webkit-user-select: none; /*webkit浏览器*/
+        -ms-user-select: none; /*IE10*/
+        -khtml-user-select: none; /*早期浏览器*/
+        user-select: none
+    }
+
+    .effectStatus {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background-color: rgba(23,35,61,.3);
+        border-radius: 50%;
+        margin-right: 5px;
+    }
+    
+    .effectStatus0 {
+        background-color: #babec5;
+    }
+    
+    .effectStatus1 {
+        background-color: #2b85e5;
+    }
+    
+    .effectStatus2 {
+        background-color: #18b468;
+    }
+    
+    .effectStatus3 {
+        background-color: #f19204;
+    }
+
+    td {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 0;
+    }
+}
+
+/* .content .filter-condition */
+
+:host ::ng-deep > .content > .filter-condition {
+    position: relative;
+    padding-left: 16px;
+
+    .condition {
+        padding: 14px 16px 11px 16px;
+        white-space: nowrap;
+        border-bottom: 1px dashed #DEDFE3;
+
+        .label {
+            display: inline-block;
+            width: 80px;
+        }
+
+        .input {
+            display: inline-block;
+            min-width: 200px;
+        }
+
+        .operation {
+            position: absolute;
+            right: 16px;
+            bottom: 16px;
+        }
+    }
+}
+
+:host ::ng-deep .ant-radio-button-wrapper {
+    margin-right: 10px;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    transition: none;
+}
+
+:host ::ng-deep .ant-radio-button-wrapper-checked {
+    border-radius: 20px;
+    line-height: 24px;
+    height: 24px;
+}
+
+:host ::ng-deep .ant-radio-button-wrapper:not(:first-child)::before {
+    background-color: #fff;
+}
+
+:host ::ng-deep .ant-radio-button-wrapper-checked::before {
+    opacity: 0;
+}
+
+:host ::ng-deep .ant-radio-button-wrapper {
+    height: 24px;
+    line-height: 24px;
+}

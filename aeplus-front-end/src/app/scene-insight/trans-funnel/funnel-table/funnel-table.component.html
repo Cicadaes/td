@@ -1,0 +1,51 @@
+<div class="first-level"></div>
+<div class="body">
+	<a (click)="goToAdd()">
+		<button nz-button nzType="primary" nzSize="default">
+			<span class="anticon anticon-plus"></span>添加漏斗
+		</button>
+	</a>
+	<div class="content shadow-content">
+		<div class="content-header">
+			漏斗列表
+		</div>
+		<div class="content-body">
+			<div class="content-table">
+				<nz-table #funnelTable
+				          [nzData]="tableList"
+				          [nzLoading]="laoding"
+				          [nzFrontPagination]="false"
+				          [nzPageSizeOptions]="[ 10, 20, 50, 100 ]"
+				          [(nzPageSize)]="pageSize"
+				          [(nzPageIndex)]="page"
+				          [nzTotal]="total"
+				          (nzPageIndexChange)="getList()"
+				          (nzPageSizeChange)="getList()"
+				          nzShowSizeChanger="true">
+					<thead>
+					<tr>
+						<th>漏斗名</th>
+						<th>事件入口</th>
+						<th>目标事件</th>
+						<th>步数</th>
+						<th>操作</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr *ngFor="let item of funnelTable.data;let i = index">
+						<td title="{{item.name}}">{{item.name}}</td>
+						<td title="{{item.startStepName}}">{{item.startStepName}}</td>
+						<td title="{{item.endStepName}}">{{item.endStepName}}</td>
+						<td>{{item.stepNum}}</td>
+						<td>
+							<a (click)="detail(item)">查看</a>
+							<a (click)="edit(item)" *ngIf="item.currentUser">编辑</a>
+							<a (click)="remove(item)" *ngIf="item.currentUser">删除</a>
+						</td>
+					</tr>
+					</tbody>
+				</nz-table>
+			</div>
+		</div>
+	</div>
+</div>

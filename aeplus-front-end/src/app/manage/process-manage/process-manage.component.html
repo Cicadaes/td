@@ -1,0 +1,100 @@
+<div class="first-level"></div>
+<main>
+    <div class="header-content">
+        <ul class="nav-list">
+            <li *ngFor="let el of tabList" class="nav-item">
+                <a (click)="navigiter(el)" [ngClass]="{active: el.type == indexType}">{{el.title}}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="content-div shadow-content">
+        <div class="content-div-table" *ngIf="indexType == 1">
+            <h3 class="content-div-table-tit module-title">流程列表
+            </h3>
+            <div class="table-custom-more-search">
+                <app-more-search [fieldArray]="processMoreSearch" (onSearch)="onSearchMoreSearch($event)"></app-more-search>
+            </div>
+            <nz-table #nzTable nzShowSizeChanger [nzLoading]="processTableLoading" [nzFrontPagination]="false" [nzData]="processData"
+                      [(nzPageIndex)]="_pageIndex" [(nzPageSize)]="_pageSize" [(nzTotal)]='_total' (nzPageIndexChange)='PageIndexChange($event)'
+                      (nzPageSizeChange)='PageSizeChange($event)' [nzPageSizeOptions]='pageSizeOptions'>
+                <thead nz-thead>
+                <tr>
+                    <th nz-th nzWidth="32%">营销流程名称</th>
+                    <th nz-th nzWidth="32%">所属营销活动名称</th>
+                    <th nz-th nzWidth="10%">状态</th>
+                    <th nz-th nzWidth="16%">发布者</th>
+                    <th nz-th nzWidth="10%">操作</th>
+                </tr>
+                </thead>
+                <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let item of nzTable.data">
+                    <td nz-td>{{item.name}}</td>
+                    <td nz-td>{{item.campaignName}}</td>
+                    <td nz-td>
+                        <span *ngIf="item.status == '4'">已上线</span>
+                        <span *ngIf="item.status == '5'">进行中</span>
+                        <span *ngIf="item.status == '2'">待审核</span>
+                    </td>
+                    <td nz-td>{{item.creator}}</td>
+                    <td nz-td>
+                        <a (click)='approve(item);' *ngIf="item.status == '2'">批准</a>
+                        <a (click)='reject(item);' *ngIf="item.status == '2'">拒绝</a>
+                        <a (click)='downLine(item);' *ngIf="item.status != '2'">下线</a>
+                    </td>
+                </tr>
+                </tbody>
+            </nz-table>
+        </div>
+        <div class="content-div-table" *ngIf="indexType == 2">
+            <h3 class="content-div-table-tit module-title">操作历史</h3>
+            <div class="table-custom-more-search">
+                <app-more-search [fieldArray]="operationHistoryMoreSearch" (onSearch)="onSearchMoreSearch($event)"></app-more-search>
+            </div>
+            <nz-table #nzTable nzShowSizeChanger [nzLoading]="operationHistoryTableLoading" [nzFrontPagination]="false" [nzData]="operationHistoryData"
+                      [(nzPageIndex)]="_pageIndex" [(nzPageSize)]="_pageSize" [(nzTotal)]='_total' (nzPageIndexChange)='PageIndexChange($event)'
+                      (nzPageSizeChange)='PageSizeChange($event)' [nzPageSizeOptions]='pageSizeOptions'>
+                <thead nz-thead>
+                <tr>
+                    <th nz-th nzWidth="23%">营销流程名称</th>
+                    <th nz-th nzWidth="23%">所属营销活动名称</th>
+                    <th nz-th nzWidth="12%">发布者</th>
+                    <th nz-th nzWidth="14%">操作时间</th>
+                    <th nz-th nzWidth="16%">操作者</th>
+                    <th nz-th nzWidth="12%">操作行为</th>
+                </tr>
+                </thead>
+                <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let item of nzTable.data">
+                    <td nz-td>{{item.name}}</td>
+                    <td nz-td>{{item.campaignName}}</td>
+                    <td nz-td>{{item.creator}}</td>
+                    <td nz-td>{{item.updateTime}}</td>
+                    <td nz-td>{{item.updater}}</td>
+                    <td nz-td>
+                            <span *ngIf="item.status == '3'" class="hover-a">上线拒绝
+                                <nz-popover [nzPlacement]="'left'">
+                                    <span style="font-style: normal;color: #1890ff;" nz-popover>理由</span>
+                                    <ng-template #nzTemplate>
+                                        <ul style="padding-left: 0px; margin-bottom: 0px;">
+                                            <li>
+                                                {{item.reason}}
+                                            </li>
+                                        </ul>
+                                    </ng-template>
+                                </nz-popover>
+                            </span>
+                        <span *ngIf="item.status == '6'">下线</span>
+                    </td>
+                </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+</main>
+<!-- 拒绝理由弹框 -->
+<app-reject-dialog  [isVisible]="isVisible" (hideDialog)="hideDialog($event);" [rejectData]="rejectData"
+                    (saveDate)="saveDate();"></app-reject-dialog>
+
+<!-- 操作提示弹框 -->
+<app-modal-dialog [itemObj]="itemObj" [isVisible]="flag" (hideItemDialog)="hideItemDialog($event);"
+                  (confirmHideDialog)='confirmHideDialog($event)'></app-modal-dialog>

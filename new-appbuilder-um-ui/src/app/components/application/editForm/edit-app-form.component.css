@@ -1,0 +1,8 @@
+:host ::ng-deep .special-label {
+    width: 118px;
+    text-align: left;
+}
+
+:host ::ng-deep .ant-form-item {
+   margin-bottom: 24px;
+}

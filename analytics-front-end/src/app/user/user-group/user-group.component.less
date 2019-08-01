@@ -1,0 +1,244 @@
+.content {
+  padding: 16px;
+  .content-title {
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #000000;
+    line-height: 22px;
+    background: #ffffff;
+    .right {
+      float: right;
+      a {
+        font-size: 12px;
+        color: #2d8cf0;
+        .anticon-down {
+          margin-right: 4.5px;
+          color: #2d8cf0;
+        }
+      }
+      .ant-input-affix-wrapper {
+        width: 196px;
+        margin-right: 20px;
+      }
+      .ant-input {
+        font-size: 12px;
+        color: rgba(23, 35, 61, 0.25);
+      }
+      .ant-input-search.ant-input-search-enter-button > .ant-input-suffix {
+        right: 12px;
+      }
+      .ant-input-affix-wrapper .ant-input {
+        height: 24px;
+        color: rgba(23, 35, 61, 1);
+      }
+    }
+  }
+  .content-search {
+    padding: 16px;
+    border-top: 1px solid;
+    border-color: rgba(23, 35, 61, 0.1);
+    background-color: #ffffff;
+    .search-left {
+      width: calc(~'100% - 125px');
+      display: inline-block;
+      padding-right: 16px;
+      .search {
+        .item-search {
+          margin-bottom: 16px;
+          display: flex;
+          line-height: 32px;
+          & > :last-child {
+            margin-bottom: 0;
+          }
+          .label-control {
+            white-space: nowrap;
+            vertical-align: middle;
+            line-height: 32px;
+            padding: 0 8px;
+          }
+          .input-search {
+            width: 100%;
+            .search-button {
+              width: 100%;
+            }
+          }
+          .ant-input-number {
+            width: 100%;
+          }
+        }
+      }
+    }
+    .search-right {
+      width: 120px;
+      height: 144px;
+      vertical-align: top;
+      border-left: 1px solid;
+      border-color: rgba(23, 35, 61, 0.1);
+      display: inline-block;
+      box-sizing: border-box;
+      button {
+        top: 50%;
+        margin-left: 32px;
+        transform: translateY(-50%);
+      }
+    }
+  }
+  .content-body {
+    background-color: #ffffff;
+  }
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  margin-right: 5px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot.success {
+  background: #27b36a;
+}
+
+.dot.forbid {
+  background: #de3f24;
+}
+
+td {
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+td a {
+  padding-right: 6px;
+}
+
+.anticon-search {
+  cursor: pointer;
+}
+
+/*model*/
+.custom-modal-title {
+  position: relative;
+}
+
+.custom-modal-title .icon-warning {
+  color: #e62d2d;
+  font-size: 22px;
+  margin-right: 10px;
+  float: left;
+}
+
+.custom-modal-title .icon-help {
+  color: #ff9900;
+  font-size: 22px;
+  margin-right: 10px;
+  float: left;
+}
+
+.custom-modal-title .icon-clear {
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+}
+
+.custom-modal-title .text {
+  font-family: PingFangSC-Medium;
+  font-size: 14px;
+  color: #17233d;
+  line-height: 22px;
+  float: left;
+}
+
+.custom-modal-content {
+  padding: 16px 16px 16px 52px;
+  color: rgba(23, 35, 61, 0.75);
+}
+
+.custom-modal-content .more-view {
+  margin: 10px 0;
+}
+
+.custom-modal-content .more-view a {
+  font-size: 12px;
+}
+
+.custom-modal-content .more-list {
+  max-height: 200px;
+  overflow: auto;
+  font-size: 12px;
+  border-top: 1px solid rgba(23, 35, 61, 0.1);
+  padding: 10px 0;
+}
+
+.custom-modal-content .more-list dt {
+  color: #17233d;
+  margin: 10px 0;
+}
+
+.custom-modal-footer {
+  padding: 16px;
+  text-align: right;
+}
+
+.custom-modal-footer button {
+  margin-left: 10px;
+}
+
+.remove-btn-wrap {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.remove-btn-wrap .remove-btn-select {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+:host ::ng-deep .remove-btn-wrap .remove-btn-select .dropdown-panel .select-text {
+  height: 40px;
+}
+
+:host ::ng-deep .remove-btn-wrap .remove-btn-select .dropdown-panel .select-text .icon-arrow_down {
+  display: none;
+}
+
+.tag-list {
+  margin: 0;
+  padding: 0;
+}
+
+.tag-list > li {
+  float: left;
+  border: 1px solid rgba(23, 35, 61, 0.15);
+  border-radius: 2px;
+  height: 24px;
+  line-height: 24px;
+  font-family: PingFangSC-Regular;
+  font-size: 12px;
+  color: rgba(23, 35, 61, 0.75);
+  text-align: center;
+  padding: 0 10px;
+  background: #f8f8f9;
+  width: 86px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0 10px 10px 0;
+}
+
+.td-text-overflow {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 15px;
+  line-height: 15px;
+}

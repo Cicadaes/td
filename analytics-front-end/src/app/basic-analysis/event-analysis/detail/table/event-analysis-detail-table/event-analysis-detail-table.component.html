@@ -1,0 +1,79 @@
+<main>
+  <nz-table
+    #nzTable
+    [nzData]="detailData.body"
+    [nzLoading]="isQueringData"
+    nzShowSizeChanger
+    [(nzPageIndex)]="_current"
+    [(nzPageSize)]="_pageSize"
+    [nzPageSizeOptions]="pageSizeOptions"
+    [(nzTotal)]="_total"
+    [nzScroll]="{ x: scroll, y: '415px' }"
+    *ngIf="detailData.body"
+  >
+    <thead nz-thead>
+      <tr>
+        <th nz-th *ngFor="let item of detailData.head; let tdIndex = index">
+          <div style="width:100px;">{{ item.name }}</div>
+        </th>
+      </tr>
+    </thead>
+    <tbody nz-tbody *ngIf="chartType == 'bar' && !_isQueringData">
+      <tr nz-tbody-tr *ngFor="let item of nzTable.data; let i = index">
+        <td
+          nz-td
+          *ngFor="let temp of item; let tdIndex = index"
+          [ngClass]="{ hide: tdIndex == 0 || (contrast && tdIndex == 1 && i % 2 == 1) }"
+          [attr.rowspan]="contrast && i % 2 == 0 && tdIndex == 1 ? 2 : 1"
+        >
+          <div *ngIf="tdIndex != item.length - 1" style="width:100px;">{{ temp }}</div>
+          <div *ngIf="tdIndex == item.length - 1" style="width:100px;">
+            <span *ngIf="temp == 0 || selectedMetric != 1">{{ temp | numberToThousandsPipe }}</span>
+            <a *ngIf="temp > 0 && selectedMetric == 1" href="javascript:;" (click)="goUserPage(item, tdIndex, i)">
+              {{ temp | numberToThousandsPipe }}
+            </a>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+    <tbody nz-tbody *ngIf="chartType == 'line' && !_isQueringData">
+      <tr nz-tbody-tr *ngFor="let item of nzTable.data; let i = index">
+        <td
+          nz-td
+          *ngFor="let temp of item; let tdIndex = index"
+          [attr.rowspan]="contrast && i % 2 == 0 && tdIndex == 0 ? 2 : 1"
+          [ngClass]="{ hide: contrast && tdIndex == 0 && i % 2 == 1 }"
+        >
+          <div *ngIf="tdIndex == 0" style="width:100px;">
+            <span *ngIf="temp == '合计'">{{ temp }}</span>
+            <span *ngIf="temp != '合计'">{{ temp | dateFormatPipe: 1 }}</span>
+          </div>
+          <div *ngIf="contrast" style="width:100px;">
+            <div *ngIf="tdIndex == 1">{{ temp }}</div>
+            <div *ngIf="tdIndex != 0 && tdIndex != 1">
+              <span *ngIf="temp == 0 || selectedMetric != 1">{{ temp | numberToThousandsPipe }}</span>
+              <a *ngIf="temp > 0 && selectedMetric == 1" href="javascript:;" (click)="goUserPage(item, tdIndex, i)">
+                {{ temp | numberToThousandsPipe }}
+              </a>
+            </div>
+          </div>
+          <div *ngIf="!contrast" style="width:100px;">
+            <div *ngIf="tdIndex != 0">
+              <span *ngIf="temp == 0 || selectedMetric != 1">{{ temp | numberToThousandsPipe }}</span>
+              <a *ngIf="temp > 0 && selectedMetric == 1" href="javascript:;" (click)="goUserPage(item, tdIndex)">
+                {{ temp | numberToThousandsPipe }}
+              </a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <nz-table
+    #nzTable
+    [nzData]="detailData.body"
+    [nzLoading]="isQueringData"
+    [nzShowPagination]="false"
+    *ngIf="!detailData.body"
+  ></nz-table>
+</main>

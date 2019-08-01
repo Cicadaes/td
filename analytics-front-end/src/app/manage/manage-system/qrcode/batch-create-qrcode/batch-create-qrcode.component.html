@@ -1,0 +1,169 @@
+<div class="content">
+  <form nz-form [formGroup]="createForm" autocomplete="off">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>App ID</nz-form-label>
+      <nz-form-control [nzSpan]="17">
+        <input
+          autocomplete="off"
+          (keyup)="changeAppId()"
+          class="no-border"
+          nz-input
+          [(ngModel)]="appId"
+          formControlName="appId"
+          placeholder="微信分配的小程序唯一ID"
+          readonly
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>App Secret</nz-form-label>
+      <nz-form-control [nzSpan]="17">
+        <input
+          autocomplete="off"
+          (keyup)="changeAppId()"
+          class="no-border"
+          nz-input
+          [(ngModel)]="secret"
+          formControlName="appSecret"
+          placeholder="微信分配的小程序Secret"
+          [type]="secretInputType"
+          readonly
+        />
+        <a class="input-eye" (click)="changeSecretType()">
+          <span
+            class="iconfont"
+            [ngClass]="{
+              'icon-visibility_off': secretInputType === 'password',
+              'icon-visibility': secretInputType === 'text'
+            }"
+          ></span>
+        </a>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" class="padding-left">样式</nz-form-label>
+      <nz-form-control [nzSpan]="17">
+        <div class="qrcode" (click)="selectQrcode(1)">
+          <img src="/aeplus/assets/images/miniQrcode.svg" alt="" />
+          <div class="select-qrcode">
+            <span *ngIf="qrcodeType" class="ant-compat anticon anticon-check-circle"></span>
+          </div>
+        </div>
+        <div class="qrcode" (click)="selectQrcode(0)">
+          <img src="/aeplus/assets/images/qrcode.svg" alt="" />
+          <div class="select-qrcode">
+            <span *ngIf="!qrcodeType" class="ant-compat anticon anticon-check-circle"></span>
+          </div>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" class="padding-left">
+        创建方式
+      </nz-form-label>
+      <nz-form-control [nzSpan]="17">
+        <nz-radio-group
+          [(ngModel)]="channel"
+          [nzDisabled]="isLoading"
+          (ngModelChange)="changeSelectChannel($event)"
+          formControlName="channel"
+        >
+          <label nz-radio nzValue="0" name="radiogroup">在线批量编辑</label>
+          <label nz-radio nzValue="1" name="radiogroup">按模板批量上传</label>
+        </nz-radio-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="item-border" *ngIf="channel == '0'">
+      <nz-popover [nzPlacement]="'bottom'" [nzTrigger]="'hover'">
+        <span nz-popover>
+          <a>在线批量编辑说明</a>
+        </span>
+        <ng-template #nzTemplate>
+          <div>
+            <span>批量创建二维码说明：</span><br />
+            <span>1.样例：name:二维码名称;path:mini/index;utm_source=baidu&canshu1=123;</span><br />
+            <span>&nbsp;&nbsp; 二维码有3个属性，分别为二维码名称；path路径；参数；</span><br />
+            <span>2.参数名与参数值之间用半角冒号隔开，两个属性之间用半角分号隔开。多个参数之间用“&”间隔。</span><br />
+            <span>3.创建多个二维码需换行。</span><br />
+            <span>4.为了保证二维码的唯一性，且能正常生成，二维码名称禁止重复。</span><br />
+            <span>5.最多支持创建200个。</span>
+          </div>
+        </ng-template>
+      </nz-popover>
+      <nz-form-control [nzSpan]="24">
+        <textarea
+          formControlName="onlineEditText"
+          *ngIf="isLoading"
+          disabled
+          nz-input
+          [(ngModel)]="onlineEditText"
+          [class.error]="
+            createForm.get('onlineEditText').dirty && createForm.get('onlineEditText').hasError('required')
+          "
+          placeholder="name:二维码名称;path:mini/index;utm_source=baidu&canshu1=123;"
+        ></textarea>
+        <textarea
+          formControlName="onlineEditText"
+          *ngIf="!isLoading"
+          nz-input
+          [(ngModel)]="onlineEditText"
+          [class.error]="
+            createForm.get('onlineEditText').dirty && createForm.get('onlineEditText').hasError('required')
+          "
+          placeholder="name:二维码名称;path:mini/index;utm_source=baidu&canshu1=123;"
+        ></textarea>
+        <nz-form-explain
+          *ngIf="createForm.get('onlineEditText').dirty && createForm.get('onlineEditText').hasError('required')"
+          >请添加要创建二维码的数据</nz-form-explain
+        >
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item *ngIf="channel == '1'">
+      <div class="modal-download">
+        <div class="step1">Step1: 下载模板</div>
+        <div class="download">
+          <img src="/aeplus/assets/images/excel.png" style="width:40px" alt="" />
+          <a href="javascript:" (click)="downloadModal()">下载</a>
+          <nz-tooltip [nzPlacement]="'bottom'">
+            <span nz-tooltip class="tips iconfont icon-info1"></span>
+            <ng-template #nzTemplate>
+              <span>1.为了保证小程序码唯一性，二维码名称必填且禁止重复；</span><br />
+              <span>2.页面路径必填；</span><br />
+              <span>3.参数格式 参数名＝参数值，多个参数用“&”拼接；</span><br />
+              <span>4.请将小程序条码数控制在200条以内。</span><br />
+            </ng-template>
+          </nz-tooltip>
+        </div>
+      </div>
+      <div class="modal-upload">
+        <div>Step2: 上传二维码信息列表</div>
+        <nz-upload
+          nzType="drag"
+          nzAction="/miniprogram-api/qrcode/uploadTemplate"
+          [nzMultiple]="false"
+          [nzLimit]="1"
+          [(nzFileList)]="fileList"
+          [nzBeforeUpload]="beforeUpload"
+        >
+          <img src="/aeplus/assets/images/upload.png" style="width:50px;" alt="" />
+          <p class="ant-upload-text">点击或将文件拖拽到这里上传</p>
+          <p class="ant-upload-hint">
+            1.请正确填写模板，单次上传最多支持200条数据。<br />2.为保证二维码能正常生成，请按模板格式上传Excel文档。支持扩展名：.xls
+            .csv .xlsx
+          </p>
+        </nz-upload>
+      </div>
+    </nz-form-item>
+  </form>
+</div>
+<div class="footer">
+  <button nz-button class="cancel-button" [disabled]="isLoading" (click)="cancel()">
+    取消
+  </button>
+  <button nz-button class="ant-btn-primary" *ngIf="channel == '0'" (click)="createQrcode()" [nzLoading]="isLoading">
+    提交
+  </button>
+  <button nz-button class="ant-btn-primary" *ngIf="channel == '1'" (click)="handleUpload()" [nzLoading]="isLoading">
+    提交
+  </button>
+</div>

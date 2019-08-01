@@ -1,0 +1,6 @@
+<ng-container *ngIf="rolecode === 'UM_TENANT_ADMIN'">
+    <app-tenant-table></app-tenant-table>
+</ng-container>
+<ng-container *ngIf="rolecode === 'UM_OPER_ADMIN'">
+    <app-oper-table></app-oper-table>
+</ng-container>

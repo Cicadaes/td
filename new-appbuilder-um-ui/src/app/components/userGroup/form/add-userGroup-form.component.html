@@ -1,0 +1,35 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="_submitForm()">
+    <nz-form-item>
+        <nz-form-label [nzSpan]="4" nzRequired nzFor="description">用户组名称</nz-form-label>
+        <nz-form-control [nzSpan]="20">
+            <input id="name" type="name" nz-input formControlName="name" placeholder="请输入用户组名称">
+            <nz-form-explain style="color:red;" *ngIf="getFormControl('name').dirty && getFormControl('name').errors" style="color: #f5222d;">
+                <ng-container *ngIf="getFormControl('name').errors.required">
+                    请输入用户组名称
+                </ng-container>
+                <ng-container *ngIf="getFormControl('name').errors.maxlength">
+                    输入的用户组名称过长
+                </ng-container>
+                <ng-container *ngIf="getFormControl('name').errors.nameRepeat">
+                    用户组名称已存在
+                </ng-container>
+                <ng-container *ngIf="getFormControl('name').errors.nameLayout">
+                    用户组名称存在特殊字符
+                </ng-container>
+            </nz-form-explain>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="4" nzRequired nzFor="desc" class="cover-ant-form-item-label">描述</nz-form-label>
+        <nz-form-control [nzSpan]="20" style="float: right;">
+            <textarea id="desc" type="desc" nz-input formControlName="desc" placeholder="描述"></textarea>
+                <nz-form-explain style="color:red;" *ngIf="getFormControl('desc').dirty && getFormControl('desc').errors"
+                    style="color: #f5222d;">
+                    <ng-container *ngIf="getFormControl('desc').errors.maxlength">
+                        输入的描述过长
+                    </ng-container>
+                </nz-form-explain>
+        </nz-form-control>
+    </nz-form-item>
+</form>

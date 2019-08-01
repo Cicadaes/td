@@ -1,0 +1,101 @@
+.hide{
+  display: none;
+}
+
+:host ::ng-deep .content-div {
+    margin: 16px;
+}
+
+:host ::ng-deep header {
+    background-color: #fff;
+    // padding: 0px 16px;
+}
+
+:host ::ng-deep .anticon-copy {
+    margin-right: 10px;
+}
+
+:host .title {
+    font-size: 16px;
+    color: #17233D;
+    padding: 16px 0px;
+    margin-bottom: 0px;
+    padding-bottom: 6px;
+}
+
+:host ::ng-deep .ant-card-body {
+    padding: 0px;
+}
+
+:host .ant-card-head {
+   padding: 0 16px;
+}
+
+:host .crowd-wap {
+    display: flex;
+    justify-content: flex-start;
+    word-wrap: normal;
+
+    &-left {
+        width: 188px;
+
+        & > ul {
+            padding: 16px;
+
+            li {
+                height: 24px;
+                line-height: 24px;
+                font-size: 12px;
+                color: rgba(23,35,61,0.75);
+                cursor: pointer;
+            }
+
+            li:hover {
+                color: #2D8CF0;
+            }
+
+            .selectLi {
+                color: #2D8CF0;
+            }
+        }
+    }
+
+    &-right {
+        flex: 1;
+        background-color: #eef0f3;
+        box-sizing: border-box;
+        padding: 16px;
+        padding-top: 0px;
+
+        h4 {
+            font-size: 14px;
+            color: #17233D;
+            height: 40px;
+            line-height: 40px;
+            margin-bottom: 0px;
+
+            span {
+                float: right;
+                font-size: 12px;
+                color: #2D8CF0;
+
+                .anticon-edit {
+                    margin-right: 8.2px;
+                    font-size: 14px;
+                }
+            }
+        }
+
+        .attributeLabel {
+            display: inline-block;
+            background-color: #8C9FC4;
+            padding: 0px 8px;
+            line-height: 24px;
+            font-size: 12px;
+            color: #FFFFFF;
+            letter-spacing: 0;
+            border-radius: 2px;
+            margin-right: 8px;
+        }
+    }
+}

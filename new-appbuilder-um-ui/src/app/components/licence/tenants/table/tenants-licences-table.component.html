@@ -1,0 +1,58 @@
+<ng-template #tableTotal>
+        <div  style="margin-right: 6px;">
+          总共 {{_total}} 条
+        </div>
+</ng-template>
+    <nz-table #nzTable [nzBordered]="false" [nzShowTotal]="tableTotal" [nzData]="_dataSet" nzShowSizeChanger [nzLoading]="_loading" [nzTotal]="_total" [(nzPageIndex)]="_current"
+              (nzPageIndexChange)="refreshData()" [nzTitle]="licenceTit" [(nzPageSize)]="_pageSize" (nzPageSizeChange)="refreshData(true)" [nzFrontPagination]="false">
+
+            <thead nz-thead>
+            <tr>
+                <th nz-th [nzWidth]="'15%'">
+                    名称
+                </th>
+                <th nz-th [nzWidth]="'8%'">
+                    状态
+                </th>
+                <th nz-th [nzWidth]="'17%'">
+                    有效期
+                </th>
+                <th nz-th [nzWidth]="'20%'">
+                    描述
+                </th>
+                <th nz-th [nzWidth]="'15%'" *ngIf="rolecode=='UM_OPER_ADMIN'">
+                    更新人
+                </th>
+                <th nz-th [nzWidth]="'15%'" *ngIf="rolecode=='UM_OPER_ADMIN'">
+                    更新时间
+                </th>
+                <th nz-th [nzWidth]="'10%'">
+                    <span>操作</span>
+                </th>
+            </tr>
+            </thead>
+
+        <tbody nz-tbody>
+        <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+            <td nz-td>{{data.name}}</td>
+            <td nz-td><span style="color:#E03E16" *ngIf="data.status==0">●</span><span style="color:#2B85E5" *ngIf="data.status==1">●</span> {{data.status==0?'禁用':'正常'}}</td>
+            <td nz-td>{{data.startDate | dateFormatPipe: '2'}} 至 {{data.endDate | dateFormatPipe : '2'}}</td>
+            <td nz-td>{{data.desc}}</td>
+            <td nz-td *ngIf="rolecode=='UM_OPER_ADMIN'">{{data.updateUserName}}</td>
+            <td nz-td *ngIf="rolecode=='UM_OPER_ADMIN'">{{data.updateTime | dateFormatPipe:2}}</td>
+            <td nz-td>
+                <span *ngIf="rolecode!='UM_TENANT_ADMIN'">
+                    <a [routerLink]="['/tenants/tenantsLicences/'+tenantId+'/editTenantLicence',data.id]" >编辑</a>
+                </span>
+                <nz-divider nzType="vertical" *ngIf="rolecode!='UM_TENANT_ADMIN'"></nz-divider>
+                <span *ngIf="rolecode!='UM_TENANT_ADMIN'">
+                    <a [routerLink]="['/tenants/tenantsLicences/'+tenantId+'/detailTenantLicence',data.id]" >查看</a>
+                </span>
+                <span *ngIf="rolecode=='UM_TENANT_ADMIN'">
+                    <a [routerLink]="['/tenantsLicences/detailTenantLicence',data.id]" >查看</a>
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </nz-table>
+

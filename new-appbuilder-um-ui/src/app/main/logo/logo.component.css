@@ -1,0 +1,31 @@
+:host ::ng-deep .logo {
+  height: 32px;
+  margin: 16px;
+  overflow: hidden;
+  /*background: #333;*/
+}
+
+:host ::ng-deep .logo a {
+  color: #fff;
+  text-underline: none;
+}
+
+.logo img {
+  width: auto;
+  height: 100%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.logo .name {
+  font-size: 16px;
+  line-height: 40px;
+  display: inline-block;
+  padding-left: 10px;
+}
+
+.logo {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

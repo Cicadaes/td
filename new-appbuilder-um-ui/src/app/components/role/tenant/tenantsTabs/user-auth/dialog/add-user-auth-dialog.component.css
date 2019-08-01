@@ -1,0 +1,10 @@
+.searchInput {
+  width: 200px;
+  margin-bottom: 11px;
+  margin-left: 567px;
+}
+
+::ng-deep .anticon-search {
+    margin-right: 6px;
+    cursor: pointer;
+}

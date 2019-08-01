@@ -1,0 +1,111 @@
+<nz-tabset>
+    <nz-tab *ngFor="let tab of tabs" [nzTitle]="tab.name">
+        <div class="text-content">
+            <!--基本信息-->
+            <nz-card *ngIf="tab.tabCode==1 && user" nzTitle="用户信息">
+                <div class="zw-margin-bg">
+                    <div class="baseinfo">
+                        <strong>姓名</strong>
+                        <span>{{user.name}}</span>
+                        <br />
+                        <strong>账号</strong>
+                        <span>{{user.email}}</span>
+                        <br />
+                        <!-- <strong>部门：</strong><span>{{user.mobile}}</span><br/> -->
+                        <strong>组织机构</strong>
+                        <span>{{user.deptName}}</span>
+                        <br />
+                        <strong>职位</strong>
+                        <span>{{user.title}}</span>
+                        <br />
+                        <!-- <strong>性别：</strong><span>{{user.gender==-1?'':(user.gender==0?'女':'男')}}</span><br/> -->
+                        <strong>性别</strong>
+                        <span>{{user.gender | sexLabel}}</span>
+                        <br />
+                        <strong>手机</strong>
+                        <span>{{user.mobile}}</span>
+                        <br />
+                        <strong>联系电话</strong>
+                        <span>{{user.phone}}</span>
+                        <br />
+                        <strong>QQ</strong>
+                        <span>{{user.qq}}</span>
+                        <br />
+                        <strong>微信</strong>
+                        <span>{{user.wechat}}</span>
+                        <br />
+                        <strong>创建人</strong>
+                        <span>{{user.createUserName}}</span>
+                        <br />
+                        <strong>创建时间</strong>
+                        <span>{{user.createTime | dateFormatPipe}}</span>
+                        <br />
+                        <strong>更新人</strong>
+                        <span>{{user.updateUserName}}</span>
+                        <br />
+                        <strong>更新时间</strong>
+                        <span>{{user.updateTime | dateFormatPipe}}</span>
+                        <br />
+                        <strong>状态</strong>
+                        <span>{{user.status==0?'禁用':'正常'}}</span>
+                        <br />
+                    </div>
+                </div>
+            </nz-card>
+
+            <!--所属用户组-->
+            <div *ngIf="tab.tabCode==2">
+                <div class="table-operator-bottom">
+                    <div class="zw-margin-top" style="margin-bottom: 24px;margin-top: 4px;">
+                        <button nz-button [nzType]="'primary'" (click)="showAddUserGroupsModal()">
+                            <span class="anticon anticon-plus"></span>
+                            <span>用户组</span>
+                        </button>
+                        <button nz-button [nzType]="'default'" (click)="deleteUserGroupsFromUser()">
+                            <span class="anticon anticon-minus"></span>
+                            <span>批量移除</span>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="zw-margin-bg" style="padding-top: 24px;margin-top: 4px;">
+                    <uguserGroups-table [tenantId]="tenantId" [isInUser]="false" [reload]="isReloadUgUserGroupTable"
+                        [refresh]="refreshUgUserGroupStatus" (onCheckUserGroup)="onCheckUgUsersGroup($event)"></uguserGroups-table>
+                </div>
+            </div>
+
+            <!--被授权的角色-->
+            <div *ngIf="tab.tabCode==3">
+                <div class="table-operator clrfix" style="margin-bottom: 24px;margin-top: 4px;">
+                    <button nz-button [nzType]="'primary'" (click)="showAddRoleModal()">
+                        <span>授权角色</span>
+                    </button>
+                    <button nz-button [nzType]="'default'" (click)="deleteRolesFromUser()">
+                        <span class="anticon anticon-minus"></span>
+                        <span>批量移除</span>
+                    </button>
+                </div>
+
+                <div class="zw-margin-bg" style="padding-top: 24px;">
+                    <ugroles-table [viewType]="viewType" [toSubmit]="toSubmit" [tenantId]="tenantId" [isUserRelation]="isUserRelation"
+                        [reload]="isReloadRoleTable" [refresh]="refreshUgRoleTableStatus" (onCheckRole)="onCheckUgRoles($event)"></ugroles-table>
+                </div>
+            </div>
+
+            <!--被授权的功能-->
+            <div class="zw-margin-bg">
+                <div *ngIf="tab.tabCode==4">
+                    <div class="zw-margin-top" style="margin-top: 4px;">
+                        <carousel-app-manage (onSubmit)="onSubmitAppData($event)" (onReset)="resetCarouselAppList($event)"
+                            [appList]="appList" [queryParams]="queryParams" [tenantId]="tenantId"></carousel-app-manage>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nz-tab>
+</nz-tabset>
+
+<uguserGroups-table-dialog [tenantId]="tenantId" *ngIf="isShowAddUgUserGroupModal" [isShow]="isShowAddUgUserGroupModal"
+    (onClose)="hideAddUgUserGroupModal($event)" (onSubmit)="onSubmitUgUserGroupFormData($event)"></uguserGroups-table-dialog>
+<ugroles-table-dialog [viewType]="viewType" [tenantId]="tenantId" *ngIf="isShowAddRoleModal" [isShow]="isShowAddRoleModal"
+    (onClose)="hideAddRoleListModal($event)" (onSubmit)="onSubmitRoleListData($event)"></ugroles-table-dialog>

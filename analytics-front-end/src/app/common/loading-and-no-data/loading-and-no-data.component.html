@@ -1,0 +1,9 @@
+<div class="loading" *ngIf="isLoading">
+  <nz-spin></nz-spin>
+</div>
+<div class="loading" *ngIf="!isLoading && isNoData">
+  <div>
+    <div class="loading-page"></div>
+    <p>暂无数据</p>
+  </div>
+</div>

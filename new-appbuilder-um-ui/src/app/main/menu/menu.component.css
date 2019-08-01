@@ -1,0 +1,22 @@
+:host ::ng-deep .ant-menu-item-selected, .menu.ant-menu-inline, .menu.ant-menu-vertical {
+  border: none;
+}
+
+:host ::ng-deep .first-level {
+  display: block;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.67);
+}
+
+:host ::ng-deep .first-level:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+:host ::ng-deep .theme-light .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected, .theme-light .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  border-color: #2a6cF0;
+}
+
+:host ::ng-deep .theme-ligh .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected, .theme-light .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  color: #FFFFFF !important;
+  background-color: #2D8CF0 !important;
+}

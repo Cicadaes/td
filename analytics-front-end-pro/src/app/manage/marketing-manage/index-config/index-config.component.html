@@ -1,0 +1,65 @@
+<div class="content-div">
+    <button nz-button nzType="primary" nzSize="default" (click)="create()">
+        <span class="ant-compat anticon anticon-plus"></span>新建指标</button>
+    <div class="content-div-table shadow-content">
+        <h3 class="content-div-table-tit module-title">指标相关配置列表
+            <nz-input-group nzSuffixIcon="anticon anticon-search" style="float: right;width: 196px;margin-top: 12px;">
+                <input type="text" [(ngModel)]="serachParam" nz-input (keyup)="serach($event)" placeholder="请输入指标名称进行检索" style="height: 24px;">
+            </nz-input-group>
+        </h3>
+        <nz-table #nzTable nzShowSizeChanger [nzLoading]="indexTableLoading" [nzFrontPagination]="false" [nzData]="indexData" [(nzPageIndex)]="_pageIndex"
+            [(nzPageSize)]="_pageSize" [(nzTotal)]='_total' (nzPageIndexChange)='PageIndexChange($event)' (nzPageSizeChange)='PageSizeChange($event)'
+            [nzPageSizeOptions]='pageSizeOptions'>
+            <thead nz-thead>
+                <tr>
+                    <th nz-th nzWidth="120px">指标名称</th>
+                    <th nz-th nzWidth="10%">编码</th>
+                    <th nz-th nzWidth="7%">状态</th>
+                    <th nz-th nzWidth="13%">描述</th>
+                    <th nz-th nzWidth="10%">规则/条件</th>
+                    <th nz-th nzWidth="10%">触发器/指标</th>
+                    <th nz-th nzWidth="10%">计划目标</th>
+                    <th nz-th nzWidth="10%">创建人</th>
+                    <th nz-th nzWidth="12%">更新时间</th>
+                    <th nz-th nzWidth="8%">操作</th>
+                </tr>
+            </thead>
+            <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let item of nzTable.data">
+                    <td nz-td title="{{item.name}}">{{item.name}}</td>
+                    <td nz-td title="{{item.code}}">{{item.code}}</td>
+                    <td nz-td><span [ngClass]="{'zw-color': true, 'inprogress-color': item.status == '0'}"></span><span *ngIf="item.status == '-1'" >禁用</span><span *ngIf="item.status == '0'">启用</span></td>
+                    <td nz-td title="{{item.description}}">{{item.description}}</td>
+                    <td nz-td>
+                        <span [ngClass]="{'mocheck': true, 'bg':  item.scope[0] == '1' || item.scope[0] == true}">
+                            <span class="ant-compat anticon anticon-check" *ngIf="item.scope[0] == '1' || item.scope[0] == true"></span>
+                        </span>
+                    </td>
+                    <td nz-td>
+                        <span [ngClass]="{'mocheck': true, 'bg': item.scope[1] == '1' || item.scope[1] == true}">
+                            <span class="ant-compat anticon anticon-check" *ngIf="item.scope[1] == '1' || item.scope[1] == true"></span>
+                        </span>
+                    </td>
+                    <td nz-td>
+                        <span [ngClass]="{'mocheck': true, 'bg':  item.scope[2] == '1' || item.scope[2] == true}">
+                            <span class="ant-compat anticon anticon-check" *ngIf="item.scope[2] == '1' || item.scope[2] == true"></span>
+                        </span>
+                    </td>
+                    <td nz-td title="{{item.creator}}">{{item.creator}}</td>
+                    <td nz-td title="{{item.updateTime}}">{{item.updateTime}}</td>
+                    <td nz-td>
+                        <a (click)='edit(item);'>编辑</a>
+                        <a (click)='delete(item);'><span *ngIf="item.status == '0'" >禁用</span><span *ngIf="item.status == '-1'">启用</span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+</div>
+
+<!-- 删除弹框 -->
+<app-modal-dialog [itemObj]="itemObj" [isVisible]="removeFlag" (hideItemDialog)="hideItemDialog($event);" (confirmHideDialog)='confirmHideDialog($event)'></app-modal-dialog>
+
+<!-- 新建指标相关配置及编辑指标相关配置-->
+<app-add-index-config [isVisible]="isVisible" (hideDialog)="hideDialog($event);" [editData]="editData" [editFlag]="editFlag"
+    (saveDate)="saveDate();"></app-add-index-config>

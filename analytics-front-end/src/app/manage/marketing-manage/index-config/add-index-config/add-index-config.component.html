@@ -1,0 +1,100 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzWrapClassName="vertical-center-modal"
+  [nzTitle]="modalTitle"
+  [nzContent]="modalContent"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="handleCancel($event)"
+  [nzMaskClosable]="false"
+>
+  <ng-template #modalTitle>
+    <span *ngIf="editFlag">编辑指标</span>
+    <span *ngIf="!editFlag">新建指标</span>
+  </ng-template>
+  <ng-template #modalContent>
+    <div></div>
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" autocomplete="off">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="4" nzRequired nzFor="name">指标名称</nz-form-label>
+        <nz-form-control [nzSpan]="19" style="float: right;">
+          <input id="name" type="name" nz-input formControlName="name" placeholder="请输入指标名称" />
+          <nz-form-explain
+            *ngIf="getFormControl('name').dirty && getFormControl('name').errors"
+            style="color: #f5222d;"
+          >
+            <ng-container *ngIf="getFormControl('name').errors.required">
+              请输入指标名称
+            </ng-container>
+            <ng-container *ngIf="getFormControl('name').errors.nameError">
+              请输入中文或英文格式
+            </ng-container>
+            <ng-container *ngIf="getFormControl('name').errors.maxlength">
+              指标名称不能超过32个字符
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item *ngIf="!editFlag">
+        <nz-form-label [nzSpan]="4" nzRequired nzFor="code">指标选择</nz-form-label>
+        <nz-form-control [nzSpan]="19" style="float: right;">
+          <nz-select [(ngModel)]="_name" class="input-item" formControlName="code" nzPlaceHolder="请选指标">
+            <nz-option
+              nzCustomContent
+              [nzValue]="item"
+              [nzLabel]="item.displayname"
+              *ngFor="let item of indexValueList"
+            >
+              <span title="{{ item.displayname }}">{{ item.displayname }}</span>
+            </nz-option>
+          </nz-select>
+          <nz-form-explain
+            *ngIf="getFormControl('code').dirty && getFormControl('code').errors"
+            style="color: #f5222d;"
+          >
+            <ng-container *ngIf="getFormControl('code').errors.required">
+              请选择指标
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="4" nzFor="code" nzRequired class="cover-ant-form-item-label">添加至</nz-form-label>
+        <nz-form-control [nzSpan]="19" style="float: right;">
+          <label nz-checkbox [(ngModel)]="scope[0]" [ngModelOptions]="{ standalone: true }">规则/条件</label>
+          <label nz-checkbox [(ngModel)]="scope[1]" [ngModelOptions]="{ standalone: true }">触发器-指标</label>
+          <label nz-checkbox [(ngModel)]="scope[2]" [ngModelOptions]="{ standalone: true }">计划目标</label>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="4" nzFor="description" nzRequired class="cover-ant-form-item-label"
+          >描述</nz-form-label
+        >
+        <nz-form-control [nzSpan]="19" style="float: right;">
+          <textarea
+            id="description"
+            type="description"
+            nz-input
+            formControlName="description"
+            placeholder="请输入描述"
+          ></textarea>
+          <nz-form-explain
+            *ngIf="getFormControl('description').dirty && getFormControl('description').errors"
+            style="color: #f5222d;"
+          >
+            <ng-container *ngIf="getFormControl('description').errors.maxlength">
+              描述不能超过480个字符
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-template>
+  <ng-template #modalFooter>
+    <button nz-button [nzType]="'default'" [nzSize]="small" (click)="handleCancel($event)">
+      取消
+    </button>
+    <button nz-button [nzType]="'primary'" [nzSize]="small" (click)="save()">
+      保存
+    </button>
+  </ng-template>
+</nz-modal>

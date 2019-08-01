@@ -1,0 +1,42 @@
+.til_desc {
+  min-height: 18px;
+}
+
+:host ::ng-deep .ant-card {
+  background: transparent;
+}
+
+:host ::ng-deep .ant-card-bordered {
+  border: none;
+}
+
+:host ::ng-deep .ant-card-body {
+  padding-top: 0px !important;
+  padding-left: 10px !important;
+}
+
+:host ::ng-deep .ant-tabs-bar {
+  border-bottom: 0px !important;
+  background: #fff;
+}
+
+:host ::ng-deep .table-operator {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+:host ::ng-deep .table-operator-bottom {
+  background: #fff;
+  padding: 20px;
+}
+
+:host ::ng-deep .roles-top-wap {
+  background: #fff;
+  padding: 20px;
+}
+
+:host ::ng-deep .special-label {
+  text-align: left;
+  width: 70px;
+}
+

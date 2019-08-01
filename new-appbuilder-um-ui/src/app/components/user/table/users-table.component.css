@@ -1,0 +1,11 @@
+:host ::ng-deep .ant-table {
+  overflow: auto;
+}
+
+:host ::ng-deep .ant-table-content{
+  /* min-width: 2000px; */
+}
+
+:host ::ng-deep .ant-modal-body {
+    padding-bottom: 24px !important;
+}

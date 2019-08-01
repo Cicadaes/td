@@ -1,0 +1,108 @@
+@import '../../../../../less/td.theme.less';
+
+.content {
+  padding: 24px 20px;
+  max-height: 500px;
+  overflow: scroll;
+  .left-content {
+    width: 390px;
+    display: inline-block;
+    .item {
+      margin-bottom: 24px;
+      font-size: 12px;
+      .item-name {
+        font-weight: 550;
+        color: #17233d;
+      }
+      .red {
+        color: red;
+      }
+      .path {
+        width: 255px;
+        vertical-align: top;
+        word-wrap: break-word;
+      }
+      input {
+        width: 200px;
+      }
+      input.error {
+        border-color: rgb(245, 34, 45);
+      }
+      .error-label {
+        display: block;
+        color: rgb(245, 34, 45);
+        line-height: 1.5;
+        margin-left: 102px;
+        width: 200px;
+        transition: color 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
+      }
+      .label {
+        width: 100px;
+        display: inline-block;
+      }
+      label {
+        width: 100px;
+        display: inline-block;
+        i {
+          color: @failed-color;
+          vertical-align: middle;
+        }
+      }
+      .item-label-special {
+        width: 50%;
+      }
+      .red {
+        color: red;
+      }
+      .item-param {
+        width: 50px;
+      }
+      .item-value {
+        width: 110px;
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        vertical-align: bottom;
+      }
+      .qrcode {
+        display: inline-block;
+      }
+      .parmas {
+        display: inline-block;
+      }
+    }
+  }
+  .right-content {
+    display: inline-block;
+    vertical-align: top;
+    .qrcode-img {
+      width: 156px;
+      height: 156px;
+      img {
+        width: 100%;
+      }
+    }
+    .qrcode-download {
+      text-align: center;
+      margin-top: 10px;
+    }
+  }
+}
+
+.footer {
+  border-top: 1px solid #e8e8e8;
+  padding: 6px 24px;
+  text-align: right;
+  border-radius: 0 0 4px 4px;
+  button {
+    width: 56px;
+    height: 32px;
+    box-sizing: border-box;
+    border-radius: 2px;
+  }
+  .cancel-button {
+    margin-right: 8px;
+    color: rgba(23, 35, 61, 0.75);
+  }
+}

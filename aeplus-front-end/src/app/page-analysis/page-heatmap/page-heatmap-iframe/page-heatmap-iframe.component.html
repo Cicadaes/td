@@ -1,0 +1,58 @@
+<main class="shadow-content">
+	<div class="ant-card ant-card-loading ant-card-bordered">
+		<div class="ant-card-head ng-star-inserted">
+			<div class="ant-card-head-wrapper">
+				<div class="ant-card-head-title ng-star-inserted">
+					<app-select-custom [select]="pageSelect" (onSelect)="onSelectPage($event);"></app-select-custom>
+				</div>
+				<div class="head-operator">
+					<app-select-search [select]="pixelSelect" (onSelect)="selectsearchPixel($event)"
+					                   class="pixel-select" *ngIf="_isH5Page && _currentPage"></app-select-search>
+					<nz-radio-group [(ngModel)]="_heatmapType" [nzSize]="'small'"
+					                (ngModelChange)="changeHeatmapType($event);">
+						<label nz-radio-button nzValue="tdHeatMap">热力图</label>
+						<label nz-radio-button nzValue="tdHeatMapLink">链接点击图</label>
+					</nz-radio-group>
+				</div>
+			</div>
+		</div>
+		<div class="ant-card-body">
+
+			<div *ngIf="_currentPage && _iframeUrl" class="td-heat-map-container" ng-style="heatMapContainerStyle">
+				<div class="td-heat-map-title clrfix" id="td-heat-map-title">
+					<div class="td-heat-map-summary clrfix">
+						<div class="td-heat-map-click">
+							<span>页面点击数</span>
+							<span class="td-heat-map-num">{{_pageDatas.clickNum}}</span>
+						</div>
+						<div class="td-heat-map-click">
+							<span>访客数</span>
+							<span class="td-heat-map-num">{{_pageDatas.uv}}</span>
+						</div>
+						<div class="td-heat-map-pv">
+							<span>浏览量</span>
+							<span class="td-heat-map-num">{{_pageDatas.pv}}</span>
+						</div>
+					</div>
+					<div class="td-heat-map-summary-link">
+						<app-page-heatmap-top10 [datas]="_topElems" [queryParam]="queryParam"
+						                        *ngIf="_heatmapType == 'tdHeatMapLink'"></app-page-heatmap-top10>
+					</div>
+				</div>
+				<div class="heat-map-iframe" [ngStyle]="_pagePixelStyle">
+					<iframe [ngStyle]="_containerStyle" name="tdHeatMapIframe" id="tdHeatMapIframe" width="100%"
+					        [src]="_iframeUrl" style="border: none;" title=""></iframe>
+				</div>
+			</div>
+
+			<div *ngIf="_isGetPage && !_currentPage" class="none-heatmap-page">
+				您尚未配置页面，请到<a (click)="goPage('/manage/manage-system/user-click-map', '/manage/manage-system')">系统管理-页面点击图管理</a>中进行配置。
+			</div>
+
+			<div *ngIf="_isGetPage && _currentPage && !_iframeUrl" class="loading">
+				<nz-spin></nz-spin>
+			</div>
+
+		</div>
+	</div>
+</main>

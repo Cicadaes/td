@@ -1,0 +1,28 @@
+{
+    "/datareport": {
+        "target": "http://172.23.5.199:9097"
+    },
+    "/crowd": {
+        "target": "http://172.23.5.173:9887",
+        "secure": "false"
+    },
+    "/express": {
+        "target": "http://localhost:3000",
+        "secure": "false"
+    },
+    "/miniprogram-api": {
+        "target": "http://172.23.6.236:80"
+    },
+    "/reportservice": {
+        "target": "http://172.23.6.236:9595",
+        "secure": "false"
+    },
+    "/dataservice": {
+        "target": "http://172.23.6.236:80",
+        "secure": "false"
+    },
+    "/marketing-api": {
+        "target": "http://172.23.7.135:8081",
+        "secure": "false"
+    }
+}

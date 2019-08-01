@@ -1,0 +1,71 @@
+<div class="content">
+  <div class="base-desc">
+    <div class="pipe-item clearfix">
+      <label class="item-label"> <span class="require">*</span>组件名称 </label>
+      <div class="item-input">
+        <input
+          tdLimitInputText
+          iType="triggerInput"
+          max="26"
+          type="text"
+          placeholder="请输入内容"
+          [(ngModel)]="pcs.nodeData.name"
+          [disabled]="!pcs.isPipelineEdit"
+        />
+      </div>
+    </div>
+    <div class="pipe-item clearfix">
+      <label class="item-label">
+        描述
+      </label>
+      <div class="item-textarea">
+        <textarea
+          tdLimitTextareaText
+          iType="all"
+          max="80"
+          type="text"
+          placeholder="请输入内容"
+          [(ngModel)]="pcs.nodeData.description"
+          [disabled]="!pcs.isPipelineEdit"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="filter-content">
+    <div class="pipe-item clearfix">
+      <label class="item-label"> <span class="require">*</span>过滤条件 </label>
+    </div>
+    <div
+      class="filter-item"
+      [ngClass]="{ first: i === 0 }"
+      *ngFor="let item of pcs.nodeData.dynamicList; let i = index"
+    >
+      <div class="button" *ngIf="i !== 0" (click)="changeRelation()">
+        {{ relationData.name }}
+      </div>
+      <div class="filter">
+        <label class="filter-text">属性</label>
+        <nz-select
+          style="width: 180px;margin-left: 20px;"
+          nzPlaceHolder="请选择标签"
+          [(ngModel)]="item.key"
+          [nzDisabled]="!pcs.isPipelineEdit"
+        >
+          <nz-option
+            *ngFor="let target of targetList"
+            [nzValue]="target.idStr"
+            [nzLabel]="target.name"
+            [nzDisabled]="target.status == -1"
+          ></nz-option>
+        </nz-select>
+        <a *ngIf="i !== 0" class="iconfont icon-fremove_circle_outli" (click)="removeFilter(i)"></a>
+      </div>
+    </div>
+    <div class="add-filter" *ngIf="pcs.isPipelineEdit">
+      <div class="button" (click)="addFilter()">
+        <span class="ant-compat anticon anticon-plus"></span>
+        添加标签
+      </div>
+    </div>
+  </div>
+</div>

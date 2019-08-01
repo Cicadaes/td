@@ -1,0 +1,73 @@
+<div class="text-content-top">
+    <h3 class="zw-one-name" *ngIf="organization">{{organization.name}}</h3>
+    <p class="til_desc" *ngIf="organization">{{organization.desc}}</p>
+</div>
+<nz-tabset [nzTabPosition]="'top'" [nzSelectedIndex]="tabIndex" (nzSelectedIndexChange)="changeIndexFun($event)">
+    <nz-tab *ngFor="let tab of tabs" [nzTitle]="tab.name">
+        <div style="padding: 0px 24px;background: transparent;">
+            <div *ngIf="tab.tabCode==1">
+                <div class="table-operator clrfix">
+                    <nz-dropdown>
+                        <button nz-button nz-dropdown [nzType]="'primary'">
+                            <span class="anticon anticon-plus"></span>
+                            <span>用户</span>
+                            <span class="anticon anticon-down"></span>
+                        </button>
+                        <ul nz-menu>
+                            <li nz-menu-item>
+                                <a href="javascript:;" (click)="showAddUserModal()">新增用户</a>
+                            </li>
+                            <li nz-menu-item>
+                                <a href="javascript:;" (click)="showAddUserList()">添加已有用户</a>
+                            </li>
+                        </ul>
+                    </nz-dropdown>
+                    <button nz-button [nzType]="'default'" (click)="deleteUsersFromUserGroup()">
+                        <span class="anticon anticon-minus"></span>
+                        <span>批量移除</span>
+                    </button>
+                </div>
+                <div class="table-operator-bottom" style="padding: 0px;">
+                    <more-search [fieldArray]="uguserFieldArray" (onSearch)="onSearchOrUserList($event)"></more-search>
+                    <orusers-table [tenantId]="tenantId" *ngIf="organization" [queryParams]="oruserTableFieldParams"
+                        [reload]="isReloadUserTable" [organization]="organization" [refresh]="refreshOguserTableStatus"
+                        (onCheck)="onCheckUgUsers($event)"></orusers-table>
+                </div>
+
+            </div>
+
+            <div *ngIf="tab.tabCode==2">
+                <!--角色管理-->
+                <div class="table-operator clrfix">
+                    <button nz-button [nzType]="'primary'" (click)="showAddRoleModal()">
+                        <span>授权角色</span>
+                    </button>
+                    <button nz-button [nzType]="'default'" (click)="deleteRolesFromUserGroup()">
+                        <span class="anticon anticon-minus"></span>
+                        <span>批量移除</span>
+                    </button>
+                </div>
+                <div class="table-operator-bottom" style="padding: 0px;padding-top: 24px;">
+                    <orgroles-table [reload]="isReloadRoleTable" [refresh]="refreshUgRoleTableStatus" [organization]="organization"
+                        (onCheckRole)="onCheckUgRoles($event)" [tenantId]="tenantId"></orgroles-table>
+                </div>
+            </div>
+
+            <div *ngIf="tab.tabCode==3">
+                <div class="zw-margin-top">
+                    <div class="table-operator-bottom">
+                        <carousel-app-manage (onSubmit)="onSubmitAppData($event)" (onReset)="resetCarouselAppList($event)"
+                            [appList]="appList" [queryParams]="queryParams" [tenantId]="tenantId"></carousel-app-manage>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </nz-tab>
+</nz-tabset>
+<add-orguser-dialog [user]="currentUser" [isShow]="isShowAddUerModal" (onClose)="hideAddUserModal($event)"
+    [organization]="organization" (onSubmit)="onSubmitUserListData($event)"></add-orguser-dialog>
+<orgusers-table-dialog *ngIf="isShowAddUerList" [isShow]="isShowAddUerList" (onClose)="hideAddUserListModal($event)"
+    (onSubmit)="onSubmitUserListData($event)" [organization]="organization"></orgusers-table-dialog>
+<orgroles-table-dialog *ngIf="isShowAddRoleModal" [isShow]="isShowAddRoleModal" [organization]="organization" (onClose)="hideAddRoleListModal($event)"
+    (onSubmit)="onSubmitRoleListData($event)"></orgroles-table-dialog>

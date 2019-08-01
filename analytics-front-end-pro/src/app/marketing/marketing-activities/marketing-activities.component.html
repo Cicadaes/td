@@ -1,0 +1,390 @@
+<div class="first-level"></div>
+<div (click)="pageClick($event)">
+
+    <div class="header-content" style="padding: 10px 30px; border-top: #DCDEE2 1px solid;">
+
+        <!-- 活动名称 -->
+        <div style="
+                font-size: 16px;
+                color: #17233D;
+                text-align: left;
+                line-height: 24px;
+                height: 24px;
+                margin: 5px 0;
+
+      ">
+            <span [ngClass]="{hide:nameEdit}" style="margin-right: 16px; font-weight: bolder;">{{actVO.name}}</span>
+            <span *ngIf="actVO.status == 1 || actVO.status == 2 || actVO.status == 3" (click)="actVO.nameOld = actVO.name; nameEdit = true;" style="cursor: pointer; margin-right: 10px; color: rgba(23, 35, 61, 0.75);" [ngClass]="{hide:nameEdit}">
+                <span class="ant-compat anticon anticon-edit"></span>
+            </span>
+
+            <nz-input-group [nzAddOnAfter]="addOnAfterTemplate" [nzSize]="'small'" [ngClass]="{hide:!nameEdit}" class="input-group" style="width: 260px; padding-right: 8px;">
+                <input type="text" nz-input [(ngModel)]="actVO.name">
+            </nz-input-group>
+
+            <span *ngIf="actVO.status == 2 || actVO.status == 3" (click)="gotoReport()" style="cursor: pointer; color: rgba(23, 35, 61, 0.75);">
+                <span class="ant-compat anticon anticon-file-text"></span>
+            </span>
+
+            <ng-template #addOnAfterTemplate>
+                <span (click)="saveCampagin();" style="cursor: pointer;">
+                  <span class="ant-compat anticon anticon-check"></span>
+                </span>
+                <nz-divider nzType="vertical" style="background: #d9d9d9;"></nz-divider>
+                <span (click)="actVO.name = actVO.nameOld; nameEdit = false;" style="cursor: pointer;">
+                  <span class="ant-compat anticon anticon-close"></span>
+                </span>
+            </ng-template>
+        </div>
+
+        <!-- 时间，描述 -->
+        <div style="padding: 10px 0;">
+            <div style="padding: 5px 0; height: 34px; line-height: 24px;">
+                <span class="label-1">营销时间：</span>
+                <span class="value-1" (click)="timeClick($event)" [ngClass]="{hide:timeEdit}" style="width: 174px; padding: 1px 8px 1px 9px;">
+                  {{actVO.time[0] | toDateStr}} ～ {{actVO.time[1] | toDateStr}}
+                </span>
+
+                <span [ngClass]="{hide:!timeEdit}" class="date-picker">
+                  <nz-range-picker [(ngModel)]="actVO.time" [nzSize]="'small'" (ngModelChange)="timeChange()" (click)="$event.stopPropagation()"
+                                   [nzDisabledDate]="disabledDate" nzPlaceHolder="" [nzAllowClear]="false" [nzStyle]="{'width': '240px'}">
+                  </nz-range-picker>
+                </span>
+
+                <nz-divider nzType="vertical"></nz-divider>
+                <span class="label-1">创建人：</span>
+                <span class="value-1">{{actVO.creator}}</span>
+                <nz-divider nzType="vertical"></nz-divider>
+                <span class="label-1">最新修改：</span>
+                <span class="value-1">{{actVO.updater}}</span>
+            </div>
+            <div style="padding: 5px 0; height: 34px; line-height: 24px;">
+                <span class="label-1">描述：</span>
+                <span [ngClass]="{hide:descEdit, placeHolderStyle:!actVO.desc}" (click)="descClick($event)" class="value-2" style="padding-left: 8px;">
+                  {{actVO.desc || '请输入'}}
+                </span>
+                <span [ngClass]="{hide:!descEdit}">
+                   <input nz-input placeholder="请输入" [(ngModel)]="actVO.desc" [nzSize]="'small'" (click)="$event.stopPropagation()" style="width: 400px;">
+                </span>
+            </div>
+        </div>
+
+        <!-- 全局管控 -->
+        <div style="padding: 15px 0; border-top: #cccccc 1px dashed;">
+            <span class="label-2">全局管控</span>
+
+            <span *ngFor="let item of globalControlList">
+                <label nz-checkbox [(ngModel)]="item.selected" (ngModelChange)="saveGlobal(item)" [nzDisabled]="actVO.status != 1" style="margin-left: 20px;"></label>
+                <span class="label-3">{{item.desc}}：</span>
+                <nz-input-number
+                        *ngIf="actVO.status == 1"
+                        [(ngModel)]="item.propValue"
+                        (ngModelChange)="saveGlobal(item)"
+                        [nzPrecision]="0"
+                        [nzMin]="0"
+                        [nzMax]="99999999"
+                        [nzStep]="1"
+                        [nzSize]="'small'"
+                        style="width: 76px;"
+                        nzPlaceHolder=""
+                ></nz-input-number>
+
+                <span *ngIf="actVO.status != 1" class="global-view">{{toThousandStr(item.propValue)}}</span>
+            </span>
+
+        </div>
+    </div>
+
+    <div style="position: relative; padding: 20px;">
+
+        <!-- 计划目标 -->
+        <div class="check-base shadow-content" style="position: relative;">
+            <div class="activities-title">
+                <span>计划目标</span>
+                <span *ngIf="(actVO.status == 1 || actVO.status == 2) && planTargetList.length < 4" class="inline-block" style="float: right;">
+                  <button nz-button nzType="default" nzShape="circle" (click)="addPlanTarget()" [nzSize]="'small'" class="activities-add-item">
+                    <span class="ant-compat anticon anticon-plus-circle-o"></span>
+                  </button>
+                </span>
+            </div>
+            <div *ngIf="planTargetList.length > 0" class="activities-content">
+                <div class="panel-content" style="padding: 20px;">
+
+                    <!-- 条目循环 -->
+                    <div *ngFor="let item of planTargetList; let i = index" class="float-item">
+                        <table style="width: 100%; height: 48px;">
+                            <tr>
+                                <td style="width: 50%;">
+                                    <span class="label-4">监测指标</span>
+                                    <span [ngClass]="{hide:item.isEdit}" class="value-4">{{indicatorMap[item.targetConfigId]}}</span>
+
+                                    <nz-select [(ngModel)]="item.targetConfigId" (ngModelChange)="configIndiList()" nzShowSearch nzAllowClear nzPlaceHolder="请选择" [ngClass]="{hide:!item.isEdit}" class="input-item" style="width: 140px;">
+                                        <nz-option *ngFor="let indi of item.indicatorListMin" nzValue="{{indi.value}}" nzLabel="{{indi.name}}" [nzDisabled]="indi.status != 0"></nz-option>
+                                    </nz-select>
+
+                                </td>
+                                <td style="width: 35%;">
+                                    <span class="label-4">预期达成</span>
+                                    <span [ngClass]="{hide:item.isEdit}" class="value-4">{{toThousandStr(item.epected)}}</span>
+                                    <nz-input-number [(ngModel)]="item.epected" [nzMin]="0" [nzMax]="99999999" [nzPrecision]="0" [nzStep]="1" [ngClass]="{hide:!item.isEdit}" style="width: 90px;" nzPlaceHolder=""></nz-input-number>
+                                </td>
+                                <td style="width: 15%; font-size: 15px; text-align: right;">
+                                    <span style="cursor: pointer; margin-right: 10px;" (click)="cachePlanTarget(item); item.isEdit = true;" *ngIf="actVO.status == 1 || actVO.status == 2" [ngClass]="{hide:item.isEdit}"><span class="ant-compat anticon anticon-edit"></span></span>
+                                    <span style="cursor: pointer;" (click)="deletePlanTarget(item, i)" *ngIf="actVO.status == 1 || actVO.status == 2" [ngClass]="{hide:item.isEdit}"><span class="ant-compat anticon anticon-minus-circle-o"></span></span>
+                                    <span style="cursor: pointer; color: #19BE6B; margin-right: 8px;" (click)="updatePlanTarget(item)" [ngClass]="{hide:!item.isEdit}"><span class="ant-compat anticon anticon-check-circle"></span></span>
+                                    <span style="cursor: pointer;" (click)="restorePlanTarget(item, i); item.isEdit = false;" *ngIf="actVO.status == 1 || actVO.status == 2" [ngClass]="{hide:!item.isEdit}"><span class="ant-compat anticon anticon-close-circle"></span></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <table style="width: 100%;">
+                        <tr>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 权益设置 -->
+        <div class="check-base shadow-content" style="position: relative; margin-top: 20px;">
+            <div class="activities-title">
+                <span>权益设置</span>
+                <span *ngIf="actVO.status == 1 && equityList.length < 4 && equitySettingEnable" class="inline-block" style="float: right;">
+                  <button nz-button nzType="default" nzShape="circle" (click)="addRightsSetting()" [nzSize]="'small'" class="activities-add-item">
+                    <span class="ant-compat anticon anticon-plus-circle-o"></span>
+                  </button>
+                </span>
+            </div>
+            <div *ngIf="equityList.length > 0" class="activities-content">
+
+                <div class="panel-content" style="padding: 20px;">
+
+                    <!-- 条目循环 -->
+                    <div *ngFor="let item of equityList; let i = index" class="float-item-2">
+                        <table style="width: 100%; height: 48px;">
+                            <tr>
+                                <td style="width: 30%;">
+                                    <span class="label-4">权益名称</span>
+                                    <span [ngClass]="{hide:item.isEdit}" class="value-4">{{item.name}}</span>
+                                    <input [ngClass]="{hide:!item.isEdit}" nz-input placeholder="请输入" [(ngModel)]="item.name" style="width: 180px;">
+                                </td>
+                                <td style="width: 30%;">
+                                    <span class="value-4">{{item.rightsFile}}</span>
+                                    <span [ngClass]="{hide:!item.isEdit || item.rightsFile != null}" style="cursor: pointer; color: #2D8CF0;" title="请上传CSV格式列表，每行一个权益码，文件大小不能超过2M">
+                                      <nz-upload
+                                              nzAction="/marketing-api/file/upload?type=equity"
+                                              nzAccept=".csv"
+                                              [nzShowUploadList]="false"
+                                              [nzName]="'uploadFiles'"
+                                              [nzBeforeUpload]="beforeUpload"
+                                              (nzChange)="handleChange($event, item)">
+                                        <button nz-button nzType="default" [nzSize]="'small'" class="" style="font-size: 12px;">
+                                          上传权益表
+                                        </button>
+                                      </nz-upload>
+                                    </span>
+
+                                    <span [ngClass]="{hide:!item.isEdit || item.rightsFile == null}" style="cursor: pointer; color: #ED4014;" (click)="clearFile(item)">清除</span>
+                                </td>
+                                <td style="width: 30%;">
+                                    <span *ngIf="actVO.status == 1" class="label-4">总量</span>
+                                    <span *ngIf="actVO.status == 2" class="label-4">余量</span>
+                                    <span *ngIf="actVO.status == 3" class="label-4">下发量</span>
+
+                                    <span *ngIf="actVO.status == 1" class="value-4">{{item.total ? toThousandStr(item.total) : '--'}}</span>
+
+                                    <span *ngIf="actVO.status == 2" class="value-5" style="color: #2D8CF0;">{{toThousandStr(item.remain)}}</span>
+                                    <span *ngIf="actVO.status == 2" class="value-5"> / </span>
+                                    <span *ngIf="actVO.status == 2" class="value-5">{{toThousandStr(item.total)}}</span>
+                                    <span *ngIf="actVO.status == 2" class="value-5">({{item.remainPrecent}}%)</span>
+
+                                    <span *ngIf="actVO.status == 3" class="value-5" style="color: #2D8CF0;">{{toThousandStr(item.total - item.remain)}}</span>
+                                    <span *ngIf="actVO.status == 3" class="value-5" style="color: #2D8CF0;"> / </span>
+                                    <span *ngIf="actVO.status == 3" class="value-5" style="color: #2D8CF0;">{{toThousandStr(item.total)}}</span>
+                                    <span *ngIf="actVO.status == 3" class="value-5" style="color: #2D8CF0;">({{item.usePrecent}}%)</span>
+                                </td>
+                                <td style="width: 10%; font-size: 15px; text-align: right;">
+                                    <span style="cursor: pointer; margin-right: 10px;" (click)="cacheEquity(item); item.isEdit = true;" *ngIf="actVO.status == 1 && equitySettingEnable" [ngClass]="{hide:item.isEdit}"><span class="ant-compat anticon anticon-edit"></span></span>
+                                    <span style="cursor: pointer;" (click)="deleteEquity(item, i)" *ngIf="actVO.status == 1 && equitySettingEnable" [ngClass]="{hide:item.isEdit}"><span class="ant-compat anticon anticon-minus-circle-o"></span></span>
+                                    <span style="cursor: pointer; color: #19BE6B; margin-right: 8px;" (click)="updateEquity(item)" [ngClass]="{hide:!item.isEdit}"><span class="ant-compat anticon anticon-check-circle"></span></span>
+                                    <span style="cursor: pointer;" (click)="restoreEquity(item, i); item.isEdit = false;" *ngIf="actVO.status == 1" [ngClass]="{hide:!item.isEdit}"><span class="ant-compat anticon anticon-close-circle"></span></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 流程pipeline -->
+        <div class="check-base shadow-content" style="position: relative; margin-top: 20px;">
+            <div class="activities-title">
+                <span>流程pipeline</span>
+                <span style="color: #2d8cf0;">({{pipelineList.length}})</span>
+                <span *ngIf="(actVO.status == 1 || actVO.status == 2) && !addPipelineDisalbe" class="inline-block" style="float: right;">
+                  <button nz-button (click)="createPipeline()" nzType="default" nzShape="circle" [nzSize]="'small'" class="activities-add-item">
+                    <span class="ant-compat anticon anticon-plus-circle-o"></span>
+                  </button>
+                </span>
+                <span *ngIf="actVO.status == 1 && !pipelineConfigStatus && equityList.length > 0"
+                      (click)="pipelineConfigStatus = true;"
+                      class="inline-block"
+                      style="float: right; color: #2D8CF0; margin-right: 10px; cursor: pointer;">
+                  权益配比
+                </span>
+                <span *ngIf="actVO.status == 2 && !pipelineConfigStatus && equityList.length > 0"
+                      (click)="pipelineConfigStatus = true;"
+                      class="inline-block"
+                      style="float: right; color: #2D8CF0; margin-right: 10px; cursor: pointer;">
+                  余量重配
+                </span>
+                <span *ngIf="pipelineConfigStatus"
+                      (click)="restorePipeline(); pipelineConfigStatus = false;"
+                      class="inline-block"
+                      style="float: right; color: #2D8CF0; margin-right: 10px; cursor: pointer;">
+                  取消
+                </span>
+                <span *ngIf="pipelineConfigStatus"
+                      (click)="updatePipelineAll(); pipelineConfigStatus = false;"
+                      class="inline-block"
+                      style="float: right; color: #2D8CF0; margin-right: 10px; cursor: pointer;">
+                  确定
+                </span>
+                <span *ngIf="addPipelineDisalbe"
+                      class="inline-block"
+                      style="float: right; color: red; margin-right: 10px;">
+                  营销活动剩余时间不足一天无法创建和编辑pipeline
+                </span>
+            </div>
+            <div *ngIf="pipelineList.length > 0" class="activities-content">
+                <!-- 循环pipeline -->
+                <div *ngFor="let item of pipelineList; let i = index">
+                    <div *ngIf="i > 0" style="padding: 0 20px;">
+                        <div style="width: 100%; height: 4px; background: rgba(23,35,61,0.10);"></div>
+                    </div>
+                    <div class="panel-content" style="padding: 20px;">
+                        <table style="width: 100%;">
+                            <tr>
+                                <td class="pipeline-image" style="cursor: pointer; padding: 20px;" (click)="gotoPipeline(item.id)">
+                                    <img src="./assets/images/pipeline.png" alt="" style="width: 519px;">
+                                </td>
+                                <td style="vertical-align: top; padding-left: 30px;">
+                                    <div style="height: 22px;">
+                                        <span class="pipeline-label-1" style="margin-right: 16px; cursor: pointer;" (click)="gotoPipeline(item.id)">{{item.name}}</span>
+
+                                        <span class="pipeline-status-label"
+                                              [ngClass]="{'pipe-state-1': item.status == 1, 'pipe-state-2': item.status == 2, 'pipe-state-3': item.status == 3, 'pipe-state-4': item.status == 4, 'pipe-state-5': item.status == 5, 'pipe-state-6': item.status == 6, 'pipe-state-7': item.status == 7, 'pipe-state-8': item.status == 8}">
+                                            {{pipelineStateMap[item.status]}}
+                                        </span>
+
+                                        <span *ngIf="item.status == 3 || item.status == 8" style="margin-left: 10px; font-size: 14px; cursor: pointer;" title="{{item.reason}}">
+                                            <span class="ant-compat anticon anticon-question-circle-o"></span>
+                                        </span>
+                                    </div>
+
+                                    <div style="height: 20px; margin-top: 7px;">
+                                        <span class="pipeline-label-2">{{item.date}}</span>
+                                    </div>
+                                    <div *ngIf="equityList.length > 0" style="height: 20px; margin-top: 24px;">
+                                        <span class="pipeline-label-3">权益配置</span>
+                                    </div>
+
+                                    <!-- 循环权益配置 -->
+                                    <div *ngFor="let config of item.configList; let j = index" class="pipline-equity-item">
+                                        <div *ngIf="actVO.status == 1">
+                                            <span class="pipeline-label-4" title="{{config.name}}">{{config.name}}</span>
+                                            <span class="label-4" style="margin-left: 50px;">配比</span>
+                                            <nz-input-number
+                                                    *ngIf="pipelineConfigStatus"
+                                                    [(ngModel)]="config.percent"
+                                                    (ngModelChange)="changePipelineEquity(config, 'percent', item)"
+                                                    [nzDisabled]="item.status == 2 || item.status == 4 || item.status == 5 || item.status == 7 || item.status == 8"
+                                                    [nzPrecision]="2"
+                                                    [nzMin]="0"
+                                                    [nzMax]="config.percentMax"
+                                                    [nzStep]="1"
+                                                    [nzSize]="'small'"
+                                                    style="width: 68px;"
+                                                    nzPlaceHolder=""
+                                            ></nz-input-number>
+                                            <span *ngIf="!pipelineConfigStatus" class="label-4" style="margin-left: 20px; display: inline-block; width: 68px;">{{config.percent}} %</span>
+                                            <span *ngIf="pipelineConfigStatus">%</span>
+                                            <span class="label-4" style="margin-left: 50px;">总量</span>
+                                            <nz-input-number
+                                                    *ngIf="pipelineConfigStatus"
+                                                    [(ngModel)]="config.count"
+                                                    (ngModelChange)="changePipelineEquity(config, 'count', item)"
+                                                    [nzDisabled]="item.status == 2 || item.status == 4 || item.status == 5 || item.status == 7 || item.status == 8"
+                                                    [nzPrecision]="0"
+                                                    [nzMin]="0"
+                                                    [nzMax]="config.countMax"
+                                                    [nzStep]="1"
+                                                    [nzSize]="'small'"
+                                                    style="width: 68px;"
+                                                    nzPlaceHolder=""
+                                            ></nz-input-number>
+                                            <span *ngIf="!pipelineConfigStatus" class="label-4" style="margin-left: 20px; display: inline-block; width: 68px;">{{toThousandStr(config.count)}}</span>
+                                        </div>
+                                        <div *ngIf="actVO.status == 2 || actVO.status == 3">
+                                            <span class="pipeline-label-4" title="{{config.name}}">{{config.name}}</span>
+
+                                            <span *ngIf="pipelineConfigStatus" class="label-4" style="margin-left: 50px;">配比</span>
+                                            <nz-input-number
+                                                    *ngIf="pipelineConfigStatus"
+                                                    [(ngModel)]="config.percent"
+                                                    (ngModelChange)="changePipelineEquity(config, 'percent', item)"
+                                                    [nzDisabled]="item.status == 2 || item.status == 4 || item.status == 5 || item.status == 7 || item.status == 8"
+                                                    [nzPrecision]="2"
+                                                    [nzMin]="0"
+                                                    [nzMax]="config.percentMax"
+                                                    [nzStep]="1"
+                                                    [nzSize]="'small'"
+                                                    style="width: 68px;"
+                                                    nzPlaceHolder=""
+                                            ></nz-input-number>
+                                            <span *ngIf="pipelineConfigStatus">%</span>
+                                            <span *ngIf="pipelineConfigStatus" class="label-4" style="margin-left: 50px;">总量</span>
+                                            <nz-input-number
+                                                    *ngIf="pipelineConfigStatus"
+                                                    [(ngModel)]="config.count"
+                                                    (ngModelChange)="changePipelineEquity(config, 'count', item)"
+                                                    [nzDisabled]="item.status == 2 || item.status == 4 || item.status == 5 || item.status == 7 || item.status == 8"
+                                                    [nzPrecision]="0"
+                                                    [nzMin]="0"
+                                                    [nzMax]="config.countMax"
+                                                    [nzStep]="1"
+                                                    [nzSize]="'small'"
+                                                    style="width: 68px;"
+                                                    nzPlaceHolder=""
+                                            ></nz-input-number>
+
+                                            <span *ngIf="!pipelineConfigStatus && actVO.status == 2" class="label-4" style="margin-left: 50px;">余量</span>
+                                            <span *ngIf="!pipelineConfigStatus && actVO.status == 2" style="color: #2D8CF0;">{{toThousandStr(config.remain)}}</span>
+                                            <span *ngIf="!pipelineConfigStatus && actVO.status == 2"> / </span>
+                                            <span *ngIf="!pipelineConfigStatus && actVO.status == 2"> {{toThousandStr(config.count)}} </span>
+                                            <span *ngIf="!pipelineConfigStatus && actVO.status == 2">({{config.remainPrecent}} %)</span>
+
+                                            <span *ngIf="!pipelineConfigStatus && actVO.status == 3" class="label-4" style="margin-left: 50px;">下发量</span>
+                                            <span *ngIf="!pipelineConfigStatus && actVO.status == 3" style="color: #2D8CF0;">{{toThousandStr(config.count - config.remain)}}</span>
+                                            <span *ngIf="!pipelineConfigStatus && actVO.status == 3" style="color: #2D8CF0;"> / </span>
+                                            <span *ngIf="!pipelineConfigStatus && actVO.status == 3" style="color: #2D8CF0;"> {{toThousandStr(config.count)}} </span>
+                                            <span *ngIf="!pipelineConfigStatus && actVO.status == 3" style="color: #2D8CF0;">({{config.usePrecent}} %)</span>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <!-- 操作按钮 -->
+                                <td style="text-align: right; vertical-align: top; font-size: 15px;">
+                                    <span style="cursor: pointer; margin-right: 10px;" (click)="gotoPipeline(item.id)" *ngIf="(item.status == 1 || item.status == 3 || item.status == 6) && actVO.status != 3 && !addPipelineDisalbe"><span class="ant-compat anticon anticon-edit"></span></span>
+                                    <span style="cursor: pointer;" (click)="deletePipeline(item.id)" *ngIf="(item.status == 1 || item.status == 3 || item.status == 6) && actVO.status != 3"><span class="ant-compat anticon anticon-minus-circle-o"></span></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

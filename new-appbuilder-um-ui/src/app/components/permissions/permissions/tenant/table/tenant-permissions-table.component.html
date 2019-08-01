@@ -1,0 +1,86 @@
+<ng-template #tableTotal>
+    <div style="margin-right: 6px;">
+        总共 {{_total}} 条
+    </div>
+</ng-template>
+<nz-table #nzTable [nzBordered]="false" [nzShowTotal]="tableTotal" [nzData]="_dataSet" nzShowSizeChanger [nzLoading]="_loading"
+    [nzTotal]="_total" [(nzPageIndex)]="_current" (nzPageIndexChange)="refreshData()" [(nzPageSize)]="_pageSize"
+    (nzPageSizeChange)="refreshData(true)" [nzFrontPagination]="false">
+    <thead nz-thead>
+        <tr>
+            <th nz-th [nzWidth]="'20%'">
+                数据对象名称
+            </th>
+            <th nz-th [nzWidth]="'10%'">
+                对象编码
+            </th>
+            <th nz-th [nzWidth]="'40%'">
+                描述
+            </th>
+            <!-- <th nz-th [nzWidth]="'20%'">
+
+                    描述
+                </th> -->
+            <!-- <th nz-th [nzWidth]="'8%'">
+                    创建人
+                </th>
+                <th nz-th [nzWidth]="'16%'">
+                    创建时间
+                </th> -->
+            <!-- <th nz-th [nzWidth]="'10%'">
+                    更新人
+                </th>
+                <th nz-th [nzWidth]="'14%'">
+                    更新时间
+                </th> -->
+            <th nz-th [nzWidth]="'16%'">
+                <span>操作</span>
+            </th>
+        </tr>
+    </thead>
+    <tbody nz-tbody>
+        <ng-container *ngFor="let data of nzTable.data; let roleIndex=index">
+            <tr nz-tbody-tr>
+                <td nz-td>
+                    <div class="item-td" style="max-width: 150px;" [title]="data.name">
+                        {{data.name}}
+                    </div>
+                </td>
+                <td nz-td>
+                    <div class="item-td" style="max-width: 100px;" [title]="data.code">
+                        {{data.code}}
+                    </div>
+                </td>
+                <td nz-td>
+                    <div class="item-td" style="max-width: 300px;" [title]="data.description">
+                        {{data.description}}
+                    </div>
+                </td>
+                <td nz-td style="padding-left:14px;">
+                    <a [routerLink]="[ '/tenants/dataPermissions', tenantId,'dataObjDetail', tenantId, data.id, data.name ]">查看</a>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <span *ngIf="rolecode!='UM_TENANT_ADMIN'">
+                        <a [routerLink]="[ '/tenants/dataPermissions', tenantId,'tenantDetails', tenantId, data.id, data.name ]">权限设置</a>
+                    </span>
+                    <span *ngIf="rolecode=='UM_TENANT_ADMIN'">
+                        <a [routerLink]="[ '/dataPermissions/tenantDetails', tenantId, data.id, data.name ]">权限设置</a>
+                    </span>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <nz-dropdown>
+                        <a nz-dropdown>
+                            更多
+                        </a>
+                        <ul nz-menu nzSelectable>
+                            <li nz-menu-item>
+                                <a (click)="editorDataObj(data)">编辑</a>
+                            </li>
+                            <li nz-menu-item>
+                                <a (click)="deleteDataObj(data)">删除</a>
+                            </li>
+                        </ul>
+                    </nz-dropdown>
+                </td>
+            </tr>
+        </ng-container>
+    </tbody>
+</nz-table>

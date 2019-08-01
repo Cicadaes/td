@@ -1,0 +1,111 @@
+<div class="first-level"></div>
+<!-- 新建、编辑 -->
+<div class="form" [ngClass]="{ 'shadow-content': !isInDialog, 'form-in-dialog': isInDialog }">
+  <!-- 页眉 -->
+  <div class="header module-title" *ngIf="!isInDialog">
+    {{ nls.headerByAdd }}
+  </div>
+
+  <!-- 名称 -->
+  <div class="input-name">
+    <span class="label">{{ nls.inputName }}</span>
+    <span [class.has-error]="vm.form.nameError" class="input">
+      <input
+        maxlength="64"
+        nz-input
+        [(ngModel)]="vm.form.nameValue"
+        [attr.placeholder]="nls.inputNamePlaceholder"
+        (keyup)="handlerInputCheck_nameError()"
+        maxlength="24"
+      />
+    </span>
+    <span class="error-msg" *ngIf="vm.form.nameError" style="margin-left:10px;">{{ nls.inputNamePlaceholder }}</span>
+    <span class="error-msg" *ngIf="systemError.isError" style="margin-left:10px;">{{ systemError.msg }}</span>
+  </div>
+
+  <!-- 步骤 -->
+  <div class="input-step">
+    <div class="tooltip">{{ nls.inputStepTooltip }}</div>
+    <div style="font-size: 12px;margin: 0 0 10px 10px;">
+      {{ nls.inputStepHeader1 }}
+    </div>
+    <!-- 步骤 -->
+    <ul class="step-ul clrfix">
+      <li *ngFor="let data of vm.form.stepValue; let i = index" class="step">
+        <label nz-checkbox [(ngModel)]="data.checked" class="label">{{ nls.inputStepLabel + (i + 1) }}：</label>
+        <!--<span class="label">{{nls.inputStepLabel + (i + 1)}}：</span>-->
+
+        <!-- 事件类型 -->
+        <span class="input" [attr.data-before]="nls.inputStepBefore1" [class.has-error]="data.eventTypeError">
+          <!--{{data.eventTypeName}}-->
+          <input
+            nz-input
+            [(ngModel)]="data.eventTypeName"
+            title="{{ data.eventTypeName }}"
+            placeholder="{{ nls.inputStepPlaceholder1 }}"
+            disabled
+          />
+          <!--<nz-select [(ngModel)]="data.eventTypeId" [nzPlaceHolder]="nls.inputStepPlaceholder1"
+                               nzShowSearch>
+                        <nz-option *ngFor="let option of _eventTypeList" [nzValue]="option.value"
+                                   [nzLabel]="option.label" nzCustomContent>
+                            <div title="{{option.label}}">{{option.label}}</div>
+                        </nz-option>
+                    </nz-select>-->
+        </span>
+
+        <!-- 事件名称 -->
+        <span
+          class="input"
+          [attr.data-before]="nls.inputStepBefore2"
+          [class.has-error]="data.eventNameError"
+          style="line-height: 32px;"
+          title="{{ data.eventName }}"
+        >
+          <nz-select
+            [(ngModel)]="data.eventId"
+            [nzPlaceHolder]="nls.inputStepPlaceholder2"
+            (ngModelChange)="handlerInputCheck_stepPropError(data, 'eventId')"
+            nzShowSearch
+            [nzDisabled]="true"
+          >
+            <nz-option
+              *ngFor="let option of _eventList"
+              [nzValue]="option.value"
+              [nzLabel]="option.label"
+              nzCustomContent
+            >
+              <div title="{{ option.label }}">{{ option.label }}</div>
+            </nz-option>
+          </nz-select>
+        </span>
+
+        <!-- 显示名 -->
+        <span
+          class="input"
+          [attr.data-before]="nls.inputStepBefore3"
+          [class.has-error]="data.stepNameError"
+          *ngIf="data.checked"
+        >
+          <input
+            nz-input
+            [(ngModel)]="data.stepName"
+            placeholder="{{ nls.inputStepNamePlaceholder }}"
+            maxlength="24"
+            (ngModelChange)="handlerInputCheck_stepPropError(data, 'stepName')"
+          />
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- 提交、取消 -->
+<div class="form-button">
+  <button nz-button (click)="handlerSubmit()" nzType="primary" [nzLoading]="isSaving">
+    {{ nls.submit }}
+  </button>
+  <button nz-button (click)="handlerCancel()" nzType="default">
+    {{ nls.cancel }}
+  </button>
+</div>

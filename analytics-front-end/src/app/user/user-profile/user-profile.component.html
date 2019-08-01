@@ -1,0 +1,43 @@
+<div class="first-level"></div>
+<!-- 基本信息 -->
+<app-base-info
+  [headerMajor]="baseInfo.headerMajor"
+  [headerMinor]="baseInfo.headerMinor"
+  [baseInfo]="baseInfo.baseInfo"
+  [theCrowd]="baseInfo.theCrowd"
+  [theLabel]="baseInfo.theLabel"
+  [theInvalidLabel]="baseInfo.theInvalidLabel"
+  class="shadow-content"
+></app-base-info>
+
+<!-- 指标分析 -->
+<app-index-analysis
+  [dateRange]="indexAnalysis.dateRange"
+  [eventSelected]="indexAnalysis.eventSelected"
+  [eventSelect]="indexAnalysis.eventSelect"
+  [eventPropSelected]="indexAnalysis.eventPropSelected"
+  [eventPropSelect]="indexAnalysis.eventPropSelect"
+  [frequencySelected]="indexAnalysis.frequencySelected"
+  [frequencySelect]="indexAnalysis.frequencySelect"
+  [chartData]="indexAnalysis.chartData"
+  [longRangeSearchLoading]="longRangeSearchLoading"
+  ($EventChange)="handlerIndexAnalysis_eventChange($event)"
+  ($EventPropChange)="handlerIndexAnalysis_eventpropChange($event)"
+  ($LookUp)="handlerIndexAnalysis_lookUp($event)"
+  (onSearchEvent)="onSearchEvent($event)"
+  (getEventList)="getEventList()"
+  class="shadow-content"
+></app-index-analysis>
+
+<!-- 行为轨迹 -->
+<app-behavior-trajectory
+  [dateRange]="behaviorTrajectory.dateRange"
+  [trajectoryList]="behaviorTrajectory.trajectoryList"
+  [trajectoryDetail]="behaviorTrajectory.trajectoryDetail"
+  [trajectoryMore]="behaviorTrajectory.trajectoryMore"
+  [chartData]="behaviorTrajectory.chartData"
+  ($TrajectoryDetail)="handlerBehaviorTrajectory_trajectoryDetail($event)"
+  ($TrajectoryMore)="handlerBehaviorTrajectory_trajectoryMore()"
+  ($DateChange)="handlerBehaviorTrajectory_dateChange($event)"
+  class="shadow-content"
+></app-behavior-trajectory>

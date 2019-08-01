@@ -1,0 +1,62 @@
+<main>
+  <div class="ant-card ant-card-loading ant-card-bordered">
+    <div class="ant-card-body">
+      <div class="users-details clrfix">
+        <dl class="clrfix">
+          <dt>
+            <span class="icon iconfont icon-account_circle"></span>
+          </dt>
+          <dd>
+            <p>用户</p>
+            <p>
+              <strong>{{ _userTotal | numberToThousandsPipe }}</strong
+              >人
+            </p>
+          </dd>
+        </dl>
+        <div class="operator">
+          <button nz-button nzType="primary" nzSize="default" (click)="showUserSaveDialog()">保存为用户分群</button>
+          <button nz-button nzType="primary" nzSize="default" (click)="showUserExportDialog()">导出</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-custom-panel">
+    <div class="table-custom-head clrfix">
+      <h5 class="table-custom-title">用户列表</h5>
+      <div class="table-custom-filter">
+        <button nz-button nzType="default" (click)="showSelectTableColoumnDialog()">
+          <span>列显示项</span>
+        </button>
+      </div>
+    </div>
+    <app-advanced-trans-funnel-users-table
+      [table]="_table"
+      (onBack)="onBackUserTableData($event)"
+    ></app-advanced-trans-funnel-users-table>
+  </div>
+  <app-advanced-trans-funnel-user-save
+    *ngIf="_isShowUserSaveModal"
+    [queryParam]="_queryParams"
+    [isVisible]="_isShowUserSaveModal"
+    (onHide)="hideUserSaveModal($event)"
+    (onSubmit)="onSubmitUserSave($event)"
+  ></app-advanced-trans-funnel-user-save>
+  <app-advanced-trans-funnel-table-head
+    [isShow]="_isShowSelectTableColoumnModal"
+    (onClose)="hideSelectTableColoumnModal($event)"
+    (onSubmit)="onSubmitSelectTableColoumn($event)"
+  ></app-advanced-trans-funnel-table-head>
+  <app-advanced-trans-funnel-user-export
+    *ngIf="_isShowUserExportModal"
+    [isShow]="_isShowUserExportModal"
+    (onClose)="hideUserExportModal($event)"
+    (onSubmit)="onSubmitUserExport($event)"
+  ></app-advanced-trans-funnel-user-export>
+  <app-advanced-trans-funnel-user-export-success
+    *ngIf="_isShowUserExportSuccessModal"
+    [isShow]="_isShowUserExportSuccessModal"
+    (onClose)="hideUserExportSuccessModal($event)"
+  ></app-advanced-trans-funnel-user-export-success>
+</main>

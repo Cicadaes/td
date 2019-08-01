@@ -1,0 +1,76 @@
+<div class="table-operator clrfix special" style="margin-bottom: 0px;">
+    <button nz-button [nzType]="'primary'" (click)="addInterface()" style="margin-top: 16px; margin-left: 17px;"
+        *ngIf="_nowData && _nowData['obj'] && _nowData['obj']['level']">
+        <span class="anticon anticon-plus"></span><span>接口</span>
+    </button>
+    <more-search [fieldArray]="interfaceArray" (onSearch)="onSearchInterfaceList($event)"></more-search>
+</div>
+<div>
+        <ng-template #tableTotal>
+                <div  style="margin-right: 6px;">
+                  总共 {{total}} 条
+                </div>
+        </ng-template>
+    <nz-table #nzTable nzShowSizeChanger [nzFrontPagination]="false" [nzBordered]="false" [nzShowTotal]="tableTotal" [nzData]="interfaceData"
+        [nzLoading]="loading" [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" 
+        (nzPageSizeChange)="refreshData(true)" (nzPageIndexChange)="refreshData()">
+        <thead>
+            <tr>
+                <th [nzWidth]="'20%'">
+                    接口名称
+                </th>
+                <th [nzWidth]="'20%'">
+                    所属分类
+                </th>
+                <th [nzWidth]="'12%'">
+                    通讯方式
+                </th>
+                <th [nzWidth]="'14%'">
+                    版本
+                </th>
+                <th [nzWidth]="'14%'">
+                    状态
+                </th>
+                <th [nzWidth]="'20%'">
+                    操作
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of nzTable.data">
+                <td>{{data.name}}</td>
+                <td>{{data.catalogName}}</td>
+                <td>
+                    <span *ngIf="data.syncType === 1">同步</span>
+                    <span *ngIf="data.syncType === 2">异步</span>
+                </td>
+                <td>{{data.versionName}}</td>
+                <td>
+                    <nz-switch [(ngModel)]="data.copyStatus" [nzControl]="true" (click)="changeStatus($event, data)"
+                        nzCheckedChildren="已发布" nzUnCheckedChildren="未发布"></nz-switch>
+                </td>
+                <td>
+                    <a href="javascript:;" (click)="detail(data)">查看</a>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <a href="javascript:;" (click)="copy(data)">复制</a>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <nz-dropdown>
+                        <a class="ant-dropdown-link" nz-dropdown>
+                            更多
+                        </a>
+                        <ul nz-menu>
+                            <li nz-menu-item nzDisabled *ngIf="data.status === 1">编辑</li>
+                            <li nz-menu-item nzDisabled *ngIf="data.status === 1">删除</li>
+                            <li nz-menu-item *ngIf="data.status === 0">
+                                <a href="javascript:;" (click)="edit(data)">编辑</a>
+                            </li>
+                            <li nz-menu-item *ngIf="data.status === 0">
+                                <a href="javascript:;" (click)="delete(data)">删除</a>
+                            </li>
+                        </ul>
+                    </nz-dropdown>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>

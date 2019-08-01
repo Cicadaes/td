@@ -1,0 +1,24 @@
+<div class="text-content-top" style="padding-bottom: 0px;">
+    <h3 class="zw-one-name" *ngIf="role">{{role.name}}</h3>
+    <p class="til_desc" *ngIf="role"> {{role.desc}}</p>
+    <nz-form-item *ngIf="role" style="margin-bottom: 0px;">
+        <nz-form-label   [nzSpan]="2">更新人</nz-form-label>
+        <nz-form-control [nzSpan]="4">{{role.updateUserName}}</nz-form-control>
+        <nz-form-label   [nzSpan]="2">更新时间</nz-form-label>
+        <nz-form-control [nzSpan]="4">{{role.updateTime | dateFormatPipe:2}}</nz-form-control>
+        <nz-form-label   [nzSpan]="2">创建人</nz-form-label>
+        <nz-form-control [nzSpan]="4">{{role.createUserName}}</nz-form-control>
+        <nz-form-label   [nzSpan]="2">创建时间</nz-form-label>
+        <nz-form-control [nzSpan]="4">{{role.createTime | dateFormatPipe:2}}</nz-form-control>
+    </nz-form-item>
+</div>
+<nz-tabset [nzTabPosition]="'top'">
+    <nz-tab *ngFor="let tab of tabs" [nzTitle]="tab.value">
+        <div class="text-content">
+            <user-auth *ngIf="tab.key == 'user'" [isSuper]="false" [tenantId]="tenantId" [roleId]="roleId"></user-auth>
+            <user-group-auth *ngIf="tab.key == 'usergroup'" [tenantId]="tenantId" [roleId]="roleId"></user-group-auth>
+            <dept-auth *ngIf="tab.key == 'dept'" [tenantId]="tenantId" [roleId]="roleId"></dept-auth>
+            <func-auth-home *ngIf="tab.key == 'func'" [tenantId]="tenantId" [appList]="appList" [roleId]="roleId"></func-auth-home>
+        </div>
+    </nz-tab>
+</nz-tabset>

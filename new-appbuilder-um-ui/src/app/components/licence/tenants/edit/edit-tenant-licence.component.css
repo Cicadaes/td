@@ -1,0 +1,15 @@
+.label_font{
+    font-weight:bold;
+}
+
+.special_label {
+  width: 80px !important;
+  text-align: left;
+  margin-right: 15px !important;
+}
+:host ::ng-deep .text-content .ant-card-body {
+  padding: 14px 0px !important;
+}
+:host ::ng-deep .ant-form-item-label label {
+  padding-left:10px;
+}

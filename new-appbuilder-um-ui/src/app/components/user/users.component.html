@@ -1,0 +1,14 @@
+<div class="text-content">
+    <div class="table-operator clrfix">
+
+        <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="showAddUserModal()">
+            <span class="anticon anticon-plus"></span><span>用户</span>
+        </button>
+
+        <add-user-dialog [isShow]="isShowAddUerModal" (onClose)="hideAddUserModal($event)" (onSubmit)="onSubmitUserFormData($event)"></add-user-dialog>
+    </div>
+    <div class="operation-region">
+        <more-search [fieldArray]="userFieldArray" (onSearch)="onSearchUserList($event)"></more-search>
+        <users-table [queryParams]="userTableFieldParams" [reload]="isReloadUserTable"></users-table>
+    </div>
+</div>

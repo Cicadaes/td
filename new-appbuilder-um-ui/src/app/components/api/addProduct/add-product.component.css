@@ -1,0 +1,8 @@
+::ng-deep .cover-ant-form-item-label .ant-form-item-required:before {
+    display: inline-block;
+    margin-right: 4px;
+    content: "*";
+    line-height: 1;
+    font-size: 14px;
+    color: #ffffff;
+}

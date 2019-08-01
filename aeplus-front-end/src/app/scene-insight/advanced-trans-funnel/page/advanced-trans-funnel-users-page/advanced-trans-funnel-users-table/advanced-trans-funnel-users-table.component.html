@@ -1,0 +1,47 @@
+<main>
+	<nz-table
+			#nzTable
+			#ajaxTable
+			[nzLoading]="_loading"
+			[nzTotal]="_total"
+			[nzData]="_dataSet"
+			[nzPageSize]="10"
+			[nzScroll]="{ x: '1000px', y: '500px' }"
+			nzShowTotal
+			nzShowSizeChanger
+			[nzFrontPagination]="false"
+			[(nzPageIndex)]="_current"
+			[(nzPageSize)]="_pageSize"
+			[nzPageSizeOptions]="[ 10, 20, 50, 100 ]"
+			(nzPageIndexChange)="refreshData()"
+			(nzPageSizeChange)="refreshData(true)"
+	>
+		<thead>
+		<tr>
+			<th *ngFor="let data of _tableHeadList"
+			    [ngStyle]="{'display': data.esfieldname == 'accountoffset' || data.esfieldname == 'offset' || data.esfieldname == 'accounttype' ? 'none' : 'table-cell' }">
+				<div [ngStyle]="{'width':data.esfieldname == 'accountid' || data.esfieldname == 'distinctid' ? '230px' : '150px' }">{{data.displayname}}
+				</div>
+			</th>
+			<th nzWidth="50px" nzRight="0px">
+				<div style="width: 50px;">操作</div>
+			</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr *ngFor="let data of nzTable.data">
+			<td *ngFor="let td of data | keysPipe"
+			    [ngStyle]="{'display': td.value && (td.value.key == 'accountoffset' || td.value.key == 'offset' || td.value.key == 'accounttype' || (td.value.key == 'distinctid' && !_isSelectedTdId)) ? 'none' : 'table-cell' }">
+				<div *ngIf="td.value" [ngStyle]="{'width': td.value.key == 'accountid' || td.value.key == 'distinctid' ? '230px' : '150px' }">
+					{{td.value.value}}
+				</div>
+			</td>
+			<td nzRight="0px">
+				<div style="width: 50px;">
+					<a href="javascript:;" (click)="goUserProfilePage(data)">查看</a>
+				</div>
+			</td>
+		</tr>
+		</tbody>
+	</nz-table>
+</main>

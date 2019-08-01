@@ -1,0 +1,9 @@
+<div class="clrfix">
+    <nz-upload [(nzFileList)]="fileList" [nzShowButton]="fileList.length < number" [nzData]="nzdata" [nzRemove]="onRemove"
+        [nzBeforeUpload]="beforeUpload">
+        <button nz-button>
+            <span class="anticon anticon-upload"></span><span>上传</span>
+        </button>
+    </nz-upload>
+</div>
+<div *ngIf="type" style="color: red;">上传的文件格式不正确，请上传json格式文件</div>

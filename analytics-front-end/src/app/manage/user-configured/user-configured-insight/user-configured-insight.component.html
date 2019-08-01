@@ -1,0 +1,58 @@
+<div class="first-level"></div>
+
+<app-tab-list [tabList]="tabList"></app-tab-list>
+
+<main>
+  <article>
+    <div class="content-div shadow-content">
+      <div class="common-title">
+        用户洞察配置
+      </div>
+      <div class="crowd-wap">
+        <div class="crowd-wap-left" [ngStyle]="containerStyle">
+          <ul>
+            <li
+              *ngFor="let item of leftMuneList; let i = index"
+              (click)="checkOne(item)"
+              [ngClass]="{ selectLi: item.type == attrIndex }"
+            >
+              {{ item.name }}
+            </li>
+          </ul>
+        </div>
+        <div class="crowd-wap-right">
+          <!-- 基础属性配置 -->
+          <div class="combination" *ngIf="attrIndex == 6"></div>
+
+          <!-- 用户列表搜索配置 -->
+          <div class="combination" *ngIf="attrIndex == 7"></div>
+
+          <!-- 用户列表快速搜索配置 -->
+          <div class="combination" *ngIf="attrIndex == 8"></div>
+
+          <!-- 用户列表搜索结果配置 -->
+          <div class="combination" *ngIf="attrIndex == 9"></div>
+
+          <app-detail
+            [ngClass]="{ hide: editFlag }"
+            [title]="'属性配置'"
+            [columnData]="attributeDataChoose"
+            (edtiData)="edtiData()"
+            [attrLoadingFlag]="attrLoadingFlag"
+          >
+          </app-detail>
+
+          <app-edit
+            [ngClass]="{ hide: !editFlag }"
+            [title]="'属性配置'"
+            [attributeData]="attributeData"
+            (cancelEtim)="cancelEtim()"
+            (saveEtim)="saveEtim()"
+            [configuredObj]="configuredObj"
+          >
+          </app-edit>
+        </div>
+      </div>
+    </div>
+  </article>
+</main>

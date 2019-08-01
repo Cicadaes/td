@@ -1,0 +1,82 @@
+<div class="text-content">
+    <nz-card [nzBordered]="true" style="margin-bottom:15px;" nzTitle="基本信息">
+
+        <div *ngIf="tenantLicence">
+            <nz-form-item nz-row>
+                <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special_label">
+                    <label for="name">许可证</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                    {{tenantLicence.name}}
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item nz-row>
+
+                <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special_label">
+                    <label>状态</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                    {{tenantLicence.status==1 ? '正常':'禁用'}}
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item nz-row>
+                <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special_label" >
+                    <label>有效期</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                    {{tenantLicence.startDate | dateFormatPipe:2}}~{{tenantLicence.endDate | dateFormatPipe:2}}
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item nz-row>
+                <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special_label">
+                    <label for="desc">描述</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                    {{tenantLicence.desc}}
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item nz-row>
+                <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special_label">
+                    <label for="desc">创建人</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                    {{tenantLicence.createUserName}}
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item nz-row>
+                <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special_label">
+                    <label for="desc">创建时间</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                    {{tenantLicence.createTime | dateFormatPipe:2}}
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item nz-row>
+                <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special_label">
+                    <label for="desc">更新人</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                    {{tenantLicence.updateUserName}}
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item nz-row>
+                <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special_label">
+                    <label for="desc">更新时间</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                    {{tenantLicence.updateTime | dateFormatPipe:2}}
+                </nz-form-control>
+            </nz-form-item>
+            <!-- <nz-form-item nz-row >
+                                    <nz-form-label nz-col [nzSm]="24" [nzXs]="24" class="special_row">
+                                        <tlicences-attribute-table [queryParams] = "licencesTableFieldParams" [licenceId]="licenceId" [_dataSet]="_dataSet" (onSubmit)="submitTbleData($event)" [tenantLicence]="tenantLicence" [noEdit]="noEdit"></tlicences-attribute-table>
+                                    </nz-form-label>
+                                </div> -->
+        </div>
+        <!-- <tlicences-attribute-table [queryParams] = "licencesTableFieldParams" [licenceId]="licenceId" [_dataSet]="_dataSet" (onSubmit)="submitTbleData($event)" [tenantLicence]="tenantLicence" [noEdit]="noEdit"></tlicences-attribute-table> -->
+    </nz-card>
+
+    <tlicences-attribute-table [queryParams]="licencesTableFieldParams" [licenceId]="licenceId" [_dataSet]="_dataSet"
+        (onSubmit)="submitTbleData($event)" [tenantLicence]="tenantLicence" [noEdit]="noEdit"></tlicences-attribute-table>
+
+</div>

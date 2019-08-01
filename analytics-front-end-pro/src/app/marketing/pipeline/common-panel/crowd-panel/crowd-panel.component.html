@@ -1,0 +1,31 @@
+<div class="content">
+    <div class="base-desc">
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                    <span class="require">*</span>人群名称
+            </label>
+            <div class="item-input">
+                <input type="text" tdLimitInputText iType="triggerInput" max="26" type="text" placeholder="请输入内容" [(ngModel)]="pcs.nodeData.name" [disabled]="!pcs.isPipelineEdit">
+            </div>
+        </div>
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                人群描述
+            </label>
+            <div class="item-textarea">
+                <textarea tdLimitTextareaText iType="all" max="80" type="text" placeholder="请输入内容" [(ngModel)]="pcs.nodeData.description" [disabled]="!pcs.isPipelineEdit"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="crowd-info">
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                采集时间
+            </label>
+        </div>
+        <div class="pipe-item clearfix">
+            <nz-range-picker [nzFormat]="dateFormat" nzPlaceHolder="" [nzAllowClear]="false" [nzPopupStyle]="{'left': '-200px'}" [nzStyle]="{'width': '245px', 'margin-left': '24px'}" [(ngModel)]="dateList" (ngModelChange)="onChange($event)" [nzDisabled]="!pcs.isPipelineEdit" [nzDisabledDate]="disabledDate"></nz-range-picker>
+            <a class="reset" (click)="reset()">重置</a>
+        </div>
+    </div>
+</div>

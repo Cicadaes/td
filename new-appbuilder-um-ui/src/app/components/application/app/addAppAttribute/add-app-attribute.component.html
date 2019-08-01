@@ -1,0 +1,50 @@
+<nz-card style="margin-top: 10px;" [nzTitle]="extraTemplate" >
+
+        <nz-table #nzTable [nzShowPagination]="false" [nzBordered]="false" [nzFrontPagination]="false" [nzData]="_dataSet" >
+
+                <thead nz-thead>
+                    <tr>
+                        <th nz-th [nzWidth]="'20%'">
+                            功能类别名称
+                        </th>
+                        <th nz-th [nzWidth]="'20%'">
+                            功能类别编码
+                        </th>
+                        <th nz-th [nzWidth]="'40%'">
+                            描述
+                        </th>
+                        <th nz-th [nzWidth]="'20%'">
+                            <span>操作</span>
+                        </th>
+                    </tr>
+                </thead>
+
+            <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                    <td nz-td>{{data.name}}</td>
+                    <td nz-td>{{data.code}}</td>
+                    <td nz-td>{{data.defaultValue}}</td>
+                    <td nz-td>
+                        <span>
+                            <a href="javascript:;" (click)="editAttribute(data)">编辑</a>
+                            <nz-divider nzType="vertical"></nz-divider>
+                            <a href="javascript:;" (click)="deleteAttribute(data)">删除</a>
+                            <!--<a href="javascript:;" (click)="deleteAppAttribute(data.id)">删除</a>-->
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+        <add-app-attribute-dialog *ngIf="!currentData" [_dataSet]="_dataSet" [isedit]="isedit" [isShow]="isShowAddAppModal"
+            [queryParams]="queryParams" (onClose)="hideAddAppModal($event)" (onSubmit)="submitAddAppModal($event)"></add-app-attribute-dialog>
+        <add-app-attribute-dialog *ngIf="currentData" [_dataSet]="_dataSet" [isedit]="isedit" [currentData]="currentData"
+            [isShow]="isShowAddAppModal" [queryParams]="queryParams" (onClose)="hideAddAppModal($event)" (onSubmit)="submitAddAppModal($event)"></add-app-attribute-dialog>
+
+</nz-card>
+<ng-template #extraTemplate>
+    
+        <span>功能类别</span>
+        <img alt="添加功能类别" src="./assets/images/add.svg" height="12px" width="12px" style="margin-left: 4px;cursor: pointer;"
+        (click)="addAppAttribute($event)"  />
+   
+</ng-template>

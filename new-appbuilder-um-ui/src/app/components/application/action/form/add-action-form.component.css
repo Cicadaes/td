@@ -1,0 +1,34 @@
+:host ::ng-deep .special-label {
+    margin-left: 15px;
+    text-align: left;
+}
+
+/* :host ::ng-deep .detail {
+    margin-left: 24px;
+} */
+
+.ant-row{
+    margin:10px 0;
+}
+/* :host ::ng-deep .detail .ant-form-item {
+    margin-bottom: 6px;
+}
+
+:host ::ng-deep .detail .special-label {
+    width: 80px;
+} */
+
+:host ::ng-deep .croate nz-input .ant-input-disabled:hover {
+    border: none !important;
+}
+
+:host ::ng-deep .croate nz-input .ant-input-disabled {
+    border: none !important;
+    background: #ffffff;
+    color: rgba(0, 0, 0, 0.65);
+    cursor: auto !important;
+}
+:host ::ng-deep .ant-input-lg ,:host ::ng-deep .ant-input {
+     padding: 0px;
+
+}

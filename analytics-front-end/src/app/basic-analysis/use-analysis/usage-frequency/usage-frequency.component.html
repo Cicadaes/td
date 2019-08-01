@@ -1,0 +1,122 @@
+<main>
+  <div class="item">
+    <div class="title">
+      使用频率分布
+      <div class="title-right">
+        <nz-popover [nzTitle]="'指标说明'" [nzPlacement]="'rightTop'" [nzTrigger]="'hover'">
+          <i class="icon iconfont icon-info1 question" nz-popover></i>
+          <ng-template #nzTemplate>
+            <ul class="des-ul">
+              <li class="clrfix">
+                <label>启动用户数：</label>
+                <div class="des">
+                  启动应用的用户，去重。
+                </div>
+              </li>
+            </ul>
+          </ng-template>
+        </nz-popover>
+      </div>
+    </div>
+    <div class="bar-chart">
+      <app-loading-and-no-data [isLoading]="barChartLoading" [isNoData]="!barOption"></app-loading-and-no-data>
+      <div echarts *ngIf="!barChartLoading && barOption" [options]="barOption" class="bar-chart"></div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="title">
+      人均启动次数趋势
+      <div class="title-right">
+        <nz-popover [nzTitle]="'指标说明'" [nzPlacement]="'rightTop'" [nzTrigger]="'hover'">
+          <i class="icon iconfont icon-info1 question" nz-popover></i>
+          <ng-template #nzTemplate>
+            <ul class="des-ul">
+              <li class="clrfix">
+                <label>人均启动次数：</label>
+                <div class="des">
+                  当日用户平均启动应用的次数，人均日启动=当日总启动次数/当日活跃用户。
+                </div>
+              </li>
+            </ul>
+          </ng-template>
+        </nz-popover>
+      </div>
+    </div>
+    <nz-tabset>
+      <nz-tab nzTitle="人均启动次数">
+        <div class="chart-one">
+          <div class="bar-chart">
+            <app-loading-and-no-data [isLoading]="loading" [isNoData]="!lineOption"></app-loading-and-no-data>
+            <div echarts *ngIf="!loading && lineOption" [options]="lineOption" class="bar-chart"></div>
+          </div>
+        </div>
+      </nz-tab>
+    </nz-tabset>
+  </div>
+
+  <div class="item">
+    <div class="title table-div">
+      人均启动次数明细
+      <div class="title-right">
+        <nz-popover
+          [nzTitle]="'下载消息'"
+          [nzContent]="downloadTemplate"
+          [nzPlacement]="'bottomLeft'"
+          [nzTrigger]="'click'"
+        >
+          <i class="iconfont icon-download tip-icon" nz-popover (click)="downloadData()"></i>
+          <ng-template #downloadTemplate>
+            <div>
+              导出任务创建成功，请稍后到
+              <a (click)="goPage('/download-data')" style="margin:0 10px;">数据下载</a>页面下载您需要的附件。
+            </div>
+          </ng-template>
+        </nz-popover>
+        <nz-popover [nzTitle]="'指标说明'" [nzPlacement]="'rightTop'" [nzTrigger]="'hover'">
+          <i class="icon iconfont icon-info1 question" nz-popover></i>
+          <ng-template #nzTemplate>
+            <ul class="des-ul">
+              <li class="clrfix">
+                <label>人均启动次数：</label>
+                <div class="des">
+                  当日用户平均启动应用的次数，人均日启动=当日总启动次数/当日活跃用户。
+                </div>
+              </li>
+            </ul>
+          </ng-template>
+        </nz-popover>
+      </div>
+    </div>
+    <nz-table
+      #listTable
+      [nzLoading]="loading"
+      [nzData]="tableData"
+      [nzTotal]="totalCount"
+      [(nzPageIndex)]="pageIndex"
+      [(nzPageSize)]="pageSize"
+      [nzPageSizeOptions]="pageOptions"
+      nzShowSizeChanger
+    >
+      <thead (nzSortChange)="sort($event)">
+        <tr>
+          <th nzShowSort nzSortKey="date" [(nzSort)]="sortMap.date">日期</th>
+          <th nzShowSort nzSortKey="value" [(nzSort)]="sortMap.value">人均启动次数</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of listTable.data">
+          <!-- 日期 -->
+          <td>
+            {{ dateSplit(data.date) }}
+          </td>
+
+          <!-- 人均启动次数明细 -->
+          <td style="width: 50%">
+            {{ globals.toDecimal(data.value) }}
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</main>

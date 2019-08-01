@@ -1,0 +1,37 @@
+<main>
+    <div class="header">
+        漏斗名称
+        <input nz-input [(ngModel)]="funnelName" (change)="checkFunnelName(funnelName)" style="width: 316px; margin-left: 16px;" placeholder="请输入漏斗名称">
+        <span class="error" *ngIf="vm.nameError" >{{vm.nameErrorInfo}}</span>
+    </div>
+
+    <div class="content">
+        <p>
+            <span class="ant-compat anticon anticon-info-circle"></span> 以用户逐步执行的事件为依据，构造转化漏斗，系统将逐步过滤，计算出用户在整个过程中的转化率。</p>
+        <div class="title">
+            <label>步骤</label>
+            <label style="margin: 0 162px 0 92px;">事件名称</label>
+            <label>事件别名</label>
+        </div>
+
+        <div class="step-list" #scroll>
+            <div class="step" *ngFor="let step of funnelStepList;let i = index;">
+                <span>step{{i + 1}}:</span>
+                <span style="margin: 0 12px 0 16px;">追踪依据</span>
+                <nz-select style="width: 200px;" *ngFor="let attr of step.funnelStepConditionList; let j = index;" [(ngModel)]="attr.key" (ngModelChange)="changeEvent($event, i, j)" nzPlaceHolder="请选择事件">
+                    <nz-option *ngFor="let option of eventList" [nzValue]="option.code" [nzLabel]="option.name" [nzDisabled]="option.status != 0"></nz-option>
+                </nz-select>
+                <span style="margin: 0 24px 0 16px;">事件别名</span>
+                <input nz-input style="width: 200px;" [(ngModel)]="step.name">
+                <span class="ant-compat anticon anticon-close-circle delete-step" *ngIf="funnelStepList.length > 3" (click)="deleteStep(i)"></span>
+            </div>
+        </div>
+
+        <span class="error" style="margin-left: 10px; margin-top: 0px;" *ngIf="vm.stepError" >{{vm.stepErrorInfo}}</span>
+
+        <div class="add-steps" (click)="addStep()">
+            <span class="iconfont icon-add1"></span>
+            <span>添加步骤</span>
+        </div>
+    </div>
+</main>

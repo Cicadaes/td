@@ -1,0 +1,186 @@
+<main [ngStyle]="_containerStyle">
+  <div class="first-level"></div>
+  <div class="header-content" id="filter-header" (click)="hideDicItems(false)">
+    <app-event-analysis-detail-filter
+      [loading]="_isSearchLoading"
+      (onSearch)="onSearch($event)"
+      (onSelectedDimension)="onSelectedDimension($event)"
+    ></app-event-analysis-detail-filter>
+  </div>
+  <article class="content-div">
+    <!-- 图标 -->
+    <div class="chart-list shadow-content">
+      <h3 class="chart-list-title module-title clrfix">
+        <span>事件趋势</span>
+        <!--<span>{{selectedEventLabel}}</span>
+                <span *ngIf="selectedEventContrast">、{{selectedEventContrastLabel}}</span>-->
+        <div class="chart-setting">
+          <div *ngIf="_isShowSetting">
+            <span
+              class="icon iconfont icon-equalizer"
+              [ngClass]="{ active: _chartType == 'bar' }"
+              (click)="_swithChartType('bar')"
+            ></span>
+            <span
+              class="icon iconfont icon-line-chart"
+              [ngClass]="{ active: _chartType == 'line' }"
+              (click)="_swithChartType('line')"
+            ></span>
+            <span class="icon iconfont icon-settings" (click)="showDicItems($event)"></span>
+          </div>
+          <app-event-analysis-detail-compare
+            [show]="_showDicItems"
+            [dic]="selectedDimension"
+            [max]="_maxLength"
+            (onBack)="onBackDicItems($event)"
+            (onHide)="hideDicItems($event)"
+            class="dialog"
+          ></app-event-analysis-detail-compare>
+        </div>
+      </h3>
+      <div (click)="hideDicItems(false)">
+        <!--<div class="chart-title module-title">{{eventMap[selectedEvent]}}的{{metricMap[selectedMetric]}}</div>-->
+        <div
+          style="height:290px;padding:0 16px 16px 16px;"
+          *ngIf="!_isQueringData && chartOption && !_noData"
+          [ngClass]="{ hide: _isQueringData || !eventMap[selectedEvent] }"
+        >
+          <app-chart [option]="chartOption"></app-chart>
+        </div>
+        <div *ngIf="_isQueringData" class="loading">
+          <nz-spin></nz-spin>
+        </div>
+        <div class="loading" *ngIf="!_isQueringData && _noData">
+          <app-loading-and-no-data [isNoData]="!_isQueringData && _noData"></app-loading-and-no-data>
+        </div>
+      </div>
+    </div>
+    <!-- 数据明细列表 -->
+    <div class="detail-data shadow-content" (click)="hideDicItems(false)">
+      <div class="detail-data-tit module-title">
+        <h4>明细数据</h4>
+        <div
+          class="detail-data-left"
+          *ngIf="_detailTabs.length == 1 || (_queryAllParams.json && _queryAllParams.json['aggregationFiled'] != 'all')"
+        >
+          <div style="float: left;" *ngIf="_chartType == 'bar'">
+            <app-fast-search
+              [placeHolder]="'按分组筛选'"
+              [keyup]="false"
+              [value]="_searchValue"
+              (onSearch)="tableSearch($event)"
+            ></app-fast-search>
+          </div>
+          <app-download-popover class="item" [params]="_downloadParams"></app-download-popover>
+          <app-help-popover
+            class="item"
+            [list]="_helpPopover['list1']"
+            [width]="_helpPopover.width"
+            [paddingLeft]="_helpPopover.paddingLeft"
+            *ngIf="selectedMetric == 1 && _currentDetailTab.value == 'event'"
+          >
+          </app-help-popover>
+          <app-help-popover
+            class="item"
+            [list]="_helpPopover['list2']"
+            [width]="_helpPopover.width"
+            [paddingLeft]="_helpPopover.paddingLeft"
+            *ngIf="selectedMetric == 2 && _currentDetailTab.value == 'event'"
+          >
+          </app-help-popover>
+          <app-help-popover
+            class="item"
+            [list]="_helpPopover['list3']"
+            [width]="_helpPopover.width"
+            [paddingLeft]="_helpPopover.paddingLeft"
+            *ngIf="selectedMetric == 3 && _currentDetailTab.value == 'event'"
+          >
+          </app-help-popover>
+        </div>
+      </div>
+
+      <app-event-analysis-detail-table
+        *ngIf="_detailTabs.length == 1 || (_queryAllParams.json && _queryAllParams.json['aggregationFiled'] != 'all')"
+        [chartType]="_chartType"
+        [detailData]="detailData"
+        [contrast]="_isContrast"
+        [selectedMetric]="selectedMetric"
+        [isQueringData]="_isQueringData"
+        [queryAllParams]="_queryAllParams"
+      ></app-event-analysis-detail-table>
+
+      <nz-tabset
+        [nzTabBarExtraContent]="tabTemplate"
+        [nzSelectedIndex]="_currentDetailTab.index"
+        *ngIf="_detailTabs.length == 3 && _queryAllParams.json && _queryAllParams.json['aggregationFiled'] == 'all'"
+      >
+        <nz-tab *ngFor="let tab of _detailTabs" [nzTitle]="tab.label" (nzSelect)="_switchTabset(tab)">
+          <app-event-analysis-detail-table
+            *ngIf="tab.value == 'event'"
+            [chartType]="_chartType"
+            [detailData]="detailData"
+            [contrast]="_isContrast"
+            [selectedMetric]="selectedMetric"
+            [isQueringData]="_isQueringData"
+            [queryAllParams]="_queryAllParams"
+          ></app-event-analysis-detail-table>
+          <app-event-analysis-tag-table
+            [queryAllParams]="_queryAllParams.json"
+            [isQuery]="_isQueryTags"
+            *ngIf="tab.value == 'tag' && !_detailTabShow"
+          ></app-event-analysis-tag-table>
+          <app-event-analysis-event-attr-table
+            [isQuery]="_isQueryEventAttrs"
+            [queryAllParams]="_queryAllParams.json"
+            *ngIf="tab.value == 'event-attr' && !_detailTabShow"
+          ></app-event-analysis-event-attr-table>
+        </nz-tab>
+      </nz-tabset>
+      <ng-template #tabTemplate>
+        <div class="tab-operator-list clrfix">
+          <app-download-popover class="item" [params]="_downloadParams"></app-download-popover>
+          <app-help-popover
+            class="item"
+            [list]="_helpPopover['list1']"
+            [width]="_helpPopover.width"
+            [paddingLeft]="_helpPopover.paddingLeft"
+            *ngIf="selectedMetric == 1 && _currentDetailTab.value == 'event'"
+          >
+          </app-help-popover>
+          <app-help-popover
+            class="item"
+            [list]="_helpPopover['list2']"
+            [width]="_helpPopover.width"
+            [paddingLeft]="_helpPopover.paddingLeft"
+            *ngIf="selectedMetric == 2 && _currentDetailTab.value == 'event'"
+          >
+          </app-help-popover>
+          <app-help-popover
+            class="item"
+            [list]="_helpPopover['list3']"
+            [width]="_helpPopover.width"
+            [paddingLeft]="_helpPopover.paddingLeft"
+            *ngIf="selectedMetric == 3 && _currentDetailTab.value == 'event'"
+          >
+          </app-help-popover>
+          <app-help-popover
+            class="item"
+            [list]="_helpPopover['list4']"
+            [width]="_helpPopover.width"
+            [paddingLeft]="_helpPopover.paddingLeft"
+            *ngIf="_currentDetailTab.value == 'tag'"
+          >
+          </app-help-popover>
+          <app-help-popover
+            class="item"
+            [list]="_helpPopover['list5']"
+            [width]="_helpPopover.width"
+            [paddingLeft]="_helpPopover.paddingLeft"
+            *ngIf="_currentDetailTab.value == 'event-attr'"
+          >
+          </app-help-popover>
+        </div>
+      </ng-template>
+    </div>
+  </article>
+</main>

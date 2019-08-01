@@ -1,0 +1,175 @@
+<main>
+    <div class="clrfix">
+        <div class="table-custom-head clrfix">
+            <button *ngIf="_tenantAdmin" nz-button nzType="primary" nzSize="default" (click)="create();">
+                <span class="anticon anticon-plus"></span>添加标签
+            </button>
+            <div class="remove-btn-wrap" *ngIf="_tenantAdmin && _hasChecked">
+                <button nz-button nzType="default">移动标签至</button>
+                <app-select-custom class="remove-btn-select" [select]="moveTagSelect"
+                                   (onSelect)="onSelectMoveTag($event);"></app-select-custom>
+            </div>
+            <button nz-button nzType="default" *ngIf="_tenantAdmin && _hasChecked" (click)="removeTags();">删除</button>
+            <!--<h5 class="table-custom-title">自定义标签列表</h5>-->
+            <div class="table-custom-filter">
+                <app-fast-search [value]="_keyword" (onSearch)="_onSearch($event);" [size]="'default'" class="fast"
+                                 *ngIf="!_showMoreSearch"></app-fast-search>
+                <a href="javascript:;" class="operator" *ngIf="!_showMoreSearch" (click)="swithFilter();">
+                    <span class="anticon anticon-down"></span>
+                    <span>搜索条件</span>
+                </a>
+                <a href="javascript:;" class="operator" *ngIf="_showMoreSearch" (click)="swithFilter();">
+                    <span class="anticon anticon-up"></span>
+                    <span>搜索条件</span>
+                </a>
+            </div>
+        </div>
+        <div class="table-custom-more-search" *ngIf="_showMoreSearch">
+            <app-more-search [fieldArray]="_moreSearchFieldArray"
+                             (onSearch)="onSearchMoreSearch($event)"></app-more-search>
+        </div>
+        <nz-table
+                #ajaxTable
+                nzShowTotal
+                nzShowSizeChanger
+                [nzFrontPagination]="false"
+                [nzData]="dataSet"
+                [nzLoading]="loading"
+                [nzTotal]="total"
+                [(nzPageIndex)]="pageIndex"
+                [(nzPageSize)]="pageSize"
+                [nzPageSizeOptions]="[ 10, 20, 50, 100 ]"
+                (nzCurrentPageDataChange)="currentPageDataChange($event)"
+                (nzPageIndexChange)="searchData()"
+                (nzPageSizeChange)="searchData(true)">
+            <thead (nzSortChange)="sort($event)" nzSingleSort>
+            <tr>
+                <th nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate"
+                    (nzCheckedChange)="checkAll($event)"></th>
+                <th style="min-width:80px;">标签名称</th>
+                <th style="min-width:80px;">状态</th>
+                <th style="min-width:100px;">计算状态</th>
+                <th style="min-width:100px;">更新人</th>
+                <th style="min-width:108px;">规则更新时间</th>
+                <th style="min-width:108px;">数据更新时间</th>
+                <th style="min-width: 162px;">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let data of ajaxTable.data">
+                <td nzShowCheckbox [(nzChecked)]="data.checked" [nzDisabled]="data.disabled"
+                    (nzCheckedChange)="refreshStatus()"></td>
+                <td>
+                    <div class="td-text-overflow" title="{{data.name }}">{{data.name }}</div>
+                </td>
+                <td>
+                    <div>{{data.status | statusCrowdPipe}}</div>
+                </td>
+                <td>
+                    <div>{{data.calcStatus | calStatusCrowdPipe}}</div>
+                </td>
+                <td>
+                    <div>{{data.updator }}</div>
+                </td>
+                <td>
+                    <div>{{data.updateTagRuleTime | date: 'yyyy-MM-dd HH:mm'}}</div>
+                </td>
+                <td>
+                    <div>{{data.updateDataTime }}</div>
+                </td>
+                <td>
+                    <div class="table-custom-bar">
+                        <a href="javascript:;" (click)="viewTag(data);">
+                            查看
+                        </a>
+                        <a href="javascript:;" *ngIf="_tenantAdmin && data.calcStatus != 1" (click)="editTag(data);">
+                            编辑
+                        </a>
+
+                        <nz-dropdown *ngIf="_tenantAdmin && data.calcStatus != 1">
+                            <a nz-dropdown>
+                                更多 <span class="anticon anticon-down"></span>
+                            </a>
+                            <ul nz-menu nzSelectable>
+                                <li nz-menu-item>
+                                    <a href="javascript:;" (click)="delete(data);" style="font-size: 12px;">
+                                        删除
+                                    </a>
+                                </li>
+                                <li nz-menu-item>
+                                    <a href="javascript:;" (click)="calcuteTag(data);" style="font-size: 12px;">
+                                        重新计算
+                                    </a>
+                                </li>
+                            </ul>
+                        </nz-dropdown>
+
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </nz-table>
+    </div>
+
+    <nz-modal *ngIf="_isVisible" [nzMaskClosable]="false" [(nzVisible)]="_isVisible" [nzBodyStyle]="{'padding': '0'}" [nzFooter]="null"
+              [nzWidth]="'476px'"
+              nzWrapClassName="vertical-center-modal" [nzTitle]="modalTitle" (nzOnCancel)="handleCancel()">
+        <ng-template #modalTitle>
+            <div class="custom-modal-title clrfix" *ngIf="_checkDeleteTagType != 'edit'">
+                <span class="icon iconfont icon-warning"></span>
+                <span class="text">删除提示</span>
+            </div>
+            <div class="custom-modal-title clrfix" *ngIf="_checkDeleteTagType == 'edit'">
+                <span class="icon iconfont icon-help"></span>
+                <span class="text">确认提示</span>
+            </div>
+        </ng-template>
+
+        <div class="custom-modal-content">
+            <div *ngIf="_checkDeleteTagType == 'delete'">标签被引用，不允许删除。</div>
+            <div *ngIf="_checkDeleteTagType == 'batchDelete'">
+                <span *ngIf="!_checkDeleteTagData.all">部分标签被引用，不允许删除。</span>
+                <span *ngIf="_checkDeleteTagData.all">标签被引用，不允许删除。</span>
+            </div>
+            <div *ngIf="_checkDeleteTagType == 'edit'">要编辑的标签已被引用，更新后会产生影响，是否继续编辑？</div>
+            <div class="more-view">
+                <a href="javascript:;" (click)="showHideMoreTagList();" *ngIf="!_showMoreTagList">查看引用详情</a>
+                <a href="javascript:;" (click)="showHideMoreTagList();" *ngIf="_showMoreTagList">收起引用详情</a>
+            </div>
+            <div class="more-list" *ngIf="_showMoreTagList">
+                <dl *ngIf="_checkDeleteTagData.tag && _checkDeleteTagData.tag.length > 0">
+                    <dt>标签</dt>
+                    <dd class="clrfix">
+                        <ul class="clrfix tag-list">
+                            <li *ngFor="let tag of _checkDeleteTagData.tag" title="{{tag}}">{{tag}}</li>
+                        </ul>
+                    </dd>
+                </dl>
+                <dl *ngIf="_checkDeleteTagData.crowd && _checkDeleteTagData.crowd.length > 0">
+                    <dt>人群</dt>
+                    <dd class="clrfix">
+                        <ul class="clrfix tag-list">
+                            <li *ngFor="let crowd of _checkDeleteTagData.crowd" title="{{crowd}}">{{crowd}}</li>
+                        </ul>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="custom-modal-footer" *ngIf="_checkDeleteTagType == 'delete'">
+            <button nz-button nzType="primary" (click)="handleCancel()">确定</button>
+        </div>
+        <div class="custom-modal-footer" *ngIf="_checkDeleteTagType == 'batchDelete'">
+            <button nz-button nzType="default" (click)="deleteBatch(_batchSelectedData)" *ngIf="!_checkDeleteTagData.all">仅删除未被引用的标签</button>
+            <button nz-button nzType="primary" (click)="handleCancel()" *ngIf="!_checkDeleteTagData.all">取消删除</button>
+            <button nz-button nzType="primary" (click)="handleCancel()" *ngIf="_checkDeleteTagData.all">确定</button>
+        </div>
+        <div class="custom-modal-footer" *ngIf="_checkDeleteTagType == 'edit'">
+            <button nz-button nzType="default" (click)="handleCancel()">取消编辑</button>
+            <button nz-button nzType="primary"
+                    (click)="goToPage('', '/manage/user-configured/tag/tag-create/edit' , {id: _batchSelectedData[0].id});handleCancel();">
+                继续编辑
+            </button>
+        </div>
+
+    </nz-modal>
+</main>

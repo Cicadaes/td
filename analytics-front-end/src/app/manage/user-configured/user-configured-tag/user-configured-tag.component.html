@@ -1,0 +1,93 @@
+<div class="first-level"></div>
+
+<app-tab-list [tabList]="tabList"></app-tab-list>
+
+<main>
+  <article>
+    <div class="content-div shadow-content">
+      <div class="crowd-wap">
+        <div class="crowd-wap-left">
+          <div class="common-title">
+            标签分类
+            <span *ngIf="_tenantAdmin" class="icon iconfont icon-add1" (click)="newCreateTagCategory()"></span>
+          </div>
+          <ul style="margin-top: 5px;">
+            <li>
+              <app-fast-search (onSearch)="_onSearchTagCate($event)"></app-fast-search>
+            </li>
+          </ul>
+          <ul>
+            <li
+              *ngFor="let item of tagCategoryList; let i = index"
+              (click)="checkTagCategory(item, i)"
+              [ngClass]="{ selectLi: i == tagCategoryIndex, hide: item.id != -1 && item.id != -2 }"
+            >
+              {{ item.name }} ({{ item.count }})
+            </li>
+          </ul>
+          <ul [ngClass]="{ hide: !_isShowNewTagCategory }">
+            <li>
+              <input
+                nz-input
+                placeholder="请输入"
+                [(ngModel)]="_newTagCategoryName"
+                nzSize="small"
+                (keyup)="replaceTagCategory()"
+                (blur)="blurNewTagCategory()"
+                #myInput
+              />
+            </li>
+          </ul>
+          <ul class="tag-cate-ul" [ngStyle]="containerStyle">
+            <li
+              *ngFor="let item of tagCategoryList; let i = index"
+              (mouseover)="mouseoverTagCategory(item)"
+              (mouseleave)="mouseleaveTagCategory(item)"
+              [ngClass]="{ selectLi: i == tagCategoryIndex, hide: item.id == -1 || item.id == -2 }"
+            >
+              <div
+                (click)="checkTagCategory(item, i)"
+                title="{{ item.name }}({{ item.count }})"
+                class="text"
+                *ngIf="!item.isEdit"
+              >
+                <div class="tab-name">{{ item.name }}</div>
+                <div>({{ item.count }})</div>
+              </div>
+              <input
+                [ngClass]="{ hide: !item.isEdit }"
+                nz-input
+                placeholder="请输入"
+                [(ngModel)]="item.newName"
+                nzSize="small"
+                (keyup)="replaceEditTagCategory(item)"
+                (blur)="blurEditTagCategory(item)"
+                maxlength="64"
+                #myInput
+              />
+              <div class="operator" *ngIf="_tenantAdmin">
+                <span
+                  class="icon iconfont icon-mode_edit"
+                  *ngIf="item.isShowOperator && !item.isEdit"
+                  (click)="checkTagCategory(item, i); showTagCategoryEdit(item)"
+                ></span>
+                <span
+                  class="icon iconfont icon-delete"
+                  *ngIf="item.isShowOperator && !item.isEdit"
+                  (click)="removeTagCategory(item)"
+                ></span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="crowd-wap-right" (click)="cancelEdit()">
+          <app-tag-list-table
+            [tenantAdmin]="_tenantAdmin"
+            [tagCate]="_currentTagCategory"
+            (onLoadTagCate)="_onLoadTagCate($event)"
+          ></app-tag-list-table>
+        </div>
+      </div>
+    </div>
+  </article>
+</main>

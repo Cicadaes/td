@@ -1,0 +1,75 @@
+<!-- 头部 -->
+<div class="header module-title">
+    <div class="title">{{vm.header.title}}</div>
+    <div class="date-range">
+        <nz-range-picker [(ngModel)]="vm.condition.dateRange"
+                         [nzDisabledDate]="handlerDateDisabled"
+                         (ngModelChange)="handlerDateChange($event)"
+                         [nzSize]="'small'"
+                         nzPlaceHolder=""
+                         [nzAllowClear]="false"
+                         [nzDropdownClassName]="'date-align-right'"
+                         [nzStyle]="{'width': '240px'}">
+
+        </nz-range-picker>
+    </div>
+</div>
+
+<!-- 图表 -->
+<div class="chart">
+
+    <!-- 轨迹列表 -->
+    <div [class.loading]="vm.chart.trajectoryListLoading" class="trajectory-list">
+
+        <!-- 今天？ -->
+        <span class="top">
+            {{vm.chart.trajectoryListTop}}
+        </span>
+
+        <!-- 列表项 -->
+        <span (scroll)="handlerTrajectoryList_scroll($event)" class="item-group">
+            <div *ngIf="nodata" style="width: 100%;height: 100%;line-height: 360px;text-align: center;">暂无数据</div>
+            <span *ngFor="let item of vm.chart.trajectoryList" [class.show]="vm?.chart?.trajectoryDetailSource === item" class="item">{{item.time}}<a (click)="handlerTrajectoryDetail_show(item)" class="description">{{item.description}}</a></span>
+        </span>
+
+        <!-- 日期 -->
+        <span class="bottom">
+            {{vm.chart.trajectoryListBottom}}
+        </span>
+
+        <!-- 显示更多 -->
+        <span *ngIf="vm.chart.trajectoryMore" class="more">
+            <a (click)="handlerTrajectoryList_more()" class="anchor">{{vm.chart.trajectoryListMore}}</a>
+        </span>
+
+    </div>
+
+    <!-- 轨迹详情 -->
+    <div *ngIf="vm?.chart?.trajectoryDetail?.length || vm.chart.trajectoryDetailLoading" [class.loading]="vm.chart.trajectoryDetailLoading" class="trajectory-detail">
+
+        <!-- 标题 -->
+        <div class="title" (click)="handlerTrajectoryDetail_close()">
+            <a class="close">{{vm.chart.trajectoryDetailTitle}}</a>
+        </div>
+
+        <!-- 详情项 -->
+        <div class="item-box">
+            <div *ngFor="let itemGroup of vm.chart.trajectoryDetail" class="item-group">
+                <span *ngFor="let item of itemGroup" class="item" title="{{item.name}}: {{item.value}}">
+                    <span class="name" >{{item.name}}</span>
+                    <span class="value" >{{vm.chart.trajectoryDetailColon}} {{item.value}}</span>
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 容器 -->
+    <div class="container"
+        [attr.data-title]="vm.chart.title"
+        [attr.data-subtitle]="vm.chart.subtitle">
+        <div *ngIf="!showChartData" style="width: 100%;height: 100%;line-height: 420px;text-align: center;">暂无数据</div>
+        <app-chart *ngIf="showChartData" [option]="vm.chart.option"></app-chart>
+    </div>
+
+</div>

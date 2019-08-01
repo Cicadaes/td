@@ -1,0 +1,260 @@
+<div class="see-interface">
+    <div class="see-interface-one">
+        <h3 class="see-interface-one-tit">基础信息</h3>
+        <div class="see-interface-one-content">
+            <div class="content-one">
+                <p class="content-one-label not-required">接口名称</p>
+                <p class="content-one-value" title="{{editData.name}}">{{editData.name}}</p>
+            </div>
+            <div class="content-one">
+                <p class="content-one-label not-required">接口版本</p>
+                <p class="content-one-value" title="{{editData.versionName}}">{{editData.versionName}}</p>
+            </div>
+            <div class="content-one">
+                <p class="content-one-label not-required">所属分类</p>
+                <p class="content-one-value" title="{{parentItem.name}} > {{item.name}}">{{parentItem.name}} > {{item.name}}</p>
+            </div>
+            <div class="content-one">
+                <p class="content-one-label not-required">接口描述</p>
+                <p class="content-one-value" title="{{editData.description}}">{{editData.description}}</p>
+            </div>
+            <div class="content-one">
+                <p class="content-one-label required-label">接口路径</p>
+                <div class="content-one-value" style="width: 710px;">
+                    <nz-select style="width: 90px; margin-right: 4px;" nzShowSearch nzPlaceHolder="请选择" [(ngModel)]="selectedRequestMethod">
+                        <nz-option *ngFor="let item of requestMethodList" nzCustomContent [nzLabel]="item.name" [nzValue]="item.name">
+                            <p style="overflow: hidden;text-overflow: ellipsis; white-space: nowrap;margin: 0px;" title="{{item.name}}">{{item.name}}</p>
+                        </nz-option>
+                    </nz-select>
+
+                    <nz-select style="width: 300px; margin-right: 4px;" nzShowSearch nzPlaceHolder="请选择" [(ngModel)]="selectedDomainId"
+                        [ngClass]="{'checkFailureBase': selectedDomainIdError}" (ngModelChange)="domainChange($event)">
+                        <nz-option *ngFor="let item of domainList" nzCustomContent [nzLabel]="item.domain" [nzValue]="item.id">
+                            <p style="overflow: hidden;text-overflow: ellipsis; white-space: nowrap;margin: 0px;" title="{{item.domain}}">{{item.domain}}</p>
+                        </nz-option>
+                    </nz-select>
+
+                    <nz-select style="width: 90px; margin-right: 4px;" nzShowSearch nzPlaceHolder="请选择" [(ngModel)]="selecteUri">
+                        <nz-option *ngFor="let item of uriList" nzCustomContent [nzLabel]="item.name" [nzValue]="item.id">
+                            <p style="overflow: hidden;text-overflow: ellipsis; white-space: nowrap;margin: 0px;" title="{{item.name}}">{{item.name}}</p>
+                        </nz-option>
+                    </nz-select>
+
+                    <input nz-input placeholder="请输入接口URI地址" [(ngModel)]="path" style="width: 200px; margin-right: 6px;">
+
+                    <nz-tooltip [nzTitle]="'请输入接口的URI地址，如/service/interface。'" [nzPlacement]="'top'" nzTrigger="click">
+                        <i class="anticon anticon-question-circle" nz-tooltip style="cursor: pointer;"></i>
+                    </nz-tooltip>
+                </div>
+            </div>
+            <div class="content-one">
+                <p class="content-one-label required-label">通讯方式</p>
+                <p class="content-one-value">
+                    <nz-radio-group [(ngModel)]="syncType">
+                        <label nz-radio nzValue="1">同步</label>
+                        <label nz-radio nzValue="2">异步</label>
+                    </nz-radio-group>
+                </p>
+            </div>
+            <div class="content-one">
+                <p class="content-one-label required-label">状态</p>
+                <p class="content-one-value">
+                    <nz-radio-group [(ngModel)]="status">
+                        <label nz-radio nzValue="0">未发布</label>
+                        <label nz-radio nzValue="1">已发布</label>
+                    </nz-radio-group>
+                    <nz-tooltip [nzTitle]="'已发布的接口才能被用户查询到。'" [nzPlacement]="'top'" nzTrigger="click" style="cursor: pointer;">
+                        <i class="anticon anticon-question-circle" nz-tooltip></i>
+                    </nz-tooltip>
+                </p>
+            </div>
+            <div class="content-one">
+                <p class="content-one-label not-required">所属服务</p>
+                <p class="content-one-value">
+                    <nz-select style="width: 160px;" nzShowSearch nzAllowClear nzPlaceHolder="请选择所属服务" [(ngModel)]="selectedService">
+                        <nz-option *ngFor="let item of serviceList" nzCustomContent [nzLabel]="item.name" [nzValue]="item.name">
+                            <p style="overflow: hidden;text-overflow: ellipsis; white-space: nowrap;margin: 0px;" title="{{item.name}}">{{item.name}}</p>
+                        </nz-option>
+                    </nz-select>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="see-interface-one">
+        <h3 class="see-interface-one-tit">请求参数设置</h3>
+        <div class="see-interface-one-content">
+            <div class="see-interface-one-content-child">
+                <h4 class="see-interface-one-content-child-tit not-required">Headers</h4>
+                <div class="see-interface-one-content-child-text">
+                    <div class="one-item  common-item" *ngFor="let item of requestHeaderList; let i = index;">
+                        <input nz-input placeholder="请输入参数名称" [(ngModel)]="item.paramName" style="width: 160px;margin-right: 6px;"
+                            [ngClass]="{'checkFailureBase': item.error}" (ngModelChange)="changeItemError(item);">
+                        <nz-select style="width: 80px; margin-right: 6px;" [(ngModel)]="item.requireType">
+                            <nz-option nzLabel="必需" nzValue="yes"></nz-option>
+                            <nz-option nzLabel="非必需" nzValue="no"></nz-option>
+                        </nz-select>
+                        <input nz-input placeholder="请输入参数值示例" [(ngModel)]="item.paramExample" style="width: 180px;margin-right: 6px;"
+                            (ngModelChange)="changeItem(item, 'paramExampleError');" [ngClass]="{'checkFailureBase': item.paramExampleError}">
+                        <input nz-input placeholder="请输入备注" [(ngModel)]="item.comment" style="width: 200px;"
+                            (ngModelChange)="changeItem(item, 'commentError');" [ngClass]="{'checkFailureBase': item.commentError}">
+                        <span (click)="removeParmas('resquestHeader', requestHeaderList, i)"><i class="anticon anticon-close"></i></span>
+                    </div>
+                    <div class="add-button">
+                        <span (click)="addParmas('resquestHeader', requestHeaderList)" class="button-span"><i class="anticon anticon-plus"></i>添加参数</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="see-interface-one-content-child">
+                <h4 class="see-interface-one-content-child-tit not-required">Query</h4>
+                <div class="see-interface-one-content-child-text">
+                    <div class="one-item  common-item" *ngFor="let item of requestQueryList; let i = index;">
+                        <input nz-input placeholder="请输入参数名称" [(ngModel)]="item.paramName" style="width: 160px;margin-right: 6px;"
+                            [ngClass]="{'checkFailureBase': item.error}" (ngModelChange)="changeItemError(item);">
+                        <nz-select style="width: 88px; margin-right: 6px;" [(ngModel)]="item.paramType">
+                            <nz-option nzLabel="string" nzValue="string"></nz-option>
+                            <nz-option nzLabel="integer" nzValue="integer"></nz-option>
+                        </nz-select>
+                        <nz-select style="width: 80px; margin-right: 6px;" [(ngModel)]="item.requireType">
+                            <nz-option nzLabel="必需" nzValue="yes"></nz-option>
+                            <nz-option nzLabel="非必需" nzValue="no"></nz-option>
+                        </nz-select>
+                        <input nz-input placeholder="请输入参数值示例" [(ngModel)]="item.paramExample" style="width: 180px;margin-right: 6px;"
+                            (ngModelChange)="changeItem(item, 'paramExampleError');" [ngClass]="{'checkFailureBase': item.paramExampleError}">
+                        <input nz-input placeholder="请输入备注" [(ngModel)]="item.comment" style="width: 200px;"
+                            (ngModelChange)="changeItem(item, 'commentError');" [ngClass]="{'checkFailureBase': item.commentError}">
+                        <span (click)="removeParmas('resquestQuery', requestQueryList, i)"><i class="anticon anticon-close"></i></span>
+                    </div>
+                    <div class="add-button">
+                        <span class="button-span" (click)="addParmas('resquestQuery', requestQueryList)"><i class="anticon anticon-plus"></i>添加参数</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="see-interface-one-content-child" *ngIf="selectedRequestMethod === 'PUT' || selectedRequestMethod === 'POST' || selectedRequestMethod === 'DELETE' || selectedRequestMethod === 'PATCH'">
+                <h4 class="see-interface-one-content-child-tit required">Body</h4>
+                <div [ngClass]="{'see-interface-one-content-child-text': true, 'pading-l-no': requestBodyType === 'json'}">
+                    <nz-radio-group [(ngModel)]="requestBodyType"
+                        [ngStyle]="{'margin-left': requestBodyType === 'json' ? '16px' : '0px','margin-top': '8px', 'margin-bottom': '4px' }">
+                        <label nz-radio nzValue="json">Json</label>
+                        <label nz-radio nzValue="form">Form</label>
+                    </nz-radio-group>
+                    <ng-container *ngIf="requestBodyType === 'form'">
+                        <div class="one-item common-item" *ngFor="let item of requestBodyList2; let i = index;">
+                            <input nz-input placeholder="请输入参数名称" [(ngModel)]="item.paramName" style="width: 160px;margin-right: 6px;"
+                                [ngClass]="{'checkFailureBase': item.error}" (ngModelChange)="changeItemError(item);">
+                            <nz-select style="width: 88px; margin-right: 6px;" [(ngModel)]="item.paramType">
+                                <nz-option nzLabel="string" nzValue="string"></nz-option>
+                                <nz-option nzLabel="integer" nzValue="integer"></nz-option>
+                                <nz-option nzLabel="file" nzValue="file"></nz-option>
+                            </nz-select>
+                            <nz-select style="width: 80px; margin-right: 6px;" [(ngModel)]="item.requireType">
+                                <nz-option nzLabel="必需" nzValue="yes"></nz-option>
+                                <nz-option nzLabel="非必需" nzValue="no"></nz-option>
+                            </nz-select>
+                            <input nz-input placeholder="请输入参数值示例" [(ngModel)]="item.paramExample" style="width: 180px;margin-right: 6px;"
+                                (ngModelChange)="changeItem(item, 'paramExampleError');" [ngClass]="{'checkFailureBase': item.paramExampleError}">
+                            <input nz-input placeholder="请输入备注" [(ngModel)]="item.comment" style="width: 200px;"
+                                (ngModelChange)="changeItem(item, 'commentError');" [ngClass]="{'checkFailureBase': item.commentError}">
+                            <span (click)="removeParmas('resquestBody', requestBodyList2, i)"><i class="anticon anticon-close"></i></span>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="requestBodyType === 'json'">
+                        <app-one-map [dataSet]="requestBodyList" (add)="add($event);" (remove)="remove($event);"></app-one-map>
+                    </ng-container>
+                    <div [ngClass]="{'add-button': true, 'pading-l-yes': requestBodyType === 'json'}">
+                        <span class="button-span" (click)="addParmas('resquestBody', requestBodyList)"><i class="anticon anticon-plus"></i>添加参数</span>
+                        <span class="mg-left button-span" (click)="dataExample(requestBodyList, 'resquestBody')" *ngIf="requestBodyType === 'json' && requestBodyList.length">生成数据示例</span>
+                    </div>
+                    <div #elementRequestBody contenteditable="true" [ngClass]="{'see-interface-one-content-child-textarea': true, 'json-text': requestBodyType === 'json'}"
+                        *ngIf="requestBodyType === 'json' && requestBodyList.length" [innerHtml]="htmlRequestBody"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="see-interface-one">
+        <h3 class="see-interface-one-tit">返回结果设置</h3>
+        <div class="see-interface-one-content">
+            <div class="see-interface-one-content-child">
+                <h4 class="see-interface-one-content-child-tit not-required">Headers</h4>
+                <div class="see-interface-one-content-child-text">
+                    <div class="one-item common-item" *ngFor="let item of responseHeaderList; let i = index;">
+                        <input nz-input placeholder="请输入参数名称" [(ngModel)]="item.paramName" style="width: 160px;margin-right: 6px;"
+                            [ngClass]="{'checkFailureBase': item.error}" (ngModelChange)="changeItemError(item);">
+                        <nz-select style="width: 80px; margin-right: 6px;" [(ngModel)]="item.requireType">
+                            <nz-option nzLabel="必需" nzValue="yes"></nz-option>
+                            <nz-option nzLabel="非必需" nzValue="no"></nz-option>
+                        </nz-select>
+                        <input nz-input placeholder="请输入参数值示例" [(ngModel)]="item.paramExample" style="width: 180px;margin-right: 6px;"
+                            (ngModelChange)="changeItem(item, 'paramExampleError');" [ngClass]="{'checkFailureBase': item.paramExampleError}">
+                        <input nz-input placeholder="请输入备注" [(ngModel)]="item.comment" style="width: 200px;"
+                            (ngModelChange)="changeItem(item, 'commentError');" [ngClass]="{'checkFailureBase': item.commentError}">
+                        <span (click)="removeParmas('responseHeader', responseHeaderList, i)"><i class="anticon anticon-close"></i></span>
+                    </div>
+                    <div class="add-button">
+                        <span class="button-span" (click)="addParmas('responseHeader', responseHeaderList)"><i class="anticon anticon-plus"></i>添加参数</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="see-interface-one-content-child">
+                <h4 class="see-interface-one-content-child-tit required">正常返回</h4>
+                <div class="see-interface-one-content-child-text pading-l-no">
+                    <app-one-map [dataSet]="responseSuccessList" (add)="add($event);" (remove)="remove($event);"></app-one-map>
+                    <div class="add-button pading-l-yes">
+                        <span class="button-span" (click)="addParmas('responseSuccess', responseSuccessList)"><i class="anticon anticon-plus"></i>添加参数</span>
+                        <span class="mg-left button-span" (click)="dataExample(responseSuccessList, 'responseSuccess')"
+                            *ngIf="responseSuccessList.length">生成数据示例</span>
+                    </div>
+                    <div #elementResponseSuccess contenteditable="true" class="see-interface-one-content-child-textarea  json-text"
+                        *ngIf="responseSuccessList.length" [innerHtml]="htmlResponseSuccess"></div>
+                </div>
+            </div>
+
+            <div class="see-interface-one-content-child">
+                <h4 class="see-interface-one-content-child-tit required">失败返回</h4>
+                <div class="see-interface-one-content-child-text pading-l-no">
+                    <app-one-map [dataSet]="responseFailList" (add)="add($event);" (remove)="remove($event);"></app-one-map>
+                    <div class="add-button  pading-l-yes">
+                        <span class="button-span" (click)="addParmas('responseFail', responseFailList)"><i class="anticon anticon-plus"></i>添加参数</span>
+                        <span class="mg-left button-span" (click)="dataExample(responseFailList, 'responseFail')" *ngIf="responseFailList.length">生成数据示例</span>
+                    </div>
+                    <div #elementResponseFail contenteditable="true" class="see-interface-one-content-child-textarea  json-text"
+                        *ngIf="responseFailList.length" [innerHtml]="htmlResponseFail"></div>
+                </div>
+            </div>
+
+            <div class="see-interface-one-content-child">
+                <h4 class="see-interface-one-content-child-tit required">返回码</h4>
+                <div class="see-interface-one-content-child-text">
+                    <div class="one-item common-item" *ngFor="let item of responseCodeList; let i = index;">
+                        <input disabled nz-input placeholder="请输入返回码" [(ngModel)]="item.code" style="width: 160px;margin-right: 6px;">
+                        <input disabled nz-input placeholder="请输入返回码解释" [(ngModel)]="item.reason" style="width: 200px;margin-right: 6px;">
+                        <input disabled nz-input placeholder="请输入解决方法" [(ngModel)]="item.solution" style="width: 200px;">
+                        <span (click)="removeParmas('responseCode', responseCodeList, i)"><i class="anticon anticon-close"></i></span>
+                    </div>
+                    <div class="add-button">
+                        <span (click)="addCode()" class="button-span"><i class="anticon anticon-plus"></i>添加返回码</span>
+                        <app-add-auto-code [isVisible]="addCodeFlag" (saveCode)="saveCode($event)" (hideCodeDialog)="hideCodeDialog($event)"
+                            [catalogId]="parentItem['id']" [apiId]="editData['id']"></app-add-auto-code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="see-interface-one">
+        <h3 class="see-interface-one-tit required pading-l-yes">简介</h3>
+        <div class="see-interface-one-content">
+            <textarea nz-input placeholder="请输入接口简介" style="height: 80px;" maxlength="10000" [(ngModel)]="summary"></textarea>
+        </div>
+    </div>
+
+    <div class="footer" style="width: calc(100% - 461px);">
+        <button nz-button nzType="primary" (click)="confirm();" style="float: right;">确定</button>
+        <button nz-button nzType="default" (click)="cancel();" style="float: right; margin-right: 4px;" *ngIf="flag === 'update'">取消</button>
+    </div>
+</div>

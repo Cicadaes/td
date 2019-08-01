@@ -1,0 +1,11 @@
+<div class="data">
+  <nz-range-picker
+    [nzDisabledDate]="_disabledDate"
+    [(ngModel)]="newData"
+    [nzAllowClear]="false"
+    [nzFormat]="'YYYY-MM-DD'"
+    (ngModelChange)="changeModel($event)"
+  >
+  </nz-range-picker>
+</div>
+<!-- [nzRanges]="nzRangesData"    '底部快捷键' -->

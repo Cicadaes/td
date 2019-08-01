@@ -1,0 +1,52 @@
+.tenant-detail li {
+    line-height: 32px;
+}
+
+.tenant-detail li .lb {
+    width: 60px;
+    display: inline-block;
+    text-align: left;
+    font-family: PingFangSC-Medium;
+    font-size: 12px;
+    color: #17233D;
+    line-height: 20px;
+    margin-left: 15px;
+}
+
+.tenant-detail li .text {
+    font-family: HelveticaNeue;
+    font-size: 12px;
+    color: rgba(23, 35, 61, 0.75);
+    line-height: 20px;
+}
+
+.tenant-detail .text {
+    color: #333;
+}
+
+:host ::ng-deep .baseinfo {
+    line-height: 32px;
+    /* margin: 16px; */
+}
+
+:host ::ng-deep .baseinfo B {
+    font-family: PingFangSC-Medium;
+    font-size: 12px;
+    color: #17233D;
+    line-height: 20px;
+    display: inline-block;
+    width: 60px;
+    margin-right: 15px;
+}
+
+ :host ::ng-deep .baseinfo span {
+    font-family: HelveticaNeue;
+    font-size: 12px;
+    color: rgba(23, 35, 61, 0.75);
+    line-height: 20px;
+    margin-left: 10px;
+}
+
+:host ::ng-deep .ant-card-body {
+    padding: 14px 24px !important;
+}

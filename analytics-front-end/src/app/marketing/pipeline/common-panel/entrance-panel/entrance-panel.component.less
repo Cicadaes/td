@@ -1,0 +1,219 @@
+.content {
+  .pointer {
+    cursor: pointer;
+  }
+  .pipe-item {
+    margin-bottom: 16px;
+  }
+  .item-label {
+    font-size: 12px;
+    color: #17233d;
+    letter-spacing: 0;
+    text-align: left;
+    line-height: 32px;
+    font-weight: bold;
+    float: left;
+    margin-left: 24px;
+    width: 49px;
+    position: relative;
+    & > .require {
+      position: absolute;
+      left: -8px;
+      color: #ed3f14;
+      font-size: 14px;
+      top: 2px;
+    }
+  }
+  .item-input {
+    float: left;
+    margin-left: 16px;
+    width: 275px;
+    input {
+      width: 100%;
+      height: 32px;
+      border: 1px solid #dcdee2;
+      border-radius: 4px;
+      padding: 11px;
+      outline: none;
+    }
+  }
+  .item-textarea {
+    float: left;
+    margin-left: 16px;
+    width: 275px;
+    height: 56px;
+    textarea {
+      width: 100%;
+      height: 100%;
+      border: 1px solid #dcdee2;
+      border-radius: 4px;
+      padding: 5px 11px;
+      outline: none;
+    }
+  }
+  .base-desc {
+    margin: 16px 0;
+    border-bottom: 1px solid #dcdee2;
+  }
+  .detail-content {
+    float: left;
+    width: 275px;
+    height: 200px;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-left: 16px;
+    border: 1px solid #dcdee2;
+    border-radius: 4px;
+    overflow: scroll;
+    .names {
+      font-weight: bold;
+      padding-left: 0;
+      margin-bottom: 6px;
+    }
+    .first-name {
+      color: #000000;
+      font-size: 12px;
+      line-height: 12px;
+    }
+    .last-time,
+    .estimate {
+      margin: 20px 0 6px 0;
+      font-weight: bold;
+    }
+    .estimate-size {
+      color: #627182;
+    }
+    .desc {
+      margin: 20px 0 6px 0;
+      font-weight: bold;
+    }
+  }
+  .update-crowd {
+    margin-left: 24px;
+  }
+  .crowd-info {
+    margin: 16px 0;
+    border-bottom: 1px solid #dcdee2;
+  }
+  .inlet-rule {
+    margin: 16px 0;
+    border-bottom: 1px solid #dcdee2;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    .label-desc {
+      font-size: 12px;
+      color: rgba(23, 35, 61, 0.55);
+      text-align: left;
+      line-height: 32px;
+      margin-left: 10px;
+    }
+    .rule-checkbox {
+      margin-left: 24px;
+    }
+    .rule-input {
+      width: 48px;
+      margin-right: 5px;
+    }
+  }
+  .forbidden-rule {
+    margin: 16px 0;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    .label-desc {
+      font-size: 12px;
+      color: rgba(23, 35, 61, 0.55);
+      text-align: left;
+      line-height: 32px;
+      margin-left: 10px;
+    }
+    .rule-header {
+      margin-left: 64px;
+      position: relative;
+      .rule-content {
+        margin-top: 16px;
+      }
+    }
+    .rule-body {
+      border-left: 1px solid #dee0e3;
+      padding-bottom: 69px;
+      position: relative;
+      &:first-child {
+        margin-top: 19px;
+      }
+      &:last-child {
+        padding-bottom: 0px;
+        border-left: 0px;
+      }
+      .icon-del {
+        width: 16px;
+        height: 16px;
+        background: url('/assets/images/pipeline/icon-delete.svg');
+        display: inline-block;
+        vertical-align: sub;
+        margin-left: 7px;
+      }
+      .rule-content .icon-del {
+        margin-right: 0px;
+      }
+      .rule-number {
+        width: 36px;
+        margin-right: 5px;
+      }
+      .rule-button {
+        position: absolute;
+        top: -51px;
+        left: -24px;
+        width: 48px;
+        height: 32px;
+        display: inline-block;
+        background: #ebeef2;
+        border-radius: 4px;
+        font-size: 12px;
+        color: #464c5b;
+        line-height: 32px;
+        text-align: center;
+      }
+    }
+  }
+  .add-rules {
+    margin-top: 20px;
+    margin-left: 24px;
+    font-size: 12px;
+    color: #2d8cf0;
+    line-height: 20px;
+    i {
+      vertical-align: text-top;
+      font-weight: bold;
+    }
+    span {
+      line-height: 17px;
+      vertical-align: text-bottom;
+      cursor: pointer;
+    }
+  }
+}
+
+:host /deep/ .ant-checkbox-wrapper {
+  font-size: 12px;
+}
+
+input:disabled,
+textarea:disabled {
+  color: rgb(84, 84, 84);
+  cursor: not-allowed;
+  background-color: #f5f5f5;
+}
+
+::ng-deep .ant-checkbox-disabled + span {
+  color: rgba(0, 0, 0, 0.65);
+  cursor: not-allowed;
+}
+
+:host /deep/ .anticon-plus {
+  margin-right: 4px;
+  font-size: 13px;
+}

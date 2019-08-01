@@ -1,0 +1,19 @@
+<div class="table-operator clrfix">
+    <button nz-button [nzType]="'primary'" (click)="submitAuthorizedOrg($event)">
+        <span>更新</span>
+    </button>
+</div>
+<div class="table-operator-bottom" style="background: #fff; padding: 30px 0px;">
+    <div class="clrfix" style="max-width: 400px;">
+        <organization-tree *ngIf="organizationTreeData.data && organizationTreeData.data.length > 0" [treeData]="organizationTreeData"
+            (onChange)="onChangeOrganizationTreeData($event)"></organization-tree>
+    </div>
+    <ng-container *ngIf="organizationTreeData.data && organizationTreeData.data.length == 0">
+        <div class="organizations-tree-empty">
+            <p>
+                <img alt="图片" src="./assets/images/organization/organization.png" width="100" />
+            </p>
+            <p style="font-size: 14px;">组织机构为空</p>
+        </div>
+    </ng-container>
+</div>

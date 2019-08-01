@@ -1,0 +1,44 @@
+<nz-modal [(nzVisible)]="isVisible" nzWrapClassName="vertical-center-modal" [nzTitle]="modalTitle" [nzContent]="modalContent"
+    [nzFooter]="null" (nzOnCancel)="handleCancel($event)" [nzMaskClosable]='false'>
+    <ng-template #modalTitle>
+        <span>查看短信配置</span>
+    </ng-template>
+    <ng-template #modalContent>
+        <form nz-form autocomplete="off">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="4">通道名称</nz-form-label>
+                <nz-form-control [nzSpan]="19" style="float: right;">
+                    {{editData && editData.name}}
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="4">编码</nz-form-label>
+                <nz-form-control [nzSpan]="19" style="float: right;">
+                    {{editData && editData.code}}
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item style="margin-bottom: 10px;">
+                <nz-form-label [nzSpan]="4">自定义签名</nz-form-label>
+                <nz-form-control [nzSpan]="19" style="float: right;">
+                    <div class="item-key" *ngFor="let item of data.signaList;let i = index;">
+                        <label style="float:left;">编码：</label>
+                        <span style="float:left;width: 130px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;height: 24px;line-height: 24px;
+                        margin-top: 7px;" title="{{item['key']}}">{{item['key']}}</span>
+                        <label style="margin-left: 16px;float:left;">名称：</label>
+                        <span style="float:left;width: 130px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;height: 24px;line-height: 24px;
+                        margin-top: 7px;" title="{{item['sign']}}">{{item['sign']}}</span>
+
+                    </div>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item style="margin-bottom: 0px;">
+                <nz-form-label [nzSpan]="4">自定义通道</nz-form-label>
+                <nz-form-control [nzSpan]="19" style="float: right;">
+                    <div class="item-key" *ngFor="let item of data.subCodeList;let j = index;">
+                        <div style="width: 350px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" title="{{item['key']}}">{{item['key']}}</div>
+                    </div>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </ng-template>
+</nz-modal>

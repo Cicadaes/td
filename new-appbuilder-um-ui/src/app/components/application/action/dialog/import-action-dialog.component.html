@@ -1,0 +1,4 @@
+<submit-upload-files [uploadParam]="appIconFile" (onUpload)="onUploadAppIconFile($event);" (onChangeFile)="onChangeFile()"></submit-upload-files>
+<span *ngIf="errorCode==1" style="color: red">{{msg}}</span>
+<span *ngIf="errorCode==2" style="color: red">请先上传文件</span>
+<span *ngIf="errorCode==3" style="color: red">上传的文件格式不正确，请上传json格式文件</span>

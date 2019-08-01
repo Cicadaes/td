@@ -1,0 +1,46 @@
+:host ::ng-deep .content-div {
+  &-table {
+    background: #ffffff;
+    margin-top: 16px;
+
+    &-tit {
+      height: 46px;
+      line-height: 46px;
+      padding: 0px 16px;
+      margin: 0px;
+    }
+  }
+}
+
+:host ::ng-deep .ant-input-affix-wrapper .ant-input-suffix {
+  top: 12px;
+}
+
+::ng-deep .cover-ant-form-item-label .ant-form-item-required:after {
+  display: inline-block;
+  margin-right: 4px;
+  content: '*';
+  line-height: 1;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+:host ::ng-deep .zw-color {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: rgba(23, 35, 61, 0.3);
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+:host ::ng-deep .inprogress-color {
+  background: #2d8cf0;
+}
+
+td {
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

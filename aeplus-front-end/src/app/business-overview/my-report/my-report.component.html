@@ -1,0 +1,31 @@
+<div class="first-level"></div>
+<main>
+	<div class="content shadow-content">
+		<div class="module-title content-header">
+			报表详情
+		</div>
+		<div class="content-body">
+			<div class="content-table">
+				<nz-table #reportTable [nzData]="tableList" [nzLoading]="laoding" [nzFrontPagination]="false" (nzPageIndexChange)="getList($event)"
+				[(nzPageSize)]="pageSize" (nzPageSizeChange)="getList()" [nzTotal]="total" nzShowSizeChanger="true" [nzPageSizeOptions]="pageSizeOptions">
+					<thead>
+						<tr>
+							<th>报表名称</th>
+							<th>创建时间</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let data of reportTable.data">
+							<td>{{data.name}}</td>
+							<td>{{data.createTime}}</td>
+							<td>
+								<a (click)="viewReport(data)">查看</a>
+							</td>
+						</tr>
+					</tbody>
+				</nz-table>
+			</div>
+		</div>
+	</div>
+</main>

@@ -1,0 +1,65 @@
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="null"
+    (nzOnCancel)="handleCancel($event)" [nzMaskClosable]='false'>
+    <ng-template #modalTitle>
+        <span>域名前缀详情</span>
+    </ng-template>
+    <ng-template #modalContent>
+        <form nz-form autocomplete="off">
+            <nz-form-item style="margin-bottom: 0px;">
+                <nz-form-label [nzSpan]="4">名称</nz-form-label>
+                <nz-form-control [nzSpan]="20"><div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;" title="{{editData['name']}}">{{editData['name']}}</div></nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item style="margin-bottom: 0px;">
+                <nz-form-label [nzSpan]="4">域名前缀</nz-form-label>
+                <nz-form-control [nzSpan]="20" ><div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;" title="{{editData['domain']}}">{{editData['domain']}}</div></nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item style="margin-bottom: 0px;">
+                <nz-form-label [nzSpan]="4" >适用产品</nz-form-label>
+                <nz-form-control [nzSpan]="20"><div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;" title="{{editData['catalogNames']}}">{{editData['catalogNames']}}</div></nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item style="margin-bottom: 0px;">
+                <nz-form-label [nzSpan]="4">描述</nz-form-label>
+                <nz-form-control [nzSpan]="20"><div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;" title="{{editData['description']}}">{{editData['description']}}</div></nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item style="margin-bottom: 0px;">
+                <nz-form-label [nzSpan]="4">创建人</nz-form-label>
+                <nz-form-control [nzSpan]="20"><div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;" title="{{editData['creator']}}">{{editData['creator']}}</div></nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item style="margin-bottom: 0px;">
+                <nz-form-label [nzSpan]="4">创建时间</nz-form-label>
+                <nz-form-control [nzSpan]="20"><div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;" title="{{editData['createTime'] | dateFormatPipe:2}}">{{editData['createTime'] | dateFormatPipe:2}}</div></nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item style="margin-bottom: 0px;">
+                <nz-form-label [nzSpan]="4">更新人</nz-form-label>
+                <nz-form-control [nzSpan]="20"><div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;" title="{{editData['updater']}}">{{editData['updater']}}</div></nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item style="margin-bottom: 0px;">
+                <nz-form-label [nzSpan]="4">更新时间</nz-form-label>
+                <nz-form-control [nzSpan]="20"><div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;" title="{{editData['updateTime'] | dateFormatPipe:2}}">{{editData['updateTime'] | dateFormatPipe:2}}</div></nz-form-control>
+            </nz-form-item>
+        </form>
+    </ng-template>
+</nz-modal>

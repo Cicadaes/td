@@ -1,0 +1,71 @@
+<div>
+  <ng-container *ngIf="!loadingFlag">
+    <div class="clrfix carousel-app-manage" *ngIf="_appList && _appList.length > 0">
+      <div class="clrfix carousel-panel">
+        <ul class="carousel-ul clrfix">
+          <li class="operator" (click)="showAddModal('add');" *ngIf="showEdit" [ngClass]="{'notallow': role=='UM_TENANT_ADMIN'}">
+            <p>
+              <span class="anticon anticon-plus-square" style="color: #96C5F7; font-size:40px;"></span>
+            </p>
+            <p>添加应用</p>
+          </li>
+          <li class="item" title="{{app.name}}" *ngFor="let app of _appList" [ngClass]="{'active':app.id == curApp.id}">
+            <div (click)="editApp(app);">
+              <p class="logo">
+                <img alt="图片" src="{{app.icon || defaultAppIcon}}" />
+              </p>
+              <p class="name">{{app.name}}</p>
+            </div>
+          </li>
+        </ul>
+        <div class="carousel-col">
+          <a (click)="toggleCollapse()">
+          </a>
+        </div>
+      </div>
+      <div class="clrfix tree-panel">
+        <div class="clrfix carousel-operator">
+          <strong class="title">应用功能</strong>
+          <div class="operator">
+            <button nz-button [nzType]="'primary'" (click)="showAddModal('edit');" *ngIf="showEdit" [ngClass]="{'notallow': role=='UM_TENANT_ADMIN'}">
+              <span>编辑</span>
+            </button>
+          </div>
+        </div>
+        <!-- <div style="max-height: 250px !important;overflow-y: scroll !important"> -->
+        <checkbox-tree-dis [treeDatas]="resourceTreeDatas" [isSet]="isSetTreeDatas" (onBack)="getBackTreeDatas($event)"></checkbox-tree-dis>
+        <!-- </div> -->
+      </div>
+    </div>
+
+    <div class="table-operator-bottom" *ngIf="!_appList || _appList.length == 0">
+      <div class="clrfix carousel-app-empty" *ngIf="!_appList || _appList.length == 0">
+        <p>
+          <img alt="图片" src="./assets/images/app/app-empty.png" height="141" width="251" />
+        </p>
+        <p>
+          <span style="color: #A2A3A8">应用功能为空，请先配置应用功能</span>
+        </p>
+        <p style="margin-top: 14px">
+          <button nz-button [nzType]="'primary'" [nzSize]="'large'"  (click)="showAddModal('add');">
+            配置应用功能
+          </button>
+        </p>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- loading -->
+  <ng-container *ngIf="loadingFlag">
+    <div class="loading">
+      <p>
+        <nz-spin [nzTip]="'正在读取数据...'"></nz-spin>
+      </p>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="isShowModel">
+    <carousel-app-add-dialog [curAppId]="curAppId" [dataCheckInfo]="resourceTreeDataDia" (onClose)="hideAddModal($event)" [checkedList]="_appList"
+      [tenantId]="tenantId" [queryParams]="queryParams" (onSubmit)="onSubmitModal($event)" [addType]="addType" [database]="database"></carousel-app-add-dialog>
+  </ng-container>
+</div>

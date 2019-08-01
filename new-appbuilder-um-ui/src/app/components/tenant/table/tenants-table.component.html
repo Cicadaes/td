@@ -1,0 +1,58 @@
+<ng-template #tableTotal>
+        <div  style="margin-right: 6px;">
+          总共 {{_total}} 条
+        </div>
+</ng-template>
+<nz-table #nzTable 
+[nzShowTotal]="tableTotal" 
+[nzBordered]="false" 
+[nzData]="_dataSet" 
+nzShowSizeChanger 
+[nzLoading]="_loading"
+[nzTotal]="_total" 
+[(nzPageIndex)]="_current" 
+(nzPageIndexChange)="refreshData()"
+[(nzPageSize)]="_pageSize" 
+(nzPageSizeChange)="refreshData(true)" 
+[nzFrontPagination]="false">
+    <thead>
+        <tr>
+            <th [nzWidth]="'20%'">
+                公司名称
+            </th>
+            <th [nzWidth]="'12%'">
+                租户ID
+            </th>
+            <th [nzWidth]="'14%'">
+                状态
+            </th>
+            <th [nzWidth]="'14%'">
+                更新人
+            </th>
+            <th [nzWidth]="'14%'">
+                更新时间
+            </th>
+            <th [nzWidth]="'16%'">
+                <span>操作</span>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of nzTable.data">
+            <td>{{data.companyName}}</td>
+            <td>{{data.id}}</td>
+            <td><span style="color:#E03E16" *ngIf="data.status==0">●</span>
+                <span style="color:#2B85E5" *ngIf="data.status==1">●</span>
+                {{data.status==0?'禁用':'正常'}}</td>
+            <td>{{data.updateUserName}}</td>
+            <td>{{data.updateTime | dateFormatPipe:2}}</td>
+            <td>
+                <a [routerLink]="[ '/tenants/tenantDetail',data.id]">查看</a>
+                <nz-divider nzType="vertical"></nz-divider>
+                <a [routerLink]="[ '/tenants/updateTenantPage',data.id]">编辑</a>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<!-- <app-add-tenant-dialog *ngIf="isShowAddTenantModal" [tenant]="currentTenant" [isShow]="isShowAddTenantModal" (close)="hideAddTenantModal($event)" (submit)="onSubmitTenantFormData($event)"></app-add-tenant-dialog> -->

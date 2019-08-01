@@ -1,0 +1,172 @@
+@import '../../../less/td.theme.less';
+
+:host ::ng-deep header {
+  background-color: #fff;
+  border-bottom: 1px solid rgba(23, 35, 61, 0.1);
+
+  .title {
+    font-size: 16px;
+    color: #17233d;
+    padding: 16px 0px;
+    margin-bottom: 0px;
+  }
+}
+
+:host ::ng-deep .search-list {
+  padding: 0px 16px;
+  border-top: 1px solid rgba(23, 35, 61, 0.1);
+  background-color: #ffffff;
+  position: relative;
+
+  &-fitst {
+    overflow: hidden;
+
+    &-left {
+      float: left;
+
+      &-one {
+        float: left;
+        margin-right: 8px;
+      }
+
+      &-bg {
+        font-size: 12px;
+        color: rgba(23, 35, 61, 0.75);
+        background: rgba(23, 35, 61, 0.06);
+        padding: 6px 12px 6px 12px;
+        border-radius: 3px;
+      }
+    }
+
+    &-right {
+      float: right;
+      font-size: 12px;
+      color: @base-color;
+      cursor: pointer;
+
+      span {
+        margin: 0px 6px;
+      }
+    }
+  }
+
+  &-one {
+    padding: 12px 0px 12px 0px;
+  }
+}
+
+:host ::ng-deep .borderBottom {
+  border-bottom: 1px dashed #dedfe3;
+}
+
+:host ::ng-deep .chart-list {
+  height: 359px;
+  background: #fff;
+  margin-bottom: 16px;
+
+  &-title {
+    font-size: 14px;
+    color: #17233d;
+    height: 46px;
+    line-height: 46px;
+    padding: 0px 16px;
+    border-bottom: 1px solid rgba(23, 35, 61, 0.1);
+  }
+
+  &-one {
+    padding: 0px 16px 16px;
+    height: 300px;
+    position: relative;
+
+    &-tab {
+      position: absolute;
+      top: 0;
+      left: 16px;
+      z-index: 1000;
+
+      .iconfont {
+        font-size: 16px;
+        color: rgba(23, 35, 61, 0.55);
+        margin-right: 6px;
+        cursor: pointer;
+      }
+
+      .iconfontColor {
+        color: @base-color;
+      }
+    }
+
+    &-one-chart {
+      position: absolute;
+      height: 300px;
+      top: 0;
+      left: 0;
+    }
+  }
+}
+
+:host ::ng-deep .search-botton {
+  height: 32px;
+  margin-top: -44px;
+  float: right;
+}
+
+:host ::ng-deep .heightClass {
+  height: 32px;
+  margin-top: -8px;
+  margin-bottom: 12px;
+}
+
+:host ::ng-deep .add-attribute-btn {
+  margin-top: 8px;
+}
+
+:host ::ng-deep .attribute-one:nth-child(5) {
+  border-bottom: 0px;
+}
+
+:host ::ng-deep .content-div {
+  margin: 16px;
+
+  .detail-data {
+    background-color: #ffffff;
+
+    &-tit {
+      height: 46px;
+      line-height: 46px;
+      font-size: 14px;
+      color: #17233d;
+      padding: 0px 16px;
+      margin: 0px;
+    }
+  }
+}
+
+::ng-deep .vertical-center-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+::ng-deep .vertical-center-modal .ant-modal {
+  top: 0;
+}
+
+:host ::ng-deep .attribute-one:nth-child(1) {
+  .view-btn {
+    border: none;
+  }
+}
+
+/deep/ .ant-select-dropdown-menu-item-group-title {
+  font-weight: bolder;
+  color: #000000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/deep/ .ant-select-dropdown-menu-item span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

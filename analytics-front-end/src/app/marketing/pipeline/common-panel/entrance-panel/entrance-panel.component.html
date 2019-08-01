@@ -1,0 +1,252 @@
+<div class="content">
+  <div class="base-desc">
+    <div class="pipe-item clearfix">
+      <label class="item-label"> <span class="require">*</span>组件名称 </label>
+      <div class="item-input">
+        <input
+          type="text"
+          tdLimitInputText
+          iType="triggerInput"
+          maxlength="26"
+          placeholder="请输入内容"
+          [(ngModel)]="pcs.nodeData.name"
+          [disabled]="!pcs.isPipelineEdit"
+        />
+      </div>
+    </div>
+    <div class="pipe-item clearfix">
+      <label class="item-label">
+        描述
+      </label>
+      <div class="item-textarea">
+        <textarea
+          type="text"
+          tdLimitTextareaText
+          iType="all"
+          max="80"
+          placeholder="请输入内容"
+          [(ngModel)]="pcs.nodeData.description"
+          [disabled]="!pcs.isPipelineEdit"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="crowd-info">
+    <div class="pipe-item clearfix">
+      <label class="item-label"> <span class="require">*</span>人群名称 </label>
+      <div class="item-input">
+        <nz-select
+          style="width: 275px;"
+          nzShowSearch
+          nzPlaceHolder="请选择"
+          (ngModelChange)="selectCrowd($event)"
+          [(ngModel)]="selectCrowdData"
+          [nzDisabled]="!pcs.isPipelineEdit"
+        >
+          <nz-option
+            *ngFor="let item of crowdList"
+            [nzLabel]="item.name"
+            [nzValue]="item"
+            [nzDisabled]="item.status == -1"
+          ></nz-option>
+        </nz-select>
+      </div>
+    </div>
+    <div class="pipe-item clearfix">
+      <label class="item-label">
+        详细信息
+      </label>
+      <div class="detail-content">
+        <h3 class="names first-name" *ngIf="selectCrowdData">人群名称</h3>
+        <span style="color:#627182;" *ngIf="selectCrowdData">{{
+          (selectCrowdData && selectCrowdData.refName) || selectCrowdData.name || '--'
+        }}</span>
+        <h3 class="last-time first-name" *ngIf="selectCrowdData">
+          最后更新时间
+        </h3>
+        <span style="color:#627182;" *ngIf="selectCrowdData">{{
+          (selectCrowdData &&
+            (selectCrowdData.lastUpdateTime || selectCrowdData.updateTime || selectCrowdData.createTime)
+            | date: 'yyyy-MM-dd HH:mm:ss') || '--'
+        }}</span>
+        <h3 class="estimate first-name" *ngIf="selectCrowdData">规模</h3>
+        <span
+          class="estimate-size"
+          *ngIf="
+            selectCrowdData &&
+            (selectCrowdData.estimatedSize ||
+              selectCrowdData.crowdCount ||
+              selectCrowdData.estimatedSize === 0 ||
+              selectCrowdData.crowdCount === 0)
+          "
+          >{{
+            selectCrowdData &&
+              (selectCrowdData.estimatedSize || selectCrowdData.estimatedSize == 0
+                ? selectCrowdData.estimatedSize
+                : selectCrowdData.crowdCount)
+          }}人</span
+        >
+        <span
+          style="color:#627182;"
+          *ngIf="
+            selectCrowdData &&
+            !selectCrowdData.estimatedSize &&
+            !selectCrowdData.crowdCount &&
+            selectCrowdData.estimatedSize !== 0 &&
+            selectCrowdData.crowdCount !== 0
+          "
+          >--</span
+        >
+      </div>
+    </div>
+    <div class="pipe-item clearfix">
+      <div class="crowd-calc"></div>
+    </div>
+  </div>
+  <div class="inlet-rule">
+    <div class="pipe-item clearfix">
+      <label class="item-label">
+        进入规则
+      </label>
+      <label class="label-desc">
+        (默认为同一用户不受次数和频率限制)
+      </label>
+    </div>
+    <div class="pipe-item clearfix">
+      <label
+        class="rule-checkbox"
+        nz-checkbox
+        [(ngModel)]="lessThanDaysSelect"
+        (ngModelChange)="pcs.nodeData.lessThanDays = null; selectRule()"
+        [nzDisabled]="!pcs.isPipelineEdit"
+      >
+        同一用户
+      </label>
+      <input
+        class="rule-input"
+        type="text"
+        nz-input
+        tdLimitNumberInput
+        condition="PI"
+        [(ngModel)]="pcs.nodeData.lessThanDays"
+        (ngModelChange)="selectRule()"
+        [disabled]="!lessThanDaysSelect || !pcs.isPipelineEdit"
+        title="{{ pcs.nodeData.lessThanDays }}"
+      />
+      <label>天内不再进入</label>
+    </div>
+    <div class="pipe-item clearfix">
+      <label
+        class="rule-checkbox"
+        nz-checkbox
+        [(ngModel)]="lessThanTimesSelect"
+        (ngModelChange)="pcs.nodeData.lessThanTimes = null; selectRule()"
+        [nzDisabled]="!pcs.isPipelineEdit"
+      >
+        同一用户进入次数不超过
+      </label>
+      <input
+        class="rule-input"
+        type="text"
+        nz-input
+        tdLimitNumberInput
+        condition="PI"
+        [(ngModel)]="pcs.nodeData.lessThanTimes"
+        (ngModelChange)="selectRule()"
+        [disabled]="!lessThanTimesSelect || !pcs.isPipelineEdit"
+        title="{{ pcs.nodeData.lessThanTimes }}"
+      />
+      <label>次</label>
+    </div>
+  </div>
+  <div class="forbidden-rule">
+    <div class="pipe-item clearfix">
+      <label class="item-label">
+        禁止规则
+      </label>
+      <label class="label-desc">
+        (满足如下条件的人禁止进入入口)
+      </label>
+    </div>
+    <div class="rule-header">
+      <div class="rule-body" *ngFor="let rule of pcs.nodeData.forbiddenRule.ruleList; let i = index">
+        <div
+          *ngIf="i"
+          [ngClass]="{ 'rule-button': true, pointer: true }"
+          (click)="changeRuleRelation(terminationForbiddenEntryRelation)"
+        >
+          {{ terminationForbiddenEntryRelation.label }}
+        </div>
+        <nz-select
+          style="width: 80px;position: absolute;left: -40px;"
+          nzPlaceHolder="请选择"
+          [(ngModel)]="rule.happen"
+          [nzDisabled]="!pcs.isPipelineEdit"
+        >
+          <nz-option
+            *ngFor="let item of fristeForbiddenEntry"
+            [nzValue]="item.value"
+            [nzLabel]="item.label"
+          ></nz-option>
+        </nz-select>
+        <nz-select
+          style="width: 160px;margin-left: 47px;"
+          nzPlaceHolder="请选择"
+          [(ngModel)]="rule.ruleType"
+          (ngModelChange)="ruleTypeChange($event, rule)"
+          [nzDisabled]="!pcs.isPipelineEdit"
+        >
+          <nz-option
+            *ngFor="let item of secondForbiddenEntry"
+            [nzValue]="item.value"
+            [nzLabel]="item.label"
+            [nzDisabled]="item.status == -1"
+          ></nz-option>
+        </nz-select>
+        <span *ngIf="!rule.forbidRuleList">></span>
+        <input
+          *ngIf="!rule.forbidRuleList"
+          class="rule-number"
+          nz-input
+          tdLimitNumberInput
+          condition="PI"
+          [(ngModel)]="rule.ruleVal"
+          [disabled]="!pcs.isPipelineEdit"
+          title="{{ rule.ruleVal }}"
+        />
+        <span *ngIf="!rule.forbidRuleList">次</span>
+        <span *ngIf="!rule.forbidRuleList" class="icon-del r pointer" (click)="delNoEntryRule(i)"></span>
+        <div *ngIf="rule.forbidRuleList" class="rule-content">
+          <nz-select
+            style="width: 160px;margin-left: 47px;"
+            nzPlaceHolder="请选择"
+            [(ngModel)]="rule.ruleParam"
+            [nzDisabled]="!pcs.isPipelineEdit"
+          >
+            <nz-option
+              *ngFor="let item of rule.forbidRuleList"
+              [nzValue]="item.value"
+              [nzLabel]="item.label"
+              [nzDisabled]="item.status == -1"
+            ></nz-option>
+          </nz-select>
+          <span>></span>
+          <input
+            class="rule-number"
+            type="text"
+            [(ngModel)]="rule.ruleVal"
+            nz-input
+            tdLimitNumberInput
+            condition="PI"
+            [disabled]="!pcs.isPipelineEdit"
+            title="{{ rule.ruleVal }}"
+          />次
+          <span [ngClass]="{ 'icon-del': true, r: true, pointer: true }" (click)="delNoEntryRule(i)"></span>
+        </div>
+      </div>
+    </div>
+    <div class="add-rules" *ngIf="pcs.isPipelineEdit">
+      <span (click)="addNoEntryRule()"><span class="ant-compat anticon anticon-plus"></span>添加规则</span>
+    </div>
+  </div>
+</div>

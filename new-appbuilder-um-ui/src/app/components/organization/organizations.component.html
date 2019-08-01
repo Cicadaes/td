@@ -1,0 +1,26 @@
+<div class="clrfix">
+    <div class="organization-tree" *ngIf="tenantId">
+        <nz-card nzTitle="{{tenant && tenant['companyName']}}">
+                <organization-tree *ngIf="!showAdd" [treeData]="organizationTreeData" (onChange)="onChangeOrganizationTreeData($event)"></organization-tree>
+                <div class="organizations-tree-empty" *ngIf="showAdd">
+                    <p>
+                        <img alt="图片" src="./assets/images/organization/organization.png" width="100"/>
+                    </p>
+                    <p style="font-size: 14px;">请添加组织机构</p>
+                    <p style="margin:20px 0;">
+                        <button nz-button [nzType]="'primary'" (click)="addOrganization($event)">
+                            <span>添加组织机构</span>
+                        </button>
+                    </p>
+                </div>
+                <div class="organizations-tree-empty" *ngIf="showAdd && isloading">
+                    <nz-spin></nz-spin>
+                </div>
+        </nz-card>
+    </div>
+    <div [ngClass]="{'organizations-right': tenantId}">
+        <show-organization-page *ngIf="!showAdd"  [organization]="currOrganization"></show-organization-page>
+    </div>
+</div>
+
+<add-organization-dialog *ngIf="isShowAddOrganizationModal" [isedit]="isedit" [oldOrganization]="organization" [currentData]="currOrganization"  [checkedData]="checkedData" [isShow]="isShowAddOrganizationModal" (onClose)="hideAddAppModal($event)" (onSubmit)="reflashOrgDataCur($event)" ></add-organization-dialog>

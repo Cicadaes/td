@@ -1,0 +1,100 @@
+<div class="_trendEtable">
+  <nz-table
+    #retention
+    [nzData]="retentionTable"
+    [nzLoading]="retentionloading"
+    [nzNoResult]="'暂无数据'"
+    [nzShowPagination]="false"
+    nzBordered
+  >
+    <thead>
+      <tr>
+        <th *ngFor="let data of retentionHeaders">
+          <span title="{{ data.label }}">{{ data.label }}</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of retentionTable; let i = index">
+        <td>
+          <span title="{{ data.starttime_day }}">{{ data.starttime_day }}</span>
+        </td>
+        <td>
+          <span title="{{ data.keep }}">{{ data.keep }}</span>
+        </td>
+        <td
+          [ngStyle]="{
+            background: data.keep_user_1bgcolor ? data.keep_user_1bgcolor : '#ffffff',
+            color: data.keep_user_1color
+          }"
+        >
+          <span title="{{ data.keep_user_1 }}">{{ data.keep_user_1 }}</span>
+        </td>
+        <td
+          [ngStyle]="{
+            background: data.keep_user_2bgcolor ? data.keep_user_2bgcolor : '#ffffff',
+            color: data.keep_user_2color
+          }"
+        >
+          <span title="{{ data.keep_user_2 }}">{{ data.keep_user_2 }}</span>
+        </td>
+        <td
+          [ngStyle]="{
+            background: data.keep_user_3bgcolor ? data.keep_user_3bgcolor : '#ffffff',
+            color: data.keep_user_3color
+          }"
+        >
+          <span title="{{ data.keep_user_3 }}">{{ data.keep_user_3 }}</span>
+        </td>
+        <td
+          [ngStyle]="{
+            background: data.keep_user_4bgcolor ? data.keep_user_4bgcolor : '#ffffff',
+            color: data.keep_user_4color
+          }"
+        >
+          <span title="{{ data.keep_user_4 }}">{{ data.keep_user_4 }}</span>
+        </td>
+        <td
+          [ngStyle]="{
+            background: data.keep_user_5bgcolor ? data.keep_user_5bgcolor : '#ffffff',
+            color: data.keep_user_5color
+          }"
+        >
+          <span title="{{ data.keep_user_5 }}">{{ data.keep_user_5 }}</span>
+        </td>
+        <td
+          [ngStyle]="{
+            background: data.keep_user_6bgcolor ? data.keep_user_6bgcolor : '#ffffff',
+            color: data.keep_user_6color
+          }"
+        >
+          <span title="{{ data.keep_user_6 }}">{{ data.keep_user_6 }}</span>
+        </td>
+        <td
+          [ngStyle]="{
+            background: data.keep_user_7bgcolor ? data.keep_user_7bgcolor : '#ffffff',
+            color: data.keep_user_7color
+          }"
+        >
+          <span title="{{ data.keep_user_7 }}">{{ data.keep_user_7 }}</span>
+        </td>
+        <td
+          [ngStyle]="{
+            background: data.keep_user_14bgcolor ? data.keep_user_14bgcolor : '#ffffff',
+            color: data.keep_user_14color
+          }"
+        >
+          <span title="{{ data.keep_user_14 }}">{{ data.keep_user_14 }}</span>
+        </td>
+        <td
+          [ngStyle]="{
+            background: data.keep_user_30bgcolor ? data.keep_user_30bgcolor : '#ffffff',
+            color: data.keep_user_30color
+          }"
+        >
+          <span title="{{ data.keep_user_30 }}">{{ data.keep_user_30 }}</span>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

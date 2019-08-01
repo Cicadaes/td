@@ -1,0 +1,29 @@
+<main>
+	<nz-select *ngIf="_model" (nzScrollToBottom)="loadMore()" [nzSize]="_size" (ngModelChange)="changeSelect($event)"
+	           style="width: 100%;vertical-align: top;" nzMode="{{_model}}" [(ngModel)]="selectedOption"
+	           nzPlaceHolder="请选择" nzShowSearch [nzServerSearch]="true" (nzOnSearch)="onSearch($event)">
+		<ng-container *ngFor="let o of searchOptions">
+			<nz-option [nzValue]="o.value" [nzLabel]="o.label" *ngIf="o.isShow" nzCustomContent>
+				<div title="{{o.label}}">{{o.label}}</div>
+			</nz-option>
+		</ng-container>
+		<nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+			<span class="anticon anticon-loading anticon-spin loading-icon"></span> Loading Data...
+		</nz-option>
+	</nz-select>
+	
+	<nz-select *ngIf="!_model" (nzScrollToBottom)="loadMore()" [nzSize]="_size" (ngModelChange)="changeSelect($event)"
+	           style="width: 100%;vertical-align: top;" [(ngModel)]="selectedOption" nzPlaceHolder="请选择" nzShowSearch
+	           [nzServerSearch]="true" (nzOnSearch)="onSearch($event)">
+		<ng-container *ngFor="let o of searchOptions">
+			<nz-option nzCustomContent [nzValue]="o.value" [nzLabel]="o.label" *ngIf="o.isShow">
+        <span title="{{o.label}}">
+                                    <span *ngIf="o.smartEvent" class="icon iconfont icon-shijian"></span>{{o.label}}</span>
+			</nz-option>
+		</ng-container>
+		<nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+			<span class="anticon anticon-loading anticon-spin loading-icon"></span> Loading Data...
+		</nz-option>
+	</nz-select>
+
+</main>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>图标 (左侧)</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M16,2.66666667 C23.3733333,2.66666667 29.3333333,8.62666667 29.3333333,16 C29.3333333,23.3733333 23.3733333,29.3333333 16,29.3333333 C8.62666667,29.3333333 2.66666667,23.3733333 2.66666667,16 C2.66666667,8.62666667 8.62666667,2.66666667 16,2.66666667 Z M13.3333333,22.6666667 L25.3333333,11.1282051 L23.4666667,9.33333333 L13.3333333,19.0769231 L8.53333333,14.4615385 L6.66666667,16.2564103 L13.3333333,22.6666667 Z" id="path-1"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="系统管理－小程序二维码-创建" transform="translate(-1042.000000, -176.000000)">
+            <g id="全局提示-Message/icon+标题+段落+关闭+按钮-Copy-4" transform="translate(925.000000, 152.000000)">
+                <g id="图标-(左侧)" transform="translate(115.000000, 22.000000)">
+                    <polygon id="Bounds" points="0 0 32 0 32 32 0 32"></polygon>
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Mask"></g>
+                    <g id="基础/颜色-Color/单色/绿色" mask="url(#mask-2)" fill="#19BE6B">
+                        <rect id="Rectangle" x="0" y="0" width="32" height="32"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

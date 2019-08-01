@@ -1,0 +1,41 @@
+<main>
+	<nz-modal [nzMaskClosable]="false" [(nzVisible)]="_isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent"
+	          [nzFooter]="modalFooter" (nzOnCancel)="handleCancel($event)" [nzWidth]="580">
+		<ng-template #modalTitle>
+			<span>导出用户</span>
+		</ng-template>
+		
+		<ng-template #modalContent>
+			<dl class="clrfix tag-group" *ngFor="let group of _allTableColumns | keysPipe">
+				<dt class="clrfix">
+					{{group.key}}
+					<div style="float: right">
+						<app-fast-search [keyup]="true" (onSearch)="_onSearch($event, group);"
+						                 style="float:left;margin-right:10px;"></app-fast-search>
+						<label nz-checkbox [(ngModel)]="group.checkAll"
+						       (ngModelChange)="_onCheckAllValue($event, group);">全选</label>
+					</div>
+				</dt>
+				<dd *ngIf="group.value.length > 0">
+					<a title="{{tag.displayname}}" class="tag"
+					   [ngClass]="{'selected': tag.selected, 'hide': tag.isHide}" href="javascript:;"
+					   *ngFor="let tag of group.value" (click)="checkChange(tag, group);">
+						{{tag.displayname}}
+					</a>
+				</dd>
+				<dd *ngIf="group.value.length == 0">
+					<div style="text-align: center;font-size:12px;">暂无数据</div>
+				</dd>
+			</dl>
+			<nz-alert nzType="error" *ngIf="_systemError && _systemError.error" nzMessage="{{_systemError.msg}}"
+			          nzBanner></nz-alert>
+		
+		</ng-template>
+
+		<ng-template #modalFooter>
+			<button nz-button nzType="default" (click)="handleCancel()">取消</button>
+			<button nz-button nzType="primary" (click)="handleOk()">确认</button>
+		</ng-template>
+
+	</nz-modal>
+</main>

@@ -1,0 +1,9 @@
+:host ::ng-deep .special {
+    margin-bottom: 0px;
+    margin-top: 1px;
+}
+
+:host ::ng-deep .anticon-search {
+    margin-right: 8px;
+    cursor: pointer;
+}

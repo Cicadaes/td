@@ -1,0 +1,53 @@
+<div class="text-content">
+    <!-- 租户基本信息 -->
+    <nz-card nzTitle="租户基本信息">
+        <div class="baseinfo" *ngIf="tenantDetails">
+            <strong>公司名称</strong>
+            <span>{{tenantDetails.companyName}}</span>
+            <br />
+            <strong>租户状态</strong>
+            <span>{{tenantDetails.status==0?'禁用':'正常'}}</span>
+            <br />
+            <strong>公司传真</strong>
+            <span>{{tenantDetails.faxNo}}</span>
+            <br />
+            <strong>联系电话</strong>
+            <span>{{tenantDetails.phone}}</span>
+            <br />
+            <strong>地址</strong>
+            <span>{{tenantDetails.address}}</span>
+            <br />
+        </div>
+    </nz-card>
+
+    <!-- 租户管理员信息 -->
+    <nz-card style="margin-top: 24px;" nzTitle="租户管理员信息">
+
+        <div class="baseinfo" *ngIf="tenantDetails && tenantDetails.adminUser">
+            <strong>姓名</strong>
+            <span>{{tenantDetails.adminUser.name}}</span>
+            <br />
+            <strong>登录账号</strong>
+            <span>{{tenantDetails.adminUser.email}}</span>
+            <br />
+            <strong>手机</strong>
+            <span>{{tenantDetails.adminUser.mobile}}</span>
+            <br />
+        </div>
+    </nz-card>
+
+    <!-- 租户联系人信息 -->
+    <nz-card style="margin-top: 24px;" nzTitle="租户联系人信息">
+        <div class="baseinfo" *ngIf="tenantDetails">
+            <strong>姓名</strong>
+            <span>{{tenantDetails.contactName}}</span>
+            <br />
+            <strong>手机</strong>
+            <span>{{tenantDetails.contactPhone}}</span>
+            <br />
+            <strong>邮箱</strong>
+            <span>{{tenantDetails.contactEmail}}</span>
+            <br />
+        </div>
+    </nz-card>
+</div>

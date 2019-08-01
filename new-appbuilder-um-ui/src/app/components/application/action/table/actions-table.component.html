@@ -1,0 +1,62 @@
+<ng-template #tableTotal>
+        <div  style="margin-right: 6px;">
+          总共 {{_total}} 条
+        </div>
+</ng-template>
+    <nz-table #nzTable [nzShowTotal]="tableTotal" [nzBordered]="false" [nzData]="_dataSet" nzShowSizeChanger [nzLoading]="_loading" [nzTotal]="_total" [(nzPageIndex)]="_current"
+              (nzPageIndexChange)="refreshData()" [(nzPageSize)]="_pageSize" (nzPageSizeChange)="refreshData(true)" [nzFrontPagination]="false">
+
+            <tr>
+                <th nz-th [nzWidth]="'150px'">
+                    功能名称
+                </th>
+                <th nz-th [nzWidth]="'150px'">
+                    功能描述
+                </th>
+                <th nz-th >
+                    资源类型
+                </th>
+                <th nz-th [nzWidth]="'150px'">
+                    资源代码
+                </th>
+                <th nz-th [nzWidth]="'150px'">
+                    资源序号
+                </th>
+                <th nz-th [nzWidth]="'150px'">
+                    资源地址
+                </th>
+                <th nz-th [nzWidth]="'220px'">
+                    <span>操作</span>
+                </th>
+            </tr>
+            </thead>
+
+        <tbody nz-tbody>
+        <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+            <td nz-td>
+                <a>{{data.name}}</a>
+            </td>
+            <td nz-td>{{data.desc}}</td>
+            <td nz-td>{{data.desc}}</td>
+            <td nz-td>{{data.fucTypeDicId}}</td>
+            <td nz-td>{{data.code}}</td>
+            <td nz-td>{{data.uri}}</td>
+            <td nz-td>
+
+                    <a href="javascript:;" (click)="showAddActionModal(data)">编辑</a>
+
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <a href="javascript:;">查看角色</a>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <a href="javascript:;" (click)="deleteActionModal(data)">删除</a>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <a href="javascript:;">导出</a>
+
+            </td>
+        </tr>
+        </tbody>
+    </nz-table>
+
+
+
+<add-action-dialog *ngIf="isShowAddActionModal" [action]="currentAction" [isShow]="isShowAddActionModal" (onClose)="hideAddActionModal($event)"></add-action-dialog>

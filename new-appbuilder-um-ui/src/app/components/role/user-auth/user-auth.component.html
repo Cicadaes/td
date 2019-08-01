@@ -1,0 +1,30 @@
+
+<div class="table-operator clrfix">
+        <button *ngIf="isSuper" nz-button [nzType]="'primary'" (click)="showAddUserAuthModal()">
+            <span class="anticon anticon-plus"></span><span>用户</span>
+        </button>
+    <nz-dropdown *ngIf="!isSuper">
+        <button nz-button nz-dropdown [nzType]="'primary'">
+            <span class="anticon anticon-plus"></span>
+            <span>用户</span>
+            <span class="anticon anticon-down"></span>
+        </button>
+        <ul nz-menu>
+            <li nz-menu-item>
+                <a target="_blank" rel="noopener noreferrer" (click)="showAddUserModal()">新增用户</a>
+            </li>
+            <li nz-menu-item>
+                <a target="_blank" rel="noopener noreferrer" (click)="showAddUserAuthModal()">添加已有用户</a>
+            </li>
+        </ul>
+    </nz-dropdown>
+        <button nz-button [nzType]="'default'" (click)="batchRemove($event)">
+            <span class="anticon anticon-minus"></span><span>批量移除</span>
+        </button>
+    <add-user-dialog  [isShow]="isShowAddUerModal" [tenantId]="tenantId" [userId]="userId" [roleId]="roleId" (onClose)="hideAddUserModal($event)" (onSubmit)="onSubmitUserAuthData($event)"></add-user-dialog>
+    <add-user-auth-dialog [isSuper]="isSuper" *ngIf="isShowAddUserAuthModal" [isShow]="isShowAddUserAuthModal" [tenantId]="tenantId" [userId]="userId" [roleId]="roleId" (onClose)="hideAddUserAuthModal($event)" (onSubmit)="onSubmitUserAuthData($event)"></add-user-auth-dialog>
+</div>
+<div class="table-operator-bottom" style="padding: 0px;box-shadow: 0 1px 4px 0 rgba(23,35,61,0.10);">
+    <more-search [fieldArray] = "userAuthFieldArray" (onSearch)="onSearchUserAuthList($event)"></more-search>
+    <user-auth-table [isSuper]="isSuper" (canShow)="checkData($event)" [queryParams] = "userQuery" [batchRemove]="batchRemoveUsers" [(isReloadData)]="isReloadData"></user-auth-table>
+</div>

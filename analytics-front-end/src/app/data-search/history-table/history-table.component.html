@@ -1,0 +1,48 @@
+<main>
+  <div class="clrfix">
+    <div class="table-custom-head clrfix">
+      <!--<h5 class="table-custom-title">自定义标签列表</h5>-->
+    </div>
+    <!-- <div class="table-custom-more-search" *ngIf="_showMoreSearch">
+            <app-more-search [fieldArray]="_moreSearchFieldArray"
+                             (onSearch)="onSearchMoreSearch($event)"></app-more-search>
+        </div>-->
+    <nz-table
+      #ajaxTable
+      nzShowTotal
+      nzShowSizeChanger
+      [nzFrontPagination]="false"
+      [nzData]="dataSet"
+      [nzLoading]="loading"
+      [nzTotal]="total"
+      [(nzPageIndex)]="pageIndex"
+      [(nzPageSize)]="pageSize"
+      [nzPageSizeOptions]="[10, 20, 50, 100]"
+      (nzPageIndexChange)="searchData()"
+      (nzPageSizeChange)="searchData(true)"
+    >
+      <thead nzSingleSort>
+        <tr>
+          <th style="min-width:80px;">查询时间</th>
+          <th style="min-width:80px;">查询状态</th>
+          <th style="min-width:100px;">查询语句</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of ajaxTable.data">
+          <td>
+            <div class="td-text-overflow" title="{{ data.name }}">
+              {{ data.name }}
+            </div>
+          </td>
+          <td>
+            <!--<div>{{data.status | statusCrowdPipe}}</div>-->
+          </td>
+          <td>
+            <!-- <div>{{data.calcStatus | calStatusCrowdPipe}}</div>-->
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</main>

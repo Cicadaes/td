@@ -1,0 +1,92 @@
+<ng-template #tableTotal>
+        <div  style="margin-right: 6px;">
+          总共 {{_total}} 条
+        </div>
+</ng-template>
+    <nz-table #nzTable [nzBordered]="false" [nzShowTotal]="tableTotal" [nzData]="_dataSet" nzShowSizeChanger [nzLoading]="_loading" [nzTotal]="_total" [(nzPageIndex)]="_current"
+              (nzPageIndexChange)="refreshData()"  [nzFrontPagination]="false" [(nzPageSize)]="_pageSize" (nzPageSizeChange)="refreshData(true)" >
+
+            <thead nz-thead>
+            <tr>
+                <th nz-th nzCheckbox>
+                    <label nz-checkbox [(ngModel)]="_allChecked" [nzIndeterminate]="_indeterminate" (ngModelChange)="_checkAll($event)">
+                    </label>
+                </th>
+                <th nz-th [nzWidth]="'9%'">
+                    姓名
+                </th>
+                <th nz-th [nzWidth]="'9%'">
+                    账号
+                </th>
+                <th nz-th [nzWidth]="'9%'">
+                    组织机构
+                </th>
+                <th nz-th [nzWidth]="'9%'">
+                    职位
+                </th>
+                <th nz-th [nzWidth]="'9%'">
+                    性别
+                </th>
+                <th nz-th [nzWidth]="'9%'">
+                    手机
+                </th>
+                <th nz-th [nzWidth]="'9%'">
+                    联系电话
+                </th>
+                <th nz-th [nzWidth]="'9%'">
+                    QQ
+                </th>
+                <th nz-th [nzWidth]="'9%'">
+                    微信
+                </th>
+                <th nz-th [nzWidth]="'9%'">
+                    状态
+                </th>
+                <th nz-th [nzWidth]="'9%'">
+                    <span>操作</span>
+                </th>
+            </tr>
+            </thead>
+        <tbody nz-tbody>
+        <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+            <td nz-td nzCheckbox>
+                <label nz-checkbox [(ngModel)]="data.checked" (ngModelChange)="_refreshStatus($event, data.id)">
+                </label>
+            </td>
+            <td nz-td>{{data.name}}</td>
+            <td nz-td>{{data.email}}</td>
+            <td nz-td>{{data.dept}}</td>
+            <td nz-td>{{data.title}}</td>
+            <td nz-td>{{data.gender==-1?'':(data.gender==0?'女':'男')}}</td>
+            <td nz-td>{{data.mobile}}</td>
+            <td nz-td>{{data.phone}}</td>
+            <td nz-td>{{data.qq}}</td>
+            <td nz-td>{{data.wechat}}</td>
+            <td nz-td>{{data.status==0?'禁用':'正常'}}</td>
+            <td nz-td>
+                <span>
+                    <a href="javascript:;" (click)="deleteUserFromUserGroup(data)">移除</a>
+                    <!--<nz-divider nzType="vertical"></nz-divider>
+                    <nz-dropdown>
+                        <a class="ant-dropdown-link" nz-dropdown>
+                          更多操作 <span class="anticon anticon-down"></span>
+                        </a>
+                        <ul nz-menu>
+                            <li nz-menu-item>
+                                <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">1st menu item</a>
+                            </li>
+                            <li nz-menu-item>
+                                <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">2nd menu item</a>
+                            </li>
+                            <li nz-menu-item>
+                                <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">3rd menu item</a>
+                            </li>
+                        </ul>
+                    </nz-dropdown>-->
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </nz-table>
+
+<add-uguser-dialog *ngIf="isShowAddUerModal" [user]="currentUser" [isShow]="isShowAddUerModal" (onClose)="hideAddUserModal($event)" (onSubmit)="onSubmitUserFormData($event)"></add-uguser-dialog>

@@ -1,0 +1,96 @@
+.carousel-app-empty{
+    text-align: center;
+    padding:50px 0;
+}
+.carousel-app-manage{
+    background: #f8f8f9;
+    border: 1px solid #e7e9eb;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+.carousel-app-manage .tree-panel{
+
+    margin:10px;
+}
+.carousel-operator{
+    padding:10px;
+}
+.carousel-operator .title{
+    float: left;
+    font-size:14px;
+}
+.carousel-operator .operator{
+    float:right;
+}
+
+.carousel-panel{
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    border-bottom:1px solid #e7e9eb;
+}
+.carousel-ul{
+    /* padding-right: 90px; */
+}
+.carousel-ul li{
+    float: left;
+    margin: 10px 0 10px 10px;
+    height: 60px;
+    width: 90px;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 5px;
+}
+.carousel-ul li.operator{
+    padding:0;
+}
+.carousel-ul li.operator i.anticon-plus-square-o{
+    font-size: 40px;
+    color: #999;
+    cursor: pointer;
+}
+.carousel-ul li.operator:hover,
+.carousel-ul li.operator:hover i.anticon-plus-square-o{
+    color: #666;
+}
+.carousel-ul li.item{
+    border: 1px solid transparent;
+    border-color: transparent;
+    border-color: rgba(0,0,0,0);
+}
+.carousel-ul li.item:hover{
+    border:1px solid #e7e9eb;
+    background: #eee;
+}
+.carousel-ul li.item.active,.carousel-ul li.item.active:hover{
+    border:1px solid #1E90FF;
+    background: #f3f8fe;
+}
+.carousel-ul li.item .logo img{
+    width:30px;
+    height:30px;
+}
+.carousel-ul li.item .name{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.carousel-col{
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+    width: 90px;
+}
+.tooltip-operator{
+
+}
+.tooltip-operator a{
+    margin:0 10px;
+    color:#fff;
+}

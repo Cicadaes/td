@@ -1,0 +1,29 @@
+<!-- <div class="text-content"> -->
+<div class="text-content-top">
+        <h3 class="zw-one-name">{{role.name}}</h3>
+        <!-- <div nz-form-item nz-row>
+            <div nz-form-control nz-col [nzSm]="4" [nzXs]="24" >
+                <strong>{{role.name}}</strong>
+            </div>
+        </div> -->
+        <!-- <div nz-form-item nz-row *ngIf="role">
+            <div nz-form-control nz-col [nzSm]="12" [nzXs]="24" >
+                {{role.desc}}
+            </div>
+        </div> -->
+    <p *ngIf="role">{{role.desc}}</p>
+</div>    
+
+<nz-tabset [nzTabPosition]="'top'">
+    <nz-tab *ngFor="let tab of tabs" [nzTitle]="tab.value">
+        <div class="text-content" style="padding-top: 4px;">
+            <user-auth *ngIf="tab.key == 'user'" [isSuper]="true" [tenantId]="0" [userId]="userId" [roleId]="roleId"></user-auth>
+            <func-auth *ngIf="tab.key == 'func'" [isSuper]="true" [tenantId]="0"  [roleId]="roleId"></func-auth>
+        </div>
+    </nz-tab>
+</nz-tabset>
+
+        
+<!-- </div> -->
+
+

@@ -1,0 +1,14 @@
+.data-obj-auth{
+    background: #fff;
+}
+
+.data-obj-auth .title {
+    padding: 16px;
+    margin: 0;
+}
+
+.data-obj-operate{
+    padding: 24px 0;
+    text-align: right;
+}
+

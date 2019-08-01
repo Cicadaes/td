@@ -1,0 +1,62 @@
+<!-- 投放名称 -->
+<div class="item launchName required">
+  <span class="label">{{ nls.launchNameLabel }}</span>
+  <span class="input" [class.has-error]="vm.launchNameError">
+    <input
+      nz-input
+      [(ngModel)]="vm.launchNameValue"
+      (change)="handlerCheck_launchName($event.target.value)"
+      [attr.placeholder]="nls.launchNamePlaceholder"
+      [disabled]="segmentDataService.isUpdate === 0"
+    />
+  </span>
+  <span class="error" *ngIf="vm.launchNameError">{{ vm.launchNameErrorInfo }}</span>
+</div>
+
+<!-- 投放方式 -->
+<div class="item launchWays">
+  <span class="label">{{ nls.launchWaysLabel }}</span>
+  <span class="input">
+    <nz-radio-group [(ngModel)]="vm.launchWaysValue" (ngModelChange)="changeSegmentType($event)">
+      <label
+        *ngFor="let radio of vm.launchWaysRadio"
+        nz-radio-button
+        [nzValue]="radio.value"
+        [nzDisabled]="segmentDataService.isUpdate === 0"
+      >
+        <span class="icon {{ radio.icon }}"></span>
+        <span class="text">{{ radio.text }}</span>
+      </label>
+    </nz-radio-group>
+  </span>
+</div>
+
+<!-- 目标人群 -->
+<div class="item launchCrowd required" *ngIf="vm.launchWaysValue != 4">
+  <span class="label">{{ nls.launchCrowdLabel }}</span>
+  <span class="input" [class.has-error]="vm.launchCrowdError">
+    <nz-select
+      [(ngModel)]="vm.launchCrowdValue"
+      (ngModelChange)="handlerCheck_launchCrowd($event)"
+      [nzPlaceHolder]="nls.launchCrowdPlaceholder"
+      [nzDisabled]="segmentDataService.isUpdate === 0"
+    >
+      <nz-option *ngFor="let option of vm.launchCrowdSelect" [nzLabel]="option.name" [nzValue]="option.id"></nz-option>
+    </nz-select>
+  </span>
+  <span class="error" *ngIf="vm.launchCrowdError">请选择目标人群</span>
+</div>
+
+<!-- 描述 -->
+<div class="item launchDescription">
+  <span class="label">{{ nls.launchDescriptionLabel }}</span>
+  <span class="input" [class.has-error]="vm.launchDescriptionError">
+    <textarea
+      nz-input
+      [(ngModel)]="vm.launchDescriptionValue"
+      (change)="handlerCheck_launchDescription($event.target.value)"
+      [disabled]="segmentDataService.isUpdate === 0"
+    ></textarea>
+  </span>
+  <span class="error" *ngIf="vm.launchDescriptionError">描述长度不能超过80</span>
+</div>

@@ -1,0 +1,309 @@
+//----------------统一样式----------------
+.header-content {
+    box-shadow: 0 1px 2px 0 rgba(23, 35, 61, 0.15);
+    //border-bottom: #cccccc 1px solid;
+    background: #FFFFFF;
+}
+
+.padding-content {
+    padding: 16px;
+}
+
+.page-custom-content {
+    margin: 16px;
+}
+
+.shadow-content {
+    border: #DCDEE2 1px solid;
+    box-shadow: 0 1px 2px 0 rgba(23, 35, 61, 0.25);
+    //box-shadow: 3px 3px 3px #c7c6c6;
+    background: #FFFFFF;
+    border-radius: 2px;
+}
+
+.common-title {
+    //content-title
+    //panel-title
+    //ant-card-head-title
+    padding-left: 16px;
+    border-bottom: #cccccc 1px solid;
+
+    height: 46px;
+    line-height: 46px;
+    font-size: 14px;
+    font-weight: 550;
+    color: #17233D;
+}
+
+.content-overflow {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+//--------------------------------------------
+
+.ant-switch-small.ant-switch-checked:before, .ant-switch-small.ant-switch-checked:after {
+    margin-left: 0;
+}
+
+.ant-confirm-content {
+    width: 320px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #9EA7B4 !important;
+}
+
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #9EA7B4 !important;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #9EA7B4 !important;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #9EA7B4 !important;
+}
+
+//----------------统一样式_end----------------
+
+/*清除浮动*/
+.clrfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+.clrfix {
+    zoom: 1;
+}
+
+/*自定义page公共样式start*/
+.page-custom-header {
+    background-color: #fff;
+    padding: 0px;
+    line-height: 48px;
+    /*border-bottom: 1px solid #ddd;
+    box-shadow: 0 1px 0 #ddd;*/
+}
+
+.page-custom-header .title {
+    font-family: "HelveticaNeue", "PingFangSC", "微软雅黑";
+    font-size: 16px;
+    color: #17233D;
+    margin-bottom: 0px;
+    padding-bottom: 0;
+    font-weight: bold;
+    padding: 0px 16px;
+    height: 65px;
+    line-height: 65px;
+}
+
+/*自定义table样式 start*/
+.table-custom-panel {
+    background-color: #fff;
+    border: 1px solid #eee;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.table-custom-head {
+    font-family: "HelveticaNeue", "PingFangSC", "微软雅黑";
+    padding: 8px 16px;
+    color: #17233D;
+}
+
+.table-custom-title {
+    float: left;
+    margin: 0;
+    font-size: 14px;
+    line-height: 30px;
+    font-weight: 550;
+}
+
+.table-custom-filter {
+    float: right;
+}
+
+.table-custom-operator {
+    margin-bottom: 16px;
+}
+
+.table-custom-bar a {
+    margin: 0 10px 0 0;
+}
+
+/*自定义table样式 end*/
+/*custom-form-explain*/
+.custom-form-explain {
+    height: 22px;
+    line-height: 22px;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+.has-error .custom-form-explain {
+    visibility: visible;
+}
+
+/*自定义日期范围 start*/
+.custom-range-picker .ant-calendar-picker {
+    width: 255px;
+}
+
+/*.custom-range-picker .ant-calendar-picker-clear,.custom-range-picker .ant-calendar-picker-icon{
+  left: 10px;
+}*/
+/*自定义日期范围 end*/
+/*热力图下拉框*/
+.pixel-select .ant-select {
+    width: 150px;
+}
+
+/*应用信息radio-group*/
+.radio-group .ant-radio-disabled + span {
+    color: #17233D;
+    opacity: 1;
+    cursor: default;
+}
+
+.radio-group .ant-radio-disabled + span span {
+    opacity: 0.9;
+}
+
+/*滚动条*/
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background: rgba(31, 37, 68, 0.30);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(31, 37, 68, 0.30);
+}
+
+::-moz-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-moz-scrollbar-track {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background: transparent;
+}
+
+::-moz-scrollbar-thumb {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background: rgba(31, 37, 68, 0.30);
+}
+
+::-moz-scrollbar-thumb:window-inactive {
+    background: rgba(31, 37, 68, 0.30);
+}
+
+::scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::scrollbar-track {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background: transparent;
+}
+
+::scrollbar-thumb {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background: rgba(31, 37, 68, 0.30);
+}
+
+::scrollbar-thumb:window-inactive {
+    background: rgba(31, 37, 68, 0.30);
+}
+
+.view-input {
+    padding: 0 15px;
+    height: 32px;
+    line-height: 30px;
+    display: inline-block;
+    border-radius: 4px;
+    border: #d9d9d9 1px solid;
+    width: auto;
+    background-color: rgba(23, 35, 61, 0.06);
+    margin-right: 8px;
+
+    font-family: "HelveticaNeue", "PingFangSC", "微软雅黑";
+    font-size: 12px;
+    color: rgba(23, 35, 61, 0.75);
+    margin-right: 8px;
+    overflow: hidden;
+    vertical-align: top;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 70%;
+}
+
+.view-btn {
+    padding: 0 15px;
+    height: 32px;
+    line-height: 30px;
+    display: inline-block;
+    border-radius: 4px;
+    border: #d9d9d9 1px solid;
+    margin-right: 8px;
+
+    font-family: "HelveticaNeue", "PingFangSC", "微软雅黑";
+    font-size: 12px;
+    color: rgba(23, 35, 61, 0.75);
+
+    width: 80px;
+    text-align: center;
+}
+
+/* 模块标题 */
+.module-title {
+    font-family: "HelveticaNeue", "PingFangSC", "微软雅黑";
+    font-size: 14px;
+    font-weight: 550;
+    color: #17233D;
+}
+
+/*自定义高级搜索*/
+.ant-advanced-search-form .more-search-label label:after {
+    display: none;
+}
+
+/*高级转化漏斗日期*/
+.advanced-add-form .ant-calendar-picker {
+    width: 317px;
+}

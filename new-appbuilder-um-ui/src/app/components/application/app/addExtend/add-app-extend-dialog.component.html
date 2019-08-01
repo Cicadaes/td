@@ -1,0 +1,88 @@
+<nz-modal [nzVisible]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+  (nzOnCancel)="handleCancel($event)" (nzOnOk)="handleOk($event)" [nzMaskClosable]="false">
+  <ng-template #modalTitle>
+    <span>{{dialogTitle}}</span>
+  </ng-template>
+  <ng-template #modalContent>
+
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="_submitForm()">
+      <nz-form-item nz-row>
+        <nz-form-label nz-col [nzSm]="6" [nzXs]="24" class="special-label" nzRequired>
+          <label for="name">名称</label>
+        </nz-form-label>
+        <nz-form-control nz-col [nzSpan]="14">
+
+          <input nz-input [nzSize]="'large'" formControlName="name" [(ngModel)]="name" id="name">
+
+          <nz-form-explain style="color:red;" >
+            <span *ngIf="_name.dirty && _name.errors && _name.errors.required">请输入扩展属性名称</span>
+            <span *ngIf="_name.dirty && _name.errors && _name.errors.nRepeat">扩展属性名称已存在</span>
+            <span *ngIf="_name.dirty && _name.errors && _name.errors.maxlength">扩展属性名称不能超过128个字符</span>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item nz-row>
+        <nz-form-label nz-col [nzSm]="6" [nzXs]="24" nzRequired class="special-label">
+          <label for="code">key</label>
+        </nz-form-label>
+        <nz-form-control nz-col [nzSpan]="14">
+
+          <input nz-input [nzSize]="'large'" *ngIf="!isedit" formControlName="code" [(ngModel)]="code" id="code">
+          <input nz-input [nzSize]="'large'" *ngIf="isedit" formControlName="code" [(ngModel)]="code" id="code"
+          disabled="true" style="background-color: #f5f5f5;">
+
+          <nz-form-explain style="color:red;" >
+            <span *ngIf="_code.dirty && _code.errors && _code.errors.required">请输入key</span>
+            <span *ngIf="_code.dirty && _code.errors && _code.errors.forbiddenName">key只能由字母、数字或_组成</span>
+            <span *ngIf="_code.dirty && _code.errors && _code.errors.maxlength">输入的key过长</span>
+            <span *ngIf="_code.dirty && _code.errors && _code.errors.cRepeat">输入的key已存在</span>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item nz-row>
+        <nz-form-label nz-col [nzSm]="6" [nzXs]="24" class="special-label" nzRequired>
+          <label for="defalutValue" >value</label>
+        </nz-form-label>
+        <nz-form-control nz-col [nzSpan]="14">
+
+          <input nz-input [nzSize]="'large'" *ngIf="!isedit" formControlName="defalutValue" [(ngModel)]="defalutValue"
+            id="defalutValue">
+          <input nz-input [nzSize]="'large'" *ngIf="isedit" formControlName="defalutValue" [(ngModel)]="defalutValue"
+            id="defalutValue" nzDisabled="true">
+
+          <nz-form-explain style="color:red;" >
+            <span *ngIf="_defalutValue.dirty && _defalutValue.errors && _defalutValue.errors.required">请输入value</span>
+            <span *ngIf="_defalutValue.dirty && _defalutValue.errors && _defalutValue.errors.maxlength">输入的value过长</span>
+            <!-- <nz-form-explain style="color:red;" *ngIf="_code.dirty && _code.errors && _code.errors.forbiddenName">功能类别编码只能由字母、数字或_组成</nz-form-explain> -->
+          </nz-form-explain>
+        </nz-form-control>
+        <!-- <nz-form-explain style="color:red;" *ngIf="_code.dirty && _code.errors && _code.errors.cRepeat">功能类别编码已存在</nz-form-explain> -->
+      </nz-form-item>
+      <nz-form-item nz-row>
+        <nz-form-label nz-col [nzSm]="6" [nzXs]="24" class="special-label">
+          <label for="desc" nzRequired class="special-label-before" style="padding-left:10px;">描述</label>
+        </nz-form-label>
+        <nz-form-control nz-col [nzSpan]="14">
+
+          <textarea nz-input [nzSize]="'large'" formControlName="desc" [(ngModel)]="desc" id="desc"></textarea>
+
+          <!-- <nz-form-explain style="color:red;" *ngIf="_desc.dirty && _desc.errors && _desc.errors.required">请输入描述</nz-form-explain> -->
+          <nz-form-explain style="color:red;" *ngIf="_desc.dirty && _desc.errors &&_desc.errors.maxlength">输入的描述过长</nz-form-explain>
+
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+
+  </ng-template>
+  <ng-template #modalFooter>
+
+    <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancel($event)">
+      取 消
+    </button>
+
+    <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="submitAttribute($event)" [nzLoading]="isConfirmLoading">
+      保 存
+    </button>
+
+  </ng-template>
+</nz-modal>

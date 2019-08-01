@@ -1,0 +1,256 @@
+/* clear */
+
+:host > .operation:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+/* icon */
+
+:host > .operation .plus:before {
+  font-family: 'anticon';
+  content: '\e627';
+}
+
+:host > .content > .filter .filter-condition:before {
+  font-family: 'anticon';
+  content: '\e61d';
+}
+
+:host > .content > .filter .filter-condition.true:before {
+  font-family: 'anticon';
+  content: '\e61e';
+}
+
+//:host > .content .header .download:before {
+//    font-family: "iconfont";
+//    content: "\edfb";
+//}
+
+/* .operation */
+
+:host > .operation {
+  position: relative;
+  margin: 16px;
+}
+
+:host > .operation .operation {
+  float: left;
+  margin-right: 8px;
+}
+
+:host > .operation .plus {
+  font-size: 14px;
+  font-style: normal;
+}
+
+/* .content */
+
+:host > .content {
+  position: relative;
+  margin: 16px;
+  border-radius: 3px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #edeef1 #e0e1e5 #cbced3 #e0e1e5;
+  background-color: #ffffff;
+}
+
+:host > .content .header {
+  height: 47px;
+  padding-left: 16px;
+  padding-top: 16px;
+  line-height: 1em;
+}
+
+:host > .content .header .\#2 {
+  color: #3d95f1;
+}
+
+:host > .content .header .download {
+  position: absolute;
+  right: 16px;
+  top: 15px;
+  font-size: 16px;
+  line-height: 16px;
+  color: #808695;
+  cursor: pointer;
+}
+
+/* .content .filter */
+
+:host > .content > .filter {
+  position: absolute;
+  right: 48px;
+  top: 11px;
+  white-space: nowrap;
+}
+
+:host > .content > .filter .filter {
+  width: 200px;
+}
+
+:host > .content > .filter .filter-condition {
+  margin-left: 18px;
+  line-height: 24px;
+}
+
+:host > .content > .filter .filter-condition:before {
+  position: relative;
+  left: -3px;
+}
+
+/* .content .filter-condition */
+
+:host > .content > .filter-condition {
+  position: relative;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+:host > .content > .filter-condition .condition {
+  padding: 14px 16px 11px 16px;
+  white-space: nowrap;
+  border-bottom: 1px dashed #dedfe3;
+}
+
+:host > .content > .filter-condition .condition .label {
+  display: inline-block;
+  width: 80px;
+}
+
+:host > .content > .filter-condition .condition .input {
+  display: inline-block;
+  min-width: 200px;
+}
+
+:host > .content > .filter-condition .operation {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+}
+
+/* .content > .table */
+
+:host > .content > .table th {
+  color: #19253e;
+}
+
+:host > .content > .table td {
+  color: #515a6e;
+}
+
+:host > .content > .table .activityState:before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 8px;
+}
+
+:host > .content > .table .activityState.\#0:before {
+  background-color: #babec5;
+}
+
+:host > .content > .table .activityState.\#1:before {
+  background-color: #babec5;
+}
+
+:host > .content > .table .activityState.\#2:before {
+  background-color: #2b85e5;
+}
+
+:host > .content > .table .activityState.\#3:before {
+  background-color: #18b468;
+}
+
+:host > .content > .table .activityState.\#4:before {
+  background-color: #f19204;
+}
+
+:host > .content > .table .operation {
+  margin-right: 8px;
+  color: #4c9df2;
+}
+
+:host > .content > .table .pagination {
+  display: block;
+  height: 64px;
+  padding-right: 8px;
+  padding: 16px;
+  text-align: right;
+}
+
+/* other */
+
+.modalTitleAutoSave {
+  position: relative;
+  left: 13px;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 12px;
+  color: #9399a5;
+}
+
+.modalOperationGiveUpAdd {
+  position: absolute;
+  left: 16px;
+}
+
+:host ::ng-deep .ant-radio-button-wrapper {
+  margin-right: 10px;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+}
+
+:host ::ng-deep .ant-radio-button-wrapper-checked {
+  border-radius: 20px;
+  font-size: 12px;
+  line-height: 24px;
+  height: 24px;
+}
+
+:host ::ng-deep .ant-radio-button-wrapper:not(:first-child)::before {
+  background-color: #fff;
+}
+
+:host ::ng-deep .ant-radio-button-wrapper-checked::before {
+  opacity: 0;
+}
+
+:host ::ng-deep .zw-color {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: rgba(23, 35, 61, 0.3);
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+:host ::ng-deep .inprogress-color {
+  background: #2d8cf0;
+}
+
+:host ::ng-deep .ant-radio-button-wrapper {
+  font-size: 12px;
+}
+
+:host ::ng-deep .ant-radio-button-wrapper {
+  height: 24px;
+  line-height: 24px;
+}
+
+// ::ng-deep .sms-content {
+//     margin: 16px 0px 0px 0px !important;
+// }
+
+// ::ng-deep .email-content {
+//     margin: 16px 0px 0px 0px !important;
+// }
+
+// ::ng-deep .push-content {
+//     margin: 16px 0px 0px 0px !important;
+// }

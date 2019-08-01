@@ -1,0 +1,17 @@
+<main>
+	<nz-modal [nzMaskClosable]="false" [(nzVisible)]="_isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent"
+	          [nzFooter]="modalFooter" (nzOnCancel)="handleCancel($event)" [nzWidth]="580">
+		<ng-template #modalTitle>
+			<span>导出用户成功</span>
+		</ng-template>
+		
+		<ng-template #modalContent>
+			导出任务创建成功，请稍后到<a (click)="goPage('/download-data')" style="margin:0 10px;">数据下载</a>页面下载您需要的附件。
+		</ng-template>
+		
+		<ng-template #modalFooter>
+			<button nz-button nzType="primary" (click)="handleOk()">确定</button>
+		
+		</ng-template>
+	</nz-modal>
+</main>

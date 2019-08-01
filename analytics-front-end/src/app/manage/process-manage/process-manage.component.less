@@ -1,0 +1,66 @@
+@import '../../../less/td.theme.less';
+@import '../../../../node_modules/ng-zorro-antd/src/ng-zorro-antd.less';
+:host ::ng-deep .nav-list {
+  display: flex;
+  padding-left: 16px;
+  background-color: #fff;
+  margin-bottom: 0;
+  padding-top: 12px;
+
+  .nav-item {
+    & > a {
+      padding-bottom: 8px;
+      display: block;
+      margin-right: 24px;
+      font-size: 14px;
+      color: rgba(28, 36, 56, 0.8);
+      letter-spacing: 0;
+      text-decoration: none;
+
+      &.active {
+        font-weight: 550;
+        color: #2d8cf0;
+        border-bottom: 2px solid #2d8cf0;
+      }
+    }
+
+    & > a:hover {
+      font-weight: 550;
+      color: #2d8cf0;
+      border-bottom: 2px solid #2d8cf0;
+    }
+  }
+}
+
+:host ::ng-deep .content-div {
+  margin: 16px;
+
+  &-table {
+    background: #ffffff;
+    margin-top: 16px;
+
+    &-tit {
+      height: 46px;
+      line-height: 46px;
+      padding: 0px 16px;
+    }
+  }
+}
+
+:host ::ng-deep .hover-a {
+  cursor: pointer;
+}
+
+:host .ant-table-thead > tr,
+.ant-table-tbody > tr {
+  &.@{table-prefix-cls}-row-hover,
+  &:hover {
+    & > td {
+      background: #fff;
+    }
+  }
+}
+
+:host ::ng-deep .ant-calendar-picker {
+  width: 100%;
+}

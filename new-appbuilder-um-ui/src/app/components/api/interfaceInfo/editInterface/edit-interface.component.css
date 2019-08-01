@@ -1,0 +1,191 @@
+:host ::ng-deep .see-interface {
+    background: #eef0f3;
+}
+
+:host ::ng-deep .see-interface-one {
+    background-color: #ffffff;
+    border: 1px solid #e9e9e9;
+    margin-bottom: 23px;
+}
+
+:host ::ng-deep .see-interface-one-tit {
+    margin-bottom: 0px;
+    height: 46px;
+    line-height: 46px;
+    font-family: PingFangSC-Medium;
+    font-size: 14px;
+    color: #17233D;
+    border-bottom: 1px solid #e9e9e9;
+    padding: 0px 24px;
+}
+
+:host ::ng-deep .see-interface-one-content {
+    padding: 16px;
+}
+
+:host ::ng-deep .see-interface-one:hover {
+    box-shadow: 0 1px 4px 0 rgba(23,35,61,0.10);
+}
+
+:host ::ng-deep .content-one {
+    margin-bottom: 16px;
+    height: 30px;
+    line-height: 30px
+}
+
+:host ::ng-deep .content-one p {
+    float: left;
+}
+
+:host ::ng-deep .content-one .content-one-label {
+    width: 94px;
+    font-family: PingFangSC-Medium;
+    font-size: 13px;
+    color: #17233D;
+}
+
+:host ::ng-deep .content-one .content-one-value {
+    font-family: PingFangSC-Regular;
+    font-size: 13px;
+    color: rgba(23,35,61,0.75);
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+    width: 500px;
+}
+
+:host ::ng-deep .see-interface-one-content-child {
+    margin-bottom: 16px;
+    border: 1px solid #DCDEE2;
+}
+
+:host ::ng-deep .see-interface-one-content-child-tit {
+    height: 40px;
+    line-height: 40px;
+    font-family: PingFangSC-Medium;
+    font-size: 12px;
+    color: #0B1100;
+    background: rgba(23,35,61,0.03);
+    border-bottom: 1px solid #DCDEE2;
+}
+
+:host ::ng-deep .see-interface-one-content-child-text {
+    padding: 16px;
+    padding-top: 5px;
+}
+
+:host ::ng-deep .not-required {
+    text-indent: 15px;
+}
+
+:host ::ng-deep .required:before {
+    margin-right: 6px;
+    content: "*";
+    font-family: SimSun;
+    font-size: 12px;
+    color: #f04134;
+    margin-top: 2px;
+    float: left;
+    margin-left: 10px;
+}
+
+:host ::ng-deep .see-interface-one-content-child-textarea {
+    background: rgba(23,35,61,0.03);
+    border: 1px solid rgba(23,35,61,0.15);
+    overflow-x: auto;
+    overflow-y: auto;
+    /* width: 100%; */
+    height: 200px;
+    margin-top: 20px;
+}
+
+
+:host ::ng-deep .required-label:before {
+    margin-right: 4px;
+    content: "*";
+    font-family: SimSun;
+    font-size: 12px;
+    color: #f04134;
+    margin-top: 2px;
+    float: left;
+    margin-left: 5px;
+}
+
+:host ::ng-deep .add-button .button-span {
+    color: #2D8CF0;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+:host ::ng-deep .add-button .mg-left {
+    margin-left: 36px
+}
+
+:host ::ng-deep .anticon-plus {
+    margin-right: 4px;
+    margin-top: 10px;
+}
+
+:host ::ng-deep .json-text {
+    margin-left: 16px;
+    margin-right: 16px;
+    outline: none;
+}
+
+:host ::ng-deep .border-bot {
+    border-bottom: 1px dashed #DEDFE3;
+    margin-right: 16px;
+}
+
+:host ::ng-deep .pading-bot {
+    padding-bottom: 0px !important;
+}
+
+:host ::ng-deep .pading-l-no {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+:host ::ng-deep .pading-l-yes {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+:host ::ng-deep .one-item {
+    padding: 10px 0px;
+    margin-left: 16px;
+}
+
+:host ::ng-deep .common-item {
+    padding: 10px 0px;
+    margin-left: 0px;
+    border-bottom: 1px dashed #DEDFE3;
+}
+
+:host ::ng-deep .one-item .anticon-close {
+    float: right;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+:host ::ng-deep .one-item .anticon-plus {
+    float: right;
+    cursor: pointer;
+}
+
+::ng-deep .checkFailureBase .ant-select-selection {
+    border-color: #f5222d;
+}
+  
+::ng-deep .checkFailureBase {
+    border-color: #f5222d !important;
+}
+
+::ng-deep .footer {
+    position: fixed;
+    bottom: 0px;
+    right: 29px;
+    padding: 15px 0px;
+    background: #eef0f3;
+}
+

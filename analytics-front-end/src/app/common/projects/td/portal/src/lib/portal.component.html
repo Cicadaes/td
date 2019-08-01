@@ -1,0 +1,328 @@
+<!--菜单 -->
+<div class="con-left" #menuEl>
+  <!-- 菜单左侧部分：多应用菜单 -->
+  <div class="icon-left hide">
+    <div class="top">
+      <!-- 左边头部icon *ngIf="!navAppList.length"-->
+      <a
+        class="logo _logo"
+        id="logo"
+        nz-tooltip="{{ 1 == appNum || !multiApp ? '' : showData?.startMenuReturnHome }}"
+        href="javascript:;"
+        (click)="goToProductList()"
+      ></a>
+    </div>
+    <!-- 多应用菜单 -->
+    <div id="nav-scroll" class="scroll-box fl">
+      <div id="nav-bar" class="nav-left">
+        <div *ngIf="navAppList && navAppList.length > 1 && multiApp" class="content_mid">
+          <div
+            *ngFor="let app of navAppList; let i = index"
+            class="list"
+            [ngClass]="getAppLiCls(app.appCode)"
+            (click)="navClick(app)"
+            (mouseenter)="onNavMouseEnter(app, $event)"
+            (mouseleave)="onNavMouseLeave(app, $event)"
+            nz-tooltip="{{ app.appName }}"
+          >
+            <a href="javascript:;">
+              <div class="nav-img">
+                <em
+                  *ngIf="app.icon"
+                  class="{{ navAppCls(app.appCode) }}"
+                  [ngStyle]="{ background: 'url(' + app.icon + ')  no-repeat' }"
+                ></em>
+                <em *ngIf="!app.icon" class="{{ navAppCls(app.appCode) }}" [ngStyle]="portalNavBackground()"></em>
+                <em class="i-a"></em>
+              </div>
+              <div class="nav-name">{{ app.appName }}</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 账户管理菜单内容 -->
+    <div class="logout">
+      <div class="dropdown">
+        <span
+          class="img iconfont icon-account_circle"
+          (click)="showHideDropdown($event)"
+          (mouseenter)="onAccountMouseEnter($event)"
+          (mouseleave)="onAccountMouseLeave($event)"
+        ></span>
+      </div>
+      <ul
+        id="dropdown-ul"
+        [ngClass]="{ 'dropdown-ul': true, hide: !navDropdownShow }"
+        (mouseenter)="onAccountMouseEnter($event)"
+        (mouseleave)="onAccountMouseLeave($event)"
+      >
+        <li
+          class="li02 clrfix"
+          style="height: 28px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display: inline-block;width: 100%"
+        >
+          <a href="javascript:;" class="account-name" id="account-name" title="{{ appConfig?.user?.name }}">{{
+            appConfig?.user?.name
+          }}</a>
+        </li>
+        <li class="li02 clrfix" (click)="accountManage()" style="cursor: pointer;">
+          <span
+            style="position: relative;top: 2px;margin-right: 10px;width: 14px;height: 14px;display: inline-block;font-size: 14px"
+            title="{{ showData?.startMenuAccountSettingusername }}"
+          >
+            <svg
+              viewBox="64 64 896 896"
+              fill="currentColor"
+              width="1em"
+              height="1em"
+              data-icon="setting"
+              aria-hidden="true"
+            >
+              <path
+                d="M924.8 625.7l-65.5-56c3.1-19 4.7-38.4 4.7-57.8s-1.6-38.8-4.7-57.8l65.5-56a32.03 32.03 0 0 0 9.3-35.2l-.9-2.6a443.74 443.74 0 0 0-79.7-137.9l-1.8-2.1a32.12 32.12 0 0 0-35.1-9.5l-81.3 28.9c-30-24.6-63.5-44-99.7-57.6l-15.7-85a32.05 32.05 0 0 0-25.8-25.7l-2.7-.5c-52.1-9.4-106.9-9.4-159 0l-2.7.5a32.05 32.05 0 0 0-25.8 25.7l-15.8 85.4a351.86 351.86 0 0 0-99 57.4l-81.9-29.1a32 32 0 0 0-35.1 9.5l-1.8 2.1a446.02 446.02 0 0 0-79.7 137.9l-.9 2.6c-4.5 12.5-.8 26.5 9.3 35.2l66.3 56.6c-3.1 18.8-4.6 38-4.6 57.1 0 19.2 1.5 38.4 4.6 57.1L99 625.5a32.03 32.03 0 0 0-9.3 35.2l.9 2.6c18.1 50.4 44.9 96.9 79.7 137.9l1.8 2.1a32.12 32.12 0 0 0 35.1 9.5l81.9-29.1c29.8 24.5 63.1 43.9 99 57.4l15.8 85.4a32.05 32.05 0 0 0 25.8 25.7l2.7.5a449.4 449.4 0 0 0 159 0l2.7-.5a32.05 32.05 0 0 0 25.8-25.7l15.7-85a350 350 0 0 0 99.7-57.6l81.3 28.9a32 32 0 0 0 35.1-9.5l1.8-2.1c34.8-41.1 61.6-87.5 79.7-137.9l.9-2.6c4.5-12.3.8-26.3-9.3-35zM788.3 465.9c2.5 15.1 3.8 30.6 3.8 46.1s-1.3 31-3.8 46.1l-6.6 40.1 74.7 63.9a370.03 370.03 0 0 1-42.6 73.6L721 702.8l-31.4 25.8c-23.9 19.6-50.5 35-79.3 45.8l-38.1 14.3-17.9 97a377.5 377.5 0 0 1-85 0l-17.9-97.2-37.8-14.5c-28.5-10.8-55-26.2-78.7-45.7l-31.4-25.9-93.4 33.2c-17-22.9-31.2-47.6-42.6-73.6l75.5-64.5-6.5-40c-2.4-14.9-3.7-30.3-3.7-45.5 0-15.3 1.2-30.6 3.7-45.5l6.5-40-75.5-64.5c11.3-26.1 25.6-50.7 42.6-73.6l93.4 33.2 31.4-25.9c23.7-19.5 50.2-34.9 78.7-45.7l37.9-14.3 17.9-97.2c28.1-3.2 56.8-3.2 85 0l17.9 97 38.1 14.3c28.7 10.8 55.4 26.2 79.3 45.8l31.4 25.8 92.8-32.9c17 22.9 31.2 47.6 42.6 73.6L781.8 426l6.5 39.9zM512 326c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm79.2 255.2A111.6 111.6 0 0 1 512 614c-29.9 0-58-11.7-79.2-32.8A111.6 111.6 0 0 1 400 502c0-29.9 11.7-58 32.8-79.2C454 401.6 482.1 390 512 390c29.9 0 58 11.6 79.2 32.8A111.6 111.6 0 0 1 624 502c0 29.9-11.7 58-32.8 79.2z"
+              ></path>
+            </svg> </span
+          >{{ showData?.startMenuAccountSettingusername }}
+        </li>
+        <li class="li02 clrfix">
+          <a href="javascript:;" class="account" style="line-height: 28px;cursor: pointer;" (click)="managePassword()">
+            <em style="margin-right: 10px;"></em>{{ showData?.startMenuAccountSetting }}
+          </a>
+          <a
+            href="javascript:;"
+            [ngClass]="{ rule: true, hide: !hashTenant }"
+            (click)="goToRuleSystem()"
+            style="line-height: 28px;cursor: pointer;"
+          >
+            <em style="position: relative;top: 2px;margin-right: 10px;"></em>{{ showData?.startMenuPermission }}
+          </a>
+        </li>
+        <li class="li02 clrfix" (click)="logout($event)" style="cursor: pointer;">
+          <em
+            style="position: relative;top: 2px;margin-right: 10px;font-size: 14px"
+            class="iconfont icon-out"
+            id="logout"
+            title="{{ showData?.startMenuLogout }}"
+          ></em
+          >退出
+        </li>
+      </ul>
+    </div>
+    <!-- <div class="app-tip hide">{{activeApp ? (showData[activeApp.appCode]?.appName || activeApp.appName) :''}}</div> -->
+  </div>
+
+  <!-- 菜单右侧部分 -->
+  <div
+    class="menu-left-root hide"
+    data-accordion-menu=""
+    role="accordion"
+    [ngClass]="{ 'single-app': 1 == appNum || !multiApp }"
+  >
+    <!-- 当前应用图标 -->
+    <div class="search" [ngStyle]="topstyle()">
+      <div class="menu-title clrfix">
+        <span *ngIf="1 == appNum || !_multiApp">
+          <a
+            [ngStyle]="portalSvgBackground()"
+            *ngIf="'AEPLUS' == appConfig.appCode"
+            nz-tooltip="{{ 'AEPLUS' == appConfig.appCode ? '返回产品中心' : '' }}"
+            class="logo _logo"
+            href="javascript:;"
+            (click)="goToProductList()"
+          ></a>
+          <a
+            *ngIf="'DevMgmt' == appConfig.appCode"
+            nz-tooltip="{{ 'DevMgmt' == appConfig.appCode ? '返回产品中心' : '' }}"
+            class="mgmt-logo"
+            href="javascript:;"
+            (click)="goToProductList()"
+          ></a>
+        </span>
+        <!-- 右边头部icon -->
+        <div
+          *ngIf="appNum > 1 && _multiApp"
+          class="place"
+          [ngStyle]="{
+            left: navAppList && navAppList.length > 1 ? '-45px' : '10px',
+            width: isCollapsed ? '55%' : '100%'
+          }"
+        >
+          <span
+            *ngIf="appConfig.largeIcon"
+            class="td-title"
+            [ngStyle]="{ background: 'url(' + appConfig.largeIcon + ')  no-repeat left center' }"
+          >
+          </span>
+        </div>
+        <div
+          *ngIf="appNum > 1 && _multiApp"
+          class="place"
+          [ngStyle]="{
+            left: navAppList && navAppList.length > 1 ? '-45px' : '10px',
+            width: isCollapsed ? '55%' : '100%'
+          }"
+        >
+          <span *ngIf="!appConfig.largeIcon" class="td-title"> <span></span>{{ appConfig?.appName }} </span>
+        </div>
+      </div>
+    </div>
+    <!-- 当前应用的菜单 -->
+    <div id="menu-scroll" class="scroll-box">
+      <div id="menu-left" class="menu-left" [ngStyle]="{ width: isCollapsed ? 'auto' : '200px' }">
+        <ul nz-menu [nzMode]="'inline'" class="menu" [nzInlineCollapsed]="isCollapsed">
+          <ng-container *ngFor="let menuArr of menuList; let isFisrt = first">
+            <!-- 一级 -->
+            <li
+              class="only-menu"
+              nz-menu-item
+              *ngIf="!menuArr.childrens || !menuArr.childrens.length"
+              (click)="selectItem(menuArr.resourceUri, true, menuArr)"
+              [nzSelected]="menuArr.selected"
+            >
+              <span title class="clrfix" [ngStyle]="{ 'padding-left': !isCollapsed ? '22px' : '32px' }">
+                <em class="fl fltop" [ngStyle]="navMenuItemCls(menuArr)"></em>
+                <a class="fl" title="{{ menuArr.resourceLabel }}">{{ menuArr.resourceLabel }}</a>
+              </span>
+            </li>
+            <!-- 二级 -->
+            <li nz-submenu *ngIf="menuArr.childrens && menuArr.childrens.length" [nzOpen]="!isCollapsed">
+              <span class="clrfix" title title-box [ngStyle]="{ 'padding-left': !isCollapsed ? '22px' : '32px' }">
+                <em class="fl" [ngStyle]="navMenuItemCls(menuArr)"></em>
+                <span class="fl" [ngStyle]="{ opacity: isCollapsed ? 0 : 1 }" title="{{ menuArr.resourceLabel }}">{{
+                  menuArr.resourceLabel
+                }}</span>
+              </span>
+              <ul [ngStyle]="{ height: !isCollapsed ? 'auto' : '0px' }">
+                <span *ngFor="let menuObj of menuArr.childrens; let i = index">
+                  <li
+                    *ngIf="!menuObj.childrens || !menuObj.childrens.length"
+                    nz-menu-item
+                    (click)="selectItem(menuObj.resourceUri, true, menuArr, menuObj)"
+                    [nzSelected]="menuObj.selected"
+                    [ngClass]="{ lititle: isCollapsed }"
+                  >
+                    <a
+                      [ngClass]="{ lititlelitext: isCollapsed }"
+                      title="{{ menuObj.resourceLabel }}"
+                      [ngStyle]="{ 'padding-left': !isCollapsed ? '50px' : '' }"
+                      >{{ menuObj.resourceLabel }}</a
+                    >
+                  </li>
+                  <li
+                    *ngIf="menuObj.childrens && menuObj.childrens.length"
+                    nz-submenu
+                    [nzOpen]="!isCollapsed"
+                    [ngClass]="{ lititle: isCollapsed }"
+                  >
+                    <span class="clrfix" title title-box [ngStyle]="{ 'padding-left': '25%' }">
+                      <em class="fl" [ngStyle]="navMenuItemClsem(menuObj)"></em>
+                      <span class="fl" title="{{ menuObj.resourceLabel }}">{{ menuObj.resourceLabel }}</span>
+                    </span>
+                    <ul>
+                      <li
+                        nz-menu-item
+                        *ngFor="let tertiary of menuObj.childrens"
+                        (click)="selectItem(tertiary.resourceUri, true, menuArr, tertiary)"
+                        nzSelected="{{ tertiary.selected ? true : false }}"
+                        [ngClass]="{ lititleli: isCollapsed }"
+                      >
+                        <em class="fl" [ngStyle]="navMenuItemClsem(tertiary)"></em>
+                        <a
+                          [ngClass]="{ lititlelitext: isCollapsed }"
+                          title="{{ tertiary.resourceLabel }}"
+                          [ngStyle]="{ 'padding-left': !isCollapsed ? '53%' : '' }"
+                          >{{ tertiary.resourceLabel }}</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                </span>
+              </ul>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+    </div>
+
+    <div class="shrink" (click)="toggleCollapsed()">
+      <span nz-icon type="left" theme="outline" *ngIf="!isCollapsed" style="color:rgb(255, 255, 255);"></span
+      ><span nz-icon type="right" theme="outline" *ngIf="isCollapsed" style="color:rgb(255, 255, 255)"></span>
+    </div>
+
+    <!-- 单应用时：账户管理菜单 -->
+    <div
+      *ngIf="1 == appNum || !_multiApp"
+      class="logout"
+      (mouseenter)="onAccountMouseEnter($event)"
+      (mouseleave)="onAccountMouseLeave($event)"
+    >
+      <div class="dropdown">
+        <span class="img iconfont icon-account_circle" (click)="showHideDropdown($event)"></span>
+        <span *ngIf="!isCollapsed">我的账户</span>
+      </div>
+
+      <ul
+        id="dropdown-ul"
+        [ngClass]="{ 'dropdown-ul': true, hide: !navDropdownShow }"
+        style="min-width: 140px;padding: 10px 15px 16px;"
+      >
+        <li class="li02 clrfix heig" style="overflow: hidden;cursor: pointer;">
+          <a
+            href="javascript:;"
+            style="height: 28px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display: inline-block;width: 100%"
+            class="account-name"
+            id="account-name"
+            title="{{ appConfig?.user?.name }}"
+            >{{ appConfig?.user?.name }}</a
+          >
+        </li>
+        <li style="overflow: hidden;cursor: pointer;" class="li02 clrfix heig" (click)="accountManage()">
+          <span
+            style="position: relative;top: 2px;margin-right: 10px;width: 14px;height: 14px;display: inline-block;font-size: 14px"
+            title="{{ showData?.startMenuAccountSettingusername }}"
+          >
+            <svg
+              viewBox="64 64 896 896"
+              fill="currentColor"
+              width="1em"
+              height="1em"
+              data-icon="setting"
+              aria-hidden="true"
+            >
+              <path
+                d="M924.8 625.7l-65.5-56c3.1-19 4.7-38.4 4.7-57.8s-1.6-38.8-4.7-57.8l65.5-56a32.03 32.03 0 0 0 9.3-35.2l-.9-2.6a443.74 443.74 0 0 0-79.7-137.9l-1.8-2.1a32.12 32.12 0 0 0-35.1-9.5l-81.3 28.9c-30-24.6-63.5-44-99.7-57.6l-15.7-85a32.05 32.05 0 0 0-25.8-25.7l-2.7-.5c-52.1-9.4-106.9-9.4-159 0l-2.7.5a32.05 32.05 0 0 0-25.8 25.7l-15.8 85.4a351.86 351.86 0 0 0-99 57.4l-81.9-29.1a32 32 0 0 0-35.1 9.5l-1.8 2.1a446.02 446.02 0 0 0-79.7 137.9l-.9 2.6c-4.5 12.5-.8 26.5 9.3 35.2l66.3 56.6c-3.1 18.8-4.6 38-4.6 57.1 0 19.2 1.5 38.4 4.6 57.1L99 625.5a32.03 32.03 0 0 0-9.3 35.2l.9 2.6c18.1 50.4 44.9 96.9 79.7 137.9l1.8 2.1a32.12 32.12 0 0 0 35.1 9.5l81.9-29.1c29.8 24.5 63.1 43.9 99 57.4l15.8 85.4a32.05 32.05 0 0 0 25.8 25.7l2.7.5a449.4 449.4 0 0 0 159 0l2.7-.5a32.05 32.05 0 0 0 25.8-25.7l15.7-85a350 350 0 0 0 99.7-57.6l81.3 28.9a32 32 0 0 0 35.1-9.5l1.8-2.1c34.8-41.1 61.6-87.5 79.7-137.9l.9-2.6c4.5-12.3.8-26.3-9.3-35zM788.3 465.9c2.5 15.1 3.8 30.6 3.8 46.1s-1.3 31-3.8 46.1l-6.6 40.1 74.7 63.9a370.03 370.03 0 0 1-42.6 73.6L721 702.8l-31.4 25.8c-23.9 19.6-50.5 35-79.3 45.8l-38.1 14.3-17.9 97a377.5 377.5 0 0 1-85 0l-17.9-97.2-37.8-14.5c-28.5-10.8-55-26.2-78.7-45.7l-31.4-25.9-93.4 33.2c-17-22.9-31.2-47.6-42.6-73.6l75.5-64.5-6.5-40c-2.4-14.9-3.7-30.3-3.7-45.5 0-15.3 1.2-30.6 3.7-45.5l6.5-40-75.5-64.5c11.3-26.1 25.6-50.7 42.6-73.6l93.4 33.2 31.4-25.9c23.7-19.5 50.2-34.9 78.7-45.7l37.9-14.3 17.9-97.2c28.1-3.2 56.8-3.2 85 0l17.9 97 38.1 14.3c28.7 10.8 55.4 26.2 79.3 45.8l31.4 25.8 92.8-32.9c17 22.9 31.2 47.6 42.6 73.6L781.8 426l6.5 39.9zM512 326c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm79.2 255.2A111.6 111.6 0 0 1 512 614c-29.9 0-58-11.7-79.2-32.8A111.6 111.6 0 0 1 400 502c0-29.9 11.7-58 32.8-79.2C454 401.6 482.1 390 512 390c29.9 0 58 11.6 79.2 32.8A111.6 111.6 0 0 1 624 502c0 29.9-11.7 58-32.8 79.2z"
+              ></path>
+            </svg> </span
+          >账户管理
+        </li>
+        <li class="li02 clrfix heig" style="overflow: hidden;cursor: pointer;">
+          <a href="javascript:;" class="account" (click)="managePassword()">
+            <em style="position: relative;top: -1px;margin-right: 10px;"></em>{{ showData?.startMenuAccountSetting }}
+          </a>
+          <a href="javascript:;" [ngClass]="{ rule: true, hide: !hashTenant }" (click)="goToRuleSystem()">
+            <em style="position: relative;top: -1px;margin-right: 10px;"></em>{{ showData?.startMenuPermission }}
+          </a>
+        </li>
+        <li class="li02 clrfix heig" style="overflow: hidden;cursor: pointer;" (click)="logout($event)">
+          <em
+            style="position: relative;top: 2px;margin-right: 10px;font-size:14px"
+            class="iconfont icon-out"
+            id="logout"
+            title="{{ showData?.startMenuLogout }}"
+          ></em
+          >退出
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- 账户管理弹框 -->
+<lib-user-account-modal
+  #libAccountModal
+  [config]="appConfig"
+  [langData]="showData"
+  (updateUserInfo)="updateUser($event)"
+></lib-user-account-modal>
+
+<!-- 修改密码弹框 -->
+<lib-reset-password-modal #libPasswordModal [config]="appConfig" [langData]="showData"></lib-reset-password-modal>

@@ -1,0 +1,109 @@
+<nz-card *ngIf="licence" [nzTitle]="title">
+    <ng-template #title>
+        <span *ngIf="licence">{{licence.name}}<span style="color:#E03E16" *ngIf="licence.status==0">●</span><span style="color:#2B85E5"
+                *ngIf="licence.status==1">●</span> {{licence.status==0?'禁用':'启用'}}</span>
+    </ng-template>
+
+    <nz-form-item nz-row *ngIf="licence">
+        <nz-form-control nz-col [nzSm]="22" [nzXs]="24">
+            {{licence.desc}}
+        </nz-form-control >
+    </nz-form-item>
+    <nz-form-item nz-row *ngIf="licence">
+        <!-- <nz-form-label nz-col [nzSm]="2" [nzXs]="24">
+                <label for="createUserName" class="label_font">创建人</label>
+            </nz-form-label >
+            <nz-form-control nz-col [nzSm]="4" [nzXs]="24" >
+                {{licence.createUserName}}
+            </nz-form-control >
+            <nz-form-label nz-col [nzSm]="2" [nzXs]="24">
+                <label for="createTime" class="label_font">创建时间</label>
+            </nz-form-label >
+            <nz-form-control nz-col [nzSm]="4" [nzXs]="24" >
+                {{licence.createTime}}
+            </nz-form-control > -->
+        <nz-form-label nz-col [nzSm]="2" [nzXs]="24">
+            <label for="updateUserName" class="label_font">更新人</label>
+        </nz-form-label >
+        <nz-form-control nz-col [nzSm]="4" [nzXs]="24">
+            {{licence.updateUserName}}
+        </nz-form-control >
+        <nz-form-label nz-col [nzSm]="2" [nzXs]="24">
+            <label for="updateTime" class="label_font">更新时间</label>
+        </nz-form-label >
+        <nz-form-control nz-col [nzSm]="4" [nzXs]="24">
+            {{licence.updateTime}}
+        </nz-form-control >
+    </nz-form-item>
+
+</nz-card>
+<nz-card nzTitle="应用信息">
+
+    <nz-form-item nz-row>
+        <nz-form-label nz-col [nzSm]="2" [nzXs]="24">
+            <label class="label_font">应用名称</label>
+        </nz-form-label >
+        <nz-form-control nz-col [nzSm]="4" [nzXs]="24">
+            用户运营xxxx（v1.0） 主应用
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row>
+        <nz-form-label nz-col [nzSm]="2" [nzXs]="24">
+            <label class="label_font">应用功能</label>
+        </nz-form-label >
+        <nz-form-control nz-col [nzSm]="4" [nzXs]="24">
+            设置
+        </nz-form-control>
+    </nz-form-item>
+
+</nz-card>
+
+<nz-card>
+    <nz-table #nzTable [nzIsPagination]="false" [nzTitle]="tableTit" [nzBordered]="false" [nzData]="_dataSet"
+        nzShowSizeChanger [nzLoading]="_loading"  [nzFrontPagination]="false">
+        <ng-template #tableTit>
+            <span nz-table-title>属性信息
+                <img alt="图片" src="./assets/images/add.svg" height="12px" width="12px" style="margin-left: 4px;cursor: pointer;"
+                    (click)="addAttribute($event)" />
+
+                <!-- <span class="anticon anticon-plus-circle-o" (click)="addAttribute($event)" style="cursor:hand"></span> -->
+            </span>
+        </ng-template>
+        <thead nz-thead>
+            <tr>
+                <th nz-th [nzWidth]="'150px'">
+                    名称
+                </th>
+                <th nz-th [nzWidth]="'150px'">
+                    Key
+                </th>
+                <th nz-th [nzWidth]="'150px'">
+                    Value(默认值)
+                </th>
+                <th nz-th>
+                    描述
+                </th>
+                <th nz-th [nzWidth]="'150px'">
+                    <span>操作</span>
+                </th>
+            </tr>
+        </thead>
+
+        <tbody nz-tbody>
+            <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                <td nz-td>{{data.name}}</td>
+                <td nz-td>{{data.key}}</td>
+                <td nz-td>{{data.defalutValue}}</td>
+                <td nz-td>{{data.desc}}</td>
+                <td nz-td>
+                    <span>
+                        <a href="javascript:;" (click)="editAttribute(data)">编辑</a>
+                        <nz-divider nzType="vertical"></nz-divider>
+                        <a href="javascript:;" (click)="deleteAttribute(data)">移除</a>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+
+</nz-card>

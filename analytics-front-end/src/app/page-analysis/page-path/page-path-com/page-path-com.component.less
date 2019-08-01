@@ -1,0 +1,41 @@
+.tree {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0 0 10px 0;
+}
+
+.tree-body {
+  margin: 20px 10px 10px -7px;
+}
+
+.tree-label {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  justify-content: flex-end;
+}
+
+.no-data {
+  text-align: center;
+  padding: 50px 0;
+}
+
+.loading {
+  text-align: center;
+  padding: 50px 0;
+}
+
+.hasData::after {
+  content: '';
+  position: absolute;
+  left: 104%;
+  top: 50%;
+  background: #ccc;
+  height: 2px;
+  width: 18px;
+}
+
+.ant-card-body {
+  padding: 16px;
+}

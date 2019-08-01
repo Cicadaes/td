@@ -1,0 +1,57 @@
+<nz-modal [nzWidth]="1000" nzVisible="true" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel($event)" (nzOnOk)="handleOk($event)" [nzMaskClosable]="false">
+    <ng-template #modalTitle>
+        <span style="margin-top: 13px;display: inline-block;">配置应用功能</span>
+        <input nz-input type="search" placeholder="'应用名称'" [(ngModel)]="_appKeyWord" style="width: 200px;float: right; margin:10px 30px 0px 0px;"
+            (keyup)="onSearchApp(_appKeyWord)">
+      </ng-template>
+
+      <ng-template #modalContent>
+        <div class="clrfix carousel-app-manage" *ngIf="appList && appList.length > 0">
+            <div class="clrfix carousel-panel left_tree-pane">
+                <ul class="carousel-ul clrfix" *ngIf="!(appShow && appList && appList.length > 0) " >
+                    <li class="item" title="{{app.name}}" *ngFor="let app of appList" [ngClass]="{'active':app.id == curApp.id,'show':app.isShow}">
+                        <div (click)="switchApp(app, $event);" class="app-box">
+                            <label nz-checkbox [(ngModel)]="app.checked" (ngModelChange)="checkCurApp($event,app)"
+                                [nzDisabled]="!app.tree || app.tree.length == 0 || app.id != curApp.id">
+                            </label>
+                            <span class="logo" *ngIf="app.type==1 && app.icon">
+                                <img alt="图片" src="{{app.icon}}" />
+                            </span>
+                            <span class="logo" *ngIf="app.type!=1 || !app.icon">
+
+                            </span>
+                            <span class="name">{{app.name}}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="clrfix tree-panel right_tree-pane">
+                <div *ngIf="appShow && appList && appList.length > 0 " style="display: table;height: 100%;width: 100%;">
+                    <p style="vertical-align:middle; display:table-cell;text-align: center;">暂无数据</p>
+                </div>
+                <checkbox-tree [treeDatas]="resourceTreeData" [isSet]="isSetTreeDatas" (onBack)="getBackTreeDatas($event)"
+                    *ngIf="flag"></checkbox-tree>
+            </div>
+
+        </div>
+
+        <div class="clrfix carousel-app-empty" *ngIf="!appList || appList.length == 0">
+            <p *ngIf="!isDataLoading">
+                <span>暂无数据</span>
+            </p>
+            <p *ngIf="isDataLoading">
+                <nz-spin [nzTip]="'正在读取数据...'"></nz-spin>
+            </p>
+        </div>
+      </ng-template>
+
+      <ng-template #modalFooter>
+        <button nz-button [nzType]="'default'" (click)="handleCancel($event)">
+            取 消
+        </button>
+        <button nz-button [nzType]="'primary'" (click)="handleOk($event)" [nzLoading]="isConfirmLoading">
+            确 定
+        </button>
+      </ng-template>
+</nz-modal>

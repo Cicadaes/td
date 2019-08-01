@@ -1,0 +1,116 @@
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel($event)" [nzMaskClosable]='false'>
+    <ng-template #modalTitle>
+        <span *ngIf="!editFlag">新建路由规则</span>
+        <span *ngIf="editFlag">修改路由规则</span>
+    </ng-template>
+    <ng-template #modalContent>
+        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" autocomplete="off">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="4" nzRequired nzFor="name">规则名称</nz-form-label>
+                <nz-form-control [nzSpan]="20">
+                    <input id="code" type="name" nz-input formControlName="name" placeholder="请输入规则名称">
+                    <nz-form-explain style="color:red;" *ngIf="getFormControl('name').dirty && getFormControl('name').errors" style="color: #f5222d;">
+                        <ng-container *ngIf="getFormControl('name').errors.required">
+                            请输入规则名称
+                        </ng-container>
+                        <ng-container *ngIf="getFormControl('name').errors.forbiddenName && !getFormControl('name').errors.pattern">
+                            只能输入中文、数字、英文字母、空格，长度最少2个、最多100个字符
+                        </ng-container>
+                        <ng-container *ngIf="getFormControl('name').errors.pattern">
+                            开头结尾不能有空格
+                        </ng-container>
+                    </nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="4" nzRequired nzFor="originUrl">原始路径</nz-form-label>
+                <nz-form-control [nzSpan]="20">
+                    <input id="originUrl" type="originUrl" nz-input formControlName="originUrl" placeholder="例如：/cal/**">
+                    <nz-form-explain style="color:red;" *ngIf="getFormControl('originUrl').dirty && getFormControl('originUrl').errors"
+                        style="color: #f5222d;">
+                        <ng-container *ngIf="getFormControl('originUrl').errors.required">
+                            请输入原始路径
+                        </ng-container>
+                        <ng-container *ngIf="getFormControl('originUrl').errors.forbiddenName && !getFormControl('originUrl').errors.pattern">
+                            {{str}}
+                        </ng-container>
+                        <ng-container *ngIf="getFormControl('originUrl').errors.pattern">
+                            开头结尾不能有空格
+                        </ng-container>
+                    </nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="4" nzRequired nzFor="routingType">映射方式</nz-form-label>
+                <nz-form-control [nzSpan]="20">
+                    <nz-radio-group [(ngModel)]="routingType" formControlName="routingType" (ngModelChange)="changeRoutingType($event);">
+                        <label nz-radio nzValue="1">URL映射</label>
+                        <label nz-radio nzValue="2">ServiceId映射</label>
+                    </nz-radio-group>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="4" nzRequired nzFor="routingUrl">映射路径</nz-form-label>
+                <nz-form-control [nzSpan]="20">
+                    <input *ngIf="routingType === '1'" id="routingUrl" type="routingUrl" nz-input formControlName="routingUrl" placeholder="例如：http://ip:port/ , http://ip:port/">
+                    <nz-select *ngIf="routingType === '2'" [(ngModel)]="selectedRoutingUrl" nzAllowClear nzShowSearch nzPlaceHolder="请选择映射路径" formControlName="routingUrl">
+                        <nz-option *ngFor="let item of serviceList" nzCustomContent [nzLabel]="item.name" [nzValue]="item.name">
+                            <p>{{item.name}}</p>
+                        </nz-option>
+                    </nz-select>
+                    <nz-form-explain style="color:red;" *ngIf="getFormControl('routingUrl').dirty && getFormControl('routingUrl').errors"
+                        style="color: #f5222d;">
+                        <ng-container *ngIf="getFormControl('routingUrl').errors.required && routingType === '2'">
+                            请选择映射路径
+                        </ng-container>
+                        <ng-container *ngIf="getFormControl('routingUrl').errors.required && routingType === '1'">
+                            请输入映射路径
+                        </ng-container>
+                        <ng-container *ngIf="getFormControl('routingUrl').errors.forbiddenName && !getFormControl('routingUrl').errors.pattern && routingType === '1'">
+                            {{str2}}
+                        </ng-container>
+                        <ng-container *ngIf="getFormControl('routingUrl').errors.pattern && routingType === '1'">
+                            开头结尾不能有空格
+                        </ng-container>
+                    </nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="4" nzRequired nzFor="status">状态</nz-form-label>
+                <nz-form-control [nzSpan]="20">
+                    <nz-radio-group [(ngModel)]="status" formControlName="status">
+                        <label nz-radio nzValue="1">已发布</label>
+                        <label nz-radio nzValue="0">未发布</label>
+                    </nz-radio-group>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="4" nzRequired nzFor="description" class="cover-ant-form-item-label">规则描述</nz-form-label>
+                <nz-form-control [nzSpan]="20">
+                    <textarea id="description" type="description" nz-input formControlName="description" placeholder="请输入规则描述"></textarea>
+                    <nz-form-explain style="color:red;" *ngIf="getFormControl('description').dirty && getFormControl('description').errors"
+                        style="color: #f5222d;">
+                        <ng-container *ngIf="getFormControl('description').errors.maxlength">
+                            规则描述不能超过256个字符
+                        </ng-container>
+                    </nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </ng-template>
+    <ng-template #modalFooter>
+        <button nz-button [nzType]="'default'" [nzSize]="large" (click)="handleCancel($event)">
+            取 消
+        </button>
+        <button nz-button [nzType]="'primary'" [nzSize]="large" (click)="save()">
+            确 定
+        </button>
+    </ng-template>
+</nz-modal>

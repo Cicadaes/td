@@ -1,0 +1,176 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="_submitForm()">
+  <nz-form-item nz-row>
+    <nz-form-label nz-col [nzSm]="6" [nzXs]="24" class="special-label" nzRequired>
+      <label for="name" nzRequired>姓名</label>
+    </nz-form-label>
+    <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+
+      <input nz-input [nzSize]="'large'" formControlName="name">
+
+      <ng-container *ngIf="getFormControl('name').dirty && getFormControl('name').errors">
+        <nz-form-explain style="color:red;">
+          <span *ngIf="getFormControl('name').errors.required">请输入姓名</span>
+          <span *ngIf="getFormControl('name').errors.maxlength">输入姓名过长</span></nz-form-explain>
+      </ng-container>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item nz-row>
+    <nz-form-label nz-col [nzSm]="6" [nzXs]="24" class="special-label" nzRequired>
+      <label for="email" nzRequired>账号</label>
+    </nz-form-label>
+    <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+
+      <input nz-input *ngIf="!user" [nzSize]="'large'" nzPlaceHolder="请输入邮箱，一旦保存不可变更" formControlName="email">
+      <input nz-input *ngIf="user" [nzSize]="'large'" nzPlaceHolder="请输入邮箱，一旦保存不可变更" formControlName="email" disabled="true" style="background-color: #f5f5f5;">
+
+      <ng-container *ngIf="getFormControl('email').dirty && getFormControl('email').errors">
+        <nz-form-explain style="color:red;">
+          <span *ngIf="getFormControl('email').errors.required">请输入账号</span>
+          <span *ngIf="getFormControl('email').errors.maxlength">输入账号过长</span>
+          <span *ngIf="getFormControl('email').errors.forbiddenName">账号必须是邮箱账号</span>
+          <span *ngIf="getFormControl('email').errors.emailRepeat">{{emailErrorMsg}}</span>
+        </nz-form-explain>
+      </ng-container>
+    </nz-form-control>
+  </nz-form-item>
+
+
+  <nz-form-item nz-row>
+    <nz-form-label nz-col [nzSm]="6" [nzXs]="24" class="special-label" nzRequired>
+      <label for="mobile" nzRequired>手机</label>
+    </nz-form-label>
+    <nz-form-control nz-col [nzSm]="14" [nzXs]="24" [nzValidateStatus]="validateForm.controls['mobile']">
+
+      <input nz-input [nzSize]="'large'" placehsolder="" formControlName="mobile">
+
+      <nz-form-explain style="color:red;" *ngIf="getFormControl('mobile').dirty  && getFormControl('mobile').errors && getFormControl('mobile').errors.required">请输入正确的手机号</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item nz-row style="margin-bottom: 10px;">
+    <nz-form-label nz-col [nzSm]="6" [nzXs]="24" class="special-label" nzRequired>
+      <label for="status" nzRequired class="special-label-before">状态</label>
+    </nz-form-label>
+    <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+      <label nz-checkbox [formControlName]="'status'" [(ngModel)]="status" disabled="!user">
+        <span>正常</span>
+      </label>
+    </nz-form-control>
+  </nz-form-item>
+
+  <div *ngIf="user" nz-form-item nz-row>
+    <nz-form-label nz-col [nzSm]="6" [nzXs]="24" class="special-label" nzRequired>
+      <label for="editAutoPwd" nzRequired>密码</label>
+    </nz-form-label>
+    <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+      <label nz-checkbox [formControlName]="'editAutoPwd'" [(ngModel)]="editAutoPwd">
+        <span>重置密码</span>
+      </label>
+
+    </nz-form-control>
+    <nz-radio-group *ngIf="getFormControl('editAutoPwd') && getFormControl('editAutoPwd').value" formControlName="autoPassword2" style="margin-left: 97px; margin-bottom: 16px"
+      (click)="checkAuto($event)">
+      <label nz-radio [nzValue]="true">
+        <span>自动生成，密码会发送到账户邮箱</span>
+      </label>
+      <label nz-radio [nzValue]="false">
+        <span>手动更新</span>
+      </label>
+    </nz-radio-group>
+  </div>
+
+  <ng-container *ngIf="user && getFormControl('editAutoPwd') && getFormControl('editAutoPwd').value && getFormControl('autoPassword2') && !getFormControl('autoPassword2').value">
+    <nz-form-item nz-row>
+      <nz-form-label nz-col [nzSm]="6" [nzXs]="24" class="special-label" nzRequired>
+        <label for="password" nzRequired>输入新密码</label>
+      </nz-form-label>
+      <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+
+        <input nz-input [nzSize]="'large'" formControlName="password" type="password" id="'password'" (ngModelChange)="updateConfirmValidator()">
+        <!-- disabled="getFormControl('autoPassword2') && getFormControl('autoPassword2').value"  -->
+        <nz-form-explain>
+          <div style="color:red;" nz-form-explain *ngIf="getFormControl('password').dirty && getFormControl('password').errors && getFormControl('password').errors['required']">请输入密码</div>
+          <div style="color:red;" nz-form-explain *ngIf="getFormControl('password').dirty && getFormControl('password').errors && getFormControl('password').errors['minlength']">密码长度最少6位</div>
+          <div style="color:red;" nz-form-explain *ngIf="getFormControl('password').dirty && getFormControl('password').errors && getFormControl('password').errors['maxlength']">密码长度最多32位</div>
+          <div style="color:red;" nz-form-explain *ngIf="getFormControl('password').dirty && getFormControl('password').errors && !getFormControl('password').errors.required&&!getFormControl('password').errors.minlength&&!getFormControl('password').errors.maxlength&&getFormControl('password').errors['forbiddenName']">密码只支持字母、数字、英文符号，不能输入空格，必须至少包含1个数字及1个字符</div>
+        </nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row>
+      <nz-form-label nz-col [nzSm]="6" [nzXs]="24" class="special-label" nzRequired>
+        <label for="checkPassword" nzRequired>重复输入密码</label>
+      </nz-form-label>
+      <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+
+        <input nz-input [nzSize]="'large'" formControlName="checkPassword" type="password" id="'checkPassword'">
+        <!-- disabled="getFormControl('autoPassword2') && getFormControl('autoPassword2').value" -->
+        <nz-form-explain style="color:red;">
+          <span *ngIf="getFormControl('checkPassword').dirty && getFormControl('checkPassword').errors && getFormControl('checkPassword').errors.required">请重复输入密码</span>
+          <span *ngIf="getFormControl('checkPassword').dirty && getFormControl('checkPassword').errors && getFormControl('checkPassword').errors.confirm">两次输入密码不一致，请重新输入</span>
+        </nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+  </ng-container>
+
+
+  <div *ngIf="!user" nz-form-item nz-row>
+    <nz-form-label nz-col [nzSm]="6" [nzXs]="24" class="special-label" nzRequired>
+      <label for="autoPassword">密码</label>
+    </nz-form-label>
+
+    <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+      <nz-radio-group formControlName="autoPassword" (click)="clearPasswordInput($event)">
+        <label nz-radio [nzValue]="true">
+          <span>自动生成密码</span>
+          <span class="tooltip">
+            <span class="anticon anticon-question-circle-o"></span>
+            <div class="tips-content">
+              <div class="tip-content-body">
+                密码会发送到账户邮箱，请确保邮箱填写正确
+              </div>
+            </div>
+          </span>
+        </label>
+        <label nz-radio [nzValue]="false">
+          <span>手动设置</span>
+        </label>
+      </nz-radio-group>
+    </nz-form-control>
+
+  </div>
+
+  <ng-container *ngIf="!user && getFormControl('autoPassword') && !getFormControl('autoPassword').value">
+    <nz-form-item nz-row>
+      <nz-form-label nz-col [nzSm]="6" [nzXs]="24" class="special-label" nzRequired>
+        <label for="password" nzRequired>输入密码</label>
+      </nz-form-label>
+      <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+
+        <input nz-input [nzSize]="'large'" formControlName="password" type="password" id="'password'" (ngModelChange)="updateConfirmValidator()">
+        <!-- disabled="getFormControl('autoPassword') && getFormControl('autoPassword').value" -->
+        <nz-form-explain>
+          <div style="color:red;" nz-form-explain *ngIf="getFormControl('password').dirty && getFormControl('password').errors && getFormControl('password').errors['required']">请输入密码</div>
+          <div style="color:red;" nz-form-explain *ngIf="getFormControl('password').dirty && getFormControl('password').errors && getFormControl('password').errors['minlength']">密码长度最少6位</div>
+          <div style="color:red;" nz-form-explain *ngIf="getFormControl('password').dirty && getFormControl('password').errors && getFormControl('password').errors['maxlength']">密码长度最多32位</div>
+          <div style="color:red;" nz-form-explain *ngIf="getFormControl('password').dirty && getFormControl('password').errors && !getFormControl('password').errors.required&&!getFormControl('password').errors.minlength&&!getFormControl('password').errors.maxlength&&getFormControl('password').errors['forbiddenName']">密码只支持字母、数字、英文符号，不能输入空格，必须至少包含1个数字及1个字符</div>
+        </nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row>
+      <nz-form-label nz-col [nzSm]="6" [nzXs]="24" class="special-label" title="重复输入密码" nzRequired>
+        <label for="checkPassword" nzRequired>重复输入密码</label>
+      </nz-form-label>
+      <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+
+        <input nz-input [nzSize]="'large'" formControlName="checkPassword" type="password" id="'checkPassword'">
+        <!-- disabled="getFormControl('autoPassword') && getFormControl('autoPassword').value"  -->
+        <nz-form-explain style="color:red;">
+          <span *ngIf="getFormControl('checkPassword').dirty && getFormControl('checkPassword').errors && getFormControl('checkPassword').errors.required">请重复输入密码</span>
+          <span *ngIf="getFormControl('checkPassword').dirty && getFormControl('checkPassword').errors && getFormControl('checkPassword').errors.confirm">两次输入密码不一致，请重新输入</span>
+        </nz-form-explain>
+
+      </nz-form-control>
+    </nz-form-item>
+  </ng-container>
+</form>

@@ -1,0 +1,51 @@
+<main>
+  <ul class="user-retention-filter">
+    <li class="clrfix">
+      <label class="item">考察对象：</label>
+      <nz-range-picker
+        class="custom-range-picker item"
+        [nzFormat]="_dateFormat"
+        [nzDisabledDate]="_disabledDate"
+        [(ngModel)]="_dateRange"
+        (ngModelChange)="_changeDaterange($event)"
+        nzPlaceHolder=""
+        [nzAllowClear]="false"
+        [nzStyle]="{ width: '240px' }"
+      >
+      </nz-range-picker>
+      <span class="item tag">期间的</span>
+      <app-select-search
+        style="min-width: 92px;"
+        [select]="_selectCustom"
+        class="item"
+        (selectOption)="onSelectCustom($event)"
+      ></app-select-search>
+    </li>
+    <li class="clrfix">
+      <label class="item">留存行为：</label>
+      <span class="item tag">在之后的使用中</span>
+      <app-select-search
+        [select]="_selectBehaviorType"
+        class="item"
+        (selectOption)="onSelectBehaviorType($event)"
+        style="min-width:200px;"
+      ></app-select-search>
+      <span class="item tag">是</span>
+      <app-select-search-multiple
+        [select]="_selectEvent"
+        class="item"
+        (onSelect)="onSelectEvent($event)"
+        style="width:200px;"
+      ></app-select-search-multiple>
+      <span class="item tag">计为留存访客</span>
+      <!--<button nz-button nzType="primary" nzSize="default" (click)="search();">查询</button>-->
+      <!--<div class="search-list-fitst-right" (click)='moreSearch();'>
+                <span>筛选</span>
+                <span class="ant-compat anticon" [class.anticon-down]="!_moreSearchFlag" [class.anticon-up]="_moreSearchFlag"></span>
+            </div>-->
+    </li>
+    <li class="clrfix" *ngIf="_moreSearchFlag">
+      <app-more-filter [queryParams]="_moreFilterQueryParams" (onFilter)="onFilterSearch($event)"></app-more-filter>
+    </li>
+  </ul>
+</main>

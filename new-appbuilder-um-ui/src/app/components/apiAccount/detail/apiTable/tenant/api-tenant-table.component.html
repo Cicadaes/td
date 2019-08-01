@@ -1,0 +1,50 @@
+<div class="ac_right_wap">
+    <div class="ac_right">
+        <nz-input-group nzSearch [nzSuffix]="suffixIconButton">
+            <input type="text" nz-input placeholder="请输入API名称" (keyup)="onSearch($event, 'keyup')" [(ngModel)]="search">
+        </nz-input-group>
+        <ng-template #suffixIconButton>
+            <i class="anticon anticon-search" (click)="onSearch(search, 'click')"></i>
+        </ng-template>    
+    </div>
+</div>
+<ng-template #tableTotal>
+    <div>
+        总共 {{_total}} 条
+    </div>
+</ng-template>
+<nz-table #nzTable [nzData]="_dataSet" [nzShowTotal]="tableTotal" nzShowSizeChanger [nzLoading]="_loading" [nzTotal]="_total"
+    [(nzPageIndex)]="_pageIndex" [(nzPageSize)]="_pageSize" [nzFrontPagination]="false" (nzPageSizeChange)="refreshData(true)"
+    (nzPageIndexChange)="refreshData()">
+    <thead nz-thead>
+        <tr>
+            <th [nzWidth]="'25%'">
+                API名称
+            </th>
+            <th [nzWidth]="'35%'">
+                API路径
+            </th>
+            <th [nzWidth]="'10%'">
+                请求方式
+            </th>
+            <th [nzWidth]="'15%'">
+                API版本
+            </th>
+            <th [nzWidth]="'15%'">
+                授权日期
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of nzTable.data">
+            <td (click)="goApiDoc(data);">
+                    <!-- {{data.metaName}} -->
+                <span style="color: #2185F0; cursor: pointer;">{{data.metaName}}</span>
+            </td>
+            <td>{{data.path}}</td>
+            <td>{{data.requestMethod}}</td>
+            <td>所有版本</td>
+            <td>{{data.createTime | dateFormatPipe:2}}</td>
+        </tr>
+    </tbody>
+</nz-table>

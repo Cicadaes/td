@@ -1,0 +1,43 @@
+
+    <nz-modal [nzWidth]="1000" [nzVisible]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel($event)"
+              (nzOnOk)="handleOk($event)" [nzMaskClosable]="false">
+        <ng-template #modalTitle>
+            <span>配置应用功能</span>
+        </ng-template>
+        <ng-template #modalContent>
+            <div class="clrfix carousel-app-manage" *ngIf="appList && appList.length > 0">
+                <div class="clrfix carousel-panel">
+                    <ul class="carousel-ul clrfix">
+                        <li class="item" title="{{app.name}}" *ngFor="let app of appList" [ngClass]="{'active':app.id == curApp.id}">
+                            <div (click)="editApp(app);" class="app-box">
+                                <label nz-checkbox [(ngModel)]="app.checked" (ngModelChange)="checkCurApp(app)" style="padding:10px;">
+                                    <span class="logo">
+                                        <img alt="图片" src="{{app.icon}}" />
+                                    </span>
+                                    <span class="name">{{app.name}}</span>
+                                </label>
+                            </div>
+                        </li> 
+                    </ul>
+                </div>
+                <div class="clrfix tree-panel">
+                    <checkbox-tree [treeDatas]="resourceTreeDatas" [isSet]="isSetTreeDatas" (onBack)="getBackTreeDatas($event)"></checkbox-tree>
+                </div>
+
+            </div>
+            <div class="clrfix carousel-app-empty" *ngIf="!appList || appList.length == 0">
+                <p >
+                    <span>暂无数据</span>
+                </p>
+            </div>
+        </ng-template>
+        <ng-template #modalFooter>
+                <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancel($event)">
+                    取 消
+                </button>
+                <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="handleOk($event)" [nzLoading]="isConfirmLoading">
+                    确 定
+                </button>
+        </ng-template>
+    </nz-modal>
+

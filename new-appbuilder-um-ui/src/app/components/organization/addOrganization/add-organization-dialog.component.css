@@ -1,0 +1,16 @@
+:host ::ng-deep .special_label {
+    margin-left: 8%;
+}
+:host ::ng-deep .lhclass .ant-form-item{
+    height: 56px;
+    overflow: hidden;
+}
+
+::ng-deep .cover-ant-form-item-label .ant-form-item-required:before {
+    display: inline-block;
+    margin-right: 4px;
+    content: "*";
+    line-height: 1;
+    font-size: 14px;
+    color: #ffffff;
+}

@@ -1,0 +1,190 @@
+<div class="top">
+    <h3 class="top-tit" style="border: 0px;padding-top: 6px;">
+        <span *ngIf="app">
+            <!-- <img alt="图片"   *ngIf="app.type==1" src="{{app.icon}}" style="width: 25px;height: 25px;vertical-align: top;margin-top: 12px;margin-right: 3px;"/>  -->
+            <strong style="font-size: 14px;color: #17233D;">{{app.name}} &nbsp;{{app.version}} &nbsp;</strong>
+            <span style="color:#E03E16" *ngIf="app.status==0">●</span>
+            <span style="color:#2B85E5" *ngIf="app.status==1">●</span>
+            <span style="color: rgba(23,35,61,0.75);font-size: 14px;font-weight: normal;">{{app.status==0?'禁用':'启用'}}</span>
+        </span>
+        <div style="float: right;" *ngIf="app">
+            <button nz-button [nzType]="'default'" (click)="showEditAppModal()" *ngIf="appCode!='UM'">
+                修改
+            </button>
+        </div>
+    </h3>
+
+    <div class="top-content">
+        <form nz-form>
+            <nz-form-item nz-row *ngIf="app">
+                <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special_label">
+                    <label for="code" class="label_font">应用编码</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="4" [nzXs]="24" nzHasFeedback style="word-wrap:break-word;">
+                    {{app.code}}
+                </nz-form-control>
+                <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special_label">
+                    <label for="type" class="label_font">应用类型</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="4" [nzXs]="24" nzHasFeedback>
+                    {{app.type==1?'主应用':'增值包'}}
+                </nz-form-control>
+                <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special_label">
+                    <label for="token" class="label_font">系统令牌</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="4" [nzXs]="24" nzHasFeedback>
+                    {{app.token}}
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item nz-row *ngIf="app">
+                <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special_label">
+                    <label for="uri" class="label_font">URL</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="4" [nzXs]="24" nzHasFeedback>
+                    {{app.uri}}
+                </nz-form-control>
+                <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special_label">
+                    <label for="provider" class="label_font">服务商</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="4" [nzXs]="24" nzHasFeedback style="word-wrap:break-word;">
+                    {{app.provider}}
+                </nz-form-control>
+                <!-- <nz-form-label nz-col [nzSm]="2" [nzXs]="24">
+                            <label for="desc"class="label_font">应用简介</label>
+                        </div>
+                        <nz-form-control nz-col [nzSm]="7" [nzXs]="24" nzHasFeedback style="word-wrap:break-word;">
+                            {{app.desc}}
+                        </div> -->
+            </nz-form-item>
+            <nz-form-item nz-row *ngIf="app">
+                <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special_label">
+                    <label for="createUserName" class="label_font">创建人</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="4" [nzXs]="24" nzHasFeedback>
+                    {{app.createUserName}}
+                </nz-form-control>
+                <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special_label">
+                    <label for="createTime" class="label_font">创建时间</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="4" [nzXs]="24" nzHasFeedback>
+                    {{app.createTime | dateFormatPipe}}
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item nz-row *ngIf="app">
+                <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special_label">
+                    <label for="updateUserName" class="label_font">更新人</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="4" [nzXs]="24" nzHasFeedback>
+                    {{app.updateUserName}}
+                </nz-form-control>
+                <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special_label">
+                    <label for="updateTime" class="label_font">更新时间</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="4" [nzXs]="24" nzHasFeedback>
+                    {{app.updateTime | dateFormatPipe}}
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item nz-row *ngIf="app">
+                <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special_label">
+                    <label for="desc" class="label_font">应用简介</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="21" [nzXs]="24" nzHasFeedback style="word-wrap:break-word;">
+                    {{app.desc}}
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </div>
+</div>
+<nz-tabset style="margin-top:-24px;">
+    <nz-tab *ngFor="let tab of tabs" [nzTitle]="tab.name">
+        <div class="text-content" style="padding-top: 0px;">
+            <div [ngClass]="{'showBox':tab.tabCode==1,'hideBox':tab.tabCode!=1}">
+                <div class="zw-margin-top">
+                    <div class="table-operator clrfix" *ngIf="appCode!='1UM'">
+                        <button nz-button [nzType]="'primary'" [nzSize]="'default'" (click)="treeChild.buildNode();">
+                            <span>注册功能</span>
+                        </button>
+
+                        <button nz-button [nzType]="'primary'" [nzSize]="'default'" (click)="showImportActionModal()">
+                            <span>导入功能</span>
+                        </button>
+
+                        <button nz-button [nzType]="'primary'" [nzSize]="'default'" (click)="showExportActionModal()">
+                            <span>导出功能</span>
+                        </button>
+                    </div>
+
+                </div>
+                <div *ngIf="tab.tabCode==1" style="height:100%;overflow:hidden;">
+                    <applicationTree #treeChild></applicationTree>
+                </div>
+            </div>
+            <div>
+            </div>
+
+            <div *ngIf="tab.tabCode==2">
+                <div class="zw-margin-top">
+                    <app-attribute [queryParams]="appAttributeParams" (onRefresh)="onRefresh($event)" [appCode]="appCode"></app-attribute>
+                </div>
+            </div>
+            <div *ngIf="tab.tabCode==3">
+                <div class="zw-margin-top">
+                    <div class="table-operator-bottom" style="padding: 0px;padding-top: 20px;">
+                        <div class="ac_right_wap">
+                            <div class="ac_right" style="margin-right: 24px;">
+                                <nz-input-group nzSuffixIcon="anticon anticon-search" [nzSearch]="true">
+                                    <input type="text" nz-input placeHolder="请输入名称" [(ngModel)]="search"
+                                        (ngModelChange)="onSearch($event);">
+                                </nz-input-group>
+                            </div>
+                        </div>
+                        <additional-apps-table [queryParams]="additionalAppsTableFieldParams" [appId]="id" [refresh]="refreshAdditional"></additional-apps-table>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="tab.tabCode==4">
+                <div class="zw-margin-top">
+                    <div class="table-operator-bottom" style="padding: 0px;padding-top: 20px;">
+                        <div class="ac_right_wap">
+                            <div class="ac_right" style="margin-right: 24px;">
+                                <nz-input-group nzSuffixIcon="anticon anticon-search" [nzSearch]="true">
+                                    <input type="text" nz-input placeHolder="请输入名称" [(ngModel)]="search2"
+                                        (ngModelChange)="onSearch2($event);">
+                                </nz-input-group>
+
+                            </div>
+                        </div>
+                        <associated-licences-table [queryParams]="licencesTableFieldParams" [appId]="id"></associated-licences-table>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="tab.tabCode==5">
+                <div class="zw-margin-top">
+                    <add-app-extend></add-app-extend>
+                </div>
+            </div>
+        </div>
+    </nz-tab>
+</nz-tabset>
+<edit-app-page *ngIf="app && isShowEditAppModal" [isShow]="isShowEditAppModal" [app]="app" (onClose)="hideEditAppModal($event)"></edit-app-page>
+
+<nz-modal [(nzVisible)]="isShowImportActionModal" [nzTitle]="modalTitleImport" [nzContent]="modalContentImport" (nzOnCancel)="handleCancel($event)"
+    (nzOnOk)="handleOk($event)" [nzMaskClosable]="false">
+    <ng-template #modalTitleImport>
+        <span *ngIf="!action">导入功能</span>
+    </ng-template>
+    <ng-template #modalContentImport>
+        <import-action-dialog (onSubmit)="submitImportActionModal($event)" [inport]="inport" [cancelInport]="cancelInport"
+        (close)="closeInport();"></import-action-dialog>
+    </ng-template>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isShowExportActionModal" [nzTitle]="modalTitleExport" [nzContent]="modalContentExport"
+    (nzOnCancel)="hideExportActionModal($event)" (nzOnOk)="handleOkEx($event)" [nzMaskClosable]="false">
+    <ng-template #modalTitleExport>
+        <span *ngIf="!action">导出功能</span>
+    </ng-template>
+    <ng-template #modalContentExport>
+        <export-action-dialog (onClose)="hideExportActionModal($event)" [export]="export"></export-action-dialog>
+    </ng-template>
+</nz-modal>

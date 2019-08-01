@@ -1,0 +1,146 @@
+<main [ngStyle]="_containerStyle">
+  <div class="first-level"></div>
+  <div class="header-content" id="filter-header" (click)="hideDicItems(false)">
+    <app-behavior-analysis-filter
+      (onSearch)="onSearch($event)"
+      (onSelectedDimension)="onSelectedDimension($event)"
+    ></app-behavior-analysis-filter>
+  </div>
+  <div *ngIf="_isQueringData" class="loading">
+    <nz-spin></nz-spin>
+  </div>
+  <div
+    *ngIf="!_isQueringData && !eventMap[selectedEvent] && !chartOption && _noData"
+    class="loading"
+    style="line-height: 290px;padding: 0;color: rgba(0,0,0,0.4);background-color: #fff;margin:20px;"
+  >
+    暂无数据
+  </div>
+  <article class="content-div" [ngClass]="{ hide: _isQueringData || !eventMap[selectedEvent] }">
+    <!-- 图标 -->
+    <div class="chart-list shadow-content">
+      <h3 class="chart-list-title module-title clrfix">
+        {{ eventMap[selectedEvent] }}的{{ metricMap[selectedMetric] }}
+        <div class="chart-setting" *ngIf="_isShowSetting">
+          <div (click)="showDicItems($event)">
+            <span>对比设置</span>
+            <span class="icon iconfont icon-settings"></span>
+          </div>
+          <app-event-attrs-dialog
+            [show]="_showDicItems"
+            [dic]="selectedDimension"
+            (onBack)="onBackDicItems($event)"
+            (onHide)="hideDicItems($event)"
+            class="dialog"
+          ></app-event-attrs-dialog>
+        </div>
+      </h3>
+      <div (click)="hideDicItems(false)">
+        <div style="height:290px;padding:0 16px 16px 16px;" *ngIf="!_isQueringData && chartOption">
+          <app-chart [option]="chartOption"></app-chart>
+        </div>
+        <div
+          *ngIf="!_isQueringData && !chartOption"
+          class="loading"
+          style="line-height: 290px;padding: 0;color: rgba(0,0,0,0.4);"
+        >
+          暂无数据
+        </div>
+      </div>
+    </div>
+    <!-- 数据明细列表 -->
+    <div class="detail-data shadow-content" (click)="hideDicItems(false)">
+      <div class="detail-data-tit module-title">
+        <h4>明细数据</h4>
+        <div class="detail-data-left">
+          <nz-popover [nzTitle]="'下载消息'" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+            <span class="icon iconfont icon-download item" (click)="downloadData()" nz-popover></span>
+            <ng-template #nzTemplate>
+              <div>
+                导出任务创建成功，请稍后到
+                <a (click)="goPage('/download-data')" style="margin:0 10px;">数据下载</a>页面下载您需要的附件。
+              </div>
+            </ng-template>
+          </nz-popover>
+          <!-- 描述 -->
+          <nz-popover [nzTitle]="'指标说明'" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+            <span class="icon iconfont icon-info1 item" nz-popover></span>
+            <ng-template #nzTemplate>
+              <ul class="des-ul">
+                <li class="clrfix" *ngIf="selectedMetric == 1">
+                  <label>人数：</label>
+                  <div class="des">日期范围内达成某事件的注册用户数。</div>
+                </li>
+                <li class="clrfix" *ngIf="selectedMetric == 2">
+                  <label>次数：</label>
+                  <div class="des">日期范围内某事件的发生次数。</div>
+                </li>
+                <li class="clrfix" *ngIf="selectedMetric == 3">
+                  <label>人均次数：</label>
+                  <div class="des">
+                    平均每人触发指定事件的次数。人均事件数=次数/人数。
+                  </div>
+                </li>
+              </ul>
+            </ng-template>
+          </nz-popover>
+        </div>
+      </div>
+      <nz-table
+        #nzTable
+        [nzData]="detailData.body"
+        [nzLoading]="detailDataTableLoading"
+        nzShowSizeChanger
+        [(nzPageIndex)]="_current"
+        [(nzPageSize)]="_pageSize"
+        [nzPageSizeOptions]="pageSizeOptions"
+        [(nzTotal)]="_total"
+        [nzScroll]="{ x: '1300px', y: '400px' }"
+        *ngIf="detailData.body"
+      >
+        <thead nz-thead>
+          <tr>
+            <th nz-th *ngFor="let item of detailData.head; let tdIndex = index">
+              <div style="width:100px;">{{ item.name }}</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody nz-tbody *ngIf="_isBarChart">
+          <tr nz-tbody-tr *ngFor="let item of nzTable.data">
+            <td nz-td *ngFor="let temp of item; let tdIndex = index" [ngClass]="{ hide: tdIndex == 0 }">
+              <div *ngIf="tdIndex == 1" style="width:100px;">{{ temp }}</div>
+              <div *ngIf="tdIndex == 2" style="width:100px;">
+                <span *ngIf="temp == 0 || selectedMetric != 1">{{ temp | numberToThousandsPipe }}</span>
+                <a *ngIf="temp > 0 && selectedMetric == 1" href="javascript:;" (click)="goUserPage(item, tdIndex)">
+                  {{ temp | numberToThousandsPipe }}
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody nz-tbody *ngIf="!_isBarChart">
+          <tr nz-tbody-tr *ngFor="let item of nzTable.data">
+            <td nz-td *ngFor="let temp of item; let tdIndex = index">
+              <div *ngIf="tdIndex == 0" style="width:100px;">
+                {{ temp | dateFormatPipe: 1 }}
+              </div>
+              <div *ngIf="tdIndex != 0" style="width:100px;">
+                <span *ngIf="temp == 0 || selectedMetric != 1">{{ temp | numberToThousandsPipe }}</span>
+                <a *ngIf="temp > 0 && selectedMetric == 1" href="javascript:;" (click)="goUserPage(item, tdIndex)">
+                  {{ temp | numberToThousandsPipe }}
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+      <nz-table
+        #nzTable
+        [nzData]="detailData.body"
+        [nzLoading]="detailDataTableLoading"
+        [nzShowPagination]="false"
+        *ngIf="!detailData.body"
+      ></nz-table>
+    </div>
+  </article>
+</main>

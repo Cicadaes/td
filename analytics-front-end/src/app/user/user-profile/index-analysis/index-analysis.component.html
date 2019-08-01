@@ -1,0 +1,105 @@
+<!-- 头部 -->
+<div class="header module-title">
+  <span class="title">{{ vm.header.title }}</span>
+  <span class="date-range">
+    <nz-range-picker
+      [(ngModel)]="vm.condition.dateRange"
+      [nzDisabledDate]="handlerDateDisabled"
+      (ngModelChange)="handlerDateRangeChange($event)"
+      nzSize="small"
+      nzPlaceHolder=""
+      [nzAllowClear]="false"
+      [nzDropdownClassName]="'date-align-right'"
+      [nzStyle]="{ width: '240px' }"
+    >
+    </nz-range-picker>
+  </span>
+</div>
+
+<!-- 条件 -->
+<div class="condition">
+  <!-- 事件 -->
+  <div [attr.data-name]="vm.condition.eventName" class="item event">
+    <nz-select
+      [(ngModel)]="vm.condition.eventSelected.value"
+      (ngModelChange)="handlerEventChange($event)"
+      [nzServerSearch]="true"
+      (nzOnSearch)="_onSearchEvent($event)"
+      (nzScrollToBottom)="_getEventList($event)"
+      style="width: 200px;"
+      nzShowSearch
+    >
+      <nz-option
+        *ngFor="let option of vm.condition.eventSelect"
+        [nzValue]="option.value"
+        [nzLabel]="option.label"
+        nzCustomContent
+      >
+        <span title="{{ option.label }}">{{ option.label }}</span>
+      </nz-option>
+      <nz-option [nzDisabled]="true" *ngIf="_longRangeSearchLoading" [nzCustomContent]="true">
+        <em class="anticon anticon-loading anticon-spin"></em> Loading...
+      </nz-option>
+    </nz-select>
+  </div>
+
+  <!-- 事件属性 -->
+  <div [attr.data-name]="vm.condition.eventPropName" class="item eventProp">
+    <nz-select
+      [(ngModel)]="vm.condition.eventPropSelected.value"
+      style="width: 200px;"
+      (ngModelChange)="handlerEventPropChange($event)"
+    >
+      <nz-option
+        *ngFor="let option of vm.condition.eventPropSelect"
+        [nzValue]="option.value"
+        [nzLabel]="option.label"
+        nzCustomContent
+      >
+        <span title="{{ option.label }}">{{ option.label }}</span>
+      </nz-option>
+    </nz-select>
+  </div>
+
+  <!-- 频率 -->
+  <div [attr.data-name]="vm.condition.frequencyName" class="item frequency">
+    <nz-select [(ngModel)]="vm.condition.frequencySelected.value" style="width: 60px;">
+      <nz-option
+        *ngFor="let option of vm.condition.frequencySelect"
+        [nzValue]="option.value"
+        [nzLabel]="option.label"
+      ></nz-option>
+    </nz-select>
+  </div>
+
+  <!-- 按钮 -->
+  <div class="button">
+    <button nz-button (click)="handlerLookUp(true)" nzType="primary" class="look-up">{{ vm.condition.lookUp }}</button>
+  </div>
+</div>
+
+<!-- 图表 -->
+<div class="chart">
+  <!-- 图表类型 -->
+  <div class="type-select">
+    <a [class.selected]="vm.chart.type === 'line'" (click)="handlerChartTypeChange('line')" class="item l-chart"></a>
+    <a [class.selected]="vm.chart.type === 'bar'" (click)="handlerChartTypeChange('bar')" class="item b-chart"></a>
+  </div>
+
+  <!-- 图表容器 -->
+  <div class="container">
+    <div
+      *ngIf="!vm.condition.eventPropSelected.value && !looading"
+      style="width: 100%;height: 100%;line-height: 250px;text-align: center;color:rgba(0,0,0,0.4);"
+    >
+      暂无数据
+    </div>
+    <div
+      style="width: 100%;height: 100%;line-height: 250px;text-align: center;"
+      *ngIf="looading && vm.condition.eventPropSelected.value"
+    >
+      <nz-spin></nz-spin>
+    </div>
+    <app-chart [option]="!looading && vm.chart.option"></app-chart>
+  </div>
+</div>

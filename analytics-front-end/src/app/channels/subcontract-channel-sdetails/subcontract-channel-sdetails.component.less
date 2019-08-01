@@ -1,0 +1,346 @@
+:host ::ng-deep .subcontractSdetails {
+  background: #f1f2f4;
+
+  ._top {
+    display: flex;
+    background: #ffffff;
+    box-shadow: 0 2px 4px 0 rgba(23, 35, 61, 0.15);
+    padding: 12px 16px 12px 16px;
+    border-top: 1px solid rgba(23, 35, 61, 0.1);
+    height: auto;
+    common-date {
+      height: 32px;
+    }
+    common-select {
+      height: 32px;
+    }
+    ._select {
+      display: flex;
+      height: 32px;
+      .name {
+        font-weight: 550;
+        font-size: 12px;
+        color: rgba(23, 35, 61, 0.75);
+        line-height: 36px;
+        margin-right: 12px;
+        margin-left: 100px;
+        height: 36px;
+      }
+
+      nz-select {
+        margin-bottom: 5px;
+        max-width: 300px;
+        min-width: 120px;
+
+        .ant-select-selection--multiple {
+          max-height: 58px;
+          overflow-y: auto;
+        }
+      }
+    }
+  }
+
+  .dataoverview {
+    background: #ffffff;
+    margin: 16px;
+    box-shadow: 0px 1px 2px 0 rgba(23, 35, 61, 0.25);
+    border-radius: 2px;
+    .top {
+      height: 46px;
+      line-height: 46px;
+      padding-left: 16px;
+      font-weight: 550;
+      font-size: 14px;
+      color: #17233d;
+      border-bottom: 1px solid rgba(23, 35, 61, 0.1);
+
+      .name {
+        margin-right: 7.5px;
+      }
+    }
+  }
+
+  ._channelTrend {
+    height: 378px;
+    background: #ffffff;
+    margin: 16px;
+    box-shadow: 0px 1px 2px 0 rgba(23, 35, 61, 0.25);
+    border-radius: 2px;
+
+    ._trendHeader {
+      height: 46px;
+      line-height: 46px;
+      padding-left: 16px;
+      border-bottom: 1px solid rgba(23, 35, 61, 0.1);
+
+      span {
+        font-weight: 550;
+        font-size: 14px;
+        color: #17233d;
+        line-height: 22px;
+        margin-right: 9.5px;
+      }
+    }
+
+    ._trendCenterTabs {
+      nz-tabset {
+        height: 46px;
+        overflow: hidden;
+
+        .ant-tabs-nav-scroll {
+          padding: 0 16px !important;
+        }
+      }
+    }
+
+    ._trendEcharts {
+      padding: 16px;
+      background: #ffffff;
+      height: 286px;
+      padding-top: 0px;
+      overflow: hidden;
+
+      .demo-chart {
+        height: 100%;
+        width: 100%;
+        background: #ffffff;
+        text-align: center;
+        font-size: 12px;
+        color: rgba(23, 35, 61, 0.55);
+        // line-height: 323px;
+      }
+    }
+  }
+
+  ._channeldetail {
+    background: #ffffff;
+    margin: 16px;
+    box-shadow: 0px 1px 2px 0 rgba(23, 35, 61, 0.25);
+    border-radius: 2px;
+
+    .detailHeader {
+      height: 46px;
+      line-height: 46px;
+      padding: 0px 16px;
+      background: #ffffff;
+
+      .left {
+        float: left;
+        font-weight: 550;
+        font-size: 14px;
+        color: #17233d;
+        line-height: 22px;
+        margin-top: 12px;
+      }
+
+      .search {
+        float: right;
+        font-weight: 550;
+        display: inline-block;
+        margin-right: 16px;
+      }
+
+      .downloadDetails {
+        float: right;
+        font-weight: 550;
+        font-size: 14px;
+        color: #17233d;
+        line-height: 22px;
+        margin-top: 12px;
+        width: 16px;
+
+        span:first-child {
+          margin-right: 16px;
+        }
+      }
+    }
+
+    ._trendEtable {
+      background: #ffffff;
+
+      nz-table {
+        thead {
+          tr {
+            background: rgba(23, 35, 61, 0.03);
+          }
+        }
+      }
+
+      .ant-table-pagination.ant-pagination {
+        margin-right: 13px !important;
+      }
+      .ant-table-placeholder {
+        color: rgba(23, 35, 61, 0.55) !important;
+      }
+    }
+  }
+
+  ._channelretention {
+    background: #ffffff;
+    margin: 16px;
+    box-shadow: 0px 1px 2px 0 rgba(23, 35, 61, 0.25);
+    border-radius: 2px;
+
+    .detailHeader {
+      height: 46px;
+      line-height: 46px;
+      padding: 0px 16px;
+      background: #ffffff;
+
+      .left {
+        float: left;
+        font-weight: 550;
+        font-size: 14px;
+        color: #17233d;
+        line-height: 22px;
+        margin-top: 12px;
+      }
+
+      .search {
+        float: right;
+        font-weight: 550;
+        display: inline-block;
+        margin-right: 16px;
+
+        nz-radio-group {
+          .ant-radio-button-wrapper {
+            height: 28px !important;
+            line-height: 28px;
+          }
+
+          .ant-radio-button-wrapper:first-child {
+            border-radius: 2px 0px 0px 2px !important;
+          }
+
+          .ant-radio-button-wrapper:last-child {
+            border-radius: 0px 2px 2px 0px !important;
+          }
+        }
+      }
+
+      .downloadDetails {
+        float: right;
+        font-weight: 550;
+        font-size: 14px;
+        color: #17233d;
+        line-height: 22px;
+        margin-top: 12px;
+        width: 48px;
+
+        span:first-child {
+          margin-right: 16px;
+        }
+      }
+    }
+
+    ._trendEtable {
+      background: #ffffff;
+
+      nz-table {
+        table {
+          border: none;
+        }
+
+        thead {
+          tr {
+            th {
+              background: #ffffff;
+              font-family: HelveticaNeue-Bold;
+              font-size: 12px;
+              color: rgba(23, 35, 61, 0.75);
+              letter-spacing: 0;
+              line-height: 12px;
+              font-weight: 500;
+              border-right: none;
+
+              &:nth-child(1) {
+                font-family: PingFangSC-Regular;
+              }
+
+              &:nth-child(2) {
+                font-family: PingFangSC-Regular;
+              }
+            }
+          }
+        }
+
+        tbody {
+          tr {
+            td {
+              // border-color: rgba(28, 36, 56, 0.1);
+              border-color: #ffffff;
+
+              &:first-child {
+                border-right: none;
+                border-bottom: 1px solid rgba(28, 36, 56, 0.1);
+              }
+              &:nth-child(2) {
+                border-bottom: 1px solid rgba(28, 36, 56, 0.1);
+              }
+              &:last-child {
+                border-right: none;
+              }
+            }
+
+            &:hover {
+              td {
+                background: transparent;
+              }
+            }
+
+            &:last-child {
+              td {
+                border-bottom: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//Top10渠道趋势提示
+.des-ul {
+  width: 450px;
+  padding: 0;
+  margin: 0;
+}
+
+.des-ul li {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgba(255, 255, 255, 0.15);
+  padding: 5px 0;
+}
+
+.des-ul li:last-child {
+  border-bottom: none;
+}
+
+.des-ul {
+  .clrfix {
+    label {
+      float: left;
+      width: 85px;
+      text-align: left;
+      color: #fff;
+    }
+  }
+
+  .clrfixDetail {
+    label {
+      width: 120px;
+    }
+  }
+}
+
+.des-ul {
+  .des {
+    padding-left: 85px;
+  }
+
+  .desDetail {
+    padding-left: 120px;
+  }
+}

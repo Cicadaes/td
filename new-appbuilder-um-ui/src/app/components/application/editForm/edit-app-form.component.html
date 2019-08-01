@@ -1,0 +1,200 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="_submitForm()">
+
+  <nz-form-item nz-row>
+    <nz-form-label nz-col [nzSm]="7" [nzXs]="24" class="special-label" nzRequired>
+      <label for="name">应用名称</label>
+    </nz-form-label>
+    <nz-form-control nz-col [nzSm]="16" [nzXs]="24">
+
+      <input nz-input [nzSize]="'large'" formControlName="name" id="name">
+
+      <ng-container *ngIf="getFormControl('name').dirty && getFormControl('name').errors">
+        <nz-form-explain style="color:red;" >
+          <span *ngIf="getFormControl('name').hasError('required')">请输入应用名称</span>
+          <span *ngIf="getFormControl('name').errors.maxlength">输入的应用名称过长</span>
+          <span *ngIf="getFormControl('name').dirty && getFormControl('name').errors && getFormControl('name').errors.nameRepeat">应用名称已存在</span>
+        </nz-form-explain>
+      </ng-container>
+    </nz-form-control>
+    <!--<nz-form-control nz-col [nzSm]="14" [nzXs]="24"  style="margin-left: 138px" *ngIf="errorFlag==2">
+        <span style="color: red" >应用名称已存在</span>
+      </nz-form-control>-->
+  </nz-form-item>
+  <!--<nz-form-item nz-row >&lt;!&ndash;*ngIf="errorFlag==2"&ndash;&gt;
+      <nz-form-label nz-col [nzSm]="7" [nzXs]="24">
+        &lt;!&ndash;<label for="status"></label>&ndash;&gt;
+      </nz-form-label>
+      <nz-form-control nz-col [nzSm]="14" [nzXs]="24" >
+        <span style="color: red" >应用名称已存在</span>
+      </nz-form-control>
+    </nz-form-item>-->
+
+  <nz-form-item nz-row>
+    <nz-form-label nz-col [nzSm]="7" [nzXs]="24" class="special-label" nzRequired>
+      <label for="version">应用版本</label>
+    </nz-form-label>
+    <nz-form-control nz-col [nzSm]="16" [nzXs]="24">
+
+      <input nz-input [nzSize]="'large'" formControlName="version" id="version">
+
+      <ng-container *ngIf="getFormControl('version').dirty && getFormControl('version').errors">
+        <nz-form-explain style="color:red;" >
+          <span *ngIf="getFormControl('version').errors.required">请输入应用版本</span>
+          <span *ngIf="getFormControl('version').errors.maxlength">输入的应用版本过长</span>
+        </nz-form-explain>
+      </ng-container>
+
+
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item nz-row>
+    <nz-form-label nz-col [nzSm]="7" [nzXs]="24" class="special-label" nzRequired>
+      <label for="status" class="special-label-before">状态</label>
+    </nz-form-label>
+    <nz-form-control nz-col [nzSm]="16" [nzXs]="24">
+
+      <!--
+                    <nz-switch [formControlName]="'status'" [(ngModel)]="status">
+                        <span checked>启用</span>
+                        <span unchecked>禁用</span>
+                    </nz-switch>
+               -->
+      <label nz-checkbox [formControlName]="'status'" [(ngModel)]="status">
+        <span>启用</span>
+      </label>
+      <nz-form-explain style="color:red;" *ngIf="errorFlag==1" style="color: red">该应用被许可证关联，无法禁用，请先禁用许可证</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <!-- <nz-form-item nz-row *ngIf="errorFlag==1">
+      <nz-form-label nz-col [nzSm]="7" [nzXs]="24">
+        &lt;!&ndash;<label for="status"></label>&ndash;&gt;
+      </nz-form-label>
+      <nz-form-control nz-col [nzSm]="14" [nzXs]="24" >
+        <span style="color: red" >该应用被许可证关联，无法禁用，请先禁用许可证</span>
+      </nz-form-control>
+    </nz-form-item>-->
+
+
+  <nz-form-item nz-row>
+    <nz-form-label nz-col [nzSm]="7" [nzXs]="24" class="special-label" nzRequired>
+      <label for="type">应用类型</label>
+    </nz-form-label>
+    <nz-form-control nz-col [nzSm]="16" [nzXs]="24">
+
+      <nz-radio-group [(ngModel)]="type" [formControlName]="'type'">
+        <label nz-radio-button [nzValue]="'1'">
+          <span>主应用</span>
+        </label>
+        <label nz-radio-button [nzValue]="'2'">
+          <span>增值包</span>
+        </label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item nz-row *ngIf="type == '2'">
+    <nz-form-label nz-col [nzSm]="7" [nzXs]="24" class="special-label" nzRequired>
+      <label for="additionalAppId">依赖的主应用</label>
+    </nz-form-label>
+    <nz-form-control nz-col [nzSm]="16" [nzXs]="24">
+      <select-search-apps *ngIf="additionalAppIdSelect" [select]="additionalAppIdSelect" (selectOptions)="additionalAppIdSelectOptions($event)"
+        [ismultiple]="ismultiple" (onSelect)="selectSearchAdditionalAppId($event,'additionalAppId')"></select-search-apps>
+      <nz-form-explain style="color:red;" *ngIf="errorFlag==6" style="color: red;">依赖的主应用不能为空</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item nz-row>
+    <nz-form-label nz-col [nzSm]="7" [nzXs]="24" class="special-label" nzRequired>
+      <label for="uri">URL</label>
+    </nz-form-label>
+    <nz-form-control nz-col [nzSm]="16" [nzXs]="24">
+
+      <input nz-input [nzSize]="'large'" formControlName="uri" id="uri">
+
+      <ng-container *ngIf="getFormControl('uri').dirty && getFormControl('uri').errors">
+        <nz-form-explain style="color:red;" >
+          <span *ngIf="getFormControl('uri').errors.required">请输入URL</span>
+          <span *ngIf="getFormControl('uri').errors.maxlength">输入的URL过长</span>
+        </nz-form-explain>
+      </ng-container>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item nz-row>
+    <nz-form-label nz-col [nzSm]="7" [nzXs]="24" class="special-label">
+      <label for="provider" class="special-label-before">服务商</label>
+    </nz-form-label>
+    <nz-form-control nz-col [nzSm]="16" [nzXs]="24">
+
+      <input nz-input [nzSize]="'large'" formControlName="provider" id="provider">
+
+      <ng-container *ngIf="getFormControl('provider').dirty && getFormControl('provider').errors">
+        <nz-form-explain style="color:red;" >
+          <span *ngIf="getFormControl('provider').errors.required">请输入服务商</span>
+          <span *ngIf="getFormControl('provider').errors.maxlength">输入的服务商过长</span>
+        </nz-form-explain>
+      </ng-container>
+    </nz-form-control>
+  </nz-form-item>
+
+
+  <nz-form-item nz-row *ngIf="type == '1'">
+    <nz-form-label nz-col [nzSm]="7" [nzXs]="24" class="special-label" nzRequired>
+      <label for="appIcon">应用小图标</label>
+    </nz-form-label>
+    <nz-form-control nz-col [nzSm]="16" [nzXs]="24">
+      <upload-images [uploadParam]="appIconFile" [size]="50" (onUpload)="onUploadAppIconFile($event);" (onRemove)="onRemoveAppIconFile($event);"
+        (onError)="onErrorAppIconFile($event);"></upload-images>
+    </nz-form-control>
+    <nz-form-control nz-col [nzSm]="24" [nzXs]="24" style="margin-left: 112px" *ngIf="errorFlag == 3 && !imageErrorFlag">
+      <span style="color: red">请上传应用小图标</span>
+    </nz-form-control>
+    <nz-form-control nz-col [nzSm]="24" [nzXs]="24" style="margin-left: 112px;color:#D1D1D9;font-size: 12px;line-height: 20px">
+      <span>推荐：90 * 90大小，只支持jpg/png格式图片，透明底色，文件最大不超过50k</span>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item nz-row *ngIf="type == '1'">
+    <nz-form-label nz-col [nzSm]="24" [nzXs]="24" class="special-label" nzRequired>
+      <label for="applargeIcon">应用大图标</label>
+    </nz-form-label>
+    <nz-form-control nz-col [nzSm]="16" [nzXs]="24">
+      <upload-images [uploadParam]="appIconFileMax" [size]="100" (onUpload)="onUploadAppIconFileMax($event);"
+        (onRemove)="onRemoveAppIconFileMax($event);" (onError)="onErrorAppIconFileMax($event);"></upload-images>
+    </nz-form-control>
+    <nz-form-control nz-col [nzSm]="14" [nzXs]="24" style="margin-left: 112px;width:100%" *ngIf="errorFlag == 4 && !imageErrorFlagMax">
+      <span style="color: red">请上传应用大图标</span>
+    </nz-form-control>
+    <nz-form-control nz-col [nzSm]="24" [nzXs]="24" style="display:block;margin-left: 112px;color:#D1D1D9;font-size: 12px;line-height: 20px">
+      <span>推荐：176 * 56大小，只支持jpg/png格式图片，透明底色，文件最大不超过100k</span>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item nz-row>
+    <nz-form-label nz-col [nzSm]="7" [nzXs]="24" class="special-label" nzRequired>
+      <label for="desc">应用简介</label>
+    </nz-form-label>
+    <nz-form-control nz-col [nzSm]="16" [nzXs]="24" style="overflow: visible;">
+
+      <textarea nz-input [nzSize]="'large'" formControlName="desc" id="desc" ></textarea>
+
+      <ng-container *ngIf="getFormControl('desc').dirty && getFormControl('desc').errors">
+        <nz-form-explain style="color:red;" >
+          <span *ngIf="getFormControl('desc').errors.required">请输入应用简介</span>
+          <span *ngIf="getFormControl('desc').errors.maxlength">输入的应用简介过长</span>
+        </nz-form-explain>
+      </ng-container>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item nz-row *ngIf="errorFlag!=0">
+    <nz-form-label nz-col [nzSm]="7" [nzXs]="24">
+      <!--<label ></label>-->
+    </nz-form-label>
+    <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+      <!--<nz-form-explain style="color:red;" >该应用被许可证关联，无法禁用，请先禁用许可证！</nz-form-explain>-->
+      <!--<span style="color: red" *ngIf="errorFlag==1">该应用被许可证关联，无法禁用，请先禁用许可证</span>
+        <span style="color: red" *ngIf="errorFlag==2">应用名称已存在</span>-->
+    </nz-form-control>
+  </nz-form-item>
+
+</form>

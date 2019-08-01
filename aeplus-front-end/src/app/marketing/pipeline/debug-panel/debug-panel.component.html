@@ -1,0 +1,83 @@
+<div class="pipeline-test pipe-item">
+  <div class="test-button check-info">
+    <nz-tooltip *ngIf="pcs.isPipelineEdit" [nzPlacement]="'right'">
+      <span class="test-des" nz-tooltip></span>
+      <ng-template #nzTemplate>
+        <div class="question-tip">
+          <em></em>
+          <span>
+              注意：
+              <br> 组件上的●[实心圆]无法作为连线起始点；
+              <br> 无后续节点的组件均需连接至结束节点；
+              <br> 流程测试需校验通过后方可执行。
+          </span>
+        </div>
+      </ng-template>
+    </nz-tooltip>
+
+    <nz-tooltip *ngIf="pipelineObj && (pipelineObj.status != 5) && pcs.isPipelineEdit"
+                [nzTitle]="'测试'" [nzPlacement]="'top'">
+      <a class="start question-tip-box" (click)="showTest()"></a>
+    </nz-tooltip>
+    <span *ngIf="pipelineObj && (pipelineObj.testStatus == 1 || pipelineObj.testStatus == 2 || pipelineObj.testStatus == 3)" class="stop" (click)="debugAbort()"></span>
+  </div>
+</div>
+
+<nz-modal [(nzVisible)]="isShowTestModal" nzTitle="测试设置" (nzOnCancel)="cancel()" (nzOnOk)="setDebug()">
+  <div class="test-content">
+    <div class="test-item clearfix">
+      <label class="item-label">
+        <span class="require">*</span>测试人群</label>
+      <div class="item-input">
+        <input tdLimitInputText type="text" placeholder="请选择人群" [(ngModel)]="debugSelectCrowdName" (click)="showTestCrowdList($event)" (ngModelChange)="getTestCrowdList()">
+        <div class="dropdown-trigger">
+          <span class="anticon anticon-down"></span>
+        </div>
+        <div *ngIf="showDebugCrowdList" class="dropdown">
+          <ul>
+            <li *ngFor="let item of debugCrowdList">
+              <span (click)="selectCrowd(item)">{{item.name}}</span>
+            </li>
+          </ul>
+          <div class="none-data" *ngIf="!debugCrowdList || debugCrowdList.length === 0">
+            <span>无</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="test-item clearfix">
+      <label class="item-label" style="width: 80px;">
+        <span class="require">*</span>组件处理逻辑
+      </label>
+      <div class="item-line"></div>
+    </div>
+    <div class="test-item clearfix">
+      <label class="item-label">用户分流</label>
+      <nz-radio-group [(ngModel)]="debugData.skipSplit">
+        <label nz-radio nzValue="true">自动分流</label>
+        <label nz-radio nzValue="false">按规则分流</label>
+      </nz-radio-group>
+    </div>
+    <div class="test-item clearfix">
+      <label class="item-label">触发器</label>
+      <nz-radio-group [(ngModel)]="debugData.skipTrigger">
+        <label nz-radio nzValue="true">自动分配</label>
+        <label nz-radio nzValue="false">按规则分配</label>
+      </nz-radio-group>
+    </div>
+    <div class="test-item clearfix">
+      <label class="item-label">计时器</label>
+      <nz-radio-group [(ngModel)]="debugData.skipHourMeter">
+        <label nz-radio nzValue="true" style="margin-right: 20px;">不等待</label>
+        <label nz-radio nzValue="false">等待</label>
+      </nz-radio-group>
+    </div>
+    <div class="test-item clearfix">
+      <label class="item-label">筛选器</label>
+      <nz-radio-group [(ngModel)]="debugData.skipFilter">
+        <label nz-radio nzValue="true" style="margin-right: 20px;">不筛选</label>
+        <label nz-radio nzValue="false">筛选</label>
+      </nz-radio-group>
+    </div>
+  </div>
+</nz-modal>

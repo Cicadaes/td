@@ -1,0 +1,112 @@
+<div *ngIf="!isSuper">
+        <ng-template #tableTotal>
+                <div  style="margin-right: 6px;">
+                  总共 {{_total}} 条
+                </div>
+        </ng-template>
+    <nz-table #nzTable [nzBordered]="false" [nzShowTotal]="tableTotal" [nzData]="_dataSet" nzShowSizeChanger [nzLoading]="_loading"
+        [nzTotal]="_total" [(nzPageIndex)]="_current" (nzPageIndexChange)="refreshData()" [(nzPageSize)]="_pageSize"
+        (nzPageSizeChange)="refreshData(true)" [nzFrontPagination]="false">
+        <thead>
+            <tr>
+                <th [nzWidth]="'5%'" nzShowCheckbox [(nzChecked)]="_allChecked" [nzIndeterminate]="_indeterminate" (nzCheckedChange)="_checkAll($event)"></th>
+
+                <th [nzWidth]="'14%'">
+                    姓名
+                </th>
+                <th [nzWidth]="'20%'">
+                    账号
+                </th>
+                <th [nzWidth]="'14%'">
+                    手机
+                </th>
+                <th [nzWidth]="'8%'">
+                    组织机构
+                </th>
+                <th [nzWidth]="'8%'">
+                    状态
+                </th>
+                <th [nzWidth]="'9%'">
+                    操作
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of nzTable.data">
+                <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="_refreshStatus($event, data.id)" (click)="checkData($event)"></td>
+                <td>{{data.name}}</td>
+                <td>{{data.email}}</td>
+                <td>{{data.mobile}}</td>
+                <td>{{data.dept}}</td>
+                <td><span style="color:#E03E16" *ngIf="data.status==0">●</span><span style="color:#2B85E5" *ngIf="data.status==1">●</span>{{data.status==0?'禁用':'正常'}}</td>
+                <td>
+                    <span>
+                        <a href="javascript:;" (click)="deleteUser(data)">移除</a>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>
+<div *ngIf="isSuper">
+        <ng-template #tableTotal>
+                <div  style="margin-right: 6px;">
+                  总共 {{_total}} 条
+                </div>
+        </ng-template>
+    <nz-table #nzTable [nzBordered]="false" [nzShowTotal]="tableTotal" [nzData]="_dataSet" nzShowSizeChanger [nzLoading]="_loading"
+        [nzTotal]="_total" [(nzPageIndex)]="_current" (nzPageIndexChange)="refreshData()" [(nzPageSize)]="_pageSize"
+        (nzPageSizeChange)="refreshData(true)" [nzFrontPagination]="false">
+        <thead>
+            <tr>
+                <th [nzWidth]="'10px'" nzShowCheckbox [(nzChecked)]="_allChecked" [nzIndeterminate]="_indeterminate" (nzCheckedChange)="_checkAll($event)"  (click)="checkData($event)"></th>
+                <th [nzWidth]="'10%'">
+                    姓名
+                </th>
+                <th [nzWidth]="'23%'">
+                    账号
+                </th>
+                <th [nzWidth]="'12%'">
+                    手机
+                </th>
+                <th [nzWidth]="'8%'">
+                    状态
+                </th>
+                <th [nzWidth]="'15%'">
+                    更新人
+                </th>
+                <th [nzWidth]="'15%'">
+                    更新时间
+                </th>
+                <th [nzWidth]="'10%'">
+                    <span>操作</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of nzTable.data">
+                <td nzShowCheckbox [(nzChecked)]="data.checked" (click)="checkData($event)"></td>
+                <td>
+                    {{data.name}}
+                </td>
+                <td>{{data.email}}</td>
+                <td>{{data.mobile}}</td>
+                <td>
+                    <span style="color:#E03E16" *ngIf="data.status==0">●</span>
+                    <span style="color:#2B85E5" *ngIf="data.status==1">●</span>
+                    {{data.status==0?'禁用':'正常'}}
+                </td>
+                <td>{{data.updateUserName}}</td>
+                <td>{{data.updateTime | dateFormatPipe:2}}</td>
+                <td>
+                    <span>
+                        <a href="javascript:;" (click)="deleteUser(data)">移除</a>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>
+
+<!--
+<add-user-auth-dialog *ngIf="isShowAddUserAuthModal" [userAuth]="currentUserAuth" [isShow]="isShowAddUserAuthModal" (onClose)="hideAddUserAuthModal($event)"></add-user-auth-dialog>-->

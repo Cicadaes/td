@@ -1,0 +1,27 @@
+<div>
+    <nz-table #insightsTable
+    [nzData]="tableTitle"
+    [nzLoading]="laoding"
+    [nzFrontPagination]="false"
+    [(nzPageSize)]="rows" 
+    [nzScroll]="scroll"
+    [nzTotal]="total" 
+    [(nzPageIndex)]="page"
+    (nzPageIndexChange)="getList()"
+    (nzPageSizeChange)="getList()"
+    nzShowSizeChanger="true"
+    [nzNoResult]='tableNoData'>
+        <thead>
+            <tr>
+                <th *ngFor="let item of tableTitle">{{item.displayname}}</th>
+                <th *ngIf="!fromMktPipe" nzWidth="100px" nzRight="0px" style="width: 100px;">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of tableList">
+                <td *ngFor="let title of tableTitle">{{item[title.esfieldname]}}</td>
+                <td *ngIf="!fromMktPipe" nzWidth="100px" nzRight="0px" style="width: 100px;"><a (click)="goUserProfile(item)">查看</a></td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>

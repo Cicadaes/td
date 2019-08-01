@@ -1,0 +1,189 @@
+<div class="push">
+    <div class="push-title">
+        <div class="push-title-left">
+            <h3 class="module-title">{{reportObj.name}}</h3>
+        </div>
+        <div class="push-title-right" *ngIf="reportObj && reportObj.right">
+            <ul>
+                <ng-container *ngFor="let item of campaignList">
+                    <ng-container *ngFor="let one of contributeList">
+                        <li *ngIf="one[item.targetConfigCode + '1']">
+                            <p>{{item.name}}</p>
+                            <p>
+                                <span>贡献率:</span>
+                                <strong>{{one[item.targetConfigCode]}}%</strong>
+                            </p>
+                        </li>
+                    </ng-container>
+                </ng-container>
+            </ul>
+        </div>
+        <!-- 循环时间轴 -->
+    </div>
+
+    <div class="push-content">
+        <div class="push-overview">
+            <h3 class="module-title push-overview-title" style="border: none;">
+                投放概览
+                <nz-popover [nzTitle]="'下载消息'" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+                    <span class="iconfont icon-download" (click)="download('pushOverview');" nz-popover></span>
+                    <ng-template #nzTemplate>
+                        <div>
+                            导出任务创建成功，请稍后到
+                            <a (click)="goPage('/download-data')" style="margin:0 10px;">数据下载</a>页面下载您需要的附件。
+                        </div>
+                    </ng-template>
+                </nz-popover>
+                <nz-popover [nzPlacement]="'left'">
+                    <span class="iconfont icon-help" nz-popover></span>
+                    <ng-template #nzTemplate>
+                        <ul style="padding-left: 0px; margin-bottom: 0px;">
+                            <li>
+                                <label>发送数：</label>
+                                <span>本次推送活动，成功向用户发出推送消息的用户设备数。</span>
+                            </li>
+                            <li>
+                                <label>到达数：</label>
+                                <span>本次推送活动，确认终端接收到推送的用户设备数。</span>
+                            </li>
+                            <li>
+                                <label>展示数：</label>
+                                <span>本次推送活动，抵达终端的消息有展示出消息内容的数量。</span>
+                            </li>
+                            <li>
+                                <label>点击数：</label>
+                                <span>本次推送活动，点击接收到的推送消息的用户设备数。</span>
+                            </li>
+                            <li>
+                                <label>到达率：</label>
+                                <span>发出的推送消息成功抵达用户的比率，到达数/发送数。</span>
+                            </li>
+                            <li>
+                                <label>展示率：</label>
+                                <span>到达用户终端并且成功展示出来的用户设备数占消息成功到达的设备数比率，展示数/到达数。</span>
+                            </li>
+                            <li>
+                                <label>点击率：</label>
+                                <span>点击了推送消息进入到应用的用户设备数占接收到消息的用户比率，进入应用的用户数/到达数。</span>
+                            </li>
+                        </ul>
+                    </ng-template>
+                </nz-popover>
+            </h3>
+            <div class="push-overview-content">
+                <nz-table #nzTable [nzData]="pushOverview" nzSize="default" [nzShowPagination]='false'>
+                    <thead>
+                        <tr>
+                            <th nzWidth="12.5%" *ngIf="_total > 1">推送方案</th>
+                            <th nzWidth="12.5%">发送数</th>
+                            <th nzWidth="12.5%">到达率</th>
+                            <th nzWidth="12.5%">到达数</th>
+                            <th nzWidth="12.5%">展示率</th>
+                            <th nzWidth="12.5%">展示数</th>
+                            <th nzWidth="12.5%">点击率</th>
+                            <th nzWidth="12.5%">点击数</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of nzTable.data;let i = index;">
+                            <td *ngIf="_total > 1">
+                                <span *ngIf="data.groupName != '总计'">
+                                    <span [ngClass]="{'span-block': true, 'td-color': i == 0, 'green-color': i == 1, 'orange-color': i == 2}">
+                                        {{data.groupName}}
+                                    </span>
+                                    <p class="percent">
+                                        {{data.percent}}
+                                    </p>
+                                </span>
+                               
+                                <strong *ngIf="data.groupName == '总计'" [ngStyle]="{'color': '#000', 'font-size': '14px'}">{{data.groupName}}</strong>
+                            </td>
+                            <td>
+                                <span>{{data.sum_td_app_send_count}}</span>
+                            </td>
+                            <td>
+                                <span [ngClass]="{'text-color': data.groupName == '总计', 'text-color-rate': true}">{{data.sum_td_app_recv_count_rate}}</span>
+                            </td>
+                            <td>
+                                <span>{{data.sum_td_app_recv_count}}</span>
+                            </td>
+                            <td>
+                                <span [ngClass]="{'text-color': data.groupName == '总计', 'text-color-rate': true}">{{data.sum_td_app_display_count_rate}}</span>
+                            </td>
+                            <td>
+                                <span>{{data.sum_td_app_display_count}}</span>
+                            </td>
+                            <td>
+                                <span [ngClass]="{'text-color': data.groupName == '总计', 'text-color-rate': true}">{{data.sum_td_app_click_count_rate}}</span>
+                            </td>
+                            <td>
+                                <span>{{data.sum_td_app_click_count}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+            </div>
+        </div>
+
+        <div class="push-trendAnalyses">
+            <h3 class="module-title">
+                趋势分析
+                <nz-popover [nzTitle]="'下载消息'" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+                    <span class="iconfont icon-download" (click)="download('chart');" nz-popover></span>
+                    <ng-template #nzTemplate>
+                        <div>
+                            导出任务创建成功，请稍后到
+                            <a (click)="goPage('/download-data')" style="margin:0 10px;">数据下载</a>页面下载您需要的附件。
+                        </div>
+                    </ng-template>
+                </nz-popover>
+            </h3>
+            <div class="push-content-chart-tab">
+                <span *ngFor="let item of chartTab;let i = index" (click)='checkOne(i, item);'>
+                    <h3 [ngClass]="{'border-bot': i == chartTabIndex}">{{item.name}}</h3>
+                </span>
+            </div>
+            <div class="push-content-chart-list">
+                <div class="chart-list-one-tab">
+                    <span [ngClass]="{'iconfont': true, 'icon-line-chart': true, 'iconfontColor': chartType == 'line'}" (click)="checkChart('line')"></span>
+                    <span [ngClass]="{'iconfont': true, 'icon-chart-form': true, 'iconfontColor': chartType == 'table'}" (click)="checkChart('table')"></span>
+                </div>
+                <div class="chart-list-one-chart" *ngIf="loading">
+                    <div style="padding: 0px 16px 16px; height: 300px;width: 100%;text-align: center;line-height: 300px;">
+                        <nz-spin></nz-spin>
+                    </div>
+                </div>
+                <div class="chart-list-one-chart" *ngIf="_total > 0 && !loading">
+                    <div style="height: 300px;" *ngIf="chartType == 'line'">
+                        <app-chart [option]='chartOptionLine'></app-chart>
+                    </div>
+                    <div style="height: 270px;" *ngIf="chartType == 'table'" style="margin-top: 30px;">
+                        <nz-table #nzTable1 [nzData]="tableOption" [nzShowPagination]='false' [nzScroll]="{ y: '220px' }" nzSize="middle" [nzFrontPagination]='false'>
+                            <thead>
+                                <tr>
+                                    <th nzWidth="{{_width}}">时间</th>
+                                    <ng-container *ngFor="let item of keys">
+                                        <th nzWidth="{{_width}}">{{chartTableName}}<ng-container *ngIf="reportObj && !reportObj.right && item != 'x' && item != 'X' && _total > 1"> - {{item}}组</ng-container></th>
+                                    </ng-container>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of nzTable1.data">
+                                    <td>{{data.time}}</td>
+                                    <ng-container *ngFor="let item of keys">
+                                        <td>{{data[item]}}</td>
+                                    </ng-container>
+                                </tr>
+                            </tbody>
+                        </nz-table>
+                    </div>
+                </div>
+                <div class="chart-list-one-chart" *ngIf="_total == 0 && !loading">
+                    <div style="padding: 0px 16px 16px; height: 300px;width: 100%;text-align: center;line-height: 300px;">
+                        暂无数据
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

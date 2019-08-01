@@ -1,0 +1,55 @@
+<ng-template #tableTotal>
+        <div  style="margin-right: 6px;">
+          总共 {{_total}} 条
+        </div>
+</ng-template>
+<nz-table #nzTable 
+[nzBordered]="false" 
+[nzShowTotal]="tableTotal" 
+[nzData]="_dataSet" 
+nzShowSizeChanger 
+[nzLoading]="_loading"
+[nzTotal]="_total" 
+[(nzPageIndex)]="_current" 
+(nzPageIndexChange)="refreshData()" 
+[(nzPageSize)]="_pageSize" 
+(nzPageSizeChange)="refreshData(true)" 
+[nzFrontPagination]="false" 
+>
+    <thead>
+        <tr>
+            <th [nzWidth]="'11%'">
+                名称
+            </th>
+            <th [nzWidth]="'11%'">
+                描述
+            </th>
+            <th [nzWidth]="'11%'">
+                更新人
+            </th>
+            <th [nzWidth]="'11%'">
+                更新时间
+            </th>
+            <th [nzWidth]="'12%'">
+                <span>操作</span>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of nzTable.data">
+            <td>{{data.name}}</td>
+            <td>{{data.desc}}</td>
+            <td>{{data.updateUserName}}</td>
+            <td>{{data.updateTime | dateFormatPipe:2}}</td>
+            <td>
+                <a href="javascript:;" (click)="viewDetailUserGroup(data)">查看</a>
+                <nz-divider nzType="vertical"></nz-divider>
+                <a href="javascript:;" (click)="showAddUserGroupModal(data)">编辑</a>
+                <nz-divider nzType="vertical"></nz-divider>
+                <a href="javascript:;" (click)="deleteUserGroup(data)">删除</a>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<app-add-user-group-dialog *ngIf="isShowAddUserGroupModal" [userGroup]="currentUserGroup" [isShow]="isShowAddUserGroupModal" (close)="hideAddUserGroupModal($event)" (submit)="onSubmitUserGroupFormData($event)" [tenantId] ="tenantId"></app-add-user-group-dialog>

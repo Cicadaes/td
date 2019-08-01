@@ -1,0 +1,31 @@
+<!-- 活动名称 -->
+<div class="item activityName required">
+    <span class="label">{{nls.activityNameLabel}}</span>
+    <span class="input" [class.has-error]="vm.activityNameError">
+        <input nz-input [(ngModel)]="vm.activityNameValue" (ngModelChange)="handlerCheck_activityName($event)" [attr.placeholder]="nls.activityNamePlaceholder">
+    </span>
+    <span class="description" style="color: #f00;" *ngIf="name" >请输入活动名称</span>
+    <span class="description" style="color: #f00;" *ngIf="name_length" >活动名称应不大于26个字符</span>
+</div>
+
+<!-- 活动名称 -->
+<div class="item activityTime required">
+    <span class="label">{{nls.activityTimeLabel}}</span>
+    <span class="input" [class.has-error]="vm.activityTimeError">
+        <nz-range-picker [(ngModel)]="vm.activityTimeValue" (ngModelChange)="handlerCheck_activityTime($event)" [nzFormat]="'yyyy-MM-dd'"
+                         nzPlaceHolder="" [nzAllowClear]="false" [nzStyle]="{'width': '240px'}" [nzDisabledDate]="disabledBeforeDate">
+
+        </nz-range-picker>
+    </span>
+    <span style="margin-left: 88px; color: #cccccc; font-size: 12px;">营销活动开始后变更需要联系管理员</span>
+    <span class="description" style="color: #f00;" *ngIf="time" >请选择活动时间</span>
+</div>
+
+<!-- 描述 -->
+<div class="item activityDescription">
+    <span class="label">{{nls.activityDescriptionLabel}}</span>
+    <span class="input" [class.has-error]="vm.activityDescriptionError">
+        <textarea nz-input [(ngModel)]="vm.activityDescriptionValue" (ngModelChange)="handlerCheck_activityDesc($event)" [attr.placeholder]="'请输入内容'"></textarea>
+    </span>
+    <span class="description" style="color: #f00;" *ngIf="desc_length" >描述应不大于80个字符</span>
+</div>

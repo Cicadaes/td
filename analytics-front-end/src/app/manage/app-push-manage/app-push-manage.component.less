@@ -1,0 +1,370 @@
+@import '../../../less/td.theme.less';
+:host ::ng-deep .content-div {
+  margin: 16px;
+
+  p {
+    margin-bottom: 0px;
+  }
+
+  .content-one {
+    background-color: #fff;
+    margin-bottom: 16px;
+
+    .content-one-title {
+      height: 45px;
+      line-height: 44px;
+      padding: 0px 16px;
+      border-bottom: 1px solid rgba(23, 35, 61, 0.1);
+      margin: 0px;
+
+      span {
+        font-size: 12px;
+        font-weight: normal;
+        color: #959ca5;
+      }
+
+      b {
+        color: @base-color;
+      }
+    }
+
+    .content-one-text {
+      padding: 0px 16px;
+
+      .content-one-text-ul {
+        padding: 0px;
+        margin: 0px;
+
+        .content-one-text-ul-li {
+          padding: 16px 0px;
+          border-bottom: 1px dashed rgba(23, 35, 61, 0.1);
+        }
+      }
+
+      .icon-help {
+        color: rgba(23, 35, 61, 0.55);
+        cursor: pointer;
+      }
+
+      .ant-input {
+        width: 200px;
+        border: 1px solid #d9d9d9;
+      }
+    }
+  }
+}
+
+:host ::ng-deep .android-manage-strengthen-one {
+  margin-left: 20px;
+}
+
+:host ::ng-deep .ui-dialog {
+  width: 400px;
+  padding: 0 20px;
+  padding-bottom: 20px;
+  overflow: visible;
+}
+
+:host ::ng-deep .ui-dialog-content {
+  padding: 10px 0 0 0 !important;
+}
+
+:host ::ng-deep .ui-dialog-buttonpane {
+  margin-top: 20px;
+}
+
+:host ::ng-deep .event-div {
+  margin: 10px 0;
+}
+
+:host ::ng-deep .textarea {
+  width: 100%;
+  height: 100px;
+  text-indent: 0.5em;
+  color: #000;
+  resize: none;
+  border: 1px solid #dfe7f2;
+  border-radius: 3px;
+}
+
+:host ::ng-deep .desc {
+  display: inline-block;
+  vertical-align: top;
+}
+
+:host ::ng-deep .change-name {
+  width: 250px;
+  height: 30px;
+  text-indent: 0.5em;
+  border-radius: 3px 0 0 3px;
+  border: 1px solid #dfe7f2;
+}
+
+/*Android推送配置*/
+:host ::ng-deep .android-td-push {
+  border-bottom: 1px solid #dfe7f2;
+  padding-bottom: 14px;
+}
+
+:host ::ng-deep .android-td-push p {
+  color: #464c5b;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+:host ::ng-deep .android-td-push span {
+  display: inline-block;
+  width: 80px;
+  height: 38px;
+  color: #5ba0ff;
+  border: 1px solid #5ba0ff;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 38px;
+}
+
+:host ::ng-deep .android-content {
+  overflow: hidden;
+}
+
+:host ::ng-deep .android-content .appkey,
+.android-content .secret {
+  width: 196px;
+  height: 32px;
+  padding-left: 5px;
+  margin-right: 4px;
+  border: 1px solid #dee6ed;
+}
+
+:host ::ng-deep .zw-table {
+  margin: 13px 0;
+}
+
+:host ::ng-deep .zw-table tr td {
+  padding-right: 25px;
+  padding-bottom: 12px;
+}
+
+:host ::ng-deep .button {
+  padding-bottom: 15px;
+}
+
+:host ::ng-deep .button-margin {
+  margin-top: 15px;
+}
+
+:host ::ng-deep .button p {
+  cursor: pointer;
+  color: #5697f1;
+  display: inline-block;
+  margin: 0px;
+}
+
+:host ::ng-deep .button p i {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+:host ::ng-deep .button p span {
+  display: inline-block;
+  font-size: 13px;
+  vertical-align: text-bottom;
+}
+
+:host ::ng-deep .btn-handel {
+  margin-top: 0;
+  display: inline-block;
+}
+
+:host ::ng-deep .btn-handel .icon-yes {
+  font-size: 16px;
+  color: #61a4ff;
+}
+
+/*IOS推送配置*/
+
+:host ::ng-deep .ui-fileupload .ui-fileupload-buttonbar {
+  padding: 0;
+}
+
+:host ::ng-deep .upload-btn {
+  background: @base-color;
+  border-color: @base-color;
+  text-align: center;
+  line-height: 32px;
+  color: #fff;
+  border-radius: 3px;
+  padding: 0px 12px;
+  outline: none;
+  cursor: pointer;
+}
+
+:host ::ng-deep .upload-btn:focus {
+  outline: 0;
+}
+
+:host ::ng-deep .ios-content-list1 {
+  margin-top: 20px;
+}
+
+:host ::ng-deep .ios-content-list1 li:nth-child(1),
+.ios-content-list2 li:nth-child(1) {
+  margin-right: 20px;
+}
+
+:host ::ng-deep .ios-content-list1 .btn-handel {
+  /*margin-top:5px;*/
+  margin-top: 0;
+}
+
+:host ::ng-deep .no-pass {
+  width: 196px;
+  height: 32px;
+  border: 1px solid #dee6ed;
+  border-radius: 5px;
+  margin: 0 20px;
+  text-indent: 1em;
+}
+
+:host ::ng-deep .book {
+  display: inline-block;
+}
+
+:host ::ng-deep .question-tip-box {
+  font-size: 13px;
+  margin: 7px 12px 0 3px;
+}
+
+:host ::ng-deep .question-tip-box .question-tip {
+  left: 19px;
+  top: -28px;
+}
+
+:host ::ng-deep .question-tip-box .tip-prod {
+  left: 20px;
+  top: -10px;
+}
+
+:host ::ng-deep .question-tip {
+  left: 15px;
+  top: -30px;
+}
+
+:host ::ng-deep .ios-content-list2 {
+  margin-top: 20px;
+}
+
+:host ::ng-deep .fa-box {
+  margin-top: 5px;
+  font-size: 16px;
+  margin-left: 12px;
+}
+
+:host ::ng-deep .fa-box i.icon-yes {
+  color: #61a4ff;
+}
+
+:host ::ng-deep .fa-box i.icon-prompt2 {
+  color: #ff716e;
+}
+
+:host ::ng-deep .text-input {
+  width: 200px;
+  height: 32px;
+  border: 1px solid #dee6ed;
+  border-radius: 5px;
+  text-indent: 1em;
+}
+
+/*自定义上传控件样式*/
+
+:host ::ng-deep .upload-file-box {
+  position: relative;
+  width: 200px;
+  height: 32px;
+}
+
+:host ::ng-deep .upload-file-box .upload-file {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.upload-file-box .text {
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  border: 1px solid #dee6ed;
+  border-radius: 5px;
+}
+
+.file_tip {
+  padding-left: 95px;
+}
+
+.passwodr_tip {
+  padding-left: 415px;
+}
+
+:host ::ng-deep .border-zw {
+  color: #fff;
+  background-color: #2d8cf0;
+  border-color: #2d8cf0;
+}
+
+:host ::ng-deep input {
+  outline: none !important;
+}
+
+:host ::ng-deep .confirm {
+  background: @base-color;
+  border-color: @base-color;
+  text-align: center;
+  line-height: 32px;
+  color: #fff;
+  border-radius: 3px;
+  padding: 0px 12px;
+  outline: none;
+  cursor: pointer;
+}
+
+:host ::ng-deep .confirm {
+  background: @base-color;
+  border-color: @base-color;
+  text-align: center;
+  line-height: 32px;
+  color: #fff;
+  border-radius: 3px;
+  padding: 0px 12px;
+  outline: none;
+  cursor: pointer;
+}
+
+:host ::ng-deep .cancel {
+  border: none;
+  text-align: center;
+  line-height: 32px;
+  color: #000;
+  border-radius: 3px;
+  padding: 0px 12px;
+  outline: none;
+  cursor: pointer;
+}
+
+:host ::ng-deep .icon-success {
+  color: @base-color;
+}
+
+:host ::ng-deep .icon-info {
+  color: #faad14;
+}
+
+:host ::ng-deep .zw-error {
+  margin-left: 114px;
+  color: red;
+  position: absolute;
+  bottom: -3px;
+}

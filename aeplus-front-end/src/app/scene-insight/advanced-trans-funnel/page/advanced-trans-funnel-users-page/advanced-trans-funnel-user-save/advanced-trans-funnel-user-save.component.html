@@ -1,0 +1,19 @@
+<main>
+	<nz-modal [nzMaskClosable]="false" [(nzVisible)]="_isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent"
+	          [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()" [nzWidth]="580">
+		<ng-template #modalTitle>
+			<span>保存为用户分群</span>
+		</ng-template>
+
+		<ng-template #modalContent>
+			<app-advanced-trans-funnel-user-form [isSubmit]="_isSubmitForm" [systemError]="_systemError"
+			                                     (onSubmit)="_onSubmitForm($event);"
+			                                     (onBack)="_onBackForm($event);"></app-advanced-trans-funnel-user-form>
+		</ng-template>
+
+		<ng-template #modalFooter>
+			<button nz-button nzType="default" (click)="handleCancel()">取消</button>
+			<button nz-button nzType="primary" (click)="handleOk()">确认</button>
+		</ng-template>
+	</nz-modal>
+</main>

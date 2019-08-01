@@ -1,0 +1,65 @@
+<main>
+	<div class="form">
+		<form nz-form [formGroup]="validateForm">
+			<nz-form-item>
+				<nz-form-label [nzSpan]="6" nzRequired>报表名称</nz-form-label>
+				<nz-form-control [nzSpan]="17">
+					<input [ngClass]="{'input-error': validateForm.get('name').dirty && validateForm.get('name').errors || validateForm.get('name').pending}"
+					 nz-input formControlName="name" placeholder="请输入内容" [(ngModel)]="name">
+					<nz-form-explain *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors || validateForm.get('name').pending ">
+						<ng-container *ngIf="validateForm.get('name').hasError('required')">
+							<span class="red">请输入报表名称</span>
+						</ng-container>
+						<ng-container *ngIf="validateForm.get('name').hasError('duplicated')">
+							名称重复
+						</ng-container>
+						<ng-container *ngIf="validateForm.get('name').hasError('auto')">
+							报表名称仅支持中文、英文、数字
+						</ng-container>
+						<ng-container *ngIf="validateForm.get('name').hasError('length')">
+							报表名称不能超过64位字符
+						</ng-container>
+						<ng-container *ngIf="validateForm.get('name').pending">
+							校验中...
+						</ng-container>
+					</nz-form-explain>
+				</nz-form-control>
+			</nz-form-item>
+			<nz-form-item>
+				<nz-form-label [nzSpan]="6" class="label-padding">背景色</nz-form-label>
+				<nz-form-control [nzSpan]="17">
+					<nz-radio-group formControlName="color" [(ngModel)]="selectedColor">
+						<label nz-radio-button style="background: #575FB9;" [nzValue]="'#575FB9'"></label>
+						<label nz-radio-button style="background: #6D77CF;" [nzValue]="'#6D77CF'"></label>
+						<label nz-radio-button style="background: #5597F1;" [nzValue]="'#5597F1'"></label>
+						<label nz-radio-button style="background: #43B393;" [nzValue]="'#43B393'"></label>
+						<label nz-radio-button style="background: #00CF95;" [nzValue]="'#00CF95'"></label>
+						<label nz-radio-button style="background: #8555B9;" [nzValue]="'#8555B9'"></label>
+						<label nz-radio-button style="background: #B151B7;" [nzValue]="'#B151B7'"></label>
+					</nz-radio-group>
+				</nz-form-control>
+			</nz-form-item>
+			<nz-form-item>
+				<nz-form-label [nzSpan]="6"></nz-form-label>
+				<nz-form-control [nzSpan]="17">
+					<div class="report-item">
+						<div class="header" [ngStyle]="{'background': selectedColor}">
+							<p class="name">
+								{{name || "报表名称"}}
+							</p>
+						</div>
+						<div class="item-value">
+							<span></span>
+						</div>
+						<div class="footer"></div>
+					</div>
+				</nz-form-control>
+			</nz-form-item>
+		</form>
+	</div>
+
+	<div class="footer">
+		<button nz-button class="cancel-button" (click)="cancel()">取消</button>
+		<button nz-button class="ant-btn-primary" (click)="submit()">创建</button>
+	</div>
+</main>

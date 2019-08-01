@@ -1,0 +1,27 @@
+.detail-obj-auth{
+    background: #fff;
+}
+
+.detail-obj-auth .title {
+    padding: 16px 16px 0 16px;
+    margin: 0;
+}
+.detail-obj-operate {
+    padding: 0 0 24px 0;
+    text-align: left;
+}
+
+:host ::ng-deep more-search .ant-col-8:first-child{
+    width: 25%!important;
+} 
+:host ::ng-deep more-search .ant-col-8:nth-child(2){
+    width: 45%!important;
+} 
+
+:host ::ng-deep more-search .ant-col-8:nth-child(3){
+    width: 30%!important;
+} 
+
+:host ::ng-deep .detail-obj-auth .ant-table-pagination.ant-pagination{
+    margin: 16px;
+}

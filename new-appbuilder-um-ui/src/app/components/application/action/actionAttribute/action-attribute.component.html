@@ -1,0 +1,53 @@
+<nz-card style="margin-top: 15px;"  [nzTitle]="titTemplate">
+    <ng-template #titTemplate>
+        <span>功能属性</span>
+        <a>
+            <img alt="图片" src="./assets/images/add.svg" height="12px" width="12px" style="margin-left: 4px;cursor: pointer;"
+                (click)="addActionAttribute($event)" *ngIf="operation != 'select'" />
+        </a>
+    </ng-template>
+    <nz-table #nzTable [nzShowPagination]="false" [nzBordered]="false" [nzData]="_dataSet" nzShowSizeChanger
+        [nzLoading]="_loading" [nzFrontPagination]="false">
+
+        <thead nz-thead>
+            <tr>
+                <th nz-th [nzWidth]="'25%'">
+                    名称
+                </th>
+                <th nz-th [nzWidth]="'20%'">
+                    key
+                </th>
+                <th nz-th [nzWidth]="'20%'">
+                    value
+                </th>
+                <th nz-th [nzWidth]="'25%'">
+                    描述
+                </th>
+                <th nz-th [nzWidth]="'10%'" *ngIf="operation != 'select'">
+                    <span>操作</span>
+                </th>
+            </tr>
+        </thead>
+
+        <tbody nz-tbody *ngFor="let data of nzTable.data">
+            <tr nz-tbody-tr *ngIf="data.operation!='delete'">
+                <td nz-td>{{data.name}}</td>
+                <td nz-td>{{data.key}}</td>
+                <td nz-td>{{data.value}}</td>
+                <td nz-td>{{data.desc}}</td>
+                <td nz-td *ngIf="operation != 'select'">
+                    <span>
+                        <a href="javascript:;" (click)="editAttribute(data)">编辑</a>
+                        <nz-divider nzType="vertical"></nz-divider>
+                        <a href="javascript:;" (click)="deleteAttribute(data)">删除</a>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+    <add-action-attribute-dialog *ngIf="currentData && currentData.data"  [_dataSet]="_dataSet" [isedit]="isedit"
+        [currentData]="currentData.data" [isShow]="isShowAddActionModal" [queryParams]="queryParams" (onClose)="hideAddActionModal($event)"></add-action-attribute-dialog>
+    <add-action-attribute-dialog *ngIf="!currentData" [_dataSet]="_dataSet" [isedit]="isedit" [isShow]="isShowAddActionModal"
+        [queryParams]="queryParams"  (onClose)="hideAddActionModal($event)"></add-action-attribute-dialog>
+
+</nz-card>

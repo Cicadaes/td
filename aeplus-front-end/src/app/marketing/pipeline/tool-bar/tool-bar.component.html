@@ -1,0 +1,43 @@
+<div class="title">
+  <div class="title-name" *ngIf="pcs.isPipelineEdit">
+    <input tdLimitInputText iType="triggerInput" max="26" type="text" [style.width]="titleNameWidth + 'px'" [(ngModel)]="pipelineObj.name" (ngModelChange)="checkTitleNameWidth(pipelineObj.name);"
+           [ngClass]="{'disable-input': true, 'add-input': isEdit}" [disabled]="!isEdit">
+    <a *ngIf="!isEdit" title="编辑" class="iconfont icon-mode_edit" (click)="cachePipelineName()" aria-hidden="true"></a>
+    <a *ngIf="isEdit" class="iconfont icon-success" (click)="updateName()" aria-hidden="true"></a>
+    <a *ngIf="isEdit" class="iconfont icon-error" (click)="restorePipelineName()" aria-hidden="true"></a>
+  </div>
+  <div *ngIf="!pcs.isPipelineEdit" style="padding-left: 14px; line-height: 50px; float: left;">
+    <span class="custom-button" (click)="goBack()">返回</span>
+  </div>
+  <div class="title-name" *ngIf="!pcs.isPipelineEdit">
+
+    <span class="des">流程起止时间：</span>
+    <span class="des" *ngIf="pipelineObj">{{pipelineObj.startTime | date:"yyyy-MM-dd"}}~{{pipelineObj.endTime | date:"yyyy-MM-dd"}}</span>
+    <span style="color: #2D8CF0;" *ngIf="textDes">（{{textDes}}）</span>
+  </div>
+  <div *ngIf="!pcs.isPipelineEdit" style="float: right; padding: 0 30px; line-height: 50px;">
+    <nz-tooltip [nzTitle]="'全局设置'" [nzPlacement]="'bottom'">
+      <a nz-tooltip class="iconfont icon-settings" (click)="showRule()" aria-hidden="true"></a>
+    </nz-tooltip>
+  </div>
+  <div class="title-content" *ngIf="pcs.isPipelineEdit">
+    <div class="time">
+      <nz-range-picker [(ngModel)]="pipelineTime" (ngModelChange)="onChangePipelineTime($event)" nzPlaceHolder="" [nzAllowClear]="false"
+                       [nzStyle]="{'width': '290px'}" [nzDisabledDate]="disabledDate">
+      </nz-range-picker>
+    </div>
+    <div class="config">
+      <nz-tooltip [nzTitle]="'校验'" [nzPlacement]="'bottom'" *ngIf="pcs.isPipelineEdit">
+        <a nz-tooltip style="margin: 8px;" class="iconfont icon-assignment_turned_in" aria-hidden="true" (click)="checkPipeline()"></a>
+      </nz-tooltip>
+      <nz-tooltip [nzTitle]="'全局设置'" [nzPlacement]="'bottom'" *ngIf="pcs.isPipelineEdit">
+        <a nz-tooltip *ngIf="pcs.isPipelineEdit" class="iconfont icon-settings" (click)="showRule()" aria-hidden="true"></a>
+      </nz-tooltip>
+    </div>
+    <div class="button">
+      <label *ngIf="pcs.isPipelineEdit" class="cancel" (click)="goBack()">取消</label>
+      <label *ngIf="pcs.isPipelineEdit" class="draft" (click)="saveDraft()">保存草稿</label>
+      <label *ngIf="pcs.isPipelineEdit" class="save" (click)="submitPipeline()">提交</label>
+    </div>
+  </div>
+</div>

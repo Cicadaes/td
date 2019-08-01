@@ -1,0 +1,16 @@
+<div class="text-content">
+    <div class="operation-region" style="padding-top: 24px;">
+        <div class="ac_right_wap">
+            <div class="ac_right" style="margin-right: 24px;">
+                <nz-input-group nzSearch [nzSuffix]="suffixIconButton">
+                    <input type="text" nz-input placeholder="请输入名称" (keyup)="onSearch($event, 'keyup')" [(ngModel)]="search">
+                </nz-input-group>
+                <ng-template #suffixIconButton>
+                    <i class="anticon anticon-search" (click)="onSearch(search, 'click')"></i>
+                </ng-template>
+            </div>
+        </div>
+        <tenants-app-table [queryParams] = "appTableFieldParams" [tenantId]="tenantId"></tenants-app-table>
+    </div>   
+</div>
+

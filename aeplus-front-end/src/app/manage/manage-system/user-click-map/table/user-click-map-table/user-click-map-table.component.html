@@ -1,0 +1,66 @@
+<main>
+	<div class="table-custom-operator">
+		<button nz-button nzType="primary" nzSize="default" (click)="showUserClickMapAddDialog(null);"><span
+				class="anticon anticon-plus"></span>添加页面
+		</button>
+	</div>
+	<div class="table-custom-panel shadow-content">
+		<div class="table-custom-head clrfix">
+			<h5 class="table-custom-title">页面点击图管理</h5>
+		</div>
+		<div class="table-custom-more-search">
+			<app-more-search [fieldArray]="_moreSearchFieldArray"
+			                 (onSearch)="onSearchMoreSearch($event)"></app-more-search>
+		</div>
+		<nz-table
+				#ajaxTable
+				nzShowTotal
+				nzShowSizeChanger
+				[nzFrontPagination]="false"
+				[nzData]="dataSet"
+				[nzLoading]="loading"
+				[nzTotal]="total"
+				[(nzPageIndex)]="pageIndex"
+				[(nzPageSize)]="pageSize"
+				[nzPageSizeOptions]="[ 10, 20, 50, 100 ]"
+				(nzPageIndexChange)="searchData()"
+				(nzPageSizeChange)="searchData(true)">
+			<thead (nzSortChange)="sort($event)" nzSingleSort>
+			<tr>
+				<th style="min-width:100px;">平台</th>
+				<th style="min-width:150px;">点击图名称</th>
+				<th>预览页面</th>
+				<th style="width: 150px;">操作</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr *ngFor="let data of ajaxTable.data">
+				<td>
+					<div>{{data.sourceid | platformPipe}}</div>
+				</td>
+				<td>
+					<div>{{data.displayname}}</div>
+				</td>
+				<td>
+					<div>
+						<a href="{{data.name}}" target="_blank">{{data.name}}</a>
+					</div>
+				</td>
+				<td>
+					<div class="table-custom-bar">
+						<a href="javascript:;" (click)="showUserClickMapAddDialog(data);">
+							编辑
+						</a>
+						<a href="javascript:;" (click)="delete(data);">
+							删除
+						</a>
+					</div>
+				</td>
+			</tr>
+			</tbody>
+		</nz-table>
+	</div>
+	<app-user-click-map-dialog *ngIf="_isShowUserClickMapAddDialog" [isVisible]="_isShowUserClickMapAddDialog"
+	                           [data]="_currentUserClickMap" (onHide)="hideUserClickMapAddDialog($event);"
+	                           (onSubmit)="onSubmitAddUserClickMap($event);"></app-user-click-map-dialog>
+</main>

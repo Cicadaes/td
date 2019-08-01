@@ -1,0 +1,4 @@
+<div>
+    <app-edit-interface *ngIf="compontentFlag === 'add' || compontentFlag === 'update'" [interfaceDetailDate]='interfaceDetailDate' [flag]='compontentFlag' (toSee)="toSee($event);"></app-edit-interface>
+    <app-see-interface  *ngIf="compontentFlag === 'see'" [interfaceDetailDate]='interfaceDetailDate' (toEdit)="toEdit($event)"></app-see-interface>
+</div>

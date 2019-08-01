@@ -1,0 +1,58 @@
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel($event)" [nzMaskClosable]='false'>
+    <ng-template #modalTitle>
+        <span *ngIf="!editFlag && editData.level === 0">新建产品分类</span>
+        <span *ngIf="!editFlag && editData.level === 1">新建子分类</span>
+        <span *ngIf="editFlag && editData.level === 0">修改分类</span>
+        <span *ngIf="editFlag && editData.level === 1">修改子分类</span>
+    </ng-template>
+    <ng-template #modalContent>
+        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" autocomplete="off">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="4" nzRequired nzFor="name">分类名称</nz-form-label>
+                <nz-form-control [nzSpan]="20">
+                    <input id="name" type="name" nz-input formControlName="name" placeholder="请输入分类名称">
+                    <nz-form-explain style="color:red;" *ngIf="getFormControl('name').dirty && getFormControl('name').errors" style="color: #f5222d;">
+                        <ng-container *ngIf="getFormControl('name').errors.required">
+                            请输入分类名称
+                        </ng-container>
+                        <ng-container *ngIf="getFormControl('name').errors.forbiddenName && !getFormControl('name').errors.pattern">
+                            只能输入中文、数字、英文字母、空格，长度最少2个、最多100个字符
+                        </ng-container>
+                        <ng-container *ngIf="getFormControl('name').errors.pattern">
+                            开头结尾不能有空格
+                        </ng-container>
+                    </nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item *ngIf="!editFlag && editData.level === 1">
+                <nz-form-label [nzSpan]="4" nzRequired nzFor="parent">父分类</nz-form-label>
+                <nz-form-control [nzSpan]="20"><div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;" title="{{editData.obj.origin.name}}">{{editData.obj.origin.name}}</div></nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item style="margin-bottom: 0px;">
+                <nz-form-label [nzSpan]="4" nzRequired nzFor="description" class="cover-ant-form-item-label">分类描述</nz-form-label>
+                <nz-form-control [nzSpan]="20">
+                    <textarea id="description" type="description" nz-input formControlName="description" placeholder="请输入分类描述"></textarea>
+                    <nz-form-explain style="color:red;" *ngIf="getFormControl('description').dirty && getFormControl('description').errors"
+                        style="color: #f5222d;">
+                        <ng-container *ngIf="getFormControl('description').errors.maxlength">
+                            分类描述不能超过256个字符
+                        </ng-container>
+                    </nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </ng-template>
+    <ng-template #modalFooter>
+        <button nz-button [nzType]="'default'" (click)="handleCancel($event)">
+            取 消
+        </button>
+        <button nz-button [nzType]="'primary'" (click)="save()">
+            确 定
+        </button>
+    </ng-template>
+</nz-modal>

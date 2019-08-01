@@ -1,0 +1,129 @@
+<main>
+  <div class="item">
+    <div class="title">
+      单次使用时长分布
+      <div class="title-right">
+        <nz-popover [nzTitle]="'指标说明'" [nzPlacement]="'rightTop'" [nzTrigger]="'hover'">
+          <i class="icon iconfont icon-info1 question" nz-popover></i>
+          <ng-template #nzTemplate>
+            <ul class="des-ul">
+              <li class="clrfix">
+                <label>单次使用时长：</label>
+                <div class="des">
+                  一次启动使用的时长。
+                </div>
+              </li>
+              <li class="clrfix">
+                <label>启动次数：</label>
+                <div class="des">
+                  单次使用时长下，用户启动应用的次数。
+                </div>
+              </li>
+            </ul>
+          </ng-template>
+        </nz-popover>
+      </div>
+    </div>
+    <div class="bar-chart">
+      <app-loading-and-no-data [isLoading]="barChartLoading" [isNoData]="!barOption"></app-loading-and-no-data>
+      <div echarts *ngIf="!barChartLoading && barOption" [options]="barOption" class="bar-chart"></div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="title">
+      使用时长趋势
+      <div class="title-right">
+        <nz-popover [nzTitle]="'指标说明'" [nzPlacement]="'rightTop'" [nzTrigger]="'hover'">
+          <i class="icon iconfont icon-info1 question" nz-popover></i>
+          <ng-template #nzTemplate>
+            <ul class="des-ul">
+              <li class="clrfix">
+                <label>平均单次使用时长：</label>
+                <div class="des bigger-padding">
+                  当日平均每次从启动到退出的使用时间，平均单次使用时长=当日使用总时长/当日启动次数。
+                </div>
+              </li>
+            </ul>
+          </ng-template>
+        </nz-popover>
+      </div>
+    </div>
+    <nz-tabset>
+      <nz-tab nzTitle="平均单次使用时长">
+        <div class="chart-one">
+          <div class="bar-chart">
+            <app-loading-and-no-data [isLoading]="loading" [isNoData]="!lineOption"></app-loading-and-no-data>
+            <div echarts *ngIf="!loading && lineOption" [options]="lineOption" class="bar-chart"></div>
+          </div>
+        </div>
+      </nz-tab>
+    </nz-tabset>
+  </div>
+
+  <div class="item">
+    <div class="title table-div">
+      使用时长明细
+      <div class="title-right">
+        <nz-popover
+          [nzTitle]="'下载消息'"
+          [nzContent]="downloadTemplate"
+          [nzPlacement]="'bottomLeft'"
+          [nzTrigger]="'click'"
+        >
+          <i class="iconfont icon-download tip-icon" nz-popover (click)="downloadData()"></i>
+          <ng-template #downloadTemplate>
+            <div>
+              导出任务创建成功，请稍后到
+              <a (click)="goPage('/download-data')" style="margin:0 10px;">数据下载</a>页面下载您需要的附件。
+            </div>
+          </ng-template>
+        </nz-popover>
+        <nz-popover [nzTitle]="'指标说明'" [nzPlacement]="'rightTop'" [nzTrigger]="'hover'">
+          <i class="icon iconfont icon-info1 question" nz-popover></i>
+          <ng-template #nzTemplate>
+            <ul class="des-ul">
+              <li class="clrfix">
+                <label>平均单次使用时长：</label>
+                <div class="des bigger-padding">
+                  当日平均每次从启动到退出的使用时间，平均单次使用时长=当日使用总时长/当日启动次数。
+                </div>
+              </li>
+            </ul>
+          </ng-template>
+        </nz-popover>
+      </div>
+    </div>
+    <nz-table
+      #listTable
+      [nzLoading]="loading"
+      [nzData]="tableData"
+      [nzTotal]="totalCount"
+      [(nzPageIndex)]="pageIndex"
+      [(nzPageSize)]="pageSize"
+      [nzPageSizeOptions]="pageOptions"
+      nzShowSizeChanger
+    >
+      <thead (nzSortChange)="sort($event)">
+        <tr>
+          <th nzShowSort nzSortKey="date" [(nzSort)]="sortMap.date">日期</th>
+          <th nzShowSort nzSortKey="value" [(nzSort)]="sortMap.value">平均单次使用时长</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of listTable.data">
+          <!-- 日期 -->
+          <td>
+            {{ dateSplit(data.date) }}
+          </td>
+
+          <!-- 平均单次使用时长 -->
+          <td style="width: 50%">
+            <!-- {{ data.value }} -->
+            {{ globals.formatSeconds(data.value) }}
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</main>

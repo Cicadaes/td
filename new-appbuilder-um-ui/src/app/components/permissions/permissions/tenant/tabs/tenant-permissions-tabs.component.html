@@ -1,0 +1,17 @@
+<!-- <div class="text-content-top">
+    <h3 class="zw-one-name" >{{name}}</h3>
+</div> -->
+<nz-tabset [nzTabPosition]="'top'">
+    <nz-tab *ngFor="let tab of tabs" [nzTitle]="nzTabHeading">
+        <ng-template #nzTabHeading>
+            {{tab.value}}
+        </ng-template>
+        <div class="text-content" style="padding-top: 4px;">
+            <user-auth *ngIf="tab.key == 'default'" [isSuper]="false" [tenantId]="tenantId" [targetId]="targetId"></user-auth>
+            <!-- <user-group-auth *ngIf="tab.key == 'manager'" [tenantId]="tenantId" [targetId]="targetId"></user-group-auth> -->
+            <app-role-permission *ngIf="tab.key == 'manager'" [tenantId]="tenantId" [targetId]="targetId"></app-role-permission>
+            <dept-auth *ngIf="tab.key == 'role'" [tenantId]="tenantId" [targetId]="targetId"></dept-auth>
+            <func-auth *ngIf="tab.key == 'empower'" [tenantId]="tenantId" [appList]="appList" [targetId]="targetId"></func-auth>
+        </div>
+    </nz-tab>
+</nz-tabset>

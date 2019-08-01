@@ -1,0 +1,429 @@
+<div class="content">
+  <div class="base-desc">
+    <div class="pipe-item clearfix">
+      <label class="item-label"> <span class="require">*</span>组件名称 </label>
+      <div class="item-input">
+        <input
+          tdLimitInputText
+          iType="triggerInput"
+          max="26"
+          type="text"
+          placeholder="请输入内容"
+          [(ngModel)]="pcs.nodeData.name"
+          [disabled]="!pcs.isPipelineEdit"
+        />
+      </div>
+    </div>
+    <div class="pipe-item clearfix">
+      <label class="item-label">
+        描述
+      </label>
+      <div class="item-textarea">
+        <textarea
+          tdLimitTextareaText
+          iType="all"
+          max="80"
+          type="text"
+          placeholder="请输入内容"
+          [(ngModel)]="pcs.nodeData.description"
+          [disabled]="!pcs.isPipelineEdit"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="timer">
+    <div class="title-item clearfix">
+      <label class="item-label"> <span class="require">*</span>监测时间 </label>
+    </div>
+    <div class="timer-item">
+      <nz-radio-group [(ngModel)]="pcs.nodeData.monitorType">
+        <label class="item" nz-radio nzValue="1" [nzDisabled]="!pcs.isPipelineEdit">
+          <nz-range-picker
+            [nzAllowClear]="false"
+            nzPlaceHolder=""
+            [nzDisabledDate]="disabledDate"
+            [nzPopupStyle]="{ left: '-250px' }"
+            [nzStyle]="{ width: '225px' }"
+            (ngModelChange)="onSelect($event)"
+            [(ngModel)]="monitorTime"
+            [nzDisabled]="pcs.nodeData.monitorType !== '1' || !pcs.isPipelineEdit"
+          ></nz-range-picker>
+        </label>
+        <label class="item" nz-radio nzValue="2" [nzDisabled]="!pcs.isPipelineEdit">
+          距离到达上一节点
+          <input
+            type="text"
+            nz-input
+            tdLimitNumberInput
+            condition="PI"
+            style="width: 80px;margin: 0px 8px;"
+            [(ngModel)]="pcs.nodeData.lessThanHour"
+            title="{{ pcs.nodeData.lessThanHour }}"
+            [disabled]="pcs.nodeData.monitorType !== '2' || !pcs.isPipelineEdit"
+          />
+          小时内
+        </label>
+      </nz-radio-group>
+    </div>
+  </div>
+  <div class="logic">
+    <div class="title-item clearfix">
+      <label class="item-label">
+        <span class="require">*</span>逻辑类型
+        <nz-popover [nzPlacement]="'right'">
+          <span
+            class="ant-compat anticon anticon-question-circle-o pointer"
+            nz-popover
+            style="margin-left: 0px;font-size: 14px;color: rgba(23,35,61,0.55);font-weight: normal;"
+          ></span>
+          <ng-template #nzTemplate>
+            <ul style="padding-left: 0px; margin-bottom: 0px;">
+              <li>
+                <label>单分支触发：</label>
+                <span>用户每次仅触发一条分支</span>
+              </li>
+              <li>
+                <label>多分支触发：</label>
+                <span>用户每次可同时触发多条分支</span>
+              </li>
+            </ul>
+          </ng-template>
+        </nz-popover>
+      </label>
+    </div>
+    <div class="pipe-item clearfix">
+      <nz-radio-group [(ngModel)]="pcs.nodeData.branchType" (ngModelChange)="exLoop()">
+        <label class="item" nz-radio nzValue="1" [nzDisabled]="!pcs.isPipelineEdit">单分支触发</label>
+        <label class="item" nz-radio nzValue="2" [nzDisabled]="!pcs.isPipelineEdit">多分支触发</label>
+      </nz-radio-group>
+    </div>
+  </div>
+  <div class="trigger-content">
+    <div class="title-item clearfix">
+      <label class="item-label"> <span class="require">*</span>触发类型 </label>
+    </div>
+    <div class="pipe-item">
+      <nz-radio-group [(ngModel)]="pcs.nodeData.targetType" (ngModelChange)="exLoop()">
+        <label class="button" nz-radio-button nzValue="event" [nzDisabled]="!pcs.isPipelineEdit">事件</label>
+        <label class="button" nz-radio-button nzValue="target" [nzDisabled]="!pcs.isPipelineEdit">指标</label>
+      </nz-radio-group>
+    </div>
+    <div class="event-list" *ngIf="pcs.nodeData.targetType === 'event'">
+      <div class="event-single">
+        <div class="event-item" *ngFor="let event of pcs.nodeData.eventList; let i = index">
+          <div class="event-case">
+            <span *ngIf="i === 0 && pcs.nodeData.branchType === '1'">If</span>
+            <span *ngIf="i !== 0 && pcs.nodeData.branchType === '1'">If Else</span>
+            <span *ngIf="pcs.nodeData.branchType === '2'">Case</span>
+          </div>
+          <div class="case-info">
+            <input
+              class="branch-name"
+              tdLimitInputText
+              iType="triggerInput"
+              type="text"
+              [(ngModel)]="event.name"
+              title="{{ event.name }}"
+              (ngModelChange)="rename(event)"
+              nz-input
+              placeholder="分支名称"
+              [disabled]="!pcs.isPipelineEdit"
+            />
+            <nz-select
+              style="width: 155px;height: 32px;"
+              (ngModelChange)="configEventList($event, i); rename(event, $event)"
+              [(ngModel)]="event.code"
+              nzPlaceHolder="请选择"
+              nzNotFoundContent="无"
+              [nzDisabled]="!pcs.isPipelineEdit"
+            >
+              <nz-option
+                *ngFor="let item of event.eventsMin; let j = index"
+                [nzValue]="item.code"
+                [nzLabel]="item.name"
+                [nzDisabled]="item.status == -1"
+              ></nz-option>
+            </nz-select>
+            <span class="iconfont icon-fremove_circle_outli" *ngIf="i !== 0" (click)="removeEvent(i)"></span>
+          </div>
+        </div>
+        <div class="add-event" (click)="addEvent()" *ngIf="pcs.isPipelineEdit">
+          <span class="iconfont icon-add1"></span>
+          <span>添加分支</span>
+        </div>
+        <div class="event-item" *ngIf="pcs.nodeData.branchType === '1'">
+          <div class="event-case">
+            <span>else</span>
+          </div>
+          <div class="case-info">
+            <input
+              class="branch-name"
+              tdLimitInputText
+              iType="triggerInput"
+              type="text"
+              nz-input
+              placeholder="分支名称"
+              [(ngModel)]="pcs.nodeData.otherName"
+              (ngModelChange)="reOtherName()"
+              [disabled]="!pcs.isPipelineEdit"
+              title="{{ pcs.nodeData.otherName }}"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="target-list" *ngIf="pcs.nodeData.targetType === 'target'">
+      <div class="select-target">
+        <div class="label">指标</div>
+        <nz-select
+          style="width: 200px;margin-left: 8px;"
+          [(ngModel)]="pcs.nodeData.otherTarget"
+          (ngModelChange)="selectTargetGetName($event)"
+          nzPlaceHolder="选择指标"
+          nzNotFoundContent="无"
+          [nzDisabled]="!pcs.isPipelineEdit"
+        >
+          <nz-option
+            *ngFor="let item of targets"
+            [nzValue]="item.code"
+            [nzLabel]="item.name"
+            [nzDisabled]="item.status == -1"
+          ></nz-option>
+        </nz-select>
+      </div>
+      <div class="target-item" *ngFor="let target of pcs.nodeData.targetList; let i = index">
+        <div class="target-case">
+          <span *ngIf="i === 0 && pcs.nodeData.branchType === '1'">If</span>
+          <span *ngIf="i !== 0 && pcs.nodeData.branchType === '1'">If Else</span>
+          <span *ngIf="pcs.nodeData.branchType === '2'">Case</span>
+        </div>
+        <div class="case-info">
+          <input
+            class="branch-name"
+            tdLimitInputText
+            iType="triggerInput"
+            type="text"
+            [(ngModel)]="target.name"
+            title="{{ target.name }}"
+            (ngModelChange)="rename(target)"
+            nz-input
+            placeholder="分支名称"
+            [disabled]="!pcs.isPipelineEdit"
+          />
+          <nz-select
+            style="width: 72px;height: 32px;"
+            [(ngModel)]="target.code"
+            (ngModelChange)="rename(target)"
+            title="{{ target.code }}"
+            nzPlaceHolder="请选择"
+            [nzDisabled]="!pcs.isPipelineEdit"
+          >
+            <nz-option
+              *ngFor="let item of equalList; let j = index"
+              [nzValue]="item.value"
+              [nzLabel]="item.name"
+            ></nz-option>
+          </nz-select>
+          <input
+            type="text"
+            tdLimitNumberInput
+            nz-input
+            condition="PI"
+            style="width: 110px;"
+            *ngIf="target.code !== 'range'"
+            [(ngModel)]="target.number"
+            title="{{ target.number }}"
+            [disabled]="!pcs.isPipelineEdit"
+            (ngModelChange)="rename(target)"
+          />
+          <input
+            type="text"
+            tdLimitNumberInput
+            nz-input
+            condition="PI"
+            style="width: 50px"
+            *ngIf="target.code === 'range'"
+            [(ngModel)]="target.first"
+            title="{{ target.first }}"
+            [disabled]="!pcs.isPipelineEdit"
+            (ngModelChange)="rename(target)"
+            (blur)="checkParams()"
+          />
+          <span *ngIf="target.code === 'range'" style="margin: 0 -1px;">~</span>
+          <input
+            type="text"
+            tdLimitNumberInput
+            nz-input
+            condition="PI"
+            style="width: 50px;"
+            *ngIf="target.code === 'range'"
+            [(ngModel)]="target.second"
+            title="{{ target.second }}"
+            [disabled]="!pcs.isPipelineEdit"
+            (ngModelChange)="rename(target)"
+            (blur)="checkParams()"
+          />
+          <span class="iconfont icon-fremove_circle_outli" *ngIf="i !== 0" (click)="removeTarget(i)"></span>
+        </div>
+      </div>
+      <div class="add-event" (click)="addTarget()" *ngIf="pcs.isPipelineEdit">
+        <span class="iconfont icon-add1"></span>
+        <span>添加分支</span>
+      </div>
+      <div class="target-item" *ngIf="pcs.nodeData.branchType === '1'">
+        <div class="target-case">
+          <span>else</span>
+        </div>
+        <div class="case-info">
+          <input
+            class="branch-name"
+            tdLimitInputText
+            iType="triggerInput"
+            type="text"
+            nz-input
+            placeholder="分支名称"
+            [(ngModel)]="pcs.nodeData.otherName"
+            (ngModelChange)="reOtherName()"
+            [disabled]="!pcs.isPipelineEdit"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="satisfy">
+      <div class="satisfy-label">
+        <span>同时满足</span>
+      </div>
+      <div class="satisfy-content" *ngFor="let cond of pcs.nodeData.conditions; let i = index">
+        <nz-select
+          style="width: 100px;height: 32px;"
+          [(ngModel)]="cond.target"
+          nzPlaceHolder="请选择"
+          nzNotFoundContent="无"
+          [nzDisabled]="!pcs.isPipelineEdit"
+        >
+          <nz-option
+            *ngFor="let item of targets; let i = index"
+            [nzValue]="item.code"
+            [nzLabel]="item.name"
+          ></nz-option>
+        </nz-select>
+        <nz-select
+          style="width: 72px;height: 32px;"
+          [(ngModel)]="cond.code"
+          nzPlaceHolder="请选择"
+          [nzDisabled]="!pcs.isPipelineEdit"
+        >
+          <nz-option
+            *ngFor="let item of equalList; let i = index"
+            [nzValue]="item.value"
+            [nzLabel]="item.name"
+          ></nz-option>
+        </nz-select>
+        <input
+          type="text"
+          tdLimitNumberInput
+          nz-input
+          condition="PI"
+          style="width: 110px;"
+          *ngIf="cond.code !== 'range'"
+          [(ngModel)]="cond.number"
+          title="{{ cond.number }}"
+          [disabled]="!pcs.isPipelineEdit"
+        />
+        <input
+          type="text"
+          tdLimitNumberInput
+          nz-input
+          condition="PI"
+          style="width: 48px"
+          *ngIf="cond.code === 'range'"
+          [(ngModel)]="cond.first"
+          title="{{ cond.first }}"
+          [disabled]="!pcs.isPipelineEdit"
+        />
+        <span *ngIf="cond.code === 'range'" style="margin: 0 -1px;">~</span>
+        <input
+          type="text"
+          tdLimitNumberInput
+          nz-input
+          condition="PI"
+          style="width: 48px;"
+          *ngIf="cond.code === 'range'"
+          [(ngModel)]="cond.second"
+          title="{{ cond.second }}"
+          [disabled]="!pcs.isPipelineEdit"
+        />
+        <span class="iconfont icon-fremove_circle_outli" (click)="removeConditions(i)"></span>
+      </div>
+      <div class="add-satisfy" (click)="addConditions()" *ngIf="pcs.isPipelineEdit">
+        <span class="iconfont icon-add1"></span>
+        <span>添加条件</span>
+      </div>
+    </div>
+  </div>
+  <div class="last-content">
+    <div class="title-item clearfix">
+      <label class="item-label special-item-label">触发规则<span>(默认为同一用户不受限可反复触发)</span> </label>
+    </div>
+    <div class="pipe-item clearfix" *ngIf="pcs.nodeData.branchType === '2' || pcs.nodeData.targetType === 'event'">
+      <label
+        nz-checkbox
+        [(ngModel)]="pcs.nodeData.lessThanDaysSelect"
+        (ngModelChange)="pcs.nodeData.sameUserLessThanDays = null"
+        [nzDisabled]="!pcs.isPipelineEdit"
+      >
+        同一用户
+      </label>
+      <input
+        type="text"
+        nz-input
+        tdLimitNumberInput
+        condition="PI"
+        style="width: 64px;height: 32px;"
+        [(ngModel)]="pcs.nodeData.sameUserLessThanDays"
+        title="{{ pcs.nodeData.sameUserLessThanDays }}"
+        [disabled]="!pcs.isPipelineEdit || !pcs.nodeData.lessThanDaysSelect"
+      />
+      天内不被重复触发
+    </div>
+    <div class="pipe-item clearfix" *ngIf="pcs.nodeData.branchType === '2' || pcs.nodeData.targetType === 'event'">
+      <label
+        nz-checkbox
+        [(ngModel)]="pcs.nodeData.lessThanTimesSelect"
+        (ngModelChange)="pcs.nodeData.sameUserLessThanTimes = null"
+        [nzDisabled]="!pcs.isPipelineEdit"
+      >
+        同一用户重复触发次数不超过
+      </label>
+      <input
+        type="text"
+        nz-input
+        tdLimitNumberInput
+        condition="PI"
+        style="width: 64px;height: 32px;"
+        [(ngModel)]="pcs.nodeData.sameUserLessThanTimes"
+        title="{{ pcs.nodeData.sameUserLessThanTimes }}"
+        [disabled]="!pcs.isPipelineEdit || !pcs.nodeData.lessThanTimesSelect"
+      />
+      次
+    </div>
+    <div class="pipe-item clearfix" *ngIf="pcs.nodeData.targetType === 'target' && pcs.nodeData.branchType === '1'">
+      <label
+        nz-checkbox
+        [ngModel]="check_one"
+        (ngModelChange)="checkRadio($event, 'one')"
+        [nzDisabled]="!pcs.isPipelineEdit"
+        >同一用户达到更大的指标值可再次触发</label
+      >
+    </div>
+    <div class="pipe-item clearfix" *ngIf="pcs.nodeData.targetType === 'target' && pcs.nodeData.branchType === '1'">
+      <label
+        nz-checkbox
+        [ngModel]="check_two"
+        (ngModelChange)="checkRadio($event, 'two')"
+        [nzDisabled]="!pcs.isPipelineEdit"
+        >同一用户达到更小的指标值可再次触发</label
+      >
+    </div>
+  </div>
+</div>

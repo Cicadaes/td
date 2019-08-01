@@ -1,0 +1,22 @@
+<nz-card [nzTitle]="title">
+    <ng-template #title>
+        用户
+    </ng-template>
+    <!--<ng-template #extra>
+        <a>More</a>
+    </ng-template>-->
+    <ng-template #body>
+
+        <div class="table-operator clrfix">
+            <a [routerLink]="[ '/users/addUgUserPage' ]">
+                
+                    <button nz-button [nzType]="'primary'" [nzSize]="'large'" >
+                        <span class="anticon anticon-plus"></span><span>用户</span>
+                    </button>
+            
+            </a>
+        </div>
+        <more-search [fieldArray] = "uguserFieldArray" (onSearch)="onSearchUserList($event)"></more-search>
+        <ugusers-table [tenantId]="tenantId" [queryParams] = "uguserTableFieldParams" [reload]="isReloadUserTable"></ugusers-table>
+    </ng-template>
+</nz-card>

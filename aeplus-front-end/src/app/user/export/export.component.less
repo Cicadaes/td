@@ -1,0 +1,180 @@
+@import '../../../../node_modules/ng-zorro-antd/src/ng-zorro-antd.less';
+
+.content {
+    margin: 16px;
+    background-color: #FFFFFF;
+    .title {
+        padding: 13px 16px;
+        font-size: 14px;
+        color: #17233D;
+        border-bottom: 1px solid;
+        border-bottom-color: rgba(23,35,61,0.10);
+    }
+    .body {
+        padding: 16px;
+        .details {
+            padding: 8px 16px;
+            font-size: 12px;
+            color: #17233D;
+            .data {
+                margin-left: 24px;
+                color: rgba(23,35,61,0.75);
+            }
+            .left-dist {
+                margin-left: 64px;
+            }
+        }
+        .edit {
+            border: 1px solid #DCDEE2;
+            background-color: #fff;
+            overflow: hidden;
+            position: relative;
+            .nav {
+                margin-bottom: 0;
+                padding-left: 0px;
+            }
+            .nav-tabs {
+                background: rgba(23, 35, 61, 0.03);
+                border-bottom: 1px solid #DCDEE2;
+            }
+            .no-dataList {
+                font-family: "HelveticaNeue", "PingFangSC", "微软雅黑";
+                font-size: 12px;
+                padding: 16px 8px 0;
+                color: rgba(0, 0, 0, 0.45);
+                text-align: center;
+                -webkit-user-select:none;
+                -moz-user-select:none;
+                -ms-user-select:none;
+                user-select:none;
+            }
+        }
+
+        .error-text {
+            color: red;
+            margin-top: 4px;
+            height: 20px;
+        }
+    }
+}
+
+:host .edit-div-content {
+    padding: 16px;
+    max-height: 340px;
+    overflow-y: auto;
+    .edit-div-content-list {
+        overflow: hidden;
+        margin-bottom: 4px;
+        padding-left: 0px;
+        li {
+            float: left;
+            height: 24px;
+            padding: 0px 8.5px;
+            line-height: 24px;
+            background: #2D8CF0;
+            font-size: 12px;
+            color: #FFFFFF;
+            letter-spacing: 0;
+            border-radius: 2px;
+            margin-right: 8px;
+            margin-bottom: 12px;
+            span {
+                margin: 0px 15.5px 0px 3.5px;
+            }
+            .anticon-close {
+                float: right;
+                margin-top: 6px;
+                cursor: pointer;
+            }
+        }
+    }
+    .edit-div-content-checklist-check {
+        overflow: hidden;
+        .li {
+            width: 16%;
+            float: left;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+            height: 26px;
+            line-height: 26px;
+            font-size: 12px;
+            color: rgba(23,35,61,0.75);
+        }
+    }
+}
+
+
+
+.button-wap {
+    padding-left: 16px;
+}
+
+.loading {
+    //background: url(data:image/png;base64,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) 55% center / auto 50% no-repeat;
+}
+
+:host .nav-tabs {
+    background: rgba(23,35,61,0.03);
+    border-bottom: 1px solid #DCDEE2;
+}
+
+:host .nav {
+    margin-bottom: 0;
+    padding-left: 0px;
+}
+
+:host .nav-tabs > li {
+    float: left;
+    margin-bottom: -1px;
+}
+
+
+:host .nav-tabs > li > a {
+    font-size: 12px;
+    color: rgba(23,35,61,0.75);
+    border-right: 1px solid #dfe0e4;
+    margin: 0;
+    border-top-color: transparent !important;
+    border-radius: 0 !important;
+}
+
+:host .nav-tabs:after {
+    display:block;
+    content: '';
+    clear:both;
+    height: 0px;
+}
+
+
+:host .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    font-size: 12px;
+    color: #2D8CF0;
+    background-color: #FFFFFF;
+}
+
+:host .nav-tabs > li > a:hover {
+    font-size: 12px;
+    color: #2D8CF0;
+    background-color: #FFFFFF;
+}
+
+
+:host .nav > li > a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+}
+
+:host ::ng-deep .ant-checkbox-wrapper + .ant-checkbox-wrapper {
+    margin-left: 0px;
+}
+
+:host ::ng-deep .ant-checkbox-wrapper {
+    font-size: 12px;
+    color: rgba(23,35,61,0.75);
+}
+
+:host ::ng-deep .ant-btn {
+    width: 100px;
+}

@@ -1,0 +1,129 @@
+<div class="first-level"></div>
+<div style="background-color: #ffffff;">
+    <div style="position: relative; padding: 20px; background: rgba(23,35,61,0.06);">
+
+        <div class="shadow-content" style="position: relative; background: #FFF;">
+            <div style="padding: 10px 20px; border-bottom: #DCDEE2 1px solid; font-weight: bolder;">
+                组合
+            </div>
+            <div style="padding: 15px 40px; border-bottom: #DCDEE2 1px solid;">
+        <span style="font-weight: bolder; height: 32px; line-height: 32px; font-size: 12px;">
+          人群名称：{{crowdVO2.crowd.name}}
+        </span>
+
+                <span *ngIf="parentId" style="padding-left: 40px;">
+          父人群名称：{{parentName}}
+        </span>
+            </div>
+
+            <div style="padding: 20px; background: rgba(23,35,61,0.06);">
+                <!-- 最外层循环 -->
+                <div *ngFor="let condition of crowdVO2.conditions; let ci = index" >
+                    <div *ngIf="ci > 0" style="position: relative; margin: 20px 0; text-align: center;">
+                        <span *ngIf="condition.operator == 'and'" class="and-or-not">交</span>
+                        <span *ngIf="condition.operator == 'or'" class="and-or-not">并</span>
+                        <span *ngIf="condition.operator == 'andNot'" class="and-or-not">差</span>
+                    </div>
+
+                    <div style="position: relative; background: #FFF; border: #DCDEE2 1px solid;">
+                        <div style="padding: 4px 20px 4px 10px; border-bottom: #DCDEE2 1px solid;">
+                            <span *ngIf="condition.indice == 'attribute'" class="indice">用户属性</span>
+                            <span *ngIf="condition.indice == 'behavior'" class="indice">用户行为</span>
+                            <span *ngIf="condition.indice == 'crowd'" class="indice">现有人群</span>
+                            <span *ngIf="condition.indice == 'customTag'" class="indice">用户标签</span>
+
+                            <span *ngIf="condition.indice == 'behavior'" style="line-height: 30px; display: inline-block;">
+                <span class="indice">
+                  在
+                </span>
+                <span *ngIf="condition.eventTimeQuery.boolFilters[0].value && condition.eventTimeQuery.boolFilters[0].value.length == 2"
+                      style="padding: 0 5px;">
+                  {{condition.eventTimeQuery.boolFilters[0].value[0] | date:"yyyy-MM-dd"}} ~ {{condition.eventTimeQuery.boolFilters[0].value[1] | date:"yyyy-MM-dd"}}
+                </span>
+              </span>
+
+                        </div>
+
+                        <!-- 属性块 -->
+                        <div *ngIf="condition.indice == 'attribute'" style="padding: 0px 20px 20px 20px;">
+                            <app-attribute-view [boolFilters]="condition.queryList[0].boolFilters" [defaultAttrList]="true" [hideAddBtn]="true"></app-attribute-view>
+                        </div>
+
+                        <!-- 行为块 -->
+                        <div *ngIf="condition.indice == 'behavior'" style="padding: 0px 20px 20px 20px;">
+                            <!-- 行为子循环块 -->
+                            <div *ngFor="let query of condition.queryList; let i = index" style="border-bottom: #cccccc 1px dashed;">
+                                <!-- 行为块 -->
+                                <div *ngFor="let attr of query.boolFilters_0; let j = index">
+                                    <div style="padding: 10px 0 10px 0; height: 52px;">
+                                        <div *ngIf="i == 0" class="view-input  black-bg">用户</div>
+                                        <div *ngIf="i > 0" class="view-input">
+                                            <span>{{query.operator | crowdCreate}}</span>
+                                        </div>
+
+                                        <div class="view-input" style="width: 120px;">
+                                            <span>{{condition.not | crowdCreate}}</span>
+                                        </div>
+
+                                        <span class="view-input" title="{{metaBehaviorTypeMap[attr.fieldName] || '无'}}">
+                      {{metaBehaviorTypeMap[attr.fieldName] || '无'}}
+                    </span>
+
+                                        <span class="view-input" title="{{metaBehaviorMap[attr.value] || '无'}}">
+                      {{metaBehaviorMap[attr.value] || '无'}}
+                    </span>
+
+                                    </div>
+                                </div>
+
+                                <!-- 行为属性块 -->
+                                <app-attribute-view [boolFilters]="query.boolFilters" [metaAttributeList]="query.metaAttributeList" [useListGroup]="false" [hideAndOr]="true"></app-attribute-view>
+                            </div>
+                        </div>
+
+                        <!-- 现有人群块 -->
+                        <div *ngIf="condition.indice == 'crowd'" style="padding: 0px 20px 20px 20px;">
+                            <div *ngFor="let attr of condition.queryList[0].boolFilters; let i = index" style="padding: 10px 0px 10px 0px; border-bottom: 1px dashed #DEDFE3;">
+
+                                <div *ngIf="i == 0" class="view-input  black-bg">用户</div>
+                                <div *ngIf="i > 0" class="view-input">
+                                    <span>{{attr.operator | crowdCreate}}</span>
+                                </div>
+
+                                <span class="view-input" title="{{existingCrowdMap[attr.value] || '无'}}">
+                  {{existingCrowdMap[attr.value] || '无'}}
+                </span>
+                            </div>
+                        </div>
+
+                        <!-- 用户标签块 -->
+                        <div *ngIf="condition.indice == 'customTag'" style="padding: 0px 20px 20px 20px;">
+                            <div *ngFor="let attr of condition.queryList[0].boolFilters; let i = index" style="padding: 10px 0px 10px 0px; border-bottom: 1px dashed #DEDFE3;">
+
+                                <div *ngIf="i == 0" class="view-input  black-bg">标签</div>
+                                <div *ngIf="i > 0" class="view-input">
+                                    <span>{{attr.operator | crowdCreate}}</span>
+                                </div>
+
+                                <!-- eqType -->
+                                <span class="view-input">
+                                    {{attr.eqType == 'eq' ? '是' : '不是'}}
+                                </span>
+
+                                <span class="view-input" title="{{existingTagMap[attr.value] || '无'}}">
+                                    {{existingTagMap[attr.value] || '无'}}
+                                </span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="position: relative; margin-top: 20px; padding: 0 20px;">
+            <button (click)="cancel()" nz-button nzType="default">返回</button>
+        </div>
+    </div>
+</div>

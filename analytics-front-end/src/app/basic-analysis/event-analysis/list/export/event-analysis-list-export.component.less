@@ -1,0 +1,114 @@
+.form-content {
+  .form-item {
+    display: flex;
+    margin-bottom: 10px;
+    .label-control {
+      width: 72px;
+      font-size: 12px;
+      line-height: 32px;
+      font-weight: bolder;
+      color: #17233d;
+    }
+    .input-control {
+      width: 290px;
+      line-height: 32px;
+    }
+  }
+}
+.border-top {
+  border-top: 1px solid #e8e8e8;
+}
+::ng-deep .export .ant-modal-body {
+  padding: 16px 16px 0 16px;
+}
+
+.ver-line {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  min-height: 100px;
+  &::before {
+    content: '';
+    position: absolute;
+    right: 50%;
+    width: 1px;
+    height: 400px;
+    bottom: -16px;
+    background-color: #e8e8e8;
+    z-index: 3;
+  }
+}
+.rows-content {
+  margin-left: -16px;
+  margin-right: -16px;
+  line-height: 26px;
+  font-size: 12px;
+
+  b {
+    color: #17233d;
+  }
+  .left {
+    padding: 8px 16px;
+    .item {
+      float: right;
+    }
+  }
+  .border-right {
+    border-right: 1px solid #e8e8e8;
+  }
+  .right {
+    padding: 8px 16px;
+    .item {
+      float: right;
+    }
+  }
+  .bg-hui {
+    background-color: #fafafa;
+  }
+  .table {
+    :host ::ng-deep .ant-table-tbody > tr > td,
+    .ant-table-placeholder {
+      border-bottom: none;
+    }
+    td {
+      max-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding: 10px 12px;
+    }
+  }
+  .selected-warp {
+    max-height: 285px;
+    overflow: auto;
+    padding: 0 16px;
+  }
+  .selected-list {
+    padding-left: 0;
+    margin: 0;
+    li {
+      line-height: 36px;
+      padding-right: 20px;
+      position: relative;
+      div {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .btn-close {
+        position: absolute;
+        top: 10px;
+        right: 0;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        line-height: 12px;
+        background-color: #ccc;
+        font-size: 12px;
+        text-align: center;
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+  }
+}

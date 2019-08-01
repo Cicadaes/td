@@ -1,0 +1,85 @@
+<main>
+  <div class="header-content">
+    <!-- tabs -->
+    <div class="tab-list">
+      <ul nz-menu [nzMode]="'horizontal'" nzSelectable>
+        <li nz-menu-item [nzSelected]="showType == 1" (click)="changeTab(1)">
+          使用时长
+        </li>
+        <li nz-menu-item [nzSelected]="showType == 2" (click)="changeTab(2)">
+          使用频率
+        </li>
+        <li nz-menu-item [nzSelected]="showType == 3" (click)="changeTab(3)">
+          访问深度
+        </li>
+      </ul>
+    </div>
+    <!-- 搜索 -->
+    <div class="search-list">
+      <!-- 日期筛选器 -->
+      <common-date _date (dateChange)="timeChange($event)"></common-date>
+
+      <!-- 筛选展开 -->
+      <div class="filter-button-right" (click)="moreSearch()">
+        <span>筛选</span>
+        <span
+          class="ant-compat anticon"
+          [class.anticon-down]="!moreSearchFlag"
+          [class.anticon-up]="moreSearchFlag"
+        ></span>
+      </div>
+
+      <!-- 筛选条件 -->
+      <div *ngIf="moreSearchFlag" class="filter-info">
+        <div class="select-list">
+          <label class="text">用户</label>
+          <nz-select
+            style="width: 150px;"
+            [(ngModel)]="filterInfo.selectedAttr"
+            (ngModelChange)="changeAttr($event)"
+            nzShowSearch
+          >
+            <nz-option-group *ngFor="let item of attributeList" [nzLabel]="item.name">
+              <nz-option *ngFor="let child of item.child" [nzValue]="child" [nzLabel]="child.name" nzCustomContent>
+                <span [title]="child.name">{{ child.name }}</span>
+              </nz-option>
+            </nz-option-group>
+          </nz-select>
+          <nz-select style="width: 100px;" [(ngModel)]="filterInfo.operator">
+            <nz-option nzValue="in" nzLabel="等于"></nz-option>
+            <nz-option nzValue="not in" nzLabel="不等于"></nz-option>
+          </nz-select>
+          <nz-select
+            style="min-width: 15%;max-width: 40%;"
+            nzMode="multiple"
+            [(ngModel)]="filterInfo.selectedAttrValue"
+            nzShowSearch
+            (nzScrollToBottom)="loadMore()"
+            nzPlaceHolder="请选择"
+          >
+            <nz-option
+              *ngFor="let item of attributeValueList"
+              [nzValue]="item.id"
+              [nzLabel]="item.dicItemValue"
+            ></nz-option>
+            <nz-option *ngIf="selectLoading" nzDisabled nzCustomContent>
+              <i nz-icon type="loading" class="loading-icon"></i> Loading Data...
+            </nz-option>
+          </nz-select>
+        </div>
+        <button nz-button nzType="primary" (click)="searchByFilter()">查询</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <!-- 使用时长 -->
+    <app-length-of-use *ngIf="showType === 1" [searchParam]="searchParam"></app-length-of-use>
+
+    <!-- 使用频率 -->
+    <app-usage-frequency *ngIf="showType === 2" [searchParam]="searchParam"></app-usage-frequency>
+
+    <!-- 访问深度 -->
+    <app-access-depth *ngIf="showType === 3" [searchParam]="searchParam"></app-access-depth>
+  </div>
+</main>

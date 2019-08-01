@@ -1,0 +1,112 @@
+ :host ::ng-deep .ant-tree li .ant-tree-node-content-wrapper.ant-tree-node-selected {
+   width: calc(100% - 8px);
+ }
+
+ :host ::ng-deep .ant-tree li span[draggable],
+ :host ::ng-deep .ant-tree li span[draggable="true"] {
+   width: calc(100% - 4px);
+   margin-left: 4px;
+ }
+ :host ::ng-deep .ant-tree ul li{
+   margin-left:10px;
+ }
+ :host ::ng-deep .ant-tree ul i{
+  font-size:10px;
+}
+ .treeBox {
+   background: #fff;
+   padding: 20px 10px;
+   margin-right: 20px;
+   height: 100%;
+   border: 1px solid #edeeee;
+ }
+
+ :host ::ng-deep.custom-node {
+  padding: 2px 4px;
+  line-height: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  width: calc(100% - 16px);
+  float: right;
+}
+:host ::ng-deep .ant-tree li span.ant-tree-switcher, .ant-tree li span.ant-tree-iconEle {
+  margin: 0;
+  width: 14px;
+  height: 28px;
+  line-height: 28px;
+  display: inline-block;
+  vertical-align: top;
+  border: 0 none;
+  cursor: pointer;
+  outline: none;
+  text-align: center;
+}
+:host ::ng-deep .dropDownBox {
+  background: #fff;
+  border: 1px solid #ededed;
+  color: #999;
+}
+
+:host ::ng-deep .dropDownBox li {
+  padding: 2px 5px;
+  cursor:pointer;
+}
+
+:host ::ng-deep .dropDownBox li:hover {
+  background: #bae7ff;
+}
+ .active {
+   background-color: #bae7ff;
+ }
+
+ .anticon {
+   padding-left: 4px;
+   padding-right: 4px;
+ }
+
+ .ant-tree .ant-tree-child-tree {
+   padding-left: 10px;
+ }
+
+ .flexBox {
+   display: -webkit-box;
+   display: -webkit-flex;
+   display: flex;
+ }
+ .hideBox{
+   display:none;
+ }
+
+ .flexItem1 {
+   -webkit-box-flex: 1;
+   -webkit-flex: 1;
+   flex: 1;
+ }
+
+ .flexItem2 {
+   -webkit-box-flex: 4;
+   -webkit-flex: 4;
+   flex: 4;
+ }
+
+ .dropDownBox {
+   background: #fff;
+   border: 1px solid #ededed;
+   color: #999;
+ }
+
+ .dropDownBox li {
+   padding: 2px 5px;
+   cursor:pointer;
+ }
+
+ .dropDownBox li:hover {
+   background: #bae7ff;
+ }
+ .carousel-app-empty {
+  text-align: center;
+  width:100%;
+  height:100%;
+  padding: 50px 0;
+  background:#fff;
+}

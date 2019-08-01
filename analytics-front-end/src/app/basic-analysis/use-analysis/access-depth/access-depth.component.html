@@ -1,0 +1,93 @@
+<main>
+  <div class="item">
+    <div class="title depth-dev">
+      访问深度趋势
+      <div class="title-right">
+        <nz-popover [nzTitle]="'指标说明'" [nzPlacement]="'rightTop'" [nzTrigger]="'hover'">
+          <i class="icon iconfont icon-info1 question" nz-popover></i>
+          <ng-template #nzTemplate>
+            <ul class="des-ul">
+              <li class="clrfix">
+                <label>访问深度：</label>
+                <div class="des">
+                  所选时段内，平均每次启动打开的页面数。访问深度=页面受访次数/启动次数。
+                </div>
+              </li>
+            </ul>
+          </ng-template>
+        </nz-popover>
+      </div>
+    </div>
+    <div class="chart-one">
+      <div class="bar-chart">
+        <app-loading-and-no-data [isLoading]="loading" [isNoData]="!lineOption"></app-loading-and-no-data>
+        <div echarts *ngIf="!loading && lineOption" [options]="lineOption" class="bar-chart"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="title table-div">
+      访问深度明细
+      <div class="title-right">
+        <nz-popover
+          [nzTitle]="'下载消息'"
+          [nzContent]="downloadTemplate"
+          [nzPlacement]="'bottomLeft'"
+          [nzTrigger]="'click'"
+        >
+          <i class="iconfont icon-download tip-icon" nz-popover (click)="downloadData()"></i>
+          <ng-template #downloadTemplate>
+            <div>
+              导出任务创建成功，请稍后到
+              <a (click)="goPage('/download-data')" style="margin:0 10px;">数据下载</a>页面下载您需要的附件。
+            </div>
+          </ng-template>
+        </nz-popover>
+        <nz-popover [nzTitle]="'指标说明'" [nzPlacement]="'rightTop'" [nzTrigger]="'hover'">
+          <i class="icon iconfont icon-info1 question" nz-popover></i>
+          <ng-template #nzTemplate>
+            <ul class="des-ul">
+              <li class="clrfix">
+                <label>访问深度：</label>
+                <div class="des">
+                  所选时段内，平均每次启动打开的页面数。访问深度=页面受访次数/启动次数。
+                </div>
+              </li>
+            </ul>
+          </ng-template>
+        </nz-popover>
+      </div>
+    </div>
+    <nz-table
+      #listTable
+      [nzLoading]="loading"
+      [nzData]="tableData"
+      [nzTotal]="totalCount"
+      [(nzPageIndex)]="pageIndex"
+      [(nzPageSize)]="pageSize"
+      [nzPageSizeOptions]="pageOptions"
+      nzShowSizeChanger
+    >
+      <thead (nzSortChange)="sort($event)">
+        <tr>
+          <th nzShowSort nzSortKey="date" [(nzSort)]="sortMap.date">日期</th>
+          <th nzShowSort nzSortKey="value" [(nzSort)]="sortMap.value">访问深度</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of listTable.data">
+          <!-- 日期 -->
+          <td>
+            {{ dateSplit(data.date) }}
+          </td>
+
+          <!-- 访问深度明细 -->
+          <td style="width: 50%">
+            {{ globals.toDecimal(data.value) }}
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</main>

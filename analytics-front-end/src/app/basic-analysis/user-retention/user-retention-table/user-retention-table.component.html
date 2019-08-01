@@ -1,0 +1,115 @@
+<main>
+  <div class="table-custom-panel shadow-content">
+    <div class="table-custom-head clrfix">
+      <h5 class="table-custom-title">留存率</h5>
+      <div class="table-custom-filter">
+        <nz-radio-group
+          class="item radio-group"
+          [(ngModel)]="_granularity"
+          [nzSize]="'small'"
+          (ngModelChange)="changeGranularity($event)"
+        >
+          <label nz-radio-button nzValue="day">日</label>
+          <label nz-radio-button nzValue="week">周</label>
+          <label nz-radio-button nzValue="month">月</label>
+        </nz-radio-group>
+
+        <nz-popover [nzTitle]="'下载消息'" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+          <span class="icon iconfont icon-download item" (click)="downloadData()" nz-popover></span>
+          <ng-template #nzTemplate>
+            <div>
+              导出任务创建成功，请稍后到
+              <a (click)="goPage('/download-data')" style="margin:0 10px;">数据下载</a>页面下载您需要的附件。
+            </div>
+          </ng-template>
+        </nz-popover>
+        <nz-popover [nzTitle]="'指标说明'" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+          <span class="icon iconfont icon-info1 item" nz-popover></span>
+          <ng-template #nzTemplate>
+            <ul class="des-ul">
+              <li class="clrfix">
+                <label>N日留存率：</label>
+                <div class="des">
+                  某日的+N日留存用户和某日新增或活跃用户的比值，某日的新增或活跃用户中在+N日访问了应用/执行了某事件的用户计为+N日的留存用户，+N日留存率=+N日留存用户数/某日新增或活跃用户数*100%，比如某日是1号、N是7，+7表示8号的活跃用户。
+                </div>
+              </li>
+              <li class="clrfix">
+                <label>N周留存率：</label>
+                <div class="des">
+                  某周（自然周）的+N周留存用户和某周新增或活跃用户的比值，某周的新增或活跃用户中在+N周访问了应用/执行了某事件的用户计为+N周的留存用户，+N周留存率=+N周留存用户数/某周新增或活跃用户数*100%，比如某周是20180913~20180919、N是1，+1表示20180920~20180926这自然周的活跃用户。
+                </div>
+              </li>
+              <li class="clrfix">
+                <label>N月留存率：</label>
+                <div class="des">
+                  某月（自然月）的+N月留存用户和某月新增或活跃用户的比值，某月的新增或活跃用户中在+N月访问了应用/执行了某事件的用户计为+N月的留存用户，+N月留存率=+N月留存用户数/某月新增或活跃用户数*100%，比如某月是20180801~20180831、N是1，+1表示20180901~20180930这自然月的活跃用户。
+                </div>
+              </li>
+            </ul>
+          </ng-template>
+        </nz-popover>
+      </div>
+    </div>
+    <nz-table #ajaxTable [nzShowPagination]="false" [nzPageSize]="999" [nzData]="dataSet" [nzLoading]="loading">
+      <thead (nzSortChange)="sort($event)" nzSingleSort>
+        <tr>
+          <th>首次使用{{ _granularityLabel }}</th>
+          <th>用户数</th>
+          <th>+1{{ _granularityLabel }}</th>
+          <th>+2{{ _granularityLabel }}</th>
+          <th>+3{{ _granularityLabel }}</th>
+          <th>+4{{ _granularityLabel }}</th>
+          <th>+5{{ _granularityLabel }}</th>
+          <th>+6{{ _granularityLabel }}</th>
+          <th *ngIf="_granularity == 'day' || _granularity == 'week'">+7{{ _granularityLabel }}</th>
+          <th *ngIf="_granularity == 'week'">+8{{ _granularityLabel }}</th>
+          <th *ngIf="_granularity == 'day'">+14{{ _granularityLabel }}</th>
+          <th *ngIf="_granularity == 'day'">+30{{ _granularityLabel }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of ajaxTable.data">
+          <td>
+            <div>{{ data.starttime_day | dateFormatPipe: 2 }}</div>
+          </td>
+          <td>
+            <div>{{ data.keep | numberToThousandsPipe }}</div>
+          </td>
+          <td [ngStyle]="_tdStyle[data.starttime_day]['keep_user_1']">
+            <div *ngIf="data.keep_user_1">{{ data.keep_user_1 }}%</div>
+          </td>
+          <td [ngStyle]="_tdStyle[data.starttime_day]['keep_user_2']">
+            <div *ngIf="data.keep_user_2">{{ data.keep_user_2 }}%</div>
+          </td>
+          <td [ngStyle]="_tdStyle[data.starttime_day]['keep_user_3']">
+            <div *ngIf="data.keep_user_3">{{ data.keep_user_3 }}%</div>
+          </td>
+          <td [ngStyle]="_tdStyle[data.starttime_day]['keep_user_4']">
+            <div *ngIf="data.keep_user_4">{{ data.keep_user_4 }}%</div>
+          </td>
+          <td [ngStyle]="_tdStyle[data.starttime_day]['keep_user_5']">
+            <div *ngIf="data.keep_user_5">{{ data.keep_user_5 }}%</div>
+          </td>
+          <td [ngStyle]="_tdStyle[data.starttime_day]['keep_user_6']">
+            <div *ngIf="data.keep_user_6">{{ data.keep_user_6 }}%</div>
+          </td>
+          <td
+            [ngStyle]="_tdStyle[data.starttime_day]['keep_user_7']"
+            *ngIf="_granularity == 'day' || _granularity == 'week'"
+          >
+            <div *ngIf="data.keep_user_7">{{ data.keep_user_7 }}%</div>
+          </td>
+          <td [ngStyle]="_tdStyle[data.starttime_day]['keep_user_8']" *ngIf="_granularity == 'week'">
+            <div *ngIf="data.keep_user_8">{{ data.keep_user_8 }}%</div>
+          </td>
+          <td [ngStyle]="_tdStyle[data.starttime_day]['keep_user_14']" *ngIf="_granularity == 'day'">
+            <div *ngIf="data.keep_user_14">{{ data.keep_user_14 }}%</div>
+          </td>
+          <td [ngStyle]="_tdStyle[data.starttime_day]['keep_user_30']" *ngIf="_granularity == 'day'">
+            <div *ngIf="data.keep_user_30">{{ data.keep_user_30 }}%</div>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</main>

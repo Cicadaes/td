@@ -1,0 +1,117 @@
+
+    :host > .item {
+        margin-bottom: 24px;
+    }
+
+    :host > .item:last-child {
+        margin-bottom: 0;
+    }
+
+    :host > .item .error {
+        display: block;
+        margin-left: 88px;
+        margin-top: 6px;
+        font-size: 12px;
+        line-height: 12px;
+        color: #f00;
+    }
+
+    /* .item .label */
+
+    :host > .item .label {
+        display: block;
+        width: 88px;
+        height: 32px;
+        font-size: 12px;
+        line-height: 32px;
+        color: #17233d;
+    }
+
+    :host > .item.required .label:after {
+        content: "*";
+        position: relative;
+        left: 6px;
+        top: 6px;
+        font-size: 18px;
+        line-height: 18px;
+        color: #ed4217;
+    }
+
+
+
+    /* .item .input */
+
+    :host > .item .input {
+        display: block;
+        margin-left: 88px;
+        margin-top: -32px;
+    }
+
+    :host > .item.launchName input {
+        display: block;
+        width: 298px;
+    }
+
+    :host > .item.launchCrowd nz-select {
+        display: block;
+        width: 298px;
+    }
+
+    :host > .item.launchDescription textarea {
+        display: block;
+        min-height: 70px;
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    /* .item .input.launchWays */
+
+    :host > .item.launchWays .ant-radio-button-wrapper {
+        position: relative;
+        width: 80px;
+        height: 72px;
+        border-radius: 4px;
+        color: #808695;
+    }
+
+    :host > .item.launchWays .ant-radio-button-wrapper.ant-radio-button-wrapper-checked {
+        border: 2px solid #2d8cf0;
+        color: #2d8cf0;
+        background-color: #ffffff;
+    }
+
+    :host > .item.launchWays .ant-radio-button-wrapper {
+        margin-left: 16px;
+    }
+
+    :host > .item.launchWays .ant-radio-button-wrapper:first-child {
+        margin-left: 0;
+    }
+
+    :host > .item.launchWays .ant-radio-button-wrapper {
+        padding: 1px;
+    }
+
+    :host > .item.launchWays .ant-radio-button-wrapper.ant-radio-button-wrapper-checked {
+        padding: 0;
+    }
+
+    :host > .item.launchWays .ant-radio-button-wrapper .icon {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 12px;
+        font-size: 24px;
+        line-height: 24px;
+        text-align: center;
+    }
+
+    :host > .item.launchWays .ant-radio-button-wrapper .text {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 12px;
+        font-size: 12px;
+        line-height: 12px;
+        text-align: center;
+    }

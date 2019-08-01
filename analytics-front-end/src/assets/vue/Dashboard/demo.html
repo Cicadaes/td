@@ -1,0 +1,19 @@
+<meta charset="utf-8">
+<title>Dashboard demo</title>
+<script src="https://unpkg.com/vue"></script>
+<script src="./Dashboard.umd.js"></script>
+
+<link rel="stylesheet" href="./Dashboard.css">
+
+
+<div id="app">
+  <demo></demo>
+</div>
+
+<script>
+new Vue({
+  components: {
+    demo: Dashboard
+  }
+}).$mount('#app')
+</script>

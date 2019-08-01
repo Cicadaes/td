@@ -1,0 +1,116 @@
+<div class="first-level"></div>
+<div class="header-content">
+  <div class="search">
+    <nz-input-group nzSuffixIcon="anticon anticon-search" style="width: 226px; height: 32px;">
+      <input
+        type="text"
+        nz-input
+        [(ngModel)]="searchName"
+        (ngModelChange)="onSearch($event)"
+        placeholder="输入报表名称搜索"
+      />
+    </nz-input-group>
+  </div>
+</div>
+
+<main>
+  <div class="list">
+    <div class="report-item shadow-content2">
+      <div class="create-oprator" (click)="addReport()">
+        <span
+          class="ant-compat anticon anticon-plus-circle"
+          style="font-size: 50px;color: #CBD2DC; cursor:pointer; line-height: 100%;"
+        ></span>
+        <p style="margin-top: 14px; font-size: 14px; cursor:pointer;">
+          创建报表
+        </p>
+      </div>
+    </div>
+
+    <div class="report-item shadow-content2" *ngFor="let report of reportList; let i = index">
+      <div class="header" [ngStyle]="{ background: report.color || '#5697F1' }">
+        <p class="name">
+          <input
+            nz-input
+            nzSize="small"
+            [(ngModel)]="report.name"
+            [title]="report.name"
+            style="width: 75px; padding-left: 0px; font-size: 16px;"
+            [disabled]="!report.isEditName"
+            [ngClass]="{ 'disable-input': !report.isEditName }"
+            maxlength="64"
+          />
+          <span
+            *ngIf="!report.isEditName"
+            class="iconfont icon-mode_edit"
+            (click)="toEditName(i)"
+            style="cursor: pointer;"
+          ></span>
+
+          <span
+            *ngIf="report.isEditName"
+            class="ant-compat anticon anticon-check-circle-o"
+            (click)="editName(report, i)"
+            style="margin-left: 10px;"
+          ></span>
+          <span
+            *ngIf="report.isEditName"
+            class="ant-compat anticon anticon-close-circle-o"
+            (click)="cancelEdit(i)"
+            style="margin-left: 10px;"
+          ></span>
+
+          <span
+            class="ant-compat anticon anticon-share-alt"
+            *ngIf="!report.share"
+            (click)="share(report, i)"
+            style="cursor: pointer; float: right; margin-top: 10px;"
+          ></span>
+          <nz-dropdown [nzTrigger]="'click'" *ngIf="report.share" style="float: right;">
+            <a nz-dropdown>
+              <span class="ant-compat anticon anticon-ellipsis" style="transform: rotate(90deg); color: #fff;"></span>
+            </a>
+            <ul nz-menu [ngClass]="{ 'ul-position': i || i == 0 }">
+              <li nz-menu-item (click)="cancelShare(report, i)">取消分享</li>
+              <li nz-menu-item (click)="editShare(report, i)">修改分享</li>
+            </ul>
+          </nz-dropdown>
+        </p>
+        <p class="info">创建人：{{ report.creator }}</p>
+      </div>
+      <div class="item-value">
+        <span>{{ i + 1 }}</span>
+      </div>
+      <div class="footer">
+        <p class="info" title="{{ report.createTime | date: 'yyyy-MM-dd HH:mm:ss' }}">
+          创建时间：{{ report.createTime | date: 'yyyy-MM-dd HH:mm:ss' }}
+        </p>
+        <div class="oprator">
+          <span class="iconfont icon-mode_edit" (click)="toEditReport(report)" style="cursor: pointer;"></span>
+          <span class="iconfont icon-delete" (click)="deleteReport(report, i)" style="cursor: pointer;"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nz-modal
+    [(nzVisible)]="isVisible"
+    [nzBodyStyle]="{ padding: '0' }"
+    [nzFooter]="null"
+    [nzWidth]="dialogWidth"
+    nzMaskClosable="false"
+    nzWrapClassName="vertical-center-modal"
+    [nzTitle]="dialogName"
+    (nzOnCancel)="handleCancel()"
+  >
+    <app-create-report
+      *ngIf="dialogType == 'addReport' && isVisible"
+      (closeSaveModel)="closeSaveModel($event)"
+    ></app-create-report>
+    <app-share-report
+      *ngIf="dialogType == 'shareReport' && isVisible"
+      [reportId]="reportId"
+      (closeModel)="cancelModal()"
+    ></app-share-report>
+  </nz-modal>
+</main>

@@ -1,0 +1,21 @@
+<ng-container *ngIf="noLimit&&period==1">
+    <nz-range-picker [(ngModel)]="_dateRange" [nzDisabledDate]="_disabledDate1" [nzAllowClear]="false" [nzPlaceHolder]="_datePlaceholder"
+    [nzFormat]="dateFormat" (ngModelChange)="_changeDateRange()"></nz-range-picker>
+</ng-container>
+
+<ng-container *ngIf="noLimit&&period==0">
+    <nz-range-picker [(ngModel)]="_dateRange" [nzDisabledDate]="_disabledDate" [nzAllowClear]="false" [nzPlaceHolder]="_datePlaceholder"
+    [nzFormat]="dateFormat" (ngModelChange)="_changeDateRange()"></nz-range-picker>
+</ng-container>
+
+<ng-container *ngIf="noLimit&&period==2">
+    <nz-range-picker [(ngModel)]="_dateRange" [nzAllowClear]="false" [nzPlaceHolder]="_datePlaceholder" [nzFormat]="dateFormat"
+    (ngModelChange)="_changeDateRange()"></nz-range-picker>
+</ng-container>
+
+<ng-container *ngIf="!noLimit">
+    <nz-range-picker [(ngModel)]="_dateRange" [nzAllowClear]="false" [nzPlaceHolder]="_datePlaceholder" [nzFormat]="dateFormat"
+    (ngModelChange)="_changeDateRange()" [nzDisabledDate]="_disabledDate"></nz-range-picker>
+</ng-container>
+
+    

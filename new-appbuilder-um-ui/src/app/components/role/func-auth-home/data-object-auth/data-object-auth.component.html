@@ -1,0 +1,38 @@
+
+
+<div class="data-obj-auth">
+  <p class="title">
+    为角色设置对各数据对象的操作权限
+  </p>
+
+    <nz-table #nzTable [nzBordered]="false" [nzData]="_dataSet" [nzTotal]="_dataSet.length" [(nzPageSize)]="_dataSet.length"
+   [nzShowPagination]='false'>
+    <thead>
+        <tr>
+            <th [nzWidth]="'30%'">
+                数据对象
+            </th>
+            <th [nzWidth]="'60%'">
+                数据权限
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of nzTable.data;">
+            <td>{{data.targetName}}</td>
+            <td>
+                <nz-checkbox-wrapper style="width: 100%;">
+                    <div nz-row >
+                        <ng-container *ngFor='let authBean of data.authBeans' >
+                            <div style='float: left;' nz-col><label nz-checkbox [nzValue]="authBean.hasAuth" [(ngModel)]="authBean.hasAuth">{{ authBean.operatorName }}</label></div>
+                        </ng-container>
+                    </div>
+                  </nz-checkbox-wrapper>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+<div class="data-obj-operate">
+        <button nz-button nzType="primary" (click)='updateDataauth()' >确定</button>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<h3 class="title">
+  Top10错误分布
+  <div class="title-tab">
+    <nz-radio-group (ngModelChange)="radioChange($event)" [nzSize]="'small'" [(ngModel)]="radioValue">
+      <label nz-radio-button nzValue="_td_channel">分包渠道</label>
+      <label nz-radio-button nzValue="_td_os">系统版本</label>
+      <label nz-radio-button nzValue="_td_mobile">品牌机型</label>
+      <label nz-radio-button nzValue="_td_current_appversion">应用版本</label>
+    </nz-radio-group>
+  </div>
+</h3>
+<div class="chart">
+  <nz-tabset>
+    <nz-tab nzTitle="{{ item.label }}" *ngFor="let item of tabList" (nzClick)="changeTab(item)">
+      <div class="chart-one">
+        <div *ngIf="!loading && !flag">
+          <div echarts [options]="chartOption" class="chart-wap"></div>
+        </div>
+        <app-loading-and-no-data [isLoading]="loading" [isNoData]="flag"></app-loading-and-no-data>
+      </div>
+    </nz-tab>
+  </nz-tabset>
+</div>

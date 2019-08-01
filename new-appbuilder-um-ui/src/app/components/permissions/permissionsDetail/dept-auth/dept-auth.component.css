@@ -1,0 +1,7 @@
+:host ::ng-deep .table-operator-bottom {
+    background:transparent;
+}
+:host ::ng-deep .operation-region {
+    background-color: #fff;
+    box-shadow: 0 1px 4px 0 rgba(23, 35, 61, 0.25);
+}

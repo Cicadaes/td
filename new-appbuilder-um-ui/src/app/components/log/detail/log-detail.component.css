@@ -1,0 +1,33 @@
+.label_font{
+    font-weight:bold;
+}
+
+:host ::ng-deep .special-label {
+    width: 100px;
+    text-align: left;
+    margin-left: 15px;
+}
+.journal{
+    margin-bottom: 10px !important;
+}
+.journal .special-label{
+    margin-left: 0 !important;
+}
+.journal div label{
+    height: 32px;
+    line-height: 32px;
+    display: inline-block;
+    width: 100%;
+}
+.journal .ant-col-sm-4{
+    height: 32px;
+    line-height: 32px;
+}
+.journal div label:after{
+    margin: 0 8px 0 2px;
+    position: relative;
+    top: -0.5px;
+}
+:host ::ng-deep .ant-card-body {
+    padding: 24px 14px !important;
+}

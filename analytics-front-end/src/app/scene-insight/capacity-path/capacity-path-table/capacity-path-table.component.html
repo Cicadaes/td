@@ -1,0 +1,59 @@
+<div class="first-level"></div>
+<main>
+  <div class="content-div">
+    <button nz-button nzType="primary" nzSize="default" (click)="create()">
+      <span class="ant-compat anticon anticon-plus"></span>创建{{ _name }}路径
+    </button>
+    <div class="content-div-table shadow-content">
+      <h3 class="content-div-table-tit module-title">路径详情</h3>
+      <div class="table-custom-more-search">
+        <app-more-search [fieldArray]="_moreSearchFieldArray" (onSearch)="onSearchMoreSearch($event)"></app-more-search>
+      </div>
+      <nz-table
+        #nzTable
+        nzShowSizeChanger
+        [nzLoading]="capacityTableLoading"
+        [nzFrontPagination]="false"
+        [nzData]="capacityData"
+        [(nzPageIndex)]="_current"
+        [(nzPageSize)]="_pageSize"
+        [(nzTotal)]="_total"
+        (nzPageIndexChange)="PageIndexChange($event)"
+        (nzPageSizeChange)="PageSizeChange($event)"
+        [nzPageSizeOptions]="pageSizeOptions"
+      >
+        <thead nz-thead>
+          <tr>
+            <th nz-th nzWidth="18%">智能路径名称</th>
+            <th nz-th nzWidth="18%">起始点</th>
+            <th nz-th nzWidth="16%">终止点</th>
+            <th nz-th nzWidth="16%">计算状态</th>
+            <th nz-th nzWidth="16%">创建人</th>
+            <th nz-th nzWidth="16%">操作</th>
+          </tr>
+        </thead>
+        <tbody nz-tbody>
+          <tr nz-tbody-tr *ngFor="let item of nzTable.data">
+            <td nz-td>{{ item.name }}</td>
+            <td nz-td>{{ item.startPointName }}</td>
+            <td nz-td>{{ item.endPointName }}</td>
+            <td nz-td>
+              <div>
+                {{ item.status | calStatusPipe }}
+              </div>
+            </td>
+            <td nz-td>{{ item.createUserName }}</td>
+            <td nz-td>
+              <a *ngIf="item.status == 3" (click)="detail(item)" style="margin-right:5px;">查看</a>
+              <a *ngIf="item.status != 2 && item.currentUser" (click)="edit(item)" style="margin-right:5px;">编辑</a>
+              <a *ngIf="item.status != 2 && item.currentUser" (click)="delete(item)" style="margin-right:5px;">删除</a>
+              <a *ngIf="(item.status == 3 || item.status == -1) && item.currentUser" (click)="recompute(item)"
+                >重新计算</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</main>

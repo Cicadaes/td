@@ -1,0 +1,4 @@
+<div class="zw-margin-top" style="padding: 0px;margin-top: 4px;">
+    <func-auth-checktree [roleId]="roleId" *ngIf="isSuper"></func-auth-checktree>
+    <carousel-app-manage *ngIf="!isSuper" [refresh]="refresh" (onSubmit)="onSubmitAppData($event)" [tenantId]="tenantId" [appList]="appList" [queryParams]="queryParams"></carousel-app-manage>
+</div>

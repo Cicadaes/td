@@ -1,0 +1,16 @@
+<!--<super-roles-tabs></super-roles-tabs>-->
+
+<div class="table-operator clrfix">
+    <p>注：为所有用户设置对当前数据对象的默认操作权限。</p>
+    <add-user-dialog [isShow]="isShowAddUerModal" [tenantId]="tenantId" [userId]="userId" [roleId]="roleId" (onClose)="hideAddUserModal($event)"
+        (onSubmit)="onSubmitUserAuthData($event)"></add-user-dialog>
+    <add-user-auth-dialog [isSuper]="isSuper" *ngIf="isShowAddUserAuthModal" [isShow]="isShowAddUserAuthModal"
+        [tenantId]="tenantId" [userId]="userId" [roleId]="roleId" (onClose)="hideAddUserAuthModal($event)" (onSubmit)="onSubmitUserAuthData($event)"></add-user-auth-dialog>
+</div>
+<div class="table-operator-bottom" style="padding: 0px;box-shadow: 0 1px 4px 0 rgba(23,35,61,0.10);">
+    <user-auth-table #tableChild [isSuper]="isSuper" (canShow)="checkData($event)" [tenantId]="tenantId" [targetId]="targetId"
+        [queryParams]="userQuery" [batchRemove]="batchRemoveUsers" [(isReloadData)]="isReloadData"></user-auth-table>
+</div>
+<button style="margin-top:20px;" nz-button [nzType]="'primary'" [nzSize]="'large'" class="leftFR" (click)="edit()">
+    <span>确定</span>
+</button>

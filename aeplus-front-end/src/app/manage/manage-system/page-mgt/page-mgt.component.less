@@ -1,0 +1,183 @@
+
+    :host {
+        position: relative;
+        display: block;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #edeef1 #e0e1e5 #cbced3 #e0e1e5;
+        border-radius: 3px;
+        background-color: #ffffff;
+    }
+
+    :host /deep/ .search nz-input-group, :host /deep/ .search input.ant-input, :host /deep/ .search-advanced nz-select, :host /deep/ .search-advanced input.ant-input {
+        display: inline-block;
+        width: 200px;
+        font-size: 12px;
+        line-height: 12px;
+        color: #17233d;
+    }
+
+    :host /deep/ .content th {
+        padding-top: 13px;
+        padding-bottom: 13px;
+        color: #17233d;
+    }
+
+    :host /deep/ .content td {
+        padding-top: 13px;
+        padding-bottom: 13px;
+        color: #656d7f;
+    }
+
+    :host /deep/ .content nz-pagination {
+        display: block;
+        height: 50px;
+        padding-right: 8px;
+        padding-top: 9px;
+        text-align: right;
+    }
+
+    :host /deep/ .content input.ant-input {
+        width: 200px;
+        margin-top: -32px;
+        margin-bottom: -32px;
+        font-size: 12px;
+        line-height: 12px;
+        color: #656d7f;
+    }
+
+    :host /deep/ .content nz-switch {
+        margin-top: -22px;
+        margin-bottom: -22px;
+    }
+
+
+
+    /* icon */
+
+    .search .advanced:before {
+        font-family: "anticon";
+        content: "\e61d";
+    }
+
+    .search .advanced.true:before {
+        font-family: "anticon";
+        content: "\e61e";
+    }
+
+    .content .edit-enter:before {
+        font-family: "anticon";
+        content: "\e692";
+    }
+
+    .content .edit-ok:before {
+        font-family: "anticon";
+        content: "\e630";
+    }
+
+    .content .edit-ok.loading:before {
+        font-family: "anticon";
+        content: "\e64d";
+    }
+
+    .content .edit-cancel:before {
+        font-family: "anticon";
+        content: "\e62e";
+    }
+
+
+
+    /* .header */
+
+    .header {
+        height: 46px;
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-top: 16px;
+    }
+
+    /* .content .edit-enter */
+
+    .content .edit-enter, .content .edit-ok.loading {
+        position: relative;
+        left: 5px;
+        font-size: 12px;
+        line-height: 12px;
+        color: #808695;
+    }
+
+    .content .edit-ok.loading:before {
+        display: inline-block;
+        -webkit-animation: loadingCircle 1s infinite linear;
+        -o-animation: loadingCircle 1s infinite linear;
+        animation: loadingCircle 1s infinite linear;
+    }
+
+    .content .edit-ok {
+        position: relative;
+        left: 5px;
+        font-size: 14px;
+        line-height: 14px;
+        color: #19be6b;
+    }
+
+    .content .edit-cancel {
+        position: relative;
+        left: 10px;
+        font-size: 14px;
+        line-height: 14px;
+        color: #808695;
+    }
+
+
+
+    /* .search, .search-advanced */
+
+    .search {
+        position: absolute;
+        right: 16px;
+        top: 11px;
+    }
+
+    .search .advanced {
+        margin-left: 18px;
+        font-size: 12px;
+        line-height: 12px;
+        color: #57a3f3;
+    }
+
+    .search .advanced:before {
+        position: relative;
+        left: -4px;
+    }
+
+    .search-advanced {
+        position: relative;
+        overflow: hidden;
+        padding: 8px 80px 8px 8px;
+        border-top: 1px solid #eeeeee;
+    }
+
+    .search-advanced .term {
+        float: left;
+        margin: 8px;
+        font-size: 12px;
+        line-height: 12px;
+        white-space: nowrap;
+        color: #17233d;
+    }
+
+    .search-advanced .button {
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+    }
+
+    .search-advanced .button:after {
+        content: "";
+        position: absolute;
+        right: 110px;
+        top: 0;
+        bottom: 0;
+        border-left: 1px solid #e7e9eb;
+    }

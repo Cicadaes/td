@@ -1,0 +1,308 @@
+<div class="content">
+    <div class="base-desc">
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                <span class="require">*</span>投放名称
+            </label>
+            <div class="item-input">
+                <input tdLimitInputText iType="triggerInput" max="26" type="text" placeholder="请输入内容" [(ngModel)]="pcs.nodeData.name"
+                    [disabled]="!pcs.isPipelineEdit">
+            </div>
+        </div>
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                描述
+            </label>
+            <div class="item-textarea">
+                <textarea tdLimitTextareaText iType="all" max="80" [(ngModel)]="pcs.nodeData.description" type="text"
+                    placeholder="请输入内容" [disabled]="!pcs.isPipelineEdit"></textarea>
+            </div>
+        </div>
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                <span class="require">*</span>投放组
+            </label>
+            <div class="item-input">
+                <input tdLimitInputText type="text" style="padding-right: 25px;" [max]="26" placeholder="请选择" [(ngModel)]="pcs.nodeData.groupName"
+                    (click)="showGroups($event)" (ngModelChange)="getGroupList()" (keydown)="saveGroup($event)" [disabled]="!pcs.isPipelineEdit">
+                <div class="dropdown-trigger">
+                    <span class="anticon anticon-down"></span>
+                </div>
+                <div *ngIf="showGroupList" class="dropdown">
+                    <ul>
+                        <li *ngFor="let item of groupList" (click)="selectGroup(item)">
+                            <span class="info">{{item.groupName}}</span>
+                            <span class="iconfont icon-clear" (click)="deleteGroup(item, $event)"></span>
+                        </li>
+                        <li *ngIf="groupList.length === 0 ">
+                            <span class="info">无</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="pipe-item clearfix">
+            <label class="item-text">
+                <span class="require">*</span>同一用户最多可收到
+                <input type="text" tdLimitNumberInput condition="PI" [(ngModel)]="pcs.nodeData.maxDeliveryCount"
+                    [disabled]="!pcs.isPipelineEdit" title="{{pcs.nodeData.maxDeliveryCount}}">次，间隔不低于
+                <input type="text" tdLimitNumberInput condition="PI" [(ngModel)]="pcs.nodeData.frequency" [disabled]="!pcs.isPipelineEdit" title="{{pcs.nodeData.frequency}}">天
+            </label>
+        </div>
+    </div>
+    <div class="app-content">
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                <span class="require">*</span>目标平台
+            </label>
+            <div class="target-platform">
+                <span class="icon-platform android" [ngClass]="{active: isAndroid}" (click)="changePlatform('android')"></span>
+                <span class="icon-platform ios" [ngClass]="{active: !isAndroid }" (click)="changePlatform('ios')"></span>
+            </div>
+        </div>
+        <!-- android start -->
+        <div class="pipe-item clearfix" *ngIf="isAndroid">
+            <label class="item-label">
+                <span class="require">*</span>消息标题
+            </label>
+            <div class="item-input">
+                <input nz-input type="text" tdLimitInputText iType="all" max="25" autocomplete="off" [disabled]="pcs.nodeData.action || !pcs.isPipelineEdit"
+                    [(ngModel)]="pcs.nodeData.title" style="width: 275px;height: 32px;">
+                <label class="checkbox-text" style="margin-top: 12px;" nz-checkbox [(ngModel)]="pcs.nodeData.action"
+                    [nzDisabled]="!pcs.isPipelineEdit">透传消息</label>
+                <nz-tooltip [nzTitle]="'透传消息时，消息标题、消息内容、震动提示、唤醒屏幕均不可用'" [nzPlacement]="'right'">
+                    <span class="anticon anticon-question-circle-o pointer" nz-tooltip></span>
+                </nz-tooltip>
+            </div>
+        </div>
+        <!-- 共有 -->
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                <span class="require">*</span>消息内容
+            </label>
+        </div>
+        <!-- 共有结束 -->
+        <div class="pipe-item clearfix left-distance" *ngIf="isAndroid">
+            <div class="insert-variable">
+                <nz-dropdown [nzTrigger]="'click'" [nzDisabled]="pcs.nodeData.action || !pcs.isPipelineEdit">
+                    <a nz-dropdown>
+                        $_ 插入变量
+                    </a>
+                    <ul nz-menu style="max-height: 200px; overflow-y: auto;">
+                        <li nz-menu-item *ngFor="let item of variableList" (click)="editorInsertVariable(item)">{{item.value}}（{{item.key}}）</li>
+                    </ul>
+                </nz-dropdown>
+            </div>
+            <ckeditor #ckeditor [ngModel]="pcs.nodeData.message" (ngModelChange)="editorChange($event)" [readonly]="pcs.nodeData.action || !pcs.isPipelineEdit" debounce="500" [config]="editorConfig"></ckeditor>
+            <!-- <textarea id="content" [(ngModel)]="pcs.nodeData.message" [disabled]="pcs.nodeData.action || !pcs.isPipelineEdit"
+                nz-input placeholder="请输入内容" tdLimitTextareaText iType="all" max="240" style="width: 340px;height: 125px;resize: none;border-radius: 0 0 4px 4px;"></textarea> -->
+            <!-- <p class="prompt">
+                还可以输入
+                <span class="blue-text">{{240 - ((pcs.nodeData.message && pcs.nodeData.message.length)
+                    || 0)}}</span>
+                字符
+            </p> -->
+            <label class="checkbox-text" style="margin-top: 10px;" nz-checkbox [(ngModel)]="pcs.nodeData.clearable" [nzDisabled]="!pcs.isPipelineEdit">
+                让本条推送消息不可被删除，谨慎使用
+            </label>
+        </div>
+        <div class="pipe-item clearfix" *ngIf="isAndroid">
+            <label class="item-label" style="width: 70px;line-height: 20px;">
+                震动提示
+                <nz-tooltip [nzTitle]="'推送到达时震动手机'" [nzPlacement]="'right'">
+                    <span class="anticon anticon-question-circle-o pointer" nz-tooltip></span>
+                </nz-tooltip>
+            </label>
+            <div class="item-content">
+                <nz-switch [nzSize]="'small'" [(ngModel)]="pcs.nodeData.vibrate" [nzDisabled]="pcs.nodeData.action || !pcs.isPipelineEdit"></nz-switch>
+            </div>
+        </div>
+        <div class="pipe-item clearfix" *ngIf="isAndroid">
+            <label class="item-label" style="width: 70px;line-height: 20px;">
+                唤醒屏幕
+                <nz-tooltip [nzTitle]="'推送到达时唤醒屏幕'" [nzPlacement]="'right'">
+                    <span class="anticon anticon-question-circle-o pointer" nz-tooltip></span>
+                </nz-tooltip>
+            </label>
+            <div class="item-content">
+                <nz-switch [nzSize]="'small'" [(ngModel)]="pcs.nodeData.wakeup" [nzDisabled]="pcs.nodeData.action || !pcs.isPipelineEdit"></nz-switch>
+            </div>
+        </div>
+        <!-- android end -->
+        <!-- IOS start -->
+        <div class="pipe-item clearfix left-distance" *ngIf="!isAndroid">
+            <div class="insert-variable">
+                <nz-dropdown [nzTrigger]="'click'" [nzDisabled]="pcs.nodeData.action || !pcs.isPipelineEdit">
+                    <a nz-dropdown>
+                        $_ 插入变量
+                    </a>
+                    <ul nz-menu style="max-height: 200px; overflow-y: auto;">
+                        <li nz-menu-item *ngFor="let item of variableList" (click)="insertVariable(item)">{{item.value}}（{{item.key}}）</li>
+                    </ul>
+                </nz-dropdown>
+            </div>
+            <textarea id="content" [(ngModel)]="pcs.nodeData.message" [disabled]="pcs.nodeData.action || !pcs.isPipelineEdit"
+                nz-input placeholder="请输入内容" tdLimitTextareaText iType="all" max="240" style="width: 340px; height: 125px;resize: none; border-radius: 0 0 4px 4px;"></textarea>
+            <p class="prompt">
+                还可以输入
+                <span  class="blue-text">{{240 - ((pcs.nodeData.message && pcs.nodeData.message.length)
+                    || 0)}}</span>
+                字符
+            </p>
+            <label class="checkbox-text" nz-checkbox [(ngModel)]="pcs.nodeData.action" [nzDisabled]="!pcs.isPipelineEdit">
+                静默推送
+            </label>
+            <nz-tooltip [nzTitle]="'静默推送时，消息内容、自定义声音、数字角标均不可用'" [nzPlacement]="'right'">
+                <span class="anticon anticon-question-circle-o pointer" style="vertical-align: middle;" nz-tooltip></span>
+            </nz-tooltip>
+        </div>
+        <div class="pipe-item clearfix" *ngIf="!isAndroid">
+            <label class="item-label" style="width: 80px;line-height: 24px;">
+                自定义声音
+                <nz-tooltip [nzTitle]="'自定义推送到达时播放的提示声音'" [nzPlacement]="'right'">
+                    <span class="anticon anticon-question-circle-o pointer" nz-tooltip></span>
+                </nz-tooltip>
+            </label>
+            <div class="item-content" style="line-height: 22px;">
+                <nz-switch [nzSize]="'small'" [(ngModel)]="pcs.nodeData.sound" (ngModelChange)="changeSound($event)"
+                    [nzDisabled]="pcs.nodeData.action || !pcs.isPipelineEdit"></nz-switch>
+                <input *ngIf="pcs.nodeData.sound" type="text" nz-input [disabled]="pcs.nodeData.action || !pcs.isPipelineEdit"
+                    autocomplete="off" [(ngModel)]="pcs.nodeData.soundName" nz-input style="width: 193px;height: 24px;margin-left: 24px;"
+                    placeholder="请输入应用包中声音文件名" title="{{pcs.nodeData.soundName}}">
+            </div>
+        </div>
+        <div class="pipe-item clearfix" *ngIf="!isAndroid">
+            <label class="item-label" style="width: 70px;line-height: 24px;">
+                数字角标
+                <nz-tooltip [nzTitle]="'推送到达时在应用图标右上角显示数字标注'" [nzPlacement]="'right'">
+                    <span class="anticon anticon-question-circle-o pointer" nz-tooltip></span>
+                </nz-tooltip>
+            </label>
+            <div class="item-content" style="line-height: 22px;">
+                <nz-switch [nzSize]="'small'" [(ngModel)]="digitalAngle" [nzDisabled]="pcs.nodeData.action || !pcs.isPipelineEdit"></nz-switch>
+                <input *ngIf="digitalAngle" [(ngModel)]="pcs.nodeData.badge" [disabled]="pcs.nodeData.action || !pcs.isPipelineEdit"
+                    style="width: 193px;height: 24px;margin-left: 24px;" nz-input placeholder="请输入小于99的整数" tdLimitNumberInput [acceptZero]=false 
+                    min="1" max="99" type="number">
+            </div>
+        </div>
+        <!-- IOS end -->
+    </div>
+    <div class="params-content">
+        <div class="pipe-item clearfix">
+            <label class="item-label" style="width: 90px;line-height: 20px;">
+                自定义参数
+                <nz-tooltip [nzTitle]="'在推送的内容里面附加自定义参数，参数将透传至应用，由应用自行处理'" [nzPlacement]="'right'">
+                    <span class="anticon anticon-question-circle-o pointer" nz-tooltip></span>
+                </nz-tooltip>
+            </label>
+            <div class="item-content">
+                <nz-switch [nzSize]="'small'" [(ngModel)]="pcs.nodeData.isVibration" (ngModelChange)="changeCustomParam($event);"
+                    [nzDisabled]="!pcs.isPipelineEdit"></nz-switch>
+            </div>
+        </div>
+        <div class="pipe-item clearfix" *ngIf="pcs.nodeData.isVibration">
+            <div class="param-list">
+                <div class="item-key" *ngFor="let param of pcs.nodeData.extendAttr;let i = index;">
+                    <label>键(key)</label>
+                    <input type="text" autocomplete="off" nz-input style="width: 80px;height: 28px;" [(ngModel)]="param['key']" title="{{param['key']}}" [disabled]="!pcs.isPipelineEdit">
+                    <label>值(value)</label>
+                    <input type="text" autocomplete="off" nz-input style="width: 80px;height: 28px;" [(ngModel)]="param['value']" title="{{param['value']}}" [disabled]="!pcs.isPipelineEdit">
+                    <span class="anticon anticon-close pointer" *ngIf="i != 0" (click)="removeCustomParam(i)"></span>
+                </div>
+                <div>
+                    <span class="blue-text pointer" (click)="addCustomParam();">
+                        <span class="anticon anticon-plus" style="margin-right: 8px;"></span>
+                        新增键值对
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                <span class="require">*</span>
+                推送通道
+            </label>
+        </div>
+        <div class="pipe-item clearfix">
+            <div class="item-content config-bn">
+                <div class="radio-group-ios" *ngIf="!isAndroid">
+                    <label class="radio-group-button" *ngIf="appConfig && appConfig.devFileName" [ngClass]="{select: pcs.nodeData.prod === 0}" (click)="select('prod', 0)">APNS测试通道</label>
+                    <label class="radio-group-button" *ngIf="appConfig && appConfig.prodFileName" [ngClass]="{select: pcs.nodeData.prod === 1}" style="margin-left: 13px;"
+                        (click)="select('prod', 1)">APNS生产通道</label>
+                    <span *ngIf="appConfig && !appConfig.devFileName && !appConfig.prodFileName" style="font-size: 12px;">尚未配置推送通道</span>
+                </div>
+                <div class="radio-group" *ngIf="isAndroid">
+                    <label class="android-button" [ngClass]="{select: pcs.nodeData.channelCode == 'tdpush'}" (click)="select('channelCode', 'tdpush')">TD推送</label>
+                    <label *ngIf="appConfig && appConfig.getuiKey" class="android-button" [ngClass]="{select: pcs.nodeData.channelCode == appConfig.getuiChannelCode}"
+                        style="margin-left: 13px;" (click)="select('channelCode', appConfig.getuiChannelCode)">个推</label>
+                    <label *ngIf="appConfig && appConfig.jpushKey" class="android-button" [ngClass]="{select: pcs.nodeData.channelCode == appConfig.jpushChannelCode}"
+                        style="margin-left: 13px;" (click)="select('channelCode', appConfig.jpushChannelCode)">极光推送</label>
+
+                    <!-- <nz-radio-group [(ngModel)]="pcs.nodeData.channelCode">
+                        <label nz-radio-button nzValue="tdpush" [nzDisabled]="!pcs.isPipelineEdit">TD推送</label>
+                        <label nz-radio-button *ngIf="appConfig && appConfig.getuiChannelCode" [nzValue]="appConfig.getuiChannelCode" [nzDisabled]="!pcs.isPipelineEdit">个推</label>
+                        <label nz-radio-button *ngIf="appConfig && appConfig.jpushChannelCode" [nzValue]="appConfig.jpushChannelCode" [nzDisabled]="!pcs.isPipelineEdit">极光推送</label>
+                    </nz-radio-group> -->
+                </div>
+                <!-- <nz-radio-group [(ngModel)]="pcs.nodeData.prod" *ngIf="!isAndroid">
+                    [nzDisabled]="!pcs.isPipelineEdit"
+                    <label nzValue="0" *ngIf="appConfig.devFilename">APNS测试通道</label>
+                    <label nzValue="1" *ngIf="appConfig.prodFilename">APNS生产通道</label>
+                </nz-radio-group>
+                <nz-radio-group [(ngModel)]="pcs.nodeData.channelCode" *ngIf="isAndroid">
+                    <label nzValue="tdpush">TD推送</label>
+                    <label *ngIf="appConfig && appConfig.getuiKey" nzValue="3">个推</label>
+                    <label *ngIf="appConfig && appConfig.jpushKey" nzValue="5">极光推送</label>
+                </nz-radio-group> -->
+            </div>
+        </div>
+        <div class="pipe-item clearfix" *ngIf="isAndroid && pcs.nodeData.channelCode == 'tdpush' && appConfig && (appConfig.hwApp || appConfig.xmApp)">
+            <label class="item-label" style="width: 75px;line-height: 18px;">
+                增强通道
+                <nz-tooltip [nzTitle]="'可增强特定品牌Android设备的消息到达能力'" [nzPlacement]="'right'">
+                    <span class="anticon anticon-question-circle-o pointer" nz-tooltip></span>
+                </nz-tooltip>
+            </label>
+            <div class="item-content l">
+                <label nz-checkbox *ngIf="appConfig && appConfig.hwApp" [(ngModel)]="pcs.nodeData.huawei" [nzDisabled]="!pcs.isPipelineEdit">华为增强通道</label>
+                <label nz-checkbox *ngIf="appConfig && appConfig.xmApp" [(ngModel)]="pcs.nodeData.xiaomi" [nzDisabled]="!pcs.isPipelineEdit">小米增强通道</label>
+            </div>
+        </div>
+    </div>
+    <div class="app-push-time">
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                <span class="require">*</span>投放时间
+            </label>
+            <div class="target-platform">
+                <ul class="label-tabs">
+                    <li *ngFor="let item of timeTabs" [ngClass]="{'item-active': item.type == nowTime}" (click)='changeTime(item.type);'>{{item.name}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="pipe-item clearfix" *ngIf="nowTime == 2">
+            <div class="target-platform" style="width: 100%;">
+                <nz-date-picker [nzShowToday]='false' [nzStyle]="{'width': '186px'}" [(ngModel)]="pcs.nodeData.date" [nzPopupStyle]="{'top': '-302px'}"
+                    [nzDisabledDate]="disabledDate" nzPlaceHolder="选择日期" nzFormat="yyyy-MM-dd" [nzDisabled]="!pcs.isPipelineEdit"></nz-date-picker>
+                <nz-select style="width: 64px; margin-left: 4px;" [(ngModel)]="pcs.nodeData.hour" nzPlaceHolder="小时"
+                    [nzDisabled]="!pcs.isPipelineEdit">
+                    <nz-option *ngFor="let item of hourList" [nzValue]="item" [nzLabel]="item"></nz-option>
+                </nz-select>
+                <nz-select style="width: 64px; margin-left: 4px;" [(ngModel)]="pcs.nodeData.minute" nzPlaceHolder="分钟"
+                    [nzDisabled]="!pcs.isPipelineEdit">
+                    <nz-option *ngFor="let item of minuteList" [nzValue]="item" [nzLabel]="item"></nz-option>
+                </nz-select>
+            </div>
+        </div>
+        <div class="pipe-item clearfix left-distance">
+            <label class="checkbox-text" nz-checkbox [(ngModel)]="pcs.nodeData.ttlType" (ngModelChange)="pcs.nodeData.timeToLive = null;" [nzDisabled]="!pcs.isPipelineEdit">
+                为离线用户保留
+            </label>
+            <nz-select style="width: 80px; margin: 0 8px;" [(ngModel)]="pcs.nodeData.timeToLive" nzPlaceHolder="小时"
+                       [nzDisabled]="!pcs.isPipelineEdit || !pcs.nodeData.ttlType">
+                <nz-option *ngFor="let option of liveTimeList" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+            </nz-select>
+            推送消息
+        </div>
+    </div>
+</div>

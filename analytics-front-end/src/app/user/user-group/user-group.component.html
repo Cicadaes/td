@@ -1,0 +1,333 @@
+<main>
+  <div class="first-level"></div>
+  <div class="content">
+    <div style="margin-bottom: 16px;">
+      <button *ngIf="!isSubCrowd" nz-button nzType="primary" nzSize="default" (click)="goNewCorwd()">
+        <span class="ant-compat anticon anticon-plus"></span>用户分群
+      </button>
+    </div>
+    <div class="shadow-content">
+      <div class="content-title ">
+        <label class="module-title">{{ titleName }}</label>
+        <div class="right">
+          <!-- 搜索 -->
+          <nz-input-group *ngIf="!showAdvancedSearch" [nzSuffix]="suffixIconButton">
+            <input
+              type="text"
+              [(ngModel)]="advancedSearchParams.name"
+              nz-input
+              (keyup.enter)="getList()"
+              placeholder="请输入人群名称"
+            />
+          </nz-input-group>
+          <ng-template #suffixIconButton>
+            <span class="ant-compat anticon anticon-search" (click)="getList()"></span>
+          </ng-template>
+
+          <a (click)="advancedSearch()">
+            <span *ngIf="showAdvancedSearch" class="ant-compat anticon anticon-up"></span>
+            <span *ngIf="!showAdvancedSearch" class="ant-compat anticon anticon-down"></span>搜索条件
+          </a>
+        </div>
+      </div>
+      <div *ngIf="showAdvancedSearch" class="content-search">
+        <div class="search-left">
+          <div class="search" nz-row nzGutter="16">
+            <div class="item-search" nz-col nzSpan="8">
+              <label class="label-control">人群名称：</label>
+              <input class="input-search" nz-input placeholder="请输入内容" [(ngModel)]="advancedSearchParams.name" />
+            </div>
+            <div class="item-search" nz-col nzSpan="8">
+              <label class="label-control">人群来源：</label>
+              <nz-select
+                class="input-search search-dropdown"
+                nzShowSearch
+                nzAllowClear
+                nzPlaceHolder="全部"
+                [(ngModel)]="advancedSearchParams.source"
+              >
+                <nz-option *ngFor="let item of crowdSourceList" [nzLabel]="item.value" [nzValue]="item.key"></nz-option>
+              </nz-select>
+            </div>
+            <div class="item-search" nz-col nzSpan="8">
+              <label class="label-control">状态：</label>
+              <nz-select
+                class="input-search search-dropdown"
+                nzShowSearch
+                nzAllowClear
+                nzPlaceHolder="全部"
+                [(ngModel)]="advancedSearchParams.status"
+              >
+                <nz-option *ngFor="let item of statusList" [nzLabel]="item.value" [nzValue]="item.key"></nz-option>
+              </nz-select>
+            </div>
+            <div class="item-search" nz-col nzSpan="8">
+              <label class="label-control">计算状态：</label>
+              <nz-select
+                class="input-search search-dropdown"
+                nzShowSearch
+                nzAllowClear
+                nzPlaceHolder="全部"
+                [(ngModel)]="advancedSearchParams.calcStatus"
+              >
+                <nz-option *ngFor="let item of calcStatusList" [nzLabel]="item.value" [nzValue]="item.key"></nz-option>
+              </nz-select>
+            </div>
+            <div class="item-search" nz-col nzSpan="8">
+              <label class="label-control">创建人：</label>
+              <input
+                class="input-search"
+                [(ngModel)]="advancedSearchParams.creator"
+                nz-input
+                placeholder="请输入内容"
+              />
+            </div>
+            <div class="item-search" nz-col nzSpan="8">
+              <label class="label-control">用户规模：</label>
+              <nz-input-number
+                [(ngModel)]="advancedSearchParams.crowdCountStart"
+                [nzMin]="0"
+                [nzStep]="1"
+                [nzPrecision]="0"
+                nzPlaceHolder=""
+              ></nz-input-number>
+              ~
+              <nz-input-number
+                [(ngModel)]="advancedSearchParams.crowdCountEnd"
+                [nzMin]="0"
+                [nzStep]="1"
+                [nzPrecision]="0"
+                nzPlaceHolder=""
+              ></nz-input-number>
+            </div>
+            <div class="item-search" nz-col nzSpan="8">
+              <label class="label-control">创建时间：</label>
+              <nz-range-picker
+                [(ngModel)]="createDate"
+                [nzFormat]="yyyy / MM / dd"
+                nzPlaceHolder=""
+                [nzAllowClear]="true"
+              >
+              </nz-range-picker>
+            </div>
+            <div class="item-search" nz-col nzSpan="8">
+              <label class="label-control">更新时间：</label>
+              <nz-range-picker
+                [(ngModel)]="updateDate"
+                [nzFormat]="yyyy / MM / dd"
+                nzPlaceHolder=""
+                [nzAllowClear]="true"
+              >
+              </nz-range-picker>
+            </div>
+          </div>
+        </div>
+        <div class="search-right">
+          <button nz-button nzType="primary" nzSize="default" (click)="advancedSearchList()">
+            查询
+          </button>
+        </div>
+      </div>
+      <div class="content-body">
+        <div class="content-table">
+          <nz-table
+            #userTable
+            [nzData]="tableList"
+            [nzLoading]="laoding"
+            [nzFrontPagination]="false"
+            (nzPageIndexChange)="getList($event)"
+            [nzPageIndex]="page"
+            [(nzPageSize)]="pageSize"
+            (nzPageSizeChange)="getList()"
+            [nzTotal]="total"
+            nzShowSizeChanger="true"
+            [nzScroll]="{ x: '1300px' }"
+            [nzPageSizeOptions]="[10, 20, 50, 100]"
+          >
+            <thead>
+              <tr>
+                <th>人群名称</th>
+                <th>人群来源</th>
+                <th>状态</th>
+                <th>计算状态</th>
+                <th>创建人</th>
+                <th>用户规模</th>
+                <th>创建时间</th>
+                <th>更新时间</th>
+                <th nzWidth="135px" nzRight="0px" style="width: 135px;">
+                  操作
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of userTable.data">
+                <td title="{{ data.name }}">{{ data.name }}</td>
+                <td>{{ crowdTypeMap[data.source] }}</td>
+                <td>
+                  <span *ngIf="data.status === 2" class="dot success"></span>
+                  <span *ngIf="data.status === 1" class="dot forbid"></span>
+                  {{ statusMap[data.status] }}
+                </td>
+                <td>{{ calcStausMap[data.calcStatus] }}</td>
+                <td title="{{ data.creator }}">{{ data.creator }}</td>
+                <td>{{ data.crowdCount | numberToThousandsPipe }}</td>
+                <td>{{ data.createTime | date: 'yyyy-MM-dd HH:mm' }}</td>
+                <td>{{ data.updateTime | date: 'yyyy-MM-dd HH:mm' }}</td>
+                <td nzRight="0px" *ngIf="data.source !== 'FC'">
+                  <span *ngIf="data.source !== 'AC'">
+                    <a
+                      *ngIf="data.crowdCount && data.crowdCount > 0 && data.calcStatus != '1'"
+                      (click)="goInsights(data)"
+                      >画像</a
+                    >
+                    <a *ngIf="data.crowdCount && data.crowdCount > 0 && data.calcStatus != '1'" (click)="export(data)"
+                      >导出</a
+                    >
+                  </span>
+                  <!-- 行为人群 计算异常不显示画像和导出操作  start -->
+                  <span *ngIf="data.source == 'AC'">
+                    <a
+                      *ngIf="
+                        data.crowdCount && data.crowdCount > 0 && data.calcStatus != '1' && data.calcStatus != '-1'
+                      "
+                      (click)="goInsights(data)"
+                      >画像</a
+                    >
+                    <a
+                      *ngIf="
+                        data.crowdCount && data.crowdCount > 0 && data.calcStatus != '1' && data.calcStatus != '-1'
+                      "
+                      (click)="export(data)"
+                      >导出</a
+                    >
+                  </span>
+                  <!-- 行为人群 计算异常不显示画像和导出操作  end -->
+                  <a
+                    *ngIf="data.createBy !== createName && data.source != 'IC' && data.calcStatus != '1'"
+                    (click)="view(data)"
+                    >查看</a
+                  >
+                  <a
+                    *ngIf="
+                      data.createBy === createName &&
+                      (data.crowdCount <= 0 || !data.crowdCount) &&
+                      (data.source == 'GC' || data.source == 'HC') &&
+                      data.calcStatus != '1'
+                    "
+                    (click)="gotoEdit(data)"
+                    >编辑</a
+                  >
+                  <a
+                    *ngIf="
+                      data.createBy === createName &&
+                      (data.crowdCount <= 0 || !data.crowdCount) &&
+                      data.calcStatus != '1'
+                    "
+                    (click)="deleteCrowd(data)"
+                    >删除</a
+                  >
+                  <a
+                    *ngIf="
+                      data.createBy === createName &&
+                      data.crowdCount > 0 &&
+                      !(data.source != 'IC') &&
+                      data.calcStatus != '1'
+                    "
+                    (click)="deleteCrowd(data)"
+                    >删除</a
+                  >
+                  <!-- 行为人群删除展示  start -->
+                  <a
+                    *ngIf="
+                      data.createBy === createName &&
+                      data.crowdCount > 0 &&
+                      data.source == 'AC' &&
+                      data.calcStatus != '1'
+                    "
+                    (click)="deleteCrowd(data)"
+                    >删除</a
+                  >
+                  <!-- 行为人群删除展示  end -->
+                  <nz-dropdown
+                    *ngIf="
+                      data.createBy === createName &&
+                      data.crowdCount > 0 &&
+                      data.source != 'IC' &&
+                      data.source != 'AC' &&
+                      data.calcStatus != '1'
+                    "
+                  >
+                    <a nz-dropdown> 更多 <span class="ant-compat anticon anticon-down"></span> </a>
+                    <ul nz-menu nzSelectable>
+                      <li *ngIf="data.source == 'GC' || data.source == 'HC'" nz-menu-item>
+                        <a (click)="gotoEdit(data)" style="font-size: 12px;">编辑</a>
+                      </li>
+                      <li nz-menu-item>
+                        <a (click)="deleteCrowd(data)" style="font-size: 12px;">删除</a>
+                      </li>
+                    </ul>
+                  </nz-dropdown>
+                </td>
+                <td nzRight="0px" *ngIf="data.source === 'FC'">
+                  <a
+                    *ngIf="data.crowdCount && data.crowdCount > 0 && data.calcStatus != '1' && data.status === 2"
+                    (click)="goInsights(data)"
+                    >画像</a
+                  >
+                  <a
+                    *ngIf="data.crowdCount && data.crowdCount > 0 && data.calcStatus != '1' && data.status === 2"
+                    (click)="export(data)"
+                    >导出</a
+                  >
+                  <a *ngIf="data.createBy === createName && data.calcStatus != '1'" (click)="deleteCrowd(data)">删除</a>
+                </td>
+              </tr>
+            </tbody>
+          </nz-table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nz-modal
+    *ngIf="_isVisible"
+    [nzMaskClosable]="false"
+    [(nzVisible)]="_isVisible"
+    [nzBodyStyle]="{ padding: '0' }"
+    [nzFooter]="null"
+    [nzWidth]="'476px'"
+    nzWrapClassName="vertical-center-modal"
+    [nzTitle]="modalTitle"
+    (nzOnCancel)="handleCancel()"
+  >
+    <ng-template #modalTitle>
+      <div class="custom-modal-title clrfix">
+        <span class="icon iconfont icon-warning"></span>
+        <span class="text">删除提示</span>
+      </div>
+    </ng-template>
+
+    <div class="custom-modal-content">
+      <div>人群被引用，不允许删除。</div>
+      <div class="more-view">
+        <a href="javascript:;" (click)="showHideMoreTagList()" *ngIf="!_showMoreTagList">查看引用详情</a>
+        <a href="javascript:;" (click)="showHideMoreTagList()" *ngIf="_showMoreTagList">收起引用详情</a>
+      </div>
+      <div class="more-list" *ngIf="_showMoreTagList">
+        <dl *ngIf="_checkDeleteTagData.crowd && _checkDeleteTagData.crowd.length > 0">
+          <dt>人群</dt>
+          <dd class="clrfix">
+            <ul class="clrfix tag-list">
+              <li *ngFor="let crowd of _checkDeleteTagData.crowd" title="{{ crowd }}">
+                {{ crowd }}
+              </li>
+            </ul>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <div class="custom-modal-footer">
+      <button nz-button nzType="primary" (click)="handleCancel()">确定</button>
+    </div>
+  </nz-modal>
+</main>

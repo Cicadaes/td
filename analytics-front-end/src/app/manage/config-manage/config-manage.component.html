@@ -1,0 +1,11 @@
+<ng-template [ngIf]="appSourceId == 'App'">
+  <app-app-config-manage></app-app-config-manage>
+</ng-template>
+
+<ng-template [ngIf]="appSourceId == 'Web'">
+  <app-web-config-manage></app-web-config-manage>
+</ng-template>
+
+<ng-template [ngIf]="appSourceId == 'miniprogram'">
+  <app-applet-config-manage></app-applet-config-manage>
+</ng-template>

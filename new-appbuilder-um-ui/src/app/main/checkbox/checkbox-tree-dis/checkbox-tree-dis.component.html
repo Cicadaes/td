@@ -1,0 +1,15 @@
+<ul class="checkbox-tree-ul clrfix" *ngIf="treeDatas && treeDatas.length > 0" [ngClass]="{'checkbox-tree-ul-first':isFirst}">
+    <ng-template ngFor let-node [ngForOf]="treeDatas">
+        <li *ngIf="node.checked">
+            <label *ngIf="isSet && node.checked" nz-checkbox [nzDisabled]="node.disabled" [(ngModel)]="node.checked" (ngModelChange)="updateCheckbox($event,node)">
+                <span>{{node.label}}</span>
+            </label>
+            <span *ngIf="!isSet">{{node.label}}</span>
+
+            <checkbox-tree-dis class="inner-checkbox-tree" [ngClass]="{'inner-checkbox-tree-first':isFirst}" *ngIf="node.children && node.children.length>0"
+                               [cmData]="node.children" [cmSet]="isSet" (onBack)="onBackData($event,node)"></checkbox-tree-dis>
+
+        </li>
+    </ng-template>
+</ul>
+<div *ngIf="!treeDatas || treeDatas.length == 0" style="text-align: center;padding: 10px;">暂无数据</div>

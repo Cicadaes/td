@@ -1,0 +1,316 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="_submitForm()">
+
+    <nz-form-item nz-row>
+        <nz-form-label nz-col [nzSm]="3" [nzXs]="30" [ngClass]="{'form-left':!isPage,'form-right':isPage,'special-label':'true'}"
+            nzRequired>
+            <label for="name" nzRequired><span>姓名</span></label>
+        </nz-form-label>
+        <nz-form-control nz-col [nzSm]="10" [nzXs]="30">
+
+            <input nz-input [nzSize]="'large'" formControlName="name" id="name">
+
+            <ng-container *ngIf="getFormControl('name').dirty && getFormControl('name').errors">
+                <nz-form-explain style="color:red;" *ngIf="getFormControl('name').errors.required">请输入姓名</nz-form-explain>
+                <nz-form-explain style="color:red;" *ngIf="getFormControl('name').errors.maxlength">输入的姓名过长</nz-form-explain>
+            </ng-container>
+        </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item nz-row>
+        <nz-form-label nz-col [nzSm]="3" [nzXs]="30" [ngClass]="{'form-left':!isPage,'form-right':isPage,'special-label':'true'}"
+            nzRequired>
+            <label for="email" nzRequired>登录账号</label>
+        </nz-form-label>
+        <nz-form-control nz-col [nzSm]="10" [nzXs]="30">
+            <input *ngIf="user" disabled="true" style="background-color: #f5f5f5;" nz-input [nzSize]="'large'" placeHolder="请输入邮箱，一旦保存不可变更"
+                formControlName="email" id="email">
+            <input *ngIf="!user" nz-input [nzSize]="'large'" placeHolder="请输入邮箱，一旦保存不可变更" formControlName="email" id="email">
+            <ng-container *ngIf="getFormControl('email').dirty&&getFormControl('email').errors">
+                <nz-form-explain style="color:red;" *ngIf="getFormControl('email').errors.required">请输入登录账号</nz-form-explain>
+                <nz-form-explain style="color:red;" *ngIf="getFormControl('email').errors.forbiddenName">登录账号必须是邮箱账号</nz-form-explain>
+                <nz-form-explain style="color:red;" *ngIf="getFormControl('email').errors.emailRepeat">{{emailErrorMsg}}</nz-form-explain>
+                <nz-form-explain style="color:red;" *ngIf="getFormControl('email').errors.maxlength">输入的登录账号过长</nz-form-explain>
+
+            </ng-container>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-row>
+        <nz-form-label nz-col [nzSm]="3" [nzXs]="30" [ngClass]="{'form-left':!isPage,'form-right':isPage,'special-label':'true'}"
+            nzRequired>
+            <label for="mobile" nzRequired>手机</label>
+        </nz-form-label>
+        <nz-form-control nz-col [nzSm]="10" [nzXs]="30">
+
+            <input nz-input [nzSize]="'large'" placeHolder="" formControlName="mobile">
+
+
+            <nz-form-explain style="color:red;" *ngIf="getFormControl('mobile').dirty&&getFormControl('mobile').hasError('required')">请输入正确的手机号</nz-form-explain>
+        </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item nz-row>
+        <nz-form-label nz-col [nzSm]="3" [nzXs]="30" [ngClass]="{'form-left':!isPage,'form-right':isPage,'special-label':'true'}">
+            <label for="phone" nzRequired class="special-label-before">联系电话</label>
+        </nz-form-label>
+        <nz-form-control nz-col [nzSm]="10" [nzXs]="30">
+
+            <input nz-input [nzSize]="'large'" placeHolder="" formControlName="phone" id="phone">
+
+            <ng-container *ngIf="getFormControl('phone').dirty && getFormControl('phone').errors">
+                <nz-form-explain style="color:red;" *ngIf="getFormControl('phone').errors.maxlength">输入的联系电话过长</nz-form-explain>
+                <nz-form-explain style="color:red;" *ngIf="getFormControl('phone').errors.phoneError">输入的联系电话格式不正确</nz-form-explain>
+            </ng-container>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-row>
+        <nz-form-label nz-col [nzSm]="3" [nzXs]="30" [ngClass]="{'form-left':!isPage,'form-right':isPage,'special-label':'true'}">
+            <label for="qq" nzRequired class="special-label-before">QQ</label>
+        </nz-form-label>
+        <nz-form-control nz-col [nzSm]="10" [nzXs]="30">
+
+            <input nz-input [nzSize]="'large'" placeHolder="" formControlName="qq" id="qq">
+
+            <ng-container *ngIf="getFormControl('qq').dirty && getFormControl('qq').errors">
+                <nz-form-explain style="color:red;" *ngIf="getFormControl('qq').errors.qqError">只能输入数字,最少5个字符、最多20个字符.</nz-form-explain>
+            </ng-container>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-row>
+        <nz-form-label nz-col [nzSm]="3" [nzXs]="30" [ngClass]="{'form-left':!isPage,'form-right':isPage,'special-label':'true'}">
+            <label for="wechat" nzRequired class="special-label-before">微信</label>
+        </nz-form-label>
+        <nz-form-control nz-col [nzSm]="10" [nzXs]="30">
+
+            <input nz-input [nzSize]="'large'" placeHolder="" formControlName="wechat" id="wechat">
+
+            <ng-container *ngIf="getFormControl('wechat').dirty && getFormControl('wechat').errors">
+                <nz-form-explain style="color:red;" *ngIf="getFormControl('wechat').errors.wechatError">只能6-20个字母|数字|下划线和减号,必须以字母开头.</nz-form-explain>
+
+            </ng-container>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-row>
+        <nz-form-label nz-col [nzSm]="3" [nzXs]="30" [ngClass]="{'form-left':!isPage,'form-right':isPage,'special-label':'true'}">
+            <label for="gender" nzRequired class="special-label-before">性别</label>
+        </nz-form-label>
+        <nz-form-control nz-col [nzSm]="10" [nzXs]="30">
+            <nz-radio-group formControlName="gender">
+                <label nz-radio [nzValue]="1">
+                    <span>男</span>
+                </label>
+                <label nz-radio [nzValue]="0">
+                    <span>女</span>
+                </label>
+            </nz-radio-group>
+            <!-- <nz-radio-group [(ngModel)]="gender" formControlName="gender">
+                    <label nz-radio [nzValue]="1">
+                        <span>男</span>
+                    </label>
+                    <label nz-radio [nzValue]="0">
+                        <span>女</span>
+                    </label>
+                </nz-radio-group> -->
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-row>
+        <nz-form-label nz-col [nzSm]="3" [nzXs]="30" [ngClass]="{'form-left':!isPage,'form-right':isPage,'special-label':'true'}">
+            <label for="deptId" nzRequired class="special-label-before">组织机构</label>
+        </nz-form-label>
+        <nz-form-control nz-col [nzSm]="10" [nzXs]="30" [nzValidateStatus]="validateForm.controls['deptId']">
+
+            <input nz-input nzReadonly [nzSize]="'large'" placeHolder="请选择" (click)="showOrganize()" formControlName="deptIdLabel">
+
+            <!-- <select-tree *ngIf="organizationSelect" [select]="organizationSelect" (onSelect)="onSelectOrganizationSelect($event)"></select-tree> -->
+            <nz-form-explain style="color:red;" *ngIf="getFormControl('deptId').dirty&&getFormControl('deptId').hasError('deptId')"></nz-form-explain>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-row>
+        <nz-form-label nz-col [nzSm]="3" [nzXs]="30" [ngClass]="{'form-left':!isPage,'form-right':isPage,'special-label':'true'}">
+            <label for="title" nzRequired class="special-label-before">职位</label>
+        </nz-form-label>
+        <nz-form-control nz-col [nzSm]="10" [nzXs]="30">
+
+            <input nz-input [nzSize]="'large'" placeHolder="" formControlName="title" id="title">
+
+            <ng-container *ngIf="getFormControl('title').dirty && getFormControl('title').errors">
+                <nz-form-explain style="color:red;" *ngIf="getFormControl('title').errors.maxlength">总长度不超过50个字符.</nz-form-explain>
+                <nz-form-explain style="color:red;" *ngIf="getFormControl('title').errors.titleError">只能输入中文、26个英文字母（大小写）、空格.</nz-form-explain>
+            </ng-container>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-row>
+        <nz-form-label nz-col [nzSm]="3" [nzXs]="30" [ngClass]="{'form-left':!isPage,'form-right':isPage,'special-label':'true'}" nzRequired>
+            <label for="status" nzRequired class="special-label-before">状态</label>
+        </nz-form-label>
+        <nz-form-control nz-col [nzSm]="10" [nzXs]="30">
+            <!-- disable="!user" -->
+            <label nz-checkbox formControlName="status">
+                <span>正常</span>
+            </label>
+            <!-- 
+                    <nz-switch [formControlName]="'status'">
+                        <span checked>正常</span>
+                        <span unchecked>禁用</span>
+                    </nz-switch>
+                -->
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item *ngIf="user" nz-form-item nz-row>
+        <nz-form-label nz-col [nzSm]="3" [nzXs]="30" [ngClass]="{'form-left':!isPage,'form-right':isPage,'special-label':'true'}"
+            nzRequired>
+            <label for="editAutoPwd">密码</label>
+        </nz-form-label>
+        <nz-form-control nz-col [nzSm]="10" [nzXs]="30">
+            <label nz-checkbox [formControlName]="'editAutoPwd'">
+                <span>重置密码</span>
+            </label>
+        </nz-form-control>
+        <nz-form-control nz-col [nzSm]="10" [nzXs]="30">
+        </nz-form-control>
+    </nz-form-item>
+    <div *ngIf="user && getFormControl('editAutoPwd') && getFormControl('editAutoPwd').value" nz-form-item nz-row>
+        <nz-form-label nz-col [nzSm]="3" [nzXs]="30" [ngClass]="{'form-left':!isPage,'form-right':isPage,'special-label':'true'}">
+        </nz-form-label>
+        <nz-form-control nz-col [nzSm]="10" [nzXs]="30">
+            <nz-radio-group *ngIf="getFormControl('editAutoPwd') && getFormControl('editAutoPwd').value"
+                formControlName="autoPassword2" (click)="checkAuto($event)">
+                <label nz-radio [nzValue]="true">
+                    <span>自动生成，密码会发送到账户邮箱</span>
+                </label>
+                <!-- <label nz-radio [nzValue]="true">
+                    <span>自动生成密码</span>
+                    <span class="tooltip">
+                      <span class="anticon anticon-question-circle-o"></span>
+                      <div class="tips-content">
+                        <div class="tip-content-body">
+                          密码会发送到账户邮箱，请确保邮箱填写正确
+                        </div>
+                      </div>
+                    </span>
+                  </label> -->
+                <label nz-radio [nzValue]="false">
+                    <span>手动更新</span>
+                </label>
+            </nz-radio-group>
+        </nz-form-control>
+    </div>
+
+    <div *ngIf="!user" nz-form-item nz-row>
+        <nz-form-label nz-col [nzSm]="3" [nzXs]="30" [ngClass]="{'form-left':!isPage,'form-right':isPage,'special-label':'true'}" nzRequired>
+            <label for="autoPassword" nzRequired>密码</label>
+        </nz-form-label>
+        <nz-form-control nz-col [nzSm]="10" [nzXs]="30">
+            <nz-radio-group formControlName="autoPassword" (click)="clearPasswordInput($event)">
+                <!-- <label nz-radio [nzValue]="true">
+                      <span>自动生成，密码会发送到账户邮箱</span>
+                  </label> -->
+                <label nz-radio [nzValue]="true">
+                    <span>自动生成密码</span>
+                    <span class="tooltip">
+                        <span class="anticon anticon-question-circle-o"></span>
+                        <div class="tips-content">
+                            <div class="tip-content-body">
+                                密码会发送到账户邮箱，请确保邮箱填写正确
+                                <!-- <p>密码会发送到账户邮箱，请确保邮箱填写正确  </p> -->
+                            </div>
+                        </div>
+                    </span>
+                </label>
+                <label nz-radio [nzValue]="false">
+                    <span>手动更新</span>
+                </label>
+            </nz-radio-group>
+        </nz-form-control>
+    </div>
+    <ng-container *ngIf="!user && getFormControl('autoPassword') && !getFormControl('autoPassword').value">
+        <nz-form-item nz-row>
+            <nz-form-label nz-col [nzSm]="3" [nzXs]="30" [ngClass]="{'form-left':!isPage,'form-right':isPage,'special-label':'true'}" nzRequired>
+                <label for="password" nzRequired>输入密码</label>
+            </nz-form-label>
+            <nz-form-control nz-col [nzSm]="10" [nzXs]="30">
+
+                <input nz-input [nzSize]="'large'" formControlName="password" type="password" id="password"
+                    (ngModelChange)="updateConfirmValidator()">
+                <!-- disable="getFormControl('autoPassword') && getFormControl('autoPassword').value" -->
+                <ng-container *ngIf="getFormControl('password').dirty && getFormControl('password').errors">
+                    <div style="color:red" nz-form-explain *ngIf="getFormControl('password').hasError('required')">请输入密码</div>
+                    <div style="color:red;width: 550px;" nz-form-explain *ngIf="!getFormControl('password').hasError('required')&&!getFormControl('password').errors.minlength&&!getFormControl('password').errors.maxlength&&getFormControl('password').errors['forbiddenName']">密码只支持字母、数字、英文符号，不能输入空格，必须至少包含1个数字及1个字符</div>
+                    <div style="color:red" nz-form-explain *ngIf="getFormControl('password').errors['maxlength']">密码长度最多32位</div>
+                    <div style="color:red" nz-form-explain *ngIf="getFormControl('password').errors['minlength']">密码长度最少6位</div>
+                </ng-container>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row>
+            <nz-form-label nz-col [nzSm]="3" [nzXs]="30" [ngClass]="{'form-left':!isPage,'form-right':isPage,'special-label':'true'}" nzRequired>
+                <label for="checkPassword" nzRequired>重复输入密码</label>
+            </nz-form-label>
+            <nz-form-control nz-col [nzSm]="10" [nzXs]="30">
+
+                <input nz-input [nzSize]="'large'" formControlName="checkPassword" type="password" id="checkPassword">
+                <!-- disable="getFormControl('autoPassword') && getFormControl('autoPassword').value" -->
+                <nz-form-explain style="color:red;" *ngIf="getFormControl('checkPassword').dirty&&getFormControl('checkPassword').hasError('required')">请重复输入密码</nz-form-explain>
+                <nz-form-explain style="color:red;" *ngIf="getFormControl('checkPassword').dirty&&getFormControl('checkPassword').hasError('confirm')">两次输入密码不一致，请重新输入</nz-form-explain>
+            </nz-form-control>
+        </nz-form-item>
+    </ng-container>
+
+
+    <!-- <div *ngIf="!user" nz-form-item nz-row >
+            <nz-form-label nz-col [nzSm]="3" [nzXs]="30" [ngClass]="{'form-left':!isPage,'form-right':isPage}">
+                <label for="autoPassword" >密码</label>
+            </nz-form-label>
+            <nz-form-control nz-col [nzSm]="10" [nzXs]="30" >
+                <label nz-checkbox  [formControlName]="'autoPassword'"  [(ngModel)]="autoPassword" (ngModelChange)="clearPasswordInput()" >
+                    <span>自动生成密码(密码会发送到账户邮箱，请确保邮箱填写正确)</span>
+                </label>
+            </nz-form-control>
+        </div> -->
+    <ng-container *ngIf="user && getFormControl('editAutoPwd') && getFormControl('editAutoPwd').value && getFormControl('autoPassword2') && !getFormControl('autoPassword2').value">
+        <nz-form-item nz-row>
+            <nz-form-label nz-col [nzSm]="3" [nzXs]="30" [ngClass]="{'form-left':!isPage,'form-right':isPage,'special-label':'true'}" nzRequired>
+                <label for="password" nzRequired>输入新密码</label>
+            </nz-form-label>
+            <nz-form-control nz-col [nzSm]="10" [nzXs]="30">
+
+                <input nz-input [nzSize]="'large'" formControlName="password" type="password" id="password"
+                    (ngModelChange)="updateConfirmValidator()">
+                <!-- disable="getFormControl('autoPassword2') && getFormControl('autoPassword2').value" -->
+                <ng-container *ngIf="getFormControl('password').dirty && getFormControl('password').errors">
+                    <div style="color:red" nz-form-explain *ngIf="getFormControl('password').hasError('required')">密码不能为空</div>
+                    <div style="color:red" nz-form-explain *ngIf="getFormControl('password').errors['maxlength']">密码长度最多32位</div>
+                    <div style="color:red;width: 550px;" nz-form-explain *ngIf="!getFormControl('password').hasError('required')&&!getFormControl('password').errors.minlength&&!getFormControl('password').errors.maxlength&&getFormControl('password').errors['forbiddenName']">密码只支持字母、数字、英文符号，不能输入空格，必须至少包含1个数字及1个字符</div>
+                    <div style="color:red" nz-form-explain *ngIf="getFormControl('password').errors['minlength']">密码长度最少6位</div>
+                </ng-container>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row>
+            <nz-form-label nz-col [nzSm]="3" [nzXs]="30" [ngClass]="{'form-left':!isPage,'form-right':isPage,'special-label':'true'}" nzRequired>
+                <label for="checkPassword" nzRequired>重复输入密码</label>
+            </nz-form-label>
+            <nz-form-control nz-col [nzSm]="10" [nzXs]="30">
+
+                <input nz-input [nzSize]="'large'" formControlName="checkPassword" type="password" id="checkPassword">
+                <!-- disable="getFormControl('autoPassword2') && getFormControl('autoPassword2').value" -->
+                <nz-form-explain style="color:red;" *ngIf="getFormControl('checkPassword').dirty&&getFormControl('checkPassword').hasError('required')">请重复输入密码</nz-form-explain>
+                <nz-form-explain style="color:red;" *ngIf="getFormControl('checkPassword').dirty&&getFormControl('checkPassword').hasError('confirm')">两次输入密码不一致，请重新输入</nz-form-explain>
+            </nz-form-control>
+        </nz-form-item>
+    </ng-container>
+
+
+</form>
+
+<!-- 选择组织结构弹窗 -->
+<um-dialog [isVisible]="isVisible" dialogTil="请选择组织机构" [dialogCb]="dialogCb" (cancel)="handleCancel()" (oking)="handleOk()">
+    <organization-tree *ngIf="isVisible" [treeData]="organizationTreeData" (onChange)="changeTreeData($event)"></organization-tree>
+</um-dialog>

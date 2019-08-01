@@ -1,0 +1,98 @@
+<div class="shadow-content">
+  <!-- 页眉 -->
+  <div class="header module-title">{{ nls.header }}</div>
+
+  <!-- 搜索（高级） -->
+  <div *ngIf="vm.search.advanced" class="search-advanced">
+    <!-- 平台 -->
+    <div class="term">
+      {{ nls.searchPlatform }}
+      <nz-select [(ngModel)]="vm.search.platformValue" [nzPlaceHolder]="nls.searchPlatformPlaceholder">
+        <nz-option
+          *ngFor="let option of vm.search.platformSelect"
+          [nzValue]="option.value"
+          [nzLabel]="option.label"
+        ></nz-option>
+      </nz-select>
+    </div>
+
+    <!-- 页面 -->
+    <div class="term">
+      {{ nls.searchName }}
+      <input nz-input [(ngModel)]="vm.search.nameValue" [attr.placeholder]="nls.searchNamePlaceholder" />
+    </div>
+
+    <!-- 按钮 -->
+    <div class="button">
+      <button nz-button nzType="primary" (click)="handlerSearch($event)">{{ nls.searchQuery }}</button>
+    </div>
+  </div>
+
+  <!-- 内容 -->
+  <div class="content">
+    <nz-table
+      #contentTable
+      [nzLoading]="vm.content.loading"
+      [nzData]="vm.content.data"
+      [nzFrontPagination]="false"
+      [nzShowPagination]="false"
+    >
+      <thead>
+        <tr>
+          <th nzWidth="360px">
+            {{ nls.contentSourceName }}
+          </th>
+          <th>
+            {{ nls.contentDisplayName }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of contentTable.data">
+          <!-- 源名称 -->
+          <td>
+            {{ data.sourceName }}
+          </td>
+
+          <!-- 显示名 -->
+          <td *ngIf="!data._displayName">
+            {{ data.displayName || '--' }}<a (click)="handlerContent_displayNameEdit(data)" class="edit-enter"></a>
+          </td>
+
+          <!-- 显示名（编辑） -->
+          <td *ngIf="data._displayName">
+            <input
+              nz-input
+              [(ngModel)]="data._displayName.value"
+              [disabled]="data._displayName.loading"
+              nzSize="default"
+              maxlength="64"
+            />
+            <a
+              [class.loading]="data._displayName.loading"
+              (click)="handlerContent_displayNameEdit(data, true)"
+              class="edit-ok"
+            ></a>
+            <a
+              *ngIf="!data._displayName.loading"
+              (click)="handlerContent_displayNameEdit(data, false)"
+              class="edit-cancel"
+            ></a>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+
+    <!-- 分页 -->
+    <nz-pagination
+      nzShowSizeChanger
+      [nzTotal]="vm.content.total"
+      [nzPageIndex]="vm.content.pageIndex"
+      [nzPageSize]="vm.content.pageSize"
+      [nzPageSizeOptions]="vm.content.pageSizeOption"
+      (nzPageIndexChange)="handlerContent_pageIndex($event)"
+      (nzPageSizeChange)="handlerContent_pageSize($event)"
+      *ngIf="vm.content.total > 0"
+    ></nz-pagination>
+  </div>
+</div>

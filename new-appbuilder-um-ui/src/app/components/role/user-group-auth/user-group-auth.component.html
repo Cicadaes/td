@@ -1,0 +1,26 @@
+<div class="table-operator clrfix">
+
+    <button nz-button [nzType]="'primary'" (click)="showAddUserGroupAuthModal()">
+        <span class="anticon anticon-plus"></span><span>用户组</span>
+    </button>
+
+    <button nz-button [nzType]="'default'" (click)="batchRevoke($event)">
+        <span class="anticon anticon-minus"></span><span>批量移除</span>
+    </button>
+    <add-user-group-auth-dialog [refresh]="refresh" [queryParams]="userGroup" [isShow]="isShowAddUserGroupAuthModal"
+        (onClose)="hideAddUserGroupAuthModal($event)" (onSubmit)="onSubmitUserFormData($event)"></add-user-group-auth-dialog>
+</div>
+<div class="table-operator-bottom" style="padding: 0px;padding-top: 20px;box-shadow: 0 1px 4px 0 rgba(23,35,61,0.10);background: #fff;">
+    <div class="ac_right_wap">
+        <div class="ac_right" style="margin-right: 24px;">
+            <nz-input-group nzSearch [nzSuffix]="suffixIconButton" style="width: 180px;">
+                <input type="text" nz-input placeholder="请输入名称" (keyup)="onSearch($event, 'keyup')" [(ngModel)]="search">
+            </nz-input-group>
+            <ng-template #suffixIconButton>
+                <i class="anticon anticon-search" (click)="onSearch(search, 'click')"></i>
+            </ng-template>
+        </div>
+    </div>
+    <user-group-auth-table [refresh]="refresh" (onChecked)="setCheckedItem($event)" [tenantId]="tenantId" [queryParams]="userGroup"
+        [hasOperCol]="'true'" [_batchRemove]="_batchRemove"></user-group-auth-table>
+</div>

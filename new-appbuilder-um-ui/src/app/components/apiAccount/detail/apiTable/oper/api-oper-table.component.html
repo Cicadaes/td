@@ -1,0 +1,59 @@
+<button nz-button [nzType]="'primary'" (click)="add();">
+    <span class="anticon anticon-plus"></span>
+    <span>API授权</span>
+</button>
+<button nz-button [nzType]="'default'" (click)="deleteAll();">
+    <span class="anticon anticon-minus"></span>
+    <span>批量删除</span>
+</button>
+<ng-template #tableTotal>
+    <div>
+        总共 {{_total}} 条
+    </div>
+</ng-template>
+<more-search [fieldArray]="moreSearchArray" (onSearch)="onMoreSearch($event)"></more-search>
+<nz-table #nzTable [nzData]="_dataSet" [nzShowTotal]="tableTotal" nzShowSizeChanger [nzLoading]="_loading" [nzTotal]="_total"
+    [(nzPageIndex)]="_pageIndex" [(nzPageSize)]="_pageSize" [nzFrontPagination]="false" (nzPageSizeChange)="refreshData(true)"
+    (nzPageIndexChange)="refreshData()">
+    <thead nz-thead>
+        <tr>
+            <th nzShowCheckbox [(nzChecked)]="_allChecked" [nzIndeterminate]="_indeterminate" (nzCheckedChange)="_checkAll($event)"></th>
+            <th [nzWidth]="'15%'">
+                API所属产品
+            </th>
+            <th [nzWidth]="'20%'">
+                API名称
+            </th>
+            <th [nzWidth]="'25%'">
+                API路径
+            </th>
+            <th [nzWidth]="'10%'">
+                请求方式
+            </th>
+            <th [nzWidth]="'10%'">
+                API版本
+            </th>
+            <th [nzWidth]="'10%'">
+                授权日期
+            </th>
+            <th [nzWidth]="'10%'">
+                操作
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of nzTable.data">
+            <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="_refreshStatus($event, data.id)"></td>
+            <td>{{data.catalogName}}</td>
+            <td>{{data.metaName}}</td>
+            <td>{{data.path}}</td>
+            <td>{{data.requestMethod}}</td>
+            <td>所有版本</td>
+            <td>{{data.createTime | dateFormatPipe:2}}</td>
+            <td> 
+                <a href="javascript:;" (click)="delete(data)">删除</a>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+<app-add-auto-api [isVisible]='addFlag' [tenantId]='tenantId' [accountId]='accountId' [productList]='productOptions' (save)="save($event)" (hideDialog)="hideDialog($event)"></app-add-auto-api>

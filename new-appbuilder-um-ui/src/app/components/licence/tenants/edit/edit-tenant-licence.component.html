@@ -1,0 +1,67 @@
+<div class="text-content">
+    <nz-card [nzBordered]="true" style="margin-bottom:15px;" nzTitle="基本信息">
+
+            <div *ngIf="tenantLicence">
+
+                    <form nz-form style="margin:0 24px">
+                        <nz-form-item nz-row>
+                            <nz-form-label nz-col [nzSm]="5" [nzXs]="24" class="special_label">
+                                <label for="name"   class="special-label-before">许可证</label>
+                            </nz-form-label>
+                            <nz-form-control nz-col [nzSm]="7" [nzXs]="24">
+                                {{tenantLicence.name}}
+                            </nz-form-control >
+                        </nz-form-item >
+                        <nz-form-item nz-row>
+                            <nz-form-label nz-col [nzSm]="5" [nzXs]="24" class="special_label">
+                                <label   class="special-label-before">状态</label>
+                            </nz-form-label >
+                            <nz-form-control nz-col [nzSpan]="7">
+                                <label nz-checkbox [(ngModel)]="tenantLicence.statusboo" [ngModelOptions]="{standalone: true}">
+                                    <span>启用</span>
+                                </label>
+                            </nz-form-control >
+                        </nz-form-item >
+                        <nz-form-item nz-row>
+                            <nz-form-label nz-col [nzSm]="5" [nzXs]="24" class="special_label" nzRequired >
+                                <label  >有效期</label>
+                            </nz-form-label >
+                            <nz-form-control nz-col [nzSpan]="7">
+                                <date-range (onSelect)="dateRangeControl($event)" [initDateRange]="initDateRange"
+                                    [noLimit]="noLimit" [disabled]="1"></date-range>
+                            </nz-form-control >
+                        </nz-form-item >
+                        <nz-form-item nz-row>
+                            <nz-form-label nz-col [nzSm]="5" [nzXs]="24" class="special_label">
+                                <label for="desc"   class="special-label-before">描述</label>
+                            </nz-form-label>
+                            <nz-form-control nz-col [nzSpan]="7">
+                                <textarea nz-input [(ngModel)]="tenantLicence.desc" [ngModelOptions]="{standalone: true}"
+                                [nzAutosize]="{ minRows: 2, maxRows: 4 }" placeHolder=""></textarea>
+                            </nz-form-control >
+                        </nz-form-item >
+                    </form>
+            </div>
+
+    </nz-card>
+
+    <div>
+        <tlicences-attribute-table [queryParams]="licencesTableFieldParams" [licenceId]="licenceId" [_dataSet]="_dataSet"
+            (onSubmit)="submitTbleData($event)" [tenantLicence]="tenantLicence"></tlicences-attribute-table>
+    </div>
+
+    <div class="clrfix">
+ 
+            <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="handleOk($event)" [nzLoading]="isConfirmLoading">
+                确 定
+            </button>
+
+            <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancle($event)" [nzLoading]="isConfirmLoading">
+                取 消
+            </button>
+
+    </div>
+</div>
+
+
+<!--<add-licence-attribute-dialog [_dataSet]="_dataSet" [isedit]="isedit" [currentData]="currentData"  [isShow]="isShowLicenceAppModal" [queryParams] = "queryParams" (onClose)="hideAddAppModal($event)"></add-licence-attribute-dialog>-->

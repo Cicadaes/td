@@ -1,0 +1,79 @@
+<div class="content">
+    <div class="base-desc">
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                <span class="require">*</span>组件名称
+            </label>
+            <div class="item-input">
+                <input type="text" tdLimitInputText iType="triggerInput" max="26" placeholder="请输入内容" [(ngModel)]="pcs.nodeData.name" [disabled]="!pcs.isPipelineEdit">
+            </div>
+        </div>
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                描述
+            </label>
+            <div class="item-textarea">
+                <textarea type="text"  tdLimitTextareaText iType="all" max="80"placeholder="请输入内容" [(ngModel)]="pcs.nodeData.description" [disabled]="!pcs.isPipelineEdit"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="time-content">
+        <div class="pipe-item clearfix">
+            <label class="item-label" style="width: 60px;">
+                <span class="require">*</span>计时器类型
+            </label>
+            <div class="item-radio">
+                <nz-radio-group [(ngModel)]="pcs.nodeData.hourMeterType" [nzSize]="'small'">
+                    <label nz-radio nzValue="1" [nzDisabled]="!pcs.isPipelineEdit">目标计时器</label>
+                    <label nz-radio nzValue="2" [nzDisabled]="!pcs.isPipelineEdit">经时计时器</label>
+                </nz-radio-group>
+            </div>
+        </div>
+    </div>
+    <div class="target-timer" *ngIf="pcs.nodeData.hourMeterType === '1'">
+        <div class="pipe-item clearfix">
+            <label class="text">等待直到满足以下条件停止计时：</label>
+            <a class="clearSet" (click)="reset()">清空设置</a>
+        </div>
+        <div class="pipe-item last clearfix">
+            <nz-date-picker [nzShowToday]='false' [nzStyle]="{'width': '186px'}" [nzAllowClear]="false" [(ngModel)]="pcs.nodeData.targetDate" [nzDisabled]="!pcs.isPipelineEdit" [nzDisabledDate]="disabledDate"></nz-date-picker>
+            <nz-select style="width: 64px;" [(ngModel)]="pcs.nodeData.targetHour" nzPlaceHolder="小时" [nzDisabled]="!pcs.isPipelineEdit">
+                <nz-option *ngFor="let item of hourList" [nzValue]="item" [nzLabel]="item"></nz-option>
+            </nz-select>
+            <nz-select style="width: 64px;" [(ngModel)]="pcs.nodeData.targetMinute" nzPlaceHolder="分钟" [nzDisabled]="!pcs.isPipelineEdit">
+                <nz-option *ngFor="let item of minuteList" [nzValue]="item" [nzLabel]="item"></nz-option>
+            </nz-select>
+        </div>
+        <div class="behavior-content">
+            <div class="behavior-item" *ngFor="let item of pcs.nodeData.behaviorList;let i = index">
+                <div class="button" *ngIf="i === 0">或者</div>
+                <div class="button gray-button" (click)="changeRelation('behaviorRelation')" *ngIf="i !== 0">{{pcs.nodeData.behaviorRelation | relationPipe}}</div>
+                <div class="behavior">
+                    <nz-select style="width: 275px;margin-left: 8px;margin-right: 5px;" nzPlaceHolder="选择事件" [(ngModel)]="item.event" [nzDisabled]="!pcs.isPipelineEdit">
+                        <nz-option *ngFor="let event of eventList" [nzValue]="event.code" [nzLabel]="event.name"></nz-option>
+                    </nz-select>
+                    <a class="iconfont icon-fremove_circle_outli" (click)="removeBehavior(i)"></a>
+                </div>
+            </div>
+            <div class="add-behavior" *ngIf="pcs.isPipelineEdit">
+                <div class="button" (click)="addBehavior()">
+                    <span class="anticon anticon-plus"></span>
+                    添加行为
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="timer" *ngIf="pcs.nodeData.hourMeterType === '2'">
+        <div class="timer-desc">
+            <label>经过以下时间停止计时</label>
+        </div>
+        <div class="timer-input">
+            <input type="text" tdLimitNumberInput condition="PI" min="1" nz-input [(ngModel)]="pcs.nodeData.afterDay" [disabled]="!pcs.isPipelineEdit" title="{{pcs.nodeData.afterDay}}">
+            <span>天</span>
+            <input type="text" tdLimitNumberInput condition="PI" min="0" max="23" nz-input [(ngModel)]="pcs.nodeData.afterHours" [disabled]="!pcs.isPipelineEdit">
+            <span>小时</span>
+            <input type="text" tdLimitNumberInput condition="PI" min="0" max="59" nz-input [(ngModel)]="pcs.nodeData.afterMinutes" [disabled]="!pcs.isPipelineEdit">
+            <span>分钟</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,98 @@
+:host ::ng-deep .com-left {
+    float: left;
+    width: 200px;
+    background: #fff;
+    padding: 6px;
+}
+
+:host ::ng-deep .center-content {
+    float: left;
+    width: 8px;
+    background: #eef0f3;
+    position: absolute;
+    height: 100%;
+}
+
+:host ::ng-deep .left-wrapper {
+    float: right;
+    width: 8px;
+}
+
+:host ::ng-deep .com-right {
+    float: right;
+}
+
+:host ::ng-deep .bg-fff {
+    background: #fff;
+}
+
+
+:host ::ng-deep .text-content-wap {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    background: #fff;
+}
+
+/* 一定要设置left的宽度 */
+.text-content-wap:after {
+    content: ".";
+    display: block;
+    clear: both;
+    height: 0;
+    visibility: hidden;
+}
+
+:host ::ng-deep .nav {
+    padding: 0px 16px;
+    padding-right: 0px;
+    height: 48px;
+    line-height: 46px;
+    border-bottom: 1px solid #DCDEE2;
+}
+
+:host ::ng-deep .nav li {
+    float: left;
+    margin-right: 36px;
+    font-family: PingFangSC-Medium;
+    font-size: 12px;
+    color: #17233D;
+}
+
+:host ::ng-deep .nav li a {
+    font-family: PingFangSC-Medium;
+    font-size: 14px;
+    color: rgba(23,35,61,0.75);
+    display: block;
+    text-decoration: none;
+}
+
+:host ::ng-deep .a-click {
+    color: #2D8CF0;
+    border-bottom: 2px solid #2D8CF0;
+}
+
+:host ::ng-deep .nav li a:hover {
+    color: #2D8CF0;
+    border-bottom: 2px solid #2D8CF0;
+    text-decoration: none;
+}
+
+::ng-deep .custom-form-explain {
+    height: 22px;
+    line-height: 22px;
+    overflow: hidden;
+}
+
+::ng-deep .has-error .custom-form-explain {
+    visibility: visible;
+}
+
+::ng-deep .custom-form .ant-form-item {
+    margin-bottom: 0;
+}
+
+
+::ng-deep .has-error .ant-input, .has-error .ant-input:hover {
+    border-color: #ed4014;
+}

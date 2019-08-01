@@ -1,0 +1,95 @@
+<div class="content">
+    <div class="forbidden-rule termination-rule">
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                提前终止规则
+            </label>
+            <label class="label-desc">
+                (满足如下条件可提前终止营销流程)
+            </label>
+        </div>
+        <div class="rule-header">
+            <div class="rule-body" *ngFor="let rule of terminationRuleList;let i = index">
+                <div *ngIf="i" class="rule-button" (click)="changeRuleRelation(terminationRuleRelation)">{{terminationRuleRelation.label}}</div>
+                <nz-select style="width: 160px;position: absolute;left: -40px;" nzPlaceHolder="请选择指标" [(ngModel)]="rule.target" (ngModelChange)="changeTerminationRule($event, rule)"
+                    [nzDisabled]="!pcs.isPipelineEdit">
+                    <nz-option *ngFor="let item of targetList" [nzValue]="item.value" [nzLabel]="item.label"></nz-option>
+                </nz-select>
+                <nz-select style="width: 80px;margin-left: 128px;margin-right: 5px;" nzPlaceHolder="请选择" [(ngModel)]="rule.code" (ngModelChange)="changeTerminationRule($event, rule)"
+                    [nzDisabled]="!pcs.isPipelineEdit">
+                    <nz-option *ngFor="let item of symbolList" [nzValue]="item.value" [nzLabel]="item.label"></nz-option>
+                </nz-select>
+                <input class="rule-number" [(ngModel)]="rule.number" tdLimitNumberInput nz-input condition="PI" (ngModelChange)="changeTerminationRule()" title="{{rule.number}}"
+                    [disabled]="!pcs.isPipelineEdit"/>次
+                <span class="icon-del" (click)="deleteRule(i)"></span>
+            </div>
+        </div>
+        <div class="add-rules add-rules-special" *ngIf="pcs.isPipelineEdit" >
+            <span (click)="addRule();"><span class="anticon anticon-plus"></span>添加规则</span>
+        </div>
+    </div>
+    <div class="inlet-rule">
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                全局进入规则
+            </label>
+            <label class="label-desc">
+                (默认为同一用户不受次数和频率限制)
+            </label>
+        </div>
+        <div class="pipe-item clearfix">
+            <label class="rule-checkbox" nz-checkbox [(ngModel)]="lessThanDaysSelect" (ngModelChange)="pcs.globalRule.pipelineEnterRuleDefinition.lessThanDays = null;selectRule()"
+                [nzDisabled]="!pcs.isPipelineEdit">
+                同一用户
+            </label>
+            <input class="rule-input" type="text" [(ngModel)]="pcs.globalRule.pipelineEnterRuleDefinition.lessThanDays" (ngModelChange)="selectRule()"
+                tdLimitNumberInput nz-input condition="PI" [disabled]="!lessThanDaysSelect || !pcs.isPipelineEdit" title="{{pcs.globalRule.pipelineEnterRuleDefinition.lessThanDays}}">
+            <label>天内不再进入营销流程</label>
+        </div>
+        <div class="pipe-item clearfix">
+            <label class="rule-checkbox" nz-checkbox [(ngModel)]="lessThanTimesSelect" (ngModelChange)="pcs.globalRule.pipelineEnterRuleDefinition.lessThanTimes = null;selectRule()"
+                [nzDisabled]="!pcs.isPipelineEdit">
+                同一用户进入营销活动次数不超过
+            </label>
+            <input class="rule-input" type="text" [(ngModel)]="pcs.globalRule.pipelineEnterRuleDefinition.lessThanTimes" (ngModelChange)="selectRule()" title="{{pcs.globalRule.pipelineEnterRuleDefinition.lessThanTimes}}"
+                tdLimitNumberInput nz-input condition="PI" [disabled]="!lessThanTimesSelect || !pcs.isPipelineEdit">
+            <label>次</label>
+        </div>
+    </div>
+    <div class="forbidden-rule">
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                全局禁止规则
+            </label>
+            <label class="label-desc">
+                (满足如下条件的用户不可进入流程)
+            </label>
+        </div>
+        <div class="rule-header">
+            <div class="rule-body" *ngFor="let rule of pcs.globalRule.pipelineForbiddenRuleDefinition.ruleList;let i = index">
+                <div *ngIf="i" [ngClass]="{'rule-button': true, 'pointer': true}" (click)="changeNoEntryRuleRelation(terminationForbiddenEntryRelation)">{{terminationForbiddenEntryRelation.label}}</div>
+                <nz-select style="width: 80px;position: absolute;left: -40px;" nzPlaceHolder="请选择" [(ngModel)]="rule.happen"  [nzDisabled]="!pcs.isPipelineEdit">
+                    <nz-option *ngFor="let item of fristeForbiddenEntry" [nzValue]="item.value" [nzLabel]="item.label"></nz-option>
+                </nz-select>
+                <nz-select style="width: 160px;margin-left: 47px;" nzPlaceHolder="请选择" [(ngModel)]="rule.ruleType" (ngModelChange)="ruleTypeChange($event, rule)"  [nzDisabled]="!pcs.isPipelineEdit">
+                    <nz-option *ngFor="let item of secondForbiddenEntry" [nzValue]="item.value" [nzLabel]="item.label"></nz-option>
+                </nz-select>
+                <span *ngIf="!rule.forbidRuleList">></span>
+                <input *ngIf="!rule.forbidRuleList" class="rule-number" [(ngModel)]="rule.ruleVal" tdLimitNumberInput nz-input condition="PI" [disabled]="!pcs.isPipelineEdit" title="{{rule.ruleVal}}"/>
+                <span *ngIf="!rule.forbidRuleList">次</span>
+                <span *ngIf="!rule.forbidRuleList" class="icon-del r pointer" (click)="delNoEntryRule(i);"></span>
+                <div *ngIf="rule.forbidRuleList" class="rule-content">
+                    <nz-select style="width: 160px;margin-left: 47px;" nzPlaceHolder="请选择" [(ngModel)]="rule.ruleParam"  [nzDisabled]="!pcs.isPipelineEdit">
+                        <nz-option *ngFor="let item of rule.forbidRuleList" [nzValue]="item.value" [nzLabel]="item.label"></nz-option>
+                    </nz-select>
+                    <span>></span>
+                    <input class="rule-number" type="text" [(ngModel)]="rule.ruleVal" tdLimitNumberInput nz-input condition="PI" [disabled]="!pcs.isPipelineEdit" title="{{rule.ruleVal}}"/>次
+                    <span [ngClass]="{'icon-del': true, 'r': true, 'pointer': true}" (click)="delNoEntryRule(i);"></span>
+                </div>
+            </div>
+        </div>
+        <div class="add-rules"  *ngIf="pcs.isPipelineEdit" >
+            <span (click)="addNoEntryRule();"><span class="anticon anticon-plus"></span>添加规则</span>
+        </div>
+    </div>
+</div>

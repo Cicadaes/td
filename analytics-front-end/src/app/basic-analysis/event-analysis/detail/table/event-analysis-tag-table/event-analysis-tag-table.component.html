@@ -1,0 +1,29 @@
+<main>
+  <nz-table
+    #ajaxTable
+    [nzData]="dataSet"
+    [nzLoading]="loading"
+    nzShowSizeChanger
+    [(nzPageIndex)]="pageIndex"
+    [(nzPageSize)]="pageSize"
+    [nzPageSizeOptions]="pageSizeOptions"
+    [(nzTotal)]="total"
+  >
+    <thead (nzSortChange)="sort($event)" nzSingleSort>
+      <tr>
+        <th>标签</th>
+        <th style="min-width: 110px;" nzShowSort nzSortKey="count">触发次数</th>
+        <th style="min-width: 110px;" nzShowSort nzSortKey="users">触发用户数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of ajaxTable.data">
+        <td>
+          {{ data.name }}
+        </td>
+        <td>{{ data.count | numberToThousandsPipe }}</td>
+        <td>{{ data.users | numberToThousandsPipe }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</main>

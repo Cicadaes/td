@@ -1,0 +1,40 @@
+.form-item {
+    padding: 0 12px;
+    /* overflow: auto; */
+}
+
+.form-item .item {
+    margin: 24px 0;
+}
+
+.form-item .item:first-child, .form-item .item:last-child{
+    margin: 0;
+}
+
+.form-item .item .require {
+    color: #ed4014;
+    font-size: 16px;
+    vertical-align: text-top;
+    margin-left: -10px;
+}
+
+.form-item label {
+    display: inline-block;
+    font-size: 14px;
+    color: #17233D;
+    width: 80px;
+}
+
+.form-item  .plan-info {
+    display: inline-block;
+    margin-left: 8px;
+    color: rgba(23,35,61,0.35);
+}
+
+.form-item .alert {
+    font-size: 14px;
+    color: #ed4014;
+    line-height: 24px;
+    margin-left: 80px;
+    margin-bottom: -24px;
+}

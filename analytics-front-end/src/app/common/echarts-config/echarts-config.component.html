@@ -1,0 +1,4 @@
+<div class="shell">
+  <app-loading-and-no-data *ngIf="!show" [isLoading]="load" [isNoData]="!load"> </app-loading-and-no-data>
+  <div echarts *ngIf="show" [options]="chartOption" class="demo-chart"></div>
+</div>

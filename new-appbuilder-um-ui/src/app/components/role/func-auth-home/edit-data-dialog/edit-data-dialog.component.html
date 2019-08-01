@@ -1,0 +1,54 @@
+
+
+<nz-modal nzWrapClassName="vertical-center-modal" class="edit-data-dialog" [nzContent]="modalContent" [nzMaskClosable]="false"
+    [nzVisible]="isVisible" [nzTitle]="'新建角色对数据对象实例的操作权限'" (nzOnCancel)="handleCancel($event)" [nzFooter]="modalFooter">
+    <form nz-form [formGroup]="editForm" (ngSubmit)="submitAddDataForm()">
+      <ng-template #modalContent>
+        <nz-form-item nz-row>
+          <nz-form-label nz-col nzSpan="6" nzRequired >
+            数据对象
+          </nz-form-label>
+          <nz-form-control nz-col nzSpan="18">
+                <nz-form-text style="width:100%;" >
+                    {{data.targetName}}
+                </nz-form-text>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row>
+          <nz-form-label nzRequired nz-col nzSpan="6" >
+            对象实例
+          </nz-form-label>
+          <nz-form-control nz-col nzSpan="18">
+            <nz-form-text style="width:100%;" >
+              {{data.dataName}}
+                </nz-form-text>
+          </nz-form-control>
+         
+        </nz-form-item>
+        <nz-form-item nz-row>
+          <nz-form-label nzRequired nz-col nzSpan="6" nzFor="'authBeans'" >
+            操作权限
+          </nz-form-label>
+          <nz-form-control nz-col nzSpan="18">
+            <nz-checkbox-wrapper style="width: 100%;padding-top: 9px">
+              <ul nz-row class="auth-bean">
+                  <ng-container *ngFor='let authBean of data.authBeans' >
+                      <li style='float: left;padding-bottom: 5px'><label [ngModelOptions]="{standalone: true}" nz-checkbox [nzValue]="authBean.hasAuth" [(ngModel)]="authBean.hasAuth">{{ authBean.operatorName }}</label></li>
+                  </ng-container>
+                </ul>
+            </nz-checkbox-wrapper>
+          </nz-form-control>
+         
+        </nz-form-item>
+      </ng-template>
+      <ng-template #modalFooter>
+        <button nz-button [nzType]="'default'" [nzSize]="'default'" (click)="handleCancel($event)">
+          取消
+        </button>
+        <button nz-button [nzType]="'primary'" [nzSize]="'default'" (click)="submitAddDataForm()"
+          [nzLoading]="isConfirmLoading">
+          确定
+        </button>
+      </ng-template>
+    </form>
+  </nz-modal>

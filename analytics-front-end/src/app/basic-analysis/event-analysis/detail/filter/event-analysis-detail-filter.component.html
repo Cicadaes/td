@@ -1,0 +1,225 @@
+<main>
+  <app-event-analysis-list-filter
+    (onFilter)="_onFilter($event)"
+    [data]="_commonFilterInit"
+  ></app-event-analysis-list-filter>
+  <div class="search-list">
+    <div class="search-list-fitst search-list-one borderBottom">
+      <div class="search-list-fitst-left">
+        <div class="item search-list-fitst-left-one search-list-fitst-left-bg">分析对象</div>
+        <div class="item search-list-fitst-left-one">
+          <nz-select
+            style="width: 180px;"
+            [(ngModel)]="analysisObj.selecteEventType"
+            (nzScrollToBottom)="getEventTypeList(analysisObj)"
+            (ngModelChange)="eventTypeChange($event, analysisObj)"
+            nzShowSearch
+            nzPlaceHolder="请选择"
+          >
+            <nz-option
+              *ngFor="let item of analysisObj.eventTypeList"
+              [nzValue]="item.id"
+              [nzLabel]="item.dicItemValue"
+              nzCustomContent
+            >
+              <div title="{{ item.dicItemValue }}">{{ item.dicItemValue }}</div>
+            </nz-option>
+          </nz-select>
+        </div>
+        <div class="item search-list-fitst-left-one search-list-fitst-left-bg">为</div>
+        <div class="item search-list-fitst-left-one">
+          <nz-select
+            style="width: 180px;"
+            (ngModelChange)="eventListChange(analysisObj)"
+            [(ngModel)]="analysisObj.selectedEvent"
+            (nzOnSearch)="onSearchEvent($event, analysisObj)"
+            (nzScrollToBottom)="getEventList(analysisObj, null, true)"
+            [nzServerSearch]="true"
+            nzShowSearch
+            nzPlaceHolder="请选择"
+          >
+            <nz-option
+              *ngFor="let item of analysisObj.eventList"
+              nzCustomContent
+              [nzValue]="item.value"
+              [nzLabel]="item.name"
+            >
+              <div title="{{ item.name }}">
+                <span *ngIf="item.smartEvent" class="icon iconfont icon-shijian"></span>{{ item.name }}
+              </div>
+            </nz-option>
+          </nz-select>
+        </div>
+        <div class="item search-list-fitst-left-one search-list-fitst-left-bg">的</div>
+        <div class="item search-list-fitst-left-one">
+          <nz-select style="width: 180px;" [(ngModel)]="analysisObj.selectedMetric" nzShowSearch nzPlaceHolder="请选择">
+            <nz-option *ngFor="let item of metricList" [nzValue]="item.value" [nzLabel]="item.name" nzCustomContent>
+              <div title="{{ item.name }}">{{ item.name }}</div>
+            </nz-option>
+          </nz-select>
+        </div>
+        <div
+          class="search-list-fitst-left-one search-list-fitst-left-add"
+          *ngIf="!analysisObj.showObjAttr"
+          (click)="addItem(analysisObj.query.boolFilters, analysisObj)"
+        >
+          <span><i nz-icon type="plus" theme="outline"></i> 添加属性</span>
+        </div>
+        <div style="padding-left: 101px;" *ngIf="analysisObj.showObjAttr">
+          <div style=" border-left: 1px solid #d9d9d9;">
+            <app-event-attribute-builder
+              [maxCount]="8"
+              [eventId]="analysisObj.selectedEvent"
+              [query]="analysisObj.query"
+              [hideAndOr]="true"
+              (attributeChange)="attributeChange($event, analysisObj)"
+              (valueChange)="onValueChange(analysisObj)"
+            ></app-event-attribute-builder>
+          </div>
+        </div>
+
+        <app-event-filter
+          *ngIf="analysisObj.showObjFilter"
+          [isCheck]="_isCheckCrowdFilter"
+          [hasContrast]="showContrast"
+          [crowdData]="analysisObj.crowdFilter"
+          [startDate]="_commonFilter.startDate"
+          [endDate]="_commonFilter.endDate"
+          (onFilter)="onFilter($event, 'analysisObj')"
+        ></app-event-filter>
+      </div>
+      <div class="add-filter-button" *ngIf="!analysisObj.showObjFilter">
+        <div
+          class="search-list-fitst-left-one search-list-fitst-left-add"
+          (click)="moreSearch(analysisObj.crowdFilter, analysisObj)"
+        >
+          <span><i nz-icon type="plus" theme="outline"></i> 筛选条件</span>
+        </div>
+      </div>
+    </div>
+    <div class="search-list-fitst search-list-one borderBottom">
+      <div class="add-contrast-button" *ngIf="!showContrast">
+        <div class="search-list-fitst-left-one search-list-fitst-left-add" (click)="addContrast()">
+          <span><i nz-icon type="plus" theme="outline"></i> 分析对象</span>
+        </div>
+      </div>
+      <div *ngIf="showContrast">
+        <div class="search-list-fitst-left">
+          <div class="item search-list-fitst-left-one search-list-fitst-left-bg">分析对象</div>
+          <div class="item search-list-fitst-left-one">
+            <nz-select
+              style="width: 180px;"
+              [(ngModel)]="contrastObj.selecteEventType"
+              (nzScrollToBottom)="getEventTypeList(contrastObj)"
+              (ngModelChange)="eventTypeChange($event, contrastObj)"
+              nzShowSearch
+              nzPlaceHolder="请选择"
+            >
+              <nz-option
+                *ngFor="let item of contrastObj.eventTypeList"
+                [nzValue]="item.id"
+                [nzLabel]="item.dicItemValue"
+                nzCustomContent
+              >
+                <div title="{{ item.dicItemValue }}">{{ item.dicItemValue }}</div>
+              </nz-option>
+            </nz-select>
+          </div>
+          <div class="item search-list-fitst-left-one search-list-fitst-left-bg">为</div>
+          <div class="item search-list-fitst-left-one">
+            <nz-select
+              style="width: 180px;"
+              (ngModelChange)="eventListChange(contrastObj)"
+              [(ngModel)]="contrastObj.selectedEvent"
+              (nzOnSearch)="onSearchEvent($event, contrastObj)"
+              (nzScrollToBottom)="getEventList(contrastObj, null, true)"
+              [nzServerSearch]="true"
+              nzShowSearch
+              nzPlaceHolder="请选择"
+            >
+              <nz-option
+                *ngFor="let item of contrastObj.eventList"
+                nzCustomContent
+                [nzValue]="item.value"
+                [nzLabel]="item.name"
+              >
+                <div title="{{ item.name }}">
+                  <span *ngIf="item.smartEvent" class="icon iconfont icon-shijian"></span>{{ item.name }}
+                </div>
+              </nz-option>
+            </nz-select>
+          </div>
+          <div
+            class="search-list-fitst-left-one search-list-fitst-left-add"
+            *ngIf="!contrastObj.showObjAttr"
+            (click)="addItem(contrastObj.query.boolFilters, contrastObj)"
+          >
+            <span><i nz-icon type="plus" theme="outline"></i> 添加属性</span>
+          </div>
+          <button
+            nz-button
+            nzType="default"
+            nzShape="circle"
+            (click)="hideContrast()"
+            class="crowd-btn-close"
+            style="float: right;"
+          >
+            <span class="ant-compat anticon anticon-close"></span>
+          </button>
+          <div style="padding-left: 101px" *ngIf="contrastObj.showObjAttr">
+            <div style=" border-left: 1px solid #d9d9d9;">
+              <app-event-attribute-builder
+                [maxCount]="8"
+                [query]="contrastObj.query"
+                [eventId]="contrastObj.selectedEvent"
+                [hideAndOr]="true"
+                (attributeChange)="attributeChange($event, contrastObj)"
+                (valueChange)="onValueChange(contrastObj)"
+              ></app-event-attribute-builder>
+            </div>
+          </div>
+          <app-event-filter
+            *ngIf="contrastObj.showObjFilter"
+            [isCheck]="_isCheckCrowdFilter"
+            [hasContrast]="showContrast"
+            [crowdData]="contrastObj.crowdFilter"
+            [startDate]="_commonFilter.startDate"
+            [endDate]="_commonFilter.endDate"
+            (onFilter)="onFilter($event, 'contrastObj')"
+          ></app-event-filter>
+        </div>
+        <div class="add-filter-button" *ngIf="!contrastObj.showObjFilter">
+          <div
+            class="search-list-fitst-left-one search-list-fitst-left-add"
+            (click)="moreSearch(contrastObj.crowdFilter, contrastObj)"
+          >
+            <span><i nz-icon type="plus" theme="outline"></i> 筛选条件</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="search-list-fitst search-list-one">
+      <div class="item search-list-fitst-left-one search-list-fitst-left-bg">按</div>
+      <div class="item search-list-fitst-left-one">
+        <nz-select style="width: 180px;" [(ngModel)]="selectedDimension" nzShowSearch nzPlaceHolder="请选择">
+          <nz-option-group *ngFor="let group of dimensionList" [nzLabel]="group.key">
+            <nz-option
+              *ngFor="let item of group.value"
+              [nzValue]="item.esfieldname"
+              [nzLabel]="item.displayname"
+              nzCustomContent
+            >
+              <div title="{{ item.displayname }}">{{ item.displayname }}</div>
+            </nz-option>
+          </nz-option-group>
+        </nz-select>
+      </div>
+      <div class="item search-list-fitst-left-one search-list-fitst-left-bg">查看</div>
+      <div style="float:right">
+        <div class="search-button">
+          <button nz-button (click)="clickSearch()">查询</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

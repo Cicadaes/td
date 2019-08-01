@@ -1,0 +1,9 @@
+
+.edit-data-dialog .auth-bean {
+    padding-top: 6px;
+}
+
+.edit-data-dialog .auth-bean li{
+    float: left;
+    padding-right: 5px;
+}

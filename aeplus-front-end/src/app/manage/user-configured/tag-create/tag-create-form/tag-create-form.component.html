@@ -1,0 +1,369 @@
+<main>
+
+    <div class="first-level"></div>
+    <div>
+
+        <div style="position: relative; padding: 20px;">
+
+            <div class="check-base shadow-content" style="position: relative; background: #FFF;">
+                <div style="padding: 10px 20px; border-bottom: #DCDEE2 1px solid; font-weight: bolder;font-size: 14px;">
+                    标签
+                </div>
+
+
+                <div class="custom-form" style="padding: 15px 40px; border-bottom: #DCDEE2 1px solid; font-size: 12px;">
+                    <div nz-row class="custom-form-row">
+                        <div nz-col nzSpan="24">
+                            <label class="custom-form-label">标签名称<em>*</em></label>
+                            <div class="custom-form-control">
+                                <input nz-input placeholder="请输入标签名称" [(ngModel)]="customTagVO2.customTag.name"
+                                       (ngModelChange)="logChange(customTagVO2.customTag, 'name')"
+                                       [ngClass]="{'checkFailure': customTagVO2.customTag.nameCheckFailure}"
+                                       style="width: 316px; font-size: 12px;" maxlength="64">
+                                <!--<span *ngIf="parentId" style="padding-left: 40px;"> 父标签名称：{{parentName}}</span>-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div nz-row class="custom-form-row">
+                        <div nz-col nzSpan="24">
+                            <label class="custom-form-label">生命周期（天）<em>*</em></label>
+                            <div class="custom-form-control">
+                                <nz-input-number
+                                        [(ngModel)]="customTagVO2.schedule.lifecycle"
+                                        (ngModelChange)="logChange(customTagVO2.schedule, 'lifecycle')"
+                                        [nzMin]="1" [nzMax]="9999" [nzStep]="1"
+                                        [ngClass]="{'checkFailure': customTagVO2.schedule.lifecycleCheckFailure}"
+                                ></nz-input-number>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div nz-row class="custom-form-row">
+                        <div nz-col nzSpan="24">
+                            <label class="custom-form-label">计算频率<em>*</em></label>
+                            <div class="custom-form-control cal-frequency-control">
+                                <div class="item label">在</div>
+                                <div class="item">
+                                    <nz-range-picker class="custom-range-picker" [nzFormat]="_dateFormat"
+                                                     [(ngModel)]="_dateRange"
+                                                     [nzDisabledDate]="_disabledDate"
+                                                     (ngModelChange)="_changeDaterange($event);"
+                                                     nzPlaceHolder="" [nzAllowClear]="false"
+                                                     [nzStyle]="{'width': '240px'}">
+                                    </nz-range-picker>
+                                </div>
+                                <div class="item label">内</div>
+                                <div class="item">
+                                    <nz-select [(ngModel)]="customTagVO2.schedule.scheduleExpressionObj.loop"
+                                               [nzSize]="'default'" nzShowSearch>
+                                        <nz-option *ngFor="let option of loopList" [nzLabel]="option.label"
+                                                   [nzValue]="option.value"></nz-option>
+                                    </nz-select>
+                                </div>
+                                <div class="item">
+                                    <nz-select style="width: 90px;" *ngIf="customTagVO2.schedule.scheduleExpressionObj.loop == 'week'"
+                                               [(ngModel)]="customTagVO2.schedule.scheduleExpressionObj.dayOfWeek"
+                                               [nzSize]="'default'" nzShowSearch>
+                                        <nz-option *ngFor="let option of weekList" [nzLabel]="option.label"
+                                                   [nzValue]="option.value"></nz-option>
+                                    </nz-select>
+                                    <nz-select style="width: 90px;" *ngIf="customTagVO2.schedule.scheduleExpressionObj.loop == 'month'"
+                                               [(ngModel)]="customTagVO2.schedule.scheduleExpressionObj.dayOfMonth"
+                                               [nzSize]="'default'" nzShowSearch>
+                                        <nz-option *ngFor="let option of monthList" [nzLabel]="option.label"
+                                                   [nzValue]="option.value"></nz-option>
+                                    </nz-select>
+                                </div>
+                                <span class="item label" *ngIf="_calculateTime">{{_calculateTime}}</span>
+                                <!--<div class="item">
+                                    <nz-time-picker style="width: 90px;" [nzDisabled]="true" [(ngModel)]="_calculateTime" nzFormat="HH:mm"></nz-time-picker>
+                                </div>-->
+                                <span class="item label">更新</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div style="padding: 20px; background: rgba(23,35,61,0.06);">
+                    <!-- 最外层循环 -->
+                    <div *ngFor="let condition of customTagVO2.conditions; let ci = index">
+                        <div *ngIf="ci > 0" style="position: relative; text-align: center;">
+                            <table class="ver-line">
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                            <nz-radio-group [(ngModel)]="condition.operator" (ngModelChange)="logChange()">
+                                <label nz-radio-button nzValue="and">交</label>
+                                <label nz-radio-button nzValue="or">并</label>
+                                <label nz-radio-button nzValue="andNot">差</label>
+                            </nz-radio-group>
+                            <table class="ver-line">
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div style="position: relative; background: #FFF; border: #DCDEE2 1px solid;">
+                            <div style="padding: 4px 20px 4px 10px; border-bottom: #DCDEE2 1px solid;">
+                                <nz-select style="width: 100px;" [(ngModel)]="condition.indice"
+                                           (ngModelChange)="changeIndice(condition,$event)" class="my-select">
+                                    <nz-option nzValue="attribute" nzLabel="用户属性"></nz-option>
+                                    <nz-option nzValue="behavior" nzLabel="用户行为"></nz-option>
+                                    <nz-option nzValue="customTag" nzLabel="现有标签"></nz-option>
+                                </nz-select>
+
+                                <span *ngIf="condition.indice == 'behavior'"
+                                      style="padding: 5px 8px;
+                    margin: 0 5px;
+                    background: rgba(23,35,61,0.06);
+                    border-radius: 4px;
+                    vertical-align: middle;">
+                在</span>
+                                <span *ngIf="condition.indice == 'behavior'" class="inline-block">
+                <nz-range-picker [(ngModel)]="condition.eventTimeQuery.boolFilters[0].value"
+                                 (ngModelChange)="logChange()" [nzRanges]="ranges1" [nzSize]="'small'"
+                                 nzPlaceHolder="" [nzAllowClear]="false" [nzStyle]="{'width': '240px'}">
+
+                </nz-range-picker>
+              </span>
+
+                                <span *ngIf="ci > 0" class="inline-block" style="float: right;">
+                <button nz-button nzType="default" nzShape="circle" (click)="removeItem(customTagVO2.conditions, ci)"
+                        [nzSize]="'small'" class="tag-btn-close">
+                  <span class="anticon anticon-close"></span>
+                </button>
+              </span>
+                                <span *ngIf="ci == 0" class="inline-block" style="float: right;">
+                <nz-popover [nzTitle]="'业务术语说明'" [nzPlacement]="'leftTop'" [(nzVisible)]="tipShow"
+                            [nzTrigger]="'click'">
+                  <span nz-popover (click)='tipShow = !tipShow'>
+                    <span class="icon iconfont icon-info1" style="font-size: 18px; cursor: pointer;"></span>
+                  </span>
+                  <ng-template #nzTemplate>
+                    <div>
+                      <div style="padding: 0 0 5px; border-bottom: rgba(255,255,255,0.15) 1px solid;">
+                        <span class="tip-span-1">
+                          用户属性
+                        </span>
+                        <span class="tip-span-2">
+                          根据人的属性信息组合形成标签。举例：可选择性别是男，并且学历是本科的属性信息。
+                        </span>
+                      </div>
+                      <div style="padding: 5px 0; border-bottom: rgba(255,255,255,0.15) 1px solid;">
+                        <span class="tip-span-1">
+                          用户行为
+                        </span>
+                        <span class="tip-span-2">
+                          根据人的行为信息组合形成标签。举例：可选择在近7日访问了深圳店铺的行为信息。
+                        </span>
+                      </div>
+                      <div style="padding: 5px 0;">
+                        <span class="tip-span-1">
+                          现有标签
+                        </span>
+                        <span class="tip-span-2">
+                          可将属性、行为构成的标签再与系统中现有的标签进行逻辑运算得到新标签。举例：可选择性别是男的标签，再与有车一族（现有标签）取交集，得到男性有车一族标签。
+                        </span>
+                      </div>
+                    </div>
+                  </ng-template>
+                </nz-popover>
+              </span>
+                            </div>
+
+                            <!-- 属性块 -->
+                            <div *ngIf="condition.indice == 'attribute'" style="padding: 0px 20px 20px 20px;">
+                                <!-- 无条件时显示 -->
+                                <div [ngClass]="{hide: condition.queryList[0].boolFilters.length > 0}"
+                                     style=" text-align: center;padding-top: 20px;margin-top: 10px;">
+                                    <span style="font-size: 14px;">根据人的属性信息组合形成标签</span><br/>
+                                    <div style="padding: 10px;">
+                                        <button nz-button nzType="default" class="tag-btn"
+                                                (click)="addItem(condition.queryList[0].boolFilters, 'prop')">
+                                            创建属性信息
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <app-attribute-builder [boolFilters]="condition.queryList[0].boolFilters"
+                                                       [defaultAttrList]="true" [hideAddBtn]="true"
+                                                       (valueChange)="onValueChange()"></app-attribute-builder>
+                            </div>
+
+                            <!-- 行为块 -->
+                            <div *ngIf="condition.indice == 'behavior'" style="padding: 0px 20px 20px 20px;">
+                                <!-- 无条件时显示 -->
+                                <div [ngClass]="{hide: condition.queryList.length > 0}"
+                                     style="text-align: center; padding-top: 20px;margin-top: 10px;">
+                                    <span style="font-size: 14px;">根据人的行为信息组合形成标签</span><br/>
+                                    <div style="padding: 10px;">
+                                        <button nz-button nzType="default" class="tag-btn"
+                                                (click)="addItem(condition.queryList, 'behavior')">
+                                            创建行为信息
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- 行为子循环块 -->
+                                <div *ngFor="let query of condition.queryList; let i = index"
+                                     style="border-bottom: #cccccc 1px dashed;">
+                                    <!-- 行为块 -->
+                                    <div *ngFor="let attr of query.boolFilters_0; let j = index">
+                                        <div style="padding: 10px 0 10px 0; height: 52px;">
+                                            <div *ngIf="i == 0" class="view-btn  black-bg" style="width:87px;">用户</div>
+                                            <div *ngIf="i > 0" class="view-btn" (click)="changeOperator(query)">
+                                                <span>{{query.operator | tagCreate}}</span>
+                                                <span class="anticon anticon-down"></span>
+                                            </div>
+
+                                            <div (click)="changeNot(condition)" class="view-btn" style="width: 120px;">
+                                                <span>{{condition.not | tagCreate}}</span>
+                                                <span class="anticon anticon-down"></span>
+                                            </div>
+
+                                            <nz-select [(ngModel)]="attr.fieldName"
+                                                       (ngModelChange)="changeBehaviorType(attr, query, true)"
+                                                       nzShowSearch
+                                                       nzAllowClear nzPlaceHolder="请选择类型"
+                                                       [ngClass]="{'checkFailureBase': attr.fieldNameCheckFailure}"
+                                                       class="input-item" style="width: 180px;">
+                                                <nz-option *ngFor="let item of behaviorTypeList" nzValue="{{item.value}}" nzLabel="{{item.name}}" nzCustomContent>
+                                                     <div title="{{item.name}}">{{item.name}}</div>   
+                                                </nz-option>
+                                            </nz-select>
+
+                                            <nz-select [(ngModel)]="attr.value" nzPlaceHolder="请选择行为" nzAllowClear
+                                                       nzShowSearch [nzServerSearch]="true"
+                                                       (nzOnSearch)="onSearch(attr.fieldName, $event, query)"
+                                                       (ngModelChange)="changeBehavior(attr.value, query, true)"
+                                                       [ngClass]="{'checkFailureBase': attr.valueCheckFailure}"
+                                                       class="input-item"
+                                                       style="width: 200px;">
+                                                <ng-container *ngFor="let item1 of query.metaBehaviorList">
+                                                    <nz-option *ngIf="!isLoading" [nzValue]="item1.value" [nzLabel]="item1.name" nzCustomContent>
+                                                        <div title="{{item1.name}}">{{item1.name}}</div>
+                                                    </nz-option>
+                                                </ng-container>
+                                                <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+                                                    <span class="anticon anticon-loading anticon-spin loading-icon"></span>
+                                                    Loading Data...
+                                                </nz-option>
+                                            </nz-select>
+
+                                            <!-- 删除行为 -->
+                                            <button nz-button nzType="default" nzShape="circle"
+                                                    (click)="removeItem(condition.queryList, i)" class="tag-btn-close"
+                                                    style="float: right;">
+                                                <span class="anticon anticon-close"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- 行为属性块 -->
+                                    <app-attribute-builder [boolFilters]="query.boolFilters"
+                                                           [metaAttributeList]="query.metaAttributeList"
+                                                           [useListGroup]="false" [hideAndOr]="true"
+                                                           (valueChange)="onValueChange()"></app-attribute-builder>
+                                </div>
+                                <div [ngClass]="{hide: condition.queryList.length == 0}"
+                                     style="padding: 10px 0px 10px 0px;">
+                                    <button nz-button nzType="default"
+                                            (click)="addItem(condition.queryList, 'behavior')"
+                                            class="tag-btn">
+                                        <span class="anticon anticon-plus"></span>
+                                        添加行为
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- 现有标签块 -->
+                            <div *ngIf="condition.indice == 'customTag'" style="padding: 0px 20px 20px 20px;">
+                                <!-- 无条件时显示 -->
+                                <div [ngClass]="{hide: condition.queryList[0].boolFilters.length > 0}"
+                                     style="text-align: center; padding-top: 20px;margin-top: 10px;">
+                                    <span style="font-size: 14px;">可选择现有标签，将属性、行为构成的标签再与系统中现有的标签进行逻辑运算得到新标签</span><br/>
+                                    <div style="padding: 10px;">
+                                        <button nz-button nzType="default" class="tag-btn"
+                                                (click)="addItem(condition.queryList[0].boolFilters, 'customTag')">
+                                            创建标签信息
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div *ngFor="let attr of condition.queryList[0].boolFilters; let i = index"  class="add-item">
+
+                                    <div *ngIf="i == 0" class="view-btn  black-bg">标签</div>
+                                    <div *ngIf="i > 0" (click)="changeOperator(attr)" class="view-btn">
+                                        <span>{{attr.operator | tagCreate}}</span>
+                                        <span class="anticon anticon-down"></span>
+                                    </div>
+
+                                    <!-- eqType -->
+                                    <nz-select [(ngModel)]="attr.eqType" (ngModelChange)="logChange()" class="input-item" style="width: 120px;">
+                                        <nz-option nzValue="eq" nzLabel="是"></nz-option>
+                                        <nz-option nzValue="ne" nzLabel="不是"></nz-option>
+                                    </nz-select>
+
+                                    <nz-select [(ngModel)]="attr.value" (ngModelChange)="logChange(attr, 'value')" nzShowSearch nzAllowClear nzPlaceHolder="请选择现有标签"
+                                               [ngClass]="{'checkFailureBase': attr.valueCheckFailure}" class="input-item select-width" style="width:300px;min-width: 200px;">
+                                        <nz-option-group *ngFor="let group of existingTagList" nzLabel="{{group.categoryName}}">
+                                            <nz-option *ngFor="let item of group.children" nzValue="{{item.value}}" nzLabel="{{item.name}}" nzCustomContent>
+                                                <div title="{{item.name}}">{{item.name}}</div>
+                                            </nz-option>
+                                        </nz-option-group>
+                                    </nz-select>
+
+                                    <button (click)="removeItem(condition.queryList[0].boolFilters, i)" nz-button
+                                            nzType="default" nzShape="circle" class="tag-btn-close"
+                                            style="float: right;">
+                                        <span class="anticon anticon-close"></span>
+                                    </button>
+
+                                </div>
+
+                                <div [ngClass]="{hide: condition.queryList[0].boolFilters.length == 0}"
+                                     style="padding: 10px 0px 10px 0px;">
+                                    <button nz-button nzType="default"
+                                            (click)="addItem(condition.queryList[0].boolFilters, 'customTag')"
+                                            class="tag-btn-add">
+                                        <span class="anticon anticon-plus"></span>
+                                        添加现有标签
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="ver-line">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    <div style="position: relative; text-align: center;">
+                        <button (click)="addItem(customTagVO2.conditions, 'block')" nz-button nzType="default"
+                                nzShape="circle"
+                                class="tag-btn" style="font-size: 14px; font-weight: bolder;">
+                            <span class="anticon anticon-plus"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="position: relative; margin-top: 20px; padding: 0;">
+                <button (click)="save()" nz-button [disabled]="saved" nzType="primary" class="save-btn">保存</button>
+                <button (click)="cancel()" nz-button nzType="default" class="save-btn" style="margin-left: 5px;">取消</button>
+                <!--<button *ngIf="isEdit" (click)="showConfirm()" nz-button nzType="info" class="save-btn"
+                        style="margin-left: 5px;">重新计算
+                </button>-->
+            </div>
+        </div>
+    </div>
+
+</main>

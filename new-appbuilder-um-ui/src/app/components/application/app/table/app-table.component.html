@@ -1,0 +1,67 @@
+<ng-template #tableTotal>
+    <div style="margin-right: 6px;">
+        总共 {{_total}} 条
+    </div>
+</ng-template>
+<nz-table #nzTable [nzBordered]="false" [nzShowTotal]="tableTotal" [nzData]="_dataSet" nzShowSizeChanger [nzLoading]="_loading"
+    [nzTotal]="_total" [(nzPageIndex)]="_current" (nzPageIndexChange)="refreshData()" [(nzPageSize)]="_pageSize"
+    (nzPageSizeChange)="refreshData(true)" [nzFrontPagination]="false">
+    <thead>
+        <tr>
+            <th [nzWidth]="'10%'">
+                应用名称
+            </th>
+            <th [nzWidth]="'10%'">
+                应用编码
+            </th>
+            <th [nzWidth]="'6%'">
+                版本
+            </th>
+            <th [nzWidth]="'8%'">
+                应用类型
+            </th>
+            <th [nzWidth]="'6%'">
+                状态
+            </th>
+
+            <th [nzWidth]="'27%'">
+                应用简介
+            </th>
+            <th [nzWidth]="'9%'">
+                更新人
+            </th>
+            <th [nzWidth]="'9%'">
+                更新时间
+            </th>
+            <th [nzWidth]="'6%'">
+                <span>操作</span>
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let data of nzTable.data">
+            <td>{{data.name}}</td>
+            <td>{{data.code}}</td>
+            <td>{{data.version}}</td>
+            <td>
+                {{data.type==1?'主应用':'增值包'}}
+            </td>
+            <td>
+                <span style="color:#E03E16" *ngIf="data.status==0">●</span>
+                <span style="color:#2B85E5" *ngIf="data.status==1">●</span>
+                {{data.status==0?'禁用':'正常'}}
+            </td>
+            <td>{{data.desc}}</td>
+            <td>{{data.updateUserName}}</td>
+            <td>{{data.updateTime | dateFormatPipe:2}}</td>
+            <td>
+                <span>
+                    <a [routerLink]="[ '/apps/detailAppPage',data.id]">查看</a>
+                </span>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<add-app-dialog *ngIf="isShowAddAppModal" [app]="currentApp" [isShow]="isShowAddAppModal" (onClose)="hideAddAppModal($event)"></add-app-dialog>

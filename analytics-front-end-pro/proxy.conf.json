@@ -1,0 +1,10 @@
+{
+    "/crowd": {
+        "target": "http://172.23.5.173:9887",
+        "secure": "false"
+    },
+    "/marketing-api": {
+        "target": "http://172.23.4.169:9081/",
+        "secure": "false"
+    }
+}

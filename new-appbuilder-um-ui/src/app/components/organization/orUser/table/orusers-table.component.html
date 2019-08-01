@@ -1,0 +1,52 @@
+<ng-template #tableTotal>
+        <div  style="margin-right: 6px;">
+          总共 {{_total}} 条
+        </div>
+</ng-template>
+<nz-table #nzTable [nzBordered]="false" [nzShowTotal]="tableTotal" [nzData]="_dataSet" nzShowSizeChanger [nzLoading]="_loading"
+    [nzTotal]="_total" [(nzPageIndex)]="_current" (nzPageIndexChange)="refreshData()"
+    [(nzPageSize)]="_pageSize" (nzPageSizeChange)="refreshData(true)"  [nzFrontPagination]="false">
+
+    <thead>
+        <tr>
+            <th [nzWidth]="'5%'" nzShowCheckbox [(nzChecked)]="_allChecked" [nzIndeterminate]="_indeterminate" (nzCheckedChange)="_checkAll($event)"></th>
+            <th [nzWidth]="'14%'">
+                姓名
+            </th>
+            <th [nzWidth]="'20%'">
+                账号
+            </th>
+            <th [nzWidth]="'9%'">
+                性别
+            </th>
+            <th [nzWidth]="'14%'">
+                手机
+            </th>
+            <th [nzWidth]="'9%'">
+                状态
+            </th>
+            <th [nzWidth]="'14%'">
+                <span>操作</span>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of nzTable.data">
+            <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="_refreshStatus($event, data.id)"></td>
+            <td>{{data.name}}</td>
+            <td>{{data.email}}</td>
+            <td>{{data.gender==-1?'':(data.gender==0?'女':'男')}}</td>
+            <td>{{data.mobile}}</td>
+            <td><span style="color:#E03E16" *ngIf="data.status==0">●</span><span style="color:#2B85E5" *ngIf="data.status==1">●</span>{{data.status==0?'禁用':'正常'}}</td>
+            <td>
+                <span>
+                    <a href="javascript:;" (click)="deleteUserFromUserGroup(data)">移除</a>
+                </span>
+                <nz-divider nzType="vertical"></nz-divider>
+                <span>
+                    <a [routerLink]="['viewTenantUserPage',data.id]">查看</a>
+                </span>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>

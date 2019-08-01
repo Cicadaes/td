@@ -1,0 +1,7 @@
+.anticon {
+  color: #2d8cf0;
+}
+
+:host ::ng-deep .ant-table-title {
+  padding: 0px !important;
+}

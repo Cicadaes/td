@@ -1,0 +1,165 @@
+@import '../../../../../less/td.theme.less';
+
+.content {
+  max-height: 500px;
+  overflow: auto;
+  padding: 24px;
+}
+
+.input-eye {
+  position: absolute;
+  top: -11px;
+  right: 6px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.qrcode {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  margin: 0 24px 0 0;
+  .select-qrcode {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    line-height: 14px;
+    border-radius: 50%;
+    background-color: @white;
+    color: @base-link-color;
+  }
+}
+
+.channel-input {
+  width: 250px;
+}
+
+.control-right {
+  float: right;
+}
+
+.add-params {
+  color: @base-color;
+  cursor: pointer;
+}
+
+.footer {
+  border-top: 1px solid #e8e8e8;
+  padding: 6px 24px;
+  text-align: right;
+  border-radius: 0 0 4px 4px;
+  button {
+    height: 32px;
+    box-sizing: border-box;
+    border-radius: 2px;
+  }
+  .cancel-button {
+    width: 56px;
+    margin-right: 8px;
+    color: rgba(23, 35, 61, 0.75);
+  }
+}
+
+.has-error {
+  color: #f5222d;
+  margin-left: 91px;
+}
+
+.params-input {
+  width: 100px;
+}
+
+.params-name.has-error {
+  margin-left: 45px;
+}
+
+.params-number.has-error {
+  margin-left: 195px;
+}
+
+.tips {
+  vertical-align: middle;
+  color: rgba(23, 35, 61, 0.55);
+  font-weight: 100;
+}
+
+.padding-left {
+  padding-left: 4px;
+}
+
+.no-border {
+  border: 1px solid #fff !important;
+  background: #fff;
+  color: rgba(0, 0, 0, 0.65);
+  cursor: default;
+}
+
+:host .ant-tooltip .ant-tooltip-inner {
+  max-width: 440px;
+}
+
+:host /deep/ .ant-form-explain {
+  color: #f5222d;
+}
+
+:host /deep/ .ant-form-item {
+  margin-bottom: 20px;
+}
+
+:host /deep/ .ant-form-item label > .anticon {
+  vertical-align: middle;
+}
+
+:host /deep/ .ant-form-item-label label .required {
+  color: @failed-color;
+  vertical-align: middle;
+}
+
+:host /deep/ .ant-form-item-label label {
+  font-weight: 550;
+}
+
+.item-border {
+  border: 1px solid #e8e8e8;
+  padding: 4px;
+  min-height: 200px;
+}
+textarea {
+  background-color: transparent;
+  -webkit-rtl-ordering: none;
+  color: #666464;
+  height: auto;
+  min-height: 130px;
+  margin-top: 20px;
+  word-break: break-all;
+}
+textarea.error {
+  border: 1px solid red;
+}
+.modal-download {
+  padding-left: 40px;
+  font-size: 13px;
+  line-height: 36px;
+  .step1 {
+    display: inline-block;
+    width: 200px;
+  }
+  .download {
+    display: inline-block;
+    a {
+      text-decoration: underline;
+      margin: 0 10px;
+    }
+  }
+}
+
+.modal-upload {
+  padding: 10px 40px;
+  font-size: 13px;
+  line-height: 36px;
+  p.ant-upload-hint {
+    text-align: left;
+    padding: 0 40px;
+    font-size: 12px;
+  }
+}

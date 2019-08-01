@@ -1,0 +1,62 @@
+
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="_submitForm()">
+        <nz-form-item nz-row>
+            <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="specialLabel" for="licenceId" nzRequired>
+                <label >许可证</label>
+            </nz-form-label>
+            <nz-form-control nz-col [nzSm]="7" [nzXs]="24">
+                <select-search [select]="additionalAppIdSelect" (onSelect)="selectSearchAdditionalAppId($event,'licenceId')"></select-search>
+                 
+                    <input nz-input [nzSize]="'large'" formControlName="licenceId" id="code" *ngIf="false"> 
+                 
+                <nz-form-explain style="color:red;" *ngIf="getFormControl('licenceId').dirty&&getFormControl('licenceId').hasError('required')" style="color: red">请选择许可证</nz-form-explain>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item nz-row>
+            <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="specialLabel" for="statusboo" >
+                <label  class="special-label-before">状态</label>
+            </nz-form-label>
+            <nz-form-control nz-col [nzSm]="7" [nzXs]="24">
+                <div nz-col [nzSpan]="14">
+                    <label nz-checkbox [(ngModel)]="statusboo" formControlName="statusboo" class="fl">
+                        <span>启用</span>
+                    </label>
+                </div>
+            </nz-form-control>
+        </nz-form-item>
+
+
+        <nz-form-item nz-row>
+            <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="specialLabel" for="validity"  nzRequired>
+                <label  >有效期</label>
+            </nz-form-label>
+            <nz-form-control nz-col [nzSm]="7" [nzXs]="24">
+                <date-range (onSelect)="dateRangeControl($event)" [noLimit]="noLimit" [disabled]=1></date-range>
+                 
+                    <input nz-input [nzSize]="'large'" formControlName="validity" id="validity" *ngIf="false"> 
+                 
+                <nz-form-explain style="color:red;" *ngIf="getFormControl('validity').dirty&&getFormControl('validity').hasError('required')" style="color: red">请选择有效期</nz-form-explain>
+            </nz-form-control>
+        </nz-form-item>
+
+
+        <nz-form-item nz-row>
+            <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="specialLabel" for="desc">
+                <label  nzRequired class="special-label-before">描述</label>
+            </nz-form-label>
+            <nz-form-control nz-col [nzSm]="7" [nzXs]="24">
+                 
+                    <textarea nz-input [nzSize]="'large'" formControlName="desc" [(ngModel)]="licence.desc" id="desc" [nzAutosize]="{ minRows: 2, maxRows: 4 }"></textarea>
+                 
+                <ng-container *ngIf="getFormControl('desc').dirty && getFormControl('desc').errors">
+                    <nz-form-explain style="color:red;" >
+                        <div *ngIf="getFormControl('desc').errors.maxlength">输入的描述过长</div>
+                        <div *ngIf="getFormControl('desc').required">输入的描述过长</div>
+                    </nz-form-explain>
+
+                </ng-container>
+            </nz-form-control>
+        </nz-form-item>
+
+    </form>

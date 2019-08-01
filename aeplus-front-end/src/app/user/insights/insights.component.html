@@ -1,0 +1,62 @@
+<div class="first-level"></div>
+<div class="content">
+    <div class="title shadow-content">
+        <div class="title-header">
+            <div class="icon">
+                <div class="iconfont icon-people"></div>
+            </div>
+            <div class="crowd">
+                <div class="crowd-title" title="{{crowd.name}}">{{crowd.name}}</div>
+                <div class="crowd-number">
+                    <span class="number">{{crowd.crowdCount}}</span>
+                    <span>人</span>
+                </div>
+            </div>
+            <div class="tag">
+                <div class="item" *ngFor="let item of tagList">{{item}}</div>
+            </div>
+            <div class="button">
+                <div class="create-crowd">
+                    <a *ngIf="crowd.crowdCount && crowd.crowdCount !== 0 && !fromMktPipe" (click)="goCreateCrowd()">创建子人群</a>
+                </div>
+                <div class="crowd-list">
+                    <a *ngIf="crowd.crowdCount && crowd.crowdCount !== 0 && !fromMktPipe" (click)="goSubCrowd()">子人群列表</a>
+                </div>
+                <div *ngIf="crowd.crowdCount && crowd.crowdCount !== 0" class="export" (click)="goExport()">
+                    <span>导出</span>
+                </div>
+            </div>
+        </div>
+        <div class="title-foot">
+            <label class="des">其它ID匹配：</label>
+            <label class="data" *ngFor="let item of otherIds">{{item.name}} {{item.value}} （{{item.percent}}%）</label>
+        </div>
+    </div>
+    <div class="body shadow-content">
+        <nz-tabset>
+            <nz-tab nzTitle="人群画像">
+                <div class="portraits">
+                    <div class="portraits-group">
+                        <ng-container *ngIf="portraits && portraits.length">
+                            <div class="portraits-button" [ngClass]="{'select': selectPortraits === i}" *ngFor="let item of portraits;let i = index"
+                                (click)="showChars(i)" title="{{item.name}}">
+                                {{item.name}}
+                            </div>
+                        </ng-container>
+                        <div *ngIf="!portraits || !portraits.length" class="no-protraits">
+                            暂未对用户人群画像报表进行配置，请在管理-用户配置-用户分群配置-人群画像配置中进行配置，如果没权限，请联系管理员。
+                        </div>
+                    </div>
+                </div>
+                <div class="loading" *ngIf="portraits && portraits.length">
+                    <nz-spin style="position: absolute; left: 50%; top: 50%;" *ngIf="portraits && portraits.length" ></nz-spin>
+                    <iframe *ngIf="iframeUrl && showIframe" [ngStyle]="{'position': 'relative', 'border': 'none', 'min-height': '334px'}" name="tdInsightsIframe" id="tdInsightsIframe" height="{{height}}"
+                        width="100%" [src]="iframeUrl" title=""></iframe>
+                </div>
+            </nz-tab>
+            <nz-tab nzTitle="用户列表">
+                <app-insights-table [crowdId]="crowdId"></app-insights-table>
+            </nz-tab>
+        </nz-tabset>
+    </div>
+</div>

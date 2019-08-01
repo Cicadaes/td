@@ -1,0 +1,66 @@
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel($event)" [nzMaskClosable]='false' [nzWidth]="'820px'">
+    <ng-template #modalTitle>
+        <span>选择API账号可访问的API</span>
+    </ng-template>
+    <ng-template #modalContent>
+        <ng-template #tableTotal>
+            <div>
+                总共 {{total}} 条
+            </div>
+        </ng-template>
+        <more-search *ngIf="isVisible" [fieldArray]="moreSearchArray" (onSearch)="onSearchMore($event)" [rowCount]="12"></more-search>
+        <nz-table 
+        #basicTable 
+        [nzData]="dataSet" 
+        [nzLoading]="loading" 
+        [nzTotal]="total" 
+        [(nzPageIndex)]="pageIndex" 
+        [(nzPageSize)]="pageSize" 
+        (nzPageIndexChange)="refreshData()"
+        (nzPageSizeChange)="refreshData(true)" 
+        nzShowSizeChanger
+        [nzShowTotal] = 'tableTotal'
+        [nzScroll]="{ y: '152px' }"
+        [nzFrontPagination]="false">
+            <thead>
+                <tr>
+                    <th nzShowCheckbox [(nzChecked)]="_allChecked" [nzIndeterminate]="_indeterminate" (nzCheckedChange)="_checkAll($event)"></th>
+                    <th [nzWidth]="'20%'">
+                        所属产品
+                    </th>
+                    <th [nzWidth]="'20%'">
+                        API名称
+                    </th>
+                    <th [nzWidth]="'30%'">
+                        API路径
+                    </th>
+                    <th [nzWidth]="'15%'">
+                        请求方式
+                    </th>
+                    <th [nzWidth]="'15%'">
+                        API版本
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of basicTable.data">
+                    <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="_refreshStatus($event, data.id)"></td>
+                    <td>{{data.catalogName}}</td>
+                    <td>{{data.metaName}}</td>
+                    <td>{{data.path}}</td>
+                    <td>{{data.requestMethod}}</td>
+                    <td>所有版本</td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </ng-template>
+    <ng-template #modalFooter>
+            <button nz-button [nzType]="'default'" (click)="handleCancel($event)">
+                取 消
+            </button>
+            <button nz-button [nzType]="'primary'" (click)="confirm($event)">
+                确 定
+            </button>
+    </ng-template>
+</nz-modal>

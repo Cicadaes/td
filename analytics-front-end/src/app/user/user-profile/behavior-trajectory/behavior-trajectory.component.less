@@ -1,0 +1,335 @@
+:host {
+  display: block;
+  margin: 16px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #edeef1 #e2e3e7 #d7d9dd #e2e3e7;
+  border-radius: 3px;
+  background-color: #ffffff;
+}
+
+.behavior-trajectory-tooltip.title {
+  display: block;
+}
+
+/* icon */
+
+.header .date-range.loading:after,
+.chart .trajectory-list.loading .more:after,
+.chart .trajectory-detail.loading .item-box:before,
+.chart .trajectory-list.loading .item-group:before,
+.chart .container:after {
+  font-family: 'anticon';
+  content: '\e64d';
+}
+
+.chart .trajectory-list .item:before {
+  font-family: 'iconfont';
+  content: '\ee19';
+}
+
+.chart .trajectory-list .item.show:before {
+  font-family: 'iconfont';
+  content: '\ee1a';
+}
+
+.chart .trajectory-detail .title:before {
+  font-family: 'anticon';
+  content: '\e61c';
+  cursor: pointer;
+}
+
+/* .header */
+
+.header {
+  position: relative;
+  height: 47px;
+  border-bottom: 1px solid #e7e9eb;
+}
+
+.header .title {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  line-height: 1em;
+}
+
+.header .date-range {
+  position: absolute;
+  right: 16px;
+  top: 11px;
+}
+
+.header .date-range {
+  position: absolute;
+  right: 16px;
+  top: 11px;
+}
+
+.header .date-range.loading:after {
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  font-size: 12px;
+  line-height: 12px;
+  color: #808695;
+  -webkit-animation: loadingCircle 1s infinite linear;
+  -o-animation: loadingCircle 1s infinite linear;
+  animation: loadingCircle 1s infinite linear;
+}
+
+/* .chart */
+
+.chart {
+  position: relative;
+  overflow: hidden;
+}
+
+/* .chart .trajectory-list */
+
+.chart .trajectory-list {
+  float: left;
+  width: 50%;
+  height: 500px;
+  padding: 16px;
+  border-right: 1px solid #e7e9eb;
+}
+
+.chart .trajectory-list .top,
+.chart .trajectory-list .bottom {
+  display: inline-block;
+  height: 24px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 6px;
+  border-radius: 24px;
+  font-size: 12px;
+  line-height: 12px;
+  color: #ffffff;
+  background-color: #2d8cf0;
+}
+
+.chart .trajectory-list .top {
+  margin-bottom: 10px;
+}
+
+.chart .trajectory-list .bottom {
+  margin-top: 10px;
+}
+
+.chart .trajectory-list .item-group {
+  display: block;
+  overflow-y: auto;
+  overflow-x: auto;
+  height: 360px;
+  position: relative;
+}
+
+.chart .trajectory-list .item {
+  position: relative;
+  display: block;
+  height: 36px;
+  margin-left: 28px;
+  padding-left: 28px;
+  padding-top: 12px;
+  border-left: 1px solid #e7e9eb;
+  font-size: 12px;
+  line-height: 12px;
+  white-space: nowrap;
+  color: #a0a4af;
+}
+
+.chart .trajectory-list .item:before {
+  position: absolute;
+  left: -12px;
+  top: 6px;
+  width: 24px;
+  height: 24px;
+  padding-left: 1px;
+  padding-top: 1px;
+  font-size: 22px;
+  line-height: 22px;
+  color: #828897;
+  background-color: #ffffff;
+}
+
+.chart .trajectory-list .item .description {
+  padding-left: 16px;
+  color: #576073;
+}
+
+.chart .trajectory-list .more {
+  display: block;
+  margin-top: 10px;
+  padding-left: 4px;
+}
+
+.chart .trajectory-list .more .anchor {
+  font-size: 12px;
+  line-height: 12px;
+  color: #2d8cf0;
+}
+
+.chart .trajectory-list.loading .more:after {
+  position: relative;
+  display: inline-block;
+  left: 5px;
+  font-size: 12px;
+  line-height: 12px;
+  color: #808695;
+  -webkit-animation: loadingCircle 1s infinite linear;
+  -o-animation: loadingCircle 1s infinite linear;
+  animation: loadingCircle 1s infinite linear;
+}
+
+/* .chart .trajectory-list .item.show */
+
+.chart .trajectory-list .item.show {
+  color: #2d8cf0;
+}
+
+.chart .trajectory-list .item.show:before {
+  color: #2d8cf0;
+}
+
+.chart .trajectory-list .item.show .description {
+  font-weight: bold;
+  color: #2d8cf0;
+}
+
+/* .chart .trajectory-detail */
+
+.chart .trajectory-detail {
+  position: absolute;
+  overflow-y: auto;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  width: 50%;
+  height: 500px;
+  padding-left: 24px;
+  padding-right: 24px;
+  background-color: #ffffff;
+}
+
+.chart .trajectory-detail .title {
+  height: 37px;
+  padding-top: 12px;
+}
+
+.chart .trajectory-detail .title:before {
+  color: #2d8cf0;
+}
+
+.chart .trajectory-detail .title .close {
+  font-size: 14px;
+  line-height: 14px;
+  color: #17233d;
+}
+
+.chart .trajectory-detail .item {
+  float: left;
+  width: 100%;
+  height: 36px;
+  padding-top: 12px;
+  font-size: 12px;
+  line-height: 12px;
+}
+
+.chart .trajectory-detail .item .name {
+  color: #9da1ad;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 50%;
+  display: inline-block;
+  height: 20px;
+}
+
+.chart .trajectory-detail .item .value {
+  color: #4a5468;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 50%;
+  display: inline-block;
+  height: 20px;
+}
+
+.chart .trajectory-detail .item-group {
+  overflow: hidden;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed #dedfe3;
+}
+
+.chart .trajectory-detail .item-group:last-child {
+  border-bottom: none;
+}
+
+.chart .trajectory-detail .item-box {
+  position: relative;
+  overflow-y: auto;
+  height: 432px;
+}
+
+.chart .trajectory-detail.loading .item-box:before {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -18px;
+  margin-top: -18px;
+  font-size: 36px;
+  line-height: 36px;
+  color: #808695;
+  -webkit-animation: loadingCircle 1s infinite linear;
+  -o-animation: loadingCircle 1s infinite linear;
+  animation: loadingCircle 1s infinite linear;
+}
+
+.chart .trajectory-list.loading .item-group:before {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -18px;
+  margin-top: -18px;
+  font-size: 36px;
+  line-height: 36px;
+  color: #808695;
+  -webkit-animation: loadingCircle 1s infinite linear;
+  -o-animation: loadingCircle 1s infinite linear;
+  animation: loadingCircle 1s infinite linear;
+}
+
+/* .chart .container */
+
+.chart .container {
+  position: relative;
+  float: left;
+  width: 50%;
+  height: 500px;
+  padding: 16px;
+}
+
+.chart .container:before {
+  content: attr(data-title);
+  position: absolute;
+  left: 24px;
+  top: 15px;
+  font-size: 14px;
+  line-height: 14px;
+  color: #17233d;
+}
+.chart .container.loading:after {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -18px;
+  margin-top: -18px;
+  font-size: 36px;
+  line-height: 36px;
+  color: #808695;
+  -webkit-animation: loadingCircle 1s infinite linear;
+  -o-animation: loadingCircle 1s infinite linear;
+  animation: loadingCircle 1s infinite linear;
+}

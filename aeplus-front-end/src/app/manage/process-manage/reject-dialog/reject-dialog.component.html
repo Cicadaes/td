@@ -1,0 +1,33 @@
+<nz-modal [(nzVisible)]="isVisible" nzWrapClassName="vertical-center-modal" [nzWidth]="410" [nzTitle]="modalTitle" [nzContent]="modalContent"
+    [nzFooter]="modalFooter" (nzOnCancel)="handleCancel($event)" [nzMaskClosable]='false'>
+    <ng-template #modalTitle>
+        <span>拒绝理由</span>
+    </ng-template>
+    <ng-template #modalContent>
+        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" autocomplete="off">
+            <nz-form-item style="margin-bottom: 10px;margin-top: 10px;">
+                <nz-form-label [nzSpan]="0" nzFor="describe"></nz-form-label>
+                <nz-form-control [nzSpan]="24">
+                    <textarea [nzSize]="large" placeholder="请输入拒绝上线的理由，以便告知业务人员" formControlName="reason" nz-input style="min-height: 100px;"></textarea>
+
+                    <nz-form-explain *ngIf="getFormControl('reason').dirty && getFormControl('reason').errors" style="color: #f5222d;position: absolute;bottom: -24px;">
+                        <ng-container *ngIf="getFormControl('reason').errors.required">
+                            请输入拒绝理由
+                        </ng-container>
+                        <ng-container *ngIf="getFormControl('reason').errors.maxlength">
+                            拒绝理由不能超过500个字符
+                        </ng-container>
+                    </nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </ng-template>
+    <ng-template #modalFooter>
+        <button nz-button [nzType]="'default'" [nzSize]="small" (click)="handleCancel($event)">
+            取消
+        </button>
+        <button nz-button [nzType]="'primary'" [nzSize]="small" (click)="save()">
+            保存
+        </button>
+    </ng-template>
+</nz-modal>

@@ -1,0 +1,30 @@
+<main>
+  <nz-modal
+    [nzMaskClosable]="false"
+    [(nzVisible)]="_isVisible"
+    [nzTitle]="modalTitle"
+    [nzContent]="modalContent"
+    [nzFooter]="null"
+    (nzOnCancel)="handleCancel()"
+    [nzWidth]="1030"
+  >
+    <ng-template #modalTitle>
+      <span *ngIf="!_data">添加漏斗</span>
+      <span *ngIf="_data">编辑漏斗</span>
+    </ng-template>
+
+    <ng-template #modalContent>
+      <app-capacity-path-funnel-add
+        [param]="param"
+        [eventList]="eventList"
+        [isInDialog]="true"
+        (onHide)="onHideModal($event)"
+      ></app-capacity-path-funnel-add>
+    </ng-template>
+
+    <ng-template #modalFooter>
+      <button nz-button nzType="default" (click)="handleCancel()">取消</button>
+      <button nz-button nzType="primary" (click)="handleOk()" [nzLoading]="_isConfirmLoading">确认</button>
+    </ng-template>
+  </nz-modal>
+</main>

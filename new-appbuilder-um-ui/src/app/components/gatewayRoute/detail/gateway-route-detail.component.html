@@ -1,0 +1,68 @@
+<div class="gateway-route-detail">
+    <nz-card>
+        <form nz-form>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="3" class="gateway-route-detail-label">规则名称</nz-form-label>
+                <nz-form-control [nzSpan]="21"><div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;" title="{{_data.name}}">{{_data.name}}</div></nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="3" class="gateway-route-detail-label">原始路径</nz-form-label>
+                <nz-form-control [nzSpan]="21"><div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;" title="{{_data.originUrl}}">{{_data.originUrl}}</div></nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="3" class="gateway-route-detail-label">映射方式</nz-form-label>
+                <nz-form-control [nzSpan]="21">
+                    <span *ngIf="_data.routingType === 1">URL映射</span>
+                    <span *ngIf="_data.routingType === 2">ServiceId映射</span>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="3" class="gateway-route-detail-label">映射路径</nz-form-label>
+                <nz-form-control [nzSpan]="21"><div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;" title="{{_data.routingUrl}}">{{_data.routingUrl}}</div></nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="3" class="gateway-route-detail-label">状态</nz-form-label>
+                <nz-form-control [nzSpan]="21">
+                    <nz-switch [(ngModel)]="_data.status" [nzControl]="true" (click)="changeStatus($event, _data)"
+                        nzCheckedChildren="已发布" nzUnCheckedChildren="未发布" [ngModelOptions]="{standalone: true}"></nz-switch>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="3" class="gateway-route-detail-label">规则描述</nz-form-label>
+                <nz-form-control [nzSpan]="21"><div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;" title="{{_data.description}}">{{_data.description}}</div></nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="3" class="gateway-route-detail-label">创建人</nz-form-label>
+                <nz-form-control [nzSpan]="21"><div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;" title="{{_data.creator}}">{{_data.creator}}</div></nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="3" class="gateway-route-detail-label">创建时间</nz-form-label>
+                <nz-form-control [nzSpan]="21"><div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;" title="{{_data.createTime}}">{{_data.createTime}}</div></nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="3" class="gateway-route-detail-label">更新人</nz-form-label>
+                <nz-form-control [nzSpan]="21"><div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;" title="{{_data.updater}}">{{_data.updater}}</div></nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="3" class="gateway-route-detail-label">更新时间</nz-form-label>
+                <nz-form-control [nzSpan]="21"><div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;" title="{{_data.updateTime}}">{{_data.updateTime}}</div></nz-form-control>
+            </nz-form-item>
+        </form>
+    </nz-card>
+</div>

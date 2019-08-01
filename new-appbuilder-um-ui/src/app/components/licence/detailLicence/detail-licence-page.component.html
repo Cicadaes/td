@@ -1,0 +1,170 @@
+<div class="text-content">
+    <nz-card style="margin-bottom: 10px;" [nzTitle]="titleTit">
+        <ng-template #titleTit>
+            <span *ngIf="licence">{{licence.name}}
+                <span style="color:#E03E16" *ngIf="licence.status==0">●</span>
+                <span style="color:#2B85E5" *ngIf="licence.status==1">●</span> {{licence.status==0?'禁用':'启用'}}</span>
+            <button style="float: right;" *ngIf="licence && rolecode=='UM_SUPER_ADMIN'" nz-button [nzType]="'default'" (click)="showEditLicenceModal()">
+                修改
+            </button>
+        </ng-template>
+
+        <nz-form-item nz-row *ngIf="licence">
+            <nz-form-label nz-col [nzSm]="2"   [nzXs]="24" class="special-label">
+                <label for="updateUserName" class="label_font">更新人</label>
+            </nz-form-label >
+            <nz-form-control nz-col [nzSm]="4" [nzXs]="24">
+                {{licence.updateUserName}}
+            </nz-form-control >
+            <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label">
+                <label for="updateTime" class="label_font">更新时间</label>
+            </nz-form-label >
+            <nz-form-control nz-col [nzSm]="3" [nzXs]="24">
+                {{licence.updateTime | dateFormatPipe:2}}
+            </nz-form-control >
+            <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special-label">
+                <label for="createUserName" class="label_font">创建人</label>
+            </nz-form-label >
+            <nz-form-control nz-col [nzSm]="4" [nzXs]="24">
+                {{licence.createUserName}}
+            </nz-form-control >
+            <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label">
+                <label for="createTime" class="label_font">创建时间</label>
+            </nz-form-label >
+            <nz-form-control nz-col [nzSm]="3" [nzXs]="24">
+                {{licence.createTime | dateFormatPipe:2}}
+            </nz-form-control >
+        </nz-form-item >
+
+    </nz-card>
+    <div>
+        <nz-tabset *ngIf="rolecode=='UM_OPER_ADMIN'" style="background: #fff;">
+            <nz-tab *ngFor="let tab of tabs" [nzTitle]="tab.name">
+                <div *ngIf="tab.code==1">
+                    <nz-card style="margin-bottom: 10px;" nzTitle="应用信息">
+                        <!-- <carousel-app-manage (onSubmit)="onSubmitAppData($event)" (onReset)="resetCarouselAppList($event)" [queryParams]="queryParams" [showEdit]="showEdit"></carousel-app-manage> -->
+                        <carousel-app-manage (onSubmit)="onSubmitAppData($event)" (onReset)="resetCarouselAppList($event)"
+                            [appList]="appList" [queryParams]="queryParams" [showEdit]="showEdit"></carousel-app-manage>
+                        <!-- <carousel-app-manage (onSubmit)="onSubmitAppData($event)" (onReset)="resetCarouselAppList($event)" [carouselId]="id" [appList]="appList" [queryParams]="queryParams" [showEdit]="showEdit"></carousel-app-manage> -->
+
+                    </nz-card>
+
+                    <nz-card style="margin-bottom: 10px;">
+                            <nz-table #nzTable [nzShowPagination]="false" [nzBordered]="false" [nzData]="_dataSet" [nzFrontPagination]="false"
+                                nzShowSizeChanger [nzLoading]="_loading" [nzTitle]="tableTit" >
+                                <ng-template #tableTit>
+                                    <span nz-table-title style="font-size:14px;font-family: PingFangSC-Medium;color: #17233D;font-weight: bold">属性信息
+                                        <img alt="图片" src="./assets/images/add.svg" height="12px" width="12px" style="margin-left: 4px;cursor: pointer;"
+                                            (click)="addAttribute($event)" *ngIf="rolecode=='UM_SUPER_ADMIN'" />
+                                        <!-- <span class="anticon anticon-plus-circle-o" (click)="addAttribute($event)" style="cursor:hand" *ngIf="rolecode=='UM_SUPER_ADMIN'"></span> -->
+                                    </span>
+                                </ng-template>
+                                <thead nz-thead>
+                                    <tr>
+                                        <th nz-th [nzWidth]="'20%'">
+                                            名称
+                                        </th>
+                                        <th nz-th [nzWidth]="'20%'">
+                                            Key
+                                        </th>
+                                        <th nz-th [nzWidth]="'20%'">
+                                            Value(默认值)
+                                        </th>
+                                        <th nz-th [nzWidth]="'40%'">
+                                            描述
+                                        </th>
+                                        <!-- <th nz-th [nzWidth]="'150px'">
+                                                    <span>操作</span>
+                                                </th>-->
+                                    </tr>
+                                </thead>
+                                <tbody nz-tbody>
+                                    <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                                        <td nz-td>{{data.name}}</td>
+                                        <td nz-td>{{data.key}}</td>
+                                        <td nz-td>{{data.defalutValue}}</td>
+                                        <td nz-td>{{data.desc}}</td>
+                                        <!-- <td nz-td>
+                                        <span>
+                                            <a href="javascript:;" (click)="editAttribute(data)">编辑</a>
+                                            <nz-divider nzType="vertical"></nz-divider>
+                                            <a href="javascript:;" (click)="deleteAttribute(data)">移除</a>
+                                        </span>
+                                            </td>-->
+                                    </tr>
+                                </tbody>
+                            </nz-table>
+                    </nz-card>
+                </div>
+                <div *ngIf="tab.code==2">
+                    <div style="padding-top: 25px;">
+                        <more-search [fieldArray]="companyFieldArray" (onSearch)="onSearchCompanyList($event)"></more-search>
+                        <auth-licences-table [queryParams]="authLicencesTableFieldParams" [licenceId]="id"></auth-licences-table>
+                    </div>
+                </div>
+            </nz-tab>
+        </nz-tabset>
+    </div>
+    <div *ngIf="rolecode=='UM_SUPER_ADMIN'">
+        <nz-card style="margin-bottom: 10px;" nzTitle="应用信息">
+
+            <!-- <carousel-app-manage (onSubmit)="onSubmitAppData($event)" (onReset)="resetCarouselAppList($event)" [queryParams]="queryParams" [showEdit]="showEdit"></carousel-app-manage> -->
+            <carousel-app-manage (onSubmit)="onSubmitAppData($event)" (onReset)="resetCarouselAppList($event)"
+                [appList]="appList" [queryParams]="queryParams" [showEdit]="showEdit"></carousel-app-manage>
+
+        </nz-card>
+
+        <nz-card style="margin-bottom: 10px;" [nzTitle]="attrTitle">
+
+            <nz-table #nzTable [nzShowPagination]="false" [nzBordered]="false" [nzData]="_dataSet" nzShowSizeChanger
+                [nzLoading]="_loading" [nzFrontPagination]="false">
+                <thead nz-thead>
+                    <tr>
+                        <th nz-th [nzWidth]="'150px'">
+                            名称
+                        </th>
+                        <th nz-th [nzWidth]="'150px'">
+                            Key
+                        </th>
+                        <th nz-th [nzWidth]="'150px'">
+                            Value(默认值)
+                        </th>
+                        <th nz-th [nzWidth]="'150px'">
+                            描述
+                        </th>
+                        <th nz-th [nzWidth]="'150px'">
+                            <span>操作</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody nz-tbody>
+                    <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                        <td nz-td>{{data.name}}</td>
+                        <td nz-td>{{data.key}}</td>
+                        <td nz-td>{{data.defalutValue}}</td>
+                        <td nz-td>{{data.desc}}</td>
+                        <td nz-td>
+                            <span>
+                                <a href="javascript:;" (click)="editAttribute(data)">编辑</a>
+                                <nz-divider nzType="vertical"></nz-divider>
+                                <a href="javascript:;" (click)="deleteAttribute(data)">删除</a>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </nz-card>
+        <ng-template #attrTitle>
+            <span>属性信息
+                <img alt="图片" src="./assets/images/add.svg" height="12px" width="12px" style="margin-left: 4px;cursor: pointer;"
+                    (click)="addAttribute($event)" /> </span>
+        </ng-template>
+    </div>
+    <edit-licence-page *ngIf="licence" [isShow]="isShowEditLicenceModal" [licence]="licence" (onClose)="hideEditAppModal($event)"></edit-licence-page>
+
+</div>
+
+<ng-container *ngIf="licence && isShowLicenceAttributeModal">
+    <edit-licence-attribute-dialog [_dataSet]="_dataSet" [isShow]="isShowLicenceAttributeModal" [queryParams]="licence"
+        [isEdit]="isEdit" [currentData]="currentData" (onClose)="hideLicenceAttributModal($event)"></edit-licence-attribute-dialog>
+</ng-container>

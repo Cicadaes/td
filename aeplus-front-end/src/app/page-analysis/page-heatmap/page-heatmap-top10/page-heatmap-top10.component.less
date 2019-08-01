@@ -1,0 +1,189 @@
+@charset "UTF-8";
+.td-heat-map-container {
+    position: relative;
+    background: #fff;
+    border-radius: 5px;
+    min-width: 320px;
+}
+
+.td-heat-map-title {
+    position: relative;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.td-heat-map-summary.td-heat-map-summary-link {
+    padding-right: 40px;
+}
+
+.td-heat-map-summary .td-heat-map-click {
+    float: left;
+    margin-right: 10px;
+    border-right: 1px solid #ededef;
+    padding-right: 10px;
+}
+
+.td-heat-map-summary .td-heat-map-pv {
+    float: left;
+}
+
+.td-heat-map-summary .td-heat-map-num {
+    color: #5ea2fc;
+    font-size: 18px;
+}
+
+.td-download-loading {
+    cursor: progress !important;
+}
+
+.td-heat-map-ranking {
+    position: relative;
+    top: 0;
+    right: 0;
+    z-index: 203;
+    background-color: transparent
+}
+
+.td-heat-map-ranking .td-ellipsis {
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+}
+
+.td-heat-map-ranking .td-heat-map-rank-list {
+    padding: 15px;
+    width: 358px;
+    color: #17233D;
+    display: none;
+    background-color: #fff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    position: absolute;
+    right: 30px;
+    top: 0;
+    border: 1px solid #eee;
+    box-shadow: 1px 1px 1px #eee;
+}
+
+.td-heat-map-ranking.td-heat-map-open .td-heat-map-rank-list {
+    display: block;
+}
+
+.td-heat-map-ranking .td-heat-map-rank-list .td-heat-map-rank-title {
+    font-size: 14px;
+    font-weight: 700
+}
+
+.td-heat-map-ranking .td-heat-map-rank-list .td-heat-map-rank-title a {
+    color: #2D8CF0;
+    float: right;
+}
+
+.td-heat-map-ranking .td-heat-map-rank-list table {
+    margin: 15px 0 5px 0;
+    width: 100%;
+    table-layout: fixed;
+    line-height: 1.2;
+    background: none;
+}
+
+.td-heat-map-ranking .td-heat-map-rank-list table thead tr {
+    /*  color: #787a7d*/
+}
+
+.td-heat-map-ranking .td-heat-map-rank-list table .td-indicator-col {
+    width: 25%;
+    text-align: right
+}
+
+.td-heat-map-ranking .td-heat-map-rank-list table tbody tr.td-heat-map-row {
+    color: #17233D;
+    cursor: default
+}
+
+.td-heat-map-ranking .td-heat-map-rank-list table tbody tr td {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.td-heat-map-ranking .td-heat-map-rank-list table tbody tr:hover {
+    background: #f0faff;
+}
+
+.td-heat-map-ranking .td-heat-map-rank-list .td-heat-map-extra {
+    line-height: 2.5
+}
+
+.td-heat-map-ranking .td-heat-map-rank-list .td-heat-map-extra .td-heat-map-help {
+    top: 8px
+}
+
+.td-heat-map-ranking .td-heat-map-rank-list .td-heat-map-extra a.disabled {
+    cursor: not-allowed;
+    color: #a0a2a5
+}
+
+.td-heat-map-operator {
+    padding: 0 0 20px 0;
+}
+
+.td-heat-map-operator .lb {
+    float: left;
+    line-height: 34px;
+}
+
+.td-heat-map-operator .item {
+    float: left;
+    margin-right: 10px;
+    line-height: 34px;
+}
+
+.td-heat-map-operator .item.page-url-item {
+    float: right;
+    width: 60%;
+    text-align: right;
+}
+
+.td-heat-map-operator .item.page-url-item .lb {
+    float: right;
+}
+
+.td-heat-map-operator .item.page-url-item .page-url {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 85%;
+    float: right;
+}
+
+.td-heat-map-operator select.form-control {
+    background-color: #fff !important;
+    float: left;
+    width: auto;
+    min-width: 160px;
+}
+
+.heatmap-arrow {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    cursor: pointer;
+    background: #fff url('../../../../assets/images/heatmap/format_indent_decrease.svg') no-repeat right center;
+    background-size: 100% auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.heatmap-arrow.heatmap-arrow-increase {
+    background: #fff url('../../../../assets/images/heatmap/format_indent_increase.svg') no-repeat right center;
+    background-size: 100% auto;
+}
+
+.ta-c {
+    text-align: center;
+}

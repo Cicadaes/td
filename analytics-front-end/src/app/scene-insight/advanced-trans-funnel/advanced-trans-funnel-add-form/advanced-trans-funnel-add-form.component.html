@@ -1,0 +1,80 @@
+<main class="shadow-content">
+  <div class="common-title">{{ cardTitle }}</div>
+  <div style="padding: 20px;">
+    <div class="clrfix notice">
+      <span class="icon iconfont icon-info"></span>
+      <span
+        >以用户逐步执行的事件或访问页面为依据，构造最少2个步骤，最多8个步骤的转化漏斗，系统将逐步过滤，计算出用户在整个过程中的转化率。</span
+      >
+    </div>
+    <form
+      class="advanced-add-form custom-form"
+      nz-form
+      [formGroup]="validateForm"
+      (ngSubmit)="submitForm($event, validateForm.value)"
+    >
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5">漏斗名称</nz-form-label>
+        <nz-form-control [nzSpan]="16">
+          <input
+            maxlength="64"
+            nz-input
+            formControlName="name"
+            placeholder="请输入漏斗名称"
+            (blur)="changeInputValue($event, 'name')"
+          />
+          <div class="custom-form-explain clrfix">
+            <nz-form-explain *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors">
+              <ng-container *ngIf="validateForm.get('name').hasError('required')">
+                请输入漏斗名称
+              </ng-container>
+            </nz-form-explain>
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5">时间区间</nz-form-label>
+        <nz-form-control [nzSpan]="16">
+          <nz-range-picker
+            formControlName="dateRange"
+            [nzFormat]="_dateFormat"
+            [nzDisabledDate]="_disabledDate"
+            [ngModel]="_dateRange"
+            (ngModelChange)="_changeDaterange($event)"
+            nzPlaceHolder=""
+            [nzAllowClear]="false"
+            [nzStyle]="{ width: '240px' }"
+          >
+          </nz-range-picker>
+          <div class="custom-form-explain clrfix">
+            <nz-form-explain
+              *ngIf="validateForm.get('dateRange').dirty && validateForm.get('dateRange').hasError('required')"
+            >
+              请输入时间区间
+            </nz-form-explain>
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5">是否有序</nz-form-label>
+        <nz-form-control [nzSpan]="16">
+          <nz-radio-group formControlName="funnelOrder" [(ngModel)]="_funnelOrder">
+            <label nz-radio nzValue="0">无序漏斗</label>
+            <label nz-radio nzValue="1">有序漏斗</label>
+          </nz-radio-group>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+
+  <app-advanced-trans-funnel-add-step
+    [funnelOrder]="_funnelOrder"
+    [data]="_steps"
+    [isSubmit]="_isSubmit"
+    [sdkId]="sdkId"
+    [tagName]="tagName"
+    (onBack)="onBackFunnelSteps($event)"
+  ></app-advanced-trans-funnel-add-step>
+</main>

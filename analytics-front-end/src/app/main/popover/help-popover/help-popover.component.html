@@ -1,0 +1,14 @@
+<main>
+  <!-- 描述 -->
+  <nz-popover [nzTitle]="'指标说明'" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+    <span class="icon iconfont icon-info1 item" nz-popover></span>
+    <ng-template #nzTemplate>
+      <ul class="des-ul">
+        <li class="clrfix" *ngFor="let item of list">
+          <label [ngStyle]="_width">{{ item.label }}：</label>
+          <div class="des" [ngStyle]="_paddingLeft">{{ item.des }}</div>
+        </li>
+      </ul>
+    </ng-template>
+  </nz-popover>
+</main>

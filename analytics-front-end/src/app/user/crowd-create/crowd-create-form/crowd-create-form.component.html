@@ -1,0 +1,40 @@
+<div class="first-level"></div>
+<div>
+  <div style="position: relative; padding: 20px;">
+    <div class="check-base shadow-content" style="position: relative; background: #FFF;">
+      <div style="padding: 10px 20px; border-bottom: #DCDEE2 1px solid; font-weight: bolder;font-size: 14px;">
+        组合
+      </div>
+      <div style="padding: 15px 40px; border-bottom: #DCDEE2 1px solid; font-size: 12px;">
+        <span style="font-weight: bolder;">人群名称</span>
+        <input
+          nz-input
+          placeholder="请输入人群名称"
+          [(ngModel)]="crowdVO2.crowd.name"
+          (ngModelChange)="logChange(crowdVO2.crowd, 'name')"
+          [ngClass]="{ checkFailure: crowdVO2.crowd.nameCheckFailure }"
+          style="width: 316px; font-size: 12px; margin-left: 10px;"
+        />
+
+        <span *ngIf="parentId" style="padding-left: 40px;"> 父人群名称：{{ parentName }} </span>
+      </div>
+
+      <div style="padding: 20px; background: rgba(23,35,61,0.06);">
+        <app-crowd-filter
+          [crowdData]="crowdVO2"
+          [isCheck]="_isCheck"
+          [isCrowd]="true"
+          (onFilter)="onFilter($event)"
+        ></app-crowd-filter>
+      </div>
+    </div>
+
+    <div style="position: relative; margin-top: 20px; padding: 0;">
+      <button (click)="save()" nz-button nzType="primary" class="save-btn" [disabled]="isSaving">保存</button>
+      <button (click)="cancel()" nz-button nzType="default" class="save-btn" style="margin-left: 5px;">取消</button>
+      <button *ngIf="isEdit" (click)="showConfirm()" nz-button nzType="info" class="save-btn" style="margin-left: 5px;">
+        重新计算
+      </button>
+    </div>
+  </div>
+</div>

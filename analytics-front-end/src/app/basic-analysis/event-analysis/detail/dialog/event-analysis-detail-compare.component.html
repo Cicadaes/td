@@ -1,0 +1,28 @@
+<main>
+  <div class="event-attrs-box" *ngIf="_showHide" (click)="stopPropagation($event)">
+    <dl>
+      <dt>
+        <app-fast-search (onSearch)="onSearch($event)" [keyup]="true"></app-fast-search>
+      </dt>
+      <dd>
+        <div class="notice">最多可选 {{ maxLength }} 项</div>
+        <ul class="clrfix">
+          <li *ngFor="let dic of _dicItems">
+            <label
+              nz-checkbox
+              [(ngModel)]="dic.checked"
+              [nzDisabled]="_checkedDicItems.length >= maxLength && !dic.checked"
+              (ngModelChange)="_selectItem(dic)"
+              >{{ dic.dicItemValue }}</label
+            >
+          </li>
+        </ul>
+      </dd>
+    </dl>
+
+    <div class="footer">
+      <button nz-button nzType="default" [nzSize]="'small'" (click)="handleCancel()">取消</button>
+      <button nz-button nzType="primary" [nzSize]="'small'" (click)="handleOk()">确认</button>
+    </div>
+  </div>
+</main>

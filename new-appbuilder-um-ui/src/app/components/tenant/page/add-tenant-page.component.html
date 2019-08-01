@@ -1,0 +1,16 @@
+<div class="text-content">
+    <add-tenant-form *ngIf="!tenant" [tenant]="tenant" [needSubmit]="isNeedSubmitAddTenantFormData" (onSubmit)="submitAddTenantForm($event)"></add-tenant-form>
+    <add-tenant-form *ngIf="tenant" [tenant]="tenant" [needSubmit]="isNeedSubmitAddTenantFormData" (onSubmit)="submitAddTenantForm($event)"></add-tenant-form>
+
+    <div style="margin-top:10px;">
+        <button nz-button [nzType]="'primary'" (click)="handleOk($event)" [nzLoading]="isConfirmLoading">
+            确 定
+        </button>
+
+        <a [routerLink]="[ '/tenants' ]">
+            <button nz-button [nzType]="'default'" (click)="handleCancel($event)">
+                取 消
+            </button>
+        </a>
+    </div>
+</div>

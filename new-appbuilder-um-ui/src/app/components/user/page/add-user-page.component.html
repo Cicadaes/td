@@ -1,0 +1,29 @@
+<div class="text-content">
+    <nz-card>
+        <ng-template #title>
+            <span>新增用户</span>
+        </ng-template>
+        <!--<ng-template #extra>
+                    <a>More</a>
+                </ng-template>-->
+        <ng-template #body>
+            <add-user-form [user]="user" [needSubmit]="isNeedSubmitAddUserFormData" (onSubmit)="submitAddUserForm($event)"></add-user-form>
+        </ng-template>
+    </nz-card>
+
+    <div style="margin-top:10px;">
+
+        <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="handleOk($event)" [nzLoading]="isConfirmLoading">
+            确 定
+        </button>
+
+
+        <a [routerLink]="[ '/users' ]">
+
+            <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancel($event)">
+                取 消
+            </button>
+
+        </a>
+    </div>
+</div>

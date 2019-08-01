@@ -1,0 +1,40 @@
+<div class="clrfix carousel-panel" [ngStyle]="{'height':isCollapse ? '82px' : 'auto' }">
+    <ul class="carousel-ul clrfix">
+        <li class="operator">
+            <span class="anticon anticon-plus-square-o"></span>
+        </li>
+        <li class="item" title="{{app.name}}" *ngFor="let app of appList" [ngClass]="{'active':app.id == curApp.id}">
+            <nz-tooltip>
+                <div nz-tooltip (click)="editApp(app);">
+                    <p class="logo">
+                        <img alt="图片" src="{{app.icon}}" />
+                    </p>
+                    <p class="name">{{app.name}}</p>
+                </div>
+                <ng-template #nzTemplate>
+                    <div class="clrfix tooltip-operator" *ngIf="!app.isEdit">
+                        <p>
+                            <a href="javascript:;" (click)="editApp(app);" >查看</a>
+                            <a href="javascript:;" (click)="setApp(app);" >设置</a>
+                            <a href="javascript:;" (click)="deleteApp(app);" >删除</a>
+                        </p>
+                    </div>
+                    <div class="clrfix tooltip-operator" *ngIf="app.isEdit">
+                        <p>
+                            <a href="javascript:;" (click)="cancelEditApp(app);" >取消</a>
+                            <a href="javascript:;" (click)="saveApp(app);" >保存</a>
+                        </p>
+                    </div>
+                </ng-template>
+            </nz-tooltip>
+        </li>
+    </ul>
+    <div class="carousel-col">
+        <a (click)="toggleCollapse()">
+            <span *ngIf="isCollapse">展开</span><span *ngIf="!isCollapse">收起</span>
+            <span class="anticon" [class.anticon-down]="isCollapse" [class.anticon-up]="!isCollapse"></span>
+        </a>
+    </div>
+</div>
+
+<checkbox-tree [treeDatas]="resourceTreeDatas" [isSet]="isSetTreeDatas" (onBack)="getBackTreeDatas($event)"></checkbox-tree>

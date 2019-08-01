@@ -1,0 +1,92 @@
+.item {
+  background: #fff;
+  margin-top: 16px;
+  box-shadow: 0px 1px 2px 0 rgba(23, 35, 61, 0.25);
+  border-radius: 2px;
+  &:first-child {
+    margin-top: 0px;
+  }
+  .title {
+    height: 46px;
+    font-weight: 550;
+    font-size: 14px;
+    color: #17233d;
+    line-height: 46px;
+    padding-left: 16px;
+    border-bottom: 1px solid rgba(23, 35, 61, 0.1);
+    &.table-div {
+      border-bottom: none;
+    }
+  }
+  .bar-chart {
+    height: 234px;
+  }
+  .loading {
+    text-align: center;
+    padding-top: 100px;
+    height: 234px;
+    font-size: 18px;
+    color: rgba(23, 35, 61, 0.55);
+  }
+}
+
+:host ::ng-deep .ant-tabs-nav {
+  margin-left: 16px;
+}
+
+.title-right {
+  float: right;
+  .question {
+    color: rgba(23, 35, 61, 0.55);
+    margin-right: 16px;
+    cursor: pointer;
+  }
+  .tip-icon {
+    color: rgba(23, 35, 61, 0.55);
+    cursor: pointer;
+    margin-right: 16px;
+  }
+}
+
+.des-ul {
+  width: 356px;
+  padding: 0;
+  margin: 0;
+
+  li {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+    padding: 5px 0;
+  }
+
+  li:last-child {
+    border-bottom: none;
+  }
+
+  label {
+    float: left;
+    text-align: left;
+    color: #fff;
+  }
+
+  .des {
+    padding-left: 90px;
+    &.bigger-padding {
+      padding-left: 108px !important;
+    }
+  }
+}
+
+:host ::ng-deep {
+  .ant-tabs.ant-tabs-top.ant-tabs-line {
+    width: 100%;
+  }
+  .ant-table-thead > tr > th .ant-table-column-sorter {
+    width: auto;
+    display: inline-block;
+    right: initial;
+    margin: -10px 0 0 5px;
+    height: 25px !important;
+  }
+}

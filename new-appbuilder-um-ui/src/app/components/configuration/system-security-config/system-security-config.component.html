@@ -1,0 +1,30 @@
+<main>
+    <div class="form-item">
+        <div class="item">
+            <span class="require">* </span><label>登录鉴别次数：</label>
+            <input nz-input style="width:300px;" tdLimitNumberInput condition="PI" placeholder="请输入登录鉴别次数" [(ngModel)]="configInfo.loginFailTimes" (ngModelChange)="changeLoginFailTimes($event);">
+            <span class="font">次</span>
+            <div *ngIf="errorInfo.loginFailTimesError" class="alert">
+                {{errorInfo.loginFailTimesErrorInfo}}
+            </div>
+        </div>
+        <div class="item">
+            <span class="require">* </span><label>会话超时时间：</label>
+            <input nz-input style="width:300px;" tdLimitNumberInput condition="PI" placeholder="请输入会话超时时间" [(ngModel)]="configInfo.sessionTimeout" (ngModelChange)="changeSessionTimeout($event);">
+            <span class="font">分钟</span>
+            <div *ngIf="errorInfo.sessionTimeoutError" class="alert">
+                {{errorInfo.sessionTimeoutErrorInfo}}
+            </div>
+        </div>
+        <div class="item">
+            <span class="require">* </span><label>审计日志开关：</label>
+            <nz-switch [(ngModel)]="configInfo.openOperLog"></nz-switch>
+            <div *ngIf="errorInfo.dependentError" class="alert">
+                {{errorInfo.dependentErrorInfo}}
+            </div>
+        </div>
+    </div>
+    <div style="float: right; margin-right: 16px;">
+        <button nz-button nzType="primary" (click)="saveConfig()">确定</button>
+    </div>
+</main>

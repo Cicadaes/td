@@ -1,0 +1,166 @@
+<main>
+	<div class="content">
+		<div class="public-set">
+			<div class="left">
+				<div class="header clrfix">
+					<nz-tabset class="tabset" [nzSize]="'small'" (nzSelectedIndexChange)="onSelectShareType($event)">
+						<nz-tab nzTitle="角色({{allRolesList.length}})">
+						</nz-tab>
+						<nz-tab nzTitle="用户({{allUsersList.length}})">
+						</nz-tab>
+					</nz-tabset>
+					<p>
+						<nz-input-group *ngIf="shareType == 'role'" nzSuffixIcon="anticon anticon-search"
+						                style="width: 156px; float: right; margin-top: 8px" nzSize="small">
+							<input type="text" nz-input [(ngModel)]="searchRoleName" (ngModelChange)="onSearch($event)"
+							       placeholder="输入关键字搜索">
+						</nz-input-group>
+						<nz-input-group *ngIf="shareType == 'user'" nzSuffixIcon="anticon anticon-search"
+						                style="width: 156px; float: right; margin-top: 8px" nzSize="small">
+							<input type="text" nz-input [(ngModel)]="searchUserName" (ngModelChange)="onSearch($event)"
+							       placeholder="输入关键字搜索">
+						</nz-input-group>
+					</p>
+				</div>
+				<div class="public-content">
+					<div class="public-content-title" *ngIf="shareType == 'role'">
+						<label nz-checkbox style="width: 160px;" [(ngModel)]="allRoleChecked"
+						       (ngModelChange)="updateAllRoleChecked($event)" [nzIndeterminate]="indeterminate">
+							角色
+						</label>
+					</div>
+					<div class="public-content-title" *ngIf="shareType == 'user'">
+						<label nz-checkbox style="width: 146px;" [(ngModel)]="allUserChecked"
+						       (ngModelChange)="updateAllUserChecked($event)" [nzIndeterminate]="indeterminate">
+							&nbsp;用户名
+						</label>
+						<label style="width: 114px; display: inline-block;">帐号</label>
+						<label style="width: 85px; display: inline-block;">角色</label>
+						<!--<label>状态</label>-->
+					</div>
+					<div class="public-content-data">
+						<div class="data-left" *ngIf="shareType == 'role'">
+							<div *ngFor="let role of allRolesList; let i = index" (click)="chooseRole(role,i)"
+							     [ngClass]="{'data-left-list': i == selectedRoleIndex}">
+								<!-- #DBEEFF -->
+								<label nz-checkbox [(nzChecked)]="role.checked" [(ngModel)]="role.checked"
+								       (ngModelChange)="updateAllUsersChecked($event, i)"></label>
+								{{role.name}}
+								<span class="anticon anticon-right" *ngIf="shareType == 'user'"></span>
+							</div>
+						</div>
+						<div class="data-right" *ngIf="shareType == 'user'">
+							<nz-table #userTable
+							          [nzData]="allUsersList"
+							          [nzWidthConfig]="['8px','120px','120px','100px']"
+							          [nzPageSize]="9999"
+							          [nzShowPagination]="false"
+							          [nzScroll]="{ y: '318px' }"
+							          nzSize="middle">
+								<tbody>
+								<tr *ngFor="let data of userTable.data">
+									<td nzShowCheckbox [(nzChecked)]="data.checked"></td>
+									<td>
+										<div title="{{data.name}}">
+											<span class="icon iconfont icon-radio_selected"
+											      *ngIf="data.status == 1"></span>
+											<span class="icon iconfont icon-radio_selected iconfont-gray"
+											      *ngIf="data.status == 0"></span>
+											{{data.name}}
+										</div>
+									</td>
+									<td>
+										<div title="{{data.umid}}">{{data.umid}}</div>
+									</td>
+									<td>
+										<div title="{{data.roleName}}">{{data.roleName}}</div>
+									</td>
+									<!--<td>
+										<span class="icon iconfont icon-radio_selected" *ngIf="data.status == 1"></span>
+										<span class="icon iconfont icon-radio_selected iconfont-gray" *ngIf="data.status == 0"></span>
+										{{data.status | commonStatusPipe}}
+									</td>-->
+								</tr>
+								</tbody>
+							</nz-table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="oprators">
+				<div class="op">
+					<span class="anticon anticon-right" (click)="addShare()"></span>
+				</div>
+				<div class="op">
+					<span class="anticon anticon-left" (click)="delShare()"></span>
+				</div>
+				<div class="op">
+					<span class="anticon anticon-double-left" (click)="removeAllShare()"></span>
+				</div>
+			</div>
+			<div class="right">
+				<div class="header">
+					<p>
+						<span class="title">已选择角色</span>
+						<span class="count">{{shareRoleList.length || 0}}</span>个
+						<span class="title">用户</span>
+						<span class="count">{{shareUserList.length || 0}}</span>人
+					</p>
+				</div>
+				
+				<div class="public-content">
+					<div class="public-content-title" style="padding-left: 16px;">
+						<label nz-checkbox style="width: 142px; display: inline-block;"
+						       [(ngModel)]="allShareChecked"
+						       (ngModelChange)="updateAllShareChecked($event)">&nbsp;&nbsp;角色/用户</label>
+					</div>
+					<div class="public-content-data">
+						<nz-table #selectedUser
+						          [nzData]="shareList"
+						          [nzWidthConfig]="['8px','120px','120px','100px']"
+						          [nzScroll]="{ y: '318px' }"
+						          [nzShowPagination]="false"
+						          [nzPageSize]="9999"
+						          nzSize="middle">
+							<tbody>
+							<tr *ngFor="let data of selectedUser.data">
+								<td nzShowCheckbox [(nzChecked)]="data.checked" style="width: 16px;"></td>
+								<td *ngIf="!data.umid" colspan="3">
+									<div title="{{data.name}}">
+										{{data.name}}
+									</div>
+								</td>
+								<td *ngIf="data.umid">
+									<div title="{{data.name}}">
+										<span class="icon iconfont icon-radio_selected" *ngIf="data.status == 1"></span>
+										<span class="icon iconfont icon-radio_selected iconfont-gray"
+										      *ngIf="data.status == 0"></span>
+										{{data.name}}
+									</div>
+								</td>
+								<td *ngIf="data.umid">
+									<div title="{{data.umid}}">{{data.umid}}</div>
+								</td>
+								<td *ngIf="data.umid">
+									<div title="{{data.roleName}}">{{data.roleName}}</div>
+								</td>
+								<!--<td style="width: 80px;">
+									<span class="icon iconfont icon-radio_selected" *ngIf="data.status == 1"></span>
+									<span class="icon iconfont icon-radio_selected iconfont-gray"
+									      *ngIf="data.status == 0"></span>
+									{{data.status | commonStatusPipe}}
+								</td>-->
+							</tr>
+							</tbody>
+						</nz-table>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<button nz-button class="cancel-button" (click)="cancel()">取消</button>
+		<button nz-button class="ant-btn-primary" (click)="submit()">保存</button>
+	</div>
+</main>

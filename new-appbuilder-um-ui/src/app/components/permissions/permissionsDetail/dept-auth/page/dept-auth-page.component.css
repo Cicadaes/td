@@ -1,0 +1,46 @@
+:host ::ng-deep .this-label {
+    text-align: left;
+    width: 70px;
+}
+
+:host ::ng-deep .special-label {
+    margin-left: 0px !important;
+}
+:host ::ng-deep .text-content .ant-card-body {
+    padding: 14px 0px !important;
+}
+
+:host ::ng-deep .ant-table-row {
+    background: #fff;
+}
+
+.baseInfor{
+    height: 47px;
+    background: #fff;
+    border: 1px solid #ededed;
+    line-height: 47px;
+    font-size: 14px;
+    font-weight:bold;
+    color: #000;
+    padding:0 10px 10px 25px;
+    border-bottom:none;
+}
+:host ::ng-deep .roleBox {
+    padding:20px 23px;
+    background:#fff;
+    border: 1px solid #ededed;
+    margin-bottom:20px;
+}
+:host ::ng-deep .parentRole{
+    padding: 15px 25px;
+    background: #fff;
+    border: 1px solid #ededed;
+    border-bottom: none;
+}
+:host ::ng-deep  .des {
+    width:100%;
+    word-wrap:break-word;
+    white-space:normal;
+    line-height:18px;
+    margin-top:18px;
+}

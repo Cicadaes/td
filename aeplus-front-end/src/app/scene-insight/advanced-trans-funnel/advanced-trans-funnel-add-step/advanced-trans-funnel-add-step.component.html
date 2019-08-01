@@ -1,0 +1,195 @@
+<main>
+    <ul class="app-advanced-trans-funnel-add-step">
+        <li *ngFor="let step of _steps; let i = index;">
+            <dl>
+                <dt>
+                    步骤{{i+1}}<span class="icon iconfont icon-clear" *ngIf="i > 1" (click)="removeStep(i);"></span>
+                </dt>
+                <dd>
+                    <div class="clrfix step-sub">
+                        <div class="item label">追踪依据</div>
+                        <div class="item event-type" [ngClass]="{'has-error': !step.eventTypeId && _isValid}">
+
+                            <nz-select style="width: 100%" [(ngModel)]="step.eventTypeId"
+                                       (ngModelChange)="changeEventType($event,step);" [nzSize]="'default'"
+                                       nzPlaceHolder="请选择">
+                                <nz-option *ngFor="let option of _eventTypes" [nzLabel]="option.dicItemAlias"
+                                           [nzValue]="option.id" nzCustomContent>
+                                    <div title="{{option.dicItemAlias}}">{{option.dicItemAlias}}</div>
+                                </nz-option>
+                            </nz-select>
+
+                        </div>
+                        <div class="item label">步骤名称</div>
+                        <div class="item" [ngClass]="{'has-error': !step.name && step.isError}">
+                            <input nz-input placeholder="请输入" [(ngModel)]="step.name" maxlength="24">
+                        </div>
+                    </div>
+                    <div class="clrfix">
+                        <ul class="clrfix step-condtion">
+                            <li class="clrfix" *ngFor="let condition of step.stepConditions; let j = index;">
+                                <div class="item label">满足</div>
+                                <div class="item condtion-type"
+                                     [ngClass]="{'has-error': !condition.typeOption && condition.isError}">
+                                    <nz-select [ngClass]="{'hide': _funnelOrder == '1'}" style="width: 100%" [(ngModel)]="condition.typeOption"
+                                               [nzDisabled]="condition.filter === 'eventid'"
+                                               (nzOpenChange)="openConditionType($event, condition, step);"
+                                               (ngModelChange)="changeConditionType($event, condition);"
+                                               [nzNotFoundContent]="'请选择'"
+                                               [nzSize]="'default'" [nzPlaceHolder]="'请选择'">
+                                        <nz-option *ngFor="let option of condition.typeOptions"
+                                                   [nzLabel]="option.displayname" [nzValue]="option" nzCustomContent>
+                                            <div title="{{option.displayname}}">
+                                                {{option.displayname}}
+                                            </div>
+                                        </nz-option>
+                                    </nz-select>
+
+                                    <nz-select [ngClass]="{'hide': _funnelOrder != '1'}" style="width: 100%" [(ngModel)]="condition.typeOption"
+                                               [nzDisabled]="condition.filter === 'eventid'"
+                                               (nzOpenChange)="openConditionType($event, condition, step);"
+                                               (ngModelChange)="changeConditionType($event, condition);"
+                                               [nzNotFoundContent]="'请选择'"
+                                               [nzSize]="'default'" [nzPlaceHolder]="'请选择'">
+                                        <nz-option *ngFor="let option of condition.typeOptions"
+                                                   [nzLabel]="option.displaynameOrder" [nzValue]="option" nzCustomContent>
+                                            <div title="{{option.displaynameOrder}}">
+                                                {{option.displaynameOrder}}
+                                            </div>
+                                        </nz-option>
+                                    </nz-select>
+
+                                </div>
+                                <div class="item condtion-operator"
+                                     [ngClass]="{'has-error': !condition.operator && condition.isError}">
+                                    <nz-select
+                                            *ngIf="condition.typeOption.displayType == 'Tag' && condition.filter == 'eventid'"
+                                            style="width: 100%" [(ngModel)]="condition.operator"
+                                            (ngModelChange)="changeConditionOperator($event, condition);"
+                                            [nzSize]="'default'" nzPlaceHolder="请选择">
+                                        <nz-option *ngFor="let option of _conditionTagEventOperators"
+                                                   [nzLabel]="option.label" [nzValue]="option.value" nzCustomContent>
+                                            <div title="{{option.label}}">{{option.label}}</div>
+                                        </nz-option>
+                                    </nz-select>
+                                    <nz-select
+                                            *ngIf="condition.typeOption.displayType == 'Tag' && condition.filter != 'eventid'"
+                                            style="width: 100%" [(ngModel)]="condition.operator"
+                                            (ngModelChange)="changeConditionOperator($event, condition);"
+                                            [nzSize]="'default'" nzPlaceHolder="请选择">
+                                        <nz-option *ngFor="let option of _conditionTagOperators"
+                                                   [nzLabel]="option.label" [nzValue]="option.value" nzCustomContent>
+                                            <div title="{{option.label}}">{{option.label}}</div>
+                                        </nz-option>
+                                    </nz-select>
+
+                                    <nz-select *ngIf="condition.typeOption.displayType == 'String'" style="width: 100%"
+                                               [(ngModel)]="condition.operator"
+                                               (ngModelChange)="changeConditionOperator($event, condition);"
+                                               [nzSize]="'default'" nzPlaceHolder="请选择">
+                                        <nz-option *ngFor="let option of _conditionStringOperators"
+                                                   [nzLabel]="option.label" [nzValue]="option.value" nzCustomContent>
+                                            <div title="{{option.label}}">{{option.label}}</div>
+                                        </nz-option>
+                                    </nz-select>
+                                    <nz-select
+                                            *ngIf="condition.typeOption.displayType == 'Integer' || condition.typeOption.displayType == 'Double' || condition.typeOption.displayType == 'Date'"
+                                            style="width: 100%" [(ngModel)]="condition.operator"
+                                            (ngModelChange)="changeConditionOperator($event, condition);"
+                                            [nzSize]="'default'" nzPlaceHolder="请选择">
+                                        <nz-option *ngFor="let option of _conditionNumberOperators"
+                                                   [nzLabel]="option.label" [nzValue]="option.value" nzCustomContent>
+                                            <div title="{{option.label}}">{{option.label}}</div>
+                                        </nz-option>
+                                    </nz-select>
+
+                                </div>
+
+                                <div class="item condition-value"
+                                     [ngClass]="{'has-error': ((!condition.value && condition.value != 0) || condition.value.length == 0) && condition.isError}"
+                                     *ngIf="condition.operator != 'range'">
+                                    <app-select-search-multiple style="width: 100%;"
+                                                                *ngIf="condition.typeOption.displayType == 'Tag' && condition.filter != 'eventid'"
+                                                                [select]="condition.tagSelect" class="item"
+                                                                (onSelect)="onSelectConditionTag($event,condition);"></app-select-search-multiple>
+                                    <nz-select nzShowSearch [nzServerSearch]="true"
+                                               (nzScrollToBottom)="loadMoreEvent(step)"
+                                               (nzOnSearch)="onSearchEvent($event, step)"
+                                               (ngModelChange)="changeConditionEvent($event,step, condition);"
+                                               *ngIf="condition.typeOption.displayType == 'Tag' && condition.filter == 'eventid'"
+                                               style="width: 100%" [(ngModel)]="condition.value" [nzSize]="'default'"
+                                               nzPlaceHolder="请选择">
+                                        <nz-option *ngFor="let option of _conditionEventsValuesMap[step.eventTypeId]"
+                                                   [nzLabel]="option.dicItemAlias" [nzValue]="option.id"
+                                                   nzCustomContent>
+                                            <div title="{{option.dicItemAlias}}" title=" {{option.dicItemAlias}}">
+                                                <span *ngIf="option.smartEvent"
+                                                      class="icon iconfont icon-shijian"></span>
+                                                {{option.dicItemAlias}}
+                                            </div>
+                                        </nz-option>
+                                    </nz-select>
+                                    <input maxlength="128" *ngIf="condition.typeOption.displayType == 'String'" nz-input
+                                           placeholder="请输入" [(ngModel)]="condition.value">
+                                    <nz-input-number
+                                            *ngIf="condition.typeOption.displayType == 'Integer' || condition.typeOption.displayType == 'Double'"
+                                            style="width:100%;" [(ngModel)]="condition.value" [nzMin]="0"
+                                            [nzMax]="99999999" [nzStep]="1" nzPlaceHolder="请输入"
+                                            (ngModelChange)="formatterInputNumber($event,condition,'value');"></nz-input-number>
+                                    <nz-date-picker [nzAllowClear]="false" [nzFormat]="'YYYY-MM-DD'"
+                                                    nzPlaceHolder="请选择日期"
+                                                    *ngIf="condition.typeOption.displayType == 'Date'"
+                                                    [(ngModel)]="condition.value"
+                                                    [nzShowToday]='false'></nz-date-picker>
+                                </div>
+
+                                <div class="item condition-value"
+                                     [ngClass]="{'has-error': ((!condition.value1 && condition.value1 != 0) || (!condition.value2 && condition.value2 != 0)) && condition.isError}"
+                                     *ngIf="condition.operator == 'range' && condition.typeOption.displayType != 'Date'">
+                                    <nz-input-number style="width:80px;"
+                                                     *ngIf="condition.typeOption.displayType == 'Integer' || condition.typeOption.displayType == 'Double'"
+                                                     [(ngModel)]="condition.value1" [nzMin]="0" [nzMax]="99999999"
+                                                     [nzStep]="1" nzPlaceHolder="请输入"
+                                                     (ngModelChange)="formatterInputNumber($event,condition,'value1');"></nz-input-number>
+                                    <span style="margin: 0 4px;">至</span>
+                                    <nz-input-number style="width:80px;"
+                                                     *ngIf="condition.typeOption.displayType == 'Integer' || condition.typeOption.displayType == 'Double'"
+                                                     [(ngModel)]="condition.value2" [nzMin]="condition.value1"
+                                                     [nzMax]="99999999" [nzStep]="1"
+                                                     nzPlaceHolder="请输入"
+                                                     (ngModelChange)="formatterInputNumber($event,condition,'value2');"></nz-input-number>
+                                </div>
+
+                                <div style="width: 230px;" class="item condition-value"
+                                     [ngClass]="{'has-error': !condition.value && condition.isError}"
+                                     *ngIf="condition.operator == 'range' && condition.typeOption.displayType == 'Date'">
+                                    <nz-range-picker [(ngModel)]="condition.value" [nzAllowClear]="false"
+                                                     [nzFormat]="'YYYY-MM-DD'" nzPlaceHolder=""></nz-range-picker>
+                                </div>
+
+                                <div class="condition-del" *ngIf="condition.filter !== 'eventid'">
+									<span class="icon iconfont icon-fremove_circle_outli"
+                                          (click)="removeCondition(condition, step , j);"></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="clrfix condition-add" *ngIf="step.stepConditions && step.conditionTypes ">
+                        <p>
+							<span (click)="addStepCondition(step, null);">
+								<span class="anticon anticon-plus"></span>添加属性
+							</span>
+                        </p>
+                        <p *ngIf="step.isError">
+                            <span>{{step.errorMsg}}</span>
+                        </p>
+                    </div>
+                    <div class="step-line" *ngIf="i < 7">
+                        <span class="icon iconfont icon-xinjian" (click)="addStep();"></span>
+                    </div>
+                </dd>
+            </dl>
+        </li>
+    </ul>
+</main>

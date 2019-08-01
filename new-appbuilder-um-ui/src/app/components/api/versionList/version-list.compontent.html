@@ -1,0 +1,80 @@
+<div class="table-operator clrfix special">
+    <div style="margin: 16px; overflow: hidden;">
+        <nz-input-group nzSearch [nzSuffix]="suffixIconButton" style="width: 180px;float: right;">
+            <input type="text" nz-input placeholder="请输入版本" (keyup)="onSearch($event, 'keyup')" [(ngModel)]="searchValue">
+        </nz-input-group>
+        <ng-template #suffixIconButton>
+            <i class="anticon anticon-search" (click)="onSearch(searchValue, 'click')"></i>
+        </ng-template>
+        <button nz-button [nzType]="'primary'" (click)="addVersion()" style="float: left;">
+            <span class="anticon anticon-plus"></span><span>版本</span>
+        </button>
+    </div>
+    <app-add-version [isVisible]="addVersionFlag" [editFlag]="editVersionFlag" [editData]='editVersionData'
+        (saveVersionDate)="saveVersionDate()" (hideVersionDialog)="hideVersionDialog($event)" [catalogObj]='catalogObj'></app-add-version>
+</div>
+<div>
+        <ng-template #tableTotal>
+                <div  style="margin-right: 6px;">
+                  总共 {{total}} 条
+                </div>
+        </ng-template>
+    <nz-table 
+    #nzTable 
+    nzShowSizeChanger
+    [nzBordered]="false" 
+    [nzShowTotal]="tableTotal" 
+    [nzData]="versionData" 
+    [nzFrontPagination]="false" 
+    [nzLoading]="loading"
+    [nzTotal]="total" 
+    [(nzPageIndex)]="pageIndex" 
+    [(nzPageSize)]="pageSize"
+    (nzPageSizeChange)="refreshData(true)" 
+    (nzPageIndexChange)="refreshData()">
+        <thead>
+            <tr>
+                <th [nzWidth]="'13%'">
+                    产品分类
+                </th>
+                <th [nzWidth]="'10%'">
+                    版本
+                </th>
+                <th [nzWidth]="'12%'">
+                    状态
+                </th>
+                <th [nzWidth]="'10%'">
+                    对应URI
+                </th>
+                <th [nzWidth]="'20%'">
+                    版本描述
+                </th>
+                <th [nzWidth]="'15%'">
+                    创建日期
+                </th>
+                <th [nzWidth]="'20%'">
+                    操作
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of nzTable.data">
+                <td>{{data.catalogName}}</td>
+                <td>{{data.version}}</td>
+                <td>
+                    <nz-switch [(ngModel)]="data.copyStatus" [nzControl]="true" (click)="changeStatus($event, data)" nzCheckedChildren="启用" nzUnCheckedChildren="禁用"></nz-switch>
+                </td>
+                <td>{{data.uri}}</td>
+                <td><span title="{{data.description}}">{{data.description | setValueLengthPipe:15}}</span></td>
+                <td>{{data.createTime | dateFormatPipe:2}}</td>
+                <td>
+                    <a href="javascript:;" (click)="edit(data)">编辑</a>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <a href="javascript:;" (click)="copy(data)">复制</a>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <a href="javascript:;" (click)="delete(data)">删除</a>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>

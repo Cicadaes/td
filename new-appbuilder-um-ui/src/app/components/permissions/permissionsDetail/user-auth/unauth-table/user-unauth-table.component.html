@@ -1,0 +1,131 @@
+<ng-template #tableTotal>
+        <div  style="margin-right: 6px;">
+          总共 {{_total}} 条
+        </div>
+</ng-template>
+    <nz-table *ngIf="!isSuper" #nzTable [nzBordered]="false" [nzShowTotal]="tableTotal" [nzData]="_dataSet" nzShowSizeChanger [nzLoading]="_loading" [nzTotal]="_total" [(nzPageIndex)]="_current"
+              (nzPageIndexChange)="refreshData()"  [(nzPageSize)]="_pageSize" (nzPageSizeChange)="refreshData(true)"  [nzFrontPagination]="false">
+
+            <thead nz-thead>
+            <tr>
+                <th nz-th nzCheckbox>
+                    <label nz-checkbox [(ngModel)]="_allChecked" [nzIndeterminate]="_indeterminate" (ngModelChange)="_checkAll($event)">
+                    </label>
+                </th>
+                <th nz-th [nzWidth]="'16%'">
+                    姓名
+                </th>
+                <th nz-th [nzWidth]="'16%'">
+                    账号
+                </th>
+               <!-- <th nz-th [nzWidth]="'9%'">
+                    部门
+                </th>
+                <th nz-th [nzWidth]="'9%'">
+                    职位
+                </th>-->
+                <th nz-th [nzWidth]="'14%'">
+                    性别
+                </th>
+                <th nz-th [nzWidth]="'16%'">
+                    手机
+                </th>
+                <th nz-th [nzWidth]="'16%'">
+                    状态
+                </th>
+                <th nz-th [nzWidth]="'18%'">
+                    联系电话
+                </th>
+               <!-- <th nz-th [nzWidth]="'9%'">
+                    QQ
+                </th>
+                <th nz-th [nzWidth]="'9%'">
+                    微信
+                </th>-->
+
+                <!--<th nz-th [nzWidth]="'15%'">
+                    联系电话
+                </th>-->
+            </tr>
+            </thead>
+
+        <tbody nz-tbody>
+        <tr nz-tbody-tr *ngFor="let data of nzTable.data; let userIndex=index">
+            <td nz-td nzCheckbox>
+                <label nz-checkbox [(ngModel)]="data.checked" (ngModelChange)="_refreshStatus($event, data.id)">
+                </label>
+            </td>
+            <td nz-td>{{data.name}}</td>
+            <td nz-td>{{data.email}}</td>
+            <!--<td nz-td>{{data.dept}}</td>
+            <td nz-td>{{data.title}}</td>-->
+            <td nz-td>{{data.gender==-1?'':(data.gender==0?'女':'男')}}</td>
+            <td nz-td>{{data.mobile}}</td>
+            <td nz-td>
+                <span style="color:#E03E16" *ngIf="data.status==0">●</span>
+                <span style="color:#2B85E5" *ngIf="data.status==1">●</span>
+                {{data.status==0?'禁用':'正常'}}
+            </td>
+            <td nz-td>{{data.phone}}</td>
+           <!-- <td nz-td>{{data.qq}}</td>
+            <td nz-td>{{data.wechat}}</td>-->
+           <!-- <td nz-td>{{data.status==0?'禁用':'正常'}}</td>-->
+            <!--<td nz-td>{{data.phone}}</td>-->
+        </tr>
+        </tbody>
+    </nz-table>
+
+    <ng-template #tableTotal1>
+            <div  style="margin-right: 6px;">
+              总共 {{_total}} 条
+            </div>
+    </ng-template>
+    <nz-table *ngIf="isSuper" #nzTable [nzShowTotal]="tableTotal1" [nzBordered]="false" [nzData]="_dataSet" nzShowSizeChanger [nzLoading]="_loading" [nzTotal]="_total" [(nzPageIndex)]="_current"
+              (nzPageIndexChange)="refreshData()"  [(nzPageSize)]="_pageSize" (nzPageSizeChange)="refreshData()"  [nzFrontPagination]="false">
+
+            <thead nz-thead>
+            <tr>
+                <th nz-th nzCheckbox [nzWidth]="'10px'">
+                    <label nz-checkbox [(ngModel)]="_allChecked" [nzIndeterminate]="_indeterminate" (ngModelChange)="_checkAll($event)">
+                    </label>
+                </th>
+                <th nz-th [nzWidth]="'15%'">
+                    姓名
+                </th>
+                <th nz-th [nzWidth]="'40%'">
+                    账号
+                </th>
+                <!--<th nz-th [nzWidth]="'8%'">
+                    性别
+                </th>-->
+                <th nz-th [nzWidth]="'20%'">
+                    手机
+                </th>
+                <th nz-th [nzWidth]="'15%'">
+                    状态
+                </th>
+                <!--<th nz-th [nzWidth]="'15%'">
+                    联系电话
+                </th>-->
+            </tr>
+            </thead>
+ 
+        <tbody nz-tbody>
+        <tr nz-tbody-tr *ngFor="let data of nzTable.data; let userIndex=index">
+            <td nz-td nzCheckbox>
+                <label nz-checkbox [(ngModel)]="data.checked" (ngModelChange)="_refreshStatus($event)"></label>
+            </td>
+            <td nz-td> {{data.name}}</td>
+            <td nz-td>{{data.email}}</td>
+            <!--<td nz-td>{{data.gender}}</td>-->
+            <td nz-td>{{data.mobile}}</td>
+            <td nz-td>
+                <span style="color:#E03E16" *ngIf="data.status==0">●</span>
+                <span style="color:#2B85E5" *ngIf="data.status==1">●</span>
+                {{data.status==0?'禁用':'正常'}}
+            </td>
+            <!--<td nz-td>{{data.phone}}</td>-->
+        </tr>
+        </tbody>
+    </nz-table>
+

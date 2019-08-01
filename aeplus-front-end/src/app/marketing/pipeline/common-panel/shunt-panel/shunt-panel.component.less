@@ -1,0 +1,118 @@
+.label-1 {
+    color: #17233D;
+    font-weight: bolder;
+}
+
+:host ::ng-deep .shunt-panel {
+    background-color: #fff;
+    width: 380px;
+
+    &-top {
+        padding: 16px;
+        border-bottom: 1px solid rgba(23, 35, 61, 0.10);
+        padding-bottom: 0px;
+    }
+
+    input {
+        outline: none;
+    }
+
+    textarea {
+        outline: none;
+    }
+
+    &-name {
+        font-size: 12px;
+        color: rgba(23, 35, 61, 0.75);
+        background: #FFFFFF;
+        border: 1px solid #D7DDE4;
+        border-radius: 4px;
+        box-sizing: border-box;
+        height: 32px;
+        padding: 0px 10px;
+        width: 100%;
+    }
+
+    &-describe {
+        height: 56px;
+    }
+
+    &-bottom {
+        padding: 16px;
+        padding-top: 10px;
+    }
+
+    .val-list {
+        margin-bottom: 10px;
+    }
+
+    .val-list:last-child {
+        margin-bottom: 0px;
+    }
+
+    .error {
+        margin-left: 29px;
+        color: #ff0000;
+        margin-bottom: 0px;
+        line-height: 12px;
+        margin-top: -5px;
+    }
+}
+
+.dimensions-content {
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    padding: 8px 16px;
+    min-height: 200px;
+    margin-top: 5px;
+    .check-all {
+        label {
+            font-size: 12px;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+    }
+    .dimensions-list {
+        label {
+            margin-left: 0px;
+            font-size: 12px;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+    }
+}
+
+:host ::ng-deep .ant-form-item {
+    margin-bottom: 14px;
+}
+
+:host ::nbg-deep .ant-form-item label {
+    font-size: 12px;
+}
+
+input:disabled, textarea:disabled {
+    color: rgb(84, 84, 84);
+    cursor: not-allowed;
+    background-color: #f5f5f5;
+}
+
+::ng-deep .ant-checkbox-disabled + span {
+    color: rgba(0, 0, 0, 0.65);
+    cursor: not-allowed;
+}
+
+.require {
+    margin-right: 4px;
+    color: #ED3F14;
+    font-size: 18px;
+    float: left;
+    margin-top: 3px;
+}
+
+.require-special {
+    color: #fff;
+}

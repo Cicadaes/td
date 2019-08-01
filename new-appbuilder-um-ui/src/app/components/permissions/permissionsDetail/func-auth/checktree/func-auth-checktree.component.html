@@ -1,0 +1,46 @@
+<div [ngClass]="{'flexBox':(nodes.length > 0 ),'hideBox':nodes.length == 0 }">
+    <div class="flexItem1 treeBox" style="height:100%;
+        min-height: 100%;
+        margin-bottom: -99999px;
+        padding: 0 0 99999px;">
+        <main style="padding: 10px">
+            <nz-input-group nzSuffixIcon="anticon anticon-search" [nzSearch]="true">
+                <input type="text" nz-input placeholder="" [(ngModel)]="search" (ngModelChange)="searchNode($event);">
+            </nz-input-group>
+
+        </main>
+        <nz-tree [(ngModel)]="nodes" [nzSearchValue]="search" (nzClick)="showDetail($event);">
+            <ng-template #nzTreeTemplate let-node>
+                <div class="custom-node" draggable="true" aria-grabbed="true" [class.active]="node.isSelected" [title]="node.title">
+                    <span style="
+                    overflow: hidden;
+                    text-overflow:ellipsis;
+                    white-space:nowrap;
+                    width: 110px;
+                    float:left;
+                ">{{node.title}}</span>
+                </div>
+            </ng-template>
+
+        </nz-tree>
+
+    </div>
+    <div class="flexItem2" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+        <!-- <func-auth-page #detailChild [tenantId]="tenantId" [nodeInfo]="nodeInfo"
+            [targetId]="targetId"></func-auth-page> -->
+        <app-instance-authorization-role [tenantId]="tenantId" [nodeInfo]="nodeInfo" [targetId]="targetId"></app-instance-authorization-role>
+    </div>
+</div>
+<ng-container *ngIf="nodes.length == 0 ">
+    <div class="table-operator-bottom" style="text-align:center;margin-top:20px;padding:0;">
+        <div class="clrfix carousel-app-empty" style="padding:50px;background:#fff;">
+            <p>
+                <img alt="图片" src="./assets/images/app/app-empty.png" height="141" width="251" />
+
+            </p>
+            <p>
+                <span style="color: #A2A3A8">暂无明细数据可授权，请联系系统运维人员</span>
+            </p>
+        </div>
+    </div>
+</ng-container>

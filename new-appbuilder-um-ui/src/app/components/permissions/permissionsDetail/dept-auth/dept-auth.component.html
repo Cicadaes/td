@@ -1,0 +1,47 @@
+<div class="table-operator clrfix" *ngIf="!this.seting">
+   
+        <button nz-button [nzType]="'primary'" (click)="addRoleLevel($event)">
+            <span class="anticon anticon-plus"></span><span>角色层级</span>
+        </button>
+  
+</div>
+
+    <nz-breadcrumb *ngIf="this.seting" style="background:#fff;padding:10px;margin-top:20px;" [nzSeparator]="'>'">
+        <nz-breadcrumb-item>
+            <a href="javascript:void(0);" (click)="backToList();">角色层级列表</a>
+        </nz-breadcrumb-item>
+        <nz-breadcrumb-item>
+            {{asName}}
+        </nz-breadcrumb-item>
+    </nz-breadcrumb>
+
+<div class="table-operator-bottom" style="padding:0;margin-top:20px;">
+    <div class="operation-region">
+    <dept-auth-table #child *ngIf="!this.seting" [queryParams]="deptAuth"  [tenantId]="tenantId" [targetId]="targetId" 
+        (changeLevelId)="changeLevel($event)"></dept-auth-table>
+    </div>
+    <ng-container *ngIf="this.seting && this.treeNodes == 0 && !this.adding">
+        <div class="table-operator-bottom" style="text-align:center;margin-top:20px;padding:0;">
+            <div class="clrfix carousel-app-empty" style="padding:50px;background:#fff;" *ngIf="!_appList || _appList.length == 0">
+                <p>
+                    <img alt="图片" src="./assets/images/app/app-empty.png" height="141" width="251" />
+                </p>
+                <p>
+                    <span style="color: #A2A3A8">角色层级为空，请点击“+顶层角色”按钮开始配置角色层级。</span>
+                </p>
+                <p style="margin-top: 14px">
+                    <button nz-button [nzType]="'primary'" [nzSize]="'large'" style="width: 112px;" (click)="showAddModal('add');">
+                        <span class="anticon anticon-plus"></span><span>顶层角色</span>
+                    </button>
+                </p>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="this.seting && this.treeNodes > 0 || this.adding ">
+        <dept-auth-tree [roleHierarchyId]="roleHierarchyId" [tenantId]="tenantId" [addOriData]="addOriData" (noNode)="showImg();"></dept-auth-tree>
+    </ng-container>
+        <dept-auth-dialog [isShow]="isShow" (onClose)="changeShow($event)" (refresh)="refreshList($event)" [tenantId]="tenantId" [targetId]="targetId"
+            (onSubmit)="submitAddRoleForm($event)"></dept-auth-dialog>
+
+</div>

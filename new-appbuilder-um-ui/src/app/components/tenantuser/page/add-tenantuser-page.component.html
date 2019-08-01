@@ -1,0 +1,36 @@
+<div class="text-content">
+        <nz-card nzTitle="用户信息">
+                    <add-tenantuser-form *ngIf="user"  [_submit]="_submit" [user]="user" [isPage]="isPage" [needSubmit] = "isNeedSubmitAddUserFormData" (onSubmit)="submitAddUserForm($event)"></add-tenantuser-form>
+                    <add-tenantuser-form *ngIf="!user" [_submit]="_submit" [tenantId]="tenantId" [user]="user" [isPage]="isPage" [needSubmit] = "isNeedSubmitAddUserFormData" (onSubmit)="submitAddUserForm($event)"></add-tenantuser-form>
+
+            </nz-card>
+
+            <div style="margin-top:10px;">                
+                    <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="handleOk($event)" [nzLoading]="isConfirmLoading">
+                        确 定
+                    </button>
+
+                <!-- <a *ngIf="isOper" [routerLink]="[ '/tenantusers2' ]">
+                     
+                        <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancel($event)">
+                            取 消
+                        </button>
+                     
+                </a> -->
+                <a *ngIf="isOper">
+                     
+                        <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancel($event)">
+                            取 消
+                        </button>
+                     
+                </a>
+
+                <a *ngIf="!isOper" [routerLink]="[ '/tenantusers' ]">
+                     
+                        <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancel($event)">
+                            取 消
+                        </button>
+                     
+                </a>
+            </div>
+</div>

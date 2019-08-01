@@ -1,0 +1,16 @@
+<main>
+  <div class="filter-box clrfix">
+    <div class="filter-select">
+      <span class="filter-label">用户</span>
+      <app-select-group [select]="_selectGroup" class="select-group" (onSelect)="onSelectGroup($event)">
+      </app-select-group>
+      <app-select-search [select]="_selectOperator" class="select-operator" (onSelect)="onSelectOperator($event)">
+      </app-select-search>
+      <app-select-search-multiple [select]="_selectDic" class="select-dic" (onSelect)="onSelectEventMultiple($event)">
+      </app-select-search-multiple>
+    </div>
+    <div class="filter-operator">
+      <button nz-button [nzType]="'primary'" class="nz-btn" (click)="search()">查询</button>
+    </div>
+  </div>
+</main>

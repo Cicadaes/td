@@ -1,0 +1,225 @@
+<div class="first-level"></div>
+<div class="header-content">
+	<div style="background-color: #FFFFFF; border-top: rgba(23,35,61,0.10) 1px solid;">
+		<ul class="search-list">
+			<li class="search-list-one clrfix">
+				<div class="search-list-one-wap">
+					<span class="search-list-one-wap-bg item">转化用户数</span>
+					
+					<nz-select [(ngModel)]="queryParams.userCountConditionOperator" nzPlaceHolder="请选择" class="item"
+					           style="width: 94px;" (ngModelChange)="logChange()">
+						<nz-option nzCustomContent [nzValue]="item.key" [nzLabel]="item.value"
+						           *ngFor="let item of operatorOptions">
+							<span title="{{item.value}}">{{item.value}}</span>
+						</nz-option>
+					</nz-select>
+					<nz-input-number *ngIf="queryParams.userCountConditionOperator != 'between'"
+					                 [(ngModel)]="queryParams.userCountCondition" class="item" nzPlaceHolder="请输入"
+					                 [nzMin]="0" [nzMax]="9999" [nzStep]="1"></nz-input-number>
+					<div class="item-range" *ngIf="queryParams.userCountConditionOperator == 'between'">
+						<nz-input-number [(ngModel)]="queryParams.userCountConditionStart" class="item"
+						                 nzPlaceHolder="请输入" [nzMin]="0" [nzMax]="9999" [nzStep]="1"></nz-input-number>
+						<span class="search-list-one-wap-bg item">至</span>
+						<nz-input-number [(ngModel)]="queryParams.userCountConditionEnd" class="item"
+						                 nzPlaceHolder="请输入" [nzMin]="queryParams.userCountConditionStart"
+						                 [nzMax]="9999" [nzStep]="1"></nz-input-number>
+					</div>
+					<span class="search-list-one-wap-bg">人</span>
+				</div>
+				<div class="search-list-one-wap">
+					<span class="search-list-one-wap-bg item">转化率</span>
+					<nz-select [(ngModel)]="queryParams.conversionConditionOperator" nzPlaceHolder="请选择" class="item"
+					           style="width: 94px;" (ngModelChange)="logChange()">
+						<nz-option nzCustomContent [nzValue]="item.key" [nzLabel]="item.value"
+						           *ngFor="let item of operatorOptions">
+							<span title="{{item.value}}">{{item.value}}</span>
+						</nz-option>
+					</nz-select>
+					<nz-input-number *ngIf="queryParams.conversionConditionOperator != 'between'"
+					                 [(ngModel)]="queryParams.conversionCondition" class="item" nzPlaceHolder="请输入"
+					                 [nzMin]="0" [nzMax]="9999" [nzStep]="1"></nz-input-number>
+					<div class="item-range" *ngIf="queryParams.conversionConditionOperator == 'between'">
+						<nz-input-number [(ngModel)]="queryParams.conversionConditionStart" class="item"
+						                 nzPlaceHolder="请输入" [nzMin]="0" [nzMax]="9999" [nzStep]="1"></nz-input-number>
+						<span class="search-list-one-wap-bg item">至</span>
+						<nz-input-number [(ngModel)]="queryParams.conversionConditionEnd" class="item"
+						                 nzPlaceHolder="请输入" [nzMin]="queryParams.conversionConditionStart"
+						                 [nzMax]="9999" [nzStep]="1"></nz-input-number>
+					</div>
+					<span class="search-list-one-wap-bg">%</span>
+				</div>
+				
+				<div class="search-list-one-wap">
+					<span class="search-list-one-wap-bg item">转化步骤</span>
+					<nz-select [(ngModel)]="queryParams.pathLengthConditionOperator" nzPlaceHolder="请选择" class="item"
+					           style="width: 94px;" (ngModelChange)="logChange()">
+						<nz-option nzCustomContent [nzValue]="item.key" [nzLabel]="item.value"
+						           *ngFor="let item of operatorOptions">
+							<span title="{{item.value}}">{{item.value}}</span>
+						</nz-option>
+					</nz-select>
+					<nz-input-number *ngIf="queryParams.pathLengthConditionOperator != 'between'"
+					                 [(ngModel)]="queryParams.pathLengthCondition" class="item" nzPlaceHolder="请输入"
+					                 [nzMin]="0" [nzMax]="9999" [nzStep]="1"></nz-input-number>
+					<div class="item-range" *ngIf="queryParams.pathLengthConditionOperator == 'between'">
+						<nz-input-number [(ngModel)]="queryParams.pathLengthConditionStart" class="item"
+						                 nzPlaceHolder="请输入" [nzMin]="0" [nzMax]="9999" [nzStep]="1"></nz-input-number>
+						<span class="search-list-one-wap-bg item">至</span>
+						<nz-input-number [(ngModel)]="queryParams.pathLengthConditionEnd" class="item"
+						                 nzPlaceHolder="请输入" [nzMin]="queryParams.pathLengthConditionStart"
+						                 [nzMax]="9999" [nzStep]="1"></nz-input-number>
+					</div>
+					<span class="search-list-one-wap-bg">步</span>
+				</div>
+			</li>
+			<li class="search-list-one clrfix">
+				<div class="search-list-one-wap">
+					<span class="search-list-one-wap-bg item">按</span>
+					<nz-select [(ngModel)]="queryParams.order" nzPlaceHolder="请选择" class="item" style="width: 110px;">
+						<nz-option nzCustomContent [nzValue]="item.key" [nzLabel]="item.value"
+						           *ngFor="let item of orderOptions">
+							<span title="{{item.value}}">{{item.value}}</span>
+						</nz-option>
+					</nz-select>
+					<span class="search-list-one-wap-bg item">排序</span>
+					<button nz-button nzType="primary" nzSize="default" (click)="search();" style="float:right;">查询
+					</button>
+				</div>
+			</li>
+		</ul>
+	
+	
+	</div>
+</div>
+
+<main>
+	
+	
+	<article class="page-custom-content">
+		
+		
+		<div class="ant-card ant-card-loading ant-card-bordered">
+			<div class="ant-card-head ng-star-inserted">
+				<div class="ant-card-head-wrapper">
+					<div class="ant-card-head-title ng-star-inserted">
+						路径详情
+					</div>
+				</div>
+			</div>
+			<div class="ant-card-body">
+				
+				
+				<div class="intelligent-path-view">
+					
+					<ul class="intelligent-path-view-details clrfix">
+						<li class="clrfix">
+							<div class="lb">智能路径名称：</div>
+							<div class="val">{{_capacityPathDetails.name}}</div>
+						</li>
+						<li class="clrfix">
+							<div class="lb">计算日期：</div>
+							<div class="val">{{_capacityPathDetails.dateRange | dateFormatPipe : 2}}</div>
+						</li>
+						<li class="clrfix">
+							<div class="lb">起始点：</div>
+							<div class="val">{{_capacityPathDetails.startPointName}}</div>
+						</li>
+						<li class="clrfix">
+							<div class="lb">终止点：</div>
+							<div class="val">{{_capacityPathDetails.endPointName}}</div>
+						</li>
+						<li class="clrfix" *ngIf="_capacityPathDetails.necessaryPathName">
+							<div class="lb">必经路径：</div>
+							<div class="val">{{_capacityPathDetails.necessaryPathName}}</div>
+						</li>
+					</ul>
+					
+					
+					<ul class="intelligent-path-list">
+						<li class="clrfix" *ngFor="let p of smartPathResults; let i = index;">
+							<dl class="clrfix">
+								<dd class="clrfix">
+									<div class="clrfix intelligent-path-attrs">
+										<ul>
+											<li>
+												<div class="num" style="margin-bottom: 0;margin-top: 2px;"><strong
+														style="font-size: 14px;">路径{{i + 1}}</strong></div>
+											</li>
+											<li>
+												<div class="num">
+													<span>起点用户数</span>
+													<strong>{{p.originalUserCount | numberToThousandsPipe}}</strong>
+													<span>人</span>
+												</div>
+												<div class="text">起点用户数</div>
+											</li>
+											<li>
+												<div class="num">
+													<span>转化用户数</span>
+													<strong>{{p.userCount | numberToThousandsPipe}}</strong>
+													<span>人</span>
+												</div>
+												<div class="text">转化用户数</div>
+											</li>
+											<li>
+												<div class="num">
+													<span>转化率</span>
+													<strong *ngIf="p.originalUserCount == 0">0%</strong>
+													<strong *ngIf="p.originalUserCount > 0">{{(p.userCount /
+														p.originalUserCount * 100).toFixed(2)}}%</strong>
+												</div>
+												<div class="text">转化率</div>
+											</li>
+											<li>
+												<div class="num">
+													<span>转化步骤</span>
+													<strong>{{p.pathLength}}</strong>
+													<span>步</span>
+												</div>
+												<div class="text">转化步骤</div>
+											</li>
+										</ul>
+									</div>
+								
+								</dd>
+								<dd class="clrfix ystep-container" *ngIf="p.resultDetail.length > 0">
+									
+									<ul class="ystep-container-steps clrfix">
+										<li *ngFor="let d of  p.resultDetail; let i = index;"
+										    [ngClass]="{'li-left':d.style.float == 'left','li-right':d.style.float == 'right','li-left-last':d.style.position == 'left-last','li-right-first':d.style.position == 'right-first'}">
+											<span class="i-dot"
+											      [ngClass]="{'i-dot-event':d.typeName == '系统预置事件' || d.typeName == '自定义事件','i-dot-page':d.typeName == '访问页面'}"></span>
+											<span class="i-line-y"></span>
+											<span class="name" title="{{d.pointname}}">
+                        {{d.pointname}}
+							          </span>
+										</li>
+									</ul>
+								
+								</dd>
+							</dl>
+						</li>
+					</ul>
+					
+					<div class="more-page" *ngIf="!isLoadingPathResult">
+						<span *ngIf="_page > _totalPage && _totalPage > 0">暂无更多</span>
+						<span *ngIf="_page > _totalPage && _totalPage == 0">暂无数据</span>
+						<a href="javascript:;" (click)="loadingNextPage();" *ngIf="_page <= _totalPage">显示更多路径</a>
+					</div>
+					<div class="more-page" *ngIf="isLoadingPathResult">
+						<nz-spin></nz-spin>
+					</div>
+				
+				</div>
+			
+			
+			</div>
+		</div>
+	
+	
+	</article>
+
+
+</main>
+
+

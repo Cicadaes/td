@@ -1,0 +1,66 @@
+.carousel-panel{
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+.carousel-ul{
+    /* padding-right: 90px; */
+}
+.carousel-ul li{
+    float: left;
+    margin: 10px 0 10px 10px;
+    height: 60px;
+    width: 90px;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px;
+}
+.carousel-ul li.operator{
+    padding:0;
+}
+.carousel-ul li.operator i.anticon-plus-square-o{
+    font-size: 60px;
+    color: #999;
+    cursor: pointer;
+}
+.carousel-ul li.operator:hover i.anticon-plus-square-o{
+    color: #666;
+}
+.carousel-ul li.item{
+    border: 1px solid transparent;
+    border-color: transparent;
+    border-color: rgba(0,0,0,0);
+}
+.carousel-ul li.item:hover{
+    border:1px solid #ddd;
+}
+.carousel-ul li.item.active,.carousel-ul li.item.active:hover{
+    border:1px solid #1E90FF;
+}
+.carousel-ul li.item .logo img{
+    width:30px;
+    height:30px;
+}
+.carousel-ul li.item .name{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.carousel-col{
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+    width: 90px;
+}
+.tooltip-operator{
+
+}
+.tooltip-operator a{
+    margin:0 10px;
+    color:#fff;
+}

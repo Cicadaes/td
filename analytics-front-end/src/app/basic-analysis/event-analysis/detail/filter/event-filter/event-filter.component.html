@@ -1,0 +1,184 @@
+<main>
+  <div class="filter-content">
+    <div (click)="changeOperator()" class="view-btn operator" [ngStyle]="{ 'margin-top': operatorTranslateY }">
+      <div class="ver-line" [ngStyle]="{ height: verLineHeight }"></div>
+      <span *ngIf="crowdVO2.conditions[0].operator == 'and'">且</span>
+      <span *ngIf="crowdVO2.conditions[0].operator == 'or'">或</span>
+      <span class="icon-caret"
+        ><i nz-icon type="caret-up" theme="outline"></i><i nz-icon type="caret-down" theme="outline"></i
+      ></span>
+    </div>
+    <div style="display: inline-block;white-space: nowrap;">
+      <div *ngFor="let condition of crowdVO2.conditions; let ci = index" class="filter-item">
+        <div>
+          <div class="tenantgroup">
+            <nz-select
+              [(ngModel)]="condition.indice"
+              (ngModelChange)="changeIndice(condition, $event)"
+              class="my-select"
+            >
+              <nz-option nzValue="attribute" nzLabel="用户属性"></nz-option>
+              <nz-option nzValue="behavior" *ngIf="!hasContrast" nzLabel="用户行为"></nz-option>
+              <nz-option nzValue="crowd" nzLabel="用户群"></nz-option>
+            </nz-select>
+            <!-- 属性块 -->
+            <div *ngIf="condition.indice == 'attribute'" class="indice-panel">
+              <div style="margin-left:-224px;display: inline-block;">
+                <app-attribute-builder
+                  [maxCount]="5"
+                  [boolFilters]="condition.queryList[0].boolFilters"
+                  [defaultAttrList]="true"
+                  [hideButton]="true"
+                  [hideAndOr]="true"
+                  [eventAttr]="true"
+                  (valueChange)="onValueChange()"
+                ></app-attribute-builder>
+              </div>
+
+              <span class="inline-block">
+                <button
+                  nz-button
+                  nzType="default"
+                  nzShape="circle"
+                  (click)="removeItem(crowdVO2.conditions, ci)"
+                  [nzSize]="'small'"
+                  class="crowd-btn-close"
+                >
+                  <span class="ant-compat anticon anticon-close"></span>
+                </button>
+              </span>
+            </div>
+          </div>
+          <!-- 行为块 -->
+          <div *ngIf="condition.indice == 'behavior'" class="indice-panel">
+            <!-- 行为块 -->
+            <div *ngFor="let attr of condition.queryList[0].boolFilters_0; let j = index">
+              <div style="position: relative;">
+                <nz-select
+                  [(ngModel)]="attr.fieldName"
+                  (ngModelChange)="changeBehaviorType(attr, condition.queryList[0], true)"
+                  nzShowSearch
+                  nzPlaceHolder="请选择类型"
+                  [ngClass]="{ checkFailureBase: attr.fieldNameCheckFailure }"
+                  class="input-item"
+                  style="width: 180px;"
+                >
+                  <nz-option
+                    *ngFor="let item of behaviorTypeList"
+                    nzValue="{{ item.value }}"
+                    nzLabel="{{ item.name }}"
+                    nzCustomContent
+                  >
+                    <div title="{{ item.name }}">{{ item.name }}</div>
+                  </nz-option>
+                </nz-select>
+                <div class="view-btn  black-bg">为</div>
+                <nz-select
+                  [(ngModel)]="attr.value"
+                  nzPlaceHolder="请选择行为"
+                  nzShowSearch
+                  [nzServerSearch]="true"
+                  (nzOnSearch)="onSearchBehavior(attr.fieldName, $event, condition.queryList[0])"
+                  (ngModelChange)="changeBehavior(attr.value, condition.queryList[0], true)"
+                  [ngClass]="{ checkFailureBase: attr.valueCheckFailure }"
+                  class="input-item"
+                  style="width: 200px;z-index: 2;"
+                >
+                  <ng-container *ngFor="let item1 of condition.queryList[0].metaBehaviorList">
+                    <nz-option *ngIf="!isLoading" [nzValue]="item1.value" [nzLabel]="item1.name" nzCustomContent>
+                      <div title="{{ item1.name }}">{{ item1.name }}</div>
+                    </nz-option>
+                  </ng-container>
+                  <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+                    <span class="ant-compat anticon anticon-loading anticon-spin loading-icon"></span>
+                    Loading Data...
+                  </nz-option>
+                </nz-select>
+
+                <!-- 删除行为 -->
+                <button
+                  nz-button
+                  nzType="default"
+                  nzShape="circle"
+                  (click)="removeItem(crowdVO2.conditions, ci)"
+                  class="crowd-btn-close"
+                >
+                  <span class="ant-compat anticon anticon-close"></span>
+                </button>
+              </div>
+            </div>
+            <div>
+              <div
+                (click)="addItem(condition.queryList[0].boolFilters, 'behavior')"
+                *ngIf="condition.queryList[0].boolFilters.length == 0"
+                class="crowd-btn-add add-attribute-btn"
+                style=" width: 80px;"
+              >
+                <span class="ant-compat anticon anticon-plus"></span>
+                添加属性
+              </div>
+              <div style="padding-left: 233px" *ngIf="condition.queryList[0].boolFilters.length > 0">
+                <app-event-attribute-builder
+                  [eventId]="condition.queryList[0].boolFilters_0[0].value"
+                  [maxCount]="8"
+                  [query]="condition.queryList[0]"
+                  (attributeChange)="attributeChange($event)"
+                  (valueChange)="onValueChange()"
+                ></app-event-attribute-builder>
+              </div>
+            </div>
+          </div>
+
+          <!-- 现有人群块 -->
+          <div *ngIf="condition.indice == 'crowd'" class="indice-panel">
+            <div *ngFor="let attr of condition.queryList[0].boolFilters; let i = index" style="position: relative;">
+              <!-- eqType -->
+              <nz-select
+                [(ngModel)]="attr.eqType"
+                (ngModelChange)="logChange()"
+                class="input-item"
+                style="width: 120px;"
+              >
+                <nz-option nzValue="eq" nzLabel="等于"></nz-option>
+                <nz-option nzValue="ne" nzLabel="不等于"></nz-option>
+              </nz-select>
+              <nz-select
+                [(ngModel)]="attr.value"
+                (ngModelChange)="logChange(attr, 'value')"
+                nzShowSearch
+                nzMode="multiple"
+                nzPlaceHolder="请选择现有人群"
+                [ngClass]="{ checkFailureBase: attr.valueCheckFailure }"
+                class="input-item "
+                style="min-width: 300px;"
+              >
+                <nz-option
+                  *ngFor="let item of existingCrowdList"
+                  nzValue="{{ item.value }}"
+                  nzLabel="{{ item.name }}"
+                  nzCustomContent
+                >
+                  <div title="{{ item.name }}">{{ item.name }}</div>
+                </nz-option>
+              </nz-select>
+              <button
+                (click)="removeItem(crowdVO2.conditions, ci)"
+                nz-button
+                nzType="default"
+                nzShape="circle"
+                class="crowd-btn-close"
+              >
+                <span class="ant-compat anticon anticon-close"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="add-filter-item-button" (click)="addItem(crowdVO2.conditions, 'block')">
+      <span><i nz-icon type="plus" theme="outline"></i> 筛选条件</span>
+    </div>
+  </div>
+</main>

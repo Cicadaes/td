@@ -1,0 +1,7 @@
+::ng-deep .ant-form-item {
+    margin-bottom: 24px;
+}
+
+/deep/ .ant-modal-body {
+    overflow-x: hidden;
+}

@@ -1,0 +1,12 @@
+<nz-breadcrumb [nzSeparator]="'>'">
+  <nz-breadcrumb-item *ngFor="let bread of breadcrumbs;let idx=index">
+    <a [routerLink]="[bread.url, bread.params]" *ngIf="idx < breadcrumbs.length - 1">{{ bread.label }}</a>
+    <span style="font-weight: bold;color: #000;" *ngIf="idx == breadcrumbs.length-1">{{bread.label}}</span>
+    <!-- <span *ngIf="idx == breadcrumbs.length-1">dafdaf</span> -->
+  </nz-breadcrumb-item>
+
+  <!-- <nz-breadcrumb-item>
+    <span>{{appName}}</span>
+  </nz-breadcrumb-item> -->
+
+</nz-breadcrumb>

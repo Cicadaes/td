@@ -1,0 +1,39 @@
+<div [ngClass]="{'flexBox':(nodes.length > 0 || emptyFlag == false),'hideBox':nodes.length == 0 && emptyFlag == true}">
+    <div class="flexItem1 treeBox" style="height:100%;
+        min-height: 100%;
+        margin-bottom: -99999px;
+        padding: 0 0 99999px;">
+        <h3 class="ant-card-head-title" style="padding: 13px 25px;border-bottom: 1px solid #ededed;display:block;">角色层级</h3>
+        <div *ngIf="nodes.length == 0" style="padding: 20px 25px;">暂无数据</div>
+        <nz-tree [(ngModel)]="nodes" [nzDraggable]="true" [nzShowExpand]="false" [nzDefaultExpandAll]="true" (nzOnDrop)="mouseAction('drop', $event)"
+            (nzClick)="toggleNode($event);showDetail($event);">
+            <ng-template #nzTreeTemplate let-node>
+                <div class="custom-node" draggable="true" aria-grabbed="true" [class.active]="node.isSelected" [title]="node.title">
+                    <div class="clearFix" style="position: relative">
+                        <span class="anticon anticon-caret-right" *ngIf="!node.isExpanded && node.children.length"
+                            style="font-size:12px;float:left;margin-top:8px; margin-left: -20px;"></span>
+                        <span *ngIf="!node.children.length" style="width:20px;height:30px;display:inline-block;float:left;margin-left: -20px;"></span>
+                        <span class="anticon anticon-caret-down" *ngIf="node.isExpanded && node.children.length" style="font-size:12px;float:left;margin-top:8px; margin-left: -20px;"></span>
+                        <span style="overflow: hidden;text-overflow:ellipsis;white-space:nowrap;width: 110px;float:left;">{{node.title}}</span>
+                        <nz-dropdown style="position: absolute;right: 0;">
+                            <a class="ant-dropdown-link" nz-dropdown>
+                                ...
+                            </a>
+                            <ul nz-menu nzSelectable class="dropDownBox">
+                                <li nz-menu-item (click)="addRoleLevel(node)">新增子层级
+                                </li>
+                                <li nz-menu-item (click)="deleteActionModal(node.key, node)">删除
+                                </li>
+                            </ul>
+                        </nz-dropdown>
+                    </div>
+                </div>
+            </ng-template>
+        </nz-tree>
+    </div>
+    <div class="flexItem2" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+        <dept-auth-page #detailChild (onFresh)="reloadList($event)" [listData]="listData" [nodeData]="nodeData"
+            [tenantId]="tenantId" [editOrAdd]="editOrAdd" [addNode]="addNode" (editTrue)="changeDoState($event);"
+            [addOriData]="addOriData" (editSucc)="reset();"></dept-auth-page>
+    </div>
+</div>

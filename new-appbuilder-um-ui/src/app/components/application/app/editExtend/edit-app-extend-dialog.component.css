@@ -1,0 +1,3 @@
+:host ::ng-deep .ant-form-explain,:host ::ng-deep .ant-form-extra {
+    color: red;
+}

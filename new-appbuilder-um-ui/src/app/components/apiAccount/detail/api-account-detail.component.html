@@ -1,0 +1,117 @@
+<div class="gateway-route-detail">
+    <nz-card nzTitle="API账号基础信息">
+        <form nz-form>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="3" class="gateway-route-detail-label">账号名称</nz-form-label>
+                <nz-form-control [nzSpan]="9">
+                    <div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;"
+                        title="{{_data.name}}">{{_data.name}}</div>
+                </nz-form-control>
+                <nz-form-label [nzSpan]="3" class="gateway-route-detail-label">租户名称</nz-form-label>
+                <nz-form-control [nzSpan]="9">
+                    <div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;"
+                        title="{{_data.companyName}}">{{_data.companyName}}</div>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="3" class="gateway-route-detail-label">账号状态</nz-form-label>
+                <nz-form-control [nzSpan]="9">
+                    <nz-switch [(ngModel)]="_data.status" [nzControl]="true" (click)="changeStatus($event, _data)"
+                        nzCheckedChildren="正常" nzUnCheckedChildren="禁用" [ngModelOptions]="{standalone: true}"></nz-switch>
+                </nz-form-control>
+                <nz-form-label [nzSpan]="3" class="gateway-route-detail-label">适用产品</nz-form-label>
+                <nz-form-control [nzSpan]="9">
+                    <ng-container *ngIf="_data && _data.catalogList">
+                        <span *ngFor="let item of _data.catalogList;let i = index;">{{item.name}}<i *ngIf="i !== (_data.catalogList.length - 1)">,</i></span>
+                    </ng-container>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="3" class="gateway-route-detail-label">ApiKey</nz-form-label>
+                <nz-form-control [nzSpan]="9">
+                    <div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;"
+                        title="{{_data.apiKey}}">{{_data.apiKey}}</div>
+                </nz-form-control>
+                <nz-form-label [nzSpan]="3" class="gateway-route-detail-label">ApiSecret</nz-form-label>
+                <nz-form-control [nzSpan]="9">
+                    <div>
+                        <span style="margin-right: 9px;">{{apiSecret}}</span>
+                        <button nz-button [nzType]="'primary'" nzSize="small" (click)="changeApiSecret();">
+                            <span *ngIf="!btnFlag">隐藏</span>
+                            <span *ngIf="btnFlag">查看</span>
+                        </button>
+                    </div>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="3" class="gateway-route-detail-label">账号描述</nz-form-label>
+                <nz-form-control [nzSpan]="33">
+                    <div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;"
+                        title="{{_data.description}}">{{_data.description}}</div>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="3" class="gateway-route-detail-label">Token生成方式</nz-form-label>
+                <nz-form-control [nzSpan]="9">
+                    <span *ngIf="_data && _data.tokenType === 1">标准</span>
+                    <span *ngIf="_data && _data.tokenType === 2">自定义</span>
+                </nz-form-control>
+                <nz-form-label [nzSpan]="3" class="gateway-route-detail-label" *ngIf="_data && _data.tokenType === 2">生成Token地址</nz-form-label>
+                <nz-form-control [nzSpan]="9" *ngIf="_data && _data.tokenType === 2">
+                        <div style="overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;"
+                            title="{{_data.tokenUrl}}">{{_data.tokenUrl}}</div>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="3" class="gateway-route-detail-label">创建人</nz-form-label>
+                <nz-form-control [nzSpan]="9">
+                    <div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;"
+                        title="{{_data.creator}}">{{_data.creator}}</div>
+                </nz-form-control>
+                <nz-form-label [nzSpan]="3" class="gateway-route-detail-label">创建时间</nz-form-label>
+                <nz-form-control [nzSpan]="9">
+                    <div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;"
+                        title="{{_data.createTime}}">{{_data.createTime}}</div>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="3" class="gateway-route-detail-label">更新人</nz-form-label>
+                <nz-form-control [nzSpan]="9">
+                    <div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;"
+                        title="{{_data.updater}}">{{_data.updater}}</div>
+                </nz-form-control>
+                <nz-form-label [nzSpan]="3" class="gateway-route-detail-label">更新时间</nz-form-label>
+                <nz-form-control [nzSpan]="9">
+                    <div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;"
+                        title="{{_data.updateTime}}">{{_data.updateTime}}</div>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </nz-card>
+    <nz-card nzTitle="API账号有权限的API列表" style="margin-top: 34px;">
+        <ng-container *ngIf="rolecode === 'UM_TENANT_ADMIN'">
+            <app-api-tenant-table></app-api-tenant-table>
+        </ng-container>
+        <ng-container *ngIf="rolecode === 'UM_OPER_ADMIN'">
+            <app-api-oper-table></app-api-oper-table>
+        </ng-container>
+    </nz-card>
+</div>

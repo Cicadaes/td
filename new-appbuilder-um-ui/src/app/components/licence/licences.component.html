@@ -1,0 +1,13 @@
+<div class="text-content">
+    <div class="table-operator clrfix" *ngIf="rolecode=='UM_SUPER_ADMIN'">
+        <a [routerLink]="[ '/licences/addLicencePage' ]">
+            <button nz-button [nzType]="'primary'" [nzSize]="'large'">
+                <span class="anticon anticon-plus"></span><span>许可证</span>
+            </button>
+        </a>
+    </div>
+    <div class="operation-region">
+        <more-search [fieldArray]="licencesFieldArray" (onSearch)="onSearchList($event)"></more-search>
+        <licences-table [queryParams]="licencesTableFieldParams"></licences-table>
+    </div>
+</div>

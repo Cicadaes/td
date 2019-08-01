@@ -1,0 +1,91 @@
+:host ::ng-deep .overview {
+  background-color: #ffffff;
+  min-height: 173px;
+  border-radius: 2px;
+
+  &-tit {
+    height: 46px;
+    line-height: 46px;
+    padding: 0px 16px;
+    font-size: 14px;
+    color: #17233d;
+    border-bottom: 1px solid rgba(23, 35, 61, 0.1);
+    margin: 0px;
+    font-weight: 550;
+
+    .help-icon {
+      color: rgba(23, 35, 61, 0.55);
+      margin-top: 16px;
+      cursor: pointer;
+      float: right;
+    }
+  }
+
+  &-list {
+    padding: 30px 0px;
+    min-height: 67px;
+
+    &-one {
+      padding-left: 25px;
+      border-right: 1px solid rgba(23, 35, 61, 0.1);
+
+      &-label {
+        font-size: 14px;
+        color: #80848f;
+        margin-bottom: 10px;
+      }
+
+      &-value {
+        font-size: 24px;
+        color: #1c2438;
+        font-family: Roboto-Regular;
+        margin: 0px;
+      }
+    }
+  }
+
+  &-list-specila {
+    text-align: center;
+    line-height: 78px;
+  }
+}
+
+:host ::ng-deep .special-over {
+  min-height: 67px;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 12px;
+  text-align: center;
+  line-height: 67px;
+}
+
+:host ::ng-deep .node-data {
+  min-height: 67px;
+  line-height: 67px;
+}
+
+.des-ul {
+  width: 356px;
+  padding: 0;
+  margin: 0;
+
+  li {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+    padding: 5px 0;
+  }
+
+  li:last-child {
+    border-bottom: none;
+  }
+
+  label {
+    float: left;
+    text-align: left;
+    color: #fff;
+  }
+
+  .des {
+    padding-left: 90px;
+  }
+}

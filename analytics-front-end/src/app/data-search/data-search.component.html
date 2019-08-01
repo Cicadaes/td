@@ -1,0 +1,110 @@
+<main>
+  <article>
+    <div class="content-div shadow-content">
+      <div class="crowd-wap">
+        <div class="crowd-wap-left" [ngStyle]="containerStyle">
+          <div class="common-title">
+            数据表
+          </div>
+          <nz-input-group [nzSuffix]="suffixIcon">
+            <input type="text" nz-input placeholder="Search Tree Node" [(ngModel)]="searchValue" />
+          </nz-input-group>
+          <ng-template #suffixIcon>
+            <i class="ant-compat anticon anticon-search"></i>
+          </ng-template>
+          <nz-tree
+            [(ngModel)]="nodes"
+            [nzSearchValue]="searchValue"
+            (nzClick)="nzEvent($event)"
+            (nzExpandChange)="nzEvent($event)"
+            (nzSearchValueChange)="nzEvent($event)"
+          >
+            <ng-template #nzTreeTemplate let-node>
+              <span class="custom-node" draggable="false" aria-grabbed="true" [class.active]="node.isSelected">
+                <span>
+                  {{ node.title }}
+                  <i
+                    class="anticon  anticon-database"
+                    (click)="showTableStructureDialog(node.title)"
+                    style="float:right;cursor: pointer;padding: 4px 10px;"
+                    *ngIf="node.key == '1001'"
+                  ></i>
+                </span>
+              </span>
+            </ng-template>
+          </nz-tree>
+        </div>
+        <div class="crowd-wap-right">
+          <nz-card nzTitle="SQL执行器" style="border: none;">
+            <textarea
+              nz-input
+              placeholder="请输入SQL语句"
+              [(ngModel)]="_selectSql"
+              [nzAutosize]="{ minRows: 2, maxRows: 6 }"
+            ></textarea>
+            <div class="btns">
+              <button nz-button [nzType]="'primary'" (click)="showGenerateApiDialog(null)">
+                生成API
+              </button>
+              <button nz-button [nzType]="'primary'" (click)="onSelectSql()">
+                查询
+              </button>
+            </div>
+
+            <nz-tabset
+              [nzTabBarExtraContent]="extraTemplate"
+              [nzSelectedIndex]="_selectedTabIndex"
+              (nzSelectedIndexChange)="_selectedTabIndexChange($event)"
+            >
+              <nz-tab *ngFor="let tab of _sqlTabs" [nzTitle]="tab.label">
+                <app-result-table
+                  *ngIf="tab.value == 'result'"
+                  [tagCate]="_currentTable"
+                  (onLoadTagCate)="_onLoadTagCate($event)"
+                ></app-result-table>
+                <app-history-table
+                  *ngIf="tab.value == 'history'"
+                  [tagCate]="_currentTable"
+                  (onLoadTagCate)="_onLoadTagCate($event)"
+                ></app-history-table>
+              </nz-tab>
+              <ng-template #extraTemplate>
+                <nz-popover [nzTitle]="'下载消息'" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+                  <span
+                    class="icon iconfont icon-download item"
+                    (click)="downloadData()"
+                    nz-popover
+                    *ngIf="_selectedTabIndex == 0"
+                  ></span>
+                  <ng-template #nzTemplate>
+                    <div>
+                      导出任务创建成功，请稍后到
+                      <a (click)="goPage('/download-data')" style="margin:0 10px;">数据下载</a>页面下载您需要的附件。
+                    </div>
+                  </ng-template>
+                </nz-popover>
+              </ng-template>
+            </nz-tabset>
+          </nz-card>
+        </div>
+      </div>
+    </div>
+  </article>
+  <app-table-structure-dialog
+    *ngIf="_isShowTableStructureDialog"
+    [isVisible]="_isShowTableStructureDialog"
+    [data]="_tableTitle"
+    (onHide)="hideTableStructureDialog($event)"
+    (onSubmit)="onSubmitGenerateApi($event)"
+  >
+  </app-table-structure-dialog>
+
+  <app-generate-api-dialog
+    *ngIf="_isShowGenerateApiDialog"
+    [isVisible]="_isShowGenerateApiDialog"
+    [data]="_currentProduct"
+    (onHide)="hideGenerateApiDialog($event)"
+    (onSubmit)="onSubmitGenerateApi($event)"
+  >
+  </app-generate-api-dialog>
+</main>

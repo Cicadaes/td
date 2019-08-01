@@ -1,0 +1,81 @@
+<main>
+  <div
+    *ngFor="let comment of _cmData"
+    class="ng-star-0"
+    [ngClass]="isOnly ? 'only' : ''"
+    [class.root]="comment.key"
+    [class.noLeft]="noLeft == true"
+    [class.left]="_cmDirct == 'left'"
+    [class.right]="_cmDirct == 'right'"
+  >
+    <div class="TransversalTree">
+      <div class="TransversalTree-body" [ngClass]="comment.key ? 'root-flex' : ''">
+        <div
+          class="TransversalTree-box"
+          (mouseenter)="comment.showArrow = true"
+          (mouseleave)="comment.showArrow = false"
+          [ngClass]="comment.children && comment.children.length > 0 && comment.isShow ? 'TransversalTreeBox' : ''"
+        >
+          <nz-tooltip [nzTitle]="comment.title" [nzPlacement]="'top'" [nzTrigger]="'hover'">
+            <div class="TransversalTree-data" nz-tooltip>
+              <div *ngIf="comment.key">
+                <nz-select
+                  (nzOnSearch)="onSearch($event)"
+                  style="width: 100%;"
+                  [(ngModel)]="selectOption"
+                  [nzPlaceHolder]="'请输入'"
+                  (ngModelChange)="selectedChange(selectOption)"
+                  [nzServerSearch]="true"
+                  nzShowSearch
+                >
+                  <nz-option
+                    *ngFor="let option of _rootList"
+                    [nzLabel]="option.label"
+                    [nzValue]="option.id"
+                    nzCustomContent
+                  >
+                    <div title="{{ option.label }}">
+                      {{ option.label }}
+                    </div>
+                  </nz-option>
+                  <nz-option *ngIf="loading" nzDisabled nzCustomContent>
+                    <span class="ant-compat anticon anticon-loading anticon-spin loading-icon"></span>
+                    Loading Data...
+                  </nz-option>
+                </nz-select>
+              </div>
+              <div *ngIf="!comment.key" class="content">
+                <span>{{ comment.content }}</span>
+              </div>
+              <div *ngIf="comment.key">
+                <span *ngIf="_treeFilter.sourceid == 'App' || _treeFilter.sourceid == 'miniprogram'"
+                  >页面受访次数：{{ comment.launchCount | numberToThousandsPipe }}</span
+                >
+                <span *ngIf="_treeFilter.sourceid != 'App' && _treeFilter.sourceid != 'miniprogram'"
+                  >浏览量：{{ comment.launchCount | numberToThousandsPipe }}</span
+                >
+              </div>
+              <div *ngIf="!comment.key">
+                <span>{{ comment.title }}</span>
+              </div>
+            </div>
+          </nz-tooltip>
+
+          <div
+            class="TransversalTree-btn"
+            (click)="showChange(comment)"
+            *ngIf="comment.id != -1 && comment.id != -2 && comment.showArrow && !comment.isShow && _cmDirct == 'right'"
+          >
+            <span>>></span>
+          </div>
+        </div>
+      </div>
+      <cm-TransversalTree
+        *ngIf="comment.children && comment.children.length > 0 && comment.isShow"
+        [cmDirct]="_cmDirct"
+        [cmData]="comment.children"
+        class="TransversalTree-item"
+      ></cm-TransversalTree>
+    </div>
+  </div>
+</main>

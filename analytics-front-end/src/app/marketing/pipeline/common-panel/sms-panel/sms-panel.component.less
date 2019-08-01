@@ -1,0 +1,321 @@
+.anticon-question-circle-o {
+  font-size: 14px;
+}
+
+.content {
+  .pipe-item {
+    margin-bottom: 16px;
+  }
+
+  .special-pipe-item {
+    margin-bottom: 23px;
+  }
+
+  .item-label {
+    font-size: 12px;
+    color: #17233d;
+    letter-spacing: 0;
+    text-align: left;
+    line-height: 32px;
+    font-weight: bold;
+    float: left;
+    margin-left: 24px;
+    width: 52px;
+    position: relative;
+
+    #special-span {
+      font-size: 12px;
+      color: rgba(23, 35, 61, 0.75);
+      font-weight: normal;
+      text-indent: 4px;
+    }
+
+    & > .require {
+      position: absolute;
+      left: -8px;
+      color: #ed3f14;
+      font-size: 14px;
+      top: 2px;
+    }
+    .anticon {
+      color: rgba(23, 35, 61, 0.55);
+      font-weight: normal;
+    }
+  }
+
+  .title-item {
+    margin-bottom: 24px;
+
+    .item-label {
+      margin-left: 32px;
+      line-height: 12px;
+    }
+  }
+
+  .item-input {
+    float: left;
+    margin-left: 16px;
+    width: 275px;
+    position: relative;
+
+    input {
+      width: 100%;
+      height: 32px;
+      border: 1px solid #dcdee2;
+      border-radius: 4px;
+      padding: 11px;
+      outline: none;
+    }
+
+    .insert-variable {
+      background: #f8f8f9;
+      border: 1px solid #dcdee2;
+      padding: 6px 10px;
+      border-bottom: none;
+    }
+
+    .item-description {
+      font-size: 12px;
+      line-height: 24px;
+      color: #9ca0ac;
+      span {
+        font-weight: normal;
+        color: #2d8cf0;
+      }
+    }
+  }
+
+  .item-textarea {
+    float: left;
+    margin-left: 16px;
+    width: 275px;
+    height: 56px;
+
+    textarea {
+      width: 100%;
+      height: 100%;
+      border: 1px solid #dcdee2;
+      border-radius: 4px;
+      padding: 5px 11px;
+      outline: none;
+    }
+  }
+
+  .base-desc {
+    margin: 22px 0px 16px 0px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #dcdee2;
+  }
+
+  .dropdown-trigger {
+    position: absolute;
+    display: inline-block;
+    top: 7px;
+    right: 8px;
+  }
+
+  .dropdown {
+    margin-top: 5px;
+    width: 275px;
+    max-height: 200px;
+    display: block;
+    z-index: 1000;
+    visibility: visible;
+    top: 29px;
+    right: 0px;
+    opacity: 1;
+    border-color: #dfe7f2;
+    background-color: #ffffff;
+    border: 1px solid #c7c7c7;
+    border-radius: 5px;
+    position: absolute;
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    overflow-y: auto;
+
+    ul {
+      padding: 0;
+      margin: 0;
+      li {
+        margin: 1px 0;
+        border: 0 none;
+        border-radius: 0;
+        font-weight: normal;
+        text-align: left;
+        cursor: pointer;
+        position: relative;
+        &:hover {
+          background-color: #e5e5e5;
+        }
+        span.info {
+          padding: 5px 10px;
+          display: inline-block;
+          vertical-align: text-top;
+        }
+        span.iconfont {
+          position: absolute;
+          right: 10px;
+          top: 4px;
+        }
+        i {
+          vertical-align: middle;
+          line-height: 28px;
+          float: right;
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+
+  .item-text {
+    font-size: 12px;
+    color: rgba(23, 35, 61, 0.75);
+    letter-spacing: 0;
+    text-align: left;
+    line-height: 32px;
+    float: left;
+    margin-left: 24px;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+
+    & > .require {
+      position: absolute;
+      left: -8px;
+      color: #ed3f14;
+      font-size: 14px;
+      top: 2px;
+    }
+
+    input {
+      width: 40px;
+      height: 32px;
+      margin: 0px 5px;
+      outline: none;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      padding: 0;
+      list-style: none;
+      position: relative;
+      display: inline-block;
+      padding: 4px 11px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: rgba(0, 0, 0, 0.65);
+      background-color: #fff;
+      background-image: none;
+      border: 1px solid #d9d9d9;
+      border-radius: 4px;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+    }
+  }
+
+  .target-platform {
+    float: left;
+    margin-left: 16px;
+    width: 275px;
+
+    .label-tabs {
+      overflow: hidden;
+      margin: 0px;
+      padding: 0px;
+
+      li {
+        float: left;
+        height: 32px;
+        line-height: 32px;
+        width: 72px;
+        font-size: 12px;
+        color: #495060;
+        border: 1px solid #dedfe3;
+        text-align: center;
+        cursor: pointer;
+        -webkit-transition: all 0.5s ease 0s;
+        transition: all 0.5s ease 0s;
+        -o-transition: all 0.5s ease 0s;
+      }
+
+      .item-active {
+        -webkit-transition: all 0.5s ease 0s;
+        transition: all 0.5s ease 0s;
+        -o-transition: all 0.5s ease 0s;
+        background: #2d8cf0;
+        color: #fff;
+        border: 1px solid #2d8cf0;
+      }
+
+      li:first-child {
+        border-radius: 5px 0px 0px 5px;
+        border-right: 0px;
+      }
+
+      li:last-child {
+        border-radius: 0px 5px 5px 0px;
+        border-left: 0px;
+      }
+    }
+  }
+
+  .app-content {
+    margin: 24px 0px;
+    border-bottom: 1px solid #dcdee2;
+  }
+
+  .app-push-time {
+    margin: 24px 0px;
+  }
+}
+
+input[type='text'] {
+  -webkit-appearance: none;
+}
+
+.fileName {
+  margin-top: 5px;
+  width: 260px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.clear-file {
+  cursor: pointer;
+  margin-top: 5px;
+  margin-left: 10px;
+  color: #5ba0ff;
+}
+
+:host ::ng-deep .ant-btn {
+  border-radius: 20px;
+  background: #2d8cf0;
+  color: #fff;
+}
+
+/* .form nz-radio-group */
+
+:host ::ng-deep .ant-radio-wrapper {
+  font-size: 12px;
+  line-height: 12px;
+  padding-top: 10px;
+}
+
+input:disabled,
+textarea:disabled {
+  color: rgb(84, 84, 84);
+  cursor: not-allowed;
+  background-color: #f5f5f5 !important;
+}
+
+::ng-deep .ant-checkbox-disabled + span {
+  color: rgba(0, 0, 0, 0.65);
+  cursor: not-allowed;
+}
+
+::ng-deep .ant-dropdown-menu-item {
+  font-size: 12px;
+}

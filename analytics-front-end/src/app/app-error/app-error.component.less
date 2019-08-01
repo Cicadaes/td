@@ -1,0 +1,110 @@
+:host ::ng-deep .search-list {
+  background-color: #ffffff;
+  box-shadow: 0px 3px 4px -2px rgba(23, 35, 61, 0.15);
+  padding: 12px 16px;
+  border-top: 1px solid rgba(23, 35, 61, 0.1);
+}
+
+:host ::ng-deep .content {
+  padding: 16px;
+
+  .title {
+    height: 46px;
+    line-height: 46px;
+    padding: 0px 16px;
+    font-size: 14px;
+    color: #17233d;
+    border-bottom: 1px solid rgba(23, 35, 61, 0.1);
+    margin: 0px;
+    font-weight: 550;
+
+    &-search {
+      float: right;
+      width: 196px;
+    }
+
+    &-down {
+      float: right;
+      color: rgba(23, 35, 61, 0.55);
+
+      .icon-download {
+        margin: 0px 10px 0px 12px;
+        cursor: pointer;
+      }
+    }
+
+    .icon-info1 {
+      cursor: pointer;
+    }
+
+    [type='search'] {
+      cursor: pointer;
+    }
+  }
+
+  .special-title {
+    border: 0px;
+  }
+
+  &-one {
+    box-shadow: 0px 1px 2px 0 rgba(23, 35, 61, 0.25);
+    border-radius: 2px;
+    background-color: #ffffff;
+    margin-top: 16px;
+  }
+
+  &-one:first-child {
+    margin-top: 0px;
+  }
+
+  .chart {
+    padding-bottom: 12px;
+
+    &-one {
+      padding: 0px 16px;
+    }
+  }
+
+  .special-chart {
+    padding-bottom: 0px;
+  }
+
+  .ant-tabs-nav-container {
+    margin-left: 16px;
+  }
+
+  .ant-tabs {
+    width: 100%;
+  }
+}
+
+:host ::ng-deep .ant-spin-blur {
+  width: 100%;
+}
+
+.des-ul {
+  width: 356px;
+  padding: 0;
+  margin: 0;
+
+  li {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+    padding: 5px 0;
+  }
+
+  li:last-child {
+    border-bottom: none;
+  }
+
+  label {
+    float: left;
+    text-align: left;
+    color: #fff;
+  }
+
+  .des {
+    padding-left: 90px;
+  }
+}

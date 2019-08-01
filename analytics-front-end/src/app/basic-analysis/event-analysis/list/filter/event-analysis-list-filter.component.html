@@ -1,0 +1,135 @@
+<main>
+  <ul class="filter-ul" *ngIf="isList">
+    <li class="clrfix">
+      <!--<div class="label">分析时段</div>-->
+      <div class="control">
+        <nz-range-picker
+          class="custom-range-picker item"
+          [nzDisabledDate]="_disabledDate"
+          [(ngModel)]="_dateRange"
+          (ngModelChange)="_changeDaterange($event)"
+          nzPlaceHolder=""
+          [nzAllowClear]="false"
+          [nzStyle]="{ width: '240px' }"
+        >
+        </nz-range-picker>
+        <div class="label">平台</div>
+        <div class="control">
+          <nz-select
+            [(ngModel)]="_filter.sdkSource"
+            (ngModelChange)="_sdkSourceChange($event)"
+            nzShowSearch
+            nzPlaceHolder="请选择"
+            class="select item"
+          >
+            <nz-option
+              *ngFor="let item of _sdkSourceList"
+              [nzValue]="item.id"
+              [nzLabel]="item.dicItemAlias"
+              nzCustomContent
+            >
+              <div title="{{ item.dicItemAlias }}">{{ item.dicItemAlias }}</div>
+            </nz-option>
+          </nz-select>
+          <nz-select
+            *ngIf="_appSdkSource && _appSdkSource.id == _filter.sdkSource"
+            [(ngModel)]="_filter.platform"
+            (ngModelChange)="_platformChange($event)"
+            nzShowSearch
+            nzPlaceHolder="请选择"
+            class="select item"
+          >
+            <nz-option
+              *ngFor="let item of _platformList"
+              [nzValue]="item.id"
+              [nzLabel]="item.dicItemAlias"
+              nzCustomContent
+            >
+              <div title="{{ item.dicItemAlias }}">{{ item.dicItemAlias }}</div>
+            </nz-option>
+          </nz-select>
+        </div>
+      </div>
+    </li>
+    <li class="clrfix">
+      <div class="control">
+        <nz-select
+          [(ngModel)]="_filter.eventTypeId"
+          (ngModelChange)="_eventTypeChange($event)"
+          nzShowSearch
+          nzPlaceHolder="请选择"
+          class="select item"
+        >
+          <nz-option
+            *ngFor="let item of _eventTypeList"
+            [nzValue]="item.id"
+            [nzLabel]="item.dicItemAlias"
+            nzCustomContent
+          >
+            <div title="{{ item.dicItemAlias }}">{{ item.dicItemAlias }}</div>
+          </nz-option>
+        </nz-select>
+      </div>
+      <button nz-button (click)="_clickSearch()" class="btn">查询</button>
+    </li>
+  </ul>
+  <ul class="filter-ul" *ngIf="!isList">
+    <li class="clrfix">
+      <div class="control">
+        <nz-range-picker
+          class="custom-range-picker item"
+          [nzDisabledDate]="_disabledDate"
+          [(ngModel)]="_dateRange"
+          (ngModelChange)="_changeDaterange($event)"
+          nzPlaceHolder=""
+          [nzAllowClear]="false"
+          [nzStyle]="{ width: '240px' }"
+        >
+        </nz-range-picker>
+        <!--<nz-select [(ngModel)]="_filter.eventTypeId"
+						   (ngModelChange)="_eventTypeChange($event)"
+						   nzShowSearch nzPlaceHolder="请选择" class="select item">
+					<nz-option *ngFor="let item of _eventTypeList" [nzValue]="item.id"
+							   [nzLabel]="item.dicItemAlias" nzCustomContent>
+						<div title="{{item.dicItemAlias}}">{{item.dicItemAlias}}</div>
+					</nz-option>
+				</nz-select>-->
+        <div class="label">平台</div>
+
+        <nz-select
+          [(ngModel)]="_filter.sdkSource"
+          (ngModelChange)="_sdkSourceChange($event)"
+          nzShowSearch
+          nzPlaceHolder="请选择"
+          class="select item"
+        >
+          <nz-option
+            *ngFor="let item of _sdkSourceList"
+            [nzValue]="item.id"
+            [nzLabel]="item.dicItemAlias"
+            nzCustomContent
+          >
+            <div title="{{ item.dicItemAlias }}">{{ item.dicItemAlias }}</div>
+          </nz-option>
+        </nz-select>
+        <nz-select
+          *ngIf="_appSdkSource && _appSdkSource.id == _filter.sdkSource"
+          [(ngModel)]="_filter.platform"
+          (ngModelChange)="_platformChange($event)"
+          nzShowSearch
+          nzPlaceHolder="请选择"
+          class="select item"
+        >
+          <nz-option
+            *ngFor="let item of _platformList"
+            [nzValue]="item.id"
+            [nzLabel]="item.dicItemAlias"
+            nzCustomContent
+          >
+            <div title="{{ item.dicItemAlias }}">{{ item.dicItemAlias }}</div>
+          </nz-option>
+        </nz-select>
+      </div>
+    </li>
+  </ul>
+</main>

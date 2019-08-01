@@ -1,0 +1,208 @@
+<!-- 表单 -->
+<div class="form">
+  <!-- 投放渠道 -->
+  <div class="item launchChannel">
+    <div class="item-label">
+      {{ nls.formLaunchChannelLabel }}
+      <span class="required"></span>
+    </div>
+    <div class="item-input">
+      <nz-select
+        [(ngModel)]="segment.channelCode"
+        (ngModelChange)="changeChannelCode($event)"
+        [nzPlaceHolder]="nls.formLaunchChannelPlaceholder"
+        [nzDisabled]="segmentDataService.isUpdate === 0"
+      >
+        <nz-option *ngFor="let option of channelConfig" [nzLabel]="option.name" [nzValue]="option.code"></nz-option>
+      </nz-select>
+      <span class="error" *ngIf="vm.channelCodeError">请选择投放渠道</span>
+    </div>
+  </div>
+
+  <!-- 黑名单 -->
+  <div class="item blacklist">
+    <div class="item-label">
+      {{ nls.formBlacklistLabel }}
+      <nz-tooltip [nzTitle]="'黑名单中包含的号码将会从目标用户中剔除。'" [nzPlacement]="'right'">
+        <span class="ant-compat anticon anticon-question-circle-o pointer" nz-tooltip></span>
+      </nz-tooltip>
+    </div>
+    <div class="item-input">
+      <nz-upload
+        *ngIf="!segment.fileName"
+        nzAction="/marketing-api/file/upload?type=blacklist"
+        nzAccept=".csv"
+        [nzBeforeUpload]="beforeUpload"
+        [nzShowUploadList]="false"
+        [nzName]="'uploadFiles'"
+        (nzChange)="handleChange($event)"
+        [nzDisabled]="segmentDataService.isUpdate === 0"
+      >
+        <button nz-button>
+          <span class="ant-compat anticon anticon-upload"></span>
+          <span>{{ nls.formBlacklistUpload }}</span>
+        </button>
+      </nz-upload>
+      <span *ngIf="segment.fileName" class="fileName">{{ segment.fileName }}</span>
+      <span *ngIf="segment.fileName && segmentDataService.isUpdate !== 0" class="clear-file" (click)="clearFile()"
+        >清除</span
+      >
+    </div>
+    <div *ngIf="!segment.fileName" class="item-description">
+      {{ nls.formBlacklistDescription }}
+    </div>
+  </div>
+
+  <!-- 签名 -->
+  <div class="item sign">
+    <div class="item-label">
+      {{ nls.formSignLabel }}
+      <span class="required"></span>
+    </div>
+    <div class="item-input">
+      <nz-select
+        [(ngModel)]="segment.sign"
+        (ngModelChange)="changeSign($event)"
+        [nzPlaceHolder]="nls.formSignPlaceholder"
+        [nzDisabled]="segmentDataService.isUpdate === 0"
+      >
+        <nz-option *ngFor="let option of signList" [nzLabel]="option.sign" [nzValue]="option.key"></nz-option>
+      </nz-select>
+      <span class="error" *ngIf="vm.signError">请选择签名</span>
+
+      <!-- 文前？文后？ -->
+      <nz-radio-group [(ngModel)]="segment.signPosition" (ngModelChange)="changeSignPosition($event)">
+        <label nz-radio nzValue="before" [nzDisabled]="segmentDataService.isUpdate === 0">{{
+          nls.formSignRadio1
+        }}</label>
+        <label nz-radio nzValue="after" [nzDisabled]="segmentDataService.isUpdate === 0">{{
+          nls.formSignRadio2
+        }}</label>
+      </nz-radio-group>
+    </div>
+  </div>
+
+  <!-- 短信内容 -->
+  <div class="item smContent">
+    <div class="item-label">
+      {{ nls.formSmContentLabel }}
+      <nz-tooltip
+        [nzTitle]="
+          '请插入长链接，系统会自动为您转为短链接发送，输入链接地址时需要在其前后加入空格符号，以免短信客户端无法识别出超链接。'
+        "
+        [nzPlacement]="'right'"
+      >
+        <span class="ant-compat anticon anticon-question-circle-o pointer" nz-tooltip></span>
+      </nz-tooltip>
+      <span class="required"></span>
+    </div>
+    <div class="item-input">
+      <div class="insert-variable">
+        <nz-dropdown [nzTrigger]="'click'" [nzDisabled]="segmentDataService.isUpdate === 0">
+          <a nz-dropdown>
+            $_ 插入变量
+          </a>
+          <ul nz-menu style="max-height: 200px; overflow-y: auto;">
+            <li nz-menu-item *ngFor="let item of variableList" (click)="insertVariable(item)">
+              {{ item.value }}（{{ item.key }}）
+            </li>
+          </ul>
+        </nz-dropdown>
+      </div>
+      <textarea
+        id="content"
+        [(ngModel)]="segment.content"
+        nz-input
+        placeholder="请输入内容"
+        style="width: 400px; height: 125px;resize: none; border-radius: 0 0 4px 4px;"
+        [disabled]="segmentDataService.isUpdate === 0"
+      ></textarea>
+      <span class="error" *ngIf="vm.contentError">{{ vm.contentErrorInfo }}</span>
+      <span class="error" *ngIf="vm.contentSignError">签名或【退订回T】格式有误，现在请确认内容无问题</span>
+    </div>
+  </div>
+
+  <!-- 投放时间 -->
+  <div class="item launchTime">
+    <div class="item-label">
+      {{ nls.formLaunchTimeLabel }}
+      <span class="required"></span>
+    </div>
+    <div class="item-input">
+      <nz-radio-group [(ngModel)]="segment.triggerType">
+        <label nz-radio-button nzValue="1" [nzDisabled]="segmentDataService.isUpdate === 0">{{
+          nls.formLaunchTimeRadio1
+        }}</label>
+        <label nz-radio-button nzValue="2" [nzDisabled]="segmentDataService.isUpdate === 0">{{
+          nls.formLaunchTimeRadio2
+        }}</label>
+      </nz-radio-group>
+
+      <div *ngIf="segment.triggerType == 2">
+        <!-- 年月日 -->
+        <nz-date-picker
+          class="YYYY-MM-DD"
+          [(ngModel)]="sendTime"
+          nzAllowClear="false"
+          [nzDisabledDate]="disabledDate"
+          (ngModelChange)="buildSendTime($event)"
+          nzPlaceHolder="请选择日期"
+          [nzDisabled]="segmentDataService.isUpdate === 0"
+        ></nz-date-picker>
+        <!-- 时 -->
+        <nz-select
+          class="hh"
+          [(ngModel)]="selectedHour"
+          (ngModelChange)="buildSendTime($event)"
+          [nzPlaceHolder]="nls.formLaunchTimeHourPlaceholder"
+          [nzDisabled]="segmentDataService.isUpdate === 0"
+        >
+          <nz-option *ngFor="let option of hourList" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+        </nz-select>
+        <!-- 分 -->
+        <nz-select
+          class="mm"
+          [(ngModel)]="selectedMinute"
+          (ngModelChange)="buildSendTime($event)"
+          [nzPlaceHolder]="nls.formLaunchTimeMinutePlaceholder"
+          [nzDisabled]="segmentDataService.isUpdate === 0"
+        >
+          <nz-option *ngFor="let option of minuteList" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+        </nz-select>
+        <span class="error" *ngIf="vm.timeError">{{ vm.timeErrorInfo }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 通道号码 -->
+  <div class="item channelNumber">
+    <div class="item-label">{{ nls.formChannelNumberLabel }}</div>
+    <div class="item-input">
+      <nz-select
+        [(ngModel)]="segment.channelNumber"
+        [nzPlaceHolder]="nls.formChannelNumberPlaceholder"
+        [nzDisabled]="segmentDataService.isUpdate === 0"
+      >
+        <nz-option *ngFor="let option of subCodeList" [nzLabel]="option" [nzValue]="option"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+</div>
+
+<!-- 短信预览 -->
+<div class="form-right">
+  <div class="phone">
+    <div class="msg-box">
+      <div class="message">
+        <p>
+          {{ segment.signPosition === 'before' && signContent ? '【' + signContent + '】' : '' }}
+          {{
+            segment.content && segment.content.length > 60 ? segment.content.substring(0, 60) + '... ' : segment.content
+          }}
+          {{ segment.signPosition === 'after' && signContent ? '【' + signContent + '】' : '' }}
+          {{ signContent ? ' 退订回T' : '' }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

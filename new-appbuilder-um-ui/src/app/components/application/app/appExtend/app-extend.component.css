@@ -1,0 +1,7 @@
+.anticon{
+  cursor: pointer; 
+}
+
+:host ::ng-deep .ant-table-title {
+    padding: 0px !important;
+  }

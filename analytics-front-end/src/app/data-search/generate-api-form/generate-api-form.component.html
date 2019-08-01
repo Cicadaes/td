@@ -1,0 +1,35 @@
+<main>
+  <form class="custom-form" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event)">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8" nzRequired>产品名称</nz-form-label>
+      <nz-form-control [nzSpan]="15">
+        <input
+          nz-input
+          formControlName="productname"
+          placeholder="请输入产品名称"
+          maxlength="64"
+          (keyup)="keyupInputValue()"
+          (blur)="changeInputValue($event, 'productname')"
+        />
+        <div class="custom-form-explain clrfix">
+          <nz-form-explain
+            *ngIf="
+              (validateForm.get('productname').dirty && validateForm.get('productname').errors) ||
+              validateForm.get('productname').pending
+            "
+          >
+            <ng-container *ngIf="validateForm.get('productname').hasError('required')">
+              请输入产品名称
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('productname').hasError('duplicated')">
+              产品名称已经存在
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('productname').pending">
+              <!--验证中...-->
+            </ng-container>
+          </nz-form-explain>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</main>

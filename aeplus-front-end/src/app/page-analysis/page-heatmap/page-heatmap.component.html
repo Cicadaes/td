@@ -1,0 +1,22 @@
+<div class="first-level"></div>
+<div class="header-content">
+	<div>
+		
+		<app-tab-list [tabList]="tabList"></app-tab-list>
+		
+		<div class="page-custom-header">
+			<nz-range-picker class="custom-range-picker" [nzFormat]="_dateFormat" style="padding: 0 16px;"
+			                 [nzDisabledDate]="_disabledDate" [(ngModel)]="_dateRange"
+			                 (ngModelChange)="_changeDaterange($event);"
+			                 nzPlaceHolder="" [nzAllowClear]="false" [nzStyle]="{'width': '240px'}">
+			
+			</nz-range-picker>
+		</div>
+	</div>
+</div>
+
+<main>
+	<article class="page-custom-content">
+		<router-outlet></router-outlet>
+	</article>
+</main>

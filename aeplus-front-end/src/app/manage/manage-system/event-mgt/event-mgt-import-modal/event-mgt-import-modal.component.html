@@ -1,0 +1,17 @@
+<nz-upload
+		nzAction="/reportservice/importEventServlet"
+		nzType="drag"
+		[nzData]="data"
+		[nzMultiple]="false"
+		[nzShowUploadList]="false"
+		[nzBeforeUpload]="handlerBeforeUpload"
+		(nzChange)="handleChange($event)">
+
+	<p class="ant-upload-drag-icon">
+		<span class="anticon anticon-inbox"></span></p>
+	<p class="ant-upload-text">
+		{{nls.text}}</p>
+	<p class="ant-upload-hint">
+		{{nls.subtext}}</p>
+
+</nz-upload>

@@ -1,0 +1,11 @@
+{
+    "/console-api": {
+        "target": "http://172.23.4.120:8080"
+    },
+    "/dataauth": {
+        "target": "http://172.23.4.120:8080"
+    },
+    "/apimanager-api": {
+        "target": "http://172.23.4.120:8080"
+    }
+}

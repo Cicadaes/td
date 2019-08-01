@@ -1,0 +1,9 @@
+<main>
+	<nz-input-group [nzSize]="_size" nzSearch [nzSuffix]="suffixIconButton">
+		<input type="text" (blur)="changeInputValue($event);" nz-input placeholder="{{_placeholder}}"
+		       [(ngModel)]="_value" (ngModelChange)="onKeyup($event);" (keyup.enter)="enterKeyword($event);">
+	</nz-input-group>
+	<ng-template #suffixIconButton>
+		<span class="anticon anticon-search" (click)="_onSearch()"></span>
+	</ng-template>
+</main>

@@ -1,0 +1,75 @@
+<div class="text-content-top">
+    <h3 class="zw-one-name" *ngIf="userGroup">{{userGroup.name}}</h3>
+    <p class="til_desc">{{userGroup && userGroup.desc}}</p>
+</div>
+<nz-tabset>
+    <nz-tab *ngFor="let tab of tabs" [nzTitle]="tab.name">
+        <ng-template #nzTabHeading>
+            {{tab.name}}
+        </ng-template>
+        <div class="text-content">
+            <!--用户管理-->
+            <div *ngIf="tab.tabCode==1">
+                <div class="table-operator clrfix" style="margin-top: 4px;">
+                    <nz-dropdown>
+                        <button nz-button nz-dropdown [nzType]="'primary'"><span class="anticon anticon-plus"></span><span>用户</span><span
+                                    class="anticon anticon-down"></span></button>
+                        <ul nz-menu>
+                            <li nz-menu-item>
+                                <a href="javascript:;" (click)="showAddUserModal()">新增用户</a>
+                            </li>
+                            <li nz-menu-item>
+                                <a href="javascript:;" (click)="showAddUserList()">添加已有用户</a>
+                            </li>
+                        </ul>
+                    </nz-dropdown>
+                    <button nz-button [nzType]="'default'" (click)="deleteUsersFromUserGroup()">
+                        <span class="anticon anticon-minus"></span><span>批量移除</span>
+                    </button>
+                </div>
+                <div class="table-operator-bottom" style="padding: 0px">
+                    <more-search [fieldArray]="uguserFieldArray" (onSearch)="onSearchUgUserList($event)"></more-search>
+                    <ugusers-table [queryParams]="uguserTableFieldParams" [reload]="isReloadUserTable" [refresh]="refreshUguserTableStatus"
+                        (onCheck)="onCheckUgUsers($event)"></ugusers-table>
+                </div>
+            </div>
+
+            <!--角色管理-->
+            <div *ngIf="tab.tabCode==2">
+                <div class="table-operator clrfix" style="margin-top: 4px;">
+                    <button nz-button [nzType]="'primary'" (click)="showAddRoleModal()">
+                        <span>授权角色</span>
+                    </button>
+                    <button nz-button [nzType]="'default'" (click)="deleteRolesFromUserGroup()">
+                        <span class="anticon anticon-minus"></span><span>批量移除</span>
+                    </button>
+                </div>
+                <div class="table-operator-bottom" style="padding: 0px;padding-top: 20px;">
+                    <ugroles-table [toSubmit]="toSubmit" [isUserRelation]="isUserRelation" [tenantId]="tenantId"
+                        [reload]="isReloadRoleTable" [refresh]="refreshUgRoleTableStatus" (onCheckRole)="onCheckUgRoles($event)"></ugroles-table>
+                </div>
+
+            </div>
+
+            <!--功能管理-->
+            <div *ngIf="tab.tabCode==3">
+                <div class="zw-margin-top" style="margin-top: 4px;">
+                    <div class="table-operator-bottom">
+                        <carousel-app-manage [_refresh]="_refresh" (onSubmit)="onSubmitAppData($event)" [tenantId]="tenantId"
+                            [appList]="appList" [queryParams]="queryParams"></carousel-app-manage>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nz-tab>
+</nz-tabset>
+
+
+
+
+<add-uguser-dialog *ngIf="isShowAddUerModal" [tenantId]="tenantId" [deptId]="id" [user]="currentUser" [isShow]="isShowAddUerModal"
+    (onClose)="hideAddUserModal($event)" (onSubmit)="onSubmitUserFormData($event)"></add-uguser-dialog>
+<ugusers-table-dialog *ngIf="isShowAddUerList" [tenantId]="tenantId" [isShow]="isShowAddUerList" (onClose)="hideAddUserListModal($event)"
+    (onSubmit)="onSubmitUserListData($event)"></ugusers-table-dialog>
+<ugroles-table-dialog [viewType]="viewType" *ngIf="isShowAddRoleModal" [tenantId]="tenantId" [isShow]="isShowAddRoleModal"
+    (onClose)="hideAddRoleListModal($event)" (onSubmit)="onSubmitRoleListData($event)"></ugroles-table-dialog>

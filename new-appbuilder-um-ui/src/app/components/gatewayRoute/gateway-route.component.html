@@ -1,0 +1,67 @@
+<div class="text-content">
+    <div class="table-operator clrfix">
+        <button nz-button [nzType]="'primary'" (click)="add()">
+            <i class="anticon anticon-plus"></i>路由规则
+        </button>
+        <app-add-route [isVisible]="addFlag" (hideDialog)="hideDialog($event);" [editData]="editData" [editFlag]="editFlag"
+            (saveDate)="saveDate();"></app-add-route>
+    </div>
+    <div class="operation-region">
+        <ng-template #tableTotal>
+            <div>
+                总共 {{_total}} 条
+            </div>
+        </ng-template>
+        <more-search [fieldArray]="moreSearchArray" (onSearch)="onMoreSearch($event)"></more-search>
+        <nz-table #nzTable [nzData]="_dataSet" [nzShowTotal]="tableTotal" nzShowSizeChanger [nzLoading]="_loading" [nzTotal]="_total"
+            [(nzPageIndex)]="_pageIndex" [(nzPageSize)]="_pageSize" [nzFrontPagination]="false" (nzPageSizeChange)="refreshData(true)"
+            (nzPageIndexChange)="refreshData()">
+            <thead nz-thead>
+                <tr>
+                    <th [nzWidth]="'17%'">
+                        路由规则名称
+                    </th>
+                    <th [nzWidth]="'15%'">
+                        原始路径
+                    </th>
+                    <th [nzWidth]="'15%'">
+                        映射方式
+                    </th>
+                    <th [nzWidth]="'20%'">
+                        映射路径
+                    </th>
+                    <th [nzWidth]="'10%'">
+                        状态
+                    </th>
+                    <th [nzWidth]="'10%'">
+                        创建日期
+                    </th>
+                    <th [nzWidth]="'13%'">
+                        操作
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of nzTable.data">
+                    <td>{{data.name}}</td>
+                    <td>{{data.originUrl}}</td>
+                    <td><span *ngIf="data.routingType === 1">URL映射</span><span *ngIf="data.routingType === 2">ServiceId映射</span></td>
+                    <td>{{data.routingUrl}}</td>
+                    <td>
+                        <nz-switch [(ngModel)]="data.status" [nzControl]="true" (click)="changeStatus($event, data)" nzCheckedChildren="已发布" nzUnCheckedChildren="未发布"></nz-switch>
+                    </td>
+                    <td>{{data.createTime | dateFormatPipe:2}}</td>
+                    <td>
+                        <a [routerLink]="[ '/gatewayRoute/detail',data.id]" >查看</a>
+                        <nz-divider nzType="vertical"></nz-divider>
+                        <a href="javascript:;" (click)="edit(data)" *ngIf="!data.status">编辑</a>
+                        <a href="javascript:;" *ngIf="data.status" style="color: rgba(23, 35, 61, 0.35); cursor:not-allowed;">编辑</a>
+                        <nz-divider nzType="vertical"></nz-divider>
+                        <a href="javascript:;" (click)="delete(data)" *ngIf="!data.status">删除</a>
+                        <a href="javascript:;" *ngIf="data.status" style="color: rgba(23, 35, 61, 0.35); cursor:not-allowed;">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+</div>

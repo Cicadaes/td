@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46 (44423) - http://www.bohemiancoding.com/sketch -->
+    <title>icon－停止</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="8测试" transform="translate(-220.000000, -136.000000)" fill="#43A3FB">
+            <path d="M231.99997,136 C225.37244,136 220,141.37106 220,148.00087 C220,154.63044 225.37412,160 231.99997,160 C238.626,160 244.00006,154.62714 244.00006,147.99913 C244.00006,141.37106 238.62762,136 231.99997,136 Z M231.99997,158.392768 C226.269147,158.392768 221.606992,153.731933 221.606992,147.99763 C221.606992,142.263027 226.269027,137.603932 231.99997,137.603932 C237.730853,137.603932 242.392888,142.268067 242.392888,147.99763 C242.392888,153.727193 237.732353,158.392768 231.99997,158.392768 Z M228,144 L228,152 L236,152 L236,144 L228,144 Z" id="icon－停止"></path>
+        </g>
+    </g>
+</svg>

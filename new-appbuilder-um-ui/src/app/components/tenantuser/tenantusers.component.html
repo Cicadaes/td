@@ -1,0 +1,14 @@
+<div class="text-content">
+    <div class="table-operator clrfix">
+        <a [routerLink]="[ '/tenants/tenantusers/'+tenantId+'/addTenantUserPage']">
+            <button nz-button [nzType]="'primary'">
+                <span class="anticon anticon-plus"></span><span>用户</span>
+            </button>
+        </a>
+        <add-tenantuser-dialog [isShow]="isShowAddUerModal" (onSubmit)="onSubmitUserFormData($event)" (onClose)="hideAddUserModal($event)"></add-tenantuser-dialog>
+    </div>
+    <div class="operation-region">
+        <more-search [fieldArray]="userFieldArray" (onSearch)="onSearchUserList($event)"></more-search>
+        <tenantusers-table [reload]="isReloadUserTable" [tenantId]="tenantId" [queryParams]="userTableFieldParams"></tenantusers-table>
+    </div>
+</div>

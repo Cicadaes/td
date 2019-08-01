@@ -1,0 +1,19 @@
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel($event)" (nzOnOk)="handleOk($event)" [nzMaskClosable]="false">
+    <ng-template #modalTitle>
+        <span *ngIf="!userGroup">新增用户组</span>
+        <span *ngIf="userGroup">编辑用户组</span>
+    </ng-template>
+    <ng-template #modalContent>
+        <app-add-user-group-form [tenantId]="tenantId" [userGroup]="userGroup" *ngIf="isVisible" [needSubmit]="isNeedSubmitAddUserGroupFormData"
+            (exists)="isExistsUserGroupName($event)" (submit)="submitAddUserGroupForm($event)"></app-add-user-group-form>
+    </ng-template>
+    <ng-template #modalFooter>
+        <button nz-button [nzType]="'default'" (click)="handleCancel($event)">
+            取 消
+        </button>
+        <button nz-button [nzType]="'primary'" (click)="handleOk($event)" [nzLoading]="isConfirmLoading">
+            确 定
+        </button>
+    </ng-template>
+</nz-modal>

@@ -1,0 +1,48 @@
+<span class="_select">
+  <span class="name">{{ name }}</span>
+  <nz-select
+    [nzDisabled]="nzDisabled"
+    nzShowSearch
+    nzMode="multiple"
+    [nzAllowClear]="true"
+    [nzServerSearch]="true"
+    nzPlaceHolder="请选择"
+    (nzOpenChange)="close($event)"
+    [nzNotFoundContent]="'暂无数据'"
+    [(ngModel)]="listOfSelectedValue"
+    (nzOnSearch)="searchChange($event)"
+    (nzScrollToBottom)="scrollToBottom()"
+    (ngModelChange)="listOfSelectedValueChange(listOfSelectedValue)"
+  >
+    <span *ngIf="!longRangeSearch">
+      <nz-option
+        *ngIf="listOfOptionSearch && !listOfOptionSearch.length && listOfOptionSearchLoading"
+        [nzDisabled]="true"
+        [nzCustomContent]="true"
+      >
+        <em class="anticon anticon-loading anticon-spin"></em> Loading...
+      </nz-option>
+      <nz-option
+        *ngFor="let option of listOfOptionSearch"
+        [nzLabel]="option.label"
+        [nzValue]="option.value"
+        [nzCustomContent]="true"
+      >
+        <span title="{{ option.label }}">{{ option.label }}</span>
+      </nz-option>
+    </span>
+    <span *ngIf="longRangeSearch">
+      <nz-option
+        *ngFor="let option of listOfOption"
+        [nzLabel]="option.label"
+        [nzValue]="option.value"
+        [nzCustomContent]="true"
+      >
+        <span title="{{ option.label }}">{{ option.label }}</span>
+      </nz-option>
+      <nz-option [nzDisabled]="true" *ngIf="longRangeSearchLoading" [nzCustomContent]="true">
+        <em class="anticon anticon-loading anticon-spin"></em> Loading...
+      </nz-option>
+    </span>
+  </nz-select>
+</span>

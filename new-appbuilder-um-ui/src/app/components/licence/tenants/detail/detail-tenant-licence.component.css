@@ -1,0 +1,55 @@
+.label_font {
+  font-weight: bold;
+}
+
+.special_label {
+  width: 80px !important;
+  text-align: left;
+  margin-right: 15px;
+}
+
+.special_row {
+  text-align: left;
+  margin-left: 15px;
+}
+
+:host ::ng-deep .ant-table-title {
+  color: rgba(0, 0, 0, 0.85) !important;
+}
+
+:host ::ng-deep .ant-form-item-label {
+    text-align: left;
+    vertical-align: middle;
+    /*line-height: 32px;*/
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #17233D;
+}
+
+/* :host ::ng-deep .ant-form-item-control {
+    line-height: 31.9999px;
+    position: relative;
+    zoom: 1;
+} */
+
+:host ::ng-deep .ant-form-item {
+    font-size: 13px;
+    margin-bottom: 0px;
+    color: rgba(0, 0, 0, 0.65);
+    vertical-align: top;
+    margin: 0 4px;
+
+}
+
+:host ::ng-deep .ant-card-body {
+    padding: 14px 0px !important;
+}
+:host ::ng-deep .ant-form-item-label label {
+  padding-left:10px;
+}
+:host ::ng-deep .ant-form-item-label label:after {
+  margin: 0px;
+
+}

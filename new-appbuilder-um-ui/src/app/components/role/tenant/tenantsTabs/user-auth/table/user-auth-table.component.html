@@ -1,0 +1,50 @@
+<ng-template #tableTotal>
+        <div  style="margin-right: 6px;">
+          总共 {{_total}} 条
+        </div>
+</ng-template>
+<nz-table #nzTable *ngIf="!isSuper" [nzBordered]="false" [nzShowTotal]="tableTotal" [nzData]="_dataSet" nzShowSizeChanger
+    [nzLoading]="_loading" [nzTotal]="_total" [(nzPageIndex)]="_current" (nzPageIndexChange)="refreshData()"
+    [(nzPageSize)]="_pageSize" (nzPageSizeChange)="refreshData(true)" [nzShowPagination]="false" [nzFrontPagination]="false">
+    <thead>
+        <tr>
+            <th [nzWidth]="'20%'">
+                姓名
+            </th>
+            <th [nzWidth]="'20%'">
+                账号
+            </th>
+            <th [nzWidth]="'15%'">
+                性别
+            </th>
+            <th [nzWidth]="'15%'">
+                手机
+            </th>
+            <th [nzWidth]="'15%'">
+                状态
+            </th>
+            <th [nzWidth]="'15%'">
+                操作
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of nzTable.data">
+            <td>{{data.name}}</td>
+            <td>{{data.email}}</td>
+            <td>{{data.gender==-1?'':(data.gender==0?'女':'男')}}</td>
+            <td>{{data.mobile}}</td>
+            <td>
+                <span style="color:#E03E16" *ngIf="data.status==0">●</span>
+                <span style="color:#2B85E5" *ngIf="data.status==1">●</span>{{data.status==0?'禁用':'正常'}}</td>
+            <td>
+                <a href="javascript:;" (click)="replaceUser(data)">替换</a>
+                <nz-divider nzType="vertical"></nz-divider>
+                <a [routerLink]="['/tenants/tenantusers/'+tenantId+'/viewTenantUserPage',data.userId]">查看</a>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<add-user-auth-dialog [isSuper]="isSuper" *ngIf="isShowAddUserAuthModal" [isShow]="isShowAddUserAuthModal" [tenantId]="tenantId"
+    [userId]="userId" [roleId]="roleId" (onClose)="hideAddUserAuthModal($event)" (onSubmit)="onSubmitUserAuthData($event)"></add-user-auth-dialog>

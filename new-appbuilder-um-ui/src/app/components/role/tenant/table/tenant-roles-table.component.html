@@ -1,0 +1,50 @@
+<ng-template #tableTotal>
+        <div  style="margin-right: 6px;">
+          总共 {{_total}} 条
+        </div>
+</ng-template>
+<nz-table #nzTable [nzBordered]="false" [nzShowTotal]="tableTotal" [nzData]="_dataSet" nzShowSizeChanger [nzLoading]="_loading"
+    [nzTotal]="_total" [(nzPageIndex)]="_current" (nzPageIndexChange)="refreshData()" [(nzPageSize)]="_pageSize"
+    (nzPageSizeChange)="refreshData(true)" [nzFrontPagination]="false" [nzFrontPagination]="false">
+    <thead>
+        <tr>
+            <th [nzWidth]="'20%'">
+                名称
+            </th>
+            <th [nzWidth]="'40%'">
+                描述
+            </th>
+            <th [nzWidth]="'10%'">
+                更新人
+            </th>
+            <th [nzWidth]="'14%'">
+                更新时间
+            </th>
+            <th [nzWidth]="'16%'">
+                操作
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of nzTable.data; let roleIndex=index">
+            <td>{{data.name}}</td>
+            <td>{{data.desc}}</td>
+            <td>{{data.updateUserName}}</td>
+            <td>{{data.updateTime | dateFormatPipe:2}}</td>
+            <td>
+                <a *ngIf="data.code && !(data.code == 'UM_TENANT_APP_ADMIN' || data.code == 'UM_TENANT_APP_ADMIN_CANCEL')"
+                    [routerLink]="[ '/tenants/roles/'+tenantId+'/tenantDetails', userId, data.id ]">查看</a>
+                <a *ngIf="data.code &&  (data.code == 'UM_TENANT_APP_ADMIN' || data.code == 'UM_TENANT_APP_ADMIN_CANCEL')"
+                    [routerLink]="[ '/tenants/roles/'+tenantId+'/tenantsDetails', userId, data.id ]">查看</a>
+                <nz-divider nzType="vertical" *ngIf="!(data.code == 'UM_TENANT_APP_ADMIN' || data.code == 'UM_TENANT_APP_ADMIN_CANCEL')"></nz-divider>
+                <a *ngIf="!(data.code == 'UM_TENANT_APP_ADMIN' || data.code == 'UM_TENANT_APP_ADMIN_CANCEL')" href="javascript:;"
+                    (click)="showEditRoleModal(data, roleIndex)">编辑</a>
+                <nz-divider nzType="vertical" *ngIf="!(data.code == 'UM_TENANT_APP_ADMIN' || data.code == 'UM_TENANT_APP_ADMIN_CANCEL')"></nz-divider>
+                <a *ngIf="!(data.code == 'UM_TENANT_APP_ADMIN' || data.code == 'UM_TENANT_APP_ADMIN_CANCEL')" href="javascript:;"
+                    (click)="deleteRole(data, roleIndex)">删除</a>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+<add-role-dialog [isShow]="isShowAddRoleModal" [nameList]="nameList" [tenantId]="tenantId" [role]="role" (onClose)="hideAddRoleModal($event)"
+    (onSubmit)="onSubmitUserFormData($event)"></add-role-dialog>

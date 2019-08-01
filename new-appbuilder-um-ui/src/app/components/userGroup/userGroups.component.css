@@ -1,0 +1,14 @@
+:host ::ng-deep .ac_right_wap {
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+:host ::ng-deep .ac_right{
+  float: right;
+  width: 180px;
+}
+
+:host ::ng-deep .anticon-search {
+    margin-right: 6px;
+    cursor: pointer;
+}

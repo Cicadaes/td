@@ -1,0 +1,31 @@
+.checkbox-tree-ul{
+    height: auto;
+    overflow: auto;
+    padding: 10px;
+}
+.checkbox-tree-ul ul{
+    padding: 0 0 0 30px;
+}
+
+.checkbox-tree-ul ul li{
+    margin: 5px 0;
+}
+
+.checkbox-tree-ul.checkbox-tree-ul-first>li{
+    background: #fff;
+    border:1px solid #e7e9eb;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom:10px;
+    padding:10px;
+}
+
+.checkbox-tree-ul.checkbox-tree-ul-first > li > label:first-child {
+    font-family: PingFangSC-Medium;
+    color: #17233D;
+}
+.inner-checkbox-tree-first > .checkbox-tree-ul>li{
+    float:left;
+    width:33.33%;
+}

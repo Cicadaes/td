@@ -1,0 +1,294 @@
+<form  nz-form [formGroup]="validateForm" (ngSubmit)="_submitForm()">
+    <nz-card>
+
+        <div style="margin: 0 0 24px">
+            <nz-form-item nz-row>
+                <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label">
+                    <label for="parentId" nzRequired class="special-label-before">上级ID</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="20" [nzXs]="24">
+                    {{action.parentId}}
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item nz-row>
+                <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label">
+                    <label for="parentName" nzRequired class="special-label-before">上级名称</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="20" [nzXs]="24">
+                    {{action.parentName || 'root'}}
+                </nz-form-control>
+            </nz-form-item>
+            <div *ngIf="operation == 'select'" class="detail">
+                <nz-form-item nz-row>
+                    <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label" nzRequired>
+                        <label for="name" >功能名称</label>
+                    </nz-form-label>
+                    <nz-form-control nz-col [nzSm]="20" [nzXs]="24" *ngIf="action && action.name">
+                        {{action.name}}
+                        <!--  
+                                        <input nz-input [nzSize]="'large'" formControlName="name" id="name"  ng-reflect-disabled="operation == 'select'"> 
+                                    
+                                   <ng-container *ngIf="getFormControl('name').dirty && getFormControl('name').errors">
+                                                            <nz-form-explain style="color:red;" *ngIf="getFormControl('name').errors.required">请输入功能名称</nz-form-explain>
+                                                            <nz-form-explain style="color:red;" *ngIf="getFormControl('name').errors.maxlength">输入的功能名称过长</nz-form-explain>
+                                                        </ng-container> -->
+                    </nz-form-control>
+                </nz-form-item>
+                <!-- <nz-form-item nz-row>
+                                <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label">
+                                    <label for="serialNumber" nzRequired>功能序号</label>
+                                </nz-form-label >
+                                {{action.serialNumber}} -->
+                <!-- <nz-form-control nz-col [nzSm]="20" [nzXs]="24" >
+                                                       
+                                                            <input nz-input [nzSize]="'large'" formControlName="serialNumber" id="serialNumber"  ng-reflect-disabled="operation == 'select'"> 
+                                                       
+                                                        <ng-container *ngIf="getFormControl('serialNumber').dirty && getFormControl('serialNumber').errors">
+                                                            <nz-form-explain style="color:red;" *ngIf="getFormControl('serialNumber').errors.required">请输入功能序号</nz-form-explain>
+                                                            <nz-form-explain style="color:red;" *ngIf="getFormControl('serialNumber').errors.forbiddenName">功能序号只能为小于6位整数</nz-form-explain>
+                                                        </ng-container>
+                                                    </div> -->
+                <!-- </nz-form-control> -->
+                <nz-form-item nz-row>
+                    <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label" nzRequired>
+                        <label for="code" >功能编码</label>
+                    </nz-form-label>
+                    <nz-form-control nz-col [nzSm]="20" [nzXs]="24" *ngIf="action && action.code">
+                        {{action.code}}
+                        <!-- 
+                                                            <input nz-input [nzSize]="'large'" [(ngModel)]="code" formControlName="code" id="code" readonly="true" *ngIf="operation != 'select'"> 
+                                                        
+                                                            <input nz-input [nzSize]="'large'" [(ngModel)]="code" formControlName="code" id="code"  ng-reflect-disabled="operation == 'select'"
+                                                                *ngIf="operation == 'select'"> 
+                                                       
+                                                        <nz-form-explain style="color:red;" *ngIf="getFormControl('code').dirty&&getFormControl('code').hasError('required')">请输入功能编码</nz-form-explain> -->
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item nz-row *ngIf="operation != 'select'">
+                    <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label">
+                        <label for="appIcon" nzRequired class="special-label-before">功能图标</label>
+                    </nz-form-label>
+                    <nz-form-control nz-col [nzSm]="20" [nzXs]="24">
+                        <upload-images [uploadParam]="appIconFile" (onUpload)="onUploadAppIconFile($event);"></upload-images>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item nz-row *ngIf="operation == 'select'">
+                    <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label">
+                        <label for="appIcon" nzRequired class="special-label-before">功能图标</label>
+                    </nz-form-label>
+                    <nz-form-control nz-col [nzSm]="20" [nzXs]="24">
+                        <span title *ngIf="action && action.icon != null &&action.icon != 'null' && action.icon != 0">
+                            <img alt="图片" src="{{action.icon}}" style="width:78px;height:78px;" />
+                        </span>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item nz-row *ngIf="!parentFucTypeDicId">
+                    <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label" nzRequired>
+                        <label for="fucTypeDicId" >功能类别</label>
+                    </nz-form-label>
+                    <nz-form-control nz-col [nzSm]="20" [nzXs]="24" *ngIf="operation != 'select'&& operation != 'update'">
+                        <select-search *ngIf="additionalAppIdSelect" [select]="additionalAppIdSelect" (onSelect)="selectSearchAdditionalAppId($event,'fucTypeDicId')"></select-search>
+                        <nz-form-explain style="color:red;" *ngIf="getFormControl('fucTypeDicId').dirty&&getFormControl('fucTypeDicId').hasError('required')"
+                            style="color: red">请添加功能类别</nz-form-explain>
+                    </nz-form-control>
+                    <nz-form-control nz-col [nzSm]="20" [nzXs]="24" *ngIf="action && (operation == 'select'||operation == 'update') && action.aaName">
+                        <!-- <span *ngIf="action.fucTypeDicId == 245">菜单</span>
+                                    <span *ngIf="action.fucTypeDicId == 246">按钮</span> -->
+                        {{action.aaName}}
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item nz-row *ngIf="parentFucTypeDicId">
+                    <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label" nzRequired>
+                        <label for="fucTypeDicId" >功能类别</label>
+                    </nz-form-label>
+                    <nz-form-control nz-col [nzSm]="20" [nzXs]="24" *ngIf="action && action.aaName">
+                        <!-- {{action.fucTypeDicId}} -->
+                        {{action.aaName}}
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item nz-row>
+                    <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label" nzRequired>
+                        <label for="uri" >功能地址</label>
+                    </nz-form-label>
+                    <nz-form-control nz-col [nzSm]="20" [nzXs]="24" *ngIf="action && action.uri">
+                        {{action.uri}}
+                        <!-- 
+                                                            <input nz-input [nzSize]="'large'" formControlName="uri" id="'uri'"  ng-reflect-disabled="operation == 'select'"> 
+                                                        
+                                                        <ng-container *ngIf="getFormControl('uri').dirty && getFormControl('uri').errors">
+                                                            <nz-form-explain style="color:red;" *ngIf="getFormControl('uri').errors.required">请输入功能地址</nz-form-explain>
+                                                            <nz-form-explain style="color:red;" *ngIf="getFormControl('uri').errors.maxlength">输入的功能地址过长</nz-form-explain>
+                                                        </ng-container> -->
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item nz-row>
+                    <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label">
+                        <label for="authorizationUri" nzRequired class="special-label-before">授权URL</label>
+                    </nz-form-label>
+                    <nz-form-control nz-col [nzSm]="20" [nzXs]="24" *ngIf="action && action.authorizationUri">
+                        {{action.authorizationUri}}
+                        
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item nz-row>
+                    <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label">
+                        <label for="desc" nzRequired class="special-label-before">描述</label>
+                    </nz-form-label>
+                    <nz-form-control nz-col [nzSm]="20" [nzXs]="24" *ngIf="action && action.desc">
+                        {{action.desc}}
+                        <!-- 
+                                                            <input nz-input formControlName="desc" [nzRows]="2" [nzType]="'textarea'" [nzSize]="'large'"  ng-reflect-disabled="operation == 'select'"> 
+                                                        
+                                                        <ng-container *ngIf="getFormControl('desc').dirty && getFormControl('desc').errors">
+                                                            <nz-form-explain style="color:red;" *ngIf="getFormControl('desc').errors.maxlength">输入的描述过长</nz-form-explain>
+                                                        </ng-container> -->
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <ng-container *ngIf="operation != 'select'">
+                <nz-form-item nz-row>
+                    <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label" nzRequired>
+                        <label for="name" >功能名称</label>
+                    </nz-form-label>
+                    <nz-form-control nz-col [nzSm]="20" [nzXs]="24">
+
+                        <input nz-input [nzSize]="'large'" formControlName="name" id="'name'" ng-reflect-disabled="operation == 'select'">
+
+                        <ng-container *ngIf="getFormControl('name').dirty && getFormControl('name').errors">
+                            <nz-form-explain style="color:red;" >
+                                <span *ngIf="getFormControl('name').errors.required">请输入功能名称</span>
+                                <span *ngIf="getFormControl('name').errors.maxlength">输入的功能名称过长</span>
+                                <span *ngIf="getFormControl('name').errors.minlength">输入的功能名称长度不得小于2位</span>
+                                <span *ngIf="getFormControl('name').errors.pattern">开头结尾不能有空格</span>
+                                <span *ngIf="getFormControl('name').errors.features"> {{nameverification}}</span>
+                            </nz-form-explain>
+                        </ng-container>
+                    </nz-form-control>
+                </nz-form-item>
+                <!-- <nz-form-item nz-row>
+                                <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label">
+                                    <label for="serialNumber" nzRequired>功能序号</label>
+                                </nz-form-label> 
+                                <nz-form-control nz-col [nzSm]="3" [nzXs]="24">
+                                
+                                        <input nz-input [nzSize]="'large'" formControlName="serialNumber" id="'serialNumber'"  ng-reflect-disabled="operation == 'select'"> 
+                                 
+                                    <ng-container *ngIf="getFormControl('serialNumber').dirty && getFormControl('serialNumber').errors">
+                                        <nz-form-explain style="color:red;" *ngIf="getFormControl('serialNumber').errors.required">请输入功能序号</nz-form-explain>
+                                        <nz-form-explain style="color:red;" *ngIf="getFormControl('serialNumber').errors.forbiddenName">功能序号只能为小于6位整数</nz-form-explain>
+                                    </ng-container>
+                                </nz-form-control>
+                            </nz-form-item > -->
+                <nz-form-item nz-row>
+                    <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label" nzRequired>
+                        <label for="code" >功能编码</label>
+                    </nz-form-label>
+                    <nz-form-control nz-col [nzSm]="20" [nzXs]="24">
+                        <!-- 
+                            <input nz-input [nzSize]="'large'" [(ngModel)]="code" formControlName="code" id="'code'" readonly="true"> 
+                        -->
+                        <span *ngIf="operation != 'update' && code">{{code}}</span>
+                        <span *ngIf="operation == 'update' && action && action.code">{{action.code}}</span>
+
+                        <nz-form-explain style="color:red;" *ngIf="getFormControl('code').dirty&&getFormControl('code').hasError('required')">请输入功能编码</nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item nz-row *ngIf="operation != 'select'">
+                    <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label">
+                        <label for="appIcon" nzRequired class="special-label-before">功能图标</label>
+                    </nz-form-label>
+                    <nz-form-control nz-col [nzSm]="20" [nzXs]="24">
+                        <upload-images [uploadParam]="appIconFile" (onUpload)="onUploadAppIconFile($event);"></upload-images>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item nz-row *ngIf="operation == 'select'">
+                    <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label">
+                        <label for="appIcon" nzRequired class="special-label-before">功能图标</label>
+                    </nz-form-label>
+                    <nz-form-control nz-col [nzSm]="20" [nzXs]="24">
+                        <span title *ngIf="action && action.icon != null &&action.icon != 'null' && action.icon != 0">
+                            <img alt="图片" src="{{action.icon}}" style="width:78px;height:78px;" />
+                        </span>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item nz-row *ngIf="!parentFucTypeDicId">
+                    <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label" nzRequired>
+                        <label for="fucTypeDicId" >功能类别</label>
+                    </nz-form-label>
+                    <nz-form-control nz-col [nzSm]="20" [nzXs]="24" *ngIf="operation != 'select'&& operation != 'update'">
+                        <select-search *ngIf="additionalAppIdSelect" [select]="additionalAppIdSelect" (onSelect)="selectSearchAdditionalAppId($event,'fucTypeDicId')"></select-search>
+                        <nz-form-explain style="color:red;" *ngIf="getFormControl('fucTypeDicId').dirty&&getFormControl('fucTypeDicId').hasError('required')"
+                            style="color: red">请添加功能类别</nz-form-explain>
+                        <select-search *ngIf="!additionalAppIdSelect" [select]="additionalAppIdSelect" (onSelect)="selectSearchAdditionalAppId($event,'fucTypeDicId')"></select-search>
+                    </nz-form-control>
+                    <nz-form-control nz-col [nzSm]="20" [nzXs]="24" *ngIf="operation == 'select'||operation == 'update'">
+                        <select-search *ngIf="additionalAppIdSelect" [select]="additionalAppIdSelect" (onSelect)="selectSearchAdditionalAppId($event,'fucTypeDicId')"
+                            [selectDisabled]="true"></select-search>
+                        <nz-form-explain style="color:red;" *ngIf="getFormControl('fucTypeDicId').dirty&&getFormControl('fucTypeDicId').hasError('required')"
+                            style="color: red">请添加功能类别</nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item nz-row *ngIf="parentFucTypeDicId">
+                    <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label" nzRequired>
+                        <label for="fucTypeDicId" >功能类别</label>
+                    </nz-form-label>
+                    <nz-form-control nz-col [nzSm]="20" [nzXs]="24">
+                        <select-search *ngIf="additionalAppIdSelect" [select]="additionalAppIdSelect" (onSelect)="selectSearchAdditionalAppId($event,'fucTypeDicId')"
+                            [selectDisabled]="true"></select-search>
+                        <nz-form-explain style="color:red;" *ngIf="getFormControl('fucTypeDicId').dirty&&getFormControl('fucTypeDicId').hasError('required')"
+                            style="color: red">请添加功能类别</nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item nz-row>
+                    <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label" nzRequired>
+                        <label for="uri" >功能地址</label>
+                    </nz-form-label>
+                    <nz-form-control nz-col [nzSm]="20" [nzXs]="24">
+                        <input nz-input [nzSize]="'large'" formControlName="uri" id="uri" ng-reflect-disabled="operation == 'select'">
+                        <ng-container *ngIf="getFormControl('uri').dirty && getFormControl('uri').errors">
+                            <nz-form-explain style="color:red;" >
+                                <span *ngIf="getFormControl('uri').errors.required">请输入功能地址</span>
+                                <span *ngIf="getFormControl('uri').errors.maxlength">输入的功能地址过长</span>
+                                <span *ngIf="getFormControl('uri').errors.minlength">输入的功能名称长度不得小于2位</span>
+                                <span *ngIf="getFormControl('uri').errors.pattern">{{wrongTip}}</span>
+                            </nz-form-explain>
+                        </ng-container>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item nz-row>
+                    <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label">
+                        <label for="authorizationUri" nzRequired class="special-label-before">授权URL</label>
+                    </nz-form-label>
+                    <nz-form-control nz-col [nzSm]="20" [nzXs]="24">
+                        <input nz-input formControlName="authorizationUri" id="authorizationUri"
+                            [nzSize]="'large'" ng-reflect-disabled="operation == 'select'">
+                        <ng-container *ngIf="getFormControl('authorizationUri').dirty && getFormControl('authorizationUri').errors">
+                            <nz-form-explain style="color:red;" >
+                                <span *ngIf="getFormControl('authorizationUri').errors.maxlength">输入授权URL过长</span>
+                                <span *ngIf="getFormControl('authorizationUri').errors.pattern">{{contauthorizationUri}}</span>
+                                <span *ngIf="getFormControl('authorizationUri').errors.minlength">输入的授权URL长度最少2个字符</span>
+                            </nz-form-explain>
+                        </ng-container>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item nz-row>
+                    <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label">
+                        <label for="desc" nzRequired class="special-label-before">描述</label>
+                    </nz-form-label>
+                    <nz-form-control nz-col [nzSm]="20" [nzXs]="24">
+
+                        <textarea nz-input formControlName="desc" [nzAutosize]="{ minRows: 2, maxRows: 2 }" [nzSize]="'large'"
+                            ng-reflect-disabled="operation == 'select'"></textarea>
+
+                        <ng-container *ngIf="getFormControl('desc').dirty && getFormControl('desc').errors">
+                            <nz-form-explain style="color:red;" *ngIf="getFormControl('desc').errors.maxlength">输入的描述过长</nz-form-explain>
+                        </ng-container>
+                    </nz-form-control>
+                </nz-form-item>
+            </ng-container>
+        </div>
+    </nz-card>
+</form>
+
+<action-attribute [operation]="operation" [_dataSet]="_dataSet" [queryParams]="appAttributeParams" (onSearch)="onSearchUserList($event)"></action-attribute>

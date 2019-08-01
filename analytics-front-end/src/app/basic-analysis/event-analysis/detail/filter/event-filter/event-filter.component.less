@@ -1,0 +1,274 @@
+.filter-content {
+  position: relative;
+  padding-left: 100px;
+  z-index: 0;
+  margin-top: 20px;
+  white-space: nowrap;
+}
+
+.operator {
+  margin-left: 20px;
+  width: 60px;
+  position: relative;
+  text-align: left;
+  background-color: #fff;
+  z-index: 1;
+  cursor: pointer;
+  vertical-align: top;
+}
+.operator::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background-color: #d9d9d9;
+  position: absolute;
+  top: 50%;
+  left: -20px;
+}
+.operator .ver-line {
+  width: 1px;
+  height: 210px;
+  background-color: #d9d9d9;
+  position: absolute;
+  bottom: 50%;
+  left: -20px;
+}
+
+.icon-caret {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  width: 14px;
+  height: 17px;
+  margin-top: -9.5px;
+  text-align: center;
+  color: #bfbfbf;
+  transition: all 0.3s;
+  .anticon {
+    line-height: 4px;
+    height: 7px;
+    transition: all 0.3s;
+    display: block;
+  }
+}
+.hide {
+  display: none;
+}
+
+.btnSelected {
+  background-color: rgba(45, 140, 240, 1) !important;
+  color: #ffffff !important;
+}
+
+.crowd-btn {
+  color: #2d8cf0;
+}
+
+.ant-radio-button-wrapper-checked {
+  background: #2d8cf0;
+  color: #ffffff;
+}
+
+.crowd-btn-add {
+  color: #2d8cf0;
+  padding: 0;
+}
+
+.add-attribute-btn {
+  font-size: 12px;
+  cursor: pointer;
+  margin-left: 233px;
+  line-height: 32px;
+  .anticon-plus {
+    color: #2d8cf0;
+    font-weight: bold;
+  }
+}
+
+.crowd-btn-close {
+  border: none;
+  color: #cccccc;
+  vertical-align: top;
+  margin-left: 12px;
+}
+
+.crowd-btn-close:hover {
+  color: #40a9ff;
+}
+
+.crowd-btn-close-all {
+  color: #cccccc;
+}
+
+.crowd-btn-close-all:hover {
+  color: #40a9ff;
+}
+
+.input-item {
+  margin-right: 8px;
+}
+
+.black-bg {
+  background: rgba(23, 35, 61, 0.06);
+  cursor: auto;
+  border: none;
+  padding: 0;
+  width: 36px;
+}
+
+/deep/ .ant-calendar-picker-icon {
+  left: auto;
+}
+
+.save-btn {
+  width: 100px;
+}
+
+.inline-block {
+  line-height: 32px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.my-select {
+  z-index: 1;
+  width: 100px;
+}
+
+/deep/ .ant-popover-inner {
+  opacity: 0.85;
+  background: #17233d;
+  border-radius: 4px;
+}
+
+/deep/ .ant-popover-title {
+  font-size: 14px;
+  color: #ffffff;
+  letter-spacing: 0;
+  line-height: 22px;
+  border-bottom: none;
+  padding-top: 10px;
+}
+
+/deep/ .ant-popover-arrow {
+  opacity: 0.85;
+  background: #17233d;
+}
+
+.tip-span-1 {
+  display: inline-block;
+  vertical-align: top;
+
+  font-size: 12px;
+  color: #ffffff;
+  letter-spacing: 0;
+  line-height: 20px;
+}
+
+.tip-span-2 {
+  display: inline-block;
+  width: 300px;
+  padding-left: 10px;
+
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: 20px;
+}
+
+.filter-item .checkFailure {
+  border-color: #f5222d;
+}
+
+.filter-item .checkFailureBase /deep/ .ant-select-selection {
+  border-color: #f5222d;
+}
+
+.filter-item .checkFailureBase /deep/ .ant-input {
+  border-color: #f5222d;
+}
+
+.btn-operator {
+  position: relative;
+  padding: 0;
+}
+
+.btn-operator button {
+  margin: 20px 10px 20px 0;
+}
+
+.indice-panel {
+  display: inline-block;
+  position: relative;
+  padding-left: 8px;
+  z-index: 0;
+}
+
+:host ::ng-deep .tenantgroup {
+  nz-select {
+    div {
+      div {
+        .ant-select-selection-selected-value {
+          text-overflow: inherit !important;
+        }
+      }
+    }
+  }
+}
+
+.add-filter-item-button {
+  padding: 6px;
+  border: 1px solid #2d8cf0;
+  border-radius: 4px;
+  margin-top: 8px;
+  margin-left: 188px;
+  width: 80px;
+  position: relative;
+  font-size: 12px;
+  color: #2d8cf0;
+  cursor: pointer;
+}
+
+.filter-item {
+  position: relative;
+  padding: 8px 40px 8px 0;
+  .tenantgroup {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .tenantgroup::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background-color: #d9d9d9;
+    position: absolute;
+    top: 17px;
+    left: -38px;
+  }
+  &::after {
+    content: '';
+    width: 1px;
+    height: 100%;
+    background-color: #d9d9d9;
+    position: absolute;
+    bottom: 0;
+    left: -38px;
+    z-index: 0;
+  }
+}
+
+.filter-item:first-child::after {
+  top: 25px;
+}
+.filter-item:last-child::after {
+  bottom: 100%;
+  -webkit-transform: translate(0, 25px);
+  -moz-transform: translate(0, 25px);
+  -ms-transform: translate(0, 25px);
+  -o-transform: translate(0, 25px);
+  transform: translate(0, 25px);
+  height: 30px;
+}
+.filter-item:only-child::after {
+  display: none;
+}

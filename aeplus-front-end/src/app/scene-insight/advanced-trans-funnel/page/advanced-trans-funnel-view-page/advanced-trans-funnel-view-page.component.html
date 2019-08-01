@@ -1,0 +1,248 @@
+<main *ngIf="!_isShowUserPage"  [ngStyle]="_containerStyle">
+	<div class="first-level"></div>
+	<div class="header-content" id="filter-header">
+		<!-- 搜索条件 -->
+		<div class="search-list">
+			<div class="search-list-fitst search-list-one" style="border-bottom: 1px dashed #DEDFE3;">
+				<div class="item search-list-fitst-left-one search-list-fitst-left-bg">分析</div>
+				<nz-range-picker class="item" *ngIf="_funnelOrder != 1" [(ngModel)]="dateRange" (ngModelChange)="timeChange($event)"
+				                 nzPlaceHolder="" [nzDisabledDate]="disabledDate"
+				                 [nzAllowClear]="false" [nzStyle]="{'width': '240px'}">
+				</nz-range-picker>
+				<nz-range-picker class="item" *ngIf="_funnelOrder == 1" [(ngModel)]="dateRange" (ngModelChange)="timeChange($event)"
+				                 nzPlaceHolder="" [nzDisabledDate]="disabledDate"
+				                 [nzAllowClear]="false" [nzStyle]="{'width': '240px'}" nzDisabled>
+				</nz-range-picker>
+
+				<div class="item search-list-fitst-left-one search-list-fitst-left-bg">期间内</div>
+				<div class="item search-list-fitst-left-one search-list-fitst-left-bg">按</div>
+				<div class="item search-list-fitst-left-one">
+					<nz-select style="width: 180px;" (ngModelChange)="search($event, 'dimension')"
+					           [(ngModel)]="selectedDimension" nzShowSearch
+					           nzPlaceHolder="">
+						<nz-option-group *ngFor="let group of dimensionList" [nzLabel]="group.key">
+							<nz-option *ngFor="let item of group.value" [nzValue]="item.esfieldname"
+							           [nzLabel]="item.displayname" nzCustomContent>
+								<div title="{{item.displayname}}">{{item.displayname}}</div>
+							</nz-option>
+						</nz-option-group>
+					</nz-select>
+				</div>
+				<div class="item search-list-fitst-left-one search-list-fitst-left-bg" *ngIf="_funnelOrder == 1">
+					查看每个步骤有顺序的转化情况
+				</div>
+				<div class="item search-list-fitst-left-one search-list-fitst-left-bg" *ngIf="_funnelOrder != 1">
+					查看每个步骤无顺序的转化情况
+				</div>
+
+				<div class="search-list-fitst-right" (click)='moreSearch();'>
+					<span>筛选</span>
+					<span class="anticon" [class.anticon-down]="!moreSearchFlag" [class.anticon-up]="moreSearchFlag"></span>
+				</div>
+
+			</div>
+			<ng-container *ngFor="let item of moreSearchList;let i = index">
+				<div class="search-list-other" [ngClass]="{'search-list-other-first': i == 0}"
+				     style="position: relative;" *ngIf="moreSearchFlag">
+					<div class="search-list-other-left">
+						<div *ngIf="i === 0" class="item search-list-fitst-left-one search-list-fitst-left-bg"
+						     style="width: 64px;text-align: center;">用户
+						</div>
+						<div *ngIf="i !== 0" class="item search-list-other-left-one">
+							<nz-select style="width: 64px;" [(ngModel)]="item.clauses" nzShowSearch nzPlaceHolder="请选择">
+								<nz-option *ngFor="let item of clausesList" [nzValue]="item.value"
+								           [nzLabel]="item.label" nzCustomContent>
+									<div title="{{item.label}}">{{item.label}}</div>
+								</nz-option>
+							</nz-select>
+						</div>
+						<div *ngIf="i !== 0" class="item line"></div>
+						<div class="item search-list-other-left-one">
+							<nz-select style="width: 180px;" (ngModelChange)="changeEvent($event, i, item)"
+							           [(ngModel)]="item.filter" nzShowSearch nzPlaceHolder="请选择">
+								<nz-option-group *ngFor="let temp of leftList" [nzLabel]="temp.key">
+									<nz-option *ngFor="let item of temp.value" [nzValue]="item"
+									           [nzLabel]="item.displayname" nzCustomContent>
+										<div title="{{item.displayname}}">{{item.displayname}}</div>
+									</nz-option>
+								</nz-option-group>
+							</nz-select>
+						</div>
+						<div class="item search-list-other-left-one">
+							<nz-select *ngIf="item.filter && filterMap[item.filter.esfieldname] === 'Tag'"
+							           style="width: 95px;" [(ngModel)]="item.operator"
+							           nzShowSearch nzPlaceHolder="请选择">
+								<nz-option nzValue="eq" nzLabel="等于"></nz-option>
+								<nz-option nzValue="ne" nzLabel="不等于"></nz-option>
+							</nz-select>
+							<nz-select *ngIf="item.filter && filterMap[item.filter.esfieldname] === 'String'"
+							           style="width: 95px;" [(ngModel)]="item.operator"
+							           nzShowSearch nzPlaceHolder="请选择">
+								<nz-option nzValue="eq" nzLabel="等于"></nz-option>
+								<nz-option nzValue="ne" nzLabel="不等于"></nz-option>
+								<nz-option nzValue="like" nzLabel="包含"></nz-option>
+								<nz-option nzValue="notlike" nzLabel="不包含"></nz-option>
+							</nz-select>
+							<nz-select
+									*ngIf="item.filter && filterMap[item.filter.esfieldname] !== 'Tag' && filterMap[item.filter.esfieldname] !== 'String'"
+									style="width: 95px;" [(ngModel)]="item.operator" nzShowSearch nzPlaceHolder="请选择">
+								<nz-option nzValue="eq" nzLabel="等于"></nz-option>
+								<nz-option nzValue="ne" nzLabel="不等于"></nz-option>
+								<nz-option nzValue="gt" nzLabel="大于"></nz-option>
+								<nz-option nzValue="ge" nzLabel="大于等于"></nz-option>
+								<nz-option nzValue="lt" nzLabel="小于"></nz-option>
+								<nz-option nzValue="le" nzLabel="小于等于"></nz-option>
+								<nz-option nzValue="range" nzLabel="区间"></nz-option>
+							</nz-select>
+						</div>
+						<div class="item search-list-other-left-one">
+							<nz-select (nzScrollToBottom)="loadMore(i, item)"
+							           *ngIf="item.filter && filterMap[item.filter.esfieldname] === 'Tag'"
+							           style="min-width: 222px;max-width:600px;" [(ngModel)]="item.values"
+							           nzShowSearch nzPlaceHolder="请选择" nzMode="multiple" (nzOnSearch)="onSearchEventAttr($event, i, item)"  [nzServerSearch]="true">
+								<nz-option *ngFor="let item of item.rightList" [nzValue]="item.value"
+								           [nzLabel]="item.name" nzCustomContent>
+									<div title="{{item.name}}">{{item.name}}</div>
+								</nz-option>
+							</nz-select>
+							<nz-input-number (ngModelChange)="formatterInputNumber($event,item);" [nzMin]="0"
+							                 [nzMax]="9999999999"
+							                 *ngIf="item.filter && filterMap[item.filter.esfieldname] !== 'Tag' && filterMap[item.filter.esfieldname] !== 'Date' && filterMap[item.filter.esfieldname] !== 'String' && item.operator !== 'range'"
+							                 nzPlaceHolder="请输入" [(ngModel)]="item.values"></nz-input-number>
+							<nz-input-number (ngModelChange)="formatterInputNumber($event,item);" [nzMin]="0"
+							                 [nzMax]="9999999999"
+							                 *ngIf="item.filter && filterMap[item.filter.esfieldname] !== 'Tag' && filterMap[item.filter.esfieldname] !== 'Date' && filterMap[item.filter.esfieldname] !== 'String' && item.operator === 'range'"
+							                 class="range" nzPlaceHolder="请输入"
+							                 [(ngModel)]="item.first"></nz-input-number>
+							<span *ngIf="item.filter && filterMap[item.filter.esfieldname] !== 'Tag' && filterMap[item.filter.esfieldname] !== 'Date' && filterMap[item.filter.esfieldname] !== 'String' && item.operator === 'range'">~</span>
+							<nz-input-number (ngModelChange)="formatterInputNumber($event,item);" [nzMin]="0"
+							                 [nzMax]="9999999999"
+							                 *ngIf="item.filter && filterMap[item.filter.esfieldname] !== 'Tag' && filterMap[item.filter.esfieldname] !== 'Date' && filterMap[item.filter.esfieldname] !== 'String' && item.operator === 'range'"
+							                 class="range" nzPlaceHolder="请输入"
+							                 [(ngModel)]="item.second"></nz-input-number>
+							<nz-date-picker
+									*ngIf="item.filter && filterMap[item.filter.esfieldname] === 'Date' && item.operator !== 'range'"
+									nzPlaceHolder="请选择日期"
+									[(ngModel)]="item.value"></nz-date-picker>
+							<nz-range-picker
+									*ngIf="item.filter && filterMap[item.filter.esfieldname] === 'Date' && item.operator === 'range'"
+									nzPlaceHolder=""
+									[(ngModel)]="item.values"></nz-range-picker>
+							<input maxlength="128"
+							       *ngIf="item.filter && filterMap[item.filter.esfieldname] === 'String'" nz-input
+							       placeholder="请输入" [(ngModel)]="item.values" autocomplete="false">
+						</div>
+						<button *ngIf="i > 0" (click)="removeItem(i)" nz-button nzType="default" nzShape="circle"
+						        class="crowd-btn-close" style="float: right;">
+							<span class="anticon anticon-close"></span>
+						</button>
+					</div>
+				</div>
+			</ng-container>
+			<div class="search-list-other" style="overflow: hidden;" *ngIf="moreSearchFlag">
+				<div class="add-button">
+					<a (click)="add()">
+						<span class="iconfont icon-add1"></span>筛选条件
+					</a>
+				</div>
+				<div class="search-button">
+					<button nz-button (click)="search()">查询</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="page-custom-content" id="page-custom-content">
+		<div *ngIf="_isQueringData" class="loading">
+			<nz-spin></nz-spin>
+		</div>
+		<article class="content-div hide" [ngClass]="{'hide':_isQueringData}">
+			<!-- 图标 -->
+			<div class="chart-list shadow-content">
+				<h3 class="chart-list-title module-title" *ngIf="_funnelOrder == 1">{{_funnelName}}-有序</h3>
+				<h3 class="chart-list-title module-title" *ngIf="_funnelOrder != 1">{{_funnelName}}-无序</h3>
+				<div style=" padding:0 16px 16px 16px;">
+					<div class="sum-proportion" *ngIf="!_isQueringData">总转化率：<strong>{{sumProportion}}%</strong></div>
+					<div style="height:380px">
+						<app-chart [option]='chartOption' *ngIf="!_isQueringData"></app-chart>
+					</div>
+				</div>
+			</div>
+			<!-- 数据明细列表 -->
+			<div class="detail-data shadow-content">
+				<div class="detail-data-tit module-title">
+					<h4>漏斗数据</h4>
+					<div class="detail-data-left">
+						<nz-popover [nzTitle]="'下载消息'" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+							<span class="icon iconfont icon-download item" (click)="downloadData();" nz-popover></span>
+							<ng-template #nzTemplate>
+								<div>
+									导出任务创建成功，请稍后到
+									<a (click)="goPage('/download-data')" style="margin:0 10px;">数据下载</a>页面下载您需要的附件。
+								</div>
+							</ng-template>
+						</nz-popover>
+						<!-- 描述 -->
+					</div>
+				</div>
+				<div class="detail-data-tit module-title" *ngIf="isShowChildDetailData"
+				     style="border-top:1px solid #eee;">
+					<h4>{{_currentStep.name}}</h4>
+					<div class="detail-data-left">
+						<a (click)="showUserSaveDialog('x_existed')" href="javascript:;" *ngIf="isShowChildDetailData">保存转化人群</a>
+						<a (click)="showUserSaveDialog('x_lost')" href="javascript:;" *ngIf="isShowChildDetailData">保存漏损人群</a>
+						<a (click)="showViewPage()" href="javascript:;" *ngIf="isShowChildDetailData">返回漏斗详情</a>
+					</div>
+				</div>
+				<nz-table #nzTable [nzData]="detailData" [nzLoading]='detailDataTableLoading' nzShowSizeChanger
+				          [(nzPageIndex)]="_current"
+				          [(nzPageSize)]="_pageSize" [nzPageSizeOptions]="pageSizeOptions" [(nzTotal)]='_total'
+				          *ngIf="!isShowChildDetailData">
+					<thead nz-thead>
+					<tr>
+						<th nz-th *ngFor="let item of tableTitleList">{{item}}</th>
+					</tr>
+					</thead>
+					<tbody nz-tbody>
+					<tr nz-tbody-tr *ngFor="let item of nzTable.data">
+						<td nz-td *ngFor="let temp of item;let tdIndex = index;" style="width: 150px;">
+							<div *ngIf="tdIndex == 0">{{temp.value}}</div>
+							<div *ngIf="tdIndex != 0">
+								<span *ngIf="temp.value == 0">{{temp.value | numberToThousandsPipe}}({{temp.percent}})</span>
+								<a *ngIf="temp.value > 0" href="javascript:;" (click)="goUserPage(temp, item[0])">{{temp.value
+									| numberToThousandsPipe}}({{temp.percent}})</a>
+							</div>
+						</td>
+					</tr>
+					</tbody>
+				</nz-table>
+				<nz-table #nzTableChild [nzData]="childDetailData" [nzLoading]='childDetailDataTableLoading'
+				          nzShowSizeChanger [(nzPageIndex)]="_current"
+				          [(nzPageSize)]="_pageSize" [nzPageSizeOptions]="pageSizeOptions" [(nzTotal)]='_total'
+				          *ngIf="isShowChildDetailData">
+					<thead nz-thead>
+					<tr>
+						<th nz-th *ngFor="let item of childTableTitleList" style="width: 150px;">{{item}}</th>
+					</tr>
+					</thead>
+					<tbody nz-tbody>
+					<tr nz-tbody-tr *ngFor="let item of nzTableChild.data">
+						<td nz-td *ngFor="let temp of item;let tdIndex = index;">
+							<div *ngIf="tdIndex == 0">{{temp.value}}</div>
+							<div *ngIf="tdIndex != 0">
+								<span *ngIf="temp.value == 0">{{temp.value | numberToThousandsPipe}}</span>
+								<a *ngIf="temp.value > 0" href="javascript:;" (click)="goUserPage(temp, item[0])">{{temp.value
+									| numberToThousandsPipe}}</a>
+							</div>
+						</td>
+					</tr>
+					</tbody>
+				</nz-table>
+			</div>
+		</article>
+		<app-advanced-trans-funnel-user-save *ngIf="_isShowUserSaveModal" [queryParam]="_queryParams"
+		                                     [detailKey]="_detailKey" [isVisible]="_isShowUserSaveModal"
+		                                     (onHide)="hideUserSaveModal($event)"
+		                                     (onSubmit)="onSubmitUserSave($event)"></app-advanced-trans-funnel-user-save>
+	</div>
+</main>

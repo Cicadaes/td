@@ -1,0 +1,15 @@
+<div class="text-content">
+
+    <div class="table-operator clrfix">
+        <a [routerLink]="[ '/tenants/addTenantPage' ]">
+                <button nz-button [nzType]="'primary'">
+                    <span class="anticon anticon-plus"></span><span>租户</span>
+                </button>
+        </a>
+    </div>
+    <div class="operation-region">
+        <more-search [fieldArray]="tenantFieldArray" (onSearch)="onSearchTenantList($event)"></more-search>
+        <app-tenants-table [queryParams]="tenantTableFieldParams" [reload]="isReloadTenantTable"></app-tenants-table>
+    </div>
+
+</div>

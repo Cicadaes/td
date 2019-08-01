@@ -1,0 +1,19 @@
+<div class="text-content">
+    <div class="table-operator clrfix">
+        <a [routerLink]="[ '/apps/addAppPage' ]">
+            <button nz-button [nzType]="'primary'">
+                <span class="anticon anticon-plus"></span><span>应用</span>
+            </button>
+        </a>
+        <add-app-dialog [isShow]="isShowAddAppModal" (onClose)="hideAddAppModal($event)"></add-app-dialog>
+    </div>
+    <div class="operation-region">
+        <more-search [fieldArray]="appFieldArray" (onSearch)="onSearchAppList($event)"></more-search>
+        <app-table [queryParams]="appTableFieldParams"></app-table>
+    </div>
+
+</div>
+
+
+<!--
+<upload-files [uploadParam]="appIconFile" (onUpload)="onUploadAppIconFile($event);"></upload-files>-->

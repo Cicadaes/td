@@ -1,0 +1,213 @@
+<main>
+  <div class="search-list">
+    <ng-container *ngFor="let item of moreSearchList; let i = index">
+      <div class="search-list-other" [ngClass]="{ 'search-list-other-first': i == 0 }" style="position: relative;">
+        <div class="search-list-other-left">
+          <div
+            *ngIf="i === 0"
+            class="item search-list-fitst-left-one search-list-fitst-left-bg"
+            style="width: 64px;text-align: center;"
+          >
+            用户
+          </div>
+          <div *ngIf="i !== 0" class="item search-list-other-left-one">
+            <nz-select
+              style="width: 64px;"
+              [(ngModel)]="item.clauses"
+              (ngModelChange)="changeClauses($event)"
+              nzShowSearch
+              nzPlaceHolder="请选择"
+            >
+              <nz-option *ngFor="let item of clausesList" [nzValue]="item.value" [nzLabel]="item.label" nzCustomContent>
+                <div title="{{ item.label }}">{{ item.label }}</div>
+              </nz-option>
+            </nz-select>
+          </div>
+          <div *ngIf="i !== 0" class="item line"></div>
+          <div class="item search-list-other-left-one">
+            <nz-select
+              style="width: 180px;"
+              (ngModelChange)="changeEvent($event, i, item)"
+              [(ngModel)]="item.filter"
+              nzShowSearch
+              nzPlaceHolder="请选择"
+            >
+              <nz-option-group *ngFor="let temp of leftList" [nzLabel]="temp.key">
+                <nz-option
+                  *ngFor="let item of temp.value"
+                  [nzValue]="item"
+                  [nzLabel]="item.displayname"
+                  nzCustomContent
+                >
+                  <div title="{{ item.displayname }}">
+                    {{ item.displayname }}
+                  </div>
+                </nz-option>
+              </nz-option-group>
+            </nz-select>
+          </div>
+          <div class="item search-list-other-left-one">
+            <nz-select
+              *ngIf="item.filter && filterMap[item.filter.esfieldname] === 'Tag'"
+              style="width: 95px;"
+              [(ngModel)]="item.operator"
+              nzShowSearch
+              nzPlaceHolder="请选择"
+            >
+              <nz-option nzValue="eq" nzLabel="等于"></nz-option>
+              <nz-option nzValue="ne" nzLabel="不等于"></nz-option>
+            </nz-select>
+            <nz-select
+              *ngIf="item.filter && filterMap[item.filter.esfieldname] === 'String'"
+              style="width: 95px;"
+              [(ngModel)]="item.operator"
+              nzShowSearch
+              nzPlaceHolder="请选择"
+            >
+              <nz-option nzValue="eq" nzLabel="等于"></nz-option>
+              <nz-option nzValue="ne" nzLabel="不等于"></nz-option>
+              <nz-option nzValue="like" nzLabel="包含"></nz-option>
+              <nz-option nzValue="notlike" nzLabel="不包含"></nz-option>
+            </nz-select>
+            <nz-select
+              *ngIf="
+                item.filter &&
+                filterMap[item.filter.esfieldname] !== 'Tag' &&
+                filterMap[item.filter.esfieldname] !== 'String'
+              "
+              style="width: 95px;"
+              [(ngModel)]="item.operator"
+              nzShowSearch
+              nzPlaceHolder="请选择"
+            >
+              <nz-option nzValue="eq" nzLabel="等于"></nz-option>
+              <nz-option nzValue="ne" nzLabel="不等于"></nz-option>
+              <nz-option nzValue="gt" nzLabel="大于"></nz-option>
+              <nz-option nzValue="ge" nzLabel="大于等于"></nz-option>
+              <nz-option nzValue="lt" nzLabel="小于"></nz-option>
+              <nz-option nzValue="le" nzLabel="小于等于"></nz-option>
+              <nz-option nzValue="range" nzLabel="区间"></nz-option>
+            </nz-select>
+          </div>
+          <div class="item search-list-other-left-one">
+            <nz-select
+              (nzScrollToBottom)="loadMore(i, item)"
+              *ngIf="item.filter && filterMap[item.filter.esfieldname] === 'Tag'"
+              style="min-width: 222px;max-width:600px;"
+              [(ngModel)]="item.values"
+              nzShowSearch
+              nzPlaceHolder="请选择"
+              nzMode="multiple"
+              (nzOnSearch)="onSearchEventAttr($event, i, item)"
+              [nzServerSearch]="true"
+            >
+              <nz-option
+                *ngFor="let item of item.rightList"
+                [nzValue]="item.value"
+                [nzLabel]="item.name"
+                nzCustomContent
+              >
+                <div title="{{ item.name }}">{{ item.name }}</div>
+              </nz-option>
+            </nz-select>
+            <nz-input-number
+              (ngModelChange)="formatterInputNumber($event, item)"
+              [nzMin]="0"
+              [nzMax]="9999999999"
+              *ngIf="
+                item.filter &&
+                filterMap[item.filter.esfieldname] !== 'Tag' &&
+                filterMap[item.filter.esfieldname] !== 'Date' &&
+                filterMap[item.filter.esfieldname] !== 'String' &&
+                item.operator !== 'range'
+              "
+              nzPlaceHolder="请输入"
+              [(ngModel)]="item.values"
+            ></nz-input-number>
+            <nz-input-number
+              (ngModelChange)="formatterInputNumber($event, item)"
+              [nzMin]="0"
+              [nzMax]="9999999999"
+              *ngIf="
+                item.filter &&
+                filterMap[item.filter.esfieldname] !== 'Tag' &&
+                filterMap[item.filter.esfieldname] !== 'Date' &&
+                filterMap[item.filter.esfieldname] !== 'String' &&
+                item.operator === 'range'
+              "
+              class="range"
+              nzPlaceHolder="请输入"
+              [(ngModel)]="item.first"
+            ></nz-input-number>
+            <span
+              *ngIf="
+                item.filter &&
+                filterMap[item.filter.esfieldname] !== 'Tag' &&
+                filterMap[item.filter.esfieldname] !== 'Date' &&
+                filterMap[item.filter.esfieldname] !== 'String' &&
+                item.operator === 'range'
+              "
+              >~</span
+            >
+            <nz-input-number
+              (ngModelChange)="formatterInputNumber($event, item)"
+              [nzMin]="0"
+              [nzMax]="9999999999"
+              *ngIf="
+                item.filter &&
+                filterMap[item.filter.esfieldname] !== 'Tag' &&
+                filterMap[item.filter.esfieldname] !== 'Date' &&
+                filterMap[item.filter.esfieldname] !== 'String' &&
+                item.operator === 'range'
+              "
+              class="range"
+              nzPlaceHolder="请输入"
+              [(ngModel)]="item.second"
+            ></nz-input-number>
+            <nz-date-picker
+              *ngIf="item.filter && filterMap[item.filter.esfieldname] === 'Date' && item.operator !== 'range'"
+              nzPlaceHolder="请选择日期"
+              [(ngModel)]="item.value"
+            ></nz-date-picker>
+            <nz-range-picker
+              *ngIf="item.filter && filterMap[item.filter.esfieldname] === 'Date' && item.operator === 'range'"
+              nzPlaceHolder=""
+              [(ngModel)]="item.values"
+            ></nz-range-picker>
+            <input
+              maxlength="128"
+              *ngIf="item.filter && filterMap[item.filter.esfieldname] === 'String'"
+              nz-input
+              placeholder="请输入"
+              [(ngModel)]="item.values"
+              autocomplete="false"
+            />
+          </div>
+          <button
+            *ngIf="i > 0"
+            (click)="removeItem(i)"
+            nz-button
+            nzType="default"
+            nzShape="circle"
+            class="crowd-btn-close"
+            style="float: right;"
+          >
+            <span class="ant-compat anticon anticon-close"></span>
+          </button>
+
+          <div class="search-button" *ngIf="!showAdd">
+            <button nz-button (click)="search()">查询</button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <div class="search-list-other" style="overflow: hidden;" *ngIf="showAdd">
+      <div class="add-button">
+        <a (click)="add()"> <span class="iconfont icon-add1"></span>筛选条件 </a>
+      </div>
+      <div class="search-button">
+        <button nz-button (click)="search()">查询</button>
+      </div>
+    </div>
+  </div>
+</main>

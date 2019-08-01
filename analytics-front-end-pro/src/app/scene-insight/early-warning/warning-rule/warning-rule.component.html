@@ -1,0 +1,122 @@
+<button nz-button (click)="add()" [nzType]="'primary'" class="operation">
+    <i class="ant-compat anticon anticon-plus"></i>新建预警规则
+</button>
+<div class="content shadow-content">
+     <!-- 页眉 -->
+     <div class="header module-title">
+        <span class="#1">共</span>
+        <span class="#2">{{total}}</span>
+        <span class="#3">个预警规则</span>
+    </div>
+     <!-- 筛选 -->
+     <div class="filter">
+        <!-- 输入框 -->
+       <nz-input-group nzSearch [nzSuffix]="suffixIconButton" style="width: 180px;" nzSize="small">    <!-- *ngIf="!moreSearch"  -->
+            <input type="text" nz-input placeholder="输入规则名称进行检索" (keyup)="onSearch($event, 'keyup')"
+                [(ngModel)]="searchValue">
+        </nz-input-group>
+        <ng-template #suffixIconButton>
+            <i class="ant-compat anticon anticon-search" (click)="onSearch(searchValue, 'click')"></i>
+        </ng-template>
+        <!-- 筛选条件 -->
+        <a (click)="showMoreFilter()" class="filter-condition" [class.true]="moreSearch">搜索条件</a>
+    </div>
+    
+    <div class="filter-condition" *ngIf="moreSearch">
+        <!-- 预警类别 -->
+        <div class="condition">
+            <span class="label">预警类别</span>
+            <span class="input">
+                <nz-radio-group [(ngModel)]="filterObj.alarmType" (ngModelChange)="handlerFilter(filterObj)">
+                    <label *ngFor="let radio of alarmTypeList" nz-radio-button [nzValue]="radio.value">{{radio.label}}</label>
+                </nz-radio-group>
+            </span>
+        </div>
+        <!-- 更新时间 -->
+        <div class="condition">
+            <span class="label">更新时间</span>
+            <span class="input">
+                <nz-range-picker [(ngModel)]="filterObj.updateTime" [nzStyle]="{'width': '240px'}"
+                    (ngModelChange)="handlerFilter(filterObj)"></nz-range-picker>
+            </span>
+        </div>
+        <!-- 活动状态 -->
+        <div class="condition" style="border: 0px;">
+            <span class="label">活动状态</span>
+            <span class="input">
+                <nz-radio-group [(ngModel)]="filterObj.effectStatus" (ngModelChange)="handlerFilter(filterObj)">
+                    <label *ngFor="let radio of effectStatusList" nz-radio-button [nzValue]="radio.value">{{radio.label}}</label>
+                </nz-radio-group>
+            </span>
+        </div>
+        <!-- 规则名称 -->
+        <!-- <div class="condition" style="border: 0px;">
+            <span class="label">规则名称</span>
+            <span class="input">
+                <nz-input-group nzSearch [nzSuffix]="suffixIconButton" style="width: 240px;">
+                    <input type="text" nz-input placeholder="输入规则名称进行检索" (keyup)="onSearch($event, 'keyup')"
+                        [(ngModel)]="searchValue">
+                </nz-input-group>
+                <ng-template #suffixIconButton>
+                    <i class="ant-compat anticon anticon-search" (click)="onSearch(searchValue, 'click')"></i>
+                </ng-template>
+            </span>
+        </div> -->
+    </div>
+    <div class="filter-table">
+        <nz-table 
+        #nzTable 
+        [nzData]="tableData" 
+        nzShowSizeChanger 
+        [nzLoading]="loading" 
+        [nzTotal]="total" 
+        [(nzPageIndex)]="pageIndex" 
+        [(nzPageSize)]="pageSize"
+        [nzFrontPagination]="false" 
+        (nzPageSizeChange)="refreshData(true)" 
+        (nzPageIndexChange)="refreshData()">
+            <thead (nzSortChange)="sort($event)" nzSingleSort>
+                <tr>
+                    <th [nzWidth]="'16%'">规则名称</th>
+                    <th [nzWidth]="'10%'">预警类别</th>
+                    <th nzShowSort nzSortKey="updateTime" [nzWidth]="'12%'">更新时间</th>
+                    <th [nzWidth]="'10%'">活动状态</th>
+                    <th [nzWidth]="'10%'">创建人</th>
+                    <th [nzWidth]="'20%'">描述</th>
+                    <th [nzWidth]="'22%'">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of nzTable.data">
+                    <td title="{{data.alarmName}}">{{data.alarmName}}</td>
+                    <td>
+                        <span *ngIf="data.alarmType === 1">业务指标预警</span>
+                        <span *ngIf="data.alarmType === 2">营销效果预警</span>
+                    </td>
+                    <td title="{{data.updateTime}}">{{data.updateTime}}</td>
+                    <td>
+                        <span *ngIf="data.effectStatus === 0"><b class="effectStatus effectStatus0"></b>待运行</span>
+                        <span *ngIf="data.effectStatus === 1"><b class="effectStatus effectStatus1"></b>运行中</span>
+                        <span *ngIf="data.effectStatus === 2"><b class="effectStatus effectStatus2"></b>已暂停</span>
+                        <span *ngIf="data.effectStatus === 3"><b class="effectStatus effectStatus3"></b>已结束</span>
+                    </td>
+                    <td title="{{data.creator}}">{{data.creator}}</td>
+                    <td title="{{data.description}}">{{data.description}}</td>
+                    <td>
+                        <a (click)="detail(data)">查看</a>
+                        <nz-divider nzType="vertical" *ngIf="data.effectStatus === 0 || data.effectStatus === 2"></nz-divider>
+                        <a *ngIf="data.effectStatus === 0 || data.effectStatus === 2" >编辑</a>
+                        <nz-divider nzType="vertical"></nz-divider>
+                        <a>克隆</a>
+                        <nz-divider nzType="vertical" *ngIf="data.effectStatus === 1" ></nz-divider>
+                        <a *ngIf="data.effectStatus === 1">暂停</a>
+                        <nz-divider nzType="vertical" *ngIf="data.effectStatus === 2" ></nz-divider>
+                        <a *ngIf="data.effectStatus === 2">启用</a>
+                        <nz-divider nzType="vertical" *ngIf="data.effectStatus !== 1" ></nz-divider>
+                        <a *ngIf="data.effectStatus !== 1" >删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+</div>

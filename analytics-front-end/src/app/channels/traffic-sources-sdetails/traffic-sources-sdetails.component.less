@@ -1,0 +1,256 @@
+:host ::ng-deep .trafficSourcesSdetails {
+  background: #f1f2f4;
+
+  ._top {
+    display: flex;
+    background: #ffffff;
+    box-shadow: 0 2px 4px 0 rgba(23, 35, 61, 0.15);
+    padding: 12px 16px 12px 16px;
+    border-top: 1px solid rgba(23, 35, 61, 0.1);
+    common-date {
+      height: 32px;
+    }
+    ._select {
+      display: flex;
+      height: 32px;
+
+      .name {
+        font-weight: 550;
+        font-size: 12px;
+        color: rgba(23, 35, 61, 0.75);
+        line-height: 36px;
+        margin-right: 12px;
+        margin-left: 100px;
+        height: 36px;
+      }
+
+      nz-select {
+        margin-bottom: 5px;
+        max-width: 300px;
+        min-width: 100px;
+
+        .ant-select-selection--multiple {
+          max-height: 58px;
+          overflow-y: auto;
+        }
+      }
+    }
+
+    .screen {
+      flex: 1;
+      background: #ffffff;
+
+      .filtrate {
+        float: right;
+        font-weight: 550;
+        font-size: 12px;
+        color: #2d8cf0;
+        line-height: 30px;
+
+        .more {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .filter {
+    min-height: 56px;
+    width: 100%;
+    background: #ffffff;
+    padding: 0px 16px 0px 16px;
+
+    .center {
+      border-top: 1px dashed #dedfe3;
+      padding-top: 11px;
+      display: flex;
+
+      common-select {
+        flex: 1;
+      }
+    }
+  }
+
+  .dataoverview {
+    background: #ffffff;
+    margin: 16px;
+    box-shadow: 0px 1px 2px 0 rgba(23, 35, 61, 0.25);
+    border-radius: 2px;
+
+    .top {
+      height: 46px;
+      line-height: 46px;
+      padding-left: 16px;
+      font-weight: 550;
+      font-size: 14px;
+      color: #17233d;
+      border-bottom: 1px solid rgba(23, 35, 61, 0.1);
+
+      .name {
+        margin-right: 7.5px;
+      }
+    }
+  }
+
+  ._channelTrend {
+    height: 378px;
+    background: #ffffff;
+    margin: 16px;
+    box-shadow: 0px 1px 2px 0 rgba(23, 35, 61, 0.25);
+    border-radius: 2px;
+
+    ._trendHeader {
+      height: 46px;
+      line-height: 46px;
+      padding-left: 16px;
+      border-bottom: 1px solid rgba(23, 35, 61, 0.1);
+
+      span {
+        font-weight: 550;
+        font-size: 14px;
+        color: #17233d;
+        line-height: 22px;
+        margin-right: 9.5px;
+      }
+    }
+
+    ._trendCenterTabs {
+      nz-tabset {
+        height: 46px;
+        overflow: hidden;
+
+        .ant-tabs-nav-scroll {
+          padding: 0 16px !important;
+        }
+      }
+    }
+
+    ._trendEcharts {
+      padding: 16px;
+      background: #ffffff;
+      height: 284px;
+      padding-top: 0px;
+
+      .demo-chart {
+        height: 100%;
+        width: 100%;
+        background: #ffffff;
+        text-align: center;
+        font-size: 12px;
+        color: rgba(23, 35, 61, 0.55);
+        // line-height: 284px;
+      }
+    }
+  }
+
+  ._channeldetail {
+    background: #ffffff;
+    margin: 16px;
+    box-shadow: 0px 1px 2px 0 rgba(23, 35, 61, 0.25);
+    border-radius: 2px;
+
+    .detailHeader {
+      height: 46px;
+      line-height: 46px;
+      padding: 0px 16px;
+      background: #ffffff;
+
+      .left {
+        float: left;
+        font-weight: 550;
+        font-size: 14px;
+        color: #17233d;
+        line-height: 22px;
+        margin-top: 12px;
+      }
+
+      .search {
+        float: right;
+        font-weight: 550;
+        display: inline-block;
+        margin-right: 16px;
+      }
+
+      .downloadDetails {
+        float: right;
+        font-weight: 550;
+        font-size: 14px;
+        color: #17233d;
+        line-height: 22px;
+        margin-top: 12px;
+        width: 16px;
+
+        span:first-child {
+          margin-right: 16px;
+        }
+      }
+    }
+
+    ._trendEtable {
+      background: #ffffff;
+
+      nz-table {
+        thead {
+          tr {
+            background: rgba(23, 35, 61, 0.03);
+          }
+        }
+      }
+
+      .ant-table-pagination.ant-pagination {
+        margin-right: 13px !important;
+      }
+      .ant-table-placeholder {
+        font-size: 12px !important;
+        color: rgba(23, 35, 61, 0.55) !important;
+        // height: 150px;
+        // line-height: 118px;
+      }
+    }
+  }
+}
+
+//Top10渠道趋势提示
+.des-ul {
+  width: 450px;
+  padding: 0;
+  margin: 0;
+}
+
+.des-ul li {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgba(255, 255, 255, 0.15);
+  padding: 5px 0;
+}
+
+.des-ul li:last-child {
+  border-bottom: none;
+}
+
+.des-ul {
+  .clrfix {
+    label {
+      float: left;
+      width: 85px;
+      text-align: left;
+      color: #fff;
+    }
+  }
+
+  .clrfixDetail {
+    label {
+      width: 120px;
+    }
+  }
+}
+
+.des-ul {
+  .des {
+    padding-left: 85px;
+  }
+
+  .desDetail {
+    padding-left: 120px;
+  }
+}

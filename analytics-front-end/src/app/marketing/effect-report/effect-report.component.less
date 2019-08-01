@@ -1,0 +1,49 @@
+// .header {
+//     background-color: #ffffff;
+//     padding: 16px;
+//     border-top: 1px solid rgba(23,35,61,0.10);
+//     .title-name {
+//         font-size: 16px;
+//         color: #17233D;
+//         line-height: 24px;
+//         margin-bottom: 0px;
+//     }
+// }
+
+main {
+  height: e('calc(100% - 58px)');
+}
+
+.header-content {
+  height: 47px;
+  border-bottom: none;
+  .tab-list {
+    display: inline-block;
+  }
+  .add-report-div {
+    display: inline-block;
+    vertical-align: top;
+    .add-report {
+      margin-right: 16px;
+      line-height: 45px;
+      cursor: pointer;
+      font-family: PingFangSC-Regular;
+      font-size: 14px;
+      color: rgba(23, 35, 61, 0.55);
+    }
+  }
+}
+
+.loading {
+  height: e('calc(100% - 92px)');
+  text-align: center;
+  border-radius: 4px;
+  padding: 16px;
+  position: relative;
+}
+
+:host ::ng-deep .ant-tabs-bar {
+  background: #ffffff;
+  padding-left: 16px;
+  margin-bottom: 0px;
+}

@@ -1,0 +1,21 @@
+<div class="text-content">
+    <div class="table-operator clrfix">
+        <button nz-button [nzType]="'primary'" (click)="showAddUserGroupModal()">
+            <span class="anticon anticon-plus"></span><span>用户组</span>
+        </button>
+        <app-add-user-group-dialog [tenantId] ="tenantId" [isShow]="isShowAddUserGroupModal" (close)="hideAddUserGroupModal($event)" (submit)="onSubmitUserGroupFormData($event)"></app-add-user-group-dialog>
+    </div>
+    <div class="operation-region" style="padding-top: 24px;">
+        <div class="ac_right_wap">
+            <div class="ac_right" style="margin-right: 24px;">
+                <nz-input-group nzSearch [nzSuffix]="suffixIconButton" style="width: 180px;float: right;">
+                    <input type="text" nz-input placeholder="请输入名称" (keyup)="onSearch($event, 'keyup')" [(ngModel)]="search">
+                </nz-input-group>
+                <ng-template #suffixIconButton>
+                    <i class="anticon anticon-search" (click)="onSearch(search, 'click')"></i>
+                </ng-template>
+            </div>
+        </div>
+        <app-user-groups-table [tenantId]="tenantId" [queryParams] = "userGroupTableFieldParams" [reload]="isReloadUserGroupTable"></app-user-groups-table>
+    </div>
+</div>

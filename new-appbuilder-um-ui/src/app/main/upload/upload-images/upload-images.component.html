@@ -1,0 +1,16 @@
+<div class="clearfix" #uploadwh>
+    <nz-upload nzAction="{{actionUrl}}" nzListType="picture-card" [(nzFileList)]="fileList" [nzShowButton]="fileList.length < number"
+        (nzChange)="uploadChange($event);" [nzBeforeUpload]="beforeUpload" [nzRemove]="removeChange" [nzPreview]="handlePreview">
+        <span class="anticon anticon-plus"></span>
+        <div class="ant-upload-text">上传</div>
+    </nz-upload>
+    <nz-modal #uploadModal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" [nzWidth]="'200px'"
+        class="clearfixmodal" (nzOnCancel)="previewVisible=false">
+        <ng-template #modalContent>
+            <div style="background: #cccccc;margin:-24px;padding:40px;border-radius: 5px;">
+                <img alt="图片" (click)="close()" [src]="previewImage" style="height:100%;width:100%" />
+            </div>
+        </ng-template>
+    </nz-modal>
+</div>
+<div class="picture_tooltip" *ngIf="type">{{cont}}</div>

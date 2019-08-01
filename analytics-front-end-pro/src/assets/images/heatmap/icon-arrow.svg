@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="5px" viewBox="0 0 8 5" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>Fill 4</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="基础分析" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.56">
+        <g id="自定义分析－报表配置" transform="translate(-1298.000000, -591.000000)" fill="#1C2438">
+            <g id="Group" transform="translate(1180.000000, 157.000000)">
+                <g id="操作" transform="translate(0.000000, 66.000000)">
+                    <g id="网格01" transform="translate(20.000000, 263.000000)">
+                        <g id="Stacked-Group" transform="translate(16.000000, 37.000000)">
+                            <g id="2" transform="translate(0.000000, 40.000000)">
+                                <g id="条">
+                                    <g id="下拉" transform="translate(76.000000, 20.000000)">
+                                        <g id="arrow" transform="translate(6.000000, 8.000000)">
+                                            <polygon id="Fill-4" points="0 0 4 5 8 0"></polygon>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,213 @@
+<div class="content">
+  <form nz-form [formGroup]="createForm" autocomplete="off">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>二维码名称</nz-form-label>
+      <nz-form-control [nzSpan]="17">
+        <input
+          autocomplete="off"
+          nz-input
+          formControlName="qrcodeName"
+          placeholder="请输入二维码名称，支持中文、字母、数字"
+        />
+        <nz-form-explain
+          *ngIf="
+            (createForm.get('qrcodeName').dirty && createForm.get('qrcodeName').errors) ||
+            createForm.get('qrcodeName').pending
+          "
+        >
+          <ng-container *ngIf="createForm.get('qrcodeName').hasError('required')">
+            请输入二维码名称
+          </ng-container>
+          <ng-container *ngIf="createForm.get('qrcodeName').hasError('length')">
+            长度限制在42个字符，可包含中文、数字或英文
+          </ng-container>
+          <ng-container *ngIf="createForm.get('qrcodeName').hasError('duplicated')">
+            该名称已存在，请重新输入
+          </ng-container>
+          <ng-container
+            *ngIf="createForm.get('qrcodeName').hasError('auto') && !createForm.get('qrcodeName').hasError('length')"
+          >
+            请输入只包含中文、字母和数字的二维码名称
+          </ng-container>
+        </nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>App ID</nz-form-label>
+      <nz-form-control [nzSpan]="17">
+        <input
+          autocomplete="off"
+          (keyup)="changeAppId()"
+          class="no-border"
+          nz-input
+          [(ngModel)]="appId"
+          formControlName="appId"
+          placeholder="微信分配的小程序唯一ID"
+          readonly
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>App Secret</nz-form-label>
+      <nz-form-control [nzSpan]="17">
+        <input
+          autocomplete="off"
+          (keyup)="changeAppId()"
+          nz-input
+          class="no-border"
+          [(ngModel)]="secret"
+          formControlName="appSecret"
+          placeholder="微信分配的小程序Secret"
+          [type]="secretInputType"
+          readonly
+        />
+        <a class="input-eye" (click)="changeSecretType()">
+          <span
+            class="iconfont"
+            [ngClass]="{
+              'icon-visibility_off': secretInputType === 'password',
+              'icon-visibility': secretInputType === 'text'
+            }"
+          ></span>
+        </a>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>页面路径</nz-form-label>
+      <nz-form-control [nzSpan]="17">
+        <input
+          autocomplete="off"
+          (input)="checkUrlParamsLength('path')"
+          nz-input
+          formControlName="qrcodePath"
+          placeholder="例如：page/index/index"
+        />
+        <nz-form-explain
+          *ngIf="
+            (createForm.get('qrcodePath').dirty && createForm.get('qrcodePath').errors) ||
+            createForm.get('qrcodePath').pending
+          "
+        >
+          <ng-container *ngIf="createForm.get('qrcodePath').hasError('required')">
+            请输入小程序页面路径
+          </ng-container>
+          <ng-container *ngIf="createForm.get('qrcodePath').hasError('auto')">
+            只能输入字母、数字、下划线、中划线以及斜线
+          </ng-container>
+        </nz-form-explain>
+        <nz-form-explain
+          *ngIf="
+            !createForm.get('qrcodePath').dirty ||
+            (!createForm.get('qrcodePath').errors && !createForm.get('qrcodePath').pending)
+          "
+        >
+          <ng-container *ngIf="isPathLengthErr">
+            {{ urlParamsLengthErrMessage }}
+          </ng-container>
+        </nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" class="padding-left">样式</nz-form-label>
+      <nz-form-control [nzSpan]="17">
+        <div class="qrcode" (click)="selectQrcode(1)">
+          <img src="/aeplus/assets/images/miniQrcode.svg" alt="" />
+          <div class="select-qrcode">
+            <span *ngIf="qrcodeType" class="ant-compat anticon anticon-check-circle"></span>
+          </div>
+        </div>
+        <div class="qrcode" (click)="selectQrcode(0)">
+          <img src="/aeplus/assets/images/qrcode.svg" alt="" />
+          <div class="select-qrcode">
+            <span *ngIf="!qrcodeType" class="ant-compat anticon anticon-check-circle"></span>
+          </div>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item style="margin-bottom: 5px;">
+      <nz-form-label [nzSpan]="7" class="padding-left">自定义参数</nz-form-label>
+      <nz-form-control class="control-right" [nzSpan]="17" *ngFor="let item of qrcodeParams; let i = index">
+        <div class="control-right-name">
+          <label>参数名</label>
+          <nz-select
+            [(ngModel)]="item.paramName"
+            (ngModelChange)="checkParamName(item, i)"
+            class="params-input"
+            [ngModelOptions]="{ standalone: true }"
+            style="width: 120px;"
+          >
+            <nz-option
+              *ngFor="let option of paramList"
+              [nzValue]="option.name"
+              [nzLabel]="option.showName"
+              nzCustomContent
+            >
+              <div title="{{ option.showName }}">{{ option.showName }}</div>
+            </nz-option>
+          </nz-select>
+          <nz-form-explain class="params-name has-error" *ngIf="isParamsNameErr[i]">
+            <ng-container>
+              {{ paramsNameErrMessage }}
+            </ng-container>
+          </nz-form-explain>
+          <nz-form-explain class="params-name has-error" *ngIf="isParamsNameNotUtmSource[i]">
+            <ng-container>
+              {{ paramsNameErrMessage1 }}
+            </ng-container>
+          </nz-form-explain>
+          <nz-form-explain class="params-name has-error" *ngIf="isParamsNameRepeatErr[i]">
+            <ng-container>
+              {{ paramsNameErrMessage2 }}
+            </ng-container>
+          </nz-form-explain>
+          <nz-form-explain class="params-name has-error" *ngIf="!isParamsNameErr[i]">
+            <ng-container *ngIf="isUrlParamsLengthErr">
+              {{ urlParamsLengthErrMessage }}
+            </ng-container>
+          </nz-form-explain>
+        </div>
+        <div class="control-right-value">
+          <label>参数值</label>
+          <input
+            autocomplete="off"
+            class="params-input params-number"
+            [(ngModel)]="item.paramValue"
+            (ngModelChange)="checkParamValue(item, i)"
+            [ngModelOptions]="{ standalone: true }"
+            nz-input
+            placeholder=""
+          />
+          <nz-form-explain
+            class="params-number has-error"
+            *ngIf="!isParamsNameErr[i] && !isUrlParamsLengthErr && isParamsNumberErr[i]"
+          >
+            <ng-container>
+              {{ paramsNumberErrMessage }}
+            </ng-container>
+          </nz-form-explain>
+        </div>
+
+        <span
+          *ngIf="i != 0"
+          style="cursor: pointer;"
+          class="ant-compat anticon anticon-minus-circle-o dynamic-delete-button"
+          (click)="removeParams(i)"
+        ></span>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item *ngIf="qrcodeParams.length < 6">
+      <nz-form-control [nzSm]="{ offset: 7 }">
+        <label class="add-params" (click)="addParams()">
+          <span class="ant-compat anticon anticon-plus"></span>
+          添加参数
+        </label>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>
+<div class="footer">
+  <button nz-button class="cancel-button" (click)="cancel()">取消</button>
+  <button nz-button class="ant-btn-primary" (click)="createQrcode()">
+    创建二维码
+  </button>
+</div>

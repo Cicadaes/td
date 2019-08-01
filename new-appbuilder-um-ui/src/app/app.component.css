@@ -1,0 +1,93 @@
+.ant-layout {
+    background: #eef0f3;
+    /* min-width: 1200px; */
+}
+
+.containers {
+    /*background: #fff;
+    padding:10px;*/
+    /* overflow: auto; */
+    /*border-radius:5px;*/
+}
+
+:host ::ng-deep .ant-layout {
+    height: 100%;
+}
+
+:host ::ng-deep .ant-layout-sider-collapsed .nav-text {
+    display: none;
+}
+
+:host ::ng-deep .ant-layout-sider-collapsed .ant-menu-submenu-title:after {
+    display: none;
+}
+
+:host ::ng-deep .ant-layout-sider-collapsed .anticon {
+    font-size: 16px;
+    margin-left: 8px;
+}
+
+:host ::ng-deep .trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 16px;
+    cursor: pointer;
+    transition: color .3s;
+}
+
+:host ::ng-deep .ant-btn{
+    margin-right:20px;
+}
+:host ::ng-deep .trigger:hover {
+    color: #108ee9;
+}
+
+.noPermission {
+    font-size: 30px;
+    color: #000;
+}
+
+:host ::ng-deep .ant-breadcrumb {
+    font-size: 14px;
+    color: #17233D;
+}
+
+:host ::ng-deep .ant-breadcrumb a {
+    color: rgba(28,36,56,0.56);
+}
+
+:host ::ng-deep cm-table nz-table .ant-table-fixed-header .ant-table-scroll .ant-table-header{
+    margin-bottom:0 !important;
+}
+:host ::ng-deep cm-table nz-table .ant-table-fixed-header .ant-table-scroll .ant-table-body{
+    overflow-y:auto !important;
+}
+
+/* 模块标题 */
+.module-title {
+    font-family: "HelveticaNeue", "PingFangSC", "微软雅黑";
+    font-size: 14px;
+    font-weight: 550;
+    color: #17233D;
+}
+:host ::ng-deep .color-picker .arrow.arrow-right{
+    display: none !important
+  }
+  :host ::ng-deep  .ant-tabs-nav-container{
+    margin-left:20px;
+}
+
+:host ::ng-deep .special-label{
+
+    padding-left:10px;
+}
+
+:host ::ng-deep .ant-form-item-required:before {
+    margin-left: -10px;
+}
+:host ::ng-deep .has-error .ant-form-explain, .has-error .ant-form-split {
+    color: #e62d2d;
+}
+:host ::ng-deep .ant-form-explain,:host ::ng-deep .ant-form-extra {
+    color: red;
+}

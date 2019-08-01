@@ -1,0 +1,31 @@
+<div class="text-content">
+    <div class="operation-region">
+        <div *ngIf="tenantId == 0">
+            <more-search [fieldArray] = "logQueryFieldArray" (onSearch)="onSearchLogList($event)"></more-search>
+            <super-log-table [queryParams] = "logQuery" [(isReloadData)]="isReloadData"></super-log-table>
+        </div>
+        <div *ngIf="tenantId > 0">
+            <more-search [fieldArray] = "logQueryFieldArray" (onSearch)="onSearchLogList($event)"></more-search>
+            <tenant-log-table [queryParams] = "logQuery" [(isReloadData)]="isReloadData"></tenant-log-table>
+        </div>
+    </div>
+       
+        <!-- <nz-card *ngIf="tenantId == 0">
+            <ng-template #title>
+                日志
+            </ng-template>
+            <ng-template #body>
+                <more-search [fieldArray] = "logQueryFieldArray" (onSearch)="onSearchLogList($event)"></more-search>
+                <super-log-table [queryParams] = "logQuery" [(isReloadData)]="isReloadData"></super-log-table>
+            </ng-template>
+        </nz-card> -->
+            <!-- <nz-card *ngIf="tenantId > 0">
+                <ng-template #title>
+                    租户登陆日志
+                </ng-template>
+                <ng-template #body>
+                    <more-search [fieldArray] = "logQueryFieldArray" (onSearch)="onSearchLogList($event)"></more-search>
+                    <tenant-log-table [queryParams] = "logQuery" [(isReloadData)]="isReloadData"></tenant-log-table>
+                </ng-template>
+            </nz-card> -->
+</div>

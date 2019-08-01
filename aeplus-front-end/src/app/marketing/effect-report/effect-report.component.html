@@ -1,0 +1,60 @@
+<div class="first-level"></div>
+<main>
+    <div class="common-title" style="border-bottom: none; background: #FFFFFF; font-size: 16px;">
+        {{campaignInfo.name}}
+    </div>
+    <div class="header-content">
+        <div class="tab-list">
+            <ul nz-menu [nzMode]="'horizontal'" nzSelectable>
+                <li nz-menu-item [nzSelected]="showType == 1" (click)="clcikTab(1)">目标达成</li>
+                <li nz-menu-item [nzSelected]="showType == 2" (click)="clcikTab(2)">漏斗分析</li>
+                <li nz-menu-item [nzSelected]="showType == 3 && tab.src == iframeUrl" *ngFor="let tab of tabs; let i = index;" (click)="clcikCustomReportTab(tab)">
+                    {{ tab.name }}
+                    <span class="anticon anticon-close" (click)="closeTab(tab, $event)"></span>
+                </li>
+            </ul>
+        </div>
+        <div class="add-report-div">
+            <span class="add-report" *ngIf="tabs.length < 3" (click)="createDialogShow()">
+                <span class="anticon anticon-plus"></span>添加报表</span>
+        </div>
+    </div>
+
+    <app-target-achievement *ngIf="showType == 1" [campaignName]="campaignInfo.name"></app-target-achievement>
+    <app-funnel-analysis *ngIf="showType == 2"></app-funnel-analysis>
+
+    <div class="loading" *ngIf="showType > 2">
+        <nz-spin style="position: absolute; left: 50%; top: 50%;"></nz-spin>
+        <iframe *ngIf="iframeUrl && showIframe" style="position: relative; border: none;" id="tdReportIframe" name="tdReportIframe" height="100%" width="100%"
+            [src]="iframeUrl" title="">
+        </iframe>
+    </div>
+
+    <nz-modal [(nzVisible)]="isVisible" nzMaskClosable="false" [nzTitle]="modalTitle" [nzStyle]="{'top': '75px'}" nzWidth="800"
+        (nzOnOk)="selectReport()" (nzOnCancel)="hideReportDialog()">
+        <div class="report-content">
+            <nz-input-group style="width: 240px; margin-bottom: 16px;" nzSuffixIcon="anticon anticon-search">
+                <input type="text" [(ngModel)]="reportName" (keyup)="fliterReport($event)" nz-input placeholder="输入关键字搜索">
+            </nz-input-group>
+            <nz-table #nzTable [nzData]="reportTemplateList" [(nzTotal)]='reportTemplateTotal' [nzLoading]="reportTableLoading" [nzFrontPagination]="false"
+                [(nzPageIndex)]="pageIndex" (nzPageIndexChange)='changeReportPage($event)' [(nzPageSize)]="pageSize">
+                <thead>
+                    <tr>
+                        <th>选择</th>
+                        <th>名称</th>
+                        <th>描述</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of nzTable.data">
+                        <td nzWidth="100px">
+                            <input type="radio" name="sleectReport" value="{{item.id}}" [(ngModel)]="selectReportId">
+                        </td>
+                        <td nzWidth="400px">{{item.name}}</td>
+                        <td nzWidth="600px">{{item.description}}</td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </nz-modal>
+</main>

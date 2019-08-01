@@ -1,0 +1,123 @@
+<div class="first-level"></div>
+
+<app-tab-list [tabList]="tabList"></app-tab-list>
+
+<main>
+  <article>
+    <div class="content-div shadow-content">
+      <nz-tabset nzSize="middle" [(nzSelectedIndex)]="index2" (nzSelectedIndexChange)="indexChange($event)">
+        <nz-tab nzTitle="常规配置">
+          <div *ngIf="index2 == 0" class="crowd-wap">
+            <div class="crowd-wap-left" [ngStyle]="containerStyle">
+              <ul class="crowd-wap-left-ul">
+                <li
+                  *ngFor="let item of leftMuneList; let i = index"
+                  (click)="checkOne(item)"
+                  [ngClass]="{ selectLi: item.type == attrIndex }"
+                >
+                  {{ item.name }}
+                </li>
+              </ul>
+            </div>
+
+            <div class="crowd-wap-right">
+              <!-- 组合分群配置 -->
+              <div class="combination" *ngIf="attrIndex == 1"></div>
+
+              <!-- Lookalike配置 -->
+              <div class="combination" *ngIf="attrIndex == 2"></div>
+
+              <!-- 特征聚类配置 -->
+              <div class="combination" *ngIf="attrIndex == 3"></div>
+
+              <!-- 人群显著标签配置 -->
+              <div class="combination" *ngIf="attrIndex == 4"></div>
+
+              <!-- 人群导出配置 -->
+              <div class="combination" *ngIf="attrIndex == 5"></div>
+
+              <div class="combination">
+                <app-detail
+                  [ngClass]="{ hide: editFlag }"
+                  [title]="'属性配置'"
+                  [columnData]="attributeDataChoose"
+                  [attrLoadingFlag]="attrLoadingFlag"
+                  (edtiData)="edtiData()"
+                ></app-detail>
+
+                <app-edit
+                  [ngClass]="{ hide: !editFlag }"
+                  [title]="'属性配置'"
+                  [attributeData]="attributeData"
+                  (cancelEtim)="cancelEtim()"
+                  (saveEtim)="saveEtim()"
+                  [configuredObj]="configuredObj"
+                  [count]="attrIndex == 4 ? 5 : 0"
+                ></app-edit>
+              </div>
+            </div>
+          </div>
+        </nz-tab>
+        <nz-tab nzTitle="人群画像配置">
+          <div *ngIf="index2 == 1">
+            <div class="portrayal">
+              <button nz-button nzType="primary" (click)="showModal(false)" [nzSize]="'small'">
+                <span class="ant-compat anticon anticon-plus"></span>
+                添加画像组
+              </button>
+              <div class="portrayal-table">
+                <nz-table
+                  #nzTable
+                  nzShowSizeChanger
+                  [nzLoading]="portrayalTableLoading"
+                  [nzFrontPagination]="false"
+                  [nzData]="portrayalData"
+                  [(nzPageIndex)]="_current"
+                  [(nzPageSize)]="_pageSize"
+                  [(nzTotal)]="_total"
+                  (nzPageIndexChange)="PageIndexChange($event)"
+                  (nzPageSizeChange)="PageSizeChange($event)"
+                  [nzPageSizeOptions]="pageSizeOptions"
+                >
+                  <thead nz-thead>
+                    <tr>
+                      <th nz-th nzWidth="23%">画像组名称</th>
+                      <th nz-th nzWidth="15%">创建人</th>
+                      <th nz-th nzWidth="15%">创建时间</th>
+                      <th nz-th nzWidth="15%">更新时间</th>
+                      <th nz-th nzWidth="12%">显示顺序</th>
+                      <th nz-th nzWidth="200px">操作</th>
+                    </tr>
+                  </thead>
+                  <tbody nz-tbody>
+                    <tr nz-tbody-tr *ngFor="let item of nzTable.data">
+                      <td nz-td>{{ item.name }}</td>
+                      <td nz-td>{{ item.creator }}</td>
+                      <td nz-td>{{ item.createTime }}</td>
+                      <td nz-td>{{ item.updateTime }}</td>
+                      <td nz-td>{{ item.sortOrder }}</td>
+                      <td nz-td>
+                        <a (click)="configReport(item)" class="margin-right">配置报表</a>
+                        <a (click)="showModal(true, item)" class="margin-right">编辑</a>
+                        <a (click)="deletePortrayal(item)">删除</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </nz-table>
+              </div>
+            </div>
+          </div>
+        </nz-tab>
+      </nz-tabset>
+    </div>
+  </article>
+  <!-- 新增人群画像组 -->
+  <app-portrayal-dialog
+    *ngIf="isVisible"
+    [isVisible]="isVisible"
+    (hideDialog)="hideDialog($event)"
+    [editData]="editData"
+    [portrayalFlag]="portrayalFlag"
+    (saveDate)="saveDate()"
+  ></app-portrayal-dialog>
+</main>

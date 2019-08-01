@@ -1,0 +1,19 @@
+<meta charset="utf-8">
+<title>ChartEditor demo</title>
+<script src="https://unpkg.com/vue"></script>
+<script src="./ChartEditor.umd.js"></script>
+
+<link rel="stylesheet" href="./ChartEditor.css">
+
+
+<div id="app">
+  <demo></demo>
+</div>
+
+<script>
+new Vue({
+  components: {
+    demo: ChartEditor
+  }
+}).$mount('#app')
+</script>

@@ -1,0 +1,36 @@
+<li class="all">
+    <p (click)="selectAll()" [class.active]="selectAllFlag">全部接口</p>
+    <button nz-button [nzType]="'primary'" (click)="addProduct()">
+        <span class="anticon anticon-plus"></span><span>产品分类</span>
+    </button>
+</li>
+<p></p>
+<div *ngIf="nodes.length < 1 && !loadingFlag" style="padding: 20px 8px; line-height: 26px;">还没有分类信息，请点击“+产品分类”添加分类</div>
+<div *ngIf="loadingFlag" style="margin-top: 30px; text-align: center;">
+    <nz-spin></nz-spin>
+</div>
+<ng-container *ngIf="nodes.length">
+    <nz-tree [(ngModel)]="nodes" (nzClick)="toggleNode($event);showDetail($event);">
+        <ng-template #nzTreeTemplate let-node>
+            <span class="custom-node" [class.active]="node.isSelected">
+                <!-- <div class="clearFix"> -->
+                    <!-- <span class="anticon anticon-caret-right" *ngIf="!node.isExpanded && node.children.length" style="font-size:12px;float:left;margin-top:8px;"></span>
+                    <span class="anticon anticon-caret-down" *ngIf="node.isExpanded && node.children.length" style="font-size:12px;float:left;margin-top:8px;"></span> -->
+                    <span title="{{node.title}}" 
+                    [ngStyle]="{'overflow': 'hidden', 'text-overflow': 'ellipsis', 'white-space': 'nowrap'
+                        , 'float': 'left', 'width' : node.level ? '116px' : '140px'}">
+                        {{node.title}}
+                    </span>
+                    <nz-dropdown class="fr" *ngIf="node.isSelected">
+                        <a class="ant-dropdown-link" nz-dropdown>...</a>
+                        <ul nz-menu nzSelectable class="dropDownBox">
+                            <li nz-menu-item (click)="add(node.key, node)" *ngIf="node.level === 0 ">新增子分类</li>
+                            <li nz-menu-item (click)="edit(node.key, node)">编辑分类</li>
+                            <li nz-menu-item (click)="delete(node.key, node)">删除分类</li>
+                        </ul>
+                    </nz-dropdown>
+                <!-- </div> -->
+                </span>
+        </ng-template>
+    </nz-tree>
+</ng-container>

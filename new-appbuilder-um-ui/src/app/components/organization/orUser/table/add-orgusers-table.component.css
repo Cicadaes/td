@@ -1,0 +1,8 @@
+:host ::ng-deep .ant-modal {
+  min-width: 600px !important;
+}
+
+:host ::ng-deep .anticon-search {
+    cursor: pointer;
+    margin-right: 6px;
+}

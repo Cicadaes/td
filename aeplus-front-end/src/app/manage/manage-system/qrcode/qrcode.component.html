@@ -1,0 +1,76 @@
+<button nz-button nzType="primary" nzSize="default" (click)="showCreateModal()"><span class="anticon anticon-plus"></span>创建二维码</button>
+
+<div class="content">
+    <div class="content-header module-title">
+        二维码列表
+        <div class="right">
+            <div class="input-search">
+                <nz-input-group nzSuffixIcon="anticon anticon-search">
+                    <input type="text" [(ngModel)]="serachParam" nz-input (keyup)="serachQrcode($event.target.value)" placeholder="请输入二维码名称">
+                </nz-input-group>
+            </div>
+        </div>
+    </div>
+    <div class="content-body">
+        <div class="content-table">
+            <nz-table #qrcodeTable 
+            [nzData]="tableList" 
+            [nzLoading]="laoding"
+            [nzFrontPagination]="false" 
+            [(nzPageIndex)]="pageIndex"
+            (nzPageIndexChange)="getList($event)"
+            [(nzPageSize)]="pageSize" 
+            (nzPageSizeChange)="getList()"
+            [nzTotal]="total" 
+            [nzPageSizeOptions]="nzPageSizeOptions"
+            nzShowSizeChanger="true">
+                <thead>
+                    <tr>
+                        <th>二维码名称</th>
+                        <th nzWidth="85px">二维码ID</th>
+                        <th>页面路径</th>
+                        <th>参数</th>
+                        <th nzWidth="80px">样式</th>
+                        <th nzWidth="135px">创建时间</th>
+                        <th nzWidth="80px">状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of qrcodeTable.data">
+                        <td title="{{data.qrcodeName}}">{{data.qrcodeName}}</td>
+                        <td>{{data.id}}</td>
+                        <td title="{{data.qrcodePath}}">{{data.qrcodePath}}</td>
+                        <td title="{{data.params}}">
+                            {{data.params}}
+                        </td>
+                        <td>
+                            <span *ngIf="data.qrcodeType === 0">二维码</span>
+                            <span *ngIf="data.qrcodeType === 1">小程序码</span>
+                        </td>
+                        <td>{{data.createTime | date: 'yyyy-MM-dd HH:mm'}}</td>
+                        <td>
+                            <span *ngIf="data.status === 1"><span class="dot success"></span>启用</span>
+                            <span *ngIf="data.status === -1"><span class="dot forbid"></span>禁用</span>
+                        </td>
+                        <td>
+                            <a (click)="editQrcode(data)">编辑</a>
+                            <a *ngIf="data.status === 1" (click)="setStatus(data)">禁用</a>
+                            <a *ngIf="data.status === -1" (click)="setStatus(data)">启用</a>
+                            <a [href]="service.baseUrl + '/qrcode/download/' + data.id + '?productId=' + productId">下载</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+</div>
+<nz-modal [(nzVisible)]="showModal" [nzMaskClosable]="false" [nzBodyStyle]="{'padding': '0'}" [nzWidth]="modalWidth" [nzFooter]="null" nzWrapClassName="vertical-center-modal" [nzTitle]="modalTitle" [nzContent]="modalContent" (nzOnCancel)="cancelModal()">
+    <ng-template #modalTitle>
+        {{modelTitle}}
+    </ng-template>
+    <ng-template #modalContent>
+        <app-create-qrcode *ngIf="showModal && showCompoment === 'create'" [appId]="appId" [secret]="secret" [productId]="productId" (showNext)="show($event)" (closeModel)="cancelModal()"></app-create-qrcode>
+        <app-edit-qrcode *ngIf="showModal && showCompoment === 'edit'" [productId]="productId" [qrcode]="deatilQrcode" (closeModel)="cancelModal()"></app-edit-qrcode>
+    </ng-template>
+</nz-modal>

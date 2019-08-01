@@ -1,0 +1,183 @@
+<main>
+  <div class="table-custom-panel shadow-content table-custom-operator">
+    <div class="table-custom-head clrfix">
+      <div class="table-custom-title">
+        <b>当前已启用参数（{{ usedTotal }} / 10）</b><small>最多同时只能启用10个参数</small>
+      </div>
+    </div>
+    <ul class="list-inline">
+      <li *ngFor="let data of usedParamList">{{ data.name }}</li>
+    </ul>
+  </div>
+  <div class="table-custom-operator">
+    <button nz-button nzType="primary" nzSize="default" (click)="showParamAddDialog(null)">
+      <span class="ant-compat anticon anticon-plus"></span>添加参数
+    </button>
+  </div>
+  <div class="table-custom-panel shadow-content content">
+    <div class="table-custom-head clrfix">
+      <h5 class="table-custom-title">参数列表</h5>
+      <div class="table-custom-filter">
+        <nz-tooltip [nzPlacement]="'leftTop'" [nzTrigger]="'click'">
+          <a nz-tooltip class="description"></a>
+          <ng-template #nzTemplate>
+            <div class="table-description">
+              <h6>字段说明</h6>
+              <dl>
+                <dt>参数名称：</dt>
+                <dd>url后缀所带的参数名称。</dd>
+              </dl>
+              <dl>
+                <dt>显示名：</dt>
+                <dd>
+                  为了便于业务理解为每个参数起的别名，也会作为小程序二维码管理、参数筛选器内每个参数对应的显示名。
+                </dd>
+              </dl>
+              <dl>
+                <dt>参数含义：</dt>
+                <dd>参数用来标识的含义，如brand参数用来标识商品品牌，则参数含义为“用来标识商品品牌”。</dd>
+              </dl>
+              <dl>
+                <dt>登记时间：</dt>
+                <dd>首次统计到此参数值的时间。</dd>
+              </dl>
+              <dl>
+                <dt>识别统计状态：</dt>
+                <dd>
+                  可控制每个参数的识别统计状态为“启用/停用”。停用状态下的参数将不会被识别统计，且不会显示在参数下拉菜单下。
+                </dd>
+              </dl>
+            </div>
+          </ng-template>
+        </nz-tooltip>
+      </div>
+    </div>
+    <div class="table-custom-more-search">
+      <app-more-search [fieldArray]="_moreSearchFieldArray" (onSearch)="onSearchMoreSearch($event)"></app-more-search>
+    </div>
+    <nz-table
+      #ajaxTable
+      nzShowTotal
+      nzShowSizeChanger
+      [nzFrontPagination]="false"
+      [nzData]="dataSet"
+      [nzLoading]="loading"
+      [nzTotal]="total"
+      [(nzPageIndex)]="pageIndex"
+      [(nzPageSize)]="pageSize"
+      [nzPageSizeOptions]="[10, 20, 50, 100]"
+      (nzPageIndexChange)="searchData$.next()"
+      (nzPageSizeChange)="searchData$.next()"
+    >
+      <thead>
+        <tr>
+          <th style="min-width:240px;width:25%">
+            参数名称
+            <nz-popover [nzPlacement]="'leftTop'" [(nzVisible)]="tipShow" [nzTrigger]="'hover'">
+              <span nz-popover (click)="tipShow = !tipShow">
+                <span class="icon iconfont icon-info1" style="font-size: 14px; opacity: 0.5; cursor: pointer;"></span>
+              </span>
+              <ng-template #nzTemplate>
+                <div style="padding: 0 0 5px; width:300px">
+                  使用流量参数时，建议采用系统提供的名称，若实际所用的名称与列表中对应的名称不一致，请修改流量参数名称为实际所用的参数名称。
+                </div>
+              </ng-template>
+            </nz-popover>
+          </th>
+          <th style="min-width:240px;width:25%">显示名</th>
+          <th style="min-width: 160px;">参数含义</th>
+          <th style="width: 150px;">参数类型</th>
+          <th style="width: 160px;">登记时间</th>
+          <th style="width: 120px;">识别统计状态</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of ajaxTable.data">
+          <!-- 参数名称 -->
+          <td *ngIf="!data._name" title="{{ data.name }}">
+            {{ data.name || '--'
+            }}<a *ngIf="data.type == 1" (click)="handlerContent_displayNameEdit(data, 'name')" class="edit-enter"></a>
+          </td>
+          <!-- 参数名（编辑） -->
+          <td *ngIf="data._name">
+            <input
+              nz-input
+              [(ngModel)]="data._name.value"
+              [disabled]="data._name.loading"
+              nzSize="default"
+              maxlength="128"
+            />
+            <a
+              [class.loading]="data._name.loading"
+              (click)="handlerContent_displayNameEdit(data, 'name', true)"
+              class="edit-ok"
+            ></a>
+            <a
+              *ngIf="!data._name.loading"
+              (click)="handlerContent_displayNameEdit(data, 'name', false)"
+              class="edit-cancel"
+            ></a>
+          </td>
+
+          <!-- 显示名 -->
+          <td *ngIf="!data._displayName" title="{{ data.displayname }}">
+            {{ data.displayname || '--'
+            }}<a
+              *ngIf="data.type == 0"
+              (click)="handlerContent_displayNameEdit(data, 'displayname')"
+              class="edit-enter"
+            ></a>
+          </td>
+
+          <!-- 显示名（编辑） -->
+          <td *ngIf="data._displayName">
+            <input
+              nz-input
+              [(ngModel)]="data._displayName.value"
+              [disabled]="data._displayName.loading"
+              nzSize="default"
+              maxlength="128"
+            />
+            <a
+              [class.loading]="data._displayName.loading"
+              (click)="handlerContent_displayNameEdit(data, 'displayname', true)"
+              class="edit-ok"
+            ></a>
+            <a
+              *ngIf="!data._displayName.loading"
+              (click)="handlerContent_displayNameEdit(data, 'displayname', false)"
+              class="edit-cancel"
+            ></a>
+          </td>
+          <td title="{{ data.parammean }}">{{ data.parammean | attributeTypePipe }}</td>
+          <td><span *ngIf="data.type == 1">流量参数</span><span *ngIf="data.type == 0">自定义参数</span></td>
+          <td>{{ data.createTime }}</td>
+          <td>
+            <nz-switch
+              [nzLoading]="data?._status?.loading"
+              [nzDisabled]="usedTotal > 9 && data.status == 1"
+              [nzControl]="true"
+              [ngModel]="data.isStatus"
+              nzCheckedChildren="启用"
+              nzUnCheckedChildren="停用"
+              (click)="handlerContent_status(data)"
+            ></nz-switch>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+  <app-param-mgt-add-dialog
+    *ngIf="_isShowAddDialog"
+    [isVisible]="_isShowAddDialog"
+    [data]="_currentEventAttribute"
+    (onHide)="hideAddDialog($event)"
+    (onSubmit)="onSubmitAddParam($event)"
+  ></app-param-mgt-add-dialog>
+  <app-param-mgt-view-dialog
+    *ngIf="_isShowViewDialog"
+    [isVisible]="_isShowViewDialog"
+    [data]="_currentData"
+    (onHide)="hideViewDialog($event)"
+  ></app-param-mgt-view-dialog>
+</main>

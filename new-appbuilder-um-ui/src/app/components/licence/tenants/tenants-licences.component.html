@@ -1,0 +1,15 @@
+<div class="text-content">
+        <div class="table-operator clrfix" *ngIf="rolecode!='UM_TENANT_ADMIN'">
+            <a [routerLink]="[ '/tenants/tenantsLicences/'+tenantId+'/addTenantLicence' ]">
+             
+                    <button nz-button [nzType]="'primary'" [nzSize]="'large'" >
+                        <span class="anticon anticon-plus"></span><span>许可证</span>
+                    </button>
+           
+            </a>
+        </div>
+        <div class="operation-region">
+            <more-search *ngIf="licencesFieldArray && licencesFieldArray.length > 0" [fieldArray] = "licencesFieldArray" (onSearch)="onSearchList($event)"></more-search>
+            <tenants-licences-table [queryParams] = "licencesTableFieldParams"></tenants-licences-table>
+        </div>  
+</div>

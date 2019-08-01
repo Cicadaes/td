@@ -1,0 +1,11 @@
+:host ::ng-deep .gateway-route-detail {
+    padding: 24px;
+}
+
+:host ::ng-deep .gateway-route-detail-label {
+    width: 80px;
+}
+
+:host ::ng-deep .ant-form-item {
+    margin-bottom: 0px;
+}

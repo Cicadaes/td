@@ -1,0 +1,12 @@
+<div class="first-level"></div>
+<div class="header-content">
+    <div style="background-color: #FFFFFF; border-top: rgba(23,35,61,0.10) 1px solid;">
+        <app-user-retention-filter (onBack)="onBackFilter($event);"></app-user-retention-filter>
+    </div>
+</div>
+
+<main>
+    <article class="page-custom-content">
+        <app-user-retention-table [filter]="_filter"></app-user-retention-table>
+    </article>
+</main>

@@ -1,0 +1,68 @@
+:host ::ng-deep ._filters {
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  padding: 0px 16px;
+  overflow: hidden;
+
+  .filterCenter {
+    padding: 8px 0px;
+    border-top: 1px dashed rgb(206, 206, 206);
+    display: flex;
+
+    .ate {
+      flex: 1;
+      display: flex;
+
+      ._name {
+        margin-right: 10px;
+        border: 1px solid #ededed;
+        text-align: center;
+        padding: 0 15px;
+        line-height: 30px;
+        background: #17233d0f;
+        border-radius: 4px;
+        overflow: hidden;
+        height: 32px;
+        width: 65px;
+      }
+
+      ._filterOne {
+        height: 32px;
+        margin-right: 10px;
+        width: 200px;
+        overflow: hidden;
+
+        nz-select {
+          width: 100%;
+        }
+      }
+
+      ._filterTwo {
+        height: 32px;
+        margin-right: 10px;
+        width: 100px;
+        overflow: hidden;
+
+        nz-select {
+          width: 100%;
+        }
+      }
+
+      ._filterThree {
+        min-height: 32px;
+        overflow-y: auto;
+        min-width: 200px;
+        max-width: 30%;
+
+        nz-select {
+          width: 100%;
+
+          .ant-select-selection--multiple {
+            max-height: 58px;
+            overflow-y: auto;
+          }
+        }
+      }
+    }
+  }
+}

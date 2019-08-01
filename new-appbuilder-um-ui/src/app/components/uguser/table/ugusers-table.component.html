@@ -1,0 +1,80 @@
+<ng-template #tableTotal>
+        <div  style="margin-right: 6px;">
+          总共 {{_total}} 条
+        </div>
+</ng-template>
+    <nz-table #nzTable 
+    [nzShowTotal]="tableTotal" 
+    [nzBordered]="false" 
+    [nzData]="_dataSet" 
+    nzShowSizeChanger 
+    [nzLoading]="_loading" 
+    [nzTotal]="_total" 
+    [(nzPageIndex)]="_current"
+    (nzPageIndexChange)="refreshData()" 
+    [(nzPageSize)]="_pageSize" 
+    (nzPageSizeChange)="refreshData(true)" 
+    [nzFrontPagination]="false" 
+    >
+            <thead>
+            <tr>
+                <th nzShowCheckbox [(nzChecked)]="_allChecked" [nzIndeterminate]="_indeterminate" (nzCheckedChange)="_checkAll($event)"></th>
+
+                <th [nzWidth]="'10%'">
+                    姓名
+                </th>
+                <th [nzWidth]="'10%'">
+                    账号
+                </th>
+                <th [nzWidth]="'9%'">
+                    职位
+                </th>
+                <th [nzWidth]="'9%'">
+                    性别
+                </th>
+                <th [nzWidth]="'10%'">
+                    手机
+                </th>
+                <th [nzWidth]="'10%'">
+                    联系电话
+                </th>
+                <th [nzWidth]="'9%'">
+                    QQ
+                </th>
+                <th [nzWidth]="'10%'">
+                    微信
+                </th>
+                <th [nzWidth]="'8%'">
+                    状态
+                </th>
+                <th [nzWidth]="'8%'">
+                    <span>操作</span>
+                </th>
+            </tr>
+            </thead>
+        <tbody>
+        <tr *ngFor="let data of nzTable.data">
+            <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="_refreshStatus($event, data.id)"></td>
+            <td>{{data.name}}</td>
+            <td>{{data.email}}</td>
+            <td>{{data.title}}</td>
+            <td>{{data.gender==-1?'':(data.gender==0?'女':'男')}}</td>
+            <td>{{data.mobile}}</td>
+            <td>{{data.phone}}</td>
+            <td>{{data.qq}}</td>
+            <td>{{data.wechat}}</td>
+            <td>
+                <span style="color:#E03E16" *ngIf="data.status==0">●</span>
+                <span style="color:#2B85E5" *ngIf="data.status==1">●</span>
+                {{data.status==0?'禁用':'正常'}}
+            </td>
+            <td>
+                <span>
+                    <a href="javascript:;" (click)="deleteUserFromUserGroup(data)">移除</a>
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </nz-table>
+
+<!-- <add-uguser-dialog *ngIf="isShowAddUerModal" [user]="currentUser" [isShow]="isShowAddUerModal" (onClose)="hideAddUserModal($event)" (onSubmit)="onSubmitUserFormData($event)"></add-uguser-dialog> -->

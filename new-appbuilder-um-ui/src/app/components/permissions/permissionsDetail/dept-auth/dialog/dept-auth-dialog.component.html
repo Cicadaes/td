@@ -1,0 +1,17 @@
+    <nz-modal [nzVisible]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel($event)"
+              (nzOnOk)="handleOk($event)" [nzMaskClosable]="false">
+        <ng-template #modalTitle>
+            <span >新建角色层级</span>
+    </ng-template>
+        <ng-template #modalContent>
+            <dept-auth-form  *ngIf="isVisible" [needSubmit] = "isNeedSubmitAddActionFormData" (onSubmit)="submitAddActionForm($event)"></dept-auth-form>
+        </ng-template>
+        <ng-template #modalFooter>
+                <button nz-button [nzType]="'default'" (click)="handleCancel($event)">
+                    取消
+                </button>
+                <button nz-button [nzType]="'primary'" (click)="handleOk($event)" [nzLoading]="isConfirmLoading">
+                    确定
+                </button>
+        </ng-template>
+    </nz-modal>

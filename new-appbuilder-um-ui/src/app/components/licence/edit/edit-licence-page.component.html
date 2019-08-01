@@ -1,0 +1,55 @@
+    <nz-modal [nzVisible]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel($event)"
+        (nzOnOk)="handleOk($event)" [nzMaskClosable]="false">
+        <ng-template #modalTitle>
+            <span>编辑许可证</span>
+        </ng-template>
+        <ng-template #modalContent>
+            <nz-input-group [nzSize]="'default'">
+                <div nz-form-label nz-col [nzSm]="3" [nzXs]="24">
+                    <label for="name">
+                        <span style="display: inline-block;font-family: SimSun;line-height: 1;color: #f04134;font-size:12px;width:12px;display: inline-block;">*</span>名称</label>
+                </div>
+                <div nz-col [nzSpan]="14">
+                    <input nz-input [(ngModel)]="_licence.name" (input)="nzBlurEvent('name');">
+                    <span *ngIf="errorType==1" style="color: red">请输入名称</span>
+                    <span *ngIf="errorType==2" style="color: red">名称已存在</span>
+                    <span *ngIf="errorType==9" style="color: red">名称不能超过128个字符</span>
+
+                </div>
+            </nz-input-group>
+            <br>
+            <nz-input-group [nzSize]="'default'">
+                <div nz-form-label nz-col [nzSm]="3" [nzXs]="24">
+                    <label>
+                        <span style="display: inline-block;font-family: SimSun;line-height: 1;color: #f04134;font-size:12px;width:12px;display: inline-block;"> </span>状态</label>
+                </div>
+                <div nz-col [nzSpan]="14" style="height: 100%;line-height: 260%;">
+                    <label nz-checkbox [(ngModel)]="_licence.statusboo">
+                        <span> 启用</span>
+                    </label>
+                </div>
+            </nz-input-group>
+            <br>
+            <nz-input-group [nzSize]="'default'">
+                <div nz-form-label nz-col [nzSm]="3" [nzXs]="24">
+                    <label for="desc">
+                        <span style="display: inline-block;font-family: SimSun;line-height: 1;color: #f04134;font-size:12px;width:12px;display: inline-block;"> </span>描述</label>
+                </div>
+                <div nz-col [nzSpan]="14">
+                    <textarea nz-input [(ngModel)]="_licence.desc"  [nzAutosize]="{ minRows: 4, maxRows: 4 }" (nzBlur)="nzBlurEvent('desc');" placeHolder=""></textarea>
+                    <span *ngIf="errorType==10" style="color: red">输入的描述过长</span>
+
+                </div>
+            </nz-input-group>
+        </ng-template>
+        <ng-template #modalFooter>
+           
+                <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancel($event)">
+                    取 消
+                </button>
+            
+                <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="handleOk($event)" [nzLoading]="isConfirmLoading">
+                    保 存
+                </button>
+        </ng-template>
+    </nz-modal>

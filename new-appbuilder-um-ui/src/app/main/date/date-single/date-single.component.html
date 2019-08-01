@@ -1,0 +1,8 @@
+<ng-container *ngIf="!_isMonth">
+    <nz-date-picker style="width:100%;" [(ngModel)]="_date" (ngModelChange)="_changeDateSingle()" [nzDisabledDate]="_disabledDate" [nzFormat]="'YYYY-MM-DD'"></nz-date-picker>
+</ng-container>
+
+<ng-container *ngIf="_isMonth">
+    <nz-month-picker style="width:100%;" [(ngModel)]="_moment" (ngModelChange)="_changeDateSingle()" [nzDisabledDate]="_disabledMonth" [nzFormat]="'YYYY-MM'"></nz-month-picker>
+</ng-container>
+

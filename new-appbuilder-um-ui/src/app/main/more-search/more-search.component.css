@@ -1,0 +1,30 @@
+.ant-advanced-search-form {
+    padding: 24px 0px 8px 15px;
+}
+
+.search-result-list {
+    margin-top: 16px;
+    border: 1px dashed #e9e9e9;
+    border-radius: 6px;
+    background-color: #fafafa;
+    min-height: 200px;
+    text-align: center;
+    padding-top: 80px;
+}
+
+:host ::ng-deep .more-search-left {
+    float: left;
+    width: 135px;
+    border-left: 1px solid rgba(23,35,61,0.10);
+    margin-left: 24px;
+}
+:host ::ng-deep .condition .ant-form-item{
+    margin-left: 0px;
+    margin-right:0px;
+}   
+.ant-form label {
+    line-height:32px;
+}
+.ant-form-item {
+    margin-bottom: 16px;
+}

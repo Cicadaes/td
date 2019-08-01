@@ -1,0 +1,28 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="_submitForm()">
+  <nz-form-item nz-row>
+    <nz-form-label nz-col [nzSm]="6" [nzXs]="24" class="special-label">
+      <label for="name" nzRequired>名称</label>
+    </nz-form-label>
+    <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+      <input nz-input [nzSize]="'large'" formControlName="name" id="name">
+      <ng-container *ngIf="getFormControl('name').dirty&&getFormControl('name').errors">
+        <nz-form-explain style="color:red;" >
+          <span *ngIf="getFormControl('name').hasError('required')">请输入角色名称</span>
+          <span *ngIf="getFormControl('name').errors.nameRepeat">角色名称不能重复</span>
+          <span *ngIf="getFormControl('name').errors.maxlength">角色名称不能重复</span>
+        </nz-form-explain>
+      </ng-container>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item nz-row>
+    <nz-form-label nz-col [nzSm]="6" [nzXs]="24" class="special-label">
+      <label for="desc" nzRequired class="special-label-before">描述</label>
+    </nz-form-label>
+    <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+      <textarea nz-input [nzRows]="'4'" [nzPlaceHolder]="''" formControlName="desc" id="desc"></textarea>
+        <ng-container *ngIf="getFormControl('desc').dirty&&getFormControl('desc').errors">
+                <nz-form-explain style="color:red;" *ngIf="getFormControl('desc').errors.maxlength">输入的描述过长</nz-form-explain>
+        </ng-container>
+    </nz-form-control>
+    </nz-form-item>
+  </form>

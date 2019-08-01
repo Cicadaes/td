@@ -1,0 +1,15 @@
+div {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  position: relative;
+}
+
+div p {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  font-size: 40px;
+}

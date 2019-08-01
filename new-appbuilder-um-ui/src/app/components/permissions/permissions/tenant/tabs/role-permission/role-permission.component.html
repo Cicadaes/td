@@ -1,0 +1,84 @@
+<main>
+    <div class="table-operator clrfix">
+        <button nz-button [nzType]="'primary'" (click)="addRolePermisssion()">
+            <span class="anticon anticon-plus"></span><span>角色权限</span>
+        </button>
+        <button nz-button [nzType]="'primary'" (click)="deleteBatch()">
+            <span>批量删除</span>
+        </button>
+    </div>
+    <div class="operation-region" style="padding-top: 24px;">
+        <div class="ac_right_wap">
+            <p class="title">为角色设置对当前数据对象的操作权限</p>
+            <div class="ac_right" style="margin-right: 24px;">
+                <nz-input-group nzSearch [nzSuffix]="suffixIconButton">
+                    <input type="text" nz-input placeholder="请输入角色名称" (keyup)="onSearch($event)" [(ngModel)]="searchInput">
+                </nz-input-group>
+                <ng-template #suffixIconButton>
+                    <i class="anticon anticon-search" (click)="onSearch(search, 'click')"></i>
+                </ng-template>
+            </div>
+        </div>
+
+        <nz-table #rolePermission nzShowTotal nzShowSizeChanger [nzFrontPagination]="false" [nzData]="dataSet"
+            [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" [nzPageSizeOptions]="[ 10, 20, 30, 40, 50 ]"
+            (nzPageIndexChange)="pageInfoChange()" (nzPageSizeChange)="pageInfoChange(true)">
+            <thead>
+                <tr>
+                    <th nzShowCheckbox [(nzChecked)]="allChecked" (nzCheckedChange)="checkAll($event)"></th>
+                    <th style="min-width:100px;">角色</th>
+                    <th style="min-width:100px;">有权限的操作</th>
+                    <th style="min-width:100px;">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of rolePermission.data">
+                    <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus($event)"></td>
+                    <td>
+                        <div class="item-td" style="max-width: 200px;" [title]="data.roleName">
+                            {{data.roleName}}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item-td" style="max-width: 200px;" [title]="data.auth">
+                            {{data.auth}}
+                        </div>
+                    </td>
+                    <td>
+                        <a (click)="editor(data)">编辑</a>
+                        <nz-divider nzType="vertical"></nz-divider>
+                        <a (click)="delete(data)">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+
+    <!-- 新增、修改弹窗 -->
+    <nz-modal [(nzVisible)]="isShowModal" nzMaskClosable="false" [nzTitle]="modalTitle" (nzOnOk)="modalSubmit($event)"
+        (nzOnCancel)="handleCancel()">
+        <div class="form-item">
+            <div class="item">
+                <span class="require">* </span><label>角色</label>
+                <nz-select *ngIf="!rolePermissionInfo.id" style="width:300px;" [(ngModel)]="rolePermissionInfo.roleId"
+                    nzPlaceHolder="请选择角色" (ngModelChange)="changeRole($event)">
+                    <nz-option *ngFor="let option of roleList" [nzLabel]="option.name" [nzValue]="option.id"></nz-option>
+                </nz-select>
+                <span *ngIf="rolePermissionInfo.id">{{rolePermissionInfo.roleName}}</span>
+                <div *ngIf="errorInfo.roleError" class="alert">
+                    {{errorInfo.roleErrorInfo}}
+                </div>
+            </div>
+            <div class="item">
+                <span class="require" style="vertical-align: top;">* </span><label style="vertical-align: top;">操作权限</label>
+                <div class="checkbox-div">
+                    <span nz-checkbox *ngFor="let item of rolePermissionInfo.authBeans" [(ngModel)]="item.hasAuth"
+                        (ngModelChange)="changeAuthBean($event)">{{item.operatorName}}</span>
+                </div>
+                <div *ngIf="errorInfo.operationError" class="alert">
+                    {{errorInfo.operationErrorInfo}}
+                </div>
+            </div>
+        </div>
+    </nz-modal>
+</main>

@@ -1,0 +1,57 @@
+<div [ngClass]="{'line-padding': hideAndOr}">
+    <div *ngFor="let attr of boolFilters; let i = index" class="attribute-one">
+        <div *ngIf="i == 0 && !hideAndOr" class="view-input  black-bg" style="width:87px;">用户</div>
+        <div *ngIf="i > 0 && !hideAndOr" class="view-input">
+            <span>{{attr.operator == 'and' ? '并且' : '或者'}}</span>
+        </div>
+
+        <!-- 选择属性 --> 
+        <span class="view-input" title="{{metaAttributeMap[attr.fieldName] || '无'}}">
+      {{metaAttributeMap[attr.fieldName] || '无'}}
+    </span>
+
+        <!-- eqType -->
+        <span *ngIf="attr.displayType == 'Tag'" class="view-input">
+      {{attr.eqType == 'eq' ? '是' : '不是'}}
+    </span>
+
+        <span *ngIf="attr.displayType == 'integer' || attr.displayType == 'Integer' || attr.displayType == 'Double' || attr.displayType == 'Long'" class="view-input">
+      {{eqTypeNumberMap[attr.eqType]}}
+    </span>
+
+        <span *ngIf="attr.displayType == 'String'" class="view-input">
+      包含
+    </span>
+
+        <span *ngIf="attr.displayType == 'Date'" class="view-input">
+      {{eqTypeDateMap[attr.eqType]}}
+    </span>
+
+        <!-- Value -->
+        <span *ngIf="attr.displayType == 'Tag'" class="view-input" style="width: auto;"  title="{{mapArrayValue(attr)}}">
+      {{mapArrayValue(attr) || '未赋值'}}
+    </span>
+
+        <span *ngIf="attr.displayType == 'String'" class="view-input" style="width: auto;" title="{{attr.value}}">
+      {{attr.value || '未赋值'}}
+    </span>
+
+        <span *ngIf="attr.displayType == 'integer' || attr.displayType == 'Integer' || attr.displayType == 'Double' || attr.displayType == 'Long'" class="view-input" style="width: auto;">
+           <span *ngIf="attr.value !== 0">{{attr.value || '未赋值'}}</span>
+           <span *ngIf="attr.value === 0">0</span>
+    </span>
+
+        <span *ngIf="attr.displayType == 'Date' && attr.eqType != 'between'" class="view-input" style="width: auto;">
+      {{attr.value | date:"yyyy-MM-dd"}}
+    </span>
+        <span *ngIf="attr.displayType == 'Date' && attr.eqType == 'between'" class="view-input" style="width: auto;">
+      {{attr.value[0] | date:"yyyy-MM-dd"}} ~ {{attr.value[1] | date:"yyyy-MM-dd"}}
+    </span>
+
+        <!-- Value2 -->
+        <span *ngIf="(attr.displayType == 'integer' || attr.displayType == 'Integer' || attr.displayType == 'Double' || attr.displayType == 'Long') && attr.eqType == 'between'" style="line-height:32px;margin-right:8px;">到</span>
+        <span *ngIf="(attr.displayType == 'integer' || attr.displayType == 'Integer' || attr.displayType == 'Double' || attr.displayType == 'Long') && attr.eqType == 'between'" class="view-input" style="width: auto;">
+      {{attr.value2}}
+    </span>
+    </div>
+</div>

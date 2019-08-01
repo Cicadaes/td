@@ -1,0 +1,36 @@
+<main>
+  <div class="ae-menu">
+    <lib-portal
+      [lang]="'zh'"
+      [appCode]="appCode"
+      [locationUrl]="routerUrl"
+      [curMenuUrl]="menuUrl"
+      [multiApp]="false"
+      (selectMenu)="menuChange($event)"
+      (gotoProduct)="gotoProduct()"
+    ></lib-portal>
+  </div>
+  <div class="ae-content" [ngClass]="{ 'iframe-overflow': isIframe }">
+    <div class="loading">
+      <nz-spin></nz-spin>
+    </div>
+    <iframe
+      #frame
+      *ngIf="isIframe && iframe_src"
+      id="main-frame"
+      [src]="iframe_src"
+      width="100%"
+      height="100%"
+      style="border:none"
+      name="main-frame"
+      title=""
+    >
+    </iframe>
+    <div *ngIf="!isIframe">
+      <div class="header-content">
+        <app-header></app-header>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</main>

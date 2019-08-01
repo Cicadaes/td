@@ -1,0 +1,51 @@
+<div class="content">
+  <h4>
+    共<span class="red">{{ total }}</span
+    >个二维码
+  </h4>
+  <p>
+    生成成功<span class="red">{{ successNum }}</span
+    >个
+  </p>
+  <p>
+    失败<span class="primary">{{ errorNum }}</span
+    >个
+  </p>
+  <div class="content-table">
+    <nz-table #creatResult [nzData]="errorList" [nzFrontPagination]="false" [nzShowPagination]="false">
+      <thead>
+        <tr>
+          <th>序号</th>
+          <th>二维码名称</th>
+          <th>页面路径</th>
+          <th>参数</th>
+          <th>状态</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of creatResult.data; let i = index">
+          <td style="width:60px">{{ i + 1 }}</td>
+          <td style="width:150px" title="{{ data.qrcodeName }}">
+            {{ data.qrcodeName }}
+          </td>
+          <td style="width:150px" title="{{ data.qrcodePath }}">
+            {{ data.qrcodePath }}
+          </td>
+          <td style="width:150px">
+            <div>
+              <span *ngFor="let param of data.qrcodeParams">{{ param.paramName }}={{ param.paramValue }};</span>
+            </div>
+          </td>
+          <td style="width:150px">
+            <span *ngIf="data.success"><span class="dot success"></span>成功</span>
+            <span *ngIf="!data.success"><span class="dot forbid"></span>失败,{{ data.errMsg }}</span>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>
+<div class="footer">
+  <button nz-button class="cancel-button" (click)="download()">批量下载</button>
+  <button nz-button class="ant-btn-primary" (click)="cancel()">关闭</button>
+</div>

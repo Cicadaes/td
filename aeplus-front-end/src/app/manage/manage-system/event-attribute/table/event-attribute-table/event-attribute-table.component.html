@@ -1,0 +1,73 @@
+<main>
+	<div class="table-custom-operator">
+		<button nz-button nzType="primary" nzSize="default" (click)="showEventAttributeAddDialog(null);"><span
+				class="anticon anticon-plus"></span>添加事件属性
+		</button>
+	</div>
+	<div class="table-custom-panel shadow-content">
+		<div class="table-custom-head clrfix">
+			<h5 class="table-custom-title">事件属性管理</h5>
+			<div class="table-custom-filter">
+			</div>
+		</div>
+		<div class="table-custom-more-search">
+			<app-more-search [fieldArray]="_moreSearchFieldArray"
+			                 (onSearch)="onSearchMoreSearch($event)"></app-more-search>
+		</div>
+		<nz-table
+				#ajaxTable
+				nzShowTotal
+				nzShowSizeChanger
+				[nzFrontPagination]="false"
+				[nzData]="dataSet"
+				[nzLoading]="loading"
+				[nzTotal]="total"
+				[(nzPageIndex)]="pageIndex"
+				[(nzPageSize)]="pageSize"
+				[nzPageSizeOptions]="[ 10, 20, 50, 100 ]"
+				(nzPageIndexChange)="searchData()"
+				(nzPageSizeChange)="searchData(true)">
+			<thead (nzSortChange)="sort($event)" nzSingleSort>
+			<tr>
+				<th style="min-width:100px;">属性名称</th>
+				<th style="min-width:100px;">属性编码</th>
+				<th style="min-width:100px;">属性类型</th>
+				<th style="min-width:100px;">所属分组</th>
+				<th style="min-width:100px;">显示顺序</th>
+				<th style="min-width:100px;">状态</th>
+				<th style="min-width:100px; width: 150px;">操作</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr *ngFor="let data of ajaxTable.data">
+				<td>
+					<div>{{data.displayname}}</div>
+				</td>
+				<td>
+					<div>{{data.column}}</div>
+				</td>
+				<td>{{data.displayType | attributeTypePipe}}</td>
+				<td>{{data.groupName}}</td>
+				<td>{{data.sorting}}</td>
+				<td>{{data.status | attributeStatusPipe}}</td>
+				<td>
+					<div class="table-custom-bar">
+						<a href="javascript:;" (click)="showEventAttributeAddDialog(data);">
+							编辑
+						</a>
+						<a href="javascript:;" (click)="changeEventAttributeStatus(data,0);" *ngIf="data.status == 1">
+							启用
+						</a>
+						<a href="javascript:;" (click)="changeEventAttributeStatus(data,1);" *ngIf="data.status == 0">
+							禁用
+						</a>
+					</div>
+				</td>
+			</tr>
+			</tbody>
+		</nz-table>
+	</div>
+	<app-event-attribute-add-dialog *ngIf="_isShowEventAttributeAddDialog" [isVisible]="_isShowEventAttributeAddDialog"
+	                                [data]="_currentEventAttribute" (onHide)="hideEventAttributeAddDialog($event);"
+	                                (onSubmit)="onSubmitAddEventAttribute($event);"></app-event-attribute-add-dialog>
+</main>

@@ -1,0 +1,97 @@
+<main>
+  <nz-modal
+    [nzMaskClosable]="false"
+    [(nzVisible)]="_isVisible"
+    [nzWidth]="700"
+    [nzTitle]="modalTitle"
+    [nzContent]="modalContent"
+    [nzFooter]="null"
+    (nzOnCancel)="handleCancel()"
+  >
+    <ng-template #modalTitle>
+      <span>
+        查看参数值
+        <nz-popover [nzPlacement]="'rightTop'" [(nzVisible)]="tipShow" [nzTrigger]="'hover'">
+          <span nz-popover (click)="tipShow = !tipShow">
+            <span class="icon iconfont icon-info1" style="font-size: 14px; opacity: 0.5; cursor: pointer;"></span>
+          </span>
+          <ng-template #nzTemplate>
+            <div style="padding: 0 0 5px; width:300px">
+              参数值可识别统计的上限种类为一万，即列表中启用状态的参数值数量不得超过一万，请根据业务实际使用情况调整参数值“启用/停用”状态。
+            </div>
+          </ng-template>
+        </nz-popover>
+      </span>
+    </ng-template>
+
+    <ng-template #modalContent>
+      <div nz-row class="rows">
+        <div nz-col nzSpan="12">参数名称： <span>utm_source</span></div>
+        <div nz-col nzSpan="12">
+          使用率： 0.50% (50/10000)
+        </div>
+      </div>
+      <div nz-row class="rows">
+        <div nz-col nzSpan="12">
+          <button nz-button nzType="primary" [disabled]="disabledButton" style="margin-right:20px;">停用</button>
+          <button nz-button nzType="primary" [disabled]="disabledButton" disabled>启用</button>
+        </div>
+        <div nz-col nzSpan="5">
+          <span>状态：</span>
+          <nz-select [(ngModel)]="selectedValue" nzAllowClear nzPlaceHolder="全部" style="width:80px;">
+            <nz-option nzValue="" nzLabel="全部"></nz-option>
+            <nz-option nzValue="0" nzLabel="停用"></nz-option>
+            <nz-option nzValue="1" nzLabel="启用"></nz-option>
+          </nz-select>
+        </div>
+        <div nz-col nzSpan="7">
+          <app-fast-search (onSearch)="onSearch($event)" [size]="'big'" [keyup]="true"></app-fast-search>
+        </div>
+      </div>
+      <div class="table-content">
+        <nz-table
+          #ajaxTable
+          nzShowTotal
+          nzShowSizeChanger
+          [nzFrontPagination]="true"
+          [nzData]="displayData"
+          [nzLoading]="loading"
+          [nzTotal]="total"
+          [nzSize]="'middle'"
+          [nzScroll]="{ y: '420px' }"
+          [(nzPageIndex)]="pageIndex"
+          [(nzPageSize)]="pageSize"
+          [nzPageSizeOptions]="[10, 20, 50, 100]"
+          (nzPageIndexChange)="searchData()"
+          (nzPageSizeChange)="searchData(true)"
+        >
+          <thead (nzSortChange)="sort($event)" nzSingleSort>
+            <tr>
+              <th
+                nzShowCheckbox
+                [(nzChecked)]="allChecked"
+                [nzIndeterminate]="indeterminate"
+                (nzCheckedChange)="checkAll($event)"
+              ></th>
+              <th style="min-width:100px;">参数值</th>
+              <th style="width: 150px;">登记时间</th>
+              <th style="width: 100px;">状态</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of ajaxTable.data">
+              <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus()"></td>
+              <td>{{ data.paramName }}</td>
+              <td style="width: 150px;">2019-02-11 20:46:22</td>
+              <td style="width: 100px;">
+                <span *ngIf="data.status == 0">启用</span>
+                <span *ngIf="data.status == 1">停用</span>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+        <div class="table-total">已选参数值{{ checkedNumber }}个</div>
+      </div>
+    </ng-template>
+  </nz-modal>
+</main>

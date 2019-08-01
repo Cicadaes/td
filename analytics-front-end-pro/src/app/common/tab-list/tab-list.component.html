@@ -1,0 +1,9 @@
+<div class="header-content">
+    <div>
+        <ul nz-menu [nzMode]="'horizontal'">
+            <li *ngFor="let item of tabList" nz-menu-item routerLinkActive="ant-menu-item-selected">
+                <a [routerLink]="[item.url]">{{item.name}}</a>
+            </li>
+        </ul>
+    </div>
+</div>

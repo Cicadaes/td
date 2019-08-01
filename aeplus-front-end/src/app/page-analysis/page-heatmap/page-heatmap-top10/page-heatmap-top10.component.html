@@ -1,0 +1,44 @@
+<main>
+  <div class="td-heat-map-ranking" [ngClass]="{'td-heat-map-open':_isShowTopLink}">
+    <div class="heatmap-arrow" (click)="toggleShowTopLink();" [ngClass]="{'heatmap-arrow-increase':_isShowTopLink}"></div>
+    <div class="td-heat-map-rank-list" ng-click="stopPropagation($event)">
+      <div class="td-heat-map-rank-title">
+        <span>Top10链接排名</span>
+        <nz-popover [nzTitle]="'下载消息'" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+          <a href="javascript:void(0);" (click)="downloadAllLinkData();" nz-popover>下载数据</a>
+          <ng-template #nzTemplate>
+            <div>
+              导出任务创建成功，请稍后到
+              <a (click)="goPage('/download-data')" style="margin:0 10px;">数据下载</a>页面下载您需要的附件。
+            </div>
+          </ng-template>
+        </nz-popover>
+      </div>
+      <table>
+        <thead>
+        <tr>
+          <td class="td-url-col">页面URL</td>
+          <td class="td-indicator-col">点击数</td>
+          <td class="td-indicator-col">点击占比</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="td-heat-map-row" *ngFor="let t of _datas;">
+          <td class="td-url-col">
+            <div class="td-ellipsis td-heat-map-link-url" title="{{t.url}}">
+              {{t.url}}
+            </div>
+          </td>
+          <td class="td-indicator-col">
+            <div class="td-ellipsis" title="{{t.clickNum}}">{{t.clickNum}}</div>
+          </td>
+          <td class="td-indicator-col">
+            <div class="td-ellipsis" title="{{t.clickPercent}}%">{{t.clickPercent}}%</div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="ta-c" *ngIf="!_datas || _datas.length == 0">暂无数据</div>
+    </div>
+  </div>
+</main>

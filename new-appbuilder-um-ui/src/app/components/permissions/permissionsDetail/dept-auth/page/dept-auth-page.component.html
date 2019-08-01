@@ -1,0 +1,68 @@
+<div #container>
+
+    <div class="baseInfor" *ngIf="addChild">
+        <span>父角色</span>
+    </div>
+    <p *ngIf="addChild" class="parentRole">{{parentRole}}</p>
+    <div class="baseInfor" *ngIf="!addChild">
+        <span>对应角色</span>
+    </div>
+    <div class="baseInfor" *ngIf="addChild">
+        <span>节点对应角色</span>
+    </div>
+    <div class="roleBox">
+        
+            <nz-select style="width: 200px;" [(ngModel)]="single" [nzSize]="size" nzShowSearch>
+                <nz-option *ngFor="let option of options" [nzLabel]="option.label" [nzValue]="option.value"
+                    [nzDisabled]="option.disabled">
+                </nz-option>
+            </nz-select>
+        
+    </div>
+    <div class="baseInfor">
+        <span>权限设置</span>
+    </div>
+    <ng-template #tableTotal>
+            <div  style="margin-right: 6px;">
+              总共 {{_total}} 条
+            </div>
+    </ng-template>
+        <nz-table #nzTable [nzBordered]="false" [nzShowTotal]="tableTotal" [nzShowPagination]="false" [nzData]="_dataSet" nzShowSizeChanger [nzLoading]="_loading" [nzTotal]="_total" [(nzPageIndex)]="_current"
+             [(nzPageSize)]="_pageSize" (nzDataChange)="checkData($event)" [nzFrontPagination]="false">
+
+                <thead nz-thead>
+                    <tr>
+                        <th nz-th nzCheckbox [nzWidth]="'20px'">
+                            <label nz-checkbox [(ngModel)]="_allChecked" (ngModelChange)="_checkAll($event)">
+                            </label>
+                        </th>
+                        <th nz-th [nzWidth]="'40%'"><span>操作名称</span></th>
+                        <th nz-th [nzWidth]="'50%'"><span>描述</span></th>
+                    </tr>
+                </thead>
+
+            <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                    <td nz-td nzCheckbox>
+                        <label nz-checkbox [(ngModel)]="data.hasAuth" (ngModelChange)="_refreshStatus($event)">
+                        </label>
+                    </td>
+                    <td nz-td>
+                        {{data.operatorName}}
+                    </td>
+                    <td nz-td style="padding-left:16px;">{{data.description}}</td>
+                </tr>
+            </tbody>
+        </nz-table>
+    
+    <div class="des">
+        <p>注：“权限设置”配置当前角色对下属各角色所拥有数据对象（包括各角色用户创建及有访问权限对象）的操作权限，如果没有下属角色，“权限设置”无法生效，可以不设置。</p>
+    </div>
+    
+    
+        <button nz-button [nzType]="'primary'" [nzSize]="'large'" style="margin-top: 15px;" (click)="handleOk($event)"
+            [nzLoading]="isConfirmLoading">
+            确 定
+        </button>
+   
+</div>

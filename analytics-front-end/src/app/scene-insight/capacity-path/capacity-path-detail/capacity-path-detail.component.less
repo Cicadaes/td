@@ -1,0 +1,289 @@
+:host ::ng-deep .search-list {
+  border-top: 1px solid rgba(23, 35, 61, 0.1);
+  padding: 0px 16px;
+  background-color: #fff;
+  margin: 0;
+
+  &-one {
+    padding: 12px 0px;
+    overflow: hidden;
+
+    &-wap {
+      float: left;
+      margin-right: 24px;
+
+      &-bg {
+        display: inline-block;
+        background-color: rgba(23, 35, 61, 0.06);
+        height: 32px;
+        line-height: 32px;
+        font-size: 12px;
+        color: rgba(23, 35, 61, 0.75);
+        padding: 0px 12px;
+        border-radius: 4px;
+      }
+    }
+  }
+
+  &-one:first-child {
+    border-bottom: 1px dashed #dedfe3;
+  }
+}
+
+.search-list .item {
+  float: left;
+  margin-right: 10px;
+}
+
+.search-list .item-range {
+  float: left;
+}
+
+:host ::ng-deep .total-path {
+  clear: both;
+  margin-top: 34px;
+  font-size: 16px;
+  color: #17233d;
+  font-weight: 500;
+
+  b {
+    color: #2185f0;
+  }
+}
+
+/*common css*/
+.ystep-container-steps {
+  display: inline-block;
+  position: relative;
+  color: #000;
+  padding: 0 20px 20px 20px;
+  width: 100%;
+}
+
+.ystep-container-steps > li {
+  float: left;
+  width: 20%;
+  height: 50px;
+  background: url('/assets/images/capacity-path/line.png') repeat-x;
+  background-position: 0px 3px;
+  padding-top: 25px;
+  line-height: 30px;
+  margin: 25px 0 0 0;
+  position: relative;
+  padding-right: 10px;
+  padding-left: 3px;
+}
+
+.ystep-container-steps > li.li-right {
+  float: right;
+}
+
+.ystep-container-steps > li.li-left.li-left-last {
+  background: url('/assets/images/capacity-path/line-y.png') repeat-y;
+  background-position: 10px 0;
+}
+
+.ystep-container-steps > li.li-left:last-child,
+.ystep-container-steps > li.li-right.li-right-first {
+  background: none;
+}
+
+.ystep-container-steps > li.li-right.li-right-first > .i-line-y,
+.ystep-container-steps > li.li-left.li-right-first > .i-line-y {
+  display: block;
+  position: absolute;
+  background: url('/assets/images/capacity-path/line-y.png') repeat-y;
+  width: 10px;
+  height: 30px;
+  top: -30px;
+  left: 10px;
+}
+
+.ystep-container-steps > li.li-right.li-left-last > .i-line-y {
+  display: block;
+  position: absolute;
+  background: url('/assets/images/capacity-path/line-y.png') repeat-y;
+  width: 10px;
+  height: 30px;
+  top: 20px;
+  left: 10px;
+}
+
+.ystep-container-steps > li > .i-line-y,
+.ystep-container-steps > li.li-right.li-left-last:last-child > .i-line-y {
+  display: none;
+}
+
+.ystep-container-steps > li > .i-dot {
+  position: absolute;
+  background: url('/assets/images/capacity-path/dot.png') no-repeat;
+  background-size: 100px 100px;
+  width: 30px;
+  height: 30px;
+  top: -8px;
+  left: 0;
+  z-index: 1;
+}
+
+.ystep-container-steps > li > .i-dot.i-dot-event {
+  background-position: 0 0;
+}
+
+.ystep-container-steps > li > .i-dot.i-dot-page {
+  background-position: -70px 0px;
+}
+
+.ystep-container-steps > li > .name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+  position: relative;
+  z-index: 1;
+  font-size: 12px;
+  color: rgba(23, 35, 61, 0.75);
+  line-height: 20px;
+}
+
+/*智能路径查看页面*/
+.intelligent-path-view {
+  background: rgba(23, 35, 61, 0.06);
+}
+
+.intelligent-path-view .intelligent-path-list {
+  margin: 0;
+  padding: 0;
+}
+
+.intelligent-path-view .intelligent-path-list > li {
+  background: #fff;
+  border-radius: 3px;
+  margin: 20px;
+  padding: 0;
+  border: 1px solid #eee;
+  box-shadow: 1px 1px 0px #eee;
+}
+
+.intelligent-path-view .intelligent-path-list > li:last-child {
+  margin-bottom: 0;
+}
+
+.intelligent-path-view .intelligent-path-list > li > dl {
+  margin: 0;
+  padding: 0;
+}
+
+.intelligent-path-view .intelligent-path-list > li > dl > dd {
+  margin: 0;
+  padding: 0;
+}
+
+.intelligent-path-view .intelligent-path-list > li .intelligent-path-attrs {
+  padding: 16px;
+}
+
+.intelligent-path-view .more-page {
+  text-align: center;
+  padding: 20px 0 20px 0;
+  font-size: 12px;
+}
+
+.intelligent-path-view .more-page a {
+  cursor: pointer;
+  color: #2d8cf0;
+}
+
+.intelligent-path-view-details {
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+  border-top: 1px solid #e8e8e8;
+  margin: 0;
+}
+
+.intelligent-path-view-details > li {
+  float: left;
+  margin: 0 100px 0 0;
+}
+
+.intelligent-path-view-details > li .lb {
+  font-size: 12px;
+  color: #17233d;
+  line-height: 20px;
+  float: left;
+  margin-right: 10px;
+}
+
+.intelligent-path-view-details > li .val {
+  font-size: 12px;
+  color: rgba(23, 35, 61, 0.75);
+  line-height: 20px;
+  float: left;
+}
+
+/*属性展示*/
+.intelligent-path-attrs {
+  border-bottom: 1px solid #e7e9eb;
+}
+
+.intelligent-path-attrs > ul {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+
+.intelligent-path-attrs > ul > li {
+  float: left;
+  padding: 0 20px;
+  border-right: 1px solid #e7e9eb;
+}
+
+.intelligent-path-attrs > ul > li:first-child {
+  padding-left: 0;
+}
+
+.intelligent-path-attrs > ul > li:last-child {
+  border-right: none;
+}
+
+.intelligent-path-attrs > ul > li .num {
+  margin-bottom: 0px;
+  margin-top: 5px;
+}
+
+.intelligent-path-attrs > ul > li .num strong {
+  font-size: 20px;
+  color: #17233d;
+  line-height: 22px;
+  font-weight: normal;
+}
+
+.intelligent-path-attrs > ul > li:first-child .num strong {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.intelligent-path-attrs > ul > li .num span {
+  margin: 0 5px;
+  font-size: 12px;
+  color: rgba(23, 35, 61, 0.75);
+  line-height: 20px;
+}
+
+.intelligent-path-attrs > ul > li .text {
+  display: none;
+}
+
+.search-list-one-wap {
+  margin-bottom: 12px;
+}
+
+.search-list-one {
+  padding-bottom: 0;
+}
+
+.ant-card-body {
+  padding: 0;
+}

@@ -1,0 +1,58 @@
+<nz-modal [(nzVisible)]="isVisible" nzWrapClassName="vertical-center-modal" [nzWidth]="410" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel($event)" [nzMaskClosable]='false'>
+    <ng-template #modalTitle>
+       <span *ngIf="portrayalFlag">编辑画像组</span>
+       <span *ngIf="!portrayalFlag">添加画像组</span>
+    </ng-template>
+    <ng-template #modalContent>
+            <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" autocomplete="off">
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="5" nzRequired nzFor="name">画像组名称</nz-form-label>
+                    <nz-form-control [nzSpan]="18" style="float: right;">
+                        <input id="name" type="name" nz-input formControlName="name" placeholder="请输入画像组名称">
+                        <nz-form-explain *ngIf="getFormControl('name').dirty && getFormControl('name').errors" style="color: #f5222d;">
+                                <ng-container *ngIf="getFormControl('name').errors.required">
+                                    请输入画像组名称
+                                </ng-container>
+                                <ng-container *ngIf="getFormControl('name').errors.maxlength">
+                                    画像组名称不能超过42个字符
+                                </ng-container>
+                                <ng-container *ngIf="getFormControl('name').errors.nameRepeat">
+                                    画像组名称不能重复
+                                </ng-container>
+                                <ng-container *ngIf="getFormControl('name').errors.nameError">
+                                    格式不正确，只支持中文、英文、数字
+                                </ng-container>
+                        </nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="5" nzRequired nzFor="sortOrder">显示顺序</nz-form-label>
+                    <nz-form-control [nzSpan]="18"  style="float: right;">
+                        <input id="sortOrder" type="sortOrder" nz-input formControlName="sortOrder" placeholder="请输入显示顺序">
+                        <nz-form-explain *ngIf="getFormControl('sortOrder').dirty && getFormControl('sortOrder').errors" style="color: #f5222d;">
+                            <ng-container *ngIf="getFormControl('sortOrder').errors.required">
+                                请输入显示顺序
+                            </ng-container>
+                            <ng-container *ngIf="getFormControl('sortOrder').errors.positiveInteger">
+                                显示顺序为正整数
+                            </ng-container>
+                            <ng-container *ngIf="getFormControl('sortOrder').errors.maxlength">
+                                显示顺序不能超过3个字符
+                            </ng-container>
+                            <ng-container *ngIf="getFormControl('sortOrder').errors.sortOrderRepeat">
+                                显示顺序不能重复
+                            </ng-container>
+                        </nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+            </form>
+    </ng-template>
+    <ng-template #modalFooter>
+        <button nz-button [nzType]="'default'" [nzSize]="small" (click)="handleCancel($event)">
+        取消
+        </button>
+        <button nz-button [nzType]="'primary'" [nzSize]="small" (click)="save()">
+        保存
+        </button>
+    </ng-template>
+</nz-modal>

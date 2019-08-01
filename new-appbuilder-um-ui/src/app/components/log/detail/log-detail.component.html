@@ -1,0 +1,160 @@
+<div class="text-content">
+    <nz-card nzTitle="日志详情">
+
+        <nz-form-item nz-row class="journal">
+            <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special-label">
+                <label for="createTime" class="label_font">操作时间</label>
+            </nz-form-label>
+            <nz-form-control nz-col [nzSm]="12" [nzXs]="24">
+                <span style="height:32px;line-height: 32px;width: 100% ">
+                    {{log.createTime | dateFormatPipe}}
+
+                </span>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row class="journal">
+            <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special-label">
+                <label for="tenantName" class="label_font">租户名称</label>
+            </nz-form-label>
+            <nz-form-control nz-col [nzSm]="12" [nzXs]="24">
+                <span style="height:32px;line-height: 32px;width: 100% ">
+                    {{log.tenantName}}
+
+                </span>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row class="journal">
+            <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special-label">
+                <label for="creator" class="label_font">操作员姓名</label>
+            </nz-form-label>
+            <nz-form-control nz-col [nzSm]="12" [nzXs]="24">
+                <span style="height:32px;line-height: 32px;width: 100% ">
+                    {{log.creator}}
+
+                </span>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row class="journal">
+            <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special-label">
+                <label for="createBy" class="label_font">操作员账号</label>
+            </nz-form-label>
+            <nz-form-control nz-col [nzSm]="12" [nzXs]="24">
+                <span style="height:32px;line-height: 32px;width: 100% ">
+                    {{log.createBy}}
+
+                </span>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row class="journal">
+            <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special-label">
+                <label for="sourceIP" class="label_font">操作员登录IP</label>
+            </nz-form-label>
+            <nz-form-control nz-col [nzSm]="12" [nzXs]="24">
+                <span style="height:32px;line-height: 32px;width: 100% ">
+                    {{log.sourceIP}}
+
+                </span>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row class="journal">
+            <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special-label">
+                <label for="browser" class="label_font">浏览器版本</label>
+            </nz-form-label>
+            <nz-form-control nz-col [nzSm]="12" [nzXs]="24">
+                <span style="height:32px;line-height: 32px;width: 100% ">
+                    {{log.browser}}
+
+                </span>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row class="journal">
+            <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special-label">
+                <label for="operType" class="label_font">操作类型</label>
+            </nz-form-label>
+            <nz-form-control nz-col [nzSm]="12" [nzXs]="24">
+                <span style="height:32px;line-height: 32px;width: 100% ">
+                    {{log.operType}}
+
+                </span>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row class="journal">
+            <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special-label">
+                <label for="operObjectId" class="label_font">操作对象ID</label>
+            </nz-form-label>
+            <nz-form-control nz-col [nzSm]="12" [nzXs]="24">
+                <span style="height:32px;line-height: 32px;width: 100% ">
+                    {{log.operObjectId}}
+
+                </span>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row class="journal">
+            <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special-label">
+                <label for="operObjectName" class="label_font">操作对象名称</label>
+            </nz-form-label>
+            <nz-form-control nz-col [nzSm]="12" [nzXs]="24">
+                <span style="height:32px;line-height: 32px;width: 100% ">
+                    {{log.operObjectName}}
+
+                </span>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row class="journal">
+            <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special-label">
+                <label for="operObjectType" class="label_font">操作对象类型</label>
+            </nz-form-label>
+            <nz-form-control nz-col [nzSm]="12" [nzXs]="24">
+                <span style="height:32px;line-height: 32px;width: 100% ">
+                    {{log.operObjectType}}
+
+                </span>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row class="journal">
+            <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special-label">
+                <label for="operObjectType" class="label_font">对象所属应用</label>
+            </nz-form-label>
+            <nz-form-control nz-col [nzSm]="12" [nzXs]="24">
+                <span style="height:32px;line-height: 32px;width: 100% ">
+                    {{log.appName}}
+
+                </span>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row class="journal">
+            <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special-label">
+                <label for="desc" class="label_font">操作描述</label>
+            </nz-form-label>
+            <nz-form-control nz-col [nzSm]="12" [nzXs]="24">
+                <span style="height:32px;line-height: 32px;width: 100% ">
+                    {{log.desc}}
+
+                </span>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row class="journal">
+            <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special-label">
+                <label for="operResult" class="label_font">操作结果</label>
+            </nz-form-label>
+            <nz-form-control nz-col [nzSm]="12" [nzXs]="24">
+                <span style="height:32px;line-height: 32px;width: 100% ">
+                    {{log.operResult}}
+
+                </span>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row class="journal">
+            <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special-label">
+                <label for="exceptionMsg" class="label_font">异常信息</label>
+            </nz-form-label>
+            <nz-form-control nz-col [nzSm]="12" [nzXs]="24">
+                <span style="height:32px;line-height: 32px;width: 100% ">
+                    {{log.exceptionMsg}}
+
+                </span>
+            </nz-form-control>
+        </nz-form-item>
+
+    </nz-card>
+</div>

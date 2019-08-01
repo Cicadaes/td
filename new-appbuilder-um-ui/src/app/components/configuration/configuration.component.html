@@ -1,0 +1,80 @@
+<div class="configuration">
+        <div class='_configuration'>
+                <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+                        <nz-form-item>
+                                <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label" nzRequired>
+                                        <label for="title" class="title" class="special-label-before">页面标题</label>
+                                </nz-form-label>
+                                <nz-form-control nz-col [nzSm]="14" [nzXs]="24" style="margin-left:60px">
+                                        <input nz-input nzSize="large" placeholder="请输入标题" formControlName="title" Id="title"
+                                                [(ngModel)]="title">
+                                        <nz-form-explain style="color:red;" style="color:red" *ngIf="getFormControl('title').dirty && getFormControl('title').errors">
+                                                <p *ngIf="getFormControl('title').errors['required']">请输入页面标题</p>
+                                                <p *ngIf="getFormControl('title').errors['maxlength']">输入的页面标题过长</p>
+                                                <p *ngIf="getFormControl('title').errors['minlength']">输入的页面标题长度不得小于2位</p>
+                                                <p style="width:120%" *ngIf="!getFormControl('title').errors['minlength']&&!getFormControl('title').errors['maxlength']&&getFormControl('title').errors['duplicated']">只能输入中文、数字、26个英文字母、-_&、空格（不能全为空格）</p>
+                                        </nz-form-explain>
+                                </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item nz-row>
+                                <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label" nzRequired>
+                                        <label class="title" class="special-label-before">页面logo</label>
+                                </nz-form-label>
+                                <nz-form-control nz-col [nzSm]="14" [nzXs]="24" style="margin-left:60px">
+                                        <upload-images [uploadParam]="pageLoge" [size]="100" (onUpload)="onUploadpageLoge($event);"
+                                                (onRemove)="onRemovepageLoge($event);" (onError)="onErrorpageLoge($event);"
+                                                class="pictermax"></upload-images>
+                                        <div *ngIf="errorlogo">
+                                                <span style="color: red">请上传页面logo</span>
+                                        </div>
+                                        <div>
+                                                <p style="display:block;color:#D1D1D9;font-size: 12px;line-height: 20px">推荐：315*40，只支持jpg/png格式图片，透明底色，文件最大不超过100k</p>
+                                        </div>
+
+                                </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item nz-row>
+                                <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label" nzRequired>
+                                        <label for="baseMap" class="title" class="special-label-before">页面底图</label>
+                                </nz-form-label>
+                                <nz-form-control nz-col [nzSm]="14" [nzXs]="24" style="margin-left:60px">
+                                        <nz-radio-group formControlName="baseMap" [(ngModel)]="baseMap" style="width:100%"
+                                                (ngModelChange)='pagePicture()'>
+                                                <label nz-radio [nzValue]="'img'" style="display:block;width: 100%;line-height: 36px;">
+                                                        图片
+                                                </label>
+                                                <div style="padding-left: 0px;" (click)="select('img')">
+                                                        <upload-images [uploadParam]="pageBackground" [size]="3072"
+                                                                (onUpload)="onUploadpageBackground($event);" (onRemove)="onRemovepageBackground($event);"
+                                                                (onError)="onErrorpageBackground($event);" class="pictermax"></upload-images>
+                                                        <div *ngIf="errorbackground">
+                                                                <span style="color: red">请上传页面底图</span>
+                                                        </div>
+                                                        <div>
+                                                                <p style="display:block;color:#D1D1D9;font-size: 12px;line-height: 20px">推荐：1920*1080大小，只支持jpg/png格式图片，文件最大不超过3M</p>
+                                                        </div>
+                                                </div>
+                                                <label nz-radio [nzValue]="'color'" style="display:block;width: 100%;line-height: 36px;">
+                                                        颜色
+                                                </label>
+                                                <div class="color" style="padding-left: 0px;" (click)="select('color')">
+                                                        <div [style.background]="color" [cpPresetColors]="cpPresetColors"
+                                                                [cpPresetColors]="cpPresetColors" [(colorPicker)]="color"
+                                                                style="width:16px;height:16px;border:1px solid #cccccc;width: 96px"
+                                                                [cpPosition]="'right'" [cpPositionOffset]="'-1000%'"
+                                                                [cpPositionRelativeToArrow]="true">
+                                                        </div>
+                                                </div>
+                                        </nz-radio-group>
+                                </nz-form-control>
+                        </nz-form-item>
+                </form>
+        </div>
+
+        <div class="savebottom">
+                <button nz-button nzType="primary" [nzSize]="'large'" (click)="determine($event)">
+                        确 定
+                </button>
+        </div>
+
+</div>

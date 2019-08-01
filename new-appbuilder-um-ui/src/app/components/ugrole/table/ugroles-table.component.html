@@ -1,0 +1,35 @@
+<ng-template #tableTotal>
+        <div  style="margin-right: 6px;">
+          总共 {{_total}} 条
+        </div>
+</ng-template>
+<nz-table #nzTable [nzBordered]="false" [nzShowTotal]="tableTotal" [nzData]="_dataSet"
+    nzShowSizeChanger [nzLoading]="_loading" [nzTotal]="_total" [(nzPageIndex)]="_current" (nzPageIndexChange)="refreshData()"
+    [(nzPageSize)]="_pageSize" (nzPageSizeChange)="refreshData(true)" [nzFrontPagination]="false">
+    <thead>
+        <tr>
+            <th nzShowCheckbox [(nzChecked)]="_allChecked" [nzIndeterminate]="_indeterminate" (nzCheckedChange)="_checkAll($event)"></th>
+            <th [nzWidth]="'30%'">
+                角色名称
+            </th>
+            <th [nzWidth]="'50%'">
+                角色描述
+            </th>
+            <th [nzWidth]="'20%'">
+                <span>操作</span>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of nzTable.data">
+            <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="_refreshStatus($event, data.id)"></td>
+            <td>{{data.name}}</td>
+            <td>{{data.desc}}</td>
+            <td>
+                <span *ngIf="!(data.code == 'UM_TENANT_APP_ADMIN' || data.code == 'UM_TENANT_APP_ADMIN_CANCEL')">
+                    <a href="javascript:;" (click)="deleteRolesFormUserGroup(data)">移除</a>
+                </span>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>

@@ -1,0 +1,45 @@
+<main *ngIf="select && !select.originData">
+  <nz-select
+    nzShowSearch
+    (nzOnSearch)="onSearch($event)"
+    class="select-search"
+    style="width:100%;"
+    [nzSize]="_size"
+    (ngModelChange)="changeSelect($event)"
+    [nzPlaceHolder]="'请选择'"
+    [(ngModel)]="selectedOptionValue"
+    (nzSearchChange)="searchChange($event)"
+    [nzNotFoundContent]="'暂无数据'"
+  >
+    <nz-option *ngFor="let option of searchOptions" [nzLabel]="option.label" nzCustomContent [nzValue]="option.value">
+      <div title="{{ option.label }}">{{ option.label }}</div>
+    </nz-option>
+  </nz-select>
+</main>
+
+<main *ngIf="select && select.originData">
+  <nz-select
+    nzShowSearch
+    (nzOnSearch)="onSearch($event)"
+    class="select-search"
+    style="width:100%;"
+    [nzSize]="_size"
+    (ngModelChange)="changeSelect($event)"
+    [nzPlaceHolder]="'请选择'"
+    [(ngModel)]="selectedOptionValue"
+    (nzSearchChange)="searchChange($event)"
+    [nzNotFoundContent]="'暂无数据'"
+    (nzScrollToBottom)="loadMore()"
+    nzShowSearch
+    [nzServerSearch]="true"
+    (nzOnSearch)="onSearch($event)"
+  >
+    <nz-option *ngFor="let option of searchOptions" [nzLabel]="option.label" nzCustomContent [nzValue]="option.value">
+      <div title="{{ option.label }}">{{ option.label }}</div>
+    </nz-option>
+    <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+      <span class="ant-compat anticon anticon-loading anticon-spin loading-icon"></span>
+      加载数据...
+    </nz-option>
+  </nz-select>
+</main>

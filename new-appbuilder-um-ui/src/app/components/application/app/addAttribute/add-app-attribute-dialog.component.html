@@ -1,0 +1,105 @@
+<nz-modal [nzVisible]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+  (nzOnCancel)="handleCancel($event)" (nzOnOk)="handleOk($event)" [nzMaskClosable]="false">
+  <ng-template #modalTitle>
+    <span>{{dialogTitle}}</span>
+  </ng-template>
+  <ng-template #modalContent>
+
+    <!-- <nz-input-group [nzSize]="'large'">
+        <nz-form-label nz-col [nzSm]="6" [nzXs]="24" nzRequired>
+          <label for="code">代码</label>
+        </nz-form-label>
+        <div nz-col [nzSpan]="14">
+          <input [(ngModel)]="code" nz-input>
+        </div>
+      </nz-input-group>
+      <br>
+      <nz-input-group [nzSize]="'large'">
+        <nz-form-label nz-col [nzSm]="6" [nzXs]="24" nzRequired>
+          <label for="name">名称</label>
+        </nz-form-label>
+        <div nz-col [nzSpan]="14">
+          <input [(ngModel)]="name" nz-input>
+        </div>
+      </nz-input-group>
+      <br>
+      <nz-input-group [nzSize]="'large'">
+        <nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+          <label for="defaultValue">描述</label>
+        </nz-form-label>
+        <div nz-col [nzSpan]="14">
+          <input [(ngModel)]="defaultValue" nz-input>
+        </div>
+      </nz-input-group> -->
+
+
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="_submitForm()">
+      <nz-form-item nz-row>
+        <nz-form-label nz-col [nzSm]="6" [nzXs]="24" class="this-label" nzRequired>
+          <label for="name">功能类别名称</label>
+        </nz-form-label>
+        <nz-form-control nz-col [nzSpan]="14">
+          <input nz-input [nzSize]="'large'" formControlName="name" [(ngModel)]="name" id="name">
+          <nz-form-explain style="color:red;" >
+            <span *ngIf="_name.dirty && _name.errors && _name.errors.required">请输入功能类别名称</span>
+            <span *ngIf="_name.dirty && _name.errors && _name.errors.nRepeat">功能类别名称已存在</span>
+            <span *ngIf="_name.dirty && _name.errors && _name.errors.maxlength">输入的功能类别名称过长</span>
+          </nz-form-explain>
+          <!--<div nz-form-explain *ngIf="errorCode==3" style="color: red">名称已存在</div>-->
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item nz-row>
+        <nz-form-label nz-col [nzSm]="6" [nzXs]="24" class="this-label" nzRequired>
+          <label for="code">功能类别编码</label>
+        </nz-form-label>
+        <nz-form-control nz-col [nzSpan]="14">
+          <input nz-input [nzSize]="'large'" *ngIf="!isedit" formControlName="code" [(ngModel)]="code" id="code">
+          <input nz-input [nzSize]="'large'" *ngIf="isedit" formControlName="code" [(ngModel)]="code" id="code"
+            disabled="true" style="background-color: #f5f5f5;">
+          <nz-form-explain style="color:red;" >
+            <span *ngIf="_code.dirty && _code.errors && _code.errors.required">请输入功能类别编码</span>
+            <span *ngIf="_code.dirty && _code.errors && _code.errors.forbiddenName">功能类别编码只能由字母、数字或_组成</span>
+            <span *ngIf="_code.dirty && _code.errors && _code.errors.maxlength">输入的功能类别编码过长</span>
+            <span *ngIf="_code.dirty && _code.errors && _code.errors.cRepeat">功能类别编码已存在</span>
+          </nz-form-explain>
+          <!--<div nz-form-explain *ngIf="errorCode==1" style="color: red">代码已存在</div>-->
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item nz-row>
+        <nz-form-label nz-col [nzSm]="6" [nzXs]="24" class="this-label">
+          <label for="defaultValue" nzRequired class="special-label-before" style="padding-left:10px;">描述</label>
+        </nz-form-label>
+        <nz-form-control nz-col [nzSpan]="14">
+          <textarea nz-input [nzSize]="'large'" formControlName="defaultValue" [(ngModel)]="defaultValue" id="defaultValue"></textarea>
+          <nz-form-explain style="color:red;" *ngIf="_defaultValue.dirty && _defaultValue.errors &&_defaultValue.errors.maxlength">输入的描述过长</nz-form-explain>
+
+        </nz-form-control>
+        <!--<div nz-form-control nz-col [nzSpan]="14"  *ngIf="errorCode==1" style="margin-left: 121px">
+              <div style="color: red">代码或名称已存在</div>
+            </div>-->
+      </nz-form-item>
+      <!--<nz-form-item nz-row  *ngIf="errorCode==1">
+            <nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+
+            </nz-form-label>
+            <nz-form-control nz-col [nzSpan]="14" >
+              <div style="color: red">代码或名称已存在</div>
+            </nz-form-control>
+          </div>-->
+    </form>
+
+
+  </ng-template>
+
+  <ng-template #modalFooter>
+
+    <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancel($event)">
+      取 消
+    </button>
+
+    <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="submitAttribute($event)" [nzLoading]="isConfirmLoading">
+      保 存
+    </button>
+
+  </ng-template>
+</nz-modal>

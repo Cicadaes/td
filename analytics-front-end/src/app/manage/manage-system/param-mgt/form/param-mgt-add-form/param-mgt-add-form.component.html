@@ -1,0 +1,70 @@
+<main>
+  <form class="custom-form" nz-form [formGroup]="validateForm">
+    <div style="font-size: 13px; color: #2d8cf0;margin-bottom: 16px;">
+      <i nz-icon type="info-circle" theme="fill" style="font-size: 16px; margin: 0 12px 0 6px; "></i>
+      参数名称、参数含义一经确认不可修改，请认真填写
+    </div>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>参数名称</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <input
+          nz-input
+          formControlName="name"
+          placeholder="请输入真实使用的参数名称"
+          maxlength="26"
+          (keyup)="keyupInputValue()"
+        />
+        <div class="custom-form-explain clrfix">
+          <nz-form-explain *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors">
+            <ng-container *ngIf="validateForm.get('name').hasError('required')">
+              参数名称不能为空
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('name').hasError('rule')">
+              参数名称只能是字母，数字和下划线
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('name').hasError('duplicated')">
+              该参数名称已存在
+            </ng-container>
+          </nz-form-explain>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5">&nbsp;显示名</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <input nz-input formControlName="displayname" placeholder="请输入参数显示的业务名称" maxlength="128" />
+        <div class="custom-form-explain clrfix">
+          <nz-form-explain
+            *ngIf="
+              (validateForm.get('displayname').dirty && validateForm.get('displayname').errors) ||
+              validateForm.get('displayname').pending
+            "
+          >
+            <ng-container *ngIf="validateForm.get('displayname').hasError('required')">
+              显示名不能为空
+            </ng-container>
+          </nz-form-explain>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>参数含义</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <input nz-input formControlName="parammean" placeholder=" 请输入参数用来标识的含义" maxlength="26" />
+        <div class="custom-form-explain clrfix">
+          <nz-form-explain
+            *ngIf="
+              (validateForm.get('parammean').dirty && validateForm.get('parammean').errors) ||
+              validateForm.get('parammean').pending
+            "
+          >
+            <ng-container *ngIf="validateForm.get('parammean').hasError('required')">
+              参数含义不能为空
+            </ng-container>
+          </nz-form-explain>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</main>

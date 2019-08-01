@@ -1,0 +1,64 @@
+<div class="text-content">
+    <div class="table-operator clrfix">
+        <button nz-button [nzType]="'primary'" (click)="add()">
+            <i class="anticon anticon-plus"></i>域名前缀
+        </button>
+        <app-add-domain-name [isVisible]="addFlag" (hideDialog)="hideDialog($event);" [editData]="editData" [editFlag]="editFlag"
+            (saveDate)="saveDate();" [productList]='pDataList'></app-add-domain-name>
+        <app-detail-domain-name [isVisible]="detailFlag" (hideDetailDialog)="hideDetailDialog($event);" [editData]="editData" ></app-detail-domain-name>
+    </div>
+    <div class="operation-region">
+        <more-search [fieldArray]="domainNameArray" (onSearch)="onSearchDomainNameList($event)"></more-search>
+        <ng-template #tableTotal>
+                <div  style="margin-right: 6px;">
+                  总共 {{_total}} 条
+                </div>
+        </ng-template>
+        <nz-table #nzTable 
+            [nzData]="_dataSet" 
+            [nzShowTotal]="tableTotal" 
+            nzShowSizeChanger 
+            [nzLoading]="_loading" 
+            [nzTotal]="_total"
+            [(nzPageIndex)]="_pageIndex" 
+            [(nzPageSize)]="_pageSize" 
+            [nzFrontPagination]="false" 
+            (nzPageSizeChange)="refreshData(true)"
+            (nzPageIndexChange)="refreshData()">
+            <thead nz-thead>
+                <tr>
+                    <th [nzWidth]="'20%'">
+                        名称
+                    </th>
+                    <th [nzWidth]="'25%'">
+                        域名前缀
+                    </th>
+                    <th [nzWidth]="'15%'">
+                        适用产品
+                    </th>
+                    <th [nzWidth]="'25%'">
+                        描述
+                    </th>
+                    <th [nzWidth]="'15%'">
+                        操作
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of nzTable.data">
+                    <td>{{data.name}}</td>
+                    <td>{{data.domain}}</td>
+                    <td>{{data.catalogNames}}</td>
+                    <td><span title="{{data.description}}">{{data.description | setValueLengthPipe:15}}</span></td>
+                    <td>
+                        <a href="javascript:;" (click)="detail(data)">查看</a>
+                        <nz-divider nzType="vertical"></nz-divider>
+                        <a href="javascript:;" (click)="edit(data)">编辑</a>
+                        <nz-divider nzType="vertical"></nz-divider>
+                        <a href="javascript:;" (click)="delete(data)">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+</div>

@@ -1,0 +1,137 @@
+<main>
+  <div class="search-list">
+    <common-date (dateChange)="dataChange($event)" [_date]="dateRange"></common-date>
+  </div>
+  <div class="content">
+    <div class="content-one">
+      <app-overview [rowCount]="4" [options]="overviewOptions" [loading]="overviewLoad"></app-overview>
+    </div>
+
+    <div class="content-one">
+      <app-error-tend [tendOptions]="tendOptions" [tabLength]="0" [loading]="tendLoad"></app-error-tend>
+    </div>
+
+    <div class="content-one">
+      <app-error-top
+        [topOptions]="topOptions"
+        (changeGetTop)="changeGetTop($event)"
+        [loading]="topLoad"
+      ></app-error-top>
+    </div>
+
+    <div class="content-one">
+      <h3 class="title special-title">
+        错误列表
+        <div class="title-down">
+          <nz-popover [nzTitle]="'下载消息'" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+            <span class="icon iconfont icon-download item" nz-popover (click)="downloadData()"></span>
+            <ng-template #nzTemplate>
+              <div>
+                导出任务创建成功，请稍后到
+                <a (click)="goPage('/download-data')" style="margin:0 10px;">数据下载</a>
+                页面下载您需要的附件。
+              </div>
+            </ng-template>
+          </nz-popover>
+          <!-- 描述 -->
+          <nz-popover [nzTitle]="'指标说明'" [nzPlacement]="'leftBottom'" [nzTrigger]="'hover'">
+            <span class="icon iconfont icon-info1 item" nz-popover></span>
+            <ng-template #nzTemplate>
+              <ul class="des-ul">
+                <li class="clrfix">
+                  <label>错误摘要：</label>
+                  <div class="des">
+                    从错误日志详情内截取出的可以用于初步错误分类的内容。
+                  </div>
+                </li>
+                <li class="clrfix">
+                  <label>首次发生时间：</label>
+                  <div class="des">
+                    所选时间范围内，某摘要下的错误首次发生的时间。
+                  </div>
+                </li>
+                <li class="clrfix">
+                  <label>最近发生时间：</label>
+                  <div class="des">
+                    所选时间范围内，某摘要下的错误最后一次发生的时间。
+                  </div>
+                </li>
+                <li class="clrfix">
+                  <label>错误次数：</label>
+                  <div class="des">
+                    所选时间范围内，某摘要下的错误发生的总次数。
+                  </div>
+                </li>
+                <li class="clrfix">
+                  <label>影响用户数：</label>
+                  <div class="des">
+                    所选时间范围内，发生某摘要下的错误的用户数。
+                  </div>
+                </li>
+              </ul>
+            </ng-template>
+          </nz-popover>
+        </div>
+        <div class="title-search">
+          <nz-input-group [nzPrefix]="suffixIconSearch" nzSize="small">
+            <input
+              type="text"
+              nz-input
+              placeholder="输入关键字搜索"
+              [(ngModel)]="searchValue"
+              nzSize="small"
+              (keyup)="searchErrorList($event, 'key')"
+            />
+          </nz-input-group>
+          <ng-template #suffixIconSearch>
+            <i nz-icon type="search" (click)="searchErrorList(searchValue, 'click')"></i>
+          </ng-template>
+        </div>
+      </h3>
+      <div class="chart special-chart">
+        <nz-table
+          #nzTable
+          [nzData]="tableData"
+          nzShowSizeChanger
+          [nzLoading]="loading"
+          [nzTotal]="total"
+          [(nzPageIndex)]="pageIndex"
+          [(nzPageSize)]="pageSize"
+          [nzFrontPagination]="false"
+          (nzPageSizeChange)="getList(true)"
+          (nzPageIndexChange)="getList()"
+          [nzPageSizeOptions]="pageOptions"
+        >
+          <thead (nzSortChange)="sort($event)" nzSingleSort>
+            <tr>
+              <th [nzWidth]="'26%'">错误摘要</th>
+              <th nzShowSort nzSortKey="firstOccurs" [nzWidth]="'17%'">
+                首次发生时间
+              </th>
+              <th nzShowSort nzSortKey="lastOccurs" [nzWidth]="'17%'">
+                最近发生时间
+              </th>
+              <th nzShowSort nzSortKey="errorTimes" [nzWidth]="'15%'">
+                错误次数
+              </th>
+              <th nzShowSort nzSortKey="affectUsers" [nzWidth]="'15%'">
+                影响用户数
+              </th>
+              <th [nzWidth]="'10%'">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of nzTable.data">
+              <td>{{ data.digest }}</td>
+              <td>{{ data.firstOccurs | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+              <td>{{ data.lastOccurs | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+              <td>{{ data.errorTimes | numberToThousandsPipe: 3 }}</td>
+              <td>{{ data.affectUsers | numberToThousandsPipe: 3 }}</td>
+              <td><a (click)="detail(data)">详情</a></td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </div>
+    </div>
+  </div>
+</main>

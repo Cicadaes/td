@@ -1,0 +1,139 @@
+<nz-modal
+  [(nzVisible)]="userInfoshow"
+  [nzMaskClosable]="false"
+  [nzWidth]="420"
+  [nzTitle]="showdata?.startMenuAccountSettingusername"
+  [nzContent]="modalContentuser"
+  [nzFooter]="modalFooteruser"
+  (nzOnCancel)="hideuser()"
+>
+  <ng-template #modalContentuser>
+    <form class="form-horizontal clrfix">
+      <div class="control-group">
+        <label class="control-label"> &nbsp;&nbsp;&nbsp;&nbsp;{{ showdata?.startMenuAccountSettinguserName }}: </label>
+        <div class="controls">
+          <span id="account-email">{{ appConfig?.user?.email }}</span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">
+          <span class="required">✳&nbsp;</span>
+          {{ showdata?.startMenuAccountSettingName }}:
+        </label>
+        <div class="controls">
+          <input
+            id="name"
+            nz-input
+            [(ngModel)]="name"
+            name="name"
+            [ngClass]="_oldPasswdCls"
+            placeholder="{{ showdata?.startMenuuser1 }}"
+            autocomplete="off"
+            (keyup)="prompt($event)"
+          />
+          <span style="color: red;position: relative;" *ngIf="namepromptshow">{{ nameprompt }}</span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">
+          <span class="required">✳&nbsp;</span>
+          {{ showdata?.startMenuAccountSettingPhoneNumber }}:
+        </label>
+        <div class="controls">
+          <input
+            id="phoneNumber"
+            nz-input
+            [(ngModel)]="phoneNumber"
+            name="phoneNumber"
+            [ngClass]="_oldPasswdCls"
+            placeholder="{{ showdata?.startMenuuser2 }}"
+            autocomplete="off"
+            (keyup)="prompt($event)"
+          />
+          <span style="color: red;position: relative;" *ngIf="phoneNumberpromptshow">{{ phoneNumberprompt }}</span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label"> &nbsp;&nbsp;&nbsp;&nbsp;{{ showdata?.startMenuAccountSettingPhone }}: </label>
+        <div class="controls">
+          <input
+            id="phone"
+            nz-input
+            (keyup)="promptphone($event)"
+            [(ngModel)]="phone"
+            name="phone"
+            [ngClass]="_oldPasswdCls"
+            placeholder="{{ showdata?.startMenuuser3 }}"
+            autocomplete="off"
+          />
+          <span style="color: red;position: relative;" *ngIf="phonepromptshow">{{ phoneprompt }}</span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label"> &nbsp;&nbsp;&nbsp;&nbsp;{{ showdata?.startMenuAccountSettingQQ }}: </label>
+        <div class="controls">
+          <input
+            id="QQ"
+            nz-input
+            (keyup)="promptqq($event)"
+            [(ngModel)]="QQ"
+            name="QQ"
+            [ngClass]="_oldPasswdCls"
+            placeholder="{{ showdata?.startMenuuser4 }}"
+            autocomplete="off"
+          />
+          <span style="color: red;position: relative;" *ngIf="qqpromptshow">{{ qqprompt }}</span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label"> &nbsp;&nbsp;&nbsp;&nbsp;{{ showdata?.startMenuAccountSettingWX }}: </label>
+        <div class="controls">
+          <input
+            id="WX"
+            nz-input
+            (keyup)="promptwx($event)"
+            [(ngModel)]="WX"
+            name="WX"
+            [ngClass]="_oldPasswdCls"
+            placeholder="{{ showdata?.startMenuuser5 }}"
+            autocomplete="off"
+          />
+          <span style="color: red;position: relative;display:inherit;width: 325px;" *ngIf="wxpromptshow">{{
+            wxprompt
+          }}</span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label"> &nbsp;&nbsp;&nbsp;&nbsp;{{ showdata?.startMenuAccountSettinggender }}: </label>
+        <div class="controls">
+          <nz-radio-group id="radioValue" name="radioValue" [(ngModel)]="radioValue" nzName="radiogroup">
+            <label nz-radio nzValue="male">{{ showdata?.radioValue0 }}</label>
+            <label nz-radio nzValue="woman">{{ showdata?.radioValue1 }}</label>
+          </nz-radio-group>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label"> &nbsp;&nbsp;&nbsp;&nbsp;{{ showdata?.startMenuAccountSettingPosition }}: </label>
+        <div class="controls">
+          <input
+            id="position"
+            nz-input
+            (keyup)="promptposition($event)"
+            [(ngModel)]="position"
+            name="position"
+            [ngClass]="_oldPasswdCls"
+            placeholder="{{ showdata?.startMenuuser6 }}"
+            autocomplete="off"
+          />
+          <span style="color: red;position: relative;display:inherit;width: 305px;" *ngIf="positionpromptshow">{{
+            positionprompt
+          }}</span>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+  <ng-template #modalFooteruser>
+    <button nz-button nzType="default" (click)="hideuser()">{{ showdata?.publicCancel }}</button>
+    <button nz-button nzType="primary" (click)="updateuser($event)">{{ showdata?.publicSave }}</button>
+  </ng-template>
+</nz-modal>

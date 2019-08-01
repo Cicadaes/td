@@ -1,0 +1,105 @@
+<main>
+	<div class="first-level"></div>
+	<div class="dataHead shadow-content">
+		<p class="title">当前年度营销计划完成情况</p>
+		<ul class="list">
+			<li>
+				<p class="font-slender">多触点流程总数</p>
+				<span class="mkt_count">{{campaignOverview.complexTotal || 0}}</span>
+			</li>
+			<li>
+				<p class="font-slender">已完成流程数</p>
+				<span class="mkt_count">{{campaignOverview.complexFinishCount || 0}}</span>
+				<span class="percentage">({{campaignOverview.complexFinishCountPercent || 0.00}}%)</span>
+				<div class="progress_bar">
+					<div class="progress_percent" [ngStyle]="{'width': (campaignOverview.complexFinishCountPercent || 0) + '%'}"></div>
+				</div>
+			</li>
+			<li>
+				<p class="font-slender">进行中流程数</p>
+				<span class="mkt_count">{{campaignOverview.complexRunningCount || 0}}</span>
+				<span class="percentage">({{campaignOverview.complexRunningCountPercent || 0.00}}%)</span>
+				<div class="progress_bar">
+					<div class="progress_percent" [ngStyle]="{'width': (campaignOverview.complexRunningCountPercent || 0) + '%'}"></div>
+				</div>
+			</li>
+			<li>
+				<p class="font-slender">未开始流程数</p>
+				<span class="mkt_count">{{campaignOverview.complexWaitingCount || 0}}</span>
+				<span class="percentage">({{campaignOverview.complexWaitingCountPercent || 0.00}}%)</span>
+				<div class="progress_bar">
+					<div class="progress_percent" [ngStyle]="{'width': (campaignOverview.complexWaitingCountPercent || 0) + '%'}"></div>
+				</div>
+			</li>
+			<li>
+				<div class="border-box"></div>
+				<p class="font-slender">单触点投放总数</p>
+				<span class="mkt_count">{{campaignOverview.singleTotal || 0}}</span>
+			</li>
+		</ul>
+	</div>
+	<div class="dataBody shadow-content">
+		<div class="top">
+			<div class="top-name">
+				营销活动计划表
+			</div>
+			<div *ngFor="let y of yearList;let i = index;" [ngStyle]="{'width': y.width}" [ngClass]="{'top-time': true, 'top-time-left-border': !!i}">
+				{{y.year}}年
+			</div>
+		</div>
+		<div class="table-title" style="border-bottom: none;">
+			<div class="title-name" style="border-right: 1px solid rgba(23,35,61,0.03);">活跃用户总量</div>
+			<div class="title-chart">
+				<app-chart [option]="activityChart"></app-chart>
+			</div>
+		</div>
+		<div class="table-title">
+			<div class="title-name">单触点投放</div>
+			<div class="title-month scl-push">
+				<div class="item-push" *ngFor="let data of sclPushList;" [ngStyle]="{'left': data.endLeft, 'width': data.endWidth}">
+					<nz-tooltip [nzPlacement]="'top'">
+						<div style="height: 100%;" nz-tooltip ></div>
+						<ng-template #nzTemplate>
+							<div class="tooltip-div">
+								<div *ngFor="let push of data.data;" class="tooltip-item">
+									<p>{{push.name}}</p>
+									{{push.startTime && push.startTime.substr(0, 16)}}
+								</div>
+							</div>
+						</ng-template>
+					</nz-tooltip>
+				</div>
+			</div>
+		</div>
+		<div class="table-title content-width" style="border-bottom: 1px solid #E1E8F0;">
+			<div class="title-name title-width">多触点流程</div>
+			<div class="title-month month-item-width" *ngFor="let m of monthList;let i = index">
+				<div *ngIf="i==0" class="table-title-left" (click)="beforeMonth()">
+					<span class="ant-compat anticon anticon-caret-left"></span>
+				</div>
+				<div *ngIf="i==11" class="table-title-rigth" (click)="afterMonth()">
+					<span class="ant-compat anticon anticon-caret-right"></span>
+				</div>
+				{{m}}月
+			</div>
+		</div>
+		<div id="content" class="table-content">
+			<div class="content-list" *ngFor="let data of campaignList;">
+				<div class="content-name">
+					<span [title]="data.name">{{data.name}}</span>
+				</div>
+				<div class="content-table" *ngFor="let m of monthList;"></div>
+				<div class="content-plan">
+					<div class="time-end" [ngStyle]="{'left': data.endLeft, 'width': data.endWidth}"></div>
+					<div class="time-future" [ngStyle]="{'left': data.futureLeft, 'width': data.futureWidth}"></div>
+					<div *ngIf="data.left" class="question-tip" [ngStyle]="{'left': data.tipLeft}">
+						<em></em> {{data.startTime && data.startTime.substr(0, 10)}} ~ {{data.endTime && data.endTime.substr(0, 10)}}
+					</div>
+					<div *ngIf="!data.left" class="question-tip rigth-tip" [ngStyle]="{'left': data.tipLeft}">
+						<em></em> {{data.startTime && data.startTime.substr(0, 10)}} ~ {{data.endTime && data.endTime.substr(0, 10)}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>

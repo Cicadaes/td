@@ -1,0 +1,8 @@
+:host ::ng-deep .special-label {
+    text-align: left;
+    width: 118px;
+}
+
+:host ::ng-deep .tokens nz-input .ant-input:focus {
+    box-shadow: none !important;
+}

@@ -1,0 +1,92 @@
+@import '../../../../less/td.theme.less';
+:host ::ng-deep .content-div {
+  margin: 16px;
+  background: #ffffff;
+
+  .user-list {
+    background-color: #ffffff;
+
+    &-search {
+      float: right;
+
+      a {
+        font-size: 12px;
+        color: @base-color;
+
+        .anticon-down {
+          margin-right: 4.5px;
+          color: @base-color;
+        }
+      }
+
+      .ant-input-affix-wrapper {
+        width: 196px;
+        margin-right: 20px;
+      }
+
+      .ant-input {
+        font-size: 12px;
+        color: rgba(23, 35, 61, 0.25);
+      }
+
+      .ant-input-search.ant-input-search-enter-button > .ant-input-suffix {
+        right: 12px;
+      }
+
+      .ant-input-affix-wrapper .ant-input-prefix,
+      .ant-input-affix-wrapper .ant-input-suffix {
+        color: rgba(23, 35, 61, 0.25);
+      }
+
+      .ant-input-affix-wrapper .ant-input {
+        height: 24px;
+      }
+    }
+
+    &-tit {
+      line-height: 22px;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #17233d;
+      margin: 0px;
+      position: relative;
+      font-weight: 500;
+      b {
+        color: @base-color;
+      }
+    }
+  }
+}
+
+:host ::ng-deep .search-botton {
+  height: 32px;
+  margin-top: -44px;
+  float: right;
+}
+
+:host ::ng-deep .heightClass {
+  height: 32px;
+  margin-top: -8px;
+  margin-bottom: 12px;
+}
+
+:host ::ng-deep .add-attribute-btn {
+  margin-top: 8px;
+}
+
+:host ::ng-deep .attribute-one:nth-child(5) {
+  border-bottom: 0px;
+}
+
+:host ::ng-deep .no-data {
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+:host ::ng-deep .attribute-one:nth-child(1) {
+  .view-btn {
+    border: none;
+  }
+}

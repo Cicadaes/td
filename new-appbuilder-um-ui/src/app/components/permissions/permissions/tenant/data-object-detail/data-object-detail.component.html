@@ -1,0 +1,142 @@
+<main>
+    <div class="detail-div">
+        <div class="title">数据对象基础信息</div>
+        <div class="body">
+            <div class="detail-item">
+                <label>对象名称</label>
+                <span class="item-value" [title]="dataObjInfo.name">{{dataObjInfo.name}}</span>
+            </div>
+            <div class="detail-item">
+                <label>对象编码</label>
+                <span class="item-value" [title]="dataObjInfo.code">{{dataObjInfo.code}}</span>
+            </div>
+            <div class="detail-item block">
+                <label>对象实例调用接口</label>
+                <span class="item-value">{{dataObjInfo.restUrl}}</span>
+            </div>
+            <div class="detail-item block">
+                <label>对象描述</label>
+                <span class="item-value" [title]="dataObjInfo.description">{{dataObjInfo.description}}</span>
+            </div>
+            <div class="detail-item">
+                <label>创建人</label>
+                <span class="item-value">{{dataObjInfo.creator}}</span>
+            </div>
+            <div class="detail-item">
+                <label>创建时间</label>
+                <span class="item-value">{{dataObjInfo.createTime | dateFormatPipe:2}}</span>
+            </div>
+            <div class="detail-item">
+                <label>更新人</label>
+                <span class="item-value">{{dataObjInfo.updater}}</span>
+            </div>
+            <div class="detail-item">
+                <label>更新时间</label>
+                <span class="item-value">{{dataObjInfo.updateTime | dateFormatPipe:2}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="detail-div">
+        <nz-tabset>
+            <nz-tab nzTitle="数据对象操作定义">
+                <div style="margin: 16px;">
+                    <button nz-button style="margin-right: 8px;" nzType="primary" nzSize="default" (click)="addDataObjOper($event)">
+                        <span class="anticon anticon-plus"></span><span>数据对象操作</span>
+                    </button>
+                </div>
+                <div class="table-body">
+                    <nz-table #targetOperator nzShowPagination='false' [nzData]="dataObjInfo.targetOperatorList">
+                        <thead>
+                            <tr>
+                                <th style="min-width:100px;">操作名称</th>
+                                <th style="min-width:100px;">操作编码</th>
+                                <th style="min-width:100px;">操作描述</th>
+                                <th style="min-width:100px;">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of targetOperator.data">
+                                <td>
+                                    <div class="item-td" style="max-width: 200px;" [title]="data.name">
+                                        {{data.name}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="item-td" style="max-width: 200px;" [title]="data.code">
+                                        {{data.code}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="item-td" style="max-width: 200px;" [title]="data.description">
+                                        {{data.description}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <a (click)="editorOperate(data)">编辑</a>
+                                    <nz-divider nzType="vertical"></nz-divider>
+                                    <a (click)="deleteOperate(data)">删除</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                </div>
+            </nz-tab>
+            <nz-tab nzTitle="数据对象实例操作定义">
+                <div style="margin: 16px;">
+                    <button nz-button style="margin-right: 8px;" nzType="primary" nzSize="default" (click)="addDataObjInstanceOper($event)">
+                        <span class="anticon anticon-plus"></span><span>数据对象实例操作</span>
+                    </button>
+                </div>
+                <div class="table-body">
+                    <nz-table #targetInstanceOperator nzShowPagination='false' [nzData]="dataObjInfo.targetInstanceOperatorVoList">
+                        <thead>
+                            <tr>
+                                <th style="min-width:100px;">操作名称</th>
+                                <th style="min-width:100px;">操作编码</th>
+                                <th style="min-width:100px;">操作描述</th>
+                                <th style="min-width:100px;">依赖操作</th>
+                                <th style="min-width:100px;">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of targetInstanceOperator.data">
+                                <td>
+                                    <div class="item-td" style="max-width: 200px;" [title]="data.name">
+                                        {{data.name}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="item-td" style="max-width: 200px;" [title]="data.code">
+                                        {{data.code}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="item-td" style="max-width: 200px;" [title]="data.description">
+                                        {{data.description}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="item-td" style="max-width: 200px;" [title]="data.dependentName">
+                                        {{data.dependentName}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <a (click)="editorInstanceOperate(data)">编辑</a>
+                                    <nz-divider nzType="vertical"></nz-divider>
+                                    <a (click)="deleteInstanceOperate(data)">删除</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                </div>
+            </nz-tab>
+        </nz-tabset>
+    </div>
+
+    <nz-modal [(nzVisible)]="isShowModal" nzMaskClosable="false" [nzTitle]="modalTitle"
+        (nzOnOk)="modalSubmit($event)" (nzOnCancel)="handleCancel()">
+        <app-data-object-operate *ngIf="isShowModal && modalContent === 'dataObjOperateModal'" [_operateInfo]="operateInfo"></app-data-object-operate>
+        <app-data-object-instance-operate *ngIf="isShowModal && modalContent === 'dataObjInstanceOperateModal'" [dataObjId]="dataObjId" [_instanceOperateInfo]="instanceOperateInfo"></app-data-object-instance-operate>
+    </nz-modal>
+</main>

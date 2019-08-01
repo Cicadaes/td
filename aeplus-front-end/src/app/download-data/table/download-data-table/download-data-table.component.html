@@ -1,0 +1,52 @@
+<main>
+    <div class="table-custom-panel">
+        <div class="table-custom-head clrfix">
+            <h5 class="table-custom-title">数据下载</h5>
+            <div class="table-custom-filter">
+                <button nz-button (click)="reload()" class="btn-fresh">刷新</button>
+            </div>
+        </div>
+        <nz-table
+                #ajaxTable
+                nzShowTotal
+                nzShowSizeChanger
+                [nzFrontPagination]="false"
+                [nzData]="dataSet"
+                [nzLoading]="loading"
+                [nzTotal]="total"
+                [(nzPageIndex)]="pageIndex"
+                [(nzPageSize)]="pageSize"
+                [nzPageSizeOptions]="[ 10, 20, 50, 100 ]"
+                (nzPageIndexChange)="searchData()"
+                (nzPageSizeChange)="searchData(true)">
+            <thead (nzSortChange)="sort($event)" nzSingleSort>
+            <tr>
+                <th style="min-width:120px;">任务名</th>
+                <th style="min-width:120px;">任务状态</th>
+                <th style="min-width:120px;">计算状态</th>
+                <th style="min-width:120px;">创建人</th>
+                <th style="min-width:180px;">创建时间</th>
+                <th style="min-width:180px;">完成时间</th>
+                <th style="min-width:60px;">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let data of ajaxTable.data">
+                <td>{{data.jkey}}</td>
+                <td>{{data.taskStatus | statusPipe}}</td>
+                <td>{{data.status | calStatusPipe}}</td>
+                <td>{{data.username}}</td>
+                <td>{{data.ctime | dateFormatPipe}}</td>
+                <td>
+                    <div *ngIf="data.status != 1">{{data.mtime | dateFormatPipe}}</div>
+                </td>
+                <td>
+                    <a *ngIf="data.taskStatus == 1 && data.status == 3" href="javascript:;"
+                       (click)="download(data);">下载</a>
+                    <a *ngIf="data.status == -1" href="javascript:;" (click)="updateTempJobretry(data)">重试</a>
+                </td>
+            </tr>
+            </tbody>
+        </nz-table>
+    </div>
+</main>

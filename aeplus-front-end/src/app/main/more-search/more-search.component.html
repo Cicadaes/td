@@ -1,0 +1,39 @@
+<main>
+	<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form">
+		<div nz-row [nzGutter]="24" class="more-search-form-panel">
+			<div nz-col [nzSpan]="control.span?control.span:8" *ngFor="let control of fieldArray" [class.padr-0]="control.span && control.span =='9'"  [style.display]="control.show?'block':'none'">
+				<nz-form-item nzFlex>
+					<nz-form-label class="more-search-label" [nzFor]="control.fieldLabel">{{control.fieldLabel}}：
+					</nz-form-label>
+					<nz-form-control *ngIf="control.fieldType == 'input'" class="nz-form-control">
+						<input nz-input (blur)="changeInputValue($event,control.fieldName);"
+							   placeholder="请输入{{control.fieldLabel}}" [formControlName]="control.fieldName"
+							   [attr.id]="control.fieldName" autocomplete="false">
+					</nz-form-control>
+					<nz-input-number *ngIf="control.fieldType == 'number' || control.fieldType == 'integer'" style="width:100%;"
+									 [formControlName]="control.fieldName" [nzMin]="0" [nzMax]="9999" [nzStep]="1"
+									 nzPlaceHolder="请输入{{control.fieldLabel}}" (ngModelChange)="formatterInputNumber($event,control);"></nz-input-number>
+					<app-select-search [select]="control" (onSelect)="selectSearchControl($event,control)"
+									   *ngIf="control.fieldType == 'select' && !isResetComponents"
+									   style="width:100%;vertical-align:top;margin-top: 4px;"></app-select-search>
+					<nz-form-control *ngIf="control.fieldType == 'date-range'" class="nz-form-control">
+						<app-date-range (onSelect)="dateRangeControl($event,control)"
+										*ngIf="control.fieldType == 'date-range' && !isResetComponents"
+										[noLimit]="noLimit"></app-date-range>
+					</nz-form-control>
+				</nz-form-item>
+			</div>
+		</div>
+		<div nz-row class="more-search-operator">
+			<div nz-col [nzSpan]="24">
+				<button nz-button [nzType]="'primary'" class="nz-btn" (click)="searchMoreSearchForm(validateForm)">查询
+				</button>
+				<a style="margin-left:8px;font-size:12px;" (click)="toggleCollapse()"
+				   *ngIf="fieldArray.length > defaultNumber">
+					<span *ngIf="isCollapse">展开</span><span *ngIf="!isCollapse">收起</span>
+					<span class="anticon" [class.anticon-down]="isCollapse" [class.anticon-up]="!isCollapse"></span>
+				</a>
+			</div>
+		</div>
+	</form>
+</main>

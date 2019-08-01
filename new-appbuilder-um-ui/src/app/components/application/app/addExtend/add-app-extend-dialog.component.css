@@ -1,0 +1,4 @@
+:host ::ng-deep .special-label {
+    width: 78px;
+    text-align: left;
+}

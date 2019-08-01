@@ -1,0 +1,137 @@
+
+    :host {
+        display: block;
+        margin: 16px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #edeef1 #e2e3e7 #d7d9dd #e2e3e7;
+        border-radius: 3px;
+        background-color: #ffffff;
+    }
+
+
+
+    /* icon */
+
+    .header .date-range.loading:after {
+        font-family: "anticon";
+        content: "\e64d";
+    }
+
+    .chart .type-select .item.l-chart:before {
+        font-family: "iconfont";
+        content: "\ee0a";
+    }
+
+    .chart .type-select .item.b-chart:before {
+        font-family: "iconfont";
+        content: "\ee00";
+    }
+
+
+
+    /* .header */
+
+    .header {
+        position: relative;
+        height: 47px;
+        border-bottom: 1px solid #e7e9eb;
+    }
+
+    .header .title {
+        position: absolute;
+        left: 16px;
+        top: 16px;
+        line-height: 1em;
+    }
+
+    .header .date-range {
+        position: absolute;
+        right: 16px;
+        top: 11px;
+    }
+
+    .header .date-range.loading:after {
+        position: absolute;
+        right: 6px;
+        top: 6px;
+        font-size: 12px;
+        line-height: 12px;
+        color: #808695;
+        -webkit-animation: loadingCircle 1s infinite linear;
+        -o-animation: loadingCircle 1s infinite linear;
+        animation: loadingCircle 1s infinite linear;
+
+    }
+
+
+
+    /* .condition */
+
+    .condition {
+        position: relative;
+        overflow: hidden;
+        padding: 6px 12px;
+    }
+
+    .condition .item, .condition .button {
+        float: left;
+        margin: 6px 4px;
+        white-space: nowrap;
+    }
+
+    .condition .item:before {
+        content: attr(data-name);
+        float: left;
+        height: 32px;
+        margin-right: 8px;
+        padding-left: 12px;
+        padding-right: 12px;
+        padding-top: 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        line-height: 12px;
+        color: #4e576b;
+        background-color: #f1f2f4;
+    }
+
+
+
+    /* .chart */
+
+    .chart {
+        position: relative;
+    }
+
+    .chart .type-select {
+        overflow: hidden;
+        height: 36px;
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-top: 10px;
+    }
+
+    .chart .type-select .item {
+        float: left;
+        margin-right: 10px;
+        font-size: 16px;
+        line-height: 16px;
+        color: #a7a9ad;
+    }
+
+    .chart .type-select .item.selected {
+        cursor: default;
+        color: #2d8cf0;
+    }
+
+    .chart .container {
+        overflow: hidden;
+        height: 250px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    :host ::ng-deep .ant-btn-primary:focus {
+        background-color: #2d8cf0;
+        border-color: #2d8cf0;
+    }

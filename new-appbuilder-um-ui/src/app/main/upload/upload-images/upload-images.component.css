@@ -1,0 +1,29 @@
+:host ::ng-deep span {
+    font-size: 32px;
+    color: #999;
+}
+:host ::ng-deep .ant-upload-text {
+    margin-top: 8px;
+    color: #666;
+}
+:host ::ng-deep .picture_tooltip {
+  color: #f04134;
+}
+
+:host ::ng-deep .clearfix .ant-modal-body {
+    background: #cccccc !important
+}
+
+:host ::ng-deep .clearfix .ant-upload-list-picture-card .ant-upload-list-item {
+    background: #cccccc !important;
+    width: auto !important;
+    height:auto !important;
+    min-width: 96px !important;
+    max-width: 385px !important;
+    max-height: 250px !important;
+}
+:host ::ng-deep .anticon-eye-o:before {
+    content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABVklEQVQ4T63Tv4vPcRwH8McziSx3GYRI3XBdSXSj9cpNrgxnsVw6m1LKeoZbRWbdKMoglCL+AIMYblAmQlnEYpFeeuv9ub53fKe71/Z+Pl/v5/v14/mObUa2ed/OC1TVLlzCSRxF4TPe4k6S36NVb6qgqk5jDTNjWnuHpSSvBn5DoKoWcRe78RNX8agnnsNN7MUvXEjyoHF/BarqLB6PvDqPD7jSsds4hmcjOQtJnqSq9uB977fx60lOVNVrzPYLb5LMVtU6jnfsI6abwDRab0M7z5PMV9V3TPTkH0kmq+oF5jrWhjsztNAGd7ETX3AE17HSsVXcQHt1smNrSZYHgf14iVOdXEmyWlWHhgpwDwv93FY6l+Tb6Bb24SHO9KT7fbAHcRlTHX+KxSRtU/86sarO4xYOb/HCJ1xL0oQ34r9WrqqGH9jixK9J2uA2xc7/hTEWHgv/Aa2tZzhEpaPPAAAAAElFTkSuQmCC) !important;
+    /* position: absolute !important; */
+    /* top: 15px !important; */
+}

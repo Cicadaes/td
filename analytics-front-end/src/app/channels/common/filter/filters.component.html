@@ -1,0 +1,54 @@
+<div class="_filters" [ngStyle]="{ height: height ? '0px' : 'auto' }">
+  <div class="filterCenter">
+    <span class="ate">
+      <span class="_name">用户</span>
+      <div class="_filterOne">
+        <nz-select
+          [nzAllowClear]="false"
+          [nzPlaceHolder]="'请选择'"
+          [(ngModel)]="dimension"
+          nzShowSearch
+          (ngModelChange)="changeDimension(dimension)"
+          [nzNotFoundContent]="'无匹配结果'"
+        >
+          <nz-option-group *ngFor="let options of dimensionOptions" [nzLabel]="options.name">
+            <nz-option
+              nzCustomContent
+              *ngFor="let option of options.child"
+              [nzValue]="option.value"
+              [nzLabel]="option.label"
+            >
+              <span title="{{ option.label }}">{{ option.label }}</span>
+            </nz-option>
+          </nz-option-group>
+        </nz-select>
+      </div>
+      <div class="_filterTwo">
+        <nz-select
+          [nzAllowClear]="false"
+          [nzNotFoundContent]="'无匹配结果'"
+          [nzPlaceHolder]="'请选择'"
+          [(ngModel)]="_filter"
+          nzShowSearch
+          (ngModelChange)="changeCondition2(_filter)"
+        >
+          <nz-option
+            *ngFor="let select of conditionoptions"
+            [nzLabel]="select.label"
+            [nzValue]="select.value"
+            [nzCustomContent]="true"
+          >
+            <span title="{{ select.label }}">{{ select.label }}</span>
+          </nz-option>
+        </nz-select>
+      </div>
+      <div class="_filterThree">
+        <nz-select nzMode="multiple" nzPlaceHolder="Please select" [(ngModel)]="listOfSelectedValue">
+          <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+        </nz-select>
+      </div>
+    </span>
+
+    <button nz-button nzType="primary" (click)="seeAbout()">查询</button>
+  </div>
+</div>

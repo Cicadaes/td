@@ -1,0 +1,79 @@
+// -------- 引入官方提供的 less 样式入口文件 -----------
+@import "../node_modules/ng-cosmos-ui/src/ng-cosmos-ui.less";
+
+// -------- 自定义参数覆盖 -----------
+@icon-url : "/assets/fonts/iconfont";
+
+.ant-form-item {
+  margin-bottom: 16px;
+}
+
+/*滚动条*/
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background: rgba(31, 37, 68, 0.30);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(31, 37, 68, 0.30);
+}
+
+::-moz-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-moz-scrollbar-track {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background: transparent;
+}
+
+::-moz-scrollbar-thumb {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background: rgba(31, 37, 68, 0.30);
+}
+
+::-moz-scrollbar-thumb:window-inactive {
+  background: rgba(31, 37, 68, 0.30);
+}
+
+::scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::scrollbar-track {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background: transparent;
+}
+
+::scrollbar-thumb {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background: rgba(31, 37, 68, 0.30);
+}
+
+::scrollbar-thumb:window-inactive {
+  background: rgba(31, 37, 68, 0.30);
+}

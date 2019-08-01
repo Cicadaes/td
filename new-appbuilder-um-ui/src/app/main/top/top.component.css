@@ -1,0 +1,22 @@
+.left {
+  float: left;
+  /* padding: 0 15px; */
+}
+
+.right {
+  text-align: right;
+  /* padding: 0 20px; */
+  font-size: 13px;
+  float: right;
+}
+
+.right a {
+  text-underline: none;
+  color: #5f92e1;
+  margin: 0 10px;
+}
+
+.right .username {
+  color: #5f92e1;
+  margin-right: 6px;
+}

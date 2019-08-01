@@ -1,0 +1,20 @@
+<div class="one-item" *ngFor="let item of dataSet; let i = index;" [ngClass]="{'border-bot': item.level === 1, 'pading-bot': item.level !== 1}" >
+    <input nz-input placeholder="请输入参数名称" [(ngModel)]="item.paramName" style="width: 160px;margin-right: 6px;" [ngClass]="{'checkFailureBase': item.error}" (ngModelChange)="changeItemError(item);">
+    <nz-select style="width: 88px; margin-right: 6px;" [(ngModel)]="item.paramType">
+        <nz-option nzLabel="string" nzValue="string"></nz-option>
+        <nz-option nzLabel="integer" nzValue="integer"></nz-option>
+        <nz-option nzLabel="boolean" nzValue="boolean"></nz-option>
+        <nz-option nzLabel="object" nzValue="object"></nz-option>
+        <nz-option nzLabel="array" nzValue="array"></nz-option>
+        <nz-option nzLabel="file" nzValue="file"></nz-option>
+    </nz-select>
+    <nz-select style="width: 80px; margin-right: 6px;" [(ngModel)]="item.requireType">
+        <nz-option nzLabel="必需" nzValue="yes"></nz-option>
+        <nz-option nzLabel="非必需" nzValue="no"></nz-option>
+    </nz-select>
+    <input nz-input placeholder="请输入参数值示例" [(ngModel)]="item.paramExample" style="width: 160px;margin-right: 6px;"  (ngModelChange)="changeItem(item, 'paramExampleError');" [ngClass]="{'checkFailureBase': item.paramExampleError}">
+    <input nz-input placeholder="请输入备注" [(ngModel)]="item.comment" [ngStyle]="{'min-width': '60px', 'width': setWidth(item)}" (ngModelChange)="changeItem(item, 'commentError');" [ngClass]="{'checkFailureBase': item.commentError}">
+    <span (click)="removeOne(dataSet, i)"><i class="anticon anticon-close"></i></span>
+    <span (click)="addChild(item)" *ngIf="item.paramType === 'object' || item.paramType === 'array'"><i class="anticon anticon-plus"></i></span>
+    <app-one-map [dataSet]="item.child" (add)="add($event);" (remove)="remove($event);" *ngIf="item.child && item.child.length>0"></app-one-map>
+</div>

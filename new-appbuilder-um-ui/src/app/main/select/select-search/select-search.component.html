@@ -1,0 +1,12 @@
+<div *ngIf="selectDisabled">
+    <nz-select (nzOpenChange)="changeSelect($event)"  [nzPlaceHolder]="'请选择'" [nzFilterOption]="false" [(ngModel)]="selectedOption" (nzSearchChange)="searchChange($event)" [nzNotFoundContent]="'暂无数据'" nzDisabled>
+        <nz-option *ngFor="let option of searchOptions" [nzLabel]="option.label" [nzValue]="option.value">
+        </nz-option>
+    </nz-select>
+</div>
+<div *ngIf="!selectDisabled">
+    <nz-select (nzOpenChange)="changeSelect($event)"  [nzPlaceHolder]="'请选择'" [nzFilterOption]="false" [(ngModel)]="selectedOption" (nzSearchChange)="searchChange($event)" [nzNotFoundContent]="'暂无数据'" >
+        <nz-option *ngFor="let option of searchOptions" [nzLabel]="option.label" [nzValue]="option.value">
+        </nz-option>
+    </nz-select>
+</div>

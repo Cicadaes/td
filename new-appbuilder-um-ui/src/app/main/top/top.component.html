@@ -1,0 +1,25 @@
+<nz-header class="header" style="background: #fff;padding: 0px 12px;
+position: relative;
+z-index: 100;
+width: 100%;
+display: flex;
+justify-content: space-between;
+flex-wrap: nowrap;
+background: #FFFFFF;
+box-shadow: 0 1px 4px 0 rgba(23, 35, 61, 0.25);
+overflow: hidden;
+">
+    <div class="left">
+        <!--<span class="anticon trigger" [class.anticon-menu-fold]="!isCollapsed" [class.anticon-menu-unfold]="isCollapsed" (click)="_changeMenuStatus();"></span>-->
+        <breadcrumb></breadcrumb>
+    </div>
+    <div class="right">
+        <span>您好，</span>
+        <!-- <a href="javascript:;">{{userName}}</a> -->
+        <span class="username">{{userName}}</span>
+        <span>|</span>
+        <a href="javascript:;" title="{{logoutText}}" (click)="logout();">
+            <span class="anticon anticon-poweroff"></span>
+        </a>
+    </div>
+</nz-header>

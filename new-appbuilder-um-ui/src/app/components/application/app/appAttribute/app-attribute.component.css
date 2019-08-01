@@ -1,0 +1,10 @@
+.anticon{
+  cursor: pointer; 
+}
+
+:host ::ng-deep .ant-table-title {
+    padding: 0px !important;
+  }
+  :host ::ng-deep nz-card .ant-card-body {
+    padding: 14px 0px !important;
+}

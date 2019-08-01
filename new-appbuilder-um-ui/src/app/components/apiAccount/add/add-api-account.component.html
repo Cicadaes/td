@@ -1,0 +1,141 @@
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel($event)" [nzMaskClosable]='false' [nzWidth]="'640px'">
+    <ng-template #modalTitle>
+        <span *ngIf="!editFlag">新建API账号</span>
+        <span *ngIf="editFlag">修改API账号</span>
+    </ng-template>
+    <ng-template #modalContent>
+        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" autocomplete="off">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="5" nzRequired nzFor="tenantId">所属租户</nz-form-label>
+                <nz-form-control [nzSpan]="19" *ngIf="!tenantId && !editFlag" [ngClass]="{'has-error': getFormControl('tenantId').dirty && getFormControl('tenantId').errors}" >
+                    <nz-select (nzScrollToBottom)="loadMore()" [(ngModel)]="selectedTenantId" nzPlaceHolder="请选择所属租户"
+                        nzShowSearch [nzServerSearch]="true" (nzOnSearch)="onSearch($event)"
+                        (ngModelChange)="changeTenant($event);" formControlName="tenantId">
+                        <ng-container *ngFor="let item of tenantList">
+                            <nz-option nzCustomContent *ngIf="!isLoading" [nzLabel]="item.companyName" [nzValue]="item.id"><span
+                                    title="{{item.companyName}}">{{item.companyName}}</span></nz-option>
+                        </ng-container>
+                        <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+                            <i class="anticon anticon-loading anticon-spin loading-icon"></i> Loading Data...
+                        </nz-option>
+                    </nz-select>
+                    <nz-form-explain *ngIf="getFormControl('tenantId').dirty && getFormControl('tenantId').errors"
+                        style="color: #f5222d;">
+                        <ng-container *ngIf="getFormControl('tenantId').errors.required">
+                            请选择所属租户
+                        </ng-container>
+                    </nz-form-explain>
+                </nz-form-control>
+                <nz-form-control [nzSpan]="19" *ngIf="editFlag">
+                    {{editData['companyName']}}
+                </nz-form-control>
+                <nz-form-control [nzSpan]="19" *ngIf="tenantId && !editFlag">
+                    {{tenantDetails['companyName']}}
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="5" nzRequired nzFor="name">账号名称</nz-form-label>
+                <nz-form-control [nzSpan]="19" [ngClass]="{'has-error': getFormControl('name').dirty && getFormControl('name').errors}">
+                    <input id="code" type="name" nz-input formControlName="name" placeholder="请输入账号名称">
+                    <nz-form-explain *ngIf="getFormControl('name').dirty && getFormControl('name').errors" style="color: #f5222d;">
+                        <ng-container *ngIf="getFormControl('name').errors.required">
+                            请输入账号名称
+                        </ng-container>
+                        <ng-container *ngIf="getFormControl('name').errors.forbiddenName && !getFormControl('name').errors.pattern">
+                            只能输入中文、数字、英文字母、空格，长度最少2个、最多100个字符
+                        </ng-container>
+                        <ng-container *ngIf="getFormControl('name').errors.pattern">
+                            开头结尾不能有空格
+                        </ng-container>
+                    </nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="5" nzRequired nzFor="catalogIdList">适用产品</nz-form-label>
+                <nz-form-control [nzSpan]="19" [ngClass]="{'has-error': getFormControl('catalogIdList').dirty && getFormControl('catalogIdList').errors}">
+                    <nz-select [nzMode]="'multiple'" [nzPlaceHolder]="'请选择适用产品'" [(ngModel)]="selectedOption"
+                        [nzNotFoundContent]="'暂无数据'" nzShowSearch formControlName="catalogIdList">
+                        <nz-option *ngFor="let option of productOptions;let i = index;" [nzLabel]="option.name"
+                            [nzValue]="option.id" nzCustomContent>
+                            {{option.name}}
+                        </nz-option>
+                    </nz-select>
+                    <nz-form-explain *ngIf="getFormControl('catalogIdList').dirty && getFormControl('catalogIdList').errors"
+                        style="color: #f5222d;">
+                        <ng-container *ngIf="getFormControl('catalogIdList').errors.required">
+                            请选择适用产品
+                        </ng-container>
+                    </nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="5" nzRequired nzFor="status">状态</nz-form-label>
+                <nz-form-control [nzSpan]="19">
+                    <nz-radio-group [(ngModel)]="status" formControlName="status">
+                        <label nz-radio nzValue="1">正常</label>
+                        <label nz-radio nzValue="0">禁用</label>
+                    </nz-radio-group>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="5" nzRequired nzFor="tokenType">Token生成方式</nz-form-label>
+                <nz-form-control [nzSpan]="19">
+                    <nz-radio-group [(ngModel)]="tokenType" formControlName="tokenType">
+                        <label nz-radio nzValue="1">标准</label>
+                        <label nz-radio nzValue="2">自定义</label>
+                    </nz-radio-group>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item *ngIf="tokenType === '2'">
+                <nz-form-label [nzSpan]="5" nzRequired nzFor="tokenUrl">获取Token参<br><span style="margin-left: 10px;">数的接口地址</span></nz-form-label>
+                <nz-form-control [nzSpan]="19">
+                    <input id="tokenUrl" type="tokenUrl" nz-input formControlName="tokenUrl" placeholder="请输入生成token的接口地址" (ngModelChange)="changeToken($event);">
+                    <nz-form-explain *ngIf="getFormControl('tokenUrl').dirty && getFormControl('tokenUrl').errors"
+                        style="color: #f5222d;">
+                        <ng-container *ngIf="getFormControl('tokenUrl').errors.required">
+                            请输入生成Token地址
+                        </ng-container>
+                        <ng-container *ngIf="getFormControl('tokenUrl').errors.maxlength && !getFormControl('tokenUrl').errors.pattern">
+                            如：http://api.talkingdata.com/mc，长度最少10个、最多256个字符
+                        </ng-container>
+                        <ng-container *ngIf="getFormControl('tokenUrl').errors.minlength && !getFormControl('tokenUrl').errors.pattern">
+                            如：http://api.talkingdata.com/mc，长度最少10个、最多256个字符
+                        </ng-container>
+                        <ng-container *ngIf="getFormControl('tokenUrl').errors.forbiddenName && !getFormControl('tokenUrl').errors.pattern && !getFormControl('tokenUrl').errors.maxlength && !getFormControl('tokenUrl').errors.minlength">
+                            如：http://api.talkingdata.com/mc，长度最少10个、最多256个字符
+                        </ng-container>
+                        <ng-container *ngIf="getFormControl('tokenUrl').errors.pattern">
+                            开头结尾不能有空格
+                        </ng-container>
+                    </nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="5" nzRequired nzFor="description" class="cover-ant-form-item-label">账号描述</nz-form-label>
+                <nz-form-control [nzSpan]="19" [ngClass]="{'has-error': getFormControl('description').dirty && getFormControl('description').errors}">
+                    <textarea id="description" type="description" nz-input formControlName="description" placeholder="请输入账号描述"></textarea>
+                    <nz-form-explain *ngIf="getFormControl('description').dirty && getFormControl('description').errors"
+                        style="color: #f5222d;">
+                        <ng-container *ngIf="getFormControl('description').errors.maxlength">
+                            账号描述不能超过256个字符
+                        </ng-container>
+                    </nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </ng-template>
+    <ng-template #modalFooter>
+        <button nz-button [nzType]="'default'" (click)="handleCancel($event)">
+            取 消
+        </button>
+        <button nz-button [nzType]="'primary'" (click)="save()">
+            确 定
+        </button>
+    </ng-template>
+</nz-modal>

@@ -1,0 +1,97 @@
+<nz-modal [nzVisible]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel($event)" (nzOnOk)="handleOk($event)" [nzMaskClosable]="false">
+    <ng-template #modalTitle>
+        <span *ngIf="!currentData">新增属性</span>
+        <span *ngIf="currentData">编辑属性</span>
+    </ng-template>
+    <ng-template #modalContent>
+
+        <form nz-form [formGroup]="validateForm" (ngSubmit)="_submitForm()">
+
+            <nz-form-item nz-row>
+                <nz-form-label nz-col [nzSm]="6" [nzXs]="24" class="this-label" for="name" nzRequired>
+                    <label >名称</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                    <input nz-input [nzSize]="'large'" formControlName="name">
+                    <ng-container *ngIf="getFormControl('name').dirty && getFormControl('name').errors">
+                        <nz-form-explain style="color:red;" >
+                            <span *ngIf="getFormControl('name').errors.required">请输入名称</span>
+                            <span *ngIf="getFormControl('name').errors.nNameRepeat">名称不能重复</span>
+                            <span *ngIf="getFormControl('name').errors.maxlength">名称不能超过128个字符</span>
+                            <!-- <span *ngIf="getFormControl('name').errors.nKeyRepeat">名称和key不能重复</span> -->
+                        </nz-form-explain>
+
+                    </ng-container>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item nz-row>
+                <nz-form-label nz-col [nzSm]="6" [nzXs]="24" class="this-label" for="key" nzRequired>
+                    <label >key</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+
+                    <input nz-input [nzSize]="'large'" formControlName="key" id="key">
+
+                    <ng-container *ngIf="getFormControl('key').dirty && getFormControl('key').errors">
+
+                        <nz-form-explain style="color:red;" >
+                            <span *ngIf="getFormControl('key').errors.required">请输入key</span>
+                            <span *ngIf="getFormControl('key').errors.keyRepeat">key不能重复</span>
+                            <span *ngIf="getFormControl('key').errors.maxlength">输入的key过长</span>
+                            <!-- <span *ngIf="getFormControl('key').hasError('required') && test()">请输入key</span> -->
+                            <!-- <span *ngIf="!keyFlag&&getFormControl('key').errors.nKeyRepeat">名称和key不能重复</span>-->
+                            <!-- <span *ngIf="getFormControl('key').errors.nKeyRepeat">key和名称不能重复</span> -->
+                        </nz-form-explain>
+
+                    </ng-container>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item nz-row>
+                <nz-form-label nz-col [nzSm]="6" [nzXs]="24" class="this-label" for="value" nzRequired>
+                    <label >value</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+
+                    <input nz-input [nzSize]="'large'" formControlName="value" id="value">
+
+                    <ng-container *ngIf="getFormControl('value').dirty && getFormControl('value').errors">
+                        <nz-form-explain style="color:red;" >
+                            <span *ngIf="getFormControl('value').errors.required">请输入value</span>
+                            <span *ngIf="getFormControl('value').errors.maxlength">输入的value过长</span>
+                        </nz-form-explain>
+                    </ng-container>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item nz-row>
+                <nz-form-label nz-col [nzSm]="6" [nzXs]="24" class="this-label">
+                    <label for="desc" nzRequired class="special-label-before" style="padding-left:10px;">描述</label>
+                </nz-form-label>
+                <nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+
+                    <textarea nz-input formControlName="desc" [nzAutosize]="{ maxRows: 2}" [nzSize]="'large'"></textarea>
+
+                    <ng-container *ngIf="getFormControl('desc').dirty && getFormControl('desc').errors">
+                        <nz-form-explain style="color:red;" *ngIf="getFormControl('desc').errors.maxlength">输入的描述过长</nz-form-explain>
+                    </ng-container>
+
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+
+    </ng-template>
+    <ng-template #modalFooter>
+
+        <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancel($event)">
+            取 消
+        </button>
+
+        <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="_submitForm($event)" [nzLoading]="isConfirmLoading">
+            确 定
+        </button>
+
+    </ng-template>
+</nz-modal>

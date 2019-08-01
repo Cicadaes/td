@@ -1,0 +1,131 @@
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel($event)" [nzMaskClosable]='false'>
+    <ng-template #modalTitle>
+        <span *ngIf="editFlag === 'edit'">编辑产品分类的版本</span>
+        <span *ngIf="editFlag === 'add'">新建产品分类的版本</span>
+        <span *ngIf="editFlag === 'copy'">从其他版本中复制API接口信息</span>
+    </ng-template>
+    <ng-template #modalContent>
+        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" autocomplete="off">
+            <nz-form-item *ngIf="editFlag !== 'copy'">
+                <nz-form-label [nzSpan]="4" nzRequired nzFor="catalogId">产品分类</nz-form-label>
+                <nz-form-control [nzSpan]="20" *ngIf="editFlag === 'edit' || editFlag === 'add'"><div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;" title="{{catalogObj['catalogName']}}">{{catalogObj['catalogName']}}</div></nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item *ngIf="editFlag !== 'copy'">
+                <nz-form-label [nzSpan]="4" nzRequired nzFor="version">版本</nz-form-label>
+                <nz-form-control [nzSpan]="20" *ngIf="editFlag === 'add'">
+                    <input id="version" type="version" nz-input formControlName="version" placeholder="请输入版本">
+                    <nz-form-explain style="color:red;" *ngIf="getFormControl('version').dirty && getFormControl('version').errors" style="color: #f5222d;">
+                        <ng-container *ngIf="getFormControl('version').errors.required">
+                            请输入版本
+                        </ng-container>
+                        <ng-container *ngIf="getFormControl('version').errors.forbiddenName && !getFormControl('version').errors.pattern">
+                            只能输入数字、英文字母、“.”、“_”，长度最少3个、最多50个字符
+                        </ng-container>
+                        <ng-container *ngIf="getFormControl('version').errors.pattern">
+                            开头结尾不能有空格
+                        </ng-container>
+                    </nz-form-explain>
+                </nz-form-control>
+                <nz-form-control [nzSpan]="20" *ngIf="editFlag === 'edit'"><div style="overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;" title="{{editData['version']}}">{{editData['version']}}</div></nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item *ngIf="editFlag !== 'copy'">
+                <nz-form-label [nzSpan]="4" nzRequired nzFor="status">状态</nz-form-label>
+                <nz-form-control [nzSpan]="20">
+                    <nz-radio-group [(ngModel)]="status" formControlName="status">
+                        <label nz-radio nzValue="1">正常</label>
+                        <label nz-radio nzValue="0">禁用</label>
+                    </nz-radio-group>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item *ngIf="editFlag !== 'copy'">
+                <nz-form-label [nzSpan]="4" nzRequired nzFor="uri" class="cover-ant-form-item-label">对应的URI</nz-form-label>
+                <nz-form-control [nzSpan]="20">
+                    <input id="uri" type="uri" nz-input formControlName="uri" placeholder="请输入对应的URI">
+                    <nz-tooltip [nzTitle]="'设置产品版本在URL中固定对应的URI片段，如“http://ip:port/V2/service”中的“/V2”。'" [nzPlacement]="'left'"
+                        nzTrigger="click">
+                        <i class="anticon anticon-question-circle" nz-tooltip style="position: absolute;right: -19px;top: 0px;cursor: pointer;"></i>
+                    </nz-tooltip>
+                    <nz-form-explain style="color:red;" *ngIf="getFormControl('uri').dirty && getFormControl('uri').errors" style="color: #f5222d;">
+                        <ng-container *ngIf="getFormControl('uri').errors.maxlength">
+                            对应的URI不能超过256个字符
+                        </ng-container>
+                        <ng-container *ngIf="getFormControl('uri').errors.pattern">
+                            只能输入数字、英文字母、“.”、“_”、“-”、“/”、“=”
+                        </ng-container>
+                    </nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item *ngIf="editFlag !== 'copy'">
+                <nz-form-label [nzSpan]="4" nzRequired nzFor="description" class="cover-ant-form-item-label">描述</nz-form-label>
+                <nz-form-control [nzSpan]="20">
+                    <textarea id="description" type="description" nz-input formControlName="description" placeholder="请输入描述"></textarea>
+                    <nz-form-explain style="color:red;" *ngIf="getFormControl('description').dirty && getFormControl('description').errors"
+                        style="color: #f5222d;">
+                        <ng-container *ngIf="getFormControl('description').errors.maxlength">
+                            描述不能超过256个字符
+                        </ng-container>
+                    </nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+
+
+            <!-- 复制时的弹框 -->
+            <nz-form-item *ngIf="editFlag === 'copy'">
+                <nz-form-label [nzSpan]="4" nzRequired nzFor="catalogId" class="cover-ant-form-item-label">当前版本</nz-form-label>
+                <nz-form-control [nzSpan]="20">{{editData['version']}}</nz-form-control>
+            </nz-form-item>
+
+            <!-- 复制时的弹框 -->
+            <nz-form-item *ngIf="editFlag === 'copy'">
+                <nz-form-label [nzSpan]="4" nzRequired nzFor="catalogId">其他版本</nz-form-label>
+                <nz-form-control [nzSpan]="20">
+                    <nz-select [nzPlaceHolder]="'请选择版本号'" style="width: 200px;" [(ngModel)]="selectedVersion"
+                        nzShowSearch [ngModelOptions]="{standalone: true}" (ngModelChange)="change($event)">
+                        <nz-option *ngFor="let option of versionOptions;let i = index;" [nzLabel]="option.version"
+                            [nzValue]="option.id" nzCustomContent>
+                            {{option.version}}
+                        </nz-option>
+                    </nz-select>
+                    <ng-container *ngIf="copyError">
+                        <nz-form-explain style="color:red;" style="color:#f04134;">请选择其他版本，若无其他版本请在一级产品分类中管理版本信息。</nz-form-explain>
+                    </ng-container>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item *ngIf="editFlag !== 'edit'">
+                <nz-form-label [nzSpan]="4" nzRequired nzFor="catalogId" class="cover-ant-form-item-label"></nz-form-label>
+                <nz-form-control [nzSpan]="20">
+                    <label style="float: left;" nz-checkbox [(ngModel)]="checkedApi" [ngModelOptions]="{standalone: true}"  [nzDisabled]="editFlag === 'add' && !versionOptions.length">
+                        <span *ngIf="editFlag === 'add'">从已有版本复制API信息</span>
+                        <span *ngIf="editFlag === 'copy'">覆盖当前版本中已存在的同名API接口信息</span>
+                    </label>
+
+                    <nz-select [nzPlaceHolder]="'请选择版本号'" style="float: left;width: 120px;margin-left: 20px;"
+                        [(ngModel)]="selectedVersion" nzShowSearch [ngModelOptions]="{standalone: true}" *ngIf="checkedApi && editFlag === 'add'">
+                        <nz-option *ngFor="let option of versionOptions;let i = index;" [nzLabel]="option.version"
+                            [nzValue]="option.id" nzCustomContent>
+                            {{option.version}}
+                        </nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </ng-template>
+    <ng-template #modalFooter>
+        <button nz-button [nzType]="'default'" (click)="handleCancel($event)">
+            取 消
+        </button>
+        <button nz-button [nzType]="'primary'" (click)="save()">
+            确 定
+        </button>
+    </ng-template>
+</nz-modal>

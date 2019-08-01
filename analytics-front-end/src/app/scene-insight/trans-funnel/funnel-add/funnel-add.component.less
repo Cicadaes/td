@@ -1,0 +1,245 @@
+:host /deep/ .form .input-name .input .ant-input,
+:host /deep/ .form .input-step .step .input .ant-input,
+:host /deep/ .form .input-step .step .input .ant-select {
+  font-size: 12px;
+  line-height: 12px;
+  color: #17233d;
+}
+
+:host /deep/ .form .input-step .step .input .ant-input {
+  width: 200px;
+}
+
+:host /deep/ .form .input-step .step .input .ant-select {
+  width: 200px;
+}
+
+/* icon */
+
+.form .input-step .tooltip:before {
+  font-family: 'anticon';
+  content: '\e62c';
+}
+
+.form .input-step .step .remove:before {
+  font-family: 'anticon';
+  content: '\e62e';
+}
+
+.form .input-step .button .add:before {
+  font-family: 'anticon';
+  content: '\e627';
+}
+
+/* .form */
+
+.form {
+  margin: 16px;
+  border-radius: 3px;
+  background-color: #ffffff;
+  min-width: 1000px;
+}
+
+.form > .header {
+  height: 47px;
+  padding-left: 16px;
+  padding-top: 16px;
+  border-bottom: 1px solid #e7e9eb;
+  line-height: 1em;
+}
+
+/* .form .input-name */
+
+.form .input-name {
+  margin-left: 16px;
+  margin-right: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e7e9eb;
+}
+
+.form .input-name .label {
+  display: inline-block;
+  height: 32px;
+  padding-right: 12px;
+  padding-top: 10px;
+  font-size: 12px;
+  line-height: 12px;
+  color: #17233d;
+}
+
+.form .input-name .input {
+  display: inline-block;
+  width: 320px;
+}
+
+/* .form .input-step */
+
+.form .input-step {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.form .input-step .tooltip {
+  position: relative;
+  padding-left: 26px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 12px;
+  line-height: 20px;
+  color: #808695;
+}
+
+.form .input-step .tooltip:before {
+  position: absolute;
+  left: 1px;
+  top: 22px;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+/* .form .input-step .step */
+
+.form .input-step .step {
+  position: relative;
+  max-width: 945px;
+  min-width: 945px;
+  min-height: 48px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  padding: 4px 56px 4px 56px;
+  border-radius: 5px;
+  background-color: #f8f8f9;
+}
+
+.form .input-step .step:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.form .input-step .step .label {
+  position: absolute;
+  left: 16px;
+  top: 17px;
+  font-size: 12px;
+  line-height: 12px;
+  color: #17233d;
+}
+
+.form .input-step .step .input {
+  position: relative;
+  float: left;
+  height: 32px;
+  margin: 4px;
+  white-space: nowrap;
+}
+
+.form .input-step .step .input.select-event {
+  border: 1px solid #ddd;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.form .input-step .step .input.select-event.has-error {
+  border-color: #ed4014;
+}
+
+.form .input-step .step .input[data-before]:before {
+  content: attr(data-before);
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 12px;
+  line-height: 12px;
+  color: #17233d;
+}
+
+.form .input-step .step .remove {
+  position: absolute;
+  right: 17px;
+  top: 14px;
+  font-size: 16px;
+  line-height: 16px;
+  color: #7c8292;
+}
+
+/* .form .input-step .step.header */
+
+.form .input-step .step.header {
+  margin-top: 32px;
+}
+
+.form .input-step .step.header .header:after {
+  content: attr(data-header);
+  position: absolute;
+  font-size: 12px;
+  line-height: 12px;
+  color: #17233d;
+}
+
+.form .input-step .step.header .header.\_1:after {
+  left: 0;
+  top: -46px;
+}
+
+.form .input-step .step.header .header.\_2:after {
+  left: 76px;
+  top: -37px;
+}
+
+.form .input-step .step.header .header.\_3:after {
+  left: 0px;
+  top: -37px;
+}
+
+/* .form .input-step .button */
+
+.form .input-step .button {
+  height: 48px;
+}
+
+.form .input-step .button .add {
+  position: relative;
+  top: -6px;
+  left: 8px;
+  font-size: 12px;
+  line-height: 16px;
+  color: #2d8cf0;
+}
+
+.form .input-step .button .add:before {
+  position: relative;
+  left: -6px;
+  top: 2px;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+/* .form-button */
+
+.form-button {
+  margin: 16px;
+}
+
+.form-button button {
+  width: 100px;
+  margin-right: 10px;
+}
+
+.form-in-dialog {
+  margin: 0;
+}
+
+/**/
+.error-msg {
+  color: #ed4014;
+}
+
+.icon-shijian {
+  color: #abe7a2;
+  vertical-align: sub;
+  margin-right: 5px;
+  font-size: 15px;
+  cursor: pointer;
+}

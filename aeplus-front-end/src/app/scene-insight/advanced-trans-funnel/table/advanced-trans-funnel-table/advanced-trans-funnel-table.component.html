@@ -1,0 +1,80 @@
+<main>
+	<article class="page-custom-content">
+		
+		<!-- 工具条 -->
+		<div class="table-custom-operator">
+			<a (click)="goToPage('添加漏斗','/scene-insight/advanced-trans-funnel/add',{})">
+				<button nz-button nzType="primary" nzSize="default"><span class="anticon anticon-plus"></span>添加漏斗</button>
+			</a>
+		</div>
+		
+		<!-- 表格 -->
+		<div class="table-custom-panel shadow-content">
+			<div class="table-custom-head clrfix">
+				<h5 class="table-custom-title">漏斗列表</h5>
+				<div class="table-custom-filter">
+				</div>
+			</div>
+			<div class="table-custom-more-search">
+				<app-more-search [fieldArray]="_moreSearchFieldArray"
+				                 (onSearch)="onSearchMoreSearch($event)"></app-more-search>
+			</div>
+			<nz-table
+					#ajaxTable
+					nzShowTotal
+					nzShowSizeChanger
+					[nzFrontPagination]="false"
+					[nzData]="dataSet"
+					[nzLoading]="loading"
+					[nzTotal]="total"
+					[(nzPageIndex)]="pageIndex"
+					[(nzPageSize)]="pageSize"
+					[nzPageSizeOptions]="[ 10, 20, 50, 100 ]"
+					(nzPageIndexChange)="searchData()"
+					(nzPageSizeChange)="searchData(true)">
+				<thead (nzSortChange)="sort($event)" nzSingleSort>
+				<tr>
+					<th style="width: 150px;">漏斗名称</th>
+					<th style="width: 150px;">入口行为</th>
+					<th style="width: 150px;">目标行为</th>
+					<th style="width: 80px;">计算状态</th>
+					<th style="width: 80px;">创建人</th>
+					<th style="width: 80px;">时间区间</th>
+					<th style="width: 80px;">步骤数</th>
+					<th style="width: 150px;">操作</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr *ngFor="let data of ajaxTable.data">
+					<td>{{data.name}}</td>
+					<td>
+						<div *ngIf="data.steps.length > 0">{{data.steps[0]['name']}}</div>
+					</td>
+					<td>
+						<div *ngIf="data.steps.length > 0">{{data.steps[data.steps.length - 1]['name']}}</div>
+					</td>
+					<td>{{data.status | calStatusPipe}}</td>
+					<td> {{data.createUserName}}</td>
+					<td>{{data.dateRange | dateFormatPipe : 2}}</td>
+					<td>{{data.steps.length}}</td>
+					<td>
+						<div class="table-custom-bar">
+							<a href="javascript:;" *ngIf="data.status == 3"
+							   (click)="goToPage('查看漏斗','/scene-insight/advanced-trans-funnel/view',{id:data.id,name: data.name, funnelOrder: data.funnelOrder, dateRange: data.dateRange})">查看</a>
+							<a href="javascript:;" *ngIf="data.currentUser && data.status != 2"
+							   (click)="goToPage('编辑漏斗','/scene-insight/advanced-trans-funnel/edit',{id:data.id})">
+								编辑
+							</a>
+							<a href="javascript:;" *ngIf="data.currentUser && data.status != 2"
+							   (click)="deleteProduct(data);">
+								删除
+							</a>
+						</div>
+					</td>
+				</tr>
+				</tbody>
+			</nz-table>
+		</div>
+	
+	</article>
+</main>

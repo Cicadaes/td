@@ -1,0 +1,17 @@
+.ant-menu-inline, .ant-menu-vertical {
+    border:none;
+}
+
+:host ::ng-deep .first-level {
+    display: block;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.67);
+}
+
+:host ::ng-deep .first-level:hover {
+    color: rgba(255, 255, 255, 1);
+}
+
+:host ::ng-deep .iconfont {
+    margin-right: 8px;
+}

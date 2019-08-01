@@ -1,0 +1,352 @@
+:host {
+  display: block;
+}
+
+:host:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.anticon.pointer {
+  font-size: 15px;
+  color: rgba(23, 35, 61, 0.55);
+  vertical-align: text-bottom;
+}
+
+.fileName {
+  display: inline-block;
+  margin-top: 5px;
+  width: 260px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.clear-file {
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 5px;
+  margin-left: 10px;
+  color: #5ba0ff;
+  vertical-align: super;
+}
+
+.insert-variable {
+  background: #f8f8f9;
+  border: 1px solid #dcdee2;
+  padding: 6px 10px;
+  border-bottom: none;
+  height: 32px;
+}
+
+.item .error {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 12px;
+  color: #f00;
+}
+
+/* .form */
+
+:host > .form {
+  float: left;
+  overflow: auto;
+  width: 551px;
+  height: 564px;
+  margin-right: 2px;
+  padding-right: 46px;
+  margin-bottom: -18px;
+}
+
+:host > .form .item {
+  margin-bottom: 24px;
+}
+
+:host > .form .item:last-child {
+  margin-bottom: 0;
+}
+
+:host > .form .item-input {
+  margin-left: 105px;
+  margin-top: -32px;
+}
+
+/* .form .item-label */
+
+:host > .form .item-label {
+  width: 105px;
+  height: 32px;
+  font-size: 12px;
+  line-height: 32px;
+  color: #17233d;
+}
+
+:host > .form .item-label .required:after {
+  content: '*';
+  position: relative;
+  left: 6px;
+  top: 6px;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 18px;
+  color: #ed4217;
+}
+
+/* .form .item-description */
+
+:host > .form .item-description {
+  margin-left: 105px;
+  margin-top: 0;
+  font-size: 12px;
+  line-height: 12px;
+  color: #9ca0ac;
+}
+
+:host > .form .item-description strong {
+  font-weight: normal;
+  color: #2d8cf0;
+}
+
+/* .form nz-select */
+
+:host > .form .item.launchChannel nz-select,
+:host > .form .item.sign nz-select,
+:host > .form .item.channelNumber nz-select {
+  display: block;
+  width: 280px;
+}
+
+:host > .form .item.launchTime nz-select.hh,
+:host > .form .item.launchTime nz-select.mm {
+  display: inline-block;
+  width: 80px;
+}
+
+/* .form nz-radio-group */
+
+:host > .form .item.sign nz-radio-group,
+:host > .form .item.launchTime nz-radio-group {
+  display: block;
+  height: 32px;
+}
+
+:host > .form .item.sign nz-radio-group .ant-radio-wrapper,
+:host > .form .item.launchTime nz-radio-group .ant-radio-button-wrapper {
+  font-size: 12px;
+}
+
+:host > .form .item.sign nz-radio-group .ant-radio-wrapper {
+  line-height: 12px;
+}
+
+:host > .form .item.sign nz-radio-group .ant-radio-wrapper {
+  padding-top: 10px;
+}
+
+/* .form nz-upload */
+
+:host > .form .item.blacklist nz-upload {
+  display: block;
+  margin-bottom: 12px;
+}
+
+:host > .form .item.blacklist nz-upload .ant-btn.ng-star-inserted {
+  border: none;
+  border-radius: 32px;
+  color: #ffffff;
+  background-color: #2d8cf0;
+}
+
+/* .form other */
+
+:host > .form .item.smContent textarea {
+  display: block;
+  min-height: 160px;
+  margin-bottom: 8px;
+}
+
+:host > .form .item.launchTime .YYYY-MM-DD,
+:host > .form .item.launchTime .hh,
+:host > .form .item.launchTime .mm {
+  margin-right: 4px;
+  margin-top: 16px;
+}
+
+/* .sm-preview */
+
+:host > .sm-preview {
+  float: left;
+  width: 363px;
+  height: 597px;
+  margin-right: -16px;
+  margin-top: -16px;
+  margin-bottom: -16px;
+  border-left: 1px solid #e7e9eb;
+  background-color: #f8f8f9;
+}
+
+/* .sm-preview .mobile-phone */
+
+:host > .sm-preview .mobile-phone {
+  position: relative;
+  left: 50px;
+  top: 35px;
+  width: 264px;
+  height: 528px;
+  border-radius: 38px;
+  background-color: #d0d6de;
+}
+
+:host > .sm-preview .mobile-phone-header {
+  position: relative;
+  left: 10px;
+  top: 10px;
+  width: 244px;
+  height: 60px;
+  border-top-left-radius: 28px;
+  border-top-right-radius: 28px;
+  background-color: #f9f9f9;
+}
+
+:host > .sm-preview .mobile-phone-content {
+  position: relative;
+  left: 10px;
+  top: 10px;
+  width: 244px;
+  height: 448px;
+  border-bottom-left-radius: 28px;
+  border-bottom-right-radius: 28px;
+  background-color: #ffffff;
+}
+
+/* .sm-preview .mobile-phone-liuhai */
+
+:host > .sm-preview .mobile-phone-liuhai {
+  position: absolute;
+  left: 65px;
+  top: 10px;
+  z-index: 1;
+  width: 134px;
+  height: 19px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: #d0d6de;
+}
+
+:host > .sm-preview .mobile-phone-liuhai .tl,
+:host > .sm-preview .mobile-phone-liuhai .tr {
+  position: absolute;
+  top: 0;
+  width: 6px;
+  height: 6px;
+  background-color: #d0d6de;
+}
+
+:host > .sm-preview .mobile-phone-liuhai .tl {
+  left: -6px;
+}
+
+:host > .sm-preview .mobile-phone-liuhai .tr {
+  right: -6px;
+}
+
+:host > .sm-preview .mobile-phone-liuhai .tl:before,
+:host > .sm-preview .mobile-phone-liuhai .tr:before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  background: #f9f9f9;
+}
+
+:host > .sm-preview .mobile-phone-liuhai .tl:before {
+  border-top-right-radius: 6px;
+}
+
+:host > .sm-preview .mobile-phone-liuhai .tr:before {
+  border-top-left-radius: 6px;
+}
+
+.form-right {
+  float: right;
+  width: 347px;
+  height: 579px;
+  margin-right: -16px;
+  margin-top: -16px;
+  border-left: 1px solid #e7e9eb;
+  background-color: #f8f8f9;
+  margin-bottom: -18px;
+  border-bottom: 1px solid #e7e9eb;
+}
+
+.phone {
+  width: 264px;
+  height: 528px;
+  // margin-top: 25px;
+  position: relative;
+  margin-right: 22px;
+  margin: auto;
+  top: 17px;
+}
+
+.phone .msg-box {
+  position: absolute;
+  left: 11px;
+  top: 72px;
+  background: #fff;
+  width: 243px;
+}
+
+.phone .msg-box .message {
+  width: 200px;
+  min-height: 100px;
+  height: 114px;
+  border-radius: 12px;
+  background: #e5e5ea;
+  margin-top: 40px;
+  margin-left: 16px;
+  position: relative;
+  padding: 12px 8px;
+  &::after {
+    color: #e5e5ea;
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: -12px;
+    bottom: 0;
+    border-width: 0px 0px 20px 20px;
+    border-style: solid;
+    border-left-color: transparent;
+    border-bottom-color: inherit;
+  }
+  p {
+    font-size: 12px;
+    word-break: break-all;
+    margin-bottom: 0;
+    max-height: 114px;
+  }
+}
+
+.phone .msg-box .content {
+  font-size: 12px;
+  color: rgba(23, 35, 61, 0.75);
+  line-height: 20px;
+  margin-bottom: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 217px;
+}
+
+.phone {
+  background: url('./../../../../assets/images/common/plateform/iphone-sms.png') no-repeat;
+  background-size: 100%;
+}
+
+:host ::ng-deep .ant-dropdown-link,
+.ant-dropdown-menu-item {
+  font-size: 12px;
+}

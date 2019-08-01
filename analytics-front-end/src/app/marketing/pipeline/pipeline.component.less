@@ -1,0 +1,329 @@
+.body {
+  position: relative;
+  overflow: hidden;
+  height: e('calc(100% - 56px)');
+  .content {
+    width: 100%;
+    height: calc(~'100% - 50px');
+    height: -webkit-calc(~'100% - 50px');
+    height: -moz-calc(~'100% - 50px');
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: flex;
+    .left-operator {
+      width: 80px;
+      background: #ffffff;
+      height: 100%;
+      display: inline-block;
+      overflow-y: auto;
+      .component-name {
+        padding: 10px 8px 10px 24px;
+        border-bottom: 1px solid #ebeef2;
+        span {
+          font-size: 12px;
+          color: #373d5d;
+          letter-spacing: 0;
+          line-height: 12px;
+        }
+        .put-away {
+          width: 14px;
+          height: 14px;
+          display: block;
+          line-height: 14px;
+          cursor: pointer;
+          float: right;
+        }
+      }
+      .component {
+        .node {
+          text-align: center;
+          cursor: move;
+          padding: 8px 0;
+          &:hover {
+            background: rgba(205, 205, 205, 0.2);
+          }
+          img {
+            width: 28px;
+            height: 28px;
+          }
+          label {
+            font-size: 12px;
+            color: #9ea7b4;
+            letter-spacing: 0;
+            line-height: 12px;
+            margin-top: 5px;
+            display: block;
+          }
+        }
+      }
+    }
+    .hide-left-operator {
+      width: 24px;
+      background: #ffffff;
+      height: 100%;
+      display: inline-block;
+      overflow-y: auto;
+      .component-name {
+        padding: 5px 7px 20px 0px;
+        border-bottom: 1px solid #ebeef2;
+        span {
+          font-size: 12px;
+          color: #373d5d;
+          letter-spacing: 0;
+          line-height: 12px;
+        }
+        .put-away {
+          width: 14px;
+          height: 14px;
+          display: block;
+          line-height: 14px;
+          cursor: pointer;
+          float: right;
+          transform: rotate(90deg);
+        }
+      }
+    }
+    #pipeline {
+      flex: 1 0 auto;
+      background-color: #eef0f3;
+      height: 100% !important;
+      display: inline-block;
+      margin-left: -3px;
+      cursor: pointer;
+      &.l-content {
+        width: calc(~'100% - 24px') !important;
+      }
+    }
+  }
+
+  /* pipeLine复位按钮和测试按钮样式 */
+
+  .pipeline-button {
+    position: absolute;
+    bottom: 50px;
+    right: 60px;
+    .reset-button {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      background-color: #ffffff;
+      border: 1px solid #d4d4d4;
+      border-radius: 5px;
+      box-shadow: 3px 3px 5px #888888;
+      text-align: center;
+      margin-bottom: 5px;
+      .reset {
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        display: inline-block;
+        background-image: url('/assets/images/pipeline/center.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+      .add {
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        display: inline-block;
+        background-image: url('/assets/images/pipeline/add.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+      .subtract {
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        display: inline-block;
+        background-image: url('/assets/images/pipeline/minus.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+}
+
+.right {
+  position: absolute;
+  top: 50px;
+  right: -380px;
+  width: 380px;
+  height: calc(~'100% - 50px');
+  border: 1px solid #dcdee2;
+  display: block;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  background: #ffffff;
+  &.right_content {
+    right: 0;
+    animation: rightAnimation 1s;
+    -moz-animation: rightAnimation 1s;
+    -webkit-animation: rightAnimation 1s;
+    -o-animation: rightAnimation 1s;
+  }
+  &.hidden_right_content {
+    animation: hiddenRightAnimation 1s;
+    -moz-animation: hiddenRightAnimation 1s;
+    -webkit-animation: hiddenRightAnimation 1s;
+    -o-animation: hiddenRightAnimation 1s;
+  }
+}
+
+.overflow-scroll {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.overflow-initial {
+  overflow: initial;
+  padding-right: 5px;
+}
+
+@keyframes rightAnimation {
+  from {
+    right: -40%;
+  }
+  to {
+    right: 0;
+  }
+}
+
+@-moz-keyframes rightAnimation {
+  from {
+    right: -40%;
+  }
+  to {
+    right: 0;
+  }
+}
+
+@-webkit-keyframes rightAnimation {
+  from {
+    right: -40%;
+  }
+  to {
+    right: 0;
+  }
+}
+
+@-o-keyframes rightAnimation {
+  from {
+    right: -40%;
+  }
+  to {
+    right: 0;
+  }
+}
+
+@keyframes hiddenRightAnimation {
+  from {
+    right: 0;
+  }
+  to {
+    right: -40%;
+  }
+}
+
+@-moz-keyframes hiddenRightAnimation {
+  from {
+    right: 0;
+  }
+  to {
+    right: -40%;
+  }
+}
+
+@-webkit-keyframes hiddenRightAnimation {
+  from {
+    right: 0;
+  }
+  to {
+    right: -40%;
+  }
+}
+
+@-o-keyframes hiddenRightAnimation {
+  from {
+    right: 0;
+  }
+  to {
+    right: -40%;
+  }
+}
+
+input {
+  outline: none;
+}
+
+/* pipeLine删除按钮浮动框样式 */
+.pipeline-message {
+  position: absolute;
+  padding-top: 10px;
+  cursor: auto;
+  .top-triangle {
+    width: 0;
+    height: 0;
+    margin-left: 14px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #378ce4;
+  }
+  .top {
+    width: 50px;
+    height: 20px;
+    background: #378ce4;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    box-shadow: 3px 3px 5px #888888;
+  }
+  .bottom {
+    width: 50px;
+    height: 20px;
+    padding: 4px;
+    box-sizing: border-box;
+    text-align: center;
+    background: #fff;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 3px 3px 5px #888888;
+    .delete {
+      display: inline-block;
+      cursor: pointer;
+      width: 15px;
+      height: 12px;
+      background: url('/assets/images/pipeline/delete.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .report {
+      display: inline-block;
+      cursor: pointer;
+      width: 15px;
+      height: 12px;
+      background-image: url('/assets/images/pipeline/report.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .portrayal {
+      display: inline-block;
+      cursor: pointer;
+      width: 15px;
+      height: 12px;
+      background-image: url('/assets/images/pipeline/icon-portrayal.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+  }
+}
+
+:host /deep/ .alreadySub .joint-link.joint-theme-default .link-tools .tool-remove {
+  transform: scale(0);
+}
+
+:host /deep/ .alreadySub .marker-vertices {
+  display: none;
+}
+
+:host /deep/ .joint-viewport .joint-link.joint-theme-default .connection-wrap {
+  stroke-width: 6px;
+}

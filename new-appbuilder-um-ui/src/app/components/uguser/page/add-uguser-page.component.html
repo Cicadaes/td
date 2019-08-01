@@ -1,0 +1,24 @@
+<nz-card [nzTitle]="title">
+    <ng-template #title>
+        <span *ngIf="!user">新增用户</span>
+        <span *ngIf="user">编辑用户</span>
+    </ng-template>
+    <!--<ng-template #extra>
+        <a>More</a>
+    </ng-template>-->
+    <ng-template #body>
+        <add-uguser-form *ngIf="user" [user]="user" [needSubmit] = "isNeedSubmitAddUgUserFormData" (onSubmit)="submitAddUgUserForm($event)"></add-uguser-form>
+        <add-uguser-form *ngIf="!user" [user]="user" [needSubmit] = "isNeedSubmitAddUgUserFormData" (onSubmit)="submitAddUgUserForm($event)"></add-uguser-form>
+    </ng-template>
+</nz-card>
+
+<div style="margin-top:10px;"> 
+        <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="handleOk($event)" [nzLoading]="isConfirmLoading">
+            确 定
+        </button>
+    <a [routerLink]="[ '/ugusers' ]">      
+            <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancel($event)">
+                取 消
+            </button>   
+    </a>
+</div>

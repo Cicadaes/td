@@ -1,0 +1,119 @@
+<div class="text-content">
+  <nz-card [nzBordered]="true" style="margin-bottom:10px;" nzTitle="基本信息">
+
+      <form style="margin:0 24px">
+        <nz-form-item nz-row>
+          <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label special-label-one" nzRequired>
+            <label for="name">名称</label>
+          </nz-form-label>
+          <nz-form-control nz-col [nzSpan]="7">
+            <input nz-input [(ngModel)]="name" (nzBlur)="nzBlurEvent('name');" (input)="onInput()" name="name">
+              <span *ngIf="errorType==1" style="color: red">请输入名称</span>
+              <span *ngIf="errorType==2" style="color: red">名称已存在</span>
+              <span *ngIf="errorType==9" style="color: red">名称不能超过128个字符</span>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item nz-row>
+          <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label special-label-one">
+            <label for="status"   class="special-label-before">状态</label>
+          </nz-form-label>
+          <nz-form-control nz-col [nzSpan]="14">
+            <label nz-checkbox [(ngModel)]="status" name="status">
+              <span>启用</span>
+            </label>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item nz-row>
+          <nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="special-label special-label-one">
+            <label for="desc"   class="special-label-before">描述</label>
+          </nz-form-label>
+          <nz-form-control nz-col [nzSpan]="7">
+            <textarea nz-input [(ngModel)]="desc" (nzBlur)="nzBlurEvent('desc');" [nzAutosize]="{ minRows: 2, maxRows: 4}"
+              placeHolder="" name="desc"></textarea>
+            <span *ngIf="errorType==10" style="color: red">输入的描述过长</span>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+
+  </nz-card>
+
+  <nz-card [nzBordered]="true" style="margin-bottom:10px;"  [nzTitle]="title">
+    <ng-template #title>
+      <span>应用信息</span>
+      <!-- <span class="anticon anticon-plus-circle-o" (click)="addLicenceAttribute($event)" style="cursor:pointer;color: blue"></span> -->
+    </ng-template>
+      <!-- <carousel-app-manage (onSubmit)="onSubmitAppData($event)"></carousel-app-manage> -->
+      <carousel-app-manage (onSubmit)="onSubmitAppData($event)" [appList]="appList"></carousel-app-manage>
+  </nz-card>
+
+  <nz-card [nzBordered]="true" style="margin-bottom:10px;" [nzTitle]="attrTitle">
+    <ng-template #attrTitle>
+      <span>属性信息</span>
+      <img alt="图片" src="./assets/images/add.svg" height="12px" width="12px" style="margin-left: 4px;cursor: pointer;"
+        (click)="addLicenceAttribute($event)" />
+  
+      <!-- <span class="anticon anticon-plus-circle-o" (click)="addLicenceAttribute($event)" style="cursor:pointer;color: blue"></span> -->
+    </ng-template>
+      <!-- 
+                          <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="addLicenceAttribute($event)">
+                              <span class="anticon anticon-plus"></span><span>新建属性</span>
+                          </button>
+      -->
+      <nz-table #nzTable nzShowPagination="false" [nzBordered]="false" [nzData]="_dataSet" [nzLoading]="_loading"
+       [nzFrontPagination]="false">
+        <thead nz-thead>
+          <tr>
+            <th nz-th [nzWidth]="'150px'">
+              名称
+            </th>
+            <th nz-th [nzWidth]="'150px'">
+              Key
+            </th>
+            <th nz-th [nzWidth]="'150px'">
+              Value(默认值)
+            </th>
+            <th nz-th>
+              描述
+            </th>
+            <th nz-th [nzWidth]="'150px'">
+              <span>操作</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody nz-tbody>
+          <tr nz-tbody-tr *ngFor="let data of nzTable.data; let i=index;">
+            <td nz-td>{{data.name}}</td>
+            <td nz-td>{{data.key}}</td>
+            <td nz-td>{{data.defalutValue}}</td>
+            <td nz-td>{{data.desc}}</td>
+            <td nz-td>
+              <span>
+                <a href="javascript:;" (click)="editAttribute(data, i)">编辑</a>
+                <nz-divider nzType="vertical"></nz-divider>
+                <a href="javascript:;" (click)="deleteAttribute(data)">删除</a>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+  </nz-card>
+  
+
+  <div class="clrfix">
+    <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="submmitLicence($event)" [nzLoading]="isConfirmLoading">
+      确 定
+    </button>
+    <a [routerLink]="[ '/licences' ]">
+      <button nz-button [nzType]="'default'" [nzSize]="'large'">
+        取 消
+      </button>
+    </a>
+  </div>
+</div>
+
+
+<add-licence-attribute-dialog [curIndex]="curIndex" [_dataSet]="_dataSet" [isedit]="isedit" [currentData]="currentData"
+  *ngIf="isShowLicenceAppModal" [isShow]="isShowLicenceAppModal" [queryParams]="queryParams" (onClose)="hideAddAppModal($event)"
+  (onSubmit)="submitAttributeModal($event)"></add-licence-attribute-dialog>

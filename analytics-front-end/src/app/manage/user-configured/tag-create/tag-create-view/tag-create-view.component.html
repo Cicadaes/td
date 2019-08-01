@@ -1,0 +1,181 @@
+<div class="first-level"></div>
+<div style="background-color: #ffffff;">
+  <div style="position: relative; padding: 20px; background: rgba(23,35,61,0.06);">
+    <div class="shadow-content" style="position: relative; background: #FFF;">
+      <div class="tag-view-detail">
+        <div style="padding: 10px 0 25px;margin-left: 20px; border-bottom: #DCDEE2 1px dashed;">
+          <div class="icon-tag-bg">
+            <i class="ant-compat anticon anticon-tag icon-tag"></i>
+          </div>
+          <div class="customTag-name">
+            <h4 title="{{ customTagVO2.customTag.name }}">
+              {{ customTagVO2.customTag.name }}
+            </h4>
+            <span
+              title="{{ customTagVO2.customTag.calcStatus | calStatusCrowdPipe }}"
+              *ngIf="customTagVO2.customTag.calcStatus != 2"
+            >
+              符合标签的用户数
+              {{ customTagVO2.customTag.calcStatus | calStatusCrowdPipe }}
+            </span>
+            <span title="{{ customTagVO2.schedule.crowdCount }}" *ngIf="customTagVO2.customTag.calcStatus == 2">
+              符合标签的用户数 {{ customTagVO2.customTag.crowdCount }}
+            </span>
+          </div>
+        </div>
+        <ul class=" clrfix">
+          <li class="clrfix">
+            <div title="{{ customTagVO2.customTag.tagCategoryName }}">
+              标签分类：<strong>{{ customTagVO2.customTag.tagCategoryName }}</strong>
+            </div>
+          </li>
+          <li>
+            <div title="{{ customTagVO2.schedule.lifecycle }}">
+              标签生命周期（天）：<strong>{{ customTagVO2.schedule.lifecycle }}</strong>
+            </div>
+          </li>
+          <li>
+            <div title="{{ _calculateDisplay }}">
+              计算频率：
+              <strong>{{ _calculateDisplay }}</strong>
+            </div>
+          </li>
+          <li>
+            <div title="{{ customTagVO2.customTag.updateDataTime }}">
+              数据更新时间：<strong>{{ customTagVO2.customTag.updateDataTime }}</strong>
+            </div>
+          </li>
+          <li class="clrfix">
+            <div title="{{ customTagVO2.customTag.creator }}">
+              创建人：<strong>{{ customTagVO2.customTag.creator }}</strong>
+            </div>
+          </li>
+          <li>
+            <div title="{{ customTagVO2.customTag.createTime | date: 'yyyy-MM-dd HH:mm' }}">
+              创建时间：<strong>{{ customTagVO2.customTag.createTime | date: 'yyyy-MM-dd HH:mm' }}</strong>
+            </div>
+          </li>
+          <li>
+            <div title="{{ customTagVO2.customTag.updator }}">
+              更新人：<strong>{{ customTagVO2.customTag.updator }}</strong>
+            </div>
+          </li>
+          <li>
+            <div title="{{ customTagVO2.customTag.updateTagRuleTime | date: 'yyyy-MM-dd HH:mm' }}">
+              规则更新时间：<strong>{{ customTagVO2.customTag.updateTagRuleTime | date: 'yyyy-MM-dd HH:mm' }}</strong>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div style="padding: 20px; background: rgba(23,35,61,0.06);">
+        <!-- 最外层循环 -->
+        <div *ngFor="let condition of customTagVO2.conditions; let ci = index">
+          <div *ngIf="ci > 0" style="position: relative; margin: 20px 0; text-align: center;">
+            <span *ngIf="condition.operator == 'and'" class="and-or-not">交</span>
+            <span *ngIf="condition.operator == 'or'" class="and-or-not">并</span>
+            <span *ngIf="condition.operator == 'andNot'" class="and-or-not">差</span>
+          </div>
+
+          <div style="position: relative; background: #FFF; border: #DCDEE2 1px solid;">
+            <div style="padding: 4px 20px 4px 10px; border-bottom: #DCDEE2 1px solid;">
+              <span *ngIf="condition.indice == 'attribute'" class="indice">用户属性</span>
+              <span *ngIf="condition.indice == 'behavior'" class="indice">用户行为</span>
+              <span *ngIf="condition.indice == 'customTag'" class="indice">现有标签</span>
+
+              <span *ngIf="condition.indice == 'behavior'" style="line-height: 30px; display: inline-block;">
+                <span class="indice">
+                  在
+                </span>
+                <span
+                  *ngIf="
+                    condition.eventTimeQuery.boolFilters[0].value &&
+                    condition.eventTimeQuery.boolFilters[0].value.length == 2
+                  "
+                  style="padding: 0 5px;"
+                >
+                  {{ condition.eventTimeQuery.boolFilters[0].value[0] | date: 'yyyy-MM-dd' }}
+                  ~
+                  {{ condition.eventTimeQuery.boolFilters[0].value[1] | date: 'yyyy-MM-dd' }}
+                </span>
+              </span>
+            </div>
+
+            <!-- 属性块 -->
+            <div *ngIf="condition.indice == 'attribute'" style="padding: 0px 20px 20px 20px;">
+              <app-attribute-view
+                [boolFilters]="condition.queryList[0].boolFilters"
+                [defaultAttrList]="true"
+                [hideAddBtn]="true"
+              ></app-attribute-view>
+            </div>
+
+            <!-- 行为块 -->
+            <div *ngIf="condition.indice == 'behavior'" style="padding: 0px 20px 20px 20px;">
+              <!-- 行为子循环块 -->
+              <div *ngFor="let query of condition.queryList; let i = index" style="border-bottom: #cccccc 1px dashed;">
+                <!-- 行为块 -->
+                <div *ngFor="let attr of query.boolFilters_0; let j = index">
+                  <div style="padding: 10px 0 10px 0; height: 52px;">
+                    <div *ngIf="i == 0" class="view-input  black-bg" style="width:87px;">
+                      用户
+                    </div>
+                    <div *ngIf="i > 0" class="view-input">
+                      <span>{{ query.operator | tagCreate }}</span>
+                    </div>
+
+                    <div class="view-input" style="width: 120px;">
+                      <span>{{ condition.not | tagCreate }}</span>
+                    </div>
+
+                    <span class="view-input" title="{{ metaBehaviorTypeMap[attr.fieldName] || '无' }}">
+                      {{ metaBehaviorTypeMap[attr.fieldName] || '无' }}
+                    </span>
+
+                    <span class="view-input" title="{{ metaBehaviorMap[attr.value] || '无' }}">
+                      {{ metaBehaviorMap[attr.value] || '无' }}
+                    </span>
+                  </div>
+                </div>
+
+                <!-- 行为属性块 -->
+                <app-attribute-view
+                  [boolFilters]="query.boolFilters"
+                  [metaAttributeList]="query.metaAttributeList"
+                  [useListGroup]="false"
+                  [hideAndOr]="true"
+                ></app-attribute-view>
+              </div>
+            </div>
+
+            <!-- 现有标签块 -->
+            <div *ngIf="condition.indice == 'customTag'" style="padding: 0px 20px 20px 20px;">
+              <div
+                *ngFor="let attr of condition.queryList[0].boolFilters; let i = index"
+                style="padding: 10px 0px 10px 0px; border-bottom: 1px dashed #DEDFE3;"
+              >
+                <div *ngIf="i == 0" class="view-input  black-bg">标签</div>
+                <div *ngIf="i > 0" class="view-input">
+                  <span>{{ attr.operator | tagCreate }}</span>
+                </div>
+
+                <!-- eqType -->
+                <span class="view-input">
+                  {{ attr.eqType == 'eq' ? '是' : '不是' }}
+                </span>
+
+                <span class="view-input" title="{{ existingTagMap[attr.value] || '无' }}">
+                  {{ existingTagMap[attr.value] || '无' }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="position: relative; margin-top: 20px; padding: 0 20px;">
+      <button (click)="cancel()" nz-button nzType="default">返回</button>
+    </div>
+  </div>
+</div>

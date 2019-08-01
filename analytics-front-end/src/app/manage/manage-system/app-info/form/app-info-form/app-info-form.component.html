@@ -1,0 +1,118 @@
+<main>
+  <form
+    class="app-info-form custom-form"
+    nz-form
+    [formGroup]="validateForm"
+    (ngSubmit)="submitForm($event, validateForm.value)"
+  >
+    <nz-form-item>
+      <nz-form-label>应用名称</nz-form-label>
+      <nz-form-control>
+        <input nz-input formControlName="productname" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>App ID</nz-form-label>
+      <nz-form-control>
+        <input nz-input formControlName="appkey" class="c1" />
+
+        <a
+          href="javascript:;"
+          class="ml-10"
+          ngxClipboard
+          [cbContent]="_data.appkey"
+          (cbOnSuccess)="successCopy('App ID复制成功')"
+          >复制</a
+        >
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label
+        >Scheme
+
+        <nz-popover [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+          <span class="icon iconfont icon-info1 item" nz-popover></span>
+          <ng-template #nzTemplate>
+            <ul class="des-ul">
+              <li class="clrfix">
+                关于Scheme的使用说明请参考SDK集成文档。
+              </li>
+            </ul>
+          </ng-template>
+        </nz-popover>
+      </nz-form-label>
+      <nz-form-control>
+        <div class="div-input">{{ _scheme }}</div>
+        <a
+          href="javascript:;"
+          class="ml-10"
+          ngxClipboard
+          [cbContent]="_scheme"
+          (cbOnSuccess)="successCopy('Scheme复制成功')"
+          >复制</a
+        >
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item *ngIf="isAutoMNP">
+      <nz-form-label>AppID（小程序ID）</nz-form-label>
+      <nz-form-control>
+        <input nz-input formControlName="miniprogramAppid" class="c1" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item *ngIf="isAutoMNP">
+      <nz-form-label>App Secret（小程序密钥） </nz-form-label>
+      <nz-form-control>
+        <input nz-input formControlName="miniprogramSecret" class="c1" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>收取数据</nz-form-label>
+      <nz-form-control>
+        <nz-switch
+          [nzDisabled]="!_isTenantAdmin"
+          [ngModel]="_iscollectdata"
+          [nzControl]="true"
+          (click)="changeIsCollectData($event)"
+          formControlName="iscollectdata"
+          nzCheckedChildren="启用"
+          nzUnCheckedChildren="禁用"
+        ></nz-switch>
+        <span class="ml-20 c2">
+          禁用后此产品的SDK将不再发送用户行为数据，请谨慎使用此功能
+        </span>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>数据补偿策略</nz-form-label>
+      <nz-form-control>
+        <nz-radio-group formControlName="iscompensate" [(ngModel)]="_data.iscompensate" class="radio-group">
+          <label nz-radio [nzDisabled]="true" nzValue="1" class="c3"
+            >补偿至数据发生时间
+            <span class="c2"
+              >历史数据会因用户网络不佳造成数据延迟收集而变化；最多支持3日之前数据补偿，超过3日的数据将补偿到今日，对系统性能有较大影响。</span
+            ></label
+          >
+          <label nz-radio [nzDisabled]="true" nzValue="2" class="c3"
+            >补偿至数据收集时间 <span class="c2">历史数据不会变化，补充数据填充至今日</span></label
+          >
+        </nz-radio-group>
+        <div class="c1">
+          <span class="ant-compat anticon anticon-info-circle"></span>如需更改数据补偿策略，请联系管理员
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5">应用简介</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <textarea formControlName="desc" nz-input rows="4"></textarea>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</main>

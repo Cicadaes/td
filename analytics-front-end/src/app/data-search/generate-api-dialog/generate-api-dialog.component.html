@@ -1,0 +1,32 @@
+<main>
+  <nz-modal
+    [nzMaskClosable]="false"
+    [(nzVisible)]="_isVisible"
+    [nzTitle]="modalTitle"
+    [nzContent]="modalContent"
+    [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel()"
+    [nzWidth]="580"
+  >
+    <ng-template #modalTitle>
+      <span *ngIf="!_data">生成API</span>
+    </ng-template>
+
+    <ng-template #modalContent>
+      <app-generate-api-form
+        [isSubmit]="_isSubmitForm"
+        [systemError]="_systemError"
+        (onSubmit)="_onSubmitForm($event)"
+        [data]="_data"
+        (onBack)="_onBackForm($event)"
+      ></app-generate-api-form>
+    </ng-template>
+
+    <ng-template #modalFooter>
+      <button nz-button nzType="default" (click)="handleCancel()">取消</button>
+      <button nz-button nzType="primary" (click)="handleOk()" [nzLoading]="_isConfirmLoading">
+        确认
+      </button>
+    </ng-template>
+  </nz-modal>
+</main>

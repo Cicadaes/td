@@ -1,0 +1,42 @@
+<main>
+	<form class="custom-form" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)">
+		<nz-form-item>
+			<nz-form-label [nzSpan]="5" nzRequired>分群名称</nz-form-label>
+			<nz-form-control [nzSpan]="16">
+				<input nz-input formControlName="crowdName" placeholder="请输入分群名称" maxlength="64"
+				       (keyup)="keyupInputValue($event,'crowdName');" (blur)="changeInputValue($event,'crowdName');">
+				<div class="custom-form-explain clrfix">
+					<nz-form-explain
+							*ngIf="validateForm.get('crowdName').dirty && validateForm.get('crowdName').errors">
+						<ng-container *ngIf="validateForm.get('crowdName').hasError('required')">
+							请输入分群名称
+						</ng-container>
+					</nz-form-explain>
+				</div>
+			</nz-form-control>
+		</nz-form-item>
+
+		<nz-form-item>
+			<nz-form-label [nzSpan]="5">&nbsp;分群描述</nz-form-label>
+			<nz-form-control [nzSpan]="16">
+				<textarea formControlName="crowdDesc" nz-input rows="4" placeholder="请输入分群描述" maxlength="200"
+				          (keyup)="keyupInputValue($event,'crowdDesc');"></textarea>
+				<div class="custom-form-explain clrfix">
+					<nz-form-explain
+							*ngIf="validateForm.get('crowdDesc').dirty&&validateForm.get('crowdDesc').hasError('required')">
+						请输入分群描述
+					</nz-form-explain>
+				</div>
+			</nz-form-control>
+		</nz-form-item>
+
+
+		<nz-form-item *ngIf="_systemError.error">
+			<nz-form-control [nzOffset]="5" [nzSpan]="16">
+				<nz-alert nzType="error" nzMessage="{{_systemError.msg}}" nzBanner></nz-alert>
+			</nz-form-control>
+		</nz-form-item>
+
+
+	</form>
+</main>

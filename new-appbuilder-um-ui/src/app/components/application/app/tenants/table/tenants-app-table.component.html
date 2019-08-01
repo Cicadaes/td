@@ -1,0 +1,40 @@
+<ng-template #tableTotal>
+        <div  style="margin-right: 6px;">
+          总共 {{_total}} 条
+        </div>
+</ng-template>
+    <nz-table #nzTable [nzBordered]="false" [nzShowTotal]="tableTotal" [nzTotal]="_total" [nzData]="_dataSet" nzShowSizeChanger [nzLoading]="_loading" [nzTotal]="_total" [(nzPageIndex)]="_current"
+              (nzPageIndexChange)="refreshData()" [(nzPageSize)]="_pageSize" (nzPageSizeChange)="refreshData(true)" [nzFrontPagination]="false">
+            <thead>
+            <tr>
+                <th [nzWidth]="'150px'">
+                    应用名称
+                </th>
+                <th [nzWidth]="'150px'">
+                    版本
+                </th>
+                <th>
+                    描述
+                </th>
+                <th [nzWidth]="'150px'">
+                    <span>操作</span>
+                </th>
+            </tr>
+            </thead>
+
+        <tbody>
+        <tr *ngFor="let data of nzTable.data">
+            <td>{{data.name}}</td>
+            <td>{{data.version}}</td>
+            <td>{{data.desc}}</td>
+            <td>
+                <span>
+                    <a href="javascript:;" (click)="showAddUserModal(data)">查看</a>
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </nz-table>
+
+
+<detail-func-dialog [isShow]="isShowAddUerModal" (onClose)="hideAddUserModal($event)" (onSubmit)="onSubmitUserFormData($event)" [resourceTreeDatas]="resourceTreeDatas"></detail-func-dialog>

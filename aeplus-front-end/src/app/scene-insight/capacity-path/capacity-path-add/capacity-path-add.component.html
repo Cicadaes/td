@@ -1,0 +1,164 @@
+<div class="first-level"></div>
+<main>
+	<form class="custom-form" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" *ngIf="validateForm">
+		<div class="path-form">
+			<nz-form-item>
+				<nz-form-label [nzSpan]="2" nzRequired nzFor="name" style="width: 116px;">智能路径名称</nz-form-label>
+				<nz-form-control [nzSpan]="22" style="width: 316px;">
+					<input maxlength="64" id="name" type="name" nz-input formControlName="name" placeholder="请输入智能路径名称">
+					<div class="custom-form-explain clrfix">
+						<nz-form-explain *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors ">
+							<ng-container *ngIf="validateForm.get('name').hasError('required')">
+								请输入智能路径名称
+							</ng-container>
+						</nz-form-explain>
+					</div>
+				</nz-form-control>
+			</nz-form-item>
+
+			<nz-form-item>
+				<nz-form-label [nzSpan]="2" nzRequired style="width: 116px;">计算日期</nz-form-label>
+				<nz-form-control [nzSpan]="22" style="width: 360px;">
+					<nz-range-picker formControlName="dateRange" [nzFormat]="_dateFormat" [ngModel]="_dateRange"
+					                 (ngModelChange)="_changeDaterange($event);"
+					                 nzPlaceHolder="" [nzAllowClear]="false" [nzStyle]="{'width': '240px'}">
+
+					</nz-range-picker>
+					<div class="custom-form-explain clrfix">
+						<nz-form-explain
+								*ngIf="validateForm.get('dateRange').dirty&&validateForm.get('dateRange').hasError('required')">
+							请选择计算日期
+						</nz-form-explain>
+					</div>
+				</nz-form-control>
+			</nz-form-item>
+
+			<nz-form-item>
+				<nz-form-label [nzSpan]="2" nzRequired nzFor="repeatType" style="width: 116px;">重复路径</nz-form-label>
+				<nz-form-control [nzSpan]="22" style="width: 390px;">
+					<nz-radio-group type="repeatType" formControlName="repeatType">
+						<label nz-radio nzValue="1">合并</label>
+						<label nz-radio nzValue="2">展开</label>
+					</nz-radio-group>
+					<div class="custom-form-explain clrfix">
+					</div>
+				</nz-form-control>
+			</nz-form-item>
+
+			<nz-form-item>
+				<nz-form-label [nzSpan]="2" nzFor="tab" style="width: 116px;"></nz-form-label>
+				<nz-form-control [nzSpan]="22" style="width: 390px;">
+					<nz-radio-group formControlName="type" [nzSize]="'default'">
+						<label nz-radio-button nzValue="{{item.id}}" *ngFor="let item of tabs">{{item.name}}</label>
+					</nz-radio-group>
+					<div class="custom-form-explain clrfix"></div>
+				</nz-form-control>
+			</nz-form-item>
+
+			<nz-form-item>
+				<nz-form-label [nzSpan]="2" nzRequired nzFor="start" style="width: 116px;">起始点</nz-form-label>
+				<nz-form-control [nzSpan]="22" style="width: 390px;"
+				                 [ngClass]="{'has-error': (validateForm.get('startPointType').dirty && validateForm.get('startPointType').hasError('required')) || (validateForm.get('startPoint').dirty && validateForm.get('startPoint').hasError('required'))}">
+					<div class="clrfix">
+						<nz-select formControlName="startPointType" nzPlaceHolder="请选择" class="input-item"
+						           style="width: 160px;" (ngModelChange)="selectTypeChange($event,'startPointType')">
+							<nz-option nzCustomContent [nzValue]="item.id" [nzLabel]="item.dicItemAlias"
+							           *ngFor="let item of startPointTypeList">
+								<span title="{{item.dicItemAlias}}">{{item.dicItemAlias}}</span>
+							</nz-option>
+						</nz-select>
+						<span class="item-text-module input-item">是</span>
+						<app-select-search-multiple [select]="_selectEvent['startPointType']" class="input-item"
+						                            (onSelect)="onSelectEvent($event, 'startPoint');"
+						                            style="width:160px;"></app-select-search-multiple>
+					</div>
+					<div class="custom-form-explain clrfix">
+						<nz-form-explain
+								*ngIf="(validateForm.get('startPointType').dirty && validateForm.get('startPointType').errors) || (validateForm.get('startPoint').dirty && validateForm.get('startPoint').errors)">
+							<ng-container
+									*ngIf="validateForm.get('startPointType').hasError('required') || validateForm.get('startPoint').hasError('required')">
+								请选择起始点
+							</ng-container>
+						</nz-form-explain>
+					</div>
+
+
+				</nz-form-control>
+			</nz-form-item>
+
+			<nz-form-item>
+				<nz-form-label [nzSpan]="2" nzRequired nzFor="start" style="width: 116px;">终止点</nz-form-label>
+				<nz-form-control [nzSpan]="22" style="width: 390px;"
+				                 [ngClass]="{'has-error': (validateForm.get('endPointType').dirty && validateForm.get('endPointType').hasError('required')) || (validateForm.get('endPoint').dirty && validateForm.get('endPoint').hasError('required'))}">
+					<div class="clrfix">
+						<nz-select formControlName="endPointType" class="input-item" style="width: 160px;"
+						           nzPlaceHolder="请选择" (ngModelChange)="selectTypeChange($event,'endPointType')">
+							<nz-option nzCustomContent [nzValue]="item.id" [nzLabel]="item.dicItemAlias"
+							           *ngFor="let item of startPointTypeList">
+								<span title="{{item.dicItemAlias}}">{{item.dicItemAlias}}</span>
+							</nz-option>
+						</nz-select>
+						<span class="item-text-module input-item">是</span>
+						<app-select-search-multiple [select]="_selectEvent['endPointType']" class="input-item"
+						                            (onSelect)="onSelectEvent($event, 'endPoint');"
+						                            style="width:160px;"></app-select-search-multiple>
+					</div>
+					<div class="custom-form-explain clrfix">
+						<nz-form-explain
+								*ngIf="(validateForm.get('endPointType').dirty && validateForm.get('endPointType').errors) || (validateForm.get('endPoint').dirty && validateForm.get('endPoint').errors)">
+							<ng-container
+									*ngIf="validateForm.get('endPointType').hasError('required') || validateForm.get('endPoint').hasError('required')">
+								请选择终止点
+							</ng-container>
+						</nz-form-explain>
+					</div>
+
+				</nz-form-control>
+			</nz-form-item>
+
+			<nz-form-item>
+				<nz-form-label [nzSpan]="2" nzFor="tab" style="width: 116px;">&nbsp;必经路径</nz-form-label>
+				<nz-form-control [nzSpan]="22" style="width: 390px;">
+					<nz-switch [(ngModel)]="switchValue" [ngModelOptions]="{standalone: true}"
+					           (ngModelChange)="requiredChange($event);"></nz-switch>
+				</nz-form-control>
+			</nz-form-item>
+
+			<nz-form-item [ngClass]="{'hide': !switchValue}">
+				<nz-form-label [nzSpan]="2" nzFor="tab" style="width: 116px;">
+
+				</nz-form-label>
+				<nz-form-control [nzSpan]="22" style="width: 390px;" [ngClass]="{'has-error': _invalidNecessaryPath}">
+					<div class="clrfix">
+						<nz-select formControlName="necessaryPathType" class="input-item" style="width: 160px;"
+						           nzPlaceHolder="请选择" (ngModelChange)="selectTypeChange($event,'necessaryPathType')">
+							<nz-option nzCustomContent [nzValue]="item.id" [nzLabel]="item.dicItemAlias"
+							           *ngFor="let item of startPointTypeList">
+								<span title="{{item.dicItemAlias}}">{{item.dicItemAlias}}</span>
+							</nz-option>
+						</nz-select>
+
+						<span class="item-text-module input-item">是</span>
+						<app-select-search-multiple [select]="_selectEvent['necessaryPathType']" class="input-item"
+						                            (onSelect)="onSelectEvent($event, 'necessaryPath');"
+						                            style="width:160px;"></app-select-search-multiple>
+					</div>
+					<div class="custom-form-explain clrfix">
+						<nz-form-explain *ngIf="_invalidNecessaryPath">
+							<ng-container *ngIf="_invalidNecessaryPath">
+								请选择必经路径
+							</ng-container>
+						</nz-form-explain>
+					</div>
+				</nz-form-control>
+			</nz-form-item>
+
+
+		</div>
+
+	</form>
+	<div class="path-form-bottom" style="margin: 16px;" *ngIf="validateForm">
+		<button nz-button nzType="primary" (click)="save();">保存</button>
+		<button nz-button nzType="default" (click)="cancel();">取消</button>
+	</div>
+</main>

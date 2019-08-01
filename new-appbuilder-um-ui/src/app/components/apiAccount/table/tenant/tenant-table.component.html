@@ -1,0 +1,51 @@
+<div class="text-content">
+    <div class="operation-region">
+        <ng-template #tableTotal>
+            <div>
+                总共 {{_total}} 条
+            </div>
+        </ng-template>
+        <more-search [fieldArray]="moreSearchArray" (onSearch)="onMoreSearch($event)"></more-search>
+        <nz-table #nzTable [nzData]="_dataSet" [nzShowTotal]="tableTotal" nzShowSizeChanger [nzLoading]="_loading" [nzTotal]="_total"
+            [(nzPageIndex)]="_pageIndex" [(nzPageSize)]="_pageSize" [nzFrontPagination]="false" (nzPageSizeChange)="refreshData(true)"
+            (nzPageIndexChange)="refreshData()">
+            <thead nz-thead>
+                <tr>
+                    <th [nzWidth]="'25%'">
+                        API账号名称
+                    </th>
+                    <th [nzWidth]="'15%'">
+                        ApiKey
+                    </th>
+                    <th [nzWidth]="'10%'">
+                        状态
+                    </th>
+                    <th [nzWidth]="'30%'">
+                        描述
+                    </th>
+                    <th [nzWidth]="'10%'">
+                        创建日期
+                    </th>
+                    <th [nzWidth]="'10%'">
+                        操作
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of nzTable.data">
+                    <td>{{data.name}}</td>
+                    <td>{{data.apiKey}}</td>
+                    <td>
+                        <nz-switch [(ngModel)]="data.status" [nzControl]="true" (click)="changeStatus($event, data)"
+                            nzCheckedChildren="正常" nzUnCheckedChildren="禁用"></nz-switch>
+                    </td>
+                    <td>{{data.description | setValueLengthPipe:15}}</td>
+                    <td>{{data.createTime | dateFormatPipe:2}}</td>
+                    <td>
+                        <a [routerLink]="[ '/tenantsApiAccount/detail',data.id]" >查看</a>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+</div>

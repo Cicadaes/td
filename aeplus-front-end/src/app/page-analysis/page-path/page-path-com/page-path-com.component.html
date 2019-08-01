@@ -1,0 +1,31 @@
+<main class="shadow-content">
+	<div class="ant-card ant-card-loading ant-card-bordered">
+		<div class="ant-card-head ng-star-inserted">
+			<div class="ant-card-head-wrapper">
+				<div class="ant-card-head-title ng-star-inserted">
+					页面路径
+				</div>
+			</div>
+		</div>
+		<div class="ant-card-body">
+			
+			<div class="tree">
+				<div *ngIf="_isQueriedData && _pagePathDatas" class="tree-body"
+					 style="display:-webkit-flex;align-items:center;justify-content: center;float:left;">
+					<div style="position:relative">
+						<cm-TransversalTree [filter]="_pagePathFilter" [cmData]="_cmData.left" [cmDirct]="'left'"
+						                    [ngClass]="_cmData.left.length>0?'hasData':''" *ngIf="showLeft"
+						                    class="tree-view"></cm-TransversalTree>
+					</div>
+					<cm-TransversalTree [filter]="_pagePathFilter" [cmData]="_cmData.right" [cmDirct]="'right'" [rootList]="rootList"
+					                   style="margin-left:18px;" class="tree-view"></cm-TransversalTree>
+				</div>
+				<div *ngIf="_isQueriedData && !_pagePathDatas" class="no-data">暂无数据</div>
+				<div *ngIf="!_isQueriedData" class="loading">
+					<nz-spin></nz-spin>
+				</div>
+			</div>
+		
+		</div>
+	</div>
+</main>

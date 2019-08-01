@@ -1,0 +1,104 @@
+<div [ngClass]="{'line-padding': hideAndOr}" class="check-base-attr">
+    <div *ngFor="let attr of boolFilters; let i = index" class="attribute-one">
+        <div *ngIf="i == 0 && !hideAndOr" class="view-btn  black-bg">用户</div>
+        <div *ngIf="i > 0 && !hideAndOr" (click)="changeOperator(attr)" class="view-btn pointer">
+            <span>{{attr.operator | crowdCreate}}</span>
+            <span class="anticon anticon-down"></span>
+        </div>
+
+        <!-- 选择属性 -->
+        <nz-select *ngIf="useListGroup" [(ngModel)]="attr.fieldName" (ngModelChange)="changeAttribute(attr)" nzShowSearch nzAllowClear nzPlaceHolder="请选择属性"
+                   [ngClass]="{'checkFailureBase': attr.fieldNameCheckFailure}" class="input-item" style="width: 180px;">
+            <nz-option-group *ngFor="let group of metaAttributeList" nzLabel="{{group.groupName}}">
+                <nz-option *ngFor="let item of group.list" nzValue="{{item.value}}" nzLabel="{{item.name}}" nzCustomContent>
+                    <div title="{{item.name}}">{{item.name}}</div>
+                </nz-option>
+            </nz-option-group>
+        </nz-select>
+        <nz-select *ngIf="!useListGroup" [(ngModel)]="attr.fieldName" (ngModelChange)="changeAttribute(attr)" nzShowSearch nzAllowClear nzPlaceHolder="请选择属性"
+                   [ngClass]="{'checkFailureBase': attr.fieldNameCheckFailure}" class="input-item" style="width: 180px;">
+            <nz-option *ngFor="let item of metaAttributeList" nzValue="{{item.value}}" nzLabel="{{item.name}}" nzCustomContent>
+                <div title="{{item.name}}">{{item.name}}</div>
+            </nz-option>
+        </nz-select>
+
+        <!-- eqType -->
+        <nz-select *ngIf="attr.displayType == 'Tag'" [(ngModel)]="attr.eqType" (ngModelChange)="logChange()" class="input-item" style="width: 120px;">
+            <nz-option nzValue="eq" nzLabel="是"></nz-option>
+            <nz-option nzValue="ne" nzLabel="不是"></nz-option>
+        </nz-select>
+
+        <nz-select *ngIf="attr.displayType == 'integer' || attr.displayType == 'Integer' || attr.displayType == 'Double' || attr.displayType == 'Long'"
+                   [(ngModel)]="attr.eqType" (ngModelChange)="logChange()" class="input-item" style="width: 120px;">
+            <nz-option nzValue="eq" nzLabel="等于"></nz-option>
+            <nz-option nzValue="gt" nzLabel="大于"></nz-option>
+            <nz-option nzValue="lt" nzLabel="小于"></nz-option>
+            <nz-option nzValue="gte" nzLabel="大于等于"></nz-option>
+            <nz-option nzValue="lte" nzLabel="小于等于"></nz-option>
+            <nz-option nzValue="between" nzLabel="在区间"></nz-option>
+        </nz-select>
+
+        <nz-select *ngIf="attr.displayType == 'String'" [(ngModel)]="attr.eqType" (ngModelChange)="logChange()" class="input-item" style="width: 120px;">
+            <nz-option nzValue="like" nzLabel="包含"></nz-option>
+        </nz-select>
+
+        <nz-select *ngIf="attr.displayType == 'Date'" [(ngModel)]="attr.eqType" (ngModelChange)="logChangeOperator(attr, 'value')" class="input-item" style="width: 120px;">
+            <nz-option nzValue="eq" nzLabel="等于"></nz-option>
+            <nz-option nzValue="gt" nzLabel="晚于"></nz-option>
+            <nz-option nzValue="lt" nzLabel="早于"></nz-option>
+            <nz-option nzValue="between" nzLabel="在区间"></nz-option>
+        </nz-select>
+
+        <!-- Value -->
+        <nz-select *ngIf="attr.displayType == 'Tag'" [(ngModel)]="attr.value" (ngModelChange)="logChange(attr, 'value')" nzMode="multiple"
+                   nzPlaceHolder="请选择" nzAllowClear nzShowSearch [nzServerSearch]="true" (nzOnSearch)="onSearch(attr, $event)"
+                   [ngClass]="{'checkFailureBase': attr.valueCheckFailure}" class="input-item" style="width: 300px;">
+            <ng-container *ngFor="let item1 of attr.prop1ValueList">
+                <nz-option *ngIf="!isLoading" [nzValue]="item1.dicItemKey" [nzLabel]="item1.dicItemValue" nzCustomContent>
+                    <div title="{{item1.dicItemValue}}">{{item1.dicItemValue}}</div>
+                </nz-option>
+            </ng-container>
+            <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+                <span class="anticon anticon-loading anticon-spin loading-icon"></span> Loading Data...
+            </nz-option>
+        </nz-select>
+
+        <input maxlength="128" *ngIf="attr.displayType == 'String'" nz-input placeholder="请输入内容" [(ngModel)]="attr.value" (ngModelChange)="logChange(attr, 'value')" [ngClass]="{'checkFailure': attr.valueCheckFailure}" style="width: 300px;">
+
+        <nz-input-number *ngIf="attr.displayType == 'integer' || attr.displayType == 'Integer' || attr.displayType == 'Long'" [nzPrecision]="0"
+                         [(ngModel)]="attr.value" (ngModelChange)="logChange(attr, 'value')" [nzMin]="0" [nzMax]="999999999" [nzStep]="1"
+                         [ngClass]="{'checkFailure': attr.valueCheckFailure}" style="width: auto;" nzPlaceHolder=""></nz-input-number>
+
+        <nz-input-number *ngIf="attr.displayType == 'Double'" [nzPrecision]="2"
+                         [(ngModel)]="attr.value" (ngModelChange)="logChange(attr, 'value')" [nzMin]="0" [nzMax]="999999999" [nzStep]="1"
+                         [ngClass]="{'checkFailure': attr.valueCheckFailure}" style="width: auto;" nzPlaceHolder=""></nz-input-number>
+
+        <nz-date-picker *ngIf="attr.displayType == 'Date' && attr.eqType != 'between'" [(ngModel)]="attr.value" (ngModelChange)="logChange(attr, 'value')" [ngClass]="{'checkFailureBase': attr.valueCheckFailure}"></nz-date-picker>
+        <nz-range-picker *ngIf="attr.displayType == 'Date' && attr.eqType == 'between'" [(ngModel)]="attr.value" (ngModelChange)="logChange(attr, 'value')" [ngClass]="{'checkFailureBase': attr.valueCheckFailure}"
+                         nzPlaceHolder="" [nzAllowClear]="false" [nzStyle]="{'width': '240px'}">
+
+        </nz-range-picker>
+
+        <!-- Value2 -->
+        <span *ngIf="(attr.displayType == 'integer' || attr.displayType == 'Integer' || attr.displayType == 'Double' || attr.displayType == 'Long') && attr.eqType == 'between'" style="line-height:32px;padding:0 5px;">到</span>
+
+        <nz-input-number *ngIf="(attr.displayType == 'integer' || attr.displayType == 'Integer' || attr.displayType == 'Long') && attr.eqType == 'between'" [(ngModel)]="attr.value2" [nzMin]="0" [nzMax]="999999999"
+                         [nzPrecision]="0" [nzStep]="1" style="width: auto;" nzPlaceHolder=""
+                         [ngClass]="{'checkFailure': attr.value2CheckFailure}" (ngModelChange)="logChange(attr, 'value2')"></nz-input-number>
+
+        <nz-input-number *ngIf="(attr.displayType == 'Double') && attr.eqType == 'between'" [(ngModel)]="attr.value2" [nzMin]="0" [nzMax]="999999999"
+                         [nzPrecision]="2" [nzStep]="1" style="width: auto;" nzPlaceHolder=""
+                         [ngClass]="{'checkFailure': attr.value2CheckFailure}" (ngModelChange)="logChange(attr, 'value2')"></nz-input-number>
+
+        <!-- remove -->
+        <button (click)="removeItem(boolFilters, i)" nz-button nzType="default" nzShape="circle" class="crowd-btn-close" style="float: right;">
+            <span class="anticon anticon-close"></span>
+        </button>
+    </div>
+    <div *ngIf="(boolFilters.length > 0 || !hideAddBtn) && btnFlag" [ngClass]="{'add-btn-padding': !hideAndOr}">
+        <div (click)="addItem(boolFilters, 'prop')" class="crowd-btn-add add-attribute-btn" style="padding: 10px 0px 10px 0px;margin-bottom: 10px; width: 80px;">
+            <span class="anticon anticon-plus"></span>
+            添加属性
+        </div>
+    </div>
+</div>

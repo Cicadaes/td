@@ -1,0 +1,129 @@
+<div class="first-level"></div>
+<!-- 新建、编辑 -->
+<div class="form shadow-content">
+
+	<!-- 页眉 -->
+	<div class="header module-title">{{funnelId ? nls.headerByEdit : nls.headerByAdd}}</div>
+
+	<!-- 名称 -->
+	<div class="input-name">
+		<span class="label">{{nls.inputName}}</span>
+		<span [class.has-error]="vm.form.nameError" class="input">
+            <input maxlength="64" nz-input [(ngModel)]="vm.form.nameValue" [attr.placeholder]="nls.inputNamePlaceholder"
+                   (keyup)="handlerInputCheck_nameError();">
+        </span>
+		<span class="error-msg" *ngIf="vm.form.nameError" style="margin-left:10px;">{{nls.inputNamePlaceholder}}</span>
+		<span class="error-msg" *ngIf="systemError.isError" style="margin-left:10px;">{{systemError.msg}}</span>
+
+	</div>
+
+	<!-- 步骤 -->
+	<div class="input-step">
+		<div class="tooltip">{{nls.inputStepTooltip}}</div>
+
+		<!-- 步骤 -->
+		<ng-container *ngFor="let data of vm.form.stepValue; let i = index">
+
+			<!-- 第 0 步 -->
+			<div *ngIf="i === 0" class="step header">
+				<span class="label header _1"
+				      [attr.data-header]="nls.inputStepHeader1">{{nls.inputStepLabel + 1}}：</span>
+
+				<!-- 事件类型 -->
+				<span class="input header _2" [attr.data-before]="nls.inputStepBefore1"
+				      [class.has-error]="data.eventTypeError">
+                    <nz-select [(ngModel)]="data.eventTypeId" [nzPlaceHolder]="nls.inputStepPlaceholder1"
+                               (ngModelChange)="handlerEventTypeChange(data, true, i); handlerInputCheck_stepPropError(data, 'eventTypeId')"
+                               nzShowSearch>
+                        <nz-option *ngFor="let option of vm.form.stepSelect_eventType" [nzValue]="option.value"
+                                   [nzLabel]="option.label" nzCustomContent>
+							<div title="{{option.label}}">{{option.label}}</div>
+						</nz-option>
+                    </nz-select>
+                </span>
+
+				<!-- 事件名称 -->
+				<span class="input header _3" [attr.data-before]="nls.inputStepBefore2"
+				      [class.has-error]="data.eventNameError" style="line-height: 32px;">
+                    <nz-select style="display: none;" [(ngModel)]="data.eventId"
+                               [nzPlaceHolder]="nls.inputStepPlaceholder2"
+                               (ngModelChange)="handlerInputCheck_stepPropError(data, 'eventId')" nzShowSearch>
+                        <nz-option *ngFor="let option of vm.form.stepSelect_eventName[data.eventTypeId]"
+                                   [nzValue]="option.value" [nzLabel]="option.label"
+                                   title="{{option.label}}" nzCustomContent>
+							<div title="{{option.label}}">{{option.label}}</div>
+						</nz-option>
+                    </nz-select>
+                </span>
+				<app-select-search-multiple [select]="data.eventSelect2" class="input header _3 select-event"
+				                            (onSelect)="onSelectEvent($event,data);" style="width:200px;"
+				                            [class.has-error]="data.eventNameError"></app-select-search-multiple>
+				<!-- 显示名 -->
+				<span class="input header _3" [attr.data-before]="nls.inputStepBefore3">
+                    <input nz-input [(ngModel)]="data.name" placeholder="{{nls.inputStepNamePlaceholder}}"
+                           maxlength="24">
+                </span>
+
+			</div>
+
+			<!-- 第 n 步 -->
+			<div *ngIf="i !== 0" class="step">
+				<span class="label">{{nls.inputStepLabel + (i + 1)}}：</span>
+
+				<!-- 事件类型 -->
+				<span class="input" [attr.data-before]="nls.inputStepBefore1" [class.has-error]="data.eventTypeError">
+                    <nz-select [(ngModel)]="data.eventTypeId" [nzPlaceHolder]="nls.inputStepPlaceholder1"
+                               (ngModelChange)="handlerEventTypeChange(data, true , i); handlerInputCheck_stepPropError(data, 'eventTypeId')"
+                               nzShowSearch>
+                        <nz-option *ngFor="let option of vm.form.stepSelect_eventType" [nzValue]="option.value"
+                                   [nzLabel]="option.label" nzCustomContent>
+							<div title="{{option.label}}">{{option.label}}</div>
+						</nz-option>
+                    </nz-select>
+                </span>
+
+
+				<!-- 事件名称 -->
+				<span class="input" [attr.data-before]="nls.inputStepBefore2" [class.has-error]="data.eventNameError"
+				      style="line-height: 32px;">
+                    <nz-select style="display: none;" [(ngModel)]="data.eventId"
+                               [nzPlaceHolder]="nls.inputStepPlaceholder2"
+                               (ngModelChange)="handlerInputCheck_stepPropError(data, 'eventId')" nzShowSearch>
+                        <nz-option *ngFor="let option of vm.form.stepSelect_eventName[data.eventTypeId]"
+                                   [nzValue]="option.value" [nzLabel]="option.label" nzCustomContent>
+							<div title="{{option.label}}">{{option.label}}</div>
+						</nz-option>
+                    </nz-select>
+                </span>
+
+				<app-select-search-multiple [select]="data.eventSelect2" class="input header _3 select-event"
+				                            (onSelect)="onSelectEvent($event,data);" style="width:200px;"
+				                            [class.has-error]="data.eventNameError"></app-select-search-multiple>
+
+				<!-- 显示名 -->
+				<span class="input" [attr.data-before]="nls.inputStepBefore3">
+                    <input nz-input [(ngModel)]="data.name" placeholder="{{nls.inputStepNamePlaceholder}}"
+                           maxlength="24">
+                </span>
+
+				<!-- 移除 -->
+				<a *ngIf="i > 1" (click)="handlerRemoveStep(i)" class="remove"></a>
+
+			</div>
+
+		</ng-container>
+
+		<!-- 添加参数 -->
+		<div *ngIf="vm.form.stepValue && vm.form.stepValue.length < 8" class="button">
+			<a (click)="handlerAddStep()" class="add">{{nls.inputStepAdd}}</a>
+		</div>
+
+	</div>
+
+</div>
+
+<!-- 提交、取消 -->
+<div class="form-button">
+	<button nz-button (click)="handlerSubmit()" nzType="primary">{{nls.submit}}</button>
+	<button nz-button (click)="handlerCancel()" nzType="default">{{nls.cancel}}</button>
+</div>

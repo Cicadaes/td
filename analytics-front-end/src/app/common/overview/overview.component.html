@@ -1,0 +1,37 @@
+<div class="overview">
+  <h3 class="overview-tit">
+    {{ options && options.title }}
+    <nz-popover
+      [nzTitle]="'指标说明'"
+      [nzPlacement]="'leftTop'"
+      [nzTrigger]="'hover'"
+      *ngIf="options && options.popover"
+    >
+      <i nz-icon type="question-circle" class="help-icon" theme="outline" nz-popover></i>
+      <ng-template #nzTemplate>
+        <ul class="des-ul">
+          <li class="clrfix" *ngFor="let item of options.popover">
+            <label>{{ item.label }}：</label>
+            <div class="des">{{ item.value }}</div>
+          </li>
+        </ul>
+      </ng-template>
+    </nz-popover>
+  </h3>
+  <div nz-row class="overview-list" *ngIf="options && options.data && !loading">
+    <div nz-col [nzSpan]="_rowCount" *ngFor="let item of options.data">
+      <div class="overview-list-one">
+        <p class="overview-list-one-label">{{ item.label }}</p>
+        <p class="overview-list-one-value">{{ item.value }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div nz-row class="overview-list special-over" *ngIf="loading">
+    <nz-spin></nz-spin>
+  </div>
+
+  <div nz-row class="overview-list special-over" *ngIf="options && !options.data && !loading">
+    暂无数据
+  </div>
+</div>

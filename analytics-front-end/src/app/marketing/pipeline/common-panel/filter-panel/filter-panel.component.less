@@ -1,0 +1,138 @@
+.content {
+  .base-desc {
+    margin-top: 24px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #dcdee2;
+  }
+  .pointer {
+    cursor: pointer;
+  }
+  .pipe-item {
+    margin-right: 19px;
+    margin-left: 32px;
+    margin-bottom: 16px;
+  }
+  .item-label {
+    font-size: 12px;
+    color: #17233d;
+    letter-spacing: 0;
+    text-align: left;
+    line-height: 32px;
+    font-weight: bold;
+    float: left;
+    width: 49px;
+    position: relative;
+    & > .require {
+      position: absolute;
+      left: -9px;
+      color: #ed3f14;
+      font-size: 14px;
+      top: 2px;
+    }
+  }
+  .item-input {
+    float: left;
+    margin-left: 10px;
+    width: 263px;
+    input {
+      width: 100%;
+      height: 32px;
+      border: 1px solid #dcdee2;
+      border-radius: 4px;
+      padding: 11px;
+      outline: none;
+    }
+  }
+  .item-textarea {
+    float: left;
+    margin-left: 10px;
+    width: 263px;
+    height: 56px;
+    textarea {
+      width: 100%;
+      height: 100%;
+      border: 1px solid #dcdee2;
+      border-radius: 4px;
+      padding: 5px 11px;
+      outline: none;
+    }
+  }
+  .filter-content {
+    .filter-item {
+      margin-left: 64px;
+      padding-top: 16px;
+      border-left: 1px solid #dcdee1;
+      &.first {
+        padding-top: 0px;
+      }
+      .button {
+        width: 66px;
+        height: 32px;
+        margin-left: -33px;
+        background: #ffffff;
+        border: 1px solid #dddee1;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 12px;
+        color: #464c5b;
+        text-align: center;
+        line-height: 32px;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        &.gray-button {
+          background: #ebeef2;
+        }
+      }
+      .filter {
+        margin-left: -32px;
+        margin-top: 16px;
+        margin-right: 19px;
+        padding: 8px;
+        border-radius: 4px;
+        background: #f4f7fb;
+        .filter-text {
+          padding: 0 8px;
+        }
+        a {
+          color: #657180;
+          margin-left: 9px;
+        }
+      }
+    }
+    .add-filter {
+      padding-top: 16px;
+      margin-left: 64px;
+      border-left: 1px solid #dcdee1;
+      .button {
+        width: 105px;
+        height: 32px;
+        text-align: center;
+        box-sizing: border-box;
+        background: #2d8cf0;
+        border-radius: 4px;
+        font-size: 12px;
+        color: #ffffff;
+        line-height: 30px;
+        margin-left: -32px;
+        i {
+          font-weight: bolder;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}
+
+input:disabled,
+textarea:disabled {
+  color: rgb(84, 84, 84);
+  cursor: not-allowed;
+  background-color: #f5f5f5;
+}
+
+::ng-deep .ant-checkbox-disabled + span {
+  color: rgba(0, 0, 0, 0.65);
+  cursor: not-allowed;
+}

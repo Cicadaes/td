@@ -1,0 +1,8 @@
+<div class="content">
+  <nz-breadcrumb nzSeparator=">">
+    <nz-breadcrumb-item *ngFor="let item of routerList2;let i = index;" >
+      <a class="font" [ngClass]="{'last': i === routerList2.length - 1}" (click)="jump(item, i)">{{item.name}}</a>
+    </nz-breadcrumb-item>
+  </nz-breadcrumb>
+  <ng-content></ng-content>
+</div>

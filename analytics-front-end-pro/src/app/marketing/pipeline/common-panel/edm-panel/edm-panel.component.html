@@ -1,0 +1,120 @@
+<div class="content">
+    <div class="base-desc">
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                <span class="require">*</span>投放名称
+            </label>
+            <div class="item-input">
+                <input type="text" tdLimitInputText iType="triggerInput" max="26" placeholder="请输入内容" [(ngModel)]="pcs.nodeData.name" [disabled]="!pcs.isPipelineEdit">
+            </div>
+        </div>
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                描述
+            </label>
+            <div class="item-textarea">
+                <textarea tdLimitTextareaText iType="all" max="80" [(ngModel)]="pcs.nodeData.description" type="text" placeholder="请输入内容" [disabled]="!pcs.isPipelineEdit"></textarea>
+            </div>
+        </div>
+        <div class="pipe-item clearfix special-pipe-item">
+            <label class="item-label">
+                <span class="require">*</span>投放组
+            </label>
+            <div class="item-input">
+                <input tdLimitInputText type="text" [max]="26" placeholder="请选择" [(ngModel)]="pcs.nodeData.groupName"
+                    (click)="showGroups($event)" (ngModelChange)="getGroupList()" (keydown)="saveGroup($event)" [disabled]="!pcs.isPipelineEdit">
+                <div class="dropdown-trigger">
+                    <span class="ant-compat anticon anticon-down"></span>
+                </div>
+                <div *ngIf="showGroupList" class="dropdown">
+                    <ul>
+                        <li *ngFor="let item of groupList" (click)="selectGroup(item)">
+                            <span class="info">{{item.groupName}}</span>
+                            <span class="iconfont icon-clear" (click)="deleteGroup(item, $event)"></span>
+                        </li>
+                        <li *ngIf="groupList.length === 0 ">
+                            <span class="info">无</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="pipe-item clearfix">
+            <label class="item-text">
+                <span class="require">*</span>同一用户最多可收到
+                <input type="text" tdLimitNumberInput condition="PI" [(ngModel)]="pcs.nodeData.maxDeliveryCount" title="{{pcs.nodeData.maxDeliveryCount}}" [disabled]="!pcs.isPipelineEdit">次，间隔不低于
+                <input type="text" tdLimitNumberInput condition="PI" [(ngModel)]="pcs.nodeData.frequency" title="{{pcs.nodeData.frequency}}" [disabled]="!pcs.isPipelineEdit">天
+            </label>
+        </div>
+    </div>
+    <div class="app-content">
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                <span class="require">*</span>投放渠道
+            </label>
+            <div class="item-input">
+                <nz-select style="width: 100%;" nzShowSearch nzPlaceHolder="请选择投放渠道" [(ngModel)]="_channelCode" (ngModelChange)="channelChange($event)" [nzDisabled]="!pcs.isPipelineEdit">
+                    <nz-option [nzLabel]="item.name" [nzValue]="item" *ngFor="let item of channelList"></nz-option>
+                </nz-select>
+            </div>
+        </div>
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                <span class="require">*</span>发件地址
+            </label>
+            <div class="item-input">
+                <nz-select style="width: 100%;" nzShowSearch nzPlaceHolder="请选择发件地址" [(ngModel)]="pcs.nodeData.sendAddress" [nzDisabled]="!pcs.isPipelineEdit">
+                    <nz-option nzLabel="{{item.note + '<' + item.email + '>'}}" [nzValue]="item.email" *ngFor="let item of emailList"></nz-option>
+                </nz-select>
+            </div>
+        </div>
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                <span class="require">*</span>选择素材
+            </label>
+            <div class="item-input" style="height: 32px; line-height: 20px;">
+                <nz-upload *ngIf="!pcs.nodeData.attachmentId" nzAction="/marketing-api/file/upload?type=edm" [nzShowUploadList]="false"
+                    nzAccept=".html" [nzName]="'uploadFiles'" (nzChange)="handleChange($event)" [nzDisabled]="!pcs.isPipelineEdit">
+                    <button nz-button>
+                        <span class="ant-compat anticon anticon-upload"></span>
+                        <span>上传HTML</span>
+                    </button>
+                </nz-upload>
+                <span *ngIf="pcs.nodeData.attachmentId" class="fileName">{{pcs.nodeData.attachmentName}}</span>
+                <span *ngIf="pcs.nodeData.attachmentId" class="clear-file" (click)="clearFile()">清除</span>
+            </div>
+        </div>
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                <span class="require">*</span>主题
+            </label>
+            <div class="item-input">
+                <input type="text" tdLimitInputText iType="all" max="120" placeholder="请输入主题" [(ngModel)]="pcs.nodeData.subject" title="{{pcs.nodeData.subject}}" [disabled]="!pcs.isPipelineEdit">
+            </div>
+        </div>
+    </div>
+    <div class="app-push-time">
+        <div class="pipe-item clearfix">
+            <label class="item-label">
+                <span class="require">*</span>投放时间
+            </label>
+            <div class="target-platform">
+                <ul class="label-tabs">
+                    <li *ngFor="let item of timeTabs" [ngClass]="{'item-active': item.type == pcs.nodeData.triggerType}" (click)='changeTime(item.type);'>{{item.name}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="pipe-item clearfix" *ngIf="pcs.nodeData.triggerType == 2">
+            <div class="target-platform" style="width: 100%;">
+                <nz-date-picker [nzShowToday]='false' [nzStyle]="{'width': '186px'}" [(ngModel)]="pcs.nodeData.date" [nzDisabledDate]="disabledDate"
+                    nzPlaceHolder="选择日期"  nzFormat="yyyy-MM-dd" [nzDisabled]="!pcs.isPipelineEdit"></nz-date-picker>
+                <nz-select style="width: 64px; margin-left: 4px;" [(ngModel)]="pcs.nodeData.hour" nzPlaceHolder="小时" [nzDisabled]="!pcs.isPipelineEdit">
+                    <nz-option *ngFor="let item of hourList" [nzValue]="item" [nzLabel]="item"></nz-option>
+                </nz-select>
+                <nz-select style="width: 64px; margin-left: 4px;" [(ngModel)]="pcs.nodeData.minute" nzPlaceHolder="分钟" [nzDisabled]="!pcs.isPipelineEdit">
+                    <nz-option *ngFor="let item of minuteList" [nzValue]="item" [nzLabel]="item"></nz-option>
+                </nz-select>
+            </div>
+        </div>
+    </div>
+</div>

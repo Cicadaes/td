@@ -1,0 +1,27 @@
+<main>
+	<div class="dropdown-panel form-item form-select" [ngStyle]="_selectStyle"
+	     [ngClass]="{'dropdown-panel-solid':_isSolid}">
+		<div class="select-text form-control" (click)="showSearchPanel();" [ngClass]="{'opacity': _opacity}">
+			<div class="text text-default" *ngIf="!selectObject.value"
+			     title="{{selectObject.name || selectObject.label}}">{{selectObject.label}}
+			</div>
+			<div class="text" *ngIf="selectObject.value" title="{{selectObject.name || selectObject.label}}">
+				<span class="icon iconfont icon-shijian" *ngIf="selectObject.smartEvent"></span>{{selectObject.label}}
+			</div>
+			<span class="icon iconfont icon-arrow_down"></span>
+		</div>
+		<div class="dropdown-list" *ngIf="_isShowOptions">
+			<div class="dropdown-search">
+				<input type="text" (blur)="changeInputValue($event);" (ngModelChange)="onChange($event);"
+				       [(ngModel)]="_searchKeyword" placeholder="输入关键字搜索" class="select-search-input">
+			</div>
+			<ul>
+				<li *ngFor="let opt of _options;" (click)="seletedOptionItem($event,opt);"
+				    [ngClass]="{'active':selectObject.value == opt.value}">
+					<a href="javascript:;" *ngIf="opt && opt.value" title="{{opt.name || opt.label}}">
+						<span class="icon iconfont icon-shijian" *ngIf="opt.smartEvent"></span>{{opt.label}}</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</main>

@@ -1,0 +1,173 @@
+@import '../../../../node_modules/ng-zorro-antd/src/ng-zorro-antd.less';
+
+.content {
+  margin: 16px;
+  background-color: #ffffff;
+  .title {
+    padding: 13px 16px;
+    font-size: 14px;
+    color: #17233d;
+    border-bottom: 1px solid;
+    border-bottom-color: rgba(23, 35, 61, 0.1);
+  }
+  .body {
+    padding: 16px;
+    .details {
+      padding: 8px 16px;
+      font-size: 12px;
+      color: #17233d;
+      .data {
+        margin-left: 24px;
+        color: rgba(23, 35, 61, 0.75);
+      }
+      .left-dist {
+        margin-left: 64px;
+      }
+    }
+    .edit {
+      border: 1px solid #dcdee2;
+      background-color: #fff;
+      overflow: hidden;
+      position: relative;
+      .nav {
+        margin-bottom: 0;
+        padding-left: 0px;
+      }
+      .nav-tabs {
+        background: rgba(23, 35, 61, 0.03);
+        border-bottom: 1px solid #dcdee2;
+      }
+      .no-dataList {
+        font-family: 'HelveticaNeue', 'PingFangSC', '微软雅黑';
+        font-size: 12px;
+        padding: 16px 8px 0;
+        color: rgba(0, 0, 0, 0.45);
+        text-align: center;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+    }
+
+    .error-text {
+      color: red;
+      margin-top: 4px;
+      height: 20px;
+    }
+  }
+}
+
+:host .edit-div-content {
+  padding: 16px;
+  max-height: 340px;
+  overflow-y: auto;
+  .edit-div-content-list {
+    overflow: hidden;
+    margin-bottom: 4px;
+    padding-left: 0px;
+    li {
+      float: left;
+      height: 24px;
+      padding: 0px 8.5px;
+      line-height: 24px;
+      background: #2d8cf0;
+      font-size: 12px;
+      color: #ffffff;
+      letter-spacing: 0;
+      border-radius: 2px;
+      margin-right: 8px;
+      margin-bottom: 12px;
+      span {
+        margin: 0px 15.5px 0px 3.5px;
+      }
+      .anticon-close {
+        float: right;
+        margin-top: 13px;
+        cursor: pointer;
+      }
+    }
+  }
+  .edit-div-content-checklist-check {
+    overflow: hidden;
+    .li {
+      width: 16%;
+      float: left;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      height: 26px;
+      line-height: 26px;
+      font-size: 12px;
+      color: rgba(23, 35, 61, 0.75);
+    }
+  }
+}
+
+.button-wap {
+  padding-left: 16px;
+}
+
+:host .nav-tabs {
+  background: rgba(23, 35, 61, 0.03);
+  border-bottom: 1px solid #dcdee2;
+}
+
+:host .nav {
+  margin-bottom: 0;
+  padding-left: 0px;
+}
+
+:host .nav-tabs > li {
+  float: left;
+  margin-bottom: -1px;
+}
+
+:host .nav-tabs > li > a {
+  font-size: 12px;
+  color: rgba(23, 35, 61, 0.75);
+  border-right: 1px solid #dfe0e4;
+  margin: 0;
+  border-top-color: transparent !important;
+  border-radius: 0 !important;
+}
+
+:host .nav-tabs:after {
+  display: block;
+  content: '';
+  clear: both;
+  height: 0px;
+}
+
+:host .nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover {
+  font-size: 12px;
+  color: #2d8cf0;
+  background-color: #ffffff;
+}
+
+:host .nav-tabs > li > a:hover {
+  font-size: 12px;
+  color: #2d8cf0;
+  background-color: #ffffff;
+}
+
+:host .nav > li > a {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+}
+
+:host ::ng-deep .ant-checkbox-wrapper + .ant-checkbox-wrapper {
+  margin-left: 0px;
+}
+
+:host ::ng-deep .ant-checkbox-wrapper {
+  font-size: 12px;
+  color: rgba(23, 35, 61, 0.75);
+}
+
+:host ::ng-deep .ant-btn {
+  width: 100px;
+}

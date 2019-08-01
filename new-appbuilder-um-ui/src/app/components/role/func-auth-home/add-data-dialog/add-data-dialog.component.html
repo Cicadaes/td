@@ -1,0 +1,69 @@
+
+
+<nz-modal nzWrapClassName="vertical-center-modal" class="moban" [nzContent]="modalContent" [nzMaskClosable]="false"
+    [nzVisible]="isVisible" [nzTitle]="'新建角色对数据对象实例的操作权限'" (nzOnCancel)="handleCancel($event)" [nzFooter]="modalFooter">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)">
+      <ng-template #modalContent>
+        <nz-form-item nz-row>
+          <nz-form-label nz-col nzSpan="4" nzFor="'targetName'" nzRequired >
+            数据对象
+          </nz-form-label>
+          <nz-form-control nz-col nzSpan="20">
+                <nz-select [(ngModel)]="targetObj" [compareWith]="compareFn" [formControlName]="'targetName'" style="width:100%;" [nzPlaceHolder]="'请选择'"
+                nzShowSearch [nzNotFoundContent]="'无匹配结果'" (ngModelChange)='changeTargetId($event)'>
+                    <nz-option   *ngFor="let option of targetList" [nzValue]="option" [nzLabel]="option.label"></nz-option>
+              </nz-select>
+            <nz-form-explain *ngIf="getFormControl('targetName').dirty&&getFormControl('targetName').hasError('required')">错误</nz-form-explain>
+
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row>
+          <nz-form-label nzRequired nz-col nzSpan="4">
+            对象实例
+          </nz-form-label>
+          <nz-form-control nz-col nzSpan="20">
+                <nz-transfer
+                [nzDataSource]="restList"
+                nzShowSearch
+                [nzTitles]="['待选对象实例', '已选对象实例']"
+                (nzSearchChange)='searchData($event)'
+                (nzSelectChange)="selectData($event)"
+                (nzChange)="changeData($event)">
+              </nz-transfer>
+          </nz-form-control>
+         
+        </nz-form-item>
+        <nz-form-item nz-row>
+          <nz-form-label nzRequired nz-col nzSpan="4">
+            操作权限
+          </nz-form-label>
+          <nz-form-control nz-col nzSpan="20">
+            <nz-checkbox-wrapper style="width: 100%;padding-top: 9px">
+              <ul nz-row class="auth-bean" style='margin: 0'>
+                  <ng-container *ngFor='let authBean of authBeans' >
+                      <li style='float: left;padding-bottom: 5px'><label  [nzDisabled]='authBean.disabled'  [ngModelOptions]="{standalone: true}" nz-checkbox (ngModelChange)='authBeanChange($event,authBean)' [nzValue]="authBean.hasAuth" [(ngModel)]="authBean.hasAuth">{{ authBean.operatorName }}</label></li>
+                  </ng-container>
+                </ul>
+            </nz-checkbox-wrapper>
+            <nz-form-explain style='color:red' *ngIf='errorInfo.dataObjIsEmpty.show'>{{errorInfo.dataObjIsEmpty.info}}</nz-form-explain>
+            <nz-form-explain style='color:red' *ngIf='errorInfo.dataInstanceIsEmpty.show'>{{errorInfo.dataInstanceIsEmpty.info}}</nz-form-explain>
+            <nz-form-explain style='color:red' *ngIf='errorInfo.authBeanIsEmpty.show'>{{errorInfo.authBeanIsEmpty.info}}</nz-form-explain>
+            <nz-form-explain style='color:red' *ngIf='errorInfo.dataObjRequired.show'>{{errorInfo.dataObjRequired.info}}</nz-form-explain>
+            <nz-form-explain style='color:red' *ngIf='errorInfo.dataInstanceRequired.show'>{{errorInfo.dataInstanceRequired.info}}</nz-form-explain>
+            <nz-form-explain style='color:red' *ngIf='errorInfo.authBeanRequired.show'>{{errorInfo.authBeanRequired.info}}</nz-form-explain>
+          </nz-form-control>
+         
+        </nz-form-item>
+       
+      </ng-template>
+      <ng-template #modalFooter>
+        <button nz-button [nzType]="'default'" [nzSize]="'default'" (click)="handleCancel($event)">
+          取消
+        </button>
+        <button nz-button [nzType]="'primary'" [nzSize]="'default'"  (click)="submitAddDataForm()"
+          [nzLoading]="isConfirmLoading">
+          确定
+        </button>
+      </ng-template>
+    </form>
+  </nz-modal>

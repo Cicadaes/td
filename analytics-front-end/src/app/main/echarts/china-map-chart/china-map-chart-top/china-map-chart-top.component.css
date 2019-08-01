@@ -1,0 +1,38 @@
+.top-content {
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 260px;
+}
+
+.top-content-title {
+  font-weight: bolder;
+  text-align: center;
+}
+
+.list-num {
+  display: inline-block;
+  width: 12%;
+  text-align: right;
+  line-height: 30px;
+  padding-right: 6px;
+  font-size: 12px;
+}
+
+.list-name {
+  display: inline-block;
+  width: 28%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 30px;
+  vertical-align: bottom;
+  font-size: 12px;
+}
+
+.list-progress {
+  display: inline-block;
+  width: 60%;
+  line-height: 30px;
+}

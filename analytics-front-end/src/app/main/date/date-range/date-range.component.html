@@ -1,0 +1,19 @@
+<span *ngIf="noLimit">
+  <nz-range-picker
+    [(ngModel)]="_dateRange"
+    [nzAllowClear]="true"
+    [nzFormat]="'YYYY-MM-DD'"
+    nzPlaceHolder=""
+    (ngModelChange)="_changeDateRange()"
+  ></nz-range-picker>
+</span>
+<span *ngIf="!noLimit">
+  <nz-range-picker
+    [(ngModel)]="_dateRange"
+    [nzAllowClear]="true"
+    [nzFormat]="'YYYY-MM-DD'"
+    nzPlaceHolder=""
+    (ngModelChange)="_changeDateRange()"
+    [nzDisabledDate]="_disabledDate"
+  ></nz-range-picker>
+</span>

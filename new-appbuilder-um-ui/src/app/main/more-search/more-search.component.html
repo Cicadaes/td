@@ -1,0 +1,31 @@
+<div class="condition">
+    <form nz-form [formGroup]="validateForm" class="ant-advanced-search-form" style="overflow: hidden;" autocomplete="off">
+        <div nz-row style="float: left;width: calc(100% - 160px);" [nzGutter]="10">
+            <div nz-col [nzSpan]="rowCount" *ngFor="let control of fieldArray;let i=index" [ngStyle]="{'display':i > '2' ? (control.show?'block':'none') : 'block' }">
+                <nz-form-item nz-row>
+                    <nz-form-label nz-col [nzSpan]="7" title="{{control.fieldLabel}}">
+                        <label [attr.for]="control.fieldName">{{control.fieldLabel}}</label>
+                    </nz-form-label>
+                    <nz-form-control nz-col [nzSpan]="17">
+                        <input nz-input *ngIf="control.fieldType == 'input'" [nzSize]="'default'" [placeholder]="'请输入'+control.fieldLabel" [formControlName]="control.fieldName"
+                            [id]="control.fieldName" autocomplete="off">
+                        <select-search [refresh]="refresh" [select]="control" (onSelect)="selectSearchControl($event,control)" *ngIf="control.fieldType == 'select' && !isResetComponents"></select-search>
+                        <date-range (onSelect)="dateRangeControl($event,control)" *ngIf="control.fieldType == 'date-range' && !isResetComponents"
+                            [noLimit]="noLimit" [disabled]='control.time'></date-range>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <div nz-row class="more-search-left">
+            <div nz-col [nzSpan]="24" style="text-align: right;">
+                <button nz-button [nzType]="'primary'" (click)="searchMoreSearchForm(validateForm)">查询</button>
+                <!-- <button nz-button (click)="resetMoreSearchForm()">重置</button> -->
+                <a style="margin-left:8px;font-size:12px;" (click)="toggleCollapse()" *ngIf="isShowCollapse">
+                    <span *ngIf="isCollapse">展开</span>
+                    <span *ngIf="!isCollapse">收起</span>
+                    <span class="anticon" [class.anticon-down]="isCollapse" [class.anticon-up]="!isCollapse"></span>
+                </a>
+            </div>
+        </div>
+    </form>
+</div>

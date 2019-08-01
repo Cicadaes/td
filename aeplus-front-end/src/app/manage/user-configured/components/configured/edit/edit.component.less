@@ -1,0 +1,155 @@
+@import '../../../../../../../node_modules/ng-zorro-antd/src/ng-zorro-antd.less';
+
+:host h4 {
+    font-size: 14px;
+    color: #17233D;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 0px;
+}
+
+:host .edit-div {
+    border: 1px solid #DCDEE2;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+:host .edit-div-content {
+    padding: 16px;
+    max-height: 340px;
+    overflow-y: auto;
+
+    &-list {
+        overflow: hidden;
+        margin-bottom: 4px;
+        padding-left: 0px;
+
+        li {
+            float: left;
+            height: 24px;
+            padding: 0px 8.5px;
+            line-height: 24px;
+            background: #2D8CF0;
+            font-size: 12px;
+            color: #FFFFFF;
+            letter-spacing: 0;
+            border-radius: 2px;
+            margin-right: 8px;
+            margin-bottom: 12px;
+
+            span {
+                margin: 0px 15.5px 0px 3.5px;
+            }
+
+            .anticon-close {
+                float: right;
+                margin-top: 6px;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &-checklist-check {
+        overflow: hidden;
+
+        li {
+            width: 16%;
+            float: left;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+            height: 26px;
+            line-height: 26px;
+            font-size: 12px;
+            color: rgba(23,35,61,0.75);
+        }
+    }
+}
+
+:host .button-wap {
+    margin-top: 16px;
+}
+
+:host .button-wap .ant-btn{
+    margin-right: 10px;
+}
+
+:host .nav-tabs {
+    background: rgba(23,35,61,0.03);
+    border-bottom: 1px solid #DCDEE2;
+}
+
+:host .nav {
+    margin-bottom: 0;
+    padding-left: 0px;
+}
+
+:host .nav-tabs > li {
+    float: left;
+    margin-bottom: -1px;
+}
+
+
+:host .nav-tabs > li > a {
+    font-size: 12px;
+    color: rgba(23,35,61,0.75);
+    border-right: 1px solid #dfe0e4;
+    margin: 0;
+    border-top-color: transparent !important;
+    border-radius: 0 !important;
+}
+
+:host .nav-tabs:after {
+    display:block;
+    content: '';
+    clear:both;
+    height: 0px;
+}
+
+
+:host .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    font-size: 12px;
+    color: #2D8CF0;
+    background-color: #FFFFFF;
+}
+
+:host .nav-tabs > li > a:hover {
+    font-size: 12px;
+    color: #2D8CF0;
+    background-color: #FFFFFF;
+}
+
+
+:host .nav > li > a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+}
+
+:host ::ng-deep .ant-checkbox-wrapper + .ant-checkbox-wrapper {
+    margin-left: 0px;
+}
+
+:host ::ng-deep .ant-checkbox-wrapper {
+    font-size: 12px;
+    color: rgba(23,35,61,0.75);
+}
+
+:host ::ng-deep .ant-btn {
+    width: 100px;
+}
+
+.edit-div-content-checklist-check {
+    overflow: hidden;
+    .li {
+        width: 16%;
+        float: left;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+        height: 26px;
+        line-height: 26px;
+        font-size: 12px;
+        color: rgba(23,35,61,0.75);
+    }
+}

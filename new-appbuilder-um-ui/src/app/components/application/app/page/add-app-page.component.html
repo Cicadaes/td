@@ -1,0 +1,17 @@
+<div class="text-content">
+    <nz-card [nzTitle]="'应用基本信息'">
+            <add-app-form [needSubmit]="isNeedSubmitAddAppFormData" [errorFlag]="errorFlag" [errorFlagMax]="errorFlagMax" (onSubmit)="submitAddAppForm($event)" (resultData)="submitResultData($event)"></add-app-form>
+    </nz-card>
+    <add-app-attribute [_dataSet]="_dataSet"></add-app-attribute>
+    <add-app-extend [_extendDate]="_extendDate"></add-app-extend>
+    <div class="btnGrouop">
+            <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="handleOk($event)" [nzLoading]="isConfirmLoading">
+                确 定
+            </button>
+        <a [routerLink]="[ '/apps' ]">
+                <button nz-button [nzType]="'default'" [nzSize]="'large'">
+                    取 消
+                </button>
+        </a>
+    </div>
+</div>

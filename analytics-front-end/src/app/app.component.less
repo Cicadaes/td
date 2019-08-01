@@ -1,0 +1,33 @@
+main {
+  height: 100%;
+  display: flex;
+}
+
+.ae-menu {
+  height: 100%;
+}
+
+.ae-content {
+  flex: 1;
+  height: 100%;
+  overflow-y: auto;
+  #main-frame {
+    html {
+      overflow: scroll;
+    }
+  }
+  .loading {
+    width: 20px;
+    height: 25px;
+    left: 50%;
+    top: 50%;
+    display: none;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    background: transparent;
+  }
+}
+
+.iframe-overflow {
+  overflow-y: hidden !important;
+}

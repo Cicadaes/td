@@ -1,0 +1,78 @@
+<main>
+  <form class="custom-form" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)">
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>平台</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+
+        <nz-select *ngIf="!_data.id" style="width: 100%;" formControlName="sourceid" [nzSize]="'default'" nzPlaceHolder="请选择" nzShowSearch>
+          <nz-option *ngFor="let option of _sourceidOptions" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+        </nz-select>
+        <span *ngIf="_data.id">{{_data.sourceid | platformPipe}}</span>
+        <div class="custom-form-explain clrfix">
+        <nz-form-explain *ngIf="!_data.id && (validateForm.get('sourceid').dirty && validateForm.get('sourceid').errors)">
+          <ng-container *ngIf="validateForm.get('sourceid').hasError('required')">
+            请选择平台
+          </ng-container>
+        </nz-form-explain>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>点击图名称</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <input nz-input formControlName="displayname" placeholder="请输入点击图名称" maxlength="32" (keyup)="keyupInputValue($event,'displayname');" (blur)="changeInputValue($event,'displayname');">
+        <div class="custom-form-explain clrfix">
+        <nz-form-explain *ngIf="validateForm.get('displayname').dirty && validateForm.get('displayname').errors || validateForm.get('displayname').pending ">
+          <ng-container *ngIf="validateForm.get('displayname').hasError('required')">
+            请输入点击图名称
+          </ng-container>
+          <ng-container *ngIf="validateForm.get('displayname').hasError('duplicated')">
+            点击图名称已经存在
+          </ng-container>
+          <ng-container *ngIf="validateForm.get('displayname').pending">
+            <!--验证中...-->
+          </ng-container>
+        </nz-form-explain>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>点击图URL</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <input nz-input formControlName="name" placeholder="请输入点击图URL" maxlength="200" (keyup)="keyupInputValue($event,'name');" (blur)="changeInputValue($event,'name');">
+        <div class="custom-form-explain clrfix">
+        <nz-form-explain *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors || validateForm.get('name').pending">
+          <ng-container *ngIf="validateForm.get('name').hasError('required')">
+            请输入点击图URL
+          </ng-container>
+          <ng-container *ngIf="validateForm.get('name').hasError('rule')">
+            请输入以http://或https://开头的URL
+          </ng-container>
+          <ng-container *ngIf="validateForm.get('name').hasError('mark')">
+            点击图URL不能包含?字符
+          </ng-container>
+          <ng-container *ngIf="validateForm.get('name').hasError('url')">
+            点击图URL格式不正确
+          </ng-container>
+          <ng-container *ngIf="validateForm.get('name').hasError('duplicated')">
+            点击图URL已经存在
+          </ng-container>
+          <ng-container *ngIf="validateForm.get('name').pending">
+            <!--验证中...-->
+          </ng-container>
+        </nz-form-explain>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item *ngIf="_systemError.error">
+      <nz-form-control [nzOffset]="5" [nzSpan]="16">
+        <nz-alert nzType="error" nzMessage="{{_systemError.msg}}" nzBanner></nz-alert>
+      </nz-form-control>
+    </nz-form-item>
+
+  </form>
+</main>

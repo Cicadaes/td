@@ -1,0 +1,8 @@
+.btnGrouop{
+  margin-top: 16px;
+}
+
+:host ::ng-deep .this-label {
+    text-align: left;
+    width: 130px;
+}

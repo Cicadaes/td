@@ -1,0 +1,18 @@
+<nz-card [nzTitle]="apptitle">
+    <ng-template #apptitle>
+        功能管理
+    </ng-template>
+        <more-search [fieldArray] = "actionFieldArray" (onSearch)="onSearchActtionList($event)"></more-search>
+        <div class="table-operator clrfix">
+                <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="showAddActionModal()">
+                    <span class="anticon anticon-plus"></span><span>导入功能</span>
+                </button>
+            <a [routerLink]="[ '/actions/addActionPage' ]">
+                    <button nz-button [nzType]="'primary'" [nzSize]="'large'" >
+                        <span class="anticon anticon-plus"></span><span>新增功能</span>
+                    </button>
+            </a>
+            <add-action-dialog [isShow]="isShowAddActionModal" (onClose)="hideAddActionModal($event)"></add-action-dialog>
+        </div>
+        <actions-table [queryParams] = "actionTableFieldParams"></actions-table>
+</nz-card>

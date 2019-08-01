@@ -1,0 +1,139 @@
+.hide{
+  display: none;
+}
+
+:host ::ng-deep .content-div {
+    margin: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+:host ::ng-deep header {
+    background-color: #fff;
+    // padding: 0px 16px;
+}
+
+:host ::ng-deep .anticon-copy {
+    margin-right: 10px;
+}
+
+:host .title {
+    font-size: 16px;
+    color: #17233D;
+    padding: 16px 0px;
+    margin-bottom: 0px;
+    padding-bottom: 6px;
+}
+
+:host ::ng-deep .ant-card-body {
+    padding: 0px;
+}
+
+:host ::ng-deep .ant-card-head {
+   padding: 0 16px;
+}
+
+:host ::ng-deep .ant-tabs-nav {
+    padding-left: 16px;
+}
+
+:host ::ng-deep .ant-tabs-large .ant-tabs-nav-container {
+    font-size: 14px;
+}
+
+:host ::ng-deep .ant-table-thead > tr, .ant-table-tbody > tr {
+    background-color: #fff;
+}
+
+:host ::ng-deep .ant-tabs-large .ant-tabs-tab {
+    padding: 12px 0px;
+}
+
+:host ::ng-deep .ant-tabs-bar {
+    margin-bottom: 0px;
+}
+
+:host .crowd-wap {
+    display: flex;
+    justify-content: flex-start;
+    word-wrap: normal;
+
+    .crowd-wap-left {
+        width: 188px;
+
+        .crowd-wap-left-ul {
+            padding: 16px;
+            flex: 1;
+
+            li {
+                height: 24px;
+                line-height: 24px;
+                font-size: 12px;
+                color: rgba(23,35,61,0.75);
+                cursor: pointer;
+            }
+
+            li:hover {
+                color: #2D8CF0;
+            }
+
+            .selectLi {
+                color: #2D8CF0;
+            }
+        }
+    }
+
+    &-right {
+        flex: 1;
+        background-color: #eef0f3;
+        box-sizing: border-box;
+        padding: 16px;
+        padding-top: 0px;
+
+        h4 {
+            font-size: 14px;
+            color: #17233D;
+            height: 40px;
+            line-height: 40px;
+            margin-bottom: 0px;
+        }
+
+        .attributeLabel {
+            display: inline-block;
+            background: #8C9FC4;
+            padding: 0px 8px;
+            line-height: 24px;
+            font-size: 12px;
+            color: #FFFFFF;
+            letter-spacing: 0;
+            color: #FFFFFF;
+            border-radius: 2px;
+            margin-right: 8px;
+        }
+    }
+}
+
+/* 人群画像配置相关样式 */
+:host .portrayal {
+    padding: 16px;
+
+    &-table {
+        margin-top: 16px;
+    }
+}
+
+:host .margin-right {
+    margin-right: 16px;
+}
+
+:host .ant-btn-primary {
+    height: 32px;
+    line-height: 32px;
+    padding: 0px 14px;
+
+    .anticon-plus {
+        margin-right: -4px;
+        font-weight: bold;
+    }
+}

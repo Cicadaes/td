@@ -1,0 +1,33 @@
+
+    <nz-table #nzTable [nzBordered]="false" [nzData]="_dataSet" nzShowSizeChanger [nzLoading]="_loading" [nzShowPagination]="false" [nzFrontPagination]="false"
+              (nzPageIndexChange)="refreshData()" [(nzPageSize)]="_pageSize" (nzPageSizeChange)="refreshData(true)" >
+            <thead nz-thead>
+            <tr>
+                <th nz-th [nzWidth]="'10%'">
+                    角色名称
+                </th>
+                <th nz-th [nzWidth]="'80%'">
+                    角色描述
+                </th>
+                <th nz-th [nzWidth]="'10%'">
+                    <span>操作</span>
+                </th>
+            </tr>
+            </thead>
+
+        <tbody nz-tbody>
+        <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+            <td nz-td>
+                <!-- <a>{{data.name}}</a> -->
+                <span>{{data.name}}</span>
+            </td>
+            <td nz-td>{{data.desc}}</td>
+            <td nz-td>
+                <span>
+                    <a [routerLink]="[ '/roles/super', userId, data.id ]" >查看</a>
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </nz-table>
+

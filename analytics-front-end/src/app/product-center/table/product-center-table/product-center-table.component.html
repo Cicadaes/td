@@ -1,0 +1,167 @@
+<main>
+  <div class="table-custom-operator">
+    <button
+      nz-button
+      nzType="primary"
+      nzSize="default"
+      (click)="showProductAddDialog()"
+      *ngIf="_appConfig && _appConfig.user && _appConfig.user.tenantAdmin"
+    >
+      <span class="ant-compat anticon anticon-plus"></span>添加产品
+    </button>
+  </div>
+  <div class="table-custom-panel shadow-content">
+    <div class="table-custom-head clrfix">
+      <h5 class="table-custom-title">产品列表</h5>
+      <div class="table-custom-filter">
+        <app-fast-search (onSearch)="_onSearch($event)"></app-fast-search>
+      </div>
+    </div>
+    <nz-table
+      #ajaxTable
+      nzShowTotal
+      nzShowSizeChanger
+      [nzFrontPagination]="false"
+      [nzData]="dataSet"
+      [nzLoading]="loading"
+      [nzTotal]="total"
+      [(nzPageIndex)]="pageIndex"
+      [(nzPageSize)]="pageSize"
+      [nzPageSizeOptions]="[10, 20, 50, 100]"
+      (nzPageIndexChange)="searchData()"
+      (nzPageSizeChange)="searchData(true)"
+    >
+      <thead (nzSortChange)="sort($event)" nzSingleSort>
+        <tr>
+          <th>产品名称</th>
+          <th style="min-width: 165px;">平台</th>
+          <th style="min-width: 110px;">今日新增访客</th>
+          <th style="min-width: 110px;">今日活跃访客</th>
+          <th style="min-width: 100px;">累计访客</th>
+          <th style="width: 200px;">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of ajaxTable.data">
+          <td>{{ data.productname }}</td>
+          <td>
+            <div>
+              <nz-tooltip nzTitle="{{ 'App' | platformPipe }}" [nzPlacement]="'bottom'" [nzTrigger]="'hover'">
+                <span
+                  nz-tooltip
+                  class="icon iconfont icon-App"
+                  *ngIf="!data.sourceids || data.sourceids.indexOf('App') == -1"
+                ></span>
+                <span
+                  nz-tooltip
+                  class="icon iconfont icon-App iconfont-blue"
+                  *ngIf="data.sourceids && data.sourceids.indexOf('App') != -1"
+                ></span>
+              </nz-tooltip>
+
+              <nz-tooltip nzTitle="{{ 'H5' | platformPipe }}" [nzPlacement]="'bottom'" [nzTrigger]="'hover'">
+                <span
+                  nz-tooltip
+                  class="icon iconfont icon-html"
+                  *ngIf="!data.sourceids || data.sourceids.indexOf('H5') == -1"
+                ></span>
+                <span
+                  nz-tooltip
+                  class="icon iconfont icon-html iconfont-blue"
+                  *ngIf="data.sourceids && data.sourceids.indexOf('H5') != -1"
+                ></span>
+              </nz-tooltip>
+
+              <nz-tooltip nzTitle="{{ 'Web' | platformPipe }}" [nzPlacement]="'bottom'" [nzTrigger]="'hover'">
+                <span
+                  nz-tooltip
+                  class="icon iconfont icon-Web"
+                  *ngIf="!data.sourceids || data.sourceids.indexOf('Web') == -1"
+                ></span>
+                <span
+                  nz-tooltip
+                  class="icon iconfont icon-Web iconfont-blue"
+                  *ngIf="data.sourceids && data.sourceids.indexOf('Web') != -1"
+                ></span>
+              </nz-tooltip>
+
+              <nz-tooltip nzTitle="{{ 'miniprogram' | platformPipe }}" [nzPlacement]="'bottom'" [nzTrigger]="'hover'">
+                <span
+                  nz-tooltip
+                  class="icon iconfont icon-mini-program-"
+                  *ngIf="!data.sourceids || data.sourceids.indexOf('miniprogram') == -1"
+                ></span>
+                <span
+                  nz-tooltip
+                  class="icon iconfont icon-mini-program- iconfont-blue"
+                  *ngIf="data.sourceids && data.sourceids.indexOf('miniprogram') != -1"
+                ></span>
+              </nz-tooltip>
+            </div>
+          </td>
+          <td>{{ data.newusercount | numberToThousandsPipe }}</td>
+          <td>{{ data.launchcount | numberToThousandsPipe }}</td>
+          <td>{{ data.totaluser | numberToThousandsPipe }}</td>
+          <td>
+            <div class="table-custom-bar">
+              <a href="javascript:;" (click)="viewProduct(data)">查看</a>
+              <a
+                href="javascript:;"
+                (click)="showProductAddDialog(data)"
+                *ngIf="_appConfig && _appConfig.user && _appConfig.user.tenantAdmin"
+              >
+                编辑
+              </a>
+              <a
+                href="javascript:;"
+                (click)="deleteProduct(data)"
+                *ngIf="_appConfig && _appConfig.user && _appConfig.user.tenantAdmin"
+              >
+                删除
+              </a>
+              <a
+                href="javascript:;"
+                (click)="showProductShareDialog(data)"
+                *ngIf="_appConfig && _appConfig.user && _appConfig.user.tenantAdmin"
+              >
+                授权
+              </a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+  <app-product-add-dialog
+    *ngIf="_isShowProductAddDialog"
+    [isVisible]="_isShowProductAddDialog"
+    [data]="_currentProduct"
+    (onHide)="hideProductAddDialog($event)"
+    (onSubmit)="onSubmitAddProduct($event)"
+  ></app-product-add-dialog>
+
+  <nz-modal
+    [nzMaskClosable]="false"
+    [(nzVisible)]="isVisible"
+    [nzBodyStyle]="{ padding: '0' }"
+    [nzFooter]="null"
+    [nzWidth]="dialogWidth"
+    nzWrapClassName="vertical-center-modal"
+    [nzTitle]="modalTitle"
+    (nzOnCancel)="handleCancel()"
+  >
+    <ng-template #modalTitle>
+      <span>{{ dialogName }}</span>
+      <nz-tooltip
+        [nzTrigger]="'click'"
+        [nzTitle]="'通过选择角色或用户来设置产品的可见范围，授权账户可在产品中心查看，但无法编辑或删除产品。'"
+        [nzPlacement]="'right'"
+        style="margin-left: 10px;"
+      >
+        <span class="ant-compat anticon anticon-question-circle-o" nz-tooltip></span>
+      </nz-tooltip>
+    </ng-template>
+    <app-product-share-dialog *ngIf="isVisible" [id]="_currentProduct.id" (closeModel)="cancelModal()">
+    </app-product-share-dialog>
+  </nz-modal>
+</main>

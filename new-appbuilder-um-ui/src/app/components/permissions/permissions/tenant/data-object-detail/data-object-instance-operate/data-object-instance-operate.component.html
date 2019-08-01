@@ -1,0 +1,35 @@
+<main>
+    <div class="form-item">
+        <div class="item">
+            <span class="require">* </span><label>操作名称</label>
+            <input nz-input style="width:300px;" placeholder="请输入操作名称" [(ngModel)]="instanceOperateInfo.name" (ngModelChange)="changeName($event)">
+            <div *ngIf="errorInfo.nameError" class="alert">
+                {{errorInfo.nameErrorInfo}}
+            </div>
+        </div>
+        <div class="item">
+            <span class="require">* </span><label>操作编码</label>
+            <input nz-input style="width:300px;" placeholder="请输入操作编码，对象内唯一" [(ngModel)]="instanceOperateInfo.code"
+                (ngModelChange)="changeCode($event)">
+            <div *ngIf="errorInfo.codeError" class="alert">
+                {{errorInfo.codeErrorInfo}}
+            </div>
+        </div>
+        <div class="item">
+            <label>依赖操作</label>
+            <nz-select style="width:300px;" [(ngModel)]="instanceOperateInfo.dependentId" nzPlaceHolder="请选择依赖操作" nzAllowClear>
+                <nz-option *ngFor="let option of dependentOperateList" [nzLabel]="option.name" [nzValue]="option.id"></nz-option>
+            </nz-select>
+            <div *ngIf="errorInfo.dependentError" class="alert">
+                {{errorInfo.dependentErrorInfo}}
+            </div>
+        </div>
+        <div class="item">
+            <label style="vertical-align: top;">操作描述</label>
+            <textarea style="width:300px; height: 75px;" nz-input [(ngModel)]="instanceOperateInfo.description" placeholder="请输入操作描述" (ngModelChange)="changeDescription($event)"></textarea>
+            <div *ngIf="errorInfo.descriptionError" class="alert">
+                {{errorInfo.descriptionErrorInfo}}
+            </div>
+        </div>
+    </div>
+</main>

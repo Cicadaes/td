@@ -1,0 +1,12 @@
+<div style="padding: 0px;">
+    <nz-tabset [nzTabPosition]="'top'">
+        <nz-tab *ngFor="let tab of tabs" [nzTitle]="tab.value">
+            <div class="zw-padding-top">
+                 <func-auth *ngIf="tab.key == 'func'" [tenantId]="tenantId" [appList]="appList" [roleId]="roleId"></func-auth>
+                 <data-object-auth *ngIf="tab.key == 'data-obj'" [roleId]="roleId" [tenantId]="tenantId"></data-object-auth>
+                 <detail-auth *ngIf="tab.key == 'data-detail'" [roleId]="roleId" [tenantId]="tenantId"></detail-auth>
+                </div>
+        </nz-tab>
+    </nz-tabset>
+
+</div>

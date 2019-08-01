@@ -1,0 +1,209 @@
+<div class="shunt-panel">
+  <form nz-form autocomplete="off">
+    <div class="shunt-panel-top">
+      <nz-form-item>
+        <nz-form-label class="label-1" [nzSpan]="5" nzFor="name"><span class="require">*</span>组件名称</nz-form-label>
+        <nz-form-control [nzSpan]="19">
+          <input
+            name="name"
+            type="name"
+            id="name"
+            nz-input
+            [(ngModel)]="pcs.nodeData.name"
+            [disabled]="!pcs.isPipelineEdit"
+            placeholder="请输入内容"
+            class="shunt-panel-name"
+            tdLimitInputText
+            iType="triggerInput"
+            max="26"
+          />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label class="label-1" [nzSpan]="5" nzFor="describe"
+          ><span class="require require-special">*</span>描述</nz-form-label
+        >
+        <nz-form-control [nzSpan]="19">
+          <textarea
+            name="describe"
+            type="describe"
+            id="describe"
+            [(ngModel)]="pcs.nodeData.description"
+            [disabled]="!pcs.isPipelineEdit"
+            placeholder="请输入内容"
+            class="shunt-panel-name  shunt-panel-describe"
+            maxlength="80"
+            nz-input
+          ></textarea>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div class="shunt-panel-bottom">
+      <nz-form-item>
+        <nz-form-label class="label-1" [nzSpan]="5" nzFor="distributary"
+          ><span class="require">*</span>分流类型</nz-form-label
+        >
+        <nz-form-control [nzSpan]="19">
+          <nz-radio-group
+            [(ngModel)]="pcs.nodeData.splitType"
+            name="distributary"
+            type="distributary"
+            id="distributary"
+            (ngModelChange)="splitTypeChange($event)"
+          >
+            <label nz-radio nzValue="1" style="font-size: 12px;" [nzDisabled]="!pcs.isPipelineEdit">人数</label>
+            <label nz-radio nzValue="2" style="font-size: 12px;" [nzDisabled]="!pcs.isPipelineEdit">占比</label>
+            <label nz-radio nzValue="3" style="font-size: 12px;" [nzDisabled]="!pcs.isPipelineEdit">维度</label>
+          </nz-radio-group>
+        </nz-form-control>
+      </nz-form-item>
+      <div *ngIf="pcs.nodeData.splitType != 3">
+        <!-- 人数或占比 -->
+        <nz-form-item style="margin-bottom: 0px;">
+          <nz-form-label class="label-1" [nzSpan]="5" nzFor="count"
+            ><span class="require">*</span>分支数量</nz-form-label
+          >
+          <nz-form-control [nzSpan]="19">
+            <nz-select
+              style="width: 100%;"
+              nzShowSearch
+              [(ngModel)]="pcs.nodeData.count"
+              nzPlaceHolder="请选择"
+              [ngModelOptions]="{ standalone: true }"
+              (ngModelChange)="branchCountChange($event, '1')"
+              [nzDisabled]="!pcs.isPipelineEdit"
+            >
+              <nz-option [nzLabel]="item" [nzValue]="item" *ngFor="let item of countList"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item style="margin-bottom: 0px;">
+          <nz-form-label class="label-1" [nzSpan]="5" nzFor="branchValue1">
+            <span *ngIf="pcs.nodeData.splitType == 1"><span class="require require-special">*</span>分支数值</span>
+            <span *ngIf="pcs.nodeData.splitType == 2"><span class="require require-special">*</span>分支占比</span>
+          </nz-form-label>
+          <nz-form-control [nzSpan]="19"></nz-form-control>
+        </nz-form-item>
+        <nz-form-item *ngIf="pcs.nodeData.splitType == 1">
+          <!-- 人数 -->
+          <nz-form-label class="label-1" [nzSpan]="0" nzFor="branchValue2"></nz-form-label>
+          <nz-form-control [nzSpan]="24">
+            <ng-container *ngFor="let val of pcs.nodeData.branchList; let i = index">
+              <div class="val-list">
+                <label style="margin-right: 16px;font-size: 12px;color: #464C5B;">{{ val.name }}</label>
+                <input
+                  class="shunt-panel-name"
+                  style="width: 148px;"
+                  tdLimitNumberInput
+                  condition="PI"
+                  [(ngModel)]="val.min"
+                  maxlength="15"
+                  (ngModelChange)="checkNumber(val, i)"
+                  [ngModelOptions]="{ standalone: true }"
+                  [disabled]="!pcs.isPipelineEdit"
+                />
+                <span style="color: #D7DDE4">—</span>
+                <input
+                  class="shunt-panel-name"
+                  style="width: 148px;"
+                  tdLimitNumberInput
+                  condition="PI"
+                  [(ngModel)]="val.max"
+                  maxlength="15"
+                  (ngModelChange)="checkNumber(val, i)"
+                  [ngModelOptions]="{ standalone: true }"
+                  [disabled]="!pcs.isPipelineEdit"
+                />
+              </div>
+              <p *ngIf="errorList[i]" class="error">请输入正确的范围</p>
+            </ng-container>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item *ngIf="pcs.nodeData.splitType == 2">
+          <!-- 占比 -->
+          <nz-form-label class="label-1" [nzSpan]="0" nzFor="proportion"></nz-form-label>
+          <nz-form-control [nzSpan]="24">
+            <ng-container *ngFor="let val of pcs.nodeData.branchList; let i = index">
+              <div class="val-list">
+                <label style="margin-right: 16px;font-size: 12px;color: #464C5B;">{{ val.name }}</label>
+                <nz-select
+                  style="width: 275px;"
+                  nzShowSearch
+                  [(ngModel)]="val.percent"
+                  nzPlaceHolder="请选择"
+                  [ngModelOptions]="{ standalone: true }"
+                  (ngModelChange)="checkPercent($event, '1')"
+                  [nzDisabled]="!pcs.isPipelineEdit"
+                >
+                  <nz-option
+                    [nzLabel]="item.percent + '%'"
+                    [nzValue]="item.percent"
+                    *ngFor="let item of percentList"
+                  ></nz-option>
+                </nz-select>
+              </div>
+            </ng-container>
+            <p *ngIf="ratioIsError" class="error">分支占比总和不为100%</p>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div *ngIf="pcs.nodeData.splitType == 3">
+        <!-- 维度 -->
+        <nz-form-item style="margin-bottom: 0px;">
+          <nz-form-label class="label-1" [nzSpan]="5" nzFor="dimensions"
+            ><span class="require">*</span>维度选择</nz-form-label
+          >
+          <nz-form-control [nzSpan]="19">
+            <nz-select
+              style="width: 100%;"
+              nzShowSearch
+              [(ngModel)]="pcs.nodeData.dimensionCode"
+              nzPlaceHolder="请选择"
+              [ngModelOptions]="{ standalone: true }"
+              (ngModelChange)="dimensionsChange($event)"
+              [nzDisabled]="!pcs.isPipelineEdit"
+            >
+              <nz-option
+                nzLabel="{{ item.name }}"
+                nzValue="{{ item.code }}"
+                [nzDisabled]="item.status == -1"
+                *ngFor="let item of dimensionsList"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label class="label-1" [nzSpan]="5" nzFor="branchValue1"
+            ><span class="require require-special">*</span>分支选择</nz-form-label
+          >
+          <nz-form-control [nzSpan]="19">
+            <div class="dimensions-content">
+              <div class="check-all" *ngIf="dimensionsOptionsList.length">
+                <label
+                  nz-checkbox
+                  [(ngModel)]="allChecked"
+                  (ngModelChange)="updateAllChecked()"
+                  [nzIndeterminate]="indeterminate"
+                  [ngModelOptions]="{ standalone: true }"
+                  [nzDisabled]="!pcs.isPipelineEdit"
+                  >全选</label
+                >
+              </div>
+              <div class="dimensions-list">
+                <label
+                  *ngFor="let item of dimensionsOptionsList; let i = index"
+                  nz-checkbox
+                  [(ngModel)]="item.checked"
+                  (ngModelChange)="updateDimensionsOptions(item, i)"
+                  [ngModelOptions]="{ standalone: true }"
+                  [nzDisabled]="!pcs.isPipelineEdit"
+                  >{{ item.label }}</label
+                >
+              </div>
+            </div>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,8 @@
+<cm-cascader
+            nzChangeOnSelect
+            [nzOptions]="dataList"
+            [nzPlaceHolder] = "placeHolder"
+            [(ngModel)]="_value"
+            (ngModelChange)="_console($event)"
+            (nzChange)="_console($event)">
+</cm-cascader>

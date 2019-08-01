@@ -1,0 +1,39 @@
+
+    <nz-select [nzSize]="'large'" *ngIf="ismultiple" [nzMode]="'multiple'" (mouseleave)="changeSelect($event)" (nzOpenChange)="changeSelect($event)" nzAllowClear [nzPlaceHolder]="'请选择'" [nzFilterOption]="false" [(ngModel)]="selectedOption" (nzSearchChange)="searchChange($event)" [nzNotFoundContent]="'暂无数据'" nzShowSearch>
+        <nz-option *ngFor="let option of searchOptions;let i = index;" [nzLabel]="option.label" [nzValue]="option.value">
+            <ng-template #nzOptionTemplate>
+                <table style="width:500px">
+                    <tbody>
+                    <tr>
+                        <td style="width:20%" style="text-align:left;"><div class="t-o-e" style="max-width:100px;" title="{{option.name}}" [ngStyle]="{'font-weight':i == '0' ? '700' : '300' }">{{option.name}}</div></td>
+                        <td style="width:10%" style="text-align:left;"><div class="t-o-e" style="max-width:60px;" title="{{option.version}}" [ngStyle]="{'font-weight':i == '0' ? '700' : '300' }">{{option.version}}</div></td>
+                        <td style="text-align:left;"><div class="t-o-e" style="max-width:100px;" title="{{option.desc}}" [ngStyle]="{'font-weight':i == '0' ? '700' : '300' }">{{option.desc}}</div></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </ng-template>
+        </nz-option>
+    </nz-select>
+
+    <nz-select [nzSize]="'large'" *ngIf="!ismultiple" (nzOpenChange)="changeSelect($event)" nzAllowClear [nzPlaceHolder]="'请选择'" [nzFilterOption]="false" [(ngModel)]="selectedOption" (nzSearchChange)="searchChange($event)" [nzNotFoundContent]="'暂无数据'" nzShowSearch>
+        <nz-option *ngFor="let option of searchOptions" [nzLabel]="option.label" [nzValue]="option">
+            <ng-template #nzOptionTemplate>
+                <table style="width:500px">
+                    <tbody>
+                    <tr>
+                        <td style="width:20%" style="text-align:left;"><div class="t-o-e" style="max-width:100px;" title="{{option.name}}">{{option.name}}</div></td>
+                        <td style="width:10%" style="text-align:left;"><div class="t-o-e" style="max-width:60px;" title="{{option.version}}">{{option.version}}</div></td>
+                        <td style="text-align:left;"><div class="t-o-e" style="max-width:100px;" title="{{option.desc}}">{{option.desc}}</div></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </ng-template>
+        </nz-option>
+    </nz-select>
+
+    <!-- <div class="has-error">
+      <div nz-form-explain *ngIf="!hasMainApp">请选择主应用</div>
+        <div nz-form-explain *ngIf="hasMainApp"> &nbsp;</div>
+    </div> -->
+
+

@@ -1,0 +1,12 @@
+<ng-container>
+    <div class="menuTree" #root>
+        <div class="menuSearch" id="btn" *ngIf="_cmHasSearch">
+            <!-- <nz-input [nzPlaceHolder]="_cmPlaceHolder" [(ngModel)]="inputValue" (ngModelChange)="search(inputValue)" (keyup.enter)="search(inputValue)"></nz-input> -->
+            <input type="text" nz-input placeholder="{{_cmPlaceHolder}}" [(ngModel)]="inputValue" (ngModelChange)="search(inputValue)" (keyup.enter)="search(inputValue)">
+            <i class="anticon anticon-search search" (click)="search(inputValue)"></i>
+        </div>
+        <div class="menuTree-body">
+            <app-menu-view [cmData]="_cmData" class="menuTree-view" [cmMenu]="_cmMenu" [cmHasChecked]="_cmHasChecked" [cmHasShow]="_cmHasShow" [cmHasRadio]="_cmHasRadio" [cmHasEllips]="_cmHasEllips" [cmHasMenu]="_cmHasMenu" [hasSelect]="_hasSelect" [cmcheckFathser]="_cmcheckFathser"></app-menu-view>
+        </div>
+    </div>
+</ng-container>

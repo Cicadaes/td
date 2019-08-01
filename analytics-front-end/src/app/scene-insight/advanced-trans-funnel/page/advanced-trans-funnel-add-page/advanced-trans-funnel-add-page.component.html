@@ -1,0 +1,21 @@
+<main>
+  <article class="page-custom-content">
+    <app-advanced-trans-funnel-add-form
+      [cardTitle]="_cardTitle"
+      [isSubmit]="_isSubmitForm"
+      [systemError]="_systemError"
+      (onSubmit)="_onSubmitForm($event)"
+      [data]="_data"
+      [sdkId]="sdkId"
+      [tagName]="tagName"
+      (onBack)="_onBackForm($event)"
+    ></app-advanced-trans-funnel-add-form>
+    <!-- 提交、取消 -->
+    <div class="form-button">
+      <button nz-button (click)="handleOk()" nzType="primary">保存</button>
+      <a (click)="_cancel()">
+        <button nz-button nzType="default">取消</button>
+      </a>
+    </div>
+  </article>
+</main>

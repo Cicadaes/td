@@ -1,0 +1,18 @@
+<div class="first-level"></div>
+<div *ngIf="isVisitor && tabList.length > 0">
+  <nz-tabset [nzAnimated]="false" [nzSelectedIndex]="selectedIndex">
+    <nz-tab [nzTitle]="titleTemplate" *ngFor="let item of tabList; let i = index">
+      <ng-template #titleTemplate>
+        <div (click)="setTab(item.filter, i)">{{ item.name }}</div>
+      </ng-template>
+      <app-funnel-table
+        [filter]="item.filter"
+        [isVisitor]="isVisitor"
+        *ngIf="item.filter == pagePathFilter"
+      ></app-funnel-table>
+    </nz-tab>
+  </nz-tabset>
+</div>
+<div *ngIf="!isVisitor || tabList.length == 0">
+  <app-funnel-table [isVisitor]="isVisitor"></app-funnel-table>
+</div>

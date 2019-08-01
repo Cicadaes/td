@@ -1,0 +1,35 @@
+<div #root>
+    <div *ngIf="_cmData.length == 0" style="padding: 20px 40px;">
+        暂无数据
+    </div>
+    <div *ngFor="let comment of _cmData">
+        <div class="menuView">
+            <div class="menuView-body item-{{comment.id}}" [ngClass]="comment.select && _hasSelect == true? 'clickItem':''" (mouseenter)="enterItems(comment)" (mouseleave)="leavesItems(comment)" (click)="clickItems(comment,_cmData)">
+                <div class="menuView-box">
+                    <div class="menuView-icon" *ngIf="_cmHasShow">
+                        <i class="anticon anticon-caret-down" (click)="comment.show = false" *ngIf="comment.show&&comment.children.length>0"></i>
+                        <i class="anticon anticon-caret-right" (click)="comment.show = true" *ngIf="!comment.show&&comment.children.length>0"></i>
+                    </div>
+                    <div class="menuView-content" style="cursor: pointer;">
+                        <label nz-checkbox [(ngModel)]="comment.checked" (ngModelChange)="checkChange($event,comment)" *ngIf="_cmHasChecked"></label>
+                        <label class="radio" (click)="radioThis(comment)" [ngClass]="comment.radio? 'radio-checked':''" *ngIf="_cmHasRadio"></label>
+                        <i class="anticon anticon-folder-open" *ngIf="comment.children.length>0"></i>
+                        <i class="anticon anticon-file" *ngIf="comment.children.length == 0"></i>
+                        <input type="text" title="{{comment.content}}" [(ngModel)]="comment.content" id="input-{{comment.id}}" class="readonly" [readonly]="comment.readonly" [ngClass]="{'writeIn': !comment.readonly}" (keyup.enter)="updateOK(comment)" (blur)="inputBlur(comment)"  style="cursor: pointer;"/>
+                        <i class="anticon anticon-check ok" *ngIf="!comment.readonly" (keyup.enter)="updateOK(comment)"></i>
+                    </div>
+                </div>
+                <div class="menu" (mouseleave)="comment.menuShow = false" *ngIf="_cmHasMenu == true">
+                    <i class="anticon anticon-ellipsis" *ngIf="comment.ellipsisShow&&_cmHasEllips == true" (click)="comment.menuShow = true"></i>
+                    <ul class="menu-list" *ngIf="comment.menuShow == true " (mouseleave)="comment.menuShow = false" class="ant-select-dropdown-menu ant-select-dropdown-menu-vertical ant-select-dropdown-menu-root">
+                        <li *ngFor="let menu of comment.customMenu" class="ant-select-dropdown-menu-item ng-tns-c23-38 ng-star-inserted" (click)="select(menu.label,_cmData,comment)">
+                            {{menu.value}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <app-menu-view *ngIf="comment.children.length>0&&comment.show == true" [cmData]="comment.children" [cmMenu]="_cmMenu" class="menuView-item" (onVoted)="onVoteds($event,comment)" [cmHasChecked]="_cmHasChecked" [cmHasShow]="_cmHasShow" [cmHasRadio]="_cmHasRadio"
+                [cmHasEllips]="_cmHasEllips" [cmHasMenu]="_cmHasMenu" [hasSelect]="_hasSelect" [cmcheckFathser]="_cmcheckFathser"></app-menu-view>
+        </div>
+    </div>
+</div>

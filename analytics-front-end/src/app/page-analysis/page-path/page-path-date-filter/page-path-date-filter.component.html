@@ -1,0 +1,65 @@
+<main>
+  <div class="clrfix page-custom-header div-margin mt16">
+    <nz-range-picker
+      class="custom-range-picker"
+      [nzFormat]="_dateFormat"
+      style="padding: 0 16px;float:left;margin-top: 8px;"
+      [nzDisabledDate]="_disabledDate"
+      [(ngModel)]="_dateRange"
+      (ngModelChange)="_changeDaterange($event)"
+      nzPlaceHolder=""
+      [nzAllowClear]="false"
+      [nzStyle]="{ width: '240px' }"
+    >
+    </nz-range-picker>
+    <div class="filter-panel">
+      <nz-popover [nzTitle]="'指标说明'" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+        <span class="icon iconfont icon-info1 item" nz-popover></span>
+        <ng-template #nzTemplate>
+          <ul class="des-ul" *ngIf="_allFilter.sourceid == 'App' || _allFilter.sourceid == 'miniprogram'">
+            <li class="clrfix">
+              <label>页面受访次数：</label>
+              <div class="des">日期范围内，访客访问页面的次数。</div>
+            </li>
+            <li class="clrfix">
+              <label>页面受访比例：</label>
+              <div class="des">日期范围内，访客访问某页面的次数占访问所有页面总次数的比例。</div>
+            </li>
+            <li class="clrfix">
+              <label>离开应用：</label>
+              <div class="des">日期范围内，访客访问页面后即离开应用的次数占访问页面总次数的比例。</div>
+            </li>
+          </ul>
+          <ul class="des-ul" *ngIf="_allFilter.sourceid != 'App' && _allFilter.sourceid != 'miniprogram'">
+            <li class="clrfix">
+              <label>浏览量：</label>
+              <div class="des">页面被打开的次数，即PV。</div>
+            </li>
+            <li class="clrfix">
+              <label>浏览量占比：</label>
+              <div class="des">日期范围内，访客访问某页面的次数占访问所有页面总次数的比例。</div>
+            </li>
+            <li class="clrfix">
+              <label>离开网站：</label>
+              <div class="des">指从某个网页退出网站的次数所占的百分比。</div>
+            </li>
+          </ul>
+        </ng-template>
+      </nz-popover>
+
+      <div class="operator" (click)="toggleCollapse()">
+        <span *ngIf="_isCollapse">筛选</span>
+        <span *ngIf="!_isCollapse">筛选</span>
+        <span class="ant-compat anticon" [class.anticon-down]="!_isCollapse" [class.anticon-up]="_isCollapse"></span>
+      </div>
+    </div>
+  </div>
+  <div class="div-margin mb16">
+    <app-page-path-filter
+      *ngIf="_isInitFilter"
+      [ngClass]="{ hide: !_isCollapse }"
+      [needSearch]="_needSearch"
+      (onBack)="getPagePathFilter($event)"
+    ></app-page-path-filter>
+  </div>
+</main>

@@ -1,0 +1,11 @@
+<main>
+  <nz-popover [nzTitle]="'下载消息'" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+    <span class="icon iconfont icon-download item" (click)="downloadData()" nz-popover></span>
+    <ng-template #nzTemplate>
+      <div>
+        导出任务创建成功，请稍后到
+        <a (click)="goPage('/download-data')" style="margin:0 10px;">数据下载</a>页面下载您需要的附件。
+      </div>
+    </ng-template>
+  </nz-popover>
+</main>

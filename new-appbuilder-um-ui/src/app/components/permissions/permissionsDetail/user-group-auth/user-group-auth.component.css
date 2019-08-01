@@ -1,0 +1,17 @@
+:host ::ng-deep .ac_right_wap {
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+:host ::ng-deep .ac_right{
+  float: right;
+  width: 180px;
+}
+:host ::ng-deep .rightFR{
+  float:right;
+  margin-top:20px;
+}
+:host ::ng-deep .leftFR {
+  float:left;
+  margin-top:20px;
+}

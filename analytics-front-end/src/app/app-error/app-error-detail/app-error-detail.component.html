@@ -1,0 +1,174 @@
+<main>
+  <div class="search-list">
+    <common-date (dateChange)="dataChange($event)" [_date]="dateRange"></common-date>
+  </div>
+
+  <div class="content">
+    <div class="content-one">
+      <div class="summary">
+        <div class="summary-icon">
+          <i nz-icon type="file-text" theme="outline"></i>
+        </div>
+        <div class="summary-text">
+          <h3>错误摘要</h3>
+          <p>{{ summaryData['digest'] }}</p>
+        </div>
+      </div>
+      <div class="summary-bot">
+        <label
+          >首次发生时间：<span>{{ summaryData['firstOccurs'] | date: 'yyyy-MM-dd HH:mm:ss' }}</span></label
+        >
+        <nz-divider nzType="vertical"></nz-divider>
+        <label
+          >最近发生时间：<span>{{ summaryData['lastOccurs'] | date: 'yyyy-MM-dd HH:mm:ss' }}</span></label
+        >
+        <nz-divider nzType="vertical"></nz-divider>
+        <label
+          >错误次数：<span>{{ summaryData['errorTimes'] | numberToThousandsPipe: 3 }}</span></label
+        >
+        <nz-divider nzType="vertical"></nz-divider>
+        <label
+          >影响用户数：<span>{{ summaryData['affectUsers'] | numberToThousandsPipe: 3 }}</span></label
+        >
+      </div>
+    </div>
+
+    <div class="content-one">
+      <app-error-tend [tendOptions]="tendOptions" [tabLength]="2" [loading]="tendLoad"></app-error-tend>
+    </div>
+
+    <div class="content-one">
+      <app-error-top
+        [topOptions]="topOptions"
+        (changeGetTop)="changeGetTop($event)"
+        [loading]="topLoad"
+      ></app-error-top>
+    </div>
+
+    <div class="content-one">
+      <h3 class="title">
+        错误详情
+        <div class="title-down">
+          <nz-popover [nzTitle]="'下载消息'" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+            <span class="icon iconfont icon-download item" nz-popover (click)="downloadData()"></span>
+            <ng-template #nzTemplate>
+              <div>
+                导出任务创建成功，请稍后到
+                <a (click)="goPage('/download-data')" style="margin:0 10px;">数据下载</a>
+                页面下载您需要的附件。
+              </div>
+            </ng-template>
+          </nz-popover>
+          <!-- 描述 -->
+          <nz-popover [nzTitle]="'指标说明'" [nzPlacement]="'leftBottom'" [nzTrigger]="'hover'">
+            <span class="icon iconfont icon-info1 item" nz-popover></span>
+            <ng-template #nzTemplate>
+              <ul class="des-ul">
+                <li class="clrfix">
+                  <label>错误日志：</label>
+                  <div class="des">
+                    由错误分析SDK上报的错误产生时收集的日志信息。
+                  </div>
+                </li>
+                <li class="clrfix">
+                  <label>错误发生时间：</label>
+                  <div class="des">
+                    错误发生的具体时间。
+                  </div>
+                </li>
+                <li class="clrfix">
+                  <label>品牌机型：</label>
+                  <div class="des">
+                    发生错误的设备的品牌机型信息。
+                  </div>
+                </li>
+                <li class="clrfix">
+                  <label>系统版本：</label>
+                  <div class="des">
+                    发生错误的设备的操作系统及版本。
+                  </div>
+                </li>
+                <li class="clrfix">
+                  <label>应用版本：</label>
+                  <div class="des">
+                    发生错误的设备应用对应的版本。
+                  </div>
+                </li>
+                <li class="clrfix">
+                  <label>分包渠道：</label>
+                  <div class="des">
+                    发生错误的设备应用是在哪个分包渠道下下载安装的。
+                  </div>
+                </li>
+              </ul>
+            </ng-template>
+          </nz-popover>
+        </div>
+        <div class="title-search">
+          <nz-input-group [nzPrefix]="suffixIconSearch" nzSize="small">
+            <input
+              type="text"
+              nz-input
+              placeholder="输入关键字搜索"
+              [(ngModel)]="searchValue"
+              nzSize="small"
+              (keyup)="searchErrorList($event, 'key')"
+            />
+          </nz-input-group>
+          <ng-template #suffixIconSearch>
+            <i nz-icon type="search" (click)="searchErrorList(searchValue, 'click')"></i>
+          </ng-template>
+        </div>
+      </h3>
+      <div class="search-more">
+        <app-search-more (searchMore)="searchMore($event)" [productId]="productId"></app-search-more>
+      </div>
+      <div class="chart special-chart">
+        <nz-table
+          #nzTable
+          [nzData]="tableData"
+          nzShowSizeChanger
+          [nzLoading]="loading"
+          [nzTotal]="total"
+          [(nzPageIndex)]="pageIndex"
+          [(nzPageSize)]="pageSize"
+          [nzFrontPagination]="false"
+          (nzPageSizeChange)="getList(true)"
+          (nzPageIndexChange)="getList()"
+          [nzPageSizeOptions]="pageOptions"
+        >
+          <thead (nzSortChange)="sort($event)" nzSingleSort>
+            <tr>
+              <th>错误日志</th>
+              <th nzShowSort nzSortKey="occurTime" [nzWidth]="'165px'">
+                错误发生时间
+              </th>
+              <th [nzWidth]="'120px'">
+                品牌机型
+              </th>
+              <th [nzWidth]="'100px'">
+                系统版本
+              </th>
+              <th [nzWidth]="'100px'">
+                应用版本
+              </th>
+              <th [nzWidth]="'120px'">分包渠道</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of nzTable.data">
+              <td>
+                <div class="scroll-div" [innerHTML]="data.detail | toBrPipe"></div>
+              </td>
+              <td>{{ data.occurTime | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+              <td>{{ data.mobile }}</td>
+              <td>{{ data.os }}</td>
+              <td>{{ data.appversion }}</td>
+              <td>{{ data.channel }}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </div>
+    </div>
+  </div>
+</main>

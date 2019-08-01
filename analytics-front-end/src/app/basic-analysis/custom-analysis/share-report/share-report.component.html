@@ -1,0 +1,143 @@
+<main>
+  <div class="content">
+    <nz-radio-group [(ngModel)]="shareType">
+      <label nz-radio nzValue="private">仅自己查看</label>
+      <label nz-radio nzValue="public">分享到业务概览并分享给他人</label>
+      <nz-tooltip
+        [nzTitle]="'通过选择账户来设置报表的可见范围，授权账户可在共享池中查看报表。'"
+        [nzPlacement]="'right'"
+      >
+        <span class="ant-compat anticon anticon-question-circle-o" nz-tooltip></span>
+      </nz-tooltip>
+    </nz-radio-group>
+    <div class="public-set" *ngIf="shareType == 'public'">
+      <div class="left">
+        <div class="header">
+          <p>
+            <nz-input-group
+              nzSuffixIcon="anticon anticon-search"
+              style="width: 176px; float: right; margin-top: 8px"
+              nzSize="small"
+            >
+              <input
+                type="text"
+                nz-input
+                [(ngModel)]="searchName"
+                (ngModelChange)="onSearch($event)"
+                placeholder="输入关键字搜索"
+              />
+            </nz-input-group>
+          </p>
+        </div>
+
+        <div class="public-content">
+          <div class="public-content-title">
+            <label
+              nz-checkbox
+              style="width: 160px;"
+              [(ngModel)]="allRoleChecked"
+              (ngModelChange)="updateAllRoleChecked($event)"
+              [nzIndeterminate]="indeterminate"
+            >
+              角色
+            </label>
+            <label style="width: 115px; display: inline-block;">用户名</label>
+            <label>帐号</label>
+          </div>
+          <div class="public-content-data">
+            <div class="data-left">
+              <div
+                *ngFor="let role of allUser; let i = index"
+                (click)="chooseRole(role, i)"
+                [ngClass]="{ 'data-left-list': i == selectedRoleIndex }"
+              >
+                <!-- #DBEEFF -->
+                <label
+                  nz-checkbox
+                  [(nzChecked)]="role.checked"
+                  [(ngModel)]="role.checked"
+                  (ngModelChange)="updateAllUsersChecked($event, i)"
+                ></label>
+                <label class="name" [title]="role.name">{{ role.name }}</label>
+                <span class="ant-compat anticon anticon-right"></span>
+              </div>
+            </div>
+            <div class="data-right">
+              <nz-table
+                #userTable
+                [nzData]="userListForRole"
+                [nzWidthConfig]="['8px', '100px', '200px']"
+                nzPageSize="100"
+                [nzShowPagination]="false"
+                [nzScroll]="{ y: '318px' }"
+                nzSize="middle"
+              >
+                <tbody>
+                  <tr *ngFor="let data of userTable.data">
+                    <td nzShowCheckbox [(nzChecked)]="data.checked"></td>
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.email }}</td>
+                  </tr>
+                </tbody>
+              </nz-table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="oprators">
+        <div class="op">
+          <span class="ant-compat anticon anticon-right" (click)="addShare()"></span>
+        </div>
+        <div class="op">
+          <span class="ant-compat anticon anticon-left" (click)="delShare()"></span>
+        </div>
+        <div class="op">
+          <span class="ant-compat anticon anticon-double-left" (click)="removeAllShare()"></span>
+        </div>
+      </div>
+      <div class="right">
+        <div class="header">
+          <p>
+            <span class="title">已选择用户</span>
+            <span class="count">{{ shareList.length || 0 }}</span
+            >人
+          </p>
+        </div>
+        <div class="public-content">
+          <div class="public-content-title" style="padding-left: 18px;">
+            <label
+              nz-checkbox
+              style="width: 142px; display: inline-block;"
+              [(ngModel)]="allUserChecked"
+              (ngModelChange)="updateAllUserChecked($event)"
+              >用户名</label
+            >
+            <label>帐号</label>
+          </div>
+          <div class="public-content-data">
+            <nz-table
+              #selectedUser
+              [nzData]="shareList"
+              [nzShowPagination]="false"
+              [nzWidthConfig]="['8px', '100px', '200px']"
+              [nzScroll]="{ y: '318px' }"
+              nzSize="middle"
+            >
+              <tbody>
+                <tr *ngFor="let data of selectedUser.data">
+                  <td nzShowCheckbox [(nzChecked)]="data.checked"></td>
+                  <td>{{ data.name }}</td>
+                  <td>{{ data.umid }}</td>
+                </tr>
+              </tbody>
+            </nz-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <button nz-button class="cancel-button" (click)="cancel()">取消</button>
+    <button nz-button class="ant-btn-primary" (click)="submit()">分享</button>
+  </div>
+</main>

@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+    margin: 0;
+    background-color: #eef0f3 !important;
+    font-size: 12px !important;
+    font-family: "HelveticaNeue", "PingFangSC", "微软雅黑" !important;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    margin: 0px;
+    padding: 0px;
+}
+
+ul,
+li {
+    list-style: none;
+}

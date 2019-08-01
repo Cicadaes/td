@@ -1,0 +1,80 @@
+<nz-modal [(nzVisible)]="isVisible" nzWrapClassName="vertical-center-modal" [nzTitle]="modalTitle" [nzContent]="modalContent"
+    [nzFooter]="modalFooter" (nzOnCancel)="handleCancel($event)" [nzMaskClosable]='false'>
+    <ng-template #modalTitle>
+        <span *ngIf="editFlag">编辑邮件配置</span>
+        <span *ngIf="!editFlag">新建邮件配置</span>
+    </ng-template>
+    <ng-template #modalContent>
+        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" autocomplete="off">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="4" nzRequired nzFor="name">通道名称</nz-form-label>
+                <nz-form-control [nzSpan]="19" style="float: right;">
+                    <input id="name" type="name" nz-input formControlName="name" placeholder="请输入渠道名称">
+                    <nz-form-explain *ngIf="getFormControl('name').dirty && getFormControl('name').errors" style="color: #f5222d;">
+                        <ng-container *ngIf="getFormControl('name').errors.required">
+                            请输入通道名称
+                        </ng-container>
+                        <ng-container *ngIf="getFormControl('name').errors.nameError">
+                            请输入中文或英文格式
+                        </ng-container>
+                        <ng-container *ngIf="getFormControl('name').errors.maxlength">
+                            通道名称不能超过32个字符
+                        </ng-container>
+                    </nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="4" nzRequired nzFor="code">编码</nz-form-label>
+                <nz-form-control [nzSpan]="19" style="float: right;">
+                    <input id="code" type="code" nz-input formControlName="code" placeholder="请输入编码">
+                    <nz-form-explain *ngIf="getFormControl('code').dirty && getFormControl('code').errors" style="color: #f5222d;">
+                        <ng-container *ngIf="getFormControl('code').errors.required">
+                            请输入编码
+                        </ng-container>
+                        <ng-container *ngIf="getFormControl('code').errors.codeError">
+                            请输入英文或下划线格式
+                        </ng-container>
+                        <ng-container *ngIf="getFormControl('code').errors.maxlength">
+                            编码不能超过255个字符
+                        </ng-container>
+                    </nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item style="margin-bottom: 10px;">
+                <nz-form-label [nzSpan]="4" nzRequired nzFor="signa">发件人</nz-form-label>
+                <nz-form-control [nzSpan]="19" style="float: right;">
+                    <div class="item-key" *ngFor="let item of data.edmSenderList;let i = index;">
+                        <label>地址</label>
+                        <input type="text" autocomplete="off" nz-input style="width: 110px;height: 28px;" [(ngModel)]="item['email']" [ngModelOptions]="{standalone: true}"
+                            placeholder="邮箱" (ngModelChange)="checkEmail(item, i)">
+                        <label style="margin-left: 6px;">名称</label>
+                        <input type="text" autocomplete="off" nz-input style="width: 110px;height: 28px;" [(ngModel)]="item['note']" [ngModelOptions]="{standalone: true}"
+                            placeholder="中文/英文/数字" (ngModelChange)="checkNote(item, i)">
+                        <nz-form-explain class="params-name has-error" *ngIf="emailErr[i]">
+                            <ng-container *ngIf="emailErr[i]">
+                                {{emailMessage}}
+                            </ng-container>
+                        </nz-form-explain>
+                        <nz-form-explain class="params-number has-error" *ngIf="noteErr[i]">
+                            <ng-container *ngIf="noteErr[i]">
+                                {{noteMessage}}
+                            </ng-container>
+                        </nz-form-explain>
+                        <span class="ant-compat anticon anticon-close" style="cursor: pointer;" (click)="remove(i)" *ngIf="i != 0"></span>
+                    </div>
+                    <span style="color: #2D8CF0;cursor: pointer;" (click)="add();">
+                        <span class="ant-compat anticon anticon-plus" style="margin-right: 8px;"></span>添加发件人
+                    </span>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </ng-template>
+    <ng-template #modalFooter>
+        <button nz-button [nzType]="'default'" [nzSize]="small" (click)="handleCancel($event)">
+            取消
+        </button>
+        <button nz-button [nzType]="'primary'" [nzSize]="small" (click)="save()">
+            保存
+        </button>
+    </ng-template>
+</nz-modal>

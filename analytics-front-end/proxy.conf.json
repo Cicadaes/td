@@ -1,0 +1,28 @@
+{
+	"/crowd": {
+		"target": "http://172.23.4.169:8886",
+		"secure": "false"
+	},
+	"/miniprogram-api": {
+		"target": "http://172.23.4.169:8099"
+	},
+	"/dataservice": {
+		"target": "http://172.23.4.168:9596",
+		"secure": "false"
+	},
+	"/marketing-api": {
+		"target": "http://172.23.4.169:9081",
+		"secure": "false"
+	},
+	"/reportservice": {
+		"target": "http://172.23.4.168:50080",
+		"secure": "false"
+	},
+	"/report-api": {
+		"target": "http://172.23.4.168:50080",
+		"secure": "false"
+	},
+	"/portal-api": {
+		"target": "http://172.23.4.168:50080"
+	}
+}

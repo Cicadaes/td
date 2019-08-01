@@ -1,0 +1,119 @@
+<main>
+  <div class="search-list">
+    <div class="search-list-fitst search-list-one" style="border-bottom: 1px dashed #DEDFE3;">
+      <nz-range-picker
+        class="item"
+        [(ngModel)]="dateRange"
+        (ngModelChange)="timeChange($event)"
+        nzPlaceHolder=""
+        [nzDisabledDate]="disabledDate"
+        [nzAllowClear]="false"
+        [nzStyle]="{ width: '240px' }"
+      >
+      </nz-range-picker>
+    </div>
+    <div
+      class="search-list-fitst search-list-one"
+      [ngClass]="{ 'search-list-fitst': true, 'search-list-one': true, borderBottom: moreSearchFlag }"
+    >
+      <div class="search-list-fitst-left">
+        <div class="item search-list-fitst-left-one search-list-fitst-left-bg">分析</div>
+        <div class="item search-list-fitst-left-one">
+          <nz-select
+            style="width: 180px;"
+            [(ngModel)]="selecteEventType"
+            (nzScrollToBottom)="getEventTypeList()"
+            (ngModelChange)="eventTypeChange($event)"
+            nzShowSearch
+            nzPlaceHolder="请选择"
+          >
+            <nz-option
+              *ngFor="let item of eventTypeList"
+              [nzValue]="item.id"
+              [nzLabel]="item.dicItemValue"
+              nzCustomContent
+            >
+              <div title="{{ item.dicItemValue }}">{{ item.dicItemValue }}</div>
+            </nz-option>
+          </nz-select>
+        </div>
+        <div class="item search-list-fitst-left-one search-list-fitst-left-bg">为</div>
+        <div class="item search-list-fitst-left-one">
+          <nz-select
+            style="width: 180px;"
+            (ngModelChange)="search($event, 'event')"
+            [(ngModel)]="selectedEvent"
+            (nzOnSearch)="onSearchEvent($event)"
+            (nzScrollToBottom)="getEventList(null, true)"
+            [nzServerSearch]="true"
+            nzShowSearch
+            nzPlaceHolder="请选择"
+          >
+            <nz-option *ngFor="let item of eventList" nzCustomContent [nzValue]="item.value" [nzLabel]="item.name">
+              <div title="{{ item.name }}">
+                <span *ngIf="item.smartEvent" class="icon iconfont icon-shijian"></span>{{ item.name }}
+              </div>
+            </nz-option>
+          </nz-select>
+        </div>
+        <div class="item search-list-fitst-left-one search-list-fitst-left-bg">的</div>
+        <div class="item search-list-fitst-left-one">
+          <nz-select
+            style="width: 180px;"
+            (ngModelChange)="search($event, 'metric')"
+            [(ngModel)]="selectedMetric"
+            nzShowSearch
+            nzPlaceHolder="请选择"
+          >
+            <nz-option *ngFor="let item of metricList" [nzValue]="item.value" [nzLabel]="item.name" nzCustomContent>
+              <div title="{{ item.name }}">{{ item.name }}</div>
+            </nz-option>
+          </nz-select>
+        </div>
+        <div class="item search-list-fitst-left-one search-list-fitst-left-bg">按</div>
+        <div class="item search-list-fitst-left-one">
+          <nz-select
+            style="width: 180px;"
+            (ngModelChange)="search($event, 'dimension')"
+            [(ngModel)]="selectedDimension"
+            nzShowSearch
+            nzPlaceHolder="请选择"
+          >
+            <nz-option-group *ngFor="let group of dimensionList" [nzLabel]="group.key">
+              <nz-option
+                *ngFor="let item of group.value"
+                [nzValue]="item.esfieldname"
+                [nzLabel]="item.displayname"
+                nzCustomContent
+              >
+                <div title="{{ item.displayname }}">{{ item.displayname }}</div>
+              </nz-option>
+            </nz-option-group>
+          </nz-select>
+        </div>
+        <div class="item search-list-fitst-left-one search-list-fitst-left-bg">查看</div>
+      </div>
+      <div class="search-list-fitst-right" (click)="moreSearch()">
+        <span>筛选</span>
+        <span
+          class="ant-compat anticon"
+          [class.anticon-down]="!moreSearchFlag"
+          [class.anticon-up]="moreSearchFlag"
+        ></span>
+      </div>
+    </div>
+
+    <app-crowd-filter
+      *ngIf="moreSearchFlag"
+      [isCheck]="_isCheckCrowdFilter"
+      [crowdData]="crowdFilter"
+      (onFilter)="onFilter($event)"
+    ></app-crowd-filter>
+
+    <div class="search-list-other" style="overflow: hidden;">
+      <div class="search-button">
+        <button nz-button (click)="clickSearch()">查询</button>
+      </div>
+    </div>
+  </div>
+</main>

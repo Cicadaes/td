@@ -1,0 +1,393 @@
+<div class="first-level"></div>
+<main>
+  <div class="content-div">
+    <div class="content-one shadow-content">
+      <h3 class="content-one-title module-title">
+        <span class="iconfont icon-android"></span>
+        Android推送配置
+        <span>除了提供内建的TD推送外，TalkingData还支持使用<strong>第三方推送平台</strong>发送消息，只需简单配置</span>
+      </h3>
+      <div class="content-one-text">
+        <div class="android-content">
+          <table style="position : relative;" *ngFor="let pushConfig of pushConfigList; let i = index" class="zw-table">
+            <tr>
+              <td>推送平台</td>
+              <td *ngIf="pushConfig.channel == 3">appID</td>
+              <td>appKey</td>
+              <td>MasterSecret</td>
+              <td></td>
+            </tr>
+            <tr *ngIf="pushConfig.channel == 4">
+              <td>
+                <nz-select
+                  style="width: 120px;"
+                  [(ngModel)]="pushConfig.value"
+                  nzPlaceHolder="Choose"
+                  (ngModelChange)="chooseOne($event, pushConfig)"
+                  [nzDisabled]="pushConfig.editStatus == 1"
+                >
+                  <nz-option
+                    [nzValue]="item.label"
+                    [nzLabel]="item.label"
+                    *ngFor="let item of pushPlatform[i]"
+                  ></nz-option>
+                </nz-select>
+              </td>
+              <td>
+                <input
+                  style="border: 1px solid #d9d9d9;"
+                  [disabled]="pushConfig.editStatus == 1"
+                  nz-input
+                  placeholder=""
+                  [(ngModel)]="pushConfig.thirdKey"
+                />
+              </td>
+              <td>
+                <input
+                  style="border: 1px solid #d9d9d9;"
+                  [disabled]="pushConfig.editStatus == 1"
+                  nz-input
+                  placeholder=""
+                  [(ngModel)]="pushConfig.thirdSecret"
+                />
+              </td>
+              <td>
+                <div class="btn-handel">
+                  <button class="upload-btn" (click)="bind(i)">绑定</button>
+                  <button class="cancel" (click)="delete(i)">删除</button>
+                  <span class="iconfont icon-success" *ngIf="pushConfig.editStatus == 1"></span>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="pushConfig.channel == 3">
+              <td>
+                <nz-select
+                  style="width: 120px;"
+                  [(ngModel)]="pushConfig.value"
+                  nzPlaceHolder="Choose"
+                  (ngModelChange)="chooseOne($event, pushConfig)"
+                  [nzDisabled]="pushConfig.editStatus == 1"
+                >
+                  <nz-option
+                    [nzValue]="item.label"
+                    [nzLabel]="item.label"
+                    *ngFor="let item of pushPlatform[i]"
+                  ></nz-option>
+                </nz-select>
+              </td>
+              <td>
+                <input
+                  style="border: 1px solid #d9d9d9;"
+                  [disabled]="pushConfig.editStatus == 1"
+                  nz-input
+                  placeholder=""
+                  [(ngModel)]="pushConfig.thirdApp"
+                />
+              </td>
+              <td>
+                <input
+                  style="border: 1px solid #d9d9d9;"
+                  [disabled]="pushConfig.editStatus == 1"
+                  nz-input
+                  placeholder=""
+                  [(ngModel)]="pushConfig.thirdKey"
+                />
+              </td>
+              <td>
+                <input
+                  style="border: 1px solid #d9d9d9;"
+                  [disabled]="pushConfig.editStatus == 1"
+                  nz-input
+                  placeholder=""
+                  [(ngModel)]="pushConfig.thirdSecret"
+                />
+              </td>
+              <td style="padding-right:0;">
+                <div class="btn-handel">
+                  <button class="upload-btn" (click)="bind(i)">绑定</button>
+                  <button class="cancel" (click)="delete(i)">删除</button>
+                  <span class="iconfont icon-success" *ngIf="pushConfig.editStatus == 1"></span>
+                </div>
+              </td>
+            </tr>
+            <p
+              style="position : absolute; left : 0; bottom : -12px; margin-bottom: 0px;color: red;"
+              *ngIf="isError[i]"
+              class="warn-tip"
+            >
+              {{ isError[i] }}。
+            </p>
+          </table>
+        </div>
+        <div
+          class="button"
+          *ngIf="pushConfigList.length < 2"
+          [ngClass]="{
+            button: true,
+            'button-margin': pushConfigList.length < 1
+          }"
+        >
+          <p (click)="addConf()">
+            <span class="ant-compat anticon anticon-plus"></span>
+            <span>添加新推送配置</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-one shadow-content">
+      <h3 class="content-one-title module-title">
+        <span class="iconfont icon-android"></span>
+        Android增强配置
+      </h3>
+      <div class="content-one-text">
+        <ul class="content-one-text-ul">
+          <li class="content-one-text-ul-li" style="position: relative;">
+            <span>小米增强通道</span>
+            <nz-popover [nzPlacement]="'left'">
+              <span class="iconfont icon-help" nz-popover></span>
+              <ng-template #nzTemplate>
+                <ul style="padding-left: 0px; margin-bottom: 0px;">
+                  <li>
+                    <span>配置小米推送所需的参数，需要和开发者在小米开发者平台创建的应用配置信息保持一致。</span>
+                  </li>
+                </ul>
+              </ng-template>
+            </nz-popover>
+            <span class="android-manage-strengthen">
+              <input
+                nz-input
+                placeholder="小米AppID"
+                [(ngModel)]="appConf.appConfig['xmApp']"
+                class="android-manage-strengthen-one"
+              />
+              <input
+                nz-input
+                placeholder="小米Secret"
+                [(ngModel)]="appConf.appConfig['xmSecret']"
+                class="android-manage-strengthen-one"
+              />
+              <button class="upload-btn android-manage-strengthen-one" (click)="bindAndroid('xm')">
+                绑定
+              </button>
+              <span *ngIf="des && des.xm" [ngClass]="{ success_text: des.tp, error_text: !des.tp }">{{ des.xm }}</span>
+            </span>
+            <p *ngIf="error && error.xm" class="zw-error">{{ error.xm }}</p>
+          </li>
+          <li class="content-one-text-ul-li" style="border-bottom: 0px;position: relative;">
+            <span>华为增强通道</span>
+            <nz-popover [nzPlacement]="'left'">
+              <span class="iconfont icon-help" nz-popover></span>
+              <ng-template #nzTemplate>
+                <ul style="padding-left: 0px; margin-bottom: 0px;">
+                  <li>
+                    <span>配置华为推送所需的参数，需要和开发者在华为开发者平台创建的应用配置信息保持一致。</span>
+                  </li>
+                </ul>
+              </ng-template>
+            </nz-popover>
+            <span class="android-manage-strengthen">
+              <input
+                nz-input
+                placeholder="华为AppID"
+                [(ngModel)]="appConf.appConfig['hwApp']"
+                class="android-manage-strengthen-one"
+              />
+              <input
+                nz-input
+                placeholder="华为Secret"
+                [(ngModel)]="appConf.appConfig['hwSecret']"
+                class="android-manage-strengthen-one"
+              />
+              <button class="upload-btn android-manage-strengthen-one" (click)="bindAndroid('hw')">
+                绑定
+              </button>
+            </span>
+            <p *ngIf="error && error.hw" class="zw-error">{{ error.hw }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-one shadow-content" style="margin-bottom: 0px;">
+      <h3 class="content-one-title module-title">
+        <span class="iconfont icon-ios1"></span>
+        IOS推送配置
+        <span>申请使用苹果官方推送服务<strong>APNS</strong>，将获得的推送服务证书配置在下方</span>
+      </h3>
+      <div class="content-one-text">
+        <ul class="content-one-text-ul">
+          <li class="content-one-text-ul-li" style="position: relative;">
+            <span>IOS 测试证书</span>
+            <nz-popover [nzPlacement]="'left'">
+              <span class="iconfont icon-help" nz-popover></span>
+              <ng-template #nzTemplate>
+                <ul style="padding-left: 0px; margin-bottom: 0px;">
+                  <li>
+                    <span>推送测试服务器使用的证书，通常用于与正式系统隔离来做推送测试。</span>
+                  </li>
+                </ul>
+              </ng-template>
+            </nz-popover>
+            <span
+              class="android-manage-strengthen"
+              *ngIf="!appConf || null == appConf.iosChannelConfig.devExpiryDate || editDevStatus"
+            >
+              <div class="upload-file-box l" style="display: inline-block;margin-left: 20px;">
+                <input
+                  class="upload-file"
+                  type="file"
+                  style="background-color: transparent;"
+                  (change)="selectedTestFile($event)"
+                />
+                <input
+                  class="text text-input"
+                  type="text"
+                  readonly="readonly"
+                  placeholder="请使用.P12格式证书…"
+                  [(ngModel)]="appConf.iosChannelConfig.devFileName"
+                />
+              </div>
+              <li class="l clearfix" style="margin-left:20px;display: inline-block;">
+                <div class="upload-file-box l" style="width:54px;cursor: pointer;">
+                  <input
+                    class="upload-file"
+                    type="file"
+                    style="background-color: transparent;"
+                    (change)="selectedTestFile($event)"
+                  />
+                  <button class="upload-btn">上传</button>
+                </div>
+              </li>
+              <li class="l clearfix" *ngIf="pwdTestShow" style="margin-left:20px;display: inline-block;">
+                <p class="l book">证书密码</p>
+                <input class="no-pass l" type="text" [(ngModel)]="testPwd" placeholder="未设置密码请直接点击确定" />
+                <div class="btn-handel r">
+                  <button class="confirm" (click)="upload(0)">确定</button>
+                  <button class="cancel" (click)="cancel(0)">取消</button>
+                </div>
+              </li>
+            </span>
+            <!-- 更新模式 -->
+            <span
+              class="android-manage-strengthen"
+              *ngIf="appConf && appConf.iosChannelConfig.devExpiryDate && !editDevStatus"
+            >
+              <div class="upload-file-box l" style="display: inline-block;margin-left: 20px;">
+                <input
+                  class="text-input l"
+                  type="text"
+                  readonly="readonly"
+                  [(ngModel)]="appConf.iosChannelConfig.devFileName"
+                />
+              </div>
+              <li class="l clearfix" style="margin-left:20px;display: inline-block;">
+                <div class="upload-file-box l" style="width:54px;cursor: pointer;">
+                  <button class="upload-btn" (click)="update(0)">更新</button>
+                </div>
+              </li>
+              <li class="l clearfix" style="margin-left:20px;display: inline-block;">
+                <p class="l book" style="margin-right: 12px;">失效时间：{{ appConf.iosChannelConfig.devExpiryDate }}</p>
+                <span
+                  class="iconfont icon-success"
+                  *ngIf="appConf.iosChannelConfig.devExpiryDate && !devIsExpiration"
+                ></span>
+                <span
+                  class="iconfont icon-info"
+                  *ngIf="appConf.iosChannelConfig.devExpiryDate && devIsExpiration"
+                ></span>
+              </li>
+            </span>
+            <p *ngIf="devFileFlag" class="zw-error">上传的证书文件格式不正确</p>
+          </li>
+          <li class="content-one-text-ul-li" style="border-bottom: 0px;position: relative;">
+            <span>IOS 生产证书</span>
+            <nz-popover [nzPlacement]="'left'">
+              <span class="iconfont icon-help" nz-popover></span>
+              <ng-template #nzTemplate>
+                <ul style="padding-left: 0px; margin-bottom: 0px;">
+                  <li>
+                    <span>用在已上线产品的正式推送证书。</span>
+                  </li>
+                </ul>
+              </ng-template>
+            </nz-popover>
+            <span
+              class="android-manage-strengthen"
+              *ngIf="!appConf || null == appConf.iosChannelConfig.prodExpiryDate || editProStatus"
+            >
+              <div class="upload-file-box l" style="display: inline-block;margin-left: 20px;">
+                <input
+                  class="upload-file"
+                  type="file"
+                  style="background-color: transparent;"
+                  (change)="selectedProFile($event)"
+                />
+                <input
+                  class="text text-input"
+                  type="text"
+                  readonly="readonly"
+                  placeholder="请使用.P12格式证书…"
+                  [(ngModel)]="appConf.iosChannelConfig.prodFileName"
+                />
+              </div>
+              <li class="l clearfix" style="margin-left:20px;display: inline-block;">
+                <div class="upload-file-box l" style="width:54px;cursor: pointer;">
+                  <input
+                    class="upload-file"
+                    type="file"
+                    style="background-color: transparent;"
+                    (change)="selectedProFile($event)"
+                  />
+                  <button class="upload-btn">上传</button>
+                </div>
+              </li>
+              <li class="l clearfix" *ngIf="pwdProShow" style="margin-left:20px;display: inline-block;">
+                <p class="l book">证书密码</p>
+                <input class="no-pass l" type="text" [(ngModel)]="proPwd" placeholder="未设置密码请直接点击确定" />
+                <div class="btn-handel r">
+                  <button class="confirm" (click)="upload(1)">确定</button>
+                  <button class="cancel" (click)="cancel(1)">取消</button>
+                </div>
+              </li>
+            </span>
+            <!-- 更新模式 -->
+            <span
+              class="android-manage-strengthen"
+              *ngIf="appConf && appConf.iosChannelConfig.prodExpiryDate && !editProStatus"
+            >
+              <div class="upload-file-box l" style="display: inline-block;margin-left: 20px;">
+                <input
+                  class="text-input"
+                  type="text"
+                  readonly
+                  [(ngModel)]="appConf.iosChannelConfig.prodFileName"
+                  readonly="readonly"
+                />
+              </div>
+              <li class="l clearfix" style="margin-left:20px;display: inline-block;">
+                <div class="upload-file-box l" style="width:54px;cursor: pointer;">
+                  <button class="upload-btn" (click)="update(1)">更新</button>
+                </div>
+              </li>
+              <li class="l clearfix" style="margin-left:20px;display: inline-block;">
+                <p class="l book" style="margin-right: 12px;">
+                  失效时间：{{ appConf.iosChannelConfig.prodExpiryDate }}
+                </p>
+                <span
+                  class="iconfont icon-success"
+                  *ngIf="appConf.iosChannelConfig.prodExpiryDate && !prodIsExpiration"
+                ></span>
+                <span
+                  class="iconfont icon-info"
+                  *ngIf="appConf.iosChannelConfig.prodExpiryDate && prodIsExpiration"
+                ></span>
+              </li>
+            </span>
+            <p *ngIf="proFileFlag" class="zw-error">上传的证书文件格式不正确</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</main>

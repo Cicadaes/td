@@ -1,0 +1,99 @@
+<ng-template #report_email>
+    <app-report-email [reportObj]='reportObj'></app-report-email>
+</ng-template>
+
+<ng-template #report_push>
+    <app-report-push [reportObj]='reportObj'></app-report-push>
+</ng-template>
+
+<ng-template #report_sms>
+    <app-report-sms [reportObj]='reportObj'></app-report-sms>
+</ng-template>
+
+<ng-template #report_insights>
+    <app-insights [reportObj]='reportObj' [mktParam]=true (clickExport)="closeModal($event)"></app-insights>
+</ng-template>
+
+<div class="body">
+    <app-tool-bar
+            [pipelineObj]="pipelineObj"
+            [campaignObj]="campaignObj"
+            (showRuleEmitter)="showRule()"
+            (checkPipelineEmitter)="checkPipeline()"
+            (saveDraftEmitter)="saveDraft()"
+            (submitPipelineEmitter)="submitPipeline()"
+            (updatePipeLineEmitter)="updatePipeLine()"
+    ></app-tool-bar>
+    <div class="content">
+        <div [ngClass]="{'left-operator': isOperatorShow, 'hide-left-operator': !isOperatorShow}" (click)="hideDetail()" *ngIf="pcs.isPipelineEdit">
+            <div class="component-name">
+                <span *ngIf="isOperatorShow">组件</span>
+                <a title="收起" class="put-away iconfont icon-arrow_left" aria-hidden="true" (click)="packUp()"></a>
+            </div>
+            <div class="component" *ngIf="isOperatorShow">
+                <div class="node" *ngFor="let item of pipelineComponentArr" draggable="true" (dragstart)="drag($event, item)">
+                    <img [src]="item.icon" alt="">
+                    <label>{{item.name}}</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- 画布 -->
+        <div id="pipeline" [ngClass]="{'alreadySub': false, 'l-content': !isOperatorShow}" (drop)="drop($event)" (dragover)="dragover($event)">
+
+            <!-- 算子tip层 -->
+            <div class="pipeline-message" [ngStyle]="{'display': tipPanelStyleDisplay, 'top': top, 'left': left, 'transform': transformStyle}"
+                 (mouseenter)="mouseenter()" (mouseleave)="mouseleave()">
+                <div class="top-triangle"></div>
+                <div class="top"></div>
+                <div class="bottom">
+                    <span *ngIf="tipDeleteShow" class="delete" (click)="deleteNode()"></span>
+                    <span *ngIf="tipReportShow" class="report" (click)="showReport()"></span>
+                    <span *ngIf="tipDetailShow" class="portrayal" (click)="showPortrayal()"></span>
+                </div>
+            </div>
+
+            <!-- 测试按钮和弹框 -->
+            <app-debug-panel
+                    [pipelineId]="pipelineId"
+                    [isCheck]="isCheck"
+                    [pipelineObj]="pipelineObj"
+                    (getPipelineDetailEmitter)="getPipelineDetail($event)"
+                    (checkPipelineEmitter)="checkPipeline()"
+            ></app-debug-panel>
+
+            <!-- 放大和縮小 -->
+            <div class="pipeline-button">
+                <div class="reset-button">
+                    <nz-tooltip [nzTitle]="'放大'" [nzPlacement]="'left'">
+                        <a class="add question-tip-box" nz-tooltip (click)="addOrigin()"></a>
+                    </nz-tooltip>
+                </div>
+                <div class="reset-button">
+                    <nz-tooltip [nzTitle]="'缩小'" [nzPlacement]="'left'">
+                        <a class="subtract question-tip-box" nz-tooltip (click)="subtractOrigin()"></a>
+                    </nz-tooltip>
+                </div>
+                <div class="reset-button">
+                    <nz-tooltip [nzTitle]="'重置'" [nzPlacement]="'left'">
+                        <a class="reset question-tip-box" nz-tooltip (click)="resetOrigin()"></a>
+                    </nz-tooltip>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="pipe-panel" [ngClass]="{'right': true, 'right_content': (showRightContent && showRightContent != 'end'), 'hidden_right_content': !(showRightContent && showRightContent != 'end'), 'overflow-scroll': overflow, 'overflow-initial': !overflow}">
+            <app-entrance-panel *ngIf="showRightContent === 'entrance'"></app-entrance-panel>
+            <app-crowd-panel *ngIf="showRightContent === 'generate'"></app-crowd-panel>
+            <app-timer-panel *ngIf="showRightContent === 'hourMeter'"></app-timer-panel>
+            <app-filter-panel *ngIf="showRightContent === 'filter'"></app-filter-panel>
+            <app-shunt-panel *ngIf="showRightContent === 'split'"></app-shunt-panel>
+            <app-trigger-panel *ngIf="showRightContent === 'trigger'"></app-trigger-panel>
+            <app-push-panel *ngIf="showRightContent === 'push'"></app-push-panel>
+            <app-edm-panel *ngIf="showRightContent === 'mail'"></app-edm-panel>
+            <app-sms-panel *ngIf="showRightContent === 'shortMessage'"></app-sms-panel>
+            <app-global-rule *ngIf="showRightContent === 'rule'"></app-global-rule>
+        </div>
+    </div>
+</div>

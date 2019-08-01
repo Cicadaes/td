@@ -1,0 +1,152 @@
+<div class="subcontract">
+  <div class="_top">
+    <common-date (dateChange)="dataChange($event)" _date></common-date>
+    <common-select
+      [All]="false"
+      [_name]="'人群筛选器'"
+      (_selctChange)="selectchangge($event)"
+      (selectData)="('')"
+      [dicKey]="'_td_crowd'"
+    >
+    </common-select>
+  </div>
+  <!-- Top10渠道趋势 -->
+  <div class="_channelTrend">
+    <div class="_trendHeader">
+      <span>
+        Top10渠道趋势
+      </span>
+      <nz-popover
+        style="float: right;width:30px"
+        [nzTitle]="'指标说明'"
+        [nzPlacement]="'leftTop'"
+        [nzTrigger]="'hover'"
+      >
+        <span class="icon iconfont icon-info1" nz-popover style="color:rgba(23,35,61,0.55);cursor: pointer;"></span>
+        <ng-template #nzTemplate>
+          <ul class="des-ul">
+            <li class="clrfix" *ngFor="let item of popovers">
+              <label>{{ item.label }}</label>
+              <div class="des">
+                {{ item.conter }}
+              </div>
+            </li>
+          </ul>
+        </ng-template>
+      </nz-popover>
+    </div>
+    <div class="_trendCenterTabs">
+      <nz-tabset [(nzSelectedIndex)]="selectedIndex" (nzSelectChange)="tabsChange(selectedIndex)">
+        <nz-tab *ngFor="let item of tabsLists" [nzTitle]="item.label"> </nz-tab>
+      </nz-tabset>
+    </div>
+    <div class="_trendEcharts">
+      <div class="demo-chart" *ngIf="echartsLoading">
+        <app-loading-and-no-data [isLoading]="load" [isNoData]="!load"></app-loading-and-no-data>
+      </div>
+      <div *ngIf="!echartsLoading" echarts [options]="chartOption" class="demo-chart"></div>
+    </div>
+  </div>
+  <!-- 渠道明细 -->
+  <div class="_channeldetail">
+    <div class="detailHeader">
+      <span class="left">
+        渠道明细
+      </span>
+      <span class="downloadDetails">
+        <nz-popover [nzTitle]="'下载消息'" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+          <span
+            class="icon iconfont icon-download item"
+            style="color:rgba(23,35,61,0.55);cursor: pointer;"
+            (click)="downloadData()"
+            nz-popover
+          ></span>
+          <ng-template #nzTemplate>
+            <div>
+              导出任务创建成功，请稍后到
+              <a (click)="goPage('/download-data')" style="margin:0 10px;">数据下载</a>页面下载您需要的附件。
+            </div>
+          </ng-template>
+        </nz-popover>
+        <nz-popover [nzTitle]="'指标说明'" [nzPlacement]="'leftBottom'" [nzTrigger]="'hover'">
+          <span class="icon iconfont icon-info1" nz-popover style="color:rgba(23,35,61,0.55);cursor: pointer;"></span>
+          <ng-template #nzTemplate>
+            <ul class="des-ul">
+              <li class="clrfix clrfixDetail" *ngFor="let item of details">
+                <label>{{ item.label }}</label>
+                <div class="des desDetail">
+                  {{ item.conter }}
+                </div>
+              </li>
+            </ul>
+          </ng-template>
+        </nz-popover>
+      </span>
+      <!-- <span class="search">
+        <nz-input-group [nzPrefix]="suffixIconSearch" nzSize="small">
+          <input type="text" (keyup.enter)="enterKeyword($event)" nz-input placeholder="输入关键字搜索"
+            [(ngModel)]="_searchText" />
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+          <i nz-icon type="search" style="cursor: pointer;padding-top: 3px" (click)="searchData(_searchText)"></i>
+        </ng-template>
+      </span> -->
+    </div>
+    <div class="_trendEtable">
+      <nz-table
+        #basicTable
+        [nzData]="dataSet"
+        [nzLoading]="loading"
+        [(nzPageSize)]="pageSize"
+        [(nzPageIndex)]="pageIndex"
+        [nzPageSizeOptions]="[10, 20, 50, 100]"
+        nzShowSizeChanger
+        [nzNoResult]="'暂无数据'"
+        [nzFrontPagination]="true"
+        (nzPageIndexChange)="PageChange()"
+        (nzPageSizeChange)="PageChange(true)"
+        nzShowSizeChanger="true"
+      >
+        <thead (nzSortChange)="tableSort($event)" nzSingleSort>
+          <tr>
+            <th *ngFor="let data of tableHeaders" nzShowSort nzSortKey="{{ data.value }}" nzWidth="{{ data.width }}">
+              <span title="{{ data.label }}">{{ data.label }}</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of basicTable.data; let i = index">
+            <td>
+              <a title="{{ data.channel }}" (click)="tableClick(data)">{{ data.channel }}</a>
+            </td>
+            <td>
+              <span title="{{ data.newAdd }}({{ data.newAddPercent }})"
+                >{{ data.newAdd }} ({{ data.newAddPercent }})</span
+              >
+            </td>
+            <td>
+              <span title="{{ data.active }}({{ data.activePercent }})"
+                >{{ data.active }} ({{ data.activePercent }})</span
+              >
+            </td>
+            <td>
+              <span title="{{ data.launchAvg }}">{{ data.launchAvg }}</span>
+            </td>
+            <td>
+              <span title="{{ data.durationAvg }}">{{ data.durationAvg }}</span>
+            </td>
+            <td>
+              <span title="{{ data.durationPer }}">{{ data.durationPer }}</span>
+            </td>
+            <td>
+              <span title="{{ data.total }}({{ data.totalPercent }})">{{ data.total }} ({{ data.totalPercent }})</span>
+            </td>
+            <td>
+              <a (click)="tableClick(data)">详情</a>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</div>

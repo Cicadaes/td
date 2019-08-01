@@ -1,0 +1,67 @@
+<div class="first-level"></div>
+<div class="content shadow-content">
+    <div class="title module-title">
+        导出人群
+    </div>
+    <div class="body">
+        <div class="details">
+            <span>人群名称</span>
+            <span class="data">{{crowd.name}}</span>
+            <span class="left-dist">人群规模</span>
+            <span class="data">{{crowd.crowdCount}}</span>
+        </div>
+        <div class="edit">
+            <div *ngIf="tabList.length == 0" class="no-dataList" >
+                    暂未对用户人群导出进行配置，请在管理-用户配置-用户分群配置-常规配置-人群导出配置中进行配置，如果没权限，请联系管理员。
+            </div>
+            <ul *ngIf="tabList.length" class="nav nav-tabs">
+                <li *ngFor="let title of tabList;let i = index;" [ngClass]="{active: i == tabIndex}">
+                    <a (click)="changeTab(title, i)">{{title}}</a>
+                </li>
+            </ul>
+            <div class="edit-div-content" [ngClass]="{'loading': !!!tabList.length}">
+                <ul class="edit-div-content-list">
+                    <li *ngFor="let item of selectList;let i = index;">
+                        <span>{{item.label}}</span>
+                        <span class="anticon anticon-close" (click)="removeSelect(item, i);"></span>
+                    </li>
+                </ul>
+                <div class="edit-div-content-checklist">
+                    <div *ngIf="attributeMap[tabList[tabIndex]] && attributeMap[tabList[tabIndex]].length > 0">
+                        <label nz-checkbox [(ngModel)]="allChecked" (ngModelChange)="updateAllChecked()" [nzIndeterminate]="indeterminate">
+                            全选
+                        </label>
+                    </div>
+                    <div class="edit-div-content-checklist-check">
+                        <span class="li" *ngFor="let item of attributeMap[tabList[tabIndex]];let i = index;">
+                            <label nz-checkbox [(ngModel)]="item.checked" (ngModelChange)="changeCheckbox(item, i)"
+                                title="{{item.label}}">
+                                {{item.label}}
+                            </label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="error-text"><span *ngIf="error" >请选择要导出的内容</span></div>
+    </div>
+</div>
+<div class="button-wap" *ngIf="tabList.length != 0">
+    <button nz-button nzType="primary" (click)="save();" style="font-size:12px;">保存</button>
+    <button nz-button nzType="default" (click)="cancel();" style="font-size:12px;margin-left: 10px;">取消</button>
+</div>
+<nz-modal  [nzMaskClosable]="false" [(nzVisible)]="_isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent"
+	          [nzFooter]="modalFooter" (nzOnCancel)="handleCancel($event)" [nzWidth]="580">
+		<ng-template #modalTitle>
+			<span>导出用户成功</span>
+		</ng-template>
+		
+		<ng-template #modalContent>
+			导出任务创建成功，请稍后到<a (click)="goPage('/download-data')" style="margin:0 10px;">数据下载</a>页面下载您需要的附件。
+		</ng-template>
+		
+		<ng-template #modalFooter>
+			<button nz-button nzType="primary" (click)="handleOk()">确定</button>
+		
+		</ng-template>
+	</nz-modal>

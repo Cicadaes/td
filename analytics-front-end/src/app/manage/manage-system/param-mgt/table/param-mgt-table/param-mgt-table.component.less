@@ -1,0 +1,138 @@
+.table-custom-title small {
+  color: #666;
+  font-size: 12px;
+  padding-left: 25px;
+  font-weight: 400;
+}
+
+ul.list-inline {
+  padding-left: 16px;
+  li {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    margin-right: 16px;
+    color: #000;
+  }
+}
+
+.description {
+  position: relative;
+  top: 5px;
+  font-size: 15px;
+  line-height: 22px;
+  color: #17233d;
+  opacity: 0.55;
+}
+.description:before {
+  font-family: 'iconfont';
+  content: '\ee16';
+}
+.description:hover {
+  color: #2d8cf0;
+}
+
+.table-description h6 {
+  margin: 12px 0 12px 0;
+  font-size: 14px;
+  line-height: 14px;
+  color: #ffffff;
+}
+
+.table-description dl {
+  position: relative;
+  margin: 0;
+  padding: 8px 0 8px 79px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+.table-description dl:last-child {
+  border-bottom: none;
+}
+
+.table-description dt {
+  position: absolute;
+  left: 0;
+  width: 60px;
+  margin: 0;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: left;
+  color: #ffffff;
+}
+
+.table-description dd {
+  margin: 0;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.content .editable:before {
+  font-family: 'anticon';
+  content: '\e63c';
+}
+
+.content .edit-enter:before {
+  font-family: 'anticon';
+  content: '\e692';
+}
+
+.content .edit-ok:before {
+  font-family: 'anticon';
+  content: '\e630';
+}
+.content .edit-cancel:before {
+  font-family: 'anticon';
+  content: '\e62e';
+}
+
+.content .edit-ok.loading:before {
+  position: relative;
+  display: inline-block;
+  left: 5px;
+  font-size: 12px;
+  line-height: 12px;
+  -webkit-animation: loadingCircle 1s infinite linear;
+  -o-animation: loadingCircle 1s infinite linear;
+  animation: loadingCircle 1s infinite linear;
+}
+
+/* .content .edit-enter, .contentUnEditableDisplayNameTip */
+
+.content .edit-enter,
+.content .editable {
+  position: relative;
+  left: 5px;
+  font-size: 12px;
+  line-height: 12px;
+  color: #808695;
+}
+
+.content .edit-ok {
+  position: relative;
+  left: 5px;
+  font-size: 14px;
+  line-height: 14px;
+  color: #19be6b;
+}
+
+.content .edit-cancel {
+  position: relative;
+  left: 10px;
+  font-size: 14px;
+  line-height: 14px;
+  color: #808695;
+}
+:host /deep/ .content .ant-table input.ant-input {
+  width: 180px;
+  margin-top: -32px;
+  margin-bottom: -32px;
+  font-size: 12px;
+  line-height: 12px;
+  color: #656d7f;
+}
+/deep/ .ant-tooltip {
+  max-width: 387px;
+}

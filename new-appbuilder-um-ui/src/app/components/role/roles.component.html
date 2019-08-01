@@ -1,0 +1,31 @@
+<div class="text-content">
+    <div class="operation-region">
+        <div *ngIf="isSuper" >
+            <h3 class="simulation-table-tit">角色列表</h3>
+            <super-roles-table  [userId] = "userId"></super-roles-table>
+        </div>
+    </div>
+
+    <div  *ngIf="!isSuper" >
+        <div class="table-operator clrfix">
+                <button nz-button [nzType]="'primary'" (click)="showAddRoleModal()">
+                    <span class="anticon anticon-plus"></span><span>角色</span>
+                </button>
+            <add-role-dialog [isShow]="isShowAddRoleModal" [tenantId]="tenantId" [role]="role" (onClose)="hideAddRoleModal($event)" (onSubmit)="onSubmitUserFormData($event)"></add-role-dialog>
+        </div>
+        <div  class="operation-region" style="padding-top: 24px;"> 
+            <div class="ac_right_wap">
+                <div class="ac_right" style="margin-right: 24px;">
+                    <nz-input-group nzSearch [nzSuffix]="suffixIconButton">
+                        <input type="text" nz-input placeholder="请输入名称" (keyup)="onSearch($event, 'keyup')" [(ngModel)]="search">
+                    </nz-input-group>
+                    <ng-template #suffixIconButton>
+                        <i class="anticon anticon-search" (click)="onSearch(search, 'click')"></i>
+                    </ng-template>    
+                </div>
+            </div>
+            <tenant-roles-table [tenantId]="tenantId" [queryParams]="roleSearch" [userId]="userId" [reload]="isReloadUserTable"></tenant-roles-table>
+        </div>
+    </div>        
+</div>
+

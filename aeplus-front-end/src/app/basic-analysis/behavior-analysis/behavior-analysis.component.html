@@ -1,0 +1,259 @@
+<main [ngStyle]="_containerStyle">
+    <div class="first-level"></div>
+    <div class="header-content" id="filter-header">
+        <!-- 搜索条件 -->
+        <div class="search-list">
+            <div class="search-list-fitst search-list-one" style="border-bottom: 1px dashed #DEDFE3;">
+                <nz-range-picker class="item" [(ngModel)]="dateRange" (ngModelChange)="timeChange($event)"
+                                 nzPlaceHolder=""
+                                 [nzDisabledDate]="disabledDate"
+                                 [nzAllowClear]="false" [nzStyle]="{'width': '240px'}">
+                </nz-range-picker>
+                <div class="item search-list-fitst-left-one search-list-fitst-left-bg">事件类型</div>
+                <div class="item search-list-fitst-left-one">
+                    <nz-select style="width: 180px;" [(ngModel)]="selecteEventType"
+                               (nzScrollToBottom)="getEventTypeList()"
+                               (ngModelChange)="eventTypeChange($event)"
+                               nzShowSearch nzPlaceHolder="请选择">
+                        <nz-option *ngFor="let item of eventTypeList" [nzValue]="item.id"
+                                   [nzLabel]="item.dicItemValue" nzCustomContent>
+                            <div title="{{item.dicItemValue}}">{{item.dicItemValue}}</div>
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div class="search-list-fitst search-list-one"
+                 [ngClass]="{'search-list-fitst': true, 'search-list-one': true, 'borderBottom': moreSearchFlag}">
+                <div class="search-list-fitst-left">
+                    <div class="item search-list-fitst-left-one search-list-fitst-left-bg"
+                         style="width: 64px;text-align: center;">触发
+                    </div>
+                    <div class="item search-list-fitst-left-one">
+                        <nz-select style="width: 180px;" (ngModelChange)="search($event, 'event')"
+                                   [(ngModel)]="selectedEvent" (nzOnSearch)="onSearchEvent($event)"
+                                   (nzScrollToBottom)="getEventList()" [nzServerSearch]="true" nzShowSearch
+                                   nzPlaceHolder="请选择">
+                            <nz-option *ngFor="let item of eventList" nzCustomContent [nzValue]="item.value"
+                                       [nzLabel]="item.name">
+                                <div title="{{item.name}}">
+                                    <span *ngIf="item.smartEvent" class="icon iconfont icon-shijian"></span>{{item.name}}
+                                </div>
+                            </nz-option>
+                        </nz-select>
+                    </div>
+                    <div class="item search-list-fitst-left-one search-list-fitst-left-bg">的</div>
+                    <div class="item search-list-fitst-left-one">
+                        <nz-select style="width: 180px;" (ngModelChange)="search($event, 'metric')"
+                                   [(ngModel)]="selectedMetric" nzShowSearch nzPlaceHolder="请选择">
+                            <nz-option *ngFor="let item of metricList" [nzValue]="item.value"
+                                       [nzLabel]="item.name" nzCustomContent>
+                                <div title="{{item.name}}">{{item.name}}</div>
+                            </nz-option>
+                        </nz-select>
+                    </div>
+                    <div class="item search-list-fitst-left-one search-list-fitst-left-bg">按</div>
+                    <div class="item search-list-fitst-left-one">
+                        <nz-select style="width: 180px;" (ngModelChange)="search($event, 'dimension')"
+                                   [(ngModel)]="selectedDimension" nzShowSearch
+                                   nzPlaceHolder="请选择">
+                            <nz-option-group *ngFor="let group of dimensionList" [nzLabel]="group.key">
+                                <nz-option *ngFor="let item of group.value" [nzValue]="item.esfieldname"
+                                           [nzLabel]="item.displayname" nzCustomContent>
+                                    <div title="{{item.displayname}}">{{item.displayname}}</div>
+                                </nz-option>
+                            </nz-option-group>
+                        </nz-select>
+                    </div>
+                    <div class="item search-list-fitst-left-one search-list-fitst-left-bg">分析</div>
+                </div>
+                <div class="search-list-fitst-right" (click)='moreSearch();' *ngIf="leftList.length >  0">
+                    <span>筛选</span>
+                    <span class="anticon" [class.anticon-down]="!moreSearchFlag"
+                          [class.anticon-up]="moreSearchFlag"></span>
+                </div>
+            </div>
+            <ng-container *ngFor="let item of moreSearchList;let i = index">
+                <div class="search-list-other" style="position: relative;" *ngIf="moreSearchFlag">
+                    <div class="search-list-other-left">
+                        <div *ngIf="i === 0" class="item search-list-fitst-left-one search-list-fitst-left-bg"
+                             style="width: 64px;text-align: center;">用户
+                        </div>
+                        <div *ngIf="i !== 0" class="item search-list-other-left-one">
+                            <nz-select style="width: 64px;" [(ngModel)]="item.clauses" nzShowSearch nzPlaceHolder="请选择">
+                                <nz-option *ngFor="let item of clausesList" [nzValue]="item.value"
+                                           [nzLabel]="item.label" nzCustomContent>
+                                    <div title="{{item.label}}">{{item.label}}</div>
+                                </nz-option>
+                            </nz-select>
+                        </div>
+                        <div *ngIf="i !== 0" class="line"></div>
+                        <div class="item search-list-other-left-one">
+                            <nz-select style="width: 180px;" (ngModelChange)="changeEvent($event, i, item)"
+                                       [(ngModel)]="item.filter" nzShowSearch nzPlaceHolder="请选择">
+                                <nz-option-group *ngFor="let temp of leftList" [nzLabel]="temp.key">
+                                    <nz-option *ngFor="let item of temp.value" [nzValue]="item"
+                                               [nzLabel]="item.displayname" nzCustomContent>
+                                        <div title="{{item.displayname}}">{{item.displayname}}</div>
+                                    </nz-option>
+                                </nz-option-group>
+                            </nz-select>
+                        </div>
+                        <div class="item search-list-other-left-one">
+                            <nz-select *ngIf="item.filter && filterMap[item.filter.esfieldname] === 'Tag'"
+                                       style="width: 95px;" [(ngModel)]="item.operator"
+                                       nzShowSearch nzPlaceHolder="请选择">
+                                <nz-option nzValue="eq" nzLabel="等于"></nz-option>
+                                <nz-option nzValue="ne" nzLabel="不等于"></nz-option>
+                            </nz-select>
+                            <nz-select *ngIf="item.filter && filterMap[item.filter.esfieldname] === 'String'"
+                                       style="width: 95px;" [(ngModel)]="item.operator"
+                                       nzShowSearch nzPlaceHolder="请选择">
+                                <nz-option nzValue="eq" nzLabel="等于"></nz-option>
+                                <nz-option nzValue="ne" nzLabel="不等于"></nz-option>
+                                <nz-option nzValue="like" nzLabel="包含"></nz-option>
+                                <nz-option nzValue="notlike" nzLabel="不包含"></nz-option>
+                            </nz-select>
+                            <nz-select
+                                    *ngIf="item.filter && filterMap[item.filter.esfieldname] !== 'Tag' && filterMap[item.filter.esfieldname] !== 'String'"
+                                    style="width: 95px;" [(ngModel)]="item.operator" nzShowSearch nzPlaceHolder="请选择">
+                                <nz-option nzValue="eq" nzLabel="等于"></nz-option>
+                                <nz-option nzValue="ne" nzLabel="不等于"></nz-option>
+                                <nz-option nzValue="gt" nzLabel="大于"></nz-option>
+                                <nz-option nzValue="ge" nzLabel="大于等于"></nz-option>
+                                <nz-option nzValue="lt" nzLabel="小于"></nz-option>
+                                <nz-option nzValue="le" nzLabel="小于等于"></nz-option>
+                                <nz-option nzValue="range" nzLabel="区间"></nz-option>
+                            </nz-select>
+                        </div>
+                        <div class="item search-list-other-left-one">
+                            <nz-select (nzScrollToBottom)="loadMore(i, item)"
+                                       *ngIf="item.filter && filterMap[item.filter.esfieldname] === 'Tag'"
+                                       style="width: 222px;"
+                                       [(ngModel)]="item.values" nzShowSearch nzPlaceHolder="请选择" nzMode="multiple"
+                                       (nzOnSearch)="onSearchEventAttr($event, i, item)" [nzServerSearch]="true">
+                                <nz-option *ngFor="let item of item.rightList" [nzValue]="item.value"
+                                           [nzLabel]="item.name" nzCustomContent>
+                                    <div title="{{item.name}}">{{item.name}}</div>
+                                </nz-option>
+                            </nz-select>
+                            <nz-input-number (ngModelChange)="formatterInputNumber($event,item);" [nzMin]="0"
+                                             [nzMax]="9999999999"
+                                             *ngIf="item.filter && filterMap[item.filter.esfieldname] !== 'Tag' && filterMap[item.filter.esfieldname] !== 'Date' && filterMap[item.filter.esfieldname] !== 'String' && item.operator !== 'range'"
+                                             nzPlaceHolder="请输入" [(ngModel)]="item.values"></nz-input-number>
+                            <nz-input-number (ngModelChange)="formatterInputNumber($event,item);" [nzMin]="0"
+                                             [nzMax]="9999999999"
+                                             *ngIf="item.filter && filterMap[item.filter.esfieldname] !== 'Tag' && filterMap[item.filter.esfieldname] !== 'Date' && filterMap[item.filter.esfieldname] !== 'String' && item.operator === 'range'"
+                                             class="range" nzPlaceHolder="请输入"
+                                             [(ngModel)]="item.first"></nz-input-number>
+                            <span *ngIf="item.filter && filterMap[item.filter.esfieldname] !== 'Tag' && filterMap[item.filter.esfieldname] !== 'Date' && filterMap[item.filter.esfieldname] !== 'String' && item.operator === 'range'">~</span>
+                            <nz-input-number (ngModelChange)="formatterInputNumber($event,item);" [nzMin]="0"
+                                             [nzMax]="9999999999"
+                                             *ngIf="item.filter && filterMap[item.filter.esfieldname] !== 'Tag' && filterMap[item.filter.esfieldname] !== 'Date' && filterMap[item.filter.esfieldname] !== 'String' && item.operator === 'range'"
+                                             class="range" nzPlaceHolder="请输入"
+                                             [(ngModel)]="item.second"></nz-input-number>
+                            <nz-date-picker
+                                    *ngIf="item.filter && filterMap[item.filter.esfieldname] === 'Date' && item.operator !== 'range'"
+                                    nzPlaceHolder="请选择日期"
+                                    [(ngModel)]="item.value"></nz-date-picker>
+                            <nz-range-picker
+                                    *ngIf="item.filter && filterMap[item.filter.esfieldname] === 'Date' && item.operator === 'range'"
+                                    nzPlaceHolder=""
+                                    [(ngModel)]="item.values"></nz-range-picker>
+                            <input maxlength="128"
+                                   *ngIf="item.filter && filterMap[item.filter.esfieldname] === 'String'"
+                                   nz-input placeholder="请输入"
+                                   [(ngModel)]="item.values" autocomplete="false">
+                        </div>
+                        <button *ngIf="i > 0" (click)="removeItem(i)" nz-button nzType="default" nzShape="circle"
+                                class="crowd-btn-close" style="float: right;">
+                            <span class="anticon anticon-close"></span>
+                        </button>
+                    </div>
+                </div>
+            </ng-container>
+            <div class="search-list-other" style="overflow: hidden;" *ngIf="moreSearchFlag">
+                <div class="add-button">
+                    <a (click)="add()">
+                        <span class="iconfont icon-add1"></span>筛选条件
+                    </a>
+                </div>
+                <div class="search-button">
+                    <button nz-button (click)="search()">查询</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="_isQueringData && eventMap[selectedEvent]" class="loading">
+        <nz-spin></nz-spin>
+    </div>
+    <div *ngIf="!eventMap[selectedEvent]" class="loading">
+        暂无数据
+    </div>
+    <article class="content-div" [ngClass]="{'hide':_isQueringData || !eventMap[selectedEvent]}">
+        <!-- 图标 -->
+        <div class="chart-list shadow-content">
+            <h3 class="chart-list-title module-title">{{eventMap[selectedEvent]}}的{{metricMap[selectedMetric]}}</h3>
+            <div style="height:290px; padding:0 16px 16px 16px;">
+                <app-chart [option]='chartOption' *ngIf="(!_isQueringData || !eventMap[selectedEvent]) && !_seriesData"></app-chart>
+                <div *ngIf="_seriesData " class="loading">
+                    暂无数据
+                </div>
+            </div>
+        </div>
+        <!-- 数据明细列表 -->
+        <div class="detail-data shadow-content">
+            <div class="detail-data-tit module-title">
+                <h4>明细数据</h4>
+                <div class="detail-data-left">
+                    <nz-popover [nzTitle]="'下载消息'" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+                        <span class="icon iconfont icon-download item" (click)="downloadData();" nz-popover></span>
+                        <ng-template #nzTemplate>
+                            <div>
+                                导出任务创建成功，请稍后到
+                                <a (click)="goPage('/download-data')" style="margin:0 10px;">数据下载</a>页面下载您需要的附件。
+                            </div>
+                        </ng-template>
+                    </nz-popover>
+                    <!-- 描述 -->
+                    <nz-popover [nzTitle]="'指标说明'" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+                        <span class="icon iconfont icon-info1 item" nz-popover></span>
+                        <ng-template #nzTemplate>
+                            <ul class="des-ul">
+                                <li class="clrfix" *ngIf="selectedMetric == 1">
+                                    <label>人数：</label>
+                                    <div class="des">日期范围内达成某事件的注册用户数。</div>
+                                </li>
+                                <li class="clrfix" *ngIf="selectedMetric == 2">
+                                    <label>次数：</label>
+                                    <div class="des">日期范围内某事件的发生次数。</div>
+                                </li>
+                                <li class="clrfix" *ngIf="selectedMetric == 3">
+                                    <label>人均次数：</label>
+                                    <div class="des">平均每人触发指定事件的次数。人均事件数=次数/人数。
+                                    </div>
+                                </li>
+                            </ul>
+                        </ng-template>
+                    </nz-popover>
+                </div>
+            </div>
+            <nz-table #nzTable [nzData]="detailData" [nzLoading]='detailDataTableLoading' nzShowSizeChanger
+                      [(nzPageIndex)]="_current"
+                      [(nzPageSize)]="_pageSize" [nzPageSizeOptions]="pageSizeOptions" [(nzTotal)]='_total'>
+                <thead nz-thead>
+                <tr>
+                    <th nz-th *ngFor="let item of tableTitleList">{{item}}</th>
+                </tr>
+                </thead>
+                <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let item of nzTable.data">
+                    <td nz-td *ngFor="let temp of item;let tdIndex = index;">
+                        <div *ngIf="tdIndex != 1">{{temp}}</div>
+                        <div *ngIf="tdIndex == 1">{{temp | numberToThousandsPipe}}</div>
+                    </td>
+                </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </article>
+</main>

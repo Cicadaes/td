@@ -1,0 +1,26 @@
+::ng-deep .zw-radio-wap {
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+    border: 1px solid #d9d9d9;
+    position: relative;
+    text-align: center;
+    line-height: 13px;
+    cursor: pointer;
+}
+
+::ng-deep .zw-radio-wap p {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 100%;
+    background: #1890ff;
+}
+
+::ng-deep .zw-radio-wap-bg {
+    border: 1px solid #1890ff;
+}
+
+::ng-deep .zw-radio-wap:hover {
+    border: 1px solid #1890ff;
+}

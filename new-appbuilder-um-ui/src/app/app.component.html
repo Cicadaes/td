@@ -1,0 +1,22 @@
+<nz-layout>
+    <ng-container *ngIf="this.appConfig && this.appConfig.rolecode">
+      <nz-sider [nzTrigger]="showTrigger" nzCollapsible [(nzCollapsed)]="isCollapsed" class="sider-menu">
+          <logo [menuCollapsed]="isCollapsed" [logo]="appLogo"></logo>
+          <menu [menuCollapsed]="isCollapsed" [firstUrl]="firstUrl" style="padding:0;"></menu>
+      </nz-sider>
+      <nz-sider nzCollapsible [nzTrigger]="null" *ngIf="isShowInnerMenu" class="sider-inner-menu">
+          <inner-menu [id]="tenantId" class="inner-menu"></inner-menu>
+      </nz-sider>
+    </ng-container>
+    <nz-layout>
+        <top (menuCollapsed)="menuCollapsed($event);"></top>
+        <nz-content>
+            <div #containersss class="containers containers-shadow" [ngStyle]="containerStyle">
+                <router-outlet></router-outlet>
+            </div>
+        </nz-content>
+        <!--<nz-footer style="text-align: center;">Talkingdata</nz-footer>-->
+    </nz-layout>
+</nz-layout>
+
+<div *ngIf="this.appConfig && !this.appConfig.rolecode" class="noPermission">当前用户无权限访问</div>

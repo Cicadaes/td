@@ -1,0 +1,152 @@
+<main>
+  <form class="custom-form" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event, validateForm.value)">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>属性名称</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <input
+          nz-input
+          formControlName="displayname"
+          placeholder="请输入属性名称"
+          maxlength="32"
+          (keyup)="keyupInputValue($event, 'displayname')"
+          (blur)="changeInputValue($event, 'displayname')"
+        />
+        <div class="custom-form-explain clrfix">
+          <nz-form-explain *ngIf="validateForm.get('displayname').dirty && validateForm.get('displayname').errors">
+            <ng-container *ngIf="validateForm.get('displayname').hasError('required')">
+              请输入属性名称
+            </ng-container>
+          </nz-form-explain>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>属性编码</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <input
+          *ngIf="!_data.id"
+          nz-input
+          formControlName="esfieldname"
+          placeholder="请输入属性编码"
+          maxlength="32"
+          (keyup)="keyupInputValue($event, 'esfieldname')"
+          (blur)="changeInputValue($event, 'esfieldname')"
+        />
+        <span *ngIf="_data.id">{{ _data.column }}</span>
+        <div class="custom-form-explain clrfix">
+          <nz-form-explain
+            *ngIf="
+              !_data.id &&
+              ((validateForm.get('esfieldname').dirty && validateForm.get('esfieldname').errors) ||
+                validateForm.get('esfieldname').pending)
+            "
+          >
+            <ng-container *ngIf="validateForm.get('esfieldname').hasError('required')">
+              请输入属性编码
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('esfieldname').hasError('rule')">
+              属性编码只能是字母，数字和下划线
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('esfieldname').hasError('duplicated')">
+              属性编码已经存在
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('esfieldname').pending">
+              <!-- 验证中...-->
+            </ng-container>
+          </nz-form-explain>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>属性类型</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <nz-select
+          *ngIf="!_data.id"
+          style="width: 100%;"
+          formControlName="displayType"
+          [nzSize]="'default'"
+          (ngModelChange)="searchChangeDisplayType($event)"
+          nzPlaceHolder="请选择"
+          nzShowSearch
+        >
+          <nz-option
+            *ngFor="let option of _displayTypeOptions"
+            [nzLabel]="option.label"
+            [nzValue]="option.value"
+          ></nz-option>
+        </nz-select>
+        <span *ngIf="_data.id">{{ _data.displayType | attributeTypePipe }}</span>
+        <div class="custom-form-explain clrfix">
+          <nz-form-explain
+            *ngIf="
+              (validateForm.get('displayType').dirty && validateForm.get('displayType').errors) ||
+              validateForm.get('displayType').pending
+            "
+          >
+            <ng-container *ngIf="validateForm.get('displayType').hasError('required')">
+              请选择属性类型
+            </ng-container>
+          </nz-form-explain>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>所属分组</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <nz-select
+          *ngIf="!_data.id"
+          style="width: 100%;"
+          nzPlaceHolder="请选择"
+          formControlName="groupid"
+          [nzSize]="'default'"
+          nzShowSearch
+        >
+          <nz-option *ngFor="let option of _groupOptions" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+        </nz-select>
+        <span *ngIf="_data.id">{{ _data.groupName }}</span>
+        <div class="custom-form-explain clrfix">
+          <nz-form-explain
+            *ngIf="
+              (validateForm.get('groupid').dirty && validateForm.get('groupid').errors) ||
+              validateForm.get('groupid').pending
+            "
+          >
+            <ng-container *ngIf="validateForm.get('groupid').hasError('required')">
+              请选择所属分组
+            </ng-container>
+          </nz-form-explain>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>显示顺序</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <nz-input-number
+          formControlName="sorting"
+          nzPlaceHolder="请输入显示顺序"
+          (keyup)="keyupInputValue($event, 'sorting')"
+          [nzMin]="0"
+          [nzMax]="9999"
+          [nzStep]="1"
+          [nzPrecision]="0"
+        ></nz-input-number>
+        <div class="custom-form-explain clrfix">
+          <nz-form-explain
+            *ngIf="
+              (validateForm.get('sorting').dirty && validateForm.get('sorting').errors) ||
+              validateForm.get('sorting').pending
+            "
+          >
+            <ng-container *ngIf="validateForm.get('sorting').hasError('required')">
+              请输入显示顺序
+            </ng-container>
+          </nz-form-explain>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</main>

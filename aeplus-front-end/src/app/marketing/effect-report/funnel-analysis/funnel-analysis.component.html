@@ -1,0 +1,153 @@
+<main>
+
+    <nz-modal [(nzVisible)]="isVisible" nzMaskClosable="false" [nzTitle]="modalTitle" nzWidth="722" [nzContent]="modalContent"
+        (nzOnOk)="saveFunnelStep()" (nzOnCancel)="handleCancel()">
+        <ng-template #modalContent>
+            <app-add-funnel *ngIf="isVisible"></app-add-funnel>
+        </ng-template>
+    </nz-modal>
+
+    <div class="header shadow-content" *ngIf="showTrendCharts">
+        <nz-select style="width: 254px;" nzShowSearch [(ngModel)]="selectedFunnelId" (ngModelChange)="changeFunnel($event)">
+            <nz-option nzCustomContent *ngFor="let option of funnelList;let i = index;" [nzLabel]="option.funnelName" [nzValue]="option.id">
+                <p class="item-name">{{option.funnelName}}</p>
+                <div style="float: right;" [ngStyle]="{'color': option.defaultFlag? '#2D8CF0': 'rgba(23,35,61,0.25)' }">
+                    <!-- 设置默认 -->
+                    <span class="iconfont icon-star" (click)="setDefaultFunnel(option, $event)"></span>
+                </div>
+                <div class="funnel-oprator" style="float: right; color: rgba(23,35,61,0.55);">
+                    <!-- 修改、删除 -->
+                    <span class="iconfont icon-mode_edit" (click)="editFunnel(option, $event)"></span>
+                    <span class="iconfont icon-delete" (click)="deleteFunnel(option, $event)"></span>
+                </div>
+            </nz-option>
+        </nz-select>
+        <span class="oprator" (click)="addFunnel()">新建漏斗</span>
+        <div class="select-crowd">
+            <button nz-button nzType="default" (click)="showCrowdDialog()">请选择细分人群</button>
+
+            <div class="select-crowd-content" [ngStyle]="{'display': showSelectCrowd}">
+                <div class="header">
+                    选择细分人群
+                    <div class="cancel-choice" (click)="cancelChoice()">
+                        重置
+                    </div>
+                </div>
+                <div class="content">
+                    <nz-input-group style="width: 184px" nzSize="small" nzSuffixIcon="anticon anticon-search">
+                        <input type="text" [(ngModel)]="searchCrowdName" (keyup)="fliterGenerateCrowd()" nz-input placeholder="输入关键字搜索">
+                    </nz-input-group>
+                    <p>最多可选择
+                        <span>2</span>个人群</p>
+                    <div class="pannel" nz-row nzGutter="16">
+                        <div *ngFor="let crowd of generateCrowdList" nz-col nzSpan="8">
+                            <div class="crowd-item" [ngClass]="{'active': crowd.checked}" (click)="checkGenerateCrowd(crowd)">
+                                {{crowd.refName}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-handel">
+                    <button nz-button nzType="default" (click)="closeCrowdDialog()">取消</button>
+                    <button nz-button style="margin-left: 8px;" (click)="saveGenerateCrowd()" nzType="primary">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="body" *ngIf="showTrendCharts">
+        <div class="view-left shadow-content">
+            <div class="funnel-view-title">
+                <h3>转化概览</h3>
+            </div>
+            <div class="clearfix">
+                <div class="section">
+                    <span class="title">起始设备数</span>
+                    <p>
+                        <span *ngFor="let view of transOverview; let i = index;">
+                            <span [ngClass]="{'section-title': i == 1}" [ngStyle]="{'color':view.color}">{{view.startDeviceCount && view.startDeviceCount.toLocaleString() || 0}}</span>
+                        </span>
+                    </p>
+                </div>
+                <div class="section">
+                    <span class="title">终点设备数</span>
+                    <p>
+                        <span *ngFor="let view of transOverview; let i = index;">
+                            <span [ngClass]="{'section-title': i == 1}" [ngStyle]="{'color':view.color}">{{view.endDeviceCount && view.endDeviceCount.toLocaleString() || 0}}</span>
+                        </span>
+                    </p>
+                </div>
+                <div class="section">
+                    <span class="title">整体转化率</span>
+                    <p>
+                        <span *ngFor="let view of transOverview; let i = index;">
+                            <span [ngClass]="{'section-title': i == 1}" [ngStyle]="{'color':view.color}">{{view.wholeConvertRate && view.wholeConvertRate.toLocaleString()}}</span>
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <!--漏斗图-->
+            <div class="charts-box">
+                <app-chart [option]="funnelChart"></app-chart>
+            </div>
+        </div>
+
+        <div class="view-right">
+            <!-- 转化率趋势图 -->
+            <div class="view-chart shadow-content">
+                <div class="title">
+                    <span>转化率趋势图</span>
+                    <nz-radio-group class="date-filter" [(ngModel)]="stepGranularity" (ngModelChange)="changeStepGranularity($event)">
+                        <label nz-radio-button nzValue="day">日</label>
+                        <label nz-radio-button nzValue="week">周</label>
+                        <label nz-radio-button nzValue="month">月</label>
+                    </nz-radio-group>
+                </div>
+                <div class="step-filter">
+                    <span>第</span>
+                    <nz-select style="width: 58px; margin: 0 8px;" [(ngModel)]="selectedStep1" (ngModelChange)="changeTrendStep($event)">
+                        <nz-option *ngFor="let option of step1" [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
+                    </nz-select>
+                    <span>到第</span>
+                    <nz-select style="width: 58px; margin: 0 8px;" [(ngModel)]="selectedStep2" (ngModelChange)="changeTrendStep($event)">
+                        <nz-option *ngFor="let option of step2" [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
+                    </nz-select>
+                    <span>步转化趋势</span>
+                </div>
+                <div id="lineID" style="height: 252px; width: 100%">
+                    <app-chart [option]="stepChart"></app-chart>
+                </div>
+            </div>
+
+            <!--终点事件累计完成趋势图-->
+            <div class="view-chart shadow-content">
+                <div class="title">
+                    <span>终点事件累计完成趋势图</span>
+                    <nz-radio-group class="date-filter" [(ngModel)]="lastGranularity" (ngModelChange)="changeLastGranularity($event)">
+                        <label nz-radio-button nzValue="day">日</label>
+                        <label nz-radio-button nzValue="week">周</label>
+                        <label nz-radio-button nzValue="month">月</label>
+                    </nz-radio-group>
+                </div>
+                <div id="barID" style="height: 252px; width: 100%">
+                    <app-chart [option]="lastChart"></app-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!showTrendCharts" class="no-data">
+        <div class="pic-box">
+            <img src="/aeplus/assets/images/unit-add.png" alt=""/>
+        </div>
+        <div class="funnel-add-btn-box">
+            <div class="new-build-btn" (click)="addFunnel()">
+                <span class="iconfont icon-add1"></span>
+                <span>新建漏斗</span>
+            </div>
+            <div style="clear: both;"></div>
+            <p>您还未新建任何漏斗，请添加！</p>
+        </div>
+    </div>
+
+</main>

@@ -1,0 +1,10 @@
+<manage-role></manage-role>
+<div class="table-operator-bottom" style="padding: 0px;box-shadow: 0 1px 4px 0 rgba(23,35,61,0.10);">
+    <user-group-auth-table #userTable (onChecked)="setCheckedItem($event)" [_tenantId]="tenantId" [_targetId]="targetId" [queryParams]="userGroup"
+        ></user-group-auth-table>
+    
+</div>
+
+    <button nz-button [nzType]="'primary'" [nzSize]="'large'" class="leftFR" (click)="userEdit()">
+        <span>确定</span>
+    </button>

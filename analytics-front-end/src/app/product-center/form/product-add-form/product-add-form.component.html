@@ -1,0 +1,172 @@
+<main>
+  <form class="custom-form" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event, validateForm.value)">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8" nzRequired>产品名称</nz-form-label>
+      <nz-form-control [nzSpan]="15">
+        <input
+          nz-input
+          formControlName="productname"
+          placeholder="请输入产品名称"
+          maxlength="64"
+          (keyup)="keyupInputValue($event, 'productname')"
+          (blur)="changeInputValue($event, 'productname')"
+        />
+        <div class="custom-form-explain clrfix">
+          <nz-form-explain
+            *ngIf="
+              (validateForm.get('productname').dirty && validateForm.get('productname').errors) ||
+              validateForm.get('productname').pending
+            "
+          >
+            <ng-container *ngIf="validateForm.get('productname').hasError('required')">
+              请输入产品名称
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('productname').hasError('duplicated')">
+              产品名称已经存在
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('productname').pending">
+              <!--验证中...-->
+            </ng-container>
+          </nz-form-explain>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item *ngIf="isAutoMNP">
+      <nz-form-label [nzSpan]="8"
+        >App ID（小程序ID）
+
+        <nz-popover [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+          <span class="icon iconfont icon-info1 item" nz-popover></span>
+          <ng-template #nzTemplate>
+            <ul class="des-ul">
+              <li class="clrfix">
+                您的产品若已集成小程序SDK，请务必输入微信分配您的小程序唯一ID，以方便您创建小程序二维码，否则请忽略。
+              </li>
+            </ul>
+          </ng-template>
+        </nz-popover>
+      </nz-form-label>
+      <nz-form-control [nzSpan]="15" [ngClass]="{ 'has-error': _miniprogramAppidError.isError }">
+        <input nz-input type="text" [disabled]="disabled" style="opacity: 0" class="hide-input" />
+        <input nz-input type="password" [disabled]="disabled" style="opacity: 0" class="hide-input" />
+        <input
+          nz-input
+          formControlName="miniprogramAppid"
+          placeholder="微信分配的小程序唯一ID"
+          maxlength="100"
+          autocomplete="off"
+          (keyup)="keyupInputValue($event, 'miniprogramAppid')"
+        />
+        <div class="custom-form-explain clrfix">
+          <nz-form-explain *ngIf="validateForm.get('miniprogramAppid').dirty && _miniprogramAppidError.isError">
+            <ng-container *ngIf="_miniprogramAppidError.isError">
+              {{ _miniprogramAppidError.errorMsg }}
+            </ng-container>
+          </nz-form-explain>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item *ngIf="isAutoMNP">
+      <nz-form-label [nzSpan]="8"
+        >App Secret（小程序密钥）
+
+        <nz-popover [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+          <span class="icon iconfont icon-info1 item" nz-popover></span>
+          <ng-template #nzTemplate>
+            <ul class="des-ul">
+              <li class="clrfix">
+                1. 您的产品若已集成小程序SDK，请务必输入微信分配您的小程序密钥，否则请忽略。
+              </li>
+              <li class="clrfix">
+                2.
+                如果密钥更改请务必在产品中心及时修改更新，否则获取不到OpenID造成数据丢失，也将导致您无法创建小程序二维码，修改完成后请到小程序二维码管理中创建二维码做个验证。
+              </li>
+              <li class="clrfix">
+                ＊请谨慎修改密钥。
+              </li>
+            </ul>
+          </ng-template>
+        </nz-popover>
+      </nz-form-label>
+      <nz-form-control [nzSpan]="15" [ngClass]="{ 'has-error': _miniprogramSecretError.isError }">
+        <nz-input-group nzSearch [nzSuffix]="suffixIconButton">
+          <input
+            *ngIf="!_isShowPwd"
+            nz-input
+            formControlName="miniprogramSecret"
+            placeholder="微信分配的小程序Secret"
+            autocomplete="new-password"
+            maxlength="100"
+            (keyup)="keyupInputValue($event, 'miniprogramSecret')"
+          />
+          <input
+            *ngIf="_isShowPwd"
+            nz-input
+            type="password"
+            formControlName="miniprogramSecret"
+            autocomplete="new-password"
+            placeholder="微信分配的小程序Secret"
+            maxlength="100"
+            (keyup)="keyupInputValue($event, 'miniprogramSecret')"
+          />
+        </nz-input-group>
+        <ng-template #suffixIconButton>
+          <span
+            *ngIf="!_isShowPwd"
+            style="margin-right:5px;"
+            class="icon iconfont icon-visibility"
+            (click)="_showHidePwd()"
+          ></span>
+          <span
+            *ngIf="_isShowPwd"
+            style="margin-right:5px;"
+            class="icon iconfont icon-visibility_off"
+            (click)="_showHidePwd()"
+          ></span>
+        </ng-template>
+
+        <div class="custom-form-explain clrfix">
+          <nz-form-explain *ngIf="validateForm.get('miniprogramSecret').dirty && _miniprogramSecretError.isError">
+            <ng-container *ngIf="_miniprogramSecretError.isError">
+              {{ _miniprogramSecretError.errorMsg }}
+            </ng-container>
+          </nz-form-explain>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8">产品描述</nz-form-label>
+      <nz-form-control [nzSpan]="15">
+        <textarea
+          formControlName="desc"
+          nz-input
+          rows="4"
+          placeholder="请输入产品描述"
+          maxlength="200"
+          (keyup)="keyupInputValue($event, 'desc')"
+        ></textarea>
+        <div class="custom-form-explain clrfix">
+          <nz-form-explain *ngIf="validateForm.get('desc').dirty && validateForm.get('desc').hasError('required')">
+            请输入产品描述
+          </nz-form-explain>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8">数据补偿策略</nz-form-label>
+      <nz-form-control [nzSpan]="15">
+        <nz-radio-group formControlName="iscompensate" [(ngModel)]="_iscompensate">
+          <label nz-radio nzValue="1" class="radio-label">补偿至数据发生时间</label>
+          <label nz-radio nzValue="2" class="radio-label">补偿至数据收集时间</label>
+        </nz-radio-group>
+        <div class="c2">
+          (补偿策略不会影响到数据总值，总数一致只是计入日期不同。)
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</main>

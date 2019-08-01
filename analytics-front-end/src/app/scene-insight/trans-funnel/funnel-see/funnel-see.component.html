@@ -1,0 +1,106 @@
+<div class="first-level"></div>
+<div class="info header-content">
+  <!-- 筛选 -->
+  <div class="filter clrfix">
+    <div style="float:left;line-height: 32px;">日期：</div>
+    <span class="input ">
+      <nz-range-picker
+        class="date-range"
+        [(ngModel)]="vm.filter.date"
+        [nzFormat]="_dateFormat"
+        [nzDisabledDate]="_disabledDate"
+        (ngModelChange)="handlerFilter()"
+        nzPlaceHolder=""
+        [nzAllowClear]="false"
+        [nzStyle]="{ width: '240px' }"
+      >
+      </nz-range-picker>
+    </span>
+    <span class="button">
+      <a [class.true]="vm.filter.advanced" (click)="handlerFilterAdvanced()" class="advanced">
+        <span *ngIf="!vm.filter.advanced">{{ nls.filterButtonAdvanced }}</span>
+        <span *ngIf="vm.filter.advanced">{{ nls.filterButtonColAdvanced }}</span>
+        <span
+          class="ant-compat anticon"
+          [class.anticon-down]="!vm.filter.advanced"
+          [class.anticon-up]="vm.filter.advanced"
+        ></span>
+      </a>
+    </span>
+  </div>
+
+  <!-- 筛选（高级） -->
+  <div *ngIf="vm.filter.advanced" class="filter-advanced">
+    <span class="label">{{ nls.filterLabel }}</span>
+
+    <!-- 属性 -->
+    <span class="input prop">
+      <nz-select nzShowSearch [(ngModel)]="vm.filter.propValue" (ngModelChange)="handlerFilterPropChange()">
+        <nz-option-group *ngFor="let optgroup of vm.filter.propSelect" [nzLabel]="optgroup.label">
+          <nz-option *ngFor="let option of optgroup.value" [nzValue]="option" [nzLabel]="option.label" nzCustomContent>
+            <div title="{{ option.label }}">{{ option.label }}</div>
+          </nz-option>
+        </nz-option-group>
+      </nz-select>
+    </span>
+
+    <!-- 运算符 -->
+    <span class="input operator">
+      <nz-select nzShowSearch [(ngModel)]="vm.filter.propOperatorValue">
+        <nz-option
+          *ngFor="let option of vm.filter.propOperatorSelect"
+          [nzValue]="option.value"
+          [nzLabel]="option.label"
+          nzCustomContent
+        >
+          <div title="{{ option.label }}">{{ option.label }}</div>
+        </nz-option>
+      </nz-select>
+    </span>
+
+    <!-- 值 -->
+    <span class="input value" style="max-width: 500px;min-width:200px;">
+      <app-select-search-multiple
+        [select]="_selectEventMultiple"
+        class="item"
+        (onSelect)="onSelectEventMultiple($event)"
+      ></app-select-search-multiple>
+    </span>
+
+    <!-- 按钮 -->
+    <span class="button">
+      <button nz-button (click)="handlerFilter()" nzType="primary">{{ nls.filterButtonLookUp }}</button>
+    </span>
+  </div>
+</div>
+
+<!-- 详情 -->
+<div class="info-chart shadow-content">
+  <!-- 页眉 -->
+  <div class="header module-title">
+    <h5 title="{{ nls.header }}">{{ nls.header }}</h5>
+    <nz-popover [nzTitle]="'指标说明'" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+      <span class="icon iconfont icon-info1 item" nz-popover></span>
+      <ng-template #nzTemplate>
+        <ul class="des-ul">
+          <li class="clrfix">
+            <label>累计转化率：</label>
+            <div class="des">（第N步的人数/第一步的人数）*100%。</div>
+          </li>
+          <li class="clrfix">
+            <label>步骤间的转化率：</label>
+            <div class="des">（第N+1步的人数/第N步的人数）*100%。</div>
+          </li>
+        </ul>
+      </ng-template>
+    </nz-popover>
+  </div>
+
+  <!-- 图表 -->
+  <div class="chart">
+    <app-chart [option]="vm.chart.option" *ngIf="!vm.chart.loading"></app-chart>
+    <div *ngIf="vm.chart.loading" class="loading">
+      <nz-spin></nz-spin>
+    </div>
+  </div>
+</div>

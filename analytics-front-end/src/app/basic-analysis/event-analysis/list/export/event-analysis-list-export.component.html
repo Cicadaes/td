@@ -1,0 +1,129 @@
+<main>
+  <nz-modal
+    [nzMaskClosable]="false"
+    [(nzVisible)]="_isVisible"
+    [nzTitle]="modalTitle"
+    [nzContent]="modalContent"
+    [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel()"
+    [nzWidth]="modelWidth"
+    class="export"
+  >
+    <ng-template #modalTitle>
+      <span>导出</span>
+    </ng-template>
+
+    <ng-template #modalContent>
+      <div class="form-content" nz-row nzGutter="16">
+        <div class="form-item" nz-col nzSpan="24">
+          <label class="label-control">报表名称</label>
+          <input
+            class="input-control"
+            nz-input
+            placeholder="请输入报表名称"
+            [(ngModel)]="exportParams.name"
+            maxlength="128"
+          />
+        </div>
+        <div class="form-item" nz-col nzSpan="24">
+          <label class="label-control">时间范围</label>
+          <div class="input-control">{{ exportParams.startDate }}<span>~</span>{{ exportParams.endDate }}</div>
+        </div>
+        <div class="form-item" nz-col nzSpan="24">
+          <label class="label-control">数据范围</label>
+          <nz-select
+            class="input-control search-dropdown"
+            nzShowSearch
+            nzPlaceHolder=""
+            [(ngModel)]="exportParams.exportScope"
+            (ngModelChange)="eventChange($event)"
+          >
+            <nz-option *ngFor="let item of sourceList" [nzLabel]="item.value" [nzValue]="item.key"></nz-option>
+          </nz-select>
+        </div>
+        <div class="form-item" nz-col nzSpan="24" *ngIf="exportParams.exportScope == 'event'">
+          <label class="label-control" style="width:150px">是否一同导出标签数据？</label>
+          <div class="input-control" style="width:120px">
+            <nz-radio-group [(ngModel)]="exportParams.label">
+              <label nz-radio nzValue="1">是</label>
+              <label nz-radio nzValue="0">否</label>
+            </nz-radio-group>
+          </div>
+        </div>
+      </div>
+      <div class="rows-content border-top" nz-row *ngIf="exportParams.exportScope == 'event'">
+        <div class="left border-right" nz-col nzSpan="12">
+          <b>事件列表</b>
+          <app-fast-search
+            class="item"
+            (onSearch)="_onSearch($event)"
+            [placeHolder]="'请输入事件名称'"
+          ></app-fast-search>
+        </div>
+        <div class="right" nz-col nzSpan="12">
+          <b
+            >最多可选1000个，已选<span style="color:#096dd9;">{{ selectedList.length }}</span
+            >个</b
+          >
+          <a class="item" (click)="deleteAll()">清空</a>
+        </div>
+      </div>
+      <div class="rows-content border-top ver-line" nz-row *ngIf="exportParams.exportScope == 'event'">
+        <div class="table" nz-col nzSpan="12">
+          <nz-table
+            #ajaxTable
+            [nzFrontPagination]="false"
+            [nzData]="eventDataList"
+            [nzLoading]="loading"
+            [nzShowPagination]="false"
+            [nzSize]="small"
+            [nzScroll]="{ y: '284px' }"
+          >
+            <thead>
+              <tr>
+                <th
+                  nzShowCheckbox
+                  [(nzChecked)]="allChecked"
+                  [nzIndeterminate]="indeterminate"
+                  (nzCheckedChange)="checkAll($event)"
+                ></th>
+                <th>事件名称</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of ajaxTable.data; let i = index">
+                <td
+                  nzShowCheckbox
+                  [(nzChecked)]="data.checked"
+                  [nzDisabled]="data.disabled"
+                  (nzCheckedChange)="refreshStatus(i)"
+                ></td>
+                <td title="{{ data.eventName }}">{{ data.eventName }}</td>
+              </tr>
+            </tbody>
+          </nz-table>
+          <!-- <nz-spin nzSimple *ngIf="_loadingMore"></nz-spin> -->
+          <!-- <a (click)="(loadingMore)" *ngIf="!_loadingMore && eventDataList.length > 0">加载更多</a> -->
+        </div>
+        <div nz-col nzSpan="12">
+          <div class="right bg-hui"><b>已选事件</b></div>
+          <div class="right border-top selected-warp">
+            <ul class="selected-list">
+              <li *ngFor="let data of selectedList; let i = index">
+                <div title="{{ data.eventName }}">{{ data.eventName }}</div>
+                <div class="btn-close" (click)="delete(data, i)">
+                  <span class="ant-compat anticon anticon-close"></span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template #modalFooter>
+      <button nz-button nzType="default" (click)="handleCancel()">取消</button>
+      <button nz-button nzType="primary" (click)="handleOk()" [nzLoading]="_isConfirmLoading">导出</button>
+    </ng-template>
+  </nz-modal>
+</main>

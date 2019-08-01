@@ -1,0 +1,89 @@
+.carousel-app-empty{
+    text-align: center;
+    padding:50px 0;
+}
+.carousel-app-manage{
+    background: #f1f2f4;
+}
+.carousel-app-manage .tree-panel{
+
+}
+.carousel-operator{
+    padding:10px;
+}
+.carousel-operator .title{
+    float: left;
+    font-size:14px;
+}
+.carousel-operator .operator{
+    float:right;
+}
+
+.carousel-panel{
+    position: relative;
+    overflow: auto;
+    background: #fff;
+    float: left;
+    max-height:500px;
+}
+.carousel-ul{
+    border:1px solid #e7e9eb;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+.carousel-ul li{
+    cursor: pointer;
+}
+.carousel-ul li .app-box{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 26px;
+}
+.carousel-ul li.operator{
+    padding:0;
+}
+.carousel-ul li.operator i.anticon-plus-square-o{
+    font-size: 40px;
+    color: #999;
+    cursor: pointer;
+}
+.carousel-ul li.operator:hover,
+.carousel-ul li.operator:hover i.anticon-plus-square-o{
+    color: #666;
+}
+.carousel-ul li.item{
+    border-bottom: 1px solid #e7e9eb;
+}
+.carousel-ul li.item:last-child{
+    border-bottom: none;
+}
+.carousel-ul li.item:hover{
+    background: #eee;
+}
+.carousel-ul li.item.active,.carousel-ul li.item.active:hover{
+    background: #f3f8fe;
+}
+.carousel-ul li.item .logo img{
+    width:20px;
+    height:20px;
+    vertical-align: top;
+    margin-top: 3px;
+}
+.carousel-ul li.item .name{
+}
+
+.carousel-col{
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+    width: 90px;
+}
+.tooltip-operator{
+
+}
+.tooltip-operator a{
+    margin:0 10px;
+    color:#fff;
+}

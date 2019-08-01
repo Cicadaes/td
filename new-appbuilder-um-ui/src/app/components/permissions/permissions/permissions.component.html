@@ -1,0 +1,55 @@
+<div class="text-content">
+    <div>
+        <div class="table-operator clrfix">
+            <button nz-button [nzType]="'primary'" [nzSize]="'default'" (click)="showAddDataObjModal()">
+                <span class="anticon anticon-plus"></span><span>数据对象</span>
+            </button>
+        </div>
+        <div class="operation-region">
+            <tenant-permissions-table [tenantId]="tenantId" [queryParams]=" permissionsearch" [userId]="userId"
+                [reload]="isReloadUserTable" (toEditorDataObj)="showAddDataObjModal($event)"></tenant-permissions-table>
+        </div>
+    </div>
+    <nz-modal [(nzVisible)]="isShowModal" nzMaskClosable="false" [nzTitle]="modalTitle" nzWidth="344" [nzContent]="modalContent"
+        (nzOnOk)="modalSubmit($event)" (nzOnCancel)="handleCancel()">
+        <ng-template #modalContent>
+            <div class="form-item">
+                <div class="item">
+                    <span class="require">* </span><label>对象名称</label>
+                    <input nz-input style="width:300px;" placeholder="给数据对象起个名字" [(ngModel)]="objInfo.name"
+                        (ngModelChange)="changeName($event)">
+                    <div *ngIf="errorInfo.nameError" class="alert">
+                        {{errorInfo.nameErrorInfo}}
+                    </div>
+                </div>
+                <div class="item">
+                    <span class="require">* </span><label>对象编码</label>
+                    <input nz-input style="width:300px;" placeholder="全局唯一" [(ngModel)]="objInfo.code"
+                        (ngModelChange)="changeCode($event)">
+                    <div *ngIf="errorInfo.codeError" class="alert">
+                        {{errorInfo.codeErrorInfo}}
+                    </div>
+                </div>
+                <div class="item">
+                    <label>对象实例调用接口</label>
+                    <input nz-input style="width:300px;" placeholder="请输入获取对象实例列表的接口URL地址" [(ngModel)]="objInfo.restUrl"
+                        (ngModelChange)="changeUrl($event)">
+                    <div *ngIf="errorInfo.urlError" class="alert">
+                        {{errorInfo.urlErrorInfo}}
+                    </div>
+                </div>
+                <div class="item">
+                    <label style="vertical-align: top;">对象描述</label>
+                    <!-- <input nz-input style="width:300px;" placeholder="请输入数据对象的业务简介" [(ngModel)]="objInfo.description"> -->
+                    <!-- (ngModelChange)="changeDescription($event)"> -->
+                    <textarea style="width:300px; height: 75px;" nz-input [(ngModel)]="objInfo.description" placeholder="请输入数据对象的业务简介" (ngModelChange)="changeDescription($event)">
+                     <!-- (ngModelChange)="changeDescription($event)"> -->
+                    </textarea>
+                    <div *ngIf="errorInfo.descriptionError" class="alert">
+                        {{errorInfo.descriptionErrorInfo}}
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </nz-modal>
+</div>

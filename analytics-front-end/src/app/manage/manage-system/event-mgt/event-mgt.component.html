@@ -1,0 +1,237 @@
+<ng-template #eventPropModal>
+  <app-event-mgt-prop-modal
+    [_productId]="productId"
+    [_data]="vm.content.dataByEventPropModal"
+  ></app-event-mgt-prop-modal>
+</ng-template>
+
+<ng-template #eventImportModal>
+  <app-event-mgt-import-modal [_productId]="productId"></app-event-mgt-import-modal>
+</ng-template>
+
+<div class="eventMgt shadow-content">
+  <!-- 页眉 -->
+  <div class="header module-title">{{ nls.header }}</div>
+
+  <!-- 页眉菜单 -->
+  <div class="header-menu">
+    <!-- 描述 -->
+    <nz-tooltip [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+      <a nz-tooltip class="description"></a>
+      <ng-template #nzTemplate>
+        <div class="manageEventMgt_headerMenuDescription">
+          <h6>{{ nls.headerMenuDescriptionTitle }}</h6>
+          <dl>
+            <dt>{{ nls.headerMenuDescription1 }}</dt>
+            <dd>{{ nls.headerMenuDescription2 }}</dd>
+          </dl>
+          <dl>
+            <dt>{{ nls.headerMenuDescription3 }}</dt>
+            <dd>{{ nls.headerMenuDescription4 }}</dd>
+          </dl>
+          <dl>
+            <dt>{{ nls.headerMenuDescription5 }}</dt>
+            <dd>{{ nls.headerMenuDescription6 }}</dd>
+          </dl>
+        </div>
+      </ng-template>
+    </nz-tooltip>
+
+    <!-- 更多 -->
+    <nz-dropdown [nzPlacement]="'bottomRight'">
+      <a nz-dropdown class="more"></a>
+      <ul nz-menu class="manageEventMgt_headerMenuMore">
+        <li nz-menu-item>
+          <a (click)="handlerShowModal_eventImport(eventImportModal)">{{ nls.headerMenuMore1 }}</a>
+        </li>
+        <li nz-menu-item>
+          <a (mousedown)="handlerEventExport()" [attr.href]="vm.content.dataByEventExport" target="_blank">{{
+            nls.headerMenuMore2
+          }}</a>
+        </li>
+      </ul>
+    </nz-dropdown>
+  </div>
+
+  <!-- 搜索（高级） -->
+  <div *ngIf="vm.search.advanced" class="search-advanced">
+    <!-- 事件名称 -->
+    <div class="term">
+      {{ nls.searchEventName }}
+      <input nz-input [(ngModel)]="vm.search.eventNameValue" [attr.placeholder]="nls.searchEventNamePlaceholder" />
+    </div>
+
+    <!-- 事件类型 -->
+    <div [class.loading]="vm.search.eventSelectLoading" class="term">
+      {{ nls.searchEventType }}
+      <nz-select
+        [(ngModel)]="vm.search.eventTypeValue"
+        [nzPlaceHolder]="nls.searchEventTypePlaceholder"
+        (ngModelChange)="handlerSearchEventType(false)"
+      >
+        <nz-option
+          *ngFor="let option of vm.search.eventTypeSelect"
+          [nzValue]="option.value"
+          [nzLabel]="option.label"
+        ></nz-option>
+      </nz-select>
+    </div>
+
+    <!-- App 版本 -->
+    <div
+      *ngIf="
+        vm.search.appVersionSelect.length &&
+        (vm.search.eventTypeValue == 'App代码事件' || vm.search.eventTypeValue == 'App灵动事件')
+      "
+      class="term"
+    >
+      {{ nls.searchAppVersion }}
+      <nz-select [(ngModel)]="vm.search.appVersionValue" [nzPlaceHolder]="nls.searchAppVersionPlaceholder">
+        <nz-option
+          *ngFor="let option of vm.search.appVersionSelect"
+          [nzValue]="option.value"
+          [nzLabel]="option.label"
+        ></nz-option>
+      </nz-select>
+    </div>
+
+    <!-- 小程序事件 -->
+    <div *ngIf="vm.search.miniProgramSelect.length && vm.search.eventTypeValue == '小程序事件'" class="term">
+      <!--{{nls.searchMiniProgram}}-->
+      <nz-select [(ngModel)]="vm.search.miniProgramValue" [nzPlaceHolder]="nls.searchMiniProgramPlaceholder">
+        <nz-option
+          *ngFor="let option of vm.search.miniProgramSelect"
+          [nzValue]="option.value"
+          [nzLabel]="option.label"
+        ></nz-option>
+      </nz-select>
+    </div>
+
+    <!-- 按钮 -->
+    <div class="button">
+      <button nz-button nzType="primary" (click)="handlerSearch($event)">
+        {{ nls.searchQuery }}
+      </button>
+    </div>
+  </div>
+
+  <!-- 内容 -->
+  <div class="content">
+    <nz-table
+      #contentTable
+      [nzLoading]="vm.content.loading"
+      [nzData]="vm.content.data"
+      [nzFrontPagination]="false"
+      [nzShowPagination]="false"
+    >
+      <thead>
+        <tr>
+          <th nzWidth="360px">
+            {{ nls.contentSourceName }}
+          </th>
+          <th>
+            {{ nls.contentDisplayName }}
+          </th>
+          <th nzWidth="200px">
+            {{ nls.contentRegisterDate }}
+          </th>
+          <th nzWidth="100px">
+            {{ nls.contentOperation }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of contentTable.data">
+          <!-- 事件名 -->
+          <td>
+            <a (click)="handlerShowModal_eventProp(data, eventPropModal)" class="anchor sourceName">{{
+              data.sourceName
+            }}</a>
+          </td>
+
+          <!-- 显示名（不可编辑） -->
+          <td *ngIf="!data.editableDisplayName">
+            {{ data.displayName || '--' }}
+            <nz-tooltip [nzPlacement]="'right'" [nzTrigger]="'click'" *ngIf="data.lingDongFlag">
+              <a nz-tooltip class="editable"></a>
+              <ng-template #nzTemplate>
+                <div class="manageEventMgt_contentUnEditableDisplayNameTip">
+                  {{ nls.contentUnEditableDisplayNameTip }}
+                </div>
+              </ng-template>
+            </nz-tooltip>
+          </td>
+
+          <!-- 显示名（可编辑） -->
+          <td *ngIf="data.editableDisplayName && !data._displayName">
+            {{ data.displayName || '--'
+            }}<a
+              (click)="handlerContent_displayNameEdit(data)"
+              *ngIf="vm.search.eventTypeValue != '小程序事件'"
+              class="edit-enter"
+            ></a>
+          </td>
+
+          <!-- 显示名（编辑） -->
+          <td *ngIf="data.editableDisplayName && data._displayName">
+            <input
+              nz-input
+              [(ngModel)]="data._displayName.value"
+              [disabled]="data._displayName.loading"
+              nzSize="default"
+              maxlength="32"
+            />
+            <a
+              [class.loading]="data._displayName.loading"
+              (click)="handlerContent_displayNameEdit(data, true)"
+              class="edit-ok"
+            ></a>
+            <a
+              *ngIf="!data._displayName.loading"
+              (click)="handlerContent_displayNameEdit(data, false)"
+              class="edit-cancel"
+            ></a>
+          </td>
+
+          <!-- 登记日期 -->
+          <td>
+            {{ data.registerDate }}
+          </td>
+
+          <!-- 操作 -->
+          <td>
+            <div class="table-custom-bar">
+              <a (click)="handlerShowModal_eventProp(data, eventPropModal)" class="anchor sourceName">{{
+                nls.contentLookUp
+              }}</a>
+              <a
+                [class.loading]="data?._status?.loading"
+                (click)="handlerContent_discontinuation(data)"
+                class="anchor discontinuation"
+                >{{ nls.contentDiscontinuation }}</a
+              >
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+
+    <!-- 分页 -->
+    <nz-pagination
+      nzShowSizeChanger
+      [nzTotal]="vm.content.total"
+      [nzPageIndex]="vm.content.pageIndex"
+      [nzPageSize]="vm.content.pageSize"
+      [nzPageSizeOptions]="vm.content.pageSizeOption"
+      (nzPageIndexChange)="handlerContent_pageIndex($event)"
+      (nzPageSizeChange)="handlerContent_pageSize($event)"
+      *ngIf="vm.content.total > 0"
+    ></nz-pagination>
+  </div>
+</div>
+
+<!-- 已停用事件 -->
+<app-event-mgt-discontinuation
+  ($recoveryUse)="handlerContent_refresh()"
+  class="shadow-content"
+></app-event-mgt-discontinuation>

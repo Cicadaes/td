@@ -1,0 +1,36 @@
+<div class="content-div">
+    <button *ngIf="!editFlag" nz-button nzType="primary" nzSize="default" (click)="edit()">修改</button>
+    <ng-container *ngIf="editFlag" >
+        <button nz-button nzType="primary" nzSize="default" (click)="save()">保存</button>
+        <button nz-button nzType="default" nzSize="default" (click)="cancel()" style="margin-left: 10px;">取消</button>
+    </ng-container>
+
+
+    <div class="content-div-table">
+        <div class="content-div-table-step1 content-div-table-step">
+            <span class="li">步骤一：归因模型选择</span>
+            <span class="li" *ngFor="let item of stepAll">
+                <div class="first-div">
+                    <label nz-checkbox [(ngModel)]="item.checked" [nzDisabled]="!editFlag" (ngModelChange)="checkOne(item)">{{item.name}}</label>
+                </div>
+                <div class="last-div" title="{{item.desc}}">{{item.desc}}</div>
+            </span>
+        </div>
+        <div class="content-div-table-step3 content-div-table-step">
+            <div class="ali-center">
+                <div class="fk"></div>
+                <div class="sj"></div>
+            </div>
+
+        </div>
+        <div class="content-div-table-step2 content-div-table-step">
+            <span class="li">步骤二：模型优先级配置</span>
+            <div class="step-two-wap" *ngIf="stepList.length > 0" (drop)="drop($event)" (dragover)="allowDrop($event)">
+                <p *ngFor="let item of stepList; let i = index" draggable="true" (dragstart)="drag($event, item, i)">{{i + 1}}.
+                    <span>{{item.name}}</span>
+                </p>
+            </div>
+            <div class="step-two-wap" *ngIf="stepList.length < 1" style="line-height: 198px; text-align: center;">暂无数据</div>
+        </div>
+    </div>
+</div>

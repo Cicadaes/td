@@ -1,0 +1,26 @@
+<main>
+	<div class="form-item">
+		<div class="item">
+			<span class="require">* </span><label>操作名称</label>
+			<input nz-input style="width:300px;" placeholder="请输入操作名称" [(ngModel)]="operateInfo.name" (ngModelChange)="changeName($event)">
+			<div *ngIf="errorInfo.nameError" class="alert">
+				{{errorInfo.nameErrorInfo}}
+			</div>
+		</div>
+		<div class="item">
+			<span class="require">* </span><label>操作编码</label>
+			<input nz-input style="width:300px;" placeholder="请输入操作编码，对象内唯一" [(ngModel)]="operateInfo.code" (ngModelChange)="changeCode($event)">
+			<div *ngIf="errorInfo.codeError" class="alert">
+				{{errorInfo.codeErrorInfo}}
+			</div>
+		</div>
+		<div class="item">
+			<label style="vertical-align: top;">操作描述</label>
+			<!-- <input nz-input style="width:300px;" placeholder="请输入操作描述" [(ngModel)]="operateInfo.description" (ngModelChange)="changePhone($event)"> -->
+			<textarea style="width:300px; height: 75px;" nz-input [(ngModel)]="operateInfo.description" placeholder="请输入操作描述" (ngModelChange)="changeDescription($event)"></textarea>
+			<div *ngIf="errorInfo.descriptionError" class="alert">
+				{{errorInfo.descriptionErrorInfo}}
+			</div>
+		</div>
+	</div>
+</main>

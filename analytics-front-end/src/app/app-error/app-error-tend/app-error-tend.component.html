@@ -1,0 +1,13 @@
+<h3 class="title">错误趋势</h3>
+<div class="chart">
+  <nz-tabset>
+    <nz-tab nzTitle="{{ item.label }}" *ngFor="let item of tabList" (nzClick)="changeTab(item)">
+      <div class="chart-one">
+        <div *ngIf="!loading && !flag">
+          <div echarts [options]="chartOption" class="chart-wap"></div>
+        </div>
+        <app-loading-and-no-data [isLoading]="loading" [isNoData]="flag"></app-loading-and-no-data>
+      </div>
+    </nz-tab>
+  </nz-tabset>
+</div>

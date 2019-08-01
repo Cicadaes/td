@@ -1,0 +1,114 @@
+<main>
+  <!-- 预警规则信息 -->
+  <div class="form-div">
+    <div class="title">预警规则信息</div>
+    <div class="form-item">
+      <div class="item">
+        <label>预警类型</label>
+        <nz-select style="width: 316px;" nzShowSearch nzPlaceHolder="请选择预警类型" [(ngModel)]="earlyInfo.type">
+          <nz-option nzLabel="业务指标" nzValue="business"></nz-option>
+          <nz-option nzLabel="营销预警" nzValue="mkt"></nz-option>
+        </nz-select>
+        <div *ngIf="errorInfo.industryError" class="alert">
+          {{ errorInfo.industryErrorInfo }}
+        </div>
+      </div>
+      <div class="item">
+        <label>规则名称<span class="require">*</span></label>
+        <input nz-input style="width:316px;" placeholder="请输入规则名称" [(ngModel)]="earlyInfo.name" />
+        <div *ngIf="errorInfo.nameError" class="alert">
+          {{ errorInfo.nameErrorInfo }}
+        </div>
+      </div>
+      <div class="item">
+        <label style="vertical-align: top;">规则描述</label>
+        <textarea style="width:316px; height: 75px;" nz-input [(ngModel)]="earlyInfo.description"></textarea>
+        <div *ngIf="errorInfo.descriptionError" class="alert">
+          {{ errorInfo.descriptionErrorInfo }}
+        </div>
+      </div>
+      <div class="item">
+        <label>运行时间</label>
+        <nz-range-picker [nzStyle]="{ width: '316px' }"></nz-range-picker>
+      </div>
+    </div>
+  </div>
+
+  <!-- 规则定义 -->
+  <!-- 业务指标 -->
+  <app-business-rule-definition *ngIf="earlyInfo.type === 'business'"></app-business-rule-definition>
+  <!-- 营销预警 -->
+  <app-mkt-rule-definition *ngIf="earlyInfo.type === 'mkt'"></app-mkt-rule-definition>
+
+  <!-- 告警信息 -->
+  <div>
+    <!-- 告警通知 -->
+    <div class="warning-div">
+      <div class="title">
+        告警接收人
+        <label class="right-info">
+          <nz-select style="width: 170px;" nzSize="small" nzPlaceHolder="输入用户组/用户进行添加">
+            <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+            <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+            <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+          </nz-select>
+        </label>
+      </div>
+      <div class="form-item">
+        <div class="table-body">
+          <nz-table #userTable nzShowPagination="false" [nzData]="[]">
+            <thead>
+              <tr>
+                <th style="min-width:100px;">用户组/用户</th>
+                <th style="min-width:100px;">短信和邮件通知</th>
+                <th style="min-width:100px;">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of userTable.data">
+                <td>
+                  <div class="item-td" style="max-width: 200px;" [title]="data.name">
+                    {{ data.name }}
+                  </div>
+                </td>
+                <td>
+                  <div class="item-td" style="max-width: 200px;" [title]="data.dependentName">
+                    {{ data.dependentName }}
+                  </div>
+                </td>
+                <td>
+                  <a (click)="editorInstanceOperate(data)">移除</a>
+                </td>
+              </tr>
+            </tbody>
+          </nz-table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 告警内容 -->
+    <div class="warning-div">
+      <div class="title">
+        告警内容
+        <label class="right-info">
+          <input nz-input style="width: 40px; margin: 0 8px;" nzSize="small" />小时内不重复告警
+        </label>
+      </div>
+      <div class="warning-body">
+        告警类型:业务指标<br />
+        规则名称:用户综合留存预警<br />
+        告警时间:2018-07-30 13:52:32<br />
+        表达式:A 并且 B 并且 C<br />
+        表达式详细:<br />
+        A: 用户次日留存率 平均值≤30% 当前值:28.70% 结果: 告警<br />
+        B: 用户三日留存率 平均值≤ 20% 当前值:19.21% 结果: 告警<br />
+        C: 用户七日留存率 平均值≤ 8% 当前值:7.56% 结果: 告警<br />
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="button-div">
+  <button nz-button nzType="primary">保存</button>
+  <button nz-button nzType="default">取消</button>
+</div>

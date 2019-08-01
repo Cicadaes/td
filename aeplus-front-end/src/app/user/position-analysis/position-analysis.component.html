@@ -1,0 +1,65 @@
+<div class="first-level"></div>
+<div>
+    <div id="map-main" class="map-main" style="width: 100%;;height:660px; position: relative; background: #FFF; min-width: 700px; min-height: 500px;">
+
+        <!-- 1.左上角工具条 -->
+        <app-control-panel [chinaClick]="chinaClick" (dataChange)="onDataChange($event)" class="map-toolbox" style="top: 20px; left: 20px;"></app-control-panel>
+
+        <!-- 2.右上角搜索 -->
+        <div class="map-toolbox" style="right: 20px; top: 20px;">
+            <button [ngClass]="{hide: searchShow}" (click)="searchShow = !searchShow" nz-button nzType="default" nzShape="circle" style="font-size: 14px;">
+                <span class="anticon anticon-search"></span>
+            </button>
+
+            <div [ngClass]="{hide: !searchShow}" class="searchBox">
+        <span (click)="searchShow = !searchShow" style="cursor: pointer;">
+          <span class="anticon anticon-search"></span>
+        </span>
+                <nz-select style="width: 160px;" nzShowSearch nzAllowClear nzPlaceHolder="请输入关键字搜索" [(ngModel)]="searchName" (ngModelChange)="selectHit($event)">
+                    <nz-option *ngFor="let item of curNameList" nzValue="{{item}}" nzLabel="{{item}}"></nz-option>
+                </nz-select>
+            </div>
+
+        </div>
+
+        <!-- 3.左下角列表 -->
+        <div class="map-toolbox" style="bottom: 20px; left: 20px;
+    background: #fff;
+    padding: 15px 30px 15px 15px;
+    border-radius: 5px;
+    box-shadow: 0 1px 0 #ddd;
+    width: 290px;
+">
+            <div style="text-align: center; height: 32px; line-height: 32px;">
+                <span style="font-weight: bolder; font-size: 14px; color: #17233D;">Top10来源{{zoomName == 'world' ? '国家': '省份'}}排名</span>
+                <button (click)="topShow = !topShow" nz-button nzType="default" nzShape="circle" style="float: right;" class="btn-no-border">
+                    <span *ngIf="topShow" class="iconfont icon-unfold_less"></span>
+                    <span *ngIf="!topShow" class="iconfont icon-unfold_more"></span>
+                </button>
+            </div>
+            <div [ngClass]="{hide: !topShow || curTop10List.length == 0}" style="padding-top: 10px;" class="pro-content top-text">
+                <div *ngFor="let item of curTop10List; let i = index" class="pro-item">
+                    <span style="padding: 5px; float: left; width: 30px; height: 32px; text-align: right;">{{i + 1}}</span>
+                    <span style="padding: 5px; float: left; width: 70px; height: 32px;" class="text-over" title="{{item.name}}">{{item.name}}</span>
+                    <div style="width: 140px; float: left; height: 32px; padding: 3px 0 3px 5px;">
+                        <nz-progress [nzPercent]="item.rate" nzSize="small" nzShowInfo="false"></nz-progress>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4.右下角缩放 -->
+        <div *ngIf="zoomName == 'world'" class="map-toolbox" style="bottom: 40px; right: 10px;">
+            <button (click)="zoomWorld(1)" nz-button nzType="default" [nzSize]="'small'" [disabled]="worldZoom >= worldZoomMax" style="padding: 0 5px;">
+                <span class="anticon anticon-plus"></span>
+            </button>
+            <br/>
+            <button (click)="zoomWorld(-1)" nz-button nzType="default" [nzSize]="'small'" [disabled]="worldZoom <= worldZoomMin" style="padding: 0 5px;">
+                <span class="anticon anticon-minus"></span>
+            </button>
+        </div>
+
+        <div id="world-map" [ngClass]="{hide: zoomName == 'china'}" class="map-content" style="width: 100%;height:calc(100% - 0px);"></div>
+        <div id="china-map" [ngClass]="{hide: zoomName == 'world'}" class="map-content" style="width: 100%;height:calc(100% - 0px);"></div>
+    </div>
+</div>

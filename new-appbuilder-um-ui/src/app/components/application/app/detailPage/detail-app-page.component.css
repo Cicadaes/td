@@ -1,0 +1,68 @@
+.label_font{
+    font-weight:bold;
+}
+
+:host ::ng-deep .special_label {
+  text-align: left;
+  width: 70px !important;
+}
+
+:host  ::ng-deep .top {
+  background: #fff;
+  padding-bottom:10px;
+}
+
+:host  ::ng-deep .top-tit {
+  height: 47px;
+  line-height: 47px;
+  border-bottom: 1px solid #e9e9e9;
+  padding: 0px 24px;
+}
+
+:host ::ng-deep .ant-tabs-bar {
+  border-bottom: 0px !important;
+  background: #fff;
+}
+
+:host ::ng-deep .top-content {
+    padding: 0px 24px;
+    margin-bottom: 20px;
+}
+
+:host ::ng-deep .table-operator-bottom {
+  background: #fff;
+  padding: 20px;
+}
+
+:host ::ng-deep .ac_right_wap {
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+:host ::ng-deep .ac_right{
+  float: right;
+  width: 180px;
+}
+
+:host ::ng-deep .ant-form-item {
+    margin-bottom: 0px;
+}
+
+:host ::ng-deep .this-label {
+    text-align: left;
+}
+:host ::ng-deep .ant-form-item-control{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+:host ::ng-deep .showBox{
+  display:block;
+}
+:host ::ng-deep .hideBox{
+  display:none;
+}
+:host ::ng-deep .anticon-search:before {
+  content: "\f063";
+  margin-right: 4px;
+}

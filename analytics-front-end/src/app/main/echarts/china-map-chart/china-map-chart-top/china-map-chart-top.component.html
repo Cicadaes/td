@@ -1,0 +1,8 @@
+<div class="top-content">
+  <h4 class="top-content-title">Top10来源省份排名</h4>
+  <div *ngFor="let item of datas; let i = index">
+    <div class="list-num">{{ i + 1 }}</div>
+    <div class="list-name">{{ item.objectName }}</div>
+    <nz-progress class="list-progress" [nzPercent]="item.rate" nzSize="small"></nz-progress>
+  </div>
+</div>

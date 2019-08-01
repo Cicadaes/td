@@ -1,0 +1,41 @@
+
+    <nz-modal [nzVisible]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel($event)"
+              (nzOnOk)="handleOk($event)">
+        <ng-template #modalTitle>
+            <span >基本信息</span>
+        </ng-template>
+        <ng-template #modalContent>
+            <nz-input-group [nzSize]="'large'">
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="name" >名称</label>
+                </div>
+                <div nz-col [nzSpan]="14">
+                    <input [(ngModel)]="name" nz-input>
+                </div>
+            </nz-input-group>
+            <br>
+            <nz-input-group [nzSize]="'large'">
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="status" >状态</label>
+                </div>
+                <div nz-col [nzSpan]="14">
+                 
+                        <nz-switch [(ngModel)]="status">
+                            <span checked>启用</span>
+                            <span unchecked>禁用</span>
+                        </nz-switch>
+                 
+                </div>
+
+            </nz-input-group>
+            <br>
+            <nz-input-group [nzSize]="'large'">
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="desc" >描述</label>
+                </div>
+                <div nz-col [nzSpan]="14">
+                    <input [(ngModel)]="desc" nz-input>
+                </div>
+            </nz-input-group>
+        </ng-template>
+    </nz-modal>

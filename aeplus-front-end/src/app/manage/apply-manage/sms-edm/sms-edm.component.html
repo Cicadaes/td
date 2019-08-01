@@ -1,0 +1,59 @@
+<div class="content-div">
+    <button nz-button nzType="primary" nzSize="default" (click)="create('2')" style="margin-right: 8px;">
+        <span class="anticon anticon-plus"></span>新建短信配置</button>
+    <button nz-button nzType="primary" nzSize="default" (click)="create('3')">
+        <span class="anticon anticon-plus"></span>新建邮件配置</button>
+    <div class="content-div-table shadow-content">
+        <h3 class="content-div-table-tit module-title">通道配置列表
+            <nz-input-group nzSuffixIcon="anticon anticon-search" style="float: right;width: 196px;margin-top: 12px;">
+                <input type="text" [(ngModel)]="serachParam" nz-input (keyup)="serach($event)" placeholder="请输入渠道名称进行检索" style="height: 24px;">
+            </nz-input-group>
+        </h3>
+        <nz-table #nzTable nzShowSizeChanger [nzLoading]="tableLoading" [nzFrontPagination]="false" [nzData]="tableData" [(nzPageIndex)]="_pageIndex"
+            [(nzPageSize)]="_pageSize" [(nzTotal)]='_total' (nzPageIndexChange)='PageIndexChange($event)' (nzPageSizeChange)='PageSizeChange($event)'
+            [nzPageSizeOptions]='pageSizeOptions'>
+            <thead nz-thead>
+                <tr>
+                    <th nz-th nzWidth="20%">渠道名称</th>
+                    <th nz-th nzWidth="15%">编码</th>
+                    <th nz-th nzWidth="10%">通道类型</th>
+                    <th nz-th nzWidth="10%">状态</th>
+                    <th nz-th nzWidth="15%">创建人</th>
+                    <th nz-th nzWidth="16%">更新时间</th>
+                    <th nz-th nzWidth="14%">操作</th>
+                </tr>
+            </thead>
+            <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let item of nzTable.data">
+                    <td nz-td>{{item.name}}</td>
+                    <td nz-td>{{item.code}}</td>
+                    <td nz-td><span *ngIf="item.channelType == 2" >短信</span><span *ngIf="item.channelType == 3">邮件</span></td>
+                    <td nz-td><span [ngClass]="{'zw-color': true, 'inprogress-color': item.status == '0'}"></span><span *ngIf="item.status == '-1'" >禁用</span><span *ngIf="item.status == '0'">启用</span></td>
+                    <td nz-td>{{item.creator}}</td>
+                    <td nz-td>{{item.updateTime}}</td>
+                    <td nz-td>
+                        <a (click)='edit(item);'>编辑</a>
+                        <a (click)='detail(item);'>查看</a>
+                        <a (click)='delete(item);'><span *ngIf="item.status == '0'" >禁用</span><span *ngIf="item.status == '-1'">启用</span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+</div>
+<!-- 新建、编辑短信弹框 -->
+<app-add-sms [isVisible]="addSmsFlag" (hideDialog)="hideDialog($event);" [editData]="editDataSms" [editFlag]="editSmsFlag"
+(saveDate)="saveDate();"></app-add-sms>
+
+<!-- 新建、编辑邮件弹框 -->
+<app-add-edm [isVisible]="addEdmFlag" (hideDialog)="hideDialog($event);" [editData]="editDataEdm" [editFlag]="editEdmFlag"
+(saveDate)="saveDate();"></app-add-edm>
+
+<!-- 查看邮件弹框 -->
+<app-edm-detail [isVisible]="detailEdmFlag" [editData]="detailDataEdm" (hideDetailDialog)="hideDetailDialog($event);" ></app-edm-detail>
+
+<!-- 查看短信弹框 -->
+<app-sms-detail [isVisible]="detailSmsFlag" [editData]="detailDataSms" (hideDetailDialog)="hideDetailDialog($event);" ></app-sms-detail>
+
+<!-- 删除弹框 -->
+<app-modal-dialog [itemObj]="itemObj" [isVisible]="removeFlag" (hideItemDialog)="hideItemDialog($event);" (confirmHideDialog)='confirmHideDialog($event)'></app-modal-dialog>

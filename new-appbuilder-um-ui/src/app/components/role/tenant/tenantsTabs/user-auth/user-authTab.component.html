@@ -1,0 +1,6 @@
+<div class="table-operator clrfix" style="margin-top: 4px;">
+    <div class="table-operator-bottom" style="padding: 0px;box-shadow: 0 1px 4px 0 rgba(23,35,61,0.10);">
+        <user-auth-table [isSuper]="isSuper" (canShow)="checkData($event)" [queryParams]="userQuery" [batchRemove]="batchRemoveUsers"
+            [(isReloadData)]="isReloadData"></user-auth-table>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+:host ::ng-deep .table-operator-bottom {
+  background: #fff;
+  padding: 20px;
+}
+:host ::ng-deep .rightFR{
+  float:right;
+  margin-top:20px;
+}
+:host ::ng-deep .leftFR {
+  float:left;
+  margin-top:20px;
+}

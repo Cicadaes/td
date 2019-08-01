@@ -1,0 +1,207 @@
+<div class="trafficSourcesSdetails">
+  <div class="_top">
+    <common-date (dateChange)="dataChange($event)" [_date]="newDate"></common-date>
+    <span class="_select">
+      <span class="name">来源</span>
+      <nz-select
+        nzShowSearch
+        [nzAllowClear]="false"
+        [nzServerSearch]="true"
+        nzPlaceHolder="请选择筛选条件"
+        [nzNotFoundContent]="'暂无数据'"
+        [(ngModel)]="sdetailsSelectedValue"
+        (nzOnSearch)="DetailsSearchChange($event)"
+        (nzScrollToBottom)="scrollToBottom()"
+        (nzOpenChange)="close($event)"
+        (ngModelChange)="DetailsSearchValueChange(sdetailsSelectedValue)"
+      >
+        <span *ngIf="!_longRangeSearch">
+          <nz-option
+            *ngIf="channelSearch && !channelSearch.length && channelSearchloading"
+            [nzDisabled]="true"
+            [nzCustomContent]="true"
+          >
+            <em class="anticon anticon-loading anticon-spin"></em> Loading...
+          </nz-option>
+          <nz-option
+            *ngFor="let option of channelSearch"
+            [nzLabel]="option.label"
+            [nzValue]="option.value"
+            [nzCustomContent]="true"
+          >
+            <span title="{{ option.label }}">{{ option.label }}</span>
+          </nz-option>
+        </span>
+        <span *ngIf="_longRangeSearch">
+          <nz-option
+            *ngFor="let option of listOfOptionSearch"
+            [nzLabel]="option.label"
+            [nzValue]="option.value"
+            [nzCustomContent]="true"
+          >
+            <span title="{{ option.label }}">{{ option.label }}</span>
+          </nz-option>
+          <nz-option nzDisabled *ngIf="longRangeSearchLoading" nzCustomContent>
+            <em class="anticon anticon-loading anticon-spin"></em> Loading...
+          </nz-option>
+        </span>
+      </nz-select>
+    </span>
+    <div class="screen" *ngIf="false">
+      <div class="filtrate" (click)="filterShow = !filterShow">
+        <i class="anticon anticon-filter more"></i>
+        <span class="more"
+          >更多筛选&nbsp;&nbsp;&nbsp;<span *ngIf="filterShow" class="ant-compat anticon anticon-up more"></span
+          ><span *ngIf="!filterShow" class="ant-compat anticon anticon-down more"></span
+        ></span>
+      </div>
+    </div>
+  </div>
+  <div
+    class="filter"
+    *ngIf="false"
+    [ngStyle]="{ height: filterShow ? '' : '0px', 'min-height': filterShow ? '56px' : '0px', overflow: 'hidden' }"
+  >
+    <div class="center">
+      <common-select
+        [dicKey]="'_td_utm_source'"
+        [_name]="'推广渠道'"
+        (_selctChange)="selectchanggesource($event)"
+        [selectData]="sourceInformation"
+        [disabled]="source"
+        [All]="true"
+      >
+      </common-select>
+      <common-select
+        [dicKey]="'_td_utm_medium'"
+        [_name]="'推广媒介'"
+        (_selctChange)="selectchanggemedium($event)"
+        [selectData]="mediumInformation"
+        [disabled]="medium"
+        [All]="true"
+      >
+      </common-select>
+      <common-select
+        [dicKey]="'_td_utm_campaign'"
+        [_name]="'活动名称'"
+        (_selctChange)="selectchanggecampaign($event)"
+        [selectData]="campaignInformation"
+        [disabled]="campaign"
+        [All]="true"
+      >
+      </common-select>
+      <common-select
+        [dicKey]="'_td_utm_term'"
+        [_name]="'关键词'"
+        (_selctChange)="selectchanggeterm($event)"
+        [disabled]="term"
+        [selectData]="termInformation"
+        [All]="true"
+      >
+      </common-select>
+      <common-select
+        [dicKey]="'_td_utm_content'"
+        [_name]="'创意版本'"
+        (_selctChange)="selectchanggecontent($event)"
+        [selectData]="contentInformation"
+        [disabled]="content"
+        [All]="true"
+      >
+      </common-select>
+      <button nz-button nzType="primary" (click)="demand()">查询</button>
+    </div>
+  </div>
+  <!-- 数据概览  -->
+  <div class="dataoverview">
+    <app-overview [rowCount]="6" [options]="overviewOptions" [loading]="overviewlosding"></app-overview>
+  </div>
+  <!-- 来源趋势 -->
+  <div class="_channelTrend">
+    <div class="_trendHeader">
+      <span>
+        {{ tendency }}
+      </span>
+    </div>
+    <div class="_trendCenterTabs">
+      <nz-tabset [(nzSelectedIndex)]="selectedIndex" (nzSelectChange)="tabsChange(selectedIndex)">
+        <nz-tab *ngFor="let item of tabsLists" [nzTitle]="item.label"> </nz-tab>
+      </nz-tabset>
+    </div>
+    <div class="_trendEcharts">
+      <div class="demo-chart" *ngIf="echartsLoading">
+        <app-loading-and-no-data [isLoading]="load" [isNoData]="!load"></app-loading-and-no-data>
+      </div>
+      <div *ngIf="!echartsLoading" echarts [options]="chartOption" class="demo-chart"></div>
+    </div>
+  </div>
+  <!-- 来源明细 -->
+  <div class="_channeldetail">
+    <div class="detailHeader">
+      <span class="left">
+        来源明细
+      </span>
+      <span class="downloadDetails">
+        <nz-popover [nzTitle]="'下载消息'" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+          <span
+            class="icon iconfont icon-download item"
+            style="color:rgba(23,35,61,0.55);cursor: pointer;"
+            (click)="downloadData()"
+            nz-popover
+          ></span>
+          <ng-template #nzTemplate>
+            <div>
+              导出任务创建成功，请稍后到
+              <a (click)="goPage('/download-data')" style="margin:0 10px;">数据下载</a>页面下载您需要的附件。
+            </div>
+          </ng-template>
+        </nz-popover>
+      </span>
+    </div>
+    <div class="_trendEtable">
+      <nz-table
+        #basicTable
+        [nzData]="dataSet"
+        [nzLoading]="loading"
+        [(nzPageSize)]="pageSize"
+        [nzPageSizeOptions]="[10, 20, 50, 100]"
+        nzShowSizeChanger
+        [nzNoResult]="'暂无数据'"
+        [nzFrontPagination]="true"
+        (nzPageIndexChange)="PageChange()"
+        (nzPageSizeChange)="PageChange(true)"
+        [(nzPageIndex)]="pageIndex"
+        nzShowSizeChanger="true"
+      >
+        <thead>
+          <tr>
+            <th *ngFor="let data of tableHeaders">
+              <span title="{{ data.label }}">{{ data.label }}</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of basicTable.data; let i = index">
+            <td>
+              <span title="{{ data.date }}">{{ data.date }}</span>
+            </td>
+            <td>
+              <span title="{{ data.newAdd }}">{{ data.newAdd }}</span>
+            </td>
+            <td>
+              <span title="{{ data.active }}">{{ data.active }}</span>
+            </td>
+            <td>
+              <span title="{{ data.launchAvg }}">{{ data.launchAvg }}</span>
+            </td>
+            <td>
+              <span title="{{ data.durationAvg }}">{{ data.durationAvg }}</span>
+            </td>
+            <td>
+              <span title="{{ data.durationPer }}">{{ data.durationPer }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</div>

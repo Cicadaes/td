@@ -1,0 +1,183 @@
+<div class="email">
+  <div class="email-title">
+    <div class="email-title-left">
+      <h3 class="module-title">{{ reportObj.name }}</h3>
+    </div>
+    <div class="email-title-right" *ngIf="reportObj && reportObj.right">
+      <ul>
+        <ng-container *ngFor="let item of campaignList">
+          <ng-container *ngFor="let one of contributeList">
+            <li *ngIf="one[item.targetConfigCode + '1']">
+              <p>{{ item.name }}</p>
+              <p>
+                <span>贡献率:</span>
+                <strong>{{ one[item.targetConfigCode] }}%</strong>
+              </p>
+            </li>
+          </ng-container>
+        </ng-container>
+      </ul>
+    </div>
+    <!-- 循环时间轴 -->
+  </div>
+  <div
+    class="email-content"
+    [ngStyle]="{
+      margin: reportObj && reportObj.modal == true ? '16px 0px 0px 0px' : '32px;'
+    }"
+  >
+    <div class="email-content-list">
+      <span class="li" *ngFor="let item of emailContentList">
+        <p class="name">
+          {{ item.name }}
+          <span *ngIf="item.status == '-1' && item.error" class="error">
+            <nz-popover [nzPlacement]="'left'">
+              <span class="iconfont icon-visibility" nz-popover></span>
+              <ng-template #nzTemplate>
+                <ul style="padding-left: 0px; margin-bottom: 0px;">
+                  <li *ngFor="let one of item.error">
+                    <label>{{ one.name }}：</label>
+                    <span>{{ one.value }}</span>
+                  </li>
+                </ul>
+              </ng-template>
+            </nz-popover>
+            <nz-popover [nzTitle]="'下载消息'" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+              <span class="iconfont icon-download" (click)="download('error')" nz-popover></span>
+              <ng-template #nzTemplate>
+                <div>
+                  导出任务创建成功，请稍后到
+                  <a (click)="goPage('/download-data')" style="margin:0 10px;">数据下载</a>页面下载您需要的附件。
+                </div>
+              </ng-template>
+            </nz-popover>
+          </span>
+        </p>
+        <h6 class="value">{{ item.value }}</h6>
+        <div class="percentage">
+          <div class="percentage-wap">
+            <div
+              [ngClass]="{
+                'percentage-one': true,
+                'error-color': item.status == '-1',
+                'unknown-color': item.status == '2'
+              }"
+              [ngStyle]="{ width: item.percentage }"
+            ></div>
+          </div>
+          <p class="percentage-text">{{ item.percentage }}</p>
+        </div>
+      </span>
+    </div>
+
+    <div class="email-content-chart">
+      <h3 class="module-title">
+        趋势分析
+        <nz-popover [nzTitle]="'下载消息'" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'">
+          <span class="iconfont icon-download" (click)="download('chart')" nz-popover></span>
+          <ng-template #nzTemplate>
+            <div>
+              导出任务创建成功，请稍后到
+              <a (click)="goPage('/download-data')" style="margin:0 10px;">数据下载</a>页面下载您需要的附件。
+            </div>
+          </ng-template>
+        </nz-popover>
+        <nz-popover [nzPlacement]="'left'">
+          <span class="iconfont icon-help" nz-popover></span>
+          <ng-template #nzTemplate>
+            <ul style="padding-left: 0px; margin-bottom: 0px;">
+              <li>
+                <label>发送成功数：</label>
+                <span>成功收到邮件的邮箱去重数。</span>
+              </li>
+              <li>
+                <label>打开邮件数：</label>
+                <span>打开邮件正文的邮箱去重数。</span>
+              </li>
+              <li>
+                <label>点击链接数：</label>
+                <span>点击邮件正文中任意链接的邮箱去重数。</span>
+              </li>
+            </ul>
+          </ng-template>
+        </nz-popover>
+        <div class="tabs">
+          <span
+            *ngFor="let item of tabs"
+            [ngClass]="{ 'item-active': item.type == timeType }"
+            (click)="checkOneTime(item)"
+            >{{ item.name }}</span
+          >
+        </div>
+      </h3>
+      <div class="email-content-chart-tab">
+        <span *ngFor="let item of chartTab; let i = index" (click)="checkOne(i, item)">
+          <p>{{ item.name }}</p>
+          <h3 [ngClass]="{ 'border-bot': i == chartTabIndex }">
+            {{ item.value }}
+          </h3>
+        </span>
+      </div>
+
+      <div class="email-content-chart-list">
+        <div class="chart-list-one-tab">
+          <span
+            [ngClass]="{
+              iconfont: true,
+              'icon-line-chart': true,
+              iconfontColor: chartType == 'line'
+            }"
+            (click)="checkChart('line')"
+          ></span>
+          <span
+            [ngClass]="{
+              iconfont: true,
+              'icon-chart-form': true,
+              iconfontColor: chartType == 'table'
+            }"
+            (click)="checkChart('table')"
+          ></span>
+        </div>
+        <div class="chart-list-one-chart" *ngIf="loading">
+          <div style="padding: 0px 16px 16px; height: 300px;width: 100%;text-align: center;line-height: 300px;">
+            <nz-spin></nz-spin>
+          </div>
+        </div>
+        <div class="chart-list-one-chart" *ngIf="_total > 0 && !loading">
+          <div style="height: 300px;" *ngIf="chartType == 'line'">
+            <app-chart [option]="chartOptionLine"></app-chart>
+          </div>
+          <div style="height: 270px;" *ngIf="chartType == 'table'" style="margin-top: 30px;">
+            <nz-table
+              #nzTable
+              [nzData]="tableOption"
+              [nzScroll]="{ y: '220px' }"
+              nzSize="middle"
+              [nzShowPagination]="false"
+              [nzFrontPagination]="false"
+            >
+              <thead>
+                <tr>
+                  <th nzWidth="50%">时间</th>
+                  <th nzWidth="50%">{{ chartTabName }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of nzTable.data">
+                  <td>{{ data.date }}</td>
+                  <td>{{ data.value }}</td>
+                </tr>
+              </tbody>
+            </nz-table>
+          </div>
+        </div>
+
+        <div class="chart-list-one-chart" *ngIf="_total == 0 && !loading">
+          <div style="padding: 0px 16px 16px; height: 300px;width: 100%;text-align: center;line-height: 300px;">
+            暂无数据
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

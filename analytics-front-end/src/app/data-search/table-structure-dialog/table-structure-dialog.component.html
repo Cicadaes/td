@@ -1,0 +1,73 @@
+<main>
+  <nz-modal
+    [nzMaskClosable]="false"
+    [(nzVisible)]="_isVisible"
+    [nzTitle]="modalTitle"
+    [nzContent]="modalContent"
+    [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel()"
+    [nzWidth]="680"
+  >
+    <ng-template #modalTitle>
+      <span>{{ _data }} 表结构说明</span>
+    </ng-template>
+
+    <ng-template #modalContent>
+      <nz-table
+        #ajaxTable
+        nzShowTotal
+        [nzFrontPagination]="false"
+        [nzData]="dataSet"
+        [nzLoading]="loading"
+        [nzTotal]="total"
+        [nzShowPagination]="false"
+      >
+        <thead>
+          <tr>
+            <th style="min-width:150px;">字段</th>
+            <th style="min-width:120px;">类型</th>
+            <th style="min-width:200px;">说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of ajaxTable.data">
+            <td>
+              <div class="td-text-overflow" title="{{ data.name }}">
+                {{ data.name }}
+              </div>
+            </td>
+            <td>
+              <div>
+                {{ data.type }}
+                <nz-popover [nzPlacement]="'right'" *ngIf="data.type == 'dictionary'">
+                  <i
+                    class="ant-compat anticon anticon-profile"
+                    nz-popover
+                    style="cursor: pointer;padding: 4px 10px;"
+                  ></i>
+                  <ng-template #nzTemplate>
+                    <div style="padding-right:30px;">{{ data.value }}</div>
+                    <i
+                      class="ant-compat anticon anticon-copy"
+                      ngxClipboard
+                      [cbContent]="data.value"
+                      (cbOnSuccess)="successCopy('信息复制成功')"
+                      style="cursor: pointer;position: absolute;top:12px;right:12px;"
+                    ></i>
+                  </ng-template>
+                </nz-popover>
+              </div>
+            </td>
+            <td>
+              <div>{{ data.info }}</div>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </ng-template>
+
+    <ng-template #modalFooter>
+      <button nz-button nzType="default" (click)="handleCancel()">关闭</button>
+    </ng-template>
+  </nz-modal>
+</main>

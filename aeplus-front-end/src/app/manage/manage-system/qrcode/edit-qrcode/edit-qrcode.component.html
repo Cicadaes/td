@@ -1,0 +1,53 @@
+<div class="content">
+    <div class="left-content">
+        <div class="item">
+            <label class="item-name">二维码名称<span class="red">*</span></label>
+            <label class="path" *ngIf="qrcode.type === 'end'">{{qrcode.qrcodeName}}</label>
+            <input [ngClass]="{'error': isError}" *ngIf="qrcode.type === 'edit'" nz-input [(ngModel)]="qrcode.qrcodeName" (input)="change()" type="text">
+            <label *ngIf="isError" class="error-label">{{isErrorMsg}}</label>
+        </div>
+        <div class="item">
+            <label class="item-name">App ID<span  class="red">*</span></label>
+            <label>{{qrcode.appId}}</label>
+        </div>
+        <div class="item">
+            <label class="item-name">App Secret<span  class="red">*</span></label>
+            <label>************</label>
+        </div>
+        <div class="item">
+            <label class="item-name">页面路径<span  class="red">*</span></label>
+            <label class="path">{{qrcode.qrcodePath}}</label>
+        </div>
+        <div class="item">
+            <label class="item-name">样式</label>
+            <div class="qrcode">
+                <img *ngIf="qrcode.qrcodeType === 1" src="/aeplus/assets/images/miniQrcode.svg" alt="">
+                <img *ngIf="qrcode.qrcodeType === 0" src="/aeplus/assets/images/qrcode.svg" alt="">
+            </div>
+        </div>
+        <div class="item" *ngIf="qrcode.utmSource">
+            <label class="item-name">utm_source</label>
+            <label>{{qrcode.utmSource}}</label>
+        </div>
+        <div class="item" *ngFor="let item of qrcode.qrcodeParams;let i = index">
+            <label class="item-name" *ngIf="i === 0 && qrcode.qrcodeParams.length && qrcode.qrcodeParams[0].paramName">自定义参数</label>
+            <label *ngIf="i !== 0" class="label"></label>
+            <div *ngIf="qrcode.qrcodeParams.length && qrcode.qrcodeParams[0].paramName" class="parmas">
+                <label class="item-param">参数名：</label>
+                <span class="item-value" title="{{item.paramName}}">{{item.paramName}}</span>
+                <label class="item-param">参数值：</label>
+                <span class="item-value" title="{{item.paramValue}}">{{item.paramValue}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="right-content">
+        <div class="qrcode-img">
+            <img alt="" [src]="'data:image/png;base64,' + qrcode.qrcodeImg">
+        </div>
+        <div class="qrcode-download"><a [href]="service.baseUrl + '/qrcode/download/' + qrcode.id">下载二维码</a></div>
+    </div>
+</div>
+<div class="footer">
+    <button nz-button class="cancel-button" (click)="cancel()">取消</button>
+    <button nz-button class="ant-btn-primary" (click)="submit()">确定</button>
+</div>

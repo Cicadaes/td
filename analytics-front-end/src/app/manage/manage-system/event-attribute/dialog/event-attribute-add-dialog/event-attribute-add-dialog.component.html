@@ -1,0 +1,30 @@
+<main>
+  <nz-modal
+    [nzMaskClosable]="false"
+    [(nzVisible)]="_isVisible"
+    [nzTitle]="modalTitle"
+    [nzContent]="modalContent"
+    [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel()"
+    [nzWidth]="530"
+  >
+    <ng-template #modalTitle>
+      <span *ngIf="!_data">添加事件属性</span>
+      <span *ngIf="_data">编辑事件属性</span>
+    </ng-template>
+
+    <ng-template #modalContent>
+      <app-event-attribute-add-form
+        [isSubmit]="_isSubmitForm"
+        [systemError]="_systemError"
+        (onSubmit)="_onSubmitForm($event)"
+        [data]="_data"
+      ></app-event-attribute-add-form>
+    </ng-template>
+
+    <ng-template #modalFooter>
+      <button nz-button nzType="default" (click)="handleCancel()">取消</button>
+      <button nz-button nzType="primary" (click)="handleOk()" [nzLoading]="_isConfirmLoading">确认</button>
+    </ng-template>
+  </nz-modal>
+</main>

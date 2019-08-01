@@ -1,0 +1,289 @@
+<div class="first-level"></div>
+<!-- 新建单触点投放 -->
+<ng-template #modalContent_addScl>
+    <app-activity-center-add-scl [launchCrowdSelect]="vm.singleContactLaunch.launchCrowdSelect" [launchWaysRadio]="vm.singleContactLaunch.launchWaysRadio"
+        [oneDotData]="vm.oneDotData">
+    </app-activity-center-add-scl>
+</ng-template>
+
+<!-- 新建多触点流程 -->
+<ng-template #modalContent_addMcp>
+    <app-activity-center-add-mcp [manyDotData]="vm.manyDotData" (putManyDotData)="putManyDotData($event);">
+    </app-activity-center-add-mcp>
+</ng-template>
+
+<!-- 新建短信投放 -->
+<ng-template #modalTitle_sm>
+    {{segmentDataService.isUpdate === 2 ? nls.modalTitleShortMessageLaunch : ''}}
+    {{segmentDataService.isUpdate === 1 ? nls.modalTitleShortMessageLaunchUpdate : ''}}
+    {{segmentDataService.isUpdate === 0 ? nls.modalTitleShortMessageLaunchLook : ''}}
+</ng-template>
+
+<ng-template #modalContent_sm>
+    <app-activity-center-sm></app-activity-center-sm>
+</ng-template>
+
+<!-- 公用投放框的底部 -->
+<ng-template #modalFooter>
+    <button nz-button nzType="default" (click)="prev(true);">{{nls.modalOperationPrev}}</button>
+    <button nz-button nzType="default" (click)="saveSingle(1)" [disabled]="segmentDataService.isUpdate === 0">{{nls.modalOperationSaveDraft}}</button>
+    <button nz-button nzType="primary" (click)="saveSingle(2)" [disabled]="segmentDataService.isUpdate === 0">{{nls.modalOperationAffirmSubmit}}</button>
+</ng-template>
+
+<!-- 新建应用推送 -->
+<ng-template #modalTitle_push>
+    {{segmentDataService.isUpdate === 2 ? nls.modalTitlePushLaunch : ''}}
+    {{segmentDataService.isUpdate === 1 ? nls.modalTitlePushLaunchUpdate : ''}}
+    {{segmentDataService.isUpdate === 0 ? nls.modalTitlePushLaunchLook : ''}}
+</ng-template>
+
+<ng-template #activityCenterAppPush>
+    <app-activity-center-app-push></app-activity-center-app-push>
+</ng-template>
+
+<!-- 新建邮件推送 -->
+<ng-template #modalTitle_edm>
+    {{segmentDataService.isUpdate === 2 ? nls.modalTitleEdmLaunch : ''}}
+    {{segmentDataService.isUpdate === 1 ? nls.modalTitleEdmLaunchUpdate : ''}}
+    {{segmentDataService.isUpdate === 0 ? nls.modalTitleEdmLaunchLook : ''}}
+</ng-template>
+
+<ng-template #activityCenterAppEdm>
+    <app-activity-center-app-edm></app-activity-center-app-edm>
+</ng-template>
+
+<ng-template #report_email>
+    <app-report-email [reportObj]='reportObj'></app-report-email>
+</ng-template>
+
+<ng-template #report_push>
+    <app-report-push [reportObj]='reportObj'></app-report-push>
+</ng-template>
+
+<ng-template #report_sms>
+    <app-report-sms [reportObj]='reportObj'></app-report-sms>
+</ng-template>
+
+<ng-template #dwPage>
+    <iframe id="dwIframe" name="dwIframe" height="652" width="100%" style="border: none;"
+        [src]="dwIframeUrl" title="">
+    </iframe>
+</ng-template>
+
+<!-- 操作 -->
+<div class="operation">
+
+    <!-- 新建单触点投放 -->
+    <button nz-button (click)="handlerScl(2, $event)" [nzType]="'primary'" class="operation">
+        <span class="plus"></span>{{nls.operationSingleContactLaunch}}
+    </button>
+
+    <!-- 新建多触点流程 -->
+    <button nz-button (click)="handlerMcp($event)" [nzType]="'primary'" class="operation">
+        <span class="plus"></span>{{nls.operationMultiContactProcess}}
+    </button>
+
+</div>
+
+<!-- 内容 -->
+<div class="content shadow-content">
+
+    <!-- 页眉 -->
+    <div class="header module-title">
+        <span class="#1">{{nls.contentHeader1}}</span>
+        <span class="#2">{{nls.contentHeader2}}</span>
+        <span class="#3">{{nls.contentHeader3}}</span>
+
+        <!-- 下载 -->
+        <nz-popover [nzTitle]="'下载消息'" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'" class="download">
+            <span class="icon iconfont icon-download item" (click)="downloadData();" nz-popover></span>
+            <ng-template #nzTemplate>
+                <div>
+                    导出任务创建成功，请稍后到
+                    <a (click)="goPage('/download-data')" style="margin:0 10px;">数据下载</a>页面下载您需要的附件。
+                </div>
+            </ng-template>
+        </nz-popover>
+    </div>
+
+    <!-- 筛选 -->
+    <div class="filter">
+
+        <!-- 输入框 -->
+        <nz-input-group nzSize="small" nzSuffixIcon="anticon anticon-search" class="filter">
+            <input nz-input type="text" [(ngModel)]="vm.filter.activityNameValue" (keyup)="handlerFilter($event)" [attr.placeholder]="nls.contentFilterPlaceholder">
+        </nz-input-group>
+
+        <!-- 筛选条件 -->
+        <a (click)="handlerFilter_advanced()" [class.true]="vm.filter.advanced" class="filter-condition">{{nls.contentFilterCondition}}</a>
+
+    </div>
+
+    <!-- 筛选条件 -->
+    <div *ngIf="vm.filter.advanced" class="filter-condition">
+
+        <!-- 活动类别 -->
+        <div class="condition">
+            <span class="label">{{nls.contentFilterConditionActivityTypeLabel}}</span>
+            <span class="input">
+                <nz-radio-group [(ngModel)]="vm.filter.activityTypeValue" (ngModelChange)="handlerFilter($event)">
+                    <label *ngFor="let radio of vm.filter.activityTypeRadio" nz-radio-button [nzValue]="radio.value">{{radio.label}}</label>
+                </nz-radio-group>
+            </span>
+        </div>
+
+        <!-- 活动时间 -->
+        <div class="condition">
+            <span class="label">{{nls.contentFilterConditionActivityTimeLabel}}</span>
+            <span class="input">
+                <nz-range-picker [(ngModel)]="vm.filter.activityTimeValue" nzPlaceHolder="" [nzStyle]="{'width': '240px'}" (ngModelChange)="handlerFilter($event)"></nz-range-picker>
+            </span>
+        </div>
+
+        <!-- 活动状态 -->
+        <div class="condition" style="border: 0px;">
+            <span class="label">{{nls.contentFilterConditionActivityStateLabel}}</span>
+            <span class="input">
+                <nz-radio-group [(ngModel)]="vm.filter.activityStateValue" (ngModelChange)="handlerFilter($event)">
+                    <label *ngFor="let radio of vm.filter.activityStateRadio" nz-radio-button [nzValue]="radio.value">{{radio.label}}</label>
+                </nz-radio-group>
+            </span>
+        </div>
+
+    </div>
+
+    <!-- 内容 -->
+    <div class="table" (click)="changeIndex(-1)">
+        <nz-table #contentTable [nzLoading]="vm.content.loading" [nzData]="vm.content.data" [nzFrontPagination]="false" [nzShowPagination]="false">
+            <thead (nzSortChange)="sort($event)" nzSingleSort>
+                <tr>
+                    <th>
+                        {{nls.contentTableColumn1}}
+                    </th>
+                    <th style="min-width: 100px;">
+                        {{nls.contentTableColumn2}}
+                    </th>
+                    <th nzShowSort nzSortKey="startTime" style="min-width: 190px;">
+                        {{nls.contentTableColumn3}}
+                    </th>
+                    <th style="min-width: 110px;">
+                        {{nls.contentTableColumn4}}
+                    </th>
+                    <th style="min-width: 120px;">
+                        {{nls.contentTableColumn5}}
+                    </th>
+                    <th>
+                        {{nls.contentTableColumn6}}
+                    </th>
+                    <th style="min-width: 140px;">
+                        {{nls.contentTableColumn7}}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of contentTable.data; let i = index;">
+
+                    <!-- 活动名称 -->
+                    <td>
+                        {{data.activityName}}
+                    </td>
+
+                    <!-- 活动类别 -->
+                    <td>
+                        {{handlerContent_formatActivityType(data.activityType)}}
+                    </td>
+
+                    <!-- 活动时间 -->
+                    <td>
+                        {{data.activityTime}}
+                    </td>
+
+                    <!-- 活动状态 -->
+                    <td>
+                        <span [ngClass]="{'zw-color': true, 'inprogress-color': data.activityState == 2}"></span>{{handlerContent_formatActivityState(data.activityState)}}</td>
+
+                    <!-- 创建人 -->
+                    <td>
+                        {{data.creator}}
+                    </td>
+
+                    <!-- 描述 -->
+                    <td>
+                        <div *ngIf="descEditGlobalIndex != i" (click)="changeIndex(i, data); $event.stopPropagation()" class="content-overflow" style="width: 120px; height: 24px; line-height: 24px; cursor: pointer;"
+                            title="{{data.description}}">
+                            {{data.description}}
+                        </div>
+                        <div *ngIf="descEditGlobalIndex == i">
+                            <input nz-input placeholder="请输入" [(ngModel)]="data.description" [nzSize]="'small'" (ngModelChange)="descChange = true;"
+                                (click)="$event.stopPropagation()" style="width: 120px; margin-left: -8px;">
+                        </div>
+                    </td>
+
+                    <!-- 操作 -->
+                    <td>
+                        <div *ngIf="data.segmentType != 4">
+                            <div *ngIf="data.activityState < 2">
+                                <span *ngIf="data.type == 1">
+                                    <a (click)="handlerSclOperation_detail(data, 1)" class="operation">
+                                        {{nls.contentOperationEdit}}</a>
+                                </span>
+                                <span *ngIf="data.type == 2">
+                                    <a (click)="handlerOperation_detail(data)" class="operation">
+                                        {{nls.contentOperationInfo}}</a>
+                                </span>
+                                <span>
+                                    <a (click)="handlerOperation_delete(data)" class="operation">
+                                        {{nls.contentOperationDelete}}</a>
+                                </span>
+                                <span>
+                                    <a (click)="handlerOperation_clone(data)" class="operation">
+                                        {{nls.contentOperationClone}}</a>
+                                </span>
+                            </div>
+
+                            <div *ngIf="data.activityState >= 2">
+                                <span *ngIf="data.type == 1">
+                                    <a (click)="handlerSclOperation_detail(data, 0)" class="operation">
+                                        {{nls.contentOperationInfo}}</a>
+                                </span>
+                                <span *ngIf="data.type == 2">
+                                    <a (click)="handlerOperation_detail(data)" class="operation">
+                                        {{nls.contentOperationInfo}}</a>
+                                </span>
+                                <span>
+                                    <a (click)="handlerOperation_report(data)" class="operation">
+                                        {{nls.contentOperationReport}}</a>
+                                </span>
+                                <span>
+                                    <a (click)="handlerOperation_clone(data)" class="operation">
+                                        {{nls.contentOperationClone}}</a>
+                                </span>
+                            </div>
+                        </div>
+                        <div *ngIf="data.segmentType == 4">
+                            <span>
+                                <a (click)="handlerSclOperation_detail(data, 0)" class="operation">
+                                    {{nls.contentOperationInfo}}</a>
+                            </span>
+                            <span *ngIf="data.activityState < 2">
+                                <a (click)="handlerOperation_delete(data)" class="operation">
+                                    {{nls.contentOperationDelete}}</a>
+                            </span>
+                            <span *ngIf="data.activityState == 3 && (data.attr3 == 1 || data.attr3 == 2)">
+                                <a (click)="handlerOperation_report(data)" class="operation">
+                                    {{nls.contentOperationReport}}</a>
+                            </span>
+                        </div>
+                    </td>
+
+                </tr>
+            </tbody>
+        </nz-table>
+
+        <!-- 分页 -->
+        <nz-pagination nzShowSizeChanger class="pagination" [nzTotal]="vm.content.total" [nzPageIndex]="vm.content.pageIndex" [nzPageSize]="vm.content.pageSize"
+            [nzPageSizeOptions]="vm.content.pageSizeOption" (nzPageIndexChange)="handlerContent_pageIndex($event)" (nzPageSizeChange)="handlerContent_pageSize($event)"
+            *ngIf="vm.content.total > 0"></nz-pagination>
+    </div>
+
+</div>

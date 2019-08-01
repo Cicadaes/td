@@ -1,0 +1,42 @@
+
+<div class="text-content-top">
+    <h3 class="zw-one-name" *ngIf="role">{{role.name}}</h3>
+    <p class="til_desc" *ngIf="role"> {{role.desc}}</p>
+   <nz-form-item nz-row *ngIf="role" style="margin-bottom: 0px;">
+        <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special-label">
+            <label for="updateUserName" class="label_font">更新人</label>
+        </nz-form-label>
+        <nz-form-control nz-col [nzSm]="3" [nzXs]="24" >
+            {{role.updateUserName}}
+        </nz-form-control>
+        <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special-label">
+            <label for="updateTime" class="label_font">更新时间</label>
+        </nz-form-label>
+        <nz-form-control nz-col [nzSm]="3" [nzXs]="24" >
+            {{role.updateTime | dateFormatPipe:2}}
+        </nz-form-control>
+        <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special-label">
+            <label for="createUserName" class="label_font">创建人</label>
+        </nz-form-label>
+        <nz-form-control nz-col [nzSm]="3" [nzXs]="24" >
+            {{role.createUserName}}
+        </nz-form-control>
+        <nz-form-label nz-col [nzSm]="2" [nzXs]="24" class="special-label">
+            <label for="createUserName" class="label_font">创建时间</label>
+        </nz-form-label>
+        <nz-form-control nz-col [nzSm]="3" [nzXs]="24" >
+            {{role.createTime | dateFormatPipe:2}}
+        </nz-form-control>
+    </nz-form-item>
+</div>
+<nz-tabset [nzTabPosition]="'top'">
+    <nz-tab *ngFor="let tab of tabs" [nzTitle]="nzTabHeading">
+        <ng-template #nzTabHeading>
+            {{tab.value}}
+        </ng-template>
+        <div class="text-content">
+            <user-auth *ngIf="tab.key == 'user'" [isSuper]="false" [tenantId]="tenantId" [roleId]="roleId"></user-auth>
+            <func-auth *ngIf="tab.key == 'func'" [tenantId]="tenantId" [appList]="appList" [roleId]="roleId"></func-auth>
+        </div>
+    </nz-tab>
+</nz-tabset>

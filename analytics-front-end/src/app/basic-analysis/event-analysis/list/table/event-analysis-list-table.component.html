@@ -1,0 +1,105 @@
+<main>
+  <app-event-analysis-list-filter
+    (onFilter)="_onFilter($event)"
+    [isList]="true"
+    [loading]="loading"
+  ></app-event-analysis-list-filter>
+  <article class="page-custom-content">
+    <div class="table-custom-panel shadow-content">
+      <div class="table-custom-head clrfix">
+        <h5 class="table-custom-title">事件概览</h5>
+        <div class="table-custom-filter">
+          <app-fast-search
+            class="item"
+            (onSearch)="_onSearch($event)"
+            [placeHolder]="'请输入事件名称'"
+            [value]="_keyword"
+          ></app-fast-search>
+          <span class="icon iconfont icon-download item" (click)="openExportModel()"></span>
+          <app-help-popover
+            class="item"
+            [list]="_helpPopover.list"
+            [width]="_helpPopover.width"
+            [paddingLeft]="_helpPopover.paddingLeft"
+          ></app-help-popover>
+        </div>
+      </div>
+      <nz-table
+        #ajaxTable
+        nzShowTotal
+        nzShowSizeChanger
+        [nzFrontPagination]="false"
+        [nzData]="dataSet"
+        [nzLoading]="loading"
+        [nzTotal]="total"
+        [(nzPageIndex)]="pageIndex"
+        [(nzPageSize)]="pageSize"
+        [nzPageSizeOptions]="[10, 20, 50, 100]"
+        (nzPageIndexChange)="searchData$.next()"
+        (nzPageSizeChange)="pageSizeChange()"
+      >
+        <thead (nzSortChange)="sort($event)" nzSingleSort>
+          <tr>
+            <th>事件名称</th>
+            <th style="min-width: 110px;" nzShowSort nzSortKey="triggerTime">触发次数</th>
+            <th style="min-width: 110px;" nzShowSort nzSortKey="triggerUser">触发用户数</th>
+            <th style="min-width: 100px;" nzShowSort nzSortKey="startTime">每启动发生数</th>
+            <th style="min-width: 100px;" nzShowSort nzSortKey="activeUserRate">每活跃用户发生率</th>
+            <th style="min-width: 100px;" nzShowSort nzSortKey="userAverageTime">人均次数</th>
+            <th style="min-width: 100px;">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of ajaxTable.data">
+            <td>
+              <a (click)="view(data)">
+                <span class="icon iconfont icon-shijian" *ngIf="data.isSmartEvent == 1"></span>
+                {{ data.eventName }}
+              </a>
+            </td>
+            <td>{{ data.triggerTime | numberToThousandsPipe }}</td>
+            <td>{{ data.triggerUser | numberToThousandsPipe }}</td>
+            <td>{{ data.startTime | numberToThousandsPipe }}</td>
+            <td>{{ data.activeUserRate }}</td>
+            <td>{{ data.userAverageTime | numberToThousandsPipe }}</td>
+            <td>
+              <div class="table-custom-bar">
+                <a href="javascript:;" (click)="view(data)">查看</a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </article>
+  <app-event-analysis-list-export
+    *ngIf="isVisible"
+    [isVisible]="isVisible"
+    [params]="exportParam"
+    (onHide)="hideExportDialog($event)"
+    (onSubmit)="onSubmitExport($event)"
+  >
+  </app-event-analysis-list-export>
+  <nz-modal
+    [nzMaskClosable]="false"
+    [(nzVisible)]="showModal"
+    [nzTitle]="modalTitle"
+    [nzContent]="modalContent"
+    [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel($event)"
+    [nzWidth]="580"
+  >
+    <ng-template #modalTitle>
+      <span>导出创建成功</span>
+    </ng-template>
+
+    <ng-template #modalContent>
+      导出任务创建成功，请稍后到<a (click)="goPage('/download-data')" style="margin:0 10px;">数据下载</a
+      >页面下载您需要的附件。
+    </ng-template>
+
+    <ng-template #modalFooter>
+      <button nz-button nzType="primary" (click)="modalHandleOk()">确定</button>
+    </ng-template>
+  </nz-modal>
+</main>

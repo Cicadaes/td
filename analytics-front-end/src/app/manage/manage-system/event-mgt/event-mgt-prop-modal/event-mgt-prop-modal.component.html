@@ -1,0 +1,61 @@
+<!-- 基本信息 -->
+<div class="base-info">
+  <div class="item">
+    <span class="name">{{ nls.baseInfoSourceName }}</span>
+    <span class="value">{{ vm.baseInfo.sourceName }}</span>
+  </div>
+  <div class="item">
+    <span class="name">{{ nls.baseInfoDisplayName }}</span>
+    <span class="value">{{ vm.baseInfo.displayName || '--' }}</span>
+  </div>
+</div>
+
+<!-- 内容 -->
+<div class="content">
+  <nz-table
+    #contentTable
+    [nzLoading]="vm.content.loading"
+    [nzData]="vm.content.data"
+    [nzFrontPagination]="false"
+    [nzShowPagination]="false"
+  >
+    <thead>
+      <tr>
+        <th>
+          {{ nls.contentPropName }}
+        </th>
+        <th style="min-width: 85px;">
+          {{ nls.contentPropCode }}
+        </th>
+        <th style="min-width: 85px;">
+          {{ nls.contentPropType }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of contentTable.data">
+        <td>
+          {{ data.propName }}
+        </td>
+        <td>
+          {{ data.propCode }}
+        </td>
+        <td>
+          {{ data.propType | attributeTypePipe }}
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+  <!-- 分页 -->
+  <nz-pagination
+    nzShowSizeChanger
+    [nzTotal]="vm.content.total"
+    [nzPageIndex]="vm.content.pageIndex"
+    [nzPageSize]="vm.content.pageSize"
+    [nzPageSizeOptions]="vm.content.pageSizeOption"
+    (nzPageIndexChange)="handlerContent_pageIndex($event)"
+    (nzPageSizeChange)="handlerContent_pageSize($event)"
+    *ngIf="vm.content.total > 0"
+  ></nz-pagination>
+</div>

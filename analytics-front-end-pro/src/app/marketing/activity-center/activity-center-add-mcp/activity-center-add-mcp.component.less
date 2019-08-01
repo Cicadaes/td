@@ -1,0 +1,67 @@
+
+    :host > .item {
+        margin-bottom: 24px;
+    }
+
+    :host > .item:last-child {
+        margin-bottom: 0;
+    }
+
+    :host > .item .description {
+        display: block;
+        margin-left: 88px;
+        margin-top: 6px;
+        font-size: 12px;
+        line-height: 12px;
+        color: #979ca8;
+    }
+
+
+
+    /* .item .label */
+
+    :host > .item .label {
+        display: block;
+        width: 88px;
+        height: 32px;
+        font-size: 12px;
+        line-height: 32px;
+        color: #17233d;
+    }
+
+    :host > .item.required .label:after {
+        content: "*";
+        position: relative;
+        left: 6px;
+        top: 6px;
+        font-size: 18px;
+        line-height: 18px;
+        color: #ed4217;
+    }
+
+
+
+    /* .item .input */
+
+    :host > .item .input {
+        display: block;
+        margin-left: 88px;
+        margin-top: -32px;
+    }
+
+    :host > .item.activityName input {
+        display: block;
+        width: 298px;
+    }
+
+    :host > .item.activityTime nz-range-picker {
+        display: block;
+        width: 298px;
+    }
+
+    :host > .item.activityDescription textarea {
+        display: block;
+        min-height: 70px;
+        font-size: 12px;
+        line-height: 20px;
+    }

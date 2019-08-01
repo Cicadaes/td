@@ -1,0 +1,47 @@
+<div class="ac_right_wap">
+    <div class="ac_right" style="margin-right: 24px;">
+        <!-- <nz-input [nzType]="'search'" [nzPlaceHolder]="'请输入名称'" [(ngModel)]="search" (nzOnSearch)="onSearch2($event)">
+        </nz-input> -->
+        <nz-input-group nzSearch [nzSuffix]="suffixIconButton" style="width: 180px;float: right;">
+            <input type="text" nz-input placeholder="请输入名称" (keyup)="onSearch2($event, 'keyup')" [(ngModel)]="search">
+        </nz-input-group>
+        <ng-template #suffixIconButton>
+            <i class="anticon anticon-search" (click)="onSearch2(search, 'click')"></i>
+        </ng-template>
+    </div>
+</div>
+<ng-template #tableTotal>
+        <div  style="margin-right: 6px;">
+          总共 {{_total}} 条
+        </div>
+</ng-template>
+<nz-table #nzTable [nzShowTotal]="tableTotal" [nzBordered]="false" [nzData]="_dataSet" nzShowSizeChanger [nzLoading]="_loading"
+    [nzTotal]="_total" [(nzPageIndex)]="_current" (nzPageIndexChange)="refreshData()" [(nzPageSize)]="_pageSize"
+    (nzPageSizeChange)="refreshData(true)" [nzFrontPagination]="false">
+    <thead>
+        <tr>
+            <th nzShowCheckbox [(nzChecked)]="_allChecked" [nzIndeterminate]="_indeterminate" (nzCheckedChange)="_checkAll($event)"></th>
+            <th [nzWidth]="'30%'">
+                名称
+            </th>
+            <th [nzWidth]="'45%'">
+                描述
+            </th>
+            <th *ngIf="!isInUser" [nzWidth]="'20%'">
+                <span>操作</span>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of nzTable.data">
+            <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="_refreshStatus($event, data.id)"></td>
+            <td>{{data.name}}</td>
+            <td>{{data.desc}}</td>
+            <td *ngIf="!isInUser">
+                <span>
+                    <a href="javascript:;" (click)="deleteUserGroup(data)">移除</a>
+                </span>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>

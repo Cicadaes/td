@@ -1,0 +1,29 @@
+<h4>
+  {{ title }}
+  <span (click)="edit()"><span class="iconfont icon-mode_edit"></span>修改 </span>
+</h4>
+<nz-table
+  #basicTable
+  [nzData]="columnData"
+  nzSize="middle"
+  nzShowPagination="false"
+  [nzLoading]="attrLoadingFlag"
+  [nzScroll]="{ y: '340px' }"
+>
+  <thead>
+    <tr>
+      <th nzWidth="20%" style="background-color: #fff;">属性组</th>
+      <th nzWidth="80%" style="background-color: #fff;">属性</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td><span class="iconfont icon-Document"></span>{{ data.name }}</td>
+      <td style="padding: 5px;">
+        <span class="attributeLabel" *ngFor="let item of data.attributeLabel">
+          {{ item.displayname }}
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

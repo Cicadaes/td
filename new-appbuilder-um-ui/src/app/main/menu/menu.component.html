@@ -1,0 +1,35 @@
+<!-- <ul *ngIf="menus && menus.length > 0" nz-menu [nzTheme]="'dark'" [nzMode]="_menuCollapsed?'vertical':'inline'">
+    <li nz-submenu *ngFor="let item of menus" [(nzOpen)]="item.isOpen" (nzOpenChange)="openChange(item)">
+        <span title><img src="{{item.icon}}" *ngIf="item.icon != null &&item.icon != 'null' && item.icon != 0" style="width: 14px;vertical-align: top;margin-top: 12px;margin-right: 5px;"/><span class="nav-text">{{item.name}}</span></span>
+        <ul>
+            <li nz-menu-item  *ngFor="let child of item.children" routerLinkActive="ant-menu-item-selected">
+                <a [routerLink]="[ child.uri ]">{{child.name}}</a>
+            </li>
+        </ul>
+    </li>
+</ul> -->
+
+<ul *ngIf="menus && menus.length > 0" nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="menuCollapsed">
+    <ng-container *ngFor="let item of menus;let isFisrt = index">
+            <li [routerLink]="[ item.uri ]" nz-menu-item *ngIf="!item.children || !item.children.length" routerLinkActive="ant-menu-item-selected">
+                <span title>
+                    <a class="first-level">
+                        <img alt="图片" src="{{item.icon}}" *ngIf="item.icon != null &&item.icon != 'null' && item.icon != 0" style="width: 18px;height: 18px;vertical-align: top;margin-top: 12px;margin-right: 5px;"/>
+                        <span *ngIf="!menuCollapsed">{{item.name}}</span>
+                    </a>
+                </span>
+            </li>
+            <!-- [(nzOpen)]="isOpenOne" -->
+            <li nz-submenu *ngIf="item.children && item.children.length" [(nzOpen)]="item.isOpen" (nzOpenChange)="openChange(item)" >
+                <span title>
+                    <img alt="图片" src="{{item.icon}}" *ngIf="item.icon != null &&item.icon != 'null' && item.icon != 0" style="width: 18px;height: 18px;vertical-align: top;margin-top: 12px;margin-right: 5px;"/>
+                    <span class="nav-text" *ngIf="!menuCollapsed" >{{item.name}}</span>
+                </span>
+                <ul>
+                    <li nz-menu-item  *ngFor="let child of item.children" routerLinkActive="ant-menu-item-selected">
+                        <a [routerLink]="[ child.uri ]">{{child.name}}</a>
+                    </li>
+                </ul>
+            </li>
+    </ng-container>
+</ul>

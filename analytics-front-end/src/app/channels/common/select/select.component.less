@@ -1,0 +1,24 @@
+:host ::ng-deep ._select {
+  display: flex;
+
+  .name {
+    font-family: PingFangSC-Medium;
+    font-size: 12px;
+    color: rgba(23, 35, 61, 0.75);
+    line-height: 36px;
+    margin-right: 12px;
+    white-space: nowrap;
+    height: 36px;
+  }
+
+  nz-select {
+    margin-bottom: 10px;
+    max-width: 300px;
+    min-width: 120px;
+
+    .ant-select-selection--multiple {
+      max-height: 58px;
+      overflow-y: auto;
+    }
+  }
+}

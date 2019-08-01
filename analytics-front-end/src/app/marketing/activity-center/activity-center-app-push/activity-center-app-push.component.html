@@ -1,0 +1,564 @@
+<main>
+  <div id="push-form" class="form">
+    <div class="item">
+      <label class="item-label l"
+        >目标平台
+        <p class="required">*</p>
+      </label>
+      <div class="item-content l">
+        <span
+          class="icon-platform android"
+          [ngClass]="{
+            active: segment.platform == 'android',
+            disabled: segmentDataService.isUpdate === 0
+          }"
+          (click)="changePlatform('android', true)"
+        ></span>
+        <span
+          class="icon-platform ios"
+          [ngClass]="{
+            active: segment.platform == 'ios',
+            disabled: segmentDataService.isUpdate === 0
+          }"
+          (click)="changePlatform('ios', true)"
+        ></span>
+      </div>
+    </div>
+
+    <div class="item">
+      <label class="item-label l">推广内容</label>
+      <div class="item-content l" style="padding-top: 6px;">
+        <div
+          class="popularize-div"
+          [ngClass]="{ active: seletABIndex == i }"
+          *ngFor="let piece of pieceList; let i = index"
+          (click)="onSelect(i)"
+        >
+          <span
+            class="ant-compat anticon anticon-close-circle delete"
+            (click)="deletePiece(i)"
+            *ngIf="segmentDataService.isUpdate !== 0"
+          ></span>
+          <p>推广内容{{ piece.type }}</p>
+          <span>流量</span>
+          <nz-row style="margin-top: -10px;">
+            <nz-col nzSpan="16">
+              <nz-slider
+                [nzMin]="min"
+                [nzMax]="max"
+                [(ngModel)]="piece.flowCount"
+                (ngModelChange)="changeFlowCount(piece, i)"
+                [nzDisabled]="segmentDataService.isUpdate === 0"
+              ></nz-slider>
+            </nz-col>
+            <div nz-col nzSpan="8">
+              <span style="float: right; margin-top: 14px;">{{ piece.flowCount + '%' }}</span>
+            </div>
+          </nz-row>
+        </div>
+        <div class="add-ab" *ngIf="pieceList.length < 3 && segmentDataService.isUpdate !== 0" (click)="addAbTest()">
+          <span class="ant-compat anticon anticon-plus" style="font-size: 14px;"></span>
+          <p>A/BTest对比方案</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Android start -->
+    <div *ngIf="segment.platform == 'android'" style="margin-top: 25px;">
+      <div class="item">
+        <label class="item-label l"
+          >消息标题
+          <p class="required">*</p>
+        </label>
+        <div class="item-content l">
+          <input
+            autocomplete="off"
+            [disabled]="segment.androidData[seletABIndex].action || segmentDataService.isUpdate === 0"
+            [(ngModel)]="segment.androidData[seletABIndex].title"
+            nz-input
+            style="width: 330px; margin-right: 16px;"
+            placeholder="请输入消息标题"
+          />
+          <label
+            class="checkbox-text"
+            nz-checkbox
+            [(ngModel)]="segment.androidData[seletABIndex].action"
+            [nzDisabled]="segmentDataService.isUpdate === 0"
+            >透传消息</label
+          >
+          <nz-tooltip
+            [nzTitle]="'透传消息会使消息标题、消息内容、震动提示、唤醒屏幕都将不可用'"
+            [nzPlacement]="'right'"
+          >
+            <span class="ant-compat anticon anticon-question-circle-o pointer" nz-tooltip></span>
+          </nz-tooltip>
+          <span class="error" *ngIf="vm.titleError[seletABIndex]">{{ vm.titleErrorInfo[seletABIndex] }}</span>
+        </div>
+      </div>
+
+      <div class="item title-content">
+        <label class="item-label l"
+          >消息内容
+          <p class="required">*</p>
+        </label>
+        <div class="item-content l" style="width: 400px;">
+          <div class="insert-variable">
+            <nz-dropdown
+              [nzTrigger]="'click'"
+              [nzDisabled]="segment.androidData[seletABIndex].action || segmentDataService.isUpdate === 0"
+            >
+              <a nz-dropdown>
+                $_ 插入变量
+              </a>
+              <ul nz-menu style="max-height: 200px; overflow-y: auto;">
+                <li nz-menu-item *ngFor="let item of variableList" (click)="editorInsertVariable(item)">
+                  {{ item.value }}（{{ item.key }}）
+                </li>
+              </ul>
+            </nz-dropdown>
+          </div>
+          <!-- <textarea id="content" [(ngModel)]="segment.androidData[seletABIndex].message" [disabled]="segment.androidData[seletABIndex].action || segmentDataService.isUpdate === 0" nz-input placeholder="请输入内容" style="width: 400px; height: 125px;resize: none; border-radius: 0 0 4px 4px;"></textarea> -->
+          <ckeditor
+            id="ckeditor"
+            #ckEditor
+            [(ngModel)]="segment.androidData[seletABIndex].message"
+            [readonly]="segment.androidData[seletABIndex].action || segmentDataService.isUpdate === 0"
+            debounce="500"
+            [config]="editorConfig"
+          ></ckeditor>
+          <span class="error" *ngIf="vm.contentError[seletABIndex]">{{ vm.contentErrorInfo[seletABIndex] }}</span>
+          <label
+            class="checkbox-text"
+            nz-checkbox
+            [(ngModel)]="segment.androidData[seletABIndex].clearable"
+            [nzDisabled]="segmentDataService.isUpdate === 0"
+            >让本条推送消息不可被删除，谨慎使用</label
+          >
+        </div>
+      </div>
+
+      <div class="item" style="margin-top: 15px;">
+        <label class="item-label l"
+          >震动提示
+          <nz-tooltip [nzTitle]="'推送到达时震动手机'" [nzPlacement]="'right'">
+            <span class="ant-compat anticon anticon-question-circle-o pointer" nz-tooltip></span>
+          </nz-tooltip>
+        </label>
+        <div class="item-content l">
+          <nz-switch
+            [nzSize]="'small'"
+            [(ngModel)]="segment.androidData[seletABIndex].vibrate"
+            [nzDisabled]="segment.androidData[seletABIndex].action || segmentDataService.isUpdate === 0"
+          ></nz-switch>
+        </div>
+      </div>
+
+      <div class="item" style="margin-top: 10px;">
+        <label class="item-label l">唤醒屏幕</label>
+        <div class="item-content l">
+          <nz-switch
+            [nzSize]="'small'"
+            [(ngModel)]="segment.androidData[seletABIndex].wakeup"
+            [nzDisabled]="segment.androidData[seletABIndex].action || segmentDataService.isUpdate === 0"
+          ></nz-switch>
+        </div>
+      </div>
+
+      <div class="item">
+        <label class="item-label l"
+          >自定义参数
+          <nz-tooltip
+            [nzTitle]="'在推送的内容里面附加自定义参数，参数将透传至应用，由应用自行处理'"
+            [nzPlacement]="'right'"
+          >
+            <span class="ant-compat anticon anticon-question-circle-o pointer" nz-tooltip></span>
+          </nz-tooltip>
+        </label>
+        <!-- android-自定义参数 -->
+        <div class="item-content l">
+          <nz-switch
+            [nzSize]="'small'"
+            [(ngModel)]="segment.androidData[seletABIndex].isVibration"
+            (ngModelChange)="changeCustomParam($event)"
+            [nzDisabled]="segmentDataService.isUpdate === 0"
+          ></nz-switch>
+          <div *ngIf="segment.androidData[seletABIndex].isVibration">
+            <div class="param-list" *ngFor="let param of segment.androidData[seletABIndex].extendAttr; let i = index">
+              键(key)
+              <input
+                autocomplete="off"
+                nz-input
+                style="width: 137px; margin-right: 16px;"
+                [(ngModel)]="param['key']"
+                [disabled]="segmentDataService.isUpdate === 0"
+              />
+              值(value)
+              <input
+                autocomplete="off"
+                nz-input
+                style="width: 137px; margin-right: 16px;"
+                [(ngModel)]="param['value']"
+                [disabled]="segmentDataService.isUpdate === 0"
+              />
+              <span
+                class="ant-compat anticon anticon-close pointer"
+                *ngIf="i != 0"
+                (click)="removeCustomParam(param, i)"
+              ></span>
+            </div>
+            <span class="error" *ngIf="vm.extendAttr">请先填写key和value</span>
+            <span
+              class="blue-text pointer"
+              style="display: block;"
+              (click)="addCustomParam()"
+              *ngIf="segmentDataService.isUpdate !== 0"
+            >
+              <span class="ant-compat anticon anticon-plus" style="margin-right: 8px;"></span>
+              新增自定义程序值
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="item">
+        <label class="item-label l"
+          >推送通道
+          <p class="required">*</p>
+        </label>
+        <div class="item-content l config-bn">
+          <nz-radio-group [(ngModel)]="segment.channelCode">
+            <label nz-radio-button nzValue="tdpush" [nzDisabled]="segmentDataService.isUpdate === 0">TD推送</label>
+            <label
+              nz-radio-button
+              *ngIf="appConfig && appConfig.getuiChannelCode"
+              [nzValue]="appConfig.getuiChannelCode"
+              [nzDisabled]="segmentDataService.isUpdate === 0"
+              >个推</label
+            >
+            <label
+              nz-radio-button
+              *ngIf="appConfig && appConfig.jpushChannelCode"
+              [nzValue]="appConfig.jpushChannelCode"
+              [nzDisabled]="segmentDataService.isUpdate === 0"
+              >极光推送</label
+            >
+          </nz-radio-group>
+        </div>
+      </div>
+
+      <div
+        class="item"
+        style="margin-top: 0px;"
+        *ngIf="segment.channelCode == 'tdpush' && appConfig && (appConfig.hwApp || appConfig.xmApp)"
+      >
+        <label class="item-label l"
+          >增强通道
+          <nz-tooltip [nzTitle]="'可增强特定品牌Android设备的消息到达能力'" [nzPlacement]="'right'">
+            <span class="ant-compat anticon anticon-question-circle-o pointer" nz-tooltip></span>
+          </nz-tooltip>
+        </label>
+        <div class="item-content l">
+          <label
+            nz-checkbox
+            *ngIf="appConfig && appConfig.hwApp"
+            [(ngModel)]="segment.huawei"
+            [nzDisabled]="segmentDataService.isUpdate === 0"
+            >华为增强通道</label
+          >
+          <label
+            nz-checkbox
+            *ngIf="appConfig && appConfig.xmApp"
+            [(ngModel)]="segment.xiaomi"
+            [nzDisabled]="segmentDataService.isUpdate === 0"
+            >小米增强通道</label
+          >
+        </div>
+      </div>
+    </div>
+    <!-- Android end -->
+
+    <!-- IOS start -->
+    <div *ngIf="segment.platform == 'ios'" style="margin-top: 25px;">
+      <div class="item title-content">
+        <label class="item-label l"
+          >消息内容
+          <p class="required">*</p>
+        </label>
+        <div class="item-content l" style="width: 400px;">
+          <div class="insert-variable">
+            <nz-dropdown
+              [nzTrigger]="'click'"
+              [nzDisabled]="segment.iosData[seletABIndex].action || segmentDataService.isUpdate === 0"
+            >
+              <a nz-dropdown>
+                $_ 插入变量
+              </a>
+              <ul nz-menu style="max-height: 200px; overflow-y: auto;">
+                <li nz-menu-item *ngFor="let item of variableList" (click)="insertVariable(item)">
+                  {{ item.value }}（{{ item.key }}）
+                </li>
+              </ul>
+            </nz-dropdown>
+          </div>
+          <textarea
+            id="content"
+            nz-input
+            [(ngModel)]="segment.iosData[seletABIndex].message"
+            [disabled]="segment.iosData[seletABIndex].action || segmentDataService.isUpdate === 0"
+            placeholder="请输入内容"
+            style="width: 400px; height: 125px;resize: none; border-radius: 0 0 4px 4px;"
+          ></textarea>
+          <span class="error" *ngIf="vm.contentError[seletABIndex]">{{ vm.contentErrorInfo[seletABIndex] }}</span>
+          <label
+            class="checkbox-text"
+            nz-checkbox
+            [(ngModel)]="segment.iosData[seletABIndex].action"
+            [nzDisabled]="segmentDataService.isUpdate === 0"
+          >
+            静默推送
+          </label>
+          <nz-tooltip [nzTitle]="'静默推送时，消息内容、自定义声音、数字角标均不可用'" [nzPlacement]="'right'">
+            <span
+              class="ant-compat anticon anticon-question-circle-o pointer"
+              style="vertical-align: middle;"
+              nz-tooltip
+            ></span>
+          </nz-tooltip>
+        </div>
+      </div>
+
+      <div class="item" style="margin-top: 15px;">
+        <label class="item-label l"
+          >自定义声音
+          <nz-tooltip [nzTitle]="'自定义推送到达时播放的提示声音'" [nzPlacement]="'right'">
+            <span class="ant-compat anticon anticon-question-circle-o pointer" nz-tooltip></span>
+          </nz-tooltip>
+        </label>
+        <div class="item-content l">
+          <nz-switch
+            [nzSize]="'small'"
+            [(ngModel)]="segment.iosData[seletABIndex].sound"
+            [nzDisabled]="segment.iosData[seletABIndex].action || segmentDataService.isUpdate === 0"
+          ></nz-switch>
+          <input
+            *ngIf="segment.iosData[seletABIndex].sound"
+            [disabled]="segment.iosData[seletABIndex].action || segmentDataService.isUpdate === 0"
+            autocomplete="off"
+            [(ngModel)]="segment.iosData[seletABIndex].soundName"
+            nz-input
+            style="width: 276px; margin-left: 24px;"
+            placeholder="请输入应用包中声音文件名"
+          />
+          <span
+            class="error"
+            style="margin-left: 60px;"
+            *ngIf="segment.iosData[seletABIndex].sound && vm.soundNameError[seletABIndex]"
+            >请输入应用包中声音文件名</span
+          >
+        </div>
+      </div>
+
+      <div class="item" style="margin-top: 15px;">
+        <label class="item-label l"
+          >数字角标
+          <nz-tooltip [nzTitle]="'推送到达时在应用图标右上角显示数字标注'" [nzPlacement]="'right'">
+            <span class="ant-compat anticon anticon-question-circle-o pointer" nz-tooltip></span>
+          </nz-tooltip>
+        </label>
+        <div class="item-content l">
+          <nz-switch
+            [nzSize]="'small'"
+            [(ngModel)]="segment.iosData[seletABIndex].digitalAngle"
+            [nzDisabled]="segment.iosData[seletABIndex].action || segmentDataService.isUpdate === 0"
+          ></nz-switch>
+          <input
+            *ngIf="segment.iosData[seletABIndex].digitalAngle"
+            [(ngModel)]="segment.iosData[seletABIndex].badge"
+            tdLimitNumberInput
+            [acceptZero]="false"
+            min="1"
+            max="99"
+            type="number"
+            [disabled]="segment.iosData[seletABIndex].action || segmentDataService.isUpdate === 0"
+            style="width: 276px; margin-left: 24px;"
+            nz-input
+            placeholder="请输入小于99的整数"
+          />
+          <span
+            class="error"
+            style="margin-left: 60px;"
+            *ngIf="segment.iosData[seletABIndex].digitalAngle && vm.badgeError[seletABIndex]"
+            >请输入角标数字</span
+          >
+        </div>
+      </div>
+
+      <div class="item">
+        <label class="item-label l"
+          >自定义参数
+          <nz-tooltip
+            [nzTitle]="'在推送的内容里面附加自定义参数，参数将透传至应用，由应用自行处理'"
+            [nzPlacement]="'right'"
+          >
+            <span class="ant-compat anticon anticon-question-circle-o pointer" nz-tooltip></span>
+          </nz-tooltip>
+        </label>
+        <!-- ios-自定义参数 -->
+        <div class="item-content l">
+          <nz-switch
+            [nzSize]="'small'"
+            [(ngModel)]="segment.iosData[seletABIndex].isVibration"
+            (ngModelChange)="changeCustomParam($event)"
+            [nzDisabled]="segmentDataService.isUpdate === 0"
+          ></nz-switch>
+          <div *ngIf="segment.iosData[seletABIndex].isVibration">
+            <div class="param-list" *ngFor="let param of segment.iosData[seletABIndex].extendAttr; let i = index">
+              键(key)
+              <input
+                autocomplete="off"
+                nz-input
+                style="width: 137px; margin-right: 16px;"
+                [(ngModel)]="param['key']"
+                [disabled]="segmentDataService.isUpdate === 0"
+              />
+              值(value)
+              <input
+                autocomplete="off"
+                nz-input
+                style="width: 137px; margin-right: 16px;"
+                [(ngModel)]="param['value']"
+                [disabled]="segmentDataService.isUpdate === 0"
+              />
+              <span class="ant-compat anticon anticon-close pointer" (click)="removeCustomParam(param, i)"></span>
+            </div>
+            <span
+              class="blue-text pointer"
+              style="display: block;"
+              (click)="addCustomParam()"
+              *ngIf="segmentDataService.isUpdate !== 0"
+            >
+              <span class="ant-compat anticon anticon-plus" style="margin-right: 8px;"></span>
+              新增自定义程序值
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="item">
+        <label class="item-label l"
+          >推送通道
+          <p class="required">*</p>
+        </label>
+        <div class="item-content l config-bn">
+          <nz-radio-group [(ngModel)]="segment.prod" (ngModelChange)="changeIOSChannel($event)">
+            <label
+              nz-radio-button
+              *ngIf="appConfig && appConfig.devFileName"
+              nzValue="0"
+              [nzDisabled]="segmentDataService.isUpdate === 0"
+              >APNS测试通道</label
+            >
+            <label
+              nz-radio-button
+              *ngIf="appConfig && appConfig.prodFileName"
+              nzValue="1"
+              [nzDisabled]="segmentDataService.isUpdate === 0"
+              >APNS生产通道</label
+            >
+          </nz-radio-group>
+          <span *ngIf="appConfig && !appConfig.devFileName && !appConfig.prodFileName" style="font-size: 12px;"
+            >尚未配置推送通道<span class="error" style="margin-left: 4px;" *ngIf="vm.prodError"
+              >请通知管理员配置推送通道</span
+            ></span
+          >
+          <span
+            class="error"
+            style="margin-left: 4px;"
+            *ngIf="((appConfig && appConfig.devFileName) || appConfig.prodFileName) && vm.prodError"
+            >请选择推送通道</span
+          >
+        </div>
+      </div>
+    </div>
+    <!-- IOS end -->
+
+    <div class="item">
+      <label class="item-label l"
+        >投放时间
+        <p class="required">*</p>
+      </label>
+      <div class="item-content l">
+        <nz-radio-group [(ngModel)]="segment.triggerType" style="font-size: 12px;">
+          <label nz-radio-button nzValue="1" [nzDisabled]="segmentDataService.isUpdate === 0">立即发送</label>
+          <label nz-radio-button nzValue="2" [nzDisabled]="segmentDataService.isUpdate === 0">定时发送</label>
+        </nz-radio-group>
+        <div class="item-content-time" *ngIf="segment.triggerType == 2">
+          <nz-date-picker
+            [nzSize]="size"
+            [(ngModel)]="sendTime"
+            [nzDisabledDate]="disabledDate"
+            nzAllowClear="false"
+            nzPlaceHolder="请选择日期"
+            (ngModelChange)="buildSendTime($event)"
+            [nzDisabled]="segmentDataService.isUpdate === 0"
+          ></nz-date-picker>
+          <nz-select
+            style="width: 80px; margin-left: 8px;"
+            [(ngModel)]="selectedHour"
+            (ngModelChange)="buildSendTime($event)"
+            nzPlaceHolder="小时"
+            [nzDisabled]="segmentDataService.isUpdate === 0"
+          >
+            <nz-option *ngFor="let option of hourList" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+          </nz-select>
+          <nz-select
+            style="width: 80px; margin-left: 8px;"
+            [(ngModel)]="selectedMinute"
+            (ngModelChange)="buildSendTime($event)"
+            nzPlaceHolder="分钟"
+            [nzDisabled]="segmentDataService.isUpdate === 0"
+          >
+            <nz-option *ngFor="let option of minuteList" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+          </nz-select>
+          <span class="error" *ngIf="vm.timeError">{{ vm.timeErrorInfo }}</span>
+        </div>
+        <div style="margin-top: 16px;" class="checkbox-text">
+          <label nz-checkbox [(ngModel)]="segment.ttlType" [nzDisabled]="segmentDataService.isUpdate === 0"></label>
+          发送时处于离线的用户，如在
+          <nz-select
+            style="width: 80px; margin: 0 8px;"
+            [(ngModel)]="segment.timeToLive"
+            nzPlaceHolder="小时"
+            [nzDisabled]="segmentDataService.isUpdate === 0"
+          >
+            <nz-option
+              *ngFor="let option of liveTimeList"
+              [nzLabel]="option.label"
+              [nzValue]="option.value"
+            ></nz-option>
+          </nz-select>
+          内恢复在线，仍然进行推送
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-right">
+    <div class="phone" [ngClass]="{ _ios: segment.platform == 'ios' }">
+      <div class="msg-box">
+        <p class="header"><label class="app-block"></label> 应用名称<span>现在</span></p>
+        <p class="title" *ngIf="segment.platform == 'android'">
+          {{ segment.androidData[seletABIndex].title || '消息标题' }}
+        </p>
+        <p
+          class="content"
+          *ngIf="segment.platform == 'android'"
+          [innerHtml]="(segment.androidData[seletABIndex] && segment.androidData[seletABIndex].message) || '消息内容'"
+        ></p>
+        <!-- <p class="title" *ngIf="segment.platform == 'ios'">(应用名称)</p> -->
+        <p class="content" *ngIf="segment.platform == 'ios'">
+          {{ segment.iosData[seletABIndex].message || '消息内容' }}
+        </p>
+      </div>
+    </div>
+  </div>
+</main>

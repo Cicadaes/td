@@ -1,0 +1,70 @@
+.rule-div {
+  background: #fff;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 2px 0 rgba(23, 35, 61, 0.25);
+  border-radius: 2px;
+  .title {
+    font-size: 14px;
+    color: #17233d;
+    border-bottom: 1px solid rgba(23, 35, 61, 0.1);
+    line-height: 48px;
+    padding-left: 16px;
+    .button {
+      color: #2d8cf0;
+      line-height: 20px;
+      font-size: 12px;
+      float: right;
+      margin-right: 16px;
+      margin-top: 14px;
+      cursor: pointer;
+    }
+  }
+  .form-item {
+    padding-left: 24px;
+    overflow: auto;
+    .item {
+      padding: 24px 0;
+      position: relative;
+      margin-left: 58px;
+      &:not(:first-child) {
+        border-top: 1px solid rgba(23, 35, 61, 0.1);
+      }
+      .relationship {
+        width: 68px;
+        position: absolute;
+        top: -16px;
+        left: -68px;
+      }
+      .tag-div {
+        display: inline-block;
+        background: #2d8cf0;
+        border-radius: 4px;
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
+        color: #ffffff;
+        text-align: center;
+        line-height: 28px;
+        margin-left: 8px;
+        vertical-align: middle;
+      }
+      .label {
+        display: inline-block;
+        background: rgba(23, 35, 61, 0.06);
+        border-radius: 4px;
+        height: 32px;
+        color: rgba(23, 35, 61, 0.75);
+        text-align: center;
+        line-height: 32px;
+        margin: 0 8px;
+        padding: 0 12px;
+      }
+      .clear-button {
+        float: right;
+        margin-right: 16px;
+        line-height: 32px;
+        cursor: pointer;
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+<ng-container *ngIf="logo">
+  <div class="logo" title="{{logo.name}}">
+      <a href="javascript:;" style="cursor: pointer;">
+      <!-- <a href="javascript:;" style="cursor: text;"> -->
+      <!-- <a href="javascript:;" [routerLink]="[routerUrl]"> -->
+          <img alt="图片" src="{{logo.logo}}" *ngIf="logo.logo" />
+          <span class="name" *ngIf="!_menuCollapsed && logo.name">{{logo.name}}</span>
+      </a>
+  </div>
+</ng-container>

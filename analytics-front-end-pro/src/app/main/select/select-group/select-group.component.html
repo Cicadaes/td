@@ -1,0 +1,11 @@
+<main>
+	<nz-select nzShowSearch [(ngModel)]="_selectedValue" (ngModelChange)="changeSelectGroup($event);"
+	           nzPlaceHolder="请选择" style="width: 100%;">
+		<nz-option-group *ngFor="let group of _selectGroupOptions | keysPipe" nzLabel="{{group.key}}">
+			<nz-option nzValue="{{option.id}}" nzLabel="{{option.displayname}}"
+					   *ngFor="let option of group.value" nzCustomContent>
+					   <div title="{{option.displayname}}">{{option.displayname}}</div>
+					</nz-option>
+		</nz-option-group>
+	</nz-select>
+</main>

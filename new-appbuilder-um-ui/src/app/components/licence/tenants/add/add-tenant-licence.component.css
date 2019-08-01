@@ -1,0 +1,6 @@
+.special_row {
+  margin-left: 20px;
+}
+:host ::ng-deep .ant-card-body {
+    padding: 14px 9px !important;
+}
